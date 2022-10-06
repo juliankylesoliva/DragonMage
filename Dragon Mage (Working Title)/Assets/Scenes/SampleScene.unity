@@ -237,10 +237,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 557060670}
+  - component: {fileID: 557060673}
   - component: {fileID: 557060669}
   - component: {fileID: 557060671}
   - component: {fileID: 557060672}
-  - component: {fileID: 557060673}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -366,26 +366,31 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   groundCheckObj: {fileID: 1380840842}
-  groundCheckRadius: 0.1
+  mageProperties: {fileID: 11400000, guid: 3058d3c16efbfc74d91b608d70e9fae5, type: 2}
+  dragonProperties: {fileID: 11400000, guid: b83ef1ce9eec7144bac8bbf2c4083cdd, type: 2}
+  startingMode: 0
+  groundCheckRadius: 0.05
   groundLayer:
     serializedVersion: 2
     m_Bits: 64
-  acceleration: 0.7
+  acceleration: 0.65
   deceleration: 0.1
-  topSpeed: 6
-  turningSpeed: 0.15
-  enableAirStalling: 1
-  enableVariableJumps: 1
+  topSpeed: 4.5
+  turningSpeed: 0.1
   jumpSpeed: 8.5
   risingGravity: 1.25
   fallingGravity: 2.5
-  variableJumpDecay: 0.5
   fallSpeed: 8
-  airStallSpeed: 0
-  maxAirStallTime: 3
   airAcceleration: 0.8
   airDeceleration: 0.6
   airTurningSpeed: 0.45
+  enableVariableJumps: 1
+  variableJumpDecay: 0.5
+  enableAirStalling: 1
+  airStallSpeed: 0
+  maxAirStallTime: 3
+  maxMidairJumps: 3
+  midairJumpSpeed: 4.25
 --- !u!1 &1380840841
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4754c104f8943c4db9130021073c864, type: 3}
+  m_Name: DragonProperties
+  m_EditorClassIdentifier: 
+  _acceleration: 0.275
+  _deceleration: 0.05
+  _topSpeed: 2.25
+  _turningSpeed: 0.02
+  _jumpSpeed: 4.25
+  _risingGravity: 1.15
+  _fallingGravity: 2.25
+  _fallSpeed: 10
+  _airAcceleration: 0.2
+  _airDeceleration: 0.02
+  _airTurningSpeed: 0.01
+  _enableVariableJumps: 0
+  _variableJumpDecay: 0
+  _enableAirStalling: 0
+  _airStallSpeed: 0
+  _maxAirStallTime: 0
+  _maxMidairJumps: 3
+  _midairJumpSpeed: 4

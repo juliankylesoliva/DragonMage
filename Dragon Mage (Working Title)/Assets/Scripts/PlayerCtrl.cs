@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum CharacterMode { MAGE, DRAGON }
+
 public class PlayerCtrl : MonoBehaviour
 {
     /* COMPONENTS */
@@ -10,9 +12,12 @@ public class PlayerCtrl : MonoBehaviour
     /* DRAG AND DROP */
     [Header("Drag and Drop")]
     [SerializeField] Transform groundCheckObj;
+    [SerializeField] PlayerCtrlProperties mageProperties;
+    [SerializeField] PlayerCtrlProperties dragonProperties;
 
     /* EDITOR VARIABLES */
     [Header("Editor Variables")]
+    [SerializeField] CharacterMode startingMode = CharacterMode.MAGE;
     [SerializeField] float groundCheckRadius = 0.1f;
     [SerializeField] LayerMask groundLayer;
 
@@ -25,24 +30,33 @@ public class PlayerCtrl : MonoBehaviour
 
     /* JUMPING VARIABLES */
     [Header("Jumping Variables")]
-    [SerializeField] bool enableAirStalling = true;
-    [SerializeField] bool enableVariableJumps = true;
     [SerializeField, Range(2f, 12f)] float jumpSpeed = 4f;
     [SerializeField, Range(0.1f, 10f)] float risingGravity = 1f;
     [SerializeField, Range(0.1f, 10f)] float fallingGravity = 1f;
-    [SerializeField, Range(0f, 10f)] float variableJumpDecay = 0.5f;
     [SerializeField, Range(2f, 20f)] float fallSpeed = 6f;
-    [SerializeField, Range(0f, 1f)] float airStallSpeed = 1f;
-    [SerializeField, Range(0f, 5f)] float maxAirStallTime = 3f;
     [SerializeField, Range(0.01f, 1f)] float airAcceleration = 0.5f;
     [SerializeField, Range(0.01f, 1f)] float airDeceleration = 0.5f;
     [SerializeField, Range(0.01f, 1f)] float airTurningSpeed = 0.5f;
-    
+
+    [Header("Variable Jump Variables")]
+    [SerializeField] bool enableVariableJumps = true;
+    [SerializeField, Range(0f, 10f)] float variableJumpDecay = 0.5f;
+
+    [Header("Air Stalling Variables")]
+    [SerializeField] bool enableAirStalling = true;
+    [SerializeField, Range(0f, 1f)] float airStallSpeed = 1f;
+    [SerializeField, Range(0f, 5f)] float maxAirStallTime = 3f;
+
+    [Header("Midair Jump Variables")]
+    [SerializeField, Range(0, 5)] int maxMidairJumps = 3;
+    [SerializeField, Range(2f, 12f)] float midairJumpSpeed = 4.25f;
 
     /* SCRIPT VARIABLES */
+    private CharacterMode currentMode = CharacterMode.MAGE;
     private bool isGrounded = false;
     private bool jumpIsHeld = false;
     private float currentAirStallTime = 0f;
+    private int currentMidairJumps = 0;
 
     void Awake()
     {
@@ -51,12 +65,13 @@ public class PlayerCtrl : MonoBehaviour
 
     void Start()
     {
-
+        ChangeMode(startingMode);
     }
 
     void Update()
     {
         GroundCheck();
+        FormChange();
         Jumping();
         Movement();
     }
@@ -120,6 +135,7 @@ public class PlayerCtrl : MonoBehaviour
         if (isGrounded)
         {
             currentAirStallTime = 0f;
+            currentMidairJumps = 0;
 
             if (Input.GetButtonDown("Jump"))
             {
@@ -127,6 +143,13 @@ public class PlayerCtrl : MonoBehaviour
                 rb2d.gravityScale = risingGravity;
                 rb2d.velocity = new Vector2(rb2d.velocity.x, jumpSpeed);
             }
+        }
+        else if (!isGrounded && currentMidairJumps < maxMidairJumps && Input.GetButtonDown("Jump"))
+        {
+            jumpIsHeld = true;
+            rb2d.gravityScale = risingGravity;
+            rb2d.velocity = new Vector2(rb2d.velocity.x, midairJumpSpeed);
+            currentMidairJumps++;
         }
         else
         {
@@ -170,5 +193,56 @@ public class PlayerCtrl : MonoBehaviour
                 }
             }
         }
+    }
+
+    private void FormChange()
+    {
+        if (Input.GetButtonDown("Change Form"))
+        {
+            if (currentMode == CharacterMode.MAGE)
+            {
+                ChangeMode(CharacterMode.DRAGON);
+                return;
+            }
+
+            if (currentMode == CharacterMode.DRAGON)
+            {
+                ChangeMode(CharacterMode.MAGE);
+                return;
+            }
+        }
+    }
+
+    /* UTILITY METHODS */
+    private void SetCtrlProperties(PlayerCtrlProperties p)
+    {
+        acceleration = p.acceleration;
+        deceleration = p.deceleration;
+        topSpeed = p.topSpeed;
+        turningSpeed = p.turningSpeed;
+
+        jumpSpeed = p.jumpSpeed;
+        risingGravity = p.risingGravity;
+        fallingGravity = p.fallingGravity;
+        fallSpeed = p.fallSpeed;
+        airAcceleration = p.airAcceleration;
+        airDeceleration = p.airDeceleration;
+        airTurningSpeed = p.airTurningSpeed;
+
+        enableVariableJumps = p.enableVariableJumps;
+        variableJumpDecay = p.variableJumpDecay;
+
+        enableAirStalling = p.enableAirStalling;
+        airStallSpeed = p.airStallSpeed;
+        maxAirStallTime = p.maxAirStallTime;
+
+        maxMidairJumps = p.maxMidairJumps;
+        midairJumpSpeed = p.midairJumpSpeed;
+    }
+
+    private void ChangeMode(CharacterMode mode)
+    {
+        SetCtrlProperties(mode == CharacterMode.MAGE ? mageProperties : dragonProperties);
+        currentMode = mode;
     }
 }
