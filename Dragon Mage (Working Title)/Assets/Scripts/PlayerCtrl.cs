@@ -13,6 +13,7 @@ public class PlayerCtrl : MonoBehaviour
     /* DRAG AND DROP */
     [Header("Drag and Drop")]
     [SerializeField] Transform groundCheckObj;
+    [SerializeField] Transform playerCamTarget;
     [SerializeField] PlayerCtrlProperties mageProperties;
     [SerializeField] PlayerCtrlProperties dragonProperties;
     [SerializeField] Sprite tempMageSprite;
@@ -61,6 +62,9 @@ public class PlayerCtrl : MonoBehaviour
     [SerializeField] float formChangeTime = 0.25f;
     [SerializeField] float jumpBufferTime = 0.1f;
     [SerializeField] float coyoteTime = 0.1f;
+    [SerializeField] float lookaheadDistance = 8f;
+    [SerializeField] float fallingLookaheadDistance = 2f;
+    [SerializeField] bool followCharacterOnJump = false;
 
     /* SCRIPT VARIABLES */
     private CharacterMode currentMode = CharacterMode.MAGE;
@@ -77,6 +81,7 @@ public class PlayerCtrl : MonoBehaviour
     {
         rb2d = this.gameObject.GetComponent<Rigidbody2D>();
         charSprite = this.gameObject.GetComponent<SpriteRenderer>();
+        playerCamTarget.position = groundCheckObj.position;
     }
 
     void Start()
@@ -89,6 +94,7 @@ public class PlayerCtrl : MonoBehaviour
     void Update()
     {
         GroundCheck();
+        UpdatePlayerCamTarget();
         FormChange();
         FacingDirection();
         Jumping();
@@ -99,9 +105,16 @@ public class PlayerCtrl : MonoBehaviour
     private void GroundCheck()
     {
         isGrounded = false;
-
         Collider2D[] colliders = Physics2D.OverlapCircleAll(groundCheckObj.position, groundCheckRadius, groundLayer);
         isGrounded = (colliders.Length > 0);
+    }
+
+    private void UpdatePlayerCamTarget()
+    {
+        if (isChangingForm) { return; }
+        float horizontalLookahead = (lookaheadDistance * Mathf.Min((rb2d.velocity.x / topSpeed), 1f));
+        float initialYPos = (followCharacterOnJump || groundCheckObj.position.y < playerCamTarget.position.y || isGrounded ? groundCheckObj.position.y : playerCamTarget.position.y);
+        playerCamTarget.position = new Vector2(groundCheckObj.position.x + horizontalLookahead, initialYPos);
     }
 
     private void Movement()
