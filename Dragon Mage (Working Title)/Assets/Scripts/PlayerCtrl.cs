@@ -33,6 +33,7 @@ public class PlayerCtrl : MonoBehaviour
 
     /* JUMPING VARIABLES */
     [Header("Jumping Variables")]
+    [SerializeField] bool changeFacingDirectionMidair = true;
     [SerializeField] float jumpSpeed = 4f;
     [SerializeField] float risingGravity = 1f;
     [SerializeField] float fallingGravity = 1f;
@@ -53,11 +54,13 @@ public class PlayerCtrl : MonoBehaviour
     [Header("Midair Jump Variables")]
     [SerializeField, Range(0, 5)] int maxMidairJumps = 3;
     [SerializeField] float midairJumpSpeed = 4.25f;
+    [SerializeField] Vector2 backwardsMidairJumpBonus;
 
     /* MISC VARIABLES */
     [Header("Miscellaneous Control Variables")]
     [SerializeField] float formChangeTime = 0.25f;
     [SerializeField] float jumpBufferTime = 0.1f;
+    [SerializeField] float coyoteTime = 0.1f;
 
     /* SCRIPT VARIABLES */
     private CharacterMode currentMode = CharacterMode.MAGE;
@@ -67,6 +70,8 @@ public class PlayerCtrl : MonoBehaviour
     private int currentMidairJumps = 0;
     private bool isChangingForm = false;
     private float jumpBufferTimeLeft = 0f;
+    private float coyoteTimeLeft = 0f;
+    private bool isFacingRight = true;
 
     void Awake()
     {
@@ -77,6 +82,7 @@ public class PlayerCtrl : MonoBehaviour
     void Start()
     {
         StartCoroutine(JumpBufferCR());
+        StartCoroutine(CoyoteTimeCR());
         ChangeMode(startingMode);
     }
 
@@ -84,6 +90,7 @@ public class PlayerCtrl : MonoBehaviour
     {
         GroundCheck();
         FormChange();
+        FacingDirection();
         Jumping();
         Movement();
     }
@@ -108,9 +115,13 @@ public class PlayerCtrl : MonoBehaviour
                 if (Mathf.Abs(rb2d.velocity.x) < topSpeed)
                 {
                     rb2d.velocity = new Vector2(rb2d.velocity.x + ((isGrounded ? acceleration : airAcceleration) * (Input.GetAxis("Horizontal") > 0f ? 1f : -1f) * Time.deltaTime), rb2d.velocity.y);
+                    if (Mathf.Abs(rb2d.velocity.x) > topSpeed)
+                    {
+                        rb2d.velocity = new Vector2(topSpeed * (Input.GetAxis("Horizontal") > 0f ? 1f : -1f), rb2d.velocity.y);
+                    }
 
                 }
-                else if (Mathf.Abs(rb2d.velocity.x) > topSpeed)
+                else if ((isGrounded || (enableAirStalling && (currentAirStallTime > 0f && currentAirStallTime < maxAirStallTime))) && Mathf.Abs(rb2d.velocity.x) > topSpeed)
                 {
                     rb2d.velocity = new Vector2(topSpeed * (Input.GetAxis("Horizontal") > 0f ? 1f : -1f), rb2d.velocity.y);
                 }
@@ -128,6 +139,8 @@ public class PlayerCtrl : MonoBehaviour
         {
             if (rb2d.velocity.x > 0f)
             {
+                if (isGrounded && rb2d.velocity.x > topSpeed) { rb2d.velocity = new Vector2(topSpeed, rb2d.velocity.y); }
+
                 rb2d.velocity = new Vector2(rb2d.velocity.x - ((isGrounded ? deceleration : airDeceleration) * Time.deltaTime), rb2d.velocity.y);
                 if (rb2d.velocity.x < 0f)
                 {
@@ -136,6 +149,8 @@ public class PlayerCtrl : MonoBehaviour
             }
             else if (rb2d.velocity.x < 0f)
             {
+                if (isGrounded && rb2d.velocity.x < -topSpeed) { rb2d.velocity = new Vector2(-topSpeed, rb2d.velocity.y); }
+
                 rb2d.velocity = new Vector2(rb2d.velocity.x + ((isGrounded ? deceleration : airDeceleration) * Time.deltaTime), rb2d.velocity.y);
                 if (rb2d.velocity.x > 0f)
                 {
@@ -150,7 +165,7 @@ public class PlayerCtrl : MonoBehaviour
     {
         if (isChangingForm) { return; }
 
-        if (isGrounded)
+        if (isGrounded || coyoteTimeLeft > 0f)
         {
             currentAirStallTime = 0f;
             currentMidairJumps = 0;
@@ -168,7 +183,21 @@ public class PlayerCtrl : MonoBehaviour
             jumpBufferTimeLeft = 0f;
             jumpIsHeld = true;
             rb2d.gravityScale = risingGravity;
-            rb2d.velocity = new Vector2(rb2d.velocity.x, midairJumpSpeed);
+            Vector2 newVelocity = new Vector2(rb2d.velocity.x, midairJumpSpeed);
+            if ((isFacingRight ? 1f : -1f) * rb2d.velocity.x < 0f)
+            {
+                float bonusXVelocity = backwardsMidairJumpBonus.x * (rb2d.velocity.x > 0f ? 1f : -1f);
+                float bonusYVelocity = Mathf.Abs(backwardsMidairJumpBonus.y);
+                newVelocity += new Vector2(bonusXVelocity, bonusYVelocity);
+            }
+            else
+            {
+                if (Mathf.Abs(rb2d.velocity.x) > topSpeed)
+                {
+                    newVelocity.x = topSpeed * (rb2d.velocity.x > 0f ? 1f : -1f);
+                }
+            }
+            rb2d.velocity = newVelocity;
             currentMidairJumps++;
         }
         else
@@ -183,11 +212,6 @@ public class PlayerCtrl : MonoBehaviour
                 if (enableVariableJumps && !jumpIsHeld)
                 {
                     rb2d.velocity = new Vector2(rb2d.velocity.x, rb2d.velocity.y - (variableJumpDecay * Time.deltaTime));
-                }
-
-                if (rb2d.velocity.y > jumpSpeed)
-                {
-                    rb2d.velocity = new Vector2(rb2d.velocity.x, jumpSpeed);
                 }
             }
             else
@@ -238,6 +262,23 @@ public class PlayerCtrl : MonoBehaviour
         }
     }
 
+    private void FacingDirection()
+    {
+        if (isChangingForm || (!changeFacingDirectionMidair && !isGrounded) || (currentAirStallTime > 0f && currentAirStallTime < maxAirStallTime)) { return; }
+
+        if (Input.GetAxis("Horizontal") > 0f)
+        {
+            isFacingRight = true;
+            charSprite.flipX = false;
+        }
+        else if (Input.GetAxis("Horizontal") < 0f)
+        {
+            isFacingRight = false;
+            charSprite.flipX = true;
+        }
+        else { /* Nothing */ }
+    }
+
     /* UTILITY METHODS */
     private void SetCtrlProperties(PlayerCtrlProperties p)
     {
@@ -246,6 +287,7 @@ public class PlayerCtrl : MonoBehaviour
         topSpeed = p.topSpeed;
         turningSpeed = p.turningSpeed;
 
+        changeFacingDirectionMidair = p.changeFacingDirectionMidair;
         jumpSpeed = p.jumpSpeed;
         risingGravity = p.risingGravity;
         fallingGravity = p.fallingGravity;
@@ -265,6 +307,7 @@ public class PlayerCtrl : MonoBehaviour
 
         maxMidairJumps = p.maxMidairJumps;
         midairJumpSpeed = p.midairJumpSpeed;
+        backwardsMidairJumpBonus = p.backwardsMidairJumpBonus;
     }
 
     private void ChangeMode(CharacterMode mode)
@@ -304,7 +347,41 @@ public class PlayerCtrl : MonoBehaviour
             if (jumpBufferTimeLeft > 0f)
             {
                 jumpBufferTimeLeft -= Time.deltaTime;
+                if (jumpBufferTimeLeft < 0f)
+                {
+                    jumpBufferTimeLeft = 0f;
+                }
             }
+
+            yield return null;
+        }
+    }
+
+    private IEnumerator CoyoteTimeCR()
+    {
+        bool prevIsGrounded = isGrounded;
+        while (true)
+        {
+            if (!isGrounded && prevIsGrounded && coyoteTimeLeft <= 0f && rb2d.velocity.y < 0f)
+            {
+                coyoteTimeLeft = coyoteTime;
+            }
+            else if ((isGrounded && !prevIsGrounded) || (isGrounded && prevIsGrounded))
+            {
+                coyoteTimeLeft = 0f;
+            }
+            else { /* Nothing */ }
+
+            if (coyoteTimeLeft > 0f)
+            {
+                coyoteTimeLeft -= Time.deltaTime;
+                if (coyoteTimeLeft < 0f)
+                {
+                    coyoteTimeLeft = 0f;
+                }
+            }
+
+            prevIsGrounded = isGrounded;
 
             yield return null;
         }

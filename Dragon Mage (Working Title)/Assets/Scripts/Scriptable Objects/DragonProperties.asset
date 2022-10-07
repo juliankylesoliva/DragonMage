@@ -13,9 +13,10 @@ MonoBehaviour:
   m_Name: DragonProperties
   m_EditorClassIdentifier: 
   _acceleration: 6
-  _deceleration: 20
+  _deceleration: 16
   _topSpeed: 3
   _turningSpeed: 12
+  _changeFacingDirectionMidair: 0
   _jumpSpeed: 4.25
   _risingGravity: 1.35
   _fallingGravity: 2.6
@@ -30,3 +31,4 @@ MonoBehaviour:
   _maxAirStallTime: 0
   _maxMidairJumps: 4
   _midairJumpSpeed: 4.75
+  _backwardsMidairJumpBonus: {x: 0.75, y: 0.5}

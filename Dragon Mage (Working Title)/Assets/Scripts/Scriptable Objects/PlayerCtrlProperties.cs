@@ -21,6 +21,9 @@ public class PlayerCtrlProperties : ScriptableObject
 
     /* JUMPING VARIABLES */
     [Header("Jumping Variables")]
+    [SerializeField] bool _changeFacingDirectionMidair = true;
+    public bool changeFacingDirectionMidair { get { return _changeFacingDirectionMidair; } }
+
     [SerializeField] float _jumpSpeed = 4f;
     public float jumpSpeed { get { return _jumpSpeed; } }
 
@@ -65,4 +68,7 @@ public class PlayerCtrlProperties : ScriptableObject
 
     [SerializeField] float _midairJumpSpeed = 4.25f;
     public float midairJumpSpeed { get { return _midairJumpSpeed; } }
+
+    [SerializeField] Vector2 _backwardsMidairJumpBonus;
+    public Vector2 backwardsMidairJumpBonus { get { return _backwardsMidairJumpBonus; } }
 }
