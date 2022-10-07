@@ -108,11 +108,13 @@ public class PlayerCtrl : MonoBehaviour
                 if (Mathf.Abs(rb2d.velocity.x) < topSpeed)
                 {
                     rb2d.velocity = new Vector2(rb2d.velocity.x + ((isGrounded ? acceleration : airAcceleration) * (Input.GetAxis("Horizontal") > 0f ? 1f : -1f) * Time.deltaTime), rb2d.velocity.y);
-                    if (Mathf.Abs(rb2d.velocity.x) > topSpeed)
-                    {
-                        rb2d.velocity = new Vector2(topSpeed * (Input.GetAxis("Horizontal") > 0f ? 1f : -1f), rb2d.velocity.y);
-                    }
+
                 }
+                else if (Mathf.Abs(rb2d.velocity.x) > topSpeed)
+                {
+                    rb2d.velocity = new Vector2(topSpeed * (Input.GetAxis("Horizontal") > 0f ? 1f : -1f), rb2d.velocity.y);
+                }
+                else { /* Nothing */ }
             }
             else
             {
@@ -182,6 +184,11 @@ public class PlayerCtrl : MonoBehaviour
                 {
                     rb2d.velocity = new Vector2(rb2d.velocity.x, rb2d.velocity.y - (variableJumpDecay * Time.deltaTime));
                 }
+
+                if (rb2d.velocity.y > jumpSpeed)
+                {
+                    rb2d.velocity = new Vector2(rb2d.velocity.x, jumpSpeed);
+                }
             }
             else
             {
@@ -197,7 +204,7 @@ public class PlayerCtrl : MonoBehaviour
                 {
                     rb2d.gravityScale = fallingGravity;
 
-                    if (currentAirStallTime > 0f)
+                    if (enableAirStalling && currentAirStallTime > 0f)
                     {
                         currentAirStallTime = maxAirStallTime;
                     }
@@ -253,6 +260,8 @@ public class PlayerCtrl : MonoBehaviour
         enableAirStalling = p.enableAirStalling;
         airStallSpeed = p.airStallSpeed;
         maxAirStallTime = p.maxAirStallTime;
+
+        if (enableAirStalling && currentAirStallTime > 0f && maxAirStallTime > 0f) { currentAirStallTime = maxAirStallTime; }
 
         maxMidairJumps = p.maxMidairJumps;
         midairJumpSpeed = p.midairJumpSpeed;
