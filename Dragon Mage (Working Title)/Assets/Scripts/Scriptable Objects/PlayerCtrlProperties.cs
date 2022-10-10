@@ -69,6 +69,6 @@ public class PlayerCtrlProperties : ScriptableObject
     [SerializeField] float _midairJumpSpeed = 4.25f;
     public float midairJumpSpeed { get { return _midairJumpSpeed; } }
 
-    [SerializeField] Vector2 _backwardsMidairJumpBonus;
-    public Vector2 backwardsMidairJumpBonus { get { return _backwardsMidairJumpBonus; } }
+    [SerializeField] Vector2 _forwardMidairJumpBonus;
+    public Vector2 forwardMidairJumpBonus { get { return _forwardMidairJumpBonus; } }
 }

@@ -55,7 +55,7 @@ public class PlayerCtrl : MonoBehaviour
     [Header("Midair Jump Variables")]
     [SerializeField, Range(0, 5)] int maxMidairJumps = 3;
     [SerializeField] float midairJumpSpeed = 4.25f;
-    [SerializeField] Vector2 backwardsMidairJumpBonus;
+    [SerializeField] Vector2 forwardMidairJumpBonus;
 
     /* MISC VARIABLES */
     [Header("Miscellaneous Control Variables")]
@@ -112,9 +112,10 @@ public class PlayerCtrl : MonoBehaviour
     private void UpdatePlayerCamTarget()
     {
         if (isChangingForm) { return; }
-        float horizontalLookahead = (lookaheadDistance * Mathf.Min((rb2d.velocity.x / topSpeed), 1f));
-        float initialYPos = (followCharacterOnJump || groundCheckObj.position.y < playerCamTarget.position.y || isGrounded ? groundCheckObj.position.y : playerCamTarget.position.y);
-        playerCamTarget.position = new Vector2(groundCheckObj.position.x + horizontalLookahead, initialYPos);
+        float horizontalLookahead = (lookaheadDistance * Mathf.Min(Mathf.Abs(rb2d.velocity.x / topSpeed), 1f) * (rb2d.velocity.x >= 0f ? 1f : -1f));
+        float initialYPos = (followCharacterOnJump || isGrounded ? groundCheckObj.position.y : playerCamTarget.position.y);
+        float verticalLookahead = (!isGrounded && rb2d.velocity.y < 0f && groundCheckObj.position.y < playerCamTarget.position.y ? fallingLookaheadDistance * Mathf.Min((rb2d.velocity.y / -fallSpeed) , 1f) : 0f);
+        playerCamTarget.position = new Vector2(groundCheckObj.position.x + horizontalLookahead, initialYPos - verticalLookahead);
     }
 
     private void Movement()
@@ -197,10 +198,10 @@ public class PlayerCtrl : MonoBehaviour
             jumpIsHeld = true;
             rb2d.gravityScale = risingGravity;
             Vector2 newVelocity = new Vector2(rb2d.velocity.x, midairJumpSpeed);
-            if ((isFacingRight ? 1f : -1f) * rb2d.velocity.x < 0f)
+            if ((isFacingRight ? 1f : -1f) * rb2d.velocity.x > 0f)
             {
-                float bonusXVelocity = backwardsMidairJumpBonus.x * (rb2d.velocity.x > 0f ? 1f : -1f);
-                float bonusYVelocity = Mathf.Abs(backwardsMidairJumpBonus.y);
+                float bonusXVelocity = forwardMidairJumpBonus.x * (rb2d.velocity.x > 0f ? 1f : -1f);
+                float bonusYVelocity = Mathf.Abs(forwardMidairJumpBonus.y);
                 newVelocity += new Vector2(bonusXVelocity, bonusYVelocity);
             }
             else
@@ -320,7 +321,7 @@ public class PlayerCtrl : MonoBehaviour
 
         maxMidairJumps = p.maxMidairJumps;
         midairJumpSpeed = p.midairJumpSpeed;
-        backwardsMidairJumpBonus = p.backwardsMidairJumpBonus;
+        forwardMidairJumpBonus = p.forwardMidairJumpBonus;
     }
 
     private void ChangeMode(CharacterMode mode)
