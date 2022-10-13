@@ -14,7 +14,7 @@ public class PlatformProjectile : MonoBehaviour
 
     void FixedUpdate()
     {
-        Vector2 nextPosition = this.transform.position + ((Vector3.right - Vector3.up) * Time.deltaTime);
+        Vector2 nextPosition = this.transform.position + (Vector3.right * Time.deltaTime);
         this.transform.position = nextPosition;
     }
 }

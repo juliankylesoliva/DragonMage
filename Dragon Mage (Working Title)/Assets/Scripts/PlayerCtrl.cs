@@ -64,6 +64,7 @@ public class PlayerCtrl : MonoBehaviour
     [SerializeField] float coyoteTime = 0.1f;
     [SerializeField] float lookaheadDistance = 8f;
     [SerializeField] float fallingLookaheadDistance = 2f;
+    [SerializeField] float fallingLookaheadThreshold = 0.1f;
     [SerializeField] bool followCharacterOnJump = false;
 
     /* SCRIPT VARIABLES */
@@ -124,7 +125,7 @@ public class PlayerCtrl : MonoBehaviour
         if (isChangingForm) { return; }
         float horizontalLookahead = (lookaheadDistance * Mathf.Min(Mathf.Abs(rb2d.velocity.x / topSpeed), 1f) * (rb2d.velocity.x >= 0f ? 1f : -1f));
         float initialYPos = (followCharacterOnJump || isGrounded || IsPlayerOnMovingPlatform() ? groundCheckObj.position.y : playerCamTarget.position.y);
-        float verticalLookahead = (!isGrounded && !IsPlayerOnMovingPlatform() && coyoteTimeLeft <= 0f && rb2d.velocity.y < 0f && groundCheckObj.position.y < playerCamTarget.position.y ? fallingLookaheadDistance * Mathf.Min((rb2d.velocity.y / -fallSpeed) , 1f) : 0f);
+        float verticalLookahead = (!isGrounded && !IsPlayerOnMovingPlatform() && coyoteTimeLeft <= 0f && rb2d.velocity.y < 0f && groundCheckObj.position.y < (playerCamTarget.position.y - fallingLookaheadThreshold) ? fallingLookaheadDistance * Mathf.Min((rb2d.velocity.y / -fallSpeed) , 1f) : 0f);
         playerCamTarget.position = new Vector2(groundCheckObj.position.x + horizontalLookahead, initialYPos - verticalLookahead);
     }
 
