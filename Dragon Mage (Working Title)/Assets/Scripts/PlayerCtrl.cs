@@ -107,14 +107,24 @@ public class PlayerCtrl : MonoBehaviour
         isGrounded = false;
         Collider2D[] colliders = Physics2D.OverlapCircleAll(groundCheckObj.position, groundCheckRadius, groundLayer);
         isGrounded = (colliders.Length > 0);
+
+        if (isGrounded && colliders[0].gameObject.tag == "MovingPlatform")
+        {
+            this.transform.parent = colliders[0].transform;
+            this.transform.localPosition = new Vector3(this.transform.localPosition.x, 1.5f, 0f);
+        }
+        else
+        {
+            this.transform.parent = null;
+        }
     }
 
     private void UpdatePlayerCamTarget()
     {
         if (isChangingForm) { return; }
         float horizontalLookahead = (lookaheadDistance * Mathf.Min(Mathf.Abs(rb2d.velocity.x / topSpeed), 1f) * (rb2d.velocity.x >= 0f ? 1f : -1f));
-        float initialYPos = (followCharacterOnJump || isGrounded ? groundCheckObj.position.y : playerCamTarget.position.y);
-        float verticalLookahead = (!isGrounded && coyoteTimeLeft <= 0f && rb2d.velocity.y < 0f && groundCheckObj.position.y < playerCamTarget.position.y ? fallingLookaheadDistance * Mathf.Min((rb2d.velocity.y / -fallSpeed) , 1f) : 0f);
+        float initialYPos = (followCharacterOnJump || isGrounded || IsPlayerOnMovingPlatform() ? groundCheckObj.position.y : playerCamTarget.position.y);
+        float verticalLookahead = (!isGrounded && !IsPlayerOnMovingPlatform() && coyoteTimeLeft <= 0f && rb2d.velocity.y < 0f && groundCheckObj.position.y < playerCamTarget.position.y ? fallingLookaheadDistance * Mathf.Min((rb2d.velocity.y / -fallSpeed) , 1f) : 0f);
         playerCamTarget.position = new Vector2(groundCheckObj.position.x + horizontalLookahead, initialYPos - verticalLookahead);
     }
 
@@ -399,5 +409,10 @@ public class PlayerCtrl : MonoBehaviour
 
             yield return null;
         }
+    }
+
+    private bool IsPlayerOnMovingPlatform()
+    {
+        return (this.transform.parent != null && this.transform.parent.gameObject.tag == "MovingPlatform");
     }
 }
