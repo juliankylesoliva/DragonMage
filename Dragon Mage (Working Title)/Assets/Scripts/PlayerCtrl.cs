@@ -18,6 +18,8 @@ public class PlayerCtrl : MonoBehaviour
     [SerializeField] PlayerCtrlProperties dragonProperties;
     [SerializeField] Sprite tempMageSprite;
     [SerializeField] Sprite tempDragonSprite;
+    [SerializeField] GameObject magicPlatformPrefab;
+    [SerializeField] Transform platformSpawnPoint;
     
     /* EDITOR VARIABLES */
     [Header("Editor Variables")]
@@ -77,9 +79,10 @@ public class PlayerCtrl : MonoBehaviour
     private float jumpBufferTimeLeft = 0f;
     private float coyoteTimeLeft = 0f;
     private bool isFacingRight = true;
+    private bool isOnMovingPlatform = false;
 
     /* PUBLIC PROPERTIES */
-    public bool IsGrounded { get { return isGrounded; } }
+    public bool IsOnMovingPlatform { get { return isOnMovingPlatform; } }
 
     void Awake()
     {
@@ -103,6 +106,7 @@ public class PlayerCtrl : MonoBehaviour
         FacingDirection();
         Jumping();
         Movement();
+        FireProjectile();
     }
 
     /* METHODS */
@@ -111,6 +115,16 @@ public class PlayerCtrl : MonoBehaviour
         isGrounded = false;
         Collider2D[] colliders = Physics2D.OverlapCircleAll(groundCheckObj.position, groundCheckRadius, groundLayer);
         isGrounded = (colliders.Length > 0);
+
+        if (isGrounded)
+        {
+            MovingPlatform platform = colliders[0].gameObject.GetComponent<MovingPlatform>();
+            isOnMovingPlatform = (platform != null);
+        }
+        else
+        {
+            isOnMovingPlatform = false;
+        }
     }
 
     private void UpdatePlayerCamTarget()
@@ -256,6 +270,26 @@ public class PlayerCtrl : MonoBehaviour
                         rb2d.velocity = new Vector2(rb2d.velocity.x, -fallSpeed);
                     }
                 }
+            }
+        }
+    }
+
+    private void FireProjectile()
+    {
+        if (Input.GetButtonDown("Fire"))
+        {
+            if (currentMode == CharacterMode.MAGE)
+            {
+                GameObject tempObj = Instantiate(magicPlatformPrefab, platformSpawnPoint.position, Quaternion.identity);
+                MovingPlatform platTemp = tempObj.GetComponent<MovingPlatform>();
+                if (platTemp != null)
+                {
+                    platTemp.SetupDirection(isFacingRight);
+                }
+            }
+            else
+            {
+
             }
         }
     }

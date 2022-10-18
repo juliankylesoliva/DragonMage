@@ -379,6 +379,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1380840842}
+  - {fileID: 2146679145}
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -437,6 +438,8 @@ MonoBehaviour:
   dragonProperties: {fileID: 11400000, guid: 30fff2eeae6f929478e55877d487543c, type: 2}
   tempMageSprite: {fileID: 21300000, guid: 3009b818094062e4d87a85053164a2d8, type: 3}
   tempDragonSprite: {fileID: 21300000, guid: 7dca87747edad3f4cab78bc67b815376, type: 3}
+  magicPlatformPrefab: {fileID: 3446839594990900316, guid: ff60197ce21b9bb43bb873cf5f19183c, type: 3}
+  platformSpawnPoint: {fileID: 2146679145}
   startingMode: 0
   groundCheckRadius: 0.05
   groundLayer:
@@ -587,7 +590,7 @@ GameObject:
   - component: {fileID: 1553617039}
   m_Layer: 6
   m_Name: LevelLayout
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -30428,4 +30431,35 @@ Transform:
   - {fileID: 1553617035}
   m_Father: {fileID: 0}
   m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &2146679144
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2146679145}
+  m_Layer: 3
+  m_Name: PlatformSpawnPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2146679145
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2146679144}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 1, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 557060670}
+  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
