@@ -69,6 +69,14 @@ public class PlayerCtrl : MonoBehaviour
     [SerializeField] float fallingLookaheadThreshold = 0.1f;
     [SerializeField] bool followCharacterOnJump = false;
 
+    /* MAGIC METER VARIABLES */
+    [Header("Magic Meter Variables")]
+    [SerializeField] float maxMagic = 100f;
+    [SerializeField] float startingMagic = 50f;
+    [SerializeField] float magicChangeRate = 0.1f;
+    [SerializeField, Range(1f, 99f)] float forceMageFormThreshold = 25f;
+    [SerializeField, Range(1f, 99f)] float forceDragonFormThreshold = 75f;
+
     /* SCRIPT VARIABLES */
     private CharacterMode currentMode = CharacterMode.MAGE;
     private bool isGrounded = false;
@@ -80,6 +88,8 @@ public class PlayerCtrl : MonoBehaviour
     private float coyoteTimeLeft = 0f;
     private bool isFacingRight = true;
     private bool isOnMovingPlatform = false;
+    private GameObject movingPlatformRef = null;
+    private float currentMagic = 0f;
 
     /* PUBLIC PROPERTIES */
     public bool IsOnMovingPlatform { get { return isOnMovingPlatform; } }
@@ -95,7 +105,9 @@ public class PlayerCtrl : MonoBehaviour
     {
         StartCoroutine(JumpBufferCR());
         StartCoroutine(CoyoteTimeCR());
+        StartCoroutine(MagicMeterCR());
         ChangeMode(startingMode);
+        currentMagic = startingMagic;
     }
 
     void Update()
@@ -199,8 +211,11 @@ public class PlayerCtrl : MonoBehaviour
 
         if (isGrounded || coyoteTimeLeft > 0f)
         {
-            currentAirStallTime = 0f;
-            currentMidairJumps = 0;
+            if (!isOnMovingPlatform)
+            {
+                currentAirStallTime = 0f;
+                currentMidairJumps = 0;
+            }
 
             if (jumpBufferTimeLeft > 0f)
             {
@@ -280,11 +295,17 @@ public class PlayerCtrl : MonoBehaviour
         {
             if (currentMode == CharacterMode.MAGE)
             {
+                if (movingPlatformRef != null)
+                {
+                    GameObject.Destroy(movingPlatformRef);
+                }
+
                 GameObject tempObj = Instantiate(magicPlatformPrefab, platformSpawnPoint.position, Quaternion.identity);
                 MovingPlatform platTemp = tempObj.GetComponent<MovingPlatform>();
                 if (platTemp != null)
                 {
-                    platTemp.SetupDirection(isFacingRight);
+                    platTemp.SetupDirection(isFacingRight, Input.GetAxis("Vertical") < 0f);
+                    movingPlatformRef = tempObj;
                 }
             }
             else
@@ -296,17 +317,17 @@ public class PlayerCtrl : MonoBehaviour
 
     private void FormChange()
     {
-        if (!isChangingForm && Input.GetButtonDown("Change Form"))
+        if (!isChangingForm && (Input.GetButtonDown("Change Form") || (currentMode == CharacterMode.MAGE && currentMagic >= maxMagic) || (currentMode == CharacterMode.DRAGON && currentMagic <= 0f)) )
         {
             StartCoroutine(FormFreeze());
 
-            if (currentMode == CharacterMode.MAGE)
+            if (currentMode == CharacterMode.MAGE && currentMagic > forceMageFormThreshold)
             {
                 ChangeMode(CharacterMode.DRAGON);
                 return;
             }
 
-            if (currentMode == CharacterMode.DRAGON)
+            if (currentMode == CharacterMode.DRAGON && currentMagic < forceDragonFormThreshold)
             {
                 ChangeMode(CharacterMode.MAGE);
                 return;
@@ -435,6 +456,17 @@ public class PlayerCtrl : MonoBehaviour
 
             prevIsGrounded = isGrounded;
 
+            yield return null;
+        }
+    }
+
+    private IEnumerator MagicMeterCR()
+    {
+        while (true)
+        {
+            currentMagic += ((currentMode == CharacterMode.MAGE ? 1f : -1f) * magicChangeRate * Time.deltaTime);
+            if (currentMagic > maxMagic) { currentMagic = maxMagic; }
+            if (currentMagic < 0f) { currentMagic = 0f; }
             yield return null;
         }
     }

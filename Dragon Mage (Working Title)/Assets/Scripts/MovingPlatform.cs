@@ -9,6 +9,7 @@ public class MovingPlatform : MonoBehaviour
 
     /* EDITOR VARIABLES */
     [SerializeField] float moveSpeed = 1f;
+    [SerializeField] float displacement = 2.5f;
     [SerializeField] float lifetime = 5f;
 
     void Start()
@@ -35,9 +36,11 @@ public class MovingPlatform : MonoBehaviour
         }
     }
 
-    public void SetupDirection(bool isGoingRight = true)
+    public void SetupDirection(bool isGoingRight = true, bool isDownPressed = false)
     {
         moveSpeed = Mathf.Abs(moveSpeed) * (isGoingRight ? 1f : -1f);
+        this.transform.position += (Vector3.right * displacement * (isGoingRight ? 1f : -1f));
+        moveSpeed *= (isDownPressed ? 0f : 1f);
     }
 
     void OnCollisionEnter2D(Collision2D col)
@@ -49,12 +52,24 @@ public class MovingPlatform : MonoBehaviour
         else if (col.transform.tag == "Player")
         {
             PlayerCtrl player = col.gameObject.GetComponent<PlayerCtrl>();
-            if (player != null && player.IsOnMovingPlatform)
+            if (player != null && player.transform.parent == null && player.IsOnMovingPlatform)
             {
                 col.transform.parent = this.transform;
             }
         }
         else { /* Nothing */ }
+    }
+
+    void OnCollisionStay2D(Collision2D col)
+    {
+        if (col.transform.tag == "Player")
+        {
+            PlayerCtrl player = col.gameObject.GetComponent<PlayerCtrl>();
+            if (player != null && player.transform.parent == null && player.IsOnMovingPlatform)
+            {
+                col.transform.parent = this.transform;
+            }
+        }
     }
 
     void OnCollisionExit2D(Collision2D col)
