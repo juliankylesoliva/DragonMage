@@ -18,8 +18,8 @@ public class PlayerCtrl : MonoBehaviour
     [SerializeField] PlayerCtrlProperties dragonProperties;
     [SerializeField] Sprite tempMageSprite;
     [SerializeField] Sprite tempDragonSprite;
-    [SerializeField] GameObject magicPlatformPrefab;
-    [SerializeField] Transform platformSpawnPoint;
+    [SerializeField] GameObject magicProjectilePrefab;
+    [SerializeField] Transform projectileSpawnPoint;
     
     /* EDITOR VARIABLES */
     [Header("Editor Variables")]
@@ -88,7 +88,7 @@ public class PlayerCtrl : MonoBehaviour
     private float coyoteTimeLeft = 0f;
     private bool isFacingRight = true;
     private bool isOnMovingPlatform = false;
-    private GameObject movingPlatformRef = null;
+    private GameObject projectileRef = null;
     private float currentMagic = 0f;
 
     /* PUBLIC PROPERTIES */
@@ -295,17 +295,17 @@ public class PlayerCtrl : MonoBehaviour
         {
             if (currentMode == CharacterMode.MAGE)
             {
-                if (movingPlatformRef != null)
+                if (projectileRef != null)
                 {
-                    GameObject.Destroy(movingPlatformRef);
+                    GameObject.Destroy(projectileRef);
                 }
 
-                GameObject tempObj = Instantiate(magicPlatformPrefab, platformSpawnPoint.position, Quaternion.identity);
-                MovingPlatform platTemp = tempObj.GetComponent<MovingPlatform>();
-                if (platTemp != null)
+                GameObject tempObj = Instantiate(magicProjectilePrefab, projectileSpawnPoint.position, Quaternion.identity);
+                MagicBlast projTemp = tempObj.GetComponent<MagicBlast>();
+                if (projTemp != null)
                 {
-                    platTemp.SetupDirection(isFacingRight, Input.GetAxis("Vertical") < 0f);
-                    movingPlatformRef = tempObj;
+                    projTemp.Setup(isFacingRight);
+                    projectileRef = tempObj;
                 }
             }
             else
