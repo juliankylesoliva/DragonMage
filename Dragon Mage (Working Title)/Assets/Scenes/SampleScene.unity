@@ -353,7 +353,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 100433471
-  m_SortingLayer: 3
+  m_SortingLayer: 2
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 3009b818094062e4d87a85053164a2d8, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -466,11 +466,14 @@ MonoBehaviour:
   midairJumpSpeed: 0
   forwardMidairJumpBonus: {x: 0, y: 0}
   formChangeTime: 0.15
+  projectileUsageCooldown: 0.4
   jumpBufferTime: 0.16666667
   coyoteTime: 0.2
   lookaheadDistance: 4
   fallingLookaheadDistance: 6
   fallingLookaheadThreshold: 1
+  risingLookaheadDistance: 5
+  risingLookaheadThreshold: 6
   followCharacterOnJump: 0
   maxMagic: 100
   startingMagic: 50
@@ -654,7 +657,7 @@ TilemapRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -2050848823
-  m_SortingLayer: 2
+  m_SortingLayer: 3
   m_SortingOrder: 0
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0, y: 0, z: 0}

@@ -72,7 +72,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -2030815321
-  m_SortingLayer: 1
+  m_SortingLayer: 4
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 78095549ad1de1b48b0a969ac8443283, type: 3}
   m_Color: {r: 0.34901962, g: 0.25490198, b: 0.6627451, a: 1}
@@ -189,6 +189,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd245338b6d36184cb00b4d5def7d17e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  blastHitboxPrefab: {fileID: 8588232049811770561, guid: 728de4123d9cdb2458d9c308ac09f3b4, type: 3}
+  fuseTime: 3
   verticalLaunchSpeed: 6
   horizontalLaunchSpeed: 8
-  displacement: 1
+  blastDuration: 0.2
+  blastStrength: 18
+  blastRadius: 2.25

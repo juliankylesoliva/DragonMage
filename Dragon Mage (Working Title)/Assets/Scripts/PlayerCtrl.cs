@@ -67,6 +67,8 @@ public class PlayerCtrl : MonoBehaviour
     [SerializeField] float lookaheadDistance = 8f;
     [SerializeField] float fallingLookaheadDistance = 2f;
     [SerializeField] float fallingLookaheadThreshold = 0.1f;
+    [SerializeField] float risingLookaheadDistance = 5f;
+    [SerializeField] float risingLookaheadThreshold = 5f;
     [SerializeField] bool followCharacterOnJump = false;
 
     /* MAGIC METER VARIABLES */
@@ -77,6 +79,9 @@ public class PlayerCtrl : MonoBehaviour
     [SerializeField, Range(1f, 99f)] float forceMageFormThreshold = 25f;
     [SerializeField, Range(1f, 99f)] float forceDragonFormThreshold = 75f;
 
+    /* PROJECTILE VARIABLES */
+    [SerializeField] float projectileUsageCooldown = 1f;
+
     /* SCRIPT VARIABLES */
     private CharacterMode currentMode = CharacterMode.MAGE;
     private bool isGrounded = false;
@@ -84,11 +89,12 @@ public class PlayerCtrl : MonoBehaviour
     private float currentAirStallTime = 0f;
     private int currentMidairJumps = 0;
     private bool isChangingForm = false;
+    private bool isProjectileCooldownActive = false;
     private float jumpBufferTimeLeft = 0f;
     private float coyoteTimeLeft = 0f;
     private bool isFacingRight = true;
     private bool isOnMovingPlatform = false;
-    private GameObject projectileRef = null;
+    private MagicBlast projectileRef = null;
     private float currentMagic = 0f;
 
     /* PUBLIC PROPERTIES */
@@ -144,8 +150,9 @@ public class PlayerCtrl : MonoBehaviour
         if (isChangingForm) { return; }
         float horizontalLookahead = (lookaheadDistance * Mathf.Min(Mathf.Abs(rb2d.velocity.x / topSpeed), 1f) * (rb2d.velocity.x >= 0f ? 1f : -1f));
         float initialYPos = (followCharacterOnJump || isGrounded ? groundCheckObj.position.y : playerCamTarget.position.y);
-        float verticalLookahead = (!isGrounded && coyoteTimeLeft <= 0f && rb2d.velocity.y < 0f && groundCheckObj.position.y < (playerCamTarget.position.y - fallingLookaheadThreshold) ? fallingLookaheadDistance * Mathf.Min((rb2d.velocity.y / -fallSpeed) , 1f) : 0f);
-        playerCamTarget.position = new Vector2(groundCheckObj.position.x + horizontalLookahead, initialYPos - verticalLookahead);
+        float fallingLookahead = (!isGrounded && coyoteTimeLeft <= 0f && rb2d.velocity.y < 0f && groundCheckObj.position.y < (playerCamTarget.position.y - fallingLookaheadThreshold) ? fallingLookaheadDistance * Mathf.Min((rb2d.velocity.y / -fallSpeed) , 1f) : 0f);
+        float risingLookahead = (!isGrounded && coyoteTimeLeft <= 0f && groundCheckObj.position.y > (playerCamTarget.position.y + risingLookaheadThreshold) ? risingLookaheadDistance * Mathf.Max(rb2d.velocity.y / fallSpeed, 1f) : 0f);
+        playerCamTarget.position = new Vector2(groundCheckObj.position.x + horizontalLookahead, initialYPos - fallingLookahead + risingLookahead);
     }
 
     private void Movement()
@@ -291,22 +298,25 @@ public class PlayerCtrl : MonoBehaviour
 
     private void FireProjectile()
     {
-        if (Input.GetButtonDown("Fire"))
+        if (!isProjectileCooldownActive && Input.GetButtonDown("Fire"))
         {
             if (currentMode == CharacterMode.MAGE)
             {
                 if (projectileRef != null)
                 {
-                    GameObject.Destroy(projectileRef);
+                    projectileRef.Detonate();
                 }
-
-                GameObject tempObj = Instantiate(magicProjectilePrefab, projectileSpawnPoint.position, Quaternion.identity);
-                MagicBlast projTemp = tempObj.GetComponent<MagicBlast>();
-                if (projTemp != null)
+                else
                 {
-                    projTemp.Setup(isFacingRight);
-                    projectileRef = tempObj;
+                    GameObject tempObj = Instantiate(magicProjectilePrefab, projectileSpawnPoint.position, Quaternion.identity);
+                    MagicBlast projTemp = tempObj.GetComponent<MagicBlast>();
+                    if (projTemp != null)
+                    {
+                        projTemp.Setup(isFacingRight, Input.GetAxis("Vertical"));
+                        projectileRef = projTemp;
+                    }
                 }
+                StartCoroutine(ProjectileUsageCooldownCR());
             }
             else
             {
@@ -381,6 +391,17 @@ public class PlayerCtrl : MonoBehaviour
         maxMidairJumps = p.maxMidairJumps;
         midairJumpSpeed = p.midairJumpSpeed;
         forwardMidairJumpBonus = p.forwardMidairJumpBonus;
+    }
+
+    private IEnumerator ProjectileUsageCooldownCR()
+    {
+        if (!isProjectileCooldownActive)
+        {
+            isProjectileCooldownActive = true;
+            yield return new WaitForSeconds(projectileUsageCooldown);
+            isProjectileCooldownActive = false;
+        }
+        yield break;
     }
 
     private void ChangeMode(CharacterMode mode)
