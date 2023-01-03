@@ -16,6 +16,7 @@ MonoBehaviour:
   _deceleration: 20
   _topSpeed: 5.25
   _turningSpeed: 45
+  _changeFacingDirectionMidair: 1
   _jumpSpeed: 8.5
   _risingGravity: 1.25
   _fallingGravity: 2.5
@@ -30,3 +31,6 @@ MonoBehaviour:
   _maxAirStallTime: 3
   _maxMidairJumps: 0
   _midairJumpSpeed: 0
+  _forwardMidairJumpBonus: {x: 0, y: 0}
+  _enableRunningJumpBonus: 1
+  _runningJumpMultiplier: 1.5

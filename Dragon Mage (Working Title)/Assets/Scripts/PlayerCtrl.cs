@@ -59,6 +59,10 @@ public class PlayerCtrl : MonoBehaviour
     [SerializeField] float midairJumpSpeed = 4.25f;
     [SerializeField] Vector2 forwardMidairJumpBonus;
 
+    [Header("Running Jump Variables")]
+    [SerializeField] bool enableRunningJumpBonus = true;
+    [SerializeField] float runningJumpMultiplier = 1f;
+
     /* MISC VARIABLES */
     [Header("Miscellaneous Control Variables")]
     [SerializeField] float formChangeTime = 0.25f;
@@ -80,6 +84,7 @@ public class PlayerCtrl : MonoBehaviour
     [SerializeField, Range(1f, 99f)] float forceDragonFormThreshold = 75f;
 
     /* PROJECTILE VARIABLES */
+    [Header("Projectile Variables")]
     [SerializeField] float projectileUsageCooldown = 1f;
 
     /* SCRIPT VARIABLES */
@@ -229,7 +234,7 @@ public class PlayerCtrl : MonoBehaviour
                 jumpBufferTimeLeft = 0f;
                 jumpIsHeld = true;
                 rb2d.gravityScale = risingGravity;
-                rb2d.velocity = new Vector2(rb2d.velocity.x, jumpSpeed);
+                rb2d.velocity = new Vector2(rb2d.velocity.x, jumpSpeed + (enableRunningJumpBonus ? Mathf.Abs(rb2d.velocity.x / topSpeed) * runningJumpMultiplier : 0f));
             }
         }
         else if (!isGrounded && currentMidairJumps < maxMidairJumps && jumpBufferTimeLeft > 0f)
@@ -312,7 +317,7 @@ public class PlayerCtrl : MonoBehaviour
                     MagicBlast projTemp = tempObj.GetComponent<MagicBlast>();
                     if (projTemp != null)
                     {
-                        projTemp.Setup(isFacingRight, Input.GetAxis("Vertical"));
+                        projTemp.Setup(isFacingRight, rb2d.velocity.x, Input.GetAxis("Vertical"));
                         projectileRef = projTemp;
                     }
                 }
@@ -391,6 +396,9 @@ public class PlayerCtrl : MonoBehaviour
         maxMidairJumps = p.maxMidairJumps;
         midairJumpSpeed = p.midairJumpSpeed;
         forwardMidairJumpBonus = p.forwardMidairJumpBonus;
+
+        enableRunningJumpBonus = p.enableRunningJumpBonus;
+        runningJumpMultiplier = p.runningJumpMultiplier;
     }
 
     private IEnumerator ProjectileUsageCooldownCR()

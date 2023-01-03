@@ -71,4 +71,11 @@ public class PlayerCtrlProperties : ScriptableObject
 
     [SerializeField] Vector2 _forwardMidairJumpBonus;
     public Vector2 forwardMidairJumpBonus { get { return _forwardMidairJumpBonus; } }
+
+    [Header("Running Jump Variables")]
+    [SerializeField] bool _enableRunningJumpBonus = true;
+    public bool enableRunningJumpBonus { get { return _enableRunningJumpBonus; } }
+
+    [SerializeField] float _runningJumpMultiplier = 1f;
+    public float runningJumpMultiplier { get { return _runningJumpMultiplier; } }
 }

@@ -75,7 +75,7 @@ SpriteRenderer:
   m_SortingLayer: 4
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 78095549ad1de1b48b0a969ac8443283, type: 3}
-  m_Color: {r: 0.34901962, g: 0.25490198, b: 0.6627451, a: 1}
+  m_Color: {r: 0.38039216, g: 0.3137255, b: 0.6392157, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -193,6 +193,7 @@ MonoBehaviour:
   fuseTime: 3
   verticalLaunchSpeed: 6
   horizontalLaunchSpeed: 8
-  blastDuration: 0.2
-  blastStrength: 18
-  blastRadius: 2.25
+  rotationSpeed: 10
+  blastDuration: 0.1
+  blastStrength: 10
+  blastRadius: 1.8

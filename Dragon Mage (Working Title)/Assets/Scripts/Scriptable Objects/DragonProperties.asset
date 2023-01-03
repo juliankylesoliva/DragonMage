@@ -32,3 +32,5 @@ MonoBehaviour:
   _maxMidairJumps: 4
   _midairJumpSpeed: 4.75
   _forwardMidairJumpBonus: {x: 0.75, y: 0.5}
+  _enableRunningJumpBonus: 0
+  _runningJumpMultiplier: 0
