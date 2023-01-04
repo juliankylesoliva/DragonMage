@@ -19,6 +19,7 @@ public class PlayerCtrl : MonoBehaviour
     [SerializeField] Sprite tempMageSprite;
     [SerializeField] Sprite tempDragonSprite;
     [SerializeField] GameObject magicProjectilePrefab;
+    [SerializeField] GameObject fireProjectilePrefab;
     [SerializeField] Transform projectileSpawnPoint;
     
     /* EDITOR VARIABLES */
@@ -66,6 +67,7 @@ public class PlayerCtrl : MonoBehaviour
     /* MISC VARIABLES */
     [Header("Miscellaneous Control Variables")]
     [SerializeField] float formChangeTime = 0.25f;
+    [SerializeField] float formChangeBufferTime = 0.1f;
     [SerializeField] float jumpBufferTime = 0.1f;
     [SerializeField] float coyoteTime = 0.1f;
     [SerializeField] float lookaheadDistance = 8f;
@@ -86,6 +88,9 @@ public class PlayerCtrl : MonoBehaviour
     /* PROJECTILE VARIABLES */
     [Header("Projectile Variables")]
     [SerializeField] float projectileUsageCooldown = 1f;
+    [SerializeField] float fireProjectileWindup = 0.5f;
+    [SerializeField] float fireProjectileStartup = 0.15f;
+    [SerializeField] float fireProjectileRecoilStrength = 4f;
 
     /* SCRIPT VARIABLES */
     private CharacterMode currentMode = CharacterMode.MAGE;
@@ -94,7 +99,10 @@ public class PlayerCtrl : MonoBehaviour
     private float currentAirStallTime = 0f;
     private int currentMidairJumps = 0;
     private bool isChangingForm = false;
+    private bool isFormChangeCooldownActive = false;
     private bool isProjectileCooldownActive = false;
+    private bool isFireProjectileWindupActive = false;
+    private float formChangeBufferTimeLeft = 0f;
     private float jumpBufferTimeLeft = 0f;
     private float coyoteTimeLeft = 0f;
     private bool isFacingRight = true;
@@ -115,6 +123,7 @@ public class PlayerCtrl : MonoBehaviour
     void Start()
     {
         StartCoroutine(JumpBufferCR());
+        StartCoroutine(FormChangeBufferCR());
         StartCoroutine(CoyoteTimeCR());
         StartCoroutine(MagicMeterCR());
         ChangeMode(startingMode);
@@ -162,9 +171,9 @@ public class PlayerCtrl : MonoBehaviour
 
     private void Movement()
     {
-        if (isChangingForm) { return; }
+        if (isChangingForm || (isFireProjectileWindupActive && !isGrounded)) { return; }
 
-        if (Input.GetAxis("Horizontal") != 0f)
+        if (Input.GetAxis("Horizontal") != 0f && !isFireProjectileWindupActive)
         {
             if ((rb2d.velocity.x * Input.GetAxis("Horizontal")) >= 0f)
             {
@@ -219,7 +228,7 @@ public class PlayerCtrl : MonoBehaviour
 
     private void Jumping()
     {
-        if (isChangingForm) { return; }
+        if (isChangingForm || isFireProjectileWindupActive) { return; }
 
         if (isGrounded || coyoteTimeLeft > 0f)
         {
@@ -303,7 +312,7 @@ public class PlayerCtrl : MonoBehaviour
 
     private void FireProjectile()
     {
-        if (!isProjectileCooldownActive && Input.GetButtonDown("Fire"))
+        if (!isProjectileCooldownActive && !isFireProjectileWindupActive && Input.GetButtonDown("Fire"))
         {
             if (currentMode == CharacterMode.MAGE)
             {
@@ -325,15 +334,17 @@ public class PlayerCtrl : MonoBehaviour
             }
             else
             {
-
+                StartCoroutine(UseFireProjectileCR());
             }
         }
     }
 
     private void FormChange()
     {
-        if (!isChangingForm && (Input.GetButtonDown("Change Form") || (currentMode == CharacterMode.MAGE && currentMagic >= maxMagic) || (currentMode == CharacterMode.DRAGON && currentMagic <= 0f)) )
+        if (!isFormChangeCooldownActive && !isChangingForm && !isFireProjectileWindupActive && ((formChangeBufferTimeLeft > 0f) || (currentMode == CharacterMode.MAGE && currentMagic >= maxMagic) || (currentMode == CharacterMode.DRAGON && currentMagic <= 0f)) )
         {
+            formChangeBufferTimeLeft = 0f;
+
             StartCoroutine(FormFreeze());
 
             if (currentMode == CharacterMode.MAGE && currentMagic > forceMageFormThreshold)
@@ -352,14 +363,18 @@ public class PlayerCtrl : MonoBehaviour
 
     private void FacingDirection()
     {
-        if (isChangingForm || (!changeFacingDirectionMidair && !isGrounded) || (currentAirStallTime > 0f && currentAirStallTime < maxAirStallTime)) { return; }
+        if (isChangingForm || isFireProjectileWindupActive || (!changeFacingDirectionMidair && !isGrounded) || (currentAirStallTime > 0f && currentAirStallTime < maxAirStallTime)) { return; }
+        SetFacingDirection(Input.GetAxis("Horizontal"));
+    }
 
-        if (Input.GetAxis("Horizontal") > 0f)
+    private void SetFacingDirection(float horizontalAxis)
+    {
+        if (horizontalAxis > 0f)
         {
             isFacingRight = true;
             charSprite.flipX = false;
         }
-        else if (Input.GetAxis("Horizontal") < 0f)
+        else if (horizontalAxis < 0f)
         {
             isFacingRight = false;
             charSprite.flipX = true;
@@ -401,6 +416,82 @@ public class PlayerCtrl : MonoBehaviour
         runningJumpMultiplier = p.runningJumpMultiplier;
     }
 
+    private float GetInputAxisAngle()
+    {
+        float horizontalAxis = Input.GetAxis("Horizontal");
+        float verticalAxis = Input.GetAxis("Vertical");
+
+        if (horizontalAxis > 0f && verticalAxis == 0f)
+        {
+            return 0f;
+        }
+        else if (horizontalAxis < 0f && verticalAxis == 0f)
+        {
+            return 180f;
+        }
+        else if (horizontalAxis == 0f && verticalAxis > 0f)
+        {
+            return 90f;
+        }
+        else if (horizontalAxis == 0f && verticalAxis < 0f)
+        {
+            return -90f;
+        }
+        else if (horizontalAxis > 0f && verticalAxis > 0f)
+        {
+            return 45f;
+        }
+        else if (horizontalAxis > 0f && verticalAxis < 0f)
+        {
+            return -45f;
+        }
+        else if (horizontalAxis < 0f && verticalAxis > 0f)
+        {
+            return 135f;
+        }
+        else if (horizontalAxis < 0f && verticalAxis < 0f)
+        {
+            return -135f;
+        }
+        else
+        {
+            return (isFacingRight ? 0f : 180f);
+        }
+    }
+
+    private IEnumerator UseFireProjectileCR()
+    {
+        if (isFireProjectileWindupActive || isProjectileCooldownActive) { yield break; }
+
+        isFireProjectileWindupActive = true;
+        yield return new WaitForSeconds(fireProjectileWindup);
+
+        float inputAxisAngle = GetInputAxisAngle();
+        float negativeInputRadians = (-inputAxisAngle * Mathf.PI / 180f);
+        SetFacingDirection(Input.GetAxis("Horizontal"));
+
+        yield return new WaitForSeconds(fireProjectileStartup);
+
+        GameObject tempObj = Instantiate(fireProjectilePrefab, projectileSpawnPoint.position, Quaternion.identity);
+        FireMissile projTemp = tempObj.GetComponent<FireMissile>();
+        if (projTemp != null)
+        {
+            projTemp.Setup(isFacingRight, rb2d.velocity.magnitude, inputAxisAngle);
+        }
+
+        if (!isGrounded)
+        {
+            Vector2 recoilVelocity = new Vector2(-Mathf.Cos(negativeInputRadians), Mathf.Sin(negativeInputRadians));
+            float bonusRecoil = (rb2d.velocity.magnitude * 0.25f);
+            rb2d.velocity += (recoilVelocity * (fireProjectileRecoilStrength + bonusRecoil));
+        }
+        
+
+        isFireProjectileWindupActive = false;
+        StartCoroutine(ProjectileUsageCooldownCR());
+        StartCoroutine(SetFormChangeCooldownCR(0.1f));
+    }
+
     private IEnumerator ProjectileUsageCooldownCR()
     {
         if (!isProjectileCooldownActive)
@@ -408,6 +499,17 @@ public class PlayerCtrl : MonoBehaviour
             isProjectileCooldownActive = true;
             yield return new WaitForSeconds(projectileUsageCooldown);
             isProjectileCooldownActive = false;
+        }
+        yield break;
+    }
+
+    private IEnumerator SetFormChangeCooldownCR(float time)
+    {
+        if (!isFormChangeCooldownActive)
+        {
+            isFormChangeCooldownActive = true;
+            yield return new WaitForSeconds(time);
+            isFormChangeCooldownActive = false;
         }
         yield break;
     }
@@ -452,6 +554,28 @@ public class PlayerCtrl : MonoBehaviour
                 if (jumpBufferTimeLeft < 0f)
                 {
                     jumpBufferTimeLeft = 0f;
+                }
+            }
+
+            yield return null;
+        }
+    }
+
+    private IEnumerator FormChangeBufferCR()
+    {
+        while (true)
+        {
+            if (Input.GetButtonDown("Change Form"))
+            {
+                formChangeBufferTimeLeft = formChangeBufferTime;
+            }
+
+            if (formChangeBufferTimeLeft > 0f)
+            {
+                formChangeBufferTimeLeft -= Time.deltaTime;
+                if (formChangeBufferTimeLeft < 0f)
+                {
+                    formChangeBufferTimeLeft = 0;
                 }
             }
 
