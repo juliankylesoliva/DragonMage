@@ -469,7 +469,8 @@ MonoBehaviour:
   enableRunningJumpBonus: 1
   runningJumpMultiplier: 1.5
   formChangeTime: 0.15
-  formChangeBufferTime: 0.16666667
+  formChangeCooldownTime: 0.4
+  formChangeBufferTime: 0.25
   jumpBufferTime: 0.16666667
   coyoteTime: 0.2
   lookaheadDistance: 4

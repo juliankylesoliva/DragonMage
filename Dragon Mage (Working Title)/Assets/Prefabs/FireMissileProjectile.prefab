@@ -85,6 +85,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 4
+  strafeSpeed: 3
+  lifetime: 8
+  strafeTime: 0.5
 --- !u!1 &5672963331915619680
 GameObject:
   m_ObjectHideFlags: 0

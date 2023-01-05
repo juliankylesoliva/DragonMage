@@ -190,6 +190,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   blastHitboxPrefab: {fileID: 8588232049811770561, guid: 728de4123d9cdb2458d9c308ac09f3b4, type: 3}
+  spriteRenderer: {fileID: 9148520560815648271}
+  chargedColor: {r: 0.94117653, g: 0.6039216, b: 0.34901962, a: 1}
+  chargeMultiplier: 1.5
   fuseTime: 3
   verticalLaunchSpeed: 6
   horizontalLaunchSpeed: 8
