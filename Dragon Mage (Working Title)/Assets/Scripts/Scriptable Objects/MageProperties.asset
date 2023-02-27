@@ -29,6 +29,15 @@ MonoBehaviour:
   _enableAirStalling: 1
   _airStallSpeed: 0
   _maxAirStallTime: 3
+  _enableWallClimbing: 0
+  _baseClimbingSpeed: 0
+  _climbingGravity: 0
+  _maxWallClimbTime: 0
+  _enableWallJumping: 1
+  _wallSlideSpeed: 1.5
+  _verticalWallJumpSpeed: 8
+  _horizontalWallJumpSpeed: 6
+  _wallJumpCooldown: 0.3
   _maxMidairJumps: 0
   _midairJumpSpeed: 0
   _forwardMidairJumpBonus: {x: 0, y: 0}

@@ -62,6 +62,35 @@ public class PlayerCtrlProperties : ScriptableObject
     [SerializeField, Range(0f, 5f)] float _maxAirStallTime = 3f;
     public float maxAirStallTime { get { return _maxAirStallTime; } }
 
+    [Header("Wall Climb Variables")]
+    [SerializeField] bool _enableWallClimbing = true;
+    public bool enableWallClimbing { get { return _enableWallClimbing; } }
+
+    [SerializeField] float _baseClimbingSpeed = 4f;
+    public float baseClimbingSpeed { get { return _baseClimbingSpeed; } }
+
+    [SerializeField] float _climbingGravity = 0.25f;
+    public float climbingGravity { get { return _climbingGravity; } }
+
+    [SerializeField] float _maxWallClimbTime = 3f;
+    public float maxWallClimbTime { get { return _maxWallClimbTime; } }
+
+    [Header("Wall Jump Variables")]
+    [SerializeField] bool _enableWallJumping = true;
+    public bool enableWallJumping { get { return _enableWallJumping; } }
+
+    [SerializeField] float _wallSlideSpeed = 1f;
+    public float wallSlideSpeed { get { return _wallSlideSpeed; } }
+
+    [SerializeField] float _verticalWallJumpSpeed = 4f;
+    public float verticalWallJumpSpeed { get { return _verticalWallJumpSpeed; } }
+
+    [SerializeField] float _horizontalWallJumpSpeed = 6f;
+    public float horizontalWallJumpSpeed { get { return _horizontalWallJumpSpeed; } }
+
+    [SerializeField] float _wallJumpCooldown = 0.25f;
+    public float wallJumpCooldown { get { return _wallJumpCooldown; } }
+
     [Header("Midair Jump Variables")]
     [SerializeField, Range(0, 5)] int _maxMidairJumps = 3;
     public int maxMidairJumps { get { return _maxMidairJumps; } }

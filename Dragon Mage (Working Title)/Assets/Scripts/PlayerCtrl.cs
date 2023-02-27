@@ -13,6 +13,8 @@ public class PlayerCtrl : MonoBehaviour
     /* DRAG AND DROP */
     [Header("Drag and Drop")]
     [SerializeField] Transform groundCheckObj;
+    [SerializeField] Transform wallCheckR;
+    [SerializeField] Transform wallCheckL;
     [SerializeField] Transform playerCamTarget;
     [SerializeField] PlayerCtrlProperties mageProperties;
     [SerializeField] PlayerCtrlProperties dragonProperties;
@@ -55,6 +57,19 @@ public class PlayerCtrl : MonoBehaviour
     [SerializeField] float airStallSpeed = 1f;
     [SerializeField, Range(0f, 5f)] float maxAirStallTime = 3f;
 
+    [Header("Wall Climb Variables")]
+    [SerializeField] bool enableWallClimbing = true;
+    [SerializeField] float baseClimbingSpeed = 4f;
+    [SerializeField] float climbingGravity = 0.25f;
+    [SerializeField] float maxWallClimbTime = 3f;
+
+    [Header("Wall Jump Variables")]
+    [SerializeField] bool enableWallJumping = true;
+    [SerializeField] float wallSlideSpeed = 1f;
+    [SerializeField] float verticalWallJumpSpeed = 4f;
+    [SerializeField] float horizontalWallJumpSpeed = 6f;
+    [SerializeField] float wallJumpCooldown = 0.25f;
+
     [Header("Midair Jump Variables")]
     [SerializeField, Range(0, 5)] int maxMidairJumps = 3;
     [SerializeField] float midairJumpSpeed = 4.25f;
@@ -96,10 +111,13 @@ public class PlayerCtrl : MonoBehaviour
     /* SCRIPT VARIABLES */
     private CharacterMode currentMode = CharacterMode.MAGE;
     private bool isGrounded = false;
+    private bool isAgainstWall = false;
     private bool jumpIsHeld = false;
     private float currentAirStallTime = 0f;
+    private float currentWallClimbTime = 0f;
     private int currentMidairJumps = 0;
     private bool isChangingForm = false;
+    private bool isWallJumpCooldownActive = false;
     private bool isFormChangeCooldownActive = false;
     private bool isProjectileCooldownActive = false;
     private bool isFireProjectileWindupActive = false;
@@ -134,6 +152,7 @@ public class PlayerCtrl : MonoBehaviour
     void Update()
     {
         GroundCheck();
+        WallCheck();
         UpdatePlayerCamTarget();
         FormChange();
         FacingDirection();
@@ -160,6 +179,14 @@ public class PlayerCtrl : MonoBehaviour
         }
     }
 
+    private void WallCheck()
+    {
+        isAgainstWall = false;
+        Collider2D[] collidersR = Physics2D.OverlapCircleAll(wallCheckR.position, groundCheckRadius, groundLayer);
+        Collider2D[] collidersL = Physics2D.OverlapCircleAll(wallCheckL.position, groundCheckRadius, groundLayer);
+        isAgainstWall = (isFacingRight ? collidersR.Length > 0 : collidersL.Length > 0);
+    }
+
     private void UpdatePlayerCamTarget()
     {
         if (isChangingForm) { return; }
@@ -172,24 +199,24 @@ public class PlayerCtrl : MonoBehaviour
 
     private void Movement()
     {
-        if (isChangingForm || (isFireProjectileWindupActive && !isGrounded)) { return; }
+        if (isChangingForm || isWallJumpCooldownActive || (isFireProjectileWindupActive && !isGrounded)) { return; }
 
-        if (Input.GetAxis("Horizontal") != 0f && !isFireProjectileWindupActive)
+        if (Input.GetAxisRaw("Horizontal") != 0f && !isFireProjectileWindupActive)
         {
-            if ((rb2d.velocity.x * Input.GetAxis("Horizontal")) >= 0f)
+            if ((rb2d.velocity.x * Input.GetAxisRaw("Horizontal")) >= 0f)
             {
                 if (Mathf.Abs(rb2d.velocity.x) < topSpeed)
                 {
-                    rb2d.velocity = new Vector2(rb2d.velocity.x + ((isGrounded ? acceleration : airAcceleration) * (Input.GetAxis("Horizontal") > 0f ? 1f : -1f) * Time.deltaTime), rb2d.velocity.y);
+                    rb2d.velocity = new Vector2(rb2d.velocity.x + ((isGrounded ? acceleration : airAcceleration) * (Input.GetAxisRaw("Horizontal") > 0f ? 1f : -1f) * Time.deltaTime), rb2d.velocity.y);
                     if (Mathf.Abs(rb2d.velocity.x) > topSpeed)
                     {
-                        rb2d.velocity = new Vector2(topSpeed * (Input.GetAxis("Horizontal") > 0f ? 1f : -1f), rb2d.velocity.y);
+                        rb2d.velocity = new Vector2(topSpeed * (Input.GetAxisRaw("Horizontal") > 0f ? 1f : -1f), rb2d.velocity.y);
                     }
 
                 }
                 else if ((isGrounded || (enableAirStalling && (currentAirStallTime > 0f && currentAirStallTime < maxAirStallTime))) && Mathf.Abs(rb2d.velocity.x) > topSpeed)
                 {
-                    rb2d.velocity = new Vector2(topSpeed * (Input.GetAxis("Horizontal") > 0f ? 1f : -1f), rb2d.velocity.y);
+                    rb2d.velocity = new Vector2(topSpeed * (Input.GetAxisRaw("Horizontal") > 0f ? 1f : -1f), rb2d.velocity.y);
                 }
                 else { /* Nothing */ }
             }
@@ -197,7 +224,7 @@ public class PlayerCtrl : MonoBehaviour
             {
                 if (rb2d.velocity.x != 0f)
                 {
-                    rb2d.velocity = new Vector2(rb2d.velocity.x + ((isGrounded ? turningSpeed : airTurningSpeed) * (Input.GetAxis("Horizontal") > 0f ? 1f : -1f) * Time.deltaTime), rb2d.velocity.y);
+                    rb2d.velocity = new Vector2(rb2d.velocity.x + ((isGrounded ? turningSpeed : airTurningSpeed) * (Input.GetAxisRaw("Horizontal") > 0f ? 1f : -1f) * Time.deltaTime), rb2d.velocity.y);
                 }
             }
         }
@@ -236,6 +263,7 @@ public class PlayerCtrl : MonoBehaviour
             if (!isOnMovingPlatform)
             {
                 currentAirStallTime = 0f;
+                currentWallClimbTime = 0f;
                 currentMidairJumps = 0;
             }
 
@@ -247,8 +275,22 @@ public class PlayerCtrl : MonoBehaviour
                 rb2d.velocity = new Vector2(rb2d.velocity.x, jumpSpeed + (enableRunningJumpBonus ? Mathf.Abs(rb2d.velocity.x / topSpeed) * runningJumpMultiplier : 0f));
             }
         }
+        else if (enableWallJumping && !isGrounded && isAgainstWall && (isFacingRight ? Input.GetAxisRaw("Horizontal") > 0f : Input.GetAxisRaw("Horizontal") < 0f) && jumpBufferTimeLeft > 0f)
+        {
+            if (enableWallClimbing && currentWallClimbTime > 0f && currentWallClimbTime < maxWallClimbTime) { currentWallClimbTime = maxWallClimbTime; }
+
+            jumpBufferTimeLeft = 0f;
+            jumpIsHeld = true;
+            rb2d.gravityScale = risingGravity;
+            Vector2 newVelocity = new Vector2((isFacingRight ? -horizontalWallJumpSpeed : horizontalWallJumpSpeed), verticalWallJumpSpeed);
+            StartCoroutine(WallJumpCooldownCR());
+            SetFacingDirection((isFacingRight ? -1f : 1f));
+            rb2d.velocity = newVelocity;
+        }
         else if (!isGrounded && currentMidairJumps < maxMidairJumps && jumpBufferTimeLeft > 0f)
         {
+            if (enableWallClimbing && currentWallClimbTime > 0f && currentWallClimbTime < maxWallClimbTime) { currentWallClimbTime = maxWallClimbTime; }
+
             jumpBufferTimeLeft = 0f;
             jumpIsHeld = true;
             rb2d.gravityScale = risingGravity;
@@ -269,6 +311,19 @@ public class PlayerCtrl : MonoBehaviour
             rb2d.velocity = newVelocity;
             currentMidairJumps++;
         }
+        else if (enableWallClimbing && currentWallClimbTime < maxWallClimbTime && !isGrounded && isAgainstWall && (isFacingRight ? Input.GetAxisRaw("Horizontal") > 0f : Input.GetAxisRaw("Horizontal") < 0f) && (rb2d.velocity.x != 0f))
+        {
+            if (currentAirStallTime > 0f && currentAirStallTime < maxAirStallTime) { currentAirStallTime = maxAirStallTime; }
+
+            rb2d.gravityScale = climbingGravity;
+            if (currentWallClimbTime <= 0f) { rb2d.velocity = new Vector2(0f, Mathf.Max(Mathf.Abs(rb2d.velocity.x), baseClimbingSpeed)); Debug.Log(Mathf.Abs(rb2d.velocity.y)); }
+            currentWallClimbTime += Time.deltaTime;
+        }
+        else if (enableWallClimbing && currentWallClimbTime > 0f && currentWallClimbTime < maxWallClimbTime)
+        {
+            currentWallClimbTime = maxWallClimbTime;
+            rb2d.gravityScale = fallingGravity;
+        }
         else
         {
             if (rb2d.velocity.y > 0f)
@@ -287,7 +342,13 @@ public class PlayerCtrl : MonoBehaviour
             {
                 jumpIsHeld = false;
 
-                if (enableAirStalling && currentAirStallTime < maxAirStallTime && Input.GetButton("Jump"))
+                if (enableWallJumping && isAgainstWall && (isFacingRight ? Input.GetAxisRaw("Horizontal") > 0f : Input.GetAxisRaw("Horizontal") < 0f))
+                {
+                    rb2d.gravityScale = 0f;
+                    rb2d.velocity = new Vector2(0f, -wallSlideSpeed);
+                    if (currentAirStallTime > 0f) { currentAirStallTime = maxAirStallTime; }
+                }
+                else if (enableAirStalling && currentAirStallTime < maxAirStallTime && Input.GetButton("Jump"))
                 {
                     rb2d.gravityScale = 0f;
                     rb2d.velocity = new Vector2(rb2d.velocity.x, -airStallSpeed);
@@ -327,7 +388,7 @@ public class PlayerCtrl : MonoBehaviour
                     MagicBlast projTemp = tempObj.GetComponent<MagicBlast>();
                     if (projTemp != null)
                     {
-                        projTemp.Setup(isFacingRight, rb2d.velocity.x, Input.GetAxis("Vertical"));
+                        projTemp.Setup(isFacingRight, rb2d.velocity.x, Input.GetAxisRaw("Vertical"));
                         projectileRef = projTemp;
                     }
                 }
@@ -365,8 +426,8 @@ public class PlayerCtrl : MonoBehaviour
 
     private void FacingDirection()
     {
-        if (isChangingForm || isFireProjectileWindupActive || (!changeFacingDirectionMidair && !isGrounded) || (currentAirStallTime > 0f && currentAirStallTime < maxAirStallTime)) { return; }
-        SetFacingDirection(Input.GetAxis("Horizontal"));
+        if (isChangingForm || isFireProjectileWindupActive || isWallJumpCooldownActive || (!changeFacingDirectionMidair && !isGrounded) || (currentAirStallTime > 0f && currentAirStallTime < maxAirStallTime)) { return; }
+        SetFacingDirection(Input.GetAxisRaw("Horizontal"));
     }
 
     private void SetFacingDirection(float horizontalAxis)
@@ -410,6 +471,19 @@ public class PlayerCtrl : MonoBehaviour
 
         if (enableAirStalling && currentAirStallTime > 0f && maxAirStallTime > 0f) { currentAirStallTime = maxAirStallTime; }
 
+        enableWallClimbing = p.enableWallClimbing;
+        baseClimbingSpeed = p.baseClimbingSpeed;
+        climbingGravity = p.climbingGravity;
+        maxWallClimbTime = p.maxWallClimbTime;
+
+        if (enableWallClimbing && currentWallClimbTime > 0f && maxWallClimbTime > 0f) { currentWallClimbTime = maxWallClimbTime; }
+
+        enableWallJumping = p.enableWallJumping;
+        wallSlideSpeed = p.wallSlideSpeed;
+        verticalWallJumpSpeed = p.verticalWallJumpSpeed;
+        horizontalWallJumpSpeed = p.horizontalWallJumpSpeed;
+        wallJumpCooldown = p.wallJumpCooldown;
+
         maxMidairJumps = p.maxMidairJumps;
         midairJumpSpeed = p.midairJumpSpeed;
         forwardMidairJumpBonus = p.forwardMidairJumpBonus;
@@ -420,8 +494,8 @@ public class PlayerCtrl : MonoBehaviour
 
     private float GetInputAxisAngle()
     {
-        float horizontalAxis = Input.GetAxis("Horizontal");
-        float verticalAxis = Input.GetAxis("Vertical");
+        float horizontalAxis = Input.GetAxisRaw("Horizontal");
+        float verticalAxis = Input.GetAxisRaw("Vertical");
 
         if (horizontalAxis > 0f && verticalAxis == 0f)
         {
@@ -470,7 +544,7 @@ public class PlayerCtrl : MonoBehaviour
 
         float inputAxisAngle = GetInputAxisAngle();
         float negativeInputRadians = (-inputAxisAngle * Mathf.PI / 180f);
-        SetFacingDirection(Input.GetAxis("Horizontal"));
+        SetFacingDirection(Input.GetAxisRaw("Horizontal"));
 
         yield return new WaitForSeconds(fireProjectileStartup);
 
@@ -492,6 +566,22 @@ public class PlayerCtrl : MonoBehaviour
         isFireProjectileWindupActive = false;
         StartCoroutine(ProjectileUsageCooldownCR());
         StartCoroutine(FormChangeCooldownCR());
+    }
+
+    private IEnumerator WallJumpCooldownCR()
+    {
+        if (!isWallJumpCooldownActive)
+        {
+            isWallJumpCooldownActive = true;
+            float currentWallJumpCooldownTimer = wallJumpCooldown;
+            while (rb2d.velocity.y > 0f || currentWallJumpCooldownTimer > 0f)
+            {
+                currentWallJumpCooldownTimer -= Time.deltaTime;
+                yield return null;
+            }
+            isWallJumpCooldownActive = false;
+        }
+        yield break;
     }
 
     private IEnumerator ProjectileUsageCooldownCR()
