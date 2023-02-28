@@ -34,9 +34,9 @@ MonoBehaviour:
   _climbingGravity: 0
   _maxWallClimbTime: 0
   _enableWallJumping: 1
-  _wallSlideSpeed: 1.5
-  _verticalWallJumpSpeed: 8
-  _horizontalWallJumpSpeed: 6
+  _wallSlideSpeed: 1.8
+  _verticalWallJumpSpeed: 8.5
+  _horizontalWallJumpSpeed: 5.25
   _wallJumpCooldown: 0.3
   _maxMidairJumps: 0
   _midairJumpSpeed: 0

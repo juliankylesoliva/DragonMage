@@ -30,7 +30,7 @@ MonoBehaviour:
   _airStallSpeed: 0
   _maxAirStallTime: 0
   _enableWallClimbing: 1
-  _baseClimbingSpeed: 4
+  _baseClimbingSpeed: 6
   _climbingGravity: 0.5
   _maxWallClimbTime: 1.5
   _enableWallJumping: 0

@@ -28,6 +28,7 @@ public class PlayerCtrl : MonoBehaviour
     [Header("Editor Variables")]
     [SerializeField] CharacterMode startingMode = CharacterMode.MAGE;
     [SerializeField] float groundCheckRadius = 0.1f;
+    [SerializeField] float wallCheckRadius = 0.1f;
     [SerializeField] LayerMask groundLayer;
 
     /* RUNNING VARIABLES */
@@ -85,6 +86,7 @@ public class PlayerCtrl : MonoBehaviour
     [SerializeField] float formChangeCooldownTime = 0.1f;
     [SerializeField] float formChangeBufferTime = 0.1f;
     [SerializeField] float jumpBufferTime = 0.1f;
+    [SerializeField] float highestSpeedBufferTime = 0.1f;
     [SerializeField] float coyoteTime = 0.1f;
     [SerializeField] float lookaheadDistance = 8f;
     [SerializeField] float fallingLookaheadDistance = 2f;
@@ -112,6 +114,8 @@ public class PlayerCtrl : MonoBehaviour
     private CharacterMode currentMode = CharacterMode.MAGE;
     private bool isGrounded = false;
     private bool isAgainstWall = false;
+    private bool isTouchingWallR = false;
+    private bool isTouchingWallL = false;
     private bool jumpIsHeld = false;
     private float currentAirStallTime = 0f;
     private float currentWallClimbTime = 0f;
@@ -123,6 +127,7 @@ public class PlayerCtrl : MonoBehaviour
     private bool isFireProjectileWindupActive = false;
     private float formChangeBufferTimeLeft = 0f;
     private float jumpBufferTimeLeft = 0f;
+    private float highestSpeedBuffer = 0f;
     private float coyoteTimeLeft = 0f;
     private bool isFacingRight = true;
     private bool isOnMovingPlatform = false;
@@ -143,6 +148,7 @@ public class PlayerCtrl : MonoBehaviour
     {
         StartCoroutine(JumpBufferCR());
         StartCoroutine(FormChangeBufferCR());
+        StartCoroutine(HighestSpeedBufferCR());
         StartCoroutine(CoyoteTimeCR());
         StartCoroutine(MagicMeterCR());
         ChangeMode(startingMode);
@@ -182,8 +188,14 @@ public class PlayerCtrl : MonoBehaviour
     private void WallCheck()
     {
         isAgainstWall = false;
-        Collider2D[] collidersR = Physics2D.OverlapCircleAll(wallCheckR.position, groundCheckRadius, groundLayer);
-        Collider2D[] collidersL = Physics2D.OverlapCircleAll(wallCheckL.position, groundCheckRadius, groundLayer);
+        isTouchingWallR = false;
+        isTouchingWallL = false;
+
+        Collider2D[] collidersR = Physics2D.OverlapCircleAll(wallCheckR.position, wallCheckRadius, groundLayer);
+        Collider2D[] collidersL = Physics2D.OverlapCircleAll(wallCheckL.position, wallCheckRadius, groundLayer);
+
+        isTouchingWallR = (collidersR.Length > 0);
+        isTouchingWallL = (collidersL.Length > 0);
         isAgainstWall = (isFacingRight ? collidersR.Length > 0 : collidersL.Length > 0);
     }
 
@@ -275,17 +287,19 @@ public class PlayerCtrl : MonoBehaviour
                 rb2d.velocity = new Vector2(rb2d.velocity.x, jumpSpeed + (enableRunningJumpBonus ? Mathf.Abs(rb2d.velocity.x / topSpeed) * runningJumpMultiplier : 0f));
             }
         }
-        else if (enableWallJumping && !isGrounded && isAgainstWall && (isFacingRight ? Input.GetAxisRaw("Horizontal") > 0f : Input.GetAxisRaw("Horizontal") < 0f) && jumpBufferTimeLeft > 0f)
+        else if (enableWallJumping && !isWallJumpCooldownActive && !isGrounded && isAgainstWall && (isFacingRight ? (Input.GetAxisRaw("Horizontal") > 0f && isTouchingWallR) : (Input.GetAxisRaw("Horizontal") < 0f && isTouchingWallL)) && jumpBufferTimeLeft > 0f)
         {
             if (enableWallClimbing && currentWallClimbTime > 0f && currentWallClimbTime < maxWallClimbTime) { currentWallClimbTime = maxWallClimbTime; }
 
             jumpBufferTimeLeft = 0f;
             jumpIsHeld = true;
             rb2d.gravityScale = risingGravity;
-            Vector2 newVelocity = new Vector2((isFacingRight ? -horizontalWallJumpSpeed : horizontalWallJumpSpeed), verticalWallJumpSpeed);
-            StartCoroutine(WallJumpCooldownCR());
-            SetFacingDirection((isFacingRight ? -1f : 1f));
+
+            float horizontalResult = Mathf.Max(highestSpeedBuffer, horizontalWallJumpSpeed);
+            Vector2 newVelocity = new Vector2((isFacingRight ? -horizontalResult : horizontalResult), verticalWallJumpSpeed);
+            SetFacingDirection((isTouchingWallL ? 1f : (isTouchingWallR ? -1f : (isFacingRight ? -1f : 1f))));
             rb2d.velocity = newVelocity;
+            StartCoroutine(WallJumpCooldownCR());
         }
         else if (!isGrounded && currentMidairJumps < maxMidairJumps && jumpBufferTimeLeft > 0f)
         {
@@ -316,7 +330,7 @@ public class PlayerCtrl : MonoBehaviour
             if (currentAirStallTime > 0f && currentAirStallTime < maxAirStallTime) { currentAirStallTime = maxAirStallTime; }
 
             rb2d.gravityScale = climbingGravity;
-            if (currentWallClimbTime <= 0f) { rb2d.velocity = new Vector2(0f, Mathf.Max(Mathf.Abs(rb2d.velocity.x), baseClimbingSpeed)); Debug.Log(Mathf.Abs(rb2d.velocity.y)); }
+            if (currentWallClimbTime <= 0f) { rb2d.velocity = new Vector2(0f, Mathf.Max(highestSpeedBuffer, baseClimbingSpeed)); }
             currentWallClimbTime += Time.deltaTime;
         }
         else if (enableWallClimbing && currentWallClimbTime > 0f && currentWallClimbTime < maxWallClimbTime)
@@ -576,7 +590,7 @@ public class PlayerCtrl : MonoBehaviour
             float currentWallJumpCooldownTimer = wallJumpCooldown;
             while (rb2d.velocity.y > 0f || currentWallJumpCooldownTimer > 0f)
             {
-                currentWallJumpCooldownTimer -= Time.deltaTime;
+                if (!isChangingForm) { currentWallJumpCooldownTimer -= Time.deltaTime; }
                 yield return null;
             }
             isWallJumpCooldownActive = false;
@@ -669,6 +683,48 @@ public class PlayerCtrl : MonoBehaviour
                     formChangeBufferTimeLeft = 0;
                 }
             }
+
+            yield return null;
+        }
+    }
+
+    private IEnumerator HighestSpeedBufferCR()
+    {
+        float highestSpeedBufferTimeLeft = 0f;
+        while (true)
+        {
+            float currentHorizontalSpeed = Mathf.Abs(rb2d.velocity.x);
+
+            if (!isGrounded)
+            {
+                if (currentHorizontalSpeed > highestSpeedBuffer)
+                {
+                    highestSpeedBuffer = currentHorizontalSpeed;
+                    highestSpeedBufferTimeLeft = highestSpeedBufferTime;
+                }
+                else if (currentHorizontalSpeed < highestSpeedBuffer)
+                {
+                    if (!isChangingForm)
+                    {
+                        if (highestSpeedBufferTimeLeft > 0f)
+                        {
+                            highestSpeedBufferTimeLeft -= Time.deltaTime;
+                            if (highestSpeedBufferTimeLeft <= 0f)
+                            {
+                                highestSpeedBuffer = currentHorizontalSpeed;
+                                highestSpeedBufferTimeLeft = highestSpeedBufferTime;
+                            }
+                        }
+                    }
+                }
+                else { /* Nothing */ }
+            }
+            else
+            {
+                highestSpeedBuffer = currentHorizontalSpeed;
+                highestSpeedBufferTimeLeft = highestSpeedBufferTime;
+            }
+            
 
             yield return null;
         }
