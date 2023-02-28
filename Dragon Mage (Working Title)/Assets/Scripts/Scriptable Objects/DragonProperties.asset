@@ -17,6 +17,7 @@ MonoBehaviour:
   _topSpeed: 3
   _turningSpeed: 12
   _changeFacingDirectionMidair: 0
+  _enableSpeedHopping: 0
   _jumpSpeed: 5.25
   _risingGravity: 1.35
   _fallingGravity: 2.6
@@ -27,13 +28,17 @@ MonoBehaviour:
   _enableVariableJumps: 0
   _variableJumpDecay: 0
   _enableAirStalling: 0
+  _minimumAirStallHeight: 0
   _airStallSpeed: 0
   _maxAirStallTime: 0
   _enableWallClimbing: 1
+  _minimumWallClimbHeight: 1
   _baseClimbingSpeed: 6
   _climbingGravity: 0.5
   _maxWallClimbTime: 1.5
+  _postClimbDashWindow: 1
   _enableWallJumping: 0
+  _minimumWallJumpHeight: 0
   _wallSlideSpeed: 0
   _verticalWallJumpSpeed: 0
   _horizontalWallJumpSpeed: 0

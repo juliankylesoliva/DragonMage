@@ -24,6 +24,9 @@ public class PlayerCtrlProperties : ScriptableObject
     [SerializeField] bool _changeFacingDirectionMidair = true;
     public bool changeFacingDirectionMidair { get { return _changeFacingDirectionMidair; } }
 
+    [SerializeField] bool _enableSpeedHopping = true;
+    public bool enableSpeedHopping { get { return _enableSpeedHopping; } }
+
     [SerializeField] float _jumpSpeed = 4f;
     public float jumpSpeed { get { return _jumpSpeed; } }
 
@@ -56,6 +59,9 @@ public class PlayerCtrlProperties : ScriptableObject
     [SerializeField] bool _enableAirStalling = true;
     public bool enableAirStalling { get { return _enableAirStalling; } }
 
+    [SerializeField] float _minimumAirStallHeight = 1f;
+    public float minimumAirStallHeight { get { return _minimumAirStallHeight; } }
+
     [SerializeField] float _airStallSpeed = 1f;
     public float airStallSpeed { get { return _airStallSpeed; } }
 
@@ -66,6 +72,9 @@ public class PlayerCtrlProperties : ScriptableObject
     [SerializeField] bool _enableWallClimbing = true;
     public bool enableWallClimbing { get { return _enableWallClimbing; } }
 
+    [SerializeField] float _minimumWallClimbHeight = 1f;
+    public float minimumWallClimbHeight { get { return _minimumWallClimbHeight; } }
+
     [SerializeField] float _baseClimbingSpeed = 4f;
     public float baseClimbingSpeed { get { return _baseClimbingSpeed; } }
 
@@ -75,9 +84,15 @@ public class PlayerCtrlProperties : ScriptableObject
     [SerializeField] float _maxWallClimbTime = 3f;
     public float maxWallClimbTime { get { return _maxWallClimbTime; } }
 
+    [SerializeField] float _postClimbDashWindow = 1f;
+    public float postClimbDashWindow { get { return _postClimbDashWindow; } }
+
     [Header("Wall Jump Variables")]
     [SerializeField] bool _enableWallJumping = true;
     public bool enableWallJumping { get { return _enableWallJumping; } }
+
+    [SerializeField] float _minimumWallJumpHeight = 1f;
+    public float minimumWallJumpHeight { get { return _minimumWallJumpHeight; } }
 
     [SerializeField] float _wallSlideSpeed = 1f;
     public float wallSlideSpeed { get { return _wallSlideSpeed; } }
