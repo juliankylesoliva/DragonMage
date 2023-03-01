@@ -46,10 +46,10 @@ public class FireMissile : MonoBehaviour
         }
     }
 
-    public void Setup(bool isGoingRight = true, float horizontalVelocity = 0f, float angle = 0f)
+    public void Setup(bool isGoingRight = true, float horizontalVelocity = 0f)
     {
         moveSpeedBonus = Mathf.Abs(horizontalVelocity * 0.5f);
-        this.transform.Rotate(0f, 0f, angle);
+        this.transform.Rotate(0f, 0f, (isGoingRight ? 0f : 180f));
     }
 
     void OnTriggerEnter2D(Collider2D col)

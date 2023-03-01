@@ -496,18 +496,22 @@ MonoBehaviour:
   lookaheadDistance: 5
   fallingLookaheadDistance: 7
   fallingLookaheadThreshold: 1
-  risingLookaheadDistance: 5
-  risingLookaheadThreshold: 6
+  risingLookaheadDistance: 7
+  risingLookaheadThreshold: 5
   followCharacterOnJump: 0
   maxMagic: 100
   startingMagic: 50
   magicChangeRate: 0
   forceMageFormThreshold: 15
   forceDragonFormThreshold: 85
-  projectileUsageCooldown: 0.4
-  fireProjectileWindup: 0.3
-  fireProjectileStartup: 0.25
-  fireProjectileRecoilStrength: 8
+  attackCooldown: 0.4
+  fireTackleBaseHorizontalSpeed: 8
+  fireTackleVerticalSteeringSpeed: 14
+  fireTackleBonkKnockback: 4
+  fireTackleStartup: 0.35
+  fireTackleBaseDuration: 0.45
+  fireTackleEndlag: 0.4
+  fireTackleEndlagCancel: 0.2
 --- !u!1 &736087748
 GameObject:
   m_ObjectHideFlags: 0
@@ -13045,6 +13049,16 @@ Tilemap:
       m_TileObjectToInstantiateIndex: 65535
       dummyAlignment: 0
       m_AllTileFlags: 1073741825
+  - first: {x: 63, y: 4, z: 0}
+    second:
+      serializedVersion: 2
+      m_TileIndex: 0
+      m_TileSpriteIndex: 0
+      m_TileMatrixIndex: 0
+      m_TileColorIndex: 0
+      m_TileObjectToInstantiateIndex: 65535
+      dummyAlignment: 0
+      m_AllTileFlags: 1073741825
   - first: {x: 64, y: 4, z: 0}
     second:
       serializedVersion: 2
@@ -13546,6 +13560,16 @@ Tilemap:
       dummyAlignment: 0
       m_AllTileFlags: 1073741825
   - first: {x: 58, y: 5, z: 0}
+    second:
+      serializedVersion: 2
+      m_TileIndex: 0
+      m_TileSpriteIndex: 0
+      m_TileMatrixIndex: 0
+      m_TileColorIndex: 0
+      m_TileObjectToInstantiateIndex: 65535
+      dummyAlignment: 0
+      m_AllTileFlags: 1073741825
+  - first: {x: 64, y: 5, z: 0}
     second:
       serializedVersion: 2
       m_TileIndex: 0
@@ -44157,13 +44181,13 @@ Tilemap:
       m_AllTileFlags: 1073741825
   m_AnimatedTiles: {}
   m_TileAssetArray:
-  - m_RefCount: 4342
+  - m_RefCount: 4344
     m_Data: {fileID: 11400000, guid: 2d216ec5f170be3418118fa4e53ce943, type: 2}
   m_TileSpriteArray:
-  - m_RefCount: 4342
+  - m_RefCount: 4344
     m_Data: {fileID: 21300000, guid: fd0c17dadba98434ca113aa384aa6c91, type: 3}
   m_TileMatrixArray:
-  - m_RefCount: 4342
+  - m_RefCount: 4344
     m_Data:
       e00: 1
       e01: 0
@@ -44182,7 +44206,7 @@ Tilemap:
       e32: 0
       e33: 1
   m_TileColorArray:
-  - m_RefCount: 4342
+  - m_RefCount: 4344
     m_Data: {r: 1, g: 1, b: 1, a: 1}
   m_TileObjectToInstantiateArray: []
   m_AnimationFrameRate: 1
@@ -44517,16 +44541,28 @@ CompositeCollider2D:
         Y: 50000000
       - X: 710000000
         Y: 60000000
-      - X: 650000000
+      - X: 650001000
         Y: 60000000
-      - X: 650000000
-        Y: 50000000
-      - X: 640000000
-        Y: 50000000
-      - X: 640000000
-        Y: 40000000
+      - X: 650001000
+        Y: 60000414
+      - X: 650000414
+        Y: 60001000
+      - X: 639999586
+        Y: 60001000
+      - X: 639999000
+        Y: 60000414
+      - X: 639999000
+        Y: 50001000
+      - X: 629999586
+        Y: 50001000
+      - X: 629999000
+        Y: 50000414
+      - X: 629999000
+        Y: 39999586
+      - X: 629999586
+        Y: 39999000
       - X: 630000000
-        Y: 40000000
+        Y: 39999000
       - X: 630000000
         Y: -10000000
       - X: 470000000
@@ -44880,11 +44916,9 @@ CompositeCollider2D:
       - {x: 71.99997, y: 5}
       - {x: 71, y: 5.0000296}
       - {x: 70.99997, y: 6}
-      - {x: 65, y: 5.999971}
-      - {x: 64.99997, y: 5}
-      - {x: 64, y: 4.999971}
-      - {x: 63.99997, y: 4}
-      - {x: 63, y: 3.999971}
+      - {x: 63.999897, y: 6.000012}
+      - {x: 63.999874, y: 5.0001}
+      - {x: 62.999897, y: 5.000012}
       - {x: 62.99997, y: -1}
       - {x: 47, y: -0.9999706}
       - {x: 46.999973, y: 0}
