@@ -491,10 +491,10 @@ MonoBehaviour:
   formChangeCooldownTime: 0.4
   formChangeBufferTime: 0.25
   jumpBufferTime: 0.16666667
-  highestSpeedBufferTime: 0.2
+  highestSpeedBufferTime: 0.3
   coyoteTime: 0.2
-  lookaheadDistance: 4
-  fallingLookaheadDistance: 6
+  lookaheadDistance: 5
+  fallingLookaheadDistance: 7
   fallingLookaheadThreshold: 1
   risingLookaheadDistance: 5
   risingLookaheadThreshold: 6
