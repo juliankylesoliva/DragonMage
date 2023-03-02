@@ -15,6 +15,7 @@ public class PlayerCtrl : MonoBehaviour
     [SerializeField] Transform groundCheckObj;
     [SerializeField] Transform wallCheckR;
     [SerializeField] Transform wallCheckL;
+    [SerializeField] Transform headbonkCheckObj;
     [SerializeField] Transform playerCamTarget;
     [SerializeField] PlayerCtrlProperties mageProperties;
     [SerializeField] PlayerCtrlProperties dragonProperties;
@@ -29,6 +30,7 @@ public class PlayerCtrl : MonoBehaviour
     [SerializeField] CharacterMode startingMode = CharacterMode.MAGE;
     [SerializeField] float groundCheckRadius = 0.1f;
     [SerializeField] float wallCheckRadius = 0.1f;
+    [SerializeField] float headbonkCheckRadius = 0.5f;
     [SerializeField] LayerMask groundLayer;
 
     /* RUNNING VARIABLES */
@@ -125,6 +127,7 @@ public class PlayerCtrl : MonoBehaviour
     private bool isAgainstWall = false;
     private bool isTouchingWallR = false;
     private bool isTouchingWallL = false;
+    private bool isHeadbonking = false;
     private bool jumpIsHeld = false;
 
     private float currentAirStallTime = 0f;
@@ -173,6 +176,7 @@ public class PlayerCtrl : MonoBehaviour
     {
         GroundCheck();
         WallCheck();
+        HeadbonkCheck();
         UpdatePlayerCamTarget();
         FormChange();
         FacingDirection();
@@ -201,6 +205,13 @@ public class PlayerCtrl : MonoBehaviour
         isTouchingWallR = (collidersR.Length > 0);
         isTouchingWallL = (collidersL.Length > 0);
         isAgainstWall = (isFacingRight ? collidersR.Length > 0 : collidersL.Length > 0);
+    }
+
+    private void HeadbonkCheck()
+    {
+        isHeadbonking = false;
+        Collider2D[] colliders = Physics2D.OverlapCircleAll(headbonkCheckObj.position, headbonkCheckRadius, groundLayer);
+        isHeadbonking = (colliders.Length > 0);
     }
 
     private bool CheckDistanceToGround(float minDistance)
@@ -356,7 +367,9 @@ public class PlayerCtrl : MonoBehaviour
                     storedWallClimbSpeed = Mathf.Max(highestSpeedBuffer, baseClimbingSpeed);
                     rb2d.velocity = new Vector2(0f, storedWallClimbSpeed);
                 }
-                currentWallClimbTime += Time.deltaTime;
+
+                if (rb2d.velocity.y > 0f) { currentWallClimbTime += Time.deltaTime; }
+                else { currentWallClimbTime = maxWallClimbTime; }
             }
         }
         else if (enableWallClimbing && currentWallClimbTime > 0f && currentWallClimbTime < maxWallClimbTime)
@@ -593,7 +606,7 @@ public class PlayerCtrl : MonoBehaviour
         rb2d.gravityScale = 0f;
         rb2d.velocity = new Vector2((Mathf.Abs(rb2d.velocity.x) + fireTackleBaseHorizontalSpeed) * (isFacingRight ? 1f : -1f), 0f);
         float attackTimer = fireTackleBaseDuration;
-        while (attackTimer > 0f && !isAgainstWall)
+        while (attackTimer > 0f && !isAgainstWall && !isHeadbonking)
         {
             if (!isGrounded) { rb2d.velocity += (Vector2.up * (fireTackleVerticalSteeringSpeed * Input.GetAxisRaw("Vertical") * Time.deltaTime)); }
             attackTimer -= Time.deltaTime;
@@ -601,7 +614,7 @@ public class PlayerCtrl : MonoBehaviour
         }
 
         charSprite.color = Color.gray;
-        if (isAgainstWall) { rb2d.velocity = new Vector2(fireTackleBonkKnockback * (isFacingRight ? -1f : 1f), fireTackleBonkKnockback); }
+        if (isAgainstWall || isHeadbonking) { rb2d.velocity = ((Vector2.up + (Vector2.right * (isFacingRight ? -1f : 1f))).normalized * fireTackleBonkKnockback); }
         rb2d.gravityScale = fallingGravity;
         float deceleration = Mathf.Abs(rb2d.velocity.x / fireTackleEndlag);
         float endlagTimer = fireTackleEndlag;
