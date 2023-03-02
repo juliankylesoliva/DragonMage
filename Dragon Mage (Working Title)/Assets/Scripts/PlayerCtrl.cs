@@ -212,11 +212,11 @@ public class PlayerCtrl : MonoBehaviour
     private void UpdatePlayerCamTarget()
     {
         if (isChangingForm) { return; }
-        float horizontalLookahead = (lookaheadDistance * Mathf.Min(Mathf.Abs(rb2d.velocity.x / topSpeed), 1.8f) * (rb2d.velocity.x >= 0f ? 1f : -1f));
+        float horizontalLookahead = (lookaheadDistance * Mathf.Min(Mathf.Abs(rb2d.velocity.x / (topSpeed * 2f)), 1f) * (rb2d.velocity.x >= 0f ? 1f : -1f));
         float initialYPos = (followCharacterOnJump || isGrounded ? groundCheckObj.position.y : playerCamTarget.position.y);
-        float fallingLookahead = (!isGrounded && coyoteTimeLeft <= 0f && rb2d.velocity.y < 0f && groundCheckObj.position.y < (playerCamTarget.position.y - fallingLookaheadThreshold) ? fallingLookaheadDistance * Mathf.Min((rb2d.velocity.y / -fallSpeed) , 1f) : 0f);
-        float risingLookahead = (!isGrounded && coyoteTimeLeft <= 0f && groundCheckObj.position.y > (playerCamTarget.position.y + risingLookaheadThreshold) ? risingLookaheadDistance * Mathf.Max(rb2d.velocity.y / fallSpeed, 1f) : 0f);
-        playerCamTarget.position = new Vector2(groundCheckObj.position.x + horizontalLookahead, initialYPos - fallingLookahead + risingLookahead);
+        float fallingLookahead = (!isGrounded && coyoteTimeLeft <= 0f && rb2d.velocity.y < 0f && groundCheckObj.position.y < (playerCamTarget.position.y - fallingLookaheadThreshold) ? fallingLookaheadDistance : 0f);
+        float risingLookahead = (!isGrounded && coyoteTimeLeft <= 0f && groundCheckObj.position.y > (playerCamTarget.position.y + risingLookaheadThreshold) ? risingLookaheadDistance * Mathf.Min(rb2d.velocity.y / (fallSpeed * 2f), 1f) : 0f);
+        playerCamTarget.position = new Vector2(this.transform.position.x + horizontalLookahead, initialYPos + (rb2d.velocity.y > 0f ? risingLookahead : -fallingLookahead));
     }
 
     private void Movement()
@@ -312,7 +312,7 @@ public class PlayerCtrl : MonoBehaviour
             rb2d.velocity = newVelocity;
             StartCoroutine(WallJumpCooldownCR());
         }
-        else if (!isGrounded && currentMidairJumps < maxMidairJumps && jumpBufferTimeLeft > 0f && postClimbDashTimeLeft <= 0f)
+        else if (!isGrounded && currentMidairJumps < maxMidairJumps && jumpBufferTimeLeft > 0f && (currentWallClimbTime <= 0f || currentWallClimbTime >= maxWallClimbTime) && postClimbDashTimeLeft <= 0f)
         {
             if (enableWallClimbing && currentWallClimbTime > 0f && currentWallClimbTime < maxWallClimbTime) { currentWallClimbTime = maxWallClimbTime; }
 
@@ -336,60 +336,56 @@ public class PlayerCtrl : MonoBehaviour
             rb2d.velocity = newVelocity;
             currentMidairJumps++;
         }
-        else if (enableWallClimbing)
+        else if (enableWallClimbing && currentWallClimbTime < maxWallClimbTime && !isGrounded && isAgainstWall && (isFacingRight ? Input.GetAxisRaw("Horizontal") > 0f : Input.GetAxisRaw("Horizontal") < 0f) && (rb2d.velocity.x != 0f))
         {
-            if (currentWallClimbTime < maxWallClimbTime && !isGrounded && isAgainstWall && (isFacingRight ? Input.GetAxisRaw("Horizontal") > 0f : Input.GetAxisRaw("Horizontal") < 0f) && (rb2d.velocity.x != 0f))
+            if (CheckDistanceToGround(minimumWallClimbHeight) || currentWallClimbTime > 0f)
             {
-                if (CheckDistanceToGround(minimumWallClimbHeight) || currentWallClimbTime > 0f)
-                {
-                    if (currentAirStallTime > 0f && currentAirStallTime < maxAirStallTime) { currentAirStallTime = maxAirStallTime; }
+                if (currentAirStallTime > 0f && currentAirStallTime < maxAirStallTime) { currentAirStallTime = maxAirStallTime; }
 
-                    rb2d.gravityScale = climbingGravity;
-                    if (storedWallClimbSpeed <= 0f)
-                    {
-                        storedWallClimbSpeed = Mathf.Max(highestSpeedBuffer, baseClimbingSpeed);
-                        rb2d.velocity = new Vector2(0f, storedWallClimbSpeed);
-                    }
-                    currentWallClimbTime += Time.deltaTime;
+                rb2d.gravityScale = climbingGravity;
+                if (storedWallClimbSpeed <= 0f)
+                {
+                    storedWallClimbSpeed = Mathf.Max(highestSpeedBuffer, baseClimbingSpeed);
+                    rb2d.velocity = new Vector2(0f, storedWallClimbSpeed);
                 }
+                currentWallClimbTime += Time.deltaTime;
             }
-            else if (currentWallClimbTime > 0f && currentWallClimbTime < maxWallClimbTime)
+        }
+        else if (enableWallClimbing && currentWallClimbTime > 0f && currentWallClimbTime < maxWallClimbTime)
+        {
+            currentWallClimbTime = maxWallClimbTime;
+            rb2d.gravityScale = fallingGravity;
+            postClimbDashTimeLeft = postClimbDashWindow;
+        }
+        else if (enableWallClimbing && currentWallClimbTime == maxWallClimbTime && postClimbDashTimeLeft > 0f)
+        {
+            if (jumpBufferTimeLeft > 0f && !isAgainstWall && !isGrounded && rb2d.velocity.y > 0f && (Input.GetAxisRaw("Horizontal") * (isFacingRight ? 1f : -1f)) > 0f)
             {
-                currentWallClimbTime = maxWallClimbTime;
-                rb2d.gravityScale = fallingGravity;
-                postClimbDashTimeLeft = postClimbDashWindow;
+                postClimbDashTimeLeft = 0f;
+
+                jumpBufferTimeLeft = 0f;
+                jumpIsHeld = true;
+                rb2d.gravityScale = risingGravity;
+
+                rb2d.velocity = new Vector2(storedWallClimbSpeed * Input.GetAxisRaw("Horizontal"), jumpSpeed);
+                currentMidairJumps = 0;
+                currentAirStallTime = 0f;
             }
-            else if (currentWallClimbTime == maxWallClimbTime && postClimbDashTimeLeft > 0f)
+            else if ((Input.GetAxisRaw("Horizontal") * (isFacingRight ? 1f : -1f)) <= 0f || rb2d.velocity.y <= 0f || isAgainstWall || isGrounded)
             {
-                if (jumpBufferTimeLeft > 0f && !isAgainstWall && !isGrounded && (Input.GetAxisRaw("Horizontal") * (isFacingRight ? 1f : -1f)) > 0f)
+                postClimbDashTimeLeft = 0f;
+            }
+            else
+            {
+                if (postClimbDashTimeLeft > 0f)
                 {
-                    postClimbDashTimeLeft = 0f;
-
-                    jumpBufferTimeLeft = 0f;
-                    jumpIsHeld = true;
-                    rb2d.gravityScale = risingGravity;
-
-                    rb2d.velocity = new Vector2(storedWallClimbSpeed * Input.GetAxisRaw("Horizontal"), jumpSpeed);
-                    currentMidairJumps = 0;
-                    currentAirStallTime = 0f;
-                }
-                else if ((Input.GetAxisRaw("Horizontal") * (isFacingRight ? 1f : -1f)) < 0f || isAgainstWall || isGrounded)
-                {
-                    postClimbDashTimeLeft = 0f;
-                }
-                else
-                {
-                    if (postClimbDashTimeLeft > 0f)
+                    postClimbDashTimeLeft -= Time.deltaTime;
+                    if (postClimbDashTimeLeft < 0f)
                     {
-                        postClimbDashTimeLeft -= Time.deltaTime;
-                        if (postClimbDashTimeLeft < 0f)
-                        {
-                            postClimbDashTimeLeft = 0f;
-                        }
+                        postClimbDashTimeLeft = 0f;
                     }
                 }
             }
-            else { /* Nothing */ } 
         }
         else
         {
@@ -580,7 +576,7 @@ public class PlayerCtrl : MonoBehaviour
         while (windupTimer > 0f)
         {
             SetFacingDirection(Input.GetAxisRaw("Horizontal"));
-
+            if (isGrounded) { rb2d.velocity = Vector2.zero; }
             windupTimer -= Time.deltaTime;
             yield return null;
         }
@@ -743,7 +739,6 @@ public class PlayerCtrl : MonoBehaviour
                         if (highestSpeedBufferTimeLeft <= 0f)
                         {
                             highestSpeedBuffer = currentHorizontalSpeed;
-                            highestSpeedBufferTimeLeft = highestSpeedBufferTime;
                         }
                     }
                 }
