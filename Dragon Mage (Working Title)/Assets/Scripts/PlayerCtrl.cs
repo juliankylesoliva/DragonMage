@@ -178,7 +178,7 @@ public class PlayerCtrl : MonoBehaviour
         FacingDirection();
         Movement();
         Jumping();
-        FireProjectile();
+        UseAttack();
     }
 
     /* METHODS */
@@ -223,7 +223,7 @@ public class PlayerCtrl : MonoBehaviour
     {
         if (isChangingForm || isWallJumpCooldownActive || isFireTackleActive) { return; }
 
-        if (Input.GetAxisRaw("Horizontal") != 0f)
+        if (Input.GetAxisRaw("Horizontal") != 0f && !isAgainstWall)
         {
             if ((rb2d.velocity.x * Input.GetAxisRaw("Horizontal")) >= 0f)
             {
@@ -238,7 +238,19 @@ public class PlayerCtrl : MonoBehaviour
                 }
                 else if (isGrounded && Mathf.Abs(rb2d.velocity.x) > topSpeed)
                 {
-                    rb2d.velocity = new Vector2(topSpeed * Input.GetAxisRaw("Horizontal"), rb2d.velocity.y);
+                    if (rb2d.velocity.x != 0f)
+                    {
+                        if (rb2d.velocity.x > 0f)
+                        {
+                            rb2d.velocity -= (Vector2.right * deceleration * Time.deltaTime);
+                            if (rb2d.velocity.x  < topSpeed) { rb2d.velocity = new Vector2(topSpeed, rb2d.velocity.y); }
+                        }
+                        else
+                        {
+                            rb2d.velocity += (Vector2.right * deceleration * Time.deltaTime);
+                            if (rb2d.velocity.x > topSpeed) { rb2d.velocity = new Vector2(-topSpeed, rb2d.velocity.y); }
+                        }
+                    }
                 }
                 else { /* Nothing */ }
             }
@@ -246,7 +258,7 @@ public class PlayerCtrl : MonoBehaviour
             {
                 if (rb2d.velocity.x != 0f)
                 {
-                    rb2d.velocity = new Vector2(rb2d.velocity.x + ((isGrounded ? turningSpeed : airTurningSpeed) * Input.GetAxisRaw("Horizontal") * Time.deltaTime), rb2d.velocity.y);
+                    rb2d.velocity += (Vector2.right * (isGrounded ? turningSpeed : airTurningSpeed) * Input.GetAxisRaw("Horizontal") * Time.deltaTime);
                 }
             }
         }
@@ -254,9 +266,7 @@ public class PlayerCtrl : MonoBehaviour
         {
             if (rb2d.velocity.x > 0f)
             {
-                if (isGrounded && rb2d.velocity.x > topSpeed) { rb2d.velocity = new Vector2(topSpeed, rb2d.velocity.y); }
-
-                rb2d.velocity = new Vector2(rb2d.velocity.x - ((isGrounded ? deceleration : airDeceleration) * Time.deltaTime), rb2d.velocity.y);
+                rb2d.velocity -= (Vector2.right * (isGrounded ? deceleration : airDeceleration) * Time.deltaTime);
                 if (rb2d.velocity.x < 0f)
                 {
                     rb2d.velocity = new Vector2(0f, rb2d.velocity.y);
@@ -264,9 +274,7 @@ public class PlayerCtrl : MonoBehaviour
             }
             else if (rb2d.velocity.x < 0f)
             {
-                if (isGrounded && rb2d.velocity.x < -topSpeed) { rb2d.velocity = new Vector2(-topSpeed, rb2d.velocity.y); }
-
-                rb2d.velocity = new Vector2(rb2d.velocity.x + ((isGrounded ? deceleration : airDeceleration) * Time.deltaTime), rb2d.velocity.y);
+                rb2d.velocity += (Vector2.right * (isGrounded ? deceleration : airDeceleration) * Time.deltaTime);
                 if (rb2d.velocity.x > 0f)
                 {
                     rb2d.velocity = new Vector2(0f, rb2d.velocity.y);
@@ -336,7 +344,7 @@ public class PlayerCtrl : MonoBehaviour
             rb2d.velocity = newVelocity;
             currentMidairJumps++;
         }
-        else if (enableWallClimbing && currentWallClimbTime < maxWallClimbTime && !isGrounded && isAgainstWall && (isFacingRight ? Input.GetAxisRaw("Horizontal") > 0f : Input.GetAxisRaw("Horizontal") < 0f) && (rb2d.velocity.x != 0f))
+        else if (enableWallClimbing && currentWallClimbTime < maxWallClimbTime && !isGrounded && isAgainstWall && (Input.GetAxisRaw("Horizontal") * (isFacingRight ? 1f : -1f)) > 0f)
         {
             if (CheckDistanceToGround(minimumWallClimbHeight) || currentWallClimbTime > 0f)
             {
@@ -359,7 +367,7 @@ public class PlayerCtrl : MonoBehaviour
         }
         else if (enableWallClimbing && currentWallClimbTime == maxWallClimbTime && postClimbDashTimeLeft > 0f)
         {
-            if (jumpBufferTimeLeft > 0f && !isAgainstWall && !isGrounded && rb2d.velocity.y > 0f && (Input.GetAxisRaw("Horizontal") * (isFacingRight ? 1f : -1f)) > 0f)
+            if (Input.GetButton("Jump") && !isAgainstWall && !isGrounded && rb2d.velocity.y > 0f && (Input.GetAxisRaw("Horizontal") * (isFacingRight ? 1f : -1f)) > 0f)
             {
                 postClimbDashTimeLeft = 0f;
 
@@ -435,9 +443,9 @@ public class PlayerCtrl : MonoBehaviour
         }
     }
 
-    private void FireProjectile()
+    private void UseAttack()
     {
-        if (!isAttackCooldownActive && !isFireTackleActive && Input.GetButtonDown("Fire"))
+        if (!isAttackCooldownActive && !isFireTackleActive && Input.GetButtonDown("Attack"))
         {
             if (currentMode == CharacterMode.MAGE)
             {
@@ -594,12 +602,25 @@ public class PlayerCtrl : MonoBehaviour
 
         charSprite.color = Color.gray;
         if (isAgainstWall) { rb2d.velocity = new Vector2(fireTackleBonkKnockback * (isFacingRight ? -1f : 1f), fireTackleBonkKnockback); }
-        else { rb2d.velocity *= (isGrounded ? 0f : 1f); }
         rb2d.gravityScale = fallingGravity;
+        float deceleration = Mathf.Abs(rb2d.velocity.x / fireTackleEndlag);
         float endlagTimer = fireTackleEndlag;
         while (endlagTimer > 0f)
         {
             if (endlagTimer < fireTackleEndlagCancel && (Input.GetAxisRaw("Horizontal") != 0f || jumpBufferTimeLeft > 0f)) { break; }
+            if (isGrounded && rb2d.velocity.x != 0f)
+            {
+                if (rb2d.velocity.x > 0f)
+                {
+                    rb2d.velocity -= (Vector2.right * deceleration * Time.deltaTime);
+                    if (rb2d.velocity.x < 0f) { rb2d.velocity = new Vector2(0f, rb2d.velocity.y); }
+                }
+                else
+                {
+                    rb2d.velocity += (Vector2.right * deceleration * Time.deltaTime);
+                    if (rb2d.velocity.x > 0f) { rb2d.velocity = new Vector2(0f, rb2d.velocity.y); }
+                }
+            }
             endlagTimer -= Time.deltaTime;
             yield return null;
         }
@@ -719,7 +740,7 @@ public class PlayerCtrl : MonoBehaviour
 
     private IEnumerator HighestSpeedBufferCR()
     {
-        float highestSpeedBufferTimeLeft = 0f;
+        float highestSpeedBufferTimeLeft = highestSpeedBufferTime;
         while (true)
         {
             float currentHorizontalSpeed = (currentWallClimbTime > 0f && currentWallClimbTime < maxWallClimbTime ? Mathf.Max(storedWallClimbSpeed, Mathf.Abs(rb2d.velocity.x)) : Mathf.Abs(rb2d.velocity.x));
@@ -733,22 +754,17 @@ public class PlayerCtrl : MonoBehaviour
             {
                 if (!isChangingForm)
                 {
-                    if (highestSpeedBufferTimeLeft > 0f)
+                    if (highestSpeedBufferTimeLeft > 0f) { highestSpeedBufferTimeLeft -= Time.deltaTime; }
+                    
+                    if (highestSpeedBufferTimeLeft <= 0f)
                     {
-                        highestSpeedBufferTimeLeft -= Time.deltaTime;
-                        if (highestSpeedBufferTimeLeft <= 0f)
-                        {
-                            highestSpeedBuffer = currentHorizontalSpeed;
-                        }
+                        highestSpeedBufferTimeLeft = 0f;
+                        highestSpeedBuffer = currentHorizontalSpeed;
                     }
                 }
             }
-            else
-            {
-                highestSpeedBufferTimeLeft = highestSpeedBufferTime;
-            }
-
-
+            else { /* Nothing */ }
+            
             yield return null;
         }
     }
