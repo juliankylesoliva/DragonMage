@@ -304,6 +304,7 @@ GameObject:
   m_Component:
   - component: {fileID: 557060670}
   - component: {fileID: 557060673}
+  - component: {fileID: 557060674}
   - component: {fileID: 557060669}
   - component: {fileID: 557060671}
   - component: {fileID: 557060672}
@@ -435,6 +436,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79f9f941848f6dd499e2af1d3a9b3bf4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rb2d: {fileID: 0}
+  charSprite: {fileID: 0}
   groundCheckObj: {fileID: 1380840842}
   wallCheckR: {fileID: 1183709775}
   wallCheckL: {fileID: 1923393745}
@@ -515,6 +518,34 @@ MonoBehaviour:
   fireTackleBaseDuration: 0.45
   fireTackleEndlag: 0.4
   fireTackleEndlagCancel: 0.2
+  isFacingRight: 1
+--- !u!114 &557060674
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 557060668}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a1868956eeb3404ab4ac080bf341446, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  groundCheckObj: {fileID: 1380840842}
+  wallCheckR: {fileID: 1183709775}
+  wallCheckL: {fileID: 1923393745}
+  headbonkCheckObj: {fileID: 1784737399}
+  groundCheckRadius: 0.05
+  wallCheckRadius: 0.1
+  headbonkCheckRadius: 0.25
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 64
+  isGrounded: 0
+  isAgainstWall: 0
+  isTouchingWallR: 0
+  isTouchingWallL: 0
+  isHeadbonking: 0
 --- !u!1 &736087748
 GameObject:
   m_ObjectHideFlags: 0
