@@ -210,7 +210,7 @@ public class PlayerCtrl : MonoBehaviour
     private void HeadbonkCheck()
     {
         isHeadbonking = false;
-        Collider2D[] colliders = Physics2D.OverlapCircleAll(headbonkCheckObj.position, headbonkCheckRadius, groundLayer);
+        Collider2D[] colliders = Physics2D.OverlapCircleAll(headbonkCheckObj.position + (Vector3.right * (1f/32f) * (isFacingRight ? 1f : -1f)), headbonkCheckRadius, groundLayer);
         isHeadbonking = (colliders.Length > 0);
     }
 
@@ -297,7 +297,14 @@ public class PlayerCtrl : MonoBehaviour
 
     private void Jumping()
     {
-        if (isChangingForm || isFireTackleActive) { return; }
+        if (isChangingForm) { return; }
+        else if (isFireTackleActive && (currentWallClimbTime > 0f && currentWallClimbTime < maxWallClimbTime))
+        {
+            currentWallClimbTime = maxWallClimbTime;
+            rb2d.gravityScale = fallingGravity;
+            return;
+        }
+        else { /* Nothing */ }
 
         if (isGrounded || coyoteTimeLeft > 0f)
         {
@@ -369,7 +376,7 @@ public class PlayerCtrl : MonoBehaviour
                 }
 
                 if (rb2d.velocity.y > 0f) { currentWallClimbTime += Time.deltaTime; }
-                else { currentWallClimbTime = maxWallClimbTime; }
+                else { currentWallClimbTime = maxWallClimbTime; rb2d.velocity = Vector2.zero; rb2d.gravityScale = fallingGravity; }
             }
         }
         else if (enableWallClimbing && currentWallClimbTime > 0f && currentWallClimbTime < maxWallClimbTime)
