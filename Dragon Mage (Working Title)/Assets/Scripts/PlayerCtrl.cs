@@ -7,15 +7,16 @@ public enum CharacterMode { MAGE, DRAGON }
 public class PlayerCtrl : MonoBehaviour
 {
     /* COMPONENTS */
-    Rigidbody2D rb2d;
-    SpriteRenderer charSprite;
+    public StateMachine stateMachine;
+    [HideInInspector] public Rigidbody2D rb2d;
+    [HideInInspector] public SpriteRenderer charSprite;
 
     /* DRAG AND DROP */
     [Header("Drag and Drop")]
-    [SerializeField] Transform groundCheckObj;
-    [SerializeField] Transform wallCheckR;
-    [SerializeField] Transform wallCheckL;
-    [SerializeField] Transform headbonkCheckObj;
+    [SerializeField] Transform groundCheckObj; // Send to PlayerCollisions
+    [SerializeField] Transform wallCheckR; // Send to PlayerCollisions
+    [SerializeField] Transform wallCheckL; // Send to PlayerCollisions
+    [SerializeField] Transform headbonkCheckObj; // Send to PlayerCollisions
     [SerializeField] Transform playerCamTarget;
     [SerializeField] PlayerCtrlProperties mageProperties;
     [SerializeField] PlayerCtrlProperties dragonProperties;
@@ -28,10 +29,10 @@ public class PlayerCtrl : MonoBehaviour
     /* EDITOR VARIABLES */
     [Header("Editor Variables")]
     [SerializeField] CharacterMode startingMode = CharacterMode.MAGE;
-    [SerializeField] float groundCheckRadius = 0.1f;
-    [SerializeField] float wallCheckRadius = 0.1f;
-    [SerializeField] float headbonkCheckRadius = 0.5f;
-    [SerializeField] LayerMask groundLayer;
+    [SerializeField] float groundCheckRadius = 0.1f; // Send to PlayerCollisions
+    [SerializeField] float wallCheckRadius = 0.1f; // Send to PlayerCollisions
+    [SerializeField] float headbonkCheckRadius = 0.5f; // Send to PlayerCollisions
+    [SerializeField] LayerMask groundLayer; // Send to PlayerCollisions
 
     /* RUNNING VARIABLES */
     [Header("Running Variables")]
@@ -123,11 +124,11 @@ public class PlayerCtrl : MonoBehaviour
 
     /* SCRIPT VARIABLES */
     private CharacterMode currentMode = CharacterMode.MAGE;
-    private bool isGrounded = false;
-    private bool isAgainstWall = false;
-    private bool isTouchingWallR = false;
-    private bool isTouchingWallL = false;
-    private bool isHeadbonking = false;
+    private bool isGrounded = false; // Send to PlayerCollisions
+    private bool isAgainstWall = false; // Send to PlayerCollisions
+    private bool isTouchingWallR = false; // Send to PlayerCollisions
+    private bool isTouchingWallL = false; // Send to PlayerCollisions
+    private bool isHeadbonking = false; // Send to PlayerCollisions
     private bool jumpIsHeld = false;
 
     private float currentAirStallTime = 0f;
@@ -156,6 +157,8 @@ public class PlayerCtrl : MonoBehaviour
 
     void Awake()
     {
+        stateMachine = new StateMachine(this);
+        stateMachine.Initialize(stateMachine.standingState);
         rb2d = this.gameObject.GetComponent<Rigidbody2D>();
         charSprite = this.gameObject.GetComponent<SpriteRenderer>();
         playerCamTarget.position = groundCheckObj.position;
@@ -174,6 +177,7 @@ public class PlayerCtrl : MonoBehaviour
 
     void Update()
     {
+        stateMachine.Update();
         GroundCheck();
         WallCheck();
         HeadbonkCheck();
@@ -234,9 +238,13 @@ public class PlayerCtrl : MonoBehaviour
     {
         if (isChangingForm || isWallJumpCooldownActive || isFireTackleActive) { return; }
 
-        if (Input.GetAxisRaw("Horizontal") != 0f && !isAgainstWall)
+        if (Input.GetAxisRaw("Horizontal") != 0f)
         {
-            if ((rb2d.velocity.x * Input.GetAxisRaw("Horizontal")) >= 0f)
+            if (isAgainstWall && (Input.GetAxisRaw("Horizontal") * (isFacingRight ? 1f : -1f)) > 0f)
+            {
+                rb2d.velocity = new Vector2(0f, rb2d.velocity.y);
+            }
+            else if ((rb2d.velocity.x * Input.GetAxisRaw("Horizontal")) >= 0f)
             {
                 if (Mathf.Abs(rb2d.velocity.x) < topSpeed)
                 {
@@ -297,7 +305,7 @@ public class PlayerCtrl : MonoBehaviour
 
     private void Jumping()
     {
-        if (isChangingForm) { return; }
+        if (isChangingForm || isFireTackleActive) { return; }
         else if (isFireTackleActive && (currentWallClimbTime > 0f && currentWallClimbTime < maxWallClimbTime))
         {
             currentWallClimbTime = maxWallClimbTime;
@@ -324,19 +332,32 @@ public class PlayerCtrl : MonoBehaviour
                 rb2d.velocity = new Vector2(horizontalResult, jumpSpeed + (enableRunningJumpBonus ? Mathf.Abs(horizontalResult / topSpeed) * runningJumpMultiplier : 0f));
             }
         }
-        else if (enableWallJumping && CheckDistanceToGround(minimumWallJumpHeight) && !isWallJumpCooldownActive && !isGrounded && isAgainstWall && (isFacingRight ? (Input.GetAxisRaw("Horizontal") > 0f && isTouchingWallR) : (Input.GetAxisRaw("Horizontal") < 0f && isTouchingWallL)) && jumpBufferTimeLeft > 0f)
+        else if (enableWallJumping && CheckDistanceToGround(minimumWallJumpHeight) && !isWallJumpCooldownActive && !isGrounded && isAgainstWall && (isFacingRight ? (Input.GetAxisRaw("Horizontal") > 0f && isTouchingWallR) : (Input.GetAxisRaw("Horizontal") < 0f && isTouchingWallL)))
         {
             if (enableWallClimbing && currentWallClimbTime > 0f && currentWallClimbTime < maxWallClimbTime) { currentWallClimbTime = maxWallClimbTime; }
 
-            jumpBufferTimeLeft = 0f;
-            jumpIsHeld = true;
-            rb2d.gravityScale = risingGravity;
+            if (jumpBufferTimeLeft > 0f)
+            {
+                jumpBufferTimeLeft = 0f;
+                jumpIsHeld = true;
+                rb2d.gravityScale = risingGravity;
 
-            float horizontalResult = Mathf.Max(highestSpeedBuffer, horizontalWallJumpSpeed);
-            Vector2 newVelocity = new Vector2((isFacingRight ? -horizontalResult : horizontalResult), verticalWallJumpSpeed);
-            SetFacingDirection((isTouchingWallL ? 1f : (isTouchingWallR ? -1f : (isFacingRight ? -1f : 1f))));
-            rb2d.velocity = newVelocity;
-            StartCoroutine(WallJumpCooldownCR());
+                float horizontalResult = Mathf.Max(highestSpeedBuffer, horizontalWallJumpSpeed);
+                Vector2 newVelocity = new Vector2((isFacingRight ? -horizontalResult : horizontalResult), verticalWallJumpSpeed);
+                SetFacingDirection((isTouchingWallL ? 1f : (isTouchingWallR ? -1f : (isFacingRight ? -1f : 1f))));
+                rb2d.velocity = newVelocity;
+                StartCoroutine(WallJumpCooldownCR());
+            }
+            else if (!Input.GetButton("Jump") || !jumpIsHeld || rb2d.velocity.y < 0f)
+            {
+                jumpIsHeld = false;
+                rb2d.gravityScale = 0f;
+                rb2d.velocity = new Vector2(0f, -wallSlideSpeed);
+                if (currentAirStallTime > 0f) { currentAirStallTime = maxAirStallTime; }
+            }
+            else { /* Nothing */ }
+
+            
         }
         else if (!isGrounded && currentMidairJumps < maxMidairJumps && jumpBufferTimeLeft > 0f && (currentWallClimbTime <= 0f || currentWallClimbTime >= maxWallClimbTime) && postClimbDashTimeLeft <= 0f)
         {
@@ -433,13 +454,7 @@ public class PlayerCtrl : MonoBehaviour
             {
                 jumpIsHeld = false;
 
-                if (enableWallJumping && isAgainstWall && (isFacingRight ? Input.GetAxisRaw("Horizontal") > 0f : Input.GetAxisRaw("Horizontal") < 0f) && CheckDistanceToGround(minimumWallJumpHeight))
-                {
-                    rb2d.gravityScale = 0f;
-                    rb2d.velocity = new Vector2(0f, -wallSlideSpeed);
-                    if (currentAirStallTime > 0f) { currentAirStallTime = maxAirStallTime; }
-                }
-                else if (enableAirStalling && currentAirStallTime < maxAirStallTime && CheckDistanceToGround(minimumAirStallHeight) && Input.GetButton("Jump"))
+                if (enableAirStalling && currentAirStallTime < maxAirStallTime && CheckDistanceToGround(minimumAirStallHeight) && Input.GetButton("Jump"))
                 {
                     rb2d.gravityScale = 0f;
                     rb2d.velocity = new Vector2(rb2d.velocity.x, -airStallSpeed);
