@@ -36,15 +36,15 @@ public class PlayerCtrl : MonoBehaviour
 
     /* JUMPING VARIABLES */
     [Header("Jumping Variables")]
-    [SerializeField] bool changeFacingDirectionMidair = true;
+    [SerializeField] bool changeFacingDirectionMidair = true; // PlayerMovement
     [SerializeField] bool enableSpeedHopping = true;
     [SerializeField] float jumpSpeed = 4f;
     [SerializeField] float risingGravity = 1f;
     [SerializeField] float fallingGravity = 1f;
     [SerializeField] float fallSpeed = 6f;
-    [SerializeField] float airAcceleration = 0.5f;
-    [SerializeField] float airDeceleration = 0.5f;
-    [SerializeField] float airTurningSpeed = 0.5f;
+    [SerializeField] float airAcceleration = 0.5f; // PlayerMovement
+    [SerializeField] float airDeceleration = 0.5f; // PlayerMovement
+    [SerializeField] float airTurningSpeed = 0.5f; // PlayerMovement
 
     [Header("Variable Jump Variables")]
     [SerializeField] bool enableVariableJumps = true;
@@ -139,7 +139,7 @@ public class PlayerCtrl : MonoBehaviour
 
     private float coyoteTimeLeft = 0f;
 
-    public bool isFacingRight = true;
+    public bool isFacingRight = true; // PlayerMovement
 
     private MagicBlast projectileRef = null;
     private float currentMagic = 0f;
@@ -189,7 +189,7 @@ public class PlayerCtrl : MonoBehaviour
         playerCamTarget.position = new Vector2(this.transform.position.x + horizontalLookahead, initialYPos + (rb2d.velocity.y > 0f ? risingLookahead : -fallingLookahead));
     }
 
-    private void Movement()
+    private void Movement() // PlayerMovement
     {
         if (isChangingForm || isWallJumpCooldownActive || isFireTackleActive) { return; }
 
@@ -485,13 +485,13 @@ public class PlayerCtrl : MonoBehaviour
         }
     }
 
-    private void FacingDirection()
+    private void FacingDirection()  // PlayerMovement
     {
         if (isChangingForm || isFireTackleActive || isWallJumpCooldownActive || (!changeFacingDirectionMidair && !playerCollisions.IsGrounded) || (currentAirStallTime > 0f && currentAirStallTime < maxAirStallTime)) { return; }
         SetFacingDirection(Input.GetAxisRaw("Horizontal"));
     }
 
-    private void SetFacingDirection(float horizontalAxis)
+    private void SetFacingDirection(float horizontalAxis)  // PlayerMovement
     {
         if (horizontalAxis > 0f)
         {
