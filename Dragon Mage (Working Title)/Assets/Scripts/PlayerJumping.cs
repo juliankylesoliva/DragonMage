@@ -24,7 +24,6 @@ public class PlayerJumping : MonoBehaviour
     public float airStallSpeed = 1f;
     [Range(0f, 5f)] public float maxAirStallTime = 3f;
     [HideInInspector] public float currentAirStallTime = 0f;
-    [HideInInspector] public float currentWallClimbTime = 0f;
     [HideInInspector] public int currentMidairJumps = 0;
 
     [Header("Wall Climb Variables")]
@@ -34,6 +33,7 @@ public class PlayerJumping : MonoBehaviour
     public float climbingGravity = 0.25f;
     public float maxWallClimbTime = 3f;
     public float postClimbDashWindow = 1f;
+    [HideInInspector] public float currentWallClimbTime = 0f;
     [HideInInspector] public float storedWallClimbSpeed = 0f;
     [HideInInspector] public float postClimbDashTimeLeft = 0f;
 
@@ -68,7 +68,7 @@ public class PlayerJumping : MonoBehaviour
             float currentWallJumpCooldownTimer = wallJumpCooldown;
             while (player.rb2d.velocity.y > 0f || currentWallJumpCooldownTimer > 0f)
             {
-                if (!player.isChangingForm) { currentWallJumpCooldownTimer -= Time.deltaTime; }
+                if (!player.form.isChangingForm) { currentWallJumpCooldownTimer -= Time.deltaTime; }
                 yield return null;
             }
             isWallJumpCooldownActive = false;
@@ -86,6 +86,8 @@ public class PlayerJumping : MonoBehaviour
         player.buffers.jumpBufferTimeLeft = 0f;
         jumpIsHeld = true;
         player.rb2d.gravityScale = risingGravity;
+
+        LandingReset();
 
         float horizontalResult = (enableSpeedHopping && (player.rb2d.velocity.x * Input.GetAxisRaw("Horizontal")) > 0f && Mathf.Abs(player.rb2d.velocity.x) >= player.movement.topSpeed && player.buffers.highestSpeedBuffer > Mathf.Abs(player.rb2d.velocity.x) ? (player.buffers.highestSpeedBuffer * Input.GetAxisRaw("Horizontal")) : player.rb2d.velocity.x);
         player.rb2d.velocity = new Vector2(horizontalResult, jumpSpeed + (enableRunningJumpBonus ? Mathf.Abs(horizontalResult / player.movement.topSpeed) * runningJumpMultiplier : 0f));
@@ -175,7 +177,7 @@ public class PlayerJumping : MonoBehaviour
 
     public bool CanWallJump()
     {
-        return (player.stateMachine.CurrentState == player.stateMachine.wallSlidingState && player.buffers.jumpBufferTimeLeft > 0f);
+        return (player.stateMachine.CurrentState == player.stateMachine.wallSlidingState && !isWallJumpCooldownActive && player.buffers.jumpBufferTimeLeft > 0f);
     }
 
     public void WallJumpStart()

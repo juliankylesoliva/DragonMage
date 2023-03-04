@@ -12,6 +12,7 @@ public class PlayerCtrl : MonoBehaviour
     [HideInInspector] public PlayerBuffers buffers;
     [HideInInspector] public PlayerMovement movement;
     [HideInInspector] public PlayerJumping jumping;
+    [HideInInspector] public PlayerForm form;
 
     [HideInInspector] public Rigidbody2D rb2d;
     [HideInInspector] public SpriteRenderer charSprite;
@@ -19,21 +20,13 @@ public class PlayerCtrl : MonoBehaviour
     /* DRAG AND DROP */
     [Header("Drag and Drop")]
     [SerializeField] Transform playerCamTarget;
-    [SerializeField] PlayerCtrlProperties mageProperties;
-    [SerializeField] PlayerCtrlProperties dragonProperties;
-    [SerializeField] Sprite tempMageSprite;
-    [SerializeField] Sprite tempDragonSprite;
+    public Sprite tempMageSprite;
+    public Sprite tempDragonSprite;
     [SerializeField] GameObject magicProjectilePrefab;
     [SerializeField] Transform projectileSpawnPoint;
-    
-    /* EDITOR VARIABLES */
-    [Header("Editor Variables")]
-    [SerializeField] CharacterMode startingMode = CharacterMode.MAGE;
 
     /* MISC VARIABLES */
     [Header("Miscellaneous Control Variables")]
-    [SerializeField] float formChangeTime = 0.25f;
-    [SerializeField] float formChangeCooldownTime = 0.1f;
     [SerializeField] float lookaheadDistance = 8f;
     [SerializeField] float fallingLookaheadDistance = 2f;
     [SerializeField] float fallingLookaheadThreshold = 0.1f;
@@ -53,11 +46,6 @@ public class PlayerCtrl : MonoBehaviour
     [SerializeField] float fireTackleEndlagCancel = 0.125f;
 
     /* SCRIPT VARIABLES */
-    [HideInInspector] public CharacterMode currentMode = CharacterMode.MAGE;
-
-    [HideInInspector] public bool isChangingForm = false; // Make into ChangingFormState
-
-    [HideInInspector] public bool isFormChangeCooldownActive = false;
     [HideInInspector] public bool isAttackCooldownActive = false;
     [HideInInspector] public bool isFireTackleActive = false;
 
@@ -69,6 +57,7 @@ public class PlayerCtrl : MonoBehaviour
         buffers = this.gameObject.GetComponent<PlayerBuffers>();
         movement = this.gameObject.GetComponent<PlayerMovement>();
         jumping = this.gameObject.GetComponent<PlayerJumping>();
+        form = this.gameObject.GetComponent<PlayerForm>();
 
         rb2d = this.gameObject.GetComponent<Rigidbody2D>();
         charSprite = this.gameObject.GetComponent<SpriteRenderer>();
@@ -78,23 +67,17 @@ public class PlayerCtrl : MonoBehaviour
         stateMachine.Initialize(stateMachine.standingState);
     }
 
-    void Start()
-    {
-        ChangeMode(startingMode);
-    }
-
     void Update()
     {
         stateMachine.Update();
         UpdatePlayerCamTarget();
-        // FormChange();
         // UseAttack();
     }
 
     /* METHODS */
     private void UpdatePlayerCamTarget()
     {
-        if (isChangingForm) { return; }
+        if (form.isChangingForm) { return; }
         float horizontalLookahead = (lookaheadDistance * Mathf.Min(Mathf.Abs(rb2d.velocity.x / (movement.topSpeed * 2f)), 1f) * (rb2d.velocity.x >= 0f ? 1f : -1f));
         float initialYPos = (followCharacterOnJump || collisions.IsGrounded ? collisions.groundCheckObj.position.y : playerCamTarget.position.y);
         float fallingLookahead = (!collisions.IsGrounded && buffers.coyoteTimeLeft <= 0f && rb2d.velocity.y < 0f && collisions.groundCheckObj.position.y < (playerCamTarget.position.y - fallingLookaheadThreshold) ? fallingLookaheadDistance : 0f);
@@ -106,7 +89,7 @@ public class PlayerCtrl : MonoBehaviour
     {
         if (!isAttackCooldownActive && !isFireTackleActive && Input.GetButtonDown("Attack"))
         {
-            if (currentMode == CharacterMode.MAGE)
+            if (form.currentMode == CharacterMode.MAGE)
             {
                 if (projectileRef != null)
                 {
@@ -129,86 +112,6 @@ public class PlayerCtrl : MonoBehaviour
                 StartCoroutine(UseFireTackleCR());
             }
         }
-    }
-
-    private void FormChange() // FormChange script will temporarily override the current state
-    {
-        if (!isFormChangeCooldownActive && !isAttackCooldownActive && !isChangingForm && !isFireTackleActive && buffers.formChangeBufferTimeLeft > 0f)
-        {
-            buffers.formChangeBufferTimeLeft = 0f;
-
-            StartCoroutine(FormFreeze());
-            StartCoroutine(FormChangeCooldownCR());
-
-            if (currentMode == CharacterMode.MAGE)
-            {
-                ChangeMode(CharacterMode.DRAGON);
-                return;
-            }
-
-            if (currentMode == CharacterMode.DRAGON)
-            {
-                ChangeMode(CharacterMode.MAGE);
-                return;
-            }
-        }
-    }
-
-    /* UTILITY METHODS */
-    private void SetCtrlProperties(PlayerCtrlProperties p)
-    {
-        movement.acceleration = p.acceleration;
-        movement.deceleration = p.deceleration;
-        movement.topSpeed = p.topSpeed;
-        movement.turningSpeed = p.turningSpeed;
-
-        movement.changeFacingDirectionMidair = p.changeFacingDirectionMidair;
-        jumping.enableSpeedHopping = p.enableSpeedHopping;
-        jumping.jumpSpeed = p.jumpSpeed;
-        jumping.risingGravity = p.risingGravity;
-        jumping.fallingGravity = p.fallingGravity;
-        jumping.fallSpeed = p.fallSpeed;
-        movement.airAcceleration = p.airAcceleration;
-        movement.airDeceleration = p.airDeceleration;
-        movement.airTurningSpeed = p.airTurningSpeed;
-
-        jumping.enableVariableJumps = p.enableVariableJumps;
-        jumping.variableJumpDecay = p.variableJumpDecay;
-
-        jumping.enableAirStalling = p.enableAirStalling;
-        jumping.minimumAirStallHeight = p.minimumAirStallHeight;
-        jumping.airStallSpeed = p.airStallSpeed;
-        jumping.maxAirStallTime = p.maxAirStallTime;
-
-        if (jumping.enableAirStalling && jumping.currentAirStallTime > 0f && jumping.maxAirStallTime > 0f) { jumping.currentAirStallTime = jumping.maxAirStallTime; }
-
-        jumping.enableWallClimbing = p.enableWallClimbing;
-        jumping.minimumWallClimbHeight = p.minimumWallClimbHeight;
-        jumping.baseClimbingSpeed = p.baseClimbingSpeed;
-        jumping.climbingGravity = p.climbingGravity;
-        jumping.maxWallClimbTime = p.maxWallClimbTime;
-        jumping.postClimbDashWindow = p.postClimbDashWindow;
-
-        if (jumping.enableWallClimbing)
-        {
-            if (jumping.currentWallClimbTime > 0f && jumping.maxWallClimbTime > 0f) { jumping.currentWallClimbTime = jumping.maxWallClimbTime; }
-            if (jumping.storedWallClimbSpeed > 0f) { jumping.storedWallClimbSpeed = 0f; }
-            if (jumping.postClimbDashTimeLeft > 0f) { jumping.postClimbDashTimeLeft = 0f; }
-        }
-
-        jumping.enableWallJumping = p.enableWallJumping;
-        jumping.minimumWallJumpHeight = p.minimumWallJumpHeight;
-        jumping.wallSlideSpeed = p.wallSlideSpeed;
-        jumping.verticalWallJumpSpeed = p.verticalWallJumpSpeed;
-        jumping.horizontalWallJumpSpeed = p.horizontalWallJumpSpeed;
-        jumping.wallJumpCooldown = p.wallJumpCooldown;
-
-        jumping.maxMidairJumps = p.maxMidairJumps;
-        jumping.midairJumpSpeed = p.midairJumpSpeed;
-        jumping.forwardMidairJumpBonus = p.forwardMidairJumpBonus;
-
-        jumping.enableRunningJumpBonus = p.enableRunningJumpBonus;
-        jumping.runningJumpMultiplier = p.runningJumpMultiplier;
     }
 
     private IEnumerator UseFireTackleCR()
@@ -266,7 +169,7 @@ public class PlayerCtrl : MonoBehaviour
         charSprite.color = Color.white;
         isFireTackleActive = false;
         StartCoroutine(AttackCooldownCR());
-        StartCoroutine(FormChangeCooldownCR());
+        StartCoroutine(form.FormChangeCooldownCR());
         yield break;
     }
 
@@ -279,40 +182,5 @@ public class PlayerCtrl : MonoBehaviour
             isAttackCooldownActive = false;
         }
         yield break;
-    }
-
-    private IEnumerator FormChangeCooldownCR()
-    {
-        if (!isFormChangeCooldownActive)
-        {
-            isFormChangeCooldownActive = true;
-            yield return new WaitForSeconds(formChangeCooldownTime);
-            isFormChangeCooldownActive = false;
-        }
-        yield break;
-    }
-
-    private void ChangeMode(CharacterMode mode)
-    {
-        SetCtrlProperties(mode == CharacterMode.MAGE ? mageProperties : dragonProperties);
-        charSprite.sprite = (mode == CharacterMode.MAGE ? tempMageSprite : tempDragonSprite);
-        currentMode = mode;
-    }
-
-    private IEnumerator FormFreeze()
-    {
-        isChangingForm = true;
-
-        Vector2 prevVelocity = rb2d.velocity;
-
-        rb2d.gravityScale = 0f;
-        rb2d.velocity = Vector2.zero;
-
-        yield return new WaitForSeconds(formChangeTime);
-
-        rb2d.gravityScale = (prevVelocity.y > 0f ? jumping.risingGravity : jumping.fallingGravity);
-        rb2d.velocity = prevVelocity;
-
-        isChangingForm = false;
     }
 }

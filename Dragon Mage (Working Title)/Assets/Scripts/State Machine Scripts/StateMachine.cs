@@ -4,6 +4,7 @@ using UnityEngine;
 
 public interface IState
 {
+    public string name { get; }
     public void Enter();
     public void Update();
     public void Exit();
@@ -59,7 +60,7 @@ public class StateMachine
 
     public void Update()
     {
-        if (CurrentState != null) { CurrentState.Update(); Debug.Log(CurrentState.GetType()); }
+        if (CurrentState != null) { CurrentState.Update(); Debug.Log(CurrentState.name); }
     }
 }
 
@@ -67,6 +68,7 @@ public class StateMachine
 public abstract class State : IState
 {
     protected PlayerCtrl player;
+    public string name { get; protected set; }
 
     public State(PlayerCtrl player) { this.player = player; }
 
@@ -75,6 +77,16 @@ public abstract class State : IState
     public abstract void Update();
 
     public abstract void Exit();
+
+    protected bool CheckFormChangeInput()
+    {
+        if (!player.form.isFormChangeCooldownActive && !player.isAttackCooldownActive && !player.form.isChangingForm && !player.isFireTackleActive && player.buffers.formChangeBufferTimeLeft > 0f)
+        {
+            player.stateMachine.TransitionTo(player.stateMachine.formChangingState);
+            return true;
+        }
+        return false;
+    }
 
     protected bool CheckRunInput()
     {
@@ -130,7 +142,7 @@ public abstract class State : IState
 
     protected bool CheckFireTackleInput()
     {
-        if (player.currentMode == CharacterMode.DRAGON && !player.isAttackCooldownActive && Input.GetButtonDown("Attack"))
+        if (player.form.currentMode == CharacterMode.DRAGON && !player.isAttackCooldownActive && Input.GetButtonDown("Attack"))
         {
             player.stateMachine.TransitionTo(player.stateMachine.attackingState);
             return true;
@@ -181,7 +193,7 @@ public abstract class State : IState
 
 public class StandingState : State
 {
-    public StandingState(PlayerCtrl player) : base(player) { }
+    public StandingState(PlayerCtrl player) : base(player) { name = "Standing"; }
 
     public override void Enter()
     {
@@ -190,7 +202,7 @@ public class StandingState : State
 
     public override void Update()
     {
-        if (CheckRunInput() || CheckJumpInput() || CheckFireTackleInput() || CheckSuddenRise() || CheckSuddenFall()) { return; }
+        if (CheckFormChangeInput() || CheckRunInput() || CheckJumpInput() || CheckFireTackleInput() || CheckSuddenRise() || CheckSuddenFall()) { return; }
     }
 
     public override void Exit()
@@ -201,7 +213,7 @@ public class StandingState : State
 
 public class RunningState : State
 {
-    public RunningState(PlayerCtrl player) : base(player) { }
+    public RunningState(PlayerCtrl player) : base(player) { name = "Running"; }
 
     public override void Enter()
     {
@@ -212,7 +224,7 @@ public class RunningState : State
     {
         player.movement.Movement();
         player.movement.FacingDirection();
-        if (CheckIfStopped() || CheckSuddenFall() || CheckJumpInput() || CheckFireTackleInput()) { return; }
+        if (CheckFormChangeInput() || CheckIfStopped() || CheckSuddenFall() || CheckJumpInput() || CheckFireTackleInput()) { return; }
     }
 
     public override void Exit()
@@ -233,7 +245,7 @@ public class RunningState : State
 
 public class JumpingState : State
 {
-    public JumpingState(PlayerCtrl player) : base(player) { }
+    public JumpingState(PlayerCtrl player) : base(player) { name = "Jumping"; }
 
     public override void Enter()
     {
@@ -246,7 +258,7 @@ public class JumpingState : State
         player.movement.FacingDirection();
         player.jumping.GroundJumpUpdate();
 
-        if (CheckMidairJumpInput() || CheckIfWallClimbing() || CheckIfWallSliding() || CheckIfFalling()) { return; }
+        if (CheckFormChangeInput() || CheckMidairJumpInput() || CheckIfWallClimbing() || CheckIfWallSliding() || CheckIfFalling()) { return; }
     }
 
     public override void Exit()
@@ -267,7 +279,7 @@ public class JumpingState : State
 
 public class FallingState : State
 {
-    public FallingState(PlayerCtrl player) : base(player) { }
+    public FallingState(PlayerCtrl player) : base(player) { name = "Falling"; }
 
     public override void Enter()
     {
@@ -279,7 +291,7 @@ public class FallingState : State
     {
         player.movement.Movement();
         player.movement.FacingDirection();
-        if (CheckGlideInput() || CheckMidairJumpInput() || CheckIfWallClimbing() || CheckIfWallSliding() || CheckRunInput() || CheckStationaryLanding()) { return; }
+        if (CheckFormChangeInput() || CheckRunInput() || CheckStationaryLanding() || CheckJumpInput() || CheckGlideInput() || CheckMidairJumpInput() || CheckIfWallClimbing() || CheckIfWallSliding()) { return; }
     }
 
     public override void Exit()
@@ -290,7 +302,7 @@ public class FallingState : State
 
 public class GlidingState : State
 {
-    public GlidingState(PlayerCtrl player) : base(player) { }
+    public GlidingState(PlayerCtrl player) : base(player) { name = "Gliding"; }
 
     public override void Enter()
     {
@@ -301,7 +313,7 @@ public class GlidingState : State
     {
         player.movement.Movement();
         player.jumping.GlideUpdate();
-        if (CheckIfWallSliding() || CheckGlideCancel()) { return; }
+        if (CheckFormChangeInput() || CheckIfWallSliding() || CheckGlideCancel()) { return; }
     }
 
     public override void Exit()
@@ -322,7 +334,7 @@ public class GlidingState : State
 
 public class WallSlidingState : State
 {
-    public WallSlidingState(PlayerCtrl player) : base(player) { }
+    public WallSlidingState(PlayerCtrl player) : base(player) { name = "WallSliding"; }
 
     public override void Enter()
     {
@@ -331,7 +343,7 @@ public class WallSlidingState : State
 
     public override void Update()
     {
-        if (CheckIfWallJumping() || CheckWallSlideCancel()) { return; }
+        if (CheckFormChangeInput() || CheckIfWallJumping() || CheckWallSlideCancel()) { return; }
     }
 
     public override void Exit()
@@ -362,7 +374,7 @@ public class WallSlidingState : State
 
 public class WallJumpingState : State
 {
-    public WallJumpingState(PlayerCtrl player) : base(player) { }
+    public WallJumpingState(PlayerCtrl player) : base(player) { name = "WallJumping"; }
 
     public override void Enter()
     {
@@ -372,21 +384,29 @@ public class WallJumpingState : State
     public override void Update()
     {
         player.jumping.GroundJumpUpdate();
-        if (!player.jumping.isWallJumpCooldownActive)
-        {
-            player.stateMachine.TransitionTo((player.rb2d.velocity.y > 0f ? player.stateMachine.jumpingState : player.stateMachine.fallingState));
-        }
+        if (CheckFormChangeInput() || CheckWallJumpCooldown()) { return; }
+        
     }
 
     public override void Exit()
     {
 
     }
+
+    private bool CheckWallJumpCooldown()
+    {
+        if (!player.jumping.isWallJumpCooldownActive)
+        {
+            player.stateMachine.TransitionTo((player.rb2d.velocity.y > 0f ? player.stateMachine.jumpingState : player.stateMachine.fallingState));
+            return true;
+        }
+        return false;
+    }
 }
 
 public class WallClimbingState : State
 {
-    public WallClimbingState(PlayerCtrl player) : base(player) { }
+    public WallClimbingState(PlayerCtrl player) : base(player) { name = "WallClimbing"; }
 
     public override void Enter()
     {
@@ -396,7 +416,7 @@ public class WallClimbingState : State
     public override void Update()
     {
         player.jumping.WallClimbUpdate();
-        if (CheckWallVault() || CheckWallClimbCancel()) { return; }
+        if (CheckFormChangeInput() || CheckWallVault() || CheckWallClimbCancel()) { return; }
     }
 
     public override void Exit()
@@ -429,7 +449,7 @@ public class WallClimbingState : State
 
 public class WallVaultingState : State
 {
-    public WallVaultingState(PlayerCtrl player) : base(player) { }
+    public WallVaultingState(PlayerCtrl player) : base(player) { name = "WallVaulting"; }
 
     public override void Enter()
     {
@@ -439,7 +459,7 @@ public class WallVaultingState : State
     public override void Update()
     {
         player.jumping.WallVaultUpdate();
-        if (CheckWallVaultDash() || CheckWallVaultCancel()) { return; }
+        if (CheckFormChangeInput() || CheckWallVaultDash() || CheckWallVaultCancel()) { return; }
     }
 
     public override void Exit()
@@ -471,7 +491,7 @@ public class WallVaultingState : State
 
 public class AttackingState : State
 {
-    public AttackingState(PlayerCtrl player) : base(player) { }
+    public AttackingState(PlayerCtrl player) : base(player) { name = "Attacking"; }
 
     public override void Enter()
     {
@@ -491,16 +511,39 @@ public class AttackingState : State
 
 public class FormChangingState : State
 {
-    public FormChangingState(PlayerCtrl player) : base(player) { }
+    public FormChangingState(PlayerCtrl player) : base(player) { name = "FormChanging"; }
 
     public override void Enter()
     {
-
+        player.form.FormChange();
     }
 
     public override void Update()
     {
-
+        if (!player.form.isChangingForm)
+        {
+            switch (player.stateMachine.PreviousState.name)
+            {
+                case "Gliding":
+                    player.stateMachine.TransitionTo(player.stateMachine.fallingState);
+                    break;
+                case "WallSliding":
+                    player.stateMachine.TransitionTo((player.jumping.CanWallClimb() ? player.stateMachine.wallClimbingState : player.stateMachine.fallingState));
+                    break;
+                case "WallJumping":
+                    player.stateMachine.TransitionTo((player.rb2d.velocity.y > 0f ? player.stateMachine.jumpingState : player.stateMachine.fallingState));
+                    break;
+                case "WallClimbing":
+                    player.stateMachine.TransitionTo((player.jumping.CanWallSlide() ? player.stateMachine.wallSlidingState : player.stateMachine.fallingState));
+                    break;
+                case "WallVaulting":
+                    player.stateMachine.TransitionTo((player.rb2d.velocity.y > 0f ? player.stateMachine.jumpingState : player.stateMachine.fallingState));
+                    break;
+                default:
+                    player.stateMachine.TransitionTo(player.stateMachine.PreviousState);
+                    break;
+            }
+        }
     }
 
     public override void Exit()

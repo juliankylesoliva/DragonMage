@@ -87,7 +87,7 @@ public class PlayerBuffers : MonoBehaviour
             }
             else if (currentHorizontalSpeed < highestSpeedBuffer)
             {
-                if (!player.isChangingForm)
+                if (!player.form.isChangingForm)
                 {
                     if (highestSpeedBufferTimeLeft > 0f) { highestSpeedBufferTimeLeft -= Time.deltaTime; }
 

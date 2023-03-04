@@ -308,6 +308,7 @@ GameObject:
   - component: {fileID: 557060676}
   - component: {fileID: 557060675}
   - component: {fileID: 557060677}
+  - component: {fileID: 557060678}
   - component: {fileID: 557060669}
   - component: {fileID: 557060671}
   - component: {fileID: 557060672}
@@ -443,6 +444,7 @@ MonoBehaviour:
   buffers: {fileID: 0}
   movement: {fileID: 0}
   jumping: {fileID: 0}
+  form: {fileID: 0}
   rb2d: {fileID: 0}
   charSprite: {fileID: 0}
   playerCamTarget: {fileID: 474523643}
@@ -589,6 +591,26 @@ MonoBehaviour:
   forwardMidairJumpBonus: {x: 0, y: 0}
   enableRunningJumpBonus: 1
   runningJumpMultiplier: 1.5
+--- !u!114 &557060678
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 557060668}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b47c7a041a8a1b49b4b7e2fe1bee6d8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mageProperties: {fileID: 11400000, guid: 3058d3c16efbfc74d91b608d70e9fae5, type: 2}
+  dragonProperties: {fileID: 11400000, guid: 30fff2eeae6f929478e55877d487543c, type: 2}
+  startingMode: 0
+  formChangeTime: 0.15
+  formChangeCooldownTime: 0.4
+  currentMode: 0
+  isChangingForm: 0
+  isFormChangeCooldownActive: 0
 --- !u!1 &736087748
 GameObject:
   m_ObjectHideFlags: 0
