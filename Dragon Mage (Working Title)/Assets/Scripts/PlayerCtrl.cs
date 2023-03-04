@@ -23,7 +23,6 @@ public class PlayerCtrl : MonoBehaviour
     [SerializeField] Sprite tempMageSprite;
     [SerializeField] Sprite tempDragonSprite;
     [SerializeField] GameObject magicProjectilePrefab;
-    [SerializeField] GameObject fireProjectilePrefab;
     [SerializeField] Transform projectileSpawnPoint;
     
     /* EDITOR VARIABLES */
@@ -32,15 +31,15 @@ public class PlayerCtrl : MonoBehaviour
 
     /* JUMPING VARIABLES */
     [Header("Jumping Variables")]
-    [SerializeField] bool enableSpeedHopping = true; // PlayerJumping
-    [SerializeField] float jumpSpeed = 4f; // PlayerJumping
-    [SerializeField] float risingGravity = 1f; // PlayerJumping
-    [SerializeField] float fallingGravity = 1f; // PlayerJumping
-    [SerializeField] float fallSpeed = 6f; // PlayerJumping
+    public bool enableSpeedHopping = true; // PlayerJumping
+    public float jumpSpeed = 4f; // PlayerJumping
+    public float risingGravity = 1f; // PlayerJumping
+    public float fallingGravity = 1f; // PlayerJumping
+    public float fallSpeed = 6f; // PlayerJumping
 
     [Header("Variable Jump Variables")]
-    [SerializeField] bool enableVariableJumps = true; // PlayerJumping
-    [SerializeField] float variableJumpDecay = 0.5f; // PlayerJumping
+    public bool enableVariableJumps = true; // PlayerJumping
+    public float variableJumpDecay = 0.5f; // PlayerJumping
 
     [Header("Air Stalling Variables")]
     public bool enableAirStalling = true;
@@ -57,21 +56,21 @@ public class PlayerCtrl : MonoBehaviour
     public float postClimbDashWindow = 1f;
 
     [Header("Wall Jump Variables")]
-    [SerializeField] bool enableWallJumping = true;
-    [SerializeField] float minimumWallJumpHeight = 1f;
-    [SerializeField] float wallSlideSpeed = 1f;
-    [SerializeField] float verticalWallJumpSpeed = 4f;
-    [SerializeField] float horizontalWallJumpSpeed = 6f;
-    [SerializeField] float wallJumpCooldown = 0.25f;
+    public bool enableWallJumping = true; // PlayerJumping
+    public float minimumWallJumpHeight = 1f; // PlayerJumping
+    public float wallSlideSpeed = 1f; // PlayerJumping
+    public float verticalWallJumpSpeed = 4f; // PlayerJumping
+    public float horizontalWallJumpSpeed = 6f; // PlayerJumping
+    public float wallJumpCooldown = 0.25f; // PlayerJumping
 
     [Header("Midair Jump Variables")]
-    [SerializeField, Range(0, 5)] int maxMidairJumps = 3;
-    [SerializeField] float midairJumpSpeed = 4.25f;
-    [SerializeField] Vector2 forwardMidairJumpBonus;
+    [SerializeField, Range(0, 5)] int maxMidairJumps = 3; // PlayerJumping
+    [SerializeField] float midairJumpSpeed = 4.25f; // PlayerJumping
+    [SerializeField] Vector2 forwardMidairJumpBonus; // PlayerJumping
 
     [Header("Running Jump Variables")]
-    [SerializeField] bool enableRunningJumpBonus = true; // PlayerJumping
-    [SerializeField] float runningJumpMultiplier = 1f; // PlayerJumping
+    public bool enableRunningJumpBonus = true; // PlayerJumping
+    public float runningJumpMultiplier = 1f; // PlayerJumping
 
     /* MISC VARIABLES */
     [Header("Miscellaneous Control Variables")]
@@ -96,7 +95,7 @@ public class PlayerCtrl : MonoBehaviour
     [SerializeField] float fireTackleEndlagCancel = 0.125f;
 
     /* SCRIPT VARIABLES */
-    private CharacterMode currentMode = CharacterMode.MAGE;
+    [HideInInspector] public CharacterMode currentMode = CharacterMode.MAGE;
     [HideInInspector] public bool jumpIsHeld = false; // PlayerJumping
 
     [HideInInspector] public float currentAirStallTime = 0f; //MidairJump
@@ -105,7 +104,7 @@ public class PlayerCtrl : MonoBehaviour
 
     [HideInInspector] public bool isChangingForm = false; // Make into ChangingFormState
 
-    [HideInInspector] public bool isWallJumpCooldownActive = false;
+    [HideInInspector] public bool isWallJumpCooldownActive = false; // PlayerJumping
     [HideInInspector] public bool isFormChangeCooldownActive = false;
     [HideInInspector] public bool isAttackCooldownActive = false;
     [HideInInspector] public bool isFireTackleActive = false;
@@ -137,9 +136,9 @@ public class PlayerCtrl : MonoBehaviour
     {
         stateMachine.Update();
         UpdatePlayerCamTarget();
-        FormChange();
-        Jumping(); // PlayerJumping
-        UseAttack();
+        // FormChange();
+        // Jumping(); // PlayerJumping
+        // UseAttack();
     }
 
     /* METHODS */
@@ -357,7 +356,7 @@ public class PlayerCtrl : MonoBehaviour
         }
     }
 
-    private void FormChange()
+    private void FormChange() // FormChange script will temporarily override the current state
     {
         if (!isFormChangeCooldownActive && !isAttackCooldownActive && !isChangingForm && !isFireTackleActive && buffers.formChangeBufferTimeLeft > 0f)
         {
