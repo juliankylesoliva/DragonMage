@@ -78,7 +78,7 @@ public class PlayerBuffers : MonoBehaviour
         float highestSpeedBufferTimeLeft = highestSpeedBufferTime;
         while (true)
         {
-            float currentHorizontalSpeed = (player.currentWallClimbTime > 0f && player.currentWallClimbTime < player.maxWallClimbTime ? Mathf.Max(player.storedWallClimbSpeed, Mathf.Abs(player.rb2d.velocity.x)) : Mathf.Abs(player.rb2d.velocity.x));
+            float currentHorizontalSpeed = (player.jumping.currentWallClimbTime > 0f && player.jumping.currentWallClimbTime < player.jumping.maxWallClimbTime ? Mathf.Max(player.jumping.storedWallClimbSpeed, Mathf.Abs(player.rb2d.velocity.x)) : Mathf.Abs(player.rb2d.velocity.x));
 
             if (currentHorizontalSpeed > highestSpeedBuffer)
             {

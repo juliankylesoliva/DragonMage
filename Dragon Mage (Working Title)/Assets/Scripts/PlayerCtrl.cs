@@ -11,6 +11,7 @@ public class PlayerCtrl : MonoBehaviour
     [HideInInspector] public PlayerCollisions collisions;
     [HideInInspector] public PlayerBuffers buffers;
     [HideInInspector] public PlayerMovement movement;
+    [HideInInspector] public PlayerJumping jumping;
 
     [HideInInspector] public Rigidbody2D rb2d;
     [HideInInspector] public SpriteRenderer charSprite;
@@ -28,49 +29,6 @@ public class PlayerCtrl : MonoBehaviour
     /* EDITOR VARIABLES */
     [Header("Editor Variables")]
     [SerializeField] CharacterMode startingMode = CharacterMode.MAGE;
-
-    /* JUMPING VARIABLES */
-    [Header("Jumping Variables")]
-    public bool enableSpeedHopping = true; // PlayerJumping
-    public float jumpSpeed = 4f; // PlayerJumping
-    public float risingGravity = 1f; // PlayerJumping
-    public float fallingGravity = 1f; // PlayerJumping
-    public float fallSpeed = 6f; // PlayerJumping
-
-    [Header("Variable Jump Variables")]
-    public bool enableVariableJumps = true; // PlayerJumping
-    public float variableJumpDecay = 0.5f; // PlayerJumping
-
-    [Header("Air Stalling Variables")]
-    public bool enableAirStalling = true;
-    public float minimumAirStallHeight = 1f;
-    public float airStallSpeed = 1f;
-    [Range(0f, 5f)] public float maxAirStallTime = 3f;
-
-    [Header("Wall Climb Variables")]
-    public bool enableWallClimbing = true;
-    public float minimumWallClimbHeight = 1f;
-    public float baseClimbingSpeed = 4f;
-    public float climbingGravity = 0.25f;
-    public float maxWallClimbTime = 3f;
-    public float postClimbDashWindow = 1f;
-
-    [Header("Wall Jump Variables")]
-    public bool enableWallJumping = true; // PlayerJumping
-    public float minimumWallJumpHeight = 1f; // PlayerJumping
-    public float wallSlideSpeed = 1f; // PlayerJumping
-    public float verticalWallJumpSpeed = 4f; // PlayerJumping
-    public float horizontalWallJumpSpeed = 6f; // PlayerJumping
-    public float wallJumpCooldown = 0.25f; // PlayerJumping
-
-    [Header("Midair Jump Variables")]
-    [SerializeField, Range(0, 5)] int maxMidairJumps = 3; // PlayerJumping
-    [SerializeField] float midairJumpSpeed = 4.25f; // PlayerJumping
-    [SerializeField] Vector2 forwardMidairJumpBonus; // PlayerJumping
-
-    [Header("Running Jump Variables")]
-    public bool enableRunningJumpBonus = true; // PlayerJumping
-    public float runningJumpMultiplier = 1f; // PlayerJumping
 
     /* MISC VARIABLES */
     [Header("Miscellaneous Control Variables")]
@@ -96,35 +54,28 @@ public class PlayerCtrl : MonoBehaviour
 
     /* SCRIPT VARIABLES */
     [HideInInspector] public CharacterMode currentMode = CharacterMode.MAGE;
-    [HideInInspector] public bool jumpIsHeld = false; // PlayerJumping
-
-    [HideInInspector] public float currentAirStallTime = 0f; //MidairJump
-    [HideInInspector] public float currentWallClimbTime = 0f; //MidairJump
-    [HideInInspector] public int currentMidairJumps = 0; //MidairJump
 
     [HideInInspector] public bool isChangingForm = false; // Make into ChangingFormState
 
-    [HideInInspector] public bool isWallJumpCooldownActive = false; // PlayerJumping
     [HideInInspector] public bool isFormChangeCooldownActive = false;
     [HideInInspector] public bool isAttackCooldownActive = false;
     [HideInInspector] public bool isFireTackleActive = false;
-
-    [HideInInspector] public float storedWallClimbSpeed = 0f;
-    [HideInInspector] public float postClimbDashTimeLeft = 0f;
 
     private MagicBlast projectileRef = null;
 
     void Awake()
     {
-        stateMachine = new StateMachine(this);
-        stateMachine.Initialize(stateMachine.standingState);
         collisions = this.gameObject.GetComponent<PlayerCollisions>();
         buffers = this.gameObject.GetComponent<PlayerBuffers>();
         movement = this.gameObject.GetComponent<PlayerMovement>();
+        jumping = this.gameObject.GetComponent<PlayerJumping>();
 
         rb2d = this.gameObject.GetComponent<Rigidbody2D>();
         charSprite = this.gameObject.GetComponent<SpriteRenderer>();
         playerCamTarget.position = collisions.groundCheckObj.position;
+        
+        stateMachine = new StateMachine(this);
+        stateMachine.Initialize(stateMachine.standingState);
     }
 
     void Start()
@@ -137,7 +88,6 @@ public class PlayerCtrl : MonoBehaviour
         stateMachine.Update();
         UpdatePlayerCamTarget();
         // FormChange();
-        // Jumping(); // PlayerJumping
         // UseAttack();
     }
 
@@ -148,183 +98,8 @@ public class PlayerCtrl : MonoBehaviour
         float horizontalLookahead = (lookaheadDistance * Mathf.Min(Mathf.Abs(rb2d.velocity.x / (movement.topSpeed * 2f)), 1f) * (rb2d.velocity.x >= 0f ? 1f : -1f));
         float initialYPos = (followCharacterOnJump || collisions.IsGrounded ? collisions.groundCheckObj.position.y : playerCamTarget.position.y);
         float fallingLookahead = (!collisions.IsGrounded && buffers.coyoteTimeLeft <= 0f && rb2d.velocity.y < 0f && collisions.groundCheckObj.position.y < (playerCamTarget.position.y - fallingLookaheadThreshold) ? fallingLookaheadDistance : 0f);
-        float risingLookahead = (!collisions.IsGrounded && buffers.coyoteTimeLeft <= 0f && collisions.groundCheckObj.position.y > (playerCamTarget.position.y + risingLookaheadThreshold) ? risingLookaheadDistance * Mathf.Min(rb2d.velocity.y / (fallSpeed * 2f), 1f) : 0f);
+        float risingLookahead = (!collisions.IsGrounded && buffers.coyoteTimeLeft <= 0f && collisions.groundCheckObj.position.y > (playerCamTarget.position.y + risingLookaheadThreshold) ? risingLookaheadDistance * Mathf.Min(rb2d.velocity.y / (jumping.fallSpeed * 2f), 1f) : 0f);
         playerCamTarget.position = new Vector2(this.transform.position.x + horizontalLookahead, initialYPos + (rb2d.velocity.y > 0f ? risingLookahead : -fallingLookahead));
-    }
-
-    private void Jumping() // PlayerJumping
-    {
-        if (isChangingForm || isFireTackleActive) { return; }
-        else if (isFireTackleActive && (currentWallClimbTime > 0f && currentWallClimbTime < maxWallClimbTime))
-        {
-            currentWallClimbTime = maxWallClimbTime;
-            rb2d.gravityScale = fallingGravity;
-            return;
-        }
-        else { /* Nothing */ }
-
-        if (collisions.IsGrounded || buffers.coyoteTimeLeft > 0f)
-        {
-            currentAirStallTime = 0f;
-            currentWallClimbTime = 0f;
-            storedWallClimbSpeed = 0f;
-            postClimbDashTimeLeft = 0f;
-            currentMidairJumps = 0;
-
-            if (buffers.jumpBufferTimeLeft > 0f)
-            {
-                buffers.jumpBufferTimeLeft = 0f;
-                jumpIsHeld = true;
-                rb2d.gravityScale = risingGravity;
-
-                float horizontalResult = (enableSpeedHopping && (rb2d.velocity.x * Input.GetAxisRaw("Horizontal")) > 0f && Mathf.Abs(rb2d.velocity.x) >= movement.topSpeed && buffers.highestSpeedBuffer > Mathf.Abs(rb2d.velocity.x) ? (buffers.highestSpeedBuffer * Input.GetAxisRaw("Horizontal")) : rb2d.velocity.x);
-                rb2d.velocity = new Vector2(horizontalResult, jumpSpeed + (enableRunningJumpBonus ? Mathf.Abs(horizontalResult / movement.topSpeed) * runningJumpMultiplier : 0f));
-            }
-        }
-        else if (enableWallJumping && collisions.CheckDistanceToGround(minimumWallJumpHeight) && !isWallJumpCooldownActive && !collisions.IsGrounded && collisions.IsAgainstWall && (movement.isFacingRight ? (Input.GetAxisRaw("Horizontal") > 0f && collisions.IsTouchingWallR) : (Input.GetAxisRaw("Horizontal") < 0f && collisions.IsTouchingWallL)))
-        {
-            if (enableWallClimbing && currentWallClimbTime > 0f && currentWallClimbTime < maxWallClimbTime) { currentWallClimbTime = maxWallClimbTime; }
-
-            if (buffers.jumpBufferTimeLeft > 0f)
-            {
-                buffers.jumpBufferTimeLeft = 0f;
-                jumpIsHeld = true;
-                rb2d.gravityScale = risingGravity;
-
-                float horizontalResult = Mathf.Max(buffers.highestSpeedBuffer, horizontalWallJumpSpeed);
-                Vector2 newVelocity = new Vector2((movement.isFacingRight ? -horizontalResult : horizontalResult), verticalWallJumpSpeed);
-                movement.SetFacingDirection((collisions.IsTouchingWallL ? 1f : (collisions.IsTouchingWallR ? -1f : (movement.isFacingRight ? -1f : 1f))));
-                rb2d.velocity = newVelocity;
-                StartCoroutine(WallJumpCooldownCR());
-            }
-            else if (!Input.GetButton("Jump") || !jumpIsHeld || rb2d.velocity.y < 0f)
-            {
-                jumpIsHeld = false;
-                rb2d.gravityScale = 0f;
-                rb2d.velocity = new Vector2(0f, -wallSlideSpeed);
-                if (currentAirStallTime > 0f) { currentAirStallTime = maxAirStallTime; }
-            }
-            else { /* Nothing */ }
-
-            
-        }
-        else if (!collisions.IsGrounded && currentMidairJumps < maxMidairJumps && buffers.jumpBufferTimeLeft > 0f && (currentWallClimbTime <= 0f || currentWallClimbTime >= maxWallClimbTime) && postClimbDashTimeLeft <= 0f)
-        {
-            if (enableWallClimbing && currentWallClimbTime > 0f && currentWallClimbTime < maxWallClimbTime) { currentWallClimbTime = maxWallClimbTime; }
-
-            buffers.jumpBufferTimeLeft = 0f;
-            jumpIsHeld = true;
-            rb2d.gravityScale = risingGravity;
-            Vector2 newVelocity = new Vector2(rb2d.velocity.x, midairJumpSpeed);
-            if ((movement.isFacingRight ? 1f : -1f) * rb2d.velocity.x > 0f)
-            {
-                float bonusXVelocity = forwardMidairJumpBonus.x * (rb2d.velocity.x > 0f ? 1f : -1f);
-                float bonusYVelocity = Mathf.Abs(forwardMidairJumpBonus.y);
-                newVelocity += new Vector2(bonusXVelocity, bonusYVelocity);
-            }
-            else
-            {
-                if (Mathf.Abs(rb2d.velocity.x) > movement.topSpeed)
-                {
-                    newVelocity.x = movement.topSpeed * (rb2d.velocity.x > 0f ? 1f : -1f);
-                }
-            }
-            rb2d.velocity = newVelocity;
-            currentMidairJumps++;
-        }
-        else if (enableWallClimbing && currentWallClimbTime < maxWallClimbTime && !collisions.IsGrounded && collisions.IsAgainstWall && (Input.GetAxisRaw("Horizontal") * (movement.isFacingRight ? 1f : -1f)) > 0f)
-        {
-            if (collisions.CheckDistanceToGround(minimumWallClimbHeight) || currentWallClimbTime > 0f)
-            {
-                if (currentAirStallTime > 0f && currentAirStallTime < maxAirStallTime) { currentAirStallTime = maxAirStallTime; }
-
-                rb2d.gravityScale = climbingGravity;
-                if (storedWallClimbSpeed <= 0f)
-                {
-                    storedWallClimbSpeed = Mathf.Max(buffers.highestSpeedBuffer, baseClimbingSpeed);
-                    rb2d.velocity = new Vector2(0f, storedWallClimbSpeed);
-                }
-
-                if (rb2d.velocity.y > 0f) { currentWallClimbTime += Time.deltaTime; }
-                else { currentWallClimbTime = maxWallClimbTime; rb2d.velocity = Vector2.zero; rb2d.gravityScale = fallingGravity; }
-            }
-        }
-        else if (enableWallClimbing && currentWallClimbTime > 0f && currentWallClimbTime < maxWallClimbTime)
-        {
-            currentWallClimbTime = maxWallClimbTime;
-            rb2d.gravityScale = fallingGravity;
-            postClimbDashTimeLeft = postClimbDashWindow;
-        }
-        else if (enableWallClimbing && currentWallClimbTime == maxWallClimbTime && postClimbDashTimeLeft > 0f)
-        {
-            if (Input.GetButton("Jump") && !collisions.IsAgainstWall && !collisions.IsGrounded && rb2d.velocity.y > 0f && (Input.GetAxisRaw("Horizontal") * (movement.isFacingRight ? 1f : -1f)) > 0f)
-            {
-                postClimbDashTimeLeft = 0f;
-
-                buffers.jumpBufferTimeLeft = 0f;
-                jumpIsHeld = true;
-                rb2d.gravityScale = risingGravity;
-
-                rb2d.velocity = new Vector2(storedWallClimbSpeed * Input.GetAxisRaw("Horizontal"), jumpSpeed);
-                currentMidairJumps = 0;
-                currentAirStallTime = 0f;
-            }
-            else if ((Input.GetAxisRaw("Horizontal") * (movement.isFacingRight ? 1f : -1f)) <= 0f || rb2d.velocity.y <= 0f || collisions.IsAgainstWall || collisions.IsGrounded)
-            {
-                postClimbDashTimeLeft = 0f;
-            }
-            else
-            {
-                if (postClimbDashTimeLeft > 0f)
-                {
-                    postClimbDashTimeLeft -= Time.deltaTime;
-                    if (postClimbDashTimeLeft < 0f)
-                    {
-                        postClimbDashTimeLeft = 0f;
-                    }
-                }
-            }
-        }
-        else
-        {
-            if (rb2d.velocity.y > 0f)
-            {
-                if (jumpIsHeld && !Input.GetButton("Jump"))
-                {
-                    jumpIsHeld = false;
-                }
-
-                if (enableVariableJumps && !jumpIsHeld)
-                {
-                    rb2d.velocity = new Vector2(rb2d.velocity.x, rb2d.velocity.y - (variableJumpDecay * Time.deltaTime));
-                }
-            }
-            else
-            {
-                jumpIsHeld = false;
-
-                if (enableAirStalling && currentAirStallTime < maxAirStallTime && collisions.CheckDistanceToGround(minimumAirStallHeight) && Input.GetButton("Jump"))
-                {
-                    rb2d.gravityScale = 0f;
-                    rb2d.velocity = new Vector2(rb2d.velocity.x, -airStallSpeed);
-                    currentAirStallTime += Time.deltaTime;
-                }
-                else
-                {
-                    rb2d.gravityScale = fallingGravity;
-
-                    if (enableAirStalling && currentAirStallTime > 0f)
-                    {
-                        currentAirStallTime = maxAirStallTime;
-                    }
-
-                    if (rb2d.velocity.y < -fallSpeed)
-                    {
-                        rb2d.velocity = new Vector2(rb2d.velocity.x, -fallSpeed);
-                    }
-                }
-            }
-        }
     }
 
     private void UseAttack()
@@ -388,52 +163,52 @@ public class PlayerCtrl : MonoBehaviour
         movement.turningSpeed = p.turningSpeed;
 
         movement.changeFacingDirectionMidair = p.changeFacingDirectionMidair;
-        enableSpeedHopping = p.enableSpeedHopping;
-        jumpSpeed = p.jumpSpeed;
-        risingGravity = p.risingGravity;
-        fallingGravity = p.fallingGravity;
-        fallSpeed = p.fallSpeed;
+        jumping.enableSpeedHopping = p.enableSpeedHopping;
+        jumping.jumpSpeed = p.jumpSpeed;
+        jumping.risingGravity = p.risingGravity;
+        jumping.fallingGravity = p.fallingGravity;
+        jumping.fallSpeed = p.fallSpeed;
         movement.airAcceleration = p.airAcceleration;
         movement.airDeceleration = p.airDeceleration;
         movement.airTurningSpeed = p.airTurningSpeed;
 
-        enableVariableJumps = p.enableVariableJumps;
-        variableJumpDecay = p.variableJumpDecay;
+        jumping.enableVariableJumps = p.enableVariableJumps;
+        jumping.variableJumpDecay = p.variableJumpDecay;
 
-        enableAirStalling = p.enableAirStalling;
-        minimumAirStallHeight = p.minimumAirStallHeight;
-        airStallSpeed = p.airStallSpeed;
-        maxAirStallTime = p.maxAirStallTime;
+        jumping.enableAirStalling = p.enableAirStalling;
+        jumping.minimumAirStallHeight = p.minimumAirStallHeight;
+        jumping.airStallSpeed = p.airStallSpeed;
+        jumping.maxAirStallTime = p.maxAirStallTime;
 
-        if (enableAirStalling && currentAirStallTime > 0f && maxAirStallTime > 0f) { currentAirStallTime = maxAirStallTime; }
+        if (jumping.enableAirStalling && jumping.currentAirStallTime > 0f && jumping.maxAirStallTime > 0f) { jumping.currentAirStallTime = jumping.maxAirStallTime; }
 
-        enableWallClimbing = p.enableWallClimbing;
-        minimumWallClimbHeight = p.minimumWallClimbHeight;
-        baseClimbingSpeed = p.baseClimbingSpeed;
-        climbingGravity = p.climbingGravity;
-        maxWallClimbTime = p.maxWallClimbTime;
-        postClimbDashWindow = p.postClimbDashWindow;
+        jumping.enableWallClimbing = p.enableWallClimbing;
+        jumping.minimumWallClimbHeight = p.minimumWallClimbHeight;
+        jumping.baseClimbingSpeed = p.baseClimbingSpeed;
+        jumping.climbingGravity = p.climbingGravity;
+        jumping.maxWallClimbTime = p.maxWallClimbTime;
+        jumping.postClimbDashWindow = p.postClimbDashWindow;
 
-        if (enableWallClimbing)
+        if (jumping.enableWallClimbing)
         {
-            if (currentWallClimbTime > 0f && maxWallClimbTime > 0f) { currentWallClimbTime = maxWallClimbTime; }
-            if (storedWallClimbSpeed > 0f) { storedWallClimbSpeed = 0f; }
-            if (postClimbDashTimeLeft > 0f) { postClimbDashTimeLeft = 0f; }
+            if (jumping.currentWallClimbTime > 0f && jumping.maxWallClimbTime > 0f) { jumping.currentWallClimbTime = jumping.maxWallClimbTime; }
+            if (jumping.storedWallClimbSpeed > 0f) { jumping.storedWallClimbSpeed = 0f; }
+            if (jumping.postClimbDashTimeLeft > 0f) { jumping.postClimbDashTimeLeft = 0f; }
         }
 
-        enableWallJumping = p.enableWallJumping;
-        minimumWallJumpHeight = p.minimumWallJumpHeight;
-        wallSlideSpeed = p.wallSlideSpeed;
-        verticalWallJumpSpeed = p.verticalWallJumpSpeed;
-        horizontalWallJumpSpeed = p.horizontalWallJumpSpeed;
-        wallJumpCooldown = p.wallJumpCooldown;
+        jumping.enableWallJumping = p.enableWallJumping;
+        jumping.minimumWallJumpHeight = p.minimumWallJumpHeight;
+        jumping.wallSlideSpeed = p.wallSlideSpeed;
+        jumping.verticalWallJumpSpeed = p.verticalWallJumpSpeed;
+        jumping.horizontalWallJumpSpeed = p.horizontalWallJumpSpeed;
+        jumping.wallJumpCooldown = p.wallJumpCooldown;
 
-        maxMidairJumps = p.maxMidairJumps;
-        midairJumpSpeed = p.midairJumpSpeed;
-        forwardMidairJumpBonus = p.forwardMidairJumpBonus;
+        jumping.maxMidairJumps = p.maxMidairJumps;
+        jumping.midairJumpSpeed = p.midairJumpSpeed;
+        jumping.forwardMidairJumpBonus = p.forwardMidairJumpBonus;
 
-        enableRunningJumpBonus = p.enableRunningJumpBonus;
-        runningJumpMultiplier = p.runningJumpMultiplier;
+        jumping.enableRunningJumpBonus = p.enableRunningJumpBonus;
+        jumping.runningJumpMultiplier = p.runningJumpMultiplier;
     }
 
     private IEnumerator UseFireTackleCR()
@@ -465,7 +240,7 @@ public class PlayerCtrl : MonoBehaviour
 
         charSprite.color = Color.gray;
         if (collisions.IsAgainstWall || collisions.IsHeadbonking) { rb2d.velocity = ((Vector2.up + (Vector2.right * (movement.isFacingRight ? -1f : 1f))).normalized * fireTackleBonkKnockback); }
-        rb2d.gravityScale = fallingGravity;
+        rb2d.gravityScale = jumping.fallingGravity;
         float deceleration = Mathf.Abs(rb2d.velocity.x / fireTackleEndlag);
         float endlagTimer = fireTackleEndlag;
         while (endlagTimer > 0f)
@@ -492,22 +267,6 @@ public class PlayerCtrl : MonoBehaviour
         isFireTackleActive = false;
         StartCoroutine(AttackCooldownCR());
         StartCoroutine(FormChangeCooldownCR());
-        yield break;
-    }
-
-    private IEnumerator WallJumpCooldownCR()
-    {
-        if (!isWallJumpCooldownActive)
-        {
-            isWallJumpCooldownActive = true;
-            float currentWallJumpCooldownTimer = wallJumpCooldown;
-            while (rb2d.velocity.y > 0f || currentWallJumpCooldownTimer > 0f)
-            {
-                if (!isChangingForm) { currentWallJumpCooldownTimer -= Time.deltaTime; }
-                yield return null;
-            }
-            isWallJumpCooldownActive = false;
-        }
         yield break;
     }
 
@@ -551,7 +310,7 @@ public class PlayerCtrl : MonoBehaviour
 
         yield return new WaitForSeconds(formChangeTime);
 
-        rb2d.gravityScale = (prevVelocity.y > 0f ? risingGravity : fallingGravity);
+        rb2d.gravityScale = (prevVelocity.y > 0f ? jumping.risingGravity : jumping.fallingGravity);
         rb2d.velocity = prevVelocity;
 
         isChangingForm = false;

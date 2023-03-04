@@ -307,6 +307,7 @@ GameObject:
   - component: {fileID: 557060674}
   - component: {fileID: 557060676}
   - component: {fileID: 557060675}
+  - component: {fileID: 557060677}
   - component: {fileID: 557060669}
   - component: {fileID: 557060671}
   - component: {fileID: 557060672}
@@ -439,7 +440,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   collisions: {fileID: 0}
+  buffers: {fileID: 0}
   movement: {fileID: 0}
+  jumping: {fileID: 0}
   rb2d: {fileID: 0}
   charSprite: {fileID: 0}
   playerCamTarget: {fileID: 474523643}
@@ -448,43 +451,10 @@ MonoBehaviour:
   tempMageSprite: {fileID: 21300000, guid: 3009b818094062e4d87a85053164a2d8, type: 3}
   tempDragonSprite: {fileID: 21300000, guid: 7dca87747edad3f4cab78bc67b815376, type: 3}
   magicProjectilePrefab: {fileID: 9148520561799880786, guid: ae959d87d34d6184b954fdbb3a746883, type: 3}
-  fireProjectilePrefab: {fileID: 5672963330781991619, guid: 9f0118bd84b2a464b8cbb39359e6f5c6, type: 3}
   projectileSpawnPoint: {fileID: 2146679145}
   startingMode: 0
-  enableSpeedHopping: 1
-  jumpSpeed: 8.5
-  risingGravity: 1.25
-  fallingGravity: 2.5
-  fallSpeed: 8
-  enableVariableJumps: 1
-  variableJumpDecay: 0.5
-  enableAirStalling: 1
-  minimumAirStallHeight: 1
-  airStallSpeed: 0.75
-  maxAirStallTime: 3
-  enableWallClimbing: 0
-  minimumWallClimbHeight: 0
-  baseClimbingSpeed: 0
-  climbingGravity: 0
-  maxWallClimbTime: 0
-  postClimbDashWindow: 0
-  enableWallJumping: 1
-  minimumWallJumpHeight: 1
-  wallSlideSpeed: 1.8
-  verticalWallJumpSpeed: 8.5
-  horizontalWallJumpSpeed: 5.25
-  wallJumpCooldown: 0.3
-  maxMidairJumps: 0
-  midairJumpSpeed: 0
-  forwardMidairJumpBonus: {x: 0, y: 0}
-  enableRunningJumpBonus: 1
-  runningJumpMultiplier: 1.5
   formChangeTime: 0.15
   formChangeCooldownTime: 0.4
-  formChangeBufferTime: 0.25
-  jumpBufferTime: 0.16666667
-  highestSpeedBufferTime: 0.2
-  coyoteTime: 0.2
   lookaheadDistance: 6.5
   fallingLookaheadDistance: 8
   fallingLookaheadThreshold: 1
@@ -499,21 +469,11 @@ MonoBehaviour:
   fireTackleBaseDuration: 0.45
   fireTackleEndlag: 0.4
   fireTackleEndlagCancel: 0.2
-  jumpIsHeld: 0
-  currentAirStallTime: 0
-  currentWallClimbTime: 0
-  currentMidairJumps: 0
+  currentMode: 0
   isChangingForm: 0
-  isWallJumpCooldownActive: 0
   isFormChangeCooldownActive: 0
   isAttackCooldownActive: 0
   isFireTackleActive: 0
-  formChangeBufferTimeLeft: 0
-  jumpBufferTimeLeft: 0
-  highestSpeedBuffer: 0
-  storedWallClimbSpeed: 0
-  postClimbDashTimeLeft: 0
-  coyoteTimeLeft: 0
 --- !u!114 &557060674
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -582,6 +542,53 @@ MonoBehaviour:
   jumpBufferTimeLeft: 0
   highestSpeedBuffer: 0
   coyoteTimeLeft: 0
+--- !u!114 &557060677
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 557060668}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3655f0ef20117314e98d8ddcf69096c2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enableSpeedHopping: 1
+  jumpSpeed: 8.5
+  risingGravity: 1.25
+  fallingGravity: 2.5
+  fallSpeed: 8
+  enableVariableJumps: 1
+  variableJumpDecay: 0.5
+  jumpIsHeld: 0
+  enableAirStalling: 1
+  minimumAirStallHeight: 1
+  airStallSpeed: 0.75
+  maxAirStallTime: 3
+  currentAirStallTime: 0
+  currentWallClimbTime: 0
+  currentMidairJumps: 0
+  enableWallClimbing: 0
+  minimumWallClimbHeight: 0
+  baseClimbingSpeed: 0
+  climbingGravity: 0
+  maxWallClimbTime: 0
+  postClimbDashWindow: 0
+  storedWallClimbSpeed: 0
+  postClimbDashTimeLeft: 0
+  enableWallJumping: 1
+  minimumWallJumpHeight: 1
+  wallSlideSpeed: 1.8
+  verticalWallJumpSpeed: 8.5
+  horizontalWallJumpSpeed: 5.25
+  wallJumpCooldown: 0.3
+  isWallJumpCooldownActive: 0
+  maxMidairJumps: 0
+  midairJumpSpeed: 0
+  forwardMidairJumpBonus: {x: 0, y: 0}
+  enableRunningJumpBonus: 1
+  runningJumpMultiplier: 1.5
 --- !u!1 &736087748
 GameObject:
   m_ObjectHideFlags: 0
