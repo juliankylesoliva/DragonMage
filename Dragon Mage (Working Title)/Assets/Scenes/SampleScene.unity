@@ -305,6 +305,7 @@ GameObject:
   - component: {fileID: 557060670}
   - component: {fileID: 557060673}
   - component: {fileID: 557060674}
+  - component: {fileID: 557060675}
   - component: {fileID: 557060669}
   - component: {fileID: 557060671}
   - component: {fileID: 557060672}
@@ -436,12 +437,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79f9f941848f6dd499e2af1d3a9b3bf4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerCollisions: {fileID: 0}
   rb2d: {fileID: 0}
   charSprite: {fileID: 0}
-  groundCheckObj: {fileID: 1380840842}
-  wallCheckR: {fileID: 1183709775}
-  wallCheckL: {fileID: 1923393745}
-  headbonkCheckObj: {fileID: 1784737399}
   playerCamTarget: {fileID: 474523643}
   mageProperties: {fileID: 11400000, guid: 3058d3c16efbfc74d91b608d70e9fae5, type: 2}
   dragonProperties: {fileID: 11400000, guid: 30fff2eeae6f929478e55877d487543c, type: 2}
@@ -451,12 +449,6 @@ MonoBehaviour:
   fireProjectilePrefab: {fileID: 5672963330781991619, guid: 9f0118bd84b2a464b8cbb39359e6f5c6, type: 3}
   projectileSpawnPoint: {fileID: 2146679145}
   startingMode: 0
-  groundCheckRadius: 0.05
-  wallCheckRadius: 0.1
-  headbonkCheckRadius: 0.25
-  groundLayer:
-    serializedVersion: 2
-    m_Bits: 64
   acceleration: 0.65
   deceleration: 0.1
   topSpeed: 4.5
@@ -518,6 +510,21 @@ MonoBehaviour:
   fireTackleBaseDuration: 0.45
   fireTackleEndlag: 0.4
   fireTackleEndlagCancel: 0.2
+  jumpIsHeld: 0
+  currentAirStallTime: 0
+  currentWallClimbTime: 0
+  currentMidairJumps: 0
+  isChangingForm: 0
+  isWallJumpCooldownActive: 0
+  isFormChangeCooldownActive: 0
+  isAttackCooldownActive: 0
+  isFireTackleActive: 0
+  formChangeBufferTimeLeft: 0
+  jumpBufferTimeLeft: 0
+  highestSpeedBuffer: 0
+  storedWallClimbSpeed: 0
+  postClimbDashTimeLeft: 0
+  coyoteTimeLeft: 0
   isFacingRight: 1
 --- !u!114 &557060674
 MonoBehaviour:
@@ -546,6 +553,27 @@ MonoBehaviour:
   isTouchingWallR: 0
   isTouchingWallL: 0
   isHeadbonking: 0
+--- !u!114 &557060675
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 557060668}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 12817d55cf24f6b4fa1898d75838a629, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  changeFacingDirectionMidair: 1
+  acceleration: 0.65
+  deceleration: 0.1
+  topSpeed: 4.5
+  turningSpeed: 0.1
+  airAcceleration: 0.8
+  airDeceleration: 0.6
+  airTurningSpeed: 0.45
+  isFacingRight: 1
 --- !u!1 &736087748
 GameObject:
   m_ObjectHideFlags: 0
@@ -8030,7 +8058,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1784737398}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.25, z: 0}
+  m_LocalPosition: {x: 0, y: 0.28125, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

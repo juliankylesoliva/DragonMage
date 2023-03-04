@@ -58,13 +58,13 @@ public class PlayerCollisions : MonoBehaviour
 
         isTouchingWallR = (collidersR.Length > 0);
         isTouchingWallL = (collidersL.Length > 0);
-        isAgainstWall = (player.isFacingRight ? collidersR.Length > 0 : collidersL.Length > 0);
+        isAgainstWall = (player.movement.isFacingRight ? collidersR.Length > 0 : collidersL.Length > 0);
     }
 
     private void HeadbonkCheck()
     {
         isHeadbonking = false;
-        Collider2D[] colliders = Physics2D.OverlapCircleAll(headbonkCheckObj.position + (Vector3.right * (1f / 32f) * (player.isFacingRight ? 1f : -1f)), headbonkCheckRadius, groundLayer);
+        Collider2D[] colliders = Physics2D.OverlapCircleAll(headbonkCheckObj.position + (Vector3.right * (1f / 32f) * (player.movement.isFacingRight ? 1f : -1f)), headbonkCheckRadius, groundLayer);
         isHeadbonking = (colliders.Length > 0);
     }
 
