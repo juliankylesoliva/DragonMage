@@ -23,10 +23,9 @@ public class StateMachine
     public FallingState fallingState;
     public GlidingState glidingState;
     public WallSlidingState wallSlidingState;
-    public WallJumpingState wallJumpingState;
     public WallClimbingState wallClimbingState;
     public WallVaultingState wallVaultingState;
-    public AttackingState attackingState;
+    public FireTacklingState fireTacklingState;
     public FormChangingState formChangingState;
 
     public StateMachine(PlayerCtrl player)
@@ -37,10 +36,9 @@ public class StateMachine
         fallingState = new FallingState(player);
         glidingState = new GlidingState(player);
         wallSlidingState = new WallSlidingState(player);
-        wallJumpingState = new WallJumpingState(player);
         wallClimbingState = new WallClimbingState(player);
         wallVaultingState = new WallVaultingState(player);
-        attackingState = new AttackingState(player);
+        fireTacklingState = new FireTacklingState(player);
         formChangingState = new FormChangingState(player);
     }
 
@@ -60,7 +58,7 @@ public class StateMachine
 
     public void Update()
     {
-        if (CurrentState != null) { CurrentState.Update(); Debug.Log(CurrentState.name); }
+        if (CurrentState != null) { CurrentState.Update(); }
     }
 }
 
@@ -80,7 +78,7 @@ public abstract class State : IState
 
     protected bool CheckFormChangeInput()
     {
-        if (!player.form.isFormChangeCooldownActive && !player.isAttackCooldownActive && !player.form.isChangingForm && !player.isFireTackleActive && player.buffers.formChangeBufferTimeLeft > 0f)
+        if (!player.form.isFormChangeCooldownActive && !player.attacks.isAttackCooldownActive && !player.form.isChangingForm && !player.attacks.isFireTackleActive && player.buffers.formChangeBufferTimeLeft > 0f)
         {
             player.stateMachine.TransitionTo(player.stateMachine.formChangingState);
             return true;
@@ -142,9 +140,10 @@ public abstract class State : IState
 
     protected bool CheckFireTackleInput()
     {
-        if (player.form.currentMode == CharacterMode.DRAGON && !player.isAttackCooldownActive && Input.GetButtonDown("Attack"))
+        player.attacks.UseAttack();
+        if (player.attacks.isFireTackleActive)
         {
-            player.stateMachine.TransitionTo(player.stateMachine.attackingState);
+            player.stateMachine.TransitionTo(player.stateMachine.fireTacklingState);
             return true;
         }
         return false;
@@ -202,7 +201,7 @@ public class StandingState : State
 
     public override void Update()
     {
-        if (CheckFormChangeInput() || CheckRunInput() || CheckJumpInput() || CheckFireTackleInput() || CheckSuddenRise() || CheckSuddenFall()) { return; }
+        if (CheckFormChangeInput() || CheckFireTackleInput() || CheckRunInput() || CheckJumpInput() || CheckFireTackleInput() || CheckSuddenRise() || CheckSuddenFall()) { return; }
     }
 
     public override void Exit()
@@ -224,7 +223,7 @@ public class RunningState : State
     {
         player.movement.Movement();
         player.movement.FacingDirection();
-        if (CheckFormChangeInput() || CheckIfStopped() || CheckSuddenFall() || CheckJumpInput() || CheckFireTackleInput()) { return; }
+        if (CheckFormChangeInput() || CheckFireTackleInput() || CheckIfStopped() || CheckSuddenFall() || CheckJumpInput() || CheckFireTackleInput()) { return; }
     }
 
     public override void Exit()
@@ -257,8 +256,7 @@ public class JumpingState : State
         player.movement.Movement();
         player.movement.FacingDirection();
         player.jumping.GroundJumpUpdate();
-
-        if (CheckFormChangeInput() || CheckMidairJumpInput() || CheckIfWallClimbing() || CheckIfWallSliding() || CheckIfFalling()) { return; }
+        if (CheckFormChangeInput() || CheckFireTackleInput() || CheckMidairJumpInput() || CheckIfWallClimbing() || CheckIfWallSliding() || CheckIfFalling()) { return; }
     }
 
     public override void Exit()
@@ -291,7 +289,7 @@ public class FallingState : State
     {
         player.movement.Movement();
         player.movement.FacingDirection();
-        if (CheckFormChangeInput() || CheckRunInput() || CheckStationaryLanding() || CheckJumpInput() || CheckGlideInput() || CheckMidairJumpInput() || CheckIfWallClimbing() || CheckIfWallSliding()) { return; }
+        if (CheckFormChangeInput() || CheckFireTackleInput() || CheckRunInput() || CheckStationaryLanding() || CheckJumpInput() || CheckGlideInput() || CheckMidairJumpInput() || CheckIfWallClimbing() || CheckIfWallSliding()) { return; }
     }
 
     public override void Exit()
@@ -313,7 +311,7 @@ public class GlidingState : State
     {
         player.movement.Movement();
         player.jumping.GlideUpdate();
-        if (CheckFormChangeInput() || CheckIfWallSliding() || CheckGlideCancel()) { return; }
+        if (CheckFormChangeInput() || CheckFireTackleInput() || CheckIfWallSliding() || CheckGlideCancel()) { return; }
     }
 
     public override void Exit()
@@ -343,7 +341,7 @@ public class WallSlidingState : State
 
     public override void Update()
     {
-        if (CheckFormChangeInput() || CheckIfWallJumping() || CheckWallSlideCancel()) { return; }
+        if (CheckFormChangeInput() || CheckFireTackleInput() || CheckIfWallJumping() || CheckWallSlideCancel()) { return; }
     }
 
     public override void Exit()
@@ -355,7 +353,8 @@ public class WallSlidingState : State
     {
         if (player.jumping.CanWallJump())
         {
-            player.stateMachine.TransitionTo(player.stateMachine.wallJumpingState);
+            player.jumping.WallJumpStart();
+            player.stateMachine.TransitionTo(player.stateMachine.jumpingState);
             return true;
         }
         return false;
@@ -366,38 +365,6 @@ public class WallSlidingState : State
         if (player.jumping.IsWallSlideCanceled())
         {
             player.stateMachine.TransitionTo(player.stateMachine.fallingState);
-            return true;
-        }
-        return false;
-    }
-}
-
-public class WallJumpingState : State
-{
-    public WallJumpingState(PlayerCtrl player) : base(player) { name = "WallJumping"; }
-
-    public override void Enter()
-    {
-        player.jumping.WallJumpStart();
-    }
-
-    public override void Update()
-    {
-        player.jumping.GroundJumpUpdate();
-        if (CheckFormChangeInput() || CheckWallJumpCooldown()) { return; }
-        
-    }
-
-    public override void Exit()
-    {
-
-    }
-
-    private bool CheckWallJumpCooldown()
-    {
-        if (!player.jumping.isWallJumpCooldownActive)
-        {
-            player.stateMachine.TransitionTo((player.rb2d.velocity.y > 0f ? player.stateMachine.jumpingState : player.stateMachine.fallingState));
             return true;
         }
         return false;
@@ -416,7 +383,7 @@ public class WallClimbingState : State
     public override void Update()
     {
         player.jumping.WallClimbUpdate();
-        if (CheckFormChangeInput() || CheckWallVault() || CheckWallClimbCancel()) { return; }
+        if (CheckFormChangeInput() || CheckFireTackleInput() || CheckWallVault() || CheckWallClimbCancel()) { return; }
     }
 
     public override void Exit()
@@ -459,7 +426,7 @@ public class WallVaultingState : State
     public override void Update()
     {
         player.jumping.WallVaultUpdate();
-        if (CheckFormChangeInput() || CheckWallVaultDash() || CheckWallVaultCancel()) { return; }
+        if (CheckFormChangeInput() || CheckFireTackleInput() || CheckWallVaultDash() || CheckWallVaultCancel()) { return; }
     }
 
     public override void Exit()
@@ -489,23 +456,39 @@ public class WallVaultingState : State
     }
 }
 
-public class AttackingState : State
+public class FireTacklingState : State
 {
-    public AttackingState(PlayerCtrl player) : base(player) { name = "Attacking"; }
+    public FireTacklingState(PlayerCtrl player) : base(player) { name = "FireTackling"; }
 
     public override void Enter()
     {
-
+        
     }
 
     public override void Update()
     {
-
+        if (CheckFireTackleFinished()) { return; }
     }
 
     public override void Exit()
     {
 
+    }
+
+    private bool CheckFireTackleFinished()
+    {
+        if (!player.attacks.isFireTackleActive)
+        {
+            State nextState;
+            if (Input.GetAxisRaw("Horizontal") != 0f) { nextState = player.stateMachine.runningState; }
+            else if (player.rb2d.velocity.y > 0f) { nextState = player.stateMachine.jumpingState; }
+            else if (player.rb2d.velocity.y <= 0f) { nextState = player.stateMachine.fallingState; }
+            else { nextState = player.stateMachine.standingState; }
+
+            player.stateMachine.TransitionTo(nextState);
+            return true;
+        }
+        return false;
     }
 }
 
@@ -529,9 +512,6 @@ public class FormChangingState : State
                     break;
                 case "WallSliding":
                     player.stateMachine.TransitionTo((player.jumping.CanWallClimb() ? player.stateMachine.wallClimbingState : player.stateMachine.fallingState));
-                    break;
-                case "WallJumping":
-                    player.stateMachine.TransitionTo((player.rb2d.velocity.y > 0f ? player.stateMachine.jumpingState : player.stateMachine.fallingState));
                     break;
                 case "WallClimbing":
                     player.stateMachine.TransitionTo((player.jumping.CanWallSlide() ? player.stateMachine.wallSlidingState : player.stateMachine.fallingState));

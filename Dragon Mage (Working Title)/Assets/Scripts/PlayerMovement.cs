@@ -24,13 +24,13 @@ public class PlayerMovement : MonoBehaviour
 
     public void FacingDirection()
     {
-        if (player.form.isChangingForm || player.isFireTackleActive || player.jumping.isWallJumpCooldownActive || (!changeFacingDirectionMidair && !player.collisions.IsGrounded) || (player.jumping.currentAirStallTime > 0f && player.jumping.currentAirStallTime < player.jumping.maxAirStallTime)) { return; }
+        if (player.form.isChangingForm || player.attacks.isFireTackleActive || player.jumping.isWallJumpCooldownActive || (!changeFacingDirectionMidair && !player.collisions.IsGrounded) || (player.jumping.currentAirStallTime > 0f && player.jumping.currentAirStallTime < player.jumping.maxAirStallTime)) { return; }
         SetFacingDirection(Input.GetAxisRaw("Horizontal"));
     }
 
     public void Movement()
     {
-        if (player.form.isChangingForm || player.jumping.isWallJumpCooldownActive || player.isFireTackleActive) { return; }
+        if (player.form.isChangingForm || player.jumping.isWallJumpCooldownActive || player.attacks.isFireTackleActive) { return; }
 
         if (Input.GetAxisRaw("Horizontal") != 0f)
         {

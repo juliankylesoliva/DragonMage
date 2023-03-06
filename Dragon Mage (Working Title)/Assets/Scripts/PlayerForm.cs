@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum CharacterMode { MAGE, DRAGON }
+
 public class PlayerForm : MonoBehaviour
 {
     PlayerCtrl player;
@@ -32,7 +34,7 @@ public class PlayerForm : MonoBehaviour
 
     public void FormChange()
     {
-        if (!isFormChangeCooldownActive && !player.isAttackCooldownActive && !isChangingForm && !player.isFireTackleActive && player.buffers.formChangeBufferTimeLeft > 0f)
+        if (!isFormChangeCooldownActive && !player.attacks.isAttackCooldownActive && !isChangingForm && !player.attacks.isFireTackleActive && player.buffers.formChangeBufferTimeLeft > 0f)
         {
             player.buffers.formChangeBufferTimeLeft = 0f;
 

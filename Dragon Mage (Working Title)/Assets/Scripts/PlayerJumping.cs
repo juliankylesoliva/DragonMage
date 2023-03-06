@@ -172,7 +172,7 @@ public class PlayerJumping : MonoBehaviour
 
     public bool IsWallSlideCanceled()
     {
-        return (!player.collisions.CheckDistanceToGround(minimumWallJumpHeight) || (Input.GetAxisRaw("Horizontal") * (player.movement.isFacingRight ? 1f : -1f)) <= 0f);
+        return (!player.collisions.IsAgainstWall || !player.collisions.CheckDistanceToGround(minimumWallJumpHeight) || (Input.GetAxisRaw("Horizontal") * (player.movement.isFacingRight ? 1f : -1f)) <= 0f);
     }
 
     public bool CanWallJump()
@@ -226,7 +226,7 @@ public class PlayerJumping : MonoBehaviour
 
     public bool IsWallClimbCanceled()
     {
-        return (currentWallClimbTime <= 0f || player.rb2d.velocity.y <= 0f || (Input.GetAxisRaw("Horizontal") * (player.movement.isFacingRight ? 1f : -1f)) <= 0f);
+        return (currentWallClimbTime <= 0f || player.rb2d.velocity.y <= 0f || !player.collisions.IsAgainstWall || (Input.GetAxisRaw("Horizontal") * (player.movement.isFacingRight ? 1f : -1f)) <= 0f);
     }
 
     public bool CanStartWallVault()
