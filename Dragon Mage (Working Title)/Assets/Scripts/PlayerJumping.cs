@@ -210,6 +210,7 @@ public class PlayerJumping : MonoBehaviour
 
     public void WallClimbUpdate()
     {
+        player.rb2d.velocity = new Vector2(0f, player.rb2d.velocity.y);
         currentWallClimbTime += Time.deltaTime;
     }
 

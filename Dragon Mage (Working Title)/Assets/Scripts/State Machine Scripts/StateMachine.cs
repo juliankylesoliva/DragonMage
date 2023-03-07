@@ -169,6 +169,16 @@ public abstract class State : IState
         return false;
     }
 
+    protected bool CheckSuddenMovement()
+    {
+        if (player.rb2d.velocity.x != 0f)
+        {
+            player.stateMachine.TransitionTo(player.stateMachine.runningState);
+            return true;
+        }
+        return false;
+    }
+
     protected bool CheckIfWallSliding()
     {
         if (player.jumping.CanWallSlide())
@@ -201,7 +211,7 @@ public class StandingState : State
 
     public override void Update()
     {
-        if (CheckFormChangeInput() || CheckFireTackleInput() || CheckRunInput() || CheckJumpInput() || CheckFireTackleInput() || CheckSuddenRise() || CheckSuddenFall()) { return; }
+        if (CheckFormChangeInput() || CheckFireTackleInput() || CheckRunInput() || CheckJumpInput() || CheckFireTackleInput() || CheckSuddenRise() || CheckSuddenFall() || CheckSuddenMovement()) { return; }
     }
 
     public override void Exit()

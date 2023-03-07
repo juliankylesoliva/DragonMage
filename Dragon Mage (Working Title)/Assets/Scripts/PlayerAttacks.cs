@@ -7,6 +7,7 @@ public class PlayerAttacks : MonoBehaviour
     PlayerCtrl player;
 
     [SerializeField] GameObject magicProjectilePrefab;
+    [SerializeField] GameObject fireProjectilePrefab;
     [SerializeField] Transform projectileSpawnPoint;
 
     [SerializeField] float attackCooldown = 1f;
@@ -86,6 +87,12 @@ public class PlayerAttacks : MonoBehaviour
 
         player.charSprite.color = Color.gray;
         if (player.collisions.IsAgainstWall || player.collisions.IsHeadbonking) { player.rb2d.velocity = ((Vector2.up + (Vector2.right * (player.movement.isFacingRight ? -1f : 1f))).normalized * fireTackleBonkKnockback); }
+        else
+        {
+            GameObject objTemp = Instantiate(fireProjectilePrefab, projectileSpawnPoint.position, Quaternion.identity);
+            FireMissile fireTemp = objTemp.GetComponent<FireMissile>();
+            if (fireTemp != null) { fireTemp.Setup(player.movement.isFacingRight, Mathf.Abs(player.rb2d.velocity.x)); }
+        }
         player.rb2d.gravityScale = player.jumping.fallingGravity;
         float deceleration = Mathf.Abs(player.rb2d.velocity.x / fireTackleEndlag);
         float endlagTimer = fireTackleEndlag;

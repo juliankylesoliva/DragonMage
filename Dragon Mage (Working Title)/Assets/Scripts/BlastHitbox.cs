@@ -7,7 +7,10 @@ public class BlastHitbox : MonoBehaviour
 {
     CircleCollider2D circle;
 
+    [SerializeField] LayerMask impassableLayer;
+
     private bool isArmed = false;
+    private float hitboxRadius = 0f;
     private float hitboxDuration = 0f;
     private float knockbackStrength = 0f;
 
@@ -34,11 +37,14 @@ public class BlastHitbox : MonoBehaviour
         hitboxDuration = duration;
         knockbackStrength = strength;
         circle.radius = radius;
+        hitboxRadius = radius;
     }
 
     void OnTriggerEnter2D(Collider2D other)
     {
         Rigidbody2D rb = other.gameObject.GetComponent<Rigidbody2D>();
+        BreakableBlock block = other.gameObject.GetComponent<BreakableBlock>();
+
         if (rb != null && rb.bodyType == RigidbodyType2D.Dynamic)
         {
             Vector2 velocityVec = (other.transform.position - this.transform.position);
@@ -47,5 +53,17 @@ public class BlastHitbox : MonoBehaviour
             velocityVec *= (knockbackStrength / (1f + distance));
             rb.velocity += velocityVec;
         }
+        else if (block != null && (block.breakableBy == BreakableType.ANY || block.breakableBy == BreakableType.MAGIC))
+        {
+            Vector3 direction = (other.transform.position - this.transform.position);
+            float raycastDistance = Mathf.Min(hitboxRadius, direction.magnitude);
+            RaycastHit2D hit = Physics2D.Raycast(this.transform.position, direction.normalized, Mathf.Infinity, impassableLayer);
+
+            if (hit.distance >= raycastDistance)
+            {
+                block.onBreak.Invoke();
+            }
+        }
+        else { /* Nothing */ }
     }
 }
