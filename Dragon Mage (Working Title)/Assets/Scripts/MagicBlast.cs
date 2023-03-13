@@ -55,13 +55,15 @@ public class MagicBlast : MonoBehaviour
 
     public void Setup(bool isGoingRight = true, float horizontalVelocity = 0f, float verticalAxis = 0f)
     {
-        rb2d.velocity = new Vector2((isGoingRight ? horizontalLaunchSpeed : -horizontalLaunchSpeed) * (verticalAxis != 0f ? 0.25f : 1f) + (horizontalVelocity * 0.5f), verticalLaunchSpeed * (verticalAxis > 0f ? 2f : 1f) * (verticalAxis < 0f ? -0.5f : 1f));
+        rb2d.velocity = new Vector2((isGoingRight ? horizontalLaunchSpeed : -horizontalLaunchSpeed) * (verticalAxis != 0f ? 0.25f : 1f) + (horizontalVelocity * 0.5f), verticalLaunchSpeed * (verticalAxis > 0f ? 2.5f : 1f) * (verticalAxis < 0f ? -0.5f : 1f));
         rb2d.AddTorque(rotationSpeed * (isGoingRight ? -1f : 1f) * (verticalAxis != 0f ? 0.5f : 1f));
     }
 
-    public void AddChargedState()
+    public void AddChargedState(float launchSpeed)
     {
         isCharged = true;
+        rb2d.velocity = new Vector2(rb2d.velocity.x, launchSpeed * 2f);
+        fuseTimeLeft = fuseTime;
         spriteRenderer.color = chargedColor;
     }
 }

@@ -46,7 +46,7 @@ public class FireMissile : MonoBehaviour
 
         if (tempBlast != null)
         {
-            tempBlast.AddChargedState();
+            tempBlast.AddChargedState(moveSpeed);
         }
         else if (block != null && (block.breakableBy == BreakableType.ANY || block.breakableBy == BreakableType.FIRE))
         {
