@@ -122,6 +122,7 @@ public class PlayerJumping : MonoBehaviour
 
     public void GlideUpdate()
     {
+        player.rb2d.velocity = new Vector2(player.rb2d.velocity.x, -airStallSpeed);
         currentAirStallTime += Time.deltaTime;
     }
 

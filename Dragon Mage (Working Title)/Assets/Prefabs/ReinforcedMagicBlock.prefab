@@ -55,18 +55,22 @@ PrefabInstance:
     - target: {fileID: 8293150372936092830, guid: 2aceab037d7a4bf45965be3e860068ea, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: 450c0e425573b8f4387af6435e2a7b02, type: 3}
+      objectReference: {fileID: 21300000, guid: 28e2f552e796d3c4394dd7c49409f4bd, type: 3}
     - target: {fileID: 8293150372936092830, guid: 2aceab037d7a4bf45965be3e860068ea, type: 3}
       propertyPath: m_SortingOrder
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8293150372936092831, guid: 2aceab037d7a4bf45965be3e860068ea, type: 3}
       propertyPath: breakableBy
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8293150372936092831, guid: 2aceab037d7a4bf45965be3e860068ea, type: 3}
+      propertyPath: isReinforced
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8293150372936092834, guid: 2aceab037d7a4bf45965be3e860068ea, type: 3}
       propertyPath: m_Name
-      value: BreakableFireBlock
+      value: ReinforcedMagicBlock
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_AddedGameObjects: []

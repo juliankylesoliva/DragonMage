@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum AttackState { NOTHING, STARTUP, ACTIVE, ENDLAG }
+
 public class PlayerAttacks : MonoBehaviour
 {
     PlayerCtrl player;
@@ -9,7 +11,7 @@ public class PlayerAttacks : MonoBehaviour
     [SerializeField] GameObject magicProjectilePrefab;
     [SerializeField] GameObject fireProjectilePrefab;
     [SerializeField] Transform projectileSpawnPoint;
-
+    
     [SerializeField] float attackCooldown = 1f;
     [SerializeField] float fireTackleBaseHorizontalSpeed = 6f;
     [SerializeField] float fireTackleVerticalSteeringSpeed = 2f;
@@ -22,11 +24,18 @@ public class PlayerAttacks : MonoBehaviour
     [HideInInspector] public bool isAttackCooldownActive = false;
     [HideInInspector] public bool isFireTackleActive = false;
 
+    public AttackState currentAttackState { get; private set; }
+
     private MagicBlast projectileRef = null;
 
     void Awake()
     {
         player = this.gameObject.GetComponent<PlayerCtrl>();
+    }
+
+    void Start()
+    {
+        currentAttackState = AttackState.NOTHING;
     }
 
     public void UseAttack()
@@ -63,6 +72,7 @@ public class PlayerAttacks : MonoBehaviour
         if (isFireTackleActive || isAttackCooldownActive) { yield break; }
 
         isFireTackleActive = true;
+        currentAttackState = AttackState.STARTUP;
 
         player.charSprite.color = Color.yellow;
         float windupTimer = fireTackleStartup;
@@ -74,6 +84,7 @@ public class PlayerAttacks : MonoBehaviour
             yield return null;
         }
 
+        currentAttackState = AttackState.ACTIVE;
         player.charSprite.color = Color.red;
         player.rb2d.gravityScale = 0f;
         player.rb2d.velocity = new Vector2((Mathf.Abs(player.rb2d.velocity.x) + fireTackleBaseHorizontalSpeed) * (player.movement.isFacingRight ? 1f : -1f), 0f);
@@ -85,6 +96,7 @@ public class PlayerAttacks : MonoBehaviour
             yield return null;
         }
 
+        currentAttackState = AttackState.ENDLAG;
         player.charSprite.color = Color.gray;
         if (player.collisions.IsAgainstWall || player.collisions.IsHeadbonking) { player.rb2d.velocity = ((Vector2.up + (Vector2.right * (player.movement.isFacingRight ? -1f : 1f))).normalized * fireTackleBonkKnockback); }
         else
@@ -116,6 +128,7 @@ public class PlayerAttacks : MonoBehaviour
             yield return null;
         }
 
+        currentAttackState = AttackState.NOTHING;
         player.charSprite.color = Color.white;
         isFireTackleActive = false;
         StartCoroutine(AttackCooldownCR());

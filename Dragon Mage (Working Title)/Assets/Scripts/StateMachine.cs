@@ -143,6 +143,7 @@ public abstract class State : IState
         player.attacks.UseAttack();
         if (player.attacks.isFireTackleActive)
         {
+            if (!player.collisions.IsGrounded) { player.rb2d.gravityScale = (player.rb2d.velocity.y > 0f ? player.jumping.risingGravity : player.jumping.fallingGravity); }
             player.stateMachine.TransitionTo(player.stateMachine.fireTacklingState);
             return true;
         }
@@ -226,7 +227,10 @@ public class RunningState : State
 
     public override void Enter()
     {
-        player.jumping.LandingReset();
+        if (player.stateMachine.PreviousState == player.stateMachine.fallingState || player.stateMachine.PreviousState == player.stateMachine.jumpingState)
+        {
+            player.jumping.LandingReset();
+        }
     }
 
     public override void Update()
@@ -490,7 +494,7 @@ public class FireTacklingState : State
         if (!player.attacks.isFireTackleActive)
         {
             State nextState;
-            if (Input.GetAxisRaw("Horizontal") != 0f) { nextState = player.stateMachine.runningState; }
+            if (player.collisions.IsGrounded && Input.GetAxisRaw("Horizontal") != 0f) { nextState = player.stateMachine.runningState; }
             else if (player.rb2d.velocity.y > 0f) { nextState = player.stateMachine.jumpingState; }
             else if (player.rb2d.velocity.y <= 0f) { nextState = player.stateMachine.fallingState; }
             else { nextState = player.stateMachine.standingState; }

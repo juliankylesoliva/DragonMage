@@ -40,10 +40,12 @@ public class BlastHitbox : MonoBehaviour
         hitboxRadius = radius;
     }
 
-    void OnTriggerEnter2D(Collider2D other)
+    void OnTriggerStay2D(Collider2D other)
     {
         Rigidbody2D rb = other.gameObject.GetComponent<Rigidbody2D>();
         BreakableBlock block = other.gameObject.GetComponent<BreakableBlock>();
+        BlastJumpHitbox jumpHitbox = other.gameObject.GetComponentInChildren<BlastJumpHitbox>();
+        PlayerCtrl player = other.gameObject.GetComponent<PlayerCtrl>();
 
         if (rb != null && rb.bodyType == RigidbodyType2D.Dynamic)
         {
@@ -53,7 +55,7 @@ public class BlastHitbox : MonoBehaviour
             velocityVec *= (knockbackStrength / (1f + distance));
             rb.velocity += velocityVec;
         }
-        else if (block != null && (block.breakableBy == BreakableType.ANY || block.breakableBy == BreakableType.MAGIC))
+        else if (block != null && !block.isReinforced && (block.breakableBy == BreakableType.ANY || block.breakableBy == BreakableType.MAGIC))
         {
             Vector3 direction = (other.transform.position - this.transform.position);
             float raycastDistance = Mathf.Min(hitboxRadius, direction.magnitude);
@@ -65,5 +67,10 @@ public class BlastHitbox : MonoBehaviour
             }
         }
         else { /* Nothing */ }
+
+        if (player != null && player.form.currentMode == CharacterMode.MAGE && jumpHitbox != null)
+        {
+            jumpHitbox.ActivateHitbox();
+        }
     }
 }
