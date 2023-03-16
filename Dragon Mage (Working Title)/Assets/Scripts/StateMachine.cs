@@ -262,7 +262,7 @@ public class JumpingState : State
 
     public override void Enter()
     {
-
+        
     }
 
     public override void Update()

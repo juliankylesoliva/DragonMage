@@ -80,12 +80,12 @@ public class PlayerBuffers : MonoBehaviour
         {
             float currentHorizontalSpeed = (player.jumping.currentWallClimbTime > 0f && player.jumping.currentWallClimbTime < player.jumping.maxWallClimbTime ? Mathf.Max(player.jumping.storedWallClimbSpeed, Mathf.Abs(player.rb2d.velocity.x)) : Mathf.Abs(player.rb2d.velocity.x));
 
-            if (currentHorizontalSpeed > highestSpeedBuffer)
+            if (currentHorizontalSpeed >= highestSpeedBuffer)
             {
                 highestSpeedBuffer = currentHorizontalSpeed;
                 highestSpeedBufferTimeLeft = highestSpeedBufferTime;
             }
-            else if (currentHorizontalSpeed < highestSpeedBuffer)
+            else
             {
                 if (!player.form.isChangingForm)
                 {
@@ -98,7 +98,6 @@ public class PlayerBuffers : MonoBehaviour
                     }
                 }
             }
-            else { /* Nothing */ }
 
             yield return null;
         }

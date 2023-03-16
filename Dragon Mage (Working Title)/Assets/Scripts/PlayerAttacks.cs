@@ -15,6 +15,7 @@ public class PlayerAttacks : MonoBehaviour
     [SerializeField] float attackCooldown = 1f;
     [SerializeField] float fireTackleBaseHorizontalSpeed = 6f;
     [SerializeField] float fireTackleVerticalSteeringSpeed = 2f;
+    [SerializeField] float fireTackleDivingSpeed = 16f;
     [SerializeField] float fireTackleBonkKnockback = 3f;
     [SerializeField] float fireTackleStartup = 0.25f;
     [SerializeField] float fireTackleBaseDuration = 0.5f;
@@ -91,7 +92,45 @@ public class PlayerAttacks : MonoBehaviour
         float attackTimer = fireTackleBaseDuration;
         while (attackTimer > 0f && !player.collisions.IsAgainstWall && !player.collisions.IsHeadbonking)
         {
-            if (!player.collisions.IsGrounded) { player.rb2d.velocity += (Vector2.up * (fireTackleVerticalSteeringSpeed * Input.GetAxisRaw("Vertical") * Time.deltaTime)); }
+            if (!player.collisions.IsGrounded)
+            {
+                float verticalAxis = Input.GetAxisRaw("Vertical");
+                if (verticalAxis > 0f)
+                {
+                    if (player.rb2d.velocity.y < 0f) { player.rb2d.velocity = new Vector2(player.rb2d.velocity.x, 0f); }
+                    player.rb2d.velocity += (Vector2.up * fireTackleVerticalSteeringSpeed * Time.deltaTime);
+                }
+                else if (verticalAxis < 0f)
+                {
+                    if (player.rb2d.velocity.y >= 0f)
+                    {
+                        player.rb2d.velocity = new Vector2(player.rb2d.velocity.x, -fireTackleDivingSpeed);
+                    }
+                }
+                else
+                {
+                    if (player.rb2d.velocity.y != 0f)
+                    {
+                        if (player.rb2d.velocity.y > 0f)
+                        {
+                            player.rb2d.velocity -= (Vector2.up * fireTackleVerticalSteeringSpeed * Time.deltaTime);
+                            if (player.rb2d.velocity.y < 0f)
+                            {
+                                player.rb2d.velocity = new Vector2(player.rb2d.velocity.x, 0f);
+                            }
+                        }
+                        else
+                        {
+                            player.rb2d.velocity += (Vector2.up * fireTackleVerticalSteeringSpeed * Time.deltaTime);
+                            if (player.rb2d.velocity.y > 0f)
+                            {
+                                player.rb2d.velocity = new Vector2(player.rb2d.velocity.x, 0f);
+                            }
+                        }
+                    }
+                }
+                
+            }
             attackTimer -= Time.deltaTime;
             yield return null;
         }

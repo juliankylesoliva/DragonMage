@@ -40,7 +40,7 @@ public class BlastHitbox : MonoBehaviour
         hitboxRadius = radius;
     }
 
-    void OnTriggerStay2D(Collider2D other)
+    void OnTriggerEnter2D(Collider2D other)
     {
         Rigidbody2D rb = other.gameObject.GetComponent<Rigidbody2D>();
         BreakableBlock block = other.gameObject.GetComponent<BreakableBlock>();

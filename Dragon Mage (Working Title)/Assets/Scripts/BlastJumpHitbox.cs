@@ -25,7 +25,7 @@ public class BlastJumpHitbox : MonoBehaviour
     {
         if (isHitboxActive)
         {
-            if (currentActiveTime <= 0f || player.form.isChangingForm || player.collisions.IsGrounded)
+            if (currentActiveTime <= 0f || player.form.isChangingForm)
             {
                 if (rb2d.velocity.magnitude < minimumVelocityMagnitude ||
                                 player.collisions.IsGrounded ||
@@ -40,7 +40,7 @@ public class BlastJumpHitbox : MonoBehaviour
             else
             {
                 currentActiveTime -= Time.deltaTime;
-                if (currentActiveTime < 0f || player.form.isChangingForm || player.collisions.IsGrounded)
+                if (currentActiveTime < 0f || player.form.isChangingForm)
                 {
                     currentActiveTime = 0f;
                 }

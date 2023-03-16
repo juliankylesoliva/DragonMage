@@ -9,15 +9,18 @@ public class TackleHitbox : MonoBehaviour
 
     [SerializeField] float hitboxOffset = 0.4f;
 
+    private float defaultYOffSet = 0f;
+
     void Awake()
     {
         player = this.transform.parent.gameObject.GetComponent<PlayerCtrl>();
         hitboxCollider = this.gameObject.GetComponent<CapsuleCollider2D>();
+        defaultYOffSet = hitboxCollider.offset.y;
     }
 
     void Update()
     {
-        hitboxCollider.offset = new Vector2(hitboxOffset * (player.movement.isFacingRight ? 1f : -1f), hitboxCollider.offset.y);
+        hitboxCollider.offset = new Vector2(hitboxOffset * (player.movement.isFacingRight ? 1f : -1f), defaultYOffSet + (player.collisions.IsGrounded ? 0f : (hitboxOffset * Input.GetAxisRaw("Vertical"))));
     }
 
     void OnTriggerEnter2D(Collider2D other)

@@ -24,7 +24,6 @@ public class PlayerJumping : MonoBehaviour
     public float airStallSpeed = 1f;
     [Range(0f, 5f)] public float maxAirStallTime = 3f;
     [HideInInspector] public float currentAirStallTime = 0f;
-    [HideInInspector] public int currentMidairJumps = 0;
 
     [Header("Wall Climb Variables")]
     public bool enableWallClimbing = true;
@@ -50,6 +49,7 @@ public class PlayerJumping : MonoBehaviour
     [Range(0, 5)] public int maxMidairJumps = 3;
     public float midairJumpSpeed = 4.25f;
     public Vector2 forwardMidairJumpBonus;
+    [HideInInspector] public int currentMidairJumps = 0;
 
     [Header("Running Jump Variables")]
     public bool enableRunningJumpBonus = true;
@@ -89,7 +89,14 @@ public class PlayerJumping : MonoBehaviour
 
         LandingReset();
 
-        float horizontalResult = (enableSpeedHopping && (player.rb2d.velocity.x * Input.GetAxisRaw("Horizontal")) > 0f && Mathf.Abs(player.rb2d.velocity.x) >= player.movement.topSpeed && player.buffers.highestSpeedBuffer > Mathf.Abs(player.rb2d.velocity.x) ? (player.buffers.highestSpeedBuffer * Input.GetAxisRaw("Horizontal")) : player.rb2d.velocity.x);
+        bool didPlayerSpeedHop = (enableSpeedHopping && (player.rb2d.velocity.x * Input.GetAxisRaw("Horizontal")) > 0f && Mathf.Abs(player.rb2d.velocity.x) >= player.movement.topSpeed && player.buffers.highestSpeedBuffer >= Mathf.Abs(player.rb2d.velocity.x));
+        float horizontalResult = (didPlayerSpeedHop ? (player.buffers.highestSpeedBuffer * Input.GetAxisRaw("Horizontal")) : player.rb2d.velocity.x);
+        if (didPlayerSpeedHop && Mathf.Abs(horizontalResult) >= (Mathf.Abs(player.rb2d.velocity.x) + 0.25f))
+        {
+            GameObject tempObj = EffectFactory.SpawnEffect("SpeedHopSpark", player.collisions.groundCheckObj.position);
+            SpriteRenderer tempSprite = tempObj.GetComponent<SpriteRenderer>();
+            if (tempSprite != null) { tempSprite.flipX = !player.movement.isFacingRight; }
+        }
         player.rb2d.velocity = new Vector2(horizontalResult, jumpSpeed + (enableRunningJumpBonus ? Mathf.Abs(horizontalResult / player.movement.topSpeed) * runningJumpMultiplier : 0f));
     }
 
@@ -133,7 +140,7 @@ public class PlayerJumping : MonoBehaviour
 
     public bool CanMidairJump()
     {
-        return (!player.collisions.IsGrounded && currentMidairJumps < maxMidairJumps && player.buffers.jumpBufferTimeLeft > 0f && (currentWallClimbTime <= 0f || currentWallClimbTime >= maxWallClimbTime) && postClimbDashTimeLeft <= 0f);
+        return (player.stateMachine.PreviousState != player.stateMachine.wallVaultingState && !player.collisions.IsGrounded && currentMidairJumps < maxMidairJumps && player.buffers.jumpBufferTimeLeft > 0f && (currentWallClimbTime <= 0f || currentWallClimbTime >= maxWallClimbTime) && postClimbDashTimeLeft <= 0f);
     }
 
     public void MidairJump()
