@@ -44,7 +44,6 @@ public class BlastHitbox : MonoBehaviour
     {
         Rigidbody2D rb = other.gameObject.GetComponent<Rigidbody2D>();
         BreakableBlock block = other.gameObject.GetComponent<BreakableBlock>();
-        BlastJumpHitbox jumpHitbox = other.gameObject.GetComponentInChildren<BlastJumpHitbox>();
         PlayerCtrl player = other.gameObject.GetComponent<PlayerCtrl>();
 
         if (rb != null && rb.bodyType == RigidbodyType2D.Dynamic)
@@ -68,9 +67,9 @@ public class BlastHitbox : MonoBehaviour
         }
         else { /* Nothing */ }
 
-        if (player != null && player.form.currentMode == CharacterMode.MAGE && jumpHitbox != null)
+        if (player != null && player.form.currentMode == CharacterMode.MAGE)
         {
-            jumpHitbox.ActivateHitbox();
+            player.attacks.UseBlastJump();
         }
     }
 }

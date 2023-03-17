@@ -18,11 +18,16 @@ public class PlayerAttacks : MonoBehaviour
     [SerializeField] float fireTackleDivingSpeed = 16f;
     [SerializeField] float fireTackleBonkKnockback = 3f;
     [SerializeField] float fireTackleStartup = 0.25f;
+    [SerializeField] float fireTackleBumpImmunityDuration = 0.2f;
     [SerializeField] float fireTackleBaseDuration = 0.5f;
     [SerializeField] float fireTackleEndlag = 0.25f;
     [SerializeField] float fireTackleEndlagCancel = 0.125f;
 
+    [SerializeField] float blastJumpMinVelocityMagnitude = 6f;
+    [SerializeField] float blastJumpMinActiveTime = 0.25f;
+
     [HideInInspector] public bool isAttackCooldownActive = false;
+    [HideInInspector] public bool isBlastJumpActive = false;
     [HideInInspector] public bool isFireTackleActive = false;
 
     public AttackState currentAttackState { get; private set; }
@@ -68,6 +73,47 @@ public class PlayerAttacks : MonoBehaviour
         }
     }
 
+    public void UseBlastJump()
+    {
+        if (!isBlastJumpActive) { StartCoroutine(UseBlastJumpCR()); }
+    }
+
+    private IEnumerator UseBlastJumpCR()
+    {
+        if (isBlastJumpActive) { yield break; }
+
+        isBlastJumpActive = true;
+        player.charSprite.color = Color.blue;
+        float currentActiveTime = blastJumpMinActiveTime;
+        while (isBlastJumpActive)
+        {
+            if (currentActiveTime <= 0f || player.form.isChangingForm)
+            {
+                if (player.rb2d.velocity.magnitude < blastJumpMinVelocityMagnitude ||
+                                player.collisions.IsGrounded ||
+                                player.form.isChangingForm ||
+                                player.stateMachine.CurrentState == player.stateMachine.glidingState ||
+                                player.form.currentMode != CharacterMode.MAGE)
+                {
+                    isBlastJumpActive = false;
+                    player.charSprite.color = Color.white;
+                }
+            }
+            else
+            {
+                currentActiveTime -= Time.deltaTime;
+                if (currentActiveTime < 0f || player.form.isChangingForm)
+                {
+                    currentActiveTime = 0f;
+                }
+            }
+            yield return null;
+        }
+
+        isBlastJumpActive = false;
+        yield break;
+    }
+
     private IEnumerator UseFireTackleCR()
     {
         if (isFireTackleActive || isAttackCooldownActive) { yield break; }
@@ -88,10 +134,13 @@ public class PlayerAttacks : MonoBehaviour
         currentAttackState = AttackState.ACTIVE;
         player.charSprite.color = Color.red;
         player.rb2d.gravityScale = 0f;
-        player.rb2d.velocity = new Vector2((Mathf.Abs(player.rb2d.velocity.x) + fireTackleBaseHorizontalSpeed) * (player.movement.isFacingRight ? 1f : -1f), 0f);
+        float horizontalResult = ((Mathf.Abs(player.rb2d.velocity.x) + fireTackleBaseHorizontalSpeed) * (player.movement.isFacingRight ? 1f : -1f));
+        player.rb2d.velocity = new Vector2(horizontalResult, 0f);
         float attackTimer = fireTackleBaseDuration;
-        while (attackTimer > 0f && !player.collisions.IsAgainstWall && !player.collisions.IsHeadbonking)
+        float bumpImmunityTimer = fireTackleBumpImmunityDuration;
+        while (attackTimer > 0f && (bumpImmunityTimer > 0f || !player.collisions.IsAgainstWall || !player.collisions.IsHeadbonking))
         {
+            player.rb2d.velocity = new Vector2((!player.collisions.IsAgainstWall ? horizontalResult : 0f), player.rb2d.velocity.y);
             if (!player.collisions.IsGrounded)
             {
                 float verticalAxis = Input.GetAxisRaw("Vertical");
@@ -131,7 +180,9 @@ public class PlayerAttacks : MonoBehaviour
                 }
                 
             }
+
             attackTimer -= Time.deltaTime;
+            bumpImmunityTimer -= Time.deltaTime;
             yield return null;
         }
 

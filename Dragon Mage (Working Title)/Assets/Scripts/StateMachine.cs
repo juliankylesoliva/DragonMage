@@ -303,6 +303,7 @@ public class FallingState : State
     {
         player.movement.Movement();
         player.movement.FacingDirection();
+        player.jumping.FallingUpdate();
         if (CheckFormChangeInput() || CheckFireTackleInput() || CheckRunInput() || CheckStationaryLanding() || CheckJumpInput() || CheckGlideInput() || CheckMidairJumpInput() || CheckIfWallClimbing() || CheckIfWallSliding()) { return; }
     }
 

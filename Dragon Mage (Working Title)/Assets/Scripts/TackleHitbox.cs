@@ -23,7 +23,7 @@ public class TackleHitbox : MonoBehaviour
         hitboxCollider.offset = new Vector2(hitboxOffset * (player.movement.isFacingRight ? 1f : -1f), defaultYOffSet + (player.collisions.IsGrounded ? 0f : (hitboxOffset * Input.GetAxisRaw("Vertical"))));
     }
 
-    void OnTriggerEnter2D(Collider2D other)
+    void OnTriggerStay2D(Collider2D other)
     {
         if (player.attacks.currentAttackState == AttackState.ACTIVE)
         {

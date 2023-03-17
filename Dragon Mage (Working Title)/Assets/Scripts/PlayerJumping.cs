@@ -116,6 +116,14 @@ public class PlayerJumping : MonoBehaviour
         }
     }
 
+    public void FallingUpdate()
+    {
+        if (!player.attacks.isBlastJumpActive && player.rb2d.velocity.y < -fallSpeed)
+        {
+            player.rb2d.velocity = new Vector2(player.rb2d.velocity.x, -fallSpeed);
+        }
+    }
+
     public bool CanGlide()
     {
         return (enableAirStalling && player.rb2d.velocity.y <= 0f && currentAirStallTime <= 0f && player.collisions.CheckDistanceToGround(minimumAirStallHeight) && Input.GetButton("Jump"));
