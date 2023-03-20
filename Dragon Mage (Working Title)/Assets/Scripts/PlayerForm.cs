@@ -32,26 +32,30 @@ public class PlayerForm : MonoBehaviour
         ChangeMode(startingMode);
     }
 
+    public bool CanFormChange()
+    {
+        return (!player.form.isFormChangeCooldownActive && !player.attacks.isAttackCooldownActive && !player.form.isChangingForm && !player.attacks.isBlastJumpActive && !player.attacks.isFireTackleActive && (player.temper.forceFormChange || (!player.temper.isFormLocked && player.buffers.formChangeBufferTimeLeft > 0f)));
+    }
+
     public void FormChange()
     {
-        if (!isFormChangeCooldownActive && !player.attacks.isAttackCooldownActive && !isChangingForm && !player.attacks.isFireTackleActive && player.buffers.formChangeBufferTimeLeft > 0f)
+        if (player.temper.forceFormChange) { player.temper.FormLockTemperChange(); }
+
+        player.buffers.formChangeBufferTimeLeft = 0f;
+
+        StartCoroutine(FormFreeze());
+        StartCoroutine(FormChangeCooldownCR());
+
+        if (currentMode == CharacterMode.MAGE)
         {
-            player.buffers.formChangeBufferTimeLeft = 0f;
+            ChangeMode(CharacterMode.DRAGON);
+            return;
+        }
 
-            StartCoroutine(FormFreeze());
-            StartCoroutine(FormChangeCooldownCR());
-
-            if (currentMode == CharacterMode.MAGE)
-            {
-                ChangeMode(CharacterMode.DRAGON);
-                return;
-            }
-
-            if (currentMode == CharacterMode.DRAGON)
-            {
-                ChangeMode(CharacterMode.MAGE);
-                return;
-            }
+        if (currentMode == CharacterMode.DRAGON)
+        {
+            ChangeMode(CharacterMode.MAGE);
+            return;
         }
     }
 

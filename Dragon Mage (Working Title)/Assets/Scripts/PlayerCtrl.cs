@@ -10,6 +10,7 @@ public class PlayerCtrl : MonoBehaviour
     [HideInInspector] public PlayerBuffers buffers;
     [HideInInspector] public PlayerMovement movement;
     [HideInInspector] public PlayerJumping jumping;
+    [HideInInspector] public PlayerTemper temper;
     [HideInInspector] public PlayerForm form;
     [HideInInspector] public PlayerAttacks attacks;
 
@@ -27,6 +28,7 @@ public class PlayerCtrl : MonoBehaviour
         buffers = this.gameObject.GetComponent<PlayerBuffers>();
         movement = this.gameObject.GetComponent<PlayerMovement>();
         jumping = this.gameObject.GetComponent<PlayerJumping>();
+        temper = this.gameObject.GetComponent<PlayerTemper>();
         form = this.gameObject.GetComponent<PlayerForm>();
         attacks = this.gameObject.GetComponent<PlayerAttacks>();
 

@@ -78,7 +78,7 @@ public abstract class State : IState
 
     protected bool CheckFormChangeInput()
     {
-        if (!player.form.isFormChangeCooldownActive && !player.attacks.isAttackCooldownActive && !player.form.isChangingForm && !player.attacks.isFireTackleActive && player.buffers.formChangeBufferTimeLeft > 0f)
+        if (player.form.CanFormChange())
         {
             player.stateMachine.TransitionTo(player.stateMachine.formChangingState);
             return true;

@@ -15,7 +15,6 @@ public class PlayerAttacks : MonoBehaviour
     [SerializeField] float attackCooldown = 1f;
     [SerializeField] float fireTackleBaseHorizontalSpeed = 6f;
     [SerializeField] float fireTackleVerticalSteeringSpeed = 2f;
-    [SerializeField] float fireTackleDivingSpeed = 16f;
     [SerializeField] float fireTackleBonkKnockback = 3f;
     [SerializeField] float fireTackleStartup = 0.25f;
     [SerializeField] float fireTackleBumpImmunityDuration = 0.2f;
@@ -123,62 +122,44 @@ public class PlayerAttacks : MonoBehaviour
 
         player.charSprite.color = Color.yellow;
         float windupTimer = fireTackleStartup;
+        float previousHorizontalVelocity = Mathf.Abs(player.rb2d.velocity.x);
+        float verticalAxis = 0f;
         while (windupTimer > 0f)
         {
+            player.rb2d.gravityScale = 0f;
+            player.rb2d.velocity = Vector2.zero;
             player.movement.SetFacingDirection(Input.GetAxisRaw("Horizontal"));
-            if (player.collisions.IsGrounded) { player.rb2d.velocity = Vector2.zero; }
+            verticalAxis = Input.GetAxisRaw("Vertical");
             windupTimer -= Time.deltaTime;
             yield return null;
         }
 
         currentAttackState = AttackState.ACTIVE;
         player.charSprite.color = Color.red;
-        player.rb2d.gravityScale = 0f;
-        float horizontalResult = ((Mathf.Abs(player.rb2d.velocity.x) + fireTackleBaseHorizontalSpeed) * (player.movement.isFacingRight ? 1f : -1f));
-        player.rb2d.velocity = new Vector2(horizontalResult, 0f);
+        float horizontalResult = ((previousHorizontalVelocity + fireTackleBaseHorizontalSpeed) * (player.movement.isFacingRight ? 1f : -1f));
+        player.rb2d.velocity = new Vector2(horizontalResult, (verticalAxis < 0f ? -Mathf.Abs(player.rb2d.velocity.x) : 0f));
         float attackTimer = fireTackleBaseDuration;
         float bumpImmunityTimer = fireTackleBumpImmunityDuration;
-        while (attackTimer > 0f && (bumpImmunityTimer > 0f || !player.collisions.IsAgainstWall || !player.collisions.IsHeadbonking))
+        player.temper.ChangeTemperBy(-1);
+        while (attackTimer > 0f && (bumpImmunityTimer > 0f || (!player.collisions.IsAgainstWall && !player.collisions.IsHeadbonking)))
         {
             player.rb2d.velocity = new Vector2((!player.collisions.IsAgainstWall ? horizontalResult : 0f), player.rb2d.velocity.y);
-            if (!player.collisions.IsGrounded)
+            if (verticalAxis > 0f)
             {
-                float verticalAxis = Input.GetAxisRaw("Vertical");
-                if (verticalAxis > 0f)
+                player.rb2d.velocity += (Vector2.up * fireTackleVerticalSteeringSpeed * Time.deltaTime);
+            }
+            else if (verticalAxis < 0f)
+            {
+                player.rb2d.velocity = new Vector2(player.rb2d.velocity.x, (player.collisions.IsGrounded ? 0f : -Mathf.Abs(player.rb2d.velocity.x)));
+                if (player.collisions.IsGrounded)
                 {
-                    if (player.rb2d.velocity.y < 0f) { player.rb2d.velocity = new Vector2(player.rb2d.velocity.x, 0f); }
-                    player.rb2d.velocity += (Vector2.up * fireTackleVerticalSteeringSpeed * Time.deltaTime);
+                    verticalAxis = 0f;
+                    player.jumping.LandingReset();
                 }
-                else if (verticalAxis < 0f)
-                {
-                    if (player.rb2d.velocity.y >= 0f)
-                    {
-                        player.rb2d.velocity = new Vector2(player.rb2d.velocity.x, -fireTackleDivingSpeed);
-                    }
-                }
-                else
-                {
-                    if (player.rb2d.velocity.y != 0f)
-                    {
-                        if (player.rb2d.velocity.y > 0f)
-                        {
-                            player.rb2d.velocity -= (Vector2.up * fireTackleVerticalSteeringSpeed * Time.deltaTime);
-                            if (player.rb2d.velocity.y < 0f)
-                            {
-                                player.rb2d.velocity = new Vector2(player.rb2d.velocity.x, 0f);
-                            }
-                        }
-                        else
-                        {
-                            player.rb2d.velocity += (Vector2.up * fireTackleVerticalSteeringSpeed * Time.deltaTime);
-                            if (player.rb2d.velocity.y > 0f)
-                            {
-                                player.rb2d.velocity = new Vector2(player.rb2d.velocity.x, 0f);
-                            }
-                        }
-                    }
-                }
-                
+            }
+            else
+            {
+                player.rb2d.velocity = new Vector2(player.rb2d.velocity.x, 0f);
             }
 
             attackTimer -= Time.deltaTime;
@@ -192,6 +173,7 @@ public class PlayerAttacks : MonoBehaviour
         else
         {
             GameObject objTemp = Instantiate(fireProjectilePrefab, projectileSpawnPoint.position, Quaternion.identity);
+            player.temper.ChangeTemperBy(-1);
             FireMissile fireTemp = objTemp.GetComponent<FireMissile>();
             if (fireTemp != null) { fireTemp.Setup(player.movement.isFacingRight, Mathf.Abs(player.rb2d.velocity.x)); }
         }

@@ -18,7 +18,7 @@ MonoBehaviour:
   _turningSpeed: 12
   _changeFacingDirectionMidair: 0
   _enableSpeedHopping: 0
-  _jumpSpeed: 5.25
+  _jumpSpeed: 6.25
   _risingGravity: 1.35
   _fallingGravity: 2.6
   _fallSpeed: 10

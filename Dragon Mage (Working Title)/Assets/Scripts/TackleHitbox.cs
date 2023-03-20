@@ -20,7 +20,7 @@ public class TackleHitbox : MonoBehaviour
 
     void Update()
     {
-        hitboxCollider.offset = new Vector2(hitboxOffset * (player.movement.isFacingRight ? 1f : -1f), defaultYOffSet + (player.collisions.IsGrounded ? 0f : (hitboxOffset * Input.GetAxisRaw("Vertical"))));
+        hitboxCollider.offset = new Vector2(hitboxOffset * (player.movement.isFacingRight ? 1f : -1f), defaultYOffSet + (player.collisions.IsGrounded ? 0f : (hitboxOffset * (player.rb2d.velocity.y == 0f ? 0f : (player.rb2d.velocity.y > 0f ? 1f : -1f)))));
     }
 
     void OnTriggerStay2D(Collider2D other)

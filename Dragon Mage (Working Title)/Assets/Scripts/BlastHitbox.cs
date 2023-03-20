@@ -48,6 +48,7 @@ public class BlastHitbox : MonoBehaviour
 
         if (rb != null && rb.bodyType == RigidbodyType2D.Dynamic)
         {
+            if (player != null && player.attacks.isFireTackleActive) { return; }
             Vector2 velocityVec = (other.transform.position - this.transform.position);
             float distance = velocityVec.magnitude;
             velocityVec = velocityVec.normalized;
@@ -70,6 +71,7 @@ public class BlastHitbox : MonoBehaviour
         if (player != null && player.form.currentMode == CharacterMode.MAGE)
         {
             player.attacks.UseBlastJump();
+            player.temper.ChangeTemperBy(2);
         }
     }
 }
