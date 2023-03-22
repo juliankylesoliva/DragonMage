@@ -19,11 +19,13 @@ public class PlayerAttacks : MonoBehaviour
     [SerializeField] float fireTackleStartup = 0.25f;
     [SerializeField] float fireTackleBumpImmunityDuration = 0.2f;
     [SerializeField] float fireTackleBaseDuration = 0.5f;
+    [SerializeField] float fireTackleRecoilMultiplier = 0.75f;
     [SerializeField] float fireTackleEndlag = 0.25f;
     [SerializeField] float fireTackleEndlagCancel = 0.125f;
 
     [SerializeField] float blastJumpMinVelocityMagnitude = 6f;
     [SerializeField] float blastJumpMinActiveTime = 0.25f;
+    [SerializeField] float blastJumpTemperIncreaseInterval = 0.5f;
 
     [HideInInspector] public bool isAttackCooldownActive = false;
     [HideInInspector] public bool isBlastJumpActive = false;
@@ -45,7 +47,7 @@ public class PlayerAttacks : MonoBehaviour
 
     public void UseAttack()
     {
-        if (!isAttackCooldownActive && !isFireTackleActive && Input.GetButtonDown("Attack"))
+        if (!player.temper.forceFormChange && !isAttackCooldownActive && !isFireTackleActive && Input.GetButtonDown("Attack"))
         {
             if (player.form.currentMode == CharacterMode.MAGE)
             {
@@ -83,7 +85,9 @@ public class PlayerAttacks : MonoBehaviour
 
         isBlastJumpActive = true;
         player.charSprite.color = Color.blue;
+        player.temper.ChangeTemperBy(1);
         float currentActiveTime = blastJumpMinActiveTime;
+        float currentTemperInterval = blastJumpTemperIncreaseInterval;
         while (isBlastJumpActive)
         {
             if (currentActiveTime <= 0f || player.form.isChangingForm)
@@ -106,6 +110,17 @@ public class PlayerAttacks : MonoBehaviour
                     currentActiveTime = 0f;
                 }
             }
+
+            if (currentTemperInterval > 0f)
+            {
+                currentTemperInterval -= Time.deltaTime;
+                if (currentTemperInterval <= 0f)
+                {
+                    player.temper.ChangeTemperBy(1);
+                    currentTemperInterval += blastJumpTemperIncreaseInterval;
+                }
+            }
+
             yield return null;
         }
 
@@ -130,13 +145,14 @@ public class PlayerAttacks : MonoBehaviour
             player.rb2d.velocity = Vector2.zero;
             player.movement.SetFacingDirection(Input.GetAxisRaw("Horizontal"));
             verticalAxis = Input.GetAxisRaw("Vertical");
+            if (player.collisions.IsGrounded && verticalAxis < 0) { verticalAxis = 0f; }
             windupTimer -= Time.deltaTime;
             yield return null;
         }
 
         currentAttackState = AttackState.ACTIVE;
         player.charSprite.color = Color.red;
-        float horizontalResult = ((previousHorizontalVelocity + fireTackleBaseHorizontalSpeed) * (player.movement.isFacingRight ? 1f : -1f));
+        float horizontalResult = (((player.stateMachine.PreviousState == player.stateMachine.wallVaultingState || player.stateMachine.PreviousState == player.stateMachine.wallClimbingState ? player.jumping.storedWallClimbSpeed : previousHorizontalVelocity) + fireTackleBaseHorizontalSpeed) * (player.movement.isFacingRight ? 1f : -1f));
         player.rb2d.velocity = new Vector2(horizontalResult, (verticalAxis < 0f ? -Mathf.Abs(player.rb2d.velocity.x) : 0f));
         float attackTimer = fireTackleBaseDuration;
         float bumpImmunityTimer = fireTackleBumpImmunityDuration;
@@ -150,11 +166,16 @@ public class PlayerAttacks : MonoBehaviour
             }
             else if (verticalAxis < 0f)
             {
-                player.rb2d.velocity = new Vector2(player.rb2d.velocity.x, (player.collisions.IsGrounded ? 0f : -Mathf.Abs(player.rb2d.velocity.x)));
+                
                 if (player.collisions.IsGrounded)
                 {
+                    player.rb2d.velocity = new Vector2(player.rb2d.velocity.magnitude * (player.movement.isFacingRight ? 1f : -1f), 0f);
                     verticalAxis = 0f;
                     player.jumping.LandingReset();
+                }
+                else
+                {
+                    player.rb2d.velocity = new Vector2(player.rb2d.velocity.x, (player.collisions.IsGrounded ? 0f : -Mathf.Abs(player.rb2d.velocity.x)));
                 }
             }
             else
@@ -172,17 +193,21 @@ public class PlayerAttacks : MonoBehaviour
         if (player.collisions.IsAgainstWall || player.collisions.IsHeadbonking) { player.rb2d.velocity = ((Vector2.up + (Vector2.right * (player.movement.isFacingRight ? -1f : 1f))).normalized * fireTackleBonkKnockback); }
         else
         {
-            GameObject objTemp = Instantiate(fireProjectilePrefab, projectileSpawnPoint.position, Quaternion.identity);
-            player.temper.ChangeTemperBy(-1);
-            FireMissile fireTemp = objTemp.GetComponent<FireMissile>();
-            if (fireTemp != null) { fireTemp.Setup(player.movement.isFacingRight, Mathf.Abs(player.rb2d.velocity.x)); }
+            if (Input.GetButton("Attack"))
+            {
+                GameObject objTemp = Instantiate(fireProjectilePrefab, projectileSpawnPoint.position, Quaternion.identity);
+                FireMissile fireTemp = objTemp.GetComponent<FireMissile>();
+                if (fireTemp != null) { fireTemp.Setup(player.movement.isFacingRight, Mathf.Abs(player.rb2d.velocity.x)); }
+                player.rb2d.velocity = new Vector2(-player.rb2d.velocity.x * fireTackleRecoilMultiplier, player.rb2d.velocity.y);
+                player.temper.ChangeTemperBy(-1);
+            }
         }
         player.rb2d.gravityScale = player.jumping.fallingGravity;
         float deceleration = Mathf.Abs(player.rb2d.velocity.x / fireTackleEndlag);
         float endlagTimer = fireTackleEndlag;
         while (endlagTimer > 0f)
         {
-            if (endlagTimer < fireTackleEndlagCancel && (Input.GetAxisRaw("Horizontal") != 0f || player.buffers.jumpBufferTimeLeft > 0f)) { break; }
+            if (endlagTimer < fireTackleEndlagCancel && (Input.GetAxisRaw("Horizontal") * (player.movement.isFacingRight ? 1f : -1f)) > 0f && (!player.collisions.IsGrounded || player.buffers.jumpBufferTimeLeft > 0f)) { break; }
             if (player.collisions.IsGrounded && player.rb2d.velocity.x != 0f)
             {
                 if (player.rb2d.velocity.x > 0f)

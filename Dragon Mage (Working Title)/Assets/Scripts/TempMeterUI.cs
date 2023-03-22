@@ -18,6 +18,8 @@ public class TempMeterUI : MonoBehaviour
         temperChangeEvent.AddListener(RefreshMeterUI);
     }
 
+    public static bool isEventInstantiated { get { return temperChangeEvent != null; } }
+
     private void RefreshMeterUI()
     {
         GameObject tempObj = GameObject.FindWithTag("Player");

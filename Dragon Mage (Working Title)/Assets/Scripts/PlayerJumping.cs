@@ -32,6 +32,8 @@ public class PlayerJumping : MonoBehaviour
     public float climbingGravity = 0.25f;
     public float maxWallClimbTime = 3f;
     public float postClimbDashWindow = 1f;
+    public float wallVaultStartSpeed = 3f;
+    public float maxWallVaultStartSpeed = 6f;
     [HideInInspector] public float currentWallClimbTime = 0f;
     [HideInInspector] public float storedWallClimbSpeed = 0f;
     [HideInInspector] public float postClimbDashTimeLeft = 0f;
@@ -255,6 +257,7 @@ public class PlayerJumping : MonoBehaviour
     {
         postClimbDashTimeLeft = postClimbDashWindow;
         player.rb2d.gravityScale = risingGravity;
+        player.rb2d.velocity = (Vector2.up * Mathf.Min(maxWallVaultStartSpeed, Mathf.Max(wallVaultStartSpeed, player.rb2d.velocity.y)));
     }
 
     public bool CanWallVaultDash()

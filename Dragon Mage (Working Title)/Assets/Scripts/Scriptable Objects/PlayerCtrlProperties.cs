@@ -87,6 +87,12 @@ public class PlayerCtrlProperties : ScriptableObject
     [SerializeField] float _postClimbDashWindow = 1f;
     public float postClimbDashWindow { get { return _postClimbDashWindow; } }
 
+    [SerializeField] float _wallVaultStartSpeed = 3f;
+    public float wallVaultStartSpeed { get { return _wallVaultStartSpeed; } }
+
+    [SerializeField] float _maxWallVaultStartSpeed = 6f;
+    public float maxWallVaultStartSpeed { get { return _maxWallVaultStartSpeed; } }
+
     [Header("Wall Jump Variables")]
     [SerializeField] bool _enableWallJumping = true;
     public bool enableWallJumping { get { return _enableWallJumping; } }

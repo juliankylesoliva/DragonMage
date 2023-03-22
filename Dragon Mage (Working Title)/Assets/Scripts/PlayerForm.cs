@@ -92,6 +92,8 @@ public class PlayerForm : MonoBehaviour
         player.jumping.climbingGravity = p.climbingGravity;
         player.jumping.maxWallClimbTime = p.maxWallClimbTime;
         player.jumping.postClimbDashWindow = p.postClimbDashWindow;
+        player.jumping.wallVaultStartSpeed = p.wallVaultStartSpeed;
+        player.jumping.maxWallVaultStartSpeed = p.maxWallVaultStartSpeed;
 
         if (player.jumping.enableWallClimbing)
         {

@@ -55,7 +55,12 @@ public class PlayerTemper : MonoBehaviour
         hotThreshold = (numSegments - (hotSegments - 1));
 
         currentTemperLevel = ((coldThreshold + hotThreshold) / 2);
-        TempMeterUI.temperChangeEvent.Invoke();
+        UpdateMeterUI();
+    }
+
+    private void UpdateMeterUI()
+    {
+        if (TempMeterUI.isEventInstantiated) { TempMeterUI.temperChangeEvent.Invoke(); }
     }
 
     public void ChangeTemperBy(int num)
@@ -72,7 +77,7 @@ public class PlayerTemper : MonoBehaviour
         }
         else { /* Nothing */ }
 
-        TempMeterUI.temperChangeEvent.Invoke();
+        UpdateMeterUI();
     }
 
     public void FormLockTemperChange()
@@ -87,6 +92,6 @@ public class PlayerTemper : MonoBehaviour
         }
         else { /* Nothing */ }
 
-        TempMeterUI.temperChangeEvent.Invoke();
+        UpdateMeterUI();
     }
 }

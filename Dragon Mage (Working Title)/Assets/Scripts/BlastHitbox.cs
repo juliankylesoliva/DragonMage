@@ -71,7 +71,6 @@ public class BlastHitbox : MonoBehaviour
         if (player != null && player.form.currentMode == CharacterMode.MAGE)
         {
             player.attacks.UseBlastJump();
-            player.temper.ChangeTemperBy(2);
         }
     }
 }
