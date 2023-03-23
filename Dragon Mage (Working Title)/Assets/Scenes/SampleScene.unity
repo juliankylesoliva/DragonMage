@@ -819,9 +819,11 @@ GameObject:
   - component: {fileID: 557060678}
   - component: {fileID: 557060679}
   - component: {fileID: 557060680}
+  - component: {fileID: 557060683}
   - component: {fileID: 557060669}
   - component: {fileID: 557060671}
   - component: {fileID: 557060672}
+  - component: {fileID: 557060682}
   m_Layer: 3
   m_Name: Player
   m_TagString: Player
@@ -870,7 +872,7 @@ SpriteRenderer:
   m_SortingLayerID: 100433471
   m_SortingLayer: 2
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 5e1207b5cefb3674898737e6d8311225, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 5f4c06f8b4732f743ac453495887f969, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -959,10 +961,11 @@ MonoBehaviour:
   temper: {fileID: 0}
   form: {fileID: 0}
   attacks: {fileID: 0}
+  animationCtrl: {fileID: 0}
   rb2d: {fileID: 0}
   charSprite: {fileID: 0}
-  tempMageSprite: {fileID: 21300000, guid: 5e1207b5cefb3674898737e6d8311225, type: 3}
-  tempDragonSprite: {fileID: 21300000, guid: 6dd61d29319720d44853fa2e32f0b4d3, type: 3}
+  tempMageSprite: {fileID: 21300000, guid: 5f4c06f8b4732f743ac453495887f969, type: 3}
+  tempDragonSprite: {fileID: 21300000, guid: 688cbfe02bcc69e4bb745acaeb315072, type: 3}
 --- !u!114 &557060674
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1059,6 +1062,7 @@ MonoBehaviour:
   enableWallClimbing: 0
   minimumWallClimbHeight: 0
   baseClimbingSpeed: 0
+  maxClimbingSpeed: 12
   climbingGravity: 0
   maxWallClimbTime: 0
   postClimbDashWindow: 0
@@ -1117,6 +1121,7 @@ MonoBehaviour:
   projectileSpawnPoint: {fileID: 2146679145}
   attackCooldown: 0.25
   fireTackleBaseHorizontalSpeed: 9.25
+  fireTackleMaxHorizontalSpeed: 40
   fireTackleVerticalSteeringSpeed: 22
   fireTackleBonkKnockback: 4
   fireTackleStartup: 0.35
@@ -1165,6 +1170,38 @@ MonoBehaviour:
   numSegments: 12
   coldSegments: 3
   hotSegments: 3
+--- !u!95 &557060682
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 557060668}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 68f1a6fd0e3b37b4686e95638b1d73b0, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &557060683
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 557060668}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 618e9b581d4188641be59a9c5cebcf63, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &573364089
 PrefabInstance:
   m_ObjectHideFlags: 0

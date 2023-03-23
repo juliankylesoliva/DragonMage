@@ -14,6 +14,7 @@ public class PlayerAttacks : MonoBehaviour
     
     [SerializeField] float attackCooldown = 1f;
     [SerializeField] float fireTackleBaseHorizontalSpeed = 6f;
+    [SerializeField] float fireTackleMaxHorizontalSpeed = 30f;
     [SerializeField] float fireTackleVerticalSteeringSpeed = 2f;
     [SerializeField] float fireTackleBonkKnockback = 3f;
     [SerializeField] float fireTackleStartup = 0.25f;
@@ -152,7 +153,8 @@ public class PlayerAttacks : MonoBehaviour
 
         currentAttackState = AttackState.ACTIVE;
         player.charSprite.color = Color.red;
-        float horizontalResult = (((player.stateMachine.PreviousState == player.stateMachine.wallVaultingState || player.stateMachine.PreviousState == player.stateMachine.wallClimbingState ? player.jumping.storedWallClimbSpeed : previousHorizontalVelocity) + fireTackleBaseHorizontalSpeed) * (player.movement.isFacingRight ? 1f : -1f));
+        bool wasInteractingWithWall = (player.stateMachine.PreviousState == player.stateMachine.wallVaultingState || player.stateMachine.PreviousState == player.stateMachine.wallClimbingState);
+        float horizontalResult = (Mathf.Min(((wasInteractingWithWall ? player.jumping.storedWallClimbSpeed : previousHorizontalVelocity) + fireTackleBaseHorizontalSpeed), fireTackleMaxHorizontalSpeed) * (player.movement.isFacingRight ? 1f : -1f));
         player.rb2d.velocity = new Vector2(horizontalResult, (verticalAxis < 0f ? -Mathf.Abs(player.rb2d.velocity.x) : 0f));
         float attackTimer = fireTackleBaseDuration;
         float bumpImmunityTimer = fireTackleBumpImmunityDuration;
@@ -169,13 +171,12 @@ public class PlayerAttacks : MonoBehaviour
                 
                 if (player.collisions.IsGrounded)
                 {
-                    player.rb2d.velocity = new Vector2(player.rb2d.velocity.magnitude * (player.movement.isFacingRight ? 1f : -1f), 0f);
                     verticalAxis = 0f;
                     player.jumping.LandingReset();
                 }
                 else
                 {
-                    player.rb2d.velocity = new Vector2(player.rb2d.velocity.x, (player.collisions.IsGrounded ? 0f : -Mathf.Abs(player.rb2d.velocity.x)));
+                    player.rb2d.velocity = new Vector2(player.rb2d.velocity.x, -Mathf.Abs(player.rb2d.velocity.x));
                 }
             }
             else

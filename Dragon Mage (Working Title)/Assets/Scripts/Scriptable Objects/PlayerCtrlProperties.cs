@@ -78,6 +78,9 @@ public class PlayerCtrlProperties : ScriptableObject
     [SerializeField] float _baseClimbingSpeed = 4f;
     public float baseClimbingSpeed { get { return _baseClimbingSpeed; } }
 
+    [SerializeField] float _maxClimbingSpeed = 12f;
+    public float maxClimbingSpeed { get { return _maxClimbingSpeed; } }
+
     [SerializeField] float _climbingGravity = 0.25f;
     public float climbingGravity { get { return _climbingGravity; } }
 

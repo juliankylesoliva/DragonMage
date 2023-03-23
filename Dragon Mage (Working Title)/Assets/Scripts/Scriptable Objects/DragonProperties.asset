@@ -34,11 +34,12 @@ MonoBehaviour:
   _enableWallClimbing: 1
   _minimumWallClimbHeight: 1
   _baseClimbingSpeed: 6
+  _maxClimbingSpeed: 12
   _climbingGravity: 0.5
   _maxWallClimbTime: 1.5
   _postClimbDashWindow: 1
   _wallVaultStartSpeed: 4
-  _maxWallVaultStartSpeed: 12
+  _maxWallVaultStartSpeed: 8
   _enableWallJumping: 0
   _minimumWallJumpHeight: 0
   _wallSlideSpeed: 0

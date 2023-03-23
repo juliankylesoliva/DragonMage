@@ -212,12 +212,14 @@ public class StandingState : State
 
     public override void Update()
     {
+        if (!player.attacks.isBlastJumpActive) { player.rb2d.velocity = Vector2.zero; }
+        player.animationCtrl.StandingAnimation();
         if (CheckFormChangeInput() || CheckFireTackleInput() || CheckRunInput() || CheckJumpInput() || CheckFireTackleInput() || CheckSuddenRise() || CheckSuddenFall() || CheckSuddenMovement()) { return; }
     }
 
     public override void Exit()
     {
-        
+
     }
 }
 
@@ -237,6 +239,7 @@ public class RunningState : State
     {
         player.movement.Movement();
         player.movement.FacingDirection();
+        player.animationCtrl.RunningAnimation();
         if (CheckFormChangeInput() || CheckFireTackleInput() || CheckIfStopped() || CheckSuddenFall() || CheckJumpInput() || CheckFireTackleInput()) { return; }
     }
 

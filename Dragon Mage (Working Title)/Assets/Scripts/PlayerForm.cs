@@ -89,6 +89,7 @@ public class PlayerForm : MonoBehaviour
         player.jumping.enableWallClimbing = p.enableWallClimbing;
         player.jumping.minimumWallClimbHeight = p.minimumWallClimbHeight;
         player.jumping.baseClimbingSpeed = p.baseClimbingSpeed;
+        player.jumping.maxClimbingSpeed = p.maxClimbingSpeed;
         player.jumping.climbingGravity = p.climbingGravity;
         player.jumping.maxWallClimbTime = p.maxWallClimbTime;
         player.jumping.postClimbDashWindow = p.postClimbDashWindow;
@@ -131,8 +132,8 @@ public class PlayerForm : MonoBehaviour
     public void ChangeMode(CharacterMode mode)
     {
         SetCtrlProperties(mode == CharacterMode.MAGE ? mageProperties : dragonProperties);
-        player.charSprite.sprite = (mode == CharacterMode.MAGE ? player.tempMageSprite : player.tempDragonSprite);
         currentMode = mode;
+        player.animationCtrl.StandingAnimation();
     }
 
     private IEnumerator FormFreeze()

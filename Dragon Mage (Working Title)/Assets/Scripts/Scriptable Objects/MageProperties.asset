@@ -34,6 +34,7 @@ MonoBehaviour:
   _enableWallClimbing: 0
   _minimumWallClimbHeight: 0
   _baseClimbingSpeed: 0
+  _maxClimbingSpeed: 0
   _climbingGravity: 0
   _maxWallClimbTime: 0
   _postClimbDashWindow: 0

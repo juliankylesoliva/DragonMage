@@ -29,6 +29,7 @@ public class PlayerJumping : MonoBehaviour
     public bool enableWallClimbing = true;
     public float minimumWallClimbHeight = 1f;
     public float baseClimbingSpeed = 4f;
+    public float maxClimbingSpeed = 12f;
     public float climbingGravity = 0.25f;
     public float maxWallClimbTime = 3f;
     public float postClimbDashWindow = 1f;
@@ -221,7 +222,7 @@ public class PlayerJumping : MonoBehaviour
         player.rb2d.gravityScale = climbingGravity;
         if (storedWallClimbSpeed <= 0f)
         {
-            storedWallClimbSpeed = Mathf.Max(player.buffers.highestSpeedBuffer, baseClimbingSpeed);
+            storedWallClimbSpeed = Mathf.Min(Mathf.Max(player.buffers.highestSpeedBuffer, baseClimbingSpeed), maxClimbingSpeed);
             player.rb2d.velocity = new Vector2(0f, storedWallClimbSpeed);
         }
     }
