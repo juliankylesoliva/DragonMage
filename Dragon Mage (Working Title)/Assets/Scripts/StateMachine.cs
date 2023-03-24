@@ -498,7 +498,8 @@ public class FireTacklingState : State
         if (!player.attacks.isFireTackleActive)
         {
             State nextState;
-            if (player.collisions.IsGrounded && Input.GetAxisRaw("Horizontal") != 0f) { nextState = player.stateMachine.runningState; }
+            if (player.temper.forceFormChange) { nextState = player.stateMachine.formChangingState; }
+            else if (player.collisions.IsGrounded && Input.GetAxisRaw("Horizontal") != 0f) { nextState = player.stateMachine.runningState; }
             else if (player.rb2d.velocity.y > 0f) { nextState = player.stateMachine.jumpingState; }
             else if (player.rb2d.velocity.y <= 0f) { nextState = player.stateMachine.fallingState; }
             else { nextState = player.stateMachine.standingState; }

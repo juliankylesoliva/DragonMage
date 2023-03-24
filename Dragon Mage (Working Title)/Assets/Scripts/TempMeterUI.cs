@@ -7,6 +7,7 @@ public class TempMeterUI : MonoBehaviour
 {
     public static UnityEvent temperChangeEvent;
 
+    [SerializeField] Vector3 cameraOffset;
     [SerializeField] Transform startMeterRef;
     [SerializeField] Transform middleMeterRef;
     [SerializeField] Transform endMeterRef;
@@ -16,6 +17,11 @@ public class TempMeterUI : MonoBehaviour
     {
         temperChangeEvent = new UnityEvent();
         temperChangeEvent.AddListener(RefreshMeterUI);
+    }
+
+    void LateUpdate()
+    {
+        this.transform.position = (Camera.main.transform.position + cameraOffset);
     }
 
     public static bool isEventInstantiated { get { return temperChangeEvent != null; } }

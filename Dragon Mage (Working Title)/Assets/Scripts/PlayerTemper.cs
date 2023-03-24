@@ -54,7 +54,7 @@ public class PlayerTemper : MonoBehaviour
         coldThreshold = coldSegments;
         hotThreshold = (numSegments - (hotSegments - 1));
 
-        currentTemperLevel = ((coldThreshold + hotThreshold) / 2);
+        currentTemperLevel = (coldThreshold + 1);
         UpdateMeterUI();
     }
 

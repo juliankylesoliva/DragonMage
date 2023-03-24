@@ -191,11 +191,18 @@ public class PlayerAttacks : MonoBehaviour
 
         currentAttackState = AttackState.ENDLAG;
         player.charSprite.color = Color.gray;
-        if (player.collisions.IsAgainstWall || player.collisions.IsHeadbonking) { player.rb2d.velocity = ((Vector2.up + (Vector2.right * (player.movement.isFacingRight ? -1f : 1f))).normalized * fireTackleBonkKnockback); }
+        bool bumped = false;
+        bool usedAttack = false;
+        if (player.collisions.IsAgainstWall || player.collisions.IsHeadbonking)
+        {
+            bumped = true;
+            player.rb2d.velocity = ((Vector2.up + (Vector2.right * (player.movement.isFacingRight ? -1f : 1f))).normalized * fireTackleBonkKnockback);
+        }
         else
         {
             if (Input.GetButton("Attack"))
             {
+                usedAttack = true;
                 GameObject objTemp = Instantiate(fireProjectilePrefab, projectileSpawnPoint.position, Quaternion.identity);
                 FireMissile fireTemp = objTemp.GetComponent<FireMissile>();
                 if (fireTemp != null) { fireTemp.Setup(player.movement.isFacingRight, Mathf.Abs(player.rb2d.velocity.x)); }
@@ -203,12 +210,13 @@ public class PlayerAttacks : MonoBehaviour
                 player.temper.ChangeTemperBy(-1);
             }
         }
+
         player.rb2d.gravityScale = player.jumping.fallingGravity;
         float deceleration = Mathf.Abs(player.rb2d.velocity.x / fireTackleEndlag);
         float endlagTimer = fireTackleEndlag;
         while (endlagTimer > 0f)
         {
-            if (endlagTimer < fireTackleEndlagCancel && (Input.GetAxisRaw("Horizontal") * (player.movement.isFacingRight ? 1f : -1f)) > 0f && (!player.collisions.IsGrounded || player.buffers.jumpBufferTimeLeft > 0f)) { break; }
+            if (!usedAttack && !bumped && endlagTimer < fireTackleEndlagCancel && (Input.GetAxisRaw("Horizontal") * (player.movement.isFacingRight ? 1f : -1f)) > 0f && player.collisions.IsGrounded && player.buffers.jumpBufferTimeLeft > 0f) { break; }
             if (player.collisions.IsGrounded && player.rb2d.velocity.x != 0f)
             {
                 if (player.rb2d.velocity.x > 0f)

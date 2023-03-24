@@ -38,6 +38,6 @@ public class PlayerAnimation : MonoBehaviour
     private float GetRunAnimationSpeed()
     {
         float retVal = ((player.rb2d.velocity.x / player.movement.topSpeed) * (player.movement.isFacingRight ? 1f : -1f));
-        return Mathf.Max(retVal, 0f);
+        return Mathf.Min(Mathf.Max(retVal, 0f), 1f);
     }
 }
