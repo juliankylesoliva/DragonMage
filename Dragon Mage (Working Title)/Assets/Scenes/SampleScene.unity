@@ -868,12 +868,12 @@ SpriteRenderer:
   m_SortingLayerID: 100433471
   m_SortingLayer: 2
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 5f4c06f8b4732f743ac453495887f969, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 1051337cddec8fe4889f7e0d1100d63b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 2, y: 2}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -960,8 +960,8 @@ MonoBehaviour:
   animationCtrl: {fileID: 0}
   rb2d: {fileID: 0}
   charSprite: {fileID: 0}
-  tempMageSprite: {fileID: 21300000, guid: 5f4c06f8b4732f743ac453495887f969, type: 3}
-  tempDragonSprite: {fileID: 21300000, guid: 688cbfe02bcc69e4bb745acaeb315072, type: 3}
+  tempMageSprite: {fileID: 21300000, guid: 1051337cddec8fe4889f7e0d1100d63b, type: 3}
+  tempDragonSprite: {fileID: 21300000, guid: 8f4a1653928647643aeed83df9f8291c, type: 3}
 --- !u!114 &557060674
 MonoBehaviour:
   m_ObjectHideFlags: 0
