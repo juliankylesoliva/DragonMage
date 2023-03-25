@@ -33,7 +33,7 @@ public class PlayerBuffers : MonoBehaviour
     {
         while (true)
         {
-            if (Input.GetButtonDown("Jump"))
+            if (player.jumpButtonDown)
             {
                 jumpBufferTimeLeft = jumpBufferTime;
             }
@@ -55,7 +55,7 @@ public class PlayerBuffers : MonoBehaviour
     {
         while (true)
         {
-            if (Input.GetButtonDown("Change Form"))
+            if (player.formChangeButtonDown)
             {
                 formChangeBufferTimeLeft = formChangeBufferTime;
             }

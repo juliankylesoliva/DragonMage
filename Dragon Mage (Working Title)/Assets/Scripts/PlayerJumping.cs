@@ -92,8 +92,8 @@ public class PlayerJumping : MonoBehaviour
 
         LandingReset();
 
-        bool didPlayerSpeedHop = (enableSpeedHopping && (player.rb2d.velocity.x * Input.GetAxisRaw("Horizontal")) > 0f && Mathf.Abs(player.rb2d.velocity.x) >= player.movement.topSpeed && player.buffers.highestSpeedBuffer >= Mathf.Abs(player.rb2d.velocity.x));
-        float horizontalResult = (didPlayerSpeedHop ? (player.buffers.highestSpeedBuffer * Input.GetAxisRaw("Horizontal")) : player.rb2d.velocity.x);
+        bool didPlayerSpeedHop = (enableSpeedHopping && (player.rb2d.velocity.x * player.inputVector.x) > 0f && Mathf.Abs(player.rb2d.velocity.x) >= player.movement.topSpeed && player.buffers.highestSpeedBuffer >= Mathf.Abs(player.rb2d.velocity.x));
+        float horizontalResult = (didPlayerSpeedHop ? (player.buffers.highestSpeedBuffer * player.inputVector.x) : player.rb2d.velocity.x);
         if (didPlayerSpeedHop && Mathf.Abs(horizontalResult) >= (Mathf.Abs(player.rb2d.velocity.x) + 0.25f))
         {
             GameObject tempObj = EffectFactory.SpawnEffect("SpeedHopSpark", player.collisions.groundCheckObj.position);
@@ -107,7 +107,7 @@ public class PlayerJumping : MonoBehaviour
     {
         if (player.rb2d.velocity.y > 0f)
         {
-            if (jumpIsHeld && !Input.GetButton("Jump"))
+            if (jumpIsHeld && !player.jumpButtonHeld)
             {
                 jumpIsHeld = false;
             }
@@ -129,7 +129,7 @@ public class PlayerJumping : MonoBehaviour
 
     public bool CanGlide()
     {
-        return (enableAirStalling && player.rb2d.velocity.y <= 0f && currentAirStallTime <= 0f && player.collisions.CheckDistanceToGround(minimumAirStallHeight) && Input.GetButton("Jump"));
+        return (enableAirStalling && player.rb2d.velocity.y <= 0f && currentAirStallTime <= 0f && player.collisions.CheckDistanceToGround(minimumAirStallHeight) && player.jumpButtonHeld);
     }
 
     public void GlideStart()
@@ -179,7 +179,7 @@ public class PlayerJumping : MonoBehaviour
 
     public bool CanWallSlide()
     {
-        return (enableWallJumping && player.collisions.CheckDistanceToGround(minimumWallJumpHeight) && !player.collisions.IsGrounded && player.collisions.IsAgainstWall && (player.movement.isFacingRight ? (Input.GetAxisRaw("Horizontal") > 0f && player.collisions.IsTouchingWallR) : (Input.GetAxisRaw("Horizontal") < 0f && player.collisions.IsTouchingWallL)) && (!Input.GetButton("Jump") || !jumpIsHeld || player.rb2d.velocity.y < 0f));
+        return (enableWallJumping && player.collisions.CheckDistanceToGround(minimumWallJumpHeight) && !player.collisions.IsGrounded && player.collisions.IsAgainstWall && (player.movement.isFacingRight ? (player.inputVector.x > 0f && player.collisions.IsTouchingWallR) : (player.inputVector.x < 0f && player.collisions.IsTouchingWallL)) && (!player.jumpButtonHeld || !jumpIsHeld || player.rb2d.velocity.y < 0f));
     }
 
     public void WallSlideStart()
@@ -191,7 +191,7 @@ public class PlayerJumping : MonoBehaviour
 
     public bool IsWallSlideCanceled()
     {
-        return (!player.collisions.IsAgainstWall || !player.collisions.CheckDistanceToGround(minimumWallJumpHeight) || (Input.GetAxisRaw("Horizontal") * (player.movement.isFacingRight ? 1f : -1f)) <= 0f);
+        return (!player.collisions.IsAgainstWall || !player.collisions.CheckDistanceToGround(minimumWallJumpHeight) || (player.inputVector.x * (player.movement.isFacingRight ? 1f : -1f)) <= 0f);
     }
 
     public bool CanWallJump()
@@ -214,7 +214,7 @@ public class PlayerJumping : MonoBehaviour
 
     public bool CanWallClimb()
     {
-        return (enableWallClimbing && player.collisions.CheckDistanceToGround(minimumWallClimbHeight) && currentWallClimbTime <= 0f && !player.collisions.IsGrounded && player.collisions.IsAgainstWall && (Input.GetAxisRaw("Horizontal") * (player.movement.isFacingRight ? 1f : -1f)) > 0f);
+        return (enableWallClimbing && player.collisions.CheckDistanceToGround(minimumWallClimbHeight) && currentWallClimbTime <= 0f && !player.collisions.IsGrounded && player.collisions.IsAgainstWall && (player.inputVector.x * (player.movement.isFacingRight ? 1f : -1f)) > 0f);
     }
 
     public void WallClimbStart()
@@ -246,12 +246,12 @@ public class PlayerJumping : MonoBehaviour
 
     public bool IsWallClimbCanceled()
     {
-        return (currentWallClimbTime <= 0f || player.rb2d.velocity.y <= 0f || !player.collisions.IsAgainstWall || (Input.GetAxisRaw("Horizontal") * (player.movement.isFacingRight ? 1f : -1f)) <= 0f);
+        return (currentWallClimbTime <= 0f || player.rb2d.velocity.y <= 0f || !player.collisions.IsAgainstWall || (player.inputVector.x * (player.movement.isFacingRight ? 1f : -1f)) <= 0f);
     }
 
     public bool CanStartWallVault()
     {
-        return (currentWallClimbTime < maxWallClimbTime && player.rb2d.velocity.y > 0f && !player.collisions.IsAgainstWall && (Input.GetAxisRaw("Horizontal") * (player.movement.isFacingRight ? 1f : -1f)) > 0f);
+        return (currentWallClimbTime < maxWallClimbTime && player.rb2d.velocity.y > 0f && !player.collisions.IsAgainstWall && (player.inputVector.x * (player.movement.isFacingRight ? 1f : -1f)) > 0f);
     }
 
     public void WallVaultStart()
@@ -263,7 +263,7 @@ public class PlayerJumping : MonoBehaviour
 
     public bool CanWallVaultDash()
     {
-        return (postClimbDashTimeLeft > 0f && player.rb2d.velocity.y > 0f && !player.collisions.IsAgainstWall && (Input.GetAxisRaw("Horizontal") * (player.movement.isFacingRight ? 1f : -1f)) > 0f && Input.GetButton("Jump"));
+        return (postClimbDashTimeLeft > 0f && player.rb2d.velocity.y > 0f && !player.collisions.IsAgainstWall && (player.inputVector.x * (player.movement.isFacingRight ? 1f : -1f)) > 0f && player.jumpButtonHeld);
     }
 
     public void WallVaultUpdate()
@@ -282,7 +282,7 @@ public class PlayerJumping : MonoBehaviour
         jumpIsHeld = true;
         player.rb2d.gravityScale = risingGravity;
 
-        player.rb2d.velocity = new Vector2(storedWallClimbSpeed * Input.GetAxisRaw("Horizontal"), jumpSpeed);
+        player.rb2d.velocity = new Vector2(storedWallClimbSpeed * player.inputVector.x, jumpSpeed);
     }
 
     public void WallVaultEnd()
@@ -292,7 +292,7 @@ public class PlayerJumping : MonoBehaviour
 
     public bool IsWallVaultCanceled()
     {
-        return (postClimbDashTimeLeft <= 0f || player.rb2d.velocity.y <= 0f || (Input.GetAxisRaw("Horizontal") * (player.movement.isFacingRight ? 1f : -1f)) <= 0f);
+        return (postClimbDashTimeLeft <= 0f || player.rb2d.velocity.y <= 0f || (player.inputVector.x * (player.movement.isFacingRight ? 1f : -1f)) <= 0f);
     }
 
     public void LandingReset()

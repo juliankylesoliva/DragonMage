@@ -12,6 +12,7 @@ public class PlayerForm : MonoBehaviour
     [SerializeField] PlayerCtrlProperties dragonProperties;
 
     [SerializeField] CharacterMode startingMode = CharacterMode.MAGE;
+    public CharacterMode StartingMode { get { return startingMode; } }
 
     [SerializeField] float formChangeTime = 0.25f;
     [SerializeField] float formChangeCooldownTime = 0.1f;

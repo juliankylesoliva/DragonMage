@@ -9,6 +9,7 @@ public class FireMissile : MonoBehaviour
     [SerializeField] float lifetime = 1f;
 
     /* SCRIPT VARIABLES */
+    PlayerTemper temper;
     private float moveSpeedBonus = 0f;
     private float lifetimeLeft = 0f;
 
@@ -33,8 +34,9 @@ public class FireMissile : MonoBehaviour
         }
     }
 
-    public void Setup(bool isGoingRight = true, float horizontalVelocity = 0f)
+    public void Setup(PlayerTemper temper, bool isGoingRight = true, float horizontalVelocity = 0f)
     {
+        this.temper = temper;
         moveSpeedBonus = Mathf.Abs(horizontalVelocity * 0.5f);
         this.transform.Rotate(0f, 0f, (isGoingRight ? 0f : 180f));
     }
@@ -50,6 +52,7 @@ public class FireMissile : MonoBehaviour
         }
         else if (block != null && (block.breakableBy == BreakableType.ANY || block.breakableBy == BreakableType.FIRE))
         {
+            temper.NeutralizeTemperBy(2);
             block.onBreak.Invoke();
         }
         else { /* Nothing */ }

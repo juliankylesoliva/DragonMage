@@ -18,6 +18,7 @@ public class BlastJumpHitbox : MonoBehaviour
             BreakableBlock block = other.gameObject.GetComponent<BreakableBlock>();
             if (block != null && (block.breakableBy == BreakableType.ANY || block.breakableBy == BreakableType.MAGIC))
             {
+                player.temper.NeutralizeTemperBy(-2);
                 block.onBreak.Invoke();
             }
         }

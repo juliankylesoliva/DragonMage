@@ -48,7 +48,7 @@ public class PlayerAttacks : MonoBehaviour
 
     public void UseAttack()
     {
-        if (!player.temper.forceFormChange && !isAttackCooldownActive && !isFireTackleActive && Input.GetButtonDown("Attack"))
+        if (!player.temper.forceFormChange && !isAttackCooldownActive && !isFireTackleActive && player.attackButtonDown)
         {
             if (player.form.currentMode == CharacterMode.MAGE)
             {
@@ -62,7 +62,7 @@ public class PlayerAttacks : MonoBehaviour
                     MagicBlast projTemp = tempObj.GetComponent<MagicBlast>();
                     if (projTemp != null)
                     {
-                        projTemp.Setup(player.movement.isFacingRight, player.rb2d.velocity.x, Input.GetAxisRaw("Vertical"));
+                        projTemp.Setup(player.temper, player.movement.isFacingRight, player.rb2d.velocity.x, player.inputVector.y);
                         projectileRef = projTemp;
                     }
                 }
@@ -144,8 +144,8 @@ public class PlayerAttacks : MonoBehaviour
         {
             player.rb2d.gravityScale = 0f;
             player.rb2d.velocity = Vector2.zero;
-            player.movement.SetFacingDirection(Input.GetAxisRaw("Horizontal"));
-            verticalAxis = Input.GetAxisRaw("Vertical");
+            player.movement.SetFacingDirection(player.inputVector.x);
+            verticalAxis = player.inputVector.y;
             if (player.collisions.IsGrounded && verticalAxis < 0) { verticalAxis = 0f; }
             windupTimer -= Time.deltaTime;
             yield return null;
@@ -192,7 +192,7 @@ public class PlayerAttacks : MonoBehaviour
         currentAttackState = AttackState.ENDLAG;
         player.charSprite.color = Color.gray;
         bool bumped = false;
-        bool usedAttack = false;
+        bool firedProjectile = false;
         if (player.collisions.IsAgainstWall || player.collisions.IsHeadbonking)
         {
             bumped = true;
@@ -200,12 +200,12 @@ public class PlayerAttacks : MonoBehaviour
         }
         else
         {
-            if (Input.GetButton("Attack"))
+            if (player.attackButtonHeld)
             {
-                usedAttack = true;
+                firedProjectile = true;
                 GameObject objTemp = Instantiate(fireProjectilePrefab, projectileSpawnPoint.position, Quaternion.identity);
                 FireMissile fireTemp = objTemp.GetComponent<FireMissile>();
-                if (fireTemp != null) { fireTemp.Setup(player.movement.isFacingRight, Mathf.Abs(player.rb2d.velocity.x)); }
+                if (fireTemp != null) { fireTemp.Setup(player.temper, player.movement.isFacingRight, Mathf.Abs(player.rb2d.velocity.x)); }
                 player.rb2d.velocity = new Vector2(-player.rb2d.velocity.x * fireTackleRecoilMultiplier, player.rb2d.velocity.y);
                 player.temper.ChangeTemperBy(-1);
             }
@@ -216,7 +216,7 @@ public class PlayerAttacks : MonoBehaviour
         float endlagTimer = fireTackleEndlag;
         while (endlagTimer > 0f)
         {
-            if (!usedAttack && !bumped && endlagTimer < fireTackleEndlagCancel && (Input.GetAxisRaw("Horizontal") * (player.movement.isFacingRight ? 1f : -1f)) > 0f && player.collisions.IsGrounded && player.buffers.jumpBufferTimeLeft > 0f) { break; }
+            if (!firedProjectile && !bumped && endlagTimer < fireTackleEndlagCancel && (player.inputVector.x * (player.movement.isFacingRight ? 1f : -1f)) > 0f && player.collisions.IsGrounded && player.buffers.jumpBufferTimeLeft > 0f) { break; }
             if (player.collisions.IsGrounded && player.rb2d.velocity.x != 0f)
             {
                 if (player.rb2d.velocity.x > 0f)

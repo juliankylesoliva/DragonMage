@@ -1,11 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PlayerCtrl : MonoBehaviour
 {
     /* COMPONENTS */
-    public StateMachine stateMachine;
+    [HideInInspector] public StateMachine stateMachine;
     [HideInInspector] public PlayerCollisions collisions;
     [HideInInspector] public PlayerBuffers buffers;
     [HideInInspector] public PlayerMovement movement;
@@ -18,10 +19,36 @@ public class PlayerCtrl : MonoBehaviour
     [HideInInspector] public Rigidbody2D rb2d;
     [HideInInspector] public SpriteRenderer charSprite;
 
-    /* DRAG AND DROP */
-    [Header("Drag and Drop")]
-    public Sprite tempMageSprite;
-    public Sprite tempDragonSprite;
+    /* INPUT ACTIONS */
+    [Header("Input Actions")]
+    [SerializeField] private InputAction moveAction;
+    [SerializeField] private InputAction jumpAction;
+    [SerializeField] private InputAction attackAction;
+    [SerializeField] private InputAction formChangeAction;
+
+    /* INPUT VARIABLES */
+    public Vector2 inputVector { get; private set; }
+    public bool jumpButtonDown { get; private set; }
+    public bool jumpButtonHeld { get; private set; }
+    public bool attackButtonDown { get; private set; }
+    public bool attackButtonHeld { get; private set; }
+    public bool formChangeButtonDown { get; private set; }
+
+    void OnEnable()
+    {
+        moveAction.Enable();
+        jumpAction.Enable();
+        attackAction.Enable();
+        formChangeAction.Enable();
+    }
+
+    void OnDisable()
+    {
+        moveAction.Disable();
+        jumpAction.Disable();
+        attackAction.Disable();
+        formChangeAction.Disable();
+    }
 
     void Awake()
     {
@@ -39,10 +66,26 @@ public class PlayerCtrl : MonoBehaviour
         
         stateMachine = new StateMachine(this);
         stateMachine.Initialize(stateMachine.standingState);
+
+        jumpAction.started += ctx => { jumpButtonDown = true; jumpButtonHeld = true; };
+        jumpAction.canceled += ctx => { jumpButtonHeld = false; };
+
+        attackAction.started += ctx => { attackButtonDown = true; attackButtonHeld = true; };
+        attackAction.canceled += ctx => { attackButtonHeld = false; };
+
+        formChangeAction.started += ctx => { formChangeButtonDown = true; };
     }
 
     void Update()
     {
+        inputVector = moveAction.ReadValue<Vector2>();
         stateMachine.Update();
+    }
+
+    void LateUpdate()
+    {
+        if (jumpButtonDown) { jumpButtonDown = false; }
+        if (attackButtonDown) { attackButtonDown = false; }
+        if (formChangeButtonDown) { formChangeButtonDown = false; }
     }
 }

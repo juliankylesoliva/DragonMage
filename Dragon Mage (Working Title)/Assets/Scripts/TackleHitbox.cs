@@ -31,6 +31,7 @@ public class TackleHitbox : MonoBehaviour
 
             if (block != null && !block.isReinforced && (block.breakableBy == BreakableType.ANY || block.breakableBy == BreakableType.FIRE))
             {
+                player.temper.NeutralizeTemperBy(1);
                 block.onBreak.Invoke();
             }
         }

@@ -25,27 +25,27 @@ public class PlayerMovement : MonoBehaviour
     public void FacingDirection()
     {
         if (player.form.isChangingForm || player.attacks.isFireTackleActive || player.jumping.isWallJumpCooldownActive || (!changeFacingDirectionMidair && !player.collisions.IsGrounded) || (player.jumping.currentAirStallTime > 0f && player.jumping.currentAirStallTime < player.jumping.maxAirStallTime)) { return; }
-        SetFacingDirection(Input.GetAxisRaw("Horizontal"));
+        SetFacingDirection(player.inputVector.x);
     }
 
     public void Movement()
     {
         if (player.form.isChangingForm || player.jumping.isWallJumpCooldownActive || player.attacks.isFireTackleActive) { return; }
 
-        if (Input.GetAxisRaw("Horizontal") != 0f)
+        if (player.inputVector.x != 0f)
         {
-            if (player.collisions.IsAgainstWall && (Input.GetAxisRaw("Horizontal") * (isFacingRight ? 1f : -1f)) > 0f)
+            if (player.collisions.IsAgainstWall && (player.inputVector.x * (isFacingRight ? 1f : -1f)) > 0f)
             {
                 player.rb2d.velocity = new Vector2(0f, player.rb2d.velocity.y);
             }
-            else if ((player.rb2d.velocity.x * Input.GetAxisRaw("Horizontal")) >= 0f)
+            else if ((player.rb2d.velocity.x * player.inputVector.x) >= 0f)
             {
                 if (Mathf.Abs(player.rb2d.velocity.x) < topSpeed)
                 {
-                    player.rb2d.velocity = new Vector2(player.rb2d.velocity.x + ((player.collisions.IsGrounded ? acceleration : airAcceleration) * Input.GetAxisRaw("Horizontal") * Time.deltaTime), player.rb2d.velocity.y);
+                    player.rb2d.velocity = new Vector2(player.rb2d.velocity.x + ((player.collisions.IsGrounded ? acceleration : airAcceleration) * player.inputVector.x * Time.deltaTime), player.rb2d.velocity.y);
                     if (Mathf.Abs(player.rb2d.velocity.x) > topSpeed)
                     {
-                        player.rb2d.velocity = new Vector2(topSpeed * Input.GetAxisRaw("Horizontal"), player.rb2d.velocity.y);
+                        player.rb2d.velocity = new Vector2(topSpeed * player.inputVector.x, player.rb2d.velocity.y);
                     }
 
                 }
@@ -71,7 +71,7 @@ public class PlayerMovement : MonoBehaviour
             {
                 if (player.rb2d.velocity.x != 0f)
                 {
-                    player.rb2d.velocity += (Vector2.right * (player.collisions.IsGrounded ? turningSpeed : airTurningSpeed) * Input.GetAxisRaw("Horizontal") * Time.deltaTime);
+                    player.rb2d.velocity += (Vector2.right * (player.collisions.IsGrounded ? turningSpeed : airTurningSpeed) * player.inputVector.x * Time.deltaTime);
                 }
             }
         }

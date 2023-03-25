@@ -9,6 +9,7 @@ public class BlastHitbox : MonoBehaviour
 
     [SerializeField] LayerMask impassableLayer;
 
+    private PlayerTemper temper;
     private bool isArmed = false;
     private float hitboxRadius = 0f;
     private float hitboxDuration = 0f;
@@ -31,8 +32,9 @@ public class BlastHitbox : MonoBehaviour
         }
     }
 
-    public void Setup(float duration, float strength, float radius)
+    public void Setup(PlayerTemper temper, float duration, float strength, float radius)
     {
+        this.temper = temper;
         isArmed = true;
         hitboxDuration = duration;
         knockbackStrength = strength;
@@ -63,6 +65,7 @@ public class BlastHitbox : MonoBehaviour
 
             if (hit.distance >= raycastDistance)
             {
+                temper.NeutralizeTemperBy(-1);
                 block.onBreak.Invoke();
             }
         }

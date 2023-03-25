@@ -88,7 +88,7 @@ public abstract class State : IState
 
     protected bool CheckRunInput()
     {
-        if (player.collisions.IsGrounded && (!player.collisions.IsAgainstWall || (Input.GetAxisRaw("Horizontal") * (player.movement.isFacingRight ? 1f : -1f)) < 0f) && Input.GetAxisRaw("Horizontal") != 0f)
+        if (player.collisions.IsGrounded && (!player.collisions.IsAgainstWall || (player.inputVector.x * (player.movement.isFacingRight ? 1f : -1f)) < 0f) && player.inputVector.x != 0f)
         {
             player.stateMachine.TransitionTo(player.stateMachine.runningState);
             return true;
@@ -250,7 +250,7 @@ public class RunningState : State
 
     private bool CheckIfStopped()
     {
-        if ((player.collisions.IsAgainstWall && (Input.GetAxisRaw("Horizontal") * (player.movement.isFacingRight ? 1f : -1f)) > 0f) || (Input.GetAxisRaw("Horizontal") == 0f && player.rb2d.velocity.x == 0f))
+        if ((player.collisions.IsAgainstWall && (player.inputVector.x * (player.movement.isFacingRight ? 1f : -1f)) > 0f) || (player.inputVector.x == 0f && player.rb2d.velocity.x == 0f))
         {
             player.stateMachine.TransitionTo(player.stateMachine.standingState);
             return true;
@@ -339,7 +339,7 @@ public class GlidingState : State
 
     private bool CheckGlideCancel()
     {
-        if (!Input.GetButton("Jump") || player.jumping.currentAirStallTime >= player.jumping.maxAirStallTime)
+        if (!player.jumpButtonHeld || player.jumping.currentAirStallTime >= player.jumping.maxAirStallTime)
         {
             player.stateMachine.TransitionTo(player.stateMachine.fallingState);
             return true;
@@ -499,7 +499,7 @@ public class FireTacklingState : State
         {
             State nextState;
             if (player.temper.forceFormChange) { nextState = player.stateMachine.formChangingState; }
-            else if (player.collisions.IsGrounded && Input.GetAxisRaw("Horizontal") != 0f) { nextState = player.stateMachine.runningState; }
+            else if (player.collisions.IsGrounded && player.inputVector.x != 0f) { nextState = player.stateMachine.runningState; }
             else if (player.rb2d.velocity.y > 0f) { nextState = player.stateMachine.jumpingState; }
             else if (player.rb2d.velocity.y <= 0f) { nextState = player.stateMachine.fallingState; }
             else { nextState = player.stateMachine.standingState; }

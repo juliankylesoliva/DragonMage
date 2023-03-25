@@ -23,6 +23,7 @@ public class MagicBlast : MonoBehaviour
     [SerializeField] float blastRadius = 1.5f;
 
     /* SCRIPT VARIABLES */
+    private PlayerTemper temper;
     private bool isCharged = false;
     private float fuseTimeLeft = 0f;
 
@@ -49,12 +50,13 @@ public class MagicBlast : MonoBehaviour
     {
         GameObject tempObj = Instantiate(blastHitboxPrefab, this.transform.position, Quaternion.identity);
         BlastHitbox tempBlast = tempObj.GetComponent<BlastHitbox>();
-        tempBlast.Setup(blastDuration * (isCharged ? chargeMultiplier : 1f), blastStrength * (isCharged ? chargeMultiplier : 1f), blastRadius * (isCharged ? chargeMultiplier : 1f));
+        tempBlast.Setup(temper, blastDuration * (isCharged ? chargeMultiplier : 1f), blastStrength * (isCharged ? chargeMultiplier : 1f), blastRadius * (isCharged ? chargeMultiplier : 1f));
         GameObject.Destroy(this.gameObject);
     }
 
-    public void Setup(bool isGoingRight = true, float horizontalVelocity = 0f, float verticalAxis = 0f)
+    public void Setup(PlayerTemper temper, bool isGoingRight = true, float horizontalVelocity = 0f, float verticalAxis = 0f)
     {
+        this.temper = temper;
         rb2d.velocity = new Vector2((isGoingRight ? horizontalLaunchSpeed : -horizontalLaunchSpeed) * (verticalAxis != 0f ? 0.25f : 1f) + (horizontalVelocity * 0.5f), verticalLaunchSpeed * (verticalAxis > 0f ? 2.5f : 1f) * (verticalAxis < 0f ? -0.5f : 1f));
         rb2d.AddTorque(rotationSpeed * (isGoingRight ? -1f : 1f) * (verticalAxis != 0f ? 0.5f : 1f));
     }
