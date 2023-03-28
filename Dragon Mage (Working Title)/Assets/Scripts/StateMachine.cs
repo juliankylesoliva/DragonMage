@@ -273,6 +273,7 @@ public class JumpingState : State
         player.movement.Movement();
         player.movement.FacingDirection();
         player.jumping.GroundJumpUpdate();
+        player.animationCtrl.JumpingAnimation();
         if (CheckFormChangeInput() || CheckFireTackleInput() || CheckMidairJumpInput() || CheckIfWallClimbing() || CheckIfWallSliding() || CheckIfFalling()) { return; }
     }
 
@@ -307,6 +308,7 @@ public class FallingState : State
         player.movement.Movement();
         player.movement.FacingDirection();
         player.jumping.FallingUpdate();
+        player.animationCtrl.JumpingAnimation();
         if (CheckFormChangeInput() || CheckFireTackleInput() || CheckRunInput() || CheckStationaryLanding() || CheckJumpInput() || CheckGlideInput() || CheckMidairJumpInput() || CheckIfWallClimbing() || CheckIfWallSliding()) { return; }
     }
 
