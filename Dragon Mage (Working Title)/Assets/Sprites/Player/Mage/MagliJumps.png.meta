@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: d6414f8b190052c499f582c9f8ab1dd8
+guid: 8166820b8c380fe4b8efc21bbf4c90fd
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -106,7 +106,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: DraelynJumps_0
+      name: MagliJumps_0
       rect:
         serializedVersion: 2
         x: 0
@@ -120,14 +120,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4a3a8fe2adc95734a924302d8f51e307
-      internalID: -479411132
+      spriteID: 2695ca318a1a932449718cd810775729
+      internalID: -996204889
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: DraelynJumps_1
+      name: MagliJumps_1
       rect:
         serializedVersion: 2
         x: 64
@@ -141,14 +141,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: dfe565bf6306cee458f3e4fb5c8787e6
-      internalID: 165339819
+      spriteID: 45c2897696f1f8e4cb9183fcf6168514
+      internalID: -2014493410
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: DraelynJumps_2
+      name: MagliJumps_2
       rect:
         serializedVersion: 2
         x: 128
@@ -162,14 +162,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 51abbd72e0fc8cd4097d53f7e6137948
-      internalID: -108876343
+      spriteID: cfbd198b7072e7f4da2fb4faa7651cbb
+      internalID: -2064624768
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: DraelynJumps_3
+      name: MagliJumps_3
       rect:
         serializedVersion: 2
         x: 192
@@ -183,8 +183,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e59bd09ffafb833438befda54b7574b8
-      internalID: -1071102230
+      spriteID: fa0b0b0c94dc54b4ba36ac12f8c0c740
+      internalID: -781692678
       vertices: []
       indices: 
       edges: []
@@ -200,10 +200,10 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      DraelynJumps_1: 165339819
-      DraelynJumps_3: -1071102230
-      DraelynJumps_0: -479411132
-      DraelynJumps_2: -108876343
+      MagliJumps_3: -781692678
+      MagliJumps_1: -2014493410
+      MagliJumps_2: -2064624768
+      MagliJumps_0: -996204889
   spritePackingTag: 
   pSDRemoveMatte: 0
   userData: 

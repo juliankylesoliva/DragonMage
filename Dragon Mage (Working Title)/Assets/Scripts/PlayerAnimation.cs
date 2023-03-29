@@ -40,20 +40,27 @@ public class PlayerAnimation : MonoBehaviour
     {
         if (!player.collisions.IsGrounded && player.rb2d.velocity.y != 0f)
         {
-            // TODO: Create Magli's jumping, falling, and gliding animations.
             if (player.rb2d.velocity.y > 0f)
             {
-                animator.Play(player.form.currentMode == CharacterMode.MAGE ? "MagliStand" : (player.jumping.currentMidairJumps > 0 ? "DraelynMidairJump" : "DraelynGroundJump"), -1, (player.jumpButtonDown ? 0f : Mathf.NegativeInfinity));
+                animator.Play(player.form.currentMode == CharacterMode.MAGE ? "MagliGroundJump" : (player.jumping.currentMidairJumps > 0 ? "DraelynMidairJump" : "DraelynGroundJump"), -1, (player.jumpButtonDown ? 0f : Mathf.NegativeInfinity));
             }
             else
             {
-                animator.Play(player.form.currentMode == CharacterMode.MAGE ? "MagliStand" : "DraelynFall");
+                animator.Play(player.form.currentMode == CharacterMode.MAGE ? "MagliFall" : "DraelynFall");
             }
             animator.speed = 1f;
         }
         else
         {
             StandingAnimation();
+        }
+    }
+
+    public void GlidingAnimation()
+    {
+        if (!player.collisions.IsGrounded && player.jumpButtonHeld && player.jumping.currentAirStallTime < player.jumping.maxAirStallTime)
+        {
+            animator.Play("MagliGlide");
         }
     }
 

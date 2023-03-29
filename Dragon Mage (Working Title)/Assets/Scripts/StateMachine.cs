@@ -213,8 +213,8 @@ public class StandingState : State
     public override void Update()
     {
         if (!player.attacks.isBlastJumpActive) { player.rb2d.velocity = Vector2.zero; }
-        player.animationCtrl.StandingAnimation();
         if (CheckFormChangeInput() || CheckFireTackleInput() || CheckRunInput() || CheckJumpInput() || CheckFireTackleInput() || CheckSuddenRise() || CheckSuddenFall() || CheckSuddenMovement()) { return; }
+        player.animationCtrl.StandingAnimation();
     }
 
     public override void Exit()
@@ -239,8 +239,8 @@ public class RunningState : State
     {
         player.movement.Movement();
         player.movement.FacingDirection();
-        player.animationCtrl.RunningAnimation();
         if (CheckFormChangeInput() || CheckFireTackleInput() || CheckIfStopped() || CheckSuddenFall() || CheckJumpInput() || CheckFireTackleInput()) { return; }
+        player.animationCtrl.RunningAnimation();
     }
 
     public override void Exit()
@@ -273,8 +273,8 @@ public class JumpingState : State
         player.movement.Movement();
         player.movement.FacingDirection();
         player.jumping.GroundJumpUpdate();
+        if (CheckFormChangeInput() || CheckFireTackleInput() || CheckGlideInput() || CheckMidairJumpInput() || CheckIfWallClimbing() || CheckIfWallSliding() || CheckIfFalling()) { return; }
         player.animationCtrl.JumpingAnimation();
-        if (CheckFormChangeInput() || CheckFireTackleInput() || CheckMidairJumpInput() || CheckIfWallClimbing() || CheckIfWallSliding() || CheckIfFalling()) { return; }
     }
 
     public override void Exit()
@@ -308,8 +308,8 @@ public class FallingState : State
         player.movement.Movement();
         player.movement.FacingDirection();
         player.jumping.FallingUpdate();
-        player.animationCtrl.JumpingAnimation();
         if (CheckFormChangeInput() || CheckFireTackleInput() || CheckRunInput() || CheckStationaryLanding() || CheckJumpInput() || CheckGlideInput() || CheckMidairJumpInput() || CheckIfWallClimbing() || CheckIfWallSliding()) { return; }
+        player.animationCtrl.JumpingAnimation();
     }
 
     public override void Exit()
@@ -332,6 +332,7 @@ public class GlidingState : State
         player.movement.Movement();
         player.jumping.GlideUpdate();
         if (CheckFormChangeInput() || CheckFireTackleInput() || CheckIfWallSliding() || CheckGlideCancel()) { return; }
+        player.animationCtrl.GlidingAnimation();
     }
 
     public override void Exit()
