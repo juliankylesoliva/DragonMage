@@ -68,7 +68,7 @@ TextureImporter:
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
-    maxTextureSize: 256
+    maxTextureSize: 512
     resizeAlgorithm: 1
     textureFormat: -1
     textureCompression: 0
@@ -120,8 +120,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4a3a8fe2adc95734a924302d8f51e307
-      internalID: -479411132
+      spriteID: 89dd1dfd53a1c0042869ad919335de5e
+      internalID: 1622029206
       vertices: []
       indices: 
       edges: []
@@ -141,8 +141,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: dfe565bf6306cee458f3e4fb5c8787e6
-      internalID: 165339819
+      spriteID: b0a9791f743269046bfc5d7fab8bcb37
+      internalID: -2037434820
       vertices: []
       indices: 
       edges: []
@@ -162,8 +162,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 51abbd72e0fc8cd4097d53f7e6137948
-      internalID: -108876343
+      spriteID: 7913aa69b78964e41b2426dcc4be52f3
+      internalID: 286009825
       vertices: []
       indices: 
       edges: []
@@ -183,8 +183,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e59bd09ffafb833438befda54b7574b8
-      internalID: -1071102230
+      spriteID: b59182d586eb48a4184143c10104ae3d
+      internalID: -370708590
       vertices: []
       indices: 
       edges: []
@@ -200,10 +200,10 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      DraelynJumps_1: 165339819
-      DraelynJumps_3: -1071102230
-      DraelynJumps_0: -479411132
-      DraelynJumps_2: -108876343
+      DraelynJumps_1: -2037434820
+      DraelynJumps_3: -370708590
+      DraelynJumps_0: 1622029206
+      DraelynJumps_2: 286009825
   spritePackingTag: 
   pSDRemoveMatte: 0
   userData: 

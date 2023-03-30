@@ -120,8 +120,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6063477e2f7dd9a46874b2996601e974
-      internalID: 1526277092
+      spriteID: f674a3ec225bb4b448a9ff1449e64494
+      internalID: -1227242399
       vertices: []
       indices: 
       edges: []
@@ -141,8 +141,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: cd8fa6f6328725c4ea58acc821e66d91
-      internalID: 1144379035
+      spriteID: 37d5e26c1cb86e74090ddbf3f88ce690
+      internalID: -2042395335
       vertices: []
       indices: 
       edges: []
@@ -162,8 +162,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1ce1fdadf1d415941875dc69ac4fc118
-      internalID: 1797226981
+      spriteID: 050040f2912a91242ab1fcfc77074b52
+      internalID: 1932680860
       vertices: []
       indices: 
       edges: []
@@ -183,8 +183,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: cd621dcbcd81567409984370ad3fdb9e
-      internalID: 960674298
+      spriteID: 67238d8bae2e38445b0b9d2e31066761
+      internalID: -1237514386
       vertices: []
       indices: 
       edges: []
@@ -204,8 +204,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5bd0463e53355ef4abeeedda9191c146
-      internalID: 770348207
+      spriteID: 9f35b1a45dab51c49b8cb0848db34771
+      internalID: 435466413
       vertices: []
       indices: 
       edges: []
@@ -225,8 +225,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 469ab9b2d5992e3409170275be55fe57
-      internalID: -1873289462
+      spriteID: b8b9de8a6725a6040a4073514567a7d7
+      internalID: -545763819
       vertices: []
       indices: 
       edges: []
@@ -242,12 +242,12 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      DraelynWalk_3: 960674298
-      DraelynWalk_5: -1873289462
-      DraelynWalk_4: 770348207
-      DraelynWalk_0: 1526277092
-      DraelynWalk_1: 1144379035
-      DraelynWalk_2: 1797226981
+      DraelynWalk_3: -1237514386
+      DraelynWalk_5: -545763819
+      DraelynWalk_4: 435466413
+      DraelynWalk_0: -1227242399
+      DraelynWalk_1: -2042395335
+      DraelynWalk_2: 1932680860
   spritePackingTag: 
   pSDRemoveMatte: 0
   userData: 

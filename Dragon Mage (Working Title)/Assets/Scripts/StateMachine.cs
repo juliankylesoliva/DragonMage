@@ -363,6 +363,7 @@ public class WallSlidingState : State
     public override void Update()
     {
         if (CheckFormChangeInput() || CheckFireTackleInput() || CheckIfWallJumping() || CheckWallSlideCancel()) { return; }
+        player.animationCtrl.WallSlidingAnimation();
     }
 
     public override void Exit()

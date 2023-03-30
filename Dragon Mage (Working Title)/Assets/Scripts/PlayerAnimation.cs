@@ -58,10 +58,12 @@ public class PlayerAnimation : MonoBehaviour
 
     public void GlidingAnimation()
     {
-        if (!player.collisions.IsGrounded && player.jumpButtonHeld && player.jumping.currentAirStallTime < player.jumping.maxAirStallTime)
-        {
-            animator.Play("MagliGlide");
-        }
+        animator.Play("MagliGlide");
+    }
+
+    public void WallSlidingAnimation()
+    {
+        animator.Play("MagliWallSlide");
     }
 
     private float GetRunAnimationSpeed()

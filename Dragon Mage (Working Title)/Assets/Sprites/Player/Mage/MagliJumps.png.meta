@@ -68,7 +68,7 @@ TextureImporter:
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
-    maxTextureSize: 256
+    maxTextureSize: 512
     resizeAlgorithm: 1
     textureFormat: -1
     textureCompression: 0
@@ -120,8 +120,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2695ca318a1a932449718cd810775729
-      internalID: -996204889
+      spriteID: 8c2ef74753d896243bf41db066af4cf3
+      internalID: 615943844
       vertices: []
       indices: 
       edges: []
@@ -141,8 +141,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 45c2897696f1f8e4cb9183fcf6168514
-      internalID: -2014493410
+      spriteID: 633beddfc6316aa4d848fa721116b630
+      internalID: 44249962
       vertices: []
       indices: 
       edges: []
@@ -162,8 +162,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: cfbd198b7072e7f4da2fb4faa7651cbb
-      internalID: -2064624768
+      spriteID: 5af5ab76d4de7c140a61b9b02eff262f
+      internalID: -1213651570
       vertices: []
       indices: 
       edges: []
@@ -183,8 +183,29 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: fa0b0b0c94dc54b4ba36ac12f8c0c740
-      internalID: -781692678
+      spriteID: 3219d5f1f17cee443b658efde5000cb3
+      internalID: -1528132463
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MagliJumps_4
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c5bad7264614e2a42bc93462f94ade01
+      internalID: 1813860429
       vertices: []
       indices: 
       edges: []
@@ -200,10 +221,11 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      MagliJumps_3: -781692678
-      MagliJumps_1: -2014493410
-      MagliJumps_2: -2064624768
-      MagliJumps_0: -996204889
+      MagliJumps_4: 1813860429
+      MagliJumps_3: -1528132463
+      MagliJumps_1: 44249962
+      MagliJumps_2: -1213651570
+      MagliJumps_0: 615943844
   spritePackingTag: 
   pSDRemoveMatte: 0
   userData: 

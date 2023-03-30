@@ -37,9 +37,9 @@ TextureImporter:
     filterMode: 0
     aniso: 1
     mipBias: 0
-    wrapU: 1
-    wrapV: 1
-    wrapW: 1
+    wrapU: 0
+    wrapV: 0
+    wrapW: 0
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
@@ -120,8 +120,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c4cc6f6161c7a4b4986030941fbbda46
-      internalID: 291394878
+      spriteID: e4dfdcb3c3ff66741a8366936e97c8b0
+      internalID: 782389985
       vertices: []
       indices: 
       edges: []
@@ -141,8 +141,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d240bd38fe8eee246a91f77f77fff4aa
-      internalID: 1188485855
+      spriteID: 349b440fe4fb0a44c9b7c2cfc8ff26ba
+      internalID: 770489849
       vertices: []
       indices: 
       edges: []
@@ -162,8 +162,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 81dee90ba9a82a94c9f81adfca2385ee
-      internalID: -2111409214
+      spriteID: 26385af96e0654f4d99016b3403269af
+      internalID: 2088873657
       vertices: []
       indices: 
       edges: []
@@ -183,8 +183,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1725480ccfd20b54c8df0fbc77d1b17e
-      internalID: -708777926
+      spriteID: 9421c438eec5f1b43894c6e376788f32
+      internalID: -977903349
       vertices: []
       indices: 
       edges: []
@@ -204,8 +204,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5393a3e3708e61b4eacd2c541031d883
-      internalID: 1352358353
+      spriteID: 6b8f3cb36b6881b4aafd1cd05357b74c
+      internalID: -667087249
       vertices: []
       indices: 
       edges: []
@@ -225,8 +225,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a6166cf0530eab244a5f7b64b6570f8b
-      internalID: -525283864
+      spriteID: 5974df736d14fde499b9aacbcf0040b8
+      internalID: -546798618
       vertices: []
       indices: 
       edges: []
@@ -242,12 +242,12 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      MagliRun_2: -2111409214
-      MagliRun_4: 1352358353
-      MagliRun_5: -525283864
-      MagliRun_0: 291394878
-      MagliRun_3: -708777926
-      MagliRun_1: 1188485855
+      MagliRun_2: 2088873657
+      MagliRun_4: -667087249
+      MagliRun_5: -546798618
+      MagliRun_0: 782389985
+      MagliRun_3: -977903349
+      MagliRun_1: 770489849
   spritePackingTag: 
   pSDRemoveMatte: 0
   userData: 
