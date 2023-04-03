@@ -114,14 +114,14 @@ TextureImporter:
         width: 64
         height: 64
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8c2ef74753d896243bf41db066af4cf3
-      internalID: 615943844
+      spriteID: 22a7912b27d301d45940ab74e7c66930
+      internalID: 944680551
       vertices: []
       indices: 
       edges: []
@@ -135,14 +135,14 @@ TextureImporter:
         width: 64
         height: 64
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 633beddfc6316aa4d848fa721116b630
-      internalID: 44249962
+      spriteID: 4733f7043302d1246b3b798246b98da4
+      internalID: -752625187
       vertices: []
       indices: 
       edges: []
@@ -156,14 +156,14 @@ TextureImporter:
         width: 64
         height: 64
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5af5ab76d4de7c140a61b9b02eff262f
-      internalID: -1213651570
+      spriteID: fc24daca84ed7d442929e5e60a3b1660
+      internalID: 1662919193
       vertices: []
       indices: 
       edges: []
@@ -177,14 +177,14 @@ TextureImporter:
         width: 64
         height: 64
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3219d5f1f17cee443b658efde5000cb3
-      internalID: -1528132463
+      spriteID: 0003940719909314bb8be3da1ca84aaf
+      internalID: -286802449
       vertices: []
       indices: 
       edges: []
@@ -198,14 +198,14 @@ TextureImporter:
         width: 64
         height: 64
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c5bad7264614e2a42bc93462f94ade01
-      internalID: 1813860429
+      spriteID: df3193e24f113ba438a5376a8eac6f1b
+      internalID: 929995690
       vertices: []
       indices: 
       edges: []
@@ -221,11 +221,11 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      MagliJumps_4: 1813860429
-      MagliJumps_3: -1528132463
-      MagliJumps_1: 44249962
-      MagliJumps_2: -1213651570
-      MagliJumps_0: 615943844
+      MagliJumps_4: 929995690
+      MagliJumps_3: -286802449
+      MagliJumps_1: -752625187
+      MagliJumps_2: 1662919193
+      MagliJumps_0: 944680551
   spritePackingTag: 
   pSDRemoveMatte: 0
   userData: 

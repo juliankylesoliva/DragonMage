@@ -48,11 +48,11 @@ TagManager:
   - name: Background
     uniqueID: 3482867403
     locked: 0
-  - name: Characters
-    uniqueID: 100433471
-    locked: 0
   - name: Foreground
     uniqueID: 2244118473
+    locked: 0
+  - name: Characters
+    uniqueID: 100433471
     locked: 0
   - name: Projectiles
     uniqueID: 2264151975

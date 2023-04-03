@@ -12,16 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4754c104f8943c4db9130021073c864, type: 3}
   m_Name: DragonProperties
   m_EditorClassIdentifier: 
-  _acceleration: 6
+  _acceleration: 12
   _deceleration: 16
-  _topSpeed: 3
-  _turningSpeed: 12
+  _topSpeed: 3.85
+  _turningSpeed: 22
   _changeFacingDirectionMidair: 0
   _enableSpeedHopping: 0
   _jumpSpeed: 6.25
   _risingGravity: 1.35
-  _fallingGravity: 2.6
-  _fallSpeed: 10
+  _fallingGravity: 4.25
+  _fallSpeed: 16
   _airAcceleration: 25
   _airDeceleration: 18
   _airTurningSpeed: 20

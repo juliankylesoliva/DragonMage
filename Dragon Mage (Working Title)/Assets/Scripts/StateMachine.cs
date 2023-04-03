@@ -273,7 +273,7 @@ public class JumpingState : State
         player.movement.Movement();
         player.movement.FacingDirection();
         player.jumping.GroundJumpUpdate();
-        if (CheckFormChangeInput() || CheckFireTackleInput() || CheckGlideInput() || CheckMidairJumpInput() || CheckIfWallClimbing() || CheckIfWallSliding() || CheckIfFalling()) { return; }
+        if (CheckFormChangeInput() || CheckFireTackleInput() || CheckIfWallClimbing() || CheckIfWallSliding() || CheckGlideInput() || CheckMidairJumpInput() || CheckIfFalling()) { return; }
         player.animationCtrl.JumpingAnimation();
     }
 
@@ -308,7 +308,7 @@ public class FallingState : State
         player.movement.Movement();
         player.movement.FacingDirection();
         player.jumping.FallingUpdate();
-        if (CheckFormChangeInput() || CheckFireTackleInput() || CheckRunInput() || CheckStationaryLanding() || CheckJumpInput() || CheckGlideInput() || CheckMidairJumpInput() || CheckIfWallClimbing() || CheckIfWallSliding()) { return; }
+        if (CheckFormChangeInput() || CheckFireTackleInput() || CheckRunInput() || CheckStationaryLanding() || CheckJumpInput() || CheckIfWallClimbing() || CheckIfWallSliding() || CheckGlideInput() || CheckMidairJumpInput()) { return; }
         player.animationCtrl.JumpingAnimation();
     }
 
@@ -406,6 +406,7 @@ public class WallClimbingState : State
     {
         player.jumping.WallClimbUpdate();
         if (CheckFormChangeInput() || CheckFireTackleInput() || CheckWallVault() || CheckWallClimbCancel()) { return; }
+        player.animationCtrl.WallClimbingAnimation();
     }
 
     public override void Exit()
@@ -449,6 +450,7 @@ public class WallVaultingState : State
     {
         player.jumping.WallVaultUpdate();
         if (CheckFormChangeInput() || CheckFireTackleInput() || CheckWallVaultDash() || CheckWallVaultCancel()) { return; }
+        player.animationCtrl.JumpingAnimation();
     }
 
     public override void Exit()
@@ -471,7 +473,8 @@ public class WallVaultingState : State
     {
         if (player.jumping.IsWallVaultCanceled())
         {
-            player.stateMachine.TransitionTo((player.rb2d.velocity.y > 0f ? player.stateMachine.jumpingState : player.stateMachine.fallingState));
+            player.jumping.WallClimbCancel();
+            player.stateMachine.TransitionTo(player.stateMachine.fallingState);
             return true;
         }
         return false;

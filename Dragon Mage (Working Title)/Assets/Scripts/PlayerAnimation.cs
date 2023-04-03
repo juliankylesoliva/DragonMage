@@ -42,7 +42,7 @@ public class PlayerAnimation : MonoBehaviour
         {
             if (player.rb2d.velocity.y > 0f)
             {
-                animator.Play(player.form.currentMode == CharacterMode.MAGE ? "MagliGroundJump" : (player.jumping.currentMidairJumps > 0 ? "DraelynMidairJump" : "DraelynGroundJump"), -1, (player.jumpButtonDown ? 0f : Mathf.NegativeInfinity));
+                animator.Play(player.form.currentMode == CharacterMode.MAGE ? "MagliGroundJump" : (player.stateMachine.PreviousState == player.stateMachine.wallVaultingState ? "DraelynDashJump" : (player.jumping.currentMidairJumps > 0 ? "DraelynMidairJump" : "DraelynGroundJump")), -1, (player.jumpButtonDown ? 0f : Mathf.NegativeInfinity));
             }
             else
             {
@@ -64,6 +64,11 @@ public class PlayerAnimation : MonoBehaviour
     public void WallSlidingAnimation()
     {
         animator.Play("MagliWallSlide");
+    }
+
+    public void WallClimbingAnimation()
+    {
+        animator.Play("DraelynWallClimb");
     }
 
     private float GetRunAnimationSpeed()

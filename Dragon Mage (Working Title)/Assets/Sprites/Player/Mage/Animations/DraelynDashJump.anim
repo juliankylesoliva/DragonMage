@@ -6,7 +6,7 @@ AnimationClip:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: MagliGlide
+  m_Name: DraelynDashJump
   serializedVersion: 7
   m_Legacy: 0
   m_Compressed: 0
@@ -20,7 +20,9 @@ AnimationClip:
   m_PPtrCurves:
   - curve:
     - time: 0
-      value: {fileID: -286802449, guid: 8166820b8c380fe4b8efc21bbf4c90fd, type: 3}
+      value: {fileID: 1086376987, guid: d6414f8b190052c499f582c9f8ab1dd8, type: 3}
+    - time: 0.05
+      value: {fileID: -1495909219, guid: d6414f8b190052c499f582c9f8ab1dd8, type: 3}
     attribute: m_Sprite
     path: 
     classID: 212
@@ -41,13 +43,14 @@ AnimationClip:
       isPPtrCurve: 1
       isIntCurve: 0
     pptrCurveMapping:
-    - {fileID: -286802449, guid: 8166820b8c380fe4b8efc21bbf4c90fd, type: 3}
+    - {fileID: 1086376987, guid: d6414f8b190052c499f582c9f8ab1dd8, type: 3}
+    - {fileID: -1495909219, guid: d6414f8b190052c499f582c9f8ab1dd8, type: 3}
   m_AnimationClipSettings:
     serializedVersion: 2
     m_AdditiveReferencePoseClip: {fileID: 0}
     m_AdditiveReferencePoseTime: 0
     m_StartTime: 0
-    m_StopTime: 0.016666668
+    m_StopTime: 0.06666667
     m_OrientationOffsetY: 0
     m_Level: 0
     m_CycleOffset: 0

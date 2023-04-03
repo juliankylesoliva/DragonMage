@@ -114,14 +114,14 @@ TextureImporter:
         width: 64
         height: 64
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 89dd1dfd53a1c0042869ad919335de5e
-      internalID: 1622029206
+      spriteID: 1bdadfb5137983046b480603ff948a12
+      internalID: -1495909219
       vertices: []
       indices: 
       edges: []
@@ -135,14 +135,14 @@ TextureImporter:
         width: 64
         height: 64
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b0a9791f743269046bfc5d7fab8bcb37
-      internalID: -2037434820
+      spriteID: fa796ffd5917f3b42b79fcfc7479a332
+      internalID: 1086376987
       vertices: []
       indices: 
       edges: []
@@ -156,14 +156,14 @@ TextureImporter:
         width: 64
         height: 64
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7913aa69b78964e41b2426dcc4be52f3
-      internalID: 286009825
+      spriteID: 3c1e9ed7b90aca64a97c5754d3c74f6c
+      internalID: -172383389
       vertices: []
       indices: 
       edges: []
@@ -177,14 +177,35 @@ TextureImporter:
         width: 64
         height: 64
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b59182d586eb48a4184143c10104ae3d
-      internalID: -370708590
+      spriteID: 6db9f3939c7b114418813e2cfc2f64fe
+      internalID: 1490651117
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DraelynJumps_4
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 0
+        width: 64
+        height: 64
+      alignment: 9
+      pivot: {x: 0.59375, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 249160d1fa963254ea67ac51773ca70c
+      internalID: 154835236
       vertices: []
       indices: 
       edges: []
@@ -200,10 +221,11 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      DraelynJumps_1: -2037434820
-      DraelynJumps_3: -370708590
-      DraelynJumps_0: 1622029206
-      DraelynJumps_2: 286009825
+      DraelynJumps_1: 1086376987
+      DraelynJumps_3: 1490651117
+      DraelynJumps_0: -1495909219
+      DraelynJumps_2: -172383389
+      DraelynJumps_4: 154835236
   spritePackingTag: 
   pSDRemoveMatte: 0
   userData: 
