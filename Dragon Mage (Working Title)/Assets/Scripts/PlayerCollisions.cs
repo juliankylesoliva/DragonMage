@@ -7,8 +7,8 @@ public class PlayerCollisions : MonoBehaviour
     PlayerCtrl player;
 
     public Transform groundCheckObj;
-    public Transform wallCheckR;
-    public Transform wallCheckL;
+    public Transform[] wallChecksR;
+    public Transform[] wallChecksL;
     public Transform headbonkCheckObj;
 
     [SerializeField] float groundCheckRadius = 0.1f;
@@ -53,12 +53,22 @@ public class PlayerCollisions : MonoBehaviour
         isTouchingWallR = false;
         isTouchingWallL = false;
 
-        Collider2D[] collidersR = Physics2D.OverlapCircleAll(wallCheckR.position, wallCheckRadius, groundLayer);
-        Collider2D[] collidersL = Physics2D.OverlapCircleAll(wallCheckL.position, wallCheckRadius, groundLayer);
+        
+        foreach (Transform t in wallChecksR)
+        {
+            Collider2D[] collidersR = Physics2D.OverlapCircleAll(t.position, wallCheckRadius, groundLayer);
+            isTouchingWallR = (collidersR.Length > 0);
+            if (isTouchingWallR) { break; }
+        }
 
-        isTouchingWallR = (collidersR.Length > 0);
-        isTouchingWallL = (collidersL.Length > 0);
-        isAgainstWall = (player.movement.isFacingRight ? collidersR.Length > 0 : collidersL.Length > 0);
+        foreach (Transform t in wallChecksL)
+        {
+            Collider2D[] collidersL = Physics2D.OverlapCircleAll(t.position, wallCheckRadius, groundLayer);
+            isTouchingWallL = (collidersL.Length > 0);
+            if (isTouchingWallL) { break; }
+        }
+
+        isAgainstWall = (player.movement.isFacingRight ? isTouchingWallR : isTouchingWallL);
     }
 
     private void HeadbonkCheck()

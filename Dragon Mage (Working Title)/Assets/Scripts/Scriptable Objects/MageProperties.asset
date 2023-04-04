@@ -41,9 +41,9 @@ MonoBehaviour:
   _wallVaultStartSpeed: 0
   _maxWallVaultStartSpeed: 0
   _enableWallJumping: 1
-  _minimumWallJumpHeight: 1
+  _minimumWallJumpHeight: 1.1
   _wallSlideSpeed: 1.8
-  _verticalWallJumpSpeed: 10
+  _verticalWallJumpSpeed: 12
   _horizontalWallJumpSpeed: 5.25
   _wallJumpCooldown: 0.3
   _maxMidairJumps: 0

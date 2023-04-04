@@ -129,7 +129,7 @@ public class PlayerJumping : MonoBehaviour
 
     public bool CanGlide()
     {
-        return (enableAirStalling && player.rb2d.velocity.y <= 0f && currentAirStallTime <= 0f && player.collisions.CheckDistanceToGround(minimumAirStallHeight) && player.jumpButtonHeld);
+        return (enableAirStalling && (player.rb2d.velocity.y <= 0f || player.inputVector.y < 0f) && currentAirStallTime <= 0f && player.collisions.CheckDistanceToGround(minimumAirStallHeight) && player.jumpButtonHeld);
     }
 
     public void GlideStart()
@@ -186,6 +186,11 @@ public class PlayerJumping : MonoBehaviour
     {
         jumpIsHeld = false;
         player.rb2d.gravityScale = 0f;
+        player.rb2d.velocity = new Vector2(0f, -wallSlideSpeed);
+    }
+
+    public void WallSlideUpdate()
+    {
         player.rb2d.velocity = new Vector2(0f, -wallSlideSpeed);
     }
 

@@ -342,7 +342,7 @@ public class GlidingState : State
 
     private bool CheckGlideCancel()
     {
-        if (!player.jumpButtonHeld || player.jumping.currentAirStallTime >= player.jumping.maxAirStallTime)
+        if (!player.jumpButtonHeld || player.collisions.IsGrounded || player.jumping.currentAirStallTime >= player.jumping.maxAirStallTime)
         {
             player.stateMachine.TransitionTo(player.stateMachine.fallingState);
             return true;
@@ -362,6 +362,7 @@ public class WallSlidingState : State
 
     public override void Update()
     {
+        player.jumping.WallSlideUpdate();
         if (CheckFormChangeInput() || CheckFireTackleInput() || CheckIfWallJumping() || CheckWallSlideCancel()) { return; }
         player.animationCtrl.WallSlidingAnimation();
     }

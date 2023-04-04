@@ -22,9 +22,9 @@ MonoBehaviour:
   _risingGravity: 1.35
   _fallingGravity: 4.25
   _fallSpeed: 16
-  _airAcceleration: 25
-  _airDeceleration: 18
-  _airTurningSpeed: 20
+  _airAcceleration: 40
+  _airDeceleration: 30
+  _airTurningSpeed: 35
   _enableVariableJumps: 0
   _variableJumpDecay: 0
   _enableAirStalling: 0
@@ -32,14 +32,14 @@ MonoBehaviour:
   _airStallSpeed: 0
   _maxAirStallTime: 0
   _enableWallClimbing: 1
-  _minimumWallClimbHeight: 1
+  _minimumWallClimbHeight: 1.1
   _baseClimbingSpeed: 6
   _maxClimbingSpeed: 12
   _climbingGravity: 0.5
   _maxWallClimbTime: 1.5
   _postClimbDashWindow: 1
-  _wallVaultStartSpeed: 4
-  _maxWallVaultStartSpeed: 8
+  _wallVaultStartSpeed: 3.5
+  _maxWallVaultStartSpeed: 7
   _enableWallJumping: 0
   _minimumWallJumpHeight: 0
   _wallSlideSpeed: 0
