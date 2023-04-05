@@ -55,12 +55,6 @@ public class PlayerTemper : MonoBehaviour
         hotThreshold = (numSegments - (hotSegments - 1));
 
         currentTemperLevel = (player.form.StartingMode == CharacterMode.MAGE ? (coldThreshold + 1) : (hotThreshold - 1));
-        UpdateMeterUI();
-    }
-
-    private void UpdateMeterUI()
-    {
-        if (TempMeterUI.isEventInstantiated) { TempMeterUI.temperChangeEvent.Invoke(); }
     }
 
     public void NeutralizeTemperBy(int num)
@@ -70,8 +64,6 @@ public class PlayerTemper : MonoBehaviour
         if (currentTemperLevel <= coldThreshold) { currentTemperLevel = (coldThreshold + 1); }
         if (currentTemperLevel >= hotThreshold) { currentTemperLevel = (hotThreshold - 1); }
         else { /* Nothing */ }
-
-        UpdateMeterUI();
     }
 
     public void ChangeTemperBy(int num)
@@ -81,8 +73,6 @@ public class PlayerTemper : MonoBehaviour
         if (currentTemperLevel < 1) { currentTemperLevel = 1; }
         else if (currentTemperLevel > numSegments) { currentTemperLevel = numSegments; }
         else { /* Nothing */ }
-
-        UpdateMeterUI();
     }
 
     public void FormLockTemperChange()
@@ -90,7 +80,5 @@ public class PlayerTemper : MonoBehaviour
         if (currentTemperLevel >= hotThreshold) { currentTemperLevel = numSegments; }
         else if (currentTemperLevel <= coldThreshold) { currentTemperLevel = 1; }
         else { /* Nothing */ }
-
-        UpdateMeterUI();
     }
 }

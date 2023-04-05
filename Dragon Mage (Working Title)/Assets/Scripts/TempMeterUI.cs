@@ -5,7 +5,7 @@ using UnityEngine.Events;
 
 public class TempMeterUI : MonoBehaviour
 {
-    public static UnityEvent temperChangeEvent;
+    private PlayerCtrl player;
 
     [SerializeField] Vector3 cameraOffset;
     [SerializeField] Transform startMeterRef;
@@ -13,10 +13,20 @@ public class TempMeterUI : MonoBehaviour
     [SerializeField] Transform endMeterRef;
     [SerializeField] TemperMeterSegment[] segmentRefs;
 
+    private int previousTemperLevel = -1;
+    private int previousColdThreshold = -1;
+    private int previousHotThreshold = -1;
+    private int previousNumSegments = -1;
+
     void Awake()
     {
-        temperChangeEvent = new UnityEvent();
-        temperChangeEvent.AddListener(RefreshMeterUI);
+        GameObject tempObj = GameObject.FindWithTag("Player");
+        if (tempObj != null) { player = tempObj.GetComponent<PlayerCtrl>(); }
+    }
+
+    void Update()
+    {
+        RefreshMeterUI();
     }
 
     void LateUpdate()
@@ -24,19 +34,26 @@ public class TempMeterUI : MonoBehaviour
         this.transform.position = (Camera.main.transform.position + cameraOffset);
     }
 
-    public static bool isEventInstantiated { get { return temperChangeEvent != null; } }
+    private bool DidPlayerTemperChange()
+    {
+        return (player.temper.currentTemperLevel != previousTemperLevel || player.temper.coldThreshold != previousColdThreshold || player.temper.hotThreshold != previousHotThreshold || player.temper.NumSegments != previousNumSegments);
+    }
 
     private void RefreshMeterUI()
     {
-        GameObject tempObj = GameObject.FindWithTag("Player");
-        PlayerCtrl player = tempObj.GetComponent<PlayerCtrl>();
-
-        if (player != null && player.temper != null)
+        if (player != null && player.temper != null && DidPlayerTemperChange())
         {
             int segments = player.temper.NumSegments;
             int coldThreshold = player.temper.coldThreshold;
             int hotThreshold = player.temper.hotThreshold;
             int currentTemperLevel = player.temper.currentTemperLevel;
+
+            previousNumSegments = segments;
+            previousColdThreshold = coldThreshold;
+            previousHotThreshold = hotThreshold;
+            previousTemperLevel = currentTemperLevel;
+
+            previousTemperLevel = currentTemperLevel;
 
             middleMeterRef.localScale = new Vector3((float)segments, 1f, 1f);
             endMeterRef.localPosition = (startMeterRef.localPosition + (Vector3.right * (segments / 2f)));
