@@ -24,7 +24,7 @@ public class PlayerMovement : MonoBehaviour
 
     public void FacingDirection()
     {
-        if (player.form.isChangingForm || player.attacks.isFireTackleActive || player.jumping.isWallJumpCooldownActive || (!changeFacingDirectionMidair && !player.collisions.IsGrounded) || (player.jumping.currentAirStallTime > 0f && player.jumping.currentAirStallTime < player.jumping.maxAirStallTime)) { return; }
+        if (player.form.isChangingForm || player.attacks.isFireTackleActive || player.jumping.isWallJumpCooldownActive || (!changeFacingDirectionMidair && !player.collisions.IsGrounded && !player.collisions.IsOnASlope) || (player.jumping.currentAirStallTime > 0f && player.jumping.currentAirStallTime < player.jumping.maxAirStallTime)) { return; }
         SetFacingDirection(player.inputVector.x);
     }
 
@@ -42,25 +42,27 @@ public class PlayerMovement : MonoBehaviour
             {
                 if (Mathf.Abs(player.rb2d.velocity.x) < topSpeed)
                 {
-                    player.rb2d.velocity = new Vector2(player.rb2d.velocity.x + ((player.collisions.IsGrounded ? acceleration : airAcceleration) * player.inputVector.x * Time.deltaTime), player.rb2d.velocity.y);
+                    // player.rb2d.velocity = new Vector2(player.rb2d.velocity.x + ((player.collisions.IsGrounded ? acceleration : airAcceleration) * player.inputVector.x * Time.deltaTime), player.rb2d.velocity.y);
+
+                    player.rb2d.velocity += ((player.collisions.IsGrounded || player.collisions.IsOnASlope ? player.collisions.GetRightVector() : Vector2.right) * (player.collisions.IsGrounded ? acceleration : airAcceleration) * player.inputVector.x * Time.deltaTime);
                     if (Mathf.Abs(player.rb2d.velocity.x) > topSpeed)
                     {
                         player.rb2d.velocity = new Vector2(topSpeed * player.inputVector.x, player.rb2d.velocity.y);
                     }
 
                 }
-                else if (player.collisions.IsGrounded && Mathf.Abs(player.rb2d.velocity.x) > topSpeed)
+                else if ((player.collisions.IsGrounded || player.collisions.IsOnASlope) && Mathf.Abs(player.rb2d.velocity.x) > topSpeed)
                 {
                     if (player.rb2d.velocity.x != 0f)
                     {
                         if (player.rb2d.velocity.x > 0f)
                         {
-                            player.rb2d.velocity -= (Vector2.right * deceleration * Time.deltaTime);
+                            player.rb2d.velocity -= (player.collisions.GetRightVector() * deceleration * Time.deltaTime);
                             if (player.rb2d.velocity.x < topSpeed) { player.rb2d.velocity = new Vector2(topSpeed, player.rb2d.velocity.y); }
                         }
                         else
                         {
-                            player.rb2d.velocity += (Vector2.right * deceleration * Time.deltaTime);
+                            player.rb2d.velocity += (player.collisions.GetRightVector() * deceleration * Time.deltaTime);
                             if (player.rb2d.velocity.x > topSpeed) { player.rb2d.velocity = new Vector2(-topSpeed, player.rb2d.velocity.y); }
                         }
                     }
@@ -71,7 +73,7 @@ public class PlayerMovement : MonoBehaviour
             {
                 if (player.rb2d.velocity.x != 0f)
                 {
-                    player.rb2d.velocity += (Vector2.right * (player.collisions.IsGrounded ? turningSpeed : airTurningSpeed) * player.inputVector.x * Time.deltaTime);
+                    player.rb2d.velocity += ((player.collisions.IsGrounded || player.collisions.IsOnASlope ? player.collisions.GetRightVector() : Vector2.right) * (player.collisions.IsGrounded ? turningSpeed : airTurningSpeed) * player.inputVector.x * Time.deltaTime);
                 }
             }
         }
@@ -79,7 +81,7 @@ public class PlayerMovement : MonoBehaviour
         {
             if (player.rb2d.velocity.x > 0f)
             {
-                player.rb2d.velocity -= (Vector2.right * (player.collisions.IsGrounded ? deceleration : airDeceleration) * Time.deltaTime);
+                player.rb2d.velocity -= ((player.collisions.IsGrounded || player.collisions.IsOnASlope ? player.collisions.GetRightVector() : Vector2.right) * (player.collisions.IsGrounded ? deceleration : airDeceleration) * Time.deltaTime);
                 if (player.rb2d.velocity.x < 0f)
                 {
                     player.rb2d.velocity = new Vector2(0f, player.rb2d.velocity.y);
@@ -87,7 +89,7 @@ public class PlayerMovement : MonoBehaviour
             }
             else if (player.rb2d.velocity.x < 0f)
             {
-                player.rb2d.velocity += (Vector2.right * (player.collisions.IsGrounded ? deceleration : airDeceleration) * Time.deltaTime);
+                player.rb2d.velocity += ((player.collisions.IsGrounded || player.collisions.IsOnASlope ? player.collisions.GetRightVector() : Vector2.right) * (player.collisions.IsGrounded ? deceleration : airDeceleration) * Time.deltaTime);
                 if (player.rb2d.velocity.x > 0f)
                 {
                     player.rb2d.velocity = new Vector2(0f, player.rb2d.velocity.y);

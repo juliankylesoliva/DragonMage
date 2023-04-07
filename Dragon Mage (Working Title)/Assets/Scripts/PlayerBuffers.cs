@@ -112,7 +112,7 @@ public class PlayerBuffers : MonoBehaviour
             {
                 coyoteTimeLeft = coyoteTime;
             }
-            else if ((player.collisions.IsGrounded && !prevIsGrounded) || (player.collisions.IsGrounded && prevIsGrounded))
+            else if (((player.collisions.IsGrounded || player.collisions.IsOnASlope) && !prevIsGrounded) || ((player.collisions.IsGrounded || player.collisions.IsOnASlope) && prevIsGrounded))
             {
                 coyoteTimeLeft = 0f;
             }
@@ -127,7 +127,7 @@ public class PlayerBuffers : MonoBehaviour
                 }
             }
 
-            prevIsGrounded = player.collisions.IsGrounded;
+            prevIsGrounded = (player.collisions.IsGrounded || player.collisions.IsOnASlope);
 
             yield return null;
         }

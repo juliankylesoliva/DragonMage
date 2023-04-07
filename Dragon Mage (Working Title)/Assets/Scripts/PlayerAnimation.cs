@@ -21,7 +21,7 @@ public class PlayerAnimation : MonoBehaviour
 
     public void RunningAnimation()
     {
-        if (player.collisions.IsGrounded)
+        if (player.collisions.IsGrounded || player.collisions.IsOnASlope)
         {
             if (player.rb2d.velocity.x != 0f)
             {

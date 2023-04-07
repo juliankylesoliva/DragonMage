@@ -88,7 +88,7 @@ public abstract class State : IState
 
     protected bool CheckRunInput()
     {
-        if (player.collisions.IsGrounded && (!player.collisions.IsAgainstWall || (player.inputVector.x * (player.movement.isFacingRight ? 1f : -1f)) < 0f) && player.inputVector.x != 0f)
+        if ((player.collisions.IsGrounded || player.collisions.IsOnASlope) && (!player.collisions.IsAgainstWall || (player.inputVector.x * (player.movement.isFacingRight ? 1f : -1f)) < 0f) && player.inputVector.x != 0f)
         {
             player.stateMachine.TransitionTo(player.stateMachine.runningState);
             return true;
@@ -98,7 +98,7 @@ public abstract class State : IState
 
     protected bool CheckStationaryLanding()
     {
-        if (player.collisions.IsGrounded && player.rb2d.velocity == Vector2.zero)
+        if ((player.collisions.IsGrounded || player.collisions.IsOnASlope))
         {
             player.stateMachine.TransitionTo(player.stateMachine.standingState);
             return true;
@@ -152,7 +152,7 @@ public abstract class State : IState
 
     protected bool CheckSuddenFall()
     {
-        if (!player.collisions.IsGrounded && player.buffers.coyoteTimeLeft <= 0f && player.rb2d.velocity.y <= 0f)
+        if (!player.collisions.IsGrounded && !player.collisions.IsOnASlope && player.buffers.coyoteTimeLeft <= 0f && player.rb2d.velocity.y <= 0f)
         {
             player.stateMachine.TransitionTo(player.stateMachine.fallingState);
             return true;
@@ -162,7 +162,7 @@ public abstract class State : IState
 
     protected bool CheckSuddenRise()
     {
-        if (!player.collisions.IsGrounded && player.buffers.coyoteTimeLeft <= 0f && player.rb2d.velocity.y > 0f)
+        if (!player.collisions.IsGrounded && !player.collisions.IsOnASlope && player.buffers.coyoteTimeLeft <= 0f && player.rb2d.velocity.y > 0f)
         {
             player.stateMachine.TransitionTo(player.stateMachine.jumpingState);
             return true;
@@ -207,19 +207,21 @@ public class StandingState : State
 
     public override void Enter()
     {
+        player.rb2d.isKinematic = true;
+        player.rb2d.velocity = Vector2.zero;
         player.jumping.LandingReset();
     }
 
     public override void Update()
     {
-        if (!player.attacks.isBlastJumpActive) { player.rb2d.velocity = Vector2.zero; }
+        player.rb2d.velocity = Vector2.zero;
         if (CheckFormChangeInput() || CheckFireTackleInput() || CheckRunInput() || CheckJumpInput() || CheckFireTackleInput() || CheckSuddenRise() || CheckSuddenFall() || CheckSuddenMovement()) { return; }
         player.animationCtrl.StandingAnimation();
     }
 
     public override void Exit()
     {
-
+        player.rb2d.isKinematic = false;
     }
 }
 

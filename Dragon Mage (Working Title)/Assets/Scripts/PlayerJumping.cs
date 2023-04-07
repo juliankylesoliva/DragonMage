@@ -81,7 +81,7 @@ public class PlayerJumping : MonoBehaviour
 
     public bool CanGroundJump()
     {
-        return ((player.collisions.IsGrounded || player.buffers.coyoteTimeLeft > 0f) && player.buffers.jumpBufferTimeLeft > 0f);
+        return ((player.collisions.IsGrounded || player.collisions.IsOnASlope || player.buffers.coyoteTimeLeft > 0f) && player.buffers.jumpBufferTimeLeft > 0f);
     }
 
     public void GroundJumpStart()
@@ -100,7 +100,8 @@ public class PlayerJumping : MonoBehaviour
             SpriteRenderer tempSprite = tempObj.GetComponent<SpriteRenderer>();
             if (tempSprite != null) { tempSprite.flipX = !player.movement.isFacingRight; }
         }
-        player.rb2d.velocity = new Vector2(horizontalResult, jumpSpeed + (enableRunningJumpBonus ? Mathf.Abs(horizontalResult / player.movement.topSpeed) * runningJumpMultiplier : 0f));
+        Vector2 normalVec = player.collisions.GetGroundNormal();
+        player.rb2d.velocity = new Vector2(horizontalResult * (1f + normalVec.x), (jumpSpeed + (enableRunningJumpBonus ? Mathf.Abs(horizontalResult / player.movement.topSpeed) * runningJumpMultiplier : 0f)) * normalVec.y);
     }
 
     public void GroundJumpUpdate()
@@ -196,7 +197,7 @@ public class PlayerJumping : MonoBehaviour
 
     public bool IsWallSlideCanceled()
     {
-        return (!player.collisions.IsAgainstWall || !player.collisions.CheckDistanceToGround(minimumWallJumpHeight) || (player.inputVector.x * (player.movement.isFacingRight ? 1f : -1f)) <= 0f);
+        return (!player.collisions.IsAgainstWall || player.collisions.IsGrounded || (player.inputVector.x * (player.movement.isFacingRight ? 1f : -1f)) <= 0f);
     }
 
     public bool CanWallJump()
