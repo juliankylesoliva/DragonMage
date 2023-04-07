@@ -66,7 +66,7 @@ public class PlayerCollisions : MonoBehaviour
         isOnASlope = (hit.collider != null);
         isGrounded = (isGrounded || isOnASlope);
 
-        if (wasOnASlope && !isOnASlope && player.stateMachine.CurrentState != player.stateMachine.jumpingState)
+        if ((wasOnASlope || player.buffers.coyoteTimeLeft > 0f || player.rb2d.velocity.y > slopeCheckDistance) && !isOnASlope && player.stateMachine.CurrentState != player.stateMachine.jumpingState)
         {
             Vector2 toMove = GetClosestGroundPoint();
             toMove += new Vector2(0f, 1f + groundCheckRadius);
@@ -117,7 +117,12 @@ public class PlayerCollisions : MonoBehaviour
     public Vector2 GetGroundNormal()
     {
         RaycastHit2D hit = Physics2D.Raycast((player.movement.isFacingRight ? normalCheckR : normalCheckL).position, -Vector2.up, slopeCheckDistance, groundDistanceCheckLayer);
-        if (hit.collider != null) { return hit.normal; }
+        if (hit.collider != null && hit.normal != Vector2.up) { return hit.normal; }
+        else
+        {
+            RaycastHit2D hit2 = Physics2D.Raycast(groundCheckObj.position, -Vector2.up, slopeCheckDistance, groundDistanceCheckLayer);
+            if (hit2.collider != null && hit2.normal != Vector2.up) { return hit2.normal; }
+        }
         return Vector2.up;
     }
 
@@ -132,7 +137,8 @@ public class PlayerCollisions : MonoBehaviour
             v2 /= normal.y;
             Vector2 result = new Vector2(v1, v2);
             result = result.normalized;
-            result.x *= (normal != Vector2.up && ((normal.x * (player.movement.isFacingRight ? 1f : -1f)) < 0f) && player.rb2d.velocity.x < player.movement.topSpeed ? slopeBoost : 1f);
+            float facingToNormalX = (normal.x * (player.movement.isFacingRight ? 1f : -1f));
+            result *= (normal != Vector2.up && facingToNormalX != 0f ? slopeBoost : 1f);
             return result;
         }
         return Vector2.right;

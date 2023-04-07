@@ -100,8 +100,7 @@ public class PlayerJumping : MonoBehaviour
             SpriteRenderer tempSprite = tempObj.GetComponent<SpriteRenderer>();
             if (tempSprite != null) { tempSprite.flipX = !player.movement.isFacingRight; }
         }
-        Vector2 normalVec = player.collisions.GetGroundNormal();
-        player.rb2d.velocity = new Vector2(horizontalResult * (1f + normalVec.x), (jumpSpeed + (enableRunningJumpBonus ? Mathf.Abs(horizontalResult / player.movement.topSpeed) * runningJumpMultiplier : 0f)) * normalVec.y);
+        player.rb2d.velocity = new Vector2(horizontalResult, (jumpSpeed + (enableRunningJumpBonus ? Mathf.Abs(horizontalResult / player.movement.topSpeed) * runningJumpMultiplier : 0f)));
     }
 
     public void GroundJumpUpdate()
