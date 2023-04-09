@@ -44,7 +44,7 @@ public class PlayerMovement : MonoBehaviour
                 {
                     // player.rb2d.velocity = new Vector2(player.rb2d.velocity.x + ((player.collisions.IsGrounded ? acceleration : airAcceleration) * player.inputVector.x * Time.deltaTime), player.rb2d.velocity.y);
 
-                    player.rb2d.velocity += ((player.collisions.IsGrounded || player.collisions.IsOnASlope ? player.collisions.GetRightVector() : Vector2.right) * (player.collisions.IsGrounded ? acceleration : airAcceleration) * player.inputVector.x * Time.deltaTime);
+                    player.rb2d.velocity += ((player.collisions.IsGrounded || player.collisions.IsOnASlope ? player.collisions.GetRightVector() : Vector2.right) * (player.collisions.IsGrounded || player.collisions.IsOnASlope ? acceleration : airAcceleration) * player.inputVector.x * Time.deltaTime);
                     if (Mathf.Abs(player.rb2d.velocity.x) > topSpeed)
                     {
                         player.rb2d.velocity = new Vector2(topSpeed * player.inputVector.x, player.rb2d.velocity.y);

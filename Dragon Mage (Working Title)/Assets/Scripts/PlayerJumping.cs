@@ -112,9 +112,16 @@ public class PlayerJumping : MonoBehaviour
                 jumpIsHeld = false;
             }
 
+            if (!player.attacks.isBlastJumpActive && jumpIsHeld && player.collisions.IsHeadbonking)
+            {
+                jumpIsHeld = false;
+                player.rb2d.velocity = new Vector2(Mathf.Abs(player.rb2d.velocity.x) <= player.movement.topSpeed ? player.rb2d.velocity.x : player.movement.topSpeed * (player.movement.isFacingRight ? 1f : -1f), 0f);
+            }
+
             if (enableVariableJumps && !jumpIsHeld)
             {
-                player.rb2d.velocity = new Vector2(player.rb2d.velocity.x, player.rb2d.velocity.y - (variableJumpDecay * Time.deltaTime));
+                player.rb2d.velocity -= (Vector2.up * (variableJumpDecay * Time.deltaTime));
+                if (player.rb2d.velocity.y < 0f) { player.rb2d.velocity = new Vector2(player.rb2d.velocity.x, 0f); }
             }
         }
     }

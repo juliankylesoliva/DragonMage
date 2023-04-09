@@ -155,6 +155,7 @@ public class PlayerAttacks : MonoBehaviour
         player.charSprite.color = Color.red;
         bool wasInteractingWithWall = (player.stateMachine.PreviousState == player.stateMachine.wallVaultingState || player.stateMachine.PreviousState == player.stateMachine.wallClimbingState);
         float horizontalResult = (Mathf.Min(((wasInteractingWithWall ? player.jumping.storedWallClimbSpeed : previousHorizontalVelocity) + fireTackleBaseHorizontalSpeed), fireTackleMaxHorizontalSpeed) * (player.movement.isFacingRight ? 1f : -1f));
+        float currentRisingSpeed = 0f;
         player.rb2d.velocity = new Vector2(horizontalResult, (verticalAxis < 0f ? -Mathf.Abs(player.rb2d.velocity.x) : 0f));
         float attackTimer = fireTackleBaseDuration;
         float bumpImmunityTimer = fireTackleBumpImmunityDuration;
@@ -164,12 +165,13 @@ public class PlayerAttacks : MonoBehaviour
             player.rb2d.velocity = new Vector2((!player.collisions.IsAgainstWall ? horizontalResult : 0f), player.rb2d.velocity.y);
             if (verticalAxis > 0f)
             {
-                player.rb2d.velocity += (Vector2.up * fireTackleVerticalSteeringSpeed * Time.deltaTime);
+                currentRisingSpeed += fireTackleVerticalSteeringSpeed * Time.deltaTime;
+                player.rb2d.velocity = new Vector2(horizontalResult, currentRisingSpeed);
             }
             else if (verticalAxis < 0f)
             {
                 
-                if (player.collisions.IsGrounded)
+                if (player.collisions.IsGrounded || player.collisions.IsOnASlope)
                 {
                     verticalAxis = 0f;
                     player.jumping.LandingReset();
@@ -181,7 +183,8 @@ public class PlayerAttacks : MonoBehaviour
             }
             else
             {
-                player.rb2d.velocity = new Vector2(player.rb2d.velocity.x, 0f);
+                player.rb2d.velocity = (player.collisions.GetRightVector().normalized * horizontalResult);
+                player.collisions.SnapToGround();
             }
 
             attackTimer -= Time.deltaTime;
@@ -217,19 +220,18 @@ public class PlayerAttacks : MonoBehaviour
         while (endlagTimer > 0f)
         {
             if (!firedProjectile && !bumped && endlagTimer < fireTackleEndlagCancel && (player.inputVector.x * (player.movement.isFacingRight ? 1f : -1f)) > 0f && player.collisions.IsGrounded && player.buffers.jumpBufferTimeLeft > 0f) { break; }
-            if (player.collisions.IsGrounded && player.rb2d.velocity.x != 0f)
+            if (!bumped && (player.collisions.IsGrounded || player.collisions.IsOnASlope) && player.rb2d.velocity.x != 0f)
             {
-                if (player.rb2d.velocity.x > 0f)
-                {
-                    player.rb2d.velocity -= (Vector2.right * deceleration * Time.deltaTime);
-                    if (player.rb2d.velocity.x < 0f) { player.rb2d.velocity = new Vector2(0f, player.rb2d.velocity.y); }
-                }
-                else
-                {
-                    player.rb2d.velocity += (Vector2.right * deceleration * Time.deltaTime);
-                    if (player.rb2d.velocity.x > 0f) { player.rb2d.velocity = new Vector2(0f, player.rb2d.velocity.y); }
-                }
+                player.rb2d.velocity = ((player.movement.isFacingRight && player.collisions.IsTouchingWallR) || (!player.movement.isFacingRight && player.collisions.IsTouchingWallL) ? Vector2.zero : Vector2.Lerp(player.collisions.GetRightVector().normalized * horizontalResult, Vector2.zero, (fireTackleEndlag - endlagTimer) / fireTackleEndlag));
+                player.collisions.SnapToGround();
             }
+            else if (bumped && (player.collisions.IsGrounded || player.collisions.IsOnASlope) && endlagTimer < fireTackleEndlagCancel)
+            {
+                player.rb2d.velocity = Vector2.zero;
+                player.collisions.SnapToGround();
+            }
+            else { /* Nothing */ }
+
             endlagTimer -= Time.deltaTime;
             yield return null;
         }

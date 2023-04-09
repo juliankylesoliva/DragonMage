@@ -36,8 +36,6 @@ public class PlayerCollisions : MonoBehaviour
     public bool IsHeadbonking { get { return isHeadbonking; } }
     public bool IsOnASlope { get { return isOnASlope; } }
 
-    private bool wasOnASlope = false;
-
     void Awake()
     {
         player = this.gameObject.GetComponent<PlayerCtrl>();
@@ -49,7 +47,6 @@ public class PlayerCollisions : MonoBehaviour
         SlopeCheck();
         WallCheck();
         HeadbonkCheck();
-        wasOnASlope = isOnASlope;
     }
 
     private void GroundCheck()
@@ -66,11 +63,9 @@ public class PlayerCollisions : MonoBehaviour
         isOnASlope = (hit.collider != null);
         isGrounded = (isGrounded || isOnASlope);
 
-        if ((wasOnASlope || player.buffers.coyoteTimeLeft > 0f || player.rb2d.velocity.y > slopeCheckDistance) && !isOnASlope && player.stateMachine.CurrentState != player.stateMachine.jumpingState)
+        if (player.rb2d.velocity.y >= slopeCheckDistance && !isOnASlope && player.stateMachine.CurrentState == player.stateMachine.runningState && player.stateMachine.CurrentState != player.stateMachine.jumpingState)
         {
-            Vector2 toMove = GetClosestGroundPoint();
-            toMove += new Vector2(0f, 1f + groundCheckRadius);
-            if (Vector2.Distance(this.transform.position, toMove) <= slopeCheckDistance) { this.transform.position = toMove; }
+            SnapToGround();
         }
     }
 
@@ -104,7 +99,7 @@ public class PlayerCollisions : MonoBehaviour
     private void HeadbonkCheck()
     {
         isHeadbonking = false;
-        Collider2D[] colliders = Physics2D.OverlapCircleAll(headbonkCheckObj.position + (Vector3.right * (1f / 32f) * (player.movement.isFacingRight ? 1f : -1f)), headbonkCheckRadius, groundLayer);
+        Collider2D[] colliders = Physics2D.OverlapCircleAll(headbonkCheckObj.position + (Vector3.right * (1f / 32f) * (player.movement.isFacingRight ? 1f : -1f)), headbonkCheckRadius, groundDistanceCheckLayer);
         isHeadbonking = (colliders.Length > 0);
     }
 
@@ -149,5 +144,12 @@ public class PlayerCollisions : MonoBehaviour
         RaycastHit2D hit = Physics2D.Raycast(groundCheckObj.position, -Vector2.up, Mathf.Infinity, groundDistanceCheckLayer);
         if (hit.collider != null) { return hit.point; }
         return groundCheckObj.position;
+    }
+
+    public void SnapToGround()
+    {
+        Vector2 toMove = GetClosestGroundPoint();
+        toMove += new Vector2(0f, 1f + groundCheckRadius);
+        if (Vector2.Distance(this.transform.position, toMove) <= slopeCheckDistance) { this.transform.position = toMove; }
     }
 }
