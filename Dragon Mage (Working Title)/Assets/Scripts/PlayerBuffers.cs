@@ -10,6 +10,9 @@ public class PlayerBuffers : MonoBehaviour
     [SerializeField] float jumpBufferTime = 0.1f;
     [SerializeField] float highestSpeedBufferTime = 0.1f;
     [SerializeField] float coyoteTime = 0.1f;
+    [SerializeField] float earlyGlideBufferTime = 0.25f;
+
+    public float EarlyGlideBufferTime { get { return earlyGlideBufferTime; } }
 
     [HideInInspector] public float formChangeBufferTimeLeft = 0f;
     [HideInInspector] public float jumpBufferTimeLeft = 0f;

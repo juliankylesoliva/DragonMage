@@ -136,7 +136,7 @@ public class PlayerAttacks : MonoBehaviour
         isFireTackleActive = true;
         currentAttackState = AttackState.STARTUP;
 
-        player.charSprite.color = Color.yellow;
+        player.animationCtrl.FireTackleAnimation(0);
         float windupTimer = fireTackleStartup;
         float previousHorizontalVelocity = Mathf.Abs(player.rb2d.velocity.x);
         float verticalAxis = 0f;
@@ -152,7 +152,7 @@ public class PlayerAttacks : MonoBehaviour
         }
 
         currentAttackState = AttackState.ACTIVE;
-        player.charSprite.color = Color.red;
+        player.animationCtrl.FireTackleAnimation(1);
         bool wasInteractingWithWall = (player.stateMachine.PreviousState == player.stateMachine.wallVaultingState || player.stateMachine.PreviousState == player.stateMachine.wallClimbingState);
         float horizontalResult = (Mathf.Min(((wasInteractingWithWall ? player.jumping.storedWallClimbSpeed : previousHorizontalVelocity) + fireTackleBaseHorizontalSpeed), fireTackleMaxHorizontalSpeed) * (player.movement.isFacingRight ? 1f : -1f));
         float currentRisingSpeed = 0f;
@@ -183,7 +183,7 @@ public class PlayerAttacks : MonoBehaviour
             }
             else
             {
-                player.rb2d.velocity = (player.collisions.GetRightVector().normalized * horizontalResult);
+                player.rb2d.velocity = (player.collisions.GetRightVector().normalized * (!player.collisions.IsAgainstWall ? horizontalResult : 0f));
                 player.collisions.SnapToGround();
             }
 
@@ -193,24 +193,29 @@ public class PlayerAttacks : MonoBehaviour
         }
 
         currentAttackState = AttackState.ENDLAG;
-        player.charSprite.color = Color.gray;
         bool bumped = false;
         bool firedProjectile = false;
         if (player.collisions.IsAgainstWall || player.collisions.IsHeadbonking)
         {
             bumped = true;
+            player.animationCtrl.FireTackleAnimation(3);
             player.rb2d.velocity = ((Vector2.up + (Vector2.right * (player.movement.isFacingRight ? -1f : 1f))).normalized * fireTackleBonkKnockback);
         }
         else
         {
             if (player.attackButtonHeld)
             {
+                player.animationCtrl.FireTackleAnimation(4);
                 firedProjectile = true;
                 GameObject objTemp = Instantiate(fireProjectilePrefab, projectileSpawnPoint.position, Quaternion.identity);
                 FireMissile fireTemp = objTemp.GetComponent<FireMissile>();
                 if (fireTemp != null) { fireTemp.Setup(player.temper, player.movement.isFacingRight, Mathf.Abs(player.rb2d.velocity.x)); }
                 player.rb2d.velocity = new Vector2(-player.rb2d.velocity.x * fireTackleRecoilMultiplier, player.rb2d.velocity.y);
                 player.temper.ChangeTemperBy(-1);
+            }
+            else
+            {
+                player.animationCtrl.FireTackleAnimation(2);
             }
         }
 
@@ -222,7 +227,7 @@ public class PlayerAttacks : MonoBehaviour
             if (!firedProjectile && !bumped && endlagTimer < fireTackleEndlagCancel && (player.inputVector.x * (player.movement.isFacingRight ? 1f : -1f)) > 0f && player.collisions.IsGrounded && player.buffers.jumpBufferTimeLeft > 0f) { break; }
             if (!bumped && (player.collisions.IsGrounded || player.collisions.IsOnASlope) && player.rb2d.velocity.x != 0f)
             {
-                player.rb2d.velocity = ((player.movement.isFacingRight && player.collisions.IsTouchingWallR) || (!player.movement.isFacingRight && player.collisions.IsTouchingWallL) ? Vector2.zero : Vector2.Lerp(player.collisions.GetRightVector().normalized * horizontalResult, Vector2.zero, (fireTackleEndlag - endlagTimer) / fireTackleEndlag));
+                player.rb2d.velocity = ((player.movement.isFacingRight && player.collisions.IsTouchingWallR) || (!player.movement.isFacingRight && player.collisions.IsTouchingWallL) ? Vector2.zero : Vector2.Lerp(player.collisions.GetRightVector().normalized * horizontalResult * (firedProjectile ? -1f : 1f), Vector2.zero, (fireTackleEndlag - endlagTimer) / fireTackleEndlag));
                 player.collisions.SnapToGround();
             }
             else if (bumped && (player.collisions.IsGrounded || player.collisions.IsOnASlope) && endlagTimer < fireTackleEndlagCancel)

@@ -136,7 +136,7 @@ public class PlayerJumping : MonoBehaviour
 
     public bool CanGlide()
     {
-        return (enableAirStalling && (player.rb2d.velocity.y <= 0f || player.inputVector.y < 0f) && currentAirStallTime <= 0f && player.collisions.CheckDistanceToGround(minimumAirStallHeight) && player.jumpButtonHeld);
+        return (enableAirStalling && (player.rb2d.velocity.y <= 0f || player.instantGlideButtonHeld) && currentAirStallTime <= player.buffers.EarlyGlideBufferTime && player.collisions.CheckDistanceToGround(minimumAirStallHeight) && player.jumpButtonHeld);
     }
 
     public void GlideStart()
@@ -153,7 +153,10 @@ public class PlayerJumping : MonoBehaviour
 
     public void GlideCancel()
     {
-        currentAirStallTime = maxAirStallTime;
+        if (currentAirStallTime > player.buffers.EarlyGlideBufferTime || !player.jumpButtonHeld)
+        {
+            currentAirStallTime = maxAirStallTime;
+        }
     }
 
     public bool CanMidairJump()

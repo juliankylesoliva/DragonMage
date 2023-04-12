@@ -23,6 +23,7 @@ public class PlayerCtrl : MonoBehaviour
     [Header("Input Actions")]
     [SerializeField] private InputAction moveAction;
     [SerializeField] private InputAction jumpAction;
+    [SerializeField] private InputAction instantGlideAction;
     [SerializeField] private InputAction attackAction;
     [SerializeField] private InputAction formChangeAction;
 
@@ -30,6 +31,7 @@ public class PlayerCtrl : MonoBehaviour
     public Vector2 inputVector { get; private set; }
     public bool jumpButtonDown { get; private set; }
     public bool jumpButtonHeld { get; private set; }
+    public bool instantGlideButtonHeld { get; private set; }
     public bool attackButtonDown { get; private set; }
     public bool attackButtonHeld { get; private set; }
     public bool formChangeButtonDown { get; private set; }
@@ -38,6 +40,7 @@ public class PlayerCtrl : MonoBehaviour
     {
         moveAction.Enable();
         jumpAction.Enable();
+        instantGlideAction.Enable();
         attackAction.Enable();
         formChangeAction.Enable();
     }
@@ -46,6 +49,7 @@ public class PlayerCtrl : MonoBehaviour
     {
         moveAction.Disable();
         jumpAction.Disable();
+        instantGlideAction.Disable();
         attackAction.Disable();
         formChangeAction.Disable();
     }
@@ -69,6 +73,9 @@ public class PlayerCtrl : MonoBehaviour
 
         jumpAction.started += ctx => { jumpButtonDown = true; jumpButtonHeld = true; };
         jumpAction.canceled += ctx => { jumpButtonHeld = false; };
+
+        instantGlideAction.started += ctx => { instantGlideButtonHeld = true; };
+        instantGlideAction.canceled += ctx => { instantGlideButtonHeld = false; };
 
         attackAction.started += ctx => { attackButtonDown = true; attackButtonHeld = true; };
         attackAction.canceled += ctx => { attackButtonHeld = false; };

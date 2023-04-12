@@ -85,8 +85,8 @@ public class PlayerForm : MonoBehaviour
         player.jumping.airStallSpeed = p.airStallSpeed;
         player.jumping.maxAirStallTime = p.maxAirStallTime;
 
-        if (player.jumping.enableAirStalling && player.jumping.currentAirStallTime > 0f && player.jumping.maxAirStallTime > 0f) { player.jumping.currentAirStallTime = player.jumping.maxAirStallTime; }
-
+        if (player.jumping.enableAirStalling && player.jumping.currentAirStallTime > player.buffers.EarlyGlideBufferTime && player.jumping.maxAirStallTime > 0f) { player.jumping.currentAirStallTime = player.jumping.maxAirStallTime; }
+        
         player.jumping.enableWallClimbing = p.enableWallClimbing;
         player.jumping.minimumWallClimbHeight = p.minimumWallClimbHeight;
         player.jumping.baseClimbingSpeed = p.baseClimbingSpeed;

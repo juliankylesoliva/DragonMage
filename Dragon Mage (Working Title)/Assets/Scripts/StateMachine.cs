@@ -286,7 +286,7 @@ public class JumpingState : State
 
     private bool CheckIfFalling()
     {
-        if (player.rb2d.velocity.y < 0f)
+        if (player.rb2d.velocity.y < player.collisions.GetRightVector().y)
         {
             player.stateMachine.TransitionTo(player.stateMachine.fallingState);
             return true;

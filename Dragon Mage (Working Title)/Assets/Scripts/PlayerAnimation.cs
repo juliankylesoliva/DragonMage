@@ -71,6 +71,30 @@ public class PlayerAnimation : MonoBehaviour
         animator.Play("DraelynWallClimb");
     }
 
+    public void FireTackleAnimation(int n)
+    {
+        switch (n)
+        {
+            case 0:
+                animator.Play("DraelynFireTackleStartup");
+                break;
+            case 1:
+                animator.Play("DraelynFireTackleActive");
+                break;
+            case 2:
+                animator.Play("DraelynFireTackleEndlag");
+                break;
+            case 3:
+                animator.Play("DraelynFireTackleBump");
+                break;
+            case 4:
+                animator.Play("DraelynFireTackleFireball");
+                break;
+            default:
+                break;
+        }
+    }
+
     private float GetRunAnimationSpeed()
     {
         float retVal = ((player.rb2d.velocity.x / player.movement.topSpeed) * (player.movement.isFacingRight ? 1f : -1f));
