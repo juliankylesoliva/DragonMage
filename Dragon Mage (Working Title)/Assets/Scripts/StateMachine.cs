@@ -509,7 +509,8 @@ public class FireTacklingState : State
         {
             State nextState;
             if (player.temper.forceFormChange) { nextState = player.stateMachine.formChangingState; }
-            else if (player.collisions.IsGrounded && player.inputVector.x != 0f) { nextState = player.stateMachine.runningState; }
+            else if (player.jumping.CanWallClimb()) { nextState = player.stateMachine.wallClimbingState; }
+            else if (player.collisions.IsGrounded && (player.inputVector.x != 0f || player.rb2d.velocity.x != 0f)) { nextState = player.stateMachine.runningState; }
             else if (player.rb2d.velocity.y > 0f) { nextState = player.stateMachine.jumpingState; }
             else if (player.rb2d.velocity.y <= 0f) { nextState = player.stateMachine.fallingState; }
             else { nextState = player.stateMachine.standingState; }

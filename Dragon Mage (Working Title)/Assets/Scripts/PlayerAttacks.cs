@@ -10,6 +10,7 @@ public class PlayerAttacks : MonoBehaviour
 
     [SerializeField] GameObject magicProjectilePrefab;
     [SerializeField] GameObject fireProjectilePrefab;
+    [SerializeField] GameObject fireTrailPrefab;
     [SerializeField] Transform projectileSpawnPoint;
     
     [SerializeField] float attackCooldown = 1f;
@@ -23,10 +24,15 @@ public class PlayerAttacks : MonoBehaviour
     [SerializeField] float fireTackleRecoilMultiplier = 0.75f;
     [SerializeField] float fireTackleEndlag = 0.25f;
     [SerializeField] float fireTackleEndlagCancel = 0.125f;
+    [SerializeField] Color fireTackleStartupColor;
+    [SerializeField] Color fireTackleActiveColor;
+    [SerializeField] Color fireTackleEndlagColor;
+    [SerializeField] float fireTackleTrailSpawnInterval = 0.05f;
 
     [SerializeField] float blastJumpMinVelocityMagnitude = 6f;
     [SerializeField] float blastJumpMinActiveTime = 0.25f;
     [SerializeField] float blastJumpTemperIncreaseInterval = 0.5f;
+    [SerializeField] Color blastJumpActiveColor;
 
     [HideInInspector] public bool isAttackCooldownActive = false;
     [HideInInspector] public bool isBlastJumpActive = false;
@@ -85,7 +91,8 @@ public class PlayerAttacks : MonoBehaviour
         if (isBlastJumpActive) { yield break; }
 
         isBlastJumpActive = true;
-        player.charSprite.color = Color.blue;
+        player.charSprite.color = blastJumpActiveColor;
+        player.spriteTrail.ActivateTrail();
         player.temper.ChangeTemperBy(1);
         float currentActiveTime = blastJumpMinActiveTime;
         float currentTemperInterval = blastJumpTemperIncreaseInterval;
@@ -100,6 +107,7 @@ public class PlayerAttacks : MonoBehaviour
                                 player.form.currentMode != CharacterMode.MAGE)
                 {
                     isBlastJumpActive = false;
+                    player.spriteTrail.DeactivateTrail();
                     player.charSprite.color = Color.white;
                 }
             }
@@ -121,7 +129,6 @@ public class PlayerAttacks : MonoBehaviour
                     currentTemperInterval += blastJumpTemperIncreaseInterval;
                 }
             }
-
             yield return null;
         }
 
@@ -136,6 +143,7 @@ public class PlayerAttacks : MonoBehaviour
         isFireTackleActive = true;
         currentAttackState = AttackState.STARTUP;
 
+        player.charSprite.color = fireTackleStartupColor;
         player.animationCtrl.FireTackleAnimation(0);
         float windupTimer = fireTackleStartup;
         float previousHorizontalVelocity = Mathf.Abs(player.rb2d.velocity.x);
@@ -152,12 +160,15 @@ public class PlayerAttacks : MonoBehaviour
         }
 
         currentAttackState = AttackState.ACTIVE;
+        player.charSprite.color = fireTackleActiveColor;
+        player.spriteTrail.ActivateTrail();
         player.animationCtrl.FireTackleAnimation(1);
         bool wasInteractingWithWall = (player.stateMachine.PreviousState == player.stateMachine.wallVaultingState || player.stateMachine.PreviousState == player.stateMachine.wallClimbingState);
         float horizontalResult = (Mathf.Min(((wasInteractingWithWall ? player.jumping.storedWallClimbSpeed : previousHorizontalVelocity) + fireTackleBaseHorizontalSpeed), fireTackleMaxHorizontalSpeed) * (player.movement.isFacingRight ? 1f : -1f));
         float currentRisingSpeed = 0f;
         player.rb2d.velocity = new Vector2(horizontalResult, (verticalAxis < 0f ? -Mathf.Abs(player.rb2d.velocity.x) : 0f));
         float attackTimer = fireTackleBaseDuration;
+        float trailSpawnTimer = 0f;
         float bumpImmunityTimer = fireTackleBumpImmunityDuration;
         player.temper.ChangeTemperBy(-1);
         while (attackTimer > 0f && (bumpImmunityTimer > 0f || (!player.collisions.IsAgainstWall && !player.collisions.IsHeadbonking)))
@@ -187,12 +198,28 @@ public class PlayerAttacks : MonoBehaviour
                 player.collisions.SnapToGround();
             }
 
+            if (player.collisions.IsGrounded && trailSpawnTimer >= 0f)
+            {
+                trailSpawnTimer -= Time.deltaTime;
+                if (trailSpawnTimer <= 0f)
+                {
+                    trailSpawnTimer = fireTackleTrailSpawnInterval;
+                    Instantiate(fireTrailPrefab, player.collisions.GetClosestGroundPoint(), Quaternion.identity);
+                }
+            }
+            else
+            {
+                if (!player.collisions.IsGrounded) { trailSpawnTimer = 0f; }
+            }
+
             attackTimer -= Time.deltaTime;
             bumpImmunityTimer -= Time.deltaTime;
             yield return null;
         }
 
         currentAttackState = AttackState.ENDLAG;
+        player.charSprite.color = fireTackleEndlagColor;
+        player.spriteTrail.DeactivateTrail();
         bool bumped = false;
         bool firedProjectile = false;
         if (player.collisions.IsAgainstWall || player.collisions.IsHeadbonking)
@@ -224,16 +251,16 @@ public class PlayerAttacks : MonoBehaviour
         float endlagTimer = fireTackleEndlag;
         while (endlagTimer > 0f)
         {
-            if (!firedProjectile && !bumped && endlagTimer < fireTackleEndlagCancel && (player.inputVector.x * (player.movement.isFacingRight ? 1f : -1f)) > 0f && player.collisions.IsGrounded && player.buffers.jumpBufferTimeLeft > 0f) { break; }
+            if (!firedProjectile && !bumped && endlagTimer < fireTackleEndlagCancel && (CanCancelFireTackleEndlag() || player.jumping.CanWallClimb())) { break; }
             if (!bumped && (player.collisions.IsGrounded || player.collisions.IsOnASlope) && player.rb2d.velocity.x != 0f)
             {
                 player.rb2d.velocity = ((player.movement.isFacingRight && player.collisions.IsTouchingWallR) || (!player.movement.isFacingRight && player.collisions.IsTouchingWallL) ? Vector2.zero : Vector2.Lerp(player.collisions.GetRightVector().normalized * horizontalResult * (firedProjectile ? -1f : 1f), Vector2.zero, (fireTackleEndlag - endlagTimer) / fireTackleEndlag));
-                player.collisions.SnapToGround();
+                if (player.collisions.IsOnASlope) { player.collisions.SnapToGround(); }
             }
             else if (bumped && (player.collisions.IsGrounded || player.collisions.IsOnASlope) && endlagTimer < fireTackleEndlagCancel)
             {
                 player.rb2d.velocity = Vector2.zero;
-                player.collisions.SnapToGround();
+                if (player.collisions.IsOnASlope) { player.collisions.SnapToGround(); }
             }
             else { /* Nothing */ }
 
@@ -247,6 +274,11 @@ public class PlayerAttacks : MonoBehaviour
         StartCoroutine(AttackCooldownCR());
         StartCoroutine(player.form.FormChangeCooldownCR());
         yield break;
+    }
+
+    private bool CanCancelFireTackleEndlag()
+    {
+        return ((player.inputVector.x * (player.movement.isFacingRight ? 1f : -1f)) > 0f && player.collisions.IsGrounded && player.buffers.jumpBufferTimeLeft > 0f);
     }
 
     private IEnumerator AttackCooldownCR()
