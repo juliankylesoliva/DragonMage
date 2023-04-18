@@ -28,7 +28,7 @@ public class PlayerCamera : MonoBehaviour
 
     private void UpdatePlayerCamTarget()
     {
-        if (player.form.isChangingForm || player.attacks.currentAttackState == AttackState.STARTUP) { return; }
+        if (player.form.isChangingForm || player.attacks.currentAttackState == AttackState.STARTUP || ((player.collisions.IsGrounded || player.collisions.IsOnASlope) && player.attacks.currentAttackState == AttackState.ENDLAG)) { return; }
         float horizontalLookahead = (lookaheadDistance * Mathf.Min(Mathf.Abs(player.rb2d.velocity.x / (player.movement.topSpeed * 2f)), 1f) * (player.rb2d.velocity.x >= 0f ? 1f : -1f));
         float initialYPos = (followCharacterOnJump || player.collisions.IsGrounded ? player.collisions.groundCheckObj.position.y : playerCamTarget.position.y);
         float fallingLookahead = (!player.collisions.IsGrounded && player.buffers.coyoteTimeLeft <= 0f && player.rb2d.velocity.y < 0f && player.collisions.groundCheckObj.position.y < (playerCamTarget.position.y - fallingLookaheadThreshold) ? fallingLookaheadDistance * Mathf.Max(player.rb2d.velocity.y / -player.jumping.fallSpeed, 1f) : 0f);

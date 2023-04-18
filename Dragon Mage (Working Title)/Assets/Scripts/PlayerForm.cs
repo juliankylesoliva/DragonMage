@@ -23,6 +23,8 @@ public class PlayerForm : MonoBehaviour
 
     [HideInInspector] public bool isFormChangeCooldownActive = false;
 
+    public float FormChangeTime { get { return formChangeTime; } }
+
     void Awake()
     {
         player = this.gameObject.GetComponent<PlayerCtrl>();
@@ -46,6 +48,8 @@ public class PlayerForm : MonoBehaviour
 
         StartCoroutine(FormFreeze());
         StartCoroutine(FormChangeCooldownCR());
+
+        player.animationCtrl.TransformationAnimation(currentMode);
 
         if (currentMode == CharacterMode.MAGE)
         {
@@ -134,7 +138,6 @@ public class PlayerForm : MonoBehaviour
     {
         SetCtrlProperties(mode == CharacterMode.MAGE ? mageProperties : dragonProperties);
         currentMode = mode;
-        player.animationCtrl.StandingAnimation();
     }
 
     private IEnumerator FormFreeze()

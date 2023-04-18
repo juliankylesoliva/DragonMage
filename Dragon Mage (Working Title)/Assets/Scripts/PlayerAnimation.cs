@@ -95,6 +95,20 @@ public class PlayerAnimation : MonoBehaviour
         }
     }
 
+    public void TransformationAnimation(CharacterMode current)
+    {
+        animator.speed = (0.4f / player.form.FormChangeTime);
+        if (current == CharacterMode.MAGE)
+        {
+            animator.Play("MagliToDraelyn");
+
+        }
+        else
+        {
+            animator.Play("DraelynToMagli");
+        }
+    }
+
     private float GetRunAnimationSpeed()
     {
         float retVal = ((player.rb2d.velocity.x / player.movement.topSpeed) * (player.movement.isFacingRight ? 1f : -1f));

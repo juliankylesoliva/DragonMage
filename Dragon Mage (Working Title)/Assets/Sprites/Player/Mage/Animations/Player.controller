@@ -1,5 +1,31 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1102 &-6312096098970832138
+AnimatorState:
+  serializedVersion: 6
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: MagliToDraelyn
+  m_Speed: 1
+  m_CycleOffset: 0
+  m_Transitions: []
+  m_StateMachineBehaviours: []
+  m_Position: {x: 50, y: 50, z: 0}
+  m_IKOnFeet: 0
+  m_WriteDefaultValues: 1
+  m_Mirror: 0
+  m_SpeedParameterActive: 0
+  m_MirrorParameterActive: 0
+  m_CycleOffsetParameterActive: 0
+  m_TimeParameterActive: 0
+  m_Motion: {fileID: 7400000, guid: 161635116e2fc9d4d961b48c62d521c8, type: 2}
+  m_Tag: 
+  m_SpeedParameter: 
+  m_MirrorParameter: 
+  m_CycleOffsetParameter: 
+  m_TimeParameter: 
 --- !u!1102 &-6179479582453764912
 AnimatorState:
   serializedVersion: 6
@@ -430,28 +456,34 @@ AnimatorStateMachine:
     m_Position: {x: 200, y: 320, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -1362495698844768037}
-    m_Position: {x: 235, y: 385, z: 0}
+    m_Position: {x: 200, y: 390, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 4379527995920295178}
-    m_Position: {x: 270, y: 450, z: 0}
+    m_Position: {x: 420, y: 390, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -670524629688803424}
-    m_Position: {x: 305, y: 515, z: 0}
+    m_Position: {x: 420, y: 450, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -995903893363598190}
-    m_Position: {x: 340, y: 580, z: 0}
+    m_Position: {x: 420, y: 520, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -18165514153369359}
-    m_Position: {x: 375, y: 645, z: 0}
+    m_Position: {x: 420, y: 580, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -4090226466084675646}
-    m_Position: {x: 410, y: 710, z: 0}
+    m_Position: {x: 420, y: 640, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -3051364206644765607}
-    m_Position: {x: 445, y: 775, z: 0}
+    m_Position: {x: 420, y: 700, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 5410585781918613718}
-    m_Position: {x: 480, y: 840, z: 0}
+    m_Position: {x: 420, y: 760, z: 0}
+  - serializedVersion: 1
+    m_State: {fileID: -6312096098970832138}
+    m_Position: {x: 200, y: 450, z: 0}
+  - serializedVersion: 1
+    m_State: {fileID: 3582155143057837852}
+    m_Position: {x: 420, y: 820, z: 0}
   m_ChildStateMachines: []
   m_AnyStateTransitions: []
   m_EntryTransitions: []
@@ -462,6 +494,32 @@ AnimatorStateMachine:
   m_ExitPosition: {x: 570, y: 0, z: 0}
   m_ParentStateMachinePosition: {x: 800, y: 20, z: 0}
   m_DefaultState: {fileID: -2942464285958715279}
+--- !u!1102 &3582155143057837852
+AnimatorState:
+  serializedVersion: 6
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: DraelynToMagli
+  m_Speed: 1
+  m_CycleOffset: 0
+  m_Transitions: []
+  m_StateMachineBehaviours: []
+  m_Position: {x: 50, y: 50, z: 0}
+  m_IKOnFeet: 0
+  m_WriteDefaultValues: 1
+  m_Mirror: 0
+  m_SpeedParameterActive: 0
+  m_MirrorParameterActive: 0
+  m_CycleOffsetParameterActive: 0
+  m_TimeParameterActive: 0
+  m_Motion: {fileID: 7400000, guid: 0eff00e3ace6c7b42a9682fb96d582bd, type: 2}
+  m_Tag: 
+  m_SpeedParameter: 
+  m_MirrorParameter: 
+  m_CycleOffsetParameter: 
+  m_TimeParameter: 
 --- !u!1102 &4379527995920295178
 AnimatorState:
   serializedVersion: 6
