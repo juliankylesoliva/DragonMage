@@ -47,7 +47,6 @@ public class PlayerForm : MonoBehaviour
         player.buffers.formChangeBufferTimeLeft = 0f;
 
         StartCoroutine(FormFreeze());
-        StartCoroutine(FormChangeCooldownCR());
 
         player.animationCtrl.TransformationAnimation(currentMode);
 
@@ -142,6 +141,7 @@ public class PlayerForm : MonoBehaviour
 
     private IEnumerator FormFreeze()
     {
+        if (isChangingForm) { yield break; }
         isChangingForm = true;
 
         Vector2 prevVelocity = player.rb2d.velocity;
@@ -155,5 +155,6 @@ public class PlayerForm : MonoBehaviour
         player.rb2d.velocity = prevVelocity;
 
         isChangingForm = false;
+        StartCoroutine(FormChangeCooldownCR());
     }
 }

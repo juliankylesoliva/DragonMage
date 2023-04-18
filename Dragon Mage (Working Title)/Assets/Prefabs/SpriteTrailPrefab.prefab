@@ -97,6 +97,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e571ef30984e7134f971c8721e5d847a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  expireTime: 0.15
+  expireTime: 0.25
   shrinkToZero: 0
   fadeSpriteToZero: 1
+  enableSpriteFlip: 0
+  flipSpriteXInterval: 6
