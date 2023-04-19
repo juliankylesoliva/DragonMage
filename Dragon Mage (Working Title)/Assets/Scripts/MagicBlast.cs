@@ -12,6 +12,8 @@ public class MagicBlast : MonoBehaviour
 
     /* EDITOR VARIABLES */
     [SerializeField] SpriteRenderer spriteRenderer;
+    [SerializeField] Color defaultColor;
+    [SerializeField] Color pulseColor;
     [SerializeField] float fuseTime = 3f;
     [SerializeField] float verticalLaunchSpeed = 1f;
     [SerializeField] float horizontalLaunchSpeed = 2f;
@@ -23,6 +25,7 @@ public class MagicBlast : MonoBehaviour
     /* SCRIPT VARIABLES */
     private PlayerTemper temper;
     private float fuseTimeLeft = 0f;
+    private float currentLerpValue = 0f;
 
     void Awake()
     {
@@ -36,7 +39,9 @@ public class MagicBlast : MonoBehaviour
 
     void Update()
     {
+        spriteRenderer.color = Color.Lerp(defaultColor, pulseColor, Mathf.PingPong(currentLerpValue, 1f));
         fuseTimeLeft -= Time.deltaTime;
+        currentLerpValue += ((fuseTime / fuseTimeLeft) * Time.deltaTime);
         if (fuseTimeLeft <= 0f)
         {
             Detonate();

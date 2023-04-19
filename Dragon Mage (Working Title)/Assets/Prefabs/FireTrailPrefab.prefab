@@ -100,5 +100,6 @@ MonoBehaviour:
   expireTime: 0.8
   shrinkToZero: 1
   fadeSpriteToZero: 0
+  fadeToBlack: 1
   enableSpriteFlip: 1
   flipSpriteXInterval: 6

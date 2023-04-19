@@ -286,7 +286,7 @@ public class JumpingState : State
 
     private bool CheckIfGrounded()
     {
-        if ((player.collisions.IsGrounded || player.collisions.IsOnASlope) && player.rb2d.velocity.y == 0f)
+        if ((player.collisions.IsGrounded || player.collisions.IsOnASlope) && (player.rb2d.velocity.y >= -0.001f && player.rb2d.velocity.y <= 0.001f))
         {
             player.stateMachine.TransitionTo(player.rb2d.velocity.x == 0f ? player.stateMachine.standingState : player.stateMachine.runningState);
             return true;

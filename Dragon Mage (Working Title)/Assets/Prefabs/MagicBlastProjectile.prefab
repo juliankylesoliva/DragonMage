@@ -105,7 +105,7 @@ TrailRenderer:
     colorGradient:
       serializedVersion: 2
       key0: {r: 0.37647063, g: 0.30980393, b: 0.6392157, a: 1}
-      key1: {r: 0.37647063, g: 0.30980393, b: 0.6392157, a: 1}
+      key1: {r: 0.37647063, g: 0.30980393, b: 0.6392157, a: 0}
       key2: {r: 0, g: 0, b: 0, a: 0}
       key3: {r: 0, g: 0, b: 0, a: 0}
       key4: {r: 0, g: 0, b: 0, a: 0}
@@ -120,7 +120,7 @@ TrailRenderer:
       ctime5: 0
       ctime6: 0
       ctime7: 0
-      atime0: 0
+      atime0: 16384
       atime1: 65535
       atime2: 0
       atime3: 0
@@ -128,7 +128,7 @@ TrailRenderer:
       atime5: 0
       atime6: 0
       atime7: 0
-      m_Mode: 1
+      m_Mode: 0
       m_NumColorKeys: 2
       m_NumAlphaKeys: 2
     numCornerVertices: 0
@@ -335,8 +335,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   blastHitboxPrefab: {fileID: 8588232049811770561, guid: 728de4123d9cdb2458d9c308ac09f3b4, type: 3}
   spriteRenderer: {fileID: 9148520560815648271}
-  chargedColor: {r: 0.94117653, g: 0.6039216, b: 0.34901962, a: 1}
-  chargeMultiplier: 1.5
+  defaultColor: {r: 0.38039216, g: 0.3137255, b: 0.6392157, a: 1}
+  pulseColor: {r: 0.09418853, g: 0.06198302, b: 0.291, a: 1}
   fuseTime: 5
   verticalLaunchSpeed: 5
   horizontalLaunchSpeed: 8

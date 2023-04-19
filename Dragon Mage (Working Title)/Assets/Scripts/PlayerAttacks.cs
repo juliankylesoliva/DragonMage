@@ -9,6 +9,7 @@ public class PlayerAttacks : MonoBehaviour
     PlayerCtrl player;
 
     [SerializeField] ParticleSystem blastJumpParticles;
+    [SerializeField] ParticleSystem fireTackleParticles;
 
     [SerializeField] GameObject magicProjectilePrefab;
     [SerializeField] GameObject fireProjectilePrefab;
@@ -164,6 +165,7 @@ public class PlayerAttacks : MonoBehaviour
         }
 
         currentAttackState = AttackState.ACTIVE;
+        fireTackleParticles.Play();
         player.charSprite.color = fireTackleActiveColor;
         player.spriteTrail.ActivateTrail();
         player.animationCtrl.FireTackleAnimation(1);
@@ -222,6 +224,7 @@ public class PlayerAttacks : MonoBehaviour
         }
 
         currentAttackState = AttackState.ENDLAG;
+        fireTackleParticles.Stop();
         player.charSprite.color = fireTackleEndlagColor;
         player.spriteTrail.DeactivateTrail();
         bool bumped = false;
@@ -241,7 +244,7 @@ public class PlayerAttacks : MonoBehaviour
                 GameObject objTemp = Instantiate(fireProjectilePrefab, projectileSpawnPoint.position, Quaternion.identity);
                 FireMissile fireTemp = objTemp.GetComponent<FireMissile>();
                 if (fireTemp != null) { fireTemp.Setup(player.temper, player.movement.isFacingRight, Mathf.Abs(player.rb2d.velocity.x)); }
-                player.rb2d.velocity = (Vector2.right * (player.movement.isFacingRight ? -1f : 1f) * fireTackleRecoilStrength);
+                player.rb2d.velocity = (new Vector2((player.movement.isFacingRight ? -1f : 1f), (!player.collisions.IsGrounded && !player.collisions.IsOnASlope ? 1f : 0f)).normalized * fireTackleRecoilStrength);
                 player.temper.ChangeTemperBy(-1);
             }
             else
