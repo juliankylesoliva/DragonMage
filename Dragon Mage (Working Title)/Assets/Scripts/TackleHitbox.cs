@@ -55,7 +55,17 @@ public class TackleHitbox : MonoBehaviour
         
     }
 
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        DestroyBlock(other);
+    }
+
     void OnTriggerStay2D(Collider2D other)
+    {
+        DestroyBlock(other);
+    }
+
+    private void DestroyBlock(Collider2D other)
     {
         if (player.attacks.currentAttackState == AttackState.ACTIVE)
         {

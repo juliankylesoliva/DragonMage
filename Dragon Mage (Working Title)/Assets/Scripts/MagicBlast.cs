@@ -12,8 +12,6 @@ public class MagicBlast : MonoBehaviour
 
     /* EDITOR VARIABLES */
     [SerializeField] SpriteRenderer spriteRenderer;
-    [SerializeField] Color chargedColor;
-    [SerializeField] float chargeMultiplier = 2f;
     [SerializeField] float fuseTime = 3f;
     [SerializeField] float verticalLaunchSpeed = 1f;
     [SerializeField] float horizontalLaunchSpeed = 2f;
@@ -24,7 +22,6 @@ public class MagicBlast : MonoBehaviour
 
     /* SCRIPT VARIABLES */
     private PlayerTemper temper;
-    private bool isCharged = false;
     private float fuseTimeLeft = 0f;
 
     void Awake()
@@ -48,9 +45,11 @@ public class MagicBlast : MonoBehaviour
 
     public void Detonate()
     {
+        GameObject tempEffect = EffectFactory.SpawnEffect("MagicExplosion", this.transform.position);
+        tempEffect.transform.localScale = new Vector3(blastRadius / 0.5f, blastRadius / 0.5f, 1f);
         GameObject tempObj = Instantiate(blastHitboxPrefab, this.transform.position, Quaternion.identity);
         BlastHitbox tempBlast = tempObj.GetComponent<BlastHitbox>();
-        tempBlast.Setup(temper, blastDuration * (isCharged ? chargeMultiplier : 1f), blastStrength * (isCharged ? chargeMultiplier : 1f), blastRadius * (isCharged ? chargeMultiplier : 1f));
+        tempBlast.Setup(temper, blastDuration, blastStrength, blastRadius);
         GameObject.Destroy(this.gameObject);
     }
 
@@ -59,13 +58,5 @@ public class MagicBlast : MonoBehaviour
         this.temper = temper;
         rb2d.velocity = new Vector2((isGoingRight ? horizontalLaunchSpeed : -horizontalLaunchSpeed) * (verticalAxis != 0f ? 0.25f : 1f) + (horizontalVelocity * 0.5f), verticalLaunchSpeed * (verticalAxis > 0f ? 2.5f : 1f) * (verticalAxis < 0f ? -0.5f : 1f));
         rb2d.AddTorque(rotationSpeed * (isGoingRight ? -1f : 1f) * (verticalAxis != 0f ? 0.5f : 1f));
-    }
-
-    public void AddChargedState(float launchSpeed)
-    {
-        isCharged = true;
-        rb2d.velocity = new Vector2(rb2d.velocity.x, launchSpeed * 2f);
-        fuseTimeLeft = fuseTime;
-        spriteRenderer.color = chargedColor;
     }
 }

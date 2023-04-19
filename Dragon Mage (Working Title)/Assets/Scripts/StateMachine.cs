@@ -215,7 +215,7 @@ public class StandingState : State
     public override void Update()
     {
         player.rb2d.velocity = Vector2.zero;
-        if (CheckFormChangeInput() || CheckFireTackleInput() || CheckRunInput() || CheckJumpInput() || CheckFireTackleInput() || CheckSuddenRise() || CheckSuddenFall() || CheckSuddenMovement()) { return; }
+        if (CheckFormChangeInput() || CheckRunInput() || CheckJumpInput() || CheckFireTackleInput() || CheckSuddenRise() || CheckSuddenFall() || CheckSuddenMovement()) { return; }
         player.animationCtrl.StandingAnimation();
     }
 
@@ -241,7 +241,7 @@ public class RunningState : State
     {
         player.movement.Movement();
         player.movement.FacingDirection();
-        if (CheckFormChangeInput() || CheckFireTackleInput() || CheckIfStopped() || CheckSuddenFall() || CheckJumpInput() || CheckFireTackleInput()) { return; }
+        if (CheckFormChangeInput() || CheckIfStopped() || CheckSuddenFall() || CheckJumpInput() || CheckFireTackleInput()) { return; }
         player.animationCtrl.RunningAnimation();
     }
 
@@ -275,7 +275,7 @@ public class JumpingState : State
         player.movement.Movement();
         player.movement.FacingDirection();
         player.jumping.GroundJumpUpdate();
-        if (CheckFormChangeInput() || CheckFireTackleInput() || CheckIfWallClimbing() || CheckIfWallSliding() || CheckGlideInput() || CheckMidairJumpInput() || CheckIfFalling()) { return; }
+        if (CheckFormChangeInput() || CheckFireTackleInput() || CheckIfWallClimbing() || CheckIfWallSliding() || CheckGlideInput() || CheckMidairJumpInput() || CheckIfFalling() || CheckIfGrounded()) { return; }
         player.animationCtrl.JumpingAnimation();
     }
 
@@ -284,9 +284,19 @@ public class JumpingState : State
 
     }
 
+    private bool CheckIfGrounded()
+    {
+        if ((player.collisions.IsGrounded || player.collisions.IsOnASlope) && player.rb2d.velocity.y == 0f)
+        {
+            player.stateMachine.TransitionTo(player.rb2d.velocity.x == 0f ? player.stateMachine.standingState : player.stateMachine.runningState);
+            return true;
+        }
+        return false;
+    }
+
     private bool CheckIfFalling()
     {
-        if (player.rb2d.velocity.y < player.collisions.GetRightVector().y)
+        if (player.rb2d.velocity.y <= player.collisions.GetRightVector().y)
         {
             player.stateMachine.TransitionTo(player.stateMachine.fallingState);
             return true;
@@ -510,9 +520,9 @@ public class FireTacklingState : State
             State nextState;
             if (player.temper.forceFormChange) { nextState = player.stateMachine.formChangingState; }
             else if (player.jumping.CanWallClimb()) { nextState = player.stateMachine.wallClimbingState; }
-            else if (player.collisions.IsGrounded && (player.inputVector.x != 0f || player.rb2d.velocity.x != 0f)) { nextState = player.stateMachine.runningState; }
-            else if (player.rb2d.velocity.y > 0f) { nextState = player.stateMachine.jumpingState; }
-            else if (player.rb2d.velocity.y <= 0f) { nextState = player.stateMachine.fallingState; }
+            else if ((player.collisions.IsGrounded || player.collisions.IsOnASlope) && (player.inputVector.x != 0f || player.rb2d.velocity.x != 0f)) { nextState = player.stateMachine.runningState; }
+            else if (player.rb2d.velocity.y > 0f && !(player.collisions.IsGrounded || player.collisions.IsOnASlope)) { nextState = player.stateMachine.jumpingState; }
+            else if (player.rb2d.velocity.y <= 0f && !(player.collisions.IsGrounded || player.collisions.IsOnASlope)) { nextState = player.stateMachine.fallingState; }
             else { nextState = player.stateMachine.standingState; }
 
             player.stateMachine.TransitionTo(nextState);

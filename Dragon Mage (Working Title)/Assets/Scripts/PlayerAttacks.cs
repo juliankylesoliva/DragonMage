@@ -8,6 +8,8 @@ public class PlayerAttacks : MonoBehaviour
 {
     PlayerCtrl player;
 
+    [SerializeField] ParticleSystem blastJumpParticles;
+
     [SerializeField] GameObject magicProjectilePrefab;
     [SerializeField] GameObject fireProjectilePrefab;
     [SerializeField] GameObject fireTrailPrefab;
@@ -21,7 +23,7 @@ public class PlayerAttacks : MonoBehaviour
     [SerializeField] float fireTackleStartup = 0.25f;
     [SerializeField] float fireTackleBumpImmunityDuration = 0.2f;
     [SerializeField] float fireTackleBaseDuration = 0.5f;
-    [SerializeField] float fireTackleRecoilMultiplier = 0.75f;
+    [SerializeField] float fireTackleRecoilStrength = 4f;
     [SerializeField] float fireTackleEndlag = 0.25f;
     [SerializeField] float fireTackleEndlagCancel = 0.125f;
     [SerializeField] Color fireTackleStartupColor;
@@ -91,6 +93,7 @@ public class PlayerAttacks : MonoBehaviour
         if (isBlastJumpActive) { yield break; }
 
         isBlastJumpActive = true;
+        blastJumpParticles.Play();
         player.charSprite.color = blastJumpActiveColor;
         player.spriteTrail.ActivateTrail();
         player.temper.ChangeTemperBy(1);
@@ -132,6 +135,7 @@ public class PlayerAttacks : MonoBehaviour
             yield return null;
         }
 
+        blastJumpParticles.Stop();
         isBlastJumpActive = false;
         yield break;
     }
@@ -237,7 +241,7 @@ public class PlayerAttacks : MonoBehaviour
                 GameObject objTemp = Instantiate(fireProjectilePrefab, projectileSpawnPoint.position, Quaternion.identity);
                 FireMissile fireTemp = objTemp.GetComponent<FireMissile>();
                 if (fireTemp != null) { fireTemp.Setup(player.temper, player.movement.isFacingRight, Mathf.Abs(player.rb2d.velocity.x)); }
-                player.rb2d.velocity = new Vector2(-player.rb2d.velocity.x * fireTackleRecoilMultiplier, player.rb2d.velocity.y);
+                player.rb2d.velocity = (Vector2.right * (player.movement.isFacingRight ? -1f : 1f) * fireTackleRecoilStrength);
                 player.temper.ChangeTemperBy(-1);
             }
             else

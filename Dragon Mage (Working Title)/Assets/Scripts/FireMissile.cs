@@ -46,11 +46,7 @@ public class FireMissile : MonoBehaviour
         MagicBlast tempBlast = other.gameObject.GetComponent<MagicBlast>();
         BreakableBlock block = other.gameObject.GetComponent<BreakableBlock>();
 
-        if (tempBlast != null)
-        {
-            tempBlast.AddChargedState(moveSpeed);
-        }
-        else if (block != null && (block.breakableBy == BreakableType.ANY || block.breakableBy == BreakableType.FIRE))
+        if (block != null && (block.breakableBy == BreakableType.ANY || block.breakableBy == BreakableType.FIRE))
         {
             temper.NeutralizeTemperBy(2);
             block.onBreak.Invoke();
