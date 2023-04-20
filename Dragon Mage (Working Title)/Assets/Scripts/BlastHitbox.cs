@@ -20,6 +20,11 @@ public class BlastHitbox : MonoBehaviour
         circle = this.gameObject.GetComponent<CircleCollider2D>();
     }
 
+    void Start()
+    {
+        SoundFactory.SpawnSound("attack_magli_explosion", this.transform.position, 0.8f);
+    }
+
     void Update()
     {
         if (isArmed)

@@ -86,6 +86,7 @@ public class PlayerJumping : MonoBehaviour
 
     public void GroundJumpStart()
     {
+        player.sfxCtrl.PlaySound(player.form.currentMode == CharacterMode.MAGE ? "jump_magli" : "jump_draelyn");
         player.buffers.jumpBufferTimeLeft = 0f;
         jumpIsHeld = true;
         player.rb2d.gravityScale = risingGravity;
@@ -141,6 +142,7 @@ public class PlayerJumping : MonoBehaviour
 
     public void GlideStart()
     {
+        player.sfxCtrl.PlaySound("jump_magli_glide");
         player.rb2d.gravityScale = 0f;
         player.rb2d.velocity = new Vector2(player.rb2d.velocity.x, -airStallSpeed);
     }
@@ -166,6 +168,7 @@ public class PlayerJumping : MonoBehaviour
 
     public void MidairJump()
     {
+        player.sfxCtrl.PlaySound("jump_draelyn_midair");
         player.buffers.jumpBufferTimeLeft = 0f;
         jumpIsHeld = true;
         player.rb2d.gravityScale = risingGravity;
@@ -194,6 +197,7 @@ public class PlayerJumping : MonoBehaviour
 
     public void WallSlideStart()
     {
+        player.sfxCtrl.PlaySound("jump_magli_wallslide", 0.8f);
         jumpIsHeld = false;
         player.rb2d.gravityScale = 0f;
         player.rb2d.velocity = new Vector2(0f, -wallSlideSpeed);
@@ -216,6 +220,8 @@ public class PlayerJumping : MonoBehaviour
 
     public void WallJumpStart()
     {
+        SoundFactory.SpawnSound("jump_magli_wallkick", this.transform.position);
+        player.sfxCtrl.PlaySound("jump_magli");
         player.buffers.jumpBufferTimeLeft = 0f;
         jumpIsHeld = true;
         player.rb2d.gravityScale = risingGravity;
@@ -234,6 +240,7 @@ public class PlayerJumping : MonoBehaviour
 
     public void WallClimbStart()
     {
+        player.sfxCtrl.PlaySound("jump_draelyn_wallclimb");
         player.rb2d.gravityScale = climbingGravity;
         if (storedWallClimbSpeed <= 0f)
         {
@@ -271,6 +278,7 @@ public class PlayerJumping : MonoBehaviour
 
     public void WallVaultStart()
     {
+        player.sfxCtrl.PlaySound("jump_draelyn_wallpopup");
         postClimbDashTimeLeft = postClimbDashWindow;
         player.rb2d.gravityScale = risingGravity;
         player.rb2d.velocity = (Vector2.up * Mathf.Min(maxWallVaultStartSpeed, Mathf.Max(wallVaultStartSpeed, player.rb2d.velocity.y)));
@@ -289,6 +297,7 @@ public class PlayerJumping : MonoBehaviour
 
     public void WallVaultDash()
     {
+        player.sfxCtrl.PlaySound("jump_draelyn_wallvault");
         currentAirStallTime = 0f;
         currentMidairJumps = 0;
         postClimbDashTimeLeft = 0f;

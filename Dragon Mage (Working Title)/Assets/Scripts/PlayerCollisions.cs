@@ -36,6 +36,9 @@ public class PlayerCollisions : MonoBehaviour
     public bool IsHeadbonking { get { return isHeadbonking; } }
     public bool IsOnASlope { get { return isOnASlope; } }
 
+    private bool prevIsGrounded = true;
+    private bool prevIsHeadbonking = true;
+
     void Awake()
     {
         player = this.gameObject.GetComponent<PlayerCtrl>();
@@ -47,6 +50,12 @@ public class PlayerCollisions : MonoBehaviour
         SlopeCheck();
         WallCheck();
         HeadbonkCheck();
+
+        LandingSoundCheck();
+        HeadbonkSoundCheck();
+
+        prevIsGrounded = isGrounded;
+        prevIsHeadbonking = isHeadbonking;
     }
 
     private void GroundCheck()
@@ -101,6 +110,21 @@ public class PlayerCollisions : MonoBehaviour
         isHeadbonking = false;
         Collider2D[] colliders = Physics2D.OverlapCircleAll(headbonkCheckObj.position + (Vector3.right * (1f / 32f) * (player.movement.isFacingRight ? 1f : -1f)), headbonkCheckRadius, groundDistanceCheckLayer);
         isHeadbonking = (colliders.Length > 0);
+    }
+
+    private void LandingSoundCheck()
+    {
+        if (!prevIsGrounded && isGrounded) { FootstepSound(); }
+    }
+
+    private void HeadbonkSoundCheck()
+    {
+        if (!prevIsHeadbonking && isHeadbonking) { SoundFactory.SpawnSound(player.form.currentMode == CharacterMode.MAGE ? "jump_magli_headbonk" : "jump_draelyn_headbonk", groundCheckObj.position, 0.75f); }
+    }
+
+    public void FootstepSound()
+    {
+        SoundFactory.SpawnSound(player.form.currentMode == CharacterMode.MAGE ? "jump_magli_landing" : "jump_draelyn_landing", groundCheckObj.position, 0.75f);
     }
 
     public bool CheckDistanceToGround(float minDistance)

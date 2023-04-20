@@ -6,6 +6,7 @@ public class MagicBlast : MonoBehaviour
 {
     /* COMPONENTS */
     Rigidbody2D rb2d;
+    AudioPlayer sfxCtrl;
 
     /* DRAG AND DROP */
     [SerializeField] GameObject blastHitboxPrefab;
@@ -30,6 +31,7 @@ public class MagicBlast : MonoBehaviour
     void Awake()
     {
         rb2d = this.gameObject.GetComponent<Rigidbody2D>();
+        sfxCtrl = this.gameObject.GetComponent<AudioPlayer>();
     }
 
     void Start()
@@ -63,5 +65,14 @@ public class MagicBlast : MonoBehaviour
         this.temper = temper;
         rb2d.velocity = new Vector2((isGoingRight ? horizontalLaunchSpeed : -horizontalLaunchSpeed) * (verticalAxis != 0f ? 0.25f : 1f) + (horizontalVelocity * 0.5f), verticalLaunchSpeed * (verticalAxis > 0f ? 2.5f : 1f) * (verticalAxis < 0f ? -0.5f : 1f));
         rb2d.AddTorque(rotationSpeed * (isGoingRight ? -1f : 1f) * (verticalAxis != 0f ? 0.5f : 1f));
+    }
+
+    void OnCollisionEnter2D(Collision2D other)
+    {
+        int otherLayer = other.transform.gameObject.layer;
+        if (otherLayer == LayerMask.NameToLayer("Ground") || otherLayer == LayerMask.NameToLayer("Slopes") || otherLayer == LayerMask.NameToLayer("Blocks"))
+        {
+            SoundFactory.SpawnSound("attack_magli_bounce", other.transform.position, 0.25f);
+        }
     }
 }

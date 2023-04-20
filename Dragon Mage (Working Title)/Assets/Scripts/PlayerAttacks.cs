@@ -93,6 +93,7 @@ public class PlayerAttacks : MonoBehaviour
     {
         if (isBlastJumpActive) { yield break; }
 
+        SoundFactory.SpawnSound("attack_magli_blastjump", this.transform.position);
         isBlastJumpActive = true;
         blastJumpParticles.Play();
         player.charSprite.color = blastJumpActiveColor;
@@ -148,6 +149,7 @@ public class PlayerAttacks : MonoBehaviour
         isFireTackleActive = true;
         currentAttackState = AttackState.STARTUP;
 
+        player.sfxCtrl.PlaySound("attack_draelyn_startup");
         player.charSprite.color = fireTackleStartupColor;
         player.animationCtrl.FireTackleAnimation(0);
         float windupTimer = fireTackleStartup;
@@ -165,6 +167,7 @@ public class PlayerAttacks : MonoBehaviour
         }
 
         currentAttackState = AttackState.ACTIVE;
+        player.sfxCtrl.PlaySound("attack_draelyn_tackle");
         fireTackleParticles.Play();
         player.charSprite.color = fireTackleActiveColor;
         player.spriteTrail.ActivateTrail();
@@ -231,6 +234,7 @@ public class PlayerAttacks : MonoBehaviour
         bool firedProjectile = false;
         if (player.collisions.IsAgainstWall || player.collisions.IsHeadbonking)
         {
+            player.sfxCtrl.PlaySound("attack_draelyn_bump");
             bumped = true;
             player.animationCtrl.FireTackleAnimation(3);
             player.rb2d.velocity = ((Vector2.up + (Vector2.right * (player.movement.isFacingRight ? -1f : 1f))).normalized * fireTackleBonkKnockback);
@@ -239,6 +243,7 @@ public class PlayerAttacks : MonoBehaviour
         {
             if (player.attackButtonHeld)
             {
+                player.sfxCtrl.PlaySound("attack_draelyn_fireball");
                 player.animationCtrl.FireTackleAnimation(4);
                 firedProjectile = true;
                 GameObject objTemp = Instantiate(fireProjectilePrefab, projectileSpawnPoint.position, Quaternion.identity);
@@ -249,6 +254,7 @@ public class PlayerAttacks : MonoBehaviour
             }
             else
             {
+                player.sfxCtrl.PlaySound("attack_draelyn_endlag", 0.5f);
                 player.animationCtrl.FireTackleAnimation(2);
             }
         }

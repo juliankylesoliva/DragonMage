@@ -6742,7 +6742,7 @@ TilemapRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -2050848823
-  m_SortingLayer: 2
+  m_SortingLayer: 3
   m_SortingOrder: 2
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
@@ -20888,7 +20888,7 @@ TilemapRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -2050848823
-  m_SortingLayer: 2
+  m_SortingLayer: 3
   m_SortingOrder: 2
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
@@ -25044,7 +25044,7 @@ TilemapRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -2050848823
-  m_SortingLayer: 2
+  m_SortingLayer: 3
   m_SortingOrder: 2
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
@@ -35697,9 +35697,11 @@ GameObject:
   - component: {fileID: 557060680}
   - component: {fileID: 557060683}
   - component: {fileID: 557060684}
+  - component: {fileID: 557060686}
   - component: {fileID: 557060669}
   - component: {fileID: 557060671}
   - component: {fileID: 557060672}
+  - component: {fileID: 557060685}
   - component: {fileID: 557060682}
   m_Layer: 3
   m_Name: Player
@@ -35747,7 +35749,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 100433471
-  m_SortingLayer: 3
+  m_SortingLayer: 2
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 1051337cddec8fe4889f7e0d1100d63b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -35848,6 +35850,7 @@ MonoBehaviour:
   attacks: {fileID: 0}
   animationCtrl: {fileID: 0}
   spriteTrail: {fileID: 0}
+  sfxCtrl: {fileID: 0}
   rb2d: {fileID: 0}
   charSprite: {fileID: 0}
   moveAction:
@@ -36357,6 +36360,114 @@ MonoBehaviour:
   trailSpawnInterval: 0.05
   mageTrailColor: {r: 0.38538656, g: 0.5192578, b: 0.90588236, a: 0.7490196}
   dragonTrailColor: {r: 1, g: 0.6011911, b: 0.43137252, a: 0.7490196}
+--- !u!82 &557060685
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 557060668}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+--- !u!114 &557060686
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 557060668}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d337e92490ee2747bb56dd870f13241, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &560514192
 GameObject:
   m_ObjectHideFlags: 0
@@ -44017,8 +44128,9 @@ GameObject:
   m_Component:
   - component: {fileID: 808095408}
   - component: {fileID: 808095409}
+  - component: {fileID: 808095410}
   m_Layer: 0
-  m_Name: EffectFactory
+  m_Name: Factory
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -44054,6 +44166,44 @@ MonoBehaviour:
   effectList:
   - {fileID: 1753482534224173454, guid: 78fe7c611a7395841a045259f2052e8c, type: 3}
   - {fileID: 4961521385902157221, guid: 9ce078aaf7d8e48409936f56c279537b, type: 3}
+--- !u!114 &808095410
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 808095407}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c505e7bb37571044082e8544b265c0c7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  temporarySoundPrefab: {fileID: 8146373053490149287, guid: dbcb6ba755bc80747bb2db42b64da932, type: 3}
+  clipList:
+  - {fileID: 8300000, guid: c18e3cc5e93a7304db2dff72cb48be56, type: 3}
+  - {fileID: 8300000, guid: 08e527866a2e97949842bfd9cc89f78f, type: 3}
+  - {fileID: 8300000, guid: 9bd6c4d73d0062f4d883793f3b453c9d, type: 3}
+  - {fileID: 8300000, guid: b656142ccd199324f8f9f3cbd70c60ef, type: 3}
+  - {fileID: 8300000, guid: e342f1fc62ef7c34d91521c396329167, type: 3}
+  - {fileID: 8300000, guid: d756faeb5ab44b949a3c3675f5ffe306, type: 3}
+  - {fileID: 8300000, guid: e1ed0b0f877737e44a2e5d2a75b94ab7, type: 3}
+  - {fileID: 8300000, guid: 932a53379a5a3184b8a5a400c3fc8e49, type: 3}
+  - {fileID: 8300000, guid: 53a31660976ce1843a94a6a385e8bb47, type: 3}
+  - {fileID: 8300000, guid: 22a63c2e6a3cee948a2a8eaf45623c98, type: 3}
+  - {fileID: 8300000, guid: ba863b21e3dea4444843fceb0301e9bf, type: 3}
+  - {fileID: 8300000, guid: 963f29aa0f0ed714a93a4310ce8b0334, type: 3}
+  - {fileID: 8300000, guid: 172a669c7fffbce42a91d7441f99e1e8, type: 3}
+  - {fileID: 8300000, guid: badfddb5d2506d94ca8006a6793468df, type: 3}
+  - {fileID: 8300000, guid: 3cb4703678070754c9420ca02edb7513, type: 3}
+  - {fileID: 8300000, guid: 26ddd0637ce6a0d4bbdb110822e3039a, type: 3}
+  - {fileID: 8300000, guid: bafbe50a13dfb1940a1dd2580bb5a2d2, type: 3}
+  - {fileID: 8300000, guid: 6ee114a2b004313468c07409d7c08082, type: 3}
+  - {fileID: 8300000, guid: 594b85f1849ec64468846c036d8515e2, type: 3}
+  - {fileID: 8300000, guid: 69039fd77ab3d7a43877eff6cc1c535d, type: 3}
+  - {fileID: 8300000, guid: 33edc29bdd7050b489be5d3243cfb45d, type: 3}
+  - {fileID: 8300000, guid: 12dc6d62566d9dd418e25b4adb9676e4, type: 3}
+  - {fileID: 8300000, guid: c9ea26db4f6544a47a5e6b59a3a59681, type: 3}
+  - {fileID: 8300000, guid: 356b5c4ef89e317469a21decd08d691e, type: 3}
 --- !u!1001 &810155126
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -57018,7 +57168,7 @@ TilemapRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -2050848823
-  m_SortingLayer: 2
+  m_SortingLayer: 3
   m_SortingOrder: 2
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
@@ -61901,7 +62051,7 @@ TilemapRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -2050848823
-  m_SortingLayer: 2
+  m_SortingLayer: 3
   m_SortingOrder: 2
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
@@ -65342,7 +65492,7 @@ TilemapRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -2050848823
-  m_SortingLayer: 2
+  m_SortingLayer: 3
   m_SortingOrder: 2
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
@@ -76191,7 +76341,7 @@ TilemapRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -2050848823
-  m_SortingLayer: 2
+  m_SortingLayer: 3
   m_SortingOrder: 2
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
@@ -83848,7 +83998,7 @@ TilemapRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -2050848823
-  m_SortingLayer: 2
+  m_SortingLayer: 3
   m_SortingOrder: 2
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
@@ -87656,7 +87806,7 @@ TilemapRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -2050848823
-  m_SortingLayer: 2
+  m_SortingLayer: 3
   m_SortingOrder: 2
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
@@ -92402,7 +92552,7 @@ TilemapRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -2050848823
-  m_SortingLayer: 2
+  m_SortingLayer: 3
   m_SortingOrder: 2
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
@@ -96755,7 +96905,7 @@ TilemapRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -2050848823
-  m_SortingLayer: 2
+  m_SortingLayer: 3
   m_SortingOrder: 2
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
@@ -101044,7 +101194,7 @@ TilemapRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -2050848823
-  m_SortingLayer: 2
+  m_SortingLayer: 3
   m_SortingOrder: 2
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0, y: 0, z: 0}

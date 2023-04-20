@@ -52,12 +52,14 @@ public class PlayerForm : MonoBehaviour
 
         if (currentMode == CharacterMode.MAGE)
         {
+            player.sfxCtrl.PlaySound("transformation_draelyn");
             ChangeMode(CharacterMode.DRAGON);
             return;
         }
 
         if (currentMode == CharacterMode.DRAGON)
         {
+            player.sfxCtrl.PlaySound("transformation_magli");
             ChangeMode(CharacterMode.MAGE);
             return;
         }
