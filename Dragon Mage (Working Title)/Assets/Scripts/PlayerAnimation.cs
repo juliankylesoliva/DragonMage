@@ -42,7 +42,7 @@ public class PlayerAnimation : MonoBehaviour
         {
             if (player.rb2d.velocity.y > 0f)
             {
-                animator.Play(player.form.currentMode == CharacterMode.MAGE ? "MagliGroundJump" : (player.stateMachine.PreviousState == player.stateMachine.wallVaultingState ? "DraelynDashJump" : (player.jumping.currentMidairJumps > 0 ? "DraelynMidairJump" : "DraelynGroundJump")), -1, (player.jumpButtonDown ? 0f : Mathf.NegativeInfinity));
+                animator.Play(player.form.currentMode == CharacterMode.MAGE ? "MagliGroundJump" : (player.stateMachine.PreviousState == player.stateMachine.wallVaultingState ? "DraelynDashJump" : (player.jumping.currentMidairJumps > 0 && player.jumping.currentMidairJumps < player.jumping.maxMidairJumps ? "DraelynMidairJump" : "DraelynGroundJump")), -1, (player.jumpButtonDown ? 0f : Mathf.NegativeInfinity));
             }
             else
             {

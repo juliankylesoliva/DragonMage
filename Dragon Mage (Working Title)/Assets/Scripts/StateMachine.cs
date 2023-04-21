@@ -83,6 +83,11 @@ public abstract class State : IState
             player.stateMachine.TransitionTo(player.stateMachine.formChangingState);
             return true;
         }
+        else if (player.form.CannotFormChange())
+        {
+            player.form.FormChangeFail();
+        }
+        else { }
         return false;
     }
 

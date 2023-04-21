@@ -40,6 +40,11 @@ public class PlayerForm : MonoBehaviour
         return (!player.form.isFormChangeCooldownActive && !player.attacks.isAttackCooldownActive && !player.form.isChangingForm && !player.attacks.isBlastJumpActive && !player.attacks.isFireTackleActive && (player.temper.forceFormChange || (!player.temper.isFormLocked && player.buffers.formChangeBufferTimeLeft > 0f)));
     }
 
+    public bool CannotFormChange()
+    {
+        return (!player.form.isChangingForm && !player.attacks.isBlastJumpActive && !player.attacks.isFireTackleActive && player.temper.isFormLocked && player.buffers.formChangeBufferTimeLeft > 0f);
+    }
+
     public void FormChange()
     {
         if (player.temper.forceFormChange) { player.temper.FormLockTemperChange(); }
@@ -63,6 +68,12 @@ public class PlayerForm : MonoBehaviour
             ChangeMode(CharacterMode.MAGE);
             return;
         }
+    }
+
+    public void FormChangeFail()
+    {
+        player.buffers.formChangeBufferTimeLeft = 0f;
+        player.sfxCtrl.PlaySound(currentMode == CharacterMode.MAGE ? "transformation_magli_locked" : "transformation_draelyn_locked");
     }
 
     private void SetCtrlProperties(PlayerCtrlProperties p)

@@ -25,12 +25,13 @@ public class TempSound : MonoBehaviour
         }
     }
 
-    public void Setup(AudioClip clip, float volume = 1f)
+    public void Setup(AudioClip clip, float volume = 1f, float pitch = 1f)
     {
         if (audioSrc.clip == null && clip != null)
         {
             audioSrc.clip = clip;
             audioSrc.volume = volume;
+            audioSrc.pitch = pitch;
             audioSrc.Play();
             timeLeft += clip.length;
         }

@@ -92,7 +92,7 @@ public class PlayerBuffers : MonoBehaviour
             {
                 if (!player.form.isChangingForm)
                 {
-                    if (highestSpeedBufferTimeLeft > 0f) { highestSpeedBufferTimeLeft -= Time.deltaTime; }
+                    if (highestSpeedBufferTimeLeft > 0f && (player.collisions.IsGrounded || player.collisions.IsOnASlope || player.collisions.IsAgainstWall)) { highestSpeedBufferTimeLeft -= Time.deltaTime; }
 
                     if (highestSpeedBufferTimeLeft <= 0f)
                     {

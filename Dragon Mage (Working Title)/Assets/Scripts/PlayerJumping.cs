@@ -86,22 +86,22 @@ public class PlayerJumping : MonoBehaviour
 
     public void GroundJumpStart()
     {
-        player.sfxCtrl.PlaySound(player.form.currentMode == CharacterMode.MAGE ? "jump_magli" : "jump_draelyn");
         player.buffers.jumpBufferTimeLeft = 0f;
         jumpIsHeld = true;
         player.rb2d.gravityScale = risingGravity;
 
         LandingReset();
 
-        bool didPlayerSpeedHop = (enableSpeedHopping && (player.rb2d.velocity.x * player.inputVector.x) > 0f && Mathf.Abs(player.rb2d.velocity.x) >= player.movement.topSpeed && player.buffers.highestSpeedBuffer >= Mathf.Abs(player.rb2d.velocity.x));
-        float horizontalResult = (didPlayerSpeedHop ? (player.buffers.highestSpeedBuffer * player.inputVector.x) : player.rb2d.velocity.x);
+        bool didPlayerSpeedHop = (enableSpeedHopping && (player.rb2d.velocity.x * player.inputVector.x) > 0f && Mathf.Abs(player.rb2d.velocity.x) > player.movement.topSpeed && player.buffers.highestSpeedBuffer >= Mathf.Abs(player.rb2d.velocity.x));
+        float horizontalResult = (didPlayerSpeedHop ? Mathf.Max(player.buffers.highestSpeedBuffer, Mathf.Abs(player.rb2d.velocity.x)) : Mathf.Abs(player.rb2d.velocity.x));
         if (didPlayerSpeedHop && Mathf.Abs(horizontalResult) >= (Mathf.Abs(player.rb2d.velocity.x) + 0.25f))
         {
             GameObject tempObj = EffectFactory.SpawnEffect("SpeedHopSpark", player.collisions.groundCheckObj.position);
             SpriteRenderer tempSprite = tempObj.GetComponent<SpriteRenderer>();
             if (tempSprite != null) { tempSprite.flipX = !player.movement.isFacingRight; }
         }
-        player.rb2d.velocity = new Vector2(horizontalResult, (jumpSpeed + (enableRunningJumpBonus ? Mathf.Abs(horizontalResult / player.movement.topSpeed) * runningJumpMultiplier : 0f)));
+        player.sfxCtrl.PlaySound(player.form.currentMode == CharacterMode.MAGE ? "jump_magli" : "jump_draelyn", 1f, didPlayerSpeedHop ? 1.5f : 1f);
+        player.rb2d.velocity = new Vector2(horizontalResult * (player.movement.isFacingRight ? 1f : -1f), (jumpSpeed + (enableRunningJumpBonus ? Mathf.Abs(horizontalResult / player.movement.topSpeed) * runningJumpMultiplier : 0f)));
     }
 
     public void GroundJumpUpdate()

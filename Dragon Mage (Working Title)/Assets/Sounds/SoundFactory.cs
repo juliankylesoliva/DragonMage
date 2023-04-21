@@ -37,10 +37,10 @@ public class SoundFactory : MonoBehaviour
         return null;
     }
 
-    public static void SpawnSound(string clipName, Vector3 position, float volume = 1f)
+    public static void SpawnSound(string clipName, Vector3 position, float volume = 1f, float pitch = 1f)
     {
         GameObject tempObj = Instantiate(_temporarySoundPrefab, position, Quaternion.identity);
         TempSound tempSound = tempObj.GetComponent<TempSound>();
-        if (tempSound != null) { tempSound.Setup(GetClip(clipName), volume); }
+        if (tempSound != null) { tempSound.Setup(GetClip(clipName), volume, pitch); }
     }
 }

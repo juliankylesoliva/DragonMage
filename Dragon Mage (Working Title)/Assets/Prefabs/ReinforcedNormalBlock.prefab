@@ -68,6 +68,10 @@ PrefabInstance:
       propertyPath: isReinforced
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 8293150372936092831, guid: 2aceab037d7a4bf45965be3e860068ea, type: 3}
+      propertyPath: fragmentPrefab
+      value: 
+      objectReference: {fileID: 1615804559549899305, guid: 1793b9c901bce4f4b9e8fce095287311, type: 3}
     - target: {fileID: 8293150372936092834, guid: 2aceab037d7a4bf45965be3e860068ea, type: 3}
       propertyPath: m_Name
       value: ReinforcedNormalBlock
