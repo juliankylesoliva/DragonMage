@@ -94,12 +94,12 @@ public class PlayerJumping : MonoBehaviour
 
         bool didPlayerSpeedHop = (enableSpeedHopping && (player.rb2d.velocity.x * player.inputVector.x) > 0f && Mathf.Abs(player.rb2d.velocity.x) > player.movement.topSpeed && player.buffers.highestSpeedBuffer >= Mathf.Abs(player.rb2d.velocity.x));
         float horizontalResult = (didPlayerSpeedHop ? Mathf.Max(player.buffers.highestSpeedBuffer, Mathf.Abs(player.rb2d.velocity.x)) : Mathf.Abs(player.rb2d.velocity.x));
-        if (didPlayerSpeedHop && Mathf.Abs(horizontalResult) >= (Mathf.Abs(player.rb2d.velocity.x) + 0.25f))
-        {
-            GameObject tempObj = EffectFactory.SpawnEffect("SpeedHopSpark", player.collisions.groundCheckObj.position);
-            SpriteRenderer tempSprite = tempObj.GetComponent<SpriteRenderer>();
-            if (tempSprite != null) { tempSprite.flipX = !player.movement.isFacingRight; }
-        }
+
+        GameObject tempObj = EffectFactory.SpawnEffect(didPlayerSpeedHop && Mathf.Abs(horizontalResult) >= (Mathf.Abs(player.rb2d.velocity.x) + 0.25f) ? "SpeedHopSpark" : "JumpSpark", player.collisions.IsOnASlope ? player.collisions.GetClosestGroundPoint() : player.collisions.GetSimpleGroundPoint());
+        SpriteRenderer tempSprite = tempObj.GetComponent<SpriteRenderer>();
+        if (tempSprite != null) { tempSprite.flipX = !player.movement.isFacingRight; }
+        tempObj.transform.up = player.collisions.GetGroundNormal();
+
         player.sfxCtrl.PlaySound(player.form.currentMode == CharacterMode.MAGE ? "jump_magli" : "jump_draelyn", 1f, didPlayerSpeedHop ? 1.5f : 1f);
         player.rb2d.velocity = new Vector2(horizontalResult * (player.movement.isFacingRight ? 1f : -1f), (jumpSpeed + (enableRunningJumpBonus ? Mathf.Abs(horizontalResult / player.movement.topSpeed) * runningJumpMultiplier : 0f)));
     }
@@ -247,6 +247,9 @@ public class PlayerJumping : MonoBehaviour
             storedWallClimbSpeed = Mathf.Min(Mathf.Max(player.buffers.highestSpeedBuffer, baseClimbingSpeed), maxClimbingSpeed);
             player.rb2d.velocity = new Vector2(0f, storedWallClimbSpeed);
         }
+        GameObject tempObj = EffectFactory.SpawnEffect("WallClimbSpark", player.movement.isFacingRight ? player.collisions.wallChecksR[0] : player.collisions.wallChecksL[0]);
+        WallClimbSpark tempSpark = tempObj.GetComponent<WallClimbSpark>();
+        tempSpark.Setup(player);
     }
 
     public void WallClimbUpdate()

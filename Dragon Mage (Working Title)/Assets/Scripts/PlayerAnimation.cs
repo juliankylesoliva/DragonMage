@@ -68,6 +68,7 @@ public class PlayerAnimation : MonoBehaviour
 
     public void WallClimbingAnimation()
     {
+        animator.speed = Mathf.Max(player.rb2d.velocity.y / player.jumping.baseClimbingSpeed, 0.5f);
         animator.Play("DraelynWallClimb");
     }
 

@@ -42,6 +42,7 @@ public class PlayerAttacks : MonoBehaviour
     [HideInInspector] public bool isFireTackleActive = false;
 
     public AttackState currentAttackState { get; private set; }
+    public bool isFireTackleEndlagCanceled { get; private set; }
 
     private MagicBlast projectileRef = null;
 
@@ -53,6 +54,7 @@ public class PlayerAttacks : MonoBehaviour
     void Start()
     {
         currentAttackState = AttackState.NOTHING;
+        isFireTackleEndlagCanceled = false;
     }
 
     public void UseAttack()
@@ -145,6 +147,7 @@ public class PlayerAttacks : MonoBehaviour
     private IEnumerator UseFireTackleCR()
     {
         if (isFireTackleActive || isAttackCooldownActive) { yield break; }
+        isFireTackleEndlagCanceled = false;
 
         isFireTackleActive = true;
         currentAttackState = AttackState.STARTUP;
@@ -209,11 +212,11 @@ public class PlayerAttacks : MonoBehaviour
 
             if (player.collisions.IsGrounded && trailSpawnTimer >= 0f)
             {
-                trailSpawnTimer -= Time.deltaTime;
+                trailSpawnTimer -= (player.rb2d.velocity.magnitude * Time.deltaTime);
                 if (trailSpawnTimer <= 0f)
                 {
                     trailSpawnTimer = fireTackleTrailSpawnInterval;
-                    Instantiate(fireTrailPrefab, player.collisions.GetClosestGroundPoint(), Quaternion.identity);
+                    Instantiate(fireTrailPrefab, player.collisions.GetSimpleGroundPoint(), Quaternion.identity);
                 }
             }
             else
@@ -264,10 +267,10 @@ public class PlayerAttacks : MonoBehaviour
         float endlagTimer = fireTackleEndlag;
         while (endlagTimer > 0f)
         {
-            if (!firedProjectile && !bumped && endlagTimer < fireTackleEndlagCancel && (CanCancelFireTackleEndlag() || player.jumping.CanWallClimb())) { break; }
+            if (!firedProjectile && !bumped && endlagTimer < fireTackleEndlagCancel && (CanCancelFireTackleEndlag() || player.jumping.CanWallClimb())) { isFireTackleEndlagCanceled = true; break; }
             if (!bumped && (player.collisions.IsGrounded || player.collisions.IsOnASlope) && player.rb2d.velocity.x != 0f)
             {
-                player.rb2d.velocity = ((player.movement.isFacingRight && player.collisions.IsTouchingWallR) || (!player.movement.isFacingRight && player.collisions.IsTouchingWallL) ? Vector2.zero : Vector2.Lerp(player.collisions.GetRightVector().normalized * horizontalResult * (firedProjectile ? -1f : 1f), Vector2.zero, (fireTackleEndlag - endlagTimer) / fireTackleEndlag));
+                player.rb2d.velocity = ((player.movement.isFacingRight && player.collisions.IsTouchingWallR) || (!player.movement.isFacingRight && player.collisions.IsTouchingWallL) ? Vector2.zero : Vector2.Lerp(player.collisions.GetRightVector().normalized * (firedProjectile ? -fireTackleRecoilStrength : horizontalResult), Vector2.zero, (fireTackleEndlag - endlagTimer) / fireTackleEndlag));
                 if (player.collisions.IsOnASlope) { player.collisions.SnapToGround(); }
             }
             else if (bumped && (player.collisions.IsGrounded || player.collisions.IsOnASlope) && endlagTimer < fireTackleEndlagCancel)

@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: d6414f8b190052c499f582c9f8ab1dd8
+guid: 5bfd1580a921e8d4eab11b85134fe5ad
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -68,7 +68,7 @@ TextureImporter:
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
-    maxTextureSize: 512
+    maxTextureSize: 128
     resizeAlgorithm: 1
     textureFormat: -1
     textureCompression: 0
@@ -106,148 +106,85 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: DraelynJumps_0
+      name: NormalJumpSpark_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 64
-        height: 64
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+        width: 32
+        height: 16
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c8e01962ef516f24c866c09db2eca643
-      internalID: 1257575765
+      spriteID: bc145a669d5d4cd48a5860b70c7ba992
+      internalID: -2058422018
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: DraelynJumps_1
+      name: NormalJumpSpark_1
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 0
+        width: 32
+        height: 16
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4e89bf8ca6f2afa4b8f7b9807a781db9
+      internalID: 1460537006
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NormalJumpSpark_2
       rect:
         serializedVersion: 2
         x: 64
         y: 0
-        width: 64
-        height: 64
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+        width: 32
+        height: 16
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 95dd821987aabd64b9b97c7a7fb11ccd
-      internalID: 815862957
+      spriteID: 96bc69c02ed13cf43a561d105c791136
+      internalID: 1295064077
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: DraelynJumps_2
+      name: NormalJumpSpark_3
       rect:
         serializedVersion: 2
-        x: 128
+        x: 96
         y: 0
-        width: 64
-        height: 64
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+        width: 32
+        height: 16
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ddcee58c8f1bc9e4980863ae0e5c2a9e
-      internalID: -1158603372
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: DraelynJumps_3
-      rect:
-        serializedVersion: 2
-        x: 192
-        y: 0
-        width: 64
-        height: 64
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 5ebf501033e53e64992f564bdfe131c1
-      internalID: -1152950870
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: DraelynJumps_4
-      rect:
-        serializedVersion: 2
-        x: 256
-        y: 0
-        width: 64
-        height: 64
-      alignment: 9
-      pivot: {x: 0.609375, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 248bbd3d4c6b41a4db99259acb281d50
-      internalID: -937584829
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: DraelynJumps_5
-      rect:
-        serializedVersion: 2
-        x: 320
-        y: 0
-        width: 64
-        height: 64
-      alignment: 9
-      pivot: {x: 0.609375, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 91996baa44f87bb43a85a9ee80459946
-      internalID: -1085139490
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: DraelynJumps_6
-      rect:
-        serializedVersion: 2
-        x: 384
-        y: 0
-        width: 64
-        height: 64
-      alignment: 9
-      pivot: {x: 0.609375, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: d27ccf813401fa2458066822857a15ba
-      internalID: -785033213
+      spriteID: a2095f9ef25f89f489870bf8a3505aa2
+      internalID: -1259264185
       vertices: []
       indices: 
       edges: []
@@ -263,13 +200,10 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      DraelynJumps_1: 815862957
-      DraelynJumps_3: -1152950870
-      DraelynJumps_0: 1257575765
-      DraelynJumps_2: -1158603372
-      DraelynJumps_4: -937584829
-      DraelynJumps_6: -785033213
-      DraelynJumps_5: -1085139490
+      NormalJumpSpark_1: 1460537006
+      NormalJumpSpark_0: -2058422018
+      NormalJumpSpark_3: -1259264185
+      NormalJumpSpark_2: 1295064077
   spritePackingTag: 
   pSDRemoveMatte: 0
   userData: 

@@ -33,4 +33,13 @@ public class EffectFactory : MonoBehaviour
         }
         return null;
     }
+
+    public static GameObject SpawnEffect(string effectName, Transform parent)
+    {
+        if (effectDictionary != null && effectDictionary.ContainsKey(effectName))
+        {
+            return Instantiate(effectDictionary[effectName], parent);
+        }
+        return null;
+    }
 }

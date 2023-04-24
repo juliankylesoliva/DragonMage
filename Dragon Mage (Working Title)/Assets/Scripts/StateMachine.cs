@@ -215,6 +215,7 @@ public class StandingState : State
         player.rb2d.isKinematic = true;
         player.rb2d.velocity = Vector2.zero;
         player.jumping.LandingReset();
+        if (player.collisions.IsOnASlope) { player.collisions.SnapToGround(); }
     }
 
     public override void Update()
@@ -525,6 +526,7 @@ public class FireTacklingState : State
             State nextState;
             if (player.temper.forceFormChange) { nextState = player.stateMachine.formChangingState; }
             else if (player.jumping.CanWallClimb()) { nextState = player.stateMachine.wallClimbingState; }
+            else if (player.attacks.isFireTackleEndlagCanceled) { player.jumping.GroundJumpStart(); nextState = player.stateMachine.jumpingState; }
             else if ((player.collisions.IsGrounded || player.collisions.IsOnASlope) && (player.inputVector.x != 0f || player.rb2d.velocity.x != 0f)) { nextState = player.stateMachine.runningState; }
             else if (player.rb2d.velocity.y > 0f && !(player.collisions.IsGrounded || player.collisions.IsOnASlope)) { nextState = player.stateMachine.jumpingState; }
             else if (player.rb2d.velocity.y <= 0f && !(player.collisions.IsGrounded || player.collisions.IsOnASlope)) { nextState = player.stateMachine.fallingState; }

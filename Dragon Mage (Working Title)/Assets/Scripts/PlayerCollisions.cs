@@ -170,6 +170,11 @@ public class PlayerCollisions : MonoBehaviour
         return groundCheckObj.position;
     }
 
+    public Vector3 GetSimpleGroundPoint()
+    {
+        return (groundCheckObj.position - (Vector3.up * (groundCheckRadius / 2f)));
+    }
+
     public void SnapToGround()
     {
         Vector2 toMove = GetClosestGroundPoint();
