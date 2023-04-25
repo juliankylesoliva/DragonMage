@@ -267,7 +267,7 @@ public class PlayerAttacks : MonoBehaviour
         float endlagTimer = fireTackleEndlag;
         while (endlagTimer > 0f)
         {
-            if (!firedProjectile && !bumped && endlagTimer < fireTackleEndlagCancel && (CanCancelFireTackleEndlag() || player.jumping.CanWallClimb())) { isFireTackleEndlagCanceled = true; break; }
+            if (!firedProjectile && !bumped && endlagTimer < fireTackleEndlagCancel && CanCancelFireTackleEndlag()) { isFireTackleEndlagCanceled = true; break; }
             if (!bumped && (player.collisions.IsGrounded || player.collisions.IsOnASlope) && player.rb2d.velocity.x != 0f)
             {
                 player.rb2d.velocity = ((player.movement.isFacingRight && player.collisions.IsTouchingWallR) || (!player.movement.isFacingRight && player.collisions.IsTouchingWallL) ? Vector2.zero : Vector2.Lerp(player.collisions.GetRightVector().normalized * (firedProjectile ? -fireTackleRecoilStrength : horizontalResult), Vector2.zero, (fireTackleEndlag - endlagTimer) / fireTackleEndlag));
@@ -294,7 +294,7 @@ public class PlayerAttacks : MonoBehaviour
 
     private bool CanCancelFireTackleEndlag()
     {
-        return ((player.inputVector.x * (player.movement.isFacingRight ? 1f : -1f)) > 0f && player.collisions.IsGrounded && player.buffers.jumpBufferTimeLeft > 0f);
+        return (!player.temper.forceFormChange && (player.jumping.CanWallClimb() || ((player.inputVector.x * (player.movement.isFacingRight ? 1f : -1f)) > 0f && player.collisions.IsGrounded && player.buffers.jumpBufferTimeLeft > 0f)));
     }
 
     private IEnumerator AttackCooldownCR()

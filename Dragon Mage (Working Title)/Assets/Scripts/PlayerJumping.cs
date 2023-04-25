@@ -168,7 +168,7 @@ public class PlayerJumping : MonoBehaviour
 
     public void MidairJump()
     {
-        player.sfxCtrl.PlaySound("jump_draelyn_midair");
+        player.sfxCtrl.PlaySound("jump_draelyn_midair", 1f, Mathf.Lerp(1f, 1.3f, ((float)currentMidairJumps / (float)(maxMidairJumps - 1))));
         player.buffers.jumpBufferTimeLeft = 0f;
         jumpIsHeld = true;
         player.rb2d.gravityScale = risingGravity;
@@ -220,16 +220,23 @@ public class PlayerJumping : MonoBehaviour
 
     public void WallJumpStart()
     {
-        SoundFactory.SpawnSound("jump_magli_wallkick", this.transform.position);
-        player.sfxCtrl.PlaySound("jump_magli");
         player.buffers.jumpBufferTimeLeft = 0f;
         jumpIsHeld = true;
         player.rb2d.gravityScale = risingGravity;
 
         float horizontalResult = Mathf.Max(player.buffers.highestSpeedBuffer, horizontalWallJumpSpeed);
+        bool didPlayerSpeedKick = (horizontalResult > (horizontalWallJumpSpeed + 0.25f));
         Vector2 newVelocity = new Vector2((player.movement.isFacingRight ? -horizontalResult : horizontalResult), verticalWallJumpSpeed);
         player.movement.SetFacingDirection((player.collisions.IsTouchingWallL ? 1f : (player.collisions.IsTouchingWallR ? -1f : (player.movement.isFacingRight ? -1f : 1f))));
         player.rb2d.velocity = newVelocity;
+
+        SoundFactory.SpawnSound("jump_magli_wallkick", this.transform.position);
+        player.sfxCtrl.PlaySound("jump_magli", 1f, didPlayerSpeedKick ? 1.5f : 1f);
+
+        GameObject tempObj = EffectFactory.SpawnEffect("WallJumpEffect", player.movement.isFacingRight ? player.collisions.wallChecksR[0].position : player.collisions.wallChecksL[0].position);
+        WallJumpEffect tempFX = tempObj.GetComponent<WallJumpEffect>();
+        tempFX.Setup(!player.movement.isFacingRight, didPlayerSpeedKick);
+
         StartCoroutine(WallJumpCooldownCR());
     }
 
@@ -310,6 +317,8 @@ public class PlayerJumping : MonoBehaviour
         player.rb2d.gravityScale = risingGravity;
 
         player.rb2d.velocity = new Vector2(storedWallClimbSpeed * player.inputVector.x, jumpSpeed);
+
+        GameObject tempObj = EffectFactory.SpawnEffect("WallVaultRing", this.transform.position - (new Vector3(player.rb2d.velocity.x, player.rb2d.velocity.y, 0f) * Time.deltaTime));
     }
 
     public void WallVaultEnd()

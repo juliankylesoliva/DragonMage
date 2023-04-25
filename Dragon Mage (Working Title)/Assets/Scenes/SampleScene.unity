@@ -36268,7 +36268,7 @@ MonoBehaviour:
   fireTackleEndlag: 0.4
   fireTackleEndlagCancel: 0.3
   fireTackleStartupColor: {r: 0.90099996, g: 0.8569411, b: 0.46041095, a: 1}
-  fireTackleActiveColor: {r: 0.703, g: 0.3777633, b: 0.17575, a: 1}
+  fireTackleActiveColor: {r: 0.97900003, g: 0.57028943, b: 0.319154, a: 1}
   fireTackleEndlagColor: {r: 0.801, g: 0.801, b: 0.801, a: 1}
   fireTackleTrailSpawnInterval: 0.33333334
   blastJumpMinVelocityMagnitude: 6
@@ -44168,6 +44168,9 @@ MonoBehaviour:
   - {fileID: 1753482534224173454, guid: 78fe7c611a7395841a045259f2052e8c, type: 3}
   - {fileID: 1037576753314232717, guid: 5e2ee4ee733703a498602dea777eb5fa, type: 3}
   - {fileID: 4961521385902157221, guid: 9ce078aaf7d8e48409936f56c279537b, type: 3}
+  - {fileID: 8717059085824538334, guid: a5f9c3b70eee9d74cb2277023c8be14d, type: 3}
+  - {fileID: 6602269675808971827, guid: 2bddcfb6678a63743b11a9c838c66c05, type: 3}
+  - {fileID: 6694413031581470486, guid: 132a1eda76c746c488cbbec6af3788d8, type: 3}
 --- !u!114 &808095410
 MonoBehaviour:
   m_ObjectHideFlags: 0

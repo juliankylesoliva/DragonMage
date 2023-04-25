@@ -119,7 +119,12 @@ public class PlayerCollisions : MonoBehaviour
 
     private void HeadbonkSoundCheck()
     {
-        if (!prevIsHeadbonking && isHeadbonking) { SoundFactory.SpawnSound(player.form.currentMode == CharacterMode.MAGE ? "jump_magli_headbonk" : "jump_draelyn_headbonk", groundCheckObj.position, 0.75f); }
+        if (!prevIsHeadbonking && isHeadbonking)
+        {
+            SoundFactory.SpawnSound(player.form.currentMode == CharacterMode.MAGE ? "jump_magli_headbonk" : "jump_draelyn_headbonk", groundCheckObj.position, 0.75f);
+            GameObject tempObj = EffectFactory.SpawnEffect("HeadbonkEffect", GetSimpleCeilingPoint());
+            tempObj.transform.up = GetCeilingNormal();
+        }
     }
 
     public void FootstepSound()
@@ -143,6 +148,13 @@ public class PlayerCollisions : MonoBehaviour
             if (hit2.collider != null && hit2.normal != Vector2.up) { return hit2.normal; }
         }
         return Vector2.up;
+    }
+
+    public Vector2 GetCeilingNormal()
+    {
+        RaycastHit2D hit = Physics2D.Raycast(headbonkCheckObj.position, Vector2.up, headbonkCheckRadius, groundDistanceCheckLayer);
+        if (hit.collider != null) { return hit.normal; }
+        return -Vector2.up;
     }
 
     public Vector2 GetRightVector()
@@ -173,6 +185,11 @@ public class PlayerCollisions : MonoBehaviour
     public Vector3 GetSimpleGroundPoint()
     {
         return (groundCheckObj.position - (Vector3.up * (groundCheckRadius / 2f)));
+    }
+
+    public Vector3 GetSimpleCeilingPoint()
+    {
+        return (headbonkCheckObj.position + (Vector3.up * (headbonkCheckRadius / 2f)));
     }
 
     public void SnapToGround()
