@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -17,9 +18,46 @@ public class PlayerMovement : MonoBehaviour
 
     public bool isFacingRight = true;
 
+    private bool isTurningAround = false;
+    private bool prevIsTurningAround = false;
+    private float prevXVelocity = 0f;
+    private float deltaXVelocity = 0f;
+
+    [SerializeField, Range(0f, 1f)] float topSpeedTurnaroundPercent = 0.5f; 
+    [SerializeField] UnityEvent turnaroundEvent;
+
     void Awake()
     {
         player = this.gameObject.GetComponent<PlayerCtrl>();
+    }
+
+    void Update()
+    {
+        TurnaroundCheck();
+    }
+
+    private void TurnaroundCheck()
+    {
+        if (player.stateMachine.CurrentState == player.stateMachine.runningState)
+        {
+            deltaXVelocity = (player.rb2d.velocity.x - prevXVelocity);
+            isTurningAround = ((deltaXVelocity * prevXVelocity) < 0f && (player.inputVector.x * player.rb2d.velocity.x) < 0f);
+
+            if ((player.collisions.IsGrounded || player.collisions.IsOnASlope) && isTurningAround && !prevIsTurningAround && player.rb2d.velocity.magnitude >= (topSpeed * topSpeedTurnaroundPercent))
+            {
+                turnaroundEvent.Invoke();
+            }
+
+            prevXVelocity = player.rb2d.velocity.x;
+            prevIsTurningAround = isTurningAround;
+        }
+        else
+        {
+            prevXVelocity = 0f;
+            deltaXVelocity = 0f;
+            isTurningAround = false;
+            prevIsTurningAround = false;
+        }
     }
 
     public void FacingDirection()

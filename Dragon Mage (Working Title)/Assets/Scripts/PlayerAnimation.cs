@@ -36,24 +36,27 @@ public class PlayerAnimation : MonoBehaviour
         }
     }
 
-    public void JumpingAnimation()
+    public void GroundJumpAnimation()
     {
-        if (!player.collisions.IsGrounded && player.rb2d.velocity.y != 0f)
-        {
-            if (player.rb2d.velocity.y > 0f)
-            {
-                animator.Play(player.form.currentMode == CharacterMode.MAGE ? "MagliGroundJump" : (player.stateMachine.PreviousState == player.stateMachine.wallVaultingState ? "DraelynDashJump" : (player.jumping.currentMidairJumps > 0 && player.jumping.currentMidairJumps < player.jumping.maxMidairJumps ? "DraelynMidairJump" : "DraelynGroundJump")), -1, (player.jumpButtonDown ? 0f : Mathf.NegativeInfinity));
-            }
-            else
-            {
-                animator.Play(player.form.currentMode == CharacterMode.MAGE ? "MagliFall" : "DraelynFall");
-            }
-            animator.speed = 1f;
-        }
-        else
-        {
-            StandingAnimation();
-        }
+        animator.Play(player.form.currentMode == CharacterMode.MAGE ? "MagliGroundJump" : "DraelynGroundJump");
+    }
+
+    public void MidairJumpAnimation()
+    {
+        animator.speed = 1f;
+        animator.Play("DraelynMidairJump", -1, 0f);
+    }
+
+    public void DashJumpAnimation()
+    {
+        animator.speed = 1f;
+        animator.Play("DraelynDashJump", -1, 0f);
+    }
+
+    public void FallingAnimation()
+    {
+        animator.speed = 1f;
+        animator.Play(player.form.currentMode == CharacterMode.MAGE ? "MagliFall" : "DraelynFall");
     }
 
     public void GlidingAnimation()

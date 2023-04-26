@@ -13,6 +13,7 @@ public class PlayerBuffers : MonoBehaviour
     [SerializeField] float earlyGlideBufferTime = 0.25f;
 
     public float EarlyGlideBufferTime { get { return earlyGlideBufferTime; } }
+    public float highestSpeedBufferTimeLeft { get; private set; }
 
     [HideInInspector] public float formChangeBufferTimeLeft = 0f;
     [HideInInspector] public float jumpBufferTimeLeft = 0f;
@@ -78,7 +79,7 @@ public class PlayerBuffers : MonoBehaviour
 
     private IEnumerator HighestSpeedBufferCR()
     {
-        float highestSpeedBufferTimeLeft = highestSpeedBufferTime;
+        highestSpeedBufferTimeLeft = highestSpeedBufferTime;
         while (true)
         {
             float currentHorizontalSpeed = (player.jumping.currentWallClimbTime > 0f && player.jumping.currentWallClimbTime < player.jumping.maxWallClimbTime ? Mathf.Max(player.jumping.storedWallClimbSpeed, Mathf.Abs(player.rb2d.velocity.x)) : Mathf.Abs(player.rb2d.velocity.x));
@@ -104,6 +105,11 @@ public class PlayerBuffers : MonoBehaviour
 
             yield return null;
         }
+    }
+
+    public void ResetSpeedBuffer()
+    {
+        highestSpeedBufferTimeLeft = 0f;
     }
 
     private IEnumerator CoyoteTimeCR()

@@ -114,7 +114,12 @@ public class PlayerCollisions : MonoBehaviour
 
     private void LandingSoundCheck()
     {
-        if (!prevIsGrounded && isGrounded) { FootstepSound(); }
+        if (!prevIsGrounded && isGrounded)
+        {
+            player.effects.FootstepSound();
+            GameObject tempObj = EffectFactory.SpawnEffect("LandingDust", GetSimpleGroundPoint());
+            tempObj.transform.up = GetGroundNormal();
+        }
     }
 
     private void HeadbonkSoundCheck()
@@ -125,11 +130,6 @@ public class PlayerCollisions : MonoBehaviour
             GameObject tempObj = EffectFactory.SpawnEffect("HeadbonkEffect", GetSimpleCeilingPoint());
             tempObj.transform.up = GetCeilingNormal();
         }
-    }
-
-    public void FootstepSound()
-    {
-        SoundFactory.SpawnSound(player.form.currentMode == CharacterMode.MAGE ? "jump_magli_landing" : "jump_draelyn_landing", groundCheckObj.position, 0.75f);
     }
 
     public bool CheckDistanceToGround(float minDistance)

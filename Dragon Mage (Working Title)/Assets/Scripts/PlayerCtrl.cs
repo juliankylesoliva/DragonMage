@@ -16,6 +16,7 @@ public class PlayerCtrl : MonoBehaviour
     [HideInInspector] public PlayerAttacks attacks;
     [HideInInspector] public PlayerAnimation animationCtrl;
     [HideInInspector] public PlayerSpriteTrail spriteTrail;
+    [HideInInspector] public PlayerEffects effects;
     [HideInInspector] public AudioPlayer sfxCtrl;
 
     [HideInInspector] public Rigidbody2D rb2d;
@@ -67,6 +68,7 @@ public class PlayerCtrl : MonoBehaviour
         attacks = this.gameObject.GetComponent<PlayerAttacks>();
         animationCtrl = this.gameObject.GetComponent<PlayerAnimation>();
         spriteTrail = this.gameObject.GetComponent<PlayerSpriteTrail>();
+        effects = this.gameObject.GetComponent<PlayerEffects>();
         sfxCtrl = this.gameObject.GetComponent<AudioPlayer>();
 
         rb2d = this.gameObject.GetComponent<Rigidbody2D>();

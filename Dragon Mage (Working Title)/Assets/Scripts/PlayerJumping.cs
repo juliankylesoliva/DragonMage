@@ -19,6 +19,7 @@ public class PlayerJumping : MonoBehaviour
     [HideInInspector] public bool jumpIsHeld = false;
 
     [Header("Air Stalling Variables")]
+    [SerializeField] ParticleSystem glidingParticles;
     public bool enableAirStalling = true;
     public float minimumAirStallHeight = 1f;
     public float airStallSpeed = 1f;
@@ -100,6 +101,7 @@ public class PlayerJumping : MonoBehaviour
         if (tempSprite != null) { tempSprite.flipX = !player.movement.isFacingRight; }
         tempObj.transform.up = player.collisions.GetGroundNormal();
 
+        player.animationCtrl.GroundJumpAnimation();
         player.sfxCtrl.PlaySound(player.form.currentMode == CharacterMode.MAGE ? "jump_magli" : "jump_draelyn", 1f, didPlayerSpeedHop ? 1.5f : 1f);
         player.rb2d.velocity = new Vector2(horizontalResult * (player.movement.isFacingRight ? 1f : -1f), (jumpSpeed + (enableRunningJumpBonus ? Mathf.Abs(horizontalResult / player.movement.topSpeed) * runningJumpMultiplier : 0f)));
     }
@@ -143,6 +145,7 @@ public class PlayerJumping : MonoBehaviour
     public void GlideStart()
     {
         player.sfxCtrl.PlaySound("jump_magli_glide");
+        glidingParticles.Play();
         player.rb2d.gravityScale = 0f;
         player.rb2d.velocity = new Vector2(player.rb2d.velocity.x, -airStallSpeed);
     }
@@ -155,6 +158,7 @@ public class PlayerJumping : MonoBehaviour
 
     public void GlideCancel()
     {
+        glidingParticles.Stop();
         if (currentAirStallTime > player.buffers.EarlyGlideBufferTime || !player.jumpButtonHeld)
         {
             currentAirStallTime = maxAirStallTime;
@@ -168,6 +172,7 @@ public class PlayerJumping : MonoBehaviour
 
     public void MidairJump()
     {
+        player.animationCtrl.MidairJumpAnimation();
         player.sfxCtrl.PlaySound("jump_draelyn_midair", 1f, Mathf.Lerp(1f, 1.3f, ((float)currentMidairJumps / (float)(maxMidairJumps - 1))));
         player.buffers.jumpBufferTimeLeft = 0f;
         jumpIsHeld = true;
@@ -175,12 +180,14 @@ public class PlayerJumping : MonoBehaviour
         Vector2 newVelocity = new Vector2(player.rb2d.velocity.x, midairJumpSpeed);
         if ((player.movement.isFacingRight ? 1f : -1f) * player.rb2d.velocity.x > 0f)
         {
+            EffectFactory.SpawnEffect("ForwardMidairJumpParticles", this.transform.position);
             float bonusXVelocity = forwardMidairJumpBonus.x * (player.rb2d.velocity.x > 0f ? 1f : -1f);
             float bonusYVelocity = Mathf.Abs(forwardMidairJumpBonus.y);
             newVelocity += new Vector2(bonusXVelocity, bonusYVelocity);
         }
         else
         {
+            EffectFactory.SpawnEffect("NeutralMidairJumpParticles", this.transform.position);
             if (Mathf.Abs(player.rb2d.velocity.x) > player.movement.topSpeed)
             {
                 newVelocity.x = player.movement.topSpeed * (player.rb2d.velocity.x > 0f ? 1f : -1f);
@@ -201,6 +208,10 @@ public class PlayerJumping : MonoBehaviour
         jumpIsHeld = false;
         player.rb2d.gravityScale = 0f;
         player.rb2d.velocity = new Vector2(0f, -wallSlideSpeed);
+
+        GameObject tempObj = EffectFactory.SpawnEffect("WallSlideDust", player.movement.isFacingRight ? player.collisions.wallChecksR[0] : player.collisions.wallChecksL[0]);
+        WallSlideDust tempDust = tempObj.GetComponent<WallSlideDust>();
+        tempDust.Setup(player);
     }
 
     public void WallSlideUpdate()
@@ -230,6 +241,7 @@ public class PlayerJumping : MonoBehaviour
         player.movement.SetFacingDirection((player.collisions.IsTouchingWallL ? 1f : (player.collisions.IsTouchingWallR ? -1f : (player.movement.isFacingRight ? -1f : 1f))));
         player.rb2d.velocity = newVelocity;
 
+        player.animationCtrl.GroundJumpAnimation();
         SoundFactory.SpawnSound("jump_magli_wallkick", this.transform.position);
         player.sfxCtrl.PlaySound("jump_magli", 1f, didPlayerSpeedKick ? 1.5f : 1f);
 
@@ -278,7 +290,7 @@ public class PlayerJumping : MonoBehaviour
 
     public bool IsWallClimbCanceled()
     {
-        return (currentWallClimbTime <= 0f || player.rb2d.velocity.y <= 0f || !player.collisions.IsAgainstWall || (player.inputVector.x * (player.movement.isFacingRight ? 1f : -1f)) <= 0f);
+        return (currentWallClimbTime <= 0f || player.rb2d.velocity.y <= 0f || player.collisions.IsHeadbonking || !player.collisions.IsAgainstWall || (player.inputVector.x * (player.movement.isFacingRight ? 1f : -1f)) <= 0f);
     }
 
     public bool CanStartWallVault()
@@ -288,10 +300,17 @@ public class PlayerJumping : MonoBehaviour
 
     public void WallVaultStart()
     {
+        player.animationCtrl.MidairJumpAnimation();
         player.sfxCtrl.PlaySound("jump_draelyn_wallpopup");
+        
+        GameObject tempObj = EffectFactory.SpawnEffect("WallVaultSpark", player.collisions.GetSimpleGroundPoint() + (Vector3.right * (player.movement.isFacingRight ? 1f : -1f) * 0.25f));
+        float verticalResult = Mathf.Min(maxWallVaultStartSpeed, Mathf.Max(wallVaultStartSpeed, player.rb2d.velocity.y));
+        float resultScale = (verticalResult / wallVaultStartSpeed);
+        tempObj.transform.localScale = new Vector3(resultScale, resultScale, 1f);
+
         postClimbDashTimeLeft = postClimbDashWindow;
         player.rb2d.gravityScale = risingGravity;
-        player.rb2d.velocity = (Vector2.up * Mathf.Min(maxWallVaultStartSpeed, Mathf.Max(wallVaultStartSpeed, player.rb2d.velocity.y)));
+        player.rb2d.velocity = (Vector2.up * verticalResult);
     }
 
     public bool CanWallVaultDash()
@@ -307,6 +326,7 @@ public class PlayerJumping : MonoBehaviour
 
     public void WallVaultDash()
     {
+        player.animationCtrl.DashJumpAnimation();
         player.sfxCtrl.PlaySound("jump_draelyn_wallvault");
         currentAirStallTime = 0f;
         currentMidairJumps = 0;

@@ -282,7 +282,6 @@ public class JumpingState : State
         player.movement.FacingDirection();
         player.jumping.GroundJumpUpdate();
         if (CheckFormChangeInput() || CheckFireTackleInput() || CheckIfWallClimbing() || CheckIfWallSliding() || CheckGlideInput() || CheckMidairJumpInput() || CheckIfFalling() || CheckIfGrounded()) { return; }
-        player.animationCtrl.JumpingAnimation();
     }
 
     public override void Exit()
@@ -327,7 +326,7 @@ public class FallingState : State
         player.movement.FacingDirection();
         player.jumping.FallingUpdate();
         if (CheckFormChangeInput() || CheckFireTackleInput() || CheckRunInput() || CheckStationaryLanding() || CheckJumpInput() || CheckIfWallClimbing() || CheckIfWallSliding() || CheckGlideInput() || CheckMidairJumpInput()) { return; }
-        player.animationCtrl.JumpingAnimation();
+        player.animationCtrl.FallingAnimation();
     }
 
     public override void Exit()
@@ -469,7 +468,6 @@ public class WallVaultingState : State
     {
         player.jumping.WallVaultUpdate();
         if (CheckFormChangeInput() || CheckFireTackleInput() || CheckWallVaultDash() || CheckWallVaultCancel()) { return; }
-        player.animationCtrl.JumpingAnimation();
     }
 
     public override void Exit()
@@ -565,6 +563,10 @@ public class FormChangingState : State
                     break;
                 case "WallVaulting":
                     player.stateMachine.TransitionTo((player.rb2d.velocity.y > 0f ? player.stateMachine.jumpingState : player.stateMachine.fallingState));
+                    break;
+                case "Jumping":
+                    player.stateMachine.TransitionTo(player.stateMachine.PreviousState);
+                    player.animationCtrl.GroundJumpAnimation();
                     break;
                 default:
                     player.stateMachine.TransitionTo(player.stateMachine.PreviousState);

@@ -29,7 +29,7 @@ public class EffectFactory : MonoBehaviour
     {
         if (effectDictionary != null && effectDictionary.ContainsKey(effectName))
         {
-            return Instantiate(effectDictionary[effectName], position, Quaternion.identity);
+            return Instantiate(effectDictionary[effectName], position, effectDictionary[effectName].transform.rotation);
         }
         return null;
     }

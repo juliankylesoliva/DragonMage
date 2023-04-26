@@ -147,8 +147,10 @@ public class PlayerAttacks : MonoBehaviour
     private IEnumerator UseFireTackleCR()
     {
         if (isFireTackleActive || isAttackCooldownActive) { yield break; }
-        isFireTackleEndlagCanceled = false;
 
+        bool isAttackButtonHeld = true;
+
+        isFireTackleEndlagCanceled = false;
         isFireTackleActive = true;
         currentAttackState = AttackState.STARTUP;
 
@@ -160,6 +162,7 @@ public class PlayerAttacks : MonoBehaviour
         float verticalAxis = 0f;
         while (windupTimer > 0f)
         {
+            if (!player.attackButtonHeld) { isAttackButtonHeld = false; }
             player.rb2d.gravityScale = 0f;
             player.rb2d.velocity = Vector2.zero;
             player.movement.SetFacingDirection(player.inputVector.x);
@@ -185,6 +188,8 @@ public class PlayerAttacks : MonoBehaviour
         player.temper.ChangeTemperBy(-1);
         while (attackTimer > 0f && (bumpImmunityTimer > 0f || (!player.collisions.IsAgainstWall && !player.collisions.IsHeadbonking)))
         {
+            if (!player.attackButtonHeld) { isAttackButtonHeld = false; }
+
             player.rb2d.velocity = new Vector2((!player.collisions.IsAgainstWall ? horizontalResult : 0f), player.rb2d.velocity.y);
             if (verticalAxis > 0f)
             {
@@ -239,12 +244,13 @@ public class PlayerAttacks : MonoBehaviour
         {
             player.sfxCtrl.PlaySound("attack_draelyn_bump");
             bumped = true;
+            player.buffers.ResetSpeedBuffer();
             player.animationCtrl.FireTackleAnimation(3);
             player.rb2d.velocity = ((Vector2.up + (Vector2.right * (player.movement.isFacingRight ? -1f : 1f))).normalized * fireTackleBonkKnockback);
         }
         else
         {
-            if (player.attackButtonHeld)
+            if (isAttackButtonHeld)
             {
                 player.sfxCtrl.PlaySound("attack_draelyn_fireball");
                 player.animationCtrl.FireTackleAnimation(4);
