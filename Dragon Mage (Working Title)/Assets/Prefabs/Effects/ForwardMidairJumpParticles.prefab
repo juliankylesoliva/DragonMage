@@ -13,6 +13,10 @@ PrefabInstance:
       value: ForwardMidairJumpParticles
       objectReference: {fileID: 0}
     - target: {fileID: 3117530012006727858, guid: 8cffcb1d27886a44094d20b057613fb2, type: 3}
+      propertyPath: stopAction
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3117530012006727858, guid: 8cffcb1d27886a44094d20b057613fb2, type: 3}
       propertyPath: simulationSpeed
       value: 1.25
       objectReference: {fileID: 0}

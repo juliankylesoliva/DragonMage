@@ -75,4 +75,9 @@ public class MagicBlast : MonoBehaviour
             SoundFactory.SpawnSound("attack_magli_bounce", other.transform.position, 0.25f);
         }
     }
+
+    void OnBecameInvisible()
+    {
+        GameObject.Destroy(this.gameObject);
+    }
 }
