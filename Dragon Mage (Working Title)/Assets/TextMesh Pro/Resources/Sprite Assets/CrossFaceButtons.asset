@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: CrossFaceButtons
   m_EditorClassIdentifier: 
   hashCode: -939483334
-  material: {fileID: 5214138684568306819}
+  material: {fileID: 8544836775674366194}
   materialHashCode: 0
   m_Version: 1.1.0
   m_FaceInfo:
@@ -21,7 +21,7 @@ MonoBehaviour:
     m_FamilyName: 
     m_StyleName: 
     m_PointSize: 0
-    m_Scale: 3
+    m_Scale: 0
     m_LineHeight: 0
     m_AscentLine: 0
     m_CapLine: 0
@@ -43,39 +43,39 @@ MonoBehaviour:
     m_Unicode: 65534
     m_GlyphIndex: 0
     m_Scale: 2.5
-    m_Name: CrossFaceButtons_0
-    m_HashCode: -895137035
+    m_Name: NoButton
+    m_HashCode: -1897234057
   - m_ElementType: 2
     m_Unicode: 65534
     m_GlyphIndex: 1
     m_Scale: 2.5
-    m_Name: CrossFaceButtons_1
-    m_HashCode: -895137036
+    m_Name: NorthButton
+    m_HashCode: -462623623
   - m_ElementType: 2
     m_Unicode: 65534
     m_GlyphIndex: 2
     m_Scale: 2.5
-    m_Name: CrossFaceButtons_2
-    m_HashCode: -895137033
+    m_Name: SouthButton
+    m_HashCode: -86476893
   - m_ElementType: 2
     m_Unicode: 65534
     m_GlyphIndex: 3
     m_Scale: 2.5
-    m_Name: CrossFaceButtons_3
-    m_HashCode: -895137034
+    m_Name: WestButton
+    m_HashCode: 224844387
   - m_ElementType: 2
     m_Unicode: 65534
     m_GlyphIndex: 4
     m_Scale: 2.5
-    m_Name: CrossFaceButtons_4
-    m_HashCode: -895137039
+    m_Name: EastButton
+    m_HashCode: -37255883
   m_SpriteGlyphTable:
   - m_Index: 0
     m_Metrics:
       m_Width: 32
       m_Height: 32
-      m_HorizontalBearingX: -16
-      m_HorizontalBearingY: 22
+      m_HorizontalBearingX: -0
+      m_HorizontalBearingY: 24
       m_HorizontalAdvance: 32
     m_GlyphRect:
       m_X: 0
@@ -90,8 +90,8 @@ MonoBehaviour:
     m_Metrics:
       m_Width: 32
       m_Height: 32
-      m_HorizontalBearingX: -16
-      m_HorizontalBearingY: 22
+      m_HorizontalBearingX: -0
+      m_HorizontalBearingY: 24
       m_HorizontalAdvance: 32
     m_GlyphRect:
       m_X: 32
@@ -106,8 +106,8 @@ MonoBehaviour:
     m_Metrics:
       m_Width: 32
       m_Height: 32
-      m_HorizontalBearingX: -16
-      m_HorizontalBearingY: 22
+      m_HorizontalBearingX: -0
+      m_HorizontalBearingY: 24
       m_HorizontalAdvance: 32
     m_GlyphRect:
       m_X: 64
@@ -122,8 +122,8 @@ MonoBehaviour:
     m_Metrics:
       m_Width: 32
       m_Height: 32
-      m_HorizontalBearingX: -16
-      m_HorizontalBearingY: 22
+      m_HorizontalBearingX: -0
+      m_HorizontalBearingY: 24
       m_HorizontalAdvance: 32
     m_GlyphRect:
       m_X: 96
@@ -138,8 +138,8 @@ MonoBehaviour:
     m_Metrics:
       m_Width: 32
       m_Height: 32
-      m_HorizontalBearingX: -16
-      m_HorizontalBearingY: 22
+      m_HorizontalBearingX: -0
+      m_HorizontalBearingY: 24
       m_HorizontalAdvance: 32
     m_GlyphRect:
       m_X: 128
@@ -152,7 +152,7 @@ MonoBehaviour:
     sprite: {fileID: -1422697755, guid: 00b90f7b04aabca4f890f3da4d9937da, type: 3}
   spriteInfoList: []
   fallbackSpriteAssets: []
---- !u!21 &5214138684568306819
+--- !u!21 &8544836775674366194
 Material:
   serializedVersion: 8
   m_ObjectHideFlags: 1
