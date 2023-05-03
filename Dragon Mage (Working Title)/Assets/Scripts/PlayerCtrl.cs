@@ -31,6 +31,7 @@ public class PlayerCtrl : MonoBehaviour
     [SerializeField] private InputAction formChangeAction;
 
     /* INPUT VARIABLES */
+    public bool areControlsFrozen { get; private set; }
     public Vector2 inputVector { get; private set; }
     public bool jumpButtonDown { get; private set; }
     public bool jumpButtonHeld { get; private set; }
@@ -77,21 +78,21 @@ public class PlayerCtrl : MonoBehaviour
         stateMachine = new StateMachine(this);
         stateMachine.Initialize(stateMachine.standingState);
 
-        jumpAction.started += ctx => { jumpButtonDown = true; jumpButtonHeld = true; };
+        jumpAction.started += ctx => { jumpButtonDown = !areControlsFrozen; jumpButtonHeld = !areControlsFrozen; };
         jumpAction.canceled += ctx => { jumpButtonHeld = false; };
 
-        instantGlideAction.started += ctx => { instantGlideButtonHeld = true; };
+        instantGlideAction.started += ctx => { instantGlideButtonHeld = !areControlsFrozen; };
         instantGlideAction.canceled += ctx => { instantGlideButtonHeld = false; };
 
-        attackAction.started += ctx => { attackButtonDown = true; attackButtonHeld = true; };
+        attackAction.started += ctx => { attackButtonDown = !areControlsFrozen; attackButtonHeld = !areControlsFrozen; };
         attackAction.canceled += ctx => { attackButtonHeld = false; };
 
-        formChangeAction.started += ctx => { formChangeButtonDown = true; };
+        formChangeAction.started += ctx => { formChangeButtonDown = !areControlsFrozen; };
     }
 
     void Update()
     {
-        inputVector = moveAction.ReadValue<Vector2>();
+        inputVector = (!areControlsFrozen ? moveAction.ReadValue<Vector2>() : Vector2.zero);
         stateMachine.Update();
     }
 
@@ -100,5 +101,15 @@ public class PlayerCtrl : MonoBehaviour
         if (jumpButtonDown) { jumpButtonDown = false; }
         if (attackButtonDown) { attackButtonDown = false; }
         if (formChangeButtonDown) { formChangeButtonDown = false; }
+    }
+
+    public void FreezeControls()
+    {
+        if (!areControlsFrozen && stateMachine.CurrentState != stateMachine.frozenControlState) { areControlsFrozen = true; stateMachine.TransitionTo(stateMachine.frozenControlState); }
+    }
+
+    public void UnfreezeControls()
+    {
+        areControlsFrozen = false;
     }
 }

@@ -27,6 +27,7 @@ public class StateMachine
     public WallVaultingState wallVaultingState;
     public FireTacklingState fireTacklingState;
     public FormChangingState formChangingState;
+    public FrozenControlState frozenControlState;
 
     public StateMachine(PlayerCtrl player)
     {
@@ -40,6 +41,7 @@ public class StateMachine
         wallVaultingState = new WallVaultingState(player);
         fireTacklingState = new FireTacklingState(player);
         formChangingState = new FormChangingState(player);
+        frozenControlState = new FrozenControlState(player);
     }
 
     public void Initialize(IState startingState)
@@ -578,5 +580,26 @@ public class FormChangingState : State
     public override void Exit()
     {
 
+    }
+}
+
+public class FrozenControlState : State
+{
+    public FrozenControlState(PlayerCtrl player) : base(player) { name = "FrozenControl"; }
+
+    public override void Enter()
+    {
+        player.rb2d.isKinematic = true;
+        player.animationCtrl.StandingAnimation();
+    }
+
+    public override void Update()
+    {
+        if (!player.areControlsFrozen) { player.stateMachine.TransitionTo(player.stateMachine.PreviousState); }
+    }
+
+    public override void Exit()
+    {
+        player.rb2d.isKinematic = false;
     }
 }
