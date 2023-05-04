@@ -23,7 +23,7 @@ public class ScreenEffects : MonoBehaviour
         if (!isEffectInProgress) { StartCoroutine(FadeToWhiteCR(time)); }
     }
 
-    private IEnumerator FadeToWhiteCR(float time)
+    private IEnumerator FadeToWhiteCR(float time, string sceneName = "None")
     {
         if (isEffectInProgress) { yield break; }
 

@@ -6,6 +6,12 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Scenes/TitleScreen.unity
+    guid: 475e2079dbd556a4c90f75301290d344
+  - enabled: 1
     path: Assets/Scenes/A1_L0_Prisoner_Prologue.unity
     guid: 2cda990e2423bbf4892e6590ba056729
+  - enabled: 1
+    path: Assets/Scenes/LevelComplete.unity
+    guid: dc2d3df2742b8bc40ba1bd60146db6a8
   m_configObjects: {}
