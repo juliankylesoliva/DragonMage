@@ -2,11 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 using TMPro;
 
 public class TitleMenuSystem : MonoBehaviour
 {
     [SerializeField] Animator menuCursor;
+    [SerializeField] ScreenEffects screenEffects;
 
     [SerializeField] TMP_Text startButton;
     [SerializeField] TMP_Text storyButton;
@@ -126,6 +128,7 @@ public class TitleMenuSystem : MonoBehaviour
                 case 0:
                     isStartingGame = true;
                     menuCursor.Play("Select");
+                    StartCoroutine(GameStartCR());
                     break;
                 case 1:
                     topMenuScreen.SetActive(false);
@@ -155,5 +158,18 @@ public class TitleMenuSystem : MonoBehaviour
             topMenuScreen.SetActive(true);
             isInSubscreen = false;
         }
+    }
+
+    private IEnumerator GameStartCR()
+    {
+        if (!isStartingGame) { yield break; }
+
+        yield return new WaitForSeconds(1f);
+
+        screenEffects.FadeToBlack(1f);
+
+        yield return new WaitForSeconds(2f);
+
+        SceneManager.LoadScene("A1_L0_Prisoner_Prologue");
     }
 }

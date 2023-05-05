@@ -6,6 +6,7 @@ using TMPro;
 public class ScreenText : MonoBehaviour
 {
     [SerializeField] TMP_Text textbox;
+    [SerializeField] GameObject backdrop;
     [SerializeField] Vector3 highOffset;
     [SerializeField] Vector3 lowOffset;
 
@@ -18,11 +19,13 @@ public class ScreenText : MonoBehaviour
         if (currentObjRef != null)
         {
             textbox.gameObject.SetActive(true);
+            backdrop.SetActive(true);
             textbox.text = currentText;
         }
         else
         {
             textbox.gameObject.SetActive(false);
+            backdrop.SetActive(false);
             currentText = "";
             isLowOffset = false;
         }
@@ -30,7 +33,8 @@ public class ScreenText : MonoBehaviour
 
     void LateUpdate()
     {
-        this.transform.position = (Camera.main.transform.position + (isLowOffset ? lowOffset : highOffset));
+        this.transform.position = Camera.main.transform.position;
+        textbox.transform.localPosition = (isLowOffset ? lowOffset : highOffset);
     }
 
     public static void SetTextReference(string text, bool low, GameObject go)
@@ -42,7 +46,7 @@ public class ScreenText : MonoBehaviour
 
     public static void UnsetTextReference(GameObject go)
     {
-        if (currentObjRef.GetInstanceID() == go.GetInstanceID())
+        if (currentObjRef != null && currentObjRef.GetInstanceID() == go.GetInstanceID())
         {
             currentObjRef = null;
         }

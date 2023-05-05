@@ -6,11 +6,20 @@ public class ScreenEffects : MonoBehaviour
 {
     SpriteRenderer spriteRenderer;
 
+    [SerializeField] bool startWithFadeIn = false;
+    [SerializeField] Color startFadeInColor;
+    [SerializeField] float startFadeInTime = 0.25f;
+
     private bool isEffectInProgress = false;
 
     void Awake()
     {
         spriteRenderer = this.gameObject.GetComponent<SpriteRenderer>();
+    }
+
+    void Start()
+    {
+        if (startWithFadeIn) { StartCoroutine(ColorFadeCR(startFadeInTime, startFadeInColor, Color.clear)); }
     }
 
     public void ResetToClear()
@@ -20,10 +29,15 @@ public class ScreenEffects : MonoBehaviour
 
     public void FadeToWhite(float time)
     {
-        if (!isEffectInProgress) { StartCoroutine(FadeToWhiteCR(time)); }
+        if (!isEffectInProgress) { StartCoroutine(ColorFadeCR(time, Color.clear, Color.white)); }
     }
 
-    private IEnumerator FadeToWhiteCR(float time, string sceneName = "None")
+    public void FadeToBlack(float time)
+    {
+        if (!isEffectInProgress) { StartCoroutine(ColorFadeCR(time, Color.clear, Color.black)); }
+    }
+
+    private IEnumerator ColorFadeCR(float time, Color from, Color to)
     {
         if (isEffectInProgress) { yield break; }
 
@@ -34,7 +48,7 @@ public class ScreenEffects : MonoBehaviour
         {
             currentTime += Time.deltaTime;
             if (currentTime > time) { currentTime = time; }
-            spriteRenderer.color = Color.Lerp(Color.clear, Color.white, currentTime / time);
+            spriteRenderer.color = Color.Lerp(from, to, currentTime / time);
             yield return null;
         }
 

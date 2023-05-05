@@ -14,6 +14,7 @@ public class PlayerCtrl : MonoBehaviour
     [HideInInspector] public PlayerTemper temper;
     [HideInInspector] public PlayerForm form;
     [HideInInspector] public PlayerAttacks attacks;
+    [HideInInspector] public PlayerInteraction interaction;
     [HideInInspector] public PlayerAnimation animationCtrl;
     [HideInInspector] public PlayerSpriteTrail spriteTrail;
     [HideInInspector] public PlayerEffects effects;
@@ -29,6 +30,7 @@ public class PlayerCtrl : MonoBehaviour
     [SerializeField] private InputAction instantGlideAction;
     [SerializeField] private InputAction attackAction;
     [SerializeField] private InputAction formChangeAction;
+    [SerializeField] private InputAction interactAction;
 
     /* INPUT VARIABLES */
     public bool areControlsFrozen { get; private set; }
@@ -39,6 +41,7 @@ public class PlayerCtrl : MonoBehaviour
     public bool attackButtonDown { get; private set; }
     public bool attackButtonHeld { get; private set; }
     public bool formChangeButtonDown { get; private set; }
+    public bool interactButtonDown { get; private set; }
 
     void OnEnable()
     {
@@ -47,6 +50,7 @@ public class PlayerCtrl : MonoBehaviour
         instantGlideAction.Enable();
         attackAction.Enable();
         formChangeAction.Enable();
+        interactAction.Enable();
     }
 
     void OnDisable()
@@ -56,6 +60,7 @@ public class PlayerCtrl : MonoBehaviour
         instantGlideAction.Disable();
         attackAction.Disable();
         formChangeAction.Disable();
+        interactAction.Disable();
     }
 
     void Awake()
@@ -66,6 +71,7 @@ public class PlayerCtrl : MonoBehaviour
         jumping = this.gameObject.GetComponent<PlayerJumping>();
         temper = this.gameObject.GetComponent<PlayerTemper>();
         form = this.gameObject.GetComponent<PlayerForm>();
+        interaction = this.gameObject.GetComponent<PlayerInteraction>();
         attacks = this.gameObject.GetComponent<PlayerAttacks>();
         animationCtrl = this.gameObject.GetComponent<PlayerAnimation>();
         spriteTrail = this.gameObject.GetComponent<PlayerSpriteTrail>();
@@ -88,6 +94,8 @@ public class PlayerCtrl : MonoBehaviour
         attackAction.canceled += ctx => { attackButtonHeld = false; };
 
         formChangeAction.started += ctx => { formChangeButtonDown = !areControlsFrozen; };
+
+        interactAction.started += ctx => { interactButtonDown = !areControlsFrozen; };
     }
 
     void Update()
@@ -101,6 +109,7 @@ public class PlayerCtrl : MonoBehaviour
         if (jumpButtonDown) { jumpButtonDown = false; }
         if (attackButtonDown) { attackButtonDown = false; }
         if (formChangeButtonDown) { formChangeButtonDown = false; }
+        if (interactButtonDown) { interactButtonDown = false; }
     }
 
     public void FreezeControls()
