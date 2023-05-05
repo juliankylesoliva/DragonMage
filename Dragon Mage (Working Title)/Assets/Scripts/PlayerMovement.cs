@@ -33,7 +33,7 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
-        TurnaroundCheck();
+        if (!PauseHandler.isPaused) { TurnaroundCheck(); }
     }
 
     private void TurnaroundCheck()

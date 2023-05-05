@@ -16,7 +16,7 @@ public class ScreenText : MonoBehaviour
 
     void Update()
     {
-        if (currentObjRef != null)
+        if (currentObjRef != null && !PauseHandler.isPaused)
         {
             textbox.gameObject.SetActive(true);
             backdrop.SetActive(true);
@@ -26,8 +26,11 @@ public class ScreenText : MonoBehaviour
         {
             textbox.gameObject.SetActive(false);
             backdrop.SetActive(false);
-            currentText = "";
-            isLowOffset = false;
+            if (!PauseHandler.isPaused)
+            {
+                currentText = "";
+                isLowOffset = false;
+            }
         }
     }
 

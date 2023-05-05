@@ -29,6 +29,8 @@ public class TackleHitbox : MonoBehaviour
 
     void Update()
     {
+        if (PauseHandler.isPaused) { return; }
+
         hitboxCollider.offset = new Vector2(hitboxOffset * (player.movement.isFacingRight ? 1f : -1f), defaultYOffSet + (player.collisions.IsGrounded ? 0f : (hitboxOffset * (player.rb2d.velocity.y == 0f ? 0f : (player.rb2d.velocity.y > 0f ? 1f : -1f)))));
         if (player.attacks.currentAttackState == AttackState.STARTUP)
         {

@@ -60,7 +60,7 @@ public class StateMachine
 
     public void Update()
     {
-        if (CurrentState != null) { CurrentState.Update(); }
+        if (!PauseHandler.isPaused && CurrentState != null) { CurrentState.Update(); }
     }
 }
 
@@ -589,12 +589,14 @@ public class FrozenControlState : State
 
     public override void Enter()
     {
+        player.rb2d.velocity = Vector2.zero;
         player.rb2d.isKinematic = true;
         player.animationCtrl.StandingAnimation();
     }
 
     public override void Update()
     {
+        player.rb2d.velocity = Vector2.zero;
         if (!player.areControlsFrozen) { player.stateMachine.TransitionTo(player.stateMachine.PreviousState); }
     }
 

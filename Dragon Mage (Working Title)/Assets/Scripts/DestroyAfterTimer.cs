@@ -35,6 +35,8 @@ public class DestroyAfterTimer : MonoBehaviour
 
     void Update()
     {
+        if (PauseHandler.isPaused) { return; }
+
         if (currentTimer > 0f)
         {
             currentTimer -= Time.deltaTime;

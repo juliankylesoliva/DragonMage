@@ -19,7 +19,7 @@ public class PlayerInteraction : MonoBehaviour
 
     void Update()
     {
-        if (player.interactButtonDown && interactableRef != null)
+        if (!PauseHandler.isPaused && player.interactButtonDown && interactableRef != null)
         {
             interactableRef.Interact(player);
         }

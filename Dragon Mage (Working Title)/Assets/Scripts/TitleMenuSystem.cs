@@ -94,6 +94,8 @@ public class TitleMenuSystem : MonoBehaviour
                 currentMenuSelection++;
                 if (currentMenuSelection > 3) { currentMenuSelection = 0; }
             }
+            SoundFactory.SpawnSound("attack_magli_bounce", Vector3.zero, 0.5f);
+            SoundFactory.SpawnSound("attack_draelyn_bump", Vector3.zero, 0.5f);
             UpdateCursorPosition();
         }
     }
@@ -126,16 +128,20 @@ public class TitleMenuSystem : MonoBehaviour
             switch (currentMenuSelection)
             {
                 case 0:
+                    SoundFactory.SpawnSound("attack_magli_blastjump", Vector3.zero, 0.5f);
+                    SoundFactory.SpawnSound("attack_draelyn_tackle", Vector3.zero, 0.5f);
                     isStartingGame = true;
                     menuCursor.Play("Select");
                     StartCoroutine(GameStartCR());
                     break;
                 case 1:
+                    SoundFactory.SpawnSound("transformation_magli", Vector3.zero, 0.5f);
                     topMenuScreen.SetActive(false);
                     storySubscreen.SetActive(true);
                     isInSubscreen = true;
                     break;
                 case 2:
+                    SoundFactory.SpawnSound("transformation_magli", Vector3.zero, 0.5f);
                     topMenuScreen.SetActive(false);
                     creditsSubscreen.SetActive(true);
                     isInSubscreen = true;
@@ -153,6 +159,7 @@ public class TitleMenuSystem : MonoBehaviour
     {
         if (isInSubscreen && isBackButtonPressed)
         {
+            SoundFactory.SpawnSound("transformation_draelyn", Vector3.zero, 0.5f);
             storySubscreen.SetActive(false);
             creditsSubscreen.SetActive(false);
             topMenuScreen.SetActive(true);
