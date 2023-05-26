@@ -41410,29 +41410,29 @@ MonoBehaviour:
       m_Action: Jump
       m_Flags: 0
     m_Flags: 0
-  instantGlideAction:
-    m_Name: Instant Glide
+  technicalAction:
+    m_Name: Technical
     m_Type: 0
     m_ExpectedControlType: 
-    m_Id: f99109ef-9b82-4b39-966c-6c5bd6abfef7
+    m_Id: 1cbdc71e-31bf-4dee-89a4-90d24bef8875
     m_Processors: 
     m_Interactions: 
     m_SingletonActionBindings:
     - m_Name: 
-      m_Id: 7648ef8b-7b37-4ede-bec3-7a7eb33a8d70
+      m_Id: 1bfdab93-cc14-4036-b016-2957c5306385
       m_Path: <Keyboard>/leftShift
       m_Interactions: 
       m_Processors: 
       m_Groups: 
-      m_Action: Instant Glide
+      m_Action: Technical
       m_Flags: 0
     - m_Name: 
-      m_Id: 09534718-d1e3-4bb6-9b1d-84dd47db1ab0
+      m_Id: c14865cb-b69c-4b1c-81b9-ba3ed487c6db
       m_Path: <Gamepad>/rightTrigger
       m_Interactions: 
       m_Processors: 
       m_Groups: 
-      m_Action: Instant Glide
+      m_Action: Technical
       m_Flags: 0
     m_Flags: 0
   attackAction:
@@ -41539,6 +41539,7 @@ MonoBehaviour:
   headbonkCheckRadius: 0.125
   slopeCheckDistance: 0.5
   slopeBoost: 4
+  ledgeCheckOffset: 0.25
   groundLayer:
     serializedVersion: 2
     m_Bits: 576
@@ -61324,6 +61325,76 @@ PolygonCollider2D:
       - {x: 33, y: -11}
       - {x: 33, y: 14}
   m_UseDelaunayMesh: 0
+--- !u!1001 &1262012059
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 2
+    m_TransformParent: {fileID: 1500392645}
+    m_Modifications:
+    - target: {fileID: 1353651659175900153, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: hintText
+      value: Don't feel like jumping after climbing a wall? Just hold LShift / RTrigger
+        before reaching the top of a wall to instantly start moving again without
+        having to vault!
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900155, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: m_RootOrder
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900155, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 212.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900155, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 37.75
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900155, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900155, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900155, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900155, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900155, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900155, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900155, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900155, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900157, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: m_Name
+      value: HintBubble (2)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_AddedGameObjects: []
+  m_SourcePrefab: {fileID: 100100000, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+--- !u!4 &1262012060 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1353651659175900155, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+  m_PrefabInstance: {fileID: 1262012059}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1262556435
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -72014,6 +72085,7 @@ Transform:
   m_Children:
   - {fileID: 860736534}
   - {fileID: 1539695317}
+  - {fileID: 1262012060}
   m_Father: {fileID: 1202177104}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -83328,7 +83400,7 @@ PrefabInstance:
       value: 'Hold Z / <sprite="CrossFaceButtons" name="SouthButton"> in midair to
         glide!
 
-        (Pressing LShift or RTrig while rising also works!)'
+        (Pressing LShift or RTrigger while rising also works!)'
       objectReference: {fileID: 0}
     - target: {fileID: 1353651659175900155, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
       propertyPath: m_RootOrder

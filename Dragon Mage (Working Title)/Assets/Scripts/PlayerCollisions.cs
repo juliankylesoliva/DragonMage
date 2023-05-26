@@ -18,6 +18,8 @@ public class PlayerCollisions : MonoBehaviour
     [SerializeField] float headbonkCheckRadius = 0.5f;
     [SerializeField] float slopeCheckDistance = 1f;
     [SerializeField] float slopeBoost = 1f;
+    [SerializeField] float ledgeCheckOffset = 0.25f;
+    [SerializeField] float groundNormalXThreshold = 0.1f;
     [SerializeField] LayerMask groundLayer;
     [SerializeField] LayerMask slopeLayer;
     [SerializeField] LayerMask groundDistanceCheckLayer;
@@ -138,14 +140,20 @@ public class PlayerCollisions : MonoBehaviour
         return (hit.distance >= minDistance || hit.distance == 0f);
     }
 
+    public bool CheckIfNearLedge()
+    {
+        Collider2D[] colliders = Physics2D.OverlapCircleAll(groundCheckObj.position + ((player.movement.isFacingRight ? 1f : -1f) * ledgeCheckOffset * Vector3.right), groundCheckRadius, groundLayer);
+        return colliders.Length <= 0;
+    }
+
     public Vector2 GetGroundNormal()
     {
         RaycastHit2D hit = Physics2D.Raycast((player.movement.isFacingRight ? normalCheckR : normalCheckL).position, -Vector2.up, slopeCheckDistance, groundDistanceCheckLayer);
-        if (hit.collider != null && hit.normal != Vector2.up) { return hit.normal; }
+        if (hit.collider != null && (hit.normal.x < -groundNormalXThreshold || hit.normal.x > groundNormalXThreshold)) { return hit.normal; }
         else
         {
             RaycastHit2D hit2 = Physics2D.Raycast(groundCheckObj.position, -Vector2.up, slopeCheckDistance, groundDistanceCheckLayer);
-            if (hit2.collider != null && hit2.normal != Vector2.up) { return hit2.normal; }
+            if (hit2.collider != null && (hit2.normal.x < -groundNormalXThreshold || hit2.normal.x > groundNormalXThreshold)) { return hit2.normal; }
         }
         return Vector2.up;
     }
@@ -169,7 +177,7 @@ public class PlayerCollisions : MonoBehaviour
             Vector2 result = new Vector2(v1, v2);
             result = result.normalized;
             float facingToNormalX = (normal.x * (player.movement.isFacingRight ? 1f : -1f));
-            result *= (normal != Vector2.up && facingToNormalX != 0f ? slopeBoost : 1f);
+            result *= ((normal.x < -groundNormalXThreshold || normal.x > groundNormalXThreshold) && facingToNormalX != 0f ? slopeBoost : 1f);
             return result;
         }
         return Vector2.right;
@@ -197,5 +205,6 @@ public class PlayerCollisions : MonoBehaviour
         Vector2 toMove = GetClosestGroundPoint();
         toMove += new Vector2(0f, 1f + groundCheckRadius);
         if (Vector2.Distance(this.transform.position, toMove) <= slopeCheckDistance) { this.transform.position = toMove; }
+        GroundCheck();
     }
 }

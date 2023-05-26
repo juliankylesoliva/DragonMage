@@ -239,7 +239,7 @@ public class RunningState : State
 
     public override void Enter()
     {
-        if (player.stateMachine.PreviousState == player.stateMachine.fallingState || player.stateMachine.PreviousState == player.stateMachine.jumpingState)
+        if (player.stateMachine.PreviousState == player.stateMachine.fallingState || player.stateMachine.PreviousState == player.stateMachine.jumpingState || player.stateMachine.PreviousState == player.stateMachine.wallClimbingState)
         {
             player.jumping.LandingReset();
         }
@@ -425,13 +425,24 @@ public class WallClimbingState : State
     public override void Update()
     {
         player.jumping.WallClimbUpdate();
-        if (CheckFormChangeInput() || CheckFireTackleInput() || CheckWallVault() || CheckWallClimbCancel()) { return; }
+        if (CheckFormChangeInput() || CheckFireTackleInput() || CheckLedgeSnap() || CheckWallVault() || CheckWallClimbCancel()) { return; }
         player.animationCtrl.WallClimbingAnimation();
     }
 
     public override void Exit()
     {
         player.jumping.WallClimbEnd();
+    }
+
+    private bool CheckLedgeSnap()
+    {
+        if (player.jumping.CanStartWallVault() && player.technicalButtonHeld)
+        {
+            player.jumping.LedgeSnap();
+            player.stateMachine.TransitionTo(player.stateMachine.runningState);
+            return true;
+        }
+        return false;
     }
 
     private bool CheckWallVault()

@@ -27,7 +27,7 @@ public class PlayerCtrl : MonoBehaviour
     [Header("Input Actions")]
     [SerializeField] private InputAction moveAction;
     [SerializeField] private InputAction jumpAction;
-    [SerializeField] private InputAction instantGlideAction;
+    [SerializeField] private InputAction technicalAction;
     [SerializeField] private InputAction attackAction;
     [SerializeField] private InputAction formChangeAction;
     [SerializeField] private InputAction interactAction;
@@ -37,7 +37,7 @@ public class PlayerCtrl : MonoBehaviour
     public Vector2 inputVector { get; private set; }
     public bool jumpButtonDown { get; private set; }
     public bool jumpButtonHeld { get; private set; }
-    public bool instantGlideButtonHeld { get; private set; }
+    public bool technicalButtonHeld { get; private set; }
     public bool attackButtonDown { get; private set; }
     public bool attackButtonHeld { get; private set; }
     public bool formChangeButtonDown { get; private set; }
@@ -47,7 +47,7 @@ public class PlayerCtrl : MonoBehaviour
     {
         moveAction.Enable();
         jumpAction.Enable();
-        instantGlideAction.Enable();
+        technicalAction.Enable();
         attackAction.Enable();
         formChangeAction.Enable();
         interactAction.Enable();
@@ -57,7 +57,7 @@ public class PlayerCtrl : MonoBehaviour
     {
         moveAction.Disable();
         jumpAction.Disable();
-        instantGlideAction.Disable();
+        technicalAction.Disable();
         attackAction.Disable();
         formChangeAction.Disable();
         interactAction.Disable();
@@ -83,12 +83,12 @@ public class PlayerCtrl : MonoBehaviour
         
         stateMachine = new StateMachine(this);
         stateMachine.Initialize(stateMachine.standingState);
-
+        
         jumpAction.started += ctx => { jumpButtonDown = !areControlsFrozen; jumpButtonHeld = !areControlsFrozen; };
         jumpAction.canceled += ctx => { jumpButtonHeld = false; };
 
-        instantGlideAction.started += ctx => { instantGlideButtonHeld = !areControlsFrozen; };
-        instantGlideAction.canceled += ctx => { instantGlideButtonHeld = false; };
+        technicalAction.started += ctx => { technicalButtonHeld = !areControlsFrozen; };
+        technicalAction.canceled += ctx => { technicalButtonHeld = false; };
 
         attackAction.started += ctx => { attackButtonDown = !areControlsFrozen; attackButtonHeld = !areControlsFrozen; };
         attackAction.canceled += ctx => { attackButtonHeld = false; };

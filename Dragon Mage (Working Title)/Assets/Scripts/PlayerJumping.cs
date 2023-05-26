@@ -139,7 +139,7 @@ public class PlayerJumping : MonoBehaviour
 
     public bool CanGlide()
     {
-        return (enableAirStalling && (player.rb2d.velocity.y <= 0f || player.instantGlideButtonHeld) && currentAirStallTime <= player.buffers.EarlyGlideBufferTime && player.collisions.CheckDistanceToGround(minimumAirStallHeight) && player.jumpButtonHeld);
+        return (enableAirStalling && (player.rb2d.velocity.y <= 0f || player.technicalButtonHeld) && currentAirStallTime <= player.buffers.EarlyGlideBufferTime && player.collisions.CheckDistanceToGround(minimumAirStallHeight) && player.jumpButtonHeld);
     }
 
     public void GlideStart()
@@ -349,6 +349,21 @@ public class PlayerJumping : MonoBehaviour
     public bool IsWallVaultCanceled()
     {
         return (postClimbDashTimeLeft <= 0f || player.rb2d.velocity.y <= 0f || (player.inputVector.x * (player.movement.isFacingRight ? 1f : -1f)) <= 0f);
+    }
+
+    public void LedgeSnap()
+    {
+        player.sfxCtrl.PlaySound("jump_draelyn_wallpopup", 1f, 1.5f);
+
+        GameObject tempObj = EffectFactory.SpawnEffect("WallVaultSpark", player.collisions.GetSimpleGroundPoint() + (Vector3.right * (player.movement.isFacingRight ? 1f : -1f) * 0.35f));
+        float verticalResult = Mathf.Min(maxWallVaultStartSpeed, Mathf.Max(wallVaultStartSpeed, player.rb2d.velocity.y));
+        float resultScale = (verticalResult / wallVaultStartSpeed);
+        tempObj.transform.localScale = new Vector3(resultScale, resultScale, 1f);
+
+        player.transform.position += (Vector3.right * (player.movement.isFacingRight ? 1f : -1f) * 0.25f);
+        player.collisions.SnapToGround();
+        player.rb2d.gravityScale = fallingGravity;
+        player.rb2d.velocity = new Vector2(storedWallClimbSpeed * player.inputVector.x, 0f);
     }
 
     public void LandingReset()
