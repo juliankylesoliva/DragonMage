@@ -33,6 +33,7 @@ public class PlayerJumping : MonoBehaviour
     public float maxClimbingSpeed = 12f;
     public float climbingGravity = 0.25f;
     public float maxWallClimbTime = 3f;
+    public float ledgeSnapDistance = 0.35f;
     public float postClimbDashWindow = 1f;
     public float wallVaultStartSpeed = 3f;
     public float maxWallVaultStartSpeed = 6f;
@@ -355,7 +356,7 @@ public class PlayerJumping : MonoBehaviour
     {
         player.sfxCtrl.PlaySound("jump_draelyn_wallpopup", 1f, 1.5f);
 
-        GameObject tempObj = EffectFactory.SpawnEffect("WallVaultSpark", player.collisions.GetSimpleGroundPoint() + (Vector3.right * (player.movement.isFacingRight ? 1f : -1f) * 0.35f));
+        GameObject tempObj = EffectFactory.SpawnEffect("WallVaultSpark", player.collisions.GetSimpleGroundPoint() + (Vector3.right * (player.movement.isFacingRight ? 1f : -1f) * ledgeSnapDistance));
         float verticalResult = Mathf.Min(maxWallVaultStartSpeed, Mathf.Max(wallVaultStartSpeed, player.rb2d.velocity.y));
         float resultScale = (verticalResult / wallVaultStartSpeed);
         tempObj.transform.localScale = new Vector3(resultScale, resultScale, 1f);

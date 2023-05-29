@@ -87,6 +87,9 @@ public class PlayerCtrlProperties : ScriptableObject
     [SerializeField] float _maxWallClimbTime = 3f;
     public float maxWallClimbTime { get { return _maxWallClimbTime; } }
 
+    [SerializeField] float _ledgeSnapDistance = 0.35f;
+    public float ledgeSnapDistance { get { return _ledgeSnapDistance; } }
+
     [SerializeField] float _postClimbDashWindow = 1f;
     public float postClimbDashWindow { get { return _postClimbDashWindow; } }
 

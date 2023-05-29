@@ -41540,6 +41540,7 @@ MonoBehaviour:
   slopeCheckDistance: 0.5
   slopeBoost: 4
   ledgeCheckOffset: 0.25
+  groundNormalXThreshold: 0.1
   groundLayer:
     serializedVersion: 2
     m_Bits: 576
@@ -41645,6 +41646,7 @@ MonoBehaviour:
   maxClimbingSpeed: 0
   climbingGravity: 0
   maxWallClimbTime: 0
+  ledgeSnapDistance: 0.35
   postClimbDashWindow: 0
   wallVaultStartSpeed: 0
   maxWallVaultStartSpeed: 0
@@ -79110,7 +79112,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2537578544507818594, guid: 869133b1082e075469e9020c55a90989, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 9
+      value: 8.5
       objectReference: {fileID: 0}
     - target: {fileID: 2537578544507818594, guid: 869133b1082e075469e9020c55a90989, type: 3}
       propertyPath: m_LocalPosition.y
@@ -79150,7 +79152,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2537578544507818595, guid: 869133b1082e075469e9020c55a90989, type: 3}
       propertyPath: m_Offset.x
-      value: -0.5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2537578544507818595, guid: 869133b1082e075469e9020c55a90989, type: 3}
       propertyPath: m_Offset.y
