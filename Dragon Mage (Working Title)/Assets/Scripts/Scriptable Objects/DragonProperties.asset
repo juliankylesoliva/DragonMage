@@ -37,6 +37,7 @@ MonoBehaviour:
   _maxClimbingSpeed: 12
   _climbingGravity: 0.5
   _maxWallClimbTime: 3
+  _ledgeSnapDistance: 0.35
   _postClimbDashWindow: 1.5
   _wallVaultStartSpeed: 3.5
   _maxWallVaultStartSpeed: 7

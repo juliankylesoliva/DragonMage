@@ -17,11 +17,11 @@ public class PlayerForm : MonoBehaviour
     [SerializeField] float formChangeTime = 0.25f;
     [SerializeField] float formChangeCooldownTime = 0.1f;
 
-    [HideInInspector] public CharacterMode currentMode = CharacterMode.MAGE;
+    public CharacterMode currentMode { get; private set; }
 
-    [HideInInspector] public bool isChangingForm = false;
+    public bool isChangingForm { get; private set; }
 
-    [HideInInspector] public bool isFormChangeCooldownActive = false;
+    public bool isFormChangeCooldownActive { get; private set; }
 
     public float FormChangeTime { get { return formChangeTime; } }
 
@@ -37,7 +37,7 @@ public class PlayerForm : MonoBehaviour
 
     public bool CanFormChange()
     {
-        return (!player.form.isFormChangeCooldownActive && !player.attacks.isAttackCooldownActive && !player.form.isChangingForm && !player.attacks.isBlastJumpActive && !player.attacks.isFireTackleActive && (player.temper.forceFormChange || (!player.temper.isFormLocked && player.buffers.formChangeBufferTimeLeft > 0f)));
+        return (!player.form.isFormChangeCooldownActive && !player.attacks.isAttackCooldownActive && !player.form.isChangingForm && !player.attacks.isBlastJumpActive && !player.attacks.isFireTackleActive && !player.damage.isPlayerDamaged && (player.temper.forceFormChange || (!player.temper.isFormLocked && player.buffers.formChangeBufferTimeLeft > 0f)));
     }
 
     public bool CannotFormChange()
@@ -49,7 +49,7 @@ public class PlayerForm : MonoBehaviour
     {
         if (player.temper.forceFormChange) { player.temper.FormLockTemperChange(); }
 
-        player.buffers.formChangeBufferTimeLeft = 0f;
+        player.buffers.ResetFormChangeBuffer();
 
         StartCoroutine(FormFreeze());
 
@@ -72,7 +72,7 @@ public class PlayerForm : MonoBehaviour
 
     public void FormChangeFail()
     {
-        player.buffers.formChangeBufferTimeLeft = 0f;
+        player.buffers.ResetFormChangeBuffer();
         player.sfxCtrl.PlaySound(currentMode == CharacterMode.MAGE ? "transformation_magli_locked" : "transformation_draelyn_locked");
     }
 

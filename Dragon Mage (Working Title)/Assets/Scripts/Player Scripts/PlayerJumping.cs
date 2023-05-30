@@ -88,7 +88,7 @@ public class PlayerJumping : MonoBehaviour
 
     public void GroundJumpStart()
     {
-        player.buffers.jumpBufferTimeLeft = 0f;
+        player.buffers.ResetJumpBuffer();
         jumpIsHeld = true;
         player.rb2d.gravityScale = risingGravity;
 
@@ -175,7 +175,7 @@ public class PlayerJumping : MonoBehaviour
     {
         player.animationCtrl.MidairJumpAnimation();
         player.sfxCtrl.PlaySound("jump_draelyn_midair", 1f, Mathf.Lerp(1f, 1.3f, ((float)currentMidairJumps / (float)(maxMidairJumps - 1))));
-        player.buffers.jumpBufferTimeLeft = 0f;
+        player.buffers.ResetJumpBuffer();
         jumpIsHeld = true;
         player.rb2d.gravityScale = risingGravity;
         Vector2 newVelocity = new Vector2(player.rb2d.velocity.x, midairJumpSpeed);
@@ -232,7 +232,7 @@ public class PlayerJumping : MonoBehaviour
 
     public void WallJumpStart()
     {
-        player.buffers.jumpBufferTimeLeft = 0f;
+        player.buffers.ResetJumpBuffer();
         jumpIsHeld = true;
         player.rb2d.gravityScale = risingGravity;
 
@@ -333,7 +333,7 @@ public class PlayerJumping : MonoBehaviour
         currentMidairJumps = 0;
         postClimbDashTimeLeft = 0f;
 
-        player.buffers.jumpBufferTimeLeft = 0f;
+        player.buffers.ResetJumpBuffer();
         jumpIsHeld = true;
         player.rb2d.gravityScale = risingGravity;
 

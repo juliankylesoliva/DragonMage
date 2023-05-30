@@ -143,7 +143,7 @@ public class PlayerCollisions : MonoBehaviour
     public bool CheckIfNearLedge()
     {
         Collider2D[] colliders = Physics2D.OverlapCircleAll(groundCheckObj.position + ((player.movement.isFacingRight ? 1f : -1f) * ledgeCheckOffset * Vector3.right), groundCheckRadius, groundLayer);
-        return colliders.Length <= 0;
+        return (isGrounded && colliders.Length <= 0);
     }
 
     public Vector2 GetGroundNormal()

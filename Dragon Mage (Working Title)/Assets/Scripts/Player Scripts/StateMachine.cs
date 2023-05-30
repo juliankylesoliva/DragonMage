@@ -28,6 +28,7 @@ public class StateMachine
     public FireTacklingState fireTacklingState;
     public FormChangingState formChangingState;
     public FrozenControlState frozenControlState;
+    public DamagedState damagedState;
 
     public StateMachine(PlayerCtrl player)
     {
@@ -42,6 +43,7 @@ public class StateMachine
         fireTacklingState = new FireTacklingState(player);
         formChangingState = new FormChangingState(player);
         frozenControlState = new FrozenControlState(player);
+        damagedState = new DamagedState(player);
     }
 
     public void Initialize(IState startingState)
@@ -206,6 +208,16 @@ public abstract class State : IState
         }
         return false;
     }
+
+    protected bool CheckIfDamaged()
+    {
+        if (player.damage.isPlayerDamaged)
+        {
+            player.stateMachine.TransitionTo(player.stateMachine.damagedState);
+            return true;
+        }
+        return false;
+    }
 }
 
 public class StandingState : State
@@ -223,7 +235,7 @@ public class StandingState : State
     public override void Update()
     {
         player.rb2d.velocity = Vector2.zero;
-        if (CheckFormChangeInput() || CheckRunInput() || CheckJumpInput() || CheckFireTackleInput() || CheckSuddenRise() || CheckSuddenFall() || CheckSuddenMovement()) { return; }
+        if (CheckFormChangeInput() || CheckRunInput() || CheckJumpInput() || CheckFireTackleInput() || CheckSuddenRise() || CheckSuddenFall() || CheckSuddenMovement() || CheckIfDamaged()) { return; }
         player.animationCtrl.StandingAnimation();
     }
 
@@ -249,7 +261,7 @@ public class RunningState : State
     {
         player.movement.Movement();
         player.movement.FacingDirection();
-        if (CheckFormChangeInput() || CheckIfStopped() || CheckSuddenFall() || CheckJumpInput() || CheckFireTackleInput()) { return; }
+        if (CheckFormChangeInput() || CheckIfStopped() || CheckSuddenFall() || CheckJumpInput() || CheckFireTackleInput() || CheckIfDamaged()) { return; }
         player.animationCtrl.RunningAnimation();
     }
 
@@ -283,7 +295,7 @@ public class JumpingState : State
         player.movement.Movement();
         player.movement.FacingDirection();
         player.jumping.GroundJumpUpdate();
-        if (CheckFormChangeInput() || CheckFireTackleInput() || CheckIfWallClimbing() || CheckIfWallSliding() || CheckGlideInput() || CheckMidairJumpInput() || CheckIfFalling() || CheckIfGrounded()) { return; }
+        if (CheckFormChangeInput() || CheckFireTackleInput() || CheckIfWallClimbing() || CheckIfWallSliding() || CheckGlideInput() || CheckMidairJumpInput() || CheckIfFalling() || CheckIfGrounded() || CheckIfDamaged()) { return; }
     }
 
     public override void Exit()
@@ -327,7 +339,7 @@ public class FallingState : State
         player.movement.Movement();
         player.movement.FacingDirection();
         player.jumping.FallingUpdate();
-        if (CheckFormChangeInput() || CheckFireTackleInput() || CheckRunInput() || CheckStationaryLanding() || CheckJumpInput() || CheckIfWallClimbing() || CheckIfWallSliding() || CheckGlideInput() || CheckMidairJumpInput()) { return; }
+        if (CheckFormChangeInput() || CheckFireTackleInput() || CheckRunInput() || CheckStationaryLanding() || CheckJumpInput() || CheckIfWallClimbing() || CheckIfWallSliding() || CheckGlideInput() || CheckMidairJumpInput() || CheckIfDamaged()) { return; }
         player.animationCtrl.FallingAnimation();
     }
 
@@ -350,7 +362,7 @@ public class GlidingState : State
     {
         player.movement.Movement();
         player.jumping.GlideUpdate();
-        if (CheckFormChangeInput() || CheckFireTackleInput() || CheckIfWallSliding() || CheckGlideCancel()) { return; }
+        if (CheckFormChangeInput() || CheckFireTackleInput() || CheckIfWallSliding() || CheckGlideCancel() || CheckIfDamaged()) { return; }
         player.animationCtrl.GlidingAnimation();
     }
 
@@ -382,7 +394,7 @@ public class WallSlidingState : State
     public override void Update()
     {
         player.jumping.WallSlideUpdate();
-        if (CheckFormChangeInput() || CheckFireTackleInput() || CheckIfWallJumping() || CheckWallSlideCancel()) { return; }
+        if (CheckFormChangeInput() || CheckFireTackleInput() || CheckIfWallJumping() || CheckWallSlideCancel() || CheckIfDamaged()) { return; }
         player.animationCtrl.WallSlidingAnimation();
     }
 
@@ -425,7 +437,7 @@ public class WallClimbingState : State
     public override void Update()
     {
         player.jumping.WallClimbUpdate();
-        if (CheckFormChangeInput() || CheckFireTackleInput() || CheckLedgeSnap() || CheckWallVault() || CheckWallClimbCancel()) { return; }
+        if (CheckFormChangeInput() || CheckFireTackleInput() || CheckLedgeSnap() || CheckWallVault() || CheckWallClimbCancel() || CheckIfDamaged()) { return; }
         player.animationCtrl.WallClimbingAnimation();
     }
 
@@ -480,7 +492,7 @@ public class WallVaultingState : State
     public override void Update()
     {
         player.jumping.WallVaultUpdate();
-        if (CheckFormChangeInput() || CheckFireTackleInput() || CheckWallVaultDash() || CheckWallVaultCancel()) { return; }
+        if (CheckFormChangeInput() || CheckFireTackleInput() || CheckWallVaultDash() || CheckWallVaultCancel() || CheckIfDamaged()) { return; }
     }
 
     public override void Exit()
@@ -614,5 +626,30 @@ public class FrozenControlState : State
     public override void Exit()
     {
         player.rb2d.isKinematic = false;
+    }
+}
+
+public class DamagedState : State
+{
+    public DamagedState(PlayerCtrl player) : base(player) { name = "Damaged"; }
+
+    public override void Enter()
+    {
+        player.rb2d.isKinematic = false;
+        player.animationCtrl.StandingAnimation();
+        player.damage.DoKnockback();
+    }
+
+    public override void Update()
+    {
+        if (!player.damage.isPlayerDamaged)
+        {
+            player.stateMachine.TransitionTo(player.stateMachine.standingState);
+        }
+    }
+
+    public override void Exit()
+    {
+
     }
 }

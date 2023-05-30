@@ -14,6 +14,7 @@ public class PlayerCtrl : MonoBehaviour
     [HideInInspector] public PlayerTemper temper;
     [HideInInspector] public PlayerForm form;
     [HideInInspector] public PlayerAttacks attacks;
+    [HideInInspector] public PlayerDamage damage;
     [HideInInspector] public PlayerInteraction interaction;
     [HideInInspector] public PlayerAnimation animationCtrl;
     [HideInInspector] public PlayerSpriteTrail spriteTrail;
@@ -73,6 +74,7 @@ public class PlayerCtrl : MonoBehaviour
         form = this.gameObject.GetComponent<PlayerForm>();
         interaction = this.gameObject.GetComponent<PlayerInteraction>();
         attacks = this.gameObject.GetComponent<PlayerAttacks>();
+        damage = this.gameObject.GetComponent<PlayerDamage>();
         animationCtrl = this.gameObject.GetComponent<PlayerAnimation>();
         spriteTrail = this.gameObject.GetComponent<PlayerSpriteTrail>();
         effects = this.gameObject.GetComponent<PlayerEffects>();

@@ -55,7 +55,7 @@ public class BlastHitbox : MonoBehaviour
 
         if (rb != null && rb.bodyType == RigidbodyType2D.Dynamic)
         {
-            if (player != null && player.attacks.isFireTackleActive) { return; }
+            if (player != null && (player.attacks.isFireTackleActive || player.damage.isPlayerDamaged)) { return; }
             Vector2 velocityVec = (other.transform.position - this.transform.position);
             float distance = velocityVec.magnitude;
             velocityVec = velocityVec.normalized;

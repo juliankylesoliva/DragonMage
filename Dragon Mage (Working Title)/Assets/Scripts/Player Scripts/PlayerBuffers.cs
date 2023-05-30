@@ -15,10 +15,14 @@ public class PlayerBuffers : MonoBehaviour
     public float EarlyGlideBufferTime { get { return earlyGlideBufferTime; } }
     public float highestSpeedBufferTimeLeft { get; private set; }
 
-    [HideInInspector] public float formChangeBufferTimeLeft = 0f;
-    [HideInInspector] public float jumpBufferTimeLeft = 0f;
-    [HideInInspector] public float highestSpeedBuffer = 0f;
-    [HideInInspector] public float coyoteTimeLeft = 0f;
+    public float formChangeBufferTimeLeft { get; private set; }
+    public void ResetFormChangeBuffer() { formChangeBufferTimeLeft = 0f; }
+
+    public float jumpBufferTimeLeft { get; private set; }
+    public void ResetJumpBuffer() { jumpBufferTimeLeft = 0f; }
+
+    public float highestSpeedBuffer { get; private set; }
+    public float coyoteTimeLeft { get; private set; }
 
     void Awake()
     {
