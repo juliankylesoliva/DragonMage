@@ -16,7 +16,7 @@ public class PlayerMovement : MonoBehaviour
     public float airDeceleration = 0.5f;
     public float airTurningSpeed = 0.5f;
 
-    public bool isFacingRight = true;
+    public bool isFacingRight { get; private set; }
 
     private bool isTurningAround = false;
     private bool prevIsTurningAround = false;
@@ -29,6 +29,11 @@ public class PlayerMovement : MonoBehaviour
     void Awake()
     {
         player = this.gameObject.GetComponent<PlayerCtrl>();
+    }
+
+    void Start()
+    {
+        isFacingRight = true;
     }
 
     void Update()
@@ -150,5 +155,10 @@ public class PlayerMovement : MonoBehaviour
             player.charSprite.flipX = true;
         }
         else { /* Nothing */ }
+    }
+
+    public float GetFacingValue()
+    {
+        return (isFacingRight ? 1f : -1f);
     }
 }

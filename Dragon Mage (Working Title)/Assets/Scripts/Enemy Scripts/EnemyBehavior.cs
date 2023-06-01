@@ -4,13 +4,20 @@ using UnityEngine;
 
 public class EnemyBehavior : MonoBehaviour
 {
-    // Start is called before the first frame update
+    [HideInInspector] public Rigidbody2D rb2d;
+    [HideInInspector] public SpriteRenderer enemySprite;
+
+    void Awake()
+    {
+        rb2d = this.gameObject.GetComponent<Rigidbody2D>();
+        enemySprite = this.gameObject.GetComponent<SpriteRenderer>();
+    }
+
     void Start()
     {
         
     }
 
-    // Update is called once per frame
     void Update()
     {
         
