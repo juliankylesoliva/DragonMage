@@ -41,11 +41,25 @@ public class EnemyMovement : MonoBehaviour
         SetFacingDirection(currentMoveVector.x);
     }
 
+    public void FaceAwayFromPlayer()
+    {
+        float awayDirection = -enemy.playerDetection.GetDirectionToPlayer();
+        if ((currentMoveVector.x * awayDirection) < 0f)
+        {
+            FlipMovement();
+        }
+    }
+
     public void SetFacingDirection(float horizontalDirection)
     {
         if (horizontalDirection != 0f)
         {
             enemy.enemySprite.flipX = (horizontalDirection < 0f);
         }
+    }
+
+    public float GetFacingValue()
+    {
+        return (enemy.enemySprite.flipX ? -1f : 1f);
     }
 }

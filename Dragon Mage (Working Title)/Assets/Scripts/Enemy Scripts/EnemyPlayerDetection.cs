@@ -64,4 +64,12 @@ public class EnemyPlayerDetection : MonoBehaviour
         }
         return 0f;
     }
+
+    public void DamagePlayer()
+    {
+        if (playerRef != null)
+        {
+            playerRef.damage.TakeDamage(this.transform);
+        }
+    }
 }
