@@ -10,6 +10,7 @@ public class EnemyBehavior : MonoBehaviour
     [HideInInspector] public EnemyMovement movement;
     [HideInInspector] public EnemyCollisionDetection collisionDetection;
     [HideInInspector] public EnemyPlayerDetection playerDetection;
+    [HideInInspector] public EnemyProjectile projectile;
 
     void Awake()
     {
@@ -19,6 +20,7 @@ public class EnemyBehavior : MonoBehaviour
         movement = this.gameObject.GetComponent<EnemyMovement>();
         collisionDetection = this.gameObject.GetComponent<EnemyCollisionDetection>();
         playerDetection = this.gameObject.GetComponent<EnemyPlayerDetection>();
+        projectile = this.gameObject.GetComponent<EnemyProjectile>();
     }
 
     void Start()

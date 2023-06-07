@@ -74,7 +74,7 @@ public class EnemyCollisionDetection : MonoBehaviour
     {
         if (isGrounded)
         {
-            Vector3 positionToCheck = (groundCheckObj.position + (Vector3.right * ledgeCheckOffset * enemy.movement.GetFacingValue()));
+            Vector3 positionToCheck = (groundCheckObj.position + (Vector3.right * ledgeCheckOffset * enemy.movement.GetNormalizedXMovement()));
             Collider2D[] colliders = Physics2D.OverlapCircleAll(positionToCheck, groundCheckRadius, groundLayer);
             if (colliders.Length > 0)
             {

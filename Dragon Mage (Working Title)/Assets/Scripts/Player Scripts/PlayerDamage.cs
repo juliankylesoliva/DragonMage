@@ -49,7 +49,7 @@ public class PlayerDamage : MonoBehaviour
     private bool CanTakeDamage()
     {
         string currentState = player.stateMachine.CurrentState.name;
-        return (currentState != "FireTackling" && currentState != "FormChanging" && currentState != "Damaged");
+        return (!player.attacks.isBlastJumpActive && currentState != "FireTackling" && currentState != "FormChanging" && currentState != "Damaged");
     }
 
     private IEnumerator HitstunTimerCR(float time)
