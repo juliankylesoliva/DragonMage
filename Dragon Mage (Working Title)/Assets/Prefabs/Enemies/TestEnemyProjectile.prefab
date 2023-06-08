@@ -10,10 +10,10 @@ GameObject:
   m_Component:
   - component: {fileID: 1353825895148523937}
   - component: {fileID: 1353825895148523936}
-  - component: {fileID: 1353825895148523943}
+  - component: {fileID: 2176417731498415568}
   - component: {fileID: 4989869529866878247}
   - component: {fileID: 1744135715086446702}
-  m_Layer: 7
+  m_Layer: 12
   m_Name: TestEnemyProjectile
   m_TagString: Projectile
   m_Icon: {fileID: 0}
@@ -33,7 +33,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &1353825895148523936
 SpriteRenderer:
@@ -76,19 +76,19 @@ SpriteRenderer:
   m_SortingLayerID: -2030815321
   m_SortingLayer: 5
   m_SortingOrder: 1
-  m_Sprite: {fileID: -1796280833, guid: b41d98e72b8c0b74ab05c9f30088cd70, type: 3}
+  m_Sprite: {fileID: -861977805, guid: b41d98e72b8c0b74ab05c9f30088cd70, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 0.59375, y: 0.59375}
+  m_Size: {x: 0.96875, y: 0.96875}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!58 &1353825895148523943
-CircleCollider2D:
+--- !u!70 &2176417731498415568
+CapsuleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -101,8 +101,8 @@ CircleCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
-  serializedVersion: 2
-  m_Radius: 0.2
+  m_Size: {x: 0.85, y: 0.35}
+  m_Direction: 1
 --- !u!50 &4989869529866878247
 Rigidbody2D:
   serializedVersion: 4

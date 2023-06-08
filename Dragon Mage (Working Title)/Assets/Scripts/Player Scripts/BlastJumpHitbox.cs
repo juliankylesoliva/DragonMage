@@ -35,11 +35,13 @@ public class BlastJumpHitbox : MonoBehaviour
     void OnTriggerEnter2D(Collider2D other)
     {
         DestroyBlock(other);
+        DefeatEnemy(other);
     }
 
     void OnTriggerStay2D(Collider2D other)
     {
         DestroyBlock(other);
+        DefeatEnemy(other);
     }
 
     private void DestroyBlock(Collider2D other)
@@ -51,6 +53,18 @@ public class BlastJumpHitbox : MonoBehaviour
             {
                 player.temper.NeutralizeTemperBy(-2);
                 block.onBreak.Invoke();
+            }
+        }
+    }
+
+    private void DefeatEnemy(Collider2D other)
+    {
+        if (player.attacks.isBlastJumpActive)
+        {
+            EnemyBehavior enemy = other.gameObject.GetComponent<EnemyBehavior>();
+            if (enemy != null)
+            {
+                enemy.DefeatEnemy();
             }
         }
     }

@@ -1,9 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class EnemyBehavior : MonoBehaviour
 {
+    [SerializeField] UnityEvent onDefeat;
+
     [HideInInspector] public Rigidbody2D rb2d;
     [HideInInspector] public SpriteRenderer enemySprite;
 
@@ -11,6 +14,9 @@ public class EnemyBehavior : MonoBehaviour
     [HideInInspector] public EnemyCollisionDetection collisionDetection;
     [HideInInspector] public EnemyPlayerDetection playerDetection;
     [HideInInspector] public EnemyProjectile projectile;
+
+    public bool isStunned { get; private set; }
+    public bool isDefeated { get; private set; }
 
     void Awake()
     {
@@ -31,5 +37,19 @@ public class EnemyBehavior : MonoBehaviour
     void Update()
     {
         
+    }
+
+    public void DefeatEnemy()
+    {
+        if (!isDefeated)
+        {
+            isDefeated = true;
+            onDefeat.Invoke();
+        }
+    }
+
+    public void StunEnemy()
+    {
+
     }
 }

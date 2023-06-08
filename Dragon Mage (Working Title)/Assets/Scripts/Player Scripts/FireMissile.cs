@@ -45,11 +45,16 @@ public class FireMissile : MonoBehaviour
     {
         MagicBlast tempBlast = other.gameObject.GetComponent<MagicBlast>();
         BreakableBlock block = other.gameObject.GetComponent<BreakableBlock>();
+        EnemyBehavior enemy = other.gameObject.GetComponent<EnemyBehavior>();
 
         if (block != null && (block.breakableBy == BreakableType.ANY || block.breakableBy == BreakableType.FIRE))
         {
             temper.NeutralizeTemperBy(2);
             block.onBreak.Invoke();
+        }
+        else if (enemy != null)
+        {
+            enemy.DefeatEnemy();
         }
         else { /* Nothing */ }
     }

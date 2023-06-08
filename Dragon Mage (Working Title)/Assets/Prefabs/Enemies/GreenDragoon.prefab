@@ -189,7 +189,7 @@ Rigidbody2D:
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 9406f10bd3650fe409c8dc01b66aa54d, type: 2}
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 1
@@ -206,6 +206,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e70fa3ab035597a45a2d864da8a579b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  onDefeat:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 240950999562514686}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   rb2d: {fileID: 0}
   enemySprite: {fileID: 0}
   movement: {fileID: 0}
@@ -276,6 +291,9 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   onPlayerSightlineEnter:
+    m_PersistentCalls:
+      m_Calls: []
+  onPlayerSightlneStay:
     m_PersistentCalls:
       m_Calls: []
   onPlayerSightlineExit:

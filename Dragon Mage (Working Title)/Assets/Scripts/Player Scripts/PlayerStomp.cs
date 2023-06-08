@@ -29,7 +29,13 @@ public class PlayerStomp : MonoBehaviour
         if (!player.collisions.IsGrounded && (player.stateMachine.CurrentState == player.stateMachine.fallingState || player.stateMachine.CurrentState == player.stateMachine.glidingState || player.stateMachine.CurrentState == player.stateMachine.wallSlidingState || player.stateMachine.CurrentState == player.stateMachine.wallClimbingState || player.stateMachine.CurrentState == player.stateMachine.wallVaultingState))
         {
             Collider2D[] colliders = Physics2D.OverlapCircleAll(groundCheckObj.position, stompCheckRadius, enemyLayer);
-            return (colliders.Length > 0);
+            if (colliders.Length > 0)
+            {
+                GameObject tempObj = colliders[0].gameObject;
+                EnemyBehavior tempEnemy = tempObj.GetComponent<EnemyBehavior>();
+                if (tempEnemy != null) { tempEnemy.DefeatEnemy(); }
+                return true;
+            }
         }
         return false;
     }
