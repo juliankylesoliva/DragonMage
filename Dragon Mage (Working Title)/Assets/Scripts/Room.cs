@@ -11,6 +11,9 @@ public class Room : MonoBehaviour
     public PolygonCollider2D CameraBounds { get { return cameraBounds; } }
 
     [SerializeField] Transform[] roomEntrances;
+
+    [SerializeField] EnemyBehavior[] enemyList;
+
     public Vector2 GetRoomEntranceCoordinates(int i)
     {
         if (i >= 0 && i < roomEntrances.Length)
@@ -24,10 +27,19 @@ public class Room : MonoBehaviour
     {
         this.gameObject.SetActive(true);
         confinedVirtualCamera.m_BoundingShape2D = cameraBounds;
+        ActivateEnemies();
     }
 
     public void DeactivateRoom()
     {
         this.gameObject.SetActive(false);
+    }
+
+    private void ActivateEnemies()
+    {
+        foreach (EnemyBehavior e in enemyList)
+        {
+            e.ActivateEnemy();
+        }
     }
 }

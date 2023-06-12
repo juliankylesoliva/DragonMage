@@ -8,6 +8,7 @@ public class BlastHitbox : MonoBehaviour
     CircleCollider2D circle;
 
     [SerializeField] LayerMask impassableLayer;
+    [SerializeField] DamageType damageType = DamageType.MAGIC_BLAST;
 
     private PlayerTemper temper;
     private bool isArmed = false;
@@ -52,8 +53,16 @@ public class BlastHitbox : MonoBehaviour
         Rigidbody2D rb = other.gameObject.GetComponent<Rigidbody2D>();
         BreakableBlock block = other.gameObject.GetComponent<BreakableBlock>();
         PlayerCtrl player = other.gameObject.GetComponent<PlayerCtrl>();
+        EnemyBehavior enemy = other.gameObject.GetComponent<EnemyBehavior>();
 
-        if (rb != null && rb.bodyType == RigidbodyType2D.Dynamic)
+        if (enemy != null)
+        {
+            if (enemy.DefeatEnemy(damageType))
+            {
+                temper.NeutralizeTemperBy(-1);
+            }
+        }
+        else if (rb != null && rb.bodyType == RigidbodyType2D.Dynamic)
         {
             if (player != null && (player.attacks.isFireTackleActive || player.damage.isPlayerDamaged)) { return; }
             Vector2 velocityVec = (other.transform.position - this.transform.position);

@@ -5,6 +5,7 @@ using UnityEngine;
 public class FireMissile : MonoBehaviour
 {
     /* EDITOR VARIABLES */
+    [SerializeField] DamageType damageType = DamageType.FIRE_MISSILE;
     [SerializeField] float moveSpeed = 6f;
     [SerializeField] float lifetime = 1f;
 
@@ -54,7 +55,10 @@ public class FireMissile : MonoBehaviour
         }
         else if (enemy != null)
         {
-            enemy.DefeatEnemy();
+            if (enemy.DefeatEnemy(damageType))
+            {
+                temper.NeutralizeTemperBy(2);
+            }
         }
         else { /* Nothing */ }
     }

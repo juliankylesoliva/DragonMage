@@ -9,6 +9,7 @@ public class PlayerStomp : MonoBehaviour
     [SerializeField] Transform groundCheckObj;
     [SerializeField] float stompCheckRadius = 0.25f;
     [SerializeField] LayerMask enemyLayer;
+    [SerializeField] DamageType damageType = DamageType.STOMP;
 
     void Awake()
     {
@@ -33,7 +34,7 @@ public class PlayerStomp : MonoBehaviour
             {
                 GameObject tempObj = colliders[0].gameObject;
                 EnemyBehavior tempEnemy = tempObj.GetComponent<EnemyBehavior>();
-                if (tempEnemy != null) { tempEnemy.DefeatEnemy(); }
+                if (tempEnemy != null) { tempEnemy.DefeatEnemy(damageType); }
                 return true;
             }
         }

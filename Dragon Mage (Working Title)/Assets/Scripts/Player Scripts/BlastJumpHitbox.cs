@@ -7,6 +7,7 @@ public class BlastJumpHitbox : MonoBehaviour
     PlayerCtrl player;
     CapsuleCollider2D hitboxCollider;
 
+    [SerializeField] DamageType damageType = DamageType.BLAST_JUMP;
     [SerializeField] int velocityLookaheadFrames = 2;
     [SerializeField] float facingDirectionOffset = 0.25f;
 
@@ -64,7 +65,10 @@ public class BlastJumpHitbox : MonoBehaviour
             EnemyBehavior enemy = other.gameObject.GetComponent<EnemyBehavior>();
             if (enemy != null)
             {
-                enemy.DefeatEnemy();
+                if (enemy.DefeatEnemy(damageType))
+                {
+                    player.temper.NeutralizeTemperBy(-2);
+                }
             }
         }
     }

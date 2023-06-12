@@ -24,7 +24,7 @@ public class EnemyProjectile : MonoBehaviour
 
     void Start()
     {
-        currentProjectileState = EnemyProjectileState.STANDBY;
+        ResetTimerAndState();
     }
 
     void Update()
@@ -40,6 +40,12 @@ public class EnemyProjectile : MonoBehaviour
         if (currentProjectileState != EnemyProjectileState.STANDBY) { return; }
         currentProjectileState = EnemyProjectileState.WINDUP;
         currentProjectileStateTimer = preFireWindup;
+    }
+
+    public void ResetTimerAndState()
+    {
+        currentProjectileState = EnemyProjectileState.STANDBY;
+        currentProjectileStateTimer = 0f;
     }
 
     private void UpdateStateTimer()

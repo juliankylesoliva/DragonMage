@@ -73,7 +73,7 @@ public class PlayerAttacks : MonoBehaviour
                     MagicBlast projTemp = tempObj.GetComponent<MagicBlast>();
                     if (projTemp != null)
                     {
-                        projTemp.Setup(player.temper, player.movement.isFacingRight, player.rb2d.velocity.x, player.inputVector.y);
+                        projTemp.Setup(player.gameObject, player.temper, player.movement.isFacingRight, player.rb2d.velocity.x, player.inputVector.y);
                         projectileRef = projTemp;
                     }
                 }
@@ -89,6 +89,11 @@ public class PlayerAttacks : MonoBehaviour
     public void UseBlastJump()
     {
         if (!isBlastJumpActive) { StartCoroutine(UseBlastJumpCR()); }
+    }
+
+    public void DestroyProjectileReference()
+    {
+        if (projectileRef != null) { GameObject.Destroy(projectileRef.gameObject); }
     }
 
     private IEnumerator UseBlastJumpCR()

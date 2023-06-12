@@ -11,12 +11,14 @@ public class EnemyMovement : MonoBehaviour
     [SerializeField] bool ignoreYValue = true;
     [SerializeField] bool isAlwaysFacingPlayer = false;
 
+    private Vector3 initialPosition = Vector3.zero;
     private Vector2 currentMoveVector = Vector2.zero;
     private float currentTurningCooldown = 0f;
 
     void Awake()
     {
         enemy = this.gameObject.GetComponent<EnemyBehavior>();
+        initialPosition = this.transform.position;
     }
 
     void Start()
@@ -97,6 +99,16 @@ public class EnemyMovement : MonoBehaviour
         {
             return GetFacingValue();
         }
+    }
+
+    public void ResetToInitialPosition()
+    {
+        this.transform.position = initialPosition;
+    }
+
+    public void ResetToInitialMoveVector()
+    {
+        SetMoveVector(initialMoveVector);
     }
 
     private void CheckIfFacingPlayer()

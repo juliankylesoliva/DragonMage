@@ -8,6 +8,7 @@ public class TackleHitbox : MonoBehaviour
     CapsuleCollider2D hitboxCollider;
     SpriteRenderer spriteRenderer;
 
+    [SerializeField] DamageType damageType = DamageType.FIRE_TACKLE;
     [SerializeField] float hitboxOffset = 0.4f;
     [SerializeField] int framesToChangeSprite = 3;
     [SerializeField] Sprite[] upHitboxSprites;
@@ -90,7 +91,10 @@ public class TackleHitbox : MonoBehaviour
             EnemyBehavior enemy = other.gameObject.GetComponent<EnemyBehavior>();
             if (enemy != null)
             {
-                enemy.DefeatEnemy();
+                if (enemy.DefeatEnemy(damageType))
+                {
+                    player.temper.NeutralizeTemperBy(1);
+                }
             }
         }
     }

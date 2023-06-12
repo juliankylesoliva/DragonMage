@@ -3,8 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
+public enum DamageType { STOMP, MAGIC_BLAST, BLAST_JUMP, FIRE_TACKLE, FIRE_MISSILE }
+
 public class EnemyBehavior : MonoBehaviour
 {
+    [SerializeField] DamageType[] immuneTo;
+
+    [SerializeField] UnityEvent onRoomActive;
     [SerializeField] UnityEvent onDefeat;
 
     [HideInInspector] public Rigidbody2D rb2d;
@@ -39,17 +44,35 @@ public class EnemyBehavior : MonoBehaviour
         
     }
 
-    public void DefeatEnemy()
+    public void ActivateEnemy()
     {
+        onRoomActive.Invoke();
+    }
+
+    public bool DefeatEnemy(DamageType dmgType)
+    {
+        if (IsImmune(dmgType)) { return false; }
+
         if (!isDefeated)
         {
             isDefeated = true;
             onDefeat.Invoke();
+            return true;
         }
+        return false;
     }
 
     public void StunEnemy()
     {
 
+    }
+
+    private bool IsImmune(DamageType dmgType)
+    {
+        foreach (DamageType d in immuneTo)
+        {
+            if (dmgType == d) { return true; }
+        }
+        return false;
     }
 }

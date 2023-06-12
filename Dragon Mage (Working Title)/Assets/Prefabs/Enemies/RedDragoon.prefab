@@ -1,0 +1,255 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &6072279661567596391
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 2
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 240950999562514432, guid: 25d6e7fab9aea06479954f464cc15cd4, type: 3}
+      propertyPath: initialMoveVector.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 240950999562514432, guid: 25d6e7fab9aea06479954f464cc15cd4, type: 3}
+      propertyPath: isAlwaysFacingPlayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 240950999562514433, guid: 25d6e7fab9aea06479954f464cc15cd4, type: 3}
+      propertyPath: sightlineLayer.m_Bits
+      value: 72
+      objectReference: {fileID: 0}
+    - target: {fileID: 240950999562514433, guid: 25d6e7fab9aea06479954f464cc15cd4, type: 3}
+      propertyPath: enemySightlineDistance
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 240950999562514433, guid: 25d6e7fab9aea06479954f464cc15cd4, type: 3}
+      propertyPath: onPlayerApproach.m_PersistentCalls.m_Calls.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 240950999562514433, guid: 25d6e7fab9aea06479954f464cc15cd4, type: 3}
+      propertyPath: onPlayerSightlneStay.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 240950999562514433, guid: 25d6e7fab9aea06479954f464cc15cd4, type: 3}
+      propertyPath: onPlayerSightlineExit.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 240950999562514433, guid: 25d6e7fab9aea06479954f464cc15cd4, type: 3}
+      propertyPath: onPlayerSightlineEnter.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 240950999562514433, guid: 25d6e7fab9aea06479954f464cc15cd4, type: 3}
+      propertyPath: onPlayerApproach.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 240950999562514433, guid: 25d6e7fab9aea06479954f464cc15cd4, type: 3}
+      propertyPath: onPlayerApproach.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 6277197122465048423}
+    - target: {fileID: 240950999562514433, guid: 25d6e7fab9aea06479954f464cc15cd4, type: 3}
+      propertyPath: onPlayerSightlneStay.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 240950999562514433, guid: 25d6e7fab9aea06479954f464cc15cd4, type: 3}
+      propertyPath: onPlayerApproach.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 240950999562514433, guid: 25d6e7fab9aea06479954f464cc15cd4, type: 3}
+      propertyPath: onPlayerSightlineExit.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 240950999562514433, guid: 25d6e7fab9aea06479954f464cc15cd4, type: 3}
+      propertyPath: onPlayerApproach.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: FaceTowardsPlayer
+      objectReference: {fileID: 0}
+    - target: {fileID: 240950999562514433, guid: 25d6e7fab9aea06479954f464cc15cd4, type: 3}
+      propertyPath: onPlayerSightlineEnter.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 240950999562514433, guid: 25d6e7fab9aea06479954f464cc15cd4, type: 3}
+      propertyPath: onPlayerSightlneStay.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 638478119392253967}
+    - target: {fileID: 240950999562514433, guid: 25d6e7fab9aea06479954f464cc15cd4, type: 3}
+      propertyPath: onPlayerSightlineExit.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 638478119392253967}
+    - target: {fileID: 240950999562514433, guid: 25d6e7fab9aea06479954f464cc15cd4, type: 3}
+      propertyPath: onPlayerSightlineEnter.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 638478119392253967}
+    - target: {fileID: 240950999562514433, guid: 25d6e7fab9aea06479954f464cc15cd4, type: 3}
+      propertyPath: onPlayerSightlneStay.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 240950999562514433, guid: 25d6e7fab9aea06479954f464cc15cd4, type: 3}
+      propertyPath: onPlayerSightlineExit.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 240950999562514433, guid: 25d6e7fab9aea06479954f464cc15cd4, type: 3}
+      propertyPath: onPlayerSightlneStay.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: LaunchProjectile
+      objectReference: {fileID: 0}
+    - target: {fileID: 240950999562514433, guid: 25d6e7fab9aea06479954f464cc15cd4, type: 3}
+      propertyPath: onPlayerSightlineEnter.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 240950999562514433, guid: 25d6e7fab9aea06479954f464cc15cd4, type: 3}
+      propertyPath: onPlayerSightlineExit.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: LaunchProjectile
+      objectReference: {fileID: 0}
+    - target: {fileID: 240950999562514433, guid: 25d6e7fab9aea06479954f464cc15cd4, type: 3}
+      propertyPath: onPlayerSightlineEnter.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: LaunchProjectile
+      objectReference: {fileID: 0}
+    - target: {fileID: 240950999562514433, guid: 25d6e7fab9aea06479954f464cc15cd4, type: 3}
+      propertyPath: onPlayerApproach.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
+      value: EnemyMovement, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 240950999562514433, guid: 25d6e7fab9aea06479954f464cc15cd4, type: 3}
+      propertyPath: onPlayerApproach.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_BoolArgument
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 240950999562514433, guid: 25d6e7fab9aea06479954f464cc15cd4, type: 3}
+      propertyPath: onPlayerSightlneStay.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: EnemyProjectile, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 240950999562514433, guid: 25d6e7fab9aea06479954f464cc15cd4, type: 3}
+      propertyPath: onPlayerSightlineExit.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: EnemyProjectile, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 240950999562514433, guid: 25d6e7fab9aea06479954f464cc15cd4, type: 3}
+      propertyPath: onPlayerSightlineEnter.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: EnemyProjectile, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 240950999562514433, guid: 25d6e7fab9aea06479954f464cc15cd4, type: 3}
+      propertyPath: onPlayerApproach.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 240950999562514433, guid: 25d6e7fab9aea06479954f464cc15cd4, type: 3}
+      propertyPath: onPlayerSightlneStay.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 240950999562514433, guid: 25d6e7fab9aea06479954f464cc15cd4, type: 3}
+      propertyPath: onPlayerSightlineExit.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 240950999562514433, guid: 25d6e7fab9aea06479954f464cc15cd4, type: 3}
+      propertyPath: onPlayerSightlineEnter.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 240950999562514435, guid: 25d6e7fab9aea06479954f464cc15cd4, type: 3}
+      propertyPath: onRoomActive.m_PersistentCalls.m_Calls.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 240950999562514435, guid: 25d6e7fab9aea06479954f464cc15cd4, type: 3}
+      propertyPath: onRoomActive.m_PersistentCalls.m_Calls.Array.data[2].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 240950999562514435, guid: 25d6e7fab9aea06479954f464cc15cd4, type: 3}
+      propertyPath: onRoomActive.m_PersistentCalls.m_Calls.Array.data[2].m_Target
+      value: 
+      objectReference: {fileID: 638478119392253967}
+    - target: {fileID: 240950999562514435, guid: 25d6e7fab9aea06479954f464cc15cd4, type: 3}
+      propertyPath: onRoomActive.m_PersistentCalls.m_Calls.Array.data[2].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 240950999562514435, guid: 25d6e7fab9aea06479954f464cc15cd4, type: 3}
+      propertyPath: onRoomActive.m_PersistentCalls.m_Calls.Array.data[2].m_MethodName
+      value: ResetTimerAndState
+      objectReference: {fileID: 0}
+    - target: {fileID: 240950999562514435, guid: 25d6e7fab9aea06479954f464cc15cd4, type: 3}
+      propertyPath: onRoomActive.m_PersistentCalls.m_Calls.Array.data[2].m_TargetAssemblyTypeName
+      value: EnemyProjectile, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 240950999562514435, guid: 25d6e7fab9aea06479954f464cc15cd4, type: 3}
+      propertyPath: onRoomActive.m_PersistentCalls.m_Calls.Array.data[2].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 240950999562514438, guid: 25d6e7fab9aea06479954f464cc15cd4, type: 3}
+      propertyPath: onPlayerCollision.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 240950999562514684, guid: 25d6e7fab9aea06479954f464cc15cd4, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: d0721e156b2393f41a90cf02a906be0e, type: 3}
+    - target: {fileID: 240950999562514686, guid: 25d6e7fab9aea06479954f464cc15cd4, type: 3}
+      propertyPath: m_Name
+      value: RedDragoon
+      objectReference: {fileID: 0}
+    - target: {fileID: 240950999562514687, guid: 25d6e7fab9aea06479954f464cc15cd4, type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 240950999562514687, guid: 25d6e7fab9aea06479954f464cc15cd4, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 240950999562514687, guid: 25d6e7fab9aea06479954f464cc15cd4, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 240950999562514687, guid: 25d6e7fab9aea06479954f464cc15cd4, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 240950999562514687, guid: 25d6e7fab9aea06479954f464cc15cd4, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 240950999562514687, guid: 25d6e7fab9aea06479954f464cc15cd4, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 240950999562514687, guid: 25d6e7fab9aea06479954f464cc15cd4, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 240950999562514687, guid: 25d6e7fab9aea06479954f464cc15cd4, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 240950999562514687, guid: 25d6e7fab9aea06479954f464cc15cd4, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 240950999562514687, guid: 25d6e7fab9aea06479954f464cc15cd4, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 240950999562514687, guid: 25d6e7fab9aea06479954f464cc15cd4, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6672441672932839272, guid: 25d6e7fab9aea06479954f464cc15cd4, type: 3}
+      propertyPath: enemyProjectilePrefab
+      value: 
+      objectReference: {fileID: 1353825895148523942, guid: f39eb85abcb69e94cb41d2737a868d7b, type: 3}
+    m_RemovedComponents: []
+    m_AddedGameObjects: []
+  m_SourcePrefab: {fileID: 100100000, guid: 25d6e7fab9aea06479954f464cc15cd4, type: 3}
+--- !u!114 &638478119392253967 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6672441672932839272, guid: 25d6e7fab9aea06479954f464cc15cd4, type: 3}
+  m_PrefabInstance: {fileID: 6072279661567596391}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: df389637cb3edbe40a25ce2b3ddb9ce3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &6277197122465048423 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 240950999562514432, guid: 25d6e7fab9aea06479954f464cc15cd4, type: 3}
+  m_PrefabInstance: {fileID: 6072279661567596391}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2781230d80444e84680e0d40dc9057e2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
