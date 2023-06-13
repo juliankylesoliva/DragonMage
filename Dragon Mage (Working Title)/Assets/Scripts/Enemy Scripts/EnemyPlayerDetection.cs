@@ -10,15 +10,18 @@ public class EnemyPlayerDetection : MonoBehaviour
 
     [SerializeField] float playerDetectionDistance = 5f;
     [SerializeField] float enemySightlineDistance = 5f;
+    [SerializeField] float playerJumpingThreshold = 1f;
     [SerializeField] LayerMask sightlineLayer;
     [SerializeField] UnityEvent onPlayerApproach;
     [SerializeField] UnityEvent onPlayerRetreat;
     [SerializeField] UnityEvent onPlayerSightlineEnter;
     [SerializeField] UnityEvent onPlayerSightlneStay;
     [SerializeField] UnityEvent onPlayerSightlineExit;
+    [SerializeField] UnityEvent onPlayerJump;
 
     private bool isPlayerNearby = false;
     private bool isPlayerInSightline = false;
+    private bool didPlayerJump = false;
 
     void Awake()
     {
@@ -37,6 +40,7 @@ public class EnemyPlayerDetection : MonoBehaviour
         {
             CheckPlayerDetectionRadius();
             CheckEnemySightline();
+            CheckPlayerJumping();
         }
     }
 
@@ -110,6 +114,25 @@ public class EnemyPlayerDetection : MonoBehaviour
                 onPlayerSightlineExit.Invoke();
             }
             isPlayerInSightline = false;
+        }
+    }
+
+    private void CheckPlayerJumping()
+    {
+        if (playerRef != null)
+        {
+            if (playerRef.stateMachine.CurrentState.name == "Jumping" && (!playerRef.collisions.IsGrounded && !playerRef.collisions.IsOnASlope) && playerRef.rb2d.velocity.y > playerJumpingThreshold)
+            {
+                if (!didPlayerJump)
+                {
+                    onPlayerJump.Invoke();
+                }
+                didPlayerJump = true;
+            }
+            else
+            {
+                didPlayerJump = false;
+            }
         }
     }
 }

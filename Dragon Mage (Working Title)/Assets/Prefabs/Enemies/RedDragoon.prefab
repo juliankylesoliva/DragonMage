@@ -18,7 +18,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 240950999562514433, guid: 25d6e7fab9aea06479954f464cc15cd4, type: 3}
       propertyPath: sightlineLayer.m_Bits
-      value: 72
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 240950999562514433, guid: 25d6e7fab9aea06479954f464cc15cd4, type: 3}
       propertyPath: enemySightlineDistance
@@ -223,6 +223,18 @@ PrefabInstance:
     - target: {fileID: 240950999562514687, guid: 25d6e7fab9aea06479954f464cc15cd4, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6672441672932839272, guid: 25d6e7fab9aea06479954f464cc15cd4, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6672441672932839272, guid: 25d6e7fab9aea06479954f464cc15cd4, type: 3}
+      propertyPath: preFireWindup
+      value: 0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 6672441672932839272, guid: 25d6e7fab9aea06479954f464cc15cd4, type: 3}
+      propertyPath: postFireCooldown
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6672441672932839272, guid: 25d6e7fab9aea06479954f464cc15cd4, type: 3}
       propertyPath: enemyProjectilePrefab

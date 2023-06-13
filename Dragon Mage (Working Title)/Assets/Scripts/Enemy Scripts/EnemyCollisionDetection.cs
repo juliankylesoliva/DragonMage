@@ -21,9 +21,9 @@ public class EnemyCollisionDetection : MonoBehaviour
     [SerializeField] float wallCheckRadius = 0.1f;
     [SerializeField] float ledgeCheckOffset = 0.25f;
 
-    private bool isGrounded = false;
-    private bool isTouchingWall = false;
-    private bool isTouchingLedge = false;
+    public bool isGrounded { get; private set; }
+    public bool isTouchingWall { get; private set; }
+    public bool isTouchingLedge { get; private set; }
 
     void Awake()
     {

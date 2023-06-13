@@ -38,11 +38,7 @@ public class EnemyProjectileBehavior : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.transform.tag == "Ground")
-        {
-            GameObject.Destroy(this.gameObject);
-        }
-        else if (other.transform.tag == "Player")
+        if (other.transform.tag == "Player")
         {
             PlayerCtrl tempPlayer = other.gameObject.GetComponent<PlayerCtrl>();
             if (tempPlayer != null) { tempPlayer.damage.TakeDamage(this.transform); }

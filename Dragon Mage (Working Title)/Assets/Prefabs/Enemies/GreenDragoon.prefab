@@ -79,6 +79,7 @@ GameObject:
   - component: {fileID: 240950999562514433}
   - component: {fileID: 240950999562514438}
   - component: {fileID: 6672441672932839272}
+  - component: {fileID: 5184253250931353200}
   m_Layer: 11
   m_Name: GreenDragoon
   m_TagString: Enemy
@@ -267,7 +268,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2781230d80444e84680e0d40dc9057e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  initialMoveVector: {x: -1.5, y: 0}
+  initialMoveVector: {x: -2, y: 0}
   turningCooldownTime: 0
   ignoreYValue: 1
   isAlwaysFacingPlayer: 0
@@ -285,6 +286,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerDetectionDistance: 14
   enemySightlineDistance: 0
+  playerJumpingThreshold: 1
   sightlineLayer:
     serializedVersion: 2
     m_Bits: 0
@@ -325,6 +327,9 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   onPlayerSightlineExit:
+    m_PersistentCalls:
+      m_Calls: []
+  onPlayerJump:
     m_PersistentCalls:
       m_Calls: []
 --- !u!114 &240950999562514438
@@ -412,7 +417,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 240950999562514686}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: df389637cb3edbe40a25ce2b3ddb9ce3, type: 3}
   m_Name: 
@@ -421,6 +426,22 @@ MonoBehaviour:
   enemyProjectileSpawnPoint: {fileID: 240950998376179084}
   preFireWindup: 0.5
   postFireCooldown: 3
+--- !u!114 &5184253250931353200
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 240950999562514686}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: adc7436bca43c7847bcba7480bad081e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  jumpSpeed: 4
+  risingGravity: 1
+  fallingGravity: 1
+  fallSpeed: 6
 --- !u!1 &240950999654906100
 GameObject:
   m_ObjectHideFlags: 0
