@@ -409,7 +409,7 @@ MonoBehaviour:
     m_Bits: 1600
   groundCheckRadius: 0.125
   wallCheckRadius: 0.125
-  ledgeCheckOffset: 0.4
+  ledgeCheckOffset: 0.5
 --- !u!114 &6672441672932839272
 MonoBehaviour:
   m_ObjectHideFlags: 0

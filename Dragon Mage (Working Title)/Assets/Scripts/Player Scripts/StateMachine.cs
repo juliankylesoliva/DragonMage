@@ -636,6 +636,7 @@ public class DamagedState : State
     public override void Enter()
     {
         player.rb2d.isKinematic = false;
+        player.rb2d.gravityScale = player.jumping.fallingGravity;
         player.animationCtrl.StandingAnimation();
         player.damage.DoKnockback();
     }

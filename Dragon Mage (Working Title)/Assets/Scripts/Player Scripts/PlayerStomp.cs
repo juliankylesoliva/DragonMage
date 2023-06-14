@@ -27,7 +27,7 @@ public class PlayerStomp : MonoBehaviour
 
     private bool IsStompingEnemy()
     {
-        if (!player.collisions.IsGrounded && (player.stateMachine.CurrentState == player.stateMachine.fallingState || player.stateMachine.CurrentState == player.stateMachine.glidingState || player.stateMachine.CurrentState == player.stateMachine.wallSlidingState || player.stateMachine.CurrentState == player.stateMachine.wallClimbingState || player.stateMachine.CurrentState == player.stateMachine.wallVaultingState))
+        if (!player.damage.isPlayerDamaged && !player.collisions.IsGrounded && !player.collisions.IsOnASlope && (player.stateMachine.CurrentState == player.stateMachine.fallingState || player.stateMachine.CurrentState == player.stateMachine.glidingState || player.stateMachine.CurrentState == player.stateMachine.wallSlidingState || player.stateMachine.CurrentState == player.stateMachine.wallClimbingState || player.stateMachine.CurrentState == player.stateMachine.wallVaultingState || player.rb2d.velocity.y <= 0f))
         {
             Collider2D[] colliders = Physics2D.OverlapCircleAll(groundCheckObj.position, stompCheckRadius, enemyLayer);
             if (colliders.Length > 0)

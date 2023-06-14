@@ -7,13 +7,17 @@ public class EnemyMovement : MonoBehaviour
     EnemyBehavior enemy;
 
     [SerializeField] Vector2 initialMoveVector;
+    [SerializeField] float generalMoveSpeed = 0f;
     [SerializeField] float turningCooldownTime = 0f;
+    [SerializeField] float chargeCooldownTime = 0f;
     [SerializeField] bool ignoreYValue = true;
     [SerializeField] bool isAlwaysFacingPlayer = false;
 
     private Vector3 initialPosition = Vector3.zero;
     private Vector2 currentMoveVector = Vector2.zero;
     private float currentTurningCooldown = 0f;
+    private bool isCharging = false;
+    private float currentChargeCooldown = 0f;
 
     void Awake()
     {
@@ -33,7 +37,13 @@ public class EnemyMovement : MonoBehaviour
             CheckIfFacingPlayer();
             UpdateVelocityVector();
             UpdateCurrentTurningCooldown();
+            UpdateCurrentChargeCooldown();
         }
+    }
+
+    void OnDisable()
+    {
+        enemy.rb2d.velocity = Vector2.zero;
     }
 
     public void SetMoveVector(Vector2 vector)
@@ -71,6 +81,26 @@ public class EnemyMovement : MonoBehaviour
         if ((currentMoveVector.x * awayDirection) < 0f)
         {
             FlipMovement();
+        }
+    }
+
+    public void ChargeTowardsPlayer()
+    {
+        if (!isCharging && currentChargeCooldown <= 0f)
+        {
+            isCharging = true;
+            FaceTowardsPlayer();
+            SetMoveVector(Vector2.right * GetFacingValue() * generalMoveSpeed);
+        }
+    }
+
+    public void StopCharging()
+    {
+        if (isCharging)
+        {
+            SetMoveVector(Vector2.zero);
+            currentChargeCooldown = chargeCooldownTime;
+            isCharging = false;
         }
     }
 
@@ -113,7 +143,7 @@ public class EnemyMovement : MonoBehaviour
 
     private void CheckIfFacingPlayer()
     {
-        if (isAlwaysFacingPlayer) { FaceTowardsPlayer(); }
+        if (!isCharging && isAlwaysFacingPlayer) { FaceTowardsPlayer(); }
     }
 
     private void UpdateVelocityVector()
@@ -129,6 +159,18 @@ public class EnemyMovement : MonoBehaviour
             if (currentTurningCooldown < 0f)
             {
                 currentTurningCooldown = 0f;
+            }
+        }
+    }
+
+    private void UpdateCurrentChargeCooldown()
+    {
+        if (currentChargeCooldown > 0f)
+        {
+            currentChargeCooldown -= Time.deltaTime;
+            if (currentChargeCooldown < 0f)
+            {
+                currentChargeCooldown = 0f;
             }
         }
     }
