@@ -10,7 +10,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 240950999562514432, guid: 25d6e7fab9aea06479954f464cc15cd4, type: 3}
       propertyPath: generalMoveSpeed
-      value: 8
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 240950999562514432, guid: 25d6e7fab9aea06479954f464cc15cd4, type: 3}
       propertyPath: chargeCooldownTime
@@ -18,95 +18,31 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 240950999562514432, guid: 25d6e7fab9aea06479954f464cc15cd4, type: 3}
       propertyPath: initialMoveVector.x
-      value: 0
+      value: -3
+      objectReference: {fileID: 0}
+    - target: {fileID: 240950999562514432, guid: 25d6e7fab9aea06479954f464cc15cd4, type: 3}
+      propertyPath: turningCooldownTime
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 240950999562514432, guid: 25d6e7fab9aea06479954f464cc15cd4, type: 3}
       propertyPath: isAlwaysFacingPlayer
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 240950999562514433, guid: 25d6e7fab9aea06479954f464cc15cd4, type: 3}
-      propertyPath: sightlineLayer.m_Bits
-      value: 1608
-      objectReference: {fileID: 0}
-    - target: {fileID: 240950999562514433, guid: 25d6e7fab9aea06479954f464cc15cd4, type: 3}
-      propertyPath: enemySightlineDistance
-      value: 14
-      objectReference: {fileID: 0}
-    - target: {fileID: 240950999562514433, guid: 25d6e7fab9aea06479954f464cc15cd4, type: 3}
-      propertyPath: onPlayerSightlneStay.m_PersistentCalls.m_Calls.Array.size
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 240950999562514433, guid: 25d6e7fab9aea06479954f464cc15cd4, type: 3}
-      propertyPath: onPlayerSightlineEnter.m_PersistentCalls.m_Calls.Array.size
+      propertyPath: m_Enabled
       value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 240950999562514433, guid: 25d6e7fab9aea06479954f464cc15cd4, type: 3}
-      propertyPath: onPlayerSightlneStay.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 240950999562514433, guid: 25d6e7fab9aea06479954f464cc15cd4, type: 3}
-      propertyPath: onPlayerSightlineEnter.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 240950999562514433, guid: 25d6e7fab9aea06479954f464cc15cd4, type: 3}
-      propertyPath: onPlayerSightlneStay.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 8526229606178788681}
-    - target: {fileID: 240950999562514433, guid: 25d6e7fab9aea06479954f464cc15cd4, type: 3}
-      propertyPath: onPlayerSightlineEnter.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 8526229606178788681}
-    - target: {fileID: 240950999562514433, guid: 25d6e7fab9aea06479954f464cc15cd4, type: 3}
-      propertyPath: onPlayerSightlneStay.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 240950999562514433, guid: 25d6e7fab9aea06479954f464cc15cd4, type: 3}
-      propertyPath: onPlayerSightlneStay.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: ChargeTowardsPlayer
-      objectReference: {fileID: 0}
-    - target: {fileID: 240950999562514433, guid: 25d6e7fab9aea06479954f464cc15cd4, type: 3}
-      propertyPath: onPlayerSightlineEnter.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 240950999562514433, guid: 25d6e7fab9aea06479954f464cc15cd4, type: 3}
-      propertyPath: onPlayerSightlineEnter.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: ChargeTowardsPlayer
-      objectReference: {fileID: 0}
-    - target: {fileID: 240950999562514433, guid: 25d6e7fab9aea06479954f464cc15cd4, type: 3}
-      propertyPath: onPlayerSightlneStay.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: EnemyMovement, Assembly-CSharp
-      objectReference: {fileID: 0}
-    - target: {fileID: 240950999562514433, guid: 25d6e7fab9aea06479954f464cc15cd4, type: 3}
-      propertyPath: onPlayerSightlineEnter.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: EnemyMovement, Assembly-CSharp
-      objectReference: {fileID: 0}
-    - target: {fileID: 240950999562514433, guid: 25d6e7fab9aea06479954f464cc15cd4, type: 3}
-      propertyPath: onPlayerSightlneStay.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
-      objectReference: {fileID: 0}
-    - target: {fileID: 240950999562514433, guid: 25d6e7fab9aea06479954f464cc15cd4, type: 3}
-      propertyPath: onPlayerSightlineEnter.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 240950999562514435, guid: 25d6e7fab9aea06479954f464cc15cd4, type: 3}
       propertyPath: onRoomActive.m_PersistentCalls.m_Calls.Array.size
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 240950999562514438, guid: 25d6e7fab9aea06479954f464cc15cd4, type: 3}
-      propertyPath: wallCheckRadius
-      value: 0.25
-      objectReference: {fileID: 0}
-    - target: {fileID: 240950999562514438, guid: 25d6e7fab9aea06479954f464cc15cd4, type: 3}
-      propertyPath: onPlayerCollision.m_PersistentCalls.m_Calls.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 240950999562514438, guid: 25d6e7fab9aea06479954f464cc15cd4, type: 3}
       propertyPath: onTouchingWall.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: StopCharging
+      value: FlipMovementOverrideCooldown
       objectReference: {fileID: 0}
     - target: {fileID: 240950999562514438, guid: 25d6e7fab9aea06479954f464cc15cd4, type: 3}
       propertyPath: onTouchingLedge.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: StopCharging
+      value: FlipMovementOverrideCooldown
       objectReference: {fileID: 0}
     - target: {fileID: 240950999562514684, guid: 25d6e7fab9aea06479954f464cc15cd4, type: 3}
       propertyPath: m_Sprite
@@ -163,14 +99,3 @@ PrefabInstance:
     m_RemovedComponents: []
     m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: 25d6e7fab9aea06479954f464cc15cd4, type: 3}
---- !u!114 &8526229606178788681 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 240950999562514432, guid: 25d6e7fab9aea06479954f464cc15cd4, type: 3}
-  m_PrefabInstance: {fileID: 8433912858886432073}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2781230d80444e84680e0d40dc9057e2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 

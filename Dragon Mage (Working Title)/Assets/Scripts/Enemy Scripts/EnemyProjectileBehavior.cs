@@ -38,6 +38,16 @@ public class EnemyProjectileBehavior : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
+        PlayerHitCheck(other);
+    }
+
+    void OnTriggerStay2D(Collider2D other)
+    {
+        PlayerHitCheck(other);
+    }
+
+    private void PlayerHitCheck(Collider2D other)
+    {
         if (other.transform.tag == "Player")
         {
             PlayerCtrl tempPlayer = other.gameObject.GetComponent<PlayerCtrl>();

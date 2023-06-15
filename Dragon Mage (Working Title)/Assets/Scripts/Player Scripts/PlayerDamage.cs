@@ -75,6 +75,5 @@ public class PlayerDamage : MonoBehaviour
             }
             yield return null;
         }
-        
     }
 }

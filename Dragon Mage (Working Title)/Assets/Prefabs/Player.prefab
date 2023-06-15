@@ -5779,8 +5779,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   baseVerticalKnockback: 8
-  baseHorizontalKnockback: 5
-  baseHitstunTime: 0.5
+  baseHorizontalKnockback: 6
+  baseHitstunTime: 0.45
   knockbackMagnitudeEpsilon: 0.8
   normalMaterial: {fileID: 6200000, guid: 9406f10bd3650fe409c8dc01b66aa54d, type: 2}
   damagedMaterial: {fileID: 6200000, guid: dd55f7c89c0e2e144b192bfa77adfb19, type: 2}
@@ -5797,7 +5797,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   groundCheckObj: {fileID: 6792052323881475428}
-  stompCheckRadius: 0.25
+  stompCheckRadius: 0.375
   enemyLayer:
     serializedVersion: 2
     m_Bits: 2048

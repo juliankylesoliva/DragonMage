@@ -7,17 +7,13 @@ public class EnemyMovement : MonoBehaviour
     EnemyBehavior enemy;
 
     [SerializeField] Vector2 initialMoveVector;
-    [SerializeField] float generalMoveSpeed = 0f;
     [SerializeField] float turningCooldownTime = 0f;
-    [SerializeField] float chargeCooldownTime = 0f;
     [SerializeField] bool ignoreYValue = true;
-    [SerializeField] bool isAlwaysFacingPlayer = false;
+    public bool isAlwaysFacingPlayer = false;
 
     private Vector3 initialPosition = Vector3.zero;
     private Vector2 currentMoveVector = Vector2.zero;
     private float currentTurningCooldown = 0f;
-    private bool isCharging = false;
-    private float currentChargeCooldown = 0f;
 
     void Awake()
     {
@@ -37,7 +33,6 @@ public class EnemyMovement : MonoBehaviour
             CheckIfFacingPlayer();
             UpdateVelocityVector();
             UpdateCurrentTurningCooldown();
-            UpdateCurrentChargeCooldown();
         }
     }
 
@@ -66,6 +61,19 @@ public class EnemyMovement : MonoBehaviour
         }
     }
 
+    public void FlipMovementOverrideCooldown()
+    {
+        if (currentMoveVector.x != 0f)
+        {
+            currentMoveVector *= -1f;
+            SetFacingDirection(currentMoveVector.x);
+        }
+        else
+        {
+            SetFacingDirection(-GetFacingValue());
+        }
+    }
+
     public void FaceTowardsPlayer()
     {
         float towardsDirection = enemy.playerDetection.GetDirectionToPlayer();
@@ -81,26 +89,6 @@ public class EnemyMovement : MonoBehaviour
         if ((currentMoveVector.x * awayDirection) < 0f)
         {
             FlipMovement();
-        }
-    }
-
-    public void ChargeTowardsPlayer()
-    {
-        if (!isCharging && currentChargeCooldown <= 0f)
-        {
-            isCharging = true;
-            FaceTowardsPlayer();
-            SetMoveVector(Vector2.right * GetFacingValue() * generalMoveSpeed);
-        }
-    }
-
-    public void StopCharging()
-    {
-        if (isCharging)
-        {
-            SetMoveVector(Vector2.zero);
-            currentChargeCooldown = chargeCooldownTime;
-            isCharging = false;
         }
     }
 
@@ -143,7 +131,7 @@ public class EnemyMovement : MonoBehaviour
 
     private void CheckIfFacingPlayer()
     {
-        if (!isCharging && isAlwaysFacingPlayer) { FaceTowardsPlayer(); }
+        if (isAlwaysFacingPlayer) { FaceTowardsPlayer(); }
     }
 
     private void UpdateVelocityVector()
@@ -159,18 +147,6 @@ public class EnemyMovement : MonoBehaviour
             if (currentTurningCooldown < 0f)
             {
                 currentTurningCooldown = 0f;
-            }
-        }
-    }
-
-    private void UpdateCurrentChargeCooldown()
-    {
-        if (currentChargeCooldown > 0f)
-        {
-            currentChargeCooldown -= Time.deltaTime;
-            if (currentChargeCooldown < 0f)
-            {
-                currentChargeCooldown = 0f;
             }
         }
     }

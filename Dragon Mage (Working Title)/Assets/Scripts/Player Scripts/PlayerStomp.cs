@@ -27,15 +27,22 @@ public class PlayerStomp : MonoBehaviour
 
     private bool IsStompingEnemy()
     {
-        if (!player.damage.isPlayerDamaged && !player.collisions.IsGrounded && !player.collisions.IsOnASlope && (player.stateMachine.CurrentState == player.stateMachine.fallingState || player.stateMachine.CurrentState == player.stateMachine.glidingState || player.stateMachine.CurrentState == player.stateMachine.wallSlidingState || player.stateMachine.CurrentState == player.stateMachine.wallClimbingState || player.stateMachine.CurrentState == player.stateMachine.wallVaultingState || player.rb2d.velocity.y <= 0f))
+        if (!player.damage.isPlayerDamaged && !player.collisions.IsGrounded && !player.collisions.IsOnASlope && player.stateMachine.CurrentState != player.stateMachine.fireTacklingState && (player.stateMachine.CurrentState == player.stateMachine.fallingState || player.stateMachine.CurrentState == player.stateMachine.glidingState || player.stateMachine.CurrentState == player.stateMachine.wallSlidingState || player.stateMachine.CurrentState == player.stateMachine.wallClimbingState || player.stateMachine.CurrentState == player.stateMachine.wallVaultingState || player.rb2d.velocity.y <= 0f))
         {
             Collider2D[] colliders = Physics2D.OverlapCircleAll(groundCheckObj.position, stompCheckRadius, enemyLayer);
             if (colliders.Length > 0)
             {
-                GameObject tempObj = colliders[0].gameObject;
-                EnemyBehavior tempEnemy = tempObj.GetComponent<EnemyBehavior>();
-                if (tempEnemy != null) { tempEnemy.DefeatEnemy(damageType); }
-                return true;
+                Vector3 feetPos = groundCheckObj.position;
+                Vector3 targetPos = colliders[0].transform.position;
+                float heightDiff = (feetPos.y - targetPos.y);
+
+                if (heightDiff > 0f)
+                {
+                    GameObject tempObj = colliders[0].gameObject;
+                    EnemyBehavior tempEnemy = tempObj.GetComponent<EnemyBehavior>();
+                    if (tempEnemy != null) { tempEnemy.DefeatEnemy(damageType); }
+                    return true;
+                }
             }
         }
         return false;
