@@ -48,6 +48,15 @@ public class BlastHitbox : MonoBehaviour
         hitboxRadius = radius;
     }
 
+    private bool DoesBlastGoThruWall(Collider2D other)
+    {
+        Vector3 direction = (other.transform.position - this.transform.position);
+        float raycastDistance = Mathf.Min(hitboxRadius, direction.magnitude);
+        RaycastHit2D hit = Physics2D.Raycast(this.transform.position, direction.normalized, Mathf.Infinity, impassableLayer);
+
+        return (hit.distance < raycastDistance);
+    }
+
     void OnTriggerEnter2D(Collider2D other)
     {
         Rigidbody2D rb = other.gameObject.GetComponent<Rigidbody2D>();
@@ -57,7 +66,7 @@ public class BlastHitbox : MonoBehaviour
 
         if (enemy != null)
         {
-            if (enemy.DefeatEnemy(damageType))
+            if (!DoesBlastGoThruWall(other) && enemy.DefeatEnemy(damageType))
             {
                 temper.NeutralizeTemperBy(-1);
             }
@@ -73,11 +82,7 @@ public class BlastHitbox : MonoBehaviour
         }
         else if (block != null && !block.isReinforced && (block.breakableBy == BreakableType.ANY || block.breakableBy == BreakableType.MAGIC))
         {
-            Vector3 direction = (other.transform.position - this.transform.position);
-            float raycastDistance = Mathf.Min(hitboxRadius, direction.magnitude);
-            RaycastHit2D hit = Physics2D.Raycast(this.transform.position, direction.normalized, Mathf.Infinity, impassableLayer);
-
-            if (hit.distance >= raycastDistance)
+            if (!DoesBlastGoThruWall(other))
             {
                 temper.NeutralizeTemperBy(-1);
                 block.onBreak.Invoke();
