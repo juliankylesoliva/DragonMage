@@ -20,6 +20,7 @@ public class EnemyBehavior : MonoBehaviour
     [HideInInspector] public EnemyPlayerDetection playerDetection;
     [HideInInspector] public EnemyProjectile projectile;
 
+    public bool isVisible { get; private set; }
     public bool isStunned { get; private set; }
     public bool isDefeated { get; private set; }
 
@@ -42,6 +43,16 @@ public class EnemyBehavior : MonoBehaviour
     void Update()
     {
         
+    }
+
+    void OnBecameVisible()
+    {
+        isVisible = true;
+    }
+
+    void OnBecameInvisible()
+    {
+        isVisible = false;
     }
 
     public void ActivateEnemy()

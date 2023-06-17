@@ -37,7 +37,7 @@ public class EnemyProjectile : MonoBehaviour
 
     public void LaunchProjectile()
     {
-        if (currentProjectileState != EnemyProjectileState.STANDBY) { return; }
+        if (currentProjectileState != EnemyProjectileState.STANDBY || !enemy.isVisible) { return; }
         currentProjectileState = EnemyProjectileState.WINDUP;
         currentProjectileStateTimer = preFireWindup;
     }
