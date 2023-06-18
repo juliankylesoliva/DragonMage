@@ -547,7 +547,8 @@ public class FireTacklingState : State
         if (!player.attacks.isFireTackleActive)
         {
             State nextState;
-            if (player.temper.forceFormChange) { nextState = player.stateMachine.formChangingState; }
+            if (player.damage.isPlayerDamaged) { nextState = player.stateMachine.damagedState; }
+            else if (player.temper.forceFormChange) { nextState = player.stateMachine.formChangingState; }
             else if (player.jumping.CanWallClimb()) { nextState = player.stateMachine.wallClimbingState; }
             else if (player.attacks.isFireTackleEndlagCanceled) { player.jumping.GroundJumpStart(); nextState = player.stateMachine.jumpingState; }
             else if ((player.collisions.IsGrounded || player.collisions.IsOnASlope) && (player.inputVector.x != 0f || player.rb2d.velocity.x != 0f)) { nextState = player.stateMachine.runningState; }
@@ -645,12 +646,16 @@ public class DamagedState : State
     {
         if (!player.damage.isPlayerDamaged)
         {
-            player.stateMachine.TransitionTo(player.stateMachine.standingState);
+            State nextState;
+            if (player.temper.forceFormChange) { nextState = player.stateMachine.formChangingState; }
+            else { nextState = player.stateMachine.standingState; }
+
+            player.stateMachine.TransitionTo(nextState);
         }
     }
 
     public override void Exit()
     {
-
+        player.damage.DoIFrames();
     }
 }

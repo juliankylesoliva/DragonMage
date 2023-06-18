@@ -6,15 +6,22 @@ public class PlayerDamage : MonoBehaviour
 {
     PlayerCtrl player;
 
+    [SerializeField] int mageTemperDamage = 2;
+    [SerializeField] int dragonTemperDamage = -1;
     [SerializeField] float baseVerticalKnockback = 2f;
     [SerializeField] float baseHorizontalKnockback = 5f;
     [SerializeField] float baseHitstunTime = 1f;
     [SerializeField] float knockbackMagnitudeEpsilon = 0.001f;
+    [SerializeField] float postDamageInvulnerabilityTime = 3f;
+    [SerializeField, Range(0f, 1f)] float invulnerabilityAlpha = 0.75f;
     [SerializeField] PhysicsMaterial2D normalMaterial;
     [SerializeField] PhysicsMaterial2D damagedMaterial;
 
     private Transform damageSource = null;
     private float hitstunTimer = 0f;
+    private bool isDamageInvulnerabilityActive = false;
+    private bool isDamageInvulnerabilityFlickering = false;
+
     public bool isPlayerDamaged { get { return hitstunTimer > 0f; } }
 
     void Awake()
@@ -22,12 +29,30 @@ public class PlayerDamage : MonoBehaviour
         player = this.gameObject.GetComponent<PlayerCtrl>();
     }
 
+    void Update()
+    {
+        if (!PauseHandler.isPaused)
+        {
+            Color spriteColor = player.charSprite.color;
+            if (isDamageInvulnerabilityActive && isDamageInvulnerabilityFlickering)
+            {
+                spriteColor.a = invulnerabilityAlpha;
+            }
+            else
+            {
+                spriteColor.a = 1f;
+            }
+            player.charSprite.color = spriteColor;
+            isDamageInvulnerabilityFlickering = !isDamageInvulnerabilityFlickering;
+        }
+    }
+
     public void TakeDamage(Transform source)
     {
         if (hitstunTimer > 0f || !CanTakeDamage()) { return; }
         damageSource = source;
         StartCoroutine(HitstunTimerCR(baseHitstunTime));
-        player.temper.ChangeTemperBy(player.form.currentMode == CharacterMode.MAGE ? 2 : 1);
+        player.temper.ChangeTemperBy(player.form.currentMode == CharacterMode.MAGE ? mageTemperDamage : dragonTemperDamage);
     }
 
     public void DoKnockback()
@@ -46,10 +71,16 @@ public class PlayerDamage : MonoBehaviour
         damageSource = null;
     }
 
+    public void DoIFrames()
+    {
+        if (isDamageInvulnerabilityActive) { return; }
+        StartCoroutine(PostDamageIFramesCR(postDamageInvulnerabilityTime));
+    }
+
     private bool CanTakeDamage()
     {
         string currentState = player.stateMachine.CurrentState.name;
-        return (!player.attacks.isBlastJumpActive && currentState != "FireTackling" && currentState != "FormChanging" && currentState != "Damaged");
+        return (!isDamageInvulnerabilityActive && !player.attacks.isBlastJumpActive && player.attacks.currentAttackState != AttackState.ACTIVE && currentState != "FormChanging" && currentState != "Damaged");
     }
 
     private IEnumerator HitstunTimerCR(float time)
@@ -75,5 +106,16 @@ public class PlayerDamage : MonoBehaviour
             }
             yield return null;
         }
+    }
+
+    private IEnumerator PostDamageIFramesCR(float time)
+    {
+        if (isDamageInvulnerabilityActive) { yield break; }
+
+        isDamageInvulnerabilityFlickering = false;
+
+        isDamageInvulnerabilityActive = true;
+        yield return new WaitForSeconds(time);
+        isDamageInvulnerabilityActive = false;
     }
 }

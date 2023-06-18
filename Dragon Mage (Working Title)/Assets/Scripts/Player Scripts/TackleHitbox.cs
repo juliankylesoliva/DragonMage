@@ -62,12 +62,14 @@ public class TackleHitbox : MonoBehaviour
     {
         DestroyBlock(other);
         DefeatEnemy(other);
+        DestroyProjectile(other);
     }
 
     void OnTriggerStay2D(Collider2D other)
     {
         DestroyBlock(other);
         DefeatEnemy(other);
+        DestroyProjectile(other);
     }
 
     private void DestroyBlock(Collider2D other)
@@ -95,6 +97,19 @@ public class TackleHitbox : MonoBehaviour
                 {
                     player.temper.NeutralizeTemperBy(1);
                 }
+            }
+        }
+    }
+
+    private void DestroyProjectile(Collider2D other)
+    {
+        if (player.attacks.currentAttackState == AttackState.ACTIVE)
+        {
+            EnemyProjectileBehavior enemyProj = other.gameObject.GetComponent<EnemyProjectileBehavior>();
+            if (enemyProj != null)
+            {
+                player.temper.NeutralizeTemperBy(1);
+                GameObject.Destroy(other.gameObject);
             }
         }
     }

@@ -165,7 +165,7 @@ public class PlayerAttacks : MonoBehaviour
         float windupTimer = fireTackleStartup;
         float previousHorizontalVelocity = Mathf.Abs(player.rb2d.velocity.x);
         float verticalAxis = 0f;
-        while (windupTimer > 0f)
+        while (windupTimer > 0f && !player.damage.isPlayerDamaged)
         {
             if (!PauseHandler.isPaused && !player.attackButtonHeld) { isAttackButtonHeld = false; }
             player.rb2d.gravityScale = 0f;
@@ -175,6 +175,12 @@ public class PlayerAttacks : MonoBehaviour
             if (player.collisions.IsGrounded && verticalAxis < 0) { verticalAxis = 0f; }
             windupTimer -= Time.deltaTime;
             yield return null;
+        }
+
+        if (player.damage.isPlayerDamaged)
+        {
+            EndFireTackle();
+            yield break;
         }
 
         currentAttackState = AttackState.ACTIVE;
@@ -276,7 +282,7 @@ public class PlayerAttacks : MonoBehaviour
         player.rb2d.gravityScale = player.jumping.fallingGravity;
         float deceleration = Mathf.Abs(player.rb2d.velocity.x / fireTackleEndlag);
         float endlagTimer = fireTackleEndlag;
-        while (endlagTimer > 0f)
+        while (endlagTimer > 0f && !player.damage.isPlayerDamaged)
         {
             if (!firedProjectile && !bumped && endlagTimer < fireTackleEndlagCancel && CanCancelFireTackleEndlag()) { isFireTackleEndlagCanceled = true; break; }
             if (!bumped && (player.collisions.IsGrounded || player.collisions.IsOnASlope) && player.rb2d.velocity.x != 0f)
@@ -296,12 +302,17 @@ public class PlayerAttacks : MonoBehaviour
             yield return null;
         }
 
+        EndFireTackle();
+        yield break;
+    }
+
+    private void EndFireTackle()
+    {
         currentAttackState = AttackState.NOTHING;
         player.charSprite.color = Color.white;
         isFireTackleActive = false;
         StartCoroutine(AttackCooldownCR());
         StartCoroutine(player.form.FormChangeCooldownCR());
-        yield break;
     }
 
     private bool CanCancelFireTackleEndlag()

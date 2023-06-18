@@ -5778,10 +5778,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc8fe5639787741469d890b822f51415, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mageTemperDamage: 3
+  dragonTemperDamage: -2
   baseVerticalKnockback: 8
   baseHorizontalKnockback: 6
   baseHitstunTime: 0.45
   knockbackMagnitudeEpsilon: 0.8
+  postDamageInvulnerabilityTime: 3
+  invulnerabilityAlpha: 0.25
   normalMaterial: {fileID: 6200000, guid: 9406f10bd3650fe409c8dc01b66aa54d, type: 2}
   damagedMaterial: {fileID: 6200000, guid: dd55f7c89c0e2e144b192bfa77adfb19, type: 2}
 --- !u!114 &6792052323780996494

@@ -8,6 +8,7 @@ public class PlayerStomp : MonoBehaviour
 
     [SerializeField] Transform groundCheckObj;
     [SerializeField] float stompCheckRadius = 0.25f;
+    [SerializeField] float highestYVelocity = 0.5f;
     [SerializeField] LayerMask enemyLayer;
     [SerializeField] DamageType damageType = DamageType.STOMP;
 
@@ -27,7 +28,7 @@ public class PlayerStomp : MonoBehaviour
 
     private bool IsStompingEnemy()
     {
-        if (!player.damage.isPlayerDamaged && !player.collisions.IsGrounded && !player.collisions.IsOnASlope && player.stateMachine.CurrentState != player.stateMachine.fireTacklingState && (player.stateMachine.CurrentState == player.stateMachine.fallingState || player.stateMachine.CurrentState == player.stateMachine.glidingState || player.stateMachine.CurrentState == player.stateMachine.wallSlidingState || player.stateMachine.CurrentState == player.stateMachine.wallClimbingState || player.stateMachine.CurrentState == player.stateMachine.wallVaultingState || player.rb2d.velocity.y <= 0f))
+        if (!player.damage.isPlayerDamaged && !player.collisions.IsGrounded && !player.collisions.IsOnASlope && !player.attacks.isBlastJumpActive && !player.attacks.isFireTackleActive && (player.stateMachine.CurrentState == player.stateMachine.fallingState || player.stateMachine.CurrentState == player.stateMachine.glidingState || player.stateMachine.CurrentState == player.stateMachine.wallSlidingState || player.stateMachine.CurrentState == player.stateMachine.wallClimbingState || player.stateMachine.CurrentState == player.stateMachine.wallVaultingState || player.rb2d.velocity.y <= highestYVelocity))
         {
             Collider2D[] colliders = Physics2D.OverlapCircleAll(groundCheckObj.position, stompCheckRadius, enemyLayer);
             if (colliders.Length > 0)

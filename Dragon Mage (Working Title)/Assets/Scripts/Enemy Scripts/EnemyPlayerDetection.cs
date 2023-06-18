@@ -9,9 +9,11 @@ public class EnemyPlayerDetection : MonoBehaviour
     PlayerCtrl playerRef;
 
     [SerializeField] float playerDetectionDistance = 5f;
-    [SerializeField] float enemySightlineDistance = 5f;
+    [SerializeField] float enemySightlineDistance = 14f;
+    [SerializeField] float enemyShortSightlineDistance = 7f;
     [SerializeField] float playerJumpingThreshold = 1f;
     [SerializeField] LayerMask sightlineLayer;
+    [SerializeField] bool useShortSightlineDistance = false;
     [SerializeField] UnityEvent onPlayerApproach;
     [SerializeField] UnityEvent onPlayerRetreat;
     [SerializeField] UnityEvent onPlayerSightlineEnter;
@@ -95,7 +97,7 @@ public class EnemyPlayerDetection : MonoBehaviour
     private void CheckEnemySightline()
     {
         RaycastHit2D hit = Physics2D.Raycast(this.transform.position, Vector2.right * enemy.movement.GetFacingValue(), Mathf.Infinity, sightlineLayer);
-        if (hit.collider != null && hit.transform.tag == "Player" && hit.distance <= enemySightlineDistance)
+        if (hit.collider != null && hit.transform.tag == "Player" && hit.distance <= (useShortSightlineDistance ? enemyShortSightlineDistance : enemySightlineDistance))
         {
             if (!isPlayerInSightline)
             {

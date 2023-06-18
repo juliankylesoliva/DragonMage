@@ -22,7 +22,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 240950999562514433, guid: 25d6e7fab9aea06479954f464cc15cd4, type: 3}
       propertyPath: enemySightlineDistance
-      value: 10
+      value: 14
       objectReference: {fileID: 0}
     - target: {fileID: 240950999562514433, guid: 25d6e7fab9aea06479954f464cc15cd4, type: 3}
       propertyPath: onPlayerApproach.m_PersistentCalls.m_Calls.Array.size
