@@ -5782,7 +5782,7 @@ MonoBehaviour:
   dragonTemperDamage: -2
   baseVerticalKnockback: 8
   baseHorizontalKnockback: 6
-  baseHitstunTime: 0.45
+  baseHitstunTime: 0.75
   knockbackMagnitudeEpsilon: 0.8
   postDamageInvulnerabilityTime: 3
   invulnerabilityAlpha: 0.25
@@ -5802,6 +5802,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   groundCheckObj: {fileID: 6792052323881475428}
   stompCheckRadius: 0.375
+  highestYVelocity: 0.5
   enemyLayer:
     serializedVersion: 2
     m_Bits: 2048

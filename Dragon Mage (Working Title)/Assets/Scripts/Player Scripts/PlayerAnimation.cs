@@ -113,6 +113,12 @@ public class PlayerAnimation : MonoBehaviour
         }
     }
 
+    public void DamageAnimation(CharacterMode current)
+    {
+        animator.speed = 1f;
+        animator.Play(current == CharacterMode.MAGE ? "MagliHurt" : "DraelynHurt");
+    }
+
     private float GetRunAnimationSpeed()
     {
         float retVal = ((player.rb2d.velocity.x / player.movement.topSpeed) * (player.movement.isFacingRight ? 1f : -1f));

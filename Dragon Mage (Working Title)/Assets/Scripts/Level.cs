@@ -8,6 +8,15 @@ public class Level : MonoBehaviour
     [SerializeField] Room startingRoom;
     [SerializeField] int startingRoomEntranceIndex = 0;
     [SerializeField] Room[] roomList;
+    [SerializeField] int fragmentsNeededForMedal = 0;
+
+    private static int _fragmentsNeededForMedal = 0;
+    public static int FragmentsNeededForMedal { get { return _fragmentsNeededForMedal; } }
+
+    void Awake()
+    {
+        _fragmentsNeededForMedal = fragmentsNeededForMedal;
+    }
 
     void Start()
     {

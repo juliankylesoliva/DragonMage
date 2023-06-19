@@ -58,10 +58,7 @@ public class EnemyCollisionDetection : MonoBehaviour
         Collider2D[] colliders = Physics2D.OverlapCircleAll(positionToCheck, wallCheckRadius, groundLayer);
         if (colliders.Length > 0)
         {
-            if (!isTouchingWall)
-            {
-                onTouchingWall.Invoke();
-            }
+            onTouchingWall.Invoke();
             isTouchingWall = true;
         }
         else
@@ -82,16 +79,21 @@ public class EnemyCollisionDetection : MonoBehaviour
             }
             else
             {
-                if (!isTouchingLedge)
-                {
-                    onTouchingLedge.Invoke();
-                }
+                onTouchingLedge.Invoke();
                 isTouchingLedge = true;
             }
         }
     }
 
     void OnCollisionEnter2D(Collision2D other)
+    {
+        if (other.gameObject.tag == "Player")
+        {
+            onPlayerCollision.Invoke();
+        }
+    }
+
+    void OnCollisionStay2D(Collision2D other)
     {
         if (other.gameObject.tag == "Player")
         {

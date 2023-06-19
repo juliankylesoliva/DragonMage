@@ -594,6 +594,9 @@ public class FormChangingState : State
                     player.stateMachine.TransitionTo(player.stateMachine.PreviousState);
                     player.animationCtrl.GroundJumpAnimation();
                     break;
+                case "Damaged":
+                    player.stateMachine.TransitionTo(player.stateMachine.standingState);
+                    break;
                 default:
                     player.stateMachine.TransitionTo(player.stateMachine.PreviousState);
                     break;
@@ -638,7 +641,7 @@ public class DamagedState : State
     {
         player.rb2d.isKinematic = false;
         player.rb2d.gravityScale = player.jumping.fallingGravity;
-        player.animationCtrl.StandingAnimation();
+        player.animationCtrl.DamageAnimation(player.form.currentMode);
         player.damage.DoKnockback();
     }
 

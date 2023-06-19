@@ -53,6 +53,7 @@ public class PlayerDamage : MonoBehaviour
         damageSource = source;
         StartCoroutine(HitstunTimerCR(baseHitstunTime));
         player.temper.ChangeTemperBy(player.form.currentMode == CharacterMode.MAGE ? mageTemperDamage : dragonTemperDamage);
+        MedalFragment.DropFragments();
     }
 
     public void DoKnockback()
