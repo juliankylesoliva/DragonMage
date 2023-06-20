@@ -40091,6 +40091,7 @@ MonoBehaviour:
   - {fileID: 2064101907}
   - {fileID: 133502805}
   - {fileID: 729257502}
+  fragmentsNeededForMedal: 0
 --- !u!1 &787381798
 GameObject:
   m_ObjectHideFlags: 0
