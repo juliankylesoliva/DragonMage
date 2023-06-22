@@ -37,4 +37,12 @@ public class MedalPickup : MonoBehaviour
             animator.Play("BlankSpin");
         }
     }
+
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.gameObject.tag == "Player")
+        {
+            GameObject.Destroy(this.gameObject);
+        }
+    }
 }

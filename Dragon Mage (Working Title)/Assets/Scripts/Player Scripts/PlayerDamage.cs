@@ -97,7 +97,7 @@ public class PlayerDamage : MonoBehaviour
         player.rb2d.sharedMaterial = normalMaterial;
         player.rb2d.velocity = Vector2.zero;
         player.collisions.SnapToGround();
-
+        
         while (hitstunTimer > 0f)
         {
             hitstunTimer -= Time.deltaTime;

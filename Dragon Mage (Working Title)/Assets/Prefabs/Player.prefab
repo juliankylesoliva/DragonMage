@@ -5782,7 +5782,7 @@ MonoBehaviour:
   dragonTemperDamage: -2
   baseVerticalKnockback: 8
   baseHorizontalKnockback: 6
-  baseHitstunTime: 0.75
+  baseHitstunTime: 0.5
   knockbackMagnitudeEpsilon: 0.8
   postDamageInvulnerabilityTime: 3
   invulnerabilityAlpha: 0.25
