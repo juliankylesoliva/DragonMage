@@ -30,6 +30,7 @@ public class MedalFragment : MonoBehaviour
                 }
             }
 
+            SoundFactory.SpawnSound("object_fragment_pickup", this.transform.position);
             this.gameObject.SetActive(false);
         }
     }

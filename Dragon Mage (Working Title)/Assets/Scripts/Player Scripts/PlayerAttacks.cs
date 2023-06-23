@@ -33,6 +33,7 @@ public class PlayerAttacks : MonoBehaviour
     [SerializeField] float fireTackleTrailSpawnInterval = 0.05f;
 
     [SerializeField] float blastJumpMinVelocityMagnitude = 6f;
+    [SerializeField] float blastJumpMaxFallSpeed = 20f;
     [SerializeField] float blastJumpMinActiveTime = 0.25f;
     [SerializeField] float blastJumpTemperIncreaseInterval = 0.5f;
     [SerializeField] Color blastJumpActiveColor;
@@ -43,6 +44,7 @@ public class PlayerAttacks : MonoBehaviour
 
     public AttackState currentAttackState { get; private set; }
     public bool isFireTackleEndlagCanceled { get; private set; }
+    public float BlastJumpMaxFallSpeed { get { return blastJumpMaxFallSpeed; } }
 
     private MagicBlast projectileRef = null;
 

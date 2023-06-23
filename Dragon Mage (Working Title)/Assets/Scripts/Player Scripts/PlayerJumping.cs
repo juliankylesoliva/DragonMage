@@ -132,9 +132,10 @@ public class PlayerJumping : MonoBehaviour
 
     public void FallingUpdate()
     {
-        if (!player.attacks.isBlastJumpActive && player.rb2d.velocity.y < -fallSpeed)
+        float maxFallSpeed = (player.attacks.isBlastJumpActive ? player.attacks.BlastJumpMaxFallSpeed : fallSpeed);
+        if (player.rb2d.velocity.y < -maxFallSpeed)
         {
-            player.rb2d.velocity = new Vector2(player.rb2d.velocity.x, -fallSpeed);
+            player.rb2d.velocity = new Vector2(player.rb2d.velocity.x, -maxFallSpeed);
         }
     }
 
