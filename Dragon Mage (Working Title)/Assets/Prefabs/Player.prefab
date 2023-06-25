@@ -5760,6 +5760,7 @@ MonoBehaviour:
   fireTackleEndlagColor: {r: 0.801, g: 0.801, b: 0.801, a: 1}
   fireTackleTrailSpawnInterval: 0.33333334
   blastJumpMinVelocityMagnitude: 6
+  blastJumpMaxFallSpeed: 18
   blastJumpMinActiveTime: 0.25
   blastJumpTemperIncreaseInterval: 0.6
   blastJumpActiveColor: {r: 0.72156864, g: 0.35686275, b: 0.76862746, a: 1}
