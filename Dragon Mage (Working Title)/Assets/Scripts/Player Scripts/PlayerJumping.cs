@@ -201,7 +201,7 @@ public class PlayerJumping : MonoBehaviour
 
     public bool CanWallSlide()
     {
-        return (enableWallJumping && player.collisions.CheckDistanceToGround(minimumWallJumpHeight) && !player.collisions.IsGrounded && player.collisions.IsAgainstWall && (player.movement.isFacingRight ? (player.inputVector.x > 0f && player.collisions.IsTouchingWallR) : (player.inputVector.x < 0f && player.collisions.IsTouchingWallL)) && (!player.jumpButtonHeld || !jumpIsHeld || player.rb2d.velocity.y < 0f));
+        return (enableWallJumping && player.collisions.CheckDistanceToGround(minimumWallJumpHeight) && !player.collisions.IsGrounded && player.collisions.IsAgainstWall && !player.collisions.IsIntangibleWall && (player.movement.isFacingRight ? (player.inputVector.x > 0f && player.collisions.IsTouchingWallR) : (player.inputVector.x < 0f && player.collisions.IsTouchingWallL)) && (!player.jumpButtonHeld || !jumpIsHeld || player.rb2d.velocity.y < 0f));
     }
 
     public void WallSlideStart()
@@ -223,7 +223,7 @@ public class PlayerJumping : MonoBehaviour
 
     public bool IsWallSlideCanceled()
     {
-        return (!player.collisions.IsAgainstWall || player.collisions.IsGrounded || (player.inputVector.x * (player.movement.isFacingRight ? 1f : -1f)) <= 0f);
+        return (player.collisions.IsIntangibleWall || !player.collisions.IsAgainstWall || player.collisions.IsGrounded || (player.inputVector.x * (player.movement.isFacingRight ? 1f : -1f)) <= 0f);
     }
 
     public bool CanWallJump()
@@ -256,7 +256,7 @@ public class PlayerJumping : MonoBehaviour
 
     public bool CanWallClimb()
     {
-        return (enableWallClimbing && player.collisions.CheckDistanceToGround(minimumWallClimbHeight) && currentWallClimbTime <= 0f && !player.collisions.IsGrounded && player.collisions.IsAgainstWall && (player.inputVector.x * (player.movement.isFacingRight ? 1f : -1f)) > 0f);
+        return (enableWallClimbing && player.collisions.CheckDistanceToGround(minimumWallClimbHeight) && currentWallClimbTime <= 0f && !player.collisions.IsGrounded && player.collisions.IsAgainstWall && !player.collisions.IsIntangibleWall && (player.inputVector.x * (player.movement.isFacingRight ? 1f : -1f)) > 0f);
     }
 
     public void WallClimbStart()
@@ -292,7 +292,7 @@ public class PlayerJumping : MonoBehaviour
 
     public bool IsWallClimbCanceled()
     {
-        return (currentWallClimbTime <= 0f || player.rb2d.velocity.y <= 0f || player.collisions.IsHeadbonking || !player.collisions.IsAgainstWall || (player.inputVector.x * (player.movement.isFacingRight ? 1f : -1f)) <= 0f);
+        return (currentWallClimbTime <= 0f || player.rb2d.velocity.y <= 0f || player.collisions.IsHeadbonking || player.collisions.IsIntangibleWall || !player.collisions.IsAgainstWall || (player.inputVector.x * (player.movement.isFacingRight ? 1f : -1f)) <= 0f);
     }
 
     public bool CanStartWallVault()

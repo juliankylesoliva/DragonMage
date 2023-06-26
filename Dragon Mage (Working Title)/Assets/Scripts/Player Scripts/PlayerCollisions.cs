@@ -20,6 +20,7 @@ public class PlayerCollisions : MonoBehaviour
     [SerializeField] float slopeBoost = 1f;
     [SerializeField] float ledgeCheckOffset = 0.25f;
     [SerializeField] float groundNormalXThreshold = 0.1f;
+    [SerializeField] LayerMask intangibleWallLayer;
     [SerializeField] LayerMask groundLayer;
     [SerializeField] LayerMask slopeLayer;
     [SerializeField] LayerMask groundDistanceCheckLayer;
@@ -28,6 +29,7 @@ public class PlayerCollisions : MonoBehaviour
     [SerializeField] private bool isAgainstWall = false;
     [SerializeField] private bool isTouchingWallR = false;
     [SerializeField] private bool isTouchingWallL = false;
+    [SerializeField] private bool isIntangibleWall = false;
     [SerializeField] private bool isHeadbonking = false;
     [SerializeField] private bool isOnASlope = false;
 
@@ -35,6 +37,7 @@ public class PlayerCollisions : MonoBehaviour
     public bool IsAgainstWall { get { return isAgainstWall; } }
     public bool IsTouchingWallR { get { return isTouchingWallR; } }
     public bool IsTouchingWallL { get { return isTouchingWallL; } }
+    public bool IsIntangibleWall { get { return isIntangibleWall; } }
     public bool IsHeadbonking { get { return isHeadbonking; } }
     public bool IsOnASlope { get { return isOnASlope; } }
 
@@ -85,10 +88,17 @@ public class PlayerCollisions : MonoBehaviour
         isAgainstWall = false;
         isTouchingWallR = false;
         isTouchingWallL = false;
+        isIntangibleWall = false;
 
         bool firstPass = true;
         foreach (Transform t in wallChecksR)
         {
+            if (!isIntangibleWall)
+            {
+                Collider2D[] intangibleR = Physics2D.OverlapCircleAll(t.position, wallCheckRadius, intangibleWallLayer);
+                isIntangibleWall = (intangibleR.Length > 0 && (!firstPass || !isOnASlope));
+            }
+
             Collider2D[] collidersR = Physics2D.OverlapCircleAll(t.position, wallCheckRadius, groundLayer);
             isTouchingWallR = (collidersR.Length > 0 && (!firstPass || !isOnASlope));
             if (isTouchingWallR) { break; }
@@ -98,6 +108,12 @@ public class PlayerCollisions : MonoBehaviour
         firstPass = true;
         foreach (Transform t in wallChecksL)
         {
+            if (!isIntangibleWall)
+            {
+                Collider2D[] intangibleL = Physics2D.OverlapCircleAll(t.position, wallCheckRadius, intangibleWallLayer);
+                isIntangibleWall = (intangibleL.Length > 0 && (!firstPass || !isOnASlope));
+            }
+
             Collider2D[] collidersL = Physics2D.OverlapCircleAll(t.position, wallCheckRadius, groundLayer);
             isTouchingWallL = (collidersL.Length > 0 && (!firstPass || !isOnASlope));
             if (isTouchingWallL) { break; }

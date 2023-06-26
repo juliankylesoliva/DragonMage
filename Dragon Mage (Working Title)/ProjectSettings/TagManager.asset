@@ -22,8 +22,8 @@ TagManager:
   - Blocks
   - Slopes
   - Enemy
-  - EnemyProojectile
-  - 
+  - EnemyProjectile
+  - IntangibleWall
   - 
   - 
   - 

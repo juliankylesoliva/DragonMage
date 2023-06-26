@@ -5574,6 +5574,9 @@ MonoBehaviour:
   slopeBoost: 4
   ledgeCheckOffset: 0.25
   groundNormalXThreshold: 0.1
+  intangibleWallLayer:
+    serializedVersion: 2
+    m_Bits: 8192
   groundLayer:
     serializedVersion: 2
     m_Bits: 576
