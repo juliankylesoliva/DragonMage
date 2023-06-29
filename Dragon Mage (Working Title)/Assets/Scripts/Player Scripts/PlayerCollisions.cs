@@ -162,6 +162,13 @@ public class PlayerCollisions : MonoBehaviour
         return (isGrounded && colliders.Length <= 0);
     }
 
+    public Vector2 GetDirectGroundNormal()
+    {
+        RaycastHit2D hit2 = Physics2D.Raycast(groundCheckObj.position, -Vector2.up, slopeCheckDistance, groundDistanceCheckLayer);
+        if (hit2.collider != null && (hit2.normal.x < -groundNormalXThreshold || hit2.normal.x > groundNormalXThreshold)) { return hit2.normal; }
+        return Vector2.up;
+    }
+
     public Vector2 GetGroundNormal()
     {
         RaycastHit2D hit = Physics2D.Raycast((player.movement.isFacingRight ? normalCheckR : normalCheckL).position, -Vector2.up, slopeCheckDistance, groundDistanceCheckLayer);

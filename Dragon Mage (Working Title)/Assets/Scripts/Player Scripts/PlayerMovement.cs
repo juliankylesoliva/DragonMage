@@ -65,6 +65,15 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+    public void ApplySlopeResistance()
+    {
+        float angleBetweenNormal = Vector2.Angle(Vector2.up, player.collisions.GetDirectGroundNormal());
+        angleBetweenNormal *= Mathf.Deg2Rad;
+        Vector2 slopeResist = (player.rb2d.mass * Physics2D.gravity * player.rb2d.gravityScale * Mathf.Sin(angleBetweenNormal));
+
+        player.rb2d.AddForce(-slopeResist);
+    }
+
     public void FacingDirection()
     {
         if (player.form.isChangingForm || player.attacks.isFireTackleActive || player.jumping.isWallJumpCooldownActive || (!changeFacingDirectionMidair && !player.collisions.IsGrounded && !player.collisions.IsOnASlope) || (player.jumping.currentAirStallTime > 0f && player.jumping.currentAirStallTime < player.jumping.maxAirStallTime)) { return; }

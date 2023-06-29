@@ -5260,7 +5260,7 @@ Transform:
   - {fileID: 6792052323689616064}
   - {fileID: 6792052324477078076}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &6792052323780996505
 MonoBehaviour:
@@ -5590,6 +5590,7 @@ MonoBehaviour:
   isAgainstWall: 0
   isTouchingWallR: 0
   isTouchingWallL: 0
+  isIntangibleWall: 0
   isHeadbonking: 0
   isOnASlope: 0
 --- !u!114 &6792052323780996487
