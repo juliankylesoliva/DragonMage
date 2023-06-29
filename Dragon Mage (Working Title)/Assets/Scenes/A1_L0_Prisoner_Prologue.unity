@@ -40076,7 +40076,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerReference: {fileID: 6792052323594762922}
-  startingRoom: {fileID: 2064101907}
+  startingRoom: {fileID: 1604748344}
   startingRoomEntranceIndex: 0
   roomList:
   - {fileID: 1604748344}
