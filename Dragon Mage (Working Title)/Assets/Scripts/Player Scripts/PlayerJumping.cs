@@ -94,7 +94,7 @@ public class PlayerJumping : MonoBehaviour
 
         LandingReset();
 
-        bool didPlayerSpeedHop = (enableSpeedHopping && (player.rb2d.velocity.x * player.inputVector.x) > 0f && Mathf.Abs(player.rb2d.velocity.x) > player.movement.topSpeed && player.buffers.highestSpeedBuffer >= Mathf.Abs(player.rb2d.velocity.x));
+        bool didPlayerSpeedHop = (enableSpeedHopping && (player.rb2d.velocity.x * player.inputVector.x) > 0f && Mathf.Abs(player.rb2d.velocity.x) > player.movement.topSpeed);
         float horizontalResult = (didPlayerSpeedHop ? Mathf.Max(player.buffers.highestSpeedBuffer, Mathf.Abs(player.rb2d.velocity.x)) : Mathf.Abs(player.rb2d.velocity.x));
 
         GameObject tempObj = EffectFactory.SpawnEffect(didPlayerSpeedHop && Mathf.Abs(horizontalResult) >= (Mathf.Abs(player.rb2d.velocity.x) + 0.25f) ? "SpeedHopSpark" : "JumpSpark", player.collisions.IsOnASlope ? player.collisions.GetClosestGroundPoint() : player.collisions.GetSimpleGroundPoint());
