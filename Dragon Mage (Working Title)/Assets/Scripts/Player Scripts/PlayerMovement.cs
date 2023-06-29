@@ -96,12 +96,13 @@ public class PlayerMovement : MonoBehaviour
                 {
                     // player.rb2d.velocity = new Vector2(player.rb2d.velocity.x + ((player.collisions.IsGrounded ? acceleration : airAcceleration) * player.inputVector.x * Time.deltaTime), player.rb2d.velocity.y);
 
+                    ApplySlopeResistance();
+
                     player.rb2d.velocity += ((player.stateMachine.CurrentState == player.stateMachine.runningState && (player.collisions.IsGrounded || player.collisions.IsOnASlope) ? player.collisions.GetRightVector() : Vector2.right) * (player.collisions.IsGrounded || player.collisions.IsOnASlope ? acceleration : airAcceleration) * player.inputVector.x * Time.deltaTime);
                     if (Mathf.Abs(player.rb2d.velocity.x) > topSpeed)
                     {
                         player.rb2d.velocity = new Vector2(topSpeed * player.inputVector.x, player.rb2d.velocity.y);
                     }
-
                 }
                 else if ((player.collisions.IsGrounded || player.collisions.IsOnASlope) && Mathf.Abs(player.rb2d.velocity.x) > topSpeed)
                 {
@@ -109,12 +110,12 @@ public class PlayerMovement : MonoBehaviour
                     {
                         if (player.rb2d.velocity.x > 0f)
                         {
-                            player.rb2d.velocity -= (player.collisions.GetRightVector() * deceleration * Time.deltaTime);
+                            player.rb2d.velocity -= (player.collisions.GetRightVector().normalized * deceleration * Time.deltaTime);
                             if (player.rb2d.velocity.x < topSpeed) { player.rb2d.velocity = new Vector2(topSpeed, player.rb2d.velocity.y); }
                         }
                         else
                         {
-                            player.rb2d.velocity += (player.collisions.GetRightVector() * deceleration * Time.deltaTime);
+                            player.rb2d.velocity += (player.collisions.GetRightVector().normalized * deceleration * Time.deltaTime);
                             if (player.rb2d.velocity.x > topSpeed) { player.rb2d.velocity = new Vector2(-topSpeed, player.rb2d.velocity.y); }
                         }
                     }
@@ -125,15 +126,18 @@ public class PlayerMovement : MonoBehaviour
             {
                 if (player.rb2d.velocity.x != 0f)
                 {
-                    player.rb2d.velocity += ((player.collisions.IsGrounded || player.collisions.IsOnASlope ? player.collisions.GetRightVector() : Vector2.right) * (player.collisions.IsGrounded ? turningSpeed : airTurningSpeed) * player.inputVector.x * Time.deltaTime);
+                    ApplySlopeResistance();
+                    player.rb2d.velocity += ((player.collisions.IsGrounded || player.collisions.IsOnASlope ? player.collisions.GetRightVector().normalized : Vector2.right) * (player.collisions.IsGrounded ? turningSpeed : airTurningSpeed) * player.inputVector.x * Time.deltaTime);
                 }
             }
         }
         else
         {
+            ApplySlopeResistance();
+
             if (player.rb2d.velocity.x > 0f)
             {
-                player.rb2d.velocity -= ((player.collisions.IsGrounded || player.collisions.IsOnASlope ? player.collisions.GetRightVector() : Vector2.right) * (player.collisions.IsGrounded ? deceleration : airDeceleration) * Time.deltaTime);
+                player.rb2d.velocity -= ((player.collisions.IsGrounded || player.collisions.IsOnASlope ? player.collisions.GetRightVector().normalized : Vector2.right) * (player.collisions.IsGrounded ? deceleration : airDeceleration) * Time.deltaTime);
                 if (player.rb2d.velocity.x < 0f)
                 {
                     player.rb2d.velocity = new Vector2(0f, player.rb2d.velocity.y);
@@ -141,7 +145,7 @@ public class PlayerMovement : MonoBehaviour
             }
             else if (player.rb2d.velocity.x < 0f)
             {
-                player.rb2d.velocity += ((player.collisions.IsGrounded || player.collisions.IsOnASlope ? player.collisions.GetRightVector() : Vector2.right) * (player.collisions.IsGrounded ? deceleration : airDeceleration) * Time.deltaTime);
+                player.rb2d.velocity += ((player.collisions.IsGrounded || player.collisions.IsOnASlope ? player.collisions.GetRightVector().normalized : Vector2.right) * (player.collisions.IsGrounded ? deceleration : airDeceleration) * Time.deltaTime);
                 if (player.rb2d.velocity.x > 0f)
                 {
                     player.rb2d.velocity = new Vector2(0f, player.rb2d.velocity.y);

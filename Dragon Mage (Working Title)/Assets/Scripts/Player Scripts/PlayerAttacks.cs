@@ -294,6 +294,7 @@ public class PlayerAttacks : MonoBehaviour
                 Vector2 resultVector = (player.collisions.GetRightVector().normalized * (firedProjectile ? -fireTackleRecoilStrength : horizontalResult));
                 player.rb2d.velocity = ((player.movement.isFacingRight && player.collisions.IsTouchingWallR) || (!player.movement.isFacingRight && player.collisions.IsTouchingWallL) || player.collisions.CheckIfNearLedge() ? Vector2.zero : Vector2.Lerp(resultVector, Vector2.zero, (fireTackleEndlag - endlagTimer) / fireTackleEndlag));
                 if (player.collisions.IsOnASlope) { player.movement.ApplySlopeResistance(); }
+                if (!player.collisions.IsGrounded && !player.collisions.IsOnASlope) { player.collisions.SnapToGround(); }
             }
             else if (bumped && (player.collisions.IsGrounded || player.collisions.IsOnASlope) && endlagTimer < fireTackleEndlagCancel)
             {

@@ -24,6 +24,7 @@ public class PlayerCollisions : MonoBehaviour
     [SerializeField] LayerMask groundLayer;
     [SerializeField] LayerMask slopeLayer;
     [SerializeField] LayerMask groundDistanceCheckLayer;
+    [SerializeField] LayerMask ledgeCheckLayer;
 
     [SerializeField] private bool isGrounded = false;
     [SerializeField] private bool isAgainstWall = false;
@@ -158,8 +159,8 @@ public class PlayerCollisions : MonoBehaviour
 
     public bool CheckIfNearLedge()
     {
-        Collider2D[] colliders = Physics2D.OverlapCircleAll(groundCheckObj.position + ((player.movement.isFacingRight ? 1f : -1f) * ledgeCheckOffset * Vector3.right), groundCheckRadius, groundLayer);
-        return (isGrounded && colliders.Length <= 0);
+        RaycastHit2D hit = Physics2D.Raycast(groundCheckObj.position + (player.movement.GetFacingValue() * ledgeCheckOffset * Vector3.right), -Vector2.up, slopeCheckDistance, ledgeCheckLayer);
+        return hit.collider == null;
     }
 
     public Vector2 GetDirectGroundNormal()
@@ -188,9 +189,9 @@ public class PlayerCollisions : MonoBehaviour
         return -Vector2.up;
     }
 
-    public Vector2 GetRightVector()
+    public Vector2 GetRightVector(bool direct = false)
     {
-        Vector2 normal = GetGroundNormal();
+        Vector2 normal = (direct ? GetDirectGroundNormal() : GetGroundNormal());
         if (normal.y != 0f)
         {
             float v1 = 1f;
@@ -200,7 +201,7 @@ public class PlayerCollisions : MonoBehaviour
             Vector2 result = new Vector2(v1, v2);
             result = result.normalized;
             float facingToNormalX = (normal.x * (player.movement.isFacingRight ? 1f : -1f));
-            result *= ((normal.x < -groundNormalXThreshold || normal.x > groundNormalXThreshold) && facingToNormalX != 0f ? slopeBoost : 1f);
+            result *= (isGrounded && !isOnASlope && (normal.x < -groundNormalXThreshold || normal.x > groundNormalXThreshold) && facingToNormalX != 0f ? slopeBoost : 1f);
             return result;
         }
         return Vector2.right;

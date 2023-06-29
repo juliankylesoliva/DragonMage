@@ -5572,6 +5572,7 @@ MonoBehaviour:
   headbonkCheckRadius: 0.125
   slopeCheckDistance: 0.5
   slopeBoost: 4
+  elevationBoost: 2.5
   ledgeCheckOffset: 0.25
   groundNormalXThreshold: 0.1
   intangibleWallLayer:
@@ -5586,6 +5587,9 @@ MonoBehaviour:
   groundDistanceCheckLayer:
     serializedVersion: 2
     m_Bits: 3648
+  ledgeCheckLayer:
+    serializedVersion: 2
+    m_Bits: 1600
   isGrounded: 0
   isAgainstWall: 0
   isTouchingWallR: 0
