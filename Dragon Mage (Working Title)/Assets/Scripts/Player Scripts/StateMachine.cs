@@ -226,17 +226,18 @@ public class StandingState : State
 
     public override void Enter()
     {
-        player.rb2d.isKinematic = true;
+        //player.rb2d.isKinematic = true;
         player.rb2d.velocity = Vector2.zero;
         player.jumping.LandingReset();
-        if (player.collisions.IsOnASlope) { player.collisions.SnapToGround(); }
+        if (player.collisions.IsOnASlope) { /*player.collisions.SnapToGround();*/ }
     }
 
     public override void Update()
     {
         player.rb2d.velocity = Vector2.zero;
-        if (CheckFormChangeInput() || CheckRunInput() || CheckJumpInput() || CheckFireTackleInput() || CheckSuddenRise() || CheckSuddenFall() || CheckSuddenMovement() || CheckIfDamaged()) { return; }
+        player.movement.ApplySlopeResistance();
         player.animationCtrl.StandingAnimation();
+        if (CheckFormChangeInput() || CheckRunInput() || CheckJumpInput() || CheckFireTackleInput() || CheckSuddenRise() || CheckSuddenFall() || CheckSuddenMovement() || CheckIfDamaged()) { return; }
     }
 
     public override void Exit()
@@ -305,7 +306,7 @@ public class JumpingState : State
 
     private bool CheckIfGrounded()
     {
-        if ((player.collisions.IsGrounded || player.collisions.IsOnASlope) && player.rb2d.velocity.y <= (player.collisions.GetRightVector(true).y * player.movement.GetFacingValue()))
+        if ((player.collisions.IsGrounded || player.collisions.IsOnASlope) && player.rb2d.velocity.y <= 0f)
         {
             player.stateMachine.TransitionTo(player.rb2d.velocity.x == 0f ? player.stateMachine.standingState : player.stateMachine.runningState);
             return true;
@@ -315,7 +316,7 @@ public class JumpingState : State
 
     private bool CheckIfFalling()
     {
-        if (player.rb2d.velocity.y <= player.collisions.GetRightVector().y)
+        if (player.rb2d.velocity.y <= 0f)
         {
             player.stateMachine.TransitionTo(player.stateMachine.fallingState);
             return true;

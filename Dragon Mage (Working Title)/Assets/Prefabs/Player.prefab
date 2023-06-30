@@ -5567,14 +5567,14 @@ MonoBehaviour:
   headbonkCheckObj: {fileID: 6792052323461160992}
   normalCheckR: {fileID: 6792052323687578736}
   normalCheckL: {fileID: 6792052324587976484}
-  groundCheckRadius: 0.05
+  groundCheckRadius: 0.125
   wallCheckRadius: 0.05
   headbonkCheckRadius: 0.125
-  slopeCheckDistance: 0.5
+  slopeCheckDistance: 0.25
   slopeBoost: 4
-  elevationBoost: 2.5
   ledgeCheckOffset: 0.25
   groundNormalXThreshold: 0.1
+  maxSlopeAngle: 45
   intangibleWallLayer:
     serializedVersion: 2
     m_Bits: 8192
@@ -5590,6 +5590,8 @@ MonoBehaviour:
   ledgeCheckLayer:
     serializedVersion: 2
     m_Bits: 1600
+  noFriction: {fileID: 6200000, guid: 9406f10bd3650fe409c8dc01b66aa54d, type: 2}
+  fullFriction: {fileID: 6200000, guid: 2557c9a9274e1c146a689f606d3ad402, type: 2}
   isGrounded: 0
   isAgainstWall: 0
   isTouchingWallR: 0
@@ -5597,6 +5599,7 @@ MonoBehaviour:
   isIntangibleWall: 0
   isHeadbonking: 0
   isOnASlope: 0
+  canWalkOnSlope: 1
 --- !u!114 &6792052323780996487
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -83,7 +83,7 @@ public class PlayerJumping : MonoBehaviour
 
     public bool CanGroundJump()
     {
-        return ((player.collisions.IsGrounded || player.collisions.IsOnASlope || player.buffers.coyoteTimeLeft > 0f) && player.buffers.jumpBufferTimeLeft > 0f);
+        return (player.stateMachine.CurrentState.name != "Jumping" && player.collisions.CanWalkOnSlope && (player.collisions.IsGrounded || player.collisions.IsOnASlope || player.buffers.coyoteTimeLeft > 0f) && player.buffers.jumpBufferTimeLeft > 0f);
     }
 
     public void GroundJumpStart()
