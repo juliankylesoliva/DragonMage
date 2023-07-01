@@ -27,6 +27,7 @@ public class PlayerAttacks : MonoBehaviour
     [SerializeField] float fireTackleRecoilStrength = 4f;
     [SerializeField] float fireTackleEndlag = 0.25f;
     [SerializeField] float fireTackleEndlagCancel = 0.125f;
+    [SerializeField] float fireTackleMaxSlopeSnapDistance = 1f;
     [SerializeField] Color fireTackleStartupColor;
     [SerializeField] Color fireTackleActiveColor;
     [SerializeField] Color fireTackleEndlagColor;
@@ -225,7 +226,7 @@ public class PlayerAttacks : MonoBehaviour
             else
             {
                 player.rb2d.velocity = (player.collisions.GetRightVector().normalized * (!player.collisions.IsAgainstWall ? horizontalResult : 0f));
-                player.collisions.SnapToGround();
+                player.collisions.SnapToGround(player.collisions.IsGrounded || player.collisions.IsOnASlope, fireTackleMaxSlopeSnapDistance);
             }
 
             if (player.collisions.IsGrounded && trailSpawnTimer >= 0f)
@@ -293,13 +294,11 @@ public class PlayerAttacks : MonoBehaviour
             {
                 Vector2 resultVector = (player.collisions.GetRightVector().normalized * (firedProjectile ? -fireTackleRecoilStrength : horizontalResult));
                 player.rb2d.velocity = ((player.movement.isFacingRight && player.collisions.IsTouchingWallR) || (!player.movement.isFacingRight && player.collisions.IsTouchingWallL) || player.collisions.CheckIfNearLedge() ? Vector2.zero : Vector2.Lerp(resultVector, Vector2.zero, (fireTackleEndlag - endlagTimer) / fireTackleEndlag));
-                if (player.collisions.IsOnASlope) { player.movement.ApplySlopeResistance(); }
-                if (!player.collisions.IsGrounded && !player.collisions.IsOnASlope) { player.collisions.SnapToGround(); }
+                if (player.collisions.IsOnASlope) { player.movement.ApplySlopeResistance(); player.collisions.SnapToGround(false); }
             }
             else if (bumped && (player.collisions.IsGrounded || player.collisions.IsOnASlope) && endlagTimer < fireTackleEndlagCancel)
             {
                 player.rb2d.velocity = Vector2.zero;
-                if (player.collisions.IsOnASlope) { player.collisions.SnapToGround(); }
             }
             else { /* Nothing */ }
 

@@ -23,6 +23,8 @@ public class PlayerMovement : MonoBehaviour
     private float prevXVelocity = 0f;
     private float deltaXVelocity = 0f;
 
+    [SerializeField] float slopeSnapDistanceThreshold = 0.1f;
+    [SerializeField] float maxMovingSlopeSnapDistance = 1f;
     [SerializeField, Range(0f, 1f)] float topSpeedTurnaroundPercent = 0.5f; 
     [SerializeField] UnityEvent turnaroundEvent;
 
@@ -87,21 +89,6 @@ public class PlayerMovement : MonoBehaviour
     public void Movement()
     {
         if (player.form.isChangingForm || player.jumping.isWallJumpCooldownActive || player.attacks.isFireTackleActive) { return; }
-
-        /*
-        if (player.collisions.IsGrounded && !player.collisions.IsOnASlope && player.stateMachine.CurrentState.name != "Jumping")
-        {
-            GroundMovement();
-        }
-        else if (player.collisions.IsGrounded && player.collisions.IsOnASlope && player.stateMachine.CurrentState.name != "Jumping" && player.collisions.CanWalkOnSlope)
-        {
-            SlopeMovement();
-        }
-        else
-        {
-            AirMovement();
-        }
-        */
 
         if (player.inputVector.x != 0f)
         {
@@ -170,168 +157,10 @@ public class PlayerMovement : MonoBehaviour
             }
             else { /* Nothing */ }
         }
-    }
 
-    private void GroundMovement()
-    {
-        if (player.inputVector.x != 0f)
+        if (player.stateMachine.CurrentState.name == "Running" && (player.collisions.IsGrounded || player.collisions.IsOnASlope) && player.rb2d.velocity.y > 0f && player.collisions.CheckDistanceToGround(slopeSnapDistanceThreshold))
         {
-            if (player.collisions.IsAgainstWall && (player.inputVector.x * (isFacingRight ? 1f : -1f)) > 0f || (player.inputVector.x > 0f ? player.collisions.IsTouchingWallR : player.collisions.IsTouchingWallL))
-            {
-                player.rb2d.velocity = Vector2.zero;
-            }
-            else if ((player.rb2d.velocity.x * player.inputVector.x) >= 0f)
-            {
-                if (Mathf.Abs(player.rb2d.velocity.x) < topSpeed)
-                {
-                    player.rb2d.velocity += (Vector2.right * acceleration * player.inputVector.x * Time.deltaTime);
-                    if (Mathf.Abs(player.rb2d.velocity.x) > topSpeed)
-                    {
-                        player.rb2d.velocity = new Vector2(player.inputVector.x * topSpeed, 0f);
-                    }
-                }
-                else if (Mathf.Abs(player.rb2d.velocity.x) > topSpeed)
-                {
-                    player.rb2d.velocity += (-player.inputVector.x * Vector2.right * deceleration * Time.deltaTime);
-                    if (Mathf.Abs(player.rb2d.velocity.x) < topSpeed) { player.rb2d.velocity = new Vector2(player.inputVector.x * topSpeed, 0f); }
-                }
-                else { /* Nothing */ }
-            }
-            else
-            {
-                if (player.rb2d.velocity.x != 0f)
-                {
-                    player.rb2d.velocity += (Vector2.right * turningSpeed * player.inputVector.x * Time.deltaTime);
-                }
-            }
-        }
-        else
-        {
-            if (player.rb2d.velocity.x > 0f)
-            {
-                player.rb2d.velocity -= (Vector2.right * deceleration * Time.deltaTime);
-                if (player.rb2d.velocity.x < 0f)
-                {
-                    player.rb2d.velocity = Vector2.zero;
-                }
-            }
-            else if (player.rb2d.velocity.x < 0f)
-            {
-                player.rb2d.velocity += (Vector2.right * deceleration * Time.deltaTime);
-                if (player.rb2d.velocity.x > 0f)
-                {
-                    player.rb2d.velocity = Vector2.zero;
-                }
-            }
-            else { /* Nothing */ }
-        }
-        player.rb2d.velocity = new Vector2(player.rb2d.velocity.x, 0f);
-    }
-
-    private void SlopeMovement()
-    {
-        if (player.collisions.CanWalkOnSlope) { ApplySlopeResistance(); }
-
-        if (player.inputVector.x != 0f)
-        {
-            if (player.collisions.IsAgainstWall && (player.inputVector.x * (isFacingRight ? 1f : -1f)) > 0f || (player.inputVector.x > 0f ? player.collisions.IsTouchingWallR : player.collisions.IsTouchingWallL))
-            {
-                player.rb2d.velocity = Vector2.zero;
-            }
-            else if ((player.rb2d.velocity.x * player.inputVector.x) >= 0f)
-            {
-                if (Mathf.Abs(player.rb2d.velocity.x) < topSpeed)
-                {
-                    player.rb2d.velocity += (player.collisions.GetRightVector() * acceleration * player.inputVector.x * Time.deltaTime);
-                    if (player.rb2d.velocity.magnitude > topSpeed)
-                    {
-                        player.rb2d.velocity = (player.inputVector.x * topSpeed * player.collisions.GetRightVector());
-                    }
-                }
-                else if (Mathf.Abs(player.rb2d.velocity.x) > topSpeed)
-                {
-                    player.rb2d.velocity += (-player.inputVector.x * player.collisions.GetRightVector() * deceleration * Time.deltaTime);
-                    if (player.rb2d.velocity.magnitude < topSpeed) { player.rb2d.velocity = (player.inputVector.x * topSpeed * player.collisions.GetRightVector()); }
-                }
-                else { /* Nothing */ }
-            }
-            else
-            {
-                if (player.rb2d.velocity.magnitude != 0f)
-                {
-                    player.rb2d.velocity += (player.collisions.GetRightVector() * turningSpeed * player.inputVector.x * Time.deltaTime);
-                }
-            }
-        }
-        else
-        {
-            if (player.rb2d.velocity.x > 0f)
-            {
-                player.rb2d.velocity -= (player.collisions.GetRightVector() * deceleration * Time.deltaTime);
-                if (player.rb2d.velocity.x < 0f)
-                {
-                    player.rb2d.velocity = Vector2.zero;
-                }
-            }
-            else if (player.rb2d.velocity.x < 0f)
-            {
-                player.rb2d.velocity += (player.collisions.GetRightVector() * deceleration * Time.deltaTime);
-                if (player.rb2d.velocity.x > 0f)
-                {
-                    player.rb2d.velocity = Vector2.zero;
-                }
-            }
-            else { /* Nothing */ }
-        }
-    }
-
-    private void AirMovement()
-    {
-        if (player.inputVector.x != 0f)
-        {
-            if (player.collisions.IsAgainstWall && (player.inputVector.x * (isFacingRight ? 1f : -1f)) > 0f || (player.inputVector.x > 0f ? player.collisions.IsTouchingWallR : player.collisions.IsTouchingWallL))
-            {
-                player.rb2d.velocity = new Vector2(0f, player.rb2d.velocity.y);
-            }
-            else if ((player.rb2d.velocity.x * player.inputVector.x) >= 0f)
-            {
-                if (Mathf.Abs(player.rb2d.velocity.x) < topSpeed)
-                {
-                    player.rb2d.velocity += (Vector2.right * airAcceleration * player.inputVector.x * Time.deltaTime);
-                    if (Mathf.Abs(player.rb2d.velocity.x) > topSpeed)
-                    {
-                        player.rb2d.velocity = new Vector2(topSpeed * player.inputVector.x, player.rb2d.velocity.y);
-                    }
-                }
-                else { /* Nothing */ }
-            }
-            else
-            {
-                if (player.rb2d.velocity.x != 0f)
-                {
-                    player.rb2d.velocity += (Vector2.right * airTurningSpeed * player.inputVector.x * Time.deltaTime);
-                }
-            }
-        }
-        else
-        {
-            if (player.rb2d.velocity.x > 0f)
-            {
-                player.rb2d.velocity -= (Vector2.right * airDeceleration * Time.deltaTime);
-                if (player.rb2d.velocity.x < 0f)
-                {
-                    player.rb2d.velocity = new Vector2(0f, player.rb2d.velocity.y);
-                }
-            }
-            else if (player.rb2d.velocity.x < 0f)
-            {
-                player.rb2d.velocity += (Vector2.right * airDeceleration * Time.deltaTime);
-                if (player.rb2d.velocity.x > 0f)
-                {
-                    player.rb2d.velocity = new Vector2(0f, player.rb2d.velocity.y);
-                }
-            }
-            else { /* Nothing */ }
+            player.collisions.SnapToGround(false, maxMovingSlopeSnapDistance);
         }
     }
 

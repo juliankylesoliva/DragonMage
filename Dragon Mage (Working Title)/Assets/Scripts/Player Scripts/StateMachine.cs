@@ -161,7 +161,7 @@ public abstract class State : IState
 
     protected bool CheckSuddenFall()
     {
-        if (!player.collisions.IsGrounded && !player.collisions.IsOnASlope && player.buffers.coyoteTimeLeft <= 0f && player.rb2d.velocity.y <= 0f)
+        if (!player.collisions.IsGrounded && !player.collisions.IsOnASlope && player.rb2d.velocity.y <= 0f)
         {
             player.stateMachine.TransitionTo(player.stateMachine.fallingState);
             return true;
@@ -171,7 +171,7 @@ public abstract class State : IState
 
     protected bool CheckSuddenRise()
     {
-        if (!player.collisions.IsGrounded && !player.collisions.IsOnASlope && player.buffers.coyoteTimeLeft <= 0f && player.rb2d.velocity.y > 0f)
+        if (!player.collisions.IsGrounded && !player.collisions.IsOnASlope && player.rb2d.velocity.y > 0f)
         {
             player.stateMachine.TransitionTo(player.stateMachine.jumpingState);
             return true;
@@ -226,23 +226,24 @@ public class StandingState : State
 
     public override void Enter()
     {
-        //player.rb2d.isKinematic = true;
-        player.rb2d.velocity = Vector2.zero;
         player.jumping.LandingReset();
-        if (player.collisions.IsOnASlope) { /*player.collisions.SnapToGround();*/ }
     }
 
     public override void Update()
     {
-        player.rb2d.velocity = Vector2.zero;
-        player.movement.ApplySlopeResistance();
         player.animationCtrl.StandingAnimation();
+        if (player.collisions.IsOnASlope)
+        {
+            player.collisions.SnapToGround(true);
+            player.rb2d.velocity = Vector2.zero;
+            player.movement.ApplySlopeResistance();
+        }
         if (CheckFormChangeInput() || CheckRunInput() || CheckJumpInput() || CheckFireTackleInput() || CheckSuddenRise() || CheckSuddenFall() || CheckSuddenMovement() || CheckIfDamaged()) { return; }
     }
 
     public override void Exit()
     {
-        player.rb2d.isKinematic = false;
+        
     }
 }
 
@@ -602,6 +603,10 @@ public class FormChangingState : State
                     player.stateMachine.TransitionTo(player.stateMachine.PreviousState);
                     break;
             }
+        }
+        else
+        {
+            player.rb2d.velocity = Vector2.zero;
         }
     }
 

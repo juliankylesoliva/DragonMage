@@ -83,7 +83,7 @@ public class PlayerJumping : MonoBehaviour
 
     public bool CanGroundJump()
     {
-        return (player.stateMachine.CurrentState.name != "Jumping" && player.collisions.CanWalkOnSlope && (player.collisions.IsGrounded || player.collisions.IsOnASlope || player.buffers.coyoteTimeLeft > 0f) && player.buffers.jumpBufferTimeLeft > 0f);
+        return (player.stateMachine.CurrentState.name != "Jumping" && (player.collisions.IsGrounded || player.collisions.IsOnASlope || player.buffers.coyoteTimeLeft > 0f) && player.buffers.jumpBufferTimeLeft > 0f);
     }
 
     public void GroundJumpStart()
@@ -97,7 +97,7 @@ public class PlayerJumping : MonoBehaviour
         bool didPlayerSpeedHop = (enableSpeedHopping && (player.rb2d.velocity.x * player.inputVector.x) > 0f && Mathf.Abs(player.rb2d.velocity.x) > player.movement.topSpeed);
         float horizontalResult = (didPlayerSpeedHop ? Mathf.Max(player.buffers.highestSpeedBuffer, Mathf.Abs(player.rb2d.velocity.x)) : Mathf.Abs(player.rb2d.velocity.x));
 
-        GameObject tempObj = EffectFactory.SpawnEffect(didPlayerSpeedHop && Mathf.Abs(horizontalResult) >= (Mathf.Abs(player.rb2d.velocity.x) + 0.25f) ? "SpeedHopSpark" : "JumpSpark", player.collisions.IsOnASlope ? player.collisions.GetClosestGroundPoint() : player.collisions.GetSimpleGroundPoint());
+        GameObject tempObj = EffectFactory.SpawnEffect(didPlayerSpeedHop ? "SpeedHopSpark" : "JumpSpark", player.collisions.IsOnASlope ? player.collisions.GetClosestGroundPoint() : player.collisions.GetSimpleGroundPoint());
         SpriteRenderer tempSprite = tempObj.GetComponent<SpriteRenderer>();
         if (tempSprite != null) { tempSprite.flipX = !player.movement.isFacingRight; }
         tempObj.transform.up = player.collisions.GetGroundNormal();
@@ -119,7 +119,7 @@ public class PlayerJumping : MonoBehaviour
             if (!player.attacks.isBlastJumpActive && jumpIsHeld && player.collisions.IsHeadbonking)
             {
                 jumpIsHeld = false;
-                player.rb2d.velocity = new Vector2(Mathf.Abs(player.rb2d.velocity.x) <= player.movement.topSpeed ? player.rb2d.velocity.x : player.movement.topSpeed * (player.movement.isFacingRight ? 1f : -1f), 0f);
+                player.rb2d.velocity = new Vector2(Mathf.Abs(player.rb2d.velocity.x) <= player.movement.topSpeed ? player.rb2d.velocity.x : player.movement.topSpeed * player.movement.GetFacingValue(), 0f);
             }
 
             if (enableVariableJumps && !jumpIsHeld)
@@ -141,7 +141,7 @@ public class PlayerJumping : MonoBehaviour
 
     public bool CanGlide()
     {
-        return (enableAirStalling && (player.rb2d.velocity.y <= 0f || player.technicalButtonHeld) && currentAirStallTime <= player.buffers.EarlyGlideBufferTime && player.collisions.CheckDistanceToGround(minimumAirStallHeight) && player.jumpButtonHeld);
+        return (enableAirStalling && (player.buffers.coyoteTimeLeft <= 0f) && (player.rb2d.velocity.y <= 0f || player.technicalButtonHeld) && currentAirStallTime <= player.buffers.EarlyGlideBufferTime && player.collisions.CheckDistanceToGround(minimumAirStallHeight) && player.jumpButtonHeld);
     }
 
     public void GlideStart()
@@ -363,7 +363,7 @@ public class PlayerJumping : MonoBehaviour
         tempObj.transform.localScale = new Vector3(resultScale, resultScale, 1f);
 
         player.transform.position += (Vector3.right * (player.movement.isFacingRight ? 1f : -1f) * 0.25f);
-        player.collisions.SnapToGround();
+        player.collisions.SnapToGround(false);
         player.rb2d.gravityScale = fallingGravity;
         player.rb2d.velocity = new Vector2(storedWallClimbSpeed * player.inputVector.x, 0f);
     }

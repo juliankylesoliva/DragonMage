@@ -23,9 +23,11 @@ public class BlastJumpHitbox : MonoBehaviour
 
     void Update()
     {
+        if (PauseHandler.isPaused) { return; }
+
         if (player.attacks.isBlastJumpActive)
         {
-            hitboxCollider.offset = (defaultOffset + (Vector2.right * (player.movement.isFacingRight ? facingDirectionOffset: -facingDirectionOffset)) + (player.rb2d.velocity * velocityLookaheadFrames * Time.deltaTime));
+            hitboxCollider.offset = (defaultOffset + (Vector2.right * (player.movement.isFacingRight ? facingDirectionOffset : -facingDirectionOffset)) + (player.rb2d.velocity * velocityLookaheadFrames * Time.deltaTime));
         }
         else
         {

@@ -47,17 +47,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damageType: 3
-  hitboxOffset: 0.85
-  framesToChangeSprite: 3
-  upHitboxSprites:
-  - {fileID: -1116206206, guid: d38f6fa363f867d49ac47a304d0ff306, type: 3}
-  - {fileID: -1078970694, guid: d38f6fa363f867d49ac47a304d0ff306, type: 3}
-  forwardHitboxSprites:
-  - {fileID: -441651936, guid: d38f6fa363f867d49ac47a304d0ff306, type: 3}
-  - {fileID: -1872600658, guid: d38f6fa363f867d49ac47a304d0ff306, type: 3}
-  downHitboxSprites:
-  - {fileID: -673927449, guid: d38f6fa363f867d49ac47a304d0ff306, type: 3}
-  - {fileID: 1758982267, guid: d38f6fa363f867d49ac47a304d0ff306, type: 3}
+  velocityLookaheadFrames: 5
   arrowIndicatorSprites:
   - {fileID: 326314678, guid: 3ba3b56ecefd26940842954d79cd6796, type: 3}
   - {fileID: -1077083613, guid: 3ba3b56ecefd26940842954d79cd6796, type: 3}
@@ -127,8 +117,8 @@ CapsuleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.85, y: -0.15}
-  m_Size: {x: 1.5, y: 1.4}
+  m_Offset: {x: 0, y: -0.25}
+  m_Size: {x: 1.5, y: 1.5}
   m_Direction: 0
 --- !u!1 &6792052323068335997
 GameObject:
@@ -5573,8 +5563,8 @@ MonoBehaviour:
   slopeCheckDistance: 0.25
   slopeBoost: 4
   ledgeCheckOffset: 0.25
+  ledgeCheckDepth: 0.85
   groundNormalXThreshold: 0.1
-  maxSlopeAngle: 45
   intangibleWallLayer:
     serializedVersion: 2
     m_Bits: 8192
@@ -5599,7 +5589,6 @@ MonoBehaviour:
   isIntangibleWall: 0
   isHeadbonking: 0
   isOnASlope: 0
-  canWalkOnSlope: 1
 --- !u!114 &6792052323780996487
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5637,6 +5626,8 @@ MonoBehaviour:
   airAcceleration: 0.8
   airDeceleration: 0.6
   airTurningSpeed: 0.45
+  slopeSnapDistanceThreshold: 0.1
+  maxMovingSlopeSnapDistance: 0.5
   topSpeedTurnaroundPercent: 0.25
   turnaroundEvent:
     m_PersistentCalls:
@@ -5766,6 +5757,7 @@ MonoBehaviour:
   fireTackleRecoilStrength: 4
   fireTackleEndlag: 0.4
   fireTackleEndlagCancel: 0.3
+  fireTackleMaxSlopeSnapDistance: 0.5
   fireTackleStartupColor: {r: 0.90099996, g: 0.8569411, b: 0.46041095, a: 1}
   fireTackleActiveColor: {r: 0.97900003, g: 0.57028943, b: 0.319154, a: 1}
   fireTackleEndlagColor: {r: 0.801, g: 0.801, b: 0.801, a: 1}
@@ -5800,6 +5792,7 @@ MonoBehaviour:
   invulnerabilityAlpha: 0.25
   normalMaterial: {fileID: 6200000, guid: 9406f10bd3650fe409c8dc01b66aa54d, type: 2}
   damagedMaterial: {fileID: 6200000, guid: dd55f7c89c0e2e144b192bfa77adfb19, type: 2}
+  fullFrictionMaterial: {fileID: 6200000, guid: 2557c9a9274e1c146a689f606d3ad402, type: 2}
 --- !u!114 &6792052323780996494
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5980,7 +5973,7 @@ Rigidbody2D:
   m_GameObject: {fileID: 6792052323780996530}
   m_BodyType: 0
   m_Simulated: 1
-  m_UseFullKinematicContacts: 0
+  m_UseFullKinematicContacts: 1
   m_UseAutoMass: 0
   m_Mass: 0.0001
   m_LinearDrag: 0

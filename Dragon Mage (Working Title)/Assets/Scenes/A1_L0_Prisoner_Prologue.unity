@@ -4898,7 +4898,7 @@ GameObject:
   - component: {fileID: 129826109}
   - component: {fileID: 129826110}
   m_Layer: 0
-  m_Name: R5_EscapePassage4
+  m_Name: R5_MagicBlastDropPassage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5127,7 +5127,7 @@ GameObject:
   - component: {fileID: 133502804}
   - component: {fileID: 133502805}
   m_Layer: 0
-  m_Name: R11_EscapePassage10
+  m_Name: R11_FireballPassage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -15872,7 +15872,7 @@ GameObject:
   - component: {fileID: 292462934}
   - component: {fileID: 292462935}
   m_Layer: 0
-  m_Name: R9_EscapePassage8
+  m_Name: R9_FireTacklePassage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -36627,7 +36627,7 @@ GameObject:
   - component: {fileID: 729257501}
   - component: {fileID: 729257502}
   m_Layer: 0
-  m_Name: R12_EscapePassage11
+  m_Name: R12_FinalClimbPassage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -40386,7 +40386,7 @@ GameObject:
   - component: {fileID: 824413789}
   - component: {fileID: 824413790}
   m_Layer: 0
-  m_Name: R6_EscapePassage5
+  m_Name: R6_BlastJumpPassage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -42548,7 +42548,7 @@ GameObject:
   - component: {fileID: 1063328804}
   - component: {fileID: 1063328805}
   m_Layer: 0
-  m_Name: R7_EscapePassage6
+  m_Name: R7_FullTemperMeterPassage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -44499,7 +44499,7 @@ GameObject:
   - component: {fileID: 1202177104}
   - component: {fileID: 1202177105}
   m_Layer: 0
-  m_Name: R8_EscapePassage7
+  m_Name: R8_FlyingPassage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -63649,7 +63649,7 @@ GameObject:
   - component: {fileID: 1604748343}
   - component: {fileID: 1604748344}
   m_Layer: 0
-  m_Name: R1_PrisonCell
+  m_Name: R1_PrisonCellWithSecret
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -78668,7 +78668,7 @@ GameObject:
   - component: {fileID: 2064101906}
   - component: {fileID: 2064101907}
   m_Layer: 0
-  m_Name: R10_EscapePassage9
+  m_Name: R10_AngledFireTacklePassage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -85997,7 +85997,7 @@ GameObject:
   - component: {fileID: 4039601300017100725}
   - component: {fileID: 4039601300017100730}
   m_Layer: 0
-  m_Name: R3_EscapePassage2
+  m_Name: R3_MagicBlastPassage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -91519,7 +91519,7 @@ GameObject:
   - component: {fileID: 5277078514668606881}
   - component: {fileID: 5277078514668606894}
   m_Layer: 0
-  m_Name: R4_EscapePassage3
+  m_Name: R4_MagicBlastLobPassage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -91766,7 +91766,7 @@ GameObject:
   - component: {fileID: 5621712601134601563}
   - component: {fileID: 5621712601134601556}
   m_Layer: 0
-  m_Name: R2_EscapePassage1
+  m_Name: R2_WallJumpPassage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -95169,6 +95169,17 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 6792052323780996530, guid: 3b25c962829dd6c4a9aba337fe0e7a1a, type: 3}
   m_PrefabInstance: {fileID: 6792052323594762921}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &6792052323594762943 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6792052323780996505, guid: 3b25c962829dd6c4a9aba337fe0e7a1a, type: 3}
+  m_PrefabInstance: {fileID: 6792052323594762921}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6792052323594762922}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 79f9f941848f6dd499e2af1d3a9b3bf4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &8348267510651388621
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -95303,7 +95314,7 @@ PrefabInstance:
     - target: {fileID: 9151918476160911055, guid: 17de6d88538bf964ba9c0d26a2497614, type: 3}
       propertyPath: OnLevelEnd.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 6792052323594762943}
     - target: {fileID: 9151918476160911055, guid: 17de6d88538bf964ba9c0d26a2497614, type: 3}
       propertyPath: OnLevelEnd.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 

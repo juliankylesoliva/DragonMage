@@ -16,6 +16,7 @@ public class PlayerDamage : MonoBehaviour
     [SerializeField, Range(0f, 1f)] float invulnerabilityAlpha = 0.75f;
     [SerializeField] PhysicsMaterial2D normalMaterial;
     [SerializeField] PhysicsMaterial2D damagedMaterial;
+    [SerializeField] PhysicsMaterial2D fullFrictionMaterial;
 
     private Transform damageSource = null;
     private float hitstunTimer = 0f;
@@ -90,17 +91,22 @@ public class PlayerDamage : MonoBehaviour
         if (hitstunTimer > 0f) { yield break; }
 
         hitstunTimer = time;
-        player.rb2d.sharedMaterial = damagedMaterial;
-
-        while (player.stateMachine.CurrentState != player.stateMachine.damagedState) { yield return null; }
-        while (!player.collisions.IsGrounded || player.rb2d.velocity.magnitude >= knockbackMagnitudeEpsilon) { yield return null; }
-
-        player.rb2d.sharedMaterial = normalMaterial;
-        player.rb2d.velocity = Vector2.zero;
-        player.collisions.SnapToGround();
+        
+        while (player.stateMachine.CurrentState != player.stateMachine.damagedState)
+        {
+            player.rb2d.sharedMaterial = damagedMaterial;
+            yield return null;
+        }
+        while (!player.collisions.IsGrounded || player.rb2d.velocity.magnitude >= knockbackMagnitudeEpsilon)
+        {
+            player.rb2d.sharedMaterial = damagedMaterial;
+            yield return null;
+        }
         
         while (hitstunTimer > 0f)
         {
+            player.rb2d.sharedMaterial = fullFrictionMaterial;
+            player.rb2d.velocity = Vector2.zero;
             hitstunTimer -= Time.deltaTime;
             if (hitstunTimer < 0f)
             {
@@ -108,6 +114,8 @@ public class PlayerDamage : MonoBehaviour
             }
             yield return null;
         }
+
+        player.rb2d.sharedMaterial = normalMaterial;
     }
 
     private IEnumerator PostDamageIFramesCR(float time)

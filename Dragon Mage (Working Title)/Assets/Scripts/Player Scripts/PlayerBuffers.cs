@@ -121,7 +121,7 @@ public class PlayerBuffers : MonoBehaviour
         bool prevIsGrounded = player.collisions.IsGrounded;
         while (true)
         {
-            if (!player.collisions.IsGrounded && prevIsGrounded && coyoteTimeLeft <= 0f && player.rb2d.velocity.y < 0f)
+            if ((!player.collisions.IsGrounded && !player.collisions.IsOnASlope) && prevIsGrounded && coyoteTimeLeft <= 0f && player.rb2d.velocity.y < 0f)
             {
                 coyoteTimeLeft = coyoteTime;
             }

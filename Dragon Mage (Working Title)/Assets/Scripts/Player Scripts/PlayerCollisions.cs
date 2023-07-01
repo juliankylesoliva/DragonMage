@@ -19,8 +19,8 @@ public class PlayerCollisions : MonoBehaviour
     [SerializeField] float slopeCheckDistance = 1f;
     [SerializeField] float slopeBoost = 1f;
     [SerializeField] float ledgeCheckOffset = 0.25f;
+    [SerializeField] float ledgeCheckDepth = 0.85f;
     [SerializeField] float groundNormalXThreshold = 0.1f;
-    [SerializeField] float maxSlopeAngle = 45f;
     [SerializeField] LayerMask intangibleWallLayer;
     [SerializeField] LayerMask groundLayer;
     [SerializeField] LayerMask slopeLayer;
@@ -36,7 +36,6 @@ public class PlayerCollisions : MonoBehaviour
     [SerializeField] private bool isIntangibleWall = false;
     [SerializeField] private bool isHeadbonking = false;
     [SerializeField] private bool isOnASlope = false;
-    [SerializeField] private bool canWalkOnSlope = false;
 
     public bool IsGrounded { get { return isGrounded; } }
     public bool IsAgainstWall { get { return isAgainstWall; } }
@@ -45,16 +44,9 @@ public class PlayerCollisions : MonoBehaviour
     public bool IsIntangibleWall { get { return isIntangibleWall; } }
     public bool IsHeadbonking { get { return isHeadbonking; } }
     public bool IsOnASlope { get { return isOnASlope; } }
-    public bool CanWalkOnSlope { get { return canWalkOnSlope; } }
 
     private bool prevIsGrounded = true;
     private bool prevIsHeadbonking = true;
-
-    private float slopeDownAngle = 0f;
-    private float slopeDownAnglePrev = 0f;
-    private float slopeSideAngle = 0f;
-    private Vector2 slopeNormalPerpendicular;
-    private Vector2 incomingSlopeNormalPerpendicular;
 
     void Awake()
     {
@@ -84,76 +76,13 @@ public class PlayerCollisions : MonoBehaviour
 
     private void SlopeCheck()
     {
-        /*
-        SlopeCheckHorizontal(groundCheckObj.position);
-        SlopeCheckVertical(groundCheckObj.position);
-        isGrounded = (isGrounded || isOnASlope);
-        */
-        
         isOnASlope = false;
+
         RaycastHit2D hit = Physics2D.Raycast(groundCheckObj.position, -Vector2.up, slopeCheckDistance, slopeLayer);
         isOnASlope = (hit.collider != null);
         isGrounded = (isGrounded || isOnASlope);
 
-        /*
-        if (player.rb2d.velocity.y >= slopeCheckDistance && !isOnASlope && player.stateMachine.CurrentState == player.stateMachine.runningState && player.stateMachine.CurrentState != player.stateMachine.jumpingState)
-        {
-            SnapToGround();
-        }
-        */
-
-        player.rb2d.sharedMaterial = (isOnASlope && player.inputVector.x == 0f && canWalkOnSlope ? fullFriction : noFriction);
-    }
-
-    private void SlopeCheckHorizontal(Vector2 checkPos)
-    {
-        RaycastHit2D hitFront = Physics2D.Raycast(checkPos, player.movement.GetFacingValue() * Vector2.right, slopeCheckDistance, slopeLayer);
-        RaycastHit2D hitBack = Physics2D.Raycast(checkPos, -player.movement.GetFacingValue() * Vector2.right, slopeCheckDistance, slopeLayer);
-
-        if (hitFront)
-        {
-            isOnASlope = true;
-            slopeSideAngle = Vector2.Angle(hitFront.normal, Vector2.up);
-        }
-        else if (hitBack)
-        {
-            isOnASlope = true;
-            slopeSideAngle = Vector2.Angle(hitBack.normal, Vector2.up);
-        }
-        else
-        {
-            isOnASlope = false;
-            slopeSideAngle = 0f;
-        }
-    }
-
-    private void SlopeCheckVertical(Vector2 checkPos)
-    {
-        RaycastHit2D hit = Physics2D.Raycast(checkPos, -Vector2.up, slopeCheckDistance, slopeLayer);
-        
-        if (hit)
-        {
-            slopeNormalPerpendicular = Vector2.Perpendicular(hit.normal).normalized;
-            slopeDownAngle = Vector2.Angle(hit.normal, Vector2.up);
-
-            isOnASlope = (slopeDownAngle != 0f);
-
-            slopeDownAnglePrev = slopeDownAngle;
-        }
-
-        if (!isOnASlope && player.rb2d.velocity.x != 0f)
-        {
-            RaycastHit2D hitFront = Physics2D.Raycast(checkPos, player.movement.GetFacingValue() * Vector2.right, slopeCheckDistance, slopeLayer);
-
-            if (hitFront)
-            {
-                incomingSlopeNormalPerpendicular = Vector2.Perpendicular(hitFront.normal).normalized;
-            }
-        }
-
-        canWalkOnSlope = (slopeDownAngle <= maxSlopeAngle || slopeSideAngle <= maxSlopeAngle);
-
-        player.rb2d.sharedMaterial = (isOnASlope && player.inputVector.x == 0f && canWalkOnSlope ? fullFriction : noFriction);
+        if (!player.damage.isPlayerDamaged) { player.rb2d.sharedMaterial = (isOnASlope && player.inputVector.x == 0f ? fullFriction : noFriction); }
     }
 
     private void WallCheck()
@@ -208,7 +137,7 @@ public class PlayerCollisions : MonoBehaviour
         if (!prevIsGrounded && isGrounded)
         {
             player.effects.FootstepSound();
-            GameObject tempObj = EffectFactory.SpawnEffect("LandingDust", GetSimpleGroundPoint());
+            GameObject tempObj = EffectFactory.SpawnEffect("LandingDust", GetClosestGroundPoint());
             tempObj.transform.up = GetGroundNormal();
         }
     }
@@ -231,7 +160,7 @@ public class PlayerCollisions : MonoBehaviour
 
     public bool CheckIfNearLedge()
     {
-        RaycastHit2D hit = Physics2D.Raycast(groundCheckObj.position + (player.movement.GetFacingValue() * ledgeCheckOffset * Vector3.right), -Vector2.up, slopeCheckDistance, ledgeCheckLayer);
+        RaycastHit2D hit = Physics2D.Raycast(groundCheckObj.position + (player.movement.GetFacingValue() * ledgeCheckOffset * Vector3.right), -Vector2.up, ledgeCheckDepth, ledgeCheckLayer);
         return hit.collider == null;
     }
 
@@ -266,19 +195,12 @@ public class PlayerCollisions : MonoBehaviour
         Vector2 normal = (direct ? GetDirectGroundNormal() : GetGroundNormal());
         if (normal.y != 0f)
         {
-            float v1 = 1f;
-            float v2 = 0f;
-            v2 += (-normal.x);
-            v2 /= normal.y;
-            Vector2 result = new Vector2(v1, v2);
-            result = result.normalized;
+            Vector2 result = -Vector2.Perpendicular(normal).normalized;
             float facingToNormalX = (normal.x * (player.movement.isFacingRight ? 1f : -1f));
             result *= (isGrounded && !isOnASlope && (normal.x < -groundNormalXThreshold || normal.x > groundNormalXThreshold) && facingToNormalX != 0f ? slopeBoost : 1f);
             return result;
         }
         return Vector2.right;
-
-        // return (direct ? -incomingSlopeNormalPerpendicular : -slopeNormalPerpendicular);
     }
 
     public Vector2 GetClosestGroundPoint()
@@ -298,11 +220,11 @@ public class PlayerCollisions : MonoBehaviour
         return (headbonkCheckObj.position + (Vector3.up * (headbonkCheckRadius / 2f)));
     }
 
-    public void SnapToGround()
+    public void SnapToGround(bool bypassDistanceCheck, float maxDistance = -1f)
     {
         Vector2 toMove = GetClosestGroundPoint();
         toMove += new Vector2(0f, 1f + groundCheckRadius);
-        if (Vector2.Distance(this.transform.position, toMove) <= slopeCheckDistance) { this.transform.position = toMove; }
+        if (bypassDistanceCheck || (Vector2.Distance(this.transform.position, toMove) <= (maxDistance >= 0f ? maxDistance : slopeCheckDistance))) { this.transform.position = toMove; }
         GroundCheck();
     }
 }
