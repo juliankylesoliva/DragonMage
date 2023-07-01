@@ -59,7 +59,9 @@ public class PlayerJumping : MonoBehaviour
     [Header("Running Jump Variables")]
     public bool enableRunningJumpBonus = true;
     public float runningJumpMultiplier = 1f;
-    
+
+    public float fallTimer { get; private set; }
+
     void Awake()
     {
         player = this.gameObject.GetComponent<PlayerCtrl>();
@@ -79,6 +81,31 @@ public class PlayerJumping : MonoBehaviour
             isWallJumpCooldownActive = false;
         }
         yield break;
+    }
+
+    public void SetFallTimer()
+    {
+        if (player.rb2d.velocity.y > 0f)
+        {
+            fallTimer = (-player.rb2d.velocity.y / (risingGravity * Physics2D.gravity.y));
+        }
+    }
+
+    public void EndFallTimer()
+    {
+        fallTimer = 0f;
+    }
+
+    public void UpdateFallTimer()
+    {
+        if (fallTimer > 0f)
+        {
+            fallTimer -= Time.deltaTime;
+            if (fallTimer < 0f)
+            {
+                EndFallTimer();
+            }
+        }
     }
 
     public bool CanGroundJump()
@@ -104,7 +131,7 @@ public class PlayerJumping : MonoBehaviour
 
         player.animationCtrl.GroundJumpAnimation();
         player.sfxCtrl.PlaySound(player.form.currentMode == CharacterMode.MAGE ? "jump_magli" : "jump_draelyn", 1f, didPlayerSpeedHop ? 1.5f : 1f);
-        player.rb2d.velocity = new Vector2(horizontalResult * (player.movement.isFacingRight ? 1f : -1f), (jumpSpeed + (enableRunningJumpBonus ? Mathf.Abs(horizontalResult / player.movement.topSpeed) * runningJumpMultiplier : 0f)));
+        player.rb2d.velocity = new Vector2(horizontalResult * (player.movement.isFacingRight ? 1f : -1f), (jumpSpeed + (enableRunningJumpBonus ? Mathf.Min(Mathf.Abs(horizontalResult / player.movement.topSpeed), 1f) * runningJumpMultiplier : 0f)));
     }
 
     public void GroundJumpUpdate()

@@ -290,7 +290,7 @@ public class JumpingState : State
 
     public override void Enter()
     {
-        
+        player.jumping.SetFallTimer();
     }
 
     public override void Update()
@@ -298,17 +298,18 @@ public class JumpingState : State
         player.movement.Movement();
         player.movement.FacingDirection();
         player.jumping.GroundJumpUpdate();
+        player.jumping.UpdateFallTimer();
         if (CheckFormChangeInput() || CheckFireTackleInput() || CheckIfWallClimbing() || CheckIfWallSliding() || CheckGlideInput() || CheckMidairJumpInput() || CheckIfFalling() || CheckIfGrounded() || CheckIfDamaged()) { return; }
     }
 
     public override void Exit()
     {
-
+        player.jumping.EndFallTimer();
     }
 
     private bool CheckIfGrounded()
     {
-        if ((player.collisions.IsGrounded || player.collisions.IsOnASlope) && player.rb2d.velocity.y <= 0f)
+        if ((player.collisions.IsGrounded || player.collisions.IsOnASlope) && player.rb2d.velocity.y > 0f && player.jumping.fallTimer <= 0f)
         {
             player.stateMachine.TransitionTo(player.rb2d.velocity.x == 0f ? player.stateMachine.standingState : player.stateMachine.runningState);
             return true;

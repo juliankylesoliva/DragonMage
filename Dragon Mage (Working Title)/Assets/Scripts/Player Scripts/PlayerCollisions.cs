@@ -136,7 +136,7 @@ public class PlayerCollisions : MonoBehaviour
         if (!prevIsGrounded && isGrounded)
         {
             player.effects.FootstepSound();
-            GameObject tempObj = EffectFactory.SpawnEffect("LandingDust", GetClosestGroundPoint());
+            GameObject tempObj = EffectFactory.SpawnEffect("LandingDust", GetSimpleGroundPoint());
             tempObj.transform.up = GetGroundNormal();
         }
     }
