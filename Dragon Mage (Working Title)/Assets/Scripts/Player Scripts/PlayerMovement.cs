@@ -23,6 +23,8 @@ public class PlayerMovement : MonoBehaviour
     private float prevXVelocity = 0f;
     private float deltaXVelocity = 0f;
 
+    private float intendedXVelocity = 0f;
+
     [SerializeField] float slopeSnapDistanceThreshold = 0.1f;
     [SerializeField] float maxMovingSlopeSnapDistance = 1f;
     [SerializeField, Range(0f, 1f)] float topSpeedTurnaroundPercent = 0.5f; 
@@ -90,6 +92,8 @@ public class PlayerMovement : MonoBehaviour
     {
         if (player.form.isChangingForm || player.jumping.isWallJumpCooldownActive || player.attacks.isFireTackleActive) { return; }
 
+        ApplySlopeResistance();
+
         if (player.inputVector.x != 0f)
         {
             if (player.collisions.IsAgainstWall && (player.inputVector.x * (isFacingRight ? 1f : -1f)) > 0f || (player.inputVector.x > 0f ? player.collisions.IsTouchingWallR : player.collisions.IsTouchingWallL))
@@ -100,8 +104,6 @@ public class PlayerMovement : MonoBehaviour
             {
                 if (Mathf.Abs(player.rb2d.velocity.x) < topSpeed)
                 {
-                    ApplySlopeResistance();
-
                     player.rb2d.velocity += ((player.stateMachine.CurrentState == player.stateMachine.runningState && (player.collisions.IsGrounded || player.collisions.IsOnASlope) ? player.collisions.GetRightVector() : Vector2.right) * (player.collisions.IsGrounded || player.collisions.IsOnASlope ? acceleration : airAcceleration) * player.inputVector.x * Time.deltaTime);
                     if (Mathf.Abs(player.rb2d.velocity.x) > topSpeed)
                     {
@@ -114,13 +116,13 @@ public class PlayerMovement : MonoBehaviour
                     {
                         if (player.rb2d.velocity.x > 0f)
                         {
-                            player.rb2d.velocity -= (player.collisions.GetRightVector().normalized * deceleration * Time.deltaTime);
+                            player.rb2d.velocity -= (player.collisions.GetRightVector(true) * deceleration * Time.deltaTime);
                             if (player.rb2d.velocity.x < topSpeed) { player.rb2d.velocity = new Vector2(topSpeed, player.rb2d.velocity.y); }
                         }
                         else
                         {
-                            player.rb2d.velocity += (player.collisions.GetRightVector().normalized * deceleration * Time.deltaTime);
-                            if (player.rb2d.velocity.x > topSpeed) { player.rb2d.velocity = new Vector2(-topSpeed, player.rb2d.velocity.y); }
+                            player.rb2d.velocity += (player.collisions.GetRightVector(true) * deceleration * Time.deltaTime);
+                            if (player.rb2d.velocity.x > -topSpeed) { player.rb2d.velocity = new Vector2(-topSpeed, player.rb2d.velocity.y); }
                         }
                     }
                 }
@@ -130,18 +132,15 @@ public class PlayerMovement : MonoBehaviour
             {
                 if (player.rb2d.velocity.x != 0f)
                 {
-                    ApplySlopeResistance();
-                    player.rb2d.velocity += ((player.collisions.IsGrounded || player.collisions.IsOnASlope ? player.collisions.GetRightVector().normalized : Vector2.right) * (player.collisions.IsGrounded ? turningSpeed : airTurningSpeed) * player.inputVector.x * Time.deltaTime);
+                    player.rb2d.velocity += ((player.collisions.IsGrounded || player.collisions.IsOnASlope ? player.collisions.GetRightVector() : Vector2.right) * (player.collisions.IsGrounded ? turningSpeed : airTurningSpeed) * player.inputVector.x * Time.deltaTime);
                 }
             }
         }
         else
         {
-            ApplySlopeResistance();
-
             if (player.rb2d.velocity.x > 0f)
             {
-                player.rb2d.velocity -= ((player.collisions.IsGrounded || player.collisions.IsOnASlope ? player.collisions.GetRightVector().normalized : Vector2.right) * (player.collisions.IsGrounded ? deceleration : airDeceleration) * Time.deltaTime);
+                player.rb2d.velocity -= ((player.collisions.IsGrounded || player.collisions.IsOnASlope ? player.collisions.GetRightVector(true) : Vector2.right) * (player.collisions.IsGrounded ? deceleration : airDeceleration) * Time.deltaTime);
                 if (player.rb2d.velocity.x < 0f)
                 {
                     player.rb2d.velocity = new Vector2(0f, player.rb2d.velocity.y);
@@ -149,7 +148,7 @@ public class PlayerMovement : MonoBehaviour
             }
             else if (player.rb2d.velocity.x < 0f)
             {
-                player.rb2d.velocity += ((player.collisions.IsGrounded || player.collisions.IsOnASlope ? player.collisions.GetRightVector().normalized : Vector2.right) * (player.collisions.IsGrounded ? deceleration : airDeceleration) * Time.deltaTime);
+                player.rb2d.velocity += ((player.collisions.IsGrounded || player.collisions.IsOnASlope ? player.collisions.GetRightVector(true) : Vector2.right) * (player.collisions.IsGrounded ? deceleration : airDeceleration) * Time.deltaTime);
                 if (player.rb2d.velocity.x > 0f)
                 {
                     player.rb2d.velocity = new Vector2(0f, player.rb2d.velocity.y);
@@ -158,10 +157,97 @@ public class PlayerMovement : MonoBehaviour
             else { /* Nothing */ }
         }
 
-        if (player.stateMachine.CurrentState.name == "Running" && (player.collisions.IsGrounded || player.collisions.IsOnASlope) && player.rb2d.velocity.y > 0f && player.collisions.CheckDistanceToGround(slopeSnapDistanceThreshold))
+        if (player.stateMachine.CurrentState.name == "Running" && player.rb2d.velocity.y != 0f && player.collisions.CheckDistanceToGround(slopeSnapDistanceThreshold))
         {
             player.collisions.SnapToGround(false, maxMovingSlopeSnapDistance);
         }
+
+        IntendedMovement();
+    }
+
+    public void IntendedMovement()
+    {
+        if (player.form.isChangingForm || player.jumping.isWallJumpCooldownActive || player.attacks.isFireTackleActive) { return; }
+
+        if (player.inputVector.x != 0f)
+        {
+            if (player.collisions.IsAgainstWall && (player.inputVector.x * (isFacingRight ? 1f : -1f)) > 0f || (player.inputVector.x > 0f ? player.collisions.IsTouchingWallR : player.collisions.IsTouchingWallL))
+            {
+                intendedXVelocity = 0f;
+            }
+            else if ((intendedXVelocity * player.inputVector.x) >= 0f)
+            {
+                if (Mathf.Abs(intendedXVelocity) < topSpeed)
+                {
+                    intendedXVelocity += ((player.collisions.IsGrounded || player.collisions.IsOnASlope ? acceleration : airAcceleration) * player.inputVector.x * Time.deltaTime);
+                    if (Mathf.Abs(intendedXVelocity) > topSpeed)
+                    {
+                        intendedXVelocity = (topSpeed * player.inputVector.x);
+                    }
+                }
+                else if ((player.collisions.IsGrounded || player.collisions.IsOnASlope) && Mathf.Abs(intendedXVelocity) > topSpeed)
+                {
+                    if (intendedXVelocity != 0f)
+                    {
+                        if (intendedXVelocity > 0f)
+                        {
+                            intendedXVelocity -= (deceleration * Time.deltaTime);
+                            if (intendedXVelocity < topSpeed) { intendedXVelocity = topSpeed; }
+                        }
+                        else
+                        {
+                            intendedXVelocity += (deceleration * Time.deltaTime);
+                            if (intendedXVelocity > -topSpeed) { intendedXVelocity = -topSpeed; }
+                        }
+                    }
+                }
+                else { /* Nothing */ }
+            }
+            else
+            {
+                if (intendedXVelocity != 0f)
+                {
+                    intendedXVelocity += ((player.collisions.IsGrounded ? turningSpeed : airTurningSpeed) * player.inputVector.x * Time.deltaTime);
+                }
+            }
+        }
+        else
+        {
+            if (intendedXVelocity > 0f)
+            {
+                intendedXVelocity -= ((player.collisions.IsGrounded ? deceleration : airDeceleration) * Time.deltaTime);
+                if (intendedXVelocity < 0f)
+                {
+                    intendedXVelocity = 0f;
+                }
+            }
+            else if (intendedXVelocity < 0f)
+            {
+                intendedXVelocity += ((player.collisions.IsGrounded ? deceleration : airDeceleration) * Time.deltaTime);
+                if (intendedXVelocity > 0f)
+                {
+                    intendedXVelocity = 0f;
+                }
+            }
+            else { /* Nothing */ }
+        }
+
+        if (intendedXVelocity != player.rb2d.velocity.x && player.inputVector.x != 0f)
+        {
+            if (player.inputVector.x > 0f)
+            {
+                if (player.rb2d.velocity.x < intendedXVelocity) { player.rb2d.velocity = new Vector2(intendedXVelocity, player.rb2d.velocity.y); }
+            }
+            else
+            {
+                if (player.rb2d.velocity.x > intendedXVelocity) { player.rb2d.velocity = new Vector2(intendedXVelocity, player.rb2d.velocity.y); }
+            }
+        }
+    }
+
+    public void ResetIntendedXVelocity()
+    {
+        intendedXVelocity = 0f;
     }
 
     public void SetFacingDirection(float horizontalAxis)

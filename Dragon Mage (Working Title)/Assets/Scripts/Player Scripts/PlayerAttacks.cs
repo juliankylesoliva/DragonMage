@@ -225,8 +225,8 @@ public class PlayerAttacks : MonoBehaviour
             }
             else
             {
-                player.rb2d.velocity = (player.collisions.GetRightVector().normalized * (!player.collisions.IsAgainstWall ? horizontalResult : 0f));
-                player.collisions.SnapToGround(player.collisions.IsGrounded || player.collisions.IsOnASlope, fireTackleMaxSlopeSnapDistance);
+                player.rb2d.velocity = (player.collisions.GetRightVector() * (!player.collisions.IsAgainstWall ? horizontalResult : 0f));
+                player.collisions.SnapToGround(false, fireTackleMaxSlopeSnapDistance);
             }
 
             if (player.collisions.IsGrounded && trailSpawnTimer >= 0f)
@@ -292,7 +292,7 @@ public class PlayerAttacks : MonoBehaviour
             if (!firedProjectile && !bumped && endlagTimer < fireTackleEndlagCancel && CanCancelFireTackleEndlag()) { isFireTackleEndlagCanceled = true; break; }
             if (!bumped && (player.collisions.IsGrounded || player.collisions.IsOnASlope) && player.rb2d.velocity.x != 0f)
             {
-                Vector2 resultVector = (player.collisions.GetRightVector().normalized * (firedProjectile ? -fireTackleRecoilStrength : horizontalResult));
+                Vector2 resultVector = (player.collisions.GetRightVector() * (firedProjectile ? -fireTackleRecoilStrength : horizontalResult));
                 player.rb2d.velocity = ((player.movement.isFacingRight && player.collisions.IsTouchingWallR) || (!player.movement.isFacingRight && player.collisions.IsTouchingWallL) || player.collisions.CheckIfNearLedge() ? Vector2.zero : Vector2.Lerp(resultVector, Vector2.zero, (fireTackleEndlag - endlagTimer) / fireTackleEndlag));
                 if (player.collisions.IsOnASlope) { player.movement.ApplySlopeResistance(); player.collisions.SnapToGround(false); }
             }
@@ -314,6 +314,7 @@ public class PlayerAttacks : MonoBehaviour
     {
         currentAttackState = AttackState.NOTHING;
         player.charSprite.color = Color.white;
+        if ((player.collisions.IsGrounded || player.collisions.IsOnASlope) && !isFireTackleEndlagCanceled) { player.movement.ResetIntendedXVelocity(); }
         isFireTackleActive = false;
         StartCoroutine(AttackCooldownCR());
         StartCoroutine(player.form.FormChangeCooldownCR());

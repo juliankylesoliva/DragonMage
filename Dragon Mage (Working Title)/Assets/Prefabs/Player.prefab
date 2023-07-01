@@ -5561,7 +5561,7 @@ MonoBehaviour:
   wallCheckRadius: 0.05
   headbonkCheckRadius: 0.125
   slopeCheckDistance: 0.25
-  slopeBoost: 4
+  slopeBoost: 1
   ledgeCheckOffset: 0.25
   ledgeCheckDepth: 0.85
   groundNormalXThreshold: 0.1

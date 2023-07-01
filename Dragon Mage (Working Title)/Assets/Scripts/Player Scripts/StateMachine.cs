@@ -236,6 +236,7 @@ public class StandingState : State
         {
             player.collisions.SnapToGround(true);
             player.rb2d.velocity = Vector2.zero;
+            player.movement.ResetIntendedXVelocity();
             player.movement.ApplySlopeResistance();
         }
         if (CheckFormChangeInput() || CheckRunInput() || CheckJumpInput() || CheckFireTackleInput() || CheckSuddenRise() || CheckSuddenFall() || CheckSuddenMovement() || CheckIfDamaged()) { return; }

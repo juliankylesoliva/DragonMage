@@ -17,7 +17,6 @@ public class PlayerCollisions : MonoBehaviour
     [SerializeField] float wallCheckRadius = 0.1f;
     [SerializeField] float headbonkCheckRadius = 0.5f;
     [SerializeField] float slopeCheckDistance = 1f;
-    [SerializeField] float slopeBoost = 1f;
     [SerializeField] float ledgeCheckOffset = 0.25f;
     [SerializeField] float ledgeCheckDepth = 0.85f;
     [SerializeField] float groundNormalXThreshold = 0.1f;
@@ -197,7 +196,6 @@ public class PlayerCollisions : MonoBehaviour
         {
             Vector2 result = -Vector2.Perpendicular(normal).normalized;
             float facingToNormalX = (normal.x * (player.movement.isFacingRight ? 1f : -1f));
-            result *= (isGrounded && !isOnASlope && (normal.x < -groundNormalXThreshold || normal.x > groundNormalXThreshold) && facingToNormalX != 0f ? slopeBoost : 1f);
             return result;
         }
         return Vector2.right;
