@@ -5198,9 +5198,9 @@ GameObject:
   - component: {fileID: 6792052323780996487}
   - component: {fileID: 6792052323780996484}
   - component: {fileID: 6792052323780996485}
+  - component: {fileID: 6792052323780996480}
   - component: {fileID: 6792052323780996482}
   - component: {fileID: 6792052323780996483}
-  - component: {fileID: 6792052323780996480}
   - component: {fileID: 6792052323780996481}
   - component: {fileID: 6792052323780996494}
   - component: {fileID: 6792052323780996495}
@@ -5268,9 +5268,9 @@ MonoBehaviour:
   buffers: {fileID: 0}
   movement: {fileID: 0}
   jumping: {fileID: 0}
+  attacks: {fileID: 0}
   temper: {fileID: 0}
   form: {fileID: 0}
-  attacks: {fileID: 0}
   damage: {fileID: 0}
   interaction: {fileID: 0}
   animationCtrl: {fileID: 0}
@@ -5433,31 +5433,6 @@ MonoBehaviour:
       m_Action: Jump
       m_Flags: 0
     m_Flags: 0
-  technicalAction:
-    m_Name: Technical
-    m_Type: 0
-    m_ExpectedControlType: 
-    m_Id: 1cbdc71e-31bf-4dee-89a4-90d24bef8875
-    m_Processors: 
-    m_Interactions: 
-    m_SingletonActionBindings:
-    - m_Name: 
-      m_Id: 1bfdab93-cc14-4036-b016-2957c5306385
-      m_Path: <Keyboard>/leftShift
-      m_Interactions: 
-      m_Processors: 
-      m_Groups: 
-      m_Action: Technical
-      m_Flags: 0
-    - m_Name: 
-      m_Id: c14865cb-b69c-4b1c-81b9-ba3ed487c6db
-      m_Path: <Gamepad>/rightTrigger
-      m_Interactions: 
-      m_Processors: 
-      m_Groups: 
-      m_Action: Technical
-      m_Flags: 0
-    m_Flags: 0
   attackAction:
     m_Name: Attack
     m_Type: 1
@@ -5481,6 +5456,31 @@ MonoBehaviour:
       m_Processors: 
       m_Groups: 
       m_Action: Attack
+      m_Flags: 0
+    m_Flags: 0
+  technicalAction:
+    m_Name: Technical
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 1cbdc71e-31bf-4dee-89a4-90d24bef8875
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings:
+    - m_Name: 
+      m_Id: 1bfdab93-cc14-4036-b016-2957c5306385
+      m_Path: <Keyboard>/leftShift
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Technical
+      m_Flags: 0
+    - m_Name: 
+      m_Id: c14865cb-b69c-4b1c-81b9-ba3ed487c6db
+      m_Path: <Gamepad>/rightTrigger
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Technical
       m_Flags: 0
     m_Flags: 0
   formChangeAction:
@@ -5561,7 +5561,6 @@ MonoBehaviour:
   wallCheckRadius: 0.05
   headbonkCheckRadius: 0.125
   slopeCheckDistance: 0.25
-  slopeBoost: 1
   ledgeCheckOffset: 0.25
   ledgeCheckDepth: 0.85
   groundNormalXThreshold: 0.1
@@ -5603,6 +5602,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   formChangeBufferTime: 0.25
   jumpBufferTime: 0.16666667
+  attackBufferTime: 0.1
   highestSpeedBufferTime: 0.2
   coyoteTime: 0.2
   earlyGlideBufferTime: 0.25
@@ -5696,38 +5696,6 @@ MonoBehaviour:
   currentMidairJumps: 0
   enableRunningJumpBonus: 1
   runningJumpMultiplier: 1.5
---- !u!114 &6792052323780996482
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6792052323780996530}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b126adbfa0333cc43a01d78fe11f9b13, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  numSegments: 12
-  coldSegments: 3
-  hotSegments: 3
---- !u!114 &6792052323780996483
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6792052323780996530}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8b47c7a041a8a1b49b4b7e2fe1bee6d8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  mageProperties: {fileID: 11400000, guid: 3058d3c16efbfc74d91b608d70e9fae5, type: 2}
-  dragonProperties: {fileID: 11400000, guid: 30fff2eeae6f929478e55877d487543c, type: 2}
-  startingMode: 0
-  formChangeTime: 0.25
-  formChangeCooldownTime: 0.4
 --- !u!114 &6792052323780996480
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5770,6 +5738,38 @@ MonoBehaviour:
   isAttackCooldownActive: 0
   isBlastJumpActive: 0
   isFireTackleActive: 0
+--- !u!114 &6792052323780996482
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6792052323780996530}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b126adbfa0333cc43a01d78fe11f9b13, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  numSegments: 12
+  coldSegments: 3
+  hotSegments: 3
+--- !u!114 &6792052323780996483
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6792052323780996530}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b47c7a041a8a1b49b4b7e2fe1bee6d8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mageProperties: {fileID: 11400000, guid: 3058d3c16efbfc74d91b608d70e9fae5, type: 2}
+  dragonProperties: {fileID: 11400000, guid: 30fff2eeae6f929478e55877d487543c, type: 2}
+  startingMode: 0
+  formChangeTime: 0.25
+  formChangeCooldownTime: 0.4
 --- !u!114 &6792052323780996481
 MonoBehaviour:
   m_ObjectHideFlags: 0

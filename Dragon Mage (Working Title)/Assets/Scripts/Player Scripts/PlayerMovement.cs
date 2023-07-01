@@ -237,10 +237,14 @@ public class PlayerMovement : MonoBehaviour
             if (player.inputVector.x > 0f)
             {
                 if (player.rb2d.velocity.x < intendedXVelocity) { player.rb2d.velocity = new Vector2(intendedXVelocity, player.rb2d.velocity.y); }
+                else if (player.rb2d.velocity.x > intendedXVelocity) { intendedXVelocity = player.rb2d.velocity.x; }
+                else { /* Nothing */ }
             }
             else
             {
                 if (player.rb2d.velocity.x > intendedXVelocity) { player.rb2d.velocity = new Vector2(intendedXVelocity, player.rb2d.velocity.y); }
+                else if (player.rb2d.velocity.x < intendedXVelocity) { intendedXVelocity = player.rb2d.velocity.x; }
+                else { /* Nothing */ }
             }
         }
     }

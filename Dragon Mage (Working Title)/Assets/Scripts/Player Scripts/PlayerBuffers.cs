@@ -8,6 +8,7 @@ public class PlayerBuffers : MonoBehaviour
 
     [SerializeField] float formChangeBufferTime = 0.1f;
     [SerializeField] float jumpBufferTime = 0.1f;
+    [SerializeField] float attackBufferTime = 0.1f;
     [SerializeField] float highestSpeedBufferTime = 0.1f;
     [SerializeField] float coyoteTime = 0.1f;
     [SerializeField] float earlyGlideBufferTime = 0.25f;
@@ -21,6 +22,9 @@ public class PlayerBuffers : MonoBehaviour
     public float jumpBufferTimeLeft { get; private set; }
     public void ResetJumpBuffer() { jumpBufferTimeLeft = 0f; }
 
+    public float attackBufferTimeLeft { get; private set; }
+    public void ResetAttackBuffer() { attackBufferTimeLeft = 0f; }
+
     public float highestSpeedBuffer { get; private set; }
     public float coyoteTimeLeft { get; private set; }
 
@@ -32,6 +36,7 @@ public class PlayerBuffers : MonoBehaviour
     void Start()
     {
         StartCoroutine(JumpBufferCR());
+        StartCoroutine(AttackBufferCR());
         StartCoroutine(FormChangeBufferCR());
         StartCoroutine(HighestSpeedBufferCR());
         StartCoroutine(CoyoteTimeCR());
@@ -52,6 +57,28 @@ public class PlayerBuffers : MonoBehaviour
                 if (jumpBufferTimeLeft < 0f)
                 {
                     jumpBufferTimeLeft = 0f;
+                }
+            }
+
+            yield return null;
+        }
+    }
+
+    private IEnumerator AttackBufferCR()
+    {
+        while (true)
+        {
+            if (player.attackButtonDown)
+            {
+                attackBufferTimeLeft = attackBufferTime;
+            }
+
+            if (attackBufferTimeLeft > 0f)
+            {
+                attackBufferTimeLeft -= Time.deltaTime;
+                if (attackBufferTimeLeft < 0f)
+                {
+                    attackBufferTimeLeft = 0f;
                 }
             }
 

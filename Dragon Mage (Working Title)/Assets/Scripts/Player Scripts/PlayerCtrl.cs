@@ -11,9 +11,9 @@ public class PlayerCtrl : MonoBehaviour
     [HideInInspector] public PlayerBuffers buffers;
     [HideInInspector] public PlayerMovement movement;
     [HideInInspector] public PlayerJumping jumping;
+    [HideInInspector] public PlayerAttacks attacks;
     [HideInInspector] public PlayerTemper temper;
     [HideInInspector] public PlayerForm form;
-    [HideInInspector] public PlayerAttacks attacks;
     [HideInInspector] public PlayerDamage damage;
     [HideInInspector] public PlayerInteraction interaction;
     [HideInInspector] public PlayerAnimation animationCtrl;
@@ -28,8 +28,8 @@ public class PlayerCtrl : MonoBehaviour
     [Header("Input Actions")]
     [SerializeField] private InputAction moveAction;
     [SerializeField] private InputAction jumpAction;
-    [SerializeField] private InputAction technicalAction;
     [SerializeField] private InputAction attackAction;
+    [SerializeField] private InputAction technicalAction;
     [SerializeField] private InputAction formChangeAction;
     [SerializeField] private InputAction interactAction;
 
@@ -38,9 +38,9 @@ public class PlayerCtrl : MonoBehaviour
     public Vector2 inputVector { get; private set; }
     public bool jumpButtonDown { get; private set; }
     public bool jumpButtonHeld { get; private set; }
-    public bool technicalButtonHeld { get; private set; }
     public bool attackButtonDown { get; private set; }
     public bool attackButtonHeld { get; private set; }
+    public bool technicalButtonHeld { get; private set; }
     public bool formChangeButtonDown { get; private set; }
     public bool interactButtonDown { get; private set; }
 
@@ -48,8 +48,8 @@ public class PlayerCtrl : MonoBehaviour
     {
         moveAction.Enable();
         jumpAction.Enable();
-        technicalAction.Enable();
         attackAction.Enable();
+        technicalAction.Enable();
         formChangeAction.Enable();
         interactAction.Enable();
     }
@@ -58,8 +58,8 @@ public class PlayerCtrl : MonoBehaviour
     {
         moveAction.Disable();
         jumpAction.Disable();
-        technicalAction.Disable();
         attackAction.Disable();
+        technicalAction.Disable();
         formChangeAction.Disable();
         interactAction.Disable();
     }
@@ -70,10 +70,10 @@ public class PlayerCtrl : MonoBehaviour
         buffers = this.gameObject.GetComponent<PlayerBuffers>();
         movement = this.gameObject.GetComponent<PlayerMovement>();
         jumping = this.gameObject.GetComponent<PlayerJumping>();
+        attacks = this.gameObject.GetComponent<PlayerAttacks>();
         temper = this.gameObject.GetComponent<PlayerTemper>();
         form = this.gameObject.GetComponent<PlayerForm>();
         interaction = this.gameObject.GetComponent<PlayerInteraction>();
-        attacks = this.gameObject.GetComponent<PlayerAttacks>();
         damage = this.gameObject.GetComponent<PlayerDamage>();
         animationCtrl = this.gameObject.GetComponent<PlayerAnimation>();
         spriteTrail = this.gameObject.GetComponent<PlayerSpriteTrail>();
@@ -89,11 +89,11 @@ public class PlayerCtrl : MonoBehaviour
         jumpAction.started += ctx => { jumpButtonDown = !areControlsFrozen; jumpButtonHeld = !areControlsFrozen; };
         jumpAction.canceled += ctx => { jumpButtonHeld = false; };
 
-        technicalAction.started += ctx => { technicalButtonHeld = !areControlsFrozen; };
-        technicalAction.canceled += ctx => { technicalButtonHeld = false; };
-
         attackAction.started += ctx => { attackButtonDown = !areControlsFrozen; attackButtonHeld = !areControlsFrozen; };
         attackAction.canceled += ctx => { attackButtonHeld = false; };
+
+        technicalAction.started += ctx => { technicalButtonHeld = !areControlsFrozen; };
+        technicalAction.canceled += ctx => { technicalButtonHeld = false; };
 
         formChangeAction.started += ctx => { formChangeButtonDown = !areControlsFrozen; };
 
@@ -102,8 +102,11 @@ public class PlayerCtrl : MonoBehaviour
 
     void Update()
     {
-        inputVector = (!areControlsFrozen ? moveAction.ReadValue<Vector2>() : Vector2.zero);
-        stateMachine.Update();
+        if (!PauseHandler.isPaused)
+        {
+            inputVector = (!areControlsFrozen ? moveAction.ReadValue<Vector2>() : Vector2.zero);
+            stateMachine.Update();
+        }
     }
 
     void LateUpdate()

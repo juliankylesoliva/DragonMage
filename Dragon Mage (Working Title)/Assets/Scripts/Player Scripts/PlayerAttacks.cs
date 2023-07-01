@@ -62,8 +62,9 @@ public class PlayerAttacks : MonoBehaviour
 
     public void UseAttack()
     {
-        if (!player.temper.forceFormChange && !isAttackCooldownActive && !isFireTackleActive && player.attackButtonDown)
+        if (!player.temper.forceFormChange && !isAttackCooldownActive && !isFireTackleActive && player.buffers.attackBufferTimeLeft > 0f)
         {
+            player.buffers.ResetAttackBuffer();
             if (player.form.currentMode == CharacterMode.MAGE)
             {
                 if (projectileRef != null)

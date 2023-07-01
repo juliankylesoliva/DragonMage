@@ -166,6 +166,7 @@ public class PlayerForm : MonoBehaviour
         yield return new WaitForSeconds(formChangeTime);
 
         player.rb2d.gravityScale = (prevVelocity.y > 0f ? player.jumping.risingGravity : player.jumping.fallingGravity);
+        if (prevVelocity.y > player.jumping.jumpSpeed) { prevVelocity.y = player.jumping.jumpSpeed; }
         player.rb2d.velocity = prevVelocity;
 
         isChangingForm = false;
