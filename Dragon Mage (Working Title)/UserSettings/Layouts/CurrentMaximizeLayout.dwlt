@@ -23,7 +23,7 @@ MonoBehaviour:
   m_MinSize: {x: 300, y: 200}
   m_MaxSize: {x: 24288, y: 16192}
   vertical: 1
-  controlID: 30497
+  controlID: 19041
 --- !u!114 &2
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -147,7 +147,7 @@ MonoBehaviour:
   m_MinSize: {x: 300, y: 200}
   m_MaxSize: {x: 24288, y: 16192}
   vertical: 0
-  controlID: 30498
+  controlID: 19042
 --- !u!114 &4
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -172,7 +172,7 @@ MonoBehaviour:
   m_MinSize: {x: 200, y: 200}
   m_MaxSize: {x: 16192, y: 16192}
   vertical: 1
-  controlID: 30499
+  controlID: 19043
 --- !u!114 &5
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -197,7 +197,7 @@ MonoBehaviour:
   m_MinSize: {x: 200, y: 100}
   m_MaxSize: {x: 16192, y: 8096}
   vertical: 0
-  controlID: 30500
+  controlID: 19044
 --- !u!114 &6
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -254,10 +254,10 @@ MonoBehaviour:
     m_SaveData: []
   m_SceneHierarchy:
     m_TreeViewState:
-      scrollPos: {x: 0, y: 226}
+      scrollPos: {x: 0, y: 0}
       m_SelectedIDs: 
       m_LastClickedID: 0
-      m_ExpandedIDs: 0afbffffd8640000b0650000d2650000e46600002c6b0000
+      m_ExpandedIDs: ba82feff50b9feff0afbffffc8630000ae640000dc650000386b000042f10000
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -601,9 +601,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: 39.753616, y: 6.7032666, z: -2.3216598}
+    m_Target: {x: -0.97358763, y: 6.21789, z: -1.8422389}
     speed: 2
-    m_Value: {x: 39.753616, y: 6.7032666, z: -2.3216598}
+    m_Value: {x: -0.97358763, y: 6.21789, z: -1.8422389}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -653,9 +653,9 @@ MonoBehaviour:
     speed: 2
     m_Value: {x: 0, y: 0, z: 0, w: 1}
   m_Size:
-    m_Target: 40.559673
+    m_Target: 10.179364
     speed: 2
-    m_Value: 40.559673
+    m_Value: 10.179364
   m_Ortho:
     m_Target: 1
     speed: 2
@@ -1089,13 +1089,13 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Prefabs/Enemies
+    - Assets/Scenes
     m_Globs: []
     m_OriginalText: 
   m_ViewMode: 1
   m_StartGridSize: 96
   m_LastFolders:
-  - Assets/Prefabs/Enemies
+  - Assets/Scenes
   m_LastFoldersGridSize: 96
   m_LastProjectPath: C:\Users\Kyle\Desktop\Kyle\game projects\GitHub Repos\DragonMage\Dragon
     Mage (Working Title)
@@ -1103,9 +1103,9 @@ MonoBehaviour:
     m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 79}
-    m_SelectedIDs: 5c750000
-    m_LastClickedID: 30044
-    m_ExpandedIDs: 00000000b8730000ba730000bc730000be730000c0730000c2730000c4730000e273000000ca9a3b
+    m_SelectedIDs: f8740000
+    m_LastClickedID: 29944
+    m_ExpandedIDs: 00000000cc740000ce740000d0740000d2740000d4740000d6740000d874000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1133,7 +1133,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 00000000b8730000ba730000bc730000be730000c0730000c2730000c473000000ca9a3b
+    m_ExpandedIDs: 00000000cc740000ce740000d0740000d2740000d4740000d6740000d874000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1160,7 +1160,7 @@ MonoBehaviour:
   m_ListAreaState:
     m_SelectedInstanceIDs: 
     m_LastClickedInstanceID: 0
-    m_HadKeyboardFocusLastEvent: 1
+    m_HadKeyboardFocusLastEvent: 0
     m_ExpandedInstanceIDs: c6230000000000002a620000a0980000ae98000044b90000de65000088880000ac710000be730000f4690000a0860000126c000024ab0000227100002e710000d672000046730000a874000030710000e4750000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
