@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 90e909fd30e91e443957f4b75de62f9c
+guid: f0c4ed350f46c7a45bf31aa9db09c7f1
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -106,7 +106,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: SlumTileset_0
+      name: SlumTileset2_0
       rect:
         serializedVersion: 2
         x: 0
@@ -120,14 +120,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 02f77f00c9726a24c97526f2ee70fd09
-      internalID: 422678974
+      spriteID: 3501cd48e4d7e574bb5cd1cf77bc6072
+      internalID: -1352998799
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SlumTileset_1
+      name: SlumTileset2_1
       rect:
         serializedVersion: 2
         x: 32
@@ -141,14 +141,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d9b81349429d2ca408cad9a6e8b75849
-      internalID: 2137243243
+      spriteID: 704e8945a54d50e4b997cd9672c702b2
+      internalID: -1174355015
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SlumTileset_2
+      name: SlumTileset2_2
       rect:
         serializedVersion: 2
         x: 64
@@ -162,14 +162,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b28b6c97eed59ca4592f52228d6e883f
-      internalID: 1210800032
+      spriteID: 06c37b1b437946f4dac8f19a79d29ad6
+      internalID: -212821950
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SlumTileset_3
+      name: SlumTileset2_3
       rect:
         serializedVersion: 2
         x: 96
@@ -183,14 +183,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 54f64af0eb39676499b60f8601a01b1b
-      internalID: -852573262
+      spriteID: 4db10e1e4d20c1b4880d0c6d8489002a
+      internalID: -1202059984
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SlumTileset_4
+      name: SlumTileset2_4
       rect:
         serializedVersion: 2
         x: 128
@@ -204,14 +204,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 825995b47217d1942a91303e15869b2f
-      internalID: 1653049244
+      spriteID: 6575d0e7febb434418d22c615d2991e3
+      internalID: 1444900889
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SlumTileset_5
+      name: SlumTileset2_5
       rect:
         serializedVersion: 2
         x: 160
@@ -225,14 +225,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 45086fc1075baf3489c9b7c46c87e9a8
-      internalID: -1846820662
+      spriteID: cad02302dfa65494e833464c1762154a
+      internalID: -546119786
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SlumTileset_6
+      name: SlumTileset2_6
       rect:
         serializedVersion: 2
         x: 192
@@ -246,14 +246,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1215c397ee21943479dd7aa6f893d0fa
-      internalID: 1150155967
+      spriteID: d998cfb43f183c847831c322d13fde83
+      internalID: -1725803172
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SlumTileset_7
+      name: SlumTileset2_7
       rect:
         serializedVersion: 2
         x: 224
@@ -267,14 +267,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f9e38cbe3ecec684a8d09b4788922ae4
-      internalID: -992165766
+      spriteID: 8e151cac897a2434d9a19f4184062ad7
+      internalID: -915488799
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SlumTileset_8
+      name: SlumTileset2_8
       rect:
         serializedVersion: 2
         x: 256
@@ -288,14 +288,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: dec7d176a8120c34e858c6cb36ca8ea1
-      internalID: 162814710
+      spriteID: 552b007825ee85b4e8c19ba3c6104fb9
+      internalID: -1148650119
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SlumTileset_9
+      name: SlumTileset2_9
       rect:
         serializedVersion: 2
         x: 288
@@ -309,14 +309,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: fb35690e7584c3e4f98207a3f95e34b2
-      internalID: 1165821968
+      spriteID: 3250e3920d196204a9d740df32e6f8ce
+      internalID: 1471208798
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SlumTileset_10
+      name: SlumTileset2_10
       rect:
         serializedVersion: 2
         x: 0
@@ -330,14 +330,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e6127cc57ba36254e9ef81e138a76cd9
-      internalID: 277615892
+      spriteID: b4c505d74ffcaa546bf00e3d7839551e
+      internalID: 2080035762
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SlumTileset_11
+      name: SlumTileset2_11
       rect:
         serializedVersion: 2
         x: 32
@@ -351,14 +351,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f138a286b744e7640bf0059a6604f839
-      internalID: -223777794
+      spriteID: 517cedb69a216f94bbffc66d348978f0
+      internalID: -111442492
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SlumTileset_12
+      name: SlumTileset2_12
       rect:
         serializedVersion: 2
         x: 64
@@ -372,14 +372,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e83306d270388924d86ac9d3ea369fe4
-      internalID: 1574798622
+      spriteID: fb42ffa61e1f2294ca8b9fa97006c997
+      internalID: -1002535095
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SlumTileset_13
+      name: SlumTileset2_13
       rect:
         serializedVersion: 2
         x: 96
@@ -393,14 +393,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4e29dcf9c22cecc46af7b67aebe57891
-      internalID: 528731224
+      spriteID: 084db92bbb417a543865e2dd9fdb8500
+      internalID: -1456706507
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SlumTileset_14
+      name: SlumTileset2_14
       rect:
         serializedVersion: 2
         x: 128
@@ -414,14 +414,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: db2022040fa89ce41ba1565a57a153c3
-      internalID: -470516767
+      spriteID: 87cfe08fe27e6a445ac31e97dfb4046b
+      internalID: -1194672606
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SlumTileset_15
+      name: SlumTileset2_15
       rect:
         serializedVersion: 2
         x: 160
@@ -435,14 +435,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6fcc1fa6a8a34f84b97dc4474694b7ad
-      internalID: -555835369
+      spriteID: 156b4a5fd73351b4c94aa73f93ad9530
+      internalID: -790291467
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SlumTileset_16
+      name: SlumTileset2_16
       rect:
         serializedVersion: 2
         x: 192
@@ -456,14 +456,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d73fa98c1ab1b54478da333ee8c6e990
-      internalID: -77545955
+      spriteID: bac40dd07cda9254b985f94c0460f1c0
+      internalID: -2125894153
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SlumTileset_17
+      name: SlumTileset2_17
       rect:
         serializedVersion: 2
         x: 224
@@ -477,14 +477,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1144c81f18035234faa64fa19819da24
-      internalID: 1691695534
+      spriteID: bf3540f1f5586b747a9c246f3d17c66c
+      internalID: 1210462152
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SlumTileset_18
+      name: SlumTileset2_18
       rect:
         serializedVersion: 2
         x: 256
@@ -498,14 +498,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ac04449a6772c884489b09fc21bc3337
-      internalID: 1135501234
+      spriteID: 35e821d24ae826c409e8a41b98cd04a9
+      internalID: 207681970
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SlumTileset_19
+      name: SlumTileset2_19
       rect:
         serializedVersion: 2
         x: 288
@@ -519,14 +519,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4c83efbc045b1204b9034619c38653a1
-      internalID: 717417743
+      spriteID: 11d1b1c1b6cd67947853e23cfaad05f5
+      internalID: -444463670
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SlumTileset_20
+      name: SlumTileset2_20
       rect:
         serializedVersion: 2
         x: 0
@@ -540,14 +540,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: de545f48276b6e940a5cf4f14112cd8e
-      internalID: -1022462585
+      spriteID: 14b6a85c5a613c149841847789c3f641
+      internalID: -1603643947
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SlumTileset_21
+      name: SlumTileset2_21
       rect:
         serializedVersion: 2
         x: 32
@@ -561,14 +561,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f8ae836378fc6af47aa00c6d0ab74c1a
-      internalID: 480626071
+      spriteID: ac1df9ae640d395438476c957f675131
+      internalID: 887377212
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SlumTileset_22
+      name: SlumTileset2_22
       rect:
         serializedVersion: 2
         x: 64
@@ -582,14 +582,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8642adf341fd0804da2f0a25ca47a222
-      internalID: 1663348513
+      spriteID: 7da8af44141592149b2b41079c9b9573
+      internalID: -502146922
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SlumTileset_23
+      name: SlumTileset2_23
       rect:
         serializedVersion: 2
         x: 96
@@ -603,14 +603,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: aff6b435908762d42b461d6fda9a30a3
-      internalID: -1854621756
+      spriteID: d1dd135c11d04564aa8f1854c395594c
+      internalID: 1801083846
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SlumTileset_24
+      name: SlumTileset2_24
       rect:
         serializedVersion: 2
         x: 128
@@ -624,14 +624,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6a005e0e5448eef46b0038462edc1010
-      internalID: -1629388761
+      spriteID: f9b25906a18153b4bbbf40322517f849
+      internalID: -1404163036
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SlumTileset_25
+      name: SlumTileset2_25
       rect:
         serializedVersion: 2
         x: 160
@@ -645,14 +645,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 99001b6aca1964f46b7fda155e8d82f2
-      internalID: 181953250
+      spriteID: d920b2db2dafe404f86d292f53df344c
+      internalID: -2093011179
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SlumTileset_26
+      name: SlumTileset2_26
       rect:
         serializedVersion: 2
         x: 192
@@ -666,14 +666,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d8602c96ea5ddf64aaf0975ff026d751
-      internalID: -1708046030
+      spriteID: b17f71e58bc4d914cb6e829e517bfe75
+      internalID: -1607921458
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SlumTileset_27
+      name: SlumTileset2_27
       rect:
         serializedVersion: 2
         x: 224
@@ -687,14 +687,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a9f0f6cd6755fe14aa6ce3e103f75ef3
-      internalID: -587910442
+      spriteID: 5327807a992ca954eaa81d367ad1ab5f
+      internalID: 696051529
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SlumTileset_28
+      name: SlumTileset2_28
       rect:
         serializedVersion: 2
         x: 256
@@ -708,14 +708,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5622199225a2ca14e9f367f77fdac676
-      internalID: 596516290
+      spriteID: a40707cfeb00c18479ca9479963f8e45
+      internalID: -1145847050
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SlumTileset_29
+      name: SlumTileset2_29
       rect:
         serializedVersion: 2
         x: 288
@@ -729,14 +729,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b00dbe7a06bf55145af8154eb688db51
-      internalID: 854443173
+      spriteID: 8f1252f8f34ecba49a0ad48cadd656da
+      internalID: 482985968
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SlumTileset_30
+      name: SlumTileset2_30
       rect:
         serializedVersion: 2
         x: 0
@@ -750,14 +750,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d1762290610e93c4a919d552165c9453
-      internalID: 2073772292
+      spriteID: e5e808def9dbbf24683885f44ae1edea
+      internalID: 991715459
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SlumTileset_31
+      name: SlumTileset2_31
       rect:
         serializedVersion: 2
         x: 32
@@ -771,14 +771,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 39ef51acfa0f3684793f9d627d66e542
-      internalID: -1306878348
+      spriteID: d0d074d630164824da05b470066f82f5
+      internalID: 1217069219
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SlumTileset_32
+      name: SlumTileset2_32
       rect:
         serializedVersion: 2
         x: 64
@@ -792,14 +792,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 251162cfe484e694d95f31254a14a20c
-      internalID: 1735194577
+      spriteID: 92ad8145570d25e4dbf59dcce7dc7e67
+      internalID: -1100387129
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SlumTileset_33
+      name: SlumTileset2_33
       rect:
         serializedVersion: 2
         x: 96
@@ -813,14 +813,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4ef2d16aa1d143847ab83bdbdf65f8d1
-      internalID: 1989940256
+      spriteID: 32551770498522749b4890a7430847a6
+      internalID: -1813126654
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SlumTileset_34
+      name: SlumTileset2_34
       rect:
         serializedVersion: 2
         x: 128
@@ -834,14 +834,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: da435b1989057ae4984e201b1543ffe5
-      internalID: 1961365973
+      spriteID: 7273f1a7acc541345afed41c29465339
+      internalID: -1071026070
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SlumTileset_35
+      name: SlumTileset2_35
       rect:
         serializedVersion: 2
         x: 160
@@ -855,14 +855,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: fef8dfffe9f8efb46b006292aa9f095d
-      internalID: 1043997001
+      spriteID: 534f6287ad3a1c746bf7751f2ceac321
+      internalID: -1593097145
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SlumTileset_36
+      name: SlumTileset2_36
       rect:
         serializedVersion: 2
         x: 192
@@ -876,14 +876,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3cadeb1d909ae024a9067dcd980715cf
-      internalID: 468505877
+      spriteID: ae54cbcba0758a54893bb090d46b33fb
+      internalID: 939035229
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SlumTileset_37
+      name: SlumTileset2_37
       rect:
         serializedVersion: 2
         x: 224
@@ -897,14 +897,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 489cd6c3f03bce046a86bd43b50693c7
-      internalID: 1630769502
+      spriteID: 93ac9803fefdf564fa236c336ce46bcf
+      internalID: 885810063
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SlumTileset_38
+      name: SlumTileset2_38
       rect:
         serializedVersion: 2
         x: 256
@@ -918,14 +918,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 18e3ad8ff722e684383c88a22c54b3a7
-      internalID: 1783968247
+      spriteID: 2cfc2e5e9fba7ad44ad47c5fa92d5d1c
+      internalID: -1756001891
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SlumTileset_39
+      name: SlumTileset2_39
       rect:
         serializedVersion: 2
         x: 288
@@ -939,14 +939,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 87a9b4d79999c65488ad5bf27426768a
-      internalID: -1613326586
+      spriteID: 39af6abcd04db014591f22a35f1f9d4f
+      internalID: 1003952270
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SlumTileset_40
+      name: SlumTileset2_40
       rect:
         serializedVersion: 2
         x: 0
@@ -960,14 +960,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c0a99be990c66444c920586ff4110597
-      internalID: -1459891482
+      spriteID: b9db9c2903fea4f46b5c9b708aa90d94
+      internalID: 1273422009
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SlumTileset_41
+      name: SlumTileset2_41
       rect:
         serializedVersion: 2
         x: 32
@@ -981,14 +981,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8dbabbe3bc5dad74f8bc43b7efb77218
-      internalID: -649581498
+      spriteID: 606fcbe30b0da4b4dba3eefd76a2f052
+      internalID: -1232492168
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SlumTileset_42
+      name: SlumTileset2_42
       rect:
         serializedVersion: 2
         x: 64
@@ -1002,14 +1002,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a29e119ee9b364045bd05b9d2f59461f
-      internalID: -1677045609
+      spriteID: f8b33f429bee8c74cadb8482d89a252d
+      internalID: 416255627
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SlumTileset_43
+      name: SlumTileset2_43
       rect:
         serializedVersion: 2
         x: 96
@@ -1023,14 +1023,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0eb27fe0e764a1845986aa9fa977f416
-      internalID: -1519492883
+      spriteID: 9616e5def2bbbd64687cde49e369c75f
+      internalID: 2144904858
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SlumTileset_44
+      name: SlumTileset2_44
       rect:
         serializedVersion: 2
         x: 128
@@ -1044,14 +1044,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1be38fc6f070afc4e95bba58c587797a
-      internalID: 185669656
+      spriteID: 078de8445386e384ba0290229ac51c5f
+      internalID: 1716439371
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SlumTileset_45
+      name: SlumTileset2_45
       rect:
         serializedVersion: 2
         x: 160
@@ -1065,14 +1065,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9f5618fcd66c5b24e9619122a86f5cfb
-      internalID: -54143180
+      spriteID: ee9ae22804ba94f46b109f312fd25609
+      internalID: 1165477690
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SlumTileset_46
+      name: SlumTileset2_46
       rect:
         serializedVersion: 2
         x: 256
@@ -1086,14 +1086,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9eeb59429bd87624291fabab9a3d5586
-      internalID: 1987640127
+      spriteID: e9b144ac4b8e4214bb458d0ce5a9fa2a
+      internalID: 1169386531
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SlumTileset_47
+      name: SlumTileset2_47
       rect:
         serializedVersion: 2
         x: 288
@@ -1107,14 +1107,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1918ababa64a72a47af7fab2fe085b7c
-      internalID: -1299707245
+      spriteID: 39b2d12fae409404d87e14792c8a0b4c
+      internalID: 130995238
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SlumTileset_48
+      name: SlumTileset2_48
       rect:
         serializedVersion: 2
         x: 0
@@ -1128,14 +1128,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ccf10cd37be5dd842a95c205dc00ddee
-      internalID: 859999524
+      spriteID: cba52b533af8fbb49a239abde853e053
+      internalID: -141234356
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SlumTileset_49
+      name: SlumTileset2_49
       rect:
         serializedVersion: 2
         x: 32
@@ -1149,14 +1149,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c47ce2fcd65ce9145938de9806517124
-      internalID: 760140456
+      spriteID: 663c667060234944f84c2a900d535b50
+      internalID: -172683381
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SlumTileset_50
+      name: SlumTileset2_50
       rect:
         serializedVersion: 2
         x: 64
@@ -1170,14 +1170,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 866574d7e12bdcc4ab50c403aa56f469
-      internalID: -1283017410
+      spriteID: 2ea8470c8d9e85f449ed05c6b014b53f
+      internalID: -2106481955
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SlumTileset_51
+      name: SlumTileset2_51
       rect:
         serializedVersion: 2
         x: 96
@@ -1191,14 +1191,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 147700b5c76416e4d817648cd9bd7e31
-      internalID: 875497901
+      spriteID: 16b0a470473257446bff7258fca369fe
+      internalID: 502659992
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SlumTileset_52
+      name: SlumTileset2_52
       rect:
         serializedVersion: 2
         x: 128
@@ -1212,14 +1212,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f939ba7fe5ef3a54797fd20fee946ef8
-      internalID: -599137400
+      spriteID: 66d51e3df6ed2e74bbf0715c4ed07731
+      internalID: -239920870
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SlumTileset_53
+      name: SlumTileset2_53
       rect:
         serializedVersion: 2
         x: 160
@@ -1233,14 +1233,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 83631a9e1a1c17e4da4d3f297c0bfdee
-      internalID: -865553233
+      spriteID: e9b59410970ad63449d48476fe4d9d91
+      internalID: 1496863828
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SlumTileset_54
+      name: SlumTileset2_54
       rect:
         serializedVersion: 2
         x: 256
@@ -1254,14 +1254,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b27d97918be91f04db79f5070b37ffde
-      internalID: -639756114
+      spriteID: 73b5f6748e9c3594ea7deaf58d4ee3ea
+      internalID: 1516935181
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SlumTileset_55
+      name: SlumTileset2_55
       rect:
         serializedVersion: 2
         x: 288
@@ -1275,14 +1275,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 55c01e82e5e60304197864e1b443b4a2
-      internalID: -2090152863
+      spriteID: cdd21ad35f49d6946a9b0d6e77761447
+      internalID: 1485423152
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SlumTileset_56
+      name: SlumTileset2_56
       rect:
         serializedVersion: 2
         x: 0
@@ -1296,14 +1296,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ef9e7638dfbf60942b08c8308daf5d13
-      internalID: 1668927953
+      spriteID: 1e609f0e9ca7ec14bb7864dcf5b5ac60
+      internalID: 1844623228
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SlumTileset_57
+      name: SlumTileset2_57
       rect:
         serializedVersion: 2
         x: 32
@@ -1317,14 +1317,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 34c731c171a0efb47a1cc932b241eeb0
-      internalID: -338708992
+      spriteID: acf79f70e4dcb6f4abadda1a9cce5ea8
+      internalID: -174885081
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SlumTileset_58
+      name: SlumTileset2_58
       rect:
         serializedVersion: 2
         x: 64
@@ -1338,14 +1338,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5f4f3b70e6bd5b844a93fd813217d0c3
-      internalID: 1675345256
+      spriteID: 22f6957790d3bd44fb08f5399eee9437
+      internalID: -708925471
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SlumTileset_59
+      name: SlumTileset2_59
       rect:
         serializedVersion: 2
         x: 96
@@ -1359,14 +1359,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 85e2495dca8295b488790e0d811dd82f
-      internalID: 2053882820
+      spriteID: 8c4050de2c58c2d458b6b450fda1584d
+      internalID: -117385372
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SlumTileset_60
+      name: SlumTileset2_60
       rect:
         serializedVersion: 2
         x: 128
@@ -1380,14 +1380,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: eafc79736f08f4249ad806701c60a28f
-      internalID: -266490060
+      spriteID: 4db910e059ed4774692873852155e663
+      internalID: -1685887971
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SlumTileset_61
+      name: SlumTileset2_61
       rect:
         serializedVersion: 2
         x: 160
@@ -1401,14 +1401,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: bce1a88e410591a419dfe14b42ed4bf3
-      internalID: -2084895342
+      spriteID: c51e1fc8725d1f84bb5074fb6818614f
+      internalID: 98588962
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SlumTileset_62
+      name: SlumTileset2_62
       rect:
         serializedVersion: 2
         x: 0
@@ -1422,14 +1422,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0b640af5fae7def48b8ec58b5183cb1b
-      internalID: -665160838
+      spriteID: e867493bc8063c04eb0a50ab70aa3405
+      internalID: 328821851
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SlumTileset_63
+      name: SlumTileset2_63
       rect:
         serializedVersion: 2
         x: 32
@@ -1443,14 +1443,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 43b856eec5a41c641875c80e138a2de6
-      internalID: -120414988
+      spriteID: ef9369b70a8b0164eb1e947d5f379ded
+      internalID: 1450084997
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SlumTileset_64
+      name: SlumTileset2_64
       rect:
         serializedVersion: 2
         x: 64
@@ -1464,14 +1464,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1a62334a53425a046af76eb93ca3660a
-      internalID: 1628949829
+      spriteID: 1a444723d580cb34ab0ec780f2379285
+      internalID: 120173613
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SlumTileset_65
+      name: SlumTileset2_65
       rect:
         serializedVersion: 2
         x: 96
@@ -1485,14 +1485,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: bdf65696d7dd1d1479668c95e69ca7c5
-      internalID: 742660071
+      spriteID: cc8901307beeed74e909e536c82dcb80
+      internalID: 446503217
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SlumTileset_66
+      name: SlumTileset2_66
       rect:
         serializedVersion: 2
         x: 128
@@ -1506,14 +1506,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f5260f176a4b3fe4fb176463aef5ae5a
-      internalID: 671943196
+      spriteID: f051dd5a9f3c32f45b22f7b216c08693
+      internalID: 1063055866
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SlumTileset_67
+      name: SlumTileset2_67
       rect:
         serializedVersion: 2
         x: 160
@@ -1527,8 +1527,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b0cce8d0f973d634abef0bf89227f60d
-      internalID: 1068326859
+      spriteID: db944411976b80e4999fee5849813e7b
+      internalID: -806975439
       vertices: []
       indices: 
       edges: []
@@ -1544,74 +1544,74 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      SlumTileset_44: 185669656
-      SlumTileset_37: 1630769502
-      SlumTileset_47: -1299707245
-      SlumTileset_14: -470516767
-      SlumTileset_5: -1846820662
-      SlumTileset_59: 2053882820
-      SlumTileset_64: 1628949829
-      SlumTileset_10: 277615892
-      SlumTileset_17: 1691695534
-      SlumTileset_8: 162814710
-      SlumTileset_1: 2137243243
-      SlumTileset_15: -555835369
-      SlumTileset_29: 854443173
-      SlumTileset_67: 1068326859
-      SlumTileset_39: -1613326586
-      SlumTileset_62: -665160838
-      SlumTileset_58: 1675345256
-      SlumTileset_16: -77545955
-      SlumTileset_30: 2073772292
-      SlumTileset_12: 1574798622
-      SlumTileset_41: -649581498
-      SlumTileset_52: -599137400
-      SlumTileset_32: 1735194577
-      SlumTileset_23: -1854621756
-      SlumTileset_21: 480626071
-      SlumTileset_42: -1677045609
-      SlumTileset_24: -1629388761
-      SlumTileset_48: 859999524
-      SlumTileset_56: 1668927953
-      SlumTileset_61: -2084895342
-      SlumTileset_54: -639756114
-      SlumTileset_6: 1150155967
-      SlumTileset_18: 1135501234
-      SlumTileset_25: 181953250
-      SlumTileset_33: 1989940256
-      SlumTileset_51: 875497901
-      SlumTileset_26: -1708046030
-      SlumTileset_65: 742660071
-      SlumTileset_55: -2090152863
-      SlumTileset_60: -266490060
-      SlumTileset_0: 422678974
-      SlumTileset_4: 1653049244
-      SlumTileset_3: -852573262
-      SlumTileset_53: -865553233
-      SlumTileset_40: -1459891482
-      SlumTileset_9: 1165821968
-      SlumTileset_19: 717417743
-      SlumTileset_2: 1210800032
-      SlumTileset_22: 1663348513
-      SlumTileset_20: -1022462585
-      SlumTileset_38: 1783968247
-      SlumTileset_43: -1519492883
-      SlumTileset_13: 528731224
-      SlumTileset_57: -338708992
-      SlumTileset_7: -992165766
-      SlumTileset_45: -54143180
-      SlumTileset_35: 1043997001
-      SlumTileset_31: -1306878348
-      SlumTileset_66: 671943196
-      SlumTileset_36: 468505877
-      SlumTileset_11: -223777794
-      SlumTileset_28: 596516290
-      SlumTileset_46: 1987640127
-      SlumTileset_63: -120414988
-      SlumTileset_50: -1283017410
-      SlumTileset_27: -587910442
-      SlumTileset_34: 1961365973
-      SlumTileset_49: 760140456
+      SlumTileset2_21: 887377212
+      SlumTileset2_28: -1145847050
+      SlumTileset2_67: -806975439
+      SlumTileset2_63: 1450084997
+      SlumTileset2_49: -172683381
+      SlumTileset2_62: 328821851
+      SlumTileset2_46: 1169386531
+      SlumTileset2_2: -212821950
+      SlumTileset2_64: 120173613
+      SlumTileset2_50: -2106481955
+      SlumTileset2_7: -915488799
+      SlumTileset2_33: -1813126654
+      SlumTileset2_29: 482985968
+      SlumTileset2_40: 1273422009
+      SlumTileset2_11: -111442492
+      SlumTileset2_17: 1210462152
+      SlumTileset2_13: -1456706507
+      SlumTileset2_4: 1444900889
+      SlumTileset2_16: -2125894153
+      SlumTileset2_26: -1607921458
+      SlumTileset2_37: 885810063
+      SlumTileset2_44: 1716439371
+      SlumTileset2_65: 446503217
+      SlumTileset2_51: 502659992
+      SlumTileset2_12: -1002535095
+      SlumTileset2_19: -444463670
+      SlumTileset2_45: 1165477690
+      SlumTileset2_5: -546119786
+      SlumTileset2_34: -1071026070
+      SlumTileset2_24: -1404163036
+      SlumTileset2_27: 696051529
+      SlumTileset2_42: 416255627
+      SlumTileset2_56: 1844623228
+      SlumTileset2_1: -1174355015
+      SlumTileset2_47: 130995238
+      SlumTileset2_54: 1516935181
+      SlumTileset2_32: -1100387129
+      SlumTileset2_57: -174885081
+      SlumTileset2_6: -1725803172
+      SlumTileset2_14: -1194672606
+      SlumTileset2_30: 991715459
+      SlumTileset2_58: -708925471
+      SlumTileset2_61: 98588962
+      SlumTileset2_10: 2080035762
+      SlumTileset2_31: 1217069219
+      SlumTileset2_0: -1352998799
+      SlumTileset2_38: -1756001891
+      SlumTileset2_52: -239920870
+      SlumTileset2_20: -1603643947
+      SlumTileset2_22: -502146922
+      SlumTileset2_39: 1003952270
+      SlumTileset2_8: -1148650119
+      SlumTileset2_23: 1801083846
+      SlumTileset2_9: 1471208798
+      SlumTileset2_35: -1593097145
+      SlumTileset2_43: 2144904858
+      SlumTileset2_41: -1232492168
+      SlumTileset2_59: -117385372
+      SlumTileset2_3: -1202059984
+      SlumTileset2_53: 1496863828
+      SlumTileset2_36: 939035229
+      SlumTileset2_48: -141234356
+      SlumTileset2_15: -790291467
+      SlumTileset2_60: -1685887971
+      SlumTileset2_18: 207681970
+      SlumTileset2_55: 1485423152
+      SlumTileset2_66: 1063055866
+      SlumTileset2_25: -2093011179
   spritePackingTag: 
   pSDRemoveMatte: 0
   userData: 

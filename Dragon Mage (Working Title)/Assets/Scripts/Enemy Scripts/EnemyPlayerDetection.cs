@@ -14,6 +14,7 @@ public class EnemyPlayerDetection : MonoBehaviour
     [SerializeField] float playerJumpingThreshold = 1f;
     [SerializeField] LayerMask sightlineLayer;
     [SerializeField] bool useShortSightlineDistance = false;
+    [SerializeField] bool useBehindSightline = false;
     [SerializeField] UnityEvent onPlayerApproach;
     [SerializeField] UnityEvent onPlayerRetreat;
     [SerializeField] UnityEvent onPlayerSightlineEnter;
@@ -97,7 +98,21 @@ public class EnemyPlayerDetection : MonoBehaviour
     private void CheckEnemySightline()
     {
         RaycastHit2D hit = Physics2D.Raycast(this.transform.position, Vector2.right * enemy.movement.GetFacingValue(), Mathf.Infinity, sightlineLayer);
+        RaycastHit2D hit2 = Physics2D.Raycast(this.transform.position, (useBehindSightline ? -1f : 0f) * Vector2.right * enemy.movement.GetFacingValue(), Mathf.Infinity, sightlineLayer);
+
         if (hit.collider != null && hit.transform.tag == "Player" && hit.distance <= (useShortSightlineDistance ? enemyShortSightlineDistance : enemySightlineDistance))
+        {
+            if (!isPlayerInSightline)
+            {
+                onPlayerSightlineEnter.Invoke();
+            }
+            else
+            {
+                onPlayerSightlneStay.Invoke();
+            }
+            isPlayerInSightline = true;
+        }
+        else if (hit2.collider != null && hit2.transform.tag == "Player" && hit2.distance <= (useShortSightlineDistance ? enemyShortSightlineDistance : enemySightlineDistance))
         {
             if (!isPlayerInSightline)
             {
