@@ -97,6 +97,7 @@ public class PlayerDamage : MonoBehaviour
             player.rb2d.sharedMaterial = damagedMaterial;
             yield return null;
         }
+
         while (!player.collisions.IsGrounded || player.rb2d.velocity.magnitude >= knockbackMagnitudeEpsilon)
         {
             player.rb2d.sharedMaterial = damagedMaterial;

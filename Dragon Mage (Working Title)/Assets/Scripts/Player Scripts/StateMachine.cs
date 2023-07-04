@@ -232,6 +232,7 @@ public class StandingState : State
     public override void Update()
     {
         player.animationCtrl.StandingAnimation();
+        if (CheckFormChangeInput() || CheckIfDamaged() || CheckRunInput() || CheckJumpInput() || CheckFireTackleInput() || CheckSuddenRise() || CheckSuddenFall() || CheckSuddenMovement()) { return; }
         if (player.collisions.IsOnASlope)
         {
             player.movement.ApplySlopeResistance();
@@ -239,7 +240,6 @@ public class StandingState : State
             player.rb2d.velocity = Vector2.zero;
             player.movement.ResetIntendedXVelocity();
         }
-        if (CheckFormChangeInput() || CheckRunInput() || CheckJumpInput() || CheckFireTackleInput() || CheckSuddenRise() || CheckSuddenFall() || CheckSuddenMovement() || CheckIfDamaged()) { return; }
     }
 
     public override void Exit()
@@ -647,7 +647,6 @@ public class DamagedState : State
 
     public override void Enter()
     {
-        player.rb2d.isKinematic = false;
         player.rb2d.gravityScale = player.jumping.fallingGravity;
         player.animationCtrl.DamageAnimation(player.form.currentMode);
         player.damage.DoKnockback();

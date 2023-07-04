@@ -47,7 +47,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damageType: 3
-  velocityLookaheadFrames: 5
+  velocityLookaheadFrames: 2
   arrowIndicatorSprites:
   - {fileID: 326314678, guid: 3ba3b56ecefd26940842954d79cd6796, type: 3}
   - {fileID: -1077083613, guid: 3ba3b56ecefd26940842954d79cd6796, type: 3}
@@ -118,7 +118,7 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: -0.25}
-  m_Size: {x: 1.5, y: 1.5}
+  m_Size: {x: 0.5, y: 1.5}
   m_Direction: 0
 --- !u!1 &6792052323068335997
 GameObject:
