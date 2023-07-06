@@ -83,12 +83,30 @@ public class EnemyMovement : MonoBehaviour
         }
     }
 
+    public void FaceTowardsPlayerOverrideCooldown()
+    {
+        float towardsDirection = enemy.playerDetection.GetDirectionToPlayer();
+        if ((GetFacingValue() * towardsDirection) < 0f)
+        {
+            FlipMovementOverrideCooldown();
+        }
+    }
+
     public void FaceAwayFromPlayer()
     {
         float awayDirection = -enemy.playerDetection.GetDirectionToPlayer();
         if ((currentMoveVector.x * awayDirection) < 0f)
         {
             FlipMovement();
+        }
+    }
+
+    public void FaceAwayFromPlayerOverrideCooldown()
+    {
+        float awayDirection = -enemy.playerDetection.GetDirectionToPlayer();
+        if ((currentMoveVector.x * awayDirection) < 0f)
+        {
+            FlipMovementOverrideCooldown();
         }
     }
 

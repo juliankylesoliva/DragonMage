@@ -55,6 +55,7 @@ public class PlayerDamage : MonoBehaviour
         StartCoroutine(HitstunTimerCR(baseHitstunTime));
         player.temper.ChangeTemperBy(player.form.currentMode == CharacterMode.MAGE ? mageTemperDamage : dragonTemperDamage);
         MedalFragment.DropFragments();
+        player.buffers.ResetSpeedBuffer();
         player.sfxCtrl.PlaySound("damage_player");
     }
 

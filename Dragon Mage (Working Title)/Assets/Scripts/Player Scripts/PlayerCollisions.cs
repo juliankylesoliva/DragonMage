@@ -143,7 +143,7 @@ public class PlayerCollisions : MonoBehaviour
 
     private void HeadbonkSoundCheck()
     {
-        if (!prevIsHeadbonking && isHeadbonking)
+        if (!prevIsHeadbonking && isHeadbonking && player.rb2d.velocity.y > 0f)
         {
             SoundFactory.SpawnSound(player.form.currentMode == CharacterMode.MAGE ? "jump_magli_headbonk" : "jump_draelyn_headbonk", groundCheckObj.position, 0.75f);
             GameObject tempObj = EffectFactory.SpawnEffect("HeadbonkEffect", GetSimpleCeilingPoint());

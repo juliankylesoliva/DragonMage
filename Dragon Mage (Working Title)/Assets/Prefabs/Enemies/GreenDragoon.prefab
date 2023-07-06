@@ -149,7 +149,7 @@ SpriteRenderer:
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: b2f1d97570cf5534b976b8a69c3d75b1, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_FlipX: 0
+  m_FlipX: 1
   m_FlipY: 0
   m_DrawMode: 0
   m_Size: {x: 2, y: 2}
@@ -238,6 +238,18 @@ MonoBehaviour:
   onDefeat:
     m_PersistentCalls:
       m_Calls:
+      - m_Target: {fileID: 240950999562514435}
+        m_TargetAssemblyTypeName: EnemyBehavior, Assembly-CSharp
+        m_MethodName: PlayDamageSound
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
       - m_Target: {fileID: 240950999562514686}
         m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
         m_MethodName: SetActive
@@ -286,10 +298,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerDetectionDistance: 14
   enemySightlineDistance: 0
+  enemyShortSightlineDistance: 7
   playerJumpingThreshold: 1
   sightlineLayer:
     serializedVersion: 2
     m_Bits: 0
+  useShortSightlineDistance: 0
+  useBehindSightline: 0
   onPlayerApproach:
     m_PersistentCalls:
       m_Calls:

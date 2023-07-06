@@ -10,6 +10,7 @@ public class TackleHitbox : MonoBehaviour
 
     [SerializeField] DamageType damageType = DamageType.FIRE_TACKLE;
     [SerializeField] int velocityLookaheadFrames = 2;
+    [SerializeField] float facingDirectionOffset = 0.125f;
     [SerializeField] Sprite[] arrowIndicatorSprites;
 
     private Vector2 defaultOffset;
@@ -36,7 +37,7 @@ public class TackleHitbox : MonoBehaviour
         else if (player.attacks.currentAttackState == AttackState.ACTIVE)
         {
             spriteRenderer.sprite = null;
-            hitboxCollider.offset = (defaultOffset + (player.rb2d.velocity * velocityLookaheadFrames * Time.deltaTime));
+            hitboxCollider.offset = (defaultOffset + (Vector2.right * (player.movement.isFacingRight ? facingDirectionOffset : -facingDirectionOffset)) + (player.rb2d.velocity * velocityLookaheadFrames * Time.deltaTime));
         }
         else
         {

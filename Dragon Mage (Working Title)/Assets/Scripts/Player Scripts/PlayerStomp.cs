@@ -8,7 +8,6 @@ public class PlayerStomp : MonoBehaviour
 
     [SerializeField] Transform groundCheckObj;
     [SerializeField] float stompCheckRadius = 0.25f;
-    [SerializeField] float highestYVelocity = 0.5f;
     [SerializeField] LayerMask enemyLayer;
     [SerializeField] DamageType damageType = DamageType.STOMP;
 
@@ -19,16 +18,19 @@ public class PlayerStomp : MonoBehaviour
 
     void Update()
     {
-        if (IsStompingEnemy())
+        if (!PauseHandler.isPaused)
         {
-            player.jumping.GroundJumpStart();
-            player.stateMachine.TransitionTo(player.stateMachine.jumpingState);
+            if (IsStompingEnemy())
+            {
+                player.jumping.GroundJumpStart();
+                player.stateMachine.TransitionTo(player.stateMachine.jumpingState);
+            }
         }
     }
 
     private bool IsStompingEnemy()
     {
-        if (!player.damage.isPlayerDamaged && !player.collisions.IsGrounded && !player.collisions.IsOnASlope && !player.attacks.isBlastJumpActive && !player.attacks.isFireTackleActive && player.rb2d.velocity.y <= highestYVelocity && (player.stateMachine.CurrentState == player.stateMachine.jumpingState || player.stateMachine.CurrentState == player.stateMachine.fallingState || player.stateMachine.CurrentState == player.stateMachine.glidingState || player.stateMachine.CurrentState == player.stateMachine.wallSlidingState || player.stateMachine.CurrentState == player.stateMachine.wallClimbingState || player.stateMachine.CurrentState == player.stateMachine.wallVaultingState))
+        if (!player.damage.isPlayerDamaged && !player.collisions.IsGrounded && !player.collisions.IsOnASlope && !player.attacks.isBlastJumpActive && !player.attacks.isFireTackleActive && (player.stateMachine.CurrentState == player.stateMachine.jumpingState || player.stateMachine.CurrentState == player.stateMachine.fallingState || player.stateMachine.CurrentState == player.stateMachine.glidingState || player.stateMachine.CurrentState == player.stateMachine.wallSlidingState || player.stateMachine.CurrentState == player.stateMachine.wallClimbingState || player.stateMachine.CurrentState == player.stateMachine.wallVaultingState))
         {
             Collider2D[] colliders = Physics2D.OverlapCircleAll(groundCheckObj.position, stompCheckRadius, enemyLayer);
             if (colliders.Length > 0)

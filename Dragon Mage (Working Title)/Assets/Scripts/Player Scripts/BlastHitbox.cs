@@ -71,15 +71,6 @@ public class BlastHitbox : MonoBehaviour
                 temper.NeutralizeTemperBy(-1);
             }
         }
-        else if (rb != null && rb.bodyType == RigidbodyType2D.Dynamic)
-        {
-            if (player != null && (player.attacks.isFireTackleActive || player.damage.isPlayerDamaged)) { return; }
-            Vector2 velocityVec = (other.transform.position - this.transform.position);
-            float distance = velocityVec.magnitude;
-            velocityVec = velocityVec.normalized;
-            velocityVec *= (knockbackStrength / (1f + distance));
-            rb.velocity += velocityVec;
-        }
         else if (block != null && !block.isReinforced && (block.breakableBy == BreakableType.ANY || block.breakableBy == BreakableType.MAGIC))
         {
             if (!DoesBlastGoThruWall(other))
@@ -92,6 +83,15 @@ public class BlastHitbox : MonoBehaviour
 
         if (player != null && player.form.currentMode == CharacterMode.MAGE)
         {
+            if (rb != null && rb.bodyType == RigidbodyType2D.Dynamic)
+            {
+                if (player != null && (player.attacks.isFireTackleActive || player.damage.isPlayerDamaged)) { return; }
+                Vector2 velocityVec = (other.transform.position - this.transform.position);
+                float distance = velocityVec.magnitude;
+                velocityVec = velocityVec.normalized;
+                velocityVec *= (knockbackStrength / (1f + distance));
+                rb.velocity += velocityVec;
+            }
             player.attacks.UseBlastJump();
         }
     }

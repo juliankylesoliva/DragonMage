@@ -60,6 +60,11 @@ public class EnemyBehavior : MonoBehaviour
         onRoomActive.Invoke();
     }
 
+    public void PlayDamageSound()
+    {
+        SoundFactory.SpawnSound("damage_enemy", this.transform.position, 0.65f);
+    }
+
     public bool DefeatEnemy(DamageType dmgType)
     {
         if (IsImmune(dmgType)) { return false; }
