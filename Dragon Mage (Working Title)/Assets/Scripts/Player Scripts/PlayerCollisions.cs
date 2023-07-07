@@ -221,7 +221,7 @@ public class PlayerCollisions : MonoBehaviour
     public void SnapToGround(bool bypassDistanceCheck, float maxDistance = -1f)
     {
         Vector2 toMove = GetClosestGroundPoint();
-        toMove += new Vector2(0f, 1f + groundCheckRadius);
+        toMove += new Vector2(0f, Vector3.Distance(this.transform.position, groundCheckObj.position) + groundCheckRadius);
         if (bypassDistanceCheck || (Vector2.Distance(this.transform.position, toMove) <= (maxDistance >= 0f ? maxDistance : slopeCheckDistance))) { this.transform.position = toMove; }
         GroundCheck();
     }
