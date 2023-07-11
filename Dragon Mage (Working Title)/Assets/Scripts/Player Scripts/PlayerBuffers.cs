@@ -46,17 +46,20 @@ public class PlayerBuffers : MonoBehaviour
     {
         while (true)
         {
-            if (player.jumpButtonDown)
+            if (!PauseHandler.isPaused)
             {
-                jumpBufferTimeLeft = jumpBufferTime;
-            }
-
-            if (jumpBufferTimeLeft > 0f)
-            {
-                jumpBufferTimeLeft -= Time.deltaTime;
-                if (jumpBufferTimeLeft < 0f)
+                if (player.jumpButtonDown)
                 {
-                    jumpBufferTimeLeft = 0f;
+                    jumpBufferTimeLeft = jumpBufferTime;
+                }
+
+                if (jumpBufferTimeLeft > 0f)
+                {
+                    jumpBufferTimeLeft -= Time.deltaTime;
+                    if (jumpBufferTimeLeft < 0f)
+                    {
+                        jumpBufferTimeLeft = 0f;
+                    }
                 }
             }
 
@@ -68,17 +71,20 @@ public class PlayerBuffers : MonoBehaviour
     {
         while (true)
         {
-            if (player.attackButtonDown)
+            if (!PauseHandler.isPaused)
             {
-                attackBufferTimeLeft = attackBufferTime;
-            }
-
-            if (attackBufferTimeLeft > 0f)
-            {
-                attackBufferTimeLeft -= Time.deltaTime;
-                if (attackBufferTimeLeft < 0f)
+                if (player.attackButtonDown)
                 {
-                    attackBufferTimeLeft = 0f;
+                    attackBufferTimeLeft = attackBufferTime;
+                }
+
+                if (attackBufferTimeLeft > 0f)
+                {
+                    attackBufferTimeLeft -= Time.deltaTime;
+                    if (attackBufferTimeLeft < 0f)
+                    {
+                        attackBufferTimeLeft = 0f;
+                    }
                 }
             }
 
@@ -90,17 +96,20 @@ public class PlayerBuffers : MonoBehaviour
     {
         while (true)
         {
-            if (player.formChangeButtonDown)
+            if (!PauseHandler.isPaused)
             {
-                formChangeBufferTimeLeft = formChangeBufferTime;
-            }
-
-            if (formChangeBufferTimeLeft > 0f)
-            {
-                formChangeBufferTimeLeft -= Time.deltaTime;
-                if (formChangeBufferTimeLeft < 0f)
+                if (player.formChangeButtonDown)
                 {
-                    formChangeBufferTimeLeft = 0;
+                    formChangeBufferTimeLeft = formChangeBufferTime;
+                }
+
+                if (formChangeBufferTimeLeft > 0f)
+                {
+                    formChangeBufferTimeLeft -= Time.deltaTime;
+                    if (formChangeBufferTimeLeft < 0f)
+                    {
+                        formChangeBufferTimeLeft = 0;
+                    }
                 }
             }
 
@@ -113,23 +122,26 @@ public class PlayerBuffers : MonoBehaviour
         highestSpeedBufferTimeLeft = highestSpeedBufferTime;
         while (true)
         {
-            float currentHorizontalSpeed = (player.jumping.currentWallClimbTime > 0f && player.jumping.currentWallClimbTime < player.jumping.maxWallClimbTime ? Mathf.Max(player.jumping.storedWallClimbSpeed, Mathf.Abs(player.rb2d.velocity.x)) : Mathf.Abs(player.rb2d.velocity.x));
+            if (!PauseHandler.isPaused)
+            {
+                float currentHorizontalSpeed = (player.jumping.currentWallClimbTime > 0f && player.jumping.currentWallClimbTime < player.jumping.maxWallClimbTime ? Mathf.Max(player.jumping.storedWallClimbSpeed, Mathf.Abs(player.rb2d.velocity.x)) : Mathf.Abs(player.rb2d.velocity.x));
 
-            if (currentHorizontalSpeed >= highestSpeedBuffer)
-            {
-                highestSpeedBuffer = currentHorizontalSpeed;
-                highestSpeedBufferTimeLeft = highestSpeedBufferTime;
-            }
-            else
-            {
-                if (!player.form.isChangingForm)
+                if (currentHorizontalSpeed >= highestSpeedBuffer)
                 {
-                    if (highestSpeedBufferTimeLeft > 0f && (player.collisions.IsGrounded || player.collisions.IsOnASlope || player.collisions.IsAgainstWall)) { highestSpeedBufferTimeLeft -= Time.deltaTime; }
-
-                    if (highestSpeedBufferTimeLeft <= 0f)
+                    highestSpeedBuffer = currentHorizontalSpeed;
+                    highestSpeedBufferTimeLeft = highestSpeedBufferTime;
+                }
+                else
+                {
+                    if (!player.form.isChangingForm)
                     {
-                        highestSpeedBufferTimeLeft = 0f;
-                        highestSpeedBuffer = currentHorizontalSpeed;
+                        if (highestSpeedBufferTimeLeft > 0f && (player.collisions.IsGrounded || player.collisions.IsOnASlope || player.collisions.IsAgainstWall)) { highestSpeedBufferTimeLeft -= Time.deltaTime; }
+
+                        if (highestSpeedBufferTimeLeft <= 0f)
+                        {
+                            highestSpeedBufferTimeLeft = 0f;
+                            highestSpeedBuffer = currentHorizontalSpeed;
+                        }
                     }
                 }
             }
@@ -148,27 +160,30 @@ public class PlayerBuffers : MonoBehaviour
         bool prevIsGrounded = player.collisions.IsGrounded;
         while (true)
         {
-            if ((!player.collisions.IsGrounded && !player.collisions.IsOnASlope) && prevIsGrounded && coyoteTimeLeft <= 0f && player.rb2d.velocity.y < 0f)
+            if (!PauseHandler.isPaused)
             {
-                coyoteTimeLeft = coyoteTime;
-            }
-            else if (((player.collisions.IsGrounded || player.collisions.IsOnASlope) && !prevIsGrounded) || ((player.collisions.IsGrounded || player.collisions.IsOnASlope) && prevIsGrounded))
-            {
-                coyoteTimeLeft = 0f;
-            }
-            else { /* Nothing */ }
-
-            if (coyoteTimeLeft > 0f)
-            {
-                coyoteTimeLeft -= Time.deltaTime;
-                if (coyoteTimeLeft < 0f)
+                if ((!player.collisions.IsGrounded && !player.collisions.IsOnASlope) && prevIsGrounded && coyoteTimeLeft <= 0f && player.rb2d.velocity.y < 0f)
+                {
+                    coyoteTimeLeft = coyoteTime;
+                }
+                else if (((player.collisions.IsGrounded || player.collisions.IsOnASlope) && !prevIsGrounded) || ((player.collisions.IsGrounded || player.collisions.IsOnASlope) && prevIsGrounded))
                 {
                     coyoteTimeLeft = 0f;
                 }
+                else { /* Nothing */ }
+
+                if (coyoteTimeLeft > 0f)
+                {
+                    coyoteTimeLeft -= Time.deltaTime;
+                    if (coyoteTimeLeft < 0f)
+                    {
+                        coyoteTimeLeft = 0f;
+                    }
+                }
+
+                prevIsGrounded = (player.collisions.IsGrounded || player.collisions.IsOnASlope);
             }
-
-            prevIsGrounded = (player.collisions.IsGrounded || player.collisions.IsOnASlope);
-
+            
             yield return null;
         }
     }
