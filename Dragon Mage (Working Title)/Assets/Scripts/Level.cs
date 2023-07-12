@@ -25,6 +25,8 @@ public class Level : MonoBehaviour
 
     private void LevelStartup()
     {
+        MedalFragment.ResetFragments();
+
         Vector2 destinationCoords = startingRoom.GetRoomEntranceCoordinates(startingRoomEntranceIndex);
         playerReference.transform.position = new Vector3(destinationCoords.x, destinationCoords.y, 0f);
 

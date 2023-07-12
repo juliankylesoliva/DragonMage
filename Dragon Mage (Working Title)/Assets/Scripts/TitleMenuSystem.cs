@@ -7,19 +7,24 @@ using TMPro;
 
 public class TitleMenuSystem : MonoBehaviour
 {
+    [SerializeField] LevelInfo[] levelInfoList;
+
     [SerializeField] Animator menuCursor;
     [SerializeField] ScreenEffects screenEffects;
 
     [SerializeField] TMP_Text startButton;
-    [SerializeField] TMP_Text storyButton;
     [SerializeField] TMP_Text creditsButton;
     [SerializeField] TMP_Text exitButton;
 
+    [SerializeField] TMP_Text levelSelectText;
+
     [SerializeField] GameObject topMenuScreen;
-    [SerializeField] GameObject storySubscreen;
+    [SerializeField] GameObject levelSelectSubscreen;
     [SerializeField] GameObject creditsSubscreen;
 
     [SerializeField] InputAction cursorUpAction;
+    [SerializeField] InputAction cursorRightAction;
+    [SerializeField] InputAction cursorLeftAction;
     [SerializeField] InputAction cursorDownAction;
 
     [SerializeField] InputAction menuSelectAction;
@@ -27,16 +32,21 @@ public class TitleMenuSystem : MonoBehaviour
 
     private bool isUpButtonPressed = false;
     private bool isDownButtonPressed = false;
+    private bool isRightButtonPressed = false;
+    private bool isLeftButtonPressed = false;
     private bool isSelectButtonPressed = false;
     private bool isBackButtonPressed = false;
 
     private bool isStartingGame = false;
     private bool isInSubscreen = false;
     private int currentMenuSelection = 0;
+    private int currentLevelSelection = 0;
 
     void OnEnable()
     {
         cursorUpAction.Enable();
+        cursorRightAction.Enable();
+        cursorLeftAction.Enable();
         cursorDownAction.Enable();
         menuSelectAction.Enable();
         menuBackAction.Enable();
@@ -45,6 +55,8 @@ public class TitleMenuSystem : MonoBehaviour
     void OnDisable()
     {
         cursorUpAction.Disable();
+        cursorRightAction.Disable();
+        cursorLeftAction.Disable();
         cursorDownAction.Disable();
         menuSelectAction.Disable();
         menuBackAction.Disable();
@@ -53,6 +65,8 @@ public class TitleMenuSystem : MonoBehaviour
     void Awake()
     {
         cursorUpAction.started += ctx => { isUpButtonPressed = true; };
+        cursorRightAction.started += ctx => { isRightButtonPressed = true; };
+        cursorLeftAction.started += ctx => { isLeftButtonPressed = true; };
         cursorDownAction.started += ctx => { isDownButtonPressed = true; };
         menuSelectAction.started += ctx => { isSelectButtonPressed = true; };
         menuBackAction.started += ctx => { isBackButtonPressed = true; };
@@ -61,11 +75,13 @@ public class TitleMenuSystem : MonoBehaviour
     void Start()
     {
         UpdateCursorPosition();
+        UpdateLevelSelectText(levelInfoList[currentLevelSelection]);
     }
 
     void Update()
     {
         MoveMenuCursor();
+        MakeLevelSelection();
         MakeMenuSelection();
         GoBackToTopMenu();
     }
@@ -74,6 +90,8 @@ public class TitleMenuSystem : MonoBehaviour
     {
         isUpButtonPressed = false;
         isDownButtonPressed = false;
+        isRightButtonPressed = false;
+        isLeftButtonPressed = false;
         isSelectButtonPressed = false;
         isBackButtonPressed = false;
     }
@@ -87,12 +105,12 @@ public class TitleMenuSystem : MonoBehaviour
             if (isUpButtonPressed)
             {
                 currentMenuSelection--;
-                if (currentMenuSelection < 0) { currentMenuSelection = 3; }
+                if (currentMenuSelection < 0) { currentMenuSelection = 2; }
             }
             else
             {
                 currentMenuSelection++;
-                if (currentMenuSelection > 3) { currentMenuSelection = 0; }
+                if (currentMenuSelection > 2) { currentMenuSelection = 0; }
             }
             SoundFactory.SpawnSound("attack_magli_bounce", Vector3.zero, 0.5f);
             SoundFactory.SpawnSound("attack_draelyn_bump", Vector3.zero, 0.5f);
@@ -108,12 +126,9 @@ public class TitleMenuSystem : MonoBehaviour
                 menuCursor.transform.position = startButton.transform.position;
                 break;
             case 1:
-                menuCursor.transform.position = storyButton.transform.position;
-                break;
-            case 2:
                 menuCursor.transform.position = creditsButton.transform.position;
                 break;
-            case 3:
+            case 2:
                 menuCursor.transform.position = exitButton.transform.position;
                 break;
             default:
@@ -128,25 +143,18 @@ public class TitleMenuSystem : MonoBehaviour
             switch (currentMenuSelection)
             {
                 case 0:
-                    SoundFactory.SpawnSound("attack_magli_blastjump", Vector3.zero, 0.5f);
-                    SoundFactory.SpawnSound("attack_draelyn_tackle", Vector3.zero, 0.5f);
-                    isStartingGame = true;
-                    menuCursor.Play("Select");
-                    StartCoroutine(GameStartCR());
-                    break;
-                case 1:
                     SoundFactory.SpawnSound("transformation_magli", Vector3.zero, 0.5f);
                     topMenuScreen.SetActive(false);
-                    storySubscreen.SetActive(true);
+                    levelSelectSubscreen.SetActive(true);
                     isInSubscreen = true;
                     break;
-                case 2:
+                case 1:
                     SoundFactory.SpawnSound("transformation_magli", Vector3.zero, 0.5f);
                     topMenuScreen.SetActive(false);
                     creditsSubscreen.SetActive(true);
                     isInSubscreen = true;
                     break;
-                case 3:
+                case 2:
                     Application.Quit();
                     break;
                 default:
@@ -155,12 +163,51 @@ public class TitleMenuSystem : MonoBehaviour
         }
     }
 
+    private void MakeLevelSelection()
+    {
+        if (!isStartingGame && isInSubscreen)
+        {
+            if (isSelectButtonPressed)
+            {
+                SoundFactory.SpawnSound("attack_magli_blastjump", Vector3.zero, 0.5f);
+                SoundFactory.SpawnSound("attack_draelyn_tackle", Vector3.zero, 0.5f);
+                isStartingGame = true;
+                // menuCursor.Play("Select");
+                StartCoroutine(GameStartCR());
+            }
+            else if ((isLeftButtonPressed || isRightButtonPressed) && !(isLeftButtonPressed && isRightButtonPressed))
+            {
+                if (isLeftButtonPressed)
+                {
+                    if (currentLevelSelection > 0) { currentLevelSelection--; }
+                    else { currentLevelSelection = (levelInfoList.Length - 1); }
+                }
+                else if (isRightButtonPressed)
+                {
+                    if (currentLevelSelection < (levelInfoList.Length - 1)) { currentLevelSelection++; }
+                    else { currentLevelSelection = 0; }
+                }
+                else { /* Nothing */ }
+
+                SoundFactory.SpawnSound("attack_magli_bounce", Vector3.zero, 0.5f);
+                SoundFactory.SpawnSound("attack_draelyn_bump", Vector3.zero, 0.5f);
+                UpdateLevelSelectText(levelInfoList[currentLevelSelection]);
+            }
+            else { /* Nothing */ }
+        }
+    }
+
+    private void UpdateLevelSelectText(LevelInfo info)
+    {
+        levelSelectText.text = $"<b><i>{info.nameHeader}</b></i>\n\n<size=3>{info.storyDescription}</size>";
+    }
+
     private void GoBackToTopMenu()
     {
         if (isInSubscreen && isBackButtonPressed)
         {
             SoundFactory.SpawnSound("transformation_draelyn", Vector3.zero, 0.5f);
-            storySubscreen.SetActive(false);
+            levelSelectSubscreen.SetActive(false);
             creditsSubscreen.SetActive(false);
             topMenuScreen.SetActive(true);
             isInSubscreen = false;
@@ -177,6 +224,6 @@ public class TitleMenuSystem : MonoBehaviour
 
         yield return new WaitForSeconds(2f);
 
-        SceneManager.LoadScene("A1_L0_Prisoner_Prologue");
+        SceneManager.LoadScene(levelInfoList[currentLevelSelection].sceneName);
     }
 }
