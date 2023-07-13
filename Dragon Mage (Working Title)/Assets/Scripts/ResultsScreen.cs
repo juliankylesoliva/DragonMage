@@ -4,15 +4,25 @@ using UnityEngine;
 
 public class ResultsScreen : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    private static bool isDisplayingResults = false;
 
-    // Update is called once per frame
     void Update()
     {
-        
+
+    }
+
+    public void DisplayResults()
+    {
+        if (!isDisplayingResults)
+        {
+            StartCoroutine(DisplayResultsCR());
+        }
+    }
+
+    private IEnumerator DisplayResultsCR()
+    {
+        if (isDisplayingResults) { yield break; }
+
+        yield return null;
     }
 }

@@ -95,13 +95,13 @@ public class PlayerDamage : MonoBehaviour
         
         while (player.stateMachine.CurrentState != player.stateMachine.damagedState)
         {
-            player.rb2d.sharedMaterial = damagedMaterial;
+            player.rb2d.sharedMaterial = fullFrictionMaterial;
             yield return null;
         }
 
         while (!player.collisions.IsGrounded || player.rb2d.velocity.magnitude >= knockbackMagnitudeEpsilon)
         {
-            player.rb2d.sharedMaterial = damagedMaterial;
+            player.rb2d.sharedMaterial = fullFrictionMaterial;
             yield return null;
         }
         

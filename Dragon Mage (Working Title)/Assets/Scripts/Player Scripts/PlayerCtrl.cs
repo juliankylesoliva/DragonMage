@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 public class PlayerCtrl : MonoBehaviour
 {
@@ -24,15 +23,6 @@ public class PlayerCtrl : MonoBehaviour
     [HideInInspector] public Rigidbody2D rb2d;
     [HideInInspector] public SpriteRenderer charSprite;
 
-    /* INPUT ACTIONS */
-    [Header("Input Actions")]
-    [SerializeField] private InputAction moveAction;
-    [SerializeField] private InputAction jumpAction;
-    [SerializeField] private InputAction attackAction;
-    [SerializeField] private InputAction technicalAction;
-    [SerializeField] private InputAction formChangeAction;
-    [SerializeField] private InputAction interactAction;
-
     /* INPUT VARIABLES */
     public bool areControlsFrozen { get; private set; }
     public Vector2 inputVector { get; private set; }
@@ -43,26 +33,6 @@ public class PlayerCtrl : MonoBehaviour
     public bool technicalButtonHeld { get; private set; }
     public bool formChangeButtonDown { get; private set; }
     public bool interactButtonDown { get; private set; }
-
-    void OnEnable()
-    {
-        moveAction.Enable();
-        jumpAction.Enable();
-        attackAction.Enable();
-        technicalAction.Enable();
-        formChangeAction.Enable();
-        interactAction.Enable();
-    }
-
-    void OnDisable()
-    {
-        moveAction.Disable();
-        jumpAction.Disable();
-        attackAction.Disable();
-        technicalAction.Disable();
-        formChangeAction.Disable();
-        interactAction.Disable();
-    }
 
     void Awake()
     {
@@ -85,36 +55,28 @@ public class PlayerCtrl : MonoBehaviour
         
         stateMachine = new StateMachine(this);
         stateMachine.Initialize(stateMachine.standingState);
-        
-        jumpAction.started += ctx => { jumpButtonDown = !areControlsFrozen; jumpButtonHeld = !areControlsFrozen; };
-        jumpAction.canceled += ctx => { jumpButtonHeld = false; };
-
-        attackAction.started += ctx => { attackButtonDown = !areControlsFrozen; attackButtonHeld = !areControlsFrozen; };
-        attackAction.canceled += ctx => { attackButtonHeld = false; };
-
-        technicalAction.started += ctx => { technicalButtonHeld = !areControlsFrozen; };
-        technicalAction.canceled += ctx => { technicalButtonHeld = false; };
-
-        formChangeAction.started += ctx => { formChangeButtonDown = !areControlsFrozen; };
-
-        interactAction.started += ctx => { interactButtonDown = !areControlsFrozen; };
     }
 
     void Update()
     {
         if (!PauseHandler.isPaused)
         {
-            inputVector = (!areControlsFrozen ? moveAction.ReadValue<Vector2>() : Vector2.zero);
+            inputVector = (!areControlsFrozen ? InputHub.inputVector : Vector2.zero);
+
+            jumpButtonDown = InputHub.jumpButtonDown;
+            jumpButtonHeld = (!areControlsFrozen && InputHub.jumpButtonHeld);
+
+            attackButtonDown = InputHub.attackButtonDown;
+            attackButtonHeld = (!areControlsFrozen && InputHub.attackButtonHeld);
+
+            technicalButtonHeld = (!areControlsFrozen && InputHub.technicalButtonHeld);
+
+            formChangeButtonDown = (!areControlsFrozen && InputHub.formChangeButtonDown);
+
+            interactButtonDown = (!areControlsFrozen && InputHub.interactButtonDown);
+
             stateMachine.Update();
         }
-    }
-
-    void LateUpdate()
-    {
-        if (jumpButtonDown) { jumpButtonDown = false; }
-        if (attackButtonDown) { attackButtonDown = false; }
-        if (formChangeButtonDown) { formChangeButtonDown = false; }
-        if (interactButtonDown) { interactButtonDown = false; }
     }
 
     public void FreezeControls()

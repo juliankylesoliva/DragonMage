@@ -83,7 +83,7 @@ public class BlastHitbox : MonoBehaviour
 
         if (player != null && player.form.currentMode == CharacterMode.MAGE)
         {
-            if (rb != null && rb.bodyType == RigidbodyType2D.Dynamic)
+            if (player.stateMachine.CurrentState.name != "Standing" && rb != null && rb.bodyType == RigidbodyType2D.Dynamic)
             {
                 if (player != null && (player.attacks.isFireTackleActive || player.damage.isPlayerDamaged)) { return; }
                 Vector2 velocityVec = (other.transform.position - this.transform.position);

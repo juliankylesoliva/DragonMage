@@ -232,14 +232,14 @@ public class StandingState : State
     public override void Update()
     {
         player.animationCtrl.StandingAnimation();
-        if (CheckFormChangeInput() || CheckIfDamaged() || CheckRunInput() || CheckJumpInput() || CheckFireTackleInput() || CheckSuddenRise() || CheckSuddenFall() || CheckSuddenMovement()) { return; }
         if (player.collisions.IsOnASlope)
         {
             player.movement.ApplySlopeResistance();
             player.collisions.SnapToGround(true);
-            player.rb2d.velocity = Vector2.zero;
             player.movement.ResetIntendedXVelocity();
         }
+        player.rb2d.velocity = Vector2.zero;
+        if (CheckFormChangeInput() || CheckIfDamaged() || CheckRunInput() || CheckJumpInput() || CheckFireTackleInput() || CheckSuddenRise() || CheckSuddenFall() || CheckSuddenMovement()) { return; }
     }
 
     public override void Exit()
