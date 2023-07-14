@@ -5,10 +5,9 @@ using UnityEngine.InputSystem;
 
 public class InputHub : MonoBehaviour
 {
-    PlayerInput playerInput;
-
-    public string currentControlScheme { get { return playerInput.currentControlScheme; } }
-
+    public static PlayerInput playerInput { get; private set; }
+    
+    /* In-Game Controls */
     public static Vector2 inputVector { get; private set; }
 
     public static bool jumpButtonDown { get; private set; }
@@ -23,6 +22,30 @@ public class InputHub : MonoBehaviour
 
     public static bool technicalButtonHeld { get; private set; }
 
+    /* Miscellaneous and Menu Controls */
+    public static bool pauseButtonDown { get; private set; }
+
+    public static bool menuUpButtonDown { get; private set; }
+    public static bool menuUpButtonHeld { get; private set; }
+
+    public static bool menuDownButtonDown { get; private set; }
+    public static bool menuDownButtonHeld { get; private set; }
+
+    public static bool menuRightButtonDown { get; private set; }
+    public static bool menuRightButtonHeld { get; private set; }
+
+    public static bool menuLeftButtonDown { get; private set; }
+    public static bool menuLeftButtonHeld { get; private set; }
+
+    public static bool menuSelectButtonDown { get; private set; }
+    public static bool menuSelectButtonHeld { get; private set; }
+
+    public static bool menuBackButtonDown { get; private set; }
+    public static bool menuBackButtonHeld { get; private set; }
+
+    public static bool titleScreenButtonDown { get; private set; }
+    public static bool titleScreenButtonHeld { get; private set; }
+
     void Awake()
     {
         playerInput = this.gameObject.GetComponent<PlayerInput>();
@@ -34,21 +57,30 @@ public class InputHub : MonoBehaviour
         if (attackButtonDown) { attackButtonDown = false; }
         if (formChangeButtonDown) { formChangeButtonDown = false; }
         if (interactButtonDown) { interactButtonDown = false; }
+
+        if (pauseButtonDown) { pauseButtonDown = false; }
+        if (menuUpButtonDown) { menuUpButtonDown = false; }
+        if (menuDownButtonDown) { menuDownButtonDown = false; }
+        if (menuRightButtonDown) { menuRightButtonDown = false; }
+        if (menuLeftButtonDown) { menuLeftButtonDown = false; }
+        if (menuSelectButtonDown) { menuSelectButtonDown = false; }
+        if (menuBackButtonDown) { menuBackButtonDown = false; }
+        if (titleScreenButtonDown) { titleScreenButtonDown = false; }
     }
 
     void OnDeviceLost()
     {
-        Debug.Log("Device Lost!");
+        
     }
 
     void OnDeviceRegained()
     {
-        Debug.Log("Device Regained!");
+        
     }
 
     void OnControlsChanged()
     {
-        Debug.Log("Controls Changed!");
+        
     }
 
     void OnMove(InputValue value)
@@ -109,43 +141,50 @@ public class InputHub : MonoBehaviour
         technicalButtonHeld = value.isPressed;
     }
 
-    void OnPause()
+    void OnPause(InputValue value)
     {
-
+        if (value.isPressed) { pauseButtonDown = true; }
     }
 
-    void OnMenuUp()
+    void OnMenuUp(InputValue value)
     {
-
+        menuUpButtonHeld = value.isPressed;
+        if (menuUpButtonHeld) { menuUpButtonDown = true; }
     }
 
-    void OnMenuDown()
+    void OnMenuDown(InputValue value)
     {
-
+        menuDownButtonHeld = value.isPressed;
+        if (menuDownButtonHeld) { menuDownButtonDown = true; }
     }
 
-    void OnMenuRight()
+    void OnMenuRight(InputValue value)
     {
-
+        menuRightButtonHeld = value.isPressed;
+        if (menuRightButtonHeld) { menuRightButtonDown = true; }
     }
 
-    void OnMenuLeft()
+    void OnMenuLeft(InputValue value)
     {
-
+        menuLeftButtonHeld = value.isPressed;
+        if (menuLeftButtonHeld) { menuLeftButtonDown = true; }
     }
 
-    void OnMenuSelect()
+    void OnMenuSelect(InputValue value)
     {
-
+        menuSelectButtonHeld = value.isPressed;
+        if (menuSelectButtonHeld) { menuSelectButtonDown = true; }
     }
 
-    void OnMenuBack()
+    void OnMenuBack(InputValue value)
     {
-
+        menuBackButtonHeld = value.isPressed;
+        if (menuBackButtonHeld) { menuBackButtonDown = true; }
     }
 
-    void OnToTitleScreen()
+    void OnToTitleScreen(InputValue value)
     {
-
+        titleScreenButtonHeld = value.isPressed;
+        if (titleScreenButtonHeld) { titleScreenButtonDown = true; }
     }
 }

@@ -8,53 +8,31 @@ public class PauseHandler : MonoBehaviour
 {
     [SerializeField] GameObject pauseMenu;
 
-    [SerializeField] InputAction pauseAction;
-    [SerializeField] InputAction titleScreenAction;
-
     public static bool isPaused { get; private set; }
-    private bool isPauseButtonPressed = false;
-    private bool isTitleScreenButtonHeld = false;
 
     private float currentTitleScreenTimer = 0f;
 
-    void OnEnable()
-    {
-        pauseAction.Enable();
-        titleScreenAction.Enable();
-    }
-
-    void OnDisable()
-    {
-        pauseAction.Disable();
-        titleScreenAction.Disable();
-    }
-
-    void Awake()
-    {
-        pauseAction.started += ctx => { isPauseButtonPressed = true; };
-        titleScreenAction.started += ctx => { isTitleScreenButtonHeld = true; };
-        titleScreenAction.canceled += ctx => { isTitleScreenButtonHeld = false; };
-    }
-
     void Update()
     {
-        if (isPauseButtonPressed)
+        if (InputHub.pauseButtonDown)
         {
             if (isPaused)
             {
+                InputHub.playerInput.SwitchCurrentActionMap("In-Game");
                 pauseMenu.SetActive(false);
                 isPaused = false;
                 Time.timeScale = 1f;
             }
             else
             {
+                InputHub.playerInput.SwitchCurrentActionMap("Menus");
                 pauseMenu.SetActive(true);
                 isPaused = true;
                 Time.timeScale = 0f;
             }
         }
 
-        if (isPaused && isTitleScreenButtonHeld)
+        if (isPaused && InputHub.titleScreenButtonHeld)
         {
             currentTitleScreenTimer += Time.unscaledDeltaTime;
             if (currentTitleScreenTimer >= 3f)
@@ -68,10 +46,5 @@ public class PauseHandler : MonoBehaviour
         {
             currentTitleScreenTimer = 0f;
         }
-    }
-
-    void LateUpdate()
-    {
-        if (isPauseButtonPressed) { isPauseButtonPressed = false; }
     }
 }

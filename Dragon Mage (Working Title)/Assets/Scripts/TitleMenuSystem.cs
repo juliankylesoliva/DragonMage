@@ -22,55 +22,13 @@ public class TitleMenuSystem : MonoBehaviour
     [SerializeField] GameObject levelSelectSubscreen;
     [SerializeField] GameObject creditsSubscreen;
 
-    [SerializeField] InputAction cursorUpAction;
-    [SerializeField] InputAction cursorRightAction;
-    [SerializeField] InputAction cursorLeftAction;
-    [SerializeField] InputAction cursorDownAction;
-
-    [SerializeField] InputAction menuSelectAction;
-    [SerializeField] InputAction menuBackAction;
-
-    private bool isUpButtonPressed = false;
-    private bool isDownButtonPressed = false;
-    private bool isRightButtonPressed = false;
-    private bool isLeftButtonPressed = false;
-    private bool isSelectButtonPressed = false;
-    private bool isBackButtonPressed = false;
+    [SerializeField] TMP_Text creditsText;
+    [SerializeField] int creditPages = 2;
 
     private bool isStartingGame = false;
     private bool isInSubscreen = false;
     private int currentMenuSelection = 0;
     private int currentLevelSelection = 0;
-
-    void OnEnable()
-    {
-        cursorUpAction.Enable();
-        cursorRightAction.Enable();
-        cursorLeftAction.Enable();
-        cursorDownAction.Enable();
-        menuSelectAction.Enable();
-        menuBackAction.Enable();
-    }
-
-    void OnDisable()
-    {
-        cursorUpAction.Disable();
-        cursorRightAction.Disable();
-        cursorLeftAction.Disable();
-        cursorDownAction.Disable();
-        menuSelectAction.Disable();
-        menuBackAction.Disable();
-    }
-
-    void Awake()
-    {
-        cursorUpAction.started += ctx => { isUpButtonPressed = true; };
-        cursorRightAction.started += ctx => { isRightButtonPressed = true; };
-        cursorLeftAction.started += ctx => { isLeftButtonPressed = true; };
-        cursorDownAction.started += ctx => { isDownButtonPressed = true; };
-        menuSelectAction.started += ctx => { isSelectButtonPressed = true; };
-        menuBackAction.started += ctx => { isBackButtonPressed = true; };
-    }
 
     void Start()
     {
@@ -81,28 +39,19 @@ public class TitleMenuSystem : MonoBehaviour
     void Update()
     {
         MoveMenuCursor();
+        CreditsPage();
         MakeLevelSelection();
         MakeMenuSelection();
         GoBackToTopMenu();
-    }
-
-    void LateUpdate()
-    {
-        isUpButtonPressed = false;
-        isDownButtonPressed = false;
-        isRightButtonPressed = false;
-        isLeftButtonPressed = false;
-        isSelectButtonPressed = false;
-        isBackButtonPressed = false;
     }
 
     private void MoveMenuCursor()
     {
         if (isStartingGame || isInSubscreen) { return; }
 
-        if ((isUpButtonPressed && !isDownButtonPressed) || (!isUpButtonPressed && isDownButtonPressed))
+        if ((InputHub.menuUpButtonDown && !InputHub.menuDownButtonDown) || (!InputHub.menuUpButtonDown && InputHub.menuDownButtonDown))
         {
-            if (isUpButtonPressed)
+            if (InputHub.menuUpButtonDown)
             {
                 currentMenuSelection--;
                 if (currentMenuSelection < 0) { currentMenuSelection = 2; }
@@ -138,7 +87,7 @@ public class TitleMenuSystem : MonoBehaviour
 
     private void MakeMenuSelection()
     {
-        if (!isStartingGame && !isInSubscreen && isSelectButtonPressed)
+        if (!isStartingGame && !isInSubscreen && InputHub.menuSelectButtonDown)
         {
             switch (currentMenuSelection)
             {
@@ -149,6 +98,7 @@ public class TitleMenuSystem : MonoBehaviour
                     isInSubscreen = true;
                     break;
                 case 1:
+                    creditsText.pageToDisplay = 1;
                     SoundFactory.SpawnSound("transformation_magli", Vector3.zero, 0.5f);
                     topMenuScreen.SetActive(false);
                     creditsSubscreen.SetActive(true);
@@ -165,9 +115,9 @@ public class TitleMenuSystem : MonoBehaviour
 
     private void MakeLevelSelection()
     {
-        if (!isStartingGame && isInSubscreen)
+        if (!isStartingGame && isInSubscreen && levelSelectSubscreen.activeSelf)
         {
-            if (isSelectButtonPressed)
+            if (InputHub.menuSelectButtonDown)
             {
                 SoundFactory.SpawnSound("attack_magli_blastjump", Vector3.zero, 0.5f);
                 SoundFactory.SpawnSound("attack_draelyn_tackle", Vector3.zero, 0.5f);
@@ -175,14 +125,14 @@ public class TitleMenuSystem : MonoBehaviour
                 // menuCursor.Play("Select");
                 StartCoroutine(GameStartCR());
             }
-            else if ((isLeftButtonPressed || isRightButtonPressed) && !(isLeftButtonPressed && isRightButtonPressed))
+            else if ((InputHub.menuLeftButtonDown || InputHub.menuRightButtonDown) && !(InputHub.menuLeftButtonDown && InputHub.menuRightButtonDown))
             {
-                if (isLeftButtonPressed)
+                if (InputHub.menuLeftButtonDown)
                 {
                     if (currentLevelSelection > 0) { currentLevelSelection--; }
                     else { currentLevelSelection = (levelInfoList.Length - 1); }
                 }
-                else if (isRightButtonPressed)
+                else if (InputHub.menuRightButtonDown)
                 {
                     if (currentLevelSelection < (levelInfoList.Length - 1)) { currentLevelSelection++; }
                     else { currentLevelSelection = 0; }
@@ -197,6 +147,30 @@ public class TitleMenuSystem : MonoBehaviour
         }
     }
 
+    private void CreditsPage()
+    {
+        if (!isStartingGame && isInSubscreen && creditsSubscreen.activeSelf)
+        {
+            if ((InputHub.menuLeftButtonDown || InputHub.menuRightButtonDown) && !(InputHub.menuLeftButtonDown && InputHub.menuRightButtonDown))
+            {
+                if (InputHub.menuLeftButtonDown)
+                {
+                    if (creditsText.pageToDisplay > 1) { creditsText.pageToDisplay--; }
+                    else { creditsText.pageToDisplay = creditPages; }
+                }
+                else if (InputHub.menuRightButtonDown)
+                {
+                    if (creditsText.pageToDisplay < creditPages) { creditsText.pageToDisplay++; }
+                    else { creditsText.pageToDisplay = 1; }
+                }
+                else { /* Nothing */ }
+
+                SoundFactory.SpawnSound("attack_magli_bounce", Vector3.zero, 0.5f);
+                SoundFactory.SpawnSound("attack_draelyn_bump", Vector3.zero, 0.5f);
+            }
+        }
+    }
+
     private void UpdateLevelSelectText(LevelInfo info)
     {
         levelSelectText.text = $"<b><i>{info.nameHeader}</b></i>\n\n<size=3>{info.storyDescription}</size>";
@@ -204,7 +178,7 @@ public class TitleMenuSystem : MonoBehaviour
 
     private void GoBackToTopMenu()
     {
-        if (isInSubscreen && isBackButtonPressed)
+        if (isInSubscreen && InputHub.menuBackButtonDown)
         {
             SoundFactory.SpawnSound("transformation_draelyn", Vector3.zero, 0.5f);
             levelSelectSubscreen.SetActive(false);

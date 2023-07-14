@@ -237,6 +237,7 @@ public class PlayerJumping : MonoBehaviour
         jumpIsHeld = false;
         player.rb2d.gravityScale = 0f;
         player.rb2d.velocity = new Vector2(0f, -wallSlideSpeed);
+        player.movement.ResetIntendedXVelocity();
 
         GameObject tempObj = EffectFactory.SpawnEffect("WallSlideDust", player.movement.isFacingRight ? player.collisions.wallChecksR[0] : player.collisions.wallChecksL[0]);
         WallSlideDust tempDust = tempObj.GetComponent<WallSlideDust>();
@@ -246,6 +247,7 @@ public class PlayerJumping : MonoBehaviour
     public void WallSlideUpdate()
     {
         player.rb2d.velocity = new Vector2(0f, -wallSlideSpeed);
+        player.movement.ResetIntendedXVelocity();
     }
 
     public bool IsWallSlideCanceled()
@@ -288,6 +290,7 @@ public class PlayerJumping : MonoBehaviour
 
     public void WallClimbStart()
     {
+        player.movement.ResetIntendedXVelocity();
         player.sfxCtrl.PlaySound("jump_draelyn_wallclimb");
         player.rb2d.gravityScale = climbingGravity;
         if (storedWallClimbSpeed <= 0f)
@@ -303,6 +306,7 @@ public class PlayerJumping : MonoBehaviour
     public void WallClimbUpdate()
     {
         player.rb2d.velocity = new Vector2(0f, player.rb2d.velocity.y);
+        player.movement.ResetIntendedXVelocity();
         currentWallClimbTime += Time.deltaTime;
     }
 
@@ -331,7 +335,8 @@ public class PlayerJumping : MonoBehaviour
     {
         player.animationCtrl.MidairJumpAnimation();
         player.sfxCtrl.PlaySound("jump_draelyn_wallpopup");
-        
+        player.movement.ResetIntendedXVelocity();
+
         GameObject tempObj = EffectFactory.SpawnEffect("WallVaultSpark", player.collisions.GetSimpleGroundPoint() + (Vector3.right * (player.movement.isFacingRight ? 1f : -1f) * 0.25f));
         float verticalResult = Mathf.Min(maxWallVaultStartSpeed, Mathf.Max(wallVaultStartSpeed, player.rb2d.velocity.y));
         float resultScale = (verticalResult / wallVaultStartSpeed);
@@ -350,6 +355,7 @@ public class PlayerJumping : MonoBehaviour
     public void WallVaultUpdate()
     {
         player.rb2d.velocity = new Vector2(0f, player.rb2d.velocity.y);
+        player.movement.ResetIntendedXVelocity();
         postClimbDashTimeLeft -= Time.deltaTime;
     }
 

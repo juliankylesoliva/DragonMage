@@ -104,7 +104,7 @@ NavMeshSettings:
   serializedVersion: 2
   m_ObjectHideFlags: 0
   m_BuildSettings:
-    serializedVersion: 2
+    serializedVersion: 3
     agentTypeID: 0
     agentRadius: 0.5
     agentHeight: 2
@@ -117,7 +117,7 @@ NavMeshSettings:
     cellSize: 0.16666667
     manualTileSize: 0
     tileSize: 256
-    accuratePlacement: 0
+    buildHeightMesh: 0
     maxJobWorkers: 0
     preserveTilesOutsideBounds: 0
     debug:
@@ -516,7 +516,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Font: <i>PressStart2P</i> by CodeMan38
+  m_text: '(1/2)
+
+
+    Font: <i>PressStart2P</i> by CodeMan38
 
     <size=2>https://fonts.google.com/specimen/Press+Start+2P</size>
 
@@ -527,7 +530,14 @@ MonoBehaviour:
     <size=2>https://sfxr.me/</size=2>
 
 
-    Music: <i>Eight
+    Characters, pixel-art,
+    sprites, tiles, animations, programming, and level design by me: Kaysun!<page>(2/2)
+
+
+    Music:
+
+
+    <i>Eight
     Bit Dungeon Monster Stomp</i> by TeknoAXE is licensed under CC BY 4.0.
 
     <size=2>No
@@ -539,8 +549,16 @@ MonoBehaviour:
     Link: https://teknoaxe.com/Link_Code_3.php?q=142</size>
 
 
-    Characters, pixel-art,
-    sprites, tiles, animations, programming, and level design by me: Kaysun!'
+    <i>Up In My Jam
+    (All Of A Sudden)</i> by Kubbi is licensed under CC BY-SA 3.0.
+
+    <size=2>No
+    changes were made.
+
+    License: https://creativecommons.org/licenses/by-sa/3.0/
+
+    Song
+    Link: https://kubbi.bandcamp.com/track/up-in-my-jam-all-of-a-sudden</size>'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: a3a8650b6fd9bb04c978844dbc0932d7, type: 2}
   m_sharedMaterial: {fileID: -6660804504467697159, guid: a3a8650b6fd9bb04c978844dbc0932d7, type: 2}
@@ -585,7 +603,7 @@ MonoBehaviour:
   m_charWidthMaxAdj: 0
   m_enableWordWrapping: 1
   m_wordWrappingRatios: 0.4
-  m_overflowMode: 0
+  m_overflowMode: 5
   m_linkedTextComponent: {fileID: 0}
   parentLinkedComponent: {fileID: 0}
   m_enableKerning: 1
@@ -690,7 +708,7 @@ Transform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &211318798
 Animator:
-  serializedVersion: 4
+  serializedVersion: 5
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -707,7 +725,8 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &269889659
 GameObject:
   m_ObjectHideFlags: 0
@@ -1659,8 +1678,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -4.5}
-  m_SizeDelta: {x: 20, y: 1}
+  m_AnchoredPosition: {x: 0, y: -4}
+  m_SizeDelta: {x: 20, y: 1.5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1030790592
 MonoBehaviour:
@@ -1682,7 +1701,11 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'X/<sprite="CrossFaceButtons" name="SouthButton">: Back'
+  m_text: '<sprite="DirectionalArrows" name="Left"><sprite="DirectionalArrows" name="Right">:
+    Change Page
+
+
+    X/<sprite="CrossFaceButtons" name="SouthButton">: Back'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: a3a8650b6fd9bb04c978844dbc0932d7, type: 2}
   m_sharedMaterial: {fileID: -6660804504467697159, guid: a3a8650b6fd9bb04c978844dbc0932d7, type: 2}
@@ -1796,6 +1819,71 @@ MeshRenderer:
   m_SortingLayer: 7
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!1001 &1291126009
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 68747523603434857, guid: f98306d4d402bae4aae90584fb0bd791, type: 3}
+      propertyPath: m_RootOrder
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 68747523603434857, guid: f98306d4d402bae4aae90584fb0bd791, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 68747523603434857, guid: f98306d4d402bae4aae90584fb0bd791, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 68747523603434857, guid: f98306d4d402bae4aae90584fb0bd791, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 68747523603434857, guid: f98306d4d402bae4aae90584fb0bd791, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 68747523603434857, guid: f98306d4d402bae4aae90584fb0bd791, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 68747523603434857, guid: f98306d4d402bae4aae90584fb0bd791, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 68747523603434857, guid: f98306d4d402bae4aae90584fb0bd791, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 68747523603434857, guid: f98306d4d402bae4aae90584fb0bd791, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 68747523603434857, guid: f98306d4d402bae4aae90584fb0bd791, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 68747523603434857, guid: f98306d4d402bae4aae90584fb0bd791, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 856414782202448995, guid: f98306d4d402bae4aae90584fb0bd791, type: 3}
+      propertyPath: m_DefaultActionMap
+      value: c681c736-ef7c-4f5d-ac35-c8bab7020c29
+      objectReference: {fileID: 0}
+    - target: {fileID: 6595617948292533171, guid: f98306d4d402bae4aae90584fb0bd791, type: 3}
+      propertyPath: m_Name
+      value: InputHub
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: f98306d4d402bae4aae90584fb0bd791, type: 3}
 --- !u!1 &1343219099
 GameObject:
   m_ObjectHideFlags: 0
@@ -2007,7 +2095,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    serializedVersion: 2
+    serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 8348267510384364642, guid: 20b563551ed141a48afeb85c6dd6e95f, type: 3}
@@ -2059,7 +2147,9 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
     m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 20b563551ed141a48afeb85c6dd6e95f, type: 3}
 --- !u!1 &1507338390
 GameObject:
@@ -2466,188 +2556,8 @@ MonoBehaviour:
   topMenuScreen: {fileID: 269889659}
   levelSelectSubscreen: {fileID: 1343219099}
   creditsSubscreen: {fileID: 121208072}
-  cursorUpAction:
-    m_Name: Cursor Up
-    m_Type: 0
-    m_ExpectedControlType: 
-    m_Id: 87a0fba6-68f1-48b1-a872-8ab3702ea0e7
-    m_Processors: 
-    m_Interactions: 
-    m_SingletonActionBindings:
-    - m_Name: 
-      m_Id: 1ff7ec71-4ace-43b7-8e23-02db8388b76f
-      m_Path: <Keyboard>/upArrow
-      m_Interactions: 
-      m_Processors: 
-      m_Groups: 
-      m_Action: Cursor Up
-      m_Flags: 0
-    - m_Name: 
-      m_Id: 58d128e4-fb6a-4a71-8671-2774df0f835e
-      m_Path: <Gamepad>/dpad/up
-      m_Interactions: 
-      m_Processors: 
-      m_Groups: 
-      m_Action: Cursor Up
-      m_Flags: 0
-    - m_Name: 
-      m_Id: 5c0d9946-142b-40ed-8eda-026cc2b27728
-      m_Path: <Gamepad>/leftStick/up
-      m_Interactions: 
-      m_Processors: 
-      m_Groups: 
-      m_Action: Cursor Up
-      m_Flags: 0
-    m_Flags: 0
-  cursorRightAction:
-    m_Name: Cursor Right
-    m_Type: 0
-    m_ExpectedControlType: 
-    m_Id: b4fd34e5-77ae-4cf4-84b2-03fbe2760471
-    m_Processors: 
-    m_Interactions: 
-    m_SingletonActionBindings:
-    - m_Name: 
-      m_Id: c7cd82ab-fece-4b0e-a25f-eca24b0cd2ab
-      m_Path: <Keyboard>/rightArrow
-      m_Interactions: 
-      m_Processors: 
-      m_Groups: 
-      m_Action: Cursor Right
-      m_Flags: 0
-    - m_Name: 
-      m_Id: 556f6848-2772-422f-933d-386f23aa6659
-      m_Path: <Gamepad>/dpad/right
-      m_Interactions: 
-      m_Processors: 
-      m_Groups: 
-      m_Action: Cursor Right
-      m_Flags: 0
-    - m_Name: 
-      m_Id: 6c963d41-f378-40a9-bae0-0270b0a7ba75
-      m_Path: <Gamepad>/leftStick/right
-      m_Interactions: 
-      m_Processors: 
-      m_Groups: 
-      m_Action: Cursor Right
-      m_Flags: 0
-    m_Flags: 0
-  cursorLeftAction:
-    m_Name: Cursor Left
-    m_Type: 0
-    m_ExpectedControlType: 
-    m_Id: ccceea7a-2fb7-4792-9b6e-1cddab831751
-    m_Processors: 
-    m_Interactions: 
-    m_SingletonActionBindings:
-    - m_Name: 
-      m_Id: 99b17f3b-5a76-42e0-9e83-070c2aef072c
-      m_Path: <Keyboard>/leftArrow
-      m_Interactions: 
-      m_Processors: 
-      m_Groups: 
-      m_Action: Cursor Left
-      m_Flags: 0
-    - m_Name: 
-      m_Id: b8ff62e2-a085-42c4-8982-3e0590ab3557
-      m_Path: <Gamepad>/dpad/left
-      m_Interactions: 
-      m_Processors: 
-      m_Groups: 
-      m_Action: Cursor Left
-      m_Flags: 0
-    - m_Name: 
-      m_Id: 071e1d4d-6ef9-40ce-8cb6-9aa7fb101d7c
-      m_Path: <Gamepad>/leftStick/left
-      m_Interactions: 
-      m_Processors: 
-      m_Groups: 
-      m_Action: Cursor Left
-      m_Flags: 0
-    m_Flags: 0
-  cursorDownAction:
-    m_Name: Cursor Down
-    m_Type: 0
-    m_ExpectedControlType: 
-    m_Id: 983083e5-33c7-4e34-8ce3-fae26497a982
-    m_Processors: 
-    m_Interactions: 
-    m_SingletonActionBindings:
-    - m_Name: 
-      m_Id: c6906218-2d85-4cd7-9176-3f06e4e9ca6d
-      m_Path: <Keyboard>/downArrow
-      m_Interactions: 
-      m_Processors: 
-      m_Groups: 
-      m_Action: Cursor Down
-      m_Flags: 0
-    - m_Name: 
-      m_Id: 14a74c45-68d0-494b-b351-e8cea96ade9b
-      m_Path: <Gamepad>/dpad/down
-      m_Interactions: 
-      m_Processors: 
-      m_Groups: 
-      m_Action: Cursor Down
-      m_Flags: 0
-    - m_Name: 
-      m_Id: 58710403-b251-41c6-af0f-bdcbe389e4f7
-      m_Path: <Gamepad>/leftStick/down
-      m_Interactions: 
-      m_Processors: 
-      m_Groups: 
-      m_Action: Cursor Down
-      m_Flags: 0
-    m_Flags: 0
-  menuSelectAction:
-    m_Name: Menu Select
-    m_Type: 0
-    m_ExpectedControlType: 
-    m_Id: 8ebe14d6-d6db-4329-83eb-f41f726911f6
-    m_Processors: 
-    m_Interactions: 
-    m_SingletonActionBindings:
-    - m_Name: 
-      m_Id: 37e21b2e-3079-492f-950f-effde740f62b
-      m_Path: <Keyboard>/z
-      m_Interactions: 
-      m_Processors: 
-      m_Groups: 
-      m_Action: Menu Select
-      m_Flags: 0
-    - m_Name: 
-      m_Id: 67699471-42ca-46f4-b02b-bd28699ca316
-      m_Path: <Gamepad>/buttonEast
-      m_Interactions: 
-      m_Processors: 
-      m_Groups: 
-      m_Action: Menu Select
-      m_Flags: 0
-    m_Flags: 0
-  menuBackAction:
-    m_Name: Menu Back
-    m_Type: 0
-    m_ExpectedControlType: 
-    m_Id: 54c108d4-c617-4167-8ff4-a71e56335548
-    m_Processors: 
-    m_Interactions: 
-    m_SingletonActionBindings:
-    - m_Name: 
-      m_Id: b2eca6b3-52e6-4e68-945c-74f92ffce8af
-      m_Path: <Keyboard>/x
-      m_Interactions: 
-      m_Processors: 
-      m_Groups: 
-      m_Action: Menu Back
-      m_Flags: 0
-    - m_Name: 
-      m_Id: a08f4620-2b3c-4cd4-8217-9d2f86b7a777
-      m_Path: <Gamepad>/buttonSouth
-      m_Interactions: 
-      m_Processors: 
-      m_Groups: 
-      m_Action: Menu Back
-      m_Flags: 0
-    m_Flags: 0
+  creditsText: {fileID: 191952276}
+  creditPages: 2
 --- !u!1 &1890741425
 GameObject:
   m_ObjectHideFlags: 0
@@ -3033,9 +2943,17 @@ Camera:
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
+  m_Iso: 200
+  m_ShutterSpeed: 0.005
+  m_Aperture: 16
+  m_FocusDistance: 10
+  m_FocalLength: 50
+  m_BladeCount: 5
+  m_Curvature: {x: 2, y: 11}
+  m_BarrelClipping: 0.25
+  m_Anamorphism: 0
   m_SensorSize: {x: 36, y: 24}
   m_LensShift: {x: 0, y: 0}
-  m_FocalLength: 50
   m_NormalizedViewPortRect:
     serializedVersion: 2
     x: 0

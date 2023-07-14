@@ -39,6 +39,6 @@ public class EndOfLevelTrigger : MonoBehaviour
         }
 
         isDelayActive = false;
-        SceneManager.LoadScene("LevelComplete");
+        SceneManager.LoadScene("TitleScreen");
     }
 }

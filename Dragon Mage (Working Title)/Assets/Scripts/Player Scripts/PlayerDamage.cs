@@ -24,6 +24,7 @@ public class PlayerDamage : MonoBehaviour
     private bool isDamageInvulnerabilityFlickering = false;
 
     public bool isPlayerDamaged { get { return hitstunTimer > 0f; } }
+    public int damageTaken { get; private set; }
 
     void Awake()
     {
@@ -51,6 +52,7 @@ public class PlayerDamage : MonoBehaviour
     public void TakeDamage(Transform source)
     {
         if (hitstunTimer > 0f || !CanTakeDamage()) { return; }
+        damageTaken++;
         damageSource = source;
         StartCoroutine(HitstunTimerCR(baseHitstunTime));
         player.temper.ChangeTemperBy(player.form.currentMode == CharacterMode.MAGE ? mageTemperDamage : dragonTemperDamage);
@@ -95,13 +97,13 @@ public class PlayerDamage : MonoBehaviour
         
         while (player.stateMachine.CurrentState != player.stateMachine.damagedState)
         {
-            player.rb2d.sharedMaterial = fullFrictionMaterial;
+            player.rb2d.sharedMaterial = damagedMaterial;
             yield return null;
         }
 
         while (!player.collisions.IsGrounded || player.rb2d.velocity.magnitude >= knockbackMagnitudeEpsilon)
         {
-            player.rb2d.sharedMaterial = fullFrictionMaterial;
+            player.rb2d.sharedMaterial = damagedMaterial;
             yield return null;
         }
         

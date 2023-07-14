@@ -262,6 +262,7 @@ public class PlayerAttacks : MonoBehaviour
             player.sfxCtrl.PlaySound("attack_draelyn_bump");
             bumped = true;
             player.buffers.ResetSpeedBuffer();
+            player.movement.ResetIntendedXVelocity();
             player.animationCtrl.FireTackleAnimation(3);
             player.rb2d.velocity = ((Vector2.up + (Vector2.right * (player.movement.isFacingRight ? -1f : 1f))).normalized * fireTackleBonkKnockback);
         }
