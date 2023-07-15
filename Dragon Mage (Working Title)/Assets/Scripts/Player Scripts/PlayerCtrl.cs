@@ -21,6 +21,7 @@ public class PlayerCtrl : MonoBehaviour
     [HideInInspector] public AudioPlayer sfxCtrl;
 
     [HideInInspector] public Rigidbody2D rb2d;
+    [HideInInspector] public CapsuleCollider2D capsuleCollider;
     [HideInInspector] public SpriteRenderer charSprite;
 
     /* INPUT VARIABLES */

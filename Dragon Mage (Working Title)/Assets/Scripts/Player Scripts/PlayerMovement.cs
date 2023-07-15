@@ -17,6 +17,7 @@ public class PlayerMovement : MonoBehaviour
     public float airTurningSpeed = 0.5f;
 
     public bool isFacingRight { get; private set; }
+    public bool isCrouching { get; private set; }
 
     private bool isTurningAround = false;
     private bool prevIsTurningAround = false;

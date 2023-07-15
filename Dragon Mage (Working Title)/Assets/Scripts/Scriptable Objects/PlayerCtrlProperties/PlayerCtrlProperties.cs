@@ -134,4 +134,36 @@ public class PlayerCtrlProperties : ScriptableObject
 
     [SerializeField] float _runningJumpMultiplier = 1f;
     public float runningJumpMultiplier { get { return _runningJumpMultiplier; } }
+
+    [Header("Crouching Variables")]
+    [SerializeField] bool _enableCrouchWalking = false;
+    public bool enableCrouchWalking { get { return _enableCrouchWalking; } }
+
+    [SerializeField, Range(0f, 1f)] float _crouchSpeedMultiplier = 0.5f;
+    public float crouchSpeedMultiplier { get { return _crouchSpeedMultiplier; } }
+
+    [SerializeField] bool _enableCrouchJump = false;
+    public bool enableCrouchJump { get { return _enableCrouchJump; } }
+
+    [SerializeField] bool _enableSuperJump = false;
+    public bool enableSuperJump { get { return _enableSuperJump; } }
+
+    [SerializeField] float _superJumpChargeTime = 1f;
+    public float superJumpChargeTime { get { return _superJumpChargeTime; } }
+
+    [SerializeField] float _superJumpRetentionTime = 3f;
+    public float superJumpRetentionTime { get { return _superJumpRetentionTime; } }
+
+    [SerializeField] float _uncrouchedYOffset = -0.25f;
+    public float uncrouchedYOffset { get { return _uncrouchedYOffset; } }
+
+    [SerializeField] float _crouchedYOffset = -0.5f;
+    public float crouchedYOffset { get { return _crouchedYOffset; } }
+
+    [SerializeField] float _uncrouchedHeight = 1.5f;
+    public float uncrouchedHeight { get { return _uncrouchedHeight; } }
+
+    [SerializeField] float _crouchedHeight = -1f;
+    public float crouchedHeight { get { return _crouchedHeight; } }
+
 }
