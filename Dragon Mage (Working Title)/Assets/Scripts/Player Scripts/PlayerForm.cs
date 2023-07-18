@@ -134,6 +134,15 @@ public class PlayerForm : MonoBehaviour
 
         player.jumping.enableRunningJumpBonus = p.enableRunningJumpBonus;
         player.jumping.runningJumpMultiplier = p.runningJumpMultiplier;
+
+        player.movement.enableCrouchWalking = p.enableCrouchWalking;
+        player.movement.crouchTopSpeed = p.crouchTopSpeed;
+        player.jumping.enableCrouchJump = p.enableCrouchJump;
+
+        if (!player.jumping.enableCrouchJump && player.movement.isCrouching && !player.collisions.IsGrounded && !player.collisions.IsOnASlope)
+        {
+            player.movement.ResetCrouchState();
+        }
     }
 
     public IEnumerator FormChangeCooldownCR()

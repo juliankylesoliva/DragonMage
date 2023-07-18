@@ -9,7 +9,10 @@ public class PlayerCollisions : MonoBehaviour
     public Transform groundCheckObj;
     public Transform[] wallChecksR;
     public Transform[] wallChecksL;
+    public Transform crouchedWallCheckR;
+    public Transform crouchedWallCheckL;
     public Transform headbonkCheckObj;
+    public Transform crouchedHeadbonkCheckObj;
     public Transform normalCheckR;
     public Transform normalCheckL;
 
@@ -20,6 +23,10 @@ public class PlayerCollisions : MonoBehaviour
     [SerializeField] float ledgeCheckOffset = 0.25f;
     [SerializeField] float ledgeCheckDepth = 0.85f;
     [SerializeField] float groundNormalXThreshold = 0.1f;
+    [SerializeField] float uncrouchedYOffset = -0.25f;
+    [SerializeField] float crouchedYOffset = -0.5f;
+    [SerializeField] float uncrouchedHeight = 1.5f;
+    [SerializeField] float crouchedHeight = 1f;
     [SerializeField] LayerMask intangibleWallLayer;
     [SerializeField] LayerMask groundLayer;
     [SerializeField] LayerMask slopeLayer;
@@ -54,9 +61,11 @@ public class PlayerCollisions : MonoBehaviour
 
     void Update()
     {
+        ColliderCrouchUpdate();
         GroundCheck();
         SlopeCheck();
-        WallCheck();
+        if (player.movement.isCrouching) { CrouchedWallCheck(); }
+        else { WallCheck(); }
         HeadbonkCheck();
 
         LandingSoundCheck();
@@ -64,6 +73,12 @@ public class PlayerCollisions : MonoBehaviour
 
         prevIsGrounded = isGrounded;
         prevIsHeadbonking = isHeadbonking;
+    }
+
+    private void ColliderCrouchUpdate()
+    {
+        player.capsuleCollider.size = new Vector2(0.5f, (player.movement.isCrouching ? crouchedHeight : uncrouchedHeight));
+        player.capsuleCollider.offset = new Vector2(0f, (player.movement.isCrouching ? crouchedYOffset : uncrouchedYOffset));
     }
 
     private void GroundCheck()
@@ -124,10 +139,38 @@ public class PlayerCollisions : MonoBehaviour
         isAgainstWall = (player.movement.isFacingRight ? isTouchingWallR : isTouchingWallL);
     }
 
+    private void CrouchedWallCheck()
+    {
+        isAgainstWall = false;
+        isTouchingWallR = false;
+        isTouchingWallL = false;
+        isIntangibleWall = false;
+
+        if (!isIntangibleWall)
+        {
+            Collider2D[] intangibleR = Physics2D.OverlapCircleAll(crouchedWallCheckR.position, wallCheckRadius, intangibleWallLayer);
+            isIntangibleWall = (intangibleR.Length > 0 && !isOnASlope);
+        }
+
+        Collider2D[] collidersR = Physics2D.OverlapCircleAll(crouchedWallCheckR.position, wallCheckRadius, groundLayer);
+        isTouchingWallR = (collidersR.Length > 0 && !isOnASlope);
+
+        if (!isIntangibleWall)
+        {
+            Collider2D[] intangibleL = Physics2D.OverlapCircleAll(crouchedWallCheckL.position, wallCheckRadius, intangibleWallLayer);
+            isIntangibleWall = (intangibleL.Length > 0 && !isOnASlope);
+        }
+
+        Collider2D[] collidersL = Physics2D.OverlapCircleAll(crouchedWallCheckL.position, wallCheckRadius, groundLayer);
+        isTouchingWallL = (collidersL.Length > 0 && !isOnASlope);
+
+        isAgainstWall = (player.movement.isFacingRight ? isTouchingWallR : isTouchingWallL);
+    }
+
     private void HeadbonkCheck()
     {
         isHeadbonking = false;
-        Collider2D[] colliders = Physics2D.OverlapCircleAll(headbonkCheckObj.position + (Vector3.right * (1f / 32f) * (player.movement.isFacingRight ? 1f : -1f)), headbonkCheckRadius, groundDistanceCheckLayer);
+        Collider2D[] colliders = Physics2D.OverlapCircleAll((player.movement.isCrouching ? crouchedHeadbonkCheckObj.position : headbonkCheckObj.position) + (Vector3.right * (1f / 32f) * (player.movement.isFacingRight ? 1f : -1f)), headbonkCheckRadius, groundDistanceCheckLayer);
         isHeadbonking = (colliders.Length > 0);
     }
 
@@ -143,11 +186,9 @@ public class PlayerCollisions : MonoBehaviour
 
     private void HeadbonkSoundCheck()
     {
-        if (!prevIsHeadbonking && isHeadbonking && player.rb2d.velocity.y > 0f)
+        if (!prevIsHeadbonking && isHeadbonking)
         {
-            SoundFactory.SpawnSound(player.form.currentMode == CharacterMode.MAGE ? "jump_magli_headbonk" : "jump_draelyn_headbonk", groundCheckObj.position, 0.75f);
-            GameObject tempObj = EffectFactory.SpawnEffect("HeadbonkEffect", GetSimpleCeilingPoint());
-            tempObj.transform.up = GetCeilingNormal();
+            player.effects.HeadbonkEffect();
         }
     }
 
@@ -215,7 +256,7 @@ public class PlayerCollisions : MonoBehaviour
 
     public Vector3 GetSimpleCeilingPoint()
     {
-        return (headbonkCheckObj.position + (Vector3.up * (headbonkCheckRadius / 2f)));
+        return ((player.movement.isCrouching ? crouchedHeadbonkCheckObj.position : headbonkCheckObj.position) + (Vector3.up * (headbonkCheckRadius / 2f)));
     }
 
     public void SnapToGround(bool bypassDistanceCheck, float maxDistance = -1f)
@@ -224,5 +265,11 @@ public class PlayerCollisions : MonoBehaviour
         toMove += new Vector2(0f, Vector3.Distance(this.transform.position, groundCheckObj.position) + groundCheckRadius);
         if (bypassDistanceCheck || (Vector2.Distance(this.transform.position, toMove) <= (maxDistance >= 0f ? maxDistance : slopeCheckDistance))) { this.transform.position = toMove; }
         GroundCheck();
+    }
+
+    public bool IsCeilingAboveWhenUncrouched()
+    {
+        RaycastHit2D hit = Physics2D.Raycast(crouchedHeadbonkCheckObj.position, Vector3.up, (headbonkCheckObj.position.y - crouchedHeadbonkCheckObj.position.y), groundDistanceCheckLayer);
+        return (hit.collider != null);
     }
 }

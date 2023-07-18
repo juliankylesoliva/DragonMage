@@ -231,6 +231,7 @@ public class StandingState : State
 
     public override void Update()
     {
+        player.movement.CrouchCheck();
         player.animationCtrl.StandingAnimation();
         if (player.collisions.IsOnASlope)
         {
@@ -262,6 +263,7 @@ public class RunningState : State
 
     public override void Update()
     {
+        player.movement.CrouchCheck();
         player.movement.Movement();
         player.movement.FacingDirection();
         if (CheckFormChangeInput() || CheckIfStopped() || CheckSuddenFall() || CheckJumpInput() || CheckFireTackleInput() || CheckIfDamaged()) { return; }
@@ -295,6 +297,7 @@ public class JumpingState : State
 
     public override void Update()
     {
+        player.movement.CrouchCheck();
         player.movement.Movement();
         player.movement.FacingDirection();
         player.jumping.GroundJumpUpdate();
@@ -340,6 +343,7 @@ public class FallingState : State
 
     public override void Update()
     {
+        player.movement.CrouchCheck();
         player.movement.Movement();
         player.movement.FacingDirection();
         player.jumping.FallingUpdate();

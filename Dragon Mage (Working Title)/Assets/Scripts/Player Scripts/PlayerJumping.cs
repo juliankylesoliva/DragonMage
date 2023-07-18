@@ -60,6 +60,12 @@ public class PlayerJumping : MonoBehaviour
     public bool enableRunningJumpBonus = true;
     public float runningJumpMultiplier = 1f;
 
+    [Header("Crouch Jump Variables")]
+    public bool enableCrouchJump = false;
+    public bool enableSuperJump = false;
+    public float superJumpChargeTime = 1f;
+    public float superJumpRetentionTime = 3f;
+
     public float fallTimer { get; private set; }
 
     void Awake()
@@ -110,7 +116,7 @@ public class PlayerJumping : MonoBehaviour
 
     public bool CanGroundJump()
     {
-        return (player.stateMachine.CurrentState.name != "Jumping" && (player.collisions.IsGrounded || player.collisions.IsOnASlope || player.buffers.coyoteTimeLeft > 0f) && player.buffers.jumpBufferTimeLeft > 0f);
+        return (player.stateMachine.CurrentState.name != "Jumping" && (player.collisions.IsGrounded || player.collisions.IsOnASlope || player.buffers.coyoteTimeLeft > 0f) && (!player.movement.isCrouching || enableCrouchJump || !player.collisions.IsCeilingAboveWhenUncrouched()) && player.buffers.jumpBufferTimeLeft > 0f);
     }
 
     public void GroundJumpStart()
@@ -119,9 +125,11 @@ public class PlayerJumping : MonoBehaviour
         jumpIsHeld = true;
         player.rb2d.gravityScale = risingGravity;
 
+        if (!enableCrouchJump) { player.movement.ResetCrouchState(); }
+
         LandingReset();
 
-        bool didPlayerSpeedHop = (enableSpeedHopping && (player.rb2d.velocity.x * player.inputVector.x) > 0f && Mathf.Abs(player.rb2d.velocity.x) > player.movement.topSpeed);
+        bool didPlayerSpeedHop = (enableSpeedHopping && !player.movement.isCrouching && (player.rb2d.velocity.x * player.inputVector.x) > 0f && Mathf.Abs(player.rb2d.velocity.x) > player.movement.topSpeed);
         float horizontalResult = (didPlayerSpeedHop ? Mathf.Max(player.buffers.highestSpeedBuffer, Mathf.Abs(player.rb2d.velocity.x)) : Mathf.Abs(player.rb2d.velocity.x));
 
         GameObject tempObj = EffectFactory.SpawnEffect(didPlayerSpeedHop ? "SpeedHopSpark" : "JumpSpark", player.collisions.IsOnASlope ? player.collisions.GetClosestGroundPoint() : player.collisions.GetSimpleGroundPoint());
@@ -131,7 +139,7 @@ public class PlayerJumping : MonoBehaviour
 
         player.animationCtrl.GroundJumpAnimation();
         player.sfxCtrl.PlaySound(player.form.currentMode == CharacterMode.MAGE ? "jump_magli" : "jump_draelyn", 1f, didPlayerSpeedHop ? 1.5f : 1f);
-        player.rb2d.velocity = new Vector2(horizontalResult * (player.movement.isFacingRight ? 1f : -1f), (jumpSpeed + (enableRunningJumpBonus ? Mathf.Min(Mathf.Abs(horizontalResult / player.movement.topSpeed), 1f) * runningJumpMultiplier : 0f)));
+        player.rb2d.velocity = new Vector2(horizontalResult * (player.movement.isFacingRight ? 1f : -1f), (jumpSpeed + (enableRunningJumpBonus && !player.movement.isCrouching ? Mathf.Min(Mathf.Abs(horizontalResult / player.movement.topSpeed), 1f) * runningJumpMultiplier : 0f)));
     }
 
     public void GroundJumpUpdate()
@@ -168,11 +176,12 @@ public class PlayerJumping : MonoBehaviour
 
     public bool CanGlide()
     {
-        return (enableAirStalling && (player.buffers.coyoteTimeLeft <= 0f) && (player.rb2d.velocity.y <= 0f || player.technicalButtonHeld) && currentAirStallTime <= player.buffers.EarlyGlideBufferTime && player.collisions.CheckDistanceToGround(minimumAirStallHeight) && player.jumpButtonHeld);
+        return (enableAirStalling && !player.movement.isCrouching && (player.buffers.coyoteTimeLeft <= 0f) && (player.rb2d.velocity.y <= 0f || player.technicalButtonHeld) && currentAirStallTime <= player.buffers.EarlyGlideBufferTime && player.collisions.CheckDistanceToGround(minimumAirStallHeight) && player.jumpButtonHeld);
     }
 
     public void GlideStart()
     {
+        player.movement.ResetCrouchState();
         player.sfxCtrl.PlaySound("jump_magli_glide");
         glidingParticles.Play();
         player.rb2d.gravityScale = 0f;
@@ -228,11 +237,12 @@ public class PlayerJumping : MonoBehaviour
 
     public bool CanWallSlide()
     {
-        return (enableWallJumping && player.collisions.CheckDistanceToGround(minimumWallJumpHeight) && !player.collisions.IsGrounded && player.collisions.IsAgainstWall && !player.collisions.IsIntangibleWall && (player.movement.isFacingRight ? (player.inputVector.x > 0f && player.collisions.IsTouchingWallR) : (player.inputVector.x < 0f && player.collisions.IsTouchingWallL)) && (!player.jumpButtonHeld || !jumpIsHeld || player.rb2d.velocity.y < 0f));
+        return (enableWallJumping && !player.movement.isCrouching && player.collisions.CheckDistanceToGround(minimumWallJumpHeight) && !player.collisions.IsGrounded && player.collisions.IsAgainstWall && !player.collisions.IsIntangibleWall && (player.movement.isFacingRight ? (player.inputVector.x > 0f && player.collisions.IsTouchingWallR) : (player.inputVector.x < 0f && player.collisions.IsTouchingWallL)) && (!player.jumpButtonHeld || !jumpIsHeld || player.rb2d.velocity.y < 0f));
     }
 
     public void WallSlideStart()
     {
+        player.movement.ResetCrouchState();
         player.sfxCtrl.PlaySound("jump_magli_wallslide", 0.8f);
         jumpIsHeld = false;
         player.rb2d.gravityScale = 0f;
@@ -257,7 +267,7 @@ public class PlayerJumping : MonoBehaviour
 
     public bool CanWallJump()
     {
-        return (player.stateMachine.CurrentState == player.stateMachine.wallSlidingState && !isWallJumpCooldownActive && player.buffers.jumpBufferTimeLeft > 0f);
+        return (player.stateMachine.CurrentState == player.stateMachine.wallSlidingState && !player.movement.isCrouching && !isWallJumpCooldownActive && player.buffers.jumpBufferTimeLeft > 0f);
     }
 
     public void WallJumpStart()
@@ -265,6 +275,7 @@ public class PlayerJumping : MonoBehaviour
         player.buffers.ResetJumpBuffer();
         jumpIsHeld = true;
         player.rb2d.gravityScale = risingGravity;
+        player.movement.ResetCrouchState();
 
         float horizontalResult = Mathf.Max(player.buffers.highestSpeedBuffer, horizontalWallJumpSpeed);
         bool didPlayerSpeedKick = (horizontalResult > (horizontalWallJumpSpeed + 0.25f));
@@ -285,11 +296,12 @@ public class PlayerJumping : MonoBehaviour
 
     public bool CanWallClimb()
     {
-        return (enableWallClimbing && player.collisions.CheckDistanceToGround(minimumWallClimbHeight) && currentWallClimbTime <= 0f && !player.collisions.IsGrounded && player.collisions.IsAgainstWall && !player.collisions.IsIntangibleWall && (player.inputVector.x * (player.movement.isFacingRight ? 1f : -1f)) > 0f);
+        return (enableWallClimbing && !player.movement.isCrouching && !player.collisions.IsHeadbonking && player.collisions.CheckDistanceToGround(minimumWallClimbHeight) && currentWallClimbTime <= 0f && !player.collisions.IsGrounded && player.collisions.IsAgainstWall && !player.collisions.IsIntangibleWall && (player.inputVector.x * (player.movement.isFacingRight ? 1f : -1f)) > 0f);
     }
 
     public void WallClimbStart()
     {
+        player.movement.ResetCrouchState();
         player.movement.ResetIntendedXVelocity();
         player.sfxCtrl.PlaySound("jump_draelyn_wallclimb");
         player.rb2d.gravityScale = climbingGravity;
@@ -336,6 +348,7 @@ public class PlayerJumping : MonoBehaviour
         player.animationCtrl.MidairJumpAnimation();
         player.sfxCtrl.PlaySound("jump_draelyn_wallpopup");
         player.movement.ResetIntendedXVelocity();
+        player.movement.ResetCrouchState();
 
         GameObject tempObj = EffectFactory.SpawnEffect("WallVaultSpark", player.collisions.GetSimpleGroundPoint() + (Vector3.right * (player.movement.isFacingRight ? 1f : -1f) * 0.25f));
         float verticalResult = Mathf.Min(maxWallVaultStartSpeed, Mathf.Max(wallVaultStartSpeed, player.rb2d.velocity.y));
@@ -349,7 +362,7 @@ public class PlayerJumping : MonoBehaviour
 
     public bool CanWallVaultDash()
     {
-        return (postClimbDashTimeLeft > 0f && player.rb2d.velocity.y > 0f && !player.collisions.IsAgainstWall && (player.inputVector.x * (player.movement.isFacingRight ? 1f : -1f)) > 0f && player.jumpButtonHeld);
+        return (postClimbDashTimeLeft > 0f && player.rb2d.velocity.y > 0f && !player.movement.isCrouching && !player.collisions.IsAgainstWall && (player.inputVector.x * (player.movement.isFacingRight ? 1f : -1f)) > 0f && player.jumpButtonHeld);
     }
 
     public void WallVaultUpdate()

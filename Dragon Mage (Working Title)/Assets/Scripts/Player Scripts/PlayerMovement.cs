@@ -15,6 +15,8 @@ public class PlayerMovement : MonoBehaviour
     public float airAcceleration = 0.5f;
     public float airDeceleration = 0.5f;
     public float airTurningSpeed = 0.5f;
+    public bool enableCrouchWalking = false;
+    public float crouchTopSpeed = 1f;
 
     public bool isFacingRight { get; private set; }
     public bool isCrouching { get; private set; }
@@ -48,7 +50,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void TurnaroundCheck()
     {
-        if (player.stateMachine.CurrentState == player.stateMachine.runningState)
+        if (!isCrouching && player.stateMachine.CurrentState == player.stateMachine.runningState)
         {
             deltaXVelocity = (player.rb2d.velocity.x - prevXVelocity);
             isTurningAround = ((deltaXVelocity * prevXVelocity) < 0f && (player.inputVector.x * player.rb2d.velocity.x) < 0f);
@@ -89,13 +91,37 @@ public class PlayerMovement : MonoBehaviour
         SetFacingDirection(player.inputVector.x);
     }
 
+    public void CrouchCheck()
+    {
+        if (player.stateMachine.CurrentState.name != "Standing" && player.stateMachine.CurrentState.name != "Running" && player.stateMachine.CurrentState.name != "Jumping" && player.stateMachine.CurrentState.name != "Falling")
+        {
+            isCrouching = false;
+            return;
+        }
+
+        if (!isCrouching)
+        {
+            isCrouching = ((player.collisions.IsGrounded || player.collisions.IsOnASlope) && player.inputVector.y < 0f);
+        }
+        else
+        {
+            isCrouching = (player.collisions.IsCeilingAboveWhenUncrouched() || ((player.collisions.IsGrounded || player.collisions.IsOnASlope || player.jumping.enableCrouchJump) && player.inputVector.y < 0f));
+            if (!isCrouching) { player.animationCtrl.GroundJumpAnimation(); }
+        }
+    }
+
+    public void ResetCrouchState()
+    {
+        isCrouching = false;
+    }
+
     public void Movement()
     {
         if (player.form.isChangingForm || player.jumping.isWallJumpCooldownActive || player.attacks.isFireTackleActive) { return; }
 
         ApplySlopeResistance();
 
-        if (player.inputVector.x != 0f)
+        if (player.inputVector.x != 0f && (!isCrouching || enableCrouchWalking))
         {
             if (player.collisions.IsAgainstWall && (player.inputVector.x * (isFacingRight ? 1f : -1f)) > 0f || (player.inputVector.x > 0f ? player.collisions.IsTouchingWallR : player.collisions.IsTouchingWallL))
             {
@@ -103,27 +129,27 @@ public class PlayerMovement : MonoBehaviour
             }
             else if ((player.rb2d.velocity.x * player.inputVector.x) >= 0f)
             {
-                if (Mathf.Abs(player.rb2d.velocity.x) < topSpeed)
+                if (Mathf.Abs(player.rb2d.velocity.x) < (isCrouching ? crouchTopSpeed : topSpeed))
                 {
                     player.rb2d.velocity += ((player.stateMachine.CurrentState == player.stateMachine.runningState && (player.collisions.IsGrounded || player.collisions.IsOnASlope) ? player.collisions.GetRightVector() : Vector2.right) * (player.collisions.IsGrounded || player.collisions.IsOnASlope ? acceleration : airAcceleration) * player.inputVector.x * Time.deltaTime);
-                    if (Mathf.Abs(player.rb2d.velocity.x) > topSpeed)
+                    if (Mathf.Abs(player.rb2d.velocity.x) > (isCrouching ? crouchTopSpeed : topSpeed))
                     {
-                        player.rb2d.velocity = new Vector2(topSpeed * player.inputVector.x, player.rb2d.velocity.y);
+                        player.rb2d.velocity = new Vector2((isCrouching ? crouchTopSpeed : topSpeed) * player.inputVector.x, player.rb2d.velocity.y);
                     }
                 }
-                else if ((player.collisions.IsGrounded || player.collisions.IsOnASlope) && Mathf.Abs(player.rb2d.velocity.x) > topSpeed)
+                else if ((player.collisions.IsGrounded || player.collisions.IsOnASlope) && Mathf.Abs(player.rb2d.velocity.x) > (isCrouching ? crouchTopSpeed : topSpeed))
                 {
                     if (player.rb2d.velocity.x != 0f)
                     {
                         if (player.rb2d.velocity.x > 0f)
                         {
                             player.rb2d.velocity -= (player.collisions.GetRightVector(true) * deceleration * Time.deltaTime);
-                            if (player.rb2d.velocity.x < topSpeed) { player.rb2d.velocity = new Vector2(topSpeed, player.rb2d.velocity.y); }
+                            if (player.rb2d.velocity.x < (isCrouching ? crouchTopSpeed : topSpeed)) { player.rb2d.velocity = new Vector2((isCrouching ? crouchTopSpeed : topSpeed), player.rb2d.velocity.y); }
                         }
                         else
                         {
                             player.rb2d.velocity += (player.collisions.GetRightVector(true) * deceleration * Time.deltaTime);
-                            if (player.rb2d.velocity.x > -topSpeed) { player.rb2d.velocity = new Vector2(-topSpeed, player.rb2d.velocity.y); }
+                            if (player.rb2d.velocity.x > -(isCrouching ? crouchTopSpeed : topSpeed)) { player.rb2d.velocity = new Vector2(-(isCrouching ? crouchTopSpeed : topSpeed), player.rb2d.velocity.y); }
                         }
                     }
                 }
@@ -178,27 +204,27 @@ public class PlayerMovement : MonoBehaviour
             }
             else if ((intendedXVelocity * player.inputVector.x) >= 0f)
             {
-                if (Mathf.Abs(intendedXVelocity) < topSpeed)
+                if (Mathf.Abs(intendedXVelocity) < (isCrouching ? crouchTopSpeed : topSpeed))
                 {
                     intendedXVelocity += ((player.collisions.IsGrounded || player.collisions.IsOnASlope ? acceleration : airAcceleration) * player.inputVector.x * Time.deltaTime);
-                    if (Mathf.Abs(intendedXVelocity) > topSpeed)
+                    if (Mathf.Abs(intendedXVelocity) > (isCrouching ? crouchTopSpeed : topSpeed))
                     {
-                        intendedXVelocity = (topSpeed * player.inputVector.x);
+                        intendedXVelocity = ((isCrouching ? crouchTopSpeed : topSpeed) * player.inputVector.x);
                     }
                 }
-                else if ((player.collisions.IsGrounded || player.collisions.IsOnASlope) && Mathf.Abs(intendedXVelocity) > topSpeed)
+                else if ((player.collisions.IsGrounded || player.collisions.IsOnASlope) && Mathf.Abs(intendedXVelocity) > (isCrouching ? crouchTopSpeed : topSpeed))
                 {
                     if (intendedXVelocity != 0f)
                     {
                         if (intendedXVelocity > 0f)
                         {
                             intendedXVelocity -= (deceleration * Time.deltaTime);
-                            if (intendedXVelocity < topSpeed) { intendedXVelocity = topSpeed; }
+                            if (intendedXVelocity < (isCrouching ? crouchTopSpeed : topSpeed)) { intendedXVelocity = (isCrouching ? crouchTopSpeed : topSpeed); }
                         }
                         else
                         {
                             intendedXVelocity += (deceleration * Time.deltaTime);
-                            if (intendedXVelocity > -topSpeed) { intendedXVelocity = -topSpeed; }
+                            if (intendedXVelocity > -(isCrouching ? crouchTopSpeed : topSpeed)) { intendedXVelocity = -(isCrouching ? crouchTopSpeed : topSpeed); }
                         }
                     }
                 }

@@ -15,30 +15,53 @@ public class PlayerAnimation : MonoBehaviour
 
     public void StandingAnimation()
     {
-        animator.Play(player.form.currentMode == CharacterMode.MAGE ? "MagliStand" : "DraelynStand");
+        if (player.movement.isCrouching)
+        {
+            if (player.inputVector.y >= 0f && player.collisions.IsCeilingAboveWhenUncrouched())
+            {
+                animator.Play(player.form.currentMode == CharacterMode.MAGE ? "MagliUncrouchInvalid" : "DraelynUncrouchInvalid");
+            }
+            else
+            {
+                animator.Play(player.form.currentMode == CharacterMode.MAGE ? "MagliCrouch" : "DraelynCrouch");
+            }
+        }
+        else
+        {
+            animator.Play(player.form.currentMode == CharacterMode.MAGE ? "MagliStand" : "DraelynStand");
+        }
+        
         animator.speed = 0f;
     }
 
     public void RunningAnimation()
     {
-        if (player.collisions.IsGrounded || player.collisions.IsOnASlope)
+        if (player.movement.isCrouching)
         {
-            if (player.rb2d.velocity.x != 0f)
+            animator.Play(player.form.currentMode == CharacterMode.MAGE ? "MagliCrouchWalk" : "DraelynCrouchWalk");
+            animator.speed = 1f;
+        }
+        else
+        {
+            if (player.collisions.IsGrounded || player.collisions.IsOnASlope)
             {
-                float runSpeed = GetRunAnimationSpeed();
-                animator.Play(player.form.currentMode == CharacterMode.MAGE ? "MagliMove" : "DraelynMove", -1, runSpeed > 0f ? Mathf.NegativeInfinity : 0f);
-                animator.speed = runSpeed;
-            }
-            else
-            {
-                StandingAnimation();
+                if (player.rb2d.velocity.x != 0f)
+                {
+                    float runSpeed = GetRunAnimationSpeed();
+                    animator.Play(player.form.currentMode == CharacterMode.MAGE ? "MagliMove" : "DraelynMove", -1, runSpeed > 0f ? Mathf.NegativeInfinity : 0f);
+                    animator.speed = runSpeed;
+                }
+                else
+                {
+                    StandingAnimation();
+                }
             }
         }
     }
 
     public void GroundJumpAnimation()
     {
-        animator.Play(player.form.currentMode == CharacterMode.MAGE ? "MagliGroundJump" : "DraelynGroundJump");
+        animator.Play(player.form.currentMode == CharacterMode.MAGE ? (player.jumping.enableCrouchJump && player.movement.isCrouching ? "MagliCrouchJump" : "MagliGroundJump") : "DraelynGroundJump");
     }
 
     public void MidairJumpAnimation()
@@ -56,7 +79,7 @@ public class PlayerAnimation : MonoBehaviour
     public void FallingAnimation()
     {
         animator.speed = 1f;
-        animator.Play(player.form.currentMode == CharacterMode.MAGE ? "MagliFall" : "DraelynFall");
+        animator.Play(player.form.currentMode == CharacterMode.MAGE ? (player.jumping.enableCrouchJump && player.movement.isCrouching ? "MagliCrouchFall" : "MagliFall") : "DraelynFall");
     }
 
     public void GlidingAnimation()

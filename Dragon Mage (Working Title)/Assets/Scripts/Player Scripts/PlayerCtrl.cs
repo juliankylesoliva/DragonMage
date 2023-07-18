@@ -52,6 +52,7 @@ public class PlayerCtrl : MonoBehaviour
         sfxCtrl = this.gameObject.GetComponent<AudioPlayer>();
 
         rb2d = this.gameObject.GetComponent<Rigidbody2D>();
+        capsuleCollider = this.gameObject.GetComponent<CapsuleCollider2D>();
         charSprite = this.gameObject.GetComponent<SpriteRenderer>();
         
         stateMachine = new StateMachine(this);

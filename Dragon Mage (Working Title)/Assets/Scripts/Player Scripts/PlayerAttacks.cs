@@ -156,6 +156,7 @@ public class PlayerAttacks : MonoBehaviour
     private IEnumerator UseFireTackleCR()
     {
         if (isFireTackleActive || isAttackCooldownActive) { yield break; }
+        player.movement.ResetCrouchState();
 
         bool isAttackButtonHeld = true;
 

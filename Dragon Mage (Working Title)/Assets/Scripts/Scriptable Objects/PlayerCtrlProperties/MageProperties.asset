@@ -53,12 +53,8 @@ MonoBehaviour:
   _enableRunningJumpBonus: 1
   _runningJumpMultiplier: 1.5
   _enableCrouchWalking: 1
-  _crouchSpeedMultiplier: 0.5
+  _crouchTopSpeed: 2.625
   _enableCrouchJump: 1
-  _enableSuperJump: 1
-  _superJumpChargeTime: 1
-  _superJumpRetentionTime: 3
-  _uncrouchedYOffset: -0.25
-  _crouchedYOffset: -0.5
-  _uncrouchedHeight: 1.5
-  _crouchedHeight: -1
+  _enableSuperJump: 0
+  _superJumpChargeTime: 0
+  _superJumpRetentionTime: 0

@@ -1,5 +1,67 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1410398728552758865
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2902511929944433057}
+  m_Layer: 3
+  m_Name: CrouchedHeadbonkCheck
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2902511929944433057
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1410398728552758865}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -0.0625, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6792052323780996504}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &4861114749448243208
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7154143987317559379}
+  m_Layer: 3
+  m_Name: CrouchedWallCheckL
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7154143987317559379
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4861114749448243208}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.25, y: -0.53125, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6792052323780996504}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6792052322839461867
 GameObject:
   m_ObjectHideFlags: 0
@@ -5295,7 +5357,10 @@ Transform:
   - {fileID: 6792052324337822811}
   - {fileID: 6792052324009736574}
   - {fileID: 6792052323526765791}
+  - {fileID: 8404929889979481835}
+  - {fileID: 7154143987317559379}
   - {fileID: 6792052323461160992}
+  - {fileID: 2902511929944433057}
   - {fileID: 6792052323971931207}
   - {fileID: 6792052323206298514}
   - {fileID: 6792052322839461866}
@@ -5331,6 +5396,7 @@ MonoBehaviour:
   effects: {fileID: 0}
   sfxCtrl: {fileID: 0}
   rb2d: {fileID: 0}
+  capsuleCollider: {fileID: 0}
   charSprite: {fileID: 0}
 --- !u!114 &6792052323780996486
 MonoBehaviour:
@@ -5353,7 +5419,10 @@ MonoBehaviour:
   - {fileID: 6792052324337822811}
   - {fileID: 6792052324009736574}
   - {fileID: 6792052323526765791}
+  crouchedWallCheckR: {fileID: 8404929889979481835}
+  crouchedWallCheckL: {fileID: 7154143987317559379}
   headbonkCheckObj: {fileID: 6792052323461160992}
+  crouchedHeadbonkCheckObj: {fileID: 2902511929944433057}
   normalCheckR: {fileID: 6792052323687578736}
   normalCheckL: {fileID: 6792052324587976484}
   groundCheckRadius: 0.125
@@ -5363,6 +5432,10 @@ MonoBehaviour:
   ledgeCheckOffset: 0.25
   ledgeCheckDepth: 0.85
   groundNormalXThreshold: 0.1
+  uncrouchedYOffset: -0.25
+  crouchedYOffset: -0.53125
+  uncrouchedHeight: 1.5
+  crouchedHeight: 0.9375
   intangibleWallLayer:
     serializedVersion: 2
     m_Bits: 8192
@@ -5425,6 +5498,8 @@ MonoBehaviour:
   airAcceleration: 0.8
   airDeceleration: 0.6
   airTurningSpeed: 0.45
+  enableCrouchWalking: 1
+  crouchTopSpeed: 2.625
   slopeSnapDistanceThreshold: 0.1
   maxMovingSlopeSnapDistance: 0.5
   topSpeedTurnaroundPercent: 0.25
@@ -5495,6 +5570,10 @@ MonoBehaviour:
   currentMidairJumps: 0
   enableRunningJumpBonus: 1
   runningJumpMultiplier: 1.5
+  enableCrouchJump: 1
+  enableSuperJump: 0
+  superJumpChargeTime: 0
+  superJumpRetentionTime: 0
 --- !u!114 &6792052323780996480
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15729,6 +15808,37 @@ Transform:
   m_GameObject: {fileID: 6792052324587976485}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.25, y: -0.75, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6792052323780996504}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &8459336762056085951
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8404929889979481835}
+  m_Layer: 3
+  m_Name: CrouchedWallCheckR
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8404929889979481835
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8459336762056085951}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.25, y: -0.53125, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

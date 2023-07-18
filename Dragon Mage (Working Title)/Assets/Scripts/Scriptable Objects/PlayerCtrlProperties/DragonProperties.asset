@@ -52,13 +52,9 @@ MonoBehaviour:
   _forwardMidairJumpBonus: {x: 0.75, y: 0.5}
   _enableRunningJumpBonus: 0
   _runningJumpMultiplier: 0
-  _enableCrouchWalking: 0
-  _crouchSpeedMultiplier: 0
+  _enableCrouchWalking: 1
+  _crouchTopSpeed: 1.925
   _enableCrouchJump: 0
   _enableSuperJump: 1
   _superJumpChargeTime: 1
   _superJumpRetentionTime: 3
-  _uncrouchedYOffset: -0.25
-  _crouchedYOffset: -0.5
-  _uncrouchedHeight: 1.5
-  _crouchedHeight: -1

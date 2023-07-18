@@ -139,8 +139,8 @@ public class PlayerCtrlProperties : ScriptableObject
     [SerializeField] bool _enableCrouchWalking = false;
     public bool enableCrouchWalking { get { return _enableCrouchWalking; } }
 
-    [SerializeField, Range(0f, 1f)] float _crouchSpeedMultiplier = 0.5f;
-    public float crouchSpeedMultiplier { get { return _crouchSpeedMultiplier; } }
+    [SerializeField] float _crouchTopSpeed = 1f;
+    public float crouchTopSpeed { get { return _crouchTopSpeed; } }
 
     [SerializeField] bool _enableCrouchJump = false;
     public bool enableCrouchJump { get { return _enableCrouchJump; } }
@@ -153,17 +153,4 @@ public class PlayerCtrlProperties : ScriptableObject
 
     [SerializeField] float _superJumpRetentionTime = 3f;
     public float superJumpRetentionTime { get { return _superJumpRetentionTime; } }
-
-    [SerializeField] float _uncrouchedYOffset = -0.25f;
-    public float uncrouchedYOffset { get { return _uncrouchedYOffset; } }
-
-    [SerializeField] float _crouchedYOffset = -0.5f;
-    public float crouchedYOffset { get { return _crouchedYOffset; } }
-
-    [SerializeField] float _uncrouchedHeight = 1.5f;
-    public float uncrouchedHeight { get { return _uncrouchedHeight; } }
-
-    [SerializeField] float _crouchedHeight = -1f;
-    public float crouchedHeight { get { return _crouchedHeight; } }
-
 }

@@ -30,4 +30,11 @@ public class PlayerEffects : MonoBehaviour
         SpriteRenderer tempSprite = tempObj.GetComponent<SpriteRenderer>();
         tempSprite.flipX = (player.inputVector.x < 0f);
     }
+
+    public void HeadbonkEffect()
+    {
+        SoundFactory.SpawnSound(player.form.currentMode == CharacterMode.MAGE ? "jump_magli_headbonk" : "jump_draelyn_headbonk", player.collisions.groundCheckObj.position, 0.75f);
+        GameObject tempObj = EffectFactory.SpawnEffect("HeadbonkEffect", player.collisions.GetSimpleCeilingPoint());
+        tempObj.transform.up = player.collisions.GetCeilingNormal();
+    }
 }
