@@ -226,11 +226,13 @@ public class StandingState : State
 
     public override void Enter()
     {
+        player.movement.ResetIntendedXVelocity();
         player.jumping.LandingReset();
     }
 
     public override void Update()
     {
+        player.movement.ResetIntendedXVelocity();
         player.movement.CrouchCheck();
         player.animationCtrl.StandingAnimation();
         if (player.collisions.IsOnASlope)
@@ -568,6 +570,26 @@ public class FireTacklingState : State
             return true;
         }
         return false;
+    }
+}
+
+public class SlidingState : State
+{
+    public SlidingState(PlayerCtrl player) : base(player) { name = "Sliding"; }
+
+    public override void Enter()
+    {
+
+    }
+
+    public override void Update()
+    {
+
+    }
+
+    public override void Exit()
+    {
+
     }
 }
 

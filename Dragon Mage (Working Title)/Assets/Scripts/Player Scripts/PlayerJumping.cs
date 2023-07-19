@@ -60,17 +60,31 @@ public class PlayerJumping : MonoBehaviour
     public bool enableRunningJumpBonus = true;
     public float runningJumpMultiplier = 1f;
 
-    [Header("Crouch Jump Variables")]
+    [Header("Crouch Jump and Super Jump Variables")]
     public bool enableCrouchJump = false;
     public bool enableSuperJump = false;
     public float superJumpChargeTime = 1f;
     public float superJumpRetentionTime = 3f;
+    public float superJumpSpeedMultiplier = 1f;
+
+    public float currentSuperJumpChargeTimer { get; private set; }
+    private float currentSuperJumpRetentionTimer = 0f;
+    public bool isSuperJumpReady { get { return currentSuperJumpRetentionTimer > 0f; } }
 
     public float fallTimer { get; private set; }
 
     void Awake()
     {
         player = this.gameObject.GetComponent<PlayerCtrl>();
+    }
+
+    void Update()
+    {
+        if (!PauseHandler.isPaused)
+        {
+            DoSuperJumpChargeTimer();
+            DoSuperJumpRetentionTimer();
+        }
     }
 
     private IEnumerator WallJumpCooldownCR()
@@ -87,6 +101,44 @@ public class PlayerJumping : MonoBehaviour
             isWallJumpCooldownActive = false;
         }
         yield break;
+    }
+
+    private void DoSuperJumpChargeTimer()
+    {
+        if (player.movement.isCrouching && player.inputVector.x == 0f && player.inputVector.y < 0f && (player.collisions.IsGrounded || player.collisions.IsOnASlope) && player.stateMachine.CurrentState.name == "Standing")
+        {
+            if (currentSuperJumpChargeTimer < superJumpChargeTime && currentSuperJumpRetentionTimer <= 0f)
+            {
+                currentSuperJumpChargeTimer += Time.deltaTime;
+                if (currentSuperJumpChargeTimer >= superJumpChargeTime)
+                {
+                    currentSuperJumpChargeTimer = superJumpChargeTime;
+                    currentSuperJumpRetentionTimer = superJumpRetentionTime;
+                }
+            }
+        }
+        else
+        {
+            if (currentSuperJumpRetentionTimer <= 0f) { currentSuperJumpChargeTimer = 0f; }
+        }
+    }
+
+    private void DoSuperJumpRetentionTimer()
+    {
+        if (currentSuperJumpRetentionTimer > 0f)
+        {
+            currentSuperJumpRetentionTimer -= Time.deltaTime;
+            if (currentSuperJumpRetentionTimer <= 0f)
+            {
+                ResetSuperJumpTimers();
+            }
+        }
+    }
+
+    public void ResetSuperJumpTimers()
+    {
+        currentSuperJumpChargeTimer = 0f;
+        currentSuperJumpRetentionTimer = 0f;
     }
 
     public void SetFallTimer()
@@ -138,8 +190,10 @@ public class PlayerJumping : MonoBehaviour
         tempObj.transform.up = player.collisions.GetGroundNormal();
 
         player.animationCtrl.GroundJumpAnimation();
-        player.sfxCtrl.PlaySound(player.form.currentMode == CharacterMode.MAGE ? "jump_magli" : "jump_draelyn", 1f, didPlayerSpeedHop ? 1.5f : 1f);
-        player.rb2d.velocity = new Vector2(horizontalResult * (player.movement.isFacingRight ? 1f : -1f), (jumpSpeed + (enableRunningJumpBonus && !player.movement.isCrouching ? Mathf.Min(Mathf.Abs(horizontalResult / player.movement.topSpeed), 1f) * runningJumpMultiplier : 0f)));
+        player.sfxCtrl.PlaySound(player.form.currentMode == CharacterMode.MAGE ? "jump_magli" : "jump_draelyn", 1f, didPlayerSpeedHop || isSuperJumpReady ? 1.5f : 1f);
+        player.rb2d.velocity = new Vector2(horizontalResult * (player.movement.isFacingRight ? 1f : -1f), ((jumpSpeed * (isSuperJumpReady ? superJumpSpeedMultiplier : 1f)) + (enableRunningJumpBonus && !player.movement.isCrouching ? Mathf.Min(Mathf.Abs(horizontalResult / player.movement.topSpeed), 1f) * runningJumpMultiplier : 0f)));
+
+        if (isSuperJumpReady) { ResetSuperJumpTimers(); }
     }
 
     public void GroundJumpUpdate()

@@ -153,4 +153,7 @@ public class PlayerCtrlProperties : ScriptableObject
 
     [SerializeField] float _superJumpRetentionTime = 3f;
     public float superJumpRetentionTime { get { return _superJumpRetentionTime; } }
+
+    [SerializeField] float _superJumpSpeedMultiplier = 1f;
+    public float superJumpSpeedMultiplier { get { return _superJumpSpeedMultiplier; } }
 }

@@ -143,6 +143,16 @@ public class PlayerForm : MonoBehaviour
         {
             player.movement.ResetCrouchState();
         }
+
+        player.jumping.enableSuperJump = p.enableSuperJump;
+        player.jumping.superJumpChargeTime = p.superJumpChargeTime;
+        player.jumping.superJumpRetentionTime = p.superJumpRetentionTime;
+        player.jumping.superJumpSpeedMultiplier = p.superJumpSpeedMultiplier;
+
+        if (!player.jumping.enableSuperJump)
+        {
+            player.jumping.ResetSuperJumpTimers();
+        }
     }
 
     public IEnumerator FormChangeCooldownCR()

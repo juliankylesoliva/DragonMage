@@ -58,3 +58,4 @@ MonoBehaviour:
   _enableSuperJump: 0
   _superJumpChargeTime: 0
   _superJumpRetentionTime: 0
+  _superJumpSpeedMultiplier: 0

@@ -17,6 +17,7 @@ public class PlayerAttacks : MonoBehaviour
     [SerializeField] Transform projectileSpawnPoint;
     
     [SerializeField] float attackCooldown = 1f;
+
     [SerializeField] float fireTackleBaseHorizontalSpeed = 6f;
     [SerializeField] float fireTackleMaxHorizontalSpeed = 30f;
     [SerializeField] float fireTackleVerticalSteeringSpeed = 2f;
@@ -33,15 +34,22 @@ public class PlayerAttacks : MonoBehaviour
     [SerializeField] Color fireTackleEndlagColor;
     [SerializeField] float fireTackleTrailSpawnInterval = 0.05f;
 
+    [SerializeField] float slideBaseHorizontalSpeed = 5f;
+    [SerializeField] float slideMaxHorizontalSpeed = 10f;
+    [SerializeField] float slideMinDuration = 0.2f;
+    [SerializeField] float slideNoJumpCancelUntil = 0.25f;
+    [SerializeField] float slideMaxSlopeSnapDistance = 1f;
+
     [SerializeField] float blastJumpMinVelocityMagnitude = 6f;
     [SerializeField] float blastJumpMaxFallSpeed = 20f;
     [SerializeField] float blastJumpMinActiveTime = 0.25f;
     [SerializeField] float blastJumpTemperIncreaseInterval = 0.5f;
     [SerializeField] Color blastJumpActiveColor;
 
-    [HideInInspector] public bool isAttackCooldownActive = false;
-    [HideInInspector] public bool isBlastJumpActive = false;
-    [HideInInspector] public bool isFireTackleActive = false;
+    public bool isAttackCooldownActive { get; private set; }
+    public bool isBlastJumpActive { get; private set; }
+    public bool isFireTackleActive { get; private set; }
+    public bool isSliding { get; private set; }
 
     public AttackState currentAttackState { get; private set; }
     public bool isFireTackleEndlagCanceled { get; private set; }
@@ -85,7 +93,14 @@ public class PlayerAttacks : MonoBehaviour
             }
             else
             {
-                StartCoroutine(UseFireTackleCR());
+                if (player.movement.isCrouching)
+                {
+                    StartCoroutine(UseSlideCR());
+                }
+                else
+                {
+                    StartCoroutine(UseFireTackleCR());
+                }
             }
         }
     }
@@ -155,7 +170,7 @@ public class PlayerAttacks : MonoBehaviour
 
     private IEnumerator UseFireTackleCR()
     {
-        if (isFireTackleActive || isAttackCooldownActive) { yield break; }
+        if ((player.movement.isCrouching && player.collisions.IsCeilingAboveWhenUncrouched()) || isFireTackleActive || isAttackCooldownActive) { yield break; }
         player.movement.ResetCrouchState();
 
         bool isAttackButtonHeld = true;
@@ -326,6 +341,11 @@ public class PlayerAttacks : MonoBehaviour
     private bool CanCancelFireTackleEndlag()
     {
         return (!player.temper.forceFormChange && (player.jumping.CanWallClimb() || ((player.inputVector.x * (player.movement.isFacingRight ? 1f : -1f)) > 0f && player.collisions.IsGrounded && player.buffers.jumpBufferTimeLeft > 0f)));
+    }
+
+    private IEnumerator UseSlideCR()
+    {
+        yield return null;
     }
 
     private IEnumerator AttackCooldownCR()
