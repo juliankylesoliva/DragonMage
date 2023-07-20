@@ -95,6 +95,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (player.stateMachine.CurrentState.name != "Standing" && player.stateMachine.CurrentState.name != "Running" && player.stateMachine.CurrentState.name != "Jumping" && player.stateMachine.CurrentState.name != "Falling")
         {
+            Debug.Log("Non-Crouching State!");
             isCrouching = false;
             return;
         }

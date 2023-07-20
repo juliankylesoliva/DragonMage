@@ -5574,6 +5574,7 @@ MonoBehaviour:
   enableSuperJump: 0
   superJumpChargeTime: 0
   superJumpRetentionTime: 0
+  superJumpSpeedMultiplier: 1
 --- !u!114 &6792052323780996480
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5608,14 +5609,16 @@ MonoBehaviour:
   fireTackleActiveColor: {r: 0.97900003, g: 0.57028943, b: 0.319154, a: 1}
   fireTackleEndlagColor: {r: 0.801, g: 0.801, b: 0.801, a: 1}
   fireTackleTrailSpawnInterval: 0.33333334
+  slideBaseHorizontalSpeed: 5
+  slideMaxHorizontalSpeed: 10
+  slideMinDuration: 0.2
+  slideNoCancelingTime: 0.25
+  slideMaxSlopeSnapDistance: 1
   blastJumpMinVelocityMagnitude: 6
   blastJumpMaxFallSpeed: 18
   blastJumpMinActiveTime: 0.25
   blastJumpTemperIncreaseInterval: 0.6
   blastJumpActiveColor: {r: 0.72156864, g: 0.35686275, b: 0.76862746, a: 1}
-  isAttackCooldownActive: 0
-  isBlastJumpActive: 0
-  isFireTackleActive: 0
 --- !u!114 &6792052323780996482
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -26,6 +26,7 @@ public class StateMachine
     public WallClimbingState wallClimbingState;
     public WallVaultingState wallVaultingState;
     public FireTacklingState fireTacklingState;
+    public SlidingState slidingState;
     public FormChangingState formChangingState;
     public FrozenControlState frozenControlState;
     public DamagedState damagedState;
@@ -41,6 +42,7 @@ public class StateMachine
         wallClimbingState = new WallClimbingState(player);
         wallVaultingState = new WallVaultingState(player);
         fireTacklingState = new FireTacklingState(player);
+        slidingState = new SlidingState(player);
         formChangingState = new FormChangingState(player);
         frozenControlState = new FrozenControlState(player);
         damagedState = new DamagedState(player);
@@ -159,6 +161,21 @@ public abstract class State : IState
         return false;
     }
 
+    protected bool CheckSlideInput()
+    {
+        if (player.movement.isCrouching)
+        {
+            player.attacks.UseAttack();
+            if (player.attacks.isSliding)
+            {
+                if (!player.collisions.IsGrounded) { player.rb2d.gravityScale = (player.rb2d.velocity.y > 0f ? player.jumping.risingGravity : player.jumping.fallingGravity); }
+                player.stateMachine.TransitionTo(player.stateMachine.slidingState);
+                return true;
+            }
+        }
+        return false;
+    }
+
     protected bool CheckSuddenFall()
     {
         if (!player.collisions.IsGrounded && !player.collisions.IsOnASlope && player.rb2d.velocity.y <= 0f)
@@ -242,7 +259,7 @@ public class StandingState : State
             player.movement.ResetIntendedXVelocity();
         }
         player.rb2d.velocity = Vector2.zero;
-        if (CheckFormChangeInput() || CheckIfDamaged() || CheckRunInput() || CheckJumpInput() || CheckFireTackleInput() || CheckSuddenRise() || CheckSuddenFall() || CheckSuddenMovement()) { return; }
+        if (CheckFormChangeInput() || CheckIfDamaged() || CheckRunInput() || CheckJumpInput() || CheckSlideInput() || CheckFireTackleInput() || CheckSuddenRise() || CheckSuddenFall() || CheckSuddenMovement()) { return; }
     }
 
     public override void Exit()
@@ -268,7 +285,7 @@ public class RunningState : State
         player.movement.CrouchCheck();
         player.movement.Movement();
         player.movement.FacingDirection();
-        if (CheckFormChangeInput() || CheckIfStopped() || CheckSuddenFall() || CheckJumpInput() || CheckFireTackleInput() || CheckIfDamaged()) { return; }
+        if (CheckFormChangeInput() || CheckIfStopped() || CheckSuddenFall() || CheckJumpInput() || CheckSlideInput() || CheckFireTackleInput() || CheckIfDamaged()) { return; }
         player.animationCtrl.RunningAnimation();
     }
 
@@ -584,12 +601,32 @@ public class SlidingState : State
 
     public override void Update()
     {
-
+        if (CheckSlideFinished()) { return; }
     }
 
     public override void Exit()
     {
 
+    }
+
+    private bool CheckSlideFinished()
+    {
+        if (!player.attacks.isSliding)
+        {
+            State nextState;
+            if (player.damage.isPlayerDamaged) { nextState = player.stateMachine.damagedState; }
+            else if (player.temper.forceFormChange) { nextState = player.stateMachine.formChangingState; }
+            else if (player.attacks.isSlideTackleCanceled) { nextState = player.stateMachine.fireTacklingState; }
+            else if (player.attacks.isSlideJumpCanceled) { player.jumping.GroundJumpStart(); nextState = player.stateMachine.jumpingState; }
+            else if ((player.collisions.IsGrounded || player.collisions.IsOnASlope) && (player.inputVector.x != 0f || player.rb2d.velocity.x != 0f)) { nextState = player.stateMachine.runningState; }
+            else if (player.rb2d.velocity.y > 0f && !(player.collisions.IsGrounded || player.collisions.IsOnASlope)) { nextState = player.stateMachine.jumpingState; }
+            else if (player.rb2d.velocity.y <= 0f && !(player.collisions.IsGrounded || player.collisions.IsOnASlope)) { nextState = player.stateMachine.fallingState; }
+            else { nextState = player.stateMachine.standingState; }
+
+            player.stateMachine.TransitionTo(nextState);
+            return true;
+        }
+        return false;
     }
 }
 

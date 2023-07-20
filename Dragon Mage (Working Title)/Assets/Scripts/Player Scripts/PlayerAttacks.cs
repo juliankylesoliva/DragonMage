@@ -37,7 +37,7 @@ public class PlayerAttacks : MonoBehaviour
     [SerializeField] float slideBaseHorizontalSpeed = 5f;
     [SerializeField] float slideMaxHorizontalSpeed = 10f;
     [SerializeField] float slideMinDuration = 0.2f;
-    [SerializeField] float slideNoJumpCancelUntil = 0.25f;
+    [SerializeField] float slideNoCancelingTime = 0.25f;
     [SerializeField] float slideMaxSlopeSnapDistance = 1f;
 
     [SerializeField] float blastJumpMinVelocityMagnitude = 6f;
@@ -53,6 +53,8 @@ public class PlayerAttacks : MonoBehaviour
 
     public AttackState currentAttackState { get; private set; }
     public bool isFireTackleEndlagCanceled { get; private set; }
+    public bool isSlideJumpCanceled { get; private set; }
+    public bool isSlideTackleCanceled { get; private set; }
     public float BlastJumpMaxFallSpeed { get { return blastJumpMaxFallSpeed; } }
 
     private MagicBlast projectileRef = null;
@@ -345,6 +347,69 @@ public class PlayerAttacks : MonoBehaviour
 
     private IEnumerator UseSlideCR()
     {
+        if (isSliding || isAttackCooldownActive || !player.movement.isCrouching || (player.stateMachine.CurrentState.name != "Standing" && player.stateMachine.CurrentState.name != "Running") || (!player.collisions.IsGrounded && !player.collisions.IsOnASlope) || player.collisions.IsAgainstWall || player.collisions.CheckIfNearLedge()) { yield break; }
+
+        isSlideJumpCanceled = false;
+        isSlideTackleCanceled = false;
+        isSliding = true;
+        float previousHorizontalVelocity = Mathf.Abs(player.rb2d.velocity.x);
+        player.rb2d.gravityScale = 0f;
+        player.animationCtrl.SlideAnimation();
+        float horizontalResult = Mathf.Abs(Mathf.Min((previousHorizontalVelocity + slideBaseHorizontalSpeed), slideMaxHorizontalSpeed));
+        player.rb2d.velocity = new Vector2(horizontalResult * player.movement.GetFacingValue(), 0f);
+        float slideTimer = 0f;
+        while (!player.damage.isPlayerDamaged && (player.inputVector.x * player.movement.GetFacingValue()) >= 0f && (slideTimer <= slideMinDuration || player.collisions.IsCeilingAboveWhenUncrouched() || player.inputVector.y < 0f))
+        {
+            if (slideTimer >= slideNoCancelingTime && (player.inputVector.x * player.rb2d.velocity.x) > 0f && player.buffers.jumpBufferTimeLeft > 0f)
+            {
+                isSlideJumpCanceled = true;
+                player.buffers.ResetJumpBuffer();
+                break;
+            }
+            else if (slideTimer >= slideNoCancelingTime && player.buffers.attackBufferTimeLeft > 0f)
+            {
+                isSlideTackleCanceled = true;
+                player.buffers.ResetAttackBuffer();
+                break;
+            }
+            else if (player.collisions.IsAgainstWall || player.collisions.CheckIfNearLedge())
+            {
+                break;
+            }
+            else { /* Nothing */ }
+            
+            /*
+            if (player.inputVector.x * player.movement.GetFacingValue() < 0f)
+            {
+                if (horizontalResult > slideBaseHorizontalSpeed) { horizontalResult = slideBaseHorizontalSpeed; }
+                player.movement.SetFacingDirection(player.inputVector.x);
+            }
+            */
+            Vector2 newVelocity = (player.collisions.GetRightVector() * (!player.collisions.IsAgainstWall && !player.collisions.CheckIfNearLedge() ? horizontalResult : 0f));
+            if (newVelocity.x > 0f & newVelocity.x < horizontalResult) { newVelocity *= (horizontalResult / newVelocity.x); }
+            newVelocity *= player.movement.GetFacingValue();
+            player.rb2d.velocity = newVelocity;
+            player.collisions.SnapToGround(false, slideMaxSlopeSnapDistance);
+
+            if (slideTimer < slideMinDuration || slideTimer < slideNoCancelingTime) { slideTimer += Time.deltaTime; }
+
+            yield return null;
+        }
+
+        player.rb2d.gravityScale = player.jumping.fallingGravity;
+        player.movement.ResetIntendedXVelocity();
+        player.rb2d.velocity = new Vector2(isSlideJumpCanceled ? player.inputVector.x * horizontalResult * (player.damage.isPlayerDamaged ? 0f : 1f) : (player.inputVector.x * player.movement.topSpeed), 0f);
+        isSliding = false;
+        if (!isSlideTackleCanceled)
+        {
+            StartCoroutine(AttackCooldownCR());
+            StartCoroutine(player.form.FormChangeCooldownCR());
+        }
+        else
+        {
+            StartCoroutine(UseFireTackleCR());
+        }
+
         yield return null;
     }
 

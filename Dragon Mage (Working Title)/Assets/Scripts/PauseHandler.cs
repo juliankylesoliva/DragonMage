@@ -11,6 +11,7 @@ public class PauseHandler : MonoBehaviour
     public static bool isPaused { get; private set; }
 
     private float currentTitleScreenTimer = 0f;
+    private bool isWaitingForControlUpdate = false;
 
     void Update()
     {
@@ -18,10 +19,7 @@ public class PauseHandler : MonoBehaviour
         {
             if (isPaused)
             {
-                InputHub.playerInput.SwitchCurrentActionMap("In-Game");
-                pauseMenu.SetActive(false);
-                isPaused = false;
-                Time.timeScale = 1f;
+                StartCoroutine(WaitForInputVectorCR());
             }
             else
             {
@@ -46,5 +44,20 @@ public class PauseHandler : MonoBehaviour
         {
             currentTitleScreenTimer = 0f;
         }
+    }
+
+    private IEnumerator WaitForInputVectorCR()
+    {
+        if (isWaitingForControlUpdate) { yield break; }
+        isWaitingForControlUpdate = true;
+
+        InputHub.playerInput.SwitchCurrentActionMap("In-Game");
+
+        yield return null;
+
+        pauseMenu.SetActive(false);
+        isPaused = false;
+        Time.timeScale = 1f;
+        isWaitingForControlUpdate = false;
     }
 }

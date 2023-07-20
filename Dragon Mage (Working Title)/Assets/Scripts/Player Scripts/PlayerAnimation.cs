@@ -122,6 +122,12 @@ public class PlayerAnimation : MonoBehaviour
         }
     }
 
+    public void SlideAnimation()
+    {
+        animator.Play("DraelynSlide");
+        animator.speed = 1f;
+    }
+
     public void TransformationAnimation(CharacterMode current)
     {
         animator.speed = (0.4f / player.form.FormChangeTime);
