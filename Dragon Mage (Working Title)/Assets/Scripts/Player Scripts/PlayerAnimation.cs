@@ -122,6 +122,12 @@ public class PlayerAnimation : MonoBehaviour
         }
     }
 
+    public void DodgeAnimation()
+    {
+        animator.Play("MagliDodge");
+        animator.speed = 1f;
+    }
+
     public void SlideAnimation()
     {
         animator.Play("DraelynSlide");

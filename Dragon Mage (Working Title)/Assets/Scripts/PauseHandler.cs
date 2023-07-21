@@ -53,7 +53,7 @@ public class PauseHandler : MonoBehaviour
 
         InputHub.playerInput.SwitchCurrentActionMap("In-Game");
 
-        yield return null;
+        yield return null; // PlayerInput needs a frame to read movement input again.
 
         pauseMenu.SetActive(false);
         isPaused = false;

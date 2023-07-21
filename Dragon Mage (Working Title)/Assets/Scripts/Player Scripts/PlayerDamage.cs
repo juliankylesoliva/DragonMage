@@ -86,7 +86,7 @@ public class PlayerDamage : MonoBehaviour
     private bool CanTakeDamage()
     {
         string currentState = player.stateMachine.CurrentState.name;
-        return (!isDamageInvulnerabilityActive && !player.attacks.isBlastJumpActive && player.attacks.currentAttackState != AttackState.ACTIVE && currentState != "FormChanging" && currentState != "Damaged");
+        return (!isDamageInvulnerabilityActive && !player.attacks.isBlastJumpActive && player.attacks.currentAttackState != AttackState.ACTIVE && currentState != "Dodging" && currentState != "FormChanging" && currentState != "Damaged");
     }
 
     private IEnumerator HitstunTimerCR(float time)

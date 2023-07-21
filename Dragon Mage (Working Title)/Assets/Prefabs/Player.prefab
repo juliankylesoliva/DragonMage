@@ -5611,6 +5611,7 @@ MonoBehaviour:
   fireTackleTrailSpawnInterval: 0.33333334
   slideBaseHorizontalSpeed: 5
   slideMaxHorizontalSpeed: 10
+  slideDecelerationRate: 5
   slideMinDuration: 0.2
   slideNoCancelingTime: 0.25
   slideMaxSlopeSnapDistance: 1
@@ -5619,6 +5620,9 @@ MonoBehaviour:
   blastJumpMinActiveTime: 0.25
   blastJumpTemperIncreaseInterval: 0.6
   blastJumpActiveColor: {r: 0.72156864, g: 0.35686275, b: 0.76862746, a: 1}
+  dodgeInitialSpeed: 10
+  dodgeDeceleration: 22
+  dodgeMaxSlopeSnapDistance: 1
 --- !u!114 &6792052323780996482
 MonoBehaviour:
   m_ObjectHideFlags: 0

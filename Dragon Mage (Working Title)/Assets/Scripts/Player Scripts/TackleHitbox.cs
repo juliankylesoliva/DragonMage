@@ -30,7 +30,7 @@ public class TackleHitbox : MonoBehaviour
 
         if (player.attacks.currentAttackState == AttackState.STARTUP)
         {
-            spriteRenderer.sprite = (player.inputVector.y == 0f ? arrowIndicatorSprites[0] : (player.inputVector.y > 0f ? arrowIndicatorSprites[1] : arrowIndicatorSprites[2]));
+            spriteRenderer.sprite = (player.inputVector.y == 0f || (player.inputVector.y < 0f && (player.collisions.IsGrounded || player.collisions.IsOnASlope)) ? arrowIndicatorSprites[0] : (player.inputVector.y > 0f ? arrowIndicatorSprites[1] : arrowIndicatorSprites[2]));
             spriteRenderer.flipX = !player.movement.isFacingRight;
             if (hitboxCollider.offset != defaultOffset) { hitboxCollider.offset = defaultOffset; }
         }

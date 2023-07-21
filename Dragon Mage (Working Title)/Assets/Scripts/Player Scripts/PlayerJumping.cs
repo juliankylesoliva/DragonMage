@@ -112,6 +112,7 @@ public class PlayerJumping : MonoBehaviour
                 currentSuperJumpChargeTimer += Time.deltaTime;
                 if (currentSuperJumpChargeTimer >= superJumpChargeTime)
                 {
+                    SoundFactory.SpawnSound("jump_draelyn_charged", this.transform.position);
                     currentSuperJumpChargeTimer = superJumpChargeTime;
                     currentSuperJumpRetentionTimer = superJumpRetentionTime;
                 }

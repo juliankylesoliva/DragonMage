@@ -36,6 +36,7 @@ public class PlayerAttacks : MonoBehaviour
 
     [SerializeField] float slideBaseHorizontalSpeed = 5f;
     [SerializeField] float slideMaxHorizontalSpeed = 10f;
+    [SerializeField] float slideDecelerationRate = 2.5f;
     [SerializeField] float slideMinDuration = 0.2f;
     [SerializeField] float slideNoCancelingTime = 0.25f;
     [SerializeField] float slideMaxSlopeSnapDistance = 1f;
@@ -46,8 +47,13 @@ public class PlayerAttacks : MonoBehaviour
     [SerializeField] float blastJumpTemperIncreaseInterval = 0.5f;
     [SerializeField] Color blastJumpActiveColor;
 
+    [SerializeField] float dodgeInitialSpeed = 8f;
+    [SerializeField] float dodgeDeceleration = 8f;
+    [SerializeField] float dodgeMaxSlopeSnapDistance = 1f;
+
     public bool isAttackCooldownActive { get; private set; }
     public bool isBlastJumpActive { get; private set; }
+    public bool isDodging { get; private set; }
     public bool isFireTackleActive { get; private set; }
     public bool isSliding { get; private set; }
 
@@ -77,21 +83,28 @@ public class PlayerAttacks : MonoBehaviour
             player.buffers.ResetAttackBuffer();
             if (player.form.currentMode == CharacterMode.MAGE)
             {
-                if (projectileRef != null)
+                if (player.movement.isCrouching)
                 {
-                    projectileRef.Detonate();
+                    StartCoroutine(UseDodgeCR());
                 }
                 else
                 {
-                    GameObject tempObj = Instantiate(magicProjectilePrefab, projectileSpawnPoint.position, Quaternion.identity);
-                    MagicBlast projTemp = tempObj.GetComponent<MagicBlast>();
-                    if (projTemp != null)
+                    if (projectileRef != null)
                     {
-                        projTemp.Setup(player.gameObject, player.temper, player.movement.isFacingRight, player.rb2d.velocity.x, player.inputVector.y);
-                        projectileRef = projTemp;
+                        projectileRef.Detonate();
                     }
+                    else
+                    {
+                        GameObject tempObj = Instantiate(magicProjectilePrefab, projectileSpawnPoint.position, Quaternion.identity);
+                        MagicBlast projTemp = tempObj.GetComponent<MagicBlast>();
+                        if (projTemp != null)
+                        {
+                            projTemp.Setup(player.gameObject, player.temper, player.movement.isFacingRight, player.rb2d.velocity.x, player.inputVector.y);
+                            projectileRef = projTemp;
+                        }
+                    }
+                    StartCoroutine(AttackCooldownCR());
                 }
-                StartCoroutine(AttackCooldownCR());
             }
             else
             {
@@ -170,15 +183,69 @@ public class PlayerAttacks : MonoBehaviour
         yield break;
     }
 
+    private IEnumerator UseDodgeCR()
+    {
+        if (isDodging || isAttackCooldownActive || !player.movement.isCrouching) { yield break; }
+
+        isDodging = true;
+        bool wasJumpInputOnFirstFrames = (player.jumpButtonDown || player.stateMachine.CurrentState.name == "Jumping" || player.stateMachine.CurrentState.name == "Falling");
+        while (player.stateMachine.CurrentState.name != "Dodging") { yield return null; }
+
+        SoundFactory.SpawnSound("movement_magli_dodge", this.transform.position);
+        player.rb2d.gravityScale = 0f;
+        player.animationCtrl.DodgeAnimation();
+        float currentDodgeSpeed = dodgeInitialSpeed;
+        bool didPlayerLeaveGround = (wasJumpInputOnFirstFrames || (!player.collisions.IsGrounded && !player.collisions.IsOnASlope) || player.stateMachine.CurrentState.name == "Jumping" || player.stateMachine.CurrentState.name == "Falling");
+        Vector2 dodgeDirection = new Vector2(player.movement.GetFacingValue(), didPlayerLeaveGround ? -1f : 0f);
+        player.rb2d.velocity = (dodgeDirection * currentDodgeSpeed);
+
+        while (currentDodgeSpeed >= 0f && (!didPlayerLeaveGround || (!player.collisions.IsGrounded && !player.collisions.IsOnASlope)))
+        {
+            if (player.collisions.IsAgainstWall)
+            {
+                player.rb2d.velocity = new Vector2(0f, dodgeDirection.y < 0f ? dodgeDirection.y * currentDodgeSpeed : 0f);
+            }
+            else if (player.collisions.IsOnASlope && dodgeDirection.y == 0f)
+            {
+                Vector2 newVelocity = (player.collisions.GetRightVector() * (!player.collisions.IsAgainstWall ? currentDodgeSpeed : 0f));
+                if (newVelocity.x > 0f & newVelocity.x < currentDodgeSpeed) { newVelocity *= (currentDodgeSpeed / newVelocity.x); }
+                player.rb2d.velocity = (newVelocity * player.movement.GetFacingValue());
+                player.collisions.SnapToGround(false, dodgeMaxSlopeSnapDistance);
+            }
+            else
+            {
+                player.rb2d.velocity = (dodgeDirection * currentDodgeSpeed);
+            }
+
+            if (!didPlayerLeaveGround && (!player.collisions.IsGrounded && !player.collisions.IsOnASlope)) { didPlayerLeaveGround = true; }
+            currentDodgeSpeed -= (dodgeDeceleration * Time.deltaTime);
+
+            yield return null;
+        }
+
+        player.rb2d.gravityScale = player.jumping.fallingGravity;
+        player.movement.ResetIntendedXVelocity();
+        if (currentDodgeSpeed <= 0f || (player.movement.GetFacingValue() > 0f ? player.collisions.IsTouchingWallR : player.collisions.IsTouchingWallL)) { player.rb2d.velocity = Vector2.zero; }
+        StartCoroutine(AttackCooldownCR());
+        StartCoroutine(player.form.FormChangeCooldownCR());
+        isDodging = false;
+
+        yield break;
+    }
+
     private IEnumerator UseFireTackleCR()
     {
         if ((player.movement.isCrouching && player.collisions.IsCeilingAboveWhenUncrouched()) || isFireTackleActive || isAttackCooldownActive) { yield break; }
+
+        isFireTackleActive = true;
+        while (player.stateMachine.CurrentState.name != "FireTackling") { yield return null; }
+
         player.movement.ResetCrouchState();
 
         bool isAttackButtonHeld = true;
 
         isFireTackleEndlagCanceled = false;
-        isFireTackleActive = true;
+        
         currentAttackState = AttackState.STARTUP;
 
         player.sfxCtrl.PlaySound("attack_draelyn_startup");
@@ -349,16 +416,19 @@ public class PlayerAttacks : MonoBehaviour
     {
         if (isSliding || isAttackCooldownActive || !player.movement.isCrouching || (player.stateMachine.CurrentState.name != "Standing" && player.stateMachine.CurrentState.name != "Running") || (!player.collisions.IsGrounded && !player.collisions.IsOnASlope) || player.collisions.IsAgainstWall || player.collisions.CheckIfNearLedge()) { yield break; }
 
+        isSliding = true;
+        while (player.stateMachine.CurrentState.name != "Sliding") { yield return null; }
+
+        SoundFactory.SpawnSound("movement_draelyn_slide", this.transform.position);
         isSlideJumpCanceled = false;
         isSlideTackleCanceled = false;
-        isSliding = true;
         float previousHorizontalVelocity = Mathf.Abs(player.rb2d.velocity.x);
         player.rb2d.gravityScale = 0f;
         player.animationCtrl.SlideAnimation();
         float horizontalResult = Mathf.Abs(Mathf.Min((previousHorizontalVelocity + slideBaseHorizontalSpeed), slideMaxHorizontalSpeed));
         player.rb2d.velocity = new Vector2(horizontalResult * player.movement.GetFacingValue(), 0f);
         float slideTimer = 0f;
-        while (!player.damage.isPlayerDamaged && (player.inputVector.x * player.movement.GetFacingValue()) >= 0f && (slideTimer <= slideMinDuration || player.collisions.IsCeilingAboveWhenUncrouched() || player.inputVector.y < 0f))
+        while (!player.damage.isPlayerDamaged && horizontalResult >= 0f && (player.inputVector.x * player.movement.GetFacingValue()) >= 0f && (slideTimer <= slideMinDuration || player.inputVector.y < 0f))
         {
             if (slideTimer >= slideNoCancelingTime && (player.inputVector.x * player.rb2d.velocity.x) > 0f && player.buffers.jumpBufferTimeLeft > 0f)
             {
@@ -389,28 +459,29 @@ public class PlayerAttacks : MonoBehaviour
             if (newVelocity.x > 0f & newVelocity.x < horizontalResult) { newVelocity *= (horizontalResult / newVelocity.x); }
             newVelocity *= player.movement.GetFacingValue();
             player.rb2d.velocity = newVelocity;
-            player.collisions.SnapToGround(false, slideMaxSlopeSnapDistance);
+            if (player.collisions.IsOnASlope) { player.collisions.SnapToGround(false, slideMaxSlopeSnapDistance); }
 
-            if (slideTimer < slideMinDuration || slideTimer < slideNoCancelingTime) { slideTimer += Time.deltaTime; }
+            slideTimer += Time.deltaTime;
+            horizontalResult -= (slideDecelerationRate * Time.deltaTime);
 
             yield return null;
         }
 
         player.rb2d.gravityScale = player.jumping.fallingGravity;
         player.movement.ResetIntendedXVelocity();
-        player.rb2d.velocity = new Vector2(isSlideJumpCanceled ? player.inputVector.x * horizontalResult * (player.damage.isPlayerDamaged ? 0f : 1f) : (player.inputVector.x * player.movement.topSpeed), 0f);
+        player.rb2d.velocity = new Vector2(isSlideJumpCanceled ? player.inputVector.x * horizontalResult * (player.damage.isPlayerDamaged ? 0f : 1f) : (player.inputVector.x * Mathf.Min(horizontalResult, player.movement.topSpeed)), 0f);
         isSliding = false;
         if (!isSlideTackleCanceled)
         {
             StartCoroutine(AttackCooldownCR());
-            StartCoroutine(player.form.FormChangeCooldownCR());
+            // StartCoroutine(player.form.FormChangeCooldownCR());
         }
         else
         {
             StartCoroutine(UseFireTackleCR());
         }
 
-        yield return null;
+        yield break;
     }
 
     private IEnumerator AttackCooldownCR()
