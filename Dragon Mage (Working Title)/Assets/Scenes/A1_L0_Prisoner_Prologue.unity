@@ -30740,7 +30740,7 @@ PrefabInstance:
     - target: {fileID: 1353651659175900153, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
       propertyPath: hintText
       value: Throw a Magic Blast while holding <sprite="DirectionalArrows" name="Down">
-        in midair to drop it at your feet!
+        to drop it at your feet!
       objectReference: {fileID: 0}
     - target: {fileID: 1353651659175900153, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
       propertyPath: isTextLow
@@ -54261,8 +54261,8 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1353651659175900153, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
       propertyPath: hintText
-      value: Attack while crouching to cross gaps in tight spaces! (You can also
-        do this in the air, but it will send you diagonally downwards...)
+      value: Attack while crouching to dodge and cross gaps in tight spaces! You
+        can also dodge in the air, but it will send you diagonally downwards...
       objectReference: {fileID: 0}
     - target: {fileID: 1353651659175900153, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
       propertyPath: isTextLow
@@ -87986,8 +87986,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1353651659175900153, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
       propertyPath: hintText
-      value: Hold <sprite="DirectionalArrows" name="Down"> to crouch! You can still
-        move while crouching!
+      value: Hold LCtrl / LShoulder to crouch! You can still move while crouching!
       objectReference: {fileID: 0}
     - target: {fileID: 1353651659175900155, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
       propertyPath: m_RootOrder
@@ -90025,8 +90024,8 @@ PrefabInstance:
       propertyPath: hintText
       value: Need to quickly move under a narrow passageway? Attack while crouching
         to perform a slide! Get a running start to go faster! You'll keep sliding
-        as long as you are holding <sprite="DirectionalArrows" name="Down"> and still
-        have speed, but bumping into a wall or reaching a ledge stops you instantly!
+        as long as you are holding LCtrl / LShoulder and still have speed, but hitting
+        a wall or reaching a ledge stops you instantly!
       objectReference: {fileID: 0}
     - target: {fileID: 1353651659175900155, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
       propertyPath: m_RootOrder

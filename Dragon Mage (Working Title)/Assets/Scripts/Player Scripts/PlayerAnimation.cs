@@ -17,7 +17,7 @@ public class PlayerAnimation : MonoBehaviour
     {
         if (player.movement.isCrouching)
         {
-            if (player.inputVector.y >= 0f && player.collisions.IsCeilingAboveWhenUncrouched())
+            if (!player.crouchButtonHeld && player.collisions.IsCeilingAboveWhenUncrouched())
             {
                 animator.Play(player.form.currentMode == CharacterMode.MAGE ? "MagliUncrouchInvalid" : "DraelynUncrouchInvalid");
             }
@@ -38,7 +38,7 @@ public class PlayerAnimation : MonoBehaviour
     {
         if (player.movement.isCrouching)
         {
-            animator.Play(player.form.currentMode == CharacterMode.MAGE ? "MagliCrouchWalk" : "DraelynCrouchWalk");
+            animator.Play(player.form.currentMode == CharacterMode.MAGE ? (player.stateMachine.PreviousState.name == "Dodging" && Mathf.Abs(player.rb2d.velocity.x) > player.movement.topSpeed ? "MagliDodge" : "MagliCrouchWalk") : "DraelynCrouchWalk");
             animator.speed = 1f;
         }
         else

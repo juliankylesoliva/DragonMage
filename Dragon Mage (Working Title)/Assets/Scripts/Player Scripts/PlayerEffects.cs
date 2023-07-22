@@ -28,7 +28,7 @@ public class PlayerEffects : MonoBehaviour
         SoundFactory.SpawnSound(player.form.currentMode == CharacterMode.MAGE ? "movement_magli_turnaround" : "movement_draelyn_turnaround", player.collisions.GetSimpleGroundPoint(), 0.75f);
         GameObject tempObj = EffectFactory.SpawnEffect("TurnaroundSpark", player.collisions.GetSimpleGroundPoint());
         SpriteRenderer tempSprite = tempObj.GetComponent<SpriteRenderer>();
-        tempSprite.flipX = (player.inputVector.x < 0f);
+        tempSprite.flipX = (player.movement.GetFacingValue() < 0f);
     }
 
     public void HeadbonkEffect()

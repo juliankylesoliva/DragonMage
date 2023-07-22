@@ -16,6 +16,8 @@ public class InputHub : MonoBehaviour
     public static bool attackButtonDown { get; private set; }
     public static bool attackButtonHeld { get; private set; }
 
+    public static bool crouchButtonHeld { get; private set; }
+
     public static bool formChangeButtonDown { get; private set; }
 
     public static bool interactButtonDown { get; private set; }
@@ -126,6 +128,11 @@ public class InputHub : MonoBehaviour
         if (attackButtonHeld) { attackButtonDown = true; }
     }
 
+    void OnCrouch(InputValue value)
+    {
+        crouchButtonHeld = value.isPressed;
+    }
+
     void OnChange(InputValue value)
     {
         if (value.isPressed) { formChangeButtonDown = true; }
@@ -186,5 +193,18 @@ public class InputHub : MonoBehaviour
     {
         titleScreenButtonHeld = value.isPressed;
         if (titleScreenButtonHeld) { titleScreenButtonDown = true; }
+    }
+
+    public static void ClearInputs()
+    {
+        inputVector = Vector2.zero;
+        jumpButtonDown = false;
+        jumpButtonHeld = false;
+        attackButtonDown = false;
+        attackButtonHeld = false;
+        crouchButtonHeld = false;
+        formChangeButtonDown = false;
+        interactButtonDown = false;
+        technicalButtonHeld = false;
     }
 }

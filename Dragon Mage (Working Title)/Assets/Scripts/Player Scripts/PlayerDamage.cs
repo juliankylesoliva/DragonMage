@@ -20,9 +20,9 @@ public class PlayerDamage : MonoBehaviour
 
     private Transform damageSource = null;
     private float hitstunTimer = 0f;
-    private bool isDamageInvulnerabilityActive = false;
     private bool isDamageInvulnerabilityFlickering = false;
 
+    public bool isDamageInvulnerabilityActive { get; private set; }
     public bool isPlayerDamaged { get { return hitstunTimer > 0f; } }
     public int damageTaken { get; private set; }
 

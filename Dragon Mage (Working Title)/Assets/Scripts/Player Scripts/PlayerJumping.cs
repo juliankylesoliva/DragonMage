@@ -66,6 +66,7 @@ public class PlayerJumping : MonoBehaviour
     public float superJumpChargeTime = 1f;
     public float superJumpRetentionTime = 3f;
     public float superJumpSpeedMultiplier = 1f;
+    [SerializeField] ParticleSystem superJumpParticles;
 
     public float currentSuperJumpChargeTimer { get; private set; }
     private float currentSuperJumpRetentionTimer = 0f;
@@ -105,13 +106,14 @@ public class PlayerJumping : MonoBehaviour
 
     private void DoSuperJumpChargeTimer()
     {
-        if (player.movement.isCrouching && player.inputVector.x == 0f && player.inputVector.y < 0f && (player.collisions.IsGrounded || player.collisions.IsOnASlope) && player.stateMachine.CurrentState.name == "Standing")
+        if (player.movement.isCrouching && player.inputVector.x == 0f && player.crouchButtonHeld && (player.collisions.IsGrounded || player.collisions.IsOnASlope) && player.stateMachine.CurrentState.name == "Standing")
         {
             if (currentSuperJumpChargeTimer < superJumpChargeTime && currentSuperJumpRetentionTimer <= 0f)
             {
                 currentSuperJumpChargeTimer += Time.deltaTime;
                 if (currentSuperJumpChargeTimer >= superJumpChargeTime)
                 {
+                    superJumpParticles.Play();
                     SoundFactory.SpawnSound("jump_draelyn_charged", this.transform.position);
                     currentSuperJumpChargeTimer = superJumpChargeTime;
                     currentSuperJumpRetentionTimer = superJumpRetentionTime;
@@ -120,7 +122,11 @@ public class PlayerJumping : MonoBehaviour
         }
         else
         {
-            if (currentSuperJumpRetentionTimer <= 0f) { currentSuperJumpChargeTimer = 0f; }
+            if (currentSuperJumpRetentionTimer <= 0f)
+            {
+                superJumpParticles.Stop();
+                currentSuperJumpChargeTimer = 0f;
+            }
         }
     }
 
@@ -128,16 +134,25 @@ public class PlayerJumping : MonoBehaviour
     {
         if (currentSuperJumpRetentionTimer > 0f)
         {
-            currentSuperJumpRetentionTimer -= Time.deltaTime;
-            if (currentSuperJumpRetentionTimer <= 0f)
+            if (currentSuperJumpRetentionTimer >= superJumpRetentionTime && player.movement.isCrouching && player.crouchButtonHeld && (player.collisions.IsGrounded || player.collisions.IsOnASlope) && (player.stateMachine.CurrentState.name == "Standing" || player.stateMachine.CurrentState.name == "Running"))
             {
-                ResetSuperJumpTimers();
+                currentSuperJumpRetentionTimer = superJumpRetentionTime;
+            }
+            else
+            {
+                currentSuperJumpRetentionTimer -= Time.deltaTime;
+                if (currentSuperJumpRetentionTimer <= 0f)
+                {
+                    superJumpParticles.Stop();
+                    ResetSuperJumpTimers();
+                }
             }
         }
     }
 
     public void ResetSuperJumpTimers()
     {
+        superJumpParticles.Stop();
         currentSuperJumpChargeTimer = 0f;
         currentSuperJumpRetentionTimer = 0f;
     }
@@ -464,7 +479,7 @@ public class PlayerJumping : MonoBehaviour
         tempObj.transform.localScale = new Vector3(resultScale, resultScale, 1f);
 
         player.transform.position += (Vector3.right * (player.movement.isFacingRight ? 1f : -1f) * 0.25f);
-        player.collisions.SnapToGround(false);
+        player.collisions.SnapToGround(false, false);
         player.rb2d.gravityScale = fallingGravity;
         player.rb2d.velocity = new Vector2(storedWallClimbSpeed * player.inputVector.x, 0f);
     }

@@ -93,21 +93,20 @@ public class PlayerMovement : MonoBehaviour
 
     public void CrouchCheck()
     {
-        if (player.stateMachine.CurrentState.name != "Standing" && player.stateMachine.CurrentState.name != "Running" && player.stateMachine.CurrentState.name != "Jumping" && player.stateMachine.CurrentState.name != "Falling")
+        if (player.stateMachine.CurrentState.name != "Standing" && player.stateMachine.CurrentState.name != "Running" && player.stateMachine.CurrentState.name != "Jumping" && player.stateMachine.CurrentState.name != "Falling" && player.stateMachine.CurrentState.name != "Dodging" && player.stateMachine.CurrentState.name != "Sliding")
         {
-            Debug.Log("Non-Crouching State!");
             isCrouching = false;
             return;
         }
 
         if (!isCrouching)
         {
-            isCrouching = ((player.collisions.IsGrounded || player.collisions.IsOnASlope) && player.inputVector.y < 0f);
+            isCrouching = (player.crouchButtonHeld && (player.collisions.IsOnASlope || player.collisions.IsGrounded || player.jumping.enableCrouchJump));
         }
         else
         {
-            isCrouching = (player.collisions.IsCeilingAboveWhenUncrouched() || ((player.collisions.IsGrounded || player.collisions.IsOnASlope || player.jumping.enableCrouchJump) && player.inputVector.y < 0f));
-            if (!isCrouching) { player.animationCtrl.GroundJumpAnimation(); }
+            isCrouching = (player.collisions.IsCeilingAboveWhenUncrouched() || (player.crouchButtonHeld && (player.collisions.IsOnASlope || player.collisions.IsGrounded || player.jumping.enableCrouchJump)));
+            if (!isCrouching && player.stateMachine.CurrentState.name == "Jumping" && !player.jumping.enableCrouchJump) { player.animationCtrl.GroundJumpAnimation(); }
         }
     }
 
@@ -187,7 +186,7 @@ public class PlayerMovement : MonoBehaviour
 
         if (player.stateMachine.CurrentState.name == "Running" && player.rb2d.velocity.y != 0f && player.collisions.CheckDistanceToGround(slopeSnapDistanceThreshold))
         {
-            player.collisions.SnapToGround(false, maxMovingSlopeSnapDistance);
+            player.collisions.SnapToGround(false, true, maxMovingSlopeSnapDistance);
         }
 
         IntendedMovement();

@@ -199,18 +199,20 @@ public class PlayerAttacks : MonoBehaviour
         Vector2 dodgeDirection = new Vector2(player.movement.GetFacingValue(), didPlayerLeaveGround ? -1f : 0f);
         player.rb2d.velocity = (dodgeDirection * currentDodgeSpeed);
 
+        player.spriteTrail.ActivateTrail();
+        player.effects.TurnaroundSpark();
         while (currentDodgeSpeed >= 0f && (!didPlayerLeaveGround || (!player.collisions.IsGrounded && !player.collisions.IsOnASlope)))
         {
             if (player.collisions.IsAgainstWall)
             {
                 player.rb2d.velocity = new Vector2(0f, dodgeDirection.y < 0f ? dodgeDirection.y * currentDodgeSpeed : 0f);
             }
-            else if (player.collisions.IsOnASlope && dodgeDirection.y == 0f)
+            else if (dodgeDirection.y == 0f)
             {
                 Vector2 newVelocity = (player.collisions.GetRightVector() * (!player.collisions.IsAgainstWall ? currentDodgeSpeed : 0f));
                 if (newVelocity.x > 0f & newVelocity.x < currentDodgeSpeed) { newVelocity *= (currentDodgeSpeed / newVelocity.x); }
                 player.rb2d.velocity = (newVelocity * player.movement.GetFacingValue());
-                player.collisions.SnapToGround(false, dodgeMaxSlopeSnapDistance);
+                player.collisions.SnapToGround(false, player.collisions.IsOnASlope, dodgeMaxSlopeSnapDistance);
             }
             else
             {
@@ -222,10 +224,19 @@ public class PlayerAttacks : MonoBehaviour
 
             yield return null;
         }
+        player.spriteTrail.DeactivateTrail();
 
         player.rb2d.gravityScale = player.jumping.fallingGravity;
         player.movement.ResetIntendedXVelocity();
-        if (currentDodgeSpeed <= 0f || (player.movement.GetFacingValue() > 0f ? player.collisions.IsTouchingWallR : player.collisions.IsTouchingWallL)) { player.rb2d.velocity = Vector2.zero; }
+        if (currentDodgeSpeed <= 0f || player.collisions.IsAgainstWall) { player.rb2d.velocity = Vector2.zero; }
+        else if (currentDodgeSpeed > 0f && player.collisions.IsOnASlope)
+        {
+            Vector2 newVelocity = (player.collisions.GetRightVector() * (!player.collisions.IsAgainstWall ? currentDodgeSpeed : 0f));
+            if (newVelocity.x > 0f & newVelocity.x < currentDodgeSpeed) { newVelocity *= (currentDodgeSpeed / newVelocity.x); }
+            player.collisions.SnapToGround(false, true, dodgeMaxSlopeSnapDistance);
+            player.rb2d.velocity = (newVelocity * player.movement.GetFacingValue());
+        }
+        else { /* Nothing */ }
         StartCoroutine(AttackCooldownCR());
         StartCoroutine(player.form.FormChangeCooldownCR());
         isDodging = false;
@@ -294,7 +305,7 @@ public class PlayerAttacks : MonoBehaviour
             if (verticalAxis > 0f)
             {
                 currentRisingSpeed += fireTackleVerticalSteeringSpeed * Time.deltaTime;
-                player.rb2d.velocity = new Vector2(horizontalResult, currentRisingSpeed);
+                player.rb2d.velocity = new Vector2(!player.collisions.IsAgainstWall ? horizontalResult : 0f, currentRisingSpeed);
             }
             else if (verticalAxis < 0f)
             {
@@ -312,7 +323,7 @@ public class PlayerAttacks : MonoBehaviour
             else
             {
                 player.rb2d.velocity = (player.collisions.GetRightVector() * (!player.collisions.IsAgainstWall ? horizontalResult : 0f));
-                player.collisions.SnapToGround(false, fireTackleMaxSlopeSnapDistance);
+                player.collisions.SnapToGround(false, player.collisions.IsOnASlope, fireTackleMaxSlopeSnapDistance);
             }
 
             if (player.collisions.IsGrounded && trailSpawnTimer >= 0f)
@@ -363,6 +374,7 @@ public class PlayerAttacks : MonoBehaviour
                 if (fireTemp != null) { fireTemp.Setup(player.temper, player.movement.isFacingRight, Mathf.Abs(player.rb2d.velocity.x)); }
                 player.rb2d.velocity = (new Vector2((player.movement.isFacingRight ? -1f : 1f), (!player.collisions.IsGrounded && !player.collisions.IsOnASlope ? 1f : 0f)).normalized * fireTackleRecoilStrength);
                 player.temper.ChangeTemperBy(-1);
+                player.movement.ResetIntendedXVelocity();
             }
             else
             {
@@ -381,10 +393,11 @@ public class PlayerAttacks : MonoBehaviour
             {
                 Vector2 resultVector = (player.collisions.GetRightVector() * (firedProjectile ? -fireTackleRecoilStrength : horizontalResult));
                 player.rb2d.velocity = ((player.movement.isFacingRight && player.collisions.IsTouchingWallR) || (!player.movement.isFacingRight && player.collisions.IsTouchingWallL) || player.collisions.CheckIfNearLedge() ? Vector2.zero : Vector2.Lerp(resultVector, Vector2.zero, (fireTackleEndlag - endlagTimer) / fireTackleEndlag));
-                if (player.collisions.IsOnASlope) { player.movement.ApplySlopeResistance(); player.collisions.SnapToGround(false); }
+                if (player.collisions.IsOnASlope) { player.movement.ApplySlopeResistance(); player.collisions.SnapToGround(false, true); }
             }
             else if (bumped && (player.collisions.IsGrounded || player.collisions.IsOnASlope) && endlagTimer < fireTackleEndlagCancel)
             {
+                player.movement.ResetIntendedXVelocity();
                 player.rb2d.velocity = Vector2.zero;
             }
             else { /* Nothing */ }
@@ -428,7 +441,11 @@ public class PlayerAttacks : MonoBehaviour
         float horizontalResult = Mathf.Abs(Mathf.Min((previousHorizontalVelocity + slideBaseHorizontalSpeed), slideMaxHorizontalSpeed));
         player.rb2d.velocity = new Vector2(horizontalResult * player.movement.GetFacingValue(), 0f);
         float slideTimer = 0f;
-        while (!player.damage.isPlayerDamaged && horizontalResult >= 0f && (player.inputVector.x * player.movement.GetFacingValue()) >= 0f && (slideTimer <= slideMinDuration || player.inputVector.y < 0f))
+        player.spriteTrail.ActivateTrail();
+        GameObject tempObj = EffectFactory.SpawnEffect("SlideDust", player.collisions.groundCheckObj);
+        SlideDust tempDust = tempObj.GetComponent<SlideDust>();
+        tempDust.Setup(player);
+        while (!player.damage.isPlayerDamaged && horizontalResult >= 0f && (player.inputVector.x * player.movement.GetFacingValue()) >= 0f && (slideTimer <= slideMinDuration || player.crouchButtonHeld))
         {
             if (slideTimer >= slideNoCancelingTime && (player.inputVector.x * player.rb2d.velocity.x) > 0f && player.buffers.jumpBufferTimeLeft > 0f)
             {
@@ -448,24 +465,18 @@ public class PlayerAttacks : MonoBehaviour
             }
             else { /* Nothing */ }
             
-            /*
-            if (player.inputVector.x * player.movement.GetFacingValue() < 0f)
-            {
-                if (horizontalResult > slideBaseHorizontalSpeed) { horizontalResult = slideBaseHorizontalSpeed; }
-                player.movement.SetFacingDirection(player.inputVector.x);
-            }
-            */
             Vector2 newVelocity = (player.collisions.GetRightVector() * (!player.collisions.IsAgainstWall && !player.collisions.CheckIfNearLedge() ? horizontalResult : 0f));
             if (newVelocity.x > 0f & newVelocity.x < horizontalResult) { newVelocity *= (horizontalResult / newVelocity.x); }
             newVelocity *= player.movement.GetFacingValue();
             player.rb2d.velocity = newVelocity;
-            if (player.collisions.IsOnASlope) { player.collisions.SnapToGround(false, slideMaxSlopeSnapDistance); }
+            player.collisions.SnapToGround(false, player.collisions.IsOnASlope, slideMaxSlopeSnapDistance);
 
             slideTimer += Time.deltaTime;
             horizontalResult -= (slideDecelerationRate * Time.deltaTime);
 
             yield return null;
         }
+        player.spriteTrail.DeactivateTrail();
 
         player.rb2d.gravityScale = player.jumping.fallingGravity;
         player.movement.ResetIntendedXVelocity();

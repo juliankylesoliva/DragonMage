@@ -27,6 +27,7 @@ public class PauseHandler : MonoBehaviour
                 pauseMenu.SetActive(true);
                 isPaused = true;
                 Time.timeScale = 0f;
+                InputHub.ClearInputs();
             }
         }
 

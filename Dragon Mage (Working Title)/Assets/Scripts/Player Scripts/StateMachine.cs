@@ -272,7 +272,7 @@ public class StandingState : State
         if (player.collisions.IsOnASlope)
         {
             player.movement.ApplySlopeResistance();
-            player.collisions.SnapToGround(true);
+            player.collisions.SnapToGround(true, true);
             player.movement.ResetIntendedXVelocity();
         }
         player.rb2d.velocity = Vector2.zero;
@@ -338,6 +338,7 @@ public class JumpingState : State
         player.movement.Movement();
         player.movement.FacingDirection();
         player.jumping.GroundJumpUpdate();
+        if (player.jumping.enableCrouchJump) { player.animationCtrl.GroundJumpAnimation(); }
         player.jumping.UpdateFallTimer();
         if (CheckFormChangeInput() || CheckDodgeInput() || CheckFireTackleInput() || CheckIfWallClimbing() || CheckIfWallSliding() || CheckGlideInput() || CheckMidairJumpInput() || CheckIfFalling() || CheckIfGrounded() || CheckIfDamaged()) { return; }
     }

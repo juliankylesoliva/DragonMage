@@ -19,6 +19,7 @@ public class PlayerCollisions : MonoBehaviour
     [SerializeField] float groundCheckRadius = 0.1f;
     [SerializeField] float wallCheckRadius = 0.1f;
     [SerializeField] float headbonkCheckRadius = 0.5f;
+    [SerializeField] float headbonkSpeedThreshold = 0.25f;
     [SerializeField] float slopeCheckDistance = 1f;
     [SerializeField] float ledgeCheckOffset = 0.25f;
     [SerializeField] float ledgeCheckDepth = 0.85f;
@@ -30,10 +31,12 @@ public class PlayerCollisions : MonoBehaviour
     [SerializeField] LayerMask intangibleWallLayer;
     [SerializeField] LayerMask groundLayer;
     [SerializeField] LayerMask slopeLayer;
-    [SerializeField] LayerMask groundDistanceCheckLayer;
-    [SerializeField] LayerMask ledgeCheckLayer;
+    [SerializeField] LayerMask distanceCheckLayer;
+    [SerializeField] LayerMask nonEnemyGroundLayer;
     [SerializeField] PhysicsMaterial2D noFriction;
     [SerializeField] PhysicsMaterial2D fullFriction;
+    [SerializeField] int playerLayer = 3;
+    [SerializeField] int[] enemyLayers;
 
     [SerializeField] private bool isGrounded = false;
     [SerializeField] private bool isAgainstWall = false;
@@ -61,6 +64,7 @@ public class PlayerCollisions : MonoBehaviour
 
     void Update()
     {
+        EnemyIntangibilityCheck();
         ColliderCrouchUpdate();
         GroundCheck();
         SlopeCheck();
@@ -73,6 +77,14 @@ public class PlayerCollisions : MonoBehaviour
 
         prevIsGrounded = isGrounded;
         prevIsHeadbonking = isHeadbonking;
+    }
+
+    private void EnemyIntangibilityCheck()
+    {
+        foreach (int i in enemyLayers)
+        {
+            Physics2D.IgnoreLayerCollision(playerLayer, i, player.damage.isDamageInvulnerabilityActive || player.damage.isPlayerDamaged || player.attacks.isDodging);
+        }
     }
 
     private void ColliderCrouchUpdate()
@@ -93,10 +105,11 @@ public class PlayerCollisions : MonoBehaviour
         isOnASlope = false;
 
         RaycastHit2D hit = Physics2D.Raycast(groundCheckObj.position, -Vector2.up, slopeCheckDistance, slopeLayer);
-        isOnASlope = (hit.collider != null);
+        RaycastHit2D hit2 = Physics2D.Raycast(groundCheckObj.position, GetRightVector() * player.movement.GetFacingValue(), slopeCheckDistance, slopeLayer);
+        isOnASlope = (hit.collider != null || hit2.collider != null);
         isGrounded = (isGrounded || isOnASlope);
 
-        if (!player.damage.isPlayerDamaged) { player.rb2d.sharedMaterial = (isOnASlope && player.inputVector.x == 0f ? fullFriction : noFriction); }
+        if (!player.damage.isPlayerDamaged) { player.rb2d.sharedMaterial = (isOnASlope && !(player.stateMachine.PreviousState.name == "Dodging" && player.rb2d.velocity != Vector2.zero) && player.inputVector.x == 0f ? fullFriction : noFriction); }
     }
 
     private void WallCheck()
@@ -170,7 +183,7 @@ public class PlayerCollisions : MonoBehaviour
     private void HeadbonkCheck()
     {
         isHeadbonking = false;
-        Collider2D[] colliders = Physics2D.OverlapCircleAll((player.movement.isCrouching ? crouchedHeadbonkCheckObj.position : headbonkCheckObj.position) + (Vector3.right * (1f / 32f) * (player.movement.isFacingRight ? 1f : -1f)), headbonkCheckRadius, groundDistanceCheckLayer);
+        Collider2D[] colliders = Physics2D.OverlapCircleAll((player.movement.isCrouching ? crouchedHeadbonkCheckObj.position : headbonkCheckObj.position) + (Vector3.right * (1f / 32f) * (player.movement.isFacingRight ? 1f : -1f)), headbonkCheckRadius, groundLayer);
         isHeadbonking = (colliders.Length > 0);
     }
 
@@ -186,7 +199,7 @@ public class PlayerCollisions : MonoBehaviour
 
     private void HeadbonkSoundCheck()
     {
-        if (!prevIsHeadbonking && isHeadbonking)
+        if ((!prevIsHeadbonking && isHeadbonking) || (player.stateMachine.CurrentState.name == "Jumping" && player.rb2d.velocity.y > headbonkSpeedThreshold && isHeadbonking))
         {
             player.effects.HeadbonkEffect();
         }
@@ -194,30 +207,30 @@ public class PlayerCollisions : MonoBehaviour
 
     public bool CheckDistanceToGround(float minDistance)
     {
-        RaycastHit2D hit = Physics2D.Raycast(groundCheckObj.position, -Vector2.up, Mathf.Infinity, groundDistanceCheckLayer);
+        RaycastHit2D hit = Physics2D.Raycast(groundCheckObj.position, -Vector2.up, Mathf.Infinity, distanceCheckLayer);
         return (hit.distance >= minDistance || hit.distance == 0f);
     }
 
     public bool CheckIfNearLedge()
     {
-        RaycastHit2D hit = Physics2D.Raycast(groundCheckObj.position + (player.movement.GetFacingValue() * ledgeCheckOffset * Vector3.right), -Vector2.up, ledgeCheckDepth, ledgeCheckLayer);
+        RaycastHit2D hit = Physics2D.Raycast(groundCheckObj.position + (player.movement.GetFacingValue() * ledgeCheckOffset * Vector3.right), -Vector2.up, ledgeCheckDepth, nonEnemyGroundLayer);
         return hit.collider == null;
     }
 
     public Vector2 GetDirectGroundNormal()
     {
-        RaycastHit2D hit2 = Physics2D.Raycast(groundCheckObj.position, -Vector2.up, slopeCheckDistance, groundDistanceCheckLayer);
+        RaycastHit2D hit2 = Physics2D.Raycast(groundCheckObj.position, -Vector2.up, slopeCheckDistance, nonEnemyGroundLayer);
         if (hit2.collider != null && (hit2.normal.x < -groundNormalXThreshold || hit2.normal.x > groundNormalXThreshold)) { return hit2.normal; }
         return Vector2.up;
     }
 
     public Vector2 GetGroundNormal()
     {
-        RaycastHit2D hit = Physics2D.Raycast((player.movement.isFacingRight ? normalCheckR : normalCheckL).position, -Vector2.up, slopeCheckDistance, groundDistanceCheckLayer);
+        RaycastHit2D hit = Physics2D.Raycast((player.movement.isFacingRight ? normalCheckR : normalCheckL).position, -Vector2.up, slopeCheckDistance, nonEnemyGroundLayer);
         if (hit.collider != null && (hit.normal.x < -groundNormalXThreshold || hit.normal.x > groundNormalXThreshold)) { return hit.normal; }
         else
         {
-            RaycastHit2D hit2 = Physics2D.Raycast(groundCheckObj.position, -Vector2.up, slopeCheckDistance, groundDistanceCheckLayer);
+            RaycastHit2D hit2 = Physics2D.Raycast(groundCheckObj.position, -Vector2.up, slopeCheckDistance, nonEnemyGroundLayer);
             if (hit2.collider != null && (hit2.normal.x < -groundNormalXThreshold || hit2.normal.x > groundNormalXThreshold)) { return hit2.normal; }
         }
         return Vector2.up;
@@ -225,7 +238,7 @@ public class PlayerCollisions : MonoBehaviour
 
     public Vector2 GetCeilingNormal()
     {
-        RaycastHit2D hit = Physics2D.Raycast(headbonkCheckObj.position, Vector2.up, headbonkCheckRadius, groundDistanceCheckLayer);
+        RaycastHit2D hit = Physics2D.Raycast(headbonkCheckObj.position, Vector2.up, headbonkCheckRadius, nonEnemyGroundLayer);
         if (hit.collider != null) { return hit.normal; }
         return -Vector2.up;
     }
@@ -244,7 +257,7 @@ public class PlayerCollisions : MonoBehaviour
 
     public Vector2 GetClosestGroundPoint()
     {
-        RaycastHit2D hit = Physics2D.Raycast(groundCheckObj.position, -Vector2.up, Mathf.Infinity, groundDistanceCheckLayer);
+        RaycastHit2D hit = Physics2D.Raycast(groundCheckObj.position, -Vector2.up, Mathf.Infinity, nonEnemyGroundLayer);
         if (hit.collider != null) { return hit.point; }
         return groundCheckObj.position;
     }
@@ -259,17 +272,17 @@ public class PlayerCollisions : MonoBehaviour
         return ((player.movement.isCrouching ? crouchedHeadbonkCheckObj.position : headbonkCheckObj.position) + (Vector3.up * (headbonkCheckRadius / 2f)));
     }
 
-    public void SnapToGround(bool bypassDistanceCheck, float maxDistance = -1f)
+    public void SnapToGround(bool bypassDistanceCheck, bool addGroundCheckDistance, float maxDistance = -1f)
     {
         Vector2 toMove = GetClosestGroundPoint();
-        toMove += new Vector2(0f, Vector3.Distance(this.transform.position, groundCheckObj.position) + groundCheckRadius);
+        toMove += new Vector2(0f, Vector3.Distance(this.transform.position, groundCheckObj.position) + (addGroundCheckDistance ? groundCheckRadius : 0f));
         if (bypassDistanceCheck || (Vector2.Distance(this.transform.position, toMove) <= (maxDistance >= 0f ? maxDistance : slopeCheckDistance))) { this.transform.position = toMove; }
         GroundCheck();
     }
 
     public bool IsCeilingAboveWhenUncrouched()
     {
-        RaycastHit2D hit = Physics2D.Raycast(crouchedHeadbonkCheckObj.position, Vector3.up, (headbonkCheckObj.position.y - crouchedHeadbonkCheckObj.position.y), groundDistanceCheckLayer);
+        RaycastHit2D hit = Physics2D.Raycast(crouchedHeadbonkCheckObj.position, Vector3.up, (headbonkCheckObj.position.y - crouchedHeadbonkCheckObj.position.y), nonEnemyGroundLayer);
         return (hit.collider != null);
     }
 }
