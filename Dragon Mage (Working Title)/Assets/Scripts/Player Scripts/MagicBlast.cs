@@ -17,8 +17,16 @@ public class MagicBlast : MonoBehaviour
     [SerializeField] Color pulseColor;
     [SerializeField] float despawnDistance = 20f;
     [SerializeField] float fuseTime = 3f;
+
     [SerializeField] float verticalLaunchSpeed = 1f;
+    [SerializeField] float verticalLaunchWithVerticalAxisUpModifier = 5f;
+    [SerializeField] float verticalLaunchWithVerticalAxisDownModifier = -0.5f;
+    [SerializeField] float verticalInertiaModifier = 0.25f;
+
     [SerializeField] float horizontalLaunchSpeed = 2f;
+    [SerializeField] float horizontalLaunchWithVerticalAxisModifier = 0.25f;
+    [SerializeField] float horizontalInertiaModifier = 0.5f;
+    
     [SerializeField] float rotationSpeed = 10f;
     [SerializeField] float blastDuration = 0.1f;
     [SerializeField] float blastStrength = 3f;
@@ -68,11 +76,16 @@ public class MagicBlast : MonoBehaviour
         GameObject.Destroy(this.gameObject);
     }
 
-    public void Setup(GameObject player, PlayerTemper temper, bool isGoingRight = true, float horizontalVelocity = 0f, float verticalAxis = 0f)
+    public void Setup(GameObject player, PlayerTemper temper, Vector2 playerVelocity, bool isGoingRight = true, float verticalAxis = 0f)
     {
         playerRef = player;
         this.temper = temper;
-        rb2d.velocity = new Vector2((isGoingRight ? horizontalLaunchSpeed : -horizontalLaunchSpeed) * (verticalAxis != 0f ? 0.25f : 1f) + (horizontalVelocity * 0.5f), verticalLaunchSpeed * (verticalAxis > 0f ? 2.5f : 1f) * (verticalAxis < 0f ? -0.5f : 1f));
+        float horizontalResult = ((isGoingRight ? horizontalLaunchSpeed : -horizontalLaunchSpeed) * (verticalAxis != 0f ? horizontalLaunchWithVerticalAxisModifier : 1f));
+        float verticalResult = (verticalLaunchSpeed * (verticalAxis > 0f ? verticalLaunchWithVerticalAxisUpModifier : 1f) * (verticalAxis < 0f ? verticalLaunchWithVerticalAxisDownModifier : 1f));
+        Vector2 resultVector = new Vector2(horizontalResult, verticalResult);
+        resultVector.x += (playerVelocity.x * horizontalInertiaModifier);
+        resultVector.y += (playerVelocity.y * verticalInertiaModifier);
+        rb2d.velocity = resultVector;
         rb2d.AddTorque(rotationSpeed * (isGoingRight ? -1f : 1f) * (verticalAxis != 0f ? 0.5f : 1f));
     }
 

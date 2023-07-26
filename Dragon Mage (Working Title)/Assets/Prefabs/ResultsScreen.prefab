@@ -100,7 +100,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'R / <sprite="CrossFaceButtons" name="EastButton">: REPLAY | Q / <sprite="CrossFaceButtons"
+  m_text: 'Z / <sprite="CrossFaceButtons" name="EastButton">: REPLAY | Q / <sprite="CrossFaceButtons"
     name="NorthButton"> TITLE SCREEN'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: a3a8650b6fd9bb04c978844dbc0932d7, type: 2}

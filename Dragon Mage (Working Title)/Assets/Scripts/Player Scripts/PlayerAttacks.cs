@@ -99,7 +99,7 @@ public class PlayerAttacks : MonoBehaviour
                         MagicBlast projTemp = tempObj.GetComponent<MagicBlast>();
                         if (projTemp != null)
                         {
-                            projTemp.Setup(player.gameObject, player.temper, player.movement.isFacingRight, player.rb2d.velocity.x, player.inputVector.y);
+                            projTemp.Setup(player.gameObject, player.temper, player.rb2d.velocity, player.movement.isFacingRight, player.inputVector.y);
                             projectileRef = projTemp;
                         }
                     }
