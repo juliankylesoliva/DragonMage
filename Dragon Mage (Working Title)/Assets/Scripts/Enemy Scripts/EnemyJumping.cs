@@ -23,7 +23,10 @@ public class EnemyJumping : MonoBehaviour
 
     void Update()
     {
-        JumpUpdate();
+        if (!PauseHandler.isPaused && !enemy.isDefeated)
+        {
+            JumpUpdate();
+        }
     }
 
     public void Jump()

@@ -19,6 +19,10 @@ public class EnemyBehavior : MonoBehaviour
     [HideInInspector] public EnemyCollisionDetection collisionDetection;
     [HideInInspector] public EnemyPlayerDetection playerDetection;
     [HideInInspector] public EnemyProjectile projectile;
+    [HideInInspector] public EnemyAnimation animationCtrl;
+
+    [SerializeField] float verticalLaunchOnDefeat = 2f;
+    [SerializeField] string sortingLayerOnDefeat = "Effects";
 
     public bool isVisible { get; private set; }
     public bool isStunned { get; private set; }
@@ -33,6 +37,7 @@ public class EnemyBehavior : MonoBehaviour
         collisionDetection = this.gameObject.GetComponent<EnemyCollisionDetection>();
         playerDetection = this.gameObject.GetComponent<EnemyPlayerDetection>();
         projectile = this.gameObject.GetComponent<EnemyProjectile>();
+        animationCtrl = this.gameObject.GetComponent<EnemyAnimation>();
     }
 
     void Start()
@@ -53,16 +58,30 @@ public class EnemyBehavior : MonoBehaviour
     void OnBecameInvisible()
     {
         isVisible = false;
+        if (isDefeated)
+        {
+            this.gameObject.SetActive(false);
+        }
     }
 
     public void ActivateEnemy()
     {
-        onRoomActive.Invoke();
+        if (!isDefeated)
+        {
+            onRoomActive.Invoke();
+        }
     }
 
     public void PlayDamageSound()
     {
         SoundFactory.SpawnSound("damage_enemy", this.transform.position, 0.65f);
+    }
+
+    public void SpawnDragoonShades()
+    {
+        GameObject tempObj = EffectFactory.SpawnEffect("DragoonShadesDefeated", projectile.enemyProjectileSpawnPoint.position);
+        DragoonShadesFall tempShades = tempObj.GetComponent<DragoonShadesFall>();
+        tempShades.Setup(rb2d.velocity, enemySprite.flipX);
     }
 
     public bool DefeatEnemy(DamageType dmgType)
@@ -72,6 +91,8 @@ public class EnemyBehavior : MonoBehaviour
         if (!isDefeated)
         {
             isDefeated = true;
+            rb2d.velocity = (Vector2.up * verticalLaunchOnDefeat);
+            enemySprite.sortingLayerName = sortingLayerOnDefeat;
             onDefeat.Invoke();
             return true;
         }

@@ -39,7 +39,7 @@ public class EnemyPlayerDetection : MonoBehaviour
 
     void Update()
     {
-        if (!PauseHandler.isPaused)
+        if (!PauseHandler.isPaused && !enemy.isDefeated)
         {
             CheckPlayerDetectionRadius();
             CheckEnemySightline();

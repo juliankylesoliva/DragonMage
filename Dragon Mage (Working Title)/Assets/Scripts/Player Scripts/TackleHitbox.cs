@@ -11,6 +11,7 @@ public class TackleHitbox : MonoBehaviour
     [SerializeField] DamageType damageType = DamageType.FIRE_TACKLE;
     [SerializeField] int velocityLookaheadFrames = 2;
     [SerializeField] float facingDirectionOffset = 0.125f;
+    [SerializeField] float enemyDefeatKnockbackMultiplier = 2f;
     [SerializeField] Sprite[] arrowIndicatorSprites;
 
     private Vector2 defaultOffset;
@@ -85,6 +86,7 @@ public class TackleHitbox : MonoBehaviour
                 if (enemy.DefeatEnemy(damageType))
                 {
                     player.temper.NeutralizeTemperBy(1);
+                    enemy.rb2d.velocity += (player.rb2d.velocity * enemyDefeatKnockbackMultiplier);
                 }
             }
         }

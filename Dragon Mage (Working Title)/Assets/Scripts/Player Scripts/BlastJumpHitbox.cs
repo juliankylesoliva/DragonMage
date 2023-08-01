@@ -10,6 +10,7 @@ public class BlastJumpHitbox : MonoBehaviour
     [SerializeField] DamageType damageType = DamageType.BLAST_JUMP;
     [SerializeField] int velocityLookaheadFrames = 2;
     [SerializeField] float facingDirectionOffset = 0.25f;
+    [SerializeField] float enemyDefeatKnockbackMultiplier = 2f;
 
     private Vector2 defaultOffset;
 
@@ -70,6 +71,7 @@ public class BlastJumpHitbox : MonoBehaviour
                 if (enemy.DefeatEnemy(damageType))
                 {
                     player.temper.NeutralizeTemperBy(-2);
+                    enemy.rb2d.velocity += (Vector2.right * player.rb2d.velocity.x * enemyDefeatKnockbackMultiplier);
                 }
             }
         }

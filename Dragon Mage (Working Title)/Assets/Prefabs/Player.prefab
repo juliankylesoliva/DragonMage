@@ -4939,6 +4939,7 @@ MonoBehaviour:
   damageType: 3
   velocityLookaheadFrames: 2
   facingDirectionOffset: 0.125
+  enemyDefeatKnockbackMultiplier: 1.5
   arrowIndicatorSprites:
   - {fileID: 326314678, guid: 3ba3b56ecefd26940842954d79cd6796, type: 3}
   - {fileID: -1077083613, guid: 3ba3b56ecefd26940842954d79cd6796, type: 3}
@@ -5140,6 +5141,7 @@ MonoBehaviour:
   damageType: 2
   velocityLookaheadFrames: 2
   facingDirectionOffset: 0.25
+  enemyDefeatKnockbackMultiplier: 1.5
 --- !u!70 &6792052323206298517
 CapsuleCollider2D:
   m_ObjectHideFlags: 0

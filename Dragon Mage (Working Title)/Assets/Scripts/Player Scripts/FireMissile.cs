@@ -8,11 +8,13 @@ public class FireMissile : MonoBehaviour
     [SerializeField] DamageType damageType = DamageType.FIRE_MISSILE;
     [SerializeField] float moveSpeed = 6f;
     [SerializeField] float lifetime = 1f;
+    [SerializeField] float enemyDefeatKnockbackMultiplier = 2f;
 
     /* SCRIPT VARIABLES */
     PlayerTemper temper;
     private float moveSpeedBonus = 0f;
     private float lifetimeLeft = 0f;
+    private bool isMovingRight = false;
 
     void Awake()
     {
@@ -40,6 +42,7 @@ public class FireMissile : MonoBehaviour
         this.temper = temper;
         moveSpeedBonus = Mathf.Abs(horizontalVelocity * 0.5f);
         this.transform.Rotate(0f, 0f, (isGoingRight ? 0f : 180f));
+        isMovingRight = isGoingRight;
     }
 
     void OnTriggerEnter2D(Collider2D other)
@@ -58,6 +61,7 @@ public class FireMissile : MonoBehaviour
             if (enemy.DefeatEnemy(damageType))
             {
                 temper.NeutralizeTemperBy(2);
+                enemy.rb2d.velocity += (Vector2.right * (isMovingRight ? 1f : -1f) * (moveSpeed + moveSpeedBonus) * enemyDefeatKnockbackMultiplier);
             }
         }
         else { /* Nothing */ }

@@ -9,6 +9,7 @@ public class BlastHitbox : MonoBehaviour
 
     [SerializeField] LayerMask impassableLayer;
     [SerializeField] DamageType damageType = DamageType.MAGIC_BLAST;
+    [SerializeField] float enemyDefeatKnockbackMultiplier = 2f;
 
     private PlayerTemper temper;
     private bool isArmed = false;
@@ -69,6 +70,15 @@ public class BlastHitbox : MonoBehaviour
             if (!DoesBlastGoThruWall(other) && enemy.DefeatEnemy(damageType))
             {
                 temper.NeutralizeTemperBy(-1);
+                if (rb != null && rb.bodyType == RigidbodyType2D.Dynamic)
+                {
+                    Vector2 velocityVec = (other.transform.position - this.transform.position);
+                    float distance = velocityVec.magnitude;
+                    velocityVec = velocityVec.normalized;
+                    velocityVec *= (knockbackStrength / (1f + distance));
+                    velocityVec *= enemyDefeatKnockbackMultiplier;
+                    rb.velocity += velocityVec;
+                }
             }
         }
         else if (block != null && !block.isReinforced && (block.breakableBy == BreakableType.ANY || block.breakableBy == BreakableType.MAGIC))

@@ -14,6 +14,8 @@ public class EnemyCollisionDetection : MonoBehaviour
     [SerializeField] UnityEvent onTouchingWall;
     [SerializeField] UnityEvent onTouchingLedge;
     [SerializeField] UnityEvent onPlayerCollision;
+    [SerializeField] UnityEvent onLeavingGround;
+    [SerializeField] UnityEvent onTouchingGround;
 
     [SerializeField] LayerMask groundLayer;
 
@@ -37,7 +39,7 @@ public class EnemyCollisionDetection : MonoBehaviour
 
     void Update()
     {
-        if (!PauseHandler.isPaused)
+        if (!PauseHandler.isPaused && !enemy.isDefeated)
         {
             GroundCheck();
             WallCheck();
@@ -49,7 +51,16 @@ public class EnemyCollisionDetection : MonoBehaviour
     {
         isGrounded = false;
         Collider2D[] colliders = Physics2D.OverlapCircleAll(groundCheckObj.position, groundCheckRadius, groundLayer);
-        isGrounded = (colliders.Length > 0);
+        if (colliders.Length > 0)
+        {
+            onTouchingGround.Invoke();
+            isGrounded = true;
+        }
+        else
+        {
+            onLeavingGround.Invoke();
+            isGrounded = false;
+        }
     }
 
     private void WallCheck()

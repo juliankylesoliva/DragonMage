@@ -9,7 +9,7 @@ public class EnemyProjectile : MonoBehaviour
     EnemyBehavior enemy;
 
     [SerializeField] GameObject enemyProjectilePrefab;
-    [SerializeField] Transform enemyProjectileSpawnPoint;
+    public Transform enemyProjectileSpawnPoint;
     [SerializeField] float preFireWindup = 0.5f;
     [SerializeField] float postFireCooldown = 3f;
 
@@ -29,7 +29,7 @@ public class EnemyProjectile : MonoBehaviour
 
     void Update()
     {
-        if (!PauseHandler.isPaused)
+        if (!PauseHandler.isPaused && !enemy.isDefeated)
         {
             UpdateStateTimer();
         }
@@ -40,6 +40,7 @@ public class EnemyProjectile : MonoBehaviour
         if (currentProjectileState != EnemyProjectileState.STANDBY || !enemy.isVisible) { return; }
         currentProjectileState = EnemyProjectileState.WINDUP;
         currentProjectileStateTimer = preFireWindup;
+        enemy.animationCtrl.AttackAnimation(0);
     }
 
     public void ResetTimerAndState()
@@ -66,11 +67,13 @@ public class EnemyProjectile : MonoBehaviour
                     projBehavior.Setup(enemy);
                     currentProjectileState = EnemyProjectileState.COOLDOWN;
                     currentProjectileStateTimer = postFireCooldown;
+                    enemy.animationCtrl.AttackAnimation(1);
                 }
                 else
                 {
                     currentProjectileState = EnemyProjectileState.STANDBY;
                     currentProjectileStateTimer = 0f;
+                    enemy.animationCtrl.IdleAnimation();
                 }
             }
         }

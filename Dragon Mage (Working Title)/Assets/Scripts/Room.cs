@@ -39,7 +39,10 @@ public class Room : MonoBehaviour
     {
         foreach (EnemyBehavior e in enemyList)
         {
-            e.ActivateEnemy();
+            if (!e.isDefeated)
+            {
+                e.ActivateEnemy();
+            }
         }
     }
 }
