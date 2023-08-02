@@ -105,6 +105,7 @@ public class ResultsScreen : MonoBehaviour
         float targetTimeDisplayNumber = ClearTimer.currentTime;
         int minutes = 0;
         float seconds = 0f;
+        bool playSoundThisFrame = true;
         lerpValue = 0f;
         while (lerpValue < 1f)
         {
@@ -113,8 +114,9 @@ public class ResultsScreen : MonoBehaviour
             currentTimeDisplayNumber = Mathf.Lerp(0f, targetTimeDisplayNumber, lerpValue);
             minutes = (int)(currentTimeDisplayNumber / 60f);
             seconds = (currentTimeDisplayNumber % 60f);
-            if ((int)currentTimeDisplayNumber % 2 == 0) { audioPlayer.PlaySound("movement_magli_turnaround", 0.5f); }
+            if (playSoundThisFrame) { audioPlayer.PlaySound("movement_magli_turnaround", 0.5f); }
             timeText.text = $"CLEAR TIME: {minutes}:{seconds.ToString("00.00")}";
+            playSoundThisFrame = !playSoundThisFrame;
             yield return null;
         }
         timeText.text = $"CLEAR TIME: {minutes}:{seconds.ToString("00.00")}";

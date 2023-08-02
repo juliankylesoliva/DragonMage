@@ -7,7 +7,7 @@ public class EnemyPlayerDetection : MonoBehaviour
 {
     EnemyBehavior enemy;
     PlayerCtrl playerRef;
-
+    
     [SerializeField] float playerDetectionDistance = 5f;
     [SerializeField] float enemySightlineDistance = 14f;
     [SerializeField] float enemyShortSightlineDistance = 7f;
@@ -136,7 +136,7 @@ public class EnemyPlayerDetection : MonoBehaviour
 
     private void CheckPlayerJumping()
     {
-        if (playerRef != null)
+        if (enemy.isVisible && playerRef != null)
         {
             if (playerRef.stateMachine.CurrentState.name == "Jumping" && (!playerRef.collisions.IsGrounded && !playerRef.collisions.IsOnASlope) && playerRef.rb2d.velocity.y > playerJumpingThreshold)
             {

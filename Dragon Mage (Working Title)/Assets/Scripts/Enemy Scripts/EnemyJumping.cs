@@ -10,6 +10,7 @@ public class EnemyJumping : MonoBehaviour
     [SerializeField] float risingGravity = 1f;
     [SerializeField] float fallingGravity = 1f;
     [SerializeField] float fallSpeed = 6f;
+    [SerializeField] string jumpSoundName = "enemy_dragoon_jump";
 
     void Awake()
     {
@@ -35,6 +36,7 @@ public class EnemyJumping : MonoBehaviour
         {
             enemy.rb2d.gravityScale = risingGravity;
             enemy.rb2d.velocity = new Vector2(enemy.rb2d.velocity.x, jumpSpeed);
+            SoundFactory.SpawnSound(jumpSoundName, this.transform.position, 0.5f);
         }
     }
 

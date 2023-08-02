@@ -52,6 +52,9 @@ public class PlayerCtrlProperties : ScriptableObject
     [SerializeField] bool _enableVariableJumps = true;
     public bool enableVariableJumps { get { return _enableVariableJumps; } }
 
+    [SerializeField] float _minJumpHoldTime = 0.1f;
+    public float minJumpHoldTime { get { return _minJumpHoldTime; } }
+
     [SerializeField] float _variableJumpDecay = 0.5f;
     public float variableJumpDecay { get { return _variableJumpDecay; } }
 

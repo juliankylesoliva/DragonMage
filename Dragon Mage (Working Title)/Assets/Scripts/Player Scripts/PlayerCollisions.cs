@@ -213,7 +213,7 @@ public class PlayerCollisions : MonoBehaviour
 
     public bool CheckIfNearLedge()
     {
-        RaycastHit2D hit = Physics2D.Raycast(groundCheckObj.position + (player.movement.GetFacingValue() * ledgeCheckOffset * Vector3.right), -Vector2.up, ledgeCheckDepth, nonEnemyGroundLayer);
+        RaycastHit2D hit = Physics2D.Raycast(groundCheckObj.position + ((player.rb2d.velocity.x != 0f ? (player.rb2d.velocity.x > 0f ? 1f : -1f) : player.movement.GetFacingValue()) * ledgeCheckOffset * Vector3.right), -Vector2.up, ledgeCheckDepth, nonEnemyGroundLayer);
         return hit.collider == null;
     }
 

@@ -94,7 +94,10 @@ public class PlayerForm : MonoBehaviour
         player.movement.airTurningSpeed = p.airTurningSpeed;
 
         player.jumping.enableVariableJumps = p.enableVariableJumps;
+        player.jumping.minJumpHoldTime = p.minJumpHoldTime;
         player.jumping.variableJumpDecay = p.variableJumpDecay;
+
+        player.jumping.MaxOutMinJumpHoldTimer();
 
         player.jumping.enableAirStalling = p.enableAirStalling;
         player.jumping.minimumAirStallHeight = p.minimumAirStallHeight;

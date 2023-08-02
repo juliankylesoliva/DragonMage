@@ -375,7 +375,7 @@ public class FallingState : State
 
     public override void Enter()
     {
-        player.jumping.jumpIsHeld = false;
+        player.jumping.ResetJumpIsHeld();
         player.rb2d.gravityScale = player.jumping.fallingGravity;
     }
 

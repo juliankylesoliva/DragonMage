@@ -15,8 +15,10 @@ public class PlayerJumping : MonoBehaviour
 
     [Header("Variable Jump Variables")]
     public bool enableVariableJumps = true;
+    public float minJumpHoldTime = 0.1f;
     public float variableJumpDecay = 0.5f;
-    [HideInInspector] public bool jumpIsHeld = false;
+    public bool jumpIsHeld { get; private set; }
+    public float currentMinJumpHoldTimer { get; private set; }
 
     [Header("Air Stalling Variables")]
     [SerializeField] ParticleSystem glidingParticles;
@@ -150,6 +152,28 @@ public class PlayerJumping : MonoBehaviour
         }
     }
 
+    private void UpdateMinJumpHoldTimer()
+    {
+        if (currentMinJumpHoldTimer < minJumpHoldTime)
+        {
+            currentMinJumpHoldTimer += Time.deltaTime;
+            if (currentMinJumpHoldTimer > minJumpHoldTime)
+            {
+                currentMinJumpHoldTimer = minJumpHoldTime;
+            }
+        }
+    }
+
+    public void ResetMinJumpHoldTimer()
+    {
+        currentMinJumpHoldTimer = 0f;
+    }
+
+    public void MaxOutMinJumpHoldTimer()
+    {
+        currentMinJumpHoldTimer = minJumpHoldTime;
+    }
+
     public void ResetSuperJumpTimers()
     {
         superJumpParticles.Stop();
@@ -182,6 +206,11 @@ public class PlayerJumping : MonoBehaviour
         }
     }
 
+    public void ResetJumpIsHeld()
+    {
+        jumpIsHeld = false;
+    }
+
     public bool CanGroundJump()
     {
         return (player.stateMachine.CurrentState.name != "Jumping" && (player.collisions.IsGrounded || player.collisions.IsOnASlope || player.buffers.coyoteTimeLeft > 0f) && (!player.movement.isCrouching || enableCrouchJump || !player.collisions.IsCeilingAboveWhenUncrouched()) && player.buffers.jumpBufferTimeLeft > 0f);
@@ -196,6 +225,7 @@ public class PlayerJumping : MonoBehaviour
         if (!enableCrouchJump) { player.movement.ResetCrouchState(); }
 
         LandingReset();
+        ResetMinJumpHoldTimer();
 
         bool didPlayerSpeedHop = (enableSpeedHopping && !player.movement.isCrouching && (player.rb2d.velocity.x * player.inputVector.x) > 0f && Mathf.Abs(player.rb2d.velocity.x) > player.movement.topSpeed);
         float horizontalResult = (didPlayerSpeedHop ? Mathf.Max(player.buffers.highestSpeedBuffer, Mathf.Abs(player.rb2d.velocity.x)) : Mathf.Abs(player.rb2d.velocity.x));
@@ -216,22 +246,25 @@ public class PlayerJumping : MonoBehaviour
     {
         if (player.rb2d.velocity.y > 0f)
         {
-            if (jumpIsHeld && !player.jumpButtonHeld)
+            if (currentMinJumpHoldTimer >= minJumpHoldTime && jumpIsHeld && !player.jumpButtonHeld)
             {
                 jumpIsHeld = false;
             }
 
-            if (!player.attacks.isBlastJumpActive && jumpIsHeld && player.collisions.IsHeadbonking)
+            if (!player.attacks.isBlastJumpActive && (jumpIsHeld || currentMinJumpHoldTimer < minJumpHoldTime) && player.collisions.IsHeadbonking)
             {
                 jumpIsHeld = false;
+                MaxOutMinJumpHoldTimer();
                 player.rb2d.velocity = new Vector2(Mathf.Abs(player.rb2d.velocity.x) <= player.movement.topSpeed ? player.rb2d.velocity.x : player.movement.topSpeed * player.movement.GetFacingValue(), 0f);
             }
 
-            if (enableVariableJumps && !jumpIsHeld)
+            if (enableVariableJumps && !jumpIsHeld && currentMinJumpHoldTimer >= minJumpHoldTime)
             {
                 player.rb2d.velocity -= (Vector2.up * (variableJumpDecay * Time.deltaTime));
                 if (player.rb2d.velocity.y < 0f) { player.rb2d.velocity = new Vector2(player.rb2d.velocity.x, 0f); }
             }
+
+            UpdateMinJumpHoldTimer();
         }
     }
 
@@ -346,6 +379,8 @@ public class PlayerJumping : MonoBehaviour
         jumpIsHeld = true;
         player.rb2d.gravityScale = risingGravity;
         player.movement.ResetCrouchState();
+
+        ResetMinJumpHoldTimer();
 
         float horizontalResult = Mathf.Max(player.buffers.highestSpeedBuffer, horizontalWallJumpSpeed);
         bool didPlayerSpeedKick = (horizontalResult > (horizontalWallJumpSpeed + 0.25f));

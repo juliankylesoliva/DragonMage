@@ -10370,8 +10370,8 @@ MonoBehaviour:
   fallingGravity: 2.5
   fallSpeed: 8
   enableVariableJumps: 1
+  minJumpHoldTime: 0.05
   variableJumpDecay: 0.5
-  jumpIsHeld: 0
   glidingParticles: {fileID: 6792052324477078074}
   enableAirStalling: 1
   minimumAirStallHeight: 1

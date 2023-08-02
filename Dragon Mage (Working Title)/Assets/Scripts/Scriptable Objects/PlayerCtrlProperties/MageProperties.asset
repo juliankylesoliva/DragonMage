@@ -26,6 +26,7 @@ MonoBehaviour:
   _airDeceleration: 60
   _airTurningSpeed: 70
   _enableVariableJumps: 1
+  _minJumpHoldTime: 0.05
   _variableJumpDecay: 95
   _enableAirStalling: 1
   _minimumAirStallHeight: 1

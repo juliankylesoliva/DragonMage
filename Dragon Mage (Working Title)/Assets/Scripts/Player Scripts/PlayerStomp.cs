@@ -43,7 +43,11 @@ public class PlayerStomp : MonoBehaviour
                 {
                     GameObject tempObj = colliders[0].gameObject;
                     EnemyBehavior tempEnemy = tempObj.GetComponent<EnemyBehavior>();
-                    if (tempEnemy != null) { tempEnemy.DefeatEnemy(damageType); }
+                    if (tempEnemy != null)
+                    {
+                        tempEnemy.DefeatEnemy(damageType);
+                        EffectFactory.SpawnEffect("StompImpact", player.collisions.groundCheckObj.position);
+                    }
                     return true;
                 }
             }
