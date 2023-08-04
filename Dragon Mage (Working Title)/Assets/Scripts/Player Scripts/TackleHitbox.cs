@@ -86,6 +86,7 @@ public class TackleHitbox : MonoBehaviour
                 if (enemy.DefeatEnemy(damageType))
                 {
                     player.temper.NeutralizeTemperBy(1);
+                    EffectFactory.SpawnEffect("FireImpact", other.transform.position);
                     enemy.rb2d.velocity += (player.rb2d.velocity * enemyDefeatKnockbackMultiplier);
                 }
             }

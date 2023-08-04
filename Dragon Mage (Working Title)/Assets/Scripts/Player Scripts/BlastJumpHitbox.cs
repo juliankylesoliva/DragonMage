@@ -71,6 +71,7 @@ public class BlastJumpHitbox : MonoBehaviour
                 if (enemy.DefeatEnemy(damageType))
                 {
                     player.temper.NeutralizeTemperBy(-2);
+                    EffectFactory.SpawnEffect("MagicImpact", other.transform.position);
                     enemy.rb2d.velocity += (Vector2.right * player.rb2d.velocity.x * enemyDefeatKnockbackMultiplier);
                 }
             }

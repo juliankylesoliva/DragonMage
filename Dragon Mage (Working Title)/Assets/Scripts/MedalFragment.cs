@@ -28,6 +28,10 @@ public class MedalFragment : MonoBehaviour
                 {
                     dragonFragments++;
                 }
+
+                GameObject tempObj = EffectFactory.SpawnEffect("FragmentGrab", this.transform.position);
+                FragmentGrab tempFragGrab = tempObj.GetComponent<FragmentGrab>();
+                tempFragGrab.Setup(playerRef.form.currentMode);
             }
 
             SoundFactory.SpawnSound("object_fragment_pickup", this.transform.position);

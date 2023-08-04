@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: b41d98e72b8c0b74ab05c9f30088cd70
+guid: 038eab0661c08a44a97486464d8923de
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -65,11 +65,11 @@ TextureImporter:
   ignorePngGamma: 0
   applyGammaDecoding: 0
   swizzle: 50462976
-  cookieLightType: 1
+  cookieLightType: 0
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
-    maxTextureSize: 64
+    maxTextureSize: 256
     resizeAlgorithm: 1
     textureFormat: -1
     textureCompression: 0
@@ -108,10 +108,10 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
     buildTarget: WebGL
-    maxTextureSize: 64
-    resizeAlgorithm: 1
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 0
+    textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -123,13 +123,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: RedDragoonProjectile_0
+      name: FireImpact_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 31
-        height: 31
+        width: 48
+        height: 48
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -137,20 +137,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8486c6d49253e8148975a21a22b5d51f
-      internalID: -861977805
+      spriteID: 610f7d00c99629c4bbe0062b4e255257
+      internalID: 845714377
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: RedDragoonProjectile_1
+      name: FireImpact_1
       rect:
         serializedVersion: 2
-        x: 31
+        x: 48
         y: 0
-        width: 31
-        height: 31
+        width: 48
+        height: 48
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -158,8 +158,29 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 65a36aef9da7a344cb37c30642ca1693
-      internalID: 1739487007
+      spriteID: a022a3f500cd8004fbb0bcce4d04aa15
+      internalID: 1638110901
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireImpact_2
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 0
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f0ff44e07c6067942834339a4e48c1a0
+      internalID: 1677592154
       vertices: []
       indices: 
       edges: []
@@ -175,8 +196,9 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      RedDragoonProjectile_0: -861977805
-      RedDragoonProjectile_1: 1739487007
+      FireImpact_0: 845714377
+      FireImpact_1: 1638110901
+      FireImpact_2: 1677592154
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

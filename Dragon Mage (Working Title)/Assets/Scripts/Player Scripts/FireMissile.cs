@@ -61,6 +61,7 @@ public class FireMissile : MonoBehaviour
             if (enemy.DefeatEnemy(damageType))
             {
                 temper.NeutralizeTemperBy(2);
+                EffectFactory.SpawnEffect("FireImpact", other.transform.position);
                 enemy.rb2d.velocity += (Vector2.right * (isMovingRight ? 1f : -1f) * (moveSpeed + moveSpeedBonus) * enemyDefeatKnockbackMultiplier);
             }
         }

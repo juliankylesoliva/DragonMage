@@ -70,6 +70,7 @@ public class BlastHitbox : MonoBehaviour
             if (!DoesBlastGoThruWall(other) && enemy.DefeatEnemy(damageType))
             {
                 temper.NeutralizeTemperBy(-1);
+                EffectFactory.SpawnEffect("MagicImpact", other.transform.position);
                 if (rb != null && rb.bodyType == RigidbodyType2D.Dynamic)
                 {
                     Vector2 velocityVec = (other.transform.position - this.transform.position);

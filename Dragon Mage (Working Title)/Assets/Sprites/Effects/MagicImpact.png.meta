@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: b41d98e72b8c0b74ab05c9f30088cd70
+guid: f70776a7ccb190a448ffd32c47fd877f
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -65,11 +65,11 @@ TextureImporter:
   ignorePngGamma: 0
   applyGammaDecoding: 0
   swizzle: 50462976
-  cookieLightType: 1
+  cookieLightType: 0
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
-    maxTextureSize: 64
+    maxTextureSize: 256
     resizeAlgorithm: 1
     textureFormat: -1
     textureCompression: 0
@@ -108,10 +108,10 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
     buildTarget: WebGL
-    maxTextureSize: 64
-    resizeAlgorithm: 1
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 0
+    textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -123,13 +123,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: RedDragoonProjectile_0
+      name: MagicImpact_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 31
-        height: 31
+        width: 48
+        height: 48
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -137,20 +137,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8486c6d49253e8148975a21a22b5d51f
-      internalID: -861977805
+      spriteID: 1e437331ab01c944f90be0b80f1fcb84
+      internalID: -1219391468
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: RedDragoonProjectile_1
+      name: MagicImpact_1
       rect:
         serializedVersion: 2
-        x: 31
+        x: 48
         y: 0
-        width: 31
-        height: 31
+        width: 48
+        height: 48
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -158,8 +158,29 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 65a36aef9da7a344cb37c30642ca1693
-      internalID: 1739487007
+      spriteID: d9f61d635b8dfdb4491051000af8c320
+      internalID: -1925823864
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MagicImpact_2
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 0
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 729e4f349b767f048b547b2f25be11f5
+      internalID: 773837224
       vertices: []
       indices: 
       edges: []
@@ -175,8 +196,9 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      RedDragoonProjectile_0: -861977805
-      RedDragoonProjectile_1: 1739487007
+      MagicImpact_0: -1219391468
+      MagicImpact_1: -1925823864
+      MagicImpact_2: 773837224
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
