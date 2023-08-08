@@ -101,7 +101,7 @@ public class TackleHitbox : MonoBehaviour
             if (enemyProj != null)
             {
                 player.temper.NeutralizeTemperBy(1);
-                GameObject.Destroy(other.gameObject);
+                enemyProj.DestroyProjectile();
             }
         }
     }

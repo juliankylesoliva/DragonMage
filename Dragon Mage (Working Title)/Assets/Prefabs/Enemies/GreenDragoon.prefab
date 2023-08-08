@@ -105,6 +105,7 @@ Transform:
   - {fileID: 240950999476447368}
   - {fileID: 240950999654906101}
   - {fileID: 240950998376179084}
+  - {fileID: 2200397293804544346}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -344,6 +345,7 @@ MonoBehaviour:
   playerDetection: {fileID: 0}
   projectile: {fileID: 0}
   animationCtrl: {fileID: 0}
+  defeatedDeactivationCameraDistance: 25
   verticalLaunchOnDefeat: 4
   sortingLayerOnDefeat: Effects
 --- !u!114 &240950999562514432
@@ -381,6 +383,7 @@ MonoBehaviour:
   sightlineLayer:
     serializedVersion: 2
     m_Bits: 0
+  sightlineRaycastOrigin: {fileID: 2200397293804544346}
   useShortSightlineDistance: 0
   useBehindSightline: 0
   onPlayerApproach:
@@ -521,6 +524,30 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 240950999562514438}
+        m_TargetAssemblyTypeName: EnemyCollisionDetection, Assembly-CSharp
+        m_MethodName: PlayPlayerCollisionSound
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 240950999562514438}
+        m_TargetAssemblyTypeName: EnemyCollisionDetection, Assembly-CSharp
+        m_MethodName: SpawnPlayerCollisionEffect
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   onLeavingGround:
     m_PersistentCalls:
       m_Calls: []
@@ -533,6 +560,8 @@ MonoBehaviour:
   groundCheckRadius: 0.125
   wallCheckRadius: 0.125
   ledgeCheckOffset: 0.5
+  playerCollisionSoundName: enemy_contact_impact
+  playerCollisionEffectName: EnemyContactImpact
 --- !u!114 &6672441672932839272
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -655,6 +684,37 @@ Transform:
   m_GameObject: {fileID: 240951000221237934}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: -1, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 240950999562514687}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &8239645506781969599
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2200397293804544346}
+  m_Layer: 11
+  m_Name: SightlineRaycastOrigin
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2200397293804544346
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8239645506781969599}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

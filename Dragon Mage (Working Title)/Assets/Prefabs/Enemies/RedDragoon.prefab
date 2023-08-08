@@ -222,7 +222,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 240950999562514438, guid: 25d6e7fab9aea06479954f464cc15cd4, type: 3}
       propertyPath: onPlayerCollision.m_PersistentCalls.m_Calls.Array.size
-      value: 1
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 240950999562514438, guid: 25d6e7fab9aea06479954f464cc15cd4, type: 3}
+      propertyPath: onPlayerCollision.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 6277197122465048417}
+    - target: {fileID: 240950999562514438, guid: 25d6e7fab9aea06479954f464cc15cd4, type: 3}
+      propertyPath: onPlayerCollision.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: PlayPlayerCollisionSound
+      objectReference: {fileID: 0}
+    - target: {fileID: 240950999562514438, guid: 25d6e7fab9aea06479954f464cc15cd4, type: 3}
+      propertyPath: onPlayerCollision.m_PersistentCalls.m_Calls.Array.data[2].m_MethodName
+      value: SpawnPlayerCollisionEffect
+      objectReference: {fileID: 0}
+    - target: {fileID: 240950999562514438, guid: 25d6e7fab9aea06479954f464cc15cd4, type: 3}
+      propertyPath: onPlayerCollision.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
+      value: EnemyCollisionDetection, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 240950999562514684, guid: 25d6e7fab9aea06479954f464cc15cd4, type: 3}
       propertyPath: m_Sprite
@@ -321,6 +337,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3dcbf87a351b86b498b0e8032b410f5f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &6277197122465048417 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 240950999562514438, guid: 25d6e7fab9aea06479954f464cc15cd4, type: 3}
+  m_PrefabInstance: {fileID: 6072279661567596391}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6277197122465048473}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5021f5e9aa18eec47af3fd19edc55dd8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &6277197122465048423 stripped

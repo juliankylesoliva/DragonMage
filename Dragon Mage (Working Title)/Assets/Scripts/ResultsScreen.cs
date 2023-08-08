@@ -12,12 +12,16 @@ public class ResultsScreen : MonoBehaviour
 
     [SerializeField] Color clearColor;
     [SerializeField] Color semiTransparentColor;
+    [SerializeField] Color magicalMedallionTextColor;
+    [SerializeField] Color draconicMedallionTextColor;
+    [SerializeField] Color balancedMedallionTextColor;
 
     [SerializeField] SpriteRenderer screenColor;
     [SerializeField] TMP_Text headerText;
     [SerializeField] TMP_Text fragmentsText;
     [SerializeField] TMP_Text damageText;
     [SerializeField] TMP_Text timeText;
+    [SerializeField] TMP_Text medallionText;
     [SerializeField] TMP_Text controlPromptText;
 
     [SerializeField] float fadeInTime = 0.5f;
@@ -74,10 +78,10 @@ public class ResultsScreen : MonoBehaviour
             currentFragmentDisplayNumber = (int)Mathf.Lerp(0f, (float)targetFragmentDisplayNumber, lerpValue);
             if (currentFragmentDisplayNumber != previousFragmentDisplayNumber) { audioPlayer.PlaySound("object_fragment_pickup", 0.5f); }
             previousFragmentDisplayNumber = currentFragmentDisplayNumber;
-            fragmentsText.text = $"FRAGMENTS COLLECTED: {currentFragmentDisplayNumber}";
+            fragmentsText.text = $"FRAGMENTS COLLECTED: {currentFragmentDisplayNumber} / {Level.FragmentsNeededForMedal}";
             yield return null;
         }
-        fragmentsText.text = $"FRAGMENTS COLLECTED: {targetFragmentDisplayNumber}";
+        fragmentsText.text = $"FRAGMENTS COLLECTED: {targetFragmentDisplayNumber} / {Level.FragmentsNeededForMedal}";
 
         yield return new WaitForSeconds(countUpTime);
 
@@ -120,6 +124,33 @@ public class ResultsScreen : MonoBehaviour
             yield return null;
         }
         timeText.text = $"CLEAR TIME: {minutes}:{seconds.ToString("00.00")}";
+
+        yield return new WaitForSeconds(countUpTime);
+
+        medallionText.gameObject.SetActive(true);
+        switch (MedalPickup.medalPickedUpStatus)
+        {
+            case MedalStatus.MAGIC_MEDAL_GET:
+                medallionText.color = magicalMedallionTextColor;
+                medallionText.text = $"FOUND A MAGICAL MEDALLION!";
+                SoundFactory.SpawnSound("object_medal_pickup", this.transform.position, 0.5f);
+                break;
+            case MedalStatus.DRAGON_MEDAL_GET:
+                medallionText.color = draconicMedallionTextColor;
+                medallionText.text = $"FOUND A DRACONIC MEDALLION!";
+                SoundFactory.SpawnSound("object_medal_pickup", this.transform.position, 0.5f);
+                break;
+            case MedalStatus.BALANCE_MEDAL_GET:
+                medallionText.color = balancedMedallionTextColor;
+                medallionText.text = $"FOUND A BALANCED MEDALLION!";
+                SoundFactory.SpawnSound("object_medal_pickup", this.transform.position, 0.5f);
+                break;
+            default:
+                medallionText.color = Color.white;
+                medallionText.text = $"NO MEDALLION FOUND...";
+                SoundFactory.SpawnSound("damage_enemy", this.transform.position, 0.5f);
+                break;
+        }
 
         yield return new WaitForSeconds(fadeInTime);
 

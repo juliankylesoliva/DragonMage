@@ -13,12 +13,13 @@ public class PlayerDamage : MonoBehaviour
     [SerializeField] float baseHitstunTime = 1f;
     [SerializeField] float knockbackMagnitudeEpsilon = 0.001f;
     [SerializeField] float postDamageInvulnerabilityTime = 3f;
+    [SerializeField] Vector3 nullSourceVector;
     [SerializeField, Range(0f, 1f)] float invulnerabilityAlpha = 0.75f;
     [SerializeField] PhysicsMaterial2D normalMaterial;
     [SerializeField] PhysicsMaterial2D damagedMaterial;
     [SerializeField] PhysicsMaterial2D fullFrictionMaterial;
 
-    private Transform damageSource = null;
+    private Vector3 damageSource;
     private float hitstunTimer = 0f;
     private bool isDamageInvulnerabilityFlickering = false;
 
@@ -29,6 +30,7 @@ public class PlayerDamage : MonoBehaviour
     void Awake()
     {
         player = this.gameObject.GetComponent<PlayerCtrl>();
+        damageSource = nullSourceVector;
     }
 
     void Update()
@@ -49,7 +51,7 @@ public class PlayerDamage : MonoBehaviour
         }
     }
 
-    public void TakeDamage(Transform source)
+    public void TakeDamage(Vector3 source)
     {
         if (hitstunTimer > 0f || !CanTakeDamage()) { return; }
         damageTaken++;
@@ -58,15 +60,16 @@ public class PlayerDamage : MonoBehaviour
         player.temper.ChangeTemperBy(player.form.currentMode == CharacterMode.MAGE ? mageTemperDamage : dragonTemperDamage);
         MedalFragment.DropFragments();
         player.buffers.ResetSpeedBuffer();
+        player.jumping.ResetSuperJumpTimers();
         player.sfxCtrl.PlaySound("damage_player");
     }
 
     public void DoKnockback()
     {
-        if (damageSource == null) { return; }
+        if (damageSource.z != 0f) { return; }
 
         Vector3 playerPos = this.transform.position;
-        Vector3 damageSrcPos = damageSource.position;
+        Vector3 damageSrcPos = damageSource;
         float xDiff = (playerPos.x - damageSrcPos.x);
         float horizontalDirection = (xDiff > 0f ? 1f : -1f);
 
@@ -74,7 +77,7 @@ public class PlayerDamage : MonoBehaviour
         Vector2 newVelocity = new Vector2(horizontalDirection * baseHorizontalKnockback, baseVerticalKnockback);
         player.rb2d.velocity = newVelocity;
 
-        damageSource = null;
+        damageSource = nullSourceVector;
     }
 
     public void DoIFrames()

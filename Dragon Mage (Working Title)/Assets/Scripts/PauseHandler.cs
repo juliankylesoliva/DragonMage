@@ -7,10 +7,12 @@ using UnityEngine.SceneManagement;
 public class PauseHandler : MonoBehaviour
 {
     [SerializeField] GameObject pauseMenu;
+    [SerializeField] float holdTime = 3f;
 
     public static bool isPaused { get; private set; }
 
     private float currentTitleScreenTimer = 0f;
+    private float currentRestartLevelTimer = 0f;
     private bool isWaitingForControlUpdate = false;
 
     void Update()
@@ -23,27 +25,44 @@ public class PauseHandler : MonoBehaviour
             }
             else
             {
-                InputHub.playerInput.SwitchCurrentActionMap("Menus");
-                pauseMenu.SetActive(true);
-                isPaused = true;
-                Time.timeScale = 0f;
-                InputHub.ClearInputs();
+                if (!Level.isLevelComplete)
+                {
+                    InputHub.playerInput.SwitchCurrentActionMap("Menus");
+                    pauseMenu.SetActive(true);
+                    isPaused = true;
+                    Time.timeScale = 0f;
+                    InputHub.ClearInputs();
+                }
             }
         }
 
-        if (isPaused && InputHub.titleScreenButtonHeld)
+        if (isPaused && InputHub.titleScreenButtonHeld && !InputHub.menuSelectButtonHeld)
         {
+            currentRestartLevelTimer = 0f;
             currentTitleScreenTimer += Time.unscaledDeltaTime;
-            if (currentTitleScreenTimer >= 3f)
+            if (currentTitleScreenTimer >= holdTime)
             {
-                Time.timeScale = 1f;
                 isPaused = false;
                 Time.timeScale = 1f;
-                SceneManager.LoadScene("TitleScreen"); }
+                SceneManager.LoadScene("TitleScreen");
+            }
+        }
+        else if (isPaused && !InputHub.titleScreenButtonHeld && InputHub.menuSelectButtonHeld)
+        {
+            currentTitleScreenTimer = 0f;
+            currentRestartLevelTimer += Time.unscaledDeltaTime;
+            if (currentRestartLevelTimer >= holdTime)
+            {
+                isPaused = false;
+                Time.timeScale = 1f;
+                Scene scene = SceneManager.GetActiveScene();
+                SceneManager.LoadScene(scene.name);
+            }
         }
         else
         {
             currentTitleScreenTimer = 0f;
+            currentRestartLevelTimer = 0f;
         }
     }
 
@@ -52,7 +71,7 @@ public class PauseHandler : MonoBehaviour
         if (isWaitingForControlUpdate) { yield break; }
         isWaitingForControlUpdate = true;
 
-        InputHub.playerInput.SwitchCurrentActionMap("In-Game");
+        if (!Level.isLevelComplete) { InputHub.playerInput.SwitchCurrentActionMap("In-Game"); }
 
         yield return null; // PlayerInput needs a frame to read movement input again.
 

@@ -30,6 +30,7 @@ public class EnemyMovement : MonoBehaviour
     {
         if (!PauseHandler.isPaused && !enemy.isDefeated)
         {
+            if (currentMoveVector != Vector2.zero) { enemy.animationCtrl.WalkAnimation(); }
             CheckIfFacingPlayer();
             UpdateVelocityVector();
             UpdateCurrentTurningCooldown();

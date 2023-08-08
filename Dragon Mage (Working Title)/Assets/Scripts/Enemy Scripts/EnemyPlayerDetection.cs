@@ -13,6 +13,7 @@ public class EnemyPlayerDetection : MonoBehaviour
     [SerializeField] float enemyShortSightlineDistance = 7f;
     [SerializeField] float playerJumpingThreshold = 1f;
     [SerializeField] LayerMask sightlineLayer;
+    [SerializeField] Transform sightlineRaycastOrigin;
     [SerializeField] bool useShortSightlineDistance = false;
     [SerializeField] bool useBehindSightline = false;
     [SerializeField] UnityEvent onPlayerApproach;
@@ -47,6 +48,11 @@ public class EnemyPlayerDetection : MonoBehaviour
         }
     }
 
+    public Vector3 GetPlayerPosition()
+    {
+        return playerRef.transform.position;
+    }
+
     public float GetDistanceToPlayer()
     {
         if (playerRef != null)
@@ -70,7 +76,7 @@ public class EnemyPlayerDetection : MonoBehaviour
     {
         if (playerRef != null)
         {
-            playerRef.damage.TakeDamage(this.transform);
+            playerRef.damage.TakeDamage(this.transform.position);
         }
     }
 
@@ -97,8 +103,8 @@ public class EnemyPlayerDetection : MonoBehaviour
 
     private void CheckEnemySightline()
     {
-        RaycastHit2D hit = Physics2D.Raycast(this.transform.position, Vector2.right * enemy.movement.GetFacingValue(), Mathf.Infinity, sightlineLayer);
-        RaycastHit2D hit2 = Physics2D.Raycast(this.transform.position, (useBehindSightline ? -1f : 0f) * Vector2.right * enemy.movement.GetFacingValue(), Mathf.Infinity, sightlineLayer);
+        RaycastHit2D hit = Physics2D.Raycast(sightlineRaycastOrigin.position, Vector2.right * enemy.movement.GetFacingValue(), Mathf.Infinity, sightlineLayer);
+        RaycastHit2D hit2 = Physics2D.Raycast(sightlineRaycastOrigin.position, (useBehindSightline ? -1f : 0f) * Vector2.right * enemy.movement.GetFacingValue(), Mathf.Infinity, sightlineLayer);
 
         if (hit.collider != null && hit.transform.tag == "Player" && hit.distance <= (useShortSightlineDistance ? enemyShortSightlineDistance : enemySightlineDistance))
         {

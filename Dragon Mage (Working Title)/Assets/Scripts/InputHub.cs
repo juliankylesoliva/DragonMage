@@ -206,5 +206,21 @@ public class InputHub : MonoBehaviour
         formChangeButtonDown = false;
         interactButtonDown = false;
         technicalButtonHeld = false;
+
+        pauseButtonDown = false;
+        menuUpButtonDown = false;
+        menuUpButtonHeld = false;
+        menuDownButtonDown = false;
+        menuDownButtonHeld = false;
+        menuRightButtonDown = false;
+        menuRightButtonHeld = false;
+        menuLeftButtonDown = false;
+        menuLeftButtonHeld = false;
+        menuSelectButtonDown = false;
+        menuSelectButtonHeld = false;
+        menuBackButtonDown = false;
+        menuBackButtonHeld = false;
+        titleScreenButtonDown = false;
+        titleScreenButtonHeld = false;
     }
 }

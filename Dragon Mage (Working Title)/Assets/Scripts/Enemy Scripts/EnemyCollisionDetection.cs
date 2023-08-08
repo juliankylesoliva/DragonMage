@@ -22,6 +22,8 @@ public class EnemyCollisionDetection : MonoBehaviour
     [SerializeField] float groundCheckRadius = 0.1f;
     [SerializeField] float wallCheckRadius = 0.1f;
     [SerializeField] float ledgeCheckOffset = 0.25f;
+    [SerializeField] string playerCollisionSoundName = "enemy_contact_impact";
+    [SerializeField] string playerCollisionEffectName = "EnemyContactImpact";
 
     public bool isGrounded { get; private set; }
     public bool isTouchingWall { get; private set; }
@@ -45,6 +47,16 @@ public class EnemyCollisionDetection : MonoBehaviour
             WallCheck();
             LedgeCheck();
         }
+    }
+
+    public void PlayPlayerCollisionSound()
+    {
+        SoundFactory.SpawnSound(playerCollisionSoundName, enemy.playerDetection.GetPlayerPosition());
+    }
+
+    public void SpawnPlayerCollisionEffect()
+    {
+        EffectFactory.SpawnEffect(playerCollisionEffectName, enemy.playerDetection.GetPlayerPosition());
     }
 
     private void GroundCheck()

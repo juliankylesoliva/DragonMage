@@ -146,7 +146,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 240950999562514438, guid: 25d6e7fab9aea06479954f464cc15cd4, type: 3}
       propertyPath: onPlayerCollision.m_PersistentCalls.m_Calls.Array.size
-      value: 1
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 240950999562514438, guid: 25d6e7fab9aea06479954f464cc15cd4, type: 3}
       propertyPath: onLeavingGround.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
@@ -173,6 +173,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 6580016325546699809}
     - target: {fileID: 240950999562514438, guid: 25d6e7fab9aea06479954f464cc15cd4, type: 3}
+      propertyPath: onPlayerCollision.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 1907358049735845091}
+    - target: {fileID: 240950999562514438, guid: 25d6e7fab9aea06479954f464cc15cd4, type: 3}
       propertyPath: onLeavingGround.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2
       objectReference: {fileID: 0}
@@ -197,6 +201,14 @@ PrefabInstance:
       value: IdleAnimation
       objectReference: {fileID: 0}
     - target: {fileID: 240950999562514438, guid: 25d6e7fab9aea06479954f464cc15cd4, type: 3}
+      propertyPath: onPlayerCollision.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: PlayPlayerCollisionSound
+      objectReference: {fileID: 0}
+    - target: {fileID: 240950999562514438, guid: 25d6e7fab9aea06479954f464cc15cd4, type: 3}
+      propertyPath: onPlayerCollision.m_PersistentCalls.m_Calls.Array.data[2].m_MethodName
+      value: SpawnPlayerCollisionEffect
+      objectReference: {fileID: 0}
+    - target: {fileID: 240950999562514438, guid: 25d6e7fab9aea06479954f464cc15cd4, type: 3}
       propertyPath: onLeavingGround.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
       value: EnemyAnimation, Assembly-CSharp
       objectReference: {fileID: 0}
@@ -207,6 +219,10 @@ PrefabInstance:
     - target: {fileID: 240950999562514438, guid: 25d6e7fab9aea06479954f464cc15cd4, type: 3}
       propertyPath: onTouchingGround.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
       value: EnemyAnimation, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 240950999562514438, guid: 25d6e7fab9aea06479954f464cc15cd4, type: 3}
+      propertyPath: onPlayerCollision.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
+      value: EnemyCollisionDetection, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 240950999562514438, guid: 25d6e7fab9aea06479954f464cc15cd4, type: 3}
       propertyPath: onLeavingGround.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
@@ -327,6 +343,17 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &1907358049735845091 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 240950999562514438, guid: 25d6e7fab9aea06479954f464cc15cd4, type: 3}
+  m_PrefabInstance: {fileID: 1810530210245661925}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1907358049735844891}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5021f5e9aa18eec47af3fd19edc55dd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &6580016325546699809 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: -4435867106726823740, guid: 25d6e7fab9aea06479954f464cc15cd4, type: 3}

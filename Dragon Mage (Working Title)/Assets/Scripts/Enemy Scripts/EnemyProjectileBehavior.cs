@@ -8,6 +8,8 @@ public class EnemyProjectileBehavior : MonoBehaviour
     Rigidbody2D rb2d;
 
     [SerializeField] float moveSpeed = 3f;
+    [SerializeField] string impactEffectName = "DragoonProjectileImpact";
+    [SerializeField] string destroySoundName = "enemy_dragoon_projectile_destroy";
 
     void Awake()
     {
@@ -31,6 +33,13 @@ public class EnemyProjectileBehavior : MonoBehaviour
         projectileSprite.flipX = (enemySource.movement.GetFacingValue() < 0f);
     }
 
+    public void DestroyProjectile()
+    {
+        EffectFactory.SpawnEffect(impactEffectName, this.transform.position);
+        SoundFactory.SpawnSound(destroySoundName, this.transform.position);
+        GameObject.Destroy(this.gameObject);
+    }
+
     void OnBecameInvisible()
     {
         GameObject.Destroy(this.gameObject);
@@ -51,7 +60,11 @@ public class EnemyProjectileBehavior : MonoBehaviour
         if (other.transform.tag == "Player")
         {
             PlayerCtrl tempPlayer = other.gameObject.GetComponent<PlayerCtrl>();
-            if (tempPlayer != null) { tempPlayer.damage.TakeDamage(this.transform); }
+            if (tempPlayer != null)
+            {
+                tempPlayer.damage.TakeDamage(this.transform.position);
+                DestroyProjectile();
+            }
         }
         else { /* Nothing */ }
     }

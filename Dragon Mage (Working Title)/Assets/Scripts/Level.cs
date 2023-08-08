@@ -13,14 +13,22 @@ public class Level : MonoBehaviour
     private static int _fragmentsNeededForMedal = 0;
     public static int FragmentsNeededForMedal { get { return _fragmentsNeededForMedal; } }
 
+    public static bool isLevelComplete { get; private set; }
+
     void Awake()
     {
         _fragmentsNeededForMedal = fragmentsNeededForMedal;
+        isLevelComplete = false;
     }
 
     void Start()
     {
         LevelStartup();
+    }
+
+    public void SetLevelCompleteFlag()
+    {
+        isLevelComplete = true;
     }
 
     private void LevelStartup()

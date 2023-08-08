@@ -21,6 +21,7 @@ public class EnemyBehavior : MonoBehaviour
     [HideInInspector] public EnemyProjectile projectile;
     [HideInInspector] public EnemyAnimation animationCtrl;
 
+    [SerializeField] float defeatedDeactivationCameraDistance = 25f;
     [SerializeField] float verticalLaunchOnDefeat = 2f;
     [SerializeField] string sortingLayerOnDefeat = "Effects";
 
@@ -47,7 +48,7 @@ public class EnemyBehavior : MonoBehaviour
 
     void Update()
     {
-        
+        CheckDefeatedCameraDistance();
     }
 
     void OnBecameVisible()
@@ -58,10 +59,6 @@ public class EnemyBehavior : MonoBehaviour
     void OnBecameInvisible()
     {
         isVisible = false;
-        if (isDefeated)
-        {
-            this.gameObject.SetActive(false);
-        }
     }
 
     public void ActivateEnemy()
@@ -111,5 +108,21 @@ public class EnemyBehavior : MonoBehaviour
             if (dmgType == d) { return true; }
         }
         return false;
+    }
+
+    private void CheckDefeatedCameraDistance()
+    {
+        if (isDefeated)
+        {
+            Vector3 cameraPosition = Camera.main.transform.position;
+            cameraPosition.z = 0f;
+
+            Vector3 thisPosition = this.transform.position;
+
+            if (Vector3.Distance(cameraPosition, thisPosition) >= defeatedDeactivationCameraDistance)
+            {
+                this.gameObject.SetActive(false);
+            }
+        }
     }
 }
