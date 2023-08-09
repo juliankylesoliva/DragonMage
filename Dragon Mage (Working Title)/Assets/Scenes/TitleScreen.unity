@@ -540,8 +540,8 @@ MonoBehaviour:
     <i>Eight
     Bit Dungeon Monster Stomp</i> by TeknoAXE is licensed under CC BY 4.0.
 
-    <size=2>No
-    changes were made.
+    <size=2>Trimmed
+    off the end to make it loopable.
 
     License: https://creativecommons.org/licenses/by/4.0/
 
@@ -552,8 +552,8 @@ MonoBehaviour:
     <i>Up In My Jam
     (All Of A Sudden)</i> by Kubbi is licensed under CC BY-SA 3.0.
 
-    <size=2>No
-    changes were made.
+    <size=2>Trimmed
+    off the end and split at the start to make an intro and loop.
 
     License: https://creativecommons.org/licenses/by-sa/3.0/
 
@@ -1345,7 +1345,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Z/<sprite="CrossFaceButtons" name="EastButton">: Confirm'
+  m_text: 'Z/<sprite="CrossFaceButtons" name="EastButton">: Select'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: a3a8650b6fd9bb04c978844dbc0932d7, type: 2}
   m_sharedMaterial: {fileID: -6660804504467697159, guid: a3a8650b6fd9bb04c978844dbc0932d7, type: 2}

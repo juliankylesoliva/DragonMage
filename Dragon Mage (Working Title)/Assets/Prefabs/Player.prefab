@@ -10506,9 +10506,11 @@ MonoBehaviour:
   dragonTemperDamage: -2
   baseVerticalKnockback: 8
   baseHorizontalKnockback: 6
+  crouchingModifier: 0.6
   baseHitstunTime: 0.25
   knockbackMagnitudeEpsilon: 0.8
   postDamageInvulnerabilityTime: 3
+  nullSourceVector: {x: 0, y: 0, z: 0}
   invulnerabilityAlpha: 0.25
   normalMaterial: {fileID: 6200000, guid: 9406f10bd3650fe409c8dc01b66aa54d, type: 2}
   damagedMaterial: {fileID: 6200000, guid: dd55f7c89c0e2e144b192bfa77adfb19, type: 2}
@@ -10602,6 +10604,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 013b422915cf2ab4995097a6d6946670, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  droppedFragmentsSpeed: 12
 --- !u!114 &6792052323780996488
 MonoBehaviour:
   m_ObjectHideFlags: 0

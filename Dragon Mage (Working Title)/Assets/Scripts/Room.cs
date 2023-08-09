@@ -43,6 +43,10 @@ public class Room : MonoBehaviour
             {
                 e.ActivateEnemy();
             }
+            else
+            {
+                if (e.gameObject.activeSelf) { e.gameObject.SetActive(false); }
+            }
         }
     }
 }

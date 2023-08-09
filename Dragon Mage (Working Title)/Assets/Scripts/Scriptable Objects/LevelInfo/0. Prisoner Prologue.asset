@@ -14,10 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _sceneName: A1_L0_Prisoner_Prologue
   _nameHeader: 'Tutorial: Prisoner Prologue'
-  _storyDescription: 'Magli is a young mage who has been kidnapped by a group of
-    dragon mobsters working for the Dragon Syndicate! They''re a group of criminals
-    based in the city of Drakageau who steal and horde magic for themselves; their
-    modus operandi includes the kidnapping of various magical races, especially mages,
-    to drain them of their powers. Magli must use her powers to escape while she
-    can still use them, but she may need to resort to using a secret power of hers:
-    one that may make her an even bigger target to the Dragon Syndicate...'
+  _storyDescription: Magli is a young mage who has been kidnapped by a group of dragon
+    mobsters working for the Dragon Syndicate! They're a group of criminals based
+    in the city of Drakageau who steal and horde magic for themselves; their modus
+    operandi includes the kidnapping of various magical races, especially mages,
+    to drain them of their powers. Magli must use her mage powers to escape while
+    she can still use them, but she may also need to resort to using her secret dragon
+    powers which could make her a more valuable target to the Dragon Syndicate...

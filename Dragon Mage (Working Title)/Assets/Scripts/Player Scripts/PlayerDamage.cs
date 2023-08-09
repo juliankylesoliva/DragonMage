@@ -10,6 +10,7 @@ public class PlayerDamage : MonoBehaviour
     [SerializeField] int dragonTemperDamage = -1;
     [SerializeField] float baseVerticalKnockback = 2f;
     [SerializeField] float baseHorizontalKnockback = 5f;
+    [SerializeField] float crouchingModifier = 0.5f;
     [SerializeField] float baseHitstunTime = 1f;
     [SerializeField] float knockbackMagnitudeEpsilon = 0.001f;
     [SerializeField] float postDamageInvulnerabilityTime = 3f;
@@ -56,8 +57,8 @@ public class PlayerDamage : MonoBehaviour
         if (hitstunTimer > 0f || !CanTakeDamage()) { return; }
         damageTaken++;
         damageSource = source;
-        StartCoroutine(HitstunTimerCR(baseHitstunTime));
-        player.temper.ChangeTemperBy(player.form.currentMode == CharacterMode.MAGE ? mageTemperDamage : dragonTemperDamage);
+        StartCoroutine(HitstunTimerCR(baseHitstunTime * (player.movement.isCrouching ? crouchingModifier : 1f)));
+        player.temper.ChangeTemperBy((int)((player.form.currentMode == CharacterMode.MAGE ? mageTemperDamage : dragonTemperDamage) * (player.movement.isCrouching ? crouchingModifier : 1f)));
         MedalFragment.DropFragments();
         player.buffers.ResetSpeedBuffer();
         player.jumping.ResetSuperJumpTimers();
@@ -75,9 +76,12 @@ public class PlayerDamage : MonoBehaviour
 
         player.rb2d.gravityScale = player.jumping.fallingGravity;
         Vector2 newVelocity = new Vector2(horizontalDirection * baseHorizontalKnockback, baseVerticalKnockback);
+        newVelocity *= (player.movement.isCrouching ? crouchingModifier : 1f);
         player.rb2d.velocity = newVelocity;
 
         damageSource = nullSourceVector;
+
+        player.effects.DroppedFragmentsEffect();
     }
 
     public void DoIFrames()

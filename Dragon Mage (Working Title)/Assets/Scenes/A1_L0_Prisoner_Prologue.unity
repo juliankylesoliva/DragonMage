@@ -32632,8 +32632,8 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 651211232}
-  - {fileID: 1878015617}
   - {fileID: 812538536}
+  - {fileID: 640433045}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -32780,7 +32780,7 @@ PrefabInstance:
     - target: {fileID: 1353651659175900153, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
       propertyPath: hintText
       value: Jump while crouching to slip through narrow passages above ground level!
-        (You won't be able to perform certain aerial actions while crouched, however...)
+        (You won't be able to perform certain aerial actions while crouching, however...)
       objectReference: {fileID: 0}
     - target: {fileID: 1353651659175900155, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
       propertyPath: m_RootOrder
@@ -36220,6 +36220,91 @@ Transform:
   m_Father: {fileID: 5621712601134601563}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &640433044
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 519420032}
+    m_Modifications:
+    - target: {fileID: 621922538701679882, guid: a9d278d3cd42411429bdd542dc36e670, type: 3}
+      propertyPath: m_Name
+      value: MusicPlayer
+      objectReference: {fileID: 0}
+    - target: {fileID: 1871194470575354862, guid: a9d278d3cd42411429bdd542dc36e670, type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1871194470575354862, guid: a9d278d3cd42411429bdd542dc36e670, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1871194470575354862, guid: a9d278d3cd42411429bdd542dc36e670, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1871194470575354862, guid: a9d278d3cd42411429bdd542dc36e670, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1871194470575354862, guid: a9d278d3cd42411429bdd542dc36e670, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1871194470575354862, guid: a9d278d3cd42411429bdd542dc36e670, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1871194470575354862, guid: a9d278d3cd42411429bdd542dc36e670, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1871194470575354862, guid: a9d278d3cd42411429bdd542dc36e670, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1871194470575354862, guid: a9d278d3cd42411429bdd542dc36e670, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1871194470575354862, guid: a9d278d3cd42411429bdd542dc36e670, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1871194470575354862, guid: a9d278d3cd42411429bdd542dc36e670, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5305743783979617659, guid: a9d278d3cd42411429bdd542dc36e670, type: 3}
+      propertyPath: loopClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 1c6303dd4f26da74488f2cf3ddc2f5b2, type: 3}
+    - target: {fileID: 5305743783979617659, guid: a9d278d3cd42411429bdd542dc36e670, type: 3}
+      propertyPath: introClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 1c6303dd4f26da74488f2cf3ddc2f5b2, type: 3}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: a9d278d3cd42411429bdd542dc36e670, type: 3}
+--- !u!4 &640433045 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1871194470575354862, guid: a9d278d3cd42411429bdd542dc36e670, type: 3}
+  m_PrefabInstance: {fileID: 640433044}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &640433046 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5305743783979617659, guid: a9d278d3cd42411429bdd542dc36e670, type: 3}
+  m_PrefabInstance: {fileID: 640433044}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b447c29e5fad454082531efa4898ea0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &643810469
 GameObject:
   m_ObjectHideFlags: 0
@@ -42031,13 +42116,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 8555515746979695526, guid: deec513b213d65442849019771cba009, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 0}
-    - targetCorrespondingSourceObject: {fileID: 8882873185863754834, guid: deec513b213d65442849019771cba009, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 0}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: deec513b213d65442849019771cba009, type: 3}
 --- !u!4 &812538536 stripped
 Transform:
@@ -45227,9 +45306,9 @@ PrefabInstance:
     - target: {fileID: 1353651659175900153, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
       propertyPath: hintText
       value: Press C / RShoulder to switch between Magli and Draelyn! This can only
-        be done if the temper meter is in the green. If it's up in the orange, you're
-        locked to Draelyn. If it's down in the blue, you're locked to Magli. Break
-        blocks to quickly neutralize the meter!
+        be done if the temper meter is in the green. If it's in the orange, you're
+        locked to Draelyn. If it's in the blue, you're locked to Magli. Break blocks
+        and defeat enemies to neutralize the meter!
       objectReference: {fileID: 0}
     - target: {fileID: 1353651659175900155, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
       propertyPath: m_RootOrder
@@ -79145,134 +79224,6 @@ Transform:
   m_Father: {fileID: 1854331270}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1878015616
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1878015617}
-  - component: {fileID: 1878015618}
-  m_Layer: 0
-  m_Name: MusicPlayer
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1878015617
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1878015616}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 519420032}
-  m_RootOrder: -1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!82 &1878015618
-AudioSource:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1878015616}
-  m_Enabled: 1
-  serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 31ce7853a8f98f948a1a0c09e2808095, type: 3}
-  m_PlayOnAwake: 1
-  m_Volume: 0.5
-  m_Pitch: 1
-  Loop: 1
-  Mute: 0
-  Spatialize: 0
-  SpatializePostEffects: 0
-  Priority: 128
-  DopplerLevel: 1
-  MinDistance: 1
-  MaxDistance: 500
-  Pan2D: 0
-  rolloffMode: 0
-  BypassEffects: 0
-  BypassListenerEffects: 0
-  BypassReverbZones: 0
-  rolloffCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 1
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  panLevelCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  spreadCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  reverbZoneMixCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
 --- !u!1001 &1879745955
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -106408,7 +106359,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9151918476160911055, guid: 17de6d88538bf964ba9c0d26a2497614, type: 3}
       propertyPath: OnLevelEnd.m_PersistentCalls.m_Calls.Array.size
-      value: 7
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 9151918476160911055, guid: 17de6d88538bf964ba9c0d26a2497614, type: 3}
       propertyPath: OnLevelEnd.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
@@ -106439,6 +106390,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9151918476160911055, guid: 17de6d88538bf964ba9c0d26a2497614, type: 3}
+      propertyPath: OnLevelEnd.m_PersistentCalls.m_Calls.Array.data[7].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9151918476160911055, guid: 17de6d88538bf964ba9c0d26a2497614, type: 3}
       propertyPath: OnLevelEnd.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 6792052323594762943}
@@ -106453,7 +106408,7 @@ PrefabInstance:
     - target: {fileID: 9151918476160911055, guid: 17de6d88538bf964ba9c0d26a2497614, type: 3}
       propertyPath: OnLevelEnd.m_PersistentCalls.m_Calls.Array.data[3].m_Target
       value: 
-      objectReference: {fileID: 1878015618}
+      objectReference: {fileID: 0}
     - target: {fileID: 9151918476160911055, guid: 17de6d88538bf964ba9c0d26a2497614, type: 3}
       propertyPath: OnLevelEnd.m_PersistentCalls.m_Calls.Array.data[4].m_Target
       value: 
@@ -106466,6 +106421,10 @@ PrefabInstance:
       propertyPath: OnLevelEnd.m_PersistentCalls.m_Calls.Array.data[6].m_Target
       value: 
       objectReference: {fileID: 764682624}
+    - target: {fileID: 9151918476160911055, guid: 17de6d88538bf964ba9c0d26a2497614, type: 3}
+      propertyPath: OnLevelEnd.m_PersistentCalls.m_Calls.Array.data[7].m_Target
+      value: 
+      objectReference: {fileID: 640433046}
     - target: {fileID: 9151918476160911055, guid: 17de6d88538bf964ba9c0d26a2497614, type: 3}
       propertyPath: OnLevelEnd.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2
@@ -106492,6 +106451,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9151918476160911055, guid: 17de6d88538bf964ba9c0d26a2497614, type: 3}
       propertyPath: OnLevelEnd.m_PersistentCalls.m_Calls.Array.data[6].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 9151918476160911055, guid: 17de6d88538bf964ba9c0d26a2497614, type: 3}
+      propertyPath: OnLevelEnd.m_PersistentCalls.m_Calls.Array.data[7].m_CallState
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 9151918476160911055, guid: 17de6d88538bf964ba9c0d26a2497614, type: 3}
@@ -106523,6 +106486,10 @@ PrefabInstance:
       value: SetLevelCompleteFlag
       objectReference: {fileID: 0}
     - target: {fileID: 9151918476160911055, guid: 17de6d88538bf964ba9c0d26a2497614, type: 3}
+      propertyPath: OnLevelEnd.m_PersistentCalls.m_Calls.Array.data[7].m_MethodName
+      value: FadeOutAndStop
+      objectReference: {fileID: 0}
+    - target: {fileID: 9151918476160911055, guid: 17de6d88538bf964ba9c0d26a2497614, type: 3}
       propertyPath: OnLevelEnd.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
       value: PlayerCtrl, Assembly-CSharp
       objectReference: {fileID: 0}
@@ -106549,6 +106516,10 @@ PrefabInstance:
     - target: {fileID: 9151918476160911055, guid: 17de6d88538bf964ba9c0d26a2497614, type: 3}
       propertyPath: OnLevelEnd.m_PersistentCalls.m_Calls.Array.data[6].m_TargetAssemblyTypeName
       value: Level, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 9151918476160911055, guid: 17de6d88538bf964ba9c0d26a2497614, type: 3}
+      propertyPath: OnLevelEnd.m_PersistentCalls.m_Calls.Array.data[7].m_TargetAssemblyTypeName
+      value: MusicPlayer, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 9151918476160911055, guid: 17de6d88538bf964ba9c0d26a2497614, type: 3}
       propertyPath: OnLevelEnd.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_FloatArgument
@@ -106584,6 +106555,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9151918476160911055, guid: 17de6d88538bf964ba9c0d26a2497614, type: 3}
       propertyPath: OnLevelEnd.m_PersistentCalls.m_Calls.Array.data[6].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 9151918476160911055, guid: 17de6d88538bf964ba9c0d26a2497614, type: 3}
+      propertyPath: OnLevelEnd.m_PersistentCalls.m_Calls.Array.data[7].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     m_RemovedComponents: []
