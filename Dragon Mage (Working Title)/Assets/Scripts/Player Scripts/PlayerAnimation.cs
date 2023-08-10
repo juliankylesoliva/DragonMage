@@ -151,7 +151,20 @@ public class PlayerAnimation : MonoBehaviour
     public void DamageAnimation(CharacterMode current)
     {
         animator.speed = 1f;
-        animator.Play(current == CharacterMode.MAGE ? "MagliHurt" : "DraelynHurt");
+        if (player.damage.isBlocking)
+        {
+            animator.Play(current == CharacterMode.MAGE ? "MagliGuard" : "DraelynGuard");
+        }
+        else
+        {
+            animator.Play(current == CharacterMode.MAGE ? "MagliHurt" : "DraelynHurt");
+        }
+    }
+
+    public void ParryPoseAnimation(CharacterMode current)
+    {
+        animator.speed = 1f;
+        animator.Play(current == CharacterMode.MAGE ? "MagliParry" : "DraelynParry");
     }
 
     private float GetRunAnimationSpeed()

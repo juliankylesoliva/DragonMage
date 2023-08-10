@@ -31,6 +31,7 @@ public class StateMachine
     public FormChangingState formChangingState;
     public FrozenControlState frozenControlState;
     public DamagedState damagedState;
+    public ParryPosingState parryPosingState;
 
     public StateMachine(PlayerCtrl player)
     {
@@ -48,6 +49,7 @@ public class StateMachine
         formChangingState = new FormChangingState(player);
         frozenControlState = new FrozenControlState(player);
         damagedState = new DamagedState(player);
+        parryPosingState = new ParryPosingState(player);
     }
 
     public void Initialize(IState startingState)
@@ -252,6 +254,16 @@ public abstract class State : IState
         }
         return false;
     }
+
+    protected bool CheckIfParryPosing()
+    {
+        if (player.damage.isParryPosing)
+        {
+            player.stateMachine.TransitionTo(player.stateMachine.parryPosingState);
+            return true;
+        }
+        return false;
+    }
 }
 
 public class StandingState : State
@@ -276,7 +288,7 @@ public class StandingState : State
             player.movement.ResetIntendedXVelocity();
         }
         player.rb2d.velocity = Vector2.zero;
-        if (CheckFormChangeInput() || CheckIfDamaged() || CheckRunInput() || CheckJumpInput() || CheckDodgeInput() || CheckSlideInput() || CheckFireTackleInput() || CheckSuddenRise() || CheckSuddenFall() || CheckSuddenMovement()) { return; }
+        if (CheckIfParryPosing() || CheckFormChangeInput() || CheckIfDamaged() || CheckRunInput() || CheckJumpInput() || CheckDodgeInput() || CheckSlideInput() || CheckFireTackleInput() || CheckSuddenRise() || CheckSuddenFall() || CheckSuddenMovement()) { return; }
         player.animationCtrl.StandingAnimation();
     }
 
@@ -303,7 +315,7 @@ public class RunningState : State
         player.movement.CrouchCheck();
         player.movement.Movement();
         player.movement.FacingDirection();
-        if (CheckFormChangeInput() || CheckIfStopped() || CheckSuddenFall() || CheckJumpInput() || CheckDodgeInput() || CheckSlideInput() || CheckFireTackleInput() || CheckIfDamaged()) { return; }
+        if (CheckIfParryPosing() || CheckFormChangeInput() || CheckIfStopped() || CheckSuddenFall() || CheckJumpInput() || CheckDodgeInput() || CheckSlideInput() || CheckFireTackleInput() || CheckIfDamaged()) { return; }
         player.animationCtrl.RunningAnimation();
     }
 
@@ -340,7 +352,7 @@ public class JumpingState : State
         player.jumping.GroundJumpUpdate();
         if (player.jumping.enableCrouchJump) { player.animationCtrl.GroundJumpAnimation(); }
         player.jumping.UpdateFallTimer();
-        if (CheckFormChangeInput() || CheckDodgeInput() || CheckFireTackleInput() || CheckIfWallClimbing() || CheckIfWallSliding() || CheckGlideInput() || CheckMidairJumpInput() || CheckIfFalling() || CheckIfGrounded() || CheckIfDamaged()) { return; }
+        if (CheckIfParryPosing() || CheckFormChangeInput() || CheckDodgeInput() || CheckFireTackleInput() || CheckIfWallClimbing() || CheckIfWallSliding() || CheckGlideInput() || CheckMidairJumpInput() || CheckIfFalling() || CheckIfGrounded() || CheckIfDamaged()) { return; }
     }
 
     public override void Exit()
@@ -385,7 +397,7 @@ public class FallingState : State
         player.movement.Movement();
         player.movement.FacingDirection();
         player.jumping.FallingUpdate();
-        if (CheckFormChangeInput() || CheckDodgeInput() || CheckFireTackleInput() || CheckRunInput() || CheckStationaryLanding() || CheckJumpInput() || CheckIfWallClimbing() || CheckIfWallSliding() || CheckGlideInput() || CheckMidairJumpInput() || CheckIfDamaged()) { return; }
+        if (CheckIfParryPosing() || CheckFormChangeInput() || CheckDodgeInput() || CheckFireTackleInput() || CheckRunInput() || CheckStationaryLanding() || CheckJumpInput() || CheckIfWallClimbing() || CheckIfWallSliding() || CheckGlideInput() || CheckMidairJumpInput() || CheckIfDamaged()) { return; }
         player.animationCtrl.FallingAnimation();
     }
 
@@ -767,7 +779,6 @@ public class DamagedState : State
     public override void Enter()
     {
         player.rb2d.gravityScale = player.jumping.fallingGravity;
-        player.animationCtrl.DamageAnimation(player.form.currentMode);
         player.damage.DoKnockback();
     }
 
@@ -781,10 +792,38 @@ public class DamagedState : State
 
             player.stateMachine.TransitionTo(nextState);
         }
+        else
+        {
+            player.animationCtrl.DamageAnimation(player.form.currentMode);
+        }
     }
 
     public override void Exit()
     {
         player.damage.DoIFrames();
+    }
+}
+
+public class ParryPosingState : State
+{
+    public ParryPosingState(PlayerCtrl player) : base(player) { name = "ParryPosing"; }
+
+    public override void Enter()
+    {
+        player.animationCtrl.ParryPoseAnimation(player.form.currentMode);
+    }
+
+    public override void Update()
+    {
+        if (!player.damage.isParryPosing)
+        {
+            if (player.stateMachine.PreviousState.name == "Jumping") { player.animationCtrl.GroundJumpAnimation(); }
+            player.stateMachine.TransitionTo(player.stateMachine.PreviousState);
+        }
+    }
+
+    public override void Exit()
+    {
+
     }
 }

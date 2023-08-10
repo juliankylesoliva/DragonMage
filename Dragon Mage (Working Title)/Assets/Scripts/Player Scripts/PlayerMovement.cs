@@ -17,6 +17,8 @@ public class PlayerMovement : MonoBehaviour
     public float airTurningSpeed = 0.5f;
     public bool enableCrouchWalking = false;
     public float crouchTopSpeed = 1f;
+    [SerializeField] float minCrouchTime = 0.1f;
+    [SerializeField] float crouchCooldownTime = 0.2f;
 
     public bool isFacingRight { get; private set; }
     public bool isCrouching { get; private set; }
@@ -27,6 +29,9 @@ public class PlayerMovement : MonoBehaviour
     private float deltaXVelocity = 0f;
 
     private float intendedXVelocity = 0f;
+
+    private float currentMinCrouchTimer = 0f;
+    private float currentCrouchCooldownTimer = 0f;
 
     [SerializeField] float slopeSnapDistanceThreshold = 0.1f;
     [SerializeField] float maxMovingSlopeSnapDistance = 1f;
@@ -45,7 +50,12 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
-        if (!PauseHandler.isPaused) { TurnaroundCheck(); }
+        if (!PauseHandler.isPaused)
+        {
+            TurnaroundCheck();
+            UpdateMinCrouchTimer();
+            UpdateCrouchCooldownTimer();
+        }
     }
 
     private void TurnaroundCheck()
@@ -101,23 +111,27 @@ public class PlayerMovement : MonoBehaviour
 
         if (!isCrouching)
         {
-            isCrouching = (player.crouchButtonHeld && (player.collisions.IsOnASlope || player.collisions.IsGrounded || player.jumping.enableCrouchJump));
+            isCrouching = (currentCrouchCooldownTimer <= 0f && player.crouchButtonHeld && (player.collisions.IsOnASlope || player.collisions.IsGrounded || player.jumping.enableCrouchJump));
+            if (isCrouching) { currentMinCrouchTimer = minCrouchTime; }
         }
         else
         {
-            isCrouching = (player.collisions.IsCeilingAboveWhenUncrouched() || (player.crouchButtonHeld && (player.collisions.IsOnASlope || player.collisions.IsGrounded || player.jumping.enableCrouchJump)));
+            isCrouching = (currentMinCrouchTimer > 0f || player.collisions.IsCeilingAboveWhenUncrouched() || (player.crouchButtonHeld && (player.collisions.IsOnASlope || player.collisions.IsGrounded || player.jumping.enableCrouchJump)));
             if (!isCrouching && player.stateMachine.CurrentState.name == "Jumping" && !player.jumping.enableCrouchJump) { player.animationCtrl.GroundJumpAnimation(); }
+            if (!isCrouching) { currentCrouchCooldownTimer = crouchCooldownTime; }
         }
     }
 
     public void ResetCrouchState()
     {
+        currentMinCrouchTimer = 0f;
+        if (isCrouching) { currentCrouchCooldownTimer = crouchCooldownTime; }
         isCrouching = false;
     }
 
     public void Movement()
     {
-        if (player.form.isChangingForm || player.jumping.isWallJumpCooldownActive || player.attacks.isFireTackleActive) { return; }
+        if (player.damage.isParryPosing || player.form.isChangingForm || player.jumping.isWallJumpCooldownActive || player.attacks.isFireTackleActive) { return; }
 
         ApplySlopeResistance();
 
@@ -194,7 +208,7 @@ public class PlayerMovement : MonoBehaviour
 
     public void IntendedMovement()
     {
-        if (player.form.isChangingForm || player.jumping.isWallJumpCooldownActive || player.attacks.isFireTackleActive) { return; }
+        if (player.damage.isParryPosing || player.form.isChangingForm || player.jumping.isWallJumpCooldownActive || player.attacks.isFireTackleActive) { return; }
 
         if (player.inputVector.x != 0f)
         {
@@ -299,5 +313,29 @@ public class PlayerMovement : MonoBehaviour
     public float GetFacingValue()
     {
         return (isFacingRight ? 1f : -1f);
+    }
+
+    private void UpdateMinCrouchTimer()
+    {
+        if (currentMinCrouchTimer > 0f)
+        {
+            currentMinCrouchTimer -= Time.deltaTime;
+            if (currentMinCrouchTimer < 0f)
+            {
+                currentMinCrouchTimer = 0f;
+            }
+        }
+    }
+
+    private void UpdateCrouchCooldownTimer()
+    {
+        if (currentCrouchCooldownTimer > 0f)
+        {
+            currentCrouchCooldownTimer -= Time.deltaTime;
+            if (currentCrouchCooldownTimer < 0f)
+            {
+                currentCrouchCooldownTimer = 0f;
+            }
+        }
     }
 }

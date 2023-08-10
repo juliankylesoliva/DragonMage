@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public enum DamageType { STOMP, MAGIC_BLAST, BLAST_JUMP, FIRE_TACKLE, FIRE_MISSILE }
+public enum DamageType { STOMP, MAGIC_BLAST, BLAST_JUMP, FIRE_TACKLE, FIRE_MISSILE, PARRY, REFLECTED_PROJECTILE }
 
 public class EnemyBehavior : MonoBehaviour
 {

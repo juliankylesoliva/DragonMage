@@ -66,13 +66,13 @@ public class PlayerCtrl : MonoBehaviour
         {
             inputVector = (!areControlsFrozen ? InputHub.inputVector : Vector2.zero);
 
-            jumpButtonDown = InputHub.jumpButtonDown;
+            jumpButtonDown = (!areControlsFrozen && InputHub.jumpButtonDown);
             jumpButtonHeld = (!areControlsFrozen && InputHub.jumpButtonHeld);
 
-            attackButtonDown = InputHub.attackButtonDown;
+            attackButtonDown = (!areControlsFrozen && InputHub.attackButtonDown);
             attackButtonHeld = (!areControlsFrozen && InputHub.attackButtonHeld);
 
-            crouchButtonHeld = InputHub.crouchButtonHeld;
+            crouchButtonHeld = (!areControlsFrozen && InputHub.crouchButtonHeld);
 
             technicalButtonHeld = (!areControlsFrozen && InputHub.technicalButtonHeld);
 

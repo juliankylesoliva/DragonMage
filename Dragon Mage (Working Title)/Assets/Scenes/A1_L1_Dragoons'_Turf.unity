@@ -17171,9 +17171,9 @@ Camera:
   m_LensShift: {x: 0, y: 0}
   m_NormalizedViewPortRect:
     serializedVersion: 2
-    x: 0
+    x: 0.13613446
     y: 0
-    width: 1
+    width: 0.727395
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
@@ -17191,7 +17191,7 @@ Camera:
   m_HDR: 1
   m_AllowMSAA: 0
   m_AllowDynamicResolution: 0
-  m_ForceIntoRT: 0
+  m_ForceIntoRT: 1
   m_OcclusionCulling: 0
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
@@ -17203,7 +17203,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 5.445471, y: 2.0000408, z: -10}
+  m_LocalPosition: {x: 4.000001, y: 2.0000408, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -55428,7 +55428,7 @@ PrefabInstance:
     - target: {fileID: 8526229606178788680, guid: 3e1dc7430a12d454e946742617401c95, type: 3}
       propertyPath: onPlayerSightlneStay.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
-      objectReference: {fileID: 1298573516}
+      objectReference: {fileID: 1298573512}
     - target: {fileID: 8526229606178788680, guid: 3e1dc7430a12d454e946742617401c95, type: 3}
       propertyPath: onPlayerSightlneStay.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2
@@ -55439,7 +55439,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8526229606178788680, guid: 3e1dc7430a12d454e946742617401c95, type: 3}
       propertyPath: onPlayerSightlneStay.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
-      value: FaceTowardsPlayer
+      value: WalkAnimation
       objectReference: {fileID: 0}
     - target: {fileID: 8526229606178788680, guid: 3e1dc7430a12d454e946742617401c95, type: 3}
       propertyPath: onPlayerSightlneStay.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
@@ -55447,7 +55447,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8526229606178788680, guid: 3e1dc7430a12d454e946742617401c95, type: 3}
       propertyPath: onPlayerSightlneStay.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
-      value: EnemyMovement, Assembly-CSharp
+      value: EnemyAnimation, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 8526229606178788680, guid: 3e1dc7430a12d454e946742617401c95, type: 3}
       propertyPath: onPlayerSightlneStay.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
@@ -55552,6 +55552,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e70fa3ab035597a45a2d864da8a579b3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1298573512 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3998041230615469453, guid: 3e1dc7430a12d454e946742617401c95, type: 3}
+  m_PrefabInstance: {fileID: 1298573509}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3dcbf87a351b86b498b0e8032b410f5f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &1298573516 stripped

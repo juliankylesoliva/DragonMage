@@ -8,10 +8,16 @@ public class PlayerDamage : MonoBehaviour
 
     [SerializeField] int mageTemperDamage = 2;
     [SerializeField] int dragonTemperDamage = -1;
+    [SerializeField] int baseFragmentDropSplit = 5;
+    [SerializeField] int maxFragmentDropFactor = 2;
     [SerializeField] float baseVerticalKnockback = 2f;
     [SerializeField] float baseHorizontalKnockback = 5f;
     [SerializeField] float crouchingModifier = 0.5f;
     [SerializeField] float baseHitstunTime = 1f;
+    [SerializeField] float parryWindowTime = 0.1f;
+    [SerializeField] float parryPoseTime = 0.25f;
+    [SerializeField] float parryKnockbackMultiplier = 2f;
+    [SerializeField] DamageType parryDamageType = DamageType.PARRY;
     [SerializeField] float knockbackMagnitudeEpsilon = 0.001f;
     [SerializeField] float postDamageInvulnerabilityTime = 3f;
     [SerializeField] Vector3 nullSourceVector;
@@ -24,8 +30,14 @@ public class PlayerDamage : MonoBehaviour
     private float hitstunTimer = 0f;
     private bool isDamageInvulnerabilityFlickering = false;
 
+    private float parryTimer = 0f;
+    private bool prevIsCrouching = false;
+
     public bool isDamageInvulnerabilityActive { get; private set; }
     public bool isPlayerDamaged { get { return hitstunTimer > 0f; } }
+    public bool isBlocking { get; private set; }
+    public bool isParrying { get { return parryTimer > 0f; } }
+    public bool isParryPosing { get; private set; }
     public int damageTaken { get; private set; }
 
     void Awake()
@@ -38,31 +50,54 @@ public class PlayerDamage : MonoBehaviour
     {
         if (!PauseHandler.isPaused)
         {
-            Color spriteColor = player.charSprite.color;
-            if (isDamageInvulnerabilityActive && isDamageInvulnerabilityFlickering)
-            {
-                spriteColor.a = invulnerabilityAlpha;
-            }
-            else
-            {
-                spriteColor.a = 1f;
-            }
-            player.charSprite.color = spriteColor;
-            isDamageInvulnerabilityFlickering = !isDamageInvulnerabilityFlickering;
+            DoIFrameSpriteAlpha();
+            DoParryCheck();
         }
     }
 
-    public void TakeDamage(Vector3 source)
+    public void TakeDamage(Vector3 source, EnemyBehavior enemySrc = null, EnemyProjectileBehavior projectileSrc = null)
     {
+        if (isParrying)
+        {
+            if (enemySrc != null)
+            {
+                if (enemySrc.DefeatEnemy(parryDamageType))
+                {
+                    enemySrc.rb2d.velocity += ((Vector2)(source - this.transform.position).normalized * parryKnockbackMultiplier);
+                }
+            }
+
+            if (projectileSrc != null)
+            {
+                projectileSrc.ReflectProjectile();
+            }
+
+            player.temper.NeutralizeTemperBy(player.temper.NumSegments * (player.form.currentMode == CharacterMode.MAGE ? -1 : 1));
+            player.sfxCtrl.PlaySound("attack_parry");
+            ResetParryTimer();
+            StartCoroutine(ParryPoseCR());
+            return;
+        }
+
         if (hitstunTimer > 0f || !CanTakeDamage()) { return; }
+        isBlocking = player.movement.isCrouching;
+
         damageTaken++;
         damageSource = source;
-        StartCoroutine(HitstunTimerCR(baseHitstunTime * (player.movement.isCrouching ? crouchingModifier : 1f)));
-        player.temper.ChangeTemperBy((int)((player.form.currentMode == CharacterMode.MAGE ? mageTemperDamage : dragonTemperDamage) * (player.movement.isCrouching ? crouchingModifier : 1f)));
-        MedalFragment.DropFragments();
+        StartCoroutine(HitstunTimerCR(baseHitstunTime * (isBlocking ? crouchingModifier : 1f)));
+        if (isBlocking)
+        {
+            player.temper.NeutralizeTemperBy((int)((player.form.currentMode == CharacterMode.MAGE ? mageTemperDamage : dragonTemperDamage) * crouchingModifier));
+        }
+        else
+        {
+            player.temper.ChangeTemperBy(player.form.currentMode == CharacterMode.MAGE ? mageTemperDamage : dragonTemperDamage);
+        }
+        
+        CalculateDroppedFragments(isBlocking ? crouchingModifier : 1f);
         player.buffers.ResetSpeedBuffer();
         player.jumping.ResetSuperJumpTimers();
-        player.sfxCtrl.PlaySound("damage_player");
+        player.sfxCtrl.PlaySound(isBlocking ? "damage_player_guarding" : "damage_player");
     }
 
     public void DoKnockback()
@@ -76,12 +111,10 @@ public class PlayerDamage : MonoBehaviour
 
         player.rb2d.gravityScale = player.jumping.fallingGravity;
         Vector2 newVelocity = new Vector2(horizontalDirection * baseHorizontalKnockback, baseVerticalKnockback);
-        newVelocity *= (player.movement.isCrouching ? crouchingModifier : 1f);
+        newVelocity *= (isBlocking ? crouchingModifier : 1f);
         player.rb2d.velocity = newVelocity;
 
         damageSource = nullSourceVector;
-
-        player.effects.DroppedFragmentsEffect();
     }
 
     public void DoIFrames()
@@ -93,7 +126,66 @@ public class PlayerDamage : MonoBehaviour
     private bool CanTakeDamage()
     {
         string currentState = player.stateMachine.CurrentState.name;
-        return (!isDamageInvulnerabilityActive && !player.attacks.isBlastJumpActive && player.attacks.currentAttackState != AttackState.ACTIVE && currentState != "Dodging" && currentState != "FormChanging" && currentState != "Damaged");
+        return (!isParrying && !isDamageInvulnerabilityActive && !player.attacks.isBlastJumpActive && player.attacks.currentAttackState != AttackState.ACTIVE && currentState != "Dodging" && currentState != "FormChanging" && currentState != "Damaged");
+    }
+
+    private void CalculateDroppedFragments(float modifier)
+    {
+        int droppedMageFragments = 0;
+        int droppedDragonFragments = 0;
+
+        int fragmentDropSplit = (int)Mathf.Ceil(modifier * baseFragmentDropSplit);
+        int maxFragmentDrop = (fragmentDropSplit * maxFragmentDropFactor);
+
+        if (MedalFragment.totalFragments > 0)
+        {
+            if (MedalFragment.totalFragments <= maxFragmentDrop)
+            {
+                droppedMageFragments = MedalFragment.mageFragments;
+                droppedDragonFragments = MedalFragment.dragonFragments;
+            }
+            else
+            {
+                if (MedalFragment.mageFragments == 0)
+                {
+                    droppedDragonFragments = maxFragmentDrop;
+                }
+                else if (MedalFragment.dragonFragments == 0)
+                {
+                    droppedMageFragments = maxFragmentDrop;
+                }
+                else
+                {
+                    int mageFragmentsToDrop = fragmentDropSplit;
+                    int dragonFragmentsToDrop = fragmentDropSplit;
+
+                    int fragmentDifference = (MedalFragment.mageFragments - MedalFragment.dragonFragments);
+                    if (fragmentDifference != 0)
+                    {
+                        fragmentDifference = Mathf.Min(Mathf.Max(fragmentDifference, -fragmentDropSplit), fragmentDropSplit);
+                        mageFragmentsToDrop += fragmentDifference;
+                        dragonFragmentsToDrop -= fragmentDifference;
+
+                        if (mageFragmentsToDrop > MedalFragment.mageFragments)
+                        {
+                            mageFragmentsToDrop = MedalFragment.mageFragments;
+                            dragonFragmentsToDrop = (maxFragmentDrop - mageFragmentsToDrop);
+                        }
+                        else if (dragonFragmentsToDrop > MedalFragment.dragonFragments)
+                        {
+                            dragonFragmentsToDrop = MedalFragment.dragonFragments;
+                            mageFragmentsToDrop = (maxFragmentDrop - dragonFragmentsToDrop);
+                        }
+                        else { /* Nothing */ }
+                    }
+                    droppedMageFragments = mageFragmentsToDrop;
+                    droppedDragonFragments = dragonFragmentsToDrop;
+                }
+            }
+        }
+
+        MedalFragment.DropFragments(droppedMageFragments, droppedDragonFragments);
+        player.effects.DroppedFragmentsEffect(droppedMageFragments, droppedDragonFragments);
     }
 
     private IEnumerator HitstunTimerCR(float time)
@@ -138,5 +230,63 @@ public class PlayerDamage : MonoBehaviour
         isDamageInvulnerabilityActive = true;
         yield return new WaitForSeconds(time);
         isDamageInvulnerabilityActive = false;
+    }
+
+    private void DoIFrameSpriteAlpha()
+    {
+        Color spriteColor = player.charSprite.color;
+        if (isDamageInvulnerabilityActive && isDamageInvulnerabilityFlickering)
+        {
+            spriteColor.a = invulnerabilityAlpha;
+        }
+        else
+        {
+            spriteColor.a = 1f;
+        }
+        player.charSprite.color = spriteColor;
+        isDamageInvulnerabilityFlickering = !isDamageInvulnerabilityFlickering;
+    }
+
+    private void DoParryCheck()
+    {
+        if (parryTimer <= 0f)
+        {
+            if (!isDamageInvulnerabilityActive && !player.crouchButtonHeld && !player.movement.isCrouching && prevIsCrouching) { parryTimer = parryWindowTime; }
+        }
+        else
+        {
+            if (parryTimer > 0f)
+            {
+                parryTimer -= Time.deltaTime;
+                if (player.movement.isCrouching || parryTimer < 0f)
+                {
+                    parryTimer = 0f;
+                }
+            }
+        }
+        prevIsCrouching = player.movement.isCrouching;
+    }
+
+    private void ResetParryTimer()
+    {
+        parryTimer = 0f;
+    }
+
+    private IEnumerator ParryPoseCR()
+    {
+        if (isParryPosing) { yield break; }
+        isParryPosing = true;
+
+        Vector2 prevVelocity = player.rb2d.velocity;
+
+        player.rb2d.gravityScale = 0f;
+        player.rb2d.velocity = Vector2.zero;
+
+        yield return new WaitForSeconds(parryPoseTime);
+
+        player.rb2d.gravityScale = (prevVelocity.y > 0f ? player.jumping.risingGravity : player.jumping.fallingGravity);
+        player.rb2d.velocity = prevVelocity;
+
+        isParryPosing = false;
     }
 }

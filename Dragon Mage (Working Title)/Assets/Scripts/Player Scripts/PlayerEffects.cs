@@ -40,10 +40,10 @@ public class PlayerEffects : MonoBehaviour
         tempObj.transform.up = player.collisions.GetCeilingNormal();
     }
 
-    public void DroppedFragmentsEffect()
+    public void DroppedFragmentsEffect(int mage, int dragon)
     {
-        int droppedMageFragments = MedalFragment.droppedMageFragments;
-        int droppedDragonFragments = MedalFragment.droppedDragonFragments;
+        int droppedMageFragments = mage;
+        int droppedDragonFragments = dragon;
         int totalDroppedFragments = (droppedMageFragments + droppedDragonFragments);
 
         for (int i = 0; i < totalDroppedFragments; ++i)

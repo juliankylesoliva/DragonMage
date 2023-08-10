@@ -10334,6 +10334,8 @@ MonoBehaviour:
   airTurningSpeed: 0.45
   enableCrouchWalking: 1
   crouchTopSpeed: 2.625
+  minCrouchTime: 0.1
+  crouchCooldownTime: 0.1666667
   slopeSnapDistanceThreshold: 0.1
   maxMovingSlopeSnapDistance: 0.5
   topSpeedTurnaroundPercent: 0.25
@@ -10504,10 +10506,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mageTemperDamage: 3
   dragonTemperDamage: -2
+  baseFragmentDropSplit: 5
+  maxFragmentDropFactor: 2
   baseVerticalKnockback: 8
   baseHorizontalKnockback: 6
   crouchingModifier: 0.6
   baseHitstunTime: 0.25
+  parryWindowTime: 0.1
+  parryPoseTime: 0.25
+  parryKnockbackMultiplier: 6
+  parryDamageType: 5
   knockbackMagnitudeEpsilon: 0.8
   postDamageInvulnerabilityTime: 3
   nullSourceVector: {x: 0, y: 0, z: 0}

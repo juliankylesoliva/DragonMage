@@ -8,8 +8,14 @@ public class EnemyProjectileBehavior : MonoBehaviour
     Rigidbody2D rb2d;
 
     [SerializeField] float moveSpeed = 3f;
+    [SerializeField] float reflectedMoveSpeedMultiplier = 1.5f;
+    [SerializeField] float enemyDefeatKnockbackMultiplier = 2f;
+    [SerializeField] DamageType damageType = DamageType.REFLECTED_PROJECTILE;
     [SerializeField] string impactEffectName = "DragoonProjectileImpact";
     [SerializeField] string destroySoundName = "enemy_dragoon_projectile_destroy";
+
+    private bool isReflected = false;
+    private bool isMovingRight = true;
 
     void Awake()
     {
@@ -30,7 +36,18 @@ public class EnemyProjectileBehavior : MonoBehaviour
     public void Setup(EnemyBehavior enemySource)
     {
         rb2d.velocity = (Vector2.right * enemySource.movement.GetFacingValue() * moveSpeed);
-        projectileSprite.flipX = (enemySource.movement.GetFacingValue() < 0f);
+        isMovingRight = (enemySource.movement.GetFacingValue() >= 0f);
+        projectileSprite.flipX = !isMovingRight;
+    }
+
+    public void ReflectProjectile()
+    {
+        isReflected = !isReflected;
+
+        Vector2 newVelocity = (-rb2d.velocity * reflectedMoveSpeedMultiplier);
+        rb2d.velocity = newVelocity;
+        isMovingRight = !isMovingRight;
+        projectileSprite.flipX = !projectileSprite.flipX;
     }
 
     public void DestroyProjectile()
@@ -47,23 +64,35 @@ public class EnemyProjectileBehavior : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        PlayerHitCheck(other);
+        HitCheck(other);
     }
 
     void OnTriggerStay2D(Collider2D other)
     {
-        PlayerHitCheck(other);
+        HitCheck(other);
     }
 
-    private void PlayerHitCheck(Collider2D other)
+    private void HitCheck(Collider2D other)
     {
-        if (other.transform.tag == "Player")
+        if (!isReflected && other.transform.tag == "Player")
         {
             PlayerCtrl tempPlayer = other.gameObject.GetComponent<PlayerCtrl>();
             if (tempPlayer != null)
             {
-                tempPlayer.damage.TakeDamage(this.transform.position);
-                DestroyProjectile();
+                tempPlayer.damage.TakeDamage(this.transform.position, null, this);
+                if (!isReflected) { DestroyProjectile(); }
+            }
+        }
+        else if (isReflected && other.transform.tag == "Enemy")
+        {
+            EnemyBehavior tempEnemy = other.gameObject.GetComponent<EnemyBehavior>();
+            if (tempEnemy != null)
+            {
+                if (tempEnemy.DefeatEnemy(damageType))
+                {
+                    tempEnemy.rb2d.velocity += (Vector2.right * (isMovingRight ? 1f : -1f) * rb2d.velocity.magnitude * enemyDefeatKnockbackMultiplier);
+                    DestroyProjectile();
+                }
             }
         }
         else { /* Nothing */ }

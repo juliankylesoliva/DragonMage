@@ -83,7 +83,7 @@ public class PlayerCollisions : MonoBehaviour
     {
         foreach (int i in enemyLayers)
         {
-            Physics2D.IgnoreLayerCollision(playerLayer, i, player.damage.isDamageInvulnerabilityActive || player.damage.isPlayerDamaged || player.attacks.isDodging);
+            Physics2D.IgnoreLayerCollision(playerLayer, i, player.damage.isParryPosing || player.damage.isDamageInvulnerabilityActive || player.damage.isPlayerDamaged || player.attacks.isDodging);
         }
     }
 

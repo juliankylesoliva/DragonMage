@@ -34,6 +34,10 @@ public class SoundFactory : MonoBehaviour
         {
             return clipDictionary[clipName];
         }
+        else
+        {
+            Debug.Log($"{clipName} not found!");
+        }
         return null;
     }
 

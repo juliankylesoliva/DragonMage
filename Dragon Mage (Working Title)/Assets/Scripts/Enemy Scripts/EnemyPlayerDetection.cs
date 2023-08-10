@@ -76,7 +76,7 @@ public class EnemyPlayerDetection : MonoBehaviour
     {
         if (playerRef != null)
         {
-            playerRef.damage.TakeDamage(this.transform.position);
+            playerRef.damage.TakeDamage(this.transform.position, enemy);
         }
     }
 
