@@ -308,7 +308,7 @@ public class PlayerJumping : MonoBehaviour
 
     public bool CanMidairJump()
     {
-        return (player.stateMachine.PreviousState != player.stateMachine.wallVaultingState && !player.collisions.IsGrounded && currentMidairJumps < maxMidairJumps && player.buffers.jumpBufferTimeLeft > 0f && (currentWallClimbTime <= 0f || currentWallClimbTime >= maxWallClimbTime) && postClimbDashTimeLeft <= 0f);
+        return ((player.stateMachine.PreviousState != player.stateMachine.wallVaultingState || player.rb2d.velocity.y <= 0f) && !player.collisions.IsGrounded && currentMidairJumps < maxMidairJumps && player.buffers.jumpBufferTimeLeft > 0f && (currentWallClimbTime <= 0f || currentWallClimbTime >= maxWallClimbTime) && postClimbDashTimeLeft <= 0f);
     }
 
     public void MidairJump()
