@@ -8,6 +8,8 @@ public class PlayerForm : MonoBehaviour
 {
     PlayerCtrl player;
 
+    [SerializeField] bool enableFormChanging = true;
+
     [SerializeField] PlayerCtrlProperties mageProperties;
     [SerializeField] PlayerCtrlProperties dragonProperties;
 
@@ -37,12 +39,12 @@ public class PlayerForm : MonoBehaviour
 
     public bool CanFormChange()
     {
-        return (!player.form.isFormChangeCooldownActive && !player.attacks.isAttackCooldownActive && !player.form.isChangingForm && !player.attacks.isBlastJumpActive && !player.attacks.isFireTackleActive && !player.damage.isPlayerDamaged && (player.temper.forceFormChange || (!player.temper.isFormLocked && player.buffers.formChangeBufferTimeLeft > 0f)));
+        return (enableFormChanging && !player.form.isFormChangeCooldownActive && !player.attacks.isAttackCooldownActive && !player.form.isChangingForm && !player.attacks.isBlastJumpActive && !player.attacks.isFireTackleActive && !player.damage.isPlayerDamaged && (player.temper.forceFormChange || (!player.temper.isFormLocked && player.buffers.formChangeBufferTimeLeft > 0f)));
     }
 
     public bool CannotFormChange()
     {
-        return (!player.form.isChangingForm && !player.attacks.isBlastJumpActive && !player.attacks.isFireTackleActive && player.temper.isFormLocked && player.buffers.formChangeBufferTimeLeft > 0f);
+        return (!enableFormChanging && !player.form.isChangingForm && !player.attacks.isBlastJumpActive && !player.attacks.isFireTackleActive && player.temper.isFormLocked && player.buffers.formChangeBufferTimeLeft > 0f);
     }
 
     public void FormChange()
