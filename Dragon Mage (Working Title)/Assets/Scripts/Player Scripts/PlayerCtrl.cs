@@ -31,6 +31,7 @@ public class PlayerCtrl : MonoBehaviour
     public bool jumpButtonHeld { get; private set; }
     public bool attackButtonDown { get; private set; }
     public bool attackButtonHeld { get; private set; }
+    public bool reticleButtonDown { get; private set; }
     public bool crouchButtonHeld { get; private set; }
     public bool technicalButtonHeld { get; private set; }
     public bool formChangeButtonDown { get; private set; }
@@ -71,6 +72,8 @@ public class PlayerCtrl : MonoBehaviour
 
             attackButtonDown = (!areControlsFrozen && InputHub.attackButtonDown);
             attackButtonHeld = (!areControlsFrozen && InputHub.attackButtonHeld);
+
+            reticleButtonDown = (!areControlsFrozen && InputHub.reticleButtonDown);
 
             crouchButtonHeld = (!areControlsFrozen && InputHub.crouchButtonHeld);
 

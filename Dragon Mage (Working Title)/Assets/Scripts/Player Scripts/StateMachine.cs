@@ -608,7 +608,7 @@ public class FireTacklingState : State
             if (player.damage.isPlayerDamaged) { nextState = player.stateMachine.damagedState; }
             else if (player.temper.forceFormChange) { nextState = player.stateMachine.formChangingState; }
             else if (player.jumping.CanWallClimb()) { nextState = player.stateMachine.wallClimbingState; }
-            else if (player.attacks.isFireTackleEndlagCanceled) { player.jumping.GroundJumpStart(); nextState = player.stateMachine.jumpingState; }
+            else if (player.attacks.isFireTackleEndlagCanceled && player.buffers.jumpBufferTimeLeft > 0f) { player.jumping.GroundJumpStart(); nextState = player.stateMachine.jumpingState; }
             else if ((player.collisions.IsGrounded || player.collisions.IsOnASlope) && (player.inputVector.x != 0f || player.rb2d.velocity.x != 0f)) { nextState = player.stateMachine.runningState; }
             else if (player.rb2d.velocity.y > 0f && !(player.collisions.IsGrounded || player.collisions.IsOnASlope)) { nextState = player.stateMachine.jumpingState; }
             else if (player.rb2d.velocity.y <= 0f && !(player.collisions.IsGrounded || player.collisions.IsOnASlope)) { nextState = player.stateMachine.fallingState; }

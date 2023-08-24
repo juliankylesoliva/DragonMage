@@ -8,6 +8,8 @@ public class PlayerAttacks : MonoBehaviour
 {
     PlayerCtrl player;
 
+    [SerializeField] AttackReticle attackReticle;
+
     [SerializeField] ParticleSystem blastJumpParticles;
     [SerializeField] ParticleSystem fireTackleParticles;
 
@@ -64,6 +66,7 @@ public class PlayerAttacks : MonoBehaviour
     public float BlastJumpMaxFallSpeed { get { return blastJumpMaxFallSpeed; } }
 
     private MagicBlast projectileRef = null;
+    private bool reticleToggle = false;
 
     void Awake()
     {
@@ -74,6 +77,14 @@ public class PlayerAttacks : MonoBehaviour
     {
         currentAttackState = AttackState.NOTHING;
         isFireTackleEndlagCanceled = false;
+    }
+
+    void Update()
+    {
+        if (!PauseHandler.isPaused)
+        {
+            ShowAttackReticle();
+        }
     }
 
     public void UseAttack()
@@ -128,6 +139,40 @@ public class PlayerAttacks : MonoBehaviour
     public void DestroyProjectileReference()
     {
         if (projectileRef != null) { GameObject.Destroy(projectileRef.gameObject); }
+    }
+
+    private void ShowAttackReticle()
+    {
+        if (player.reticleButtonDown) { reticleToggle = !reticleToggle; }
+
+        if (reticleToggle && !player.movement.isCrouching && !player.temper.forceFormChange && !isAttackCooldownActive && !isFireTackleActive && (player.form.currentMode != CharacterMode.MAGE || projectileRef == null))
+        {
+            if (!attackReticle.gameObject.activeSelf)
+            {
+                attackReticle.gameObject.SetActive(true);
+                attackReticle.ResetTrailPosition();
+            }
+
+            if (player.form.currentMode == CharacterMode.MAGE)
+            {
+                if (projectileRef == null)
+                {
+                    attackReticle.SetMagicBlastReticle(projectileSpawnPoint.position, player.collisions.groundCheckObj.position, player.rb2d.velocity, player.movement.isFacingRight, player.inputVector.y, (player.rb2d.velocity.y < 0f && !player.collisions.IsGrounded && !player.collisions.IsOnASlope));
+                }
+            }
+            else
+            {
+                float calculatedTackleSpeed = (Mathf.Abs(player.rb2d.velocity.x) + fireTackleBaseHorizontalSpeed);
+                calculatedTackleSpeed *= player.movement.GetFacingValue();
+                float verticalComponent = (!player.collisions.IsGrounded && !player.collisions.IsOnASlope && player.inputVector.y < 0f ? -Mathf.Abs(calculatedTackleSpeed) : 0f);
+                float verticalAcceleration = (player.inputVector.y > 0f ? fireTackleVerticalSteeringSpeed : 0f);
+                attackReticle.SetFireTackleReticle(this.transform.position, new Vector2(calculatedTackleSpeed, verticalComponent), verticalAcceleration, fireTackleBaseDuration);
+            }
+        }
+        else
+        {
+            if (attackReticle.gameObject.activeSelf) { attackReticle.gameObject.SetActive(false); }
+        }
     }
 
     private IEnumerator UseBlastJumpCR()

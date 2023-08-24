@@ -42,6 +42,15 @@
                     "initialStateCheck": true
                 },
                 {
+                    "name": "Reticle",
+                    "type": "Button",
+                    "id": "839b2b8f-0375-4302-beb2-3d80c1f940e8",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "Press(behavior=2)",
+                    "initialStateCheck": true
+                },
+                {
                     "name": "Change",
                     "type": "Button",
                     "id": "d014e246-891a-4ec9-b3f0-a97bbb716426",
@@ -395,6 +404,28 @@
                     "processors": "",
                     "groups": "Gamepad",
                     "action": "Crouch",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "c8c6eb38-53b4-4fdb-a0fb-47b1d059525c",
+                    "path": "<Keyboard>/q",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard",
+                    "action": "Reticle",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "4df432b5-db7d-4f1b-8a27-e7a14a698fc5",
+                    "path": "<Gamepad>/buttonNorth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "Reticle",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

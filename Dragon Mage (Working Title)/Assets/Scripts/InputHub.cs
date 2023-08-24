@@ -16,6 +16,8 @@ public class InputHub : MonoBehaviour
     public static bool attackButtonDown { get; private set; }
     public static bool attackButtonHeld { get; private set; }
 
+    public static bool reticleButtonDown { get; private set; }
+
     public static bool crouchButtonHeld { get; private set; }
 
     public static bool formChangeButtonDown { get; private set; }
@@ -57,6 +59,7 @@ public class InputHub : MonoBehaviour
     {
         if (jumpButtonDown) { jumpButtonDown = false; }
         if (attackButtonDown) { attackButtonDown = false; }
+        if (reticleButtonDown) { reticleButtonDown = false; }
         if (formChangeButtonDown) { formChangeButtonDown = false; }
         if (interactButtonDown) { interactButtonDown = false; }
 
@@ -126,6 +129,11 @@ public class InputHub : MonoBehaviour
     {
         attackButtonHeld = value.isPressed;
         if (attackButtonHeld) { attackButtonDown = true; }
+    }
+
+    void OnReticle(InputValue value)
+    {
+        if (value.isPressed) { reticleButtonDown = true; }
     }
 
     void OnCrouch(InputValue value)
@@ -202,6 +210,7 @@ public class InputHub : MonoBehaviour
         jumpButtonHeld = false;
         attackButtonDown = false;
         attackButtonHeld = false;
+        reticleButtonDown = false;
         crouchButtonHeld = false;
         formChangeButtonDown = false;
         interactButtonDown = false;
