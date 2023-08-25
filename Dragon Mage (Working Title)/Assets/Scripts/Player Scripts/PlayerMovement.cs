@@ -179,23 +179,30 @@ public class PlayerMovement : MonoBehaviour
         }
         else
         {
-            if (player.rb2d.velocity.x > 0f)
+            if (!player.collisions.IsOnASlope && player.stateMachine.CurrentState.name == "Running" && player.collisions.CheckIfNearLedge())
             {
-                player.rb2d.velocity -= ((player.collisions.IsGrounded || player.collisions.IsOnASlope ? player.collisions.GetRightVector(true) : Vector2.right) * (player.collisions.IsGrounded ? deceleration : airDeceleration) * Time.deltaTime);
-                if (player.rb2d.velocity.x < 0f)
-                {
-                    player.rb2d.velocity = new Vector2(0f, player.rb2d.velocity.y);
-                }
+                player.rb2d.velocity = Vector2.zero;
             }
-            else if (player.rb2d.velocity.x < 0f)
+            else
             {
-                player.rb2d.velocity += ((player.collisions.IsGrounded || player.collisions.IsOnASlope ? player.collisions.GetRightVector(true) : Vector2.right) * (player.collisions.IsGrounded ? deceleration : airDeceleration) * Time.deltaTime);
                 if (player.rb2d.velocity.x > 0f)
                 {
-                    player.rb2d.velocity = new Vector2(0f, player.rb2d.velocity.y);
+                    player.rb2d.velocity -= ((player.collisions.IsGrounded || player.collisions.IsOnASlope ? player.collisions.GetRightVector(true) : Vector2.right) * (player.collisions.IsGrounded ? deceleration : airDeceleration) * Time.deltaTime);
+                    if (player.rb2d.velocity.x < 0f)
+                    {
+                        player.rb2d.velocity = new Vector2(0f, player.rb2d.velocity.y);
+                    }
                 }
+                else if (player.rb2d.velocity.x < 0f)
+                {
+                    player.rb2d.velocity += ((player.collisions.IsGrounded || player.collisions.IsOnASlope ? player.collisions.GetRightVector(true) : Vector2.right) * (player.collisions.IsGrounded ? deceleration : airDeceleration) * Time.deltaTime);
+                    if (player.rb2d.velocity.x > 0f)
+                    {
+                        player.rb2d.velocity = new Vector2(0f, player.rb2d.velocity.y);
+                    }
+                }
+                else { /* Nothing */ }
             }
-            else { /* Nothing */ }
         }
 
         if (player.stateMachine.CurrentState.name == "Running" && player.rb2d.velocity.y != 0f && player.collisions.CheckDistanceToGround(slopeSnapDistanceThreshold))
@@ -254,23 +261,30 @@ public class PlayerMovement : MonoBehaviour
         }
         else
         {
-            if (intendedXVelocity > 0f)
+            if (!player.collisions.IsOnASlope && player.stateMachine.CurrentState.name == "Running" && player.collisions.CheckIfNearLedge())
             {
-                intendedXVelocity -= ((player.collisions.IsGrounded ? deceleration : airDeceleration) * Time.deltaTime);
-                if (intendedXVelocity < 0f)
-                {
-                    intendedXVelocity = 0f;
-                }
+                intendedXVelocity = 0f;
             }
-            else if (intendedXVelocity < 0f)
+            else
             {
-                intendedXVelocity += ((player.collisions.IsGrounded ? deceleration : airDeceleration) * Time.deltaTime);
                 if (intendedXVelocity > 0f)
                 {
-                    intendedXVelocity = 0f;
+                    intendedXVelocity -= ((player.collisions.IsGrounded ? deceleration : airDeceleration) * Time.deltaTime);
+                    if (intendedXVelocity < 0f)
+                    {
+                        intendedXVelocity = 0f;
+                    }
                 }
+                else if (intendedXVelocity < 0f)
+                {
+                    intendedXVelocity += ((player.collisions.IsGrounded ? deceleration : airDeceleration) * Time.deltaTime);
+                    if (intendedXVelocity > 0f)
+                    {
+                        intendedXVelocity = 0f;
+                    }
+                }
+                else { /* Nothing */ }
             }
-            else { /* Nothing */ }
         }
 
         if (intendedXVelocity != player.rb2d.velocity.x && player.inputVector.x != 0f)

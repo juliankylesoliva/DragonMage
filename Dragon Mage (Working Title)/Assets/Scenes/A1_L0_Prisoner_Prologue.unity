@@ -304,6 +304,7 @@ Transform:
   - {fileID: 1900248015}
   - {fileID: 108474337}
   - {fileID: 1751051096}
+  - {fileID: 781235249}
   - {fileID: 1279083854}
   m_Father: {fileID: 2064101906}
   m_RootOrder: -1
@@ -6066,8 +6067,8 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 10, y: 7}
-      - {x: 3, y: 7}
+    - - {x: 10, y: 8}
+      - {x: 3, y: 8}
       - {x: 3, y: 6}
       - {x: 10, y: 6}
   m_UseDelaunayMesh: 0
@@ -41908,6 +41909,78 @@ MonoBehaviour:
   - {fileID: 133502805}
   - {fileID: 729257502}
   fragmentsNeededForMedal: 4
+--- !u!1001 &781235248
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 21696057}
+    m_Modifications:
+    - target: {fileID: 1353651659175900153, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: hintText
+      value: Hold down the attack button if you need more time to aim, then release
+        it to launch the attack. The temper meter drains the longer you hold it,
+        however...
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900155, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: m_RootOrder
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900155, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 258.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900155, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 57.75
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900155, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900155, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900155, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900155, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900155, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900155, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900155, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900155, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900157, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: m_Name
+      value: HintBubble (2)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+--- !u!4 &781235249 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1353651659175900155, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+  m_PrefabInstance: {fileID: 781235248}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &787381798
 GameObject:
   m_ObjectHideFlags: 0
@@ -47341,9 +47414,9 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1353651659175900153, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
       propertyPath: dragonText
-      value: Magli switched to her dragon persona, Draelyn! Magli's glide and wall
-        kick are replaced by midair jumps and wall climbing respectively! The inputs
-        are similar, but the moves behave differently!
+      value: Magli switched to her dragon persona, Draelyn! When Draelyn faces a
+        wall, hold the direction against that wall to have her climb it! She can
+        also jump up to four more times in midair by using her wings!
       objectReference: {fileID: 0}
     - target: {fileID: 1353651659175900153, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
       propertyPath: enableDragonText
@@ -48633,10 +48706,9 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1353651659175900153, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
       propertyPath: hintText
-      value: Hold X / <sprite="CrossFaceButtons" name="WestButton"> for the entire
-        duration of an uninterrupted Fire Tackle to spit out a fireball at the end
-        that can destroy reinforced blocks! This consumes another segment of the
-        temper meter.
+      value: Hold X / <sprite="CrossFaceButtons" name="WestButton"> before the Fire
+        Tackle ends to spit out a fireball at the end that can destroy reinforced
+        blocks! This consumes another segment of the temper meter.
       objectReference: {fileID: 0}
     - target: {fileID: 1353651659175900155, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
       propertyPath: m_RootOrder
@@ -74202,7 +74274,7 @@ PrefabInstance:
     - target: {fileID: 1353651659175900153, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
       propertyPath: hintText
       value: Draelyn can't crouch jump, but she can Super Jump by crouching in place
-        for a second before doing a grounded jump that goes higher than normal!
+        for one second then doing a grounded jump that goes higher than normal!
       objectReference: {fileID: 0}
     - target: {fileID: 1353651659175900155, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
       propertyPath: m_RootOrder
@@ -74450,7 +74522,7 @@ PrefabInstance:
     - target: {fileID: 1353651659175900153, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
       propertyPath: hintText
       value: Holding <sprite="DirectionalArrows" name="Up"> during Fire Tackle's
-        wind-up will cause you to gradually rise up during the attack!
+        wind-up will cause you to gradually rise up during the attack.
       objectReference: {fileID: 0}
     - target: {fileID: 1353651659175900155, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
       propertyPath: m_RootOrder
@@ -74458,11 +74530,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1353651659175900155, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 258.5
+      value: 253.5
       objectReference: {fileID: 0}
     - target: {fileID: 1353651659175900155, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 57.75
+      value: 55.75
       objectReference: {fileID: 0}
     - target: {fileID: 1353651659175900155, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
       propertyPath: m_LocalPosition.z
@@ -87334,6 +87406,7 @@ Transform:
   - {fileID: 2069160309}
   - {fileID: 9321264}
   - {fileID: 1982035925}
+  - {fileID: 2111080087}
   - {fileID: 1974751295}
   - {fileID: 405264109}
   m_Father: {fileID: 292462934}
@@ -91921,6 +91994,77 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
+--- !u!1001 &2111080086
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 1932376417}
+    m_Modifications:
+    - target: {fileID: 1353651659175900153, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: hintText
+      value: Need an indication of where your attacks are going to go? Press Q /
+        <sprite="CrossFaceButtons" name="NorthButton"> to toggle the attack reticle!
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900155, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: m_RootOrder
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900155, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 241.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900155, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 40.75
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900155, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900155, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900155, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900155, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900155, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900155, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900155, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900155, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900157, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: m_Name
+      value: HintBubble (3)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+--- !u!4 &2111080087 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1353651659175900155, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+  m_PrefabInstance: {fileID: 2111080086}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2117824361
 GameObject:
   m_ObjectHideFlags: 0

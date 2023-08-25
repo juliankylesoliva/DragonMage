@@ -44,7 +44,7 @@ public class PlayerForm : MonoBehaviour
 
     public bool CannotFormChange()
     {
-        return (!enableFormChanging && !player.form.isChangingForm && !player.attacks.isBlastJumpActive && !player.attacks.isFireTackleActive && player.temper.isFormLocked && player.buffers.formChangeBufferTimeLeft > 0f);
+        return (!player.form.isChangingForm && !player.attacks.isBlastJumpActive && !player.attacks.isFireTackleActive && (player.temper.isFormLocked || !enableFormChanging) && player.buffers.formChangeBufferTimeLeft > 0f);
     }
 
     public void FormChange()

@@ -4957,7 +4957,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 220128a9d8f3beb4aa20f738a5c7af09, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  groundDetectionRadius: 0.05
   reticleTrail: {fileID: 7679465409882286838}
   trailSpeed: 5
   magicBlastTrail: {fileID: 250182539, guid: e6313490bbaaed7449c444ba2c58b097, type: 3}
@@ -10556,7 +10555,7 @@ MonoBehaviour:
   fireTackleBaseDuration: 0.45
   fireTackleRecoilStrength: 4
   fireTackleEndlag: 0.4
-  fireTackleEndlagCancel: 0.3
+  fireTackleEndlagCancel: 0.35
   fireTackleMaxSlopeSnapDistance: 0.5
   fireTackleStartupColor: {r: 0.90099996, g: 0.8569411, b: 0.46041095, a: 1}
   fireTackleActiveColor: {r: 0.97900003, g: 0.57028943, b: 0.319154, a: 1}

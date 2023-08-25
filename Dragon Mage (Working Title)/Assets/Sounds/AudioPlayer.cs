@@ -11,13 +11,14 @@ public class AudioPlayer : MonoBehaviour
         audioSrc = this.gameObject.GetComponent<AudioSource>();
     }
 
-    public void PlaySound(string name, float volume = 1f, float pitch = 1f)
+    public void PlaySound(string name, float volume = 1f, float pitch = 1f, bool loop = false)
     {
         audioSrc.clip = SoundFactory.GetClip(name);
         if (audioSrc.clip != null)
         {
             audioSrc.volume = volume;
             audioSrc.pitch = pitch;
+            audioSrc.loop = loop;
             audioSrc.Play();
         }
     }

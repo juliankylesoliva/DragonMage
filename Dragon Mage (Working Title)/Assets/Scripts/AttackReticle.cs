@@ -10,9 +10,6 @@ public class AttackReticle : MonoBehaviour
 
     SpriteRenderer spriteRenderer;
 
-    // [SerializeField] LayerMask groundDetectionLayers;
-    [SerializeField] float groundDetectionRadius = 0.05f;
-
     [SerializeField] SpriteRenderer reticleTrail;
     [SerializeField] float trailSpeed = 5f;
 
@@ -62,9 +59,7 @@ public class AttackReticle : MonoBehaviour
         spriteRenderer.sprite = magicBlastReticle;
 
         Vector3 trailPos = (initialPos + ((Vector3)initialSpeed * airTime * currentTrailPosition) + ((Vector3)Physics2D.gravity * gravityScale * HALF_ACCELERATION * Mathf.Pow(airTime * currentTrailPosition, SECONDS_SQUARED)));
-        Vector2 trailVec = (trailPos - initialPos);
         reticleTrail.transform.position = trailPos;
-        reticleTrail.transform.up = trailVec;
 
         UpdateTrailPosition();
     }
@@ -78,9 +73,7 @@ public class AttackReticle : MonoBehaviour
         spriteRenderer.sprite = fireTackleReticle;
 
         Vector3 trailPos = (initialPos + ((Vector3)fwdAndDownVelocity * activeTime * currentTrailPosition) + (Vector3.up * upAcceleration * HALF_ACCELERATION * Mathf.Pow(activeTime * currentTrailPosition, SECONDS_SQUARED)));
-        Vector2 trailVec = (trailPos - initialPos);
         reticleTrail.transform.position = trailPos;
-        reticleTrail.transform.up = trailVec;
 
         UpdateTrailPosition();
     }

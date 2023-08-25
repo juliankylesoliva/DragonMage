@@ -35,6 +35,7 @@ public class PlayerAttacks : MonoBehaviour
     [SerializeField] Color fireTackleActiveColor;
     [SerializeField] Color fireTackleEndlagColor;
     [SerializeField] float fireTackleTrailSpawnInterval = 0.05f;
+    [SerializeField] float fireTackleHoldTemperDrainInterval = 0.8f;
 
     [SerializeField] float slideBaseHorizontalSpeed = 5f;
     [SerializeField] float slideMaxHorizontalSpeed = 10f;
@@ -67,6 +68,7 @@ public class PlayerAttacks : MonoBehaviour
 
     private MagicBlast projectileRef = null;
     private bool reticleToggle = false;
+    float previousHorizontalVelocity = 0f;
 
     void Awake()
     {
@@ -110,7 +112,12 @@ public class PlayerAttacks : MonoBehaviour
                         MagicBlast projTemp = tempObj.GetComponent<MagicBlast>();
                         if (projTemp != null)
                         {
-                            projTemp.Setup(player.gameObject, player.temper, player.rb2d.velocity, player.movement.isFacingRight, player.inputVector.y);
+                            bool facingRight = player.movement.isFacingRight;
+                            if (player.stateMachine.CurrentState.name == "WallSliding")
+                            {
+                                facingRight = !facingRight;
+                            }
+                            projTemp.Setup(player.gameObject, player.temper, player.rb2d.velocity, facingRight, player.inputVector.y);
                             projectileRef = projTemp;
                         }
                     }
@@ -145,7 +152,7 @@ public class PlayerAttacks : MonoBehaviour
     {
         if (player.reticleButtonDown) { reticleToggle = !reticleToggle; }
 
-        if (reticleToggle && !player.movement.isCrouching && !player.temper.forceFormChange && !isAttackCooldownActive && !isFireTackleActive && (player.form.currentMode != CharacterMode.MAGE || projectileRef == null))
+        if (reticleToggle && !player.movement.isCrouching && !player.form.isChangingForm && !player.temper.forceFormChange && !isAttackCooldownActive && (currentAttackState == AttackState.STARTUP || !isFireTackleActive) && (player.form.currentMode != CharacterMode.MAGE || projectileRef == null))
         {
             if (!attackReticle.gameObject.activeSelf)
             {
@@ -157,13 +164,20 @@ public class PlayerAttacks : MonoBehaviour
             {
                 if (projectileRef == null)
                 {
-                    attackReticle.SetMagicBlastReticle(projectileSpawnPoint.position, player.collisions.groundCheckObj.position, player.rb2d.velocity, player.movement.isFacingRight, player.inputVector.y, (player.rb2d.velocity.y < 0f && !player.collisions.IsGrounded && !player.collisions.IsOnASlope));
+                    bool facingRight = player.movement.isFacingRight;
+                    if (player.stateMachine.CurrentState.name == "WallSliding")
+                    {
+                        facingRight = !facingRight;
+                    }
+                    attackReticle.SetMagicBlastReticle(projectileSpawnPoint.position, player.collisions.groundCheckObj.position, player.rb2d.velocity, facingRight, player.inputVector.y, (player.rb2d.velocity.y < 0f && !player.collisions.IsGrounded && !player.collisions.IsOnASlope));
                 }
             }
             else
             {
-                float calculatedTackleSpeed = (Mathf.Abs(player.rb2d.velocity.x) + fireTackleBaseHorizontalSpeed);
-                calculatedTackleSpeed *= player.movement.GetFacingValue();
+                bool wasInteractingWithWall = (player.stateMachine.PreviousState.name == "WallVaulting" || player.stateMachine.PreviousState.name == "WallClimbing" || player.stateMachine.CurrentState.name == "WallClimbing");
+                float calculatedTackleSpeed = Mathf.Min((Mathf.Abs(currentAttackState == AttackState.STARTUP ? (wasInteractingWithWall ? player.jumping.storedWallClimbSpeed : previousHorizontalVelocity) : (wasInteractingWithWall ? player.jumping.storedWallClimbSpeed : player.rb2d.velocity.x)) + fireTackleBaseHorizontalSpeed), fireTackleMaxHorizontalSpeed);
+                calculatedTackleSpeed *= (player.inputVector.x != 0f ? player.inputVector.x : player.movement.GetFacingValue());
+                calculatedTackleSpeed *= (player.stateMachine.CurrentState.name == "WallClimbing" ? -1f : 1f);
                 float verticalComponent = (!player.collisions.IsGrounded && !player.collisions.IsOnASlope && player.inputVector.y < 0f ? -Mathf.Abs(calculatedTackleSpeed) : 0f);
                 float verticalAcceleration = (player.inputVector.y > 0f ? fireTackleVerticalSteeringSpeed : 0f);
                 attackReticle.SetFireTackleReticle(this.transform.position, new Vector2(calculatedTackleSpeed, verticalComponent), verticalAcceleration, fireTackleBaseDuration);
@@ -304,13 +318,14 @@ public class PlayerAttacks : MonoBehaviour
         
         currentAttackState = AttackState.STARTUP;
 
-        player.sfxCtrl.PlaySound("attack_draelyn_startup");
+        player.sfxCtrl.PlaySound("attack_draelyn_startup", 1f, 1f, true);
         player.charSprite.color = fireTackleStartupColor;
         player.animationCtrl.FireTackleAnimation(0);
         float windupTimer = fireTackleStartup;
-        float previousHorizontalVelocity = Mathf.Abs(player.rb2d.velocity.x);
+        float holdTimer = fireTackleHoldTemperDrainInterval;
+        previousHorizontalVelocity = Mathf.Abs(player.rb2d.velocity.x);
         float verticalAxis = 0f;
-        while (windupTimer > 0f && !player.damage.isPlayerDamaged)
+        while ((windupTimer > 0f || isAttackButtonHeld) && !player.damage.isPlayerDamaged)
         {
             if (!PauseHandler.isPaused && !player.attackButtonHeld) { isAttackButtonHeld = false; }
             player.rb2d.gravityScale = 0f;
@@ -319,6 +334,16 @@ public class PlayerAttacks : MonoBehaviour
             verticalAxis = player.inputVector.y;
             if (player.collisions.IsGrounded && verticalAxis < 0) { verticalAxis = 0f; }
             windupTimer -= Time.deltaTime;
+            if (windupTimer <= 0f && holdTimer > 0f)
+            {
+                holdTimer -= Time.deltaTime;
+                if (holdTimer <= 0f)
+                {
+                    holdTimer += fireTackleHoldTemperDrainInterval;
+                    if (player.temper.currentTemperLevel >= player.temper.hotThreshold) { player.temper.ChangeTemperBy(-1); }
+                    else { player.temper.NeutralizeTemperBy(-1); }
+                }
+            }
             yield return null;
         }
 
@@ -344,7 +369,7 @@ public class PlayerAttacks : MonoBehaviour
         player.temper.ChangeTemperBy(-1);
         while (attackTimer > 0f && (bumpImmunityTimer > 0f || (!player.collisions.IsAgainstWall && !player.collisions.IsHeadbonking)))
         {
-            if (!PauseHandler.isPaused && !player.attackButtonHeld) { isAttackButtonHeld = false; }
+            // if (!PauseHandler.isPaused && !player.attackButtonHeld) { isAttackButtonHeld = false; }
 
             player.rb2d.velocity = new Vector2((!player.collisions.IsAgainstWall ? horizontalResult : 0f), player.rb2d.velocity.y);
             if (verticalAxis > 0f)
@@ -409,7 +434,7 @@ public class PlayerAttacks : MonoBehaviour
         }
         else
         {
-            if (isAttackButtonHeld)
+            if (player.attackButtonHeld)
             {
                 player.sfxCtrl.PlaySound("attack_draelyn_fireball");
                 player.animationCtrl.FireTackleAnimation(4);
@@ -436,7 +461,7 @@ public class PlayerAttacks : MonoBehaviour
             if (!firedProjectile && !bumped && endlagTimer < fireTackleEndlagCancel && CanCancelFireTackleEndlag()) { isFireTackleEndlagCanceled = true; break; }
             if (!bumped && (player.collisions.IsGrounded || player.collisions.IsOnASlope) && player.rb2d.velocity.x != 0f)
             {
-                Vector2 resultVector = (player.collisions.GetRightVector() * (firedProjectile ? -fireTackleRecoilStrength : horizontalResult));
+                Vector2 resultVector = (player.collisions.GetRightVector() * (firedProjectile ? (fireTackleRecoilStrength * -player.movement.GetFacingValue()) : horizontalResult));
                 player.rb2d.velocity = ((player.movement.isFacingRight && player.collisions.IsTouchingWallR) || (!player.movement.isFacingRight && player.collisions.IsTouchingWallL) || player.collisions.CheckIfNearLedge() ? Vector2.zero : Vector2.Lerp(resultVector, Vector2.zero, (fireTackleEndlag - endlagTimer) / fireTackleEndlag));
                 if (player.collisions.IsOnASlope) { player.movement.ApplySlopeResistance(); player.collisions.SnapToGround(false, true); }
             }
