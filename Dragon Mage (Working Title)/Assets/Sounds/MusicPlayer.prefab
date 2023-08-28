@@ -182,7 +182,7 @@ MonoBehaviour:
   introClip: {fileID: 0}
   loopClip: {fileID: 0}
   initialDelay: 0.5
-  preloadDelay: 0
+  preloadDelay: 1
 --- !u!1 &5696711955676719636
 GameObject:
   m_ObjectHideFlags: 0
