@@ -43445,11 +43445,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1353651659175900155, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 167
+      value: 169
       objectReference: {fileID: 0}
     - target: {fileID: 1353651659175900155, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 36.75
+      value: 34.75
       objectReference: {fileID: 0}
     - target: {fileID: 1353651659175900155, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
       propertyPath: m_LocalPosition.z
@@ -48707,8 +48707,8 @@ PrefabInstance:
     - target: {fileID: 1353651659175900153, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
       propertyPath: hintText
       value: Hold X / <sprite="CrossFaceButtons" name="WestButton"> before the Fire
-        Tackle ends to spit out a fireball at the end that can destroy reinforced
-        blocks! This consumes another segment of the temper meter.
+        Tackle ends to spit out a fireball that can destroy reinforced blocks! This
+        consumes another segment of the temper meter.
       objectReference: {fileID: 0}
     - target: {fileID: 1353651659175900155, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
       propertyPath: m_RootOrder
@@ -89275,9 +89275,9 @@ PrefabInstance:
     - target: {fileID: 1353651659175900153, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
       propertyPath: hintText
       value: Need to quickly move under a narrow passageway? Attack while crouching
-        to perform a slide! Get a running start to go faster! You'll keep sliding
-        as long as you are holding LCtrl / LShoulder and still have speed, but hitting
-        a wall or reaching a ledge stops you instantly!
+        to slide! Get a running start to go faster! You'll keep sliding as long as
+        you are holding LCtrl / LShoulder and still have speed, but hitting a wall
+        or reaching a ledge stops you instantly!
       objectReference: {fileID: 0}
     - target: {fileID: 1353651659175900155, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
       propertyPath: m_RootOrder

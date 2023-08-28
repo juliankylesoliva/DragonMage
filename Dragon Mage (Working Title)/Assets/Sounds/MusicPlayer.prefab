@@ -177,10 +177,12 @@ MonoBehaviour:
   audioSources:
   - {fileID: 3277149213650274062}
   - {fileID: 103082877992247256}
+  baseVolume: 0.5
+  fadeoutTime: 3
   introClip: {fileID: 0}
   loopClip: {fileID: 0}
   initialDelay: 0.5
-  preloadDelay: 1
+  preloadDelay: 0
 --- !u!1 &5696711955676719636
 GameObject:
   m_ObjectHideFlags: 0
