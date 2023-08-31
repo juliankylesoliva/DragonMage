@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1a5d74fadb751d246822daa9c49a1f1b, type: 3}
+  m_Name: 0-1. Byway Backwoods
+  m_EditorClassIdentifier: 
+  _sceneName: A0_L1_Byway_Backwoods
+  _nameHeader: 'Tutorial-1: Byway Backwoods'
+  _storyDescription: 'Magli is a mage who is running late for her first day of work
+    as a spell developer. The trains have been delayed, and Magli must make a beeline
+    through the forest to get to her workplace. On the bright side, this is a great
+    time to test out her latest spell: the Magic Blast! Hopefully the spell won''t
+    malfunction by the time Magli presents it at work...'
