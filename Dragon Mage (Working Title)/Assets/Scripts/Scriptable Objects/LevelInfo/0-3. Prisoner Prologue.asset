@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1a5d74fadb751d246822daa9c49a1f1b, type: 3}
-  m_Name: 0. Prisoner Prologue
+  m_Name: 0-3. Prisoner Prologue
   m_EditorClassIdentifier: 
   _sceneName: A1_L0_Prisoner_Prologue
-  _nameHeader: 'Tutorial: Prisoner Prologue'
+  _nameHeader: 'Tutorial-3: Prisoner Prologue'
   _storyDescription: Magli is a young mage who has been kidnapped by a group of dragon
     mobsters working for the Dragon Syndicate! They're a group of criminals based
     in the city of Drakageau who steal and horde magic for themselves; their modus

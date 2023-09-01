@@ -19,7 +19,7 @@ MonoBehaviour:
     width: 1920
     height: 997
   m_ShowMode: 4
-  m_Title: Scene
+  m_Title: Hierarchy
   m_RootView: {fileID: 2}
   m_MinSize: {x: 875, y: 350}
   m_MaxSize: {x: 10000, y: 10000}
@@ -118,7 +118,7 @@ MonoBehaviour:
   m_MinSize: {x: 300, y: 100}
   m_MaxSize: {x: 24288, y: 16192}
   vertical: 0
-  controlID: 48303
+  controlID: 20387
 --- !u!114 &6
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -143,7 +143,7 @@ MonoBehaviour:
   m_MinSize: {x: 300, y: 100}
   m_MaxSize: {x: 24288, y: 16192}
   vertical: 0
-  controlID: 48304
+  controlID: 20388
 --- !u!114 &7
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -168,7 +168,7 @@ MonoBehaviour:
   m_MinSize: {x: 200, y: 100}
   m_MaxSize: {x: 16192, y: 16192}
   vertical: 1
-  controlID: 48305
+  controlID: 20389
 --- !u!114 &8
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -193,7 +193,7 @@ MonoBehaviour:
   m_MinSize: {x: 200, y: 50}
   m_MaxSize: {x: 16192, y: 8096}
   vertical: 0
-  controlID: 48306
+  controlID: 20390
 --- !u!114 &9
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -442,7 +442,7 @@ MonoBehaviour:
       scrollPos: {x: 0, y: 0}
       m_SelectedIDs: 
       m_LastClickedID: 0
-      m_ExpandedIDs: 6238fdff7038fdff7a38fdfffcfafdfffefafdff96a7ffff9aa7ffffd6adffff46c6fffff4fafffff4690000d26a0000d66a0000606b0000886b0000806c00006a840000f28b0000168c0000648c0000c48c0000328d0000c08d0000
+      m_ExpandedIDs: ceb0fcffcef6fcffce04fdff023efdff0a43fdff204bfdff664ffdffc458fdff9e98fdffa098fdffb498fdff20c1ffff2cc1ffff2ec1fffff4faffff406a0000d86a0000786b0000d86d0000066e0000e25b0100bc6b0100026d0100606d0100e26d0100066f0100fc6f010044700100
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -861,9 +861,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: 312.01224, y: 36.16567, z: 0.043763407}
+    m_Target: {x: 33.376503, y: 11.506874, z: -0.28650144}
     speed: 2
-    m_Value: {x: 311.47046, y: 35.517063, z: 0.064213544}
+    m_Value: {x: 32.874184, y: 11.401344, z: -0.2978143}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -913,9 +913,9 @@ MonoBehaviour:
     speed: 2
     m_Value: {x: 0, y: 0, z: 0, w: 1}
   m_Size:
-    m_Target: 47.489887
+    m_Target: 24.008202
     speed: 2
-    m_Value: 45.44487
+    m_Value: 25.139479
   m_Ortho:
     m_Target: 1
     speed: 2
@@ -1473,7 +1473,7 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Prefabs
+    - Assets/Scenes
     m_Globs: []
     m_OriginalText: 
     m_ImportLogFlags: 0
@@ -1481,7 +1481,7 @@ MonoBehaviour:
   m_ViewMode: 1
   m_StartGridSize: 96
   m_LastFolders:
-  - Assets/Prefabs
+  - Assets/Scenes
   m_LastFoldersGridSize: 96
   m_LastProjectPath: C:\Users\Kyle\Desktop\Kyle\game projects\GitHub Repos\DragonMage\Dragon
     Mage (Working Title)
@@ -1489,9 +1489,9 @@ MonoBehaviour:
     m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: 0c740000
-    m_LastClickedID: 29708
-    m_ExpandedIDs: 00000000fe73000000740000027400000474000006740000087400000a7400000c7400000e74000000ca9a3b
+    m_SelectedIDs: 38780000
+    m_LastClickedID: 30776
+    m_ExpandedIDs: 000000008c7500008e75000090750000927500009475000096750000987500009a7500009c75000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1519,7 +1519,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 00000000fe73000000740000027400000474000006740000087400000a7400000c7400000e74000000ca9a3b
+    m_ExpandedIDs: 000000008c7500008e75000090750000927500009475000096750000987500009a7500009c75000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1546,7 +1546,7 @@ MonoBehaviour:
   m_ListAreaState:
     m_SelectedInstanceIDs: 
     m_LastClickedInstanceID: 0
-    m_HadKeyboardFocusLastEvent: 0
+    m_HadKeyboardFocusLastEvent: 1
     m_ExpandedInstanceIDs: c6230000000000002a620000a0980000ae98000044b90000de65000088880000ac710000be730000f4690000a0860000126c000024ab0000227100002e710000d672000046730000a874000030710000e4750000be71000090ba00005cbb00005e780000d681000038320200ea7400003e7e0000ea730000c0800000ba800000be80000064f8010010bb00002cbb0000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
@@ -1645,7 +1645,7 @@ MonoBehaviour:
     m_OverlaysVisible: 1
   m_LockTracker:
     m_IsLocked: 0
-  m_LastSelectedObjectID: -182164
+  m_LastSelectedObjectID: 93542
 --- !u!114 &21
 MonoBehaviour:
   m_ObjectHideFlags: 52
