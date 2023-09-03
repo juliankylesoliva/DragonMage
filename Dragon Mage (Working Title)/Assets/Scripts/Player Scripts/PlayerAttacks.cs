@@ -175,7 +175,8 @@ public class PlayerAttacks : MonoBehaviour
             else
             {
                 bool isInteractingWithWall = (player.stateMachine.CurrentState.name == "WallVaulting" || player.stateMachine.CurrentState.name == "WallClimbing");
-                float calculatedTackleSpeed = Mathf.Min((Mathf.Abs(currentAttackState == AttackState.STARTUP ? (isInteractingWithWall ? player.jumping.storedWallClimbSpeed : previousHorizontalVelocity) : (isInteractingWithWall ? player.jumping.storedWallClimbSpeed : player.rb2d.velocity.x)) + fireTackleBaseHorizontalSpeed), fireTackleMaxHorizontalSpeed);
+                bool wasVaulting = (player.stateMachine.PreviousState.name == "WallVaulting");
+                float calculatedTackleSpeed = Mathf.Min((Mathf.Abs(currentAttackState == AttackState.STARTUP ? (isInteractingWithWall || wasVaulting ? player.jumping.storedWallClimbSpeed : previousHorizontalVelocity) : (isInteractingWithWall ? player.jumping.storedWallClimbSpeed : player.rb2d.velocity.x)) + fireTackleBaseHorizontalSpeed), fireTackleMaxHorizontalSpeed);
                 calculatedTackleSpeed *= (player.inputVector.x != 0f ? player.inputVector.x : player.movement.GetFacingValue());
                 calculatedTackleSpeed *= (player.stateMachine.CurrentState.name == "WallClimbing" ? -1f : 1f);
                 float verticalComponent = (!player.collisions.IsGrounded && !player.collisions.IsOnASlope && player.inputVector.y < 0f ? -Mathf.Abs(calculatedTackleSpeed) : 0f);
@@ -434,8 +435,10 @@ public class PlayerAttacks : MonoBehaviour
         }
         else
         {
-            if (player.attackButtonHeld)
+            if (player.buffers.attackBufferTimeLeft > 0f || player.attackButtonHeld)
             {
+                player.buffers.ResetAttackBuffer();
+
                 player.sfxCtrl.PlaySound("attack_draelyn_fireball");
                 player.animationCtrl.FireTackleAnimation(4);
                 firedProjectile = true;
@@ -517,7 +520,7 @@ public class PlayerAttacks : MonoBehaviour
         tempDust.Setup(player);
         while (!player.damage.isPlayerDamaged && horizontalResult >= 0f && (player.inputVector.x * player.movement.GetFacingValue()) >= 0f && (slideTimer <= slideMinDuration || player.crouchButtonHeld))
         {
-            if (slideTimer >= slideNoCancelingTime && (player.inputVector.x * player.rb2d.velocity.x) > 0f && player.buffers.jumpBufferTimeLeft > 0f)
+            if (!player.collisions.IsCeilingAboveWhenUncrouched() && slideTimer >= slideNoCancelingTime && (player.inputVector.x * player.rb2d.velocity.x) > 0f && player.buffers.jumpBufferTimeLeft > 0f)
             {
                 isSlideJumpCanceled = true;
                 player.buffers.ResetJumpBuffer();

@@ -16,9 +16,9 @@ public class WarpTrigger : MonoBehaviour
             if (player != null) { player.attacks.DestroyProjectileReference(); }
 
             Vector2 destinationCoords = roomDestination.GetRoomEntranceCoordinates(roomEntranceIndex);
-            roomDestination.ActivateRoom();
+            if (roomDestination != roomOrigin) { roomDestination.ActivateRoom(); }
             other.transform.position = new Vector3(destinationCoords.x, destinationCoords.y, 0f);
-            roomOrigin.DeactivateRoom();
+            if (roomDestination != roomOrigin) { roomOrigin.DeactivateRoom(); }
         }
     }
 }
