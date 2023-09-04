@@ -461,7 +461,12 @@ public class PlayerAttacks : MonoBehaviour
         float endlagTimer = fireTackleEndlag;
         while (endlagTimer > 0f && !player.damage.isPlayerDamaged)
         {
-            if (!firedProjectile && !bumped && endlagTimer < fireTackleEndlagCancel && CanCancelFireTackleEndlag()) { isFireTackleEndlagCanceled = true; break; }
+            if (!firedProjectile && !bumped && endlagTimer < fireTackleEndlagCancel && CanCancelFireTackleEndlag())
+            {
+                isFireTackleEndlagCanceled = true;
+                player.buffers.RefreshJumpBuffer();
+                break;
+            }
             if (!bumped && (player.collisions.IsGrounded || player.collisions.IsOnASlope) && player.rb2d.velocity.x != 0f)
             {
                 Vector2 resultVector = (player.collisions.GetRightVector() * (firedProjectile ? (fireTackleRecoilStrength * -player.movement.GetFacingValue()) : horizontalResult));
@@ -526,7 +531,7 @@ public class PlayerAttacks : MonoBehaviour
                 player.buffers.ResetJumpBuffer();
                 break;
             }
-            else if (slideTimer >= slideNoCancelingTime && player.buffers.attackBufferTimeLeft > 0f)
+            else if (!player.collisions.IsCeilingAboveWhenUncrouched() && slideTimer >= slideNoCancelingTime && player.buffers.attackBufferTimeLeft > 0f)
             {
                 isSlideTackleCanceled = true;
                 player.buffers.ResetAttackBuffer();

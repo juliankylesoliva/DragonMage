@@ -21,6 +21,7 @@ public class PlayerBuffers : MonoBehaviour
 
     public float jumpBufferTimeLeft { get; private set; }
     public void ResetJumpBuffer() { jumpBufferTimeLeft = 0f; }
+    public void RefreshJumpBuffer() { jumpBufferTimeLeft = jumpBufferTime; }
 
     public float attackBufferTimeLeft { get; private set; }
     public void ResetAttackBuffer() { attackBufferTimeLeft = 0f; }
