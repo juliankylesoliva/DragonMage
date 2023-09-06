@@ -438,6 +438,7 @@ public class PlayerAttacks : MonoBehaviour
             if (player.buffers.attackBufferTimeLeft > 0f || player.attackButtonHeld)
             {
                 player.buffers.ResetAttackBuffer();
+                player.buffers.ResetSpeedBuffer();
 
                 player.sfxCtrl.PlaySound("attack_draelyn_fireball");
                 player.animationCtrl.FireTackleAnimation(4);
@@ -464,7 +465,8 @@ public class PlayerAttacks : MonoBehaviour
             if (!firedProjectile && !bumped && endlagTimer < fireTackleEndlagCancel && CanCancelFireTackleEndlag())
             {
                 isFireTackleEndlagCanceled = true;
-                player.buffers.RefreshJumpBuffer();
+                if (player.buffers.jumpBufferTimeLeft > 0f && (player.collisions.IsGrounded || player.collisions.IsOnASlope)) { player.buffers.RefreshJumpBuffer(); }
+                else { player.buffers.ResetJumpBuffer(); }
                 break;
             }
             if (!bumped && (player.collisions.IsGrounded || player.collisions.IsOnASlope) && player.rb2d.velocity.x != 0f)

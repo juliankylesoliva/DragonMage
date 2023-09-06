@@ -118,7 +118,7 @@ MonoBehaviour:
   m_MinSize: {x: 300, y: 100}
   m_MaxSize: {x: 24288, y: 16192}
   vertical: 0
-  controlID: 40225
+  controlID: 15325
 --- !u!114 &6
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -143,7 +143,7 @@ MonoBehaviour:
   m_MinSize: {x: 300, y: 100}
   m_MaxSize: {x: 24288, y: 16192}
   vertical: 0
-  controlID: 40226
+  controlID: 15326
 --- !u!114 &7
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -168,7 +168,7 @@ MonoBehaviour:
   m_MinSize: {x: 200, y: 100}
   m_MaxSize: {x: 16192, y: 16192}
   vertical: 1
-  controlID: 40265
+  controlID: 15327
 --- !u!114 &8
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -193,7 +193,7 @@ MonoBehaviour:
   m_MinSize: {x: 200, y: 50}
   m_MaxSize: {x: 16192, y: 8096}
   vertical: 0
-  controlID: 40266
+  controlID: 15328
 --- !u!114 &9
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -288,7 +288,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 1
   m_Script: {fileID: 12006, guid: 0000000000000000e000000000000000, type: 0}
-  m_Name: GridPaintPaletteWindow
+  m_Name: InspectorWindow
   m_EditorClassIdentifier: 
   m_Children: []
   m_Position:
@@ -297,14 +297,14 @@ MonoBehaviour:
     y: 0
     width: 594
     height: 947
-  m_MinSize: {x: 241, y: 221}
+  m_MinSize: {x: 276, y: 71}
   m_MaxSize: {x: 4001, y: 4021}
-  m_ActualView: {fileID: 23}
+  m_ActualView: {fileID: 22}
   m_Panes:
   - {fileID: 22}
   - {fileID: 23}
-  m_Selected: 1
-  m_LastSelected: 0
+  m_Selected: 0
+  m_LastSelected: 1
 --- !u!114 &13
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -442,7 +442,7 @@ MonoBehaviour:
       scrollPos: {x: 0, y: 0}
       m_SelectedIDs: 
       m_LastClickedID: 0
-      m_ExpandedIDs: a03dffffa23dffff26f6ffff2cf6ffff38f6fffff4faffffde6a0000226b0000ee6b0000
+      m_ExpandedIDs: c2b6f6ff4a34f7fff6ebfbffac2afcffbc9dfdff06a2fdff9ae1fdff4cb2feff68b7feff024effff2c53ffffe662fffff262fffff462fffff662fffff4faffff086a0000326a00007e6b0000986b0000126c0000d46d0000d86d00006ab70000eeb7000054ba0000faba00004abc00009abc0000d8bc0000fcbc00001abd0000d6bd000026bf0000946a01003a6c0100be6c0100246f0100c0740100fe74010074760100aa770100ce78010028790100420e0200960e0200dc0e02004a110200e2980200
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -789,7 +789,7 @@ MonoBehaviour:
       containerId: overlay-toolbar__top
       floating: 0
       collapsed: 0
-      displayed: 1
+      displayed: 0
       snapOffset: {x: 0, y: 26}
       snapOffsetDelta: {x: 0, y: 0}
       snapCorner: 0
@@ -861,9 +861,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: 181.61752, y: 14.266647, z: -0.9541095}
+    m_Target: {x: -1.2524136, y: -0.4042514, z: 0.015869824}
     speed: 2
-    m_Value: {x: 181.61752, y: 14.266647, z: -0.9541095}
+    m_Value: {x: -1.2524136, y: -0.4042514, z: 0.015869824}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -913,9 +913,9 @@ MonoBehaviour:
     speed: 2
     m_Value: {x: 0, y: 0, z: 0, w: 1}
   m_Size:
-    m_Target: 118.65428
+    m_Target: 7.8475285
     speed: 2
-    m_Value: 118.65428
+    m_Value: 7.8475285
   m_Ortho:
     m_Target: 1
     speed: 2
@@ -1352,9 +1352,9 @@ MonoBehaviour:
       e32: 0
       e33: 1
   m_PreviewAnimator: {fileID: 0}
-  m_AnimatorController: {fileID: 9100000, guid: 475a0f080bf3f6f41879fa4b28fae1a5, type: 2}
+  m_AnimatorController: {fileID: 9100000, guid: 68f1a6fd0e3b37b4686e95638b1d73b0, type: 2}
   m_BreadCrumbs:
-  - m_Target: {fileID: -2072412162143120539, guid: 475a0f080bf3f6f41879fa4b28fae1a5, type: 2}
+  - m_Target: {fileID: 3477398121264398229, guid: 68f1a6fd0e3b37b4686e95638b1d73b0, type: 2}
     m_ScrollPosition: {x: 0, y: 0}
   stateMachineGraph: {fileID: 0}
   stateMachineGraphGUI: {fileID: 0}
@@ -1473,7 +1473,7 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Scripts/Player Scripts
+    - Assets
     m_Globs: []
     m_OriginalText: 
     m_ImportLogFlags: 0
@@ -1481,7 +1481,7 @@ MonoBehaviour:
   m_ViewMode: 1
   m_StartGridSize: 96
   m_LastFolders:
-  - Assets/Scripts/Player Scripts
+  - Assets
   m_LastFoldersGridSize: 96
   m_LastProjectPath: C:\Users\Kyle\Desktop\Kyle\game projects\GitHub Repos\DragonMage\Dragon
     Mage (Working Title)
@@ -1489,9 +1489,9 @@ MonoBehaviour:
     m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 79}
-    m_SelectedIDs: 1c770000
-    m_LastClickedID: 30492
-    m_ExpandedIDs: 00000000787400007a7400007c7400007e740000807400008274000084740000867400008874000000ca9a3b
+    m_SelectedIDs: 78750000
+    m_LastClickedID: 30072
+    m_ExpandedIDs: 00000000787500007a7500007c7500007e750000807500008275000084750000867500008875000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1519,7 +1519,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 00000000787400007a7400007c7400007e740000807400008274000084740000867400008874000000ca9a3b
+    m_ExpandedIDs: 00000000787500007a7500007c7500007e750000807500008275000084750000867500008875000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1546,7 +1546,7 @@ MonoBehaviour:
   m_ListAreaState:
     m_SelectedInstanceIDs: 
     m_LastClickedInstanceID: 0
-    m_HadKeyboardFocusLastEvent: 0
+    m_HadKeyboardFocusLastEvent: 1
     m_ExpandedInstanceIDs: c6230000000000002a620000a0980000ae98000044b90000de65000088880000ac710000be730000f4690000a0860000126c000024ab0000227100002e710000d672000046730000a874000030710000e475000090ba00005cbb00005e780000d681000038320200ea7400003e7e0000ea730000c0800000ba800000be80000064f8010010bb00002cbb0000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
@@ -1571,7 +1571,7 @@ MonoBehaviour:
       m_Icon: {fileID: 0}
       m_ResourceFile: 
     m_NewAssetIndexInList: -1
-    m_ScrollPosition: {x: 0, y: 100}
+    m_ScrollPosition: {x: 0, y: 0}
     m_GridSize: 96
   m_SkipHiddenPackages: 0
   m_DirectoriesAreaWidth: 149
@@ -1645,7 +1645,7 @@ MonoBehaviour:
     m_OverlaysVisible: 1
   m_LockTracker:
     m_IsLocked: 0
-  m_LastSelectedObjectID: 27426
+  m_LastSelectedObjectID: -577810
 --- !u!114 &21
 MonoBehaviour:
   m_ObjectHideFlags: 52

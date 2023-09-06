@@ -13,9 +13,10 @@ MonoBehaviour:
   m_Name: 0-1. Byway Backwoods
   m_EditorClassIdentifier: 
   _sceneName: A0_L1_Byway_Backwoods
-  _nameHeader: 'Tutorial-1: Byway Backwoods'
-  _storyDescription: 'Magli is a mage who is running late for her first day of work
-    as a spell developer. The trains have been delayed, and Magli must make a beeline
-    through the forest to get to her workplace. On the bright side, this is a great
-    time to test out her latest spell: the Magic Blast! Hopefully the spell won''t
-    malfunction by the time Magli presents it at work...'
+  _nameHeader: 'Prologue 1: Byway Backwoods'
+  _storyDescription: 'Magli is a timid mage who is running late for her first day
+    of work as a spell developer. The trains have been delayed due to the tracks
+    being damaged, and Magli must make a beeline through the forest to get to her
+    workplace. On the bright side, she sees that this is a great time to test out
+    her latest spell: the Magic Blast! It may just be a prototype, but hopefully
+    the spell won''t malfunction by the time Magli presents it to her boss and coworkers...'

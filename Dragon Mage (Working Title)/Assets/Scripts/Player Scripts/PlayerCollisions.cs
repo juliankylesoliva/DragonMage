@@ -199,7 +199,7 @@ public class PlayerCollisions : MonoBehaviour
 
     private void HeadbonkSoundCheck()
     {
-        if ((!prevIsHeadbonking && isHeadbonking) || (player.stateMachine.CurrentState.name == "Jumping" && player.rb2d.velocity.y > headbonkSpeedThreshold && isHeadbonking))
+        if (!prevIsHeadbonking && isHeadbonking)
         {
             player.effects.HeadbonkEffect();
         }
