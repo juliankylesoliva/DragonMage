@@ -23,6 +23,7 @@ public class PlayerCollisions : MonoBehaviour
     [SerializeField] float slopeCheckDistance = 1f;
     [SerializeField] float ledgeCheckOffset = 0.25f;
     [SerializeField] float ledgeCheckDepth = 0.85f;
+    [SerializeField] float nudgeCheckOffset = 0.6f;
     [SerializeField] float groundNormalXThreshold = 0.1f;
     [SerializeField] float uncrouchedYOffset = -0.25f;
     [SerializeField] float crouchedYOffset = -0.5f;
@@ -66,10 +67,12 @@ public class PlayerCollisions : MonoBehaviour
     {
         EnemyIntangibilityCheck();
         ColliderCrouchUpdate();
+        LedgeNudgeCheck();
         GroundCheck();
         SlopeCheck();
         if (player.movement.isCrouching) { CrouchedWallCheck(); }
         else { WallCheck(); }
+        CeilingNudgeCheck();
         HeadbonkCheck();
 
         LandingSoundCheck();
@@ -202,6 +205,89 @@ public class PlayerCollisions : MonoBehaviour
         if (!prevIsHeadbonking && isHeadbonking)
         {
             player.effects.HeadbonkEffect();
+        }
+    }
+
+    private void CeilingNudgeCheck()
+    {
+        if (player.stateMachine.CurrentState.name == "Jumping")
+        {
+            Transform headPos = (player.movement.isCrouching ? crouchedHeadbonkCheckObj : headbonkCheckObj);
+
+            RaycastHit2D hitM = Physics2D.Raycast(headPos.position, Vector2.up, ledgeCheckDepth, nonEnemyGroundLayer);
+            RaycastHit2D hitL = Physics2D.Raycast(headPos.position - (ledgeCheckOffset * Vector3.right), Vector2.up, ledgeCheckDepth, nonEnemyGroundLayer);
+            RaycastHit2D hitR = Physics2D.Raycast(headPos.position + (ledgeCheckOffset * Vector3.right), Vector2.up, ledgeCheckDepth, nonEnemyGroundLayer);
+
+            if (hitM.collider == null && (hitL.collider != null || hitR.collider != null) && (hitL.collider == null || hitR.collider == null))
+            {
+                if (hitL.collider == null && hitR.collider != null)
+                {
+                    if (hitR.distance <= headbonkCheckRadius)
+                    {
+                        RaycastHit2D hitOffset = Physics2D.Raycast(headPos.position + (ledgeCheckDepth * Vector3.up), Vector3.right, nudgeCheckOffset, nonEnemyGroundLayer);
+                        if (hitOffset.collider != null)
+                        {
+                            float nudgeDistance = (ledgeCheckOffset - Mathf.Abs(headPos.position.x - hitOffset.point.x));
+                            player.transform.position -= (Vector3.right * nudgeDistance);
+                            return;
+                        }
+                        player.transform.position -= (Vector3.right * ledgeCheckOffset);
+                    }
+                }
+                else if (hitL.collider != null && hitR.collider == null)
+                {
+                    if (hitL.distance <= headbonkCheckRadius)
+                    {
+                        RaycastHit2D hitOffset = Physics2D.Raycast(headPos.position + (ledgeCheckDepth * Vector3.up), -Vector3.right, nudgeCheckOffset, nonEnemyGroundLayer);
+                        if (hitOffset.collider != null)
+                        {
+                            float nudgeDistance = (ledgeCheckOffset - Mathf.Abs(headPos.position.x - hitOffset.point.x));
+                            player.transform.position += (Vector3.right * nudgeDistance);
+                            return;
+                        }
+                        player.transform.position += (Vector3.right * ledgeCheckOffset);
+                    }
+                }
+                else { /* Nothing */ }
+            }
+        }
+    }
+
+    private void LedgeNudgeCheck()
+    {
+        string stateName = player.stateMachine.CurrentState.name;
+        if (stateName == "Standing" || (stateName == "Running" && player.inputVector.x == 0f) || (player.attacks.isFireTackleActive && player.attacks.currentAttackState == AttackState.ENDLAG))
+        {
+            RaycastHit2D hitM = Physics2D.Raycast(groundCheckObj.position, -Vector2.up, ledgeCheckDepth, nonEnemyGroundLayer);
+            RaycastHit2D hitL = Physics2D.Raycast(groundCheckObj.position - (ledgeCheckOffset * Vector3.right), -Vector2.up, ledgeCheckDepth, nonEnemyGroundLayer);
+            RaycastHit2D hitR = Physics2D.Raycast(groundCheckObj.position + (ledgeCheckOffset * Vector3.right), -Vector2.up, ledgeCheckDepth, nonEnemyGroundLayer);
+
+            if (hitM.collider == null && (hitL.collider != null || hitR.collider != null) && (hitL.collider == null || hitR.collider == null))
+            {
+                if (hitL.collider == null && hitR.collider != null)
+                {
+                    RaycastHit2D hitOffset = Physics2D.Raycast(groundCheckObj.position + (ledgeCheckDepth * -Vector3.up), Vector3.right, nudgeCheckOffset, nonEnemyGroundLayer);
+                    if (hitOffset.collider != null)
+                    {
+                        float nudgeDistance = Mathf.Abs(groundCheckObj.position.x - hitOffset.point.x);
+                        player.transform.position += (Vector3.right * nudgeDistance);
+                        return;
+                    }
+                    player.transform.position -= (Vector3.right * ledgeCheckOffset);
+                }
+                else if (hitL.collider != null && hitR.collider == null)
+                {
+                    RaycastHit2D hitOffset = Physics2D.Raycast(groundCheckObj.position + (ledgeCheckDepth * -Vector3.up), -Vector3.right, nudgeCheckOffset, nonEnemyGroundLayer);
+                    if (hitOffset.collider != null)
+                    {
+                        float nudgeDistance = Mathf.Abs(groundCheckObj.position.x - hitOffset.point.x);
+                        player.transform.position -= (Vector3.right * nudgeDistance);
+                        return;
+                    }
+                    player.transform.position -= (Vector3.right * ledgeCheckOffset);
+                }
+                else { /* Nothing */ }
+            }
         }
     }
 
