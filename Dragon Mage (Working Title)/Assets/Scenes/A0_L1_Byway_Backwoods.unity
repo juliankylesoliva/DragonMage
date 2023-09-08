@@ -17471,8 +17471,8 @@ PrefabInstance:
     - target: {fileID: 1353651659175900153, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
       propertyPath: hintText
       value: You'll gain a slight burst of speed while running by detonating the
-        Magic Blast while it's behind you! The closer your scarf is to the center
-        of the blast, the bigger the boost!
+        Magic Blast while it's behind you! The closer your center of gravity is to
+        the center of the blast, the bigger the boost!
       objectReference: {fileID: 0}
     - target: {fileID: 1353651659175900155, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
       propertyPath: m_RootOrder

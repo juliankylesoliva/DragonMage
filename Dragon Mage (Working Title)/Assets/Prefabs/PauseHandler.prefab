@@ -392,10 +392,9 @@ MonoBehaviour:
       m_Calls: []
   m_text: 'Hold for three seconds to...
 
-    Z / <sprite="CrossFaceButtons" name="EastButton">:
-    Restart Level
+    ???: Restart Level
 
-    Q / <sprite="CrossFaceButtons" name="NorthButton">: Quit to
+    ???: Quit to
     Title Screen'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: a3a8650b6fd9bb04c978844dbc0932d7, type: 2}
@@ -478,6 +477,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4364297243198256775}
   - component: {fileID: 7660225997322628739}
+  - component: {fileID: 4418827874475465446}
   m_Layer: 0
   m_Name: PauseHandler
   m_TagString: Untagged
@@ -514,4 +514,30 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pauseMenu: {fileID: 8227558664281324765}
+  controlPromptText: {fileID: 0}
   holdTime: 3
+--- !u!114 &4418827874475465446
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9176992790525344906}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 80fdb6d6b9a23b04abb5b6b6b408ed19, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  textPromptObj: {fileID: 1681276511893932056}
+  keyboardPrompts:
+  - Keyboard_Z
+  - Keyboard_Q
+  gamepadPrompts:
+  - Gamepad_EFB
+  - Gamepad_NFB
+  rawTextToDisplay: 'Hold for three seconds to...
+
+    [0]: Restart Level
+
+    [1]:
+    Quit to Title Screen'

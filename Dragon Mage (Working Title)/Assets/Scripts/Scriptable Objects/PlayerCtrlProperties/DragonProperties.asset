@@ -57,6 +57,6 @@ MonoBehaviour:
   _crouchTopSpeed: 1.925
   _enableCrouchJump: 0
   _enableSuperJump: 1
-  _superJumpChargeTime: 1
+  _superJumpChargeTime: 0.75
   _superJumpRetentionTime: 3
   _superJumpSpeedMultiplier: 1.75

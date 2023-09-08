@@ -1298,6 +1298,7 @@ GameObject:
   - component: {fileID: 531595331}
   - component: {fileID: 531595333}
   - component: {fileID: 531595332}
+  - component: {fileID: 531595334}
   m_Layer: 0
   m_Name: Controls
   m_TagString: Untagged
@@ -1345,7 +1346,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Z/<sprite="CrossFaceButtons" name="EastButton">: Select'
+  m_text: '???: Select'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: a3a8650b6fd9bb04c978844dbc0932d7, type: 2}
   m_sharedMaterial: {fileID: -6660804504467697159, guid: a3a8650b6fd9bb04c978844dbc0932d7, type: 2}
@@ -1459,6 +1460,24 @@ MeshRenderer:
   m_SortingLayer: 7
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &531595334
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 531595330}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 80fdb6d6b9a23b04abb5b6b6b408ed19, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  textPromptObj: {fileID: 531595332}
+  keyboardPrompts:
+  - Keyboard_Z
+  gamepadPrompts:
+  - Gamepad_EFB
+  rawTextToDisplay: '[0]: Select'
 --- !u!1 &879445845
 GameObject:
   m_ObjectHideFlags: 0
@@ -1654,6 +1673,7 @@ GameObject:
   - component: {fileID: 1030790591}
   - component: {fileID: 1030790593}
   - component: {fileID: 1030790592}
+  - component: {fileID: 1030790594}
   m_Layer: 0
   m_Name: BackControls
   m_TagString: Untagged
@@ -1701,11 +1721,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: '<sprite="DirectionalArrows" name="Left"><sprite="DirectionalArrows" name="Right">:
-    Change Page
+  m_text: '???: Change Page
 
 
-    X/<sprite="CrossFaceButtons" name="SouthButton">: Back'
+    ???: Back'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: a3a8650b6fd9bb04c978844dbc0932d7, type: 2}
   m_sharedMaterial: {fileID: -6660804504467697159, guid: a3a8650b6fd9bb04c978844dbc0932d7, type: 2}
@@ -1819,6 +1838,31 @@ MeshRenderer:
   m_SortingLayer: 7
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &1030790594
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1030790590}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 80fdb6d6b9a23b04abb5b6b6b408ed19, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  textPromptObj: {fileID: 1030790592}
+  keyboardPrompts:
+  - Keyboard_AKL
+  - Keyboard_AKR
+  - Keyboard_X
+  gamepadPrompts:
+  - Gamepad_DPL
+  - Gamepad_DPR
+  - Gamepad_SFB
+  rawTextToDisplay: '[0][1]: Change Page
+
+
+    [2]: Back'
 --- !u!1001 &1291126009
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2334,6 +2378,7 @@ GameObject:
   - component: {fileID: 1648993133}
   - component: {fileID: 1648993135}
   - component: {fileID: 1648993134}
+  - component: {fileID: 1648993136}
   m_Layer: 0
   m_Name: LevelSelectControls
   m_TagString: Untagged
@@ -2381,12 +2426,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: '<sprite="DirectionalArrows" name="Left"><sprite="DirectionalArrows" name="Right">:
-    Select | X/<sprite="CrossFaceButtons" name="SouthButton">: Back
+  m_text: '???: Select | ???: Back
 
 
-    Z/<sprite="CrossFaceButtons"
-    name="EastButton">: Start!'
+    ???: Start!'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: a3a8650b6fd9bb04c978844dbc0932d7, type: 2}
   m_sharedMaterial: {fileID: -6660804504467697159, guid: a3a8650b6fd9bb04c978844dbc0932d7, type: 2}
@@ -2500,6 +2543,33 @@ MeshRenderer:
   m_SortingLayer: 7
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &1648993136
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1648993132}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 80fdb6d6b9a23b04abb5b6b6b408ed19, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  textPromptObj: {fileID: 1648993134}
+  keyboardPrompts:
+  - Keyboard_AKL
+  - Keyboard_AKR
+  - Keyboard_X
+  - Keyboard_Z
+  gamepadPrompts:
+  - Gamepad_DPL
+  - Gamepad_DPR
+  - Gamepad_SFB
+  - Gamepad_EFB
+  rawTextToDisplay: '[0][1]: Select | [2]: Back
+
+
+    [3]: Start!'
 --- !u!1 &1760821977
 GameObject:
   m_ObjectHideFlags: 0

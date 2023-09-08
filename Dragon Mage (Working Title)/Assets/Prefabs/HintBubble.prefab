@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 3206934202421523992}
   - component: {fileID: 3329787606448483553}
   - component: {fileID: 3062901956276934937}
+  - component: {fileID: 257829626762443816}
   m_Layer: 0
   m_Name: InteractPrompt
   m_TagString: Untagged
@@ -100,7 +101,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: V / <sprite="CrossFaceButtons" name="EastButton">
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: a3a8650b6fd9bb04c978844dbc0932d7, type: 2}
   m_sharedMaterial: {fileID: -6660804504467697159, guid: a3a8650b6fd9bb04c978844dbc0932d7, type: 2}
@@ -172,6 +173,24 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_renderer: {fileID: 3329787606448483553}
   m_maskType: 0
+--- !u!114 &257829626762443816
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1265456943529392688}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 80fdb6d6b9a23b04abb5b6b6b408ed19, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  textPromptObj: {fileID: 3062901956276934937}
+  keyboardPrompts:
+  - Keyboard_V
+  gamepadPrompts:
+  - Gamepad_EFB
+  rawTextToDisplay: '[0]'
 --- !u!1 &1353651659175900157
 GameObject:
   m_ObjectHideFlags: 0
@@ -186,6 +205,7 @@ GameObject:
   - component: {fileID: 1353651659175900153}
   - component: {fileID: 1353651659175900134}
   - component: {fileID: 5562612483950719421}
+  - component: {fileID: 9172167358572471345}
   m_Layer: 0
   m_Name: HintBubble
   m_TagString: Untagged
@@ -321,9 +341,7 @@ MonoBehaviour:
   selectedColor: {r: 1, g: 1, b: 1, a: 0.2509804}
   isTextLow: 0
   enableDragonText: 0
-  controlPrompt: {fileID: 3062901956276934937}
-  keyboardInteractPrompt: Keyboard_V
-  gamepadInteractPrompt: Gamepad_EFB
+  controlPrompt: {fileID: 1265456943529392688}
   keyboardPromptsList: []
   gamepadPromptsList: []
   hintText: SAMPLE TEXT
@@ -376,3 +394,19 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 7
+--- !u!114 &9172167358572471345
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1353651659175900157}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 80fdb6d6b9a23b04abb5b6b6b408ed19, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  textPromptObj: {fileID: 3062901956276934937}
+  keyboardPrompts: []
+  gamepadPrompts: []
+  rawTextToDisplay: 

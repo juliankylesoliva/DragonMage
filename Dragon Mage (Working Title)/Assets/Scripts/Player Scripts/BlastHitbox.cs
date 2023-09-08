@@ -98,6 +98,7 @@ public class BlastHitbox : MonoBehaviour
             {
                 if (player != null && (player.attacks.isFireTackleActive || player.damage.isPlayerDamaged)) { return; }
                 Vector2 velocityVec = (other.transform.position - this.transform.position);
+                velocityVec -= other.offset;
                 float distance = velocityVec.magnitude;
                 velocityVec = velocityVec.normalized;
                 velocityVec *= (knockbackStrength / (1f + distance));

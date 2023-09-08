@@ -19,7 +19,6 @@ public class PlayerCollisions : MonoBehaviour
     [SerializeField] float groundCheckRadius = 0.1f;
     [SerializeField] float wallCheckRadius = 0.1f;
     [SerializeField] float headbonkCheckRadius = 0.5f;
-    [SerializeField] float headbonkSpeedThreshold = 0.25f;
     [SerializeField] float slopeCheckDistance = 1f;
     [SerializeField] float ledgeCheckOffset = 0.25f;
     [SerializeField] float ledgeCheckDepth = 0.85f;

@@ -175,8 +175,8 @@ public class PlayerAttacks : MonoBehaviour
             else
             {
                 bool isInteractingWithWall = (player.stateMachine.CurrentState.name == "WallVaulting" || player.stateMachine.CurrentState.name == "WallClimbing");
-                bool wasVaulting = (player.stateMachine.PreviousState.name == "WallVaulting");
-                float calculatedTackleSpeed = Mathf.Min((Mathf.Abs(currentAttackState == AttackState.STARTUP ? (isInteractingWithWall || wasVaulting ? player.jumping.storedWallClimbSpeed : previousHorizontalVelocity) : (isInteractingWithWall ? player.jumping.storedWallClimbSpeed : player.rb2d.velocity.x)) + fireTackleBaseHorizontalSpeed), fireTackleMaxHorizontalSpeed);
+                bool wasInteractingWithWall = (player.stateMachine.PreviousState.name == "WallVaulting" || player.stateMachine.PreviousState.name == "WallClimbing");
+                float calculatedTackleSpeed = Mathf.Min((Mathf.Abs(currentAttackState == AttackState.STARTUP ? (isInteractingWithWall || wasInteractingWithWall ? player.jumping.storedWallClimbSpeed : previousHorizontalVelocity) : (isInteractingWithWall ? player.jumping.storedWallClimbSpeed : player.rb2d.velocity.x)) + fireTackleBaseHorizontalSpeed), fireTackleMaxHorizontalSpeed);
                 calculatedTackleSpeed *= (player.inputVector.x != 0f ? player.inputVector.x : player.movement.GetFacingValue());
                 calculatedTackleSpeed *= (player.stateMachine.CurrentState.name == "WallClimbing" ? -1f : 1f);
                 float verticalComponent = (!player.collisions.IsGrounded && !player.collisions.IsOnASlope && player.inputVector.y < 0f ? -Mathf.Abs(calculatedTackleSpeed) : 0f);

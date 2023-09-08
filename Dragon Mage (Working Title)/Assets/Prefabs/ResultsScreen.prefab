@@ -100,8 +100,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Z / <sprite="CrossFaceButtons" name="EastButton">: REPLAY | Q / <sprite="CrossFaceButtons"
-    name="NorthButton"> TITLE SCREEN'
+  m_text: '???: REPLAY | ??? TITLE SCREEN'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: a3a8650b6fd9bb04c978844dbc0932d7, type: 2}
   m_sharedMaterial: {fileID: -6660804504467697159, guid: a3a8650b6fd9bb04c978844dbc0932d7, type: 2}
@@ -528,6 +527,7 @@ GameObject:
   - component: {fileID: 3716874173842229011}
   - component: {fileID: 4061694363659457781}
   - component: {fileID: 3364351035081605914}
+  - component: {fileID: 3152552032856642547}
   - component: {fileID: 8176112558599245721}
   m_Layer: 0
   m_Name: ResultsScreen
@@ -681,6 +681,26 @@ MonoBehaviour:
   controlPromptText: {fileID: 2972273322604295875}
   fadeInTime: 0.5
   countUpTime: 0.75
+--- !u!114 &3152552032856642547
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4738667161820412837}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 80fdb6d6b9a23b04abb5b6b6b408ed19, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  textPromptObj: {fileID: 2972273322604295875}
+  keyboardPrompts:
+  - Keyboard_Z
+  - Keyboard_Q
+  gamepadPrompts:
+  - Gamepad_EFB
+  - Gamepad_NFB
+  rawTextToDisplay: '[0]: REPLAY | [1]: TITLE SCREEN'
 --- !u!114 &8176112558599245721
 MonoBehaviour:
   m_ObjectHideFlags: 0

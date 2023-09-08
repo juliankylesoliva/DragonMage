@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using TMPro;
 
 public class HintBubble : MonoBehaviour, IInteractable
 {
@@ -10,9 +9,7 @@ public class HintBubble : MonoBehaviour, IInteractable
     [SerializeField] Color selectedColor;
     [SerializeField] bool isTextLow = false;
     [SerializeField] bool enableDragonText = false;
-    [SerializeField] TMP_Text controlPrompt;
-    [SerializeField] string keyboardInteractPrompt = "Keyboard_V";
-    [SerializeField] string gamepadInteractPrompt = "Gamepad_EFB";
+    [SerializeField] GameObject controlPrompt;
     [SerializeField] string[] keyboardPromptsList;
     [SerializeField] string[] gamepadPromptsList;
     [SerializeField, TextArea(15,20)] string hintText = "TEST1";
@@ -44,8 +41,6 @@ public class HintBubble : MonoBehaviour, IInteractable
             string[] promptListToSend = (isUsingKeyboard ? keyboardPromptsList : gamepadPromptsList);
             ScreenText.SetTextReference(TextPromptParser.ParseTextPrompt(textToSend, promptListToSend), isTextLow, this.gameObject);
         }
-
-        if (controlPrompt.gameObject.activeSelf) { controlPrompt.text = $"<sprite=\"ControlGuide\" name=\"{(isUsingKeyboard ? keyboardInteractPrompt : gamepadInteractPrompt)}\">"; }
     }
 
     public void Interact(PlayerCtrl playerSrc)
@@ -60,15 +55,14 @@ public class HintBubble : MonoBehaviour, IInteractable
                 string[] promptListToSend = (isUsingKeyboard ? keyboardPromptsList : gamepadPromptsList);
                 ScreenText.SetTextReference(TextPromptParser.ParseTextPrompt(textToSend, promptListToSend), isTextLow, this.gameObject);
                 spriteRenderer.color = selectedColor;
-                controlPrompt.gameObject.SetActive(false);
+                controlPrompt.SetActive(false);
             }
             else
             {
                 isTextShowing = false;
                 ScreenText.UnsetTextReference(this.gameObject);
                 spriteRenderer.color = Color.white;
-                controlPrompt.gameObject.SetActive(true);
-                controlPrompt.text = $"<sprite=\"ControlGuide\" name=\"{(isUsingKeyboard ? keyboardInteractPrompt : gamepadInteractPrompt)}\">";
+                controlPrompt.SetActive(true);
             }
         }
     }
@@ -80,8 +74,7 @@ public class HintBubble : MonoBehaviour, IInteractable
             PlayerCtrl playerTemp = other.gameObject.GetComponent<PlayerCtrl>();
             if (playerTemp != null) { player = playerTemp; }
             player.interaction.SetInteractableRef(this);
-            controlPrompt.gameObject.SetActive(true);
-            controlPrompt.text = $"<sprite=\"ControlGuide\" name=\"{(isUsingKeyboard ? keyboardInteractPrompt : gamepadInteractPrompt)}\">";
+            controlPrompt.SetActive(true);
         }
     }
 
@@ -94,7 +87,7 @@ public class HintBubble : MonoBehaviour, IInteractable
             isTextShowing = false;
             spriteRenderer.color = Color.white;
             ScreenText.UnsetTextReference(this.gameObject);
-            controlPrompt.gameObject.SetActive(false);
+            controlPrompt.SetActive(false);
         }
     }
 }

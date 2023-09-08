@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 public class PauseHandler : MonoBehaviour
 {
     [SerializeField] GameObject pauseMenu;
+    [SerializeField] TMP_Text controlPromptText;
     [SerializeField] float holdTime = 3f;
 
     public static bool isPaused { get; private set; }
