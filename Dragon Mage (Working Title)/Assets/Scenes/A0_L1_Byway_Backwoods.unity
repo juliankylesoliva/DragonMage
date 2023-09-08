@@ -476,6 +476,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 613261124}
+  - {fileID: 1928424075}
   m_Father: {fileID: 503842637}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -5719,6 +5720,100 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7940826814183255599, guid: 97048d4f782fcd545b906c7a91cb50ca, type: 3}
   m_PrefabInstance: {fileID: 224515083}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &247228273
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 652817443}
+    m_Modifications:
+    - target: {fileID: 1353651659175900153, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: hintText
+      value: Press [0]+[1] to lob the Magic Blast upwards!
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900153, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: gamepadPromptsList.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900153, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: keyboardPromptsList.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900153, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: gamepadPromptsList.Array.data[0]
+      value: Gamepad_DPU
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900153, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: gamepadPromptsList.Array.data[1]
+      value: Gamepad_WFB
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900153, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: keyboardPromptsList.Array.data[0]
+      value: Keyboard_AKU
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900153, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: keyboardPromptsList.Array.data[1]
+      value: Keyboard_X
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900155, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: m_RootOrder
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900155, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900155, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900155, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900155, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900155, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900155, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900155, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900155, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900155, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900155, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900157, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: m_Name
+      value: HintBubble (1)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+--- !u!4 &247228274 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1353651659175900155, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+  m_PrefabInstance: {fileID: 247228273}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &260914169
 GameObject:
   m_ObjectHideFlags: 0
@@ -5751,6 +5846,94 @@ Transform:
   m_Father: {fileID: 280895818}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &268231517
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 1937483700}
+    m_Modifications:
+    - target: {fileID: 1353651659175900153, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: hintText
+      value: 'Hold [0] in midair to glide!
+
+'
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900153, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: gamepadPromptsList.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900153, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: keyboardPromptsList.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900153, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: gamepadPromptsList.Array.data[0]
+      value: Gamepad_SFB
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900153, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: keyboardPromptsList.Array.data[0]
+      value: Keyboard_Z
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900155, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: m_RootOrder
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900155, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 29
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900155, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 3.75
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900155, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900155, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900155, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900155, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900155, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900155, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900155, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900155, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900157, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: m_Name
+      value: HintBubble (1)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+--- !u!4 &268231518 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1353651659175900155, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+  m_PrefabInstance: {fileID: 268231517}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &280895817
 GameObject:
   m_ObjectHideFlags: 0
@@ -12063,6 +12246,39 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2537578544507818594, guid: 869133b1082e075469e9020c55a90989, type: 3}
   m_PrefabInstance: {fileID: 354532737}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &361806334
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 361806335}
+  m_Layer: 0
+  m_Name: Interactables
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &361806335
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 361806334}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1042270674}
+  - {fileID: 740417063}
+  m_Father: {fileID: 1503889058}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &388836384
 GameObject:
   m_ObjectHideFlags: 0
@@ -17244,6 +17460,78 @@ MonoBehaviour:
   m_CameraActivatedEvent:
     m_PersistentCalls:
       m_Calls: []
+--- !u!1001 &528320557
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 1928424075}
+    m_Modifications:
+    - target: {fileID: 1353651659175900153, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: hintText
+      value: You'll gain a slight burst of speed while running by detonating the
+        Magic Blast while it's behind you! The closer your scarf is to the center
+        of the blast, the bigger the boost!
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900155, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: m_RootOrder
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900155, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900155, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -10.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900155, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900155, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900155, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900155, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900155, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900155, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900155, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900155, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900157, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: m_Name
+      value: HintBubble (1)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+--- !u!4 &528320558 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1353651659175900155, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+  m_PrefabInstance: {fileID: 528320557}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &534347745
 GameObject:
   m_ObjectHideFlags: 0
@@ -19130,6 +19418,118 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8293150372936092825, guid: 2aceab037d7a4bf45965be3e860068ea, type: 3}
   m_PrefabInstance: {fileID: 570685105}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &589479738
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 2019811435}
+    m_Modifications:
+    - target: {fileID: 1353651659175900153, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: hintText
+      value: 'Launch yourself horizontally by detonating then jumping as you run
+        past the Magic Blast! You can still control your jump height as you do this.
+        (Hint: Press [0]+[1], hold [2], then press [1] and [3] in quick succession.)'
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900153, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: gamepadPromptsList.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900153, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: keyboardPromptsList.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900153, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: gamepadPromptsList.Array.data[0]
+      value: Gamepad_DPD
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900153, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: gamepadPromptsList.Array.data[1]
+      value: Gamepad_WFB
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900153, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: gamepadPromptsList.Array.data[2]
+      value: Gamepad_DPR
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900153, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: gamepadPromptsList.Array.data[3]
+      value: Gamepad_SFB
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900153, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: keyboardPromptsList.Array.data[0]
+      value: Keyboard_AKD
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900153, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: keyboardPromptsList.Array.data[1]
+      value: Keyboard_X
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900153, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: keyboardPromptsList.Array.data[2]
+      value: Keyboard_AKR
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900153, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: keyboardPromptsList.Array.data[3]
+      value: Keyboard_Z
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900155, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: m_RootOrder
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900155, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 9.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900155, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.75
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900155, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900155, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900155, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900155, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900155, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900155, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900155, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900155, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900157, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: m_Name
+      value: HintBubble
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+--- !u!4 &589479739 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1353651659175900155, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+  m_PrefabInstance: {fileID: 589479738}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &604588060
 GameObject:
   m_ObjectHideFlags: 0
@@ -19378,13 +19778,13 @@ CompositeCollider2D:
         Y: -9999000
       - X: 140001008
         Y: 49999000
-      - X: 160000416
+      - X: 180000416
         Y: 49999000
-      - X: 160000992
+      - X: 180000992
         Y: 49999584
-      - X: 160000992
+      - X: 180000992
         Y: 60000416
-      - X: 160000416
+      - X: 180000416
         Y: 60001000
       - X: 99999592
         Y: 60001000
@@ -19419,8 +19819,8 @@ CompositeCollider2D:
       - {x: 23.999872, y: -0.9999}
       - {x: 14.000101, y: -0.9998706}
       - {x: 14.00013, y: 4.9999}
-      - {x: 16.0001, y: 4.9999876}
-      - {x: 16.000013, y: 6.0001}
+      - {x: 18.0001, y: 4.9999876}
+      - {x: 18.000013, y: 6.0001}
       - {x: 9.9999, y: 6.0000124}
       - {x: 9.99987, y: -0.9999}
       - {x: -1.9999, y: -0.9998706}
@@ -21102,6 +21502,26 @@ Tilemap:
       dummyAlignment: 0
       m_AllTileFlags: 1073741825
   - first: {x: 15, y: 5, z: 0}
+    second:
+      serializedVersion: 2
+      m_TileIndex: 1
+      m_TileSpriteIndex: 4
+      m_TileMatrixIndex: 0
+      m_TileColorIndex: 0
+      m_TileObjectToInstantiateIndex: 65535
+      dummyAlignment: 0
+      m_AllTileFlags: 1073741825
+  - first: {x: 16, y: 5, z: 0}
+    second:
+      serializedVersion: 2
+      m_TileIndex: 1
+      m_TileSpriteIndex: 4
+      m_TileMatrixIndex: 0
+      m_TileColorIndex: 0
+      m_TileObjectToInstantiateIndex: 65535
+      dummyAlignment: 0
+      m_AllTileFlags: 1073741825
+  - first: {x: 17, y: 5, z: 0}
     second:
       serializedVersion: 2
       m_TileIndex: 1
@@ -22855,7 +23275,7 @@ Tilemap:
   m_TileAssetArray:
   - m_RefCount: 0
     m_Data: {fileID: 0}
-  - m_RefCount: 346
+  - m_RefCount: 348
     m_Data: {fileID: 11400000, guid: 2d216ec5f170be3418118fa4e53ce943, type: 2}
   - m_RefCount: 0
     m_Data: {fileID: 0}
@@ -22872,10 +23292,10 @@ Tilemap:
     m_Data: {fileID: 0}
   - m_RefCount: 0
     m_Data: {fileID: 0}
-  - m_RefCount: 328
+  - m_RefCount: 330
     m_Data: {fileID: 21300000, guid: fd0c17dadba98434ca113aa384aa6c91, type: 3}
   m_TileMatrixArray:
-  - m_RefCount: 328
+  - m_RefCount: 330
     m_Data:
       e00: 1
       e01: 0
@@ -22894,7 +23314,7 @@ Tilemap:
       e32: 0
       e33: 1
   m_TileColorArray:
-  - m_RefCount: 328
+  - m_RefCount: 330
     m_Data: {r: 1, g: 1, b: 1, a: 1}
   m_TileObjectToInstantiateArray: []
   m_AnimationFrameRate: 1
@@ -23314,6 +23734,40 @@ MonoBehaviour:
   startWithFadeIn: 1
   startFadeInColor: {r: 0, g: 0, b: 0, a: 1}
   startFadeInTime: 0.5
+--- !u!1 &652817442
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 652817443}
+  m_Layer: 0
+  m_Name: Interactables
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &652817443
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 652817442}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1759545663}
+  - {fileID: 247228274}
+  - {fileID: 1266506084}
+  m_Father: {fileID: 1086595962}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &659714661
 GameObject:
   m_ObjectHideFlags: 0
@@ -23343,6 +23797,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2028738743}
+  - {fileID: 2000282694}
   m_Father: {fileID: 1507853956}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -28005,6 +28460,118 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1001 &740417062
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 361806335}
+    m_Modifications:
+    - target: {fileID: 1353651659175900153, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: hintText
+      value: 'You won''t lose any speed while you''re in the air, so use your glide
+        to carry that speed to your destination! (Hint: You can also boost yourself
+        while gliding by mashing [0] while holding [1], [2], and [3])'
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900153, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: gamepadPromptsList.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900153, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: keyboardPromptsList.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900153, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: gamepadPromptsList.Array.data[0]
+      value: Gamepad_WFB
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900153, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: gamepadPromptsList.Array.data[1]
+      value: Gamepad_DPD
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900153, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: gamepadPromptsList.Array.data[2]
+      value: Gamepad_DPR
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900153, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: gamepadPromptsList.Array.data[3]
+      value: Gamepad_SFB
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900153, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: keyboardPromptsList.Array.data[0]
+      value: Keyboard_X
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900153, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: keyboardPromptsList.Array.data[1]
+      value: Keyboard_AKD
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900153, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: keyboardPromptsList.Array.data[2]
+      value: Keyboard_AKR
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900153, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: keyboardPromptsList.Array.data[3]
+      value: Keyboard_Z
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900155, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: m_RootOrder
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900155, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900155, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 10.75
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900155, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900155, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900155, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900155, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900155, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900155, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900155, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900155, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900157, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: m_Name
+      value: HintBubble (1)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+--- !u!4 &740417063 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1353651659175900155, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+  m_PrefabInstance: {fileID: 740417062}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &763928404
 GameObject:
   m_ObjectHideFlags: 0
@@ -29562,6 +30129,117 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
+--- !u!1001 &872662588
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 2019811435}
+    m_Modifications:
+    - target: {fileID: 1353651659175900153, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: hintText
+      value: 'Run up to your Magic Blast then detonate when it''s under you for extra
+        height! (Hint: Press [0]+[1], hold [2], then press [3]+[1] at the same time.)'
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900153, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: gamepadPromptsList.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900153, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: keyboardPromptsList.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900153, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: gamepadPromptsList.Array.data[0]
+      value: Gamepad_DPD
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900153, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: gamepadPromptsList.Array.data[1]
+      value: Gamepad_WFB
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900153, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: gamepadPromptsList.Array.data[2]
+      value: Gamepad_DPR
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900153, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: gamepadPromptsList.Array.data[3]
+      value: Gamepad_SFB
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900153, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: keyboardPromptsList.Array.data[0]
+      value: Keyboard_AKD
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900153, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: keyboardPromptsList.Array.data[1]
+      value: Keyboard_X
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900153, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: keyboardPromptsList.Array.data[2]
+      value: Keyboard_AKR
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900153, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: keyboardPromptsList.Array.data[3]
+      value: Keyboard_Z
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900155, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: m_RootOrder
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900155, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900155, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900155, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900155, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900155, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900155, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900155, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900155, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900155, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900155, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900157, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: m_Name
+      value: HintBubble (1)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+--- !u!4 &872662589 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1353651659175900155, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+  m_PrefabInstance: {fileID: 872662588}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &874667493
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -29640,6 +30318,41 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2537578544507818594, guid: 869133b1082e075469e9020c55a90989, type: 3}
   m_PrefabInstance: {fileID: 874667493}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &876515899
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 876515900}
+  m_Layer: 0
+  m_Name: Interactables
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &876515900
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 876515899}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1855323679}
+  - {fileID: 961071966}
+  - {fileID: 1949216074}
+  - {fileID: 2117840948}
+  m_Father: {fileID: 2092430872}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &901895945
 GameObject:
   m_ObjectHideFlags: 0
@@ -30699,6 +31412,101 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
+--- !u!1001 &961071965
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 876515900}
+    m_Modifications:
+    - target: {fileID: 1353651659175900153, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: hintText
+      value: Press [0]+[1] to dodge and cross gaps in tight spaces! You can also
+        dodge in midair, but it will send you diagonally downwards...
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900153, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: gamepadPromptsList.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900153, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: keyboardPromptsList.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900153, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: gamepadPromptsList.Array.data[0]
+      value: Gamepad_LB
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900153, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: gamepadPromptsList.Array.data[1]
+      value: Gamepad_WFB
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900153, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: keyboardPromptsList.Array.data[0]
+      value: Keyboard_LCT
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900153, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: keyboardPromptsList.Array.data[1]
+      value: Keyboard_X
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900155, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: m_RootOrder
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900155, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900155, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 7.75
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900155, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900155, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900155, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900155, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900155, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900155, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900155, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900155, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900157, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: m_Name
+      value: HintBubble (1)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+--- !u!4 &961071966 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1353651659175900155, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+  m_PrefabInstance: {fileID: 961071965}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &990722402
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -31020,6 +31828,94 @@ PrefabInstance:
 Transform:
   m_CorrespondingSourceObject: {fileID: 7940826814183255599, guid: 97048d4f782fcd545b906c7a91cb50ca, type: 3}
   m_PrefabInstance: {fileID: 1041173420}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &1042270673
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 361806335}
+    m_Modifications:
+    - target: {fileID: 1353651659175900153, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: hintText
+      value: Conserve the speed you gained from Magic Boosting by pressing [0] as
+        soon as you touch a wall or land on the ground! This is called Speedkicking
+        and Speedhopping, respectively!
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900153, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: gamepadPromptsList.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900153, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: keyboardPromptsList.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900153, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: gamepadPromptsList.Array.data[0]
+      value: Gamepad_SFB
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900153, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: keyboardPromptsList.Array.data[0]
+      value: Keyboard_Z
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900155, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: m_RootOrder
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900155, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 8.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900155, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.75
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900155, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900155, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900155, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900155, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900155, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900155, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900155, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900155, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900157, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: m_Name
+      value: HintBubble
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+--- !u!4 &1042270674 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1353651659175900155, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+  m_PrefabInstance: {fileID: 1042270673}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &1043842713
 GameObject:
@@ -33939,6 +34835,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 789619009}
+  - {fileID: 652817443}
   m_Father: {fileID: 918915016}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -34576,6 +35473,94 @@ Transform:
   m_Father: {fileID: 1574216761}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &1221548285
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 1937483700}
+    m_Modifications:
+    - target: {fileID: 1353651659175900153, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: hintText
+      value: 'Press [0] to jump!
+
+'
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900153, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: gamepadPromptsList.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900153, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: keyboardPromptsList.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900153, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: gamepadPromptsList.Array.data[0]
+      value: Gamepad_SFB
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900153, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: keyboardPromptsList.Array.data[0]
+      value: Keyboard_Z
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900155, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: m_RootOrder
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900155, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 3.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900155, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900155, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900155, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900155, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900155, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900155, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900155, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900155, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900155, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900157, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: m_Name
+      value: HintBubble
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+--- !u!4 &1221548286 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1353651659175900155, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+  m_PrefabInstance: {fileID: 1221548285}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1224505870
 GameObject:
   m_ObjectHideFlags: 0
@@ -35262,6 +36247,100 @@ PrefabInstance:
 Transform:
   m_CorrespondingSourceObject: {fileID: 7940826814183255599, guid: 97048d4f782fcd545b906c7a91cb50ca, type: 3}
   m_PrefabInstance: {fileID: 1266017442}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &1266506083
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 652817443}
+    m_Modifications:
+    - target: {fileID: 1353651659175900153, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: hintText
+      value: Press [0]+[1] to drop the Magic Blast at your feet!
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900153, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: gamepadPromptsList.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900153, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: keyboardPromptsList.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900153, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: gamepadPromptsList.Array.data[0]
+      value: Gamepad_DPD
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900153, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: gamepadPromptsList.Array.data[1]
+      value: Gamepad_WFB
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900153, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: keyboardPromptsList.Array.data[0]
+      value: Keyboard_AKD
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900153, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: keyboardPromptsList.Array.data[1]
+      value: Keyboard_X
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900155, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: m_RootOrder
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900155, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900155, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 3.75
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900155, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900155, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900155, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900155, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900155, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900155, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900155, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900155, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900157, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: m_Name
+      value: HintBubble (2)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+--- !u!4 &1266506084 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1353651659175900155, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+  m_PrefabInstance: {fileID: 1266506083}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1286174388
 PrefabInstance:
@@ -39023,6 +40102,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1519918622}
+  - {fileID: 2019811435}
   m_Father: {fileID: 1434931163}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -41483,6 +42563,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1491027257}
+  - {fileID: 361806335}
   m_Father: {fileID: 99971806}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -41638,6 +42719,101 @@ Transform:
   m_Father: {fileID: 1442264311}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &1533732575
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 2000282694}
+    m_Modifications:
+    - target: {fileID: 1353651659175900153, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: hintText
+      value: Press [0] while rising and holding [1] to start gliding from a shorter
+        height!
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900153, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: gamepadPromptsList.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900153, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: keyboardPromptsList.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900153, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: gamepadPromptsList.Array.data[0]
+      value: Gamepad_RT
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900153, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: gamepadPromptsList.Array.data[1]
+      value: Gamepad_SFB
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900153, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: keyboardPromptsList.Array.data[0]
+      value: Keyboard_LSH
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900153, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: keyboardPromptsList.Array.data[1]
+      value: Keyboard_Z
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900155, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: m_RootOrder
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900155, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900155, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 4.75
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900155, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900155, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900155, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900155, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900155, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900155, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900155, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900155, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900157, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: m_Name
+      value: HintBubble
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+--- !u!4 &1533732576 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1353651659175900155, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+  m_PrefabInstance: {fileID: 1533732575}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1535299421
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -42105,7 +43281,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 1937483700}
   m_Father: {fileID: 1604748343}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -50039,6 +51216,92 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
+--- !u!1001 &1759545662
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 652817443}
+    m_Modifications:
+    - target: {fileID: 1353651659175900153, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: hintText
+      value: Press [0] to throw a Magic Blast! Press it again to detonate it!
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900153, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: gamepadPromptsList.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900153, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: keyboardPromptsList.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900153, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: gamepadPromptsList.Array.data[0]
+      value: Gamepad_WFB
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900153, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: keyboardPromptsList.Array.data[0]
+      value: Keyboard_X
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900155, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: m_RootOrder
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900155, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900155, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900155, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900155, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900155, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900155, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900155, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900155, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900155, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900155, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900157, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: m_Name
+      value: HintBubble
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+--- !u!4 &1759545663 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1353651659175900155, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+  m_PrefabInstance: {fileID: 1759545662}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1759909871
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -53879,6 +55142,93 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
+--- !u!1001 &1855323678
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 876515900}
+    m_Modifications:
+    - target: {fileID: 1353651659175900153, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: hintText
+      value: Hold [0] to crouch! You can still move and jump while crouching, but
+        you won't be able to glide or wall kick.
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900153, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: gamepadPromptsList.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900153, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: keyboardPromptsList.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900153, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: gamepadPromptsList.Array.data[0]
+      value: Gamepad_LB
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900153, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: keyboardPromptsList.Array.data[0]
+      value: Keyboard_LCT
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900155, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: m_RootOrder
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900155, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900155, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900155, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900155, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900155, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900155, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900155, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900155, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900155, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900155, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900157, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: m_Name
+      value: HintBubble
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+--- !u!4 &1855323679 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1353651659175900155, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+  m_PrefabInstance: {fileID: 1855323678}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1858924921
 GameObject:
   m_ObjectHideFlags: 0
@@ -54423,6 +55773,74 @@ Transform:
   m_Father: {fileID: 280895818}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1928424074
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1928424075}
+  m_Layer: 0
+  m_Name: Interactables
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1928424075
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1928424074}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1993521321}
+  - {fileID: 528320558}
+  - {fileID: 2070611610}
+  m_Father: {fileID: 33931687}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1937483699
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1937483700}
+  m_Layer: 0
+  m_Name: Interactables
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1937483700
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1937483699}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1221548286}
+  - {fileID: 268231518}
+  - {fileID: 1977368166}
+  m_Father: {fileID: 1576838775}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1946322483
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -54500,6 +55918,204 @@ PrefabInstance:
 Transform:
   m_CorrespondingSourceObject: {fileID: 2537578544507818594, guid: 869133b1082e075469e9020c55a90989, type: 3}
   m_PrefabInstance: {fileID: 1946322483}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &1949216073
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 876515900}
+    m_Modifications:
+    - target: {fileID: 1353651659175900153, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: hintText
+      value: You may need to crouch in midair or dodge to get into tight spaces above
+        you.
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900153, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: gamepadPromptsList.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900153, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: keyboardPromptsList.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900153, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: gamepadPromptsList.Array.data[0]
+      value: Gamepad_LB
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900153, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: gamepadPromptsList.Array.data[1]
+      value: Gamepad_WFB
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900153, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: keyboardPromptsList.Array.data[0]
+      value: Keyboard_LCT
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900153, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: keyboardPromptsList.Array.data[1]
+      value: Keyboard_X
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900155, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: m_RootOrder
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900155, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900155, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 8.75
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900155, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900155, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900155, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900155, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900155, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900155, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900155, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900155, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900157, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: m_Name
+      value: HintBubble (2)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+--- !u!4 &1949216074 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1353651659175900155, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+  m_PrefabInstance: {fileID: 1949216073}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &1977368165
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 1937483700}
+    m_Modifications:
+    - target: {fileID: 1353651659175900153, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: hintText
+      value: Hold [0] or [1] against a wall in midair to slide down it, then press
+        [2] to perform a wall kick!
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900153, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: gamepadPromptsList.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900153, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: keyboardPromptsList.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900153, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: gamepadPromptsList.Array.data[0]
+      value: Gamepad_DPL
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900153, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: gamepadPromptsList.Array.data[1]
+      value: Gamepad_DPR
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900153, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: gamepadPromptsList.Array.data[2]
+      value: Gamepad_SFB
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900153, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: keyboardPromptsList.Array.data[0]
+      value: Keyboard_AKL
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900153, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: keyboardPromptsList.Array.data[1]
+      value: Keyboard_AKR
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900153, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: keyboardPromptsList.Array.data[2]
+      value: Keyboard_Z
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900155, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: m_RootOrder
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900155, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 44
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900155, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900155, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900155, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900155, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900155, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900155, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900155, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900155, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900155, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900157, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: m_Name
+      value: HintBubble (2)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+--- !u!4 &1977368166 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1353651659175900155, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+  m_PrefabInstance: {fileID: 1977368165}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &1983985995
 GameObject:
@@ -54802,6 +56418,78 @@ TilemapCollider2D:
   m_MaximumTileChangeCount: 1000
   m_ExtrusionFactor: 0
   m_UseDelaunayMesh: 0
+--- !u!1001 &1993521320
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 1928424075}
+    m_Modifications:
+    - target: {fileID: 1353651659175900153, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: hintText
+      value: Detonate the Magic Blast on yourself to do a Magic Boost! You can break
+        reinforced blocks and defeat enemies by touching them while in this state!
+        The effect lasts until you touch the ground, glide, or slow down.
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900155, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: m_RootOrder
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900155, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900155, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.75
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900155, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900155, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900155, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900155, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900155, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900155, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900155, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900155, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900157, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: m_Name
+      value: HintBubble
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+--- !u!4 &1993521321 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1353651659175900155, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+  m_PrefabInstance: {fileID: 1993521320}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1999526027
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -54876,6 +56564,38 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2537578544507818594, guid: 869133b1082e075469e9020c55a90989, type: 3}
   m_PrefabInstance: {fileID: 1999526027}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &2000282693
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2000282694}
+  m_Layer: 0
+  m_Name: Interactables
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2000282694
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2000282693}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1533732576}
+  m_Father: {fileID: 659714662}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2000624510
 GameObject:
   m_ObjectHideFlags: 0
@@ -55148,6 +56868,39 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1768865790}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &2019811434
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2019811435}
+  m_Layer: 0
+  m_Name: Interactables
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2019811435
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2019811434}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 589479739}
+  - {fileID: 872662589}
+  m_Father: {fileID: 1442264311}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2027403781
@@ -55465,6 +57218,109 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7940826814183255599, guid: 97048d4f782fcd545b906c7a91cb50ca, type: 3}
   m_PrefabInstance: {fileID: 2067080786}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &2070611609
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 1928424075}
+    m_Modifications:
+    - target: {fileID: 1353651659175900153, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: hintText
+      value: 'Boost your jump height by jumping and detonating the Magic Blast at
+        the same time! (Hint: Press [0]+[1] then [2]+[1].)'
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900153, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: gamepadPromptsList.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900153, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: keyboardPromptsList.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900153, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: gamepadPromptsList.Array.data[0]
+      value: Gamepad_DPD
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900153, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: gamepadPromptsList.Array.data[1]
+      value: Gamepad_WFB
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900153, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: gamepadPromptsList.Array.data[2]
+      value: Gamepad_SFB
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900153, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: keyboardPromptsList.Array.data[0]
+      value: Keyboard_AKD
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900153, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: keyboardPromptsList.Array.data[1]
+      value: Keyboard_X
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900153, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: keyboardPromptsList.Array.data[2]
+      value: Keyboard_Z
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900155, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: m_RootOrder
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900155, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 13
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900155, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -11.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900155, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900155, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900155, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900155, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900155, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900155, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900155, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900155, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900157, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: m_Name
+      value: HintBubble (2)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+--- !u!4 &2070611610 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1353651659175900155, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+  m_PrefabInstance: {fileID: 2070611609}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2092430871
 GameObject:
   m_ObjectHideFlags: 0
@@ -55494,9 +57350,105 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1907020375}
+  - {fileID: 876515900}
   m_Father: {fileID: 1667881021}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &2117840947
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 876515900}
+    m_Modifications:
+    - target: {fileID: 1353651659175900153, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: hintText
+      value: Press [0] to toggle the attack reticle and get a good idea of where
+        your Magic Blast will end up!
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900153, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: gamepadPromptsList.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900153, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: keyboardPromptsList.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900153, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: gamepadPromptsList.Array.data[0]
+      value: Gamepad_NFB
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900153, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: gamepadPromptsList.Array.data[1]
+      value: Gamepad_WFB
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900153, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: keyboardPromptsList.Array.data[0]
+      value: Keyboard_Q
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900153, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: keyboardPromptsList.Array.data[1]
+      value: Keyboard_X
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900155, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: m_RootOrder
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900155, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900155, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 12.75
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900155, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900155, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900155, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900155, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900155, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900155, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900155, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900155, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1353651659175900157, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: m_Name
+      value: HintBubble (3)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+--- !u!4 &2117840948 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1353651659175900155, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+  m_PrefabInstance: {fileID: 2117840947}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2118671774
 PrefabInstance:
   m_ObjectHideFlags: 0
