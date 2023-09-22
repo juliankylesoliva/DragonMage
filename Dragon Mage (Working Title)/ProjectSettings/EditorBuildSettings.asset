@@ -15,7 +15,7 @@ EditorBuildSettings:
     path: Assets/Scenes/A0_L2_Catharsis_Cliffs.unity
     guid: 4eae693ff53eaf24481a0a92afc4cc40
   - enabled: 1
-    path: Assets/Scenes/A0_L3_Prisoner_Prologue.unity
+    path: Assets/Scenes/A0_L3_Prisoner_Predicament.unity
     guid: 2cda990e2423bbf4892e6590ba056729
   - enabled: 1
     path: Assets/Scenes/A1_L1_Dragoons'_Turf.unity

@@ -33139,7 +33139,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1353651659175900153, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
       propertyPath: hintText
-      value: if you 're sliding down a wall as a mage, switch to your dragon powers
+      value: If you 're sliding down a wall as a mage, switch to your dragon powers
         to start wall climbing immediately!
       objectReference: {fileID: 0}
     - target: {fileID: 1353651659175900155, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
@@ -42805,7 +42805,8 @@ PrefabInstance:
     - target: {fileID: 1353651659175900153, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
       propertyPath: hintText
       value: Your horizontal speed is conserved when you switch movesets--use this
-        to your advantage and you'll go far... literally!
+        to your advantage and you'll go far... literally! Wall vaulting as a dragon
+        will also refresh your gliding time as a mage!
       objectReference: {fileID: 0}
     - target: {fileID: 1353651659175900155, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
       propertyPath: m_RootOrder

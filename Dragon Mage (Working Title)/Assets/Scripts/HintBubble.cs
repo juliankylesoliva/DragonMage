@@ -8,12 +8,10 @@ public class HintBubble : MonoBehaviour, IInteractable
 
     [SerializeField] Color selectedColor;
     [SerializeField] bool isTextLow = false;
-    [SerializeField] bool enableDragonText = false;
     [SerializeField] GameObject controlPrompt;
     [SerializeField] string[] keyboardPromptsList;
     [SerializeField] string[] gamepadPromptsList;
-    [SerializeField, TextArea(15,20)] string hintText = "TEST1";
-    [SerializeField, TextArea(15, 20)] string dragonText = "UNUSED";
+    [SerializeField, TextArea(15,20)] string hintText = "TEST";
 
     private PlayerCtrl player;
     private bool isTextShowing = false;
@@ -36,8 +34,7 @@ public class HintBubble : MonoBehaviour, IInteractable
     {
         if (isTextShowing && ((isUsingKeyboard && !prevIsUsingKeyboard) || (!isUsingKeyboard && prevIsUsingKeyboard)))
         {
-            bool isADragon = (player.form.currentMode == CharacterMode.DRAGON);
-            string textToSend = (enableDragonText && isADragon ? dragonText : hintText);
+            string textToSend = hintText;
             string[] promptListToSend = (isUsingKeyboard ? keyboardPromptsList : gamepadPromptsList);
             ScreenText.SetTextReference(TextPromptParser.ParseTextPrompt(textToSend, promptListToSend), isTextLow, this.gameObject);
         }
@@ -50,8 +47,7 @@ public class HintBubble : MonoBehaviour, IInteractable
             if (!isTextShowing)
             {
                 isTextShowing = true;
-                bool isADragon = (player.form.currentMode == CharacterMode.DRAGON);
-                string textToSend = (enableDragonText && isADragon ? dragonText : hintText);
+                string textToSend = hintText;
                 string[] promptListToSend = (isUsingKeyboard ? keyboardPromptsList : gamepadPromptsList);
                 ScreenText.SetTextReference(TextPromptParser.ParseTextPrompt(textToSend, promptListToSend), isTextLow, this.gameObject);
                 spriteRenderer.color = selectedColor;
