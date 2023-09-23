@@ -33190,6 +33190,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: HintBubble
       objectReference: {fileID: 0}
+    - target: {fileID: 9172167358572471345, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: rawTextToDisplay
+      value: If you 're sliding down a wall as a mage, switch to your dragon powers
+        to start wall climbing immediately!
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -38046,6 +38051,13 @@ PrefabInstance:
       propertyPath: m_Name
       value: HintBubble (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 9172167358572471345, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: rawTextToDisplay
+      value: These are Fate Fragments. Collect enough of them to form a Fate Medallion!
+        The medallion can appear in three possible types depending on the ratio of
+        fragments collected as a mage to a dragon. They won't do much now, but collecting
+        enough of them will decide your fate towards the end of your journey...
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -41643,6 +41655,29 @@ PrefabInstance:
       propertyPath: m_Name
       value: HintBubble
       objectReference: {fileID: 0}
+    - target: {fileID: 9172167358572471345, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: rawTextToDisplay
+      value: Magic Boosting will increase your temper meter! If it goes up to the
+        orange, you'll be locked to your dragon powers! Hold [0] to drain the temper
+        meter if this happens! Breaking blocks or defeating enemies will neutralize
+        the meter!
+      objectReference: {fileID: 0}
+    - target: {fileID: 9172167358572471345, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: gamepadPrompts.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9172167358572471345, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: keyboardPrompts.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9172167358572471345, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: gamepadPrompts.Array.data[0]
+      value: Gamepad_WFB
+      objectReference: {fileID: 0}
+    - target: {fileID: 9172167358572471345, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: keyboardPrompts.Array.data[0]
+      value: Keyboard_X
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -42805,8 +42840,7 @@ PrefabInstance:
     - target: {fileID: 1353651659175900153, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
       propertyPath: hintText
       value: Your horizontal speed is conserved when you switch movesets--use this
-        to your advantage and you'll go far... literally! Wall vaulting as a dragon
-        will also refresh your gliding time as a mage!
+        to your advantage and you'll go far... literally!
       objectReference: {fileID: 0}
     - target: {fileID: 1353651659175900155, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
       propertyPath: m_RootOrder
@@ -42855,6 +42889,11 @@ PrefabInstance:
     - target: {fileID: 1353651659175900157, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
       propertyPath: m_Name
       value: HintBubble
+      objectReference: {fileID: 0}
+    - target: {fileID: 9172167358572471345, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: rawTextToDisplay
+      value: Your horizontal speed is conserved when you switch movesets--use this
+        to your advantage and you'll go far... literally!
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -46674,6 +46713,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: HintBubble
       objectReference: {fileID: 0}
+    - target: {fileID: 9172167358572471345, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: rawTextToDisplay
+      value: Try combining your glide and wing jumps by switching in midair! Wall
+        vaulting as a dragon will also refresh your glide time as a mage!
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -47720,6 +47764,11 @@ PrefabInstance:
     - target: {fileID: 1353651659175900157, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
       propertyPath: m_Name
       value: HintBubble
+      objectReference: {fileID: 0}
+    - target: {fileID: 9172167358572471345, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: rawTextToDisplay
+      value: Specially marked blocks like these can only be destroyed by mage attacks
+        only or dragon attacks only.
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -76614,18 +76663,6 @@ CompositeCollider2D:
       - X: -90001000
         Y: 90000408
       - X: -90001000
-        Y: 29999586
-      - X: -90000408
-        Y: 29998998
-      - X: -80001000
-        Y: 29998998
-      - X: -80001000
-        Y: 10001000
-      - X: -90000408
-        Y: 10001000
-      - X: -90001000
-        Y: 10000415
-      - X: -90001000
         Y: -20000414
       - X: -90000408
         Y: -20001002
@@ -76635,24 +76672,30 @@ CompositeCollider2D:
         Y: -9999000
       - X: -79999000
         Y: 9999000
-      - X: -68124888
+      - X: -70000288
         Y: 9999000
-      - X: -68124656
-        Y: 9999054
-      - X: -59999300
-        Y: 14061733
-      - X: -59999000
-        Y: 14062216
-      - X: -59999000
-        Y: 14374000
-      - X: -59374884
-        Y: 14374000
-      - X: -59374656
-        Y: 14374053
-      - X: -49999300
-        Y: 19061734
+      - X: -70000056
+        Y: 9998856
+      - X: -69999768
+        Y: 9999000
+      - X: -69999584
+        Y: 9999000
+      - X: -69999401
+        Y: 9999183
+      - X: -60000053
+        Y: 14998857
+      - X: -60000052
+        Y: 14998856
+      - X: -49999768
+        Y: 19999000
+      - X: -49999584
+        Y: 19999000
+      - X: -49999401
+        Y: 19999183
+      - X: -49998848
+        Y: 19999460
       - X: -49999000
-        Y: 19062216
+        Y: 20000111
       - X: -49999000
         Y: 30000414
       - X: -49999584
@@ -76660,29 +76703,13 @@ CompositeCollider2D:
       - X: -79999000
         Y: 30001002
       - X: -79999000
-        Y: 89999000
-      - X: -79062296
-        Y: 89999000
-      - X: -79061936
-        Y: 89999152
-      - X: -69999152
-        Y: 99061936
-      - X: -69999000
-        Y: 99062296
-      - X: -69999000
+        Y: 89999584
+      - X: -69999576
         Y: 99999000
-      - X: 9999000
+      - X: 9999580
         Y: 99999000
-      - X: 9999000
-        Y: 99062296
-      - X: 9999152
-        Y: 99061936
-      - X: 19061934
-        Y: 89999152
-      - X: 19062300
-        Y: 89999000
       - X: 19999000
-        Y: 89999000
+        Y: 89999582
       - X: 19999000
         Y: 79999584
       - X: 19999586
@@ -76720,29 +76747,18 @@ CompositeCollider2D:
       - {x: -8.0001, y: 10.000011}
       - {x: -8.00013, y: 9.0001}
       - {x: -9.0001, y: 9.000011}
-      - {x: -9.000011, y: 2.9998999}
-      - {x: -8.0001, y: 2.9998705}
-      - {x: -8.00013, y: 1.0001}
-      - {x: -9.0001, y: 1.0000122}
       - {x: -9.000011, y: -2.0001001}
     - - {x: 1.9999, y: -0.9998706}
       - {x: -7.9999, y: -0.9998706}
       - {x: -7.9998703, y: 0.9999}
-      - {x: -6.81246, y: 0.9999081}
-      - {x: -5.9999, y: 1.4062382}
-      - {x: -5.9998703, y: 1.4374}
-      - {x: -5.93746, y: 1.437408}
-      - {x: -4.9999, y: 1.9062382}
+      - {x: -6.9999347, y: 0.999921}
+      - {x: -4.9999, y: 2.0000277}
       - {x: -4.9999876, y: 3.0001001}
       - {x: -7.9999, y: 3.0001297}
-      - {x: -7.9998703, y: 8.9999}
-      - {x: -7.9061856, y: 8.999924}
-      - {x: -6.9999, y: 9.90624}
-      - {x: -6.9998703, y: 9.9999}
-      - {x: 0.9999, y: 9.99987}
-      - {x: 0.9999228, y: 9.906186}
-      - {x: 1.9062408, y: 8.9999}
-      - {x: 1.9999, y: 8.99987}
+      - {x: -7.9998927, y: 8.999966}
+      - {x: -6.999947, y: 9.9999}
+      - {x: 0.9999653, y: 9.999893}
+      - {x: 1.9999, y: 8.999948}
       - {x: 1.9999881, y: 7.9999}
       - {x: 3.9999, y: 7.9998703}
       - {x: 3.9999876, y: 6.9999}
@@ -77034,6 +77050,16 @@ Tilemap:
       m_TileObjectToInstantiateIndex: 65535
       dummyAlignment: 0
       m_AllTileFlags: 1073741825
+  - first: {x: -9, y: 1, z: 0}
+    second:
+      serializedVersion: 2
+      m_TileIndex: 1
+      m_TileSpriteIndex: 0
+      m_TileMatrixIndex: 0
+      m_TileColorIndex: 0
+      m_TileObjectToInstantiateIndex: 65535
+      dummyAlignment: 0
+      m_AllTileFlags: 1073741825
   - first: {x: -8, y: 1, z: 0}
     second:
       serializedVersion: 2
@@ -77065,6 +77091,16 @@ Tilemap:
       dummyAlignment: 0
       m_AllTileFlags: 1073741825
   - first: {x: 2, y: 1, z: 0}
+    second:
+      serializedVersion: 2
+      m_TileIndex: 1
+      m_TileSpriteIndex: 0
+      m_TileMatrixIndex: 0
+      m_TileColorIndex: 0
+      m_TileObjectToInstantiateIndex: 65535
+      dummyAlignment: 0
+      m_AllTileFlags: 1073741825
+  - first: {x: -9, y: 2, z: 0}
     second:
       serializedVersion: 2
       m_TileIndex: 1
@@ -77478,7 +77514,7 @@ Tilemap:
   m_TileAssetArray:
   - m_RefCount: 1
     m_Data: {fileID: 11400000, guid: e5828b855b21f0040956208fb505fe12, type: 2}
-  - m_RefCount: 74
+  - m_RefCount: 76
     m_Data: {fileID: 11400000, guid: 2d216ec5f170be3418118fa4e53ce943, type: 2}
   - m_RefCount: 1
     m_Data: {fileID: 11400000, guid: 5986c336ae87f3242bd55171b14a7158, type: 2}
@@ -77487,7 +77523,7 @@ Tilemap:
   - m_RefCount: 1
     m_Data: {fileID: 11400000, guid: ef195f3c358d0544ab81ff16e65156d9, type: 2}
   m_TileSpriteArray:
-  - m_RefCount: 56
+  - m_RefCount: 58
     m_Data: {fileID: 21300000, guid: fd0c17dadba98434ca113aa384aa6c91, type: 3}
   - m_RefCount: 1
     m_Data: {fileID: 647192907, guid: d7289a8ee93fac743bea1cae5d1f6d30, type: 3}
@@ -77498,7 +77534,7 @@ Tilemap:
   - m_RefCount: 1
     m_Data: {fileID: 194397637, guid: d7289a8ee93fac743bea1cae5d1f6d30, type: 3}
   m_TileMatrixArray:
-  - m_RefCount: 60
+  - m_RefCount: 62
     m_Data:
       e00: 1
       e01: 0
@@ -77517,7 +77553,7 @@ Tilemap:
       e32: 0
       e33: 1
   m_TileColorArray:
-  - m_RefCount: 60
+  - m_RefCount: 62
     m_Data: {r: 1, g: 1, b: 1, a: 1}
   m_TileObjectToInstantiateArray: []
   m_AnimationFrameRate: 1
@@ -86042,6 +86078,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: HintBubble (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 9172167358572471345, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: rawTextToDisplay
+      value: The exit is above you! Try chaining moves from both movesets to get
+        to the top!
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -86137,6 +86178,36 @@ PrefabInstance:
     - target: {fileID: 1353651659175900157, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
       propertyPath: m_Name
       value: HintBubble
+      objectReference: {fileID: 0}
+    - target: {fileID: 9172167358572471345, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: rawTextToDisplay
+      value: Fire Tackling and spitting fireballs will drain your temper meter! If
+        it goes down to the blue, you'll be locked to your mage powers! Mash [0]
+        while holding [1] to build the temper meter back up if this happens!
+      objectReference: {fileID: 0}
+    - target: {fileID: 9172167358572471345, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: gamepadPrompts.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 9172167358572471345, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: keyboardPrompts.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 9172167358572471345, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: gamepadPrompts.Array.data[0]
+      value: Gamepad_WFB
+      objectReference: {fileID: 0}
+    - target: {fileID: 9172167358572471345, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: gamepadPrompts.Array.data[1]
+      value: Gamepad_DPD
+      objectReference: {fileID: 0}
+    - target: {fileID: 9172167358572471345, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: keyboardPrompts.Array.data[0]
+      value: Keyboard_X
+      objectReference: {fileID: 0}
+    - target: {fileID: 9172167358572471345, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: keyboardPrompts.Array.data[1]
+      value: Keyboard_AKD
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -94986,6 +95057,28 @@ PrefabInstance:
     - target: {fileID: 1353651659175900157, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
       propertyPath: m_Name
       value: HintBubble
+      objectReference: {fileID: 0}
+    - target: {fileID: 9172167358572471345, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: rawTextToDisplay
+      value: Press [0] to switch between your mage and dragon powers! Stick to your
+        favorite moveset or adapt to the situation! Watch the temper meter on the
+        upper left, though... You can only switch if it's in the green.
+      objectReference: {fileID: 0}
+    - target: {fileID: 9172167358572471345, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: gamepadPrompts.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9172167358572471345, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: keyboardPrompts.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9172167358572471345, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: gamepadPrompts.Array.data[0]
+      value: Gamepad_RB
+      objectReference: {fileID: 0}
+    - target: {fileID: 9172167358572471345, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: keyboardPrompts.Array.data[0]
+      value: Keyboard_C
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

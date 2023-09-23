@@ -20,7 +20,7 @@ public class TextPromptParser : MonoBehaviour
         UpdateTextObject();
     }
 
-    public static string ParseTextPrompt(string rawString, string[] promptArray)
+    public string ParseTextPrompt(string rawString, string[] promptArray)
     {
         string retStr = rawString;
 

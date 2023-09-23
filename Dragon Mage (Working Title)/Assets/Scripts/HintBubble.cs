@@ -5,13 +5,11 @@ using UnityEngine;
 public class HintBubble : MonoBehaviour, IInteractable
 {
     SpriteRenderer spriteRenderer;
+    TextPromptParser textPromptParser;
 
     [SerializeField] Color selectedColor;
     [SerializeField] bool isTextLow = false;
     [SerializeField] GameObject controlPrompt;
-    [SerializeField] string[] keyboardPromptsList;
-    [SerializeField] string[] gamepadPromptsList;
-    [SerializeField, TextArea(15,20)] string hintText = "TEST";
 
     private PlayerCtrl player;
     private bool isTextShowing = false;
@@ -21,6 +19,7 @@ public class HintBubble : MonoBehaviour, IInteractable
     void Awake()
     {
         spriteRenderer = this.gameObject.GetComponent<SpriteRenderer>();
+        textPromptParser = this.gameObject.GetComponent<TextPromptParser>();
     }
 
     void Update()
@@ -34,9 +33,9 @@ public class HintBubble : MonoBehaviour, IInteractable
     {
         if (isTextShowing && ((isUsingKeyboard && !prevIsUsingKeyboard) || (!isUsingKeyboard && prevIsUsingKeyboard)))
         {
-            string textToSend = hintText;
-            string[] promptListToSend = (isUsingKeyboard ? keyboardPromptsList : gamepadPromptsList);
-            ScreenText.SetTextReference(TextPromptParser.ParseTextPrompt(textToSend, promptListToSend), isTextLow, this.gameObject);
+            //string textToSend = hintText;
+            //string[] promptListToSend = (isUsingKeyboard ? keyboardPromptsList : gamepadPromptsList);
+            ScreenText.SetTextReference(textPromptParser.GetParsedText(), isTextLow, this.gameObject);
         }
     }
 
@@ -47,9 +46,9 @@ public class HintBubble : MonoBehaviour, IInteractable
             if (!isTextShowing)
             {
                 isTextShowing = true;
-                string textToSend = hintText;
-                string[] promptListToSend = (isUsingKeyboard ? keyboardPromptsList : gamepadPromptsList);
-                ScreenText.SetTextReference(TextPromptParser.ParseTextPrompt(textToSend, promptListToSend), isTextLow, this.gameObject);
+                //string textToSend = hintText;
+                //string[] promptListToSend = (isUsingKeyboard ? keyboardPromptsList : gamepadPromptsList);
+                ScreenText.SetTextReference(textPromptParser.GetParsedText(), isTextLow, this.gameObject);
                 spriteRenderer.color = selectedColor;
                 controlPrompt.SetActive(false);
             }

@@ -516,7 +516,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: '(1/2)
+  m_text: '(1/3)
 
 
     Font: <i>PressStart2P</i> by CodeMan38
@@ -531,26 +531,52 @@ MonoBehaviour:
 
 
     Characters, pixel-art,
-    sprites, tiles, animations, programming, and level design by me: Kaysun!<page>(2/2)
+    sprites, tiles, animations, programming, and level design by me: Kaysun!<page>(2/3)
 
 
     Music:
 
 
-    <i>Eight
-    Bit Dungeon Monster Stomp</i> by TeknoAXE is licensed under CC BY 4.0.
+    <i>17092017</i>
+    by RoccoW is licensed under CC BY 3.0.
 
-    <size=2>Trimmed
-    off the end to make it loopable.
+    <size=2>No changes were made.
 
-    License: https://creativecommons.org/licenses/by/4.0/
+    License:
+    https://creativecommons.org/licenses/by/3.0/
+
+    Song Link: https://roccow.bandcamp.com/track/17092017</size>
+
+
+    <i>New
+    Game Minus</i> by RoccoW is licensed under CC BY 3.0.
+
+    <size=2>Trimmed off
+    the end to make it loopable.
+
+    License: https://creativecommons.org/licenses/by/3.0/
 
     Song
-    Link: https://teknoaxe.com/Link_Code_3.php?q=142</size>
+    Link: https://soundcloud.com/roccow/new-game-minus</size><page>(3/3)
 
 
-    <i>Up In My Jam
-    (All Of A Sudden)</i> by Kubbi is licensed under CC BY-SA 3.0.
+    Music
+    (continued):
+
+
+    <i>Eight Bit Dungeon Monster Stomp</i> by TeknoAXE is licensed
+    under CC BY 4.0.
+
+    <size=2>Trimmed off the end to make it loopable.
+
+    License:
+    https://creativecommons.org/licenses/by/4.0/
+
+    Song Link: https://teknoaxe.com/Link_Code_3.php?q=142</size>
+
+
+    <i>Up
+    In My Jam (All Of A Sudden)</i> by Kubbi is licensed under CC BY-SA 3.0.
 
     <size=2>Trimmed
     off the end and split at the start to make an intro and loop.
@@ -2629,7 +2655,7 @@ MonoBehaviour:
   levelSelectSubscreen: {fileID: 1343219099}
   creditsSubscreen: {fileID: 121208072}
   creditsText: {fileID: 191952276}
-  creditPages: 2
+  creditPages: 3
 --- !u!1 &1890741425
 GameObject:
   m_ObjectHideFlags: 0

@@ -201,6 +201,28 @@ PrefabInstance:
       propertyPath: m_Name
       value: HintBubble
       objectReference: {fileID: 0}
+    - target: {fileID: 9172167358572471345, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: rawTextToDisplay
+      value: When you reach a ledge while wall climbing, you'll pop up a bit. While
+        you're still rising in this state, press [0] (or hold [0]) while holding
+        forward to vault! Doing so replenishes your winged jumps!
+      objectReference: {fileID: 0}
+    - target: {fileID: 9172167358572471345, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: gamepadPrompts.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9172167358572471345, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: keyboardPrompts.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9172167358572471345, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: gamepadPrompts.Array.data[0]
+      value: Gamepad_SFB
+      objectReference: {fileID: 0}
+    - target: {fileID: 9172167358572471345, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: keyboardPrompts.Array.data[0]
+      value: Keyboard_Z
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -573,6 +595,27 @@ PrefabInstance:
     - target: {fileID: 1353651659175900157, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
       propertyPath: m_Name
       value: HintBubble (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 9172167358572471345, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: rawTextToDisplay
+      value: Hold forward before pressing [0] to increase your Fire Tackle's horizontal
+        momentum!
+      objectReference: {fileID: 0}
+    - target: {fileID: 9172167358572471345, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: gamepadPrompts.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9172167358572471345, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: keyboardPrompts.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9172167358572471345, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: gamepadPrompts.Array.data[0]
+      value: Gamepad_WFB
+      objectReference: {fileID: 0}
+    - target: {fileID: 9172167358572471345, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: keyboardPrompts.Array.data[0]
+      value: Keyboard_X
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -8019,6 +8062,36 @@ PrefabInstance:
     - target: {fileID: 1353651659175900157, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
       propertyPath: m_Name
       value: HintBubble (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 9172167358572471345, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: rawTextToDisplay
+      value: Press [0] while holding forward and [1] to cancel your slide with a
+        jump! You can also cancel your Fire Tackle with a jump by pressing [0] while
+        holding forward during its endlag.
+      objectReference: {fileID: 0}
+    - target: {fileID: 9172167358572471345, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: gamepadPrompts.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 9172167358572471345, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: keyboardPrompts.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 9172167358572471345, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: gamepadPrompts.Array.data[0]
+      value: Gamepad_SFB
+      objectReference: {fileID: 0}
+    - target: {fileID: 9172167358572471345, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: gamepadPrompts.Array.data[1]
+      value: Gamepad_LB
+      objectReference: {fileID: 0}
+    - target: {fileID: 9172167358572471345, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: keyboardPrompts.Array.data[0]
+      value: Keyboard_Z
+      objectReference: {fileID: 0}
+    - target: {fileID: 9172167358572471345, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: keyboardPrompts.Array.data[1]
+      value: Keyboard_LCT
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -22306,6 +22379,28 @@ PrefabInstance:
       propertyPath: m_Name
       value: HintBubble (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 9172167358572471345, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: rawTextToDisplay
+      value: Press [0] in midair to do a winged jump! You only get four of these
+        every time you leave the ground, so make the most of them by spacing them
+        out!
+      objectReference: {fileID: 0}
+    - target: {fileID: 9172167358572471345, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: gamepadPrompts.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9172167358572471345, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: keyboardPrompts.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9172167358572471345, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: gamepadPrompts.Array.data[0]
+      value: Gamepad_SFB
+      objectReference: {fileID: 0}
+    - target: {fileID: 9172167358572471345, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: keyboardPrompts.Array.data[0]
+      value: Keyboard_Z
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -22834,6 +22929,28 @@ PrefabInstance:
     - target: {fileID: 1353651659175900157, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
       propertyPath: m_Name
       value: HintBubble
+      objectReference: {fileID: 0}
+    - target: {fileID: 9172167358572471345, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: rawTextToDisplay
+      value: 'Hold [0] when starting a Fire Tackle to rise up during the tackle!
+        (Hint: You can climb this wall as soon as your Fire Tackle ends by holding
+        the direction against the wall you''re going towards.)'
+      objectReference: {fileID: 0}
+    - target: {fileID: 9172167358572471345, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: gamepadPrompts.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9172167358572471345, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: keyboardPrompts.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9172167358572471345, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: gamepadPrompts.Array.data[0]
+      value: Gamepad_DPU
+      objectReference: {fileID: 0}
+    - target: {fileID: 9172167358572471345, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: keyboardPrompts.Array.data[0]
+      value: Keyboard_AKU
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -49728,6 +49845,36 @@ PrefabInstance:
       propertyPath: m_Name
       value: HintBubble (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 9172167358572471345, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: rawTextToDisplay
+      value: Hold [0] when you start a Fire Tackle to give yourself more time to
+        aim! You can even switch directions before launching the attack! Combine
+        this with the attack reticle ([1]) to line up your attacks properly!
+      objectReference: {fileID: 0}
+    - target: {fileID: 9172167358572471345, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: gamepadPrompts.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 9172167358572471345, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: keyboardPrompts.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 9172167358572471345, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: gamepadPrompts.Array.data[0]
+      value: Gamepad_WFB
+      objectReference: {fileID: 0}
+    - target: {fileID: 9172167358572471345, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: gamepadPrompts.Array.data[1]
+      value: Gamepad_NFB
+      objectReference: {fileID: 0}
+    - target: {fileID: 9172167358572471345, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: keyboardPrompts.Array.data[0]
+      value: Keyboard_X
+      objectReference: {fileID: 0}
+    - target: {fileID: 9172167358572471345, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: keyboardPrompts.Array.data[1]
+      value: Keyboard_Q
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -49785,7 +49932,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 621922538701679882, guid: a9d278d3cd42411429bdd542dc36e670, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1871194470575354862, guid: a9d278d3cd42411429bdd542dc36e670, type: 3}
       propertyPath: m_RootOrder
@@ -49834,14 +49981,18 @@ PrefabInstance:
     - target: {fileID: 5305743783979617659, guid: a9d278d3cd42411429bdd542dc36e670, type: 3}
       propertyPath: loopClip
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 8300000, guid: 0d78d34d533deda4fb20a74eae09c440, type: 3}
     - target: {fileID: 5305743783979617659, guid: a9d278d3cd42411429bdd542dc36e670, type: 3}
       propertyPath: introClip
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 8300000, guid: 0d78d34d533deda4fb20a74eae09c440, type: 3}
     - target: {fileID: 5305743783979617659, guid: a9d278d3cd42411429bdd542dc36e670, type: 3}
       propertyPath: m_Enabled
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5305743783979617659, guid: a9d278d3cd42411429bdd542dc36e670, type: 3}
+      propertyPath: baseVolume
+      value: 0.7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -49853,6 +50004,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1871194470575354862, guid: a9d278d3cd42411429bdd542dc36e670, type: 3}
   m_PrefabInstance: {fileID: 640433044}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &640433046 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5305743783979617659, guid: a9d278d3cd42411429bdd542dc36e670, type: 3}
+  m_PrefabInstance: {fileID: 640433044}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b447c29e5fad454082531efa4898ea0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &650838311
 GameObject:
   m_ObjectHideFlags: 0
@@ -50333,6 +50495,28 @@ PrefabInstance:
       propertyPath: m_Name
       value: HintBubble
       objectReference: {fileID: 0}
+    - target: {fileID: 9172167358572471345, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: rawTextToDisplay
+      value: You can't crouch jump as a dragon, but if you crouch in place for about
+        a second, you'll charge a Super Jump! Press [0] on the ground while it's
+        charged to jump higher than normal!
+      objectReference: {fileID: 0}
+    - target: {fileID: 9172167358572471345, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: gamepadPrompts.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9172167358572471345, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: keyboardPrompts.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9172167358572471345, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: gamepadPrompts.Array.data[0]
+      value: Gamepad_SFB
+      objectReference: {fileID: 0}
+    - target: {fileID: 9172167358572471345, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: keyboardPrompts.Array.data[0]
+      value: Keyboard_Z
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -50436,7 +50620,7 @@ Transform:
   - {fileID: 959546668}
   - {fileID: 1679678376}
   m_Father: {fileID: 0}
-  m_RootOrder: 12
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &717383634
 PrefabInstance:
@@ -52011,6 +52195,27 @@ PrefabInstance:
     - target: {fileID: 1353651659175900157, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
       propertyPath: m_Name
       value: HintBubble
+      objectReference: {fileID: 0}
+    - target: {fileID: 9172167358572471345, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: rawTextToDisplay
+      value: Press [0] to jump! As a dragon, your jump doesn't go as high, and your
+        jump height is fixed.
+      objectReference: {fileID: 0}
+    - target: {fileID: 9172167358572471345, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: gamepadPrompts.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9172167358572471345, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: keyboardPrompts.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9172167358572471345, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: gamepadPrompts.Array.data[0]
+      value: Gamepad_SFB
+      objectReference: {fileID: 0}
+    - target: {fileID: 9172167358572471345, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: keyboardPrompts.Array.data[0]
+      value: Keyboard_Z
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -54131,7 +54336,8 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1353651659175900153, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
       propertyPath: hintText
-      value: Press [0] to do a Fire Tackle!
+      value: Press [0] to do a Fire Tackle! This travels along slopes and crosses
+        over gaps!
       objectReference: {fileID: 0}
     - target: {fileID: 1353651659175900153, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
       propertyPath: gamepadPromptsList.Array.size
@@ -54196,6 +54402,27 @@ PrefabInstance:
     - target: {fileID: 1353651659175900157, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
       propertyPath: m_Name
       value: HintBubble
+      objectReference: {fileID: 0}
+    - target: {fileID: 9172167358572471345, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: rawTextToDisplay
+      value: Press [0] to do a Fire Tackle! This travels along slopes and crosses
+        over gaps!
+      objectReference: {fileID: 0}
+    - target: {fileID: 9172167358572471345, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: gamepadPrompts.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9172167358572471345, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: keyboardPrompts.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9172167358572471345, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: gamepadPrompts.Array.data[0]
+      value: Gamepad_WFB
+      objectReference: {fileID: 0}
+    - target: {fileID: 9172167358572471345, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: keyboardPrompts.Array.data[0]
+      value: Keyboard_X
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -54267,6 +54494,11 @@ PrefabInstance:
     - target: {fileID: 1353651659175900157, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
       propertyPath: m_Name
       value: HintBubble
+      objectReference: {fileID: 0}
+    - target: {fileID: 9172167358572471345, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: rawTextToDisplay
+      value: Hold forward when you do a winged jump to slightly increase your jump
+        height and speed! Remember to space them out for maximum distance!
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -54712,6 +54944,35 @@ PrefabInstance:
       propertyPath: m_Name
       value: HintBubble
       objectReference: {fileID: 0}
+    - target: {fileID: 9172167358572471345, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: rawTextToDisplay
+      value: Press [0] while sliding to cancel your slide into a Fire Tackle! (You
+        must be holding [1] when you press [0].)
+      objectReference: {fileID: 0}
+    - target: {fileID: 9172167358572471345, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: gamepadPrompts.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 9172167358572471345, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: keyboardPrompts.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 9172167358572471345, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: gamepadPrompts.Array.data[0]
+      value: Gamepad_WFB
+      objectReference: {fileID: 0}
+    - target: {fileID: 9172167358572471345, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: gamepadPrompts.Array.data[1]
+      value: Gamepad_LB
+      objectReference: {fileID: 0}
+    - target: {fileID: 9172167358572471345, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: keyboardPrompts.Array.data[0]
+      value: Keyboard_X
+      objectReference: {fileID: 0}
+    - target: {fileID: 9172167358572471345, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: keyboardPrompts.Array.data[1]
+      value: Keyboard_LCT
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -54751,6 +55012,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 211048829}
+  - {fileID: 1786901955}
   m_Father: {fileID: 650838313}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -54913,6 +55175,29 @@ PrefabInstance:
     - target: {fileID: 1353651659175900157, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
       propertyPath: m_Name
       value: HintBubble
+      objectReference: {fileID: 0}
+    - target: {fileID: 9172167358572471345, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: rawTextToDisplay
+      value: After activating a Fire Tackle, press [0] again (or hold [0]) right
+        before the tackle ends to spit out a fireball that can destroy reinforced
+        blocks and go through walls! Make sure you have enough room when you tackle,
+        though.
+      objectReference: {fileID: 0}
+    - target: {fileID: 9172167358572471345, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: gamepadPrompts.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9172167358572471345, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: keyboardPrompts.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9172167358572471345, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: gamepadPrompts.Array.data[0]
+      value: Gamepad_WFB
+      objectReference: {fileID: 0}
+    - target: {fileID: 9172167358572471345, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: keyboardPrompts.Array.data[0]
+      value: Keyboard_X
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -60005,6 +60290,28 @@ PrefabInstance:
       propertyPath: m_Name
       value: HintBubble (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 9172167358572471345, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: rawTextToDisplay
+      value: Keep in mind that if you climb a wall, you cannot wall climb again until
+        you touch the ground. You may want to hold [0] before you reach a ledge to
+        snap up to it and keep moving.
+      objectReference: {fileID: 0}
+    - target: {fileID: 9172167358572471345, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: gamepadPrompts.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9172167358572471345, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: keyboardPrompts.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9172167358572471345, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: gamepadPrompts.Array.data[0]
+      value: Gamepad_RT
+      objectReference: {fileID: 0}
+    - target: {fileID: 9172167358572471345, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: keyboardPrompts.Array.data[0]
+      value: Keyboard_LSH
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -64057,6 +64364,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: HintBubble (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 9172167358572471345, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: rawTextToDisplay
+      value: You can start a Fire Tackle while wall climbing!
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -64246,6 +64557,35 @@ PrefabInstance:
     - target: {fileID: 1353651659175900157, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
       propertyPath: m_Name
       value: HintBubble (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 9172167358572471345, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: rawTextToDisplay
+      value: Hold [0] or [1] against the wall you're facing in midair to wall climb!
+        Please note that you can't change your facing direction in midair as a dragon.
+      objectReference: {fileID: 0}
+    - target: {fileID: 9172167358572471345, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: gamepadPrompts.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 9172167358572471345, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: keyboardPrompts.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 9172167358572471345, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: gamepadPrompts.Array.data[0]
+      value: Gamepad_DPL
+      objectReference: {fileID: 0}
+    - target: {fileID: 9172167358572471345, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: gamepadPrompts.Array.data[1]
+      value: Gamepad_DPR
+      objectReference: {fileID: 0}
+    - target: {fileID: 9172167358572471345, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: keyboardPrompts.Array.data[0]
+      value: Keyboard_AKL
+      objectReference: {fileID: 0}
+    - target: {fileID: 9172167358572471345, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: keyboardPrompts.Array.data[1]
+      value: Keyboard_AKR
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -75495,6 +75835,27 @@ PrefabInstance:
     - target: {fileID: 1353651659175900157, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
       propertyPath: m_Name
       value: HintBubble (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 9172167358572471345, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: rawTextToDisplay
+      value: Hold [0] when starting a Fire Tackle in midair to dive diagonally down
+        during the tackle!
+      objectReference: {fileID: 0}
+    - target: {fileID: 9172167358572471345, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: gamepadPrompts.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9172167358572471345, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: keyboardPrompts.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9172167358572471345, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: gamepadPrompts.Array.data[0]
+      value: Gamepad_DPD
+      objectReference: {fileID: 0}
+    - target: {fileID: 9172167358572471345, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: keyboardPrompts.Array.data[0]
+      value: Keyboard_AKD
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -86955,6 +87316,26 @@ PrefabInstance:
       propertyPath: m_Name
       value: HintBubble (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 9172167358572471345, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: rawTextToDisplay
+      value: You can also start a Fire Tackle in midair!
+      objectReference: {fileID: 0}
+    - target: {fileID: 9172167358572471345, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: gamepadPrompts.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9172167358572471345, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: keyboardPrompts.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9172167358572471345, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: gamepadPrompts.Array.data[0]
+      value: Gamepad_WFB
+      objectReference: {fileID: 0}
+    - target: {fileID: 9172167358572471345, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: keyboardPrompts.Array.data[0]
+      value: Keyboard_X
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -94181,19 +94562,19 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 0}
+    m_TransformParent: {fileID: 1016778209}
     m_Modifications:
     - target: {fileID: 9151918476160911040, guid: 17de6d88538bf964ba9c0d26a2497614, type: 3}
       propertyPath: m_RootOrder
-      value: 11
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 9151918476160911040, guid: 17de6d88538bf964ba9c0d26a2497614, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 388.5
+      value: 48.5
       objectReference: {fileID: 0}
     - target: {fileID: 9151918476160911040, guid: 17de6d88538bf964ba9c0d26a2497614, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 15
+      value: -13
       objectReference: {fileID: 0}
     - target: {fileID: 9151918476160911040, guid: 17de6d88538bf964ba9c0d26a2497614, type: 3}
       propertyPath: m_LocalPosition.z
@@ -94205,15 +94586,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9151918476160911040, guid: 17de6d88538bf964ba9c0d26a2497614, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 9151918476160911040, guid: 17de6d88538bf964ba9c0d26a2497614, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 9151918476160911040, guid: 17de6d88538bf964ba9c0d26a2497614, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 9151918476160911040, guid: 17de6d88538bf964ba9c0d26a2497614, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -94237,7 +94618,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9151918476160911055, guid: 17de6d88538bf964ba9c0d26a2497614, type: 3}
       propertyPath: OnLevelEnd.m_PersistentCalls.m_Calls.Array.size
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 9151918476160911055, guid: 17de6d88538bf964ba9c0d26a2497614, type: 3}
       propertyPath: OnLevelEnd.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
@@ -94252,6 +94633,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9151918476160911055, guid: 17de6d88538bf964ba9c0d26a2497614, type: 3}
+      propertyPath: OnLevelEnd.m_PersistentCalls.m_Calls.Array.data[3].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9151918476160911055, guid: 17de6d88538bf964ba9c0d26a2497614, type: 3}
       propertyPath: OnLevelEnd.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1550202660}
@@ -94261,6 +94646,10 @@ PrefabInstance:
       objectReference: {fileID: 6792052323594762943}
     - target: {fileID: 9151918476160911055, guid: 17de6d88538bf964ba9c0d26a2497614, type: 3}
       propertyPath: OnLevelEnd.m_PersistentCalls.m_Calls.Array.data[2].m_Target
+      value: 
+      objectReference: {fileID: 640433046}
+    - target: {fileID: 9151918476160911055, guid: 17de6d88538bf964ba9c0d26a2497614, type: 3}
+      propertyPath: OnLevelEnd.m_PersistentCalls.m_Calls.Array.data[3].m_Target
       value: 
       objectReference: {fileID: 595037386}
     - target: {fileID: 9151918476160911055, guid: 17de6d88538bf964ba9c0d26a2497614, type: 3}
@@ -94276,6 +94665,10 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 9151918476160911055, guid: 17de6d88538bf964ba9c0d26a2497614, type: 3}
+      propertyPath: OnLevelEnd.m_PersistentCalls.m_Calls.Array.data[3].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 9151918476160911055, guid: 17de6d88538bf964ba9c0d26a2497614, type: 3}
       propertyPath: OnLevelEnd.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: StopTimer
       objectReference: {fileID: 0}
@@ -94285,6 +94678,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9151918476160911055, guid: 17de6d88538bf964ba9c0d26a2497614, type: 3}
       propertyPath: OnLevelEnd.m_PersistentCalls.m_Calls.Array.data[2].m_MethodName
+      value: FadeOutAndStop
+      objectReference: {fileID: 0}
+    - target: {fileID: 9151918476160911055, guid: 17de6d88538bf964ba9c0d26a2497614, type: 3}
+      propertyPath: OnLevelEnd.m_PersistentCalls.m_Calls.Array.data[3].m_MethodName
       value: DisplayResults
       objectReference: {fileID: 0}
     - target: {fileID: 9151918476160911055, guid: 17de6d88538bf964ba9c0d26a2497614, type: 3}
@@ -94297,6 +94694,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9151918476160911055, guid: 17de6d88538bf964ba9c0d26a2497614, type: 3}
       propertyPath: OnLevelEnd.m_PersistentCalls.m_Calls.Array.data[2].m_TargetAssemblyTypeName
+      value: MusicPlayer, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 9151918476160911055, guid: 17de6d88538bf964ba9c0d26a2497614, type: 3}
+      propertyPath: OnLevelEnd.m_PersistentCalls.m_Calls.Array.data[3].m_TargetAssemblyTypeName
       value: ResultsScreen, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 9151918476160911055, guid: 17de6d88538bf964ba9c0d26a2497614, type: 3}
@@ -94311,11 +94712,20 @@ PrefabInstance:
       propertyPath: OnLevelEnd.m_PersistentCalls.m_Calls.Array.data[2].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
+    - target: {fileID: 9151918476160911055, guid: 17de6d88538bf964ba9c0d26a2497614, type: 3}
+      propertyPath: OnLevelEnd.m_PersistentCalls.m_Calls.Array.data[3].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 17de6d88538bf964ba9c0d26a2497614, type: 3}
+--- !u!4 &1786901955 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 9151918476160911040, guid: 17de6d88538bf964ba9c0d26a2497614, type: 3}
+  m_PrefabInstance: {fileID: 1786901954}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1793933773
 GameObject:
   m_ObjectHideFlags: 0
@@ -106536,6 +106946,36 @@ PrefabInstance:
     - target: {fileID: 1353651659175900157, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
       propertyPath: m_Name
       value: HintBubble
+      objectReference: {fileID: 0}
+    - target: {fileID: 9172167358572471345, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: rawTextToDisplay
+      value: Press [0]+[1] while you're on the ground to slide under narrow passages
+        You'll keep sliding for as long as you are holding [0], but you will stop
+        instantly at ledges and walls!
+      objectReference: {fileID: 0}
+    - target: {fileID: 9172167358572471345, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: gamepadPrompts.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 9172167358572471345, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: keyboardPrompts.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 9172167358572471345, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: gamepadPrompts.Array.data[0]
+      value: Gamepad_LB
+      objectReference: {fileID: 0}
+    - target: {fileID: 9172167358572471345, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: gamepadPrompts.Array.data[1]
+      value: Gamepad_WFB
+      objectReference: {fileID: 0}
+    - target: {fileID: 9172167358572471345, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: keyboardPrompts.Array.data[0]
+      value: Keyboard_LCT
+      objectReference: {fileID: 0}
+    - target: {fileID: 9172167358572471345, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: keyboardPrompts.Array.data[1]
+      value: Keyboard_X
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

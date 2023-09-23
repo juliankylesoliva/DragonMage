@@ -3063,7 +3063,7 @@ PrefabInstance:
       objectReference: {fileID: 1512726620}
     - target: {fileID: 8971218899169207556, guid: 869133b1082e075469e9020c55a90989, type: 3}
       propertyPath: roomEntranceIndex
-      value: 0
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -6303,6 +6303,34 @@ PrefabInstance:
       propertyPath: m_Name
       value: HintBubble (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 9172167358572471345, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: rawTextToDisplay
+      value: Press [0]+[1] to lob the Magic Blast upwards!
+      objectReference: {fileID: 0}
+    - target: {fileID: 9172167358572471345, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: gamepadPrompts.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 9172167358572471345, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: keyboardPrompts.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 9172167358572471345, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: gamepadPrompts.Array.data[0]
+      value: Gamepad_DPU
+      objectReference: {fileID: 0}
+    - target: {fileID: 9172167358572471345, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: gamepadPrompts.Array.data[1]
+      value: Gamepad_WFB
+      objectReference: {fileID: 0}
+    - target: {fileID: 9172167358572471345, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: keyboardPrompts.Array.data[0]
+      value: Keyboard_AKU
+      objectReference: {fileID: 0}
+    - target: {fileID: 9172167358572471345, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: keyboardPrompts.Array.data[1]
+      value: Keyboard_X
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -6422,6 +6450,28 @@ PrefabInstance:
     - target: {fileID: 1353651659175900157, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
       propertyPath: m_Name
       value: HintBubble (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 9172167358572471345, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: rawTextToDisplay
+      value: 'Hold [0] in midair to glide!
+
+'
+      objectReference: {fileID: 0}
+    - target: {fileID: 9172167358572471345, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: gamepadPrompts.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9172167358572471345, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: keyboardPrompts.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9172167358572471345, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: gamepadPrompts.Array.data[0]
+      value: Gamepad_SFB
+      objectReference: {fileID: 0}
+    - target: {fileID: 9172167358572471345, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: keyboardPrompts.Array.data[0]
+      value: Keyboard_Z
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -8589,7 +8639,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9151918476160911055, guid: 17de6d88538bf964ba9c0d26a2497614, type: 3}
       propertyPath: OnLevelEnd.m_PersistentCalls.m_Calls.Array.size
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 9151918476160911055, guid: 17de6d88538bf964ba9c0d26a2497614, type: 3}
       propertyPath: OnLevelEnd.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
@@ -8604,6 +8654,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9151918476160911055, guid: 17de6d88538bf964ba9c0d26a2497614, type: 3}
+      propertyPath: OnLevelEnd.m_PersistentCalls.m_Calls.Array.data[3].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9151918476160911055, guid: 17de6d88538bf964ba9c0d26a2497614, type: 3}
       propertyPath: OnLevelEnd.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1461024878}
@@ -8613,6 +8667,10 @@ PrefabInstance:
       objectReference: {fileID: 6792052323594762943}
     - target: {fileID: 9151918476160911055, guid: 17de6d88538bf964ba9c0d26a2497614, type: 3}
       propertyPath: OnLevelEnd.m_PersistentCalls.m_Calls.Array.data[2].m_Target
+      value: 
+      objectReference: {fileID: 640433046}
+    - target: {fileID: 9151918476160911055, guid: 17de6d88538bf964ba9c0d26a2497614, type: 3}
+      propertyPath: OnLevelEnd.m_PersistentCalls.m_Calls.Array.data[3].m_Target
       value: 
       objectReference: {fileID: 436033296}
     - target: {fileID: 9151918476160911055, guid: 17de6d88538bf964ba9c0d26a2497614, type: 3}
@@ -8628,6 +8686,10 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 9151918476160911055, guid: 17de6d88538bf964ba9c0d26a2497614, type: 3}
+      propertyPath: OnLevelEnd.m_PersistentCalls.m_Calls.Array.data[3].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 9151918476160911055, guid: 17de6d88538bf964ba9c0d26a2497614, type: 3}
       propertyPath: OnLevelEnd.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: StopTimer
       objectReference: {fileID: 0}
@@ -8637,6 +8699,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9151918476160911055, guid: 17de6d88538bf964ba9c0d26a2497614, type: 3}
       propertyPath: OnLevelEnd.m_PersistentCalls.m_Calls.Array.data[2].m_MethodName
+      value: FadeOutAndStop
+      objectReference: {fileID: 0}
+    - target: {fileID: 9151918476160911055, guid: 17de6d88538bf964ba9c0d26a2497614, type: 3}
+      propertyPath: OnLevelEnd.m_PersistentCalls.m_Calls.Array.data[3].m_MethodName
       value: DisplayResults
       objectReference: {fileID: 0}
     - target: {fileID: 9151918476160911055, guid: 17de6d88538bf964ba9c0d26a2497614, type: 3}
@@ -8649,6 +8715,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9151918476160911055, guid: 17de6d88538bf964ba9c0d26a2497614, type: 3}
       propertyPath: OnLevelEnd.m_PersistentCalls.m_Calls.Array.data[2].m_TargetAssemblyTypeName
+      value: MusicPlayer, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 9151918476160911055, guid: 17de6d88538bf964ba9c0d26a2497614, type: 3}
+      propertyPath: OnLevelEnd.m_PersistentCalls.m_Calls.Array.data[3].m_TargetAssemblyTypeName
       value: ResultsScreen, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 9151918476160911055, guid: 17de6d88538bf964ba9c0d26a2497614, type: 3}
@@ -8661,6 +8731,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9151918476160911055, guid: 17de6d88538bf964ba9c0d26a2497614, type: 3}
       propertyPath: OnLevelEnd.m_PersistentCalls.m_Calls.Array.data[2].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 9151918476160911055, guid: 17de6d88538bf964ba9c0d26a2497614, type: 3}
+      propertyPath: OnLevelEnd.m_PersistentCalls.m_Calls.Array.data[3].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -28938,7 +29012,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 6, y: 2, z: -10}
+  m_LocalPosition: {x: 6.5767097, y: 2, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -29063,6 +29137,12 @@ PrefabInstance:
     - target: {fileID: 1353651659175900157, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
       propertyPath: m_Name
       value: HintBubble (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 9172167358572471345, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: rawTextToDisplay
+      value: You'll gain a slight burst of speed while running by detonating the
+        Magic Blast while it's behind you! The closer your center of gravity is to
+        the center of the blast, the bigger the boost!
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -31100,6 +31180,52 @@ PrefabInstance:
     - target: {fileID: 1353651659175900157, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
       propertyPath: m_Name
       value: HintBubble
+      objectReference: {fileID: 0}
+    - target: {fileID: 9172167358572471345, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: rawTextToDisplay
+      value: 'Launch yourself horizontally by detonating then jumping as you run
+        past the Magic Blast! You can still control your jump height as you do this.
+        (Hint: Press [0]+[1], hold [2], then press [1] and [3] in quick succession.)'
+      objectReference: {fileID: 0}
+    - target: {fileID: 9172167358572471345, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: gamepadPrompts.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 9172167358572471345, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: keyboardPrompts.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 9172167358572471345, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: gamepadPrompts.Array.data[0]
+      value: Gamepad_DPD
+      objectReference: {fileID: 0}
+    - target: {fileID: 9172167358572471345, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: gamepadPrompts.Array.data[1]
+      value: Gamepad_WFB
+      objectReference: {fileID: 0}
+    - target: {fileID: 9172167358572471345, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: gamepadPrompts.Array.data[2]
+      value: Gamepad_DPR
+      objectReference: {fileID: 0}
+    - target: {fileID: 9172167358572471345, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: gamepadPrompts.Array.data[3]
+      value: Gamepad_SFB
+      objectReference: {fileID: 0}
+    - target: {fileID: 9172167358572471345, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: keyboardPrompts.Array.data[0]
+      value: Keyboard_AKD
+      objectReference: {fileID: 0}
+    - target: {fileID: 9172167358572471345, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: keyboardPrompts.Array.data[1]
+      value: Keyboard_X
+      objectReference: {fileID: 0}
+    - target: {fileID: 9172167358572471345, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: keyboardPrompts.Array.data[2]
+      value: Keyboard_AKR
+      objectReference: {fileID: 0}
+    - target: {fileID: 9172167358572471345, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: keyboardPrompts.Array.data[3]
+      value: Keyboard_Z
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -34969,7 +35095,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 621922538701679882, guid: a9d278d3cd42411429bdd542dc36e670, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1871194470575354862, guid: a9d278d3cd42411429bdd542dc36e670, type: 3}
       propertyPath: m_RootOrder
@@ -35018,14 +35144,18 @@ PrefabInstance:
     - target: {fileID: 5305743783979617659, guid: a9d278d3cd42411429bdd542dc36e670, type: 3}
       propertyPath: loopClip
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 8300000, guid: 770a88a10d98a2949872ea0b7afc6f52, type: 3}
     - target: {fileID: 5305743783979617659, guid: a9d278d3cd42411429bdd542dc36e670, type: 3}
       propertyPath: introClip
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 8300000, guid: 770a88a10d98a2949872ea0b7afc6f52, type: 3}
     - target: {fileID: 5305743783979617659, guid: a9d278d3cd42411429bdd542dc36e670, type: 3}
       propertyPath: m_Enabled
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5305743783979617659, guid: a9d278d3cd42411429bdd542dc36e670, type: 3}
+      propertyPath: baseVolume
+      value: 0.7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -35037,6 +35167,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1871194470575354862, guid: a9d278d3cd42411429bdd542dc36e670, type: 3}
   m_PrefabInstance: {fileID: 640433044}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &640433046 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5305743783979617659, guid: a9d278d3cd42411429bdd542dc36e670, type: 3}
+  m_PrefabInstance: {fileID: 640433044}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b447c29e5fad454082531efa4898ea0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &642427073
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -39988,6 +40129,52 @@ PrefabInstance:
       propertyPath: m_Name
       value: HintBubble (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 9172167358572471345, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: rawTextToDisplay
+      value: 'You won''t lose any speed while you''re in the air, so keep gliding
+        forward to carry that speed to your destination! (Hint: You can also boost
+        yourself while gliding by mashing [0] while holding [1], [2], and [3])'
+      objectReference: {fileID: 0}
+    - target: {fileID: 9172167358572471345, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: gamepadPrompts.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 9172167358572471345, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: keyboardPrompts.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 9172167358572471345, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: gamepadPrompts.Array.data[0]
+      value: Gamepad_WFB
+      objectReference: {fileID: 0}
+    - target: {fileID: 9172167358572471345, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: gamepadPrompts.Array.data[1]
+      value: Gamepad_DPD
+      objectReference: {fileID: 0}
+    - target: {fileID: 9172167358572471345, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: gamepadPrompts.Array.data[2]
+      value: Gamepad_DPR
+      objectReference: {fileID: 0}
+    - target: {fileID: 9172167358572471345, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: gamepadPrompts.Array.data[3]
+      value: Gamepad_SFB
+      objectReference: {fileID: 0}
+    - target: {fileID: 9172167358572471345, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: keyboardPrompts.Array.data[0]
+      value: Keyboard_X
+      objectReference: {fileID: 0}
+    - target: {fileID: 9172167358572471345, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: keyboardPrompts.Array.data[1]
+      value: Keyboard_AKD
+      objectReference: {fileID: 0}
+    - target: {fileID: 9172167358572471345, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: keyboardPrompts.Array.data[2]
+      value: Keyboard_AKR
+      objectReference: {fileID: 0}
+    - target: {fileID: 9172167358572471345, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: keyboardPrompts.Array.data[3]
+      value: Keyboard_Z
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -44171,6 +44358,51 @@ PrefabInstance:
     - target: {fileID: 1353651659175900157, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
       propertyPath: m_Name
       value: HintBubble (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 9172167358572471345, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: rawTextToDisplay
+      value: 'Run up to your Magic Blast then detonate when it''s under you for extra
+        height! (Hint: Press [0]+[1], hold [2], then press [3]+[1] at the same time.)'
+      objectReference: {fileID: 0}
+    - target: {fileID: 9172167358572471345, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: gamepadPrompts.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 9172167358572471345, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: keyboardPrompts.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 9172167358572471345, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: gamepadPrompts.Array.data[0]
+      value: Gamepad_DPD
+      objectReference: {fileID: 0}
+    - target: {fileID: 9172167358572471345, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: gamepadPrompts.Array.data[1]
+      value: Gamepad_WFB
+      objectReference: {fileID: 0}
+    - target: {fileID: 9172167358572471345, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: gamepadPrompts.Array.data[2]
+      value: Gamepad_DPR
+      objectReference: {fileID: 0}
+    - target: {fileID: 9172167358572471345, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: gamepadPrompts.Array.data[3]
+      value: Gamepad_SFB
+      objectReference: {fileID: 0}
+    - target: {fileID: 9172167358572471345, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: keyboardPrompts.Array.data[0]
+      value: Keyboard_AKD
+      objectReference: {fileID: 0}
+    - target: {fileID: 9172167358572471345, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: keyboardPrompts.Array.data[1]
+      value: Keyboard_X
+      objectReference: {fileID: 0}
+    - target: {fileID: 9172167358572471345, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: keyboardPrompts.Array.data[2]
+      value: Keyboard_AKR
+      objectReference: {fileID: 0}
+    - target: {fileID: 9172167358572471345, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: keyboardPrompts.Array.data[3]
+      value: Keyboard_Z
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -52173,6 +52405,35 @@ PrefabInstance:
       propertyPath: m_Name
       value: HintBubble (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 9172167358572471345, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: rawTextToDisplay
+      value: Press [0]+[1] to dodge and cross gaps in tight spaces! You can also
+        dodge in midair, but it will send you diagonally downwards...
+      objectReference: {fileID: 0}
+    - target: {fileID: 9172167358572471345, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: gamepadPrompts.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 9172167358572471345, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: keyboardPrompts.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 9172167358572471345, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: gamepadPrompts.Array.data[0]
+      value: Gamepad_LB
+      objectReference: {fileID: 0}
+    - target: {fileID: 9172167358572471345, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: gamepadPrompts.Array.data[1]
+      value: Gamepad_WFB
+      objectReference: {fileID: 0}
+    - target: {fileID: 9172167358572471345, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: keyboardPrompts.Array.data[0]
+      value: Keyboard_LCT
+      objectReference: {fileID: 0}
+    - target: {fileID: 9172167358572471345, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: keyboardPrompts.Array.data[1]
+      value: Keyboard_X
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -53194,6 +53455,28 @@ PrefabInstance:
     - target: {fileID: 1353651659175900157, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
       propertyPath: m_Name
       value: HintBubble
+      objectReference: {fileID: 0}
+    - target: {fileID: 9172167358572471345, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: rawTextToDisplay
+      value: Conserve the speed you gained from Magic Boosting by pressing [0] as
+        soon as you touch a wall or land on the ground! This is called Speedkicking
+        and Speedhopping, respectively!
+      objectReference: {fileID: 0}
+    - target: {fileID: 9172167358572471345, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: gamepadPrompts.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9172167358572471345, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: keyboardPrompts.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9172167358572471345, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: gamepadPrompts.Array.data[0]
+      value: Gamepad_SFB
+      objectReference: {fileID: 0}
+    - target: {fileID: 9172167358572471345, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: keyboardPrompts.Array.data[0]
+      value: Keyboard_Z
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -61173,6 +61456,28 @@ PrefabInstance:
       propertyPath: m_Name
       value: HintBubble
       objectReference: {fileID: 0}
+    - target: {fileID: 9172167358572471345, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: rawTextToDisplay
+      value: 'Press [0] to jump!
+
+'
+      objectReference: {fileID: 0}
+    - target: {fileID: 9172167358572471345, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: gamepadPrompts.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9172167358572471345, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: keyboardPrompts.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9172167358572471345, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: gamepadPrompts.Array.data[0]
+      value: Gamepad_SFB
+      objectReference: {fileID: 0}
+    - target: {fileID: 9172167358572471345, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: keyboardPrompts.Array.data[0]
+      value: Keyboard_Z
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -62385,6 +62690,34 @@ PrefabInstance:
     - target: {fileID: 1353651659175900157, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
       propertyPath: m_Name
       value: HintBubble (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 9172167358572471345, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: rawTextToDisplay
+      value: Press [0]+[1] to drop the Magic Blast at your feet!
+      objectReference: {fileID: 0}
+    - target: {fileID: 9172167358572471345, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: gamepadPrompts.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 9172167358572471345, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: keyboardPrompts.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 9172167358572471345, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: gamepadPrompts.Array.data[0]
+      value: Gamepad_DPD
+      objectReference: {fileID: 0}
+    - target: {fileID: 9172167358572471345, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: gamepadPrompts.Array.data[1]
+      value: Gamepad_WFB
+      objectReference: {fileID: 0}
+    - target: {fileID: 9172167358572471345, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: keyboardPrompts.Array.data[0]
+      value: Keyboard_AKD
+      objectReference: {fileID: 0}
+    - target: {fileID: 9172167358572471345, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: keyboardPrompts.Array.data[1]
+      value: Keyboard_X
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -66861,6 +67194,7 @@ Transform:
   m_Children:
   - {fileID: 2119008180}
   - {fileID: 26078550}
+  - {fileID: 1775906710}
   m_Father: {fileID: 1512726619}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -72840,6 +73174,7 @@ MonoBehaviour:
   roomEntrances:
   - {fileID: 2119008180}
   - {fileID: 26078550}
+  - {fileID: 1775906710}
   enemyList: []
 --- !u!1 &1519918621
 GameObject:
@@ -72959,6 +73294,35 @@ PrefabInstance:
     - target: {fileID: 1353651659175900157, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
       propertyPath: m_Name
       value: HintBubble
+      objectReference: {fileID: 0}
+    - target: {fileID: 9172167358572471345, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: rawTextToDisplay
+      value: Press [0] while rising and holding [1] to start gliding from a shorter
+        height!
+      objectReference: {fileID: 0}
+    - target: {fileID: 9172167358572471345, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: gamepadPrompts.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 9172167358572471345, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: keyboardPrompts.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 9172167358572471345, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: gamepadPrompts.Array.data[0]
+      value: Gamepad_RT
+      objectReference: {fileID: 0}
+    - target: {fileID: 9172167358572471345, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: gamepadPrompts.Array.data[1]
+      value: Gamepad_SFB
+      objectReference: {fileID: 0}
+    - target: {fileID: 9172167358572471345, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: keyboardPrompts.Array.data[0]
+      value: Keyboard_LSH
+      objectReference: {fileID: 0}
+    - target: {fileID: 9172167358572471345, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: keyboardPrompts.Array.data[1]
+      value: Keyboard_Z
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -83248,6 +83612,26 @@ PrefabInstance:
       propertyPath: m_Name
       value: HintBubble
       objectReference: {fileID: 0}
+    - target: {fileID: 9172167358572471345, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: rawTextToDisplay
+      value: Press [0] to throw a Magic Blast! Press it again to detonate it!
+      objectReference: {fileID: 0}
+    - target: {fileID: 9172167358572471345, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: gamepadPrompts.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9172167358572471345, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: keyboardPrompts.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9172167358572471345, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: gamepadPrompts.Array.data[0]
+      value: Gamepad_WFB
+      objectReference: {fileID: 0}
+    - target: {fileID: 9172167358572471345, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: keyboardPrompts.Array.data[0]
+      value: Keyboard_X
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -83865,6 +84249,37 @@ Transform:
   - {fileID: 431710795}
   - {fileID: 1544028731}
   m_Father: {fileID: 260914170}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1775906709
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1775906710}
+  m_Layer: 0
+  m_Name: FallReentry
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1775906710
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1775906709}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 6, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1439323775}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1816202607
@@ -93831,6 +94246,27 @@ PrefabInstance:
       propertyPath: m_Name
       value: HintBubble
       objectReference: {fileID: 0}
+    - target: {fileID: 9172167358572471345, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: rawTextToDisplay
+      value: Hold [0] to crouch! You can still move and jump while crouching, but
+        you won't be able to glide or wall kick.
+      objectReference: {fileID: 0}
+    - target: {fileID: 9172167358572471345, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: gamepadPrompts.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9172167358572471345, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: keyboardPrompts.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9172167358572471345, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: gamepadPrompts.Array.data[0]
+      value: Gamepad_LB
+      objectReference: {fileID: 0}
+    - target: {fileID: 9172167358572471345, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: keyboardPrompts.Array.data[0]
+      value: Keyboard_LCT
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -95067,6 +95503,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: HintBubble (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 9172167358572471345, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: rawTextToDisplay
+      value: To get into small gaps in certain walls, you'll need to crouch in midair
+        or dodge into these gaps from above.
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -95169,6 +95610,43 @@ PrefabInstance:
     - target: {fileID: 1353651659175900157, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
       propertyPath: m_Name
       value: HintBubble (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 9172167358572471345, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: rawTextToDisplay
+      value: Hold [0] or [1] against a wall in midair to slide down it, then press
+        [2] to perform a wall kick!
+      objectReference: {fileID: 0}
+    - target: {fileID: 9172167358572471345, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: gamepadPrompts.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 9172167358572471345, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: keyboardPrompts.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 9172167358572471345, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: gamepadPrompts.Array.data[0]
+      value: Gamepad_DPL
+      objectReference: {fileID: 0}
+    - target: {fileID: 9172167358572471345, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: gamepadPrompts.Array.data[1]
+      value: Gamepad_DPR
+      objectReference: {fileID: 0}
+    - target: {fileID: 9172167358572471345, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: gamepadPrompts.Array.data[2]
+      value: Gamepad_SFB
+      objectReference: {fileID: 0}
+    - target: {fileID: 9172167358572471345, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: keyboardPrompts.Array.data[0]
+      value: Keyboard_AKL
+      objectReference: {fileID: 0}
+    - target: {fileID: 9172167358572471345, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: keyboardPrompts.Array.data[1]
+      value: Keyboard_AKR
+      objectReference: {fileID: 0}
+    - target: {fileID: 9172167358572471345, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: keyboardPrompts.Array.data[2]
+      value: Keyboard_Z
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -95542,6 +96020,12 @@ PrefabInstance:
     - target: {fileID: 1353651659175900157, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
       propertyPath: m_Name
       value: HintBubble
+      objectReference: {fileID: 0}
+    - target: {fileID: 9172167358572471345, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: rawTextToDisplay
+      value: Detonate the Magic Blast on yourself to do a Magic Boost! You can break
+        reinforced blocks and defeat enemies by touching them while in this state!
+        This effect lasts until you touch the ground, glide, or slow down.
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -98878,6 +99362,43 @@ PrefabInstance:
       propertyPath: m_Name
       value: HintBubble (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 9172167358572471345, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: rawTextToDisplay
+      value: 'Boost your jump height by jumping and detonating the Magic Blast underneath
+        yourself at the same time! (Hint: Press [0]+[1] then [2]+[1].)'
+      objectReference: {fileID: 0}
+    - target: {fileID: 9172167358572471345, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: gamepadPrompts.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 9172167358572471345, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: keyboardPrompts.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 9172167358572471345, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: gamepadPrompts.Array.data[0]
+      value: Gamepad_DPD
+      objectReference: {fileID: 0}
+    - target: {fileID: 9172167358572471345, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: gamepadPrompts.Array.data[1]
+      value: Gamepad_WFB
+      objectReference: {fileID: 0}
+    - target: {fileID: 9172167358572471345, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: gamepadPrompts.Array.data[2]
+      value: Gamepad_SFB
+      objectReference: {fileID: 0}
+    - target: {fileID: 9172167358572471345, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: keyboardPrompts.Array.data[0]
+      value: Keyboard_AKD
+      objectReference: {fileID: 0}
+    - target: {fileID: 9172167358572471345, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: keyboardPrompts.Array.data[1]
+      value: Keyboard_X
+      objectReference: {fileID: 0}
+    - target: {fileID: 9172167358572471345, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: keyboardPrompts.Array.data[2]
+      value: Keyboard_Z
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -99005,6 +99526,27 @@ PrefabInstance:
     - target: {fileID: 1353651659175900157, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
       propertyPath: m_Name
       value: HintBubble (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 9172167358572471345, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: rawTextToDisplay
+      value: Press [0] to toggle the attack reticle and see the trajectory of your
+        Magic Blast!
+      objectReference: {fileID: 0}
+    - target: {fileID: 9172167358572471345, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: gamepadPrompts.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9172167358572471345, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: keyboardPrompts.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9172167358572471345, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: gamepadPrompts.Array.data[0]
+      value: Gamepad_NFB
+      objectReference: {fileID: 0}
+    - target: {fileID: 9172167358572471345, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
+      propertyPath: keyboardPrompts.Array.data[0]
+      value: Keyboard_Q
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

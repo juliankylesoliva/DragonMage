@@ -14,9 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _sceneName: A1_L1_Dragoons'_Turf
   _nameHeader: 'Ch. 1-1: Dragoons'' Turf'
-  _storyDescription: Having escaped the Dragon Syndicate's prison, Magli finds herself
-    at the outskirts of Drakageau, and her only chance of not getting recaptured
-    is to reach the city; however, several members of the Dragon Syndicate, called
-    Dragoons, patrol the area and block her way! Fortunately, they all happen to
-    be low-ranking members, but they each have different attack and movement patterns
-    depending on the color of their suit!
+  _storyDescription: Having escaped the Dragon Syndicate's prison, Magli Draelyn
+    finds herself at the outskirts of Drakageau, and her only chance of not getting
+    recaptured is to reach the city; however, several members of the Dragon Syndicate,
+    called Dragoons, patrol the area and block her way! Fortunately, they all happen
+    to be low-ranking members stationed to guard the prison, but they each have different
+    attack and movement patterns depending on the color of their suit!

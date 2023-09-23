@@ -397,7 +397,7 @@ public class PlayerAttacks : MonoBehaviour
                 player.collisions.SnapToGround(false, player.collisions.IsOnASlope, fireTackleMaxSlopeSnapDistance);
             }
 
-            if (player.collisions.IsGrounded && trailSpawnTimer >= 0f)
+            if ((player.collisions.IsGrounded || player.collisions.IsOnASlope) && trailSpawnTimer >= 0f)
             {
                 trailSpawnTimer -= (player.rb2d.velocity.magnitude * Time.deltaTime);
                 if (trailSpawnTimer <= 0f)
@@ -408,7 +408,7 @@ public class PlayerAttacks : MonoBehaviour
             }
             else
             {
-                if (!player.collisions.IsGrounded) { trailSpawnTimer = 0f; }
+                if (!player.collisions.IsGrounded && !player.collisions.IsOnASlope) { trailSpawnTimer = 0f; }
             }
 
             player.movement.ApplySlopeResistance();

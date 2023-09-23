@@ -127,34 +127,38 @@ public class ResultsScreen : MonoBehaviour
 
         yield return new WaitForSeconds(countUpTime);
 
-        medallionText.gameObject.SetActive(true);
-        switch (MedalPickup.medalPickedUpStatus)
+        
+        if (Level.FragmentsNeededForMedal > 0)
         {
-            case MedalStatus.MAGIC_MEDAL_GET:
-                medallionText.color = magicalMedallionTextColor;
-                medallionText.text = $"FOUND A MAGICAL MEDALLION!";
-                SoundFactory.SpawnSound("object_medal_pickup", this.transform.position, 0.5f);
-                SoundFactory.SpawnSound("transformation_magli", this.transform.position, 0.5f);
-                break;
-            case MedalStatus.DRAGON_MEDAL_GET:
-                medallionText.color = draconicMedallionTextColor;
-                medallionText.text = $"FOUND A DRACONIC MEDALLION!";
-                SoundFactory.SpawnSound("object_medal_pickup", this.transform.position, 0.5f);
-                SoundFactory.SpawnSound("transformation_draelyn", this.transform.position, 0.5f);
-                break;
-            case MedalStatus.BALANCE_MEDAL_GET:
-                medallionText.color = balancedMedallionTextColor;
-                medallionText.text = $"FOUND A BALANCED MEDALLION!";
-                SoundFactory.SpawnSound("object_medal_pickup", this.transform.position, 0.5f);
-                SoundFactory.SpawnSound("transformation_magli", this.transform.position, 0.5f);
-                SoundFactory.SpawnSound("transformation_draelyn", this.transform.position, 0.5f);
-                break;
-            default:
-                medallionText.color = Color.white;
-                medallionText.text = $"NO MEDALLION FOUND...";
-                SoundFactory.SpawnSound("transformation_magli_locked", this.transform.position, 0.5f);
-                SoundFactory.SpawnSound("transformation_draelyn_locked", this.transform.position, 0.5f);
-                break;
+            medallionText.gameObject.SetActive(true);
+            switch (MedalPickup.medalPickedUpStatus)
+            {
+                case MedalStatus.MAGIC_MEDAL_GET:
+                    medallionText.color = magicalMedallionTextColor;
+                    medallionText.text = $"FOUND A MAGICAL MEDALLION!";
+                    SoundFactory.SpawnSound("object_medal_pickup", this.transform.position, 0.5f);
+                    SoundFactory.SpawnSound("transformation_magli", this.transform.position, 0.5f);
+                    break;
+                case MedalStatus.DRAGON_MEDAL_GET:
+                    medallionText.color = draconicMedallionTextColor;
+                    medallionText.text = $"FOUND A DRACONIC MEDALLION!";
+                    SoundFactory.SpawnSound("object_medal_pickup", this.transform.position, 0.5f);
+                    SoundFactory.SpawnSound("transformation_draelyn", this.transform.position, 0.5f);
+                    break;
+                case MedalStatus.BALANCE_MEDAL_GET:
+                    medallionText.color = balancedMedallionTextColor;
+                    medallionText.text = $"FOUND A BALANCED MEDALLION!";
+                    SoundFactory.SpawnSound("object_medal_pickup", this.transform.position, 0.5f);
+                    SoundFactory.SpawnSound("transformation_magli", this.transform.position, 0.5f);
+                    SoundFactory.SpawnSound("transformation_draelyn", this.transform.position, 0.5f);
+                    break;
+                default:
+                    medallionText.color = Color.white;
+                    medallionText.text = $"NO MEDALLION FOUND...";
+                    SoundFactory.SpawnSound("transformation_magli_locked", this.transform.position, 0.5f);
+                    SoundFactory.SpawnSound("transformation_draelyn_locked", this.transform.position, 0.5f);
+                    break;
+            }
         }
 
         yield return new WaitForSeconds(fadeInTime);
