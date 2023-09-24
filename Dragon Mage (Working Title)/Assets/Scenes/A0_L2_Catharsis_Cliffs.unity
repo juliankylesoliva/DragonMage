@@ -8066,8 +8066,8 @@ PrefabInstance:
     - target: {fileID: 9172167358572471345, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
       propertyPath: rawTextToDisplay
       value: Press [0] while holding forward and [1] to cancel your slide with a
-        jump! You can also cancel your Fire Tackle with a jump by pressing [0] while
-        holding forward during its endlag.
+        jump! You can also cancel your Fire Tackle with a grounded jump by pressing
+        [0] while holding forward during its endlag.
       objectReference: {fileID: 0}
     - target: {fileID: 9172167358572471345, guid: b80d9fa8744086249b1dc68546967fcf, type: 3}
       propertyPath: gamepadPrompts.Array.size
