@@ -1,3 +1,79 @@
-[gd_scene format=3 uid="uid://ditx5iixwbmbo"]
+[gd_scene load_steps=3 format=3 uid="uid://ditx5iixwbmbo"]
+
+[ext_resource type="PackedScene" uid="uid://cs4s34scsvcfr" path="res://BreakableBlock.tscn" id="1_bttlh"]
+[ext_resource type="PackedScene" uid="uid://c6qw77ovfwgfs" path="res://Player.tscn" id="2_mjfj3"]
 
 [node name="TestLevel" type="Node2D"]
+
+[node name="BreakableBlock" parent="." instance=ExtResource("1_bttlh")]
+position = Vector2(-224, 128)
+
+[node name="BreakableBlock2" parent="." instance=ExtResource("1_bttlh")]
+position = Vector2(-160, 128)
+
+[node name="BreakableBlock3" parent="." instance=ExtResource("1_bttlh")]
+position = Vector2(-96, 128)
+
+[node name="BreakableBlock4" parent="." instance=ExtResource("1_bttlh")]
+position = Vector2(-32, 128)
+
+[node name="BreakableBlock5" parent="." instance=ExtResource("1_bttlh")]
+position = Vector2(32, 128)
+
+[node name="BreakableBlock6" parent="." instance=ExtResource("1_bttlh")]
+position = Vector2(96, 128)
+
+[node name="BreakableBlock7" parent="." instance=ExtResource("1_bttlh")]
+position = Vector2(160, 128)
+
+[node name="BreakableBlock8" parent="." instance=ExtResource("1_bttlh")]
+position = Vector2(224, 128)
+
+[node name="BreakableBlock15" parent="." instance=ExtResource("1_bttlh")]
+position = Vector2(-224, -128)
+
+[node name="BreakableBlock16" parent="." instance=ExtResource("1_bttlh")]
+position = Vector2(-160, -128)
+
+[node name="BreakableBlock17" parent="." instance=ExtResource("1_bttlh")]
+position = Vector2(-96, -128)
+
+[node name="BreakableBlock18" parent="." instance=ExtResource("1_bttlh")]
+position = Vector2(-32, -128)
+
+[node name="BreakableBlock19" parent="." instance=ExtResource("1_bttlh")]
+position = Vector2(32, -128)
+
+[node name="BreakableBlock20" parent="." instance=ExtResource("1_bttlh")]
+position = Vector2(96, -128)
+
+[node name="BreakableBlock21" parent="." instance=ExtResource("1_bttlh")]
+position = Vector2(160, -128)
+
+[node name="BreakableBlock22" parent="." instance=ExtResource("1_bttlh")]
+position = Vector2(224, -128)
+
+[node name="BreakableBlock9" parent="." instance=ExtResource("1_bttlh")]
+position = Vector2(-224, 64)
+
+[node name="BreakableBlock10" parent="." instance=ExtResource("1_bttlh")]
+position = Vector2(224, 64)
+
+[node name="BreakableBlock11" parent="." instance=ExtResource("1_bttlh")]
+position = Vector2(-224, 0)
+
+[node name="BreakableBlock12" parent="." instance=ExtResource("1_bttlh")]
+position = Vector2(224, 0)
+
+[node name="BreakableBlock13" parent="." instance=ExtResource("1_bttlh")]
+position = Vector2(-224, -64)
+
+[node name="BreakableBlock14" parent="." instance=ExtResource("1_bttlh")]
+position = Vector2(224, -64)
+
+[node name="Player" parent="." instance=ExtResource("2_mjfj3")]
+position = Vector2(0, 64)
+floor_stop_on_slope = false
+floor_constant_speed = true
+
+[node name="Camera2D" type="Camera2D" parent="."]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=88 format=3 uid="uid://c6qw77ovfwgfs"]
+[gd_scene load_steps=89 format=3 uid="uid://c6qw77ovfwgfs"]
 
 [ext_resource type="Texture2D" uid="uid://d381ahbcwydy8" path="res://Sprites/Player/DraelynCrouch.png" id="1_6b42p"]
 [ext_resource type="Texture2D" uid="uid://dls34a1qa8iy1" path="res://Sprites/Player/DraelynFireTackle.png" id="1_ddrlj"]
@@ -688,10 +688,19 @@ animations = [{
 "speed": 60.0
 }]
 
-[node name="Player" type="Node2D"]
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_6k7o1"]
+radius = 8.0
+height = 48.0
+
+[node name="CharacterBody2D" type="CharacterBody2D"]
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_5s7e1")
 animation = &"MagliStand"
 autoplay = "MagliStand"
+frame_progress = 0.15854
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 8)
+shape = SubResource("CapsuleShape2D_6k7o1")

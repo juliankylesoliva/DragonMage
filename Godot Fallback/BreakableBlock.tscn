@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://cs4s34scsvcfr"]
+
+[ext_resource type="Texture2D" uid="uid://caahvt434hqkt" path="res://Sprites/Objects/BreakableNormalBlock.png" id="1_wsx6d"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ry55m"]
+size = Vector2(64, 64)
+
+[node name="BreakableBlock" type="StaticBody2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_wsx6d")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_ry55m")

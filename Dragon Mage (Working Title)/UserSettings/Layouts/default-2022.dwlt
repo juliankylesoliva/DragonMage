@@ -19,7 +19,7 @@ MonoBehaviour:
     width: 1920
     height: 997
   m_ShowMode: 4
-  m_Title: Hierarchy
+  m_Title: Inspector
   m_RootView: {fileID: 2}
   m_MinSize: {x: 875, y: 350}
   m_MaxSize: {x: 10000, y: 10000}
@@ -440,9 +440,9 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: 
+      m_SelectedIDs: 7e670000
       m_LastClickedID: 0
-      m_ExpandedIDs: 4a05ffff0c16ffff8a1bffffa020ffff3226ffffb82effff002fffffa041ffff9846ffff2a4bffff7c50ffffc050ffff5251ffff1862ffffc067ffff0e6dffffe472ffff907bffffd87bffff708effff6093ffffea97ffff349dffff709dffff8ca4ffffd4a4ffff6cb7ffff5cbcffffe6c0ffff30c6ffff6cc6ffffb4cdfffffacdffff9ae0ffff92e5ffff24eaffff76efffffbaefffff74f0ffff50f9fffff4faffffdc74000096760000147a0000
+      m_ExpandedIDs: f4faffff
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -861,9 +861,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: 0, y: 0, z: -10}
+    m_Target: {x: 0.013375044, y: -0.02216953, z: -9.999755}
     speed: 2
-    m_Value: {x: 0, y: 0, z: -10}
+    m_Value: {x: -0.2972277, y: 0.49266517, z: -10.005456}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -913,9 +913,9 @@ MonoBehaviour:
     speed: 2
     m_Value: {x: 0, y: 0, z: 0, w: 1}
   m_Size:
-    m_Target: 12.124355
+    m_Target: 12.099804
     speed: 2
-    m_Value: 12.124355
+    m_Value: 12.669951
   m_Ortho:
     m_Target: 1
     speed: 2
@@ -1473,7 +1473,7 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Scenes
+    - Assets/Scripts/Scriptable Objects/PlayerCtrlProperties
     m_Globs: []
     m_OriginalText: 
     m_ImportLogFlags: 0
@@ -1481,7 +1481,7 @@ MonoBehaviour:
   m_ViewMode: 1
   m_StartGridSize: 96
   m_LastFolders:
-  - Assets/Scenes
+  - Assets/Scripts/Scriptable Objects/PlayerCtrlProperties
   m_LastFoldersGridSize: 96
   m_LastProjectPath: C:\Users\Kyle\Desktop\Kyle\game projects\GitHub Repos\DragonMage\Dragon
     Mage (Working Title)
@@ -1489,9 +1489,9 @@ MonoBehaviour:
     m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 79}
-    m_SelectedIDs: 30740000
-    m_LastClickedID: 29744
-    m_ExpandedIDs: 000000002e70000030700000327000003470000036700000387000003a7000003c7000003e70000000ca9a3b
+    m_SelectedIDs: a6740000
+    m_LastClickedID: 29862
+    m_ExpandedIDs: 000000002e70000030700000327000003470000036700000387000003a7000003c7000003e7000003674000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
