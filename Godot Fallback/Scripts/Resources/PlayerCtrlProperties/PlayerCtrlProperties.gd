@@ -7,7 +7,7 @@ extends Resource
 @export var turning_speed = 45.0
 
 @export_subgroup("Jumping Variables")
-@export var enable_midair_facing_direction_change = true
+@export var can_change_facing_direction_in_midair = true
 @export var enable_speed_hopping = true
 @export var initial_jump_velocity = 12.0
 @export var rising_gravity_scale = 2.2

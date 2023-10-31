@@ -71,9 +71,7 @@ position = Vector2(-224, -64)
 [node name="BreakableBlock14" parent="." instance=ExtResource("1_bttlh")]
 position = Vector2(224, -64)
 
+[node name="Camera2D" type="Camera2D" parent="."]
+
 [node name="Player" parent="." instance=ExtResource("2_mjfj3")]
 position = Vector2(0, 64)
-floor_stop_on_slope = false
-floor_constant_speed = true
-
-[node name="Camera2D" type="Camera2D" parent="."]
