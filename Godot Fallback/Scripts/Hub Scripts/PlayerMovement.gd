@@ -4,19 +4,37 @@ class_name PlayerMovement
 
 @export var hub : PlayerHub
 
+## Affects what direction(s) this character can interact with walls in while in midair.
 @export var can_change_facing_direction_in_midair : bool = true
-@export var acceleration : float = 25
-@export var deceleration : float = 20
+
+## The maximum ground speed this character can run at.
 @export var top_speed : float = 5.25
+
+## Affects how quickly this character reaches top speed while on the ground.
+@export var acceleration : float = 25
+
+## Affects how quickly this character comes to a stop while on the ground.
+@export var deceleration : float = 20
+
+## Affects how quickly this character changes directions while on the ground.
 @export var turning_speed : float = 45
 
-@export var is_facing_right : bool = true
+## Affects how quickly this character reaches top speed while in the air.
+@export var air_acceleration : float = 80.0
 
+## Affects how quickly this character comes to a stop while in the air.
+@export var air_deceleration : float = 60.0
+
+## Affects how quickly this character changes directions while in the air.
+@export var air_turning_speed : float = 70.0
+
+var is_facing_right : bool = true
 var current_horizontal_velocity : float = 0
 
 func update_facing_direction():
+	if ((!can_change_facing_direction_in_midair and !hub.char_body.is_on_floor())):
+		return
 	set_facing_direction(hub.get_input_vector().x)
-	pass
 
 func set_facing_direction(horizontal_axis : float):
 	if (horizontal_axis > 0):
@@ -44,10 +62,13 @@ func do_movement(delta):
 	if (is_running_into_a_wall()):
 		current_horizontal_velocity = 0
 	elif (horizontal_axis != 0):
-		var accel_delta = (acceleration if !is_turning() else turning_speed)
+		var accel = (acceleration if hub.char_body.is_on_floor() else air_acceleration)
+		var turn = (turning_speed if hub.char_body.is_on_floor() else air_turning_speed)
+		var accel_delta = (accel if !is_turning() else turn)
 		current_horizontal_velocity = move_toward(current_horizontal_velocity, top_speed * horizontal_axis, accel_delta * delta)
 	else:
-		current_horizontal_velocity = move_toward(current_horizontal_velocity, 0, deceleration * delta)
+		var decel = (deceleration if hub.char_body.is_on_floor() else air_deceleration)
+		current_horizontal_velocity = move_toward(current_horizontal_velocity, 0, decel * delta)
 	
 	hub.char_body.velocity.x = current_horizontal_velocity
 	hub.char_body.move_and_slide()

@@ -4,6 +4,7 @@ class_name PlayerStateMachine
 
 @export var hub : PlayerHub
 @export var current_state : State
+var previous_state : State
 
 var states_list : Array[State]
 
@@ -32,7 +33,8 @@ func switch_states(new_state : State):
 	if (current_state != null):
 		current_state.on_exit()
 		current_state.next_state = null
-		
+	
+	previous_state = current_state
 	current_state = new_state
 	
 	current_state.on_enter()
@@ -43,6 +45,9 @@ func get_state_by_name(state_name : String):
 			return state
 	push_error("Invalid state name! ({str})".format({"str": state_name}))
 	return null
+
+func match_current_state_name(state_name : String):
+	return (current_state.name == state_name)
 
 func _input(event : InputEvent):
 	current_state.state_input(event)

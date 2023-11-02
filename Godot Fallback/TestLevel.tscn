@@ -71,6 +71,15 @@ position = Vector2(-224, -64)
 [node name="BreakableBlock14" parent="." instance=ExtResource("1_bttlh")]
 position = Vector2(224, -64)
 
+[node name="BreakableBlock23" parent="." instance=ExtResource("1_bttlh")]
+position = Vector2(160, 64)
+
+[node name="BreakableBlock24" parent="." instance=ExtResource("1_bttlh")]
+position = Vector2(-160, 64)
+
+[node name="BreakableBlock25" parent="." instance=ExtResource("1_bttlh")]
+position = Vector2(-160, 0)
+
 [node name="Camera2D" type="Camera2D" parent="."]
 
 [node name="Player" parent="." instance=ExtResource("2_mjfj3")]

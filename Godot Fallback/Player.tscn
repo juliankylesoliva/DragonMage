@@ -1,4 +1,4 @@
-[gd_scene load_steps=97 format=3 uid="uid://c6qw77ovfwgfs"]
+[gd_scene load_steps=100 format=3 uid="uid://c6qw77ovfwgfs"]
 
 [ext_resource type="Texture2D" uid="uid://d381ahbcwydy8" path="res://Sprites/Player/DraelynCrouch.png" id="1_6b42p"]
 [ext_resource type="Texture2D" uid="uid://dls34a1qa8iy1" path="res://Sprites/Player/DraelynFireTackle.png" id="1_ddrlj"]
@@ -16,12 +16,15 @@
 [ext_resource type="Script" path="res://Scripts/Hub Scripts/PlayerAnimation.gd" id="3_01vwt"]
 [ext_resource type="Script" path="res://Scripts/Player/PlayerStateMachine/RunningState.gd" id="3_65y85"]
 [ext_resource type="Texture2D" uid="uid://ckycrs1a8f53l" path="res://Sprites/Player/DraelynStand.png" id="3_n4ayw"]
+[ext_resource type="Script" path="res://Scripts/Hub Scripts/PlayerJumping.gd" id="3_rs3b5"]
 [ext_resource type="Texture2D" uid="uid://bejyweqbresc6" path="res://Sprites/Player/DraelynDefense.png" id="4_22c6w"]
 [ext_resource type="Texture2D" uid="uid://b8ckwbp7kmd5n" path="res://Sprites/Player/MagliDraelynTransformations.png" id="4_gxmp5"]
+[ext_resource type="Script" path="res://Scripts/Hub Scripts/PlayerBuffers.gd" id="4_jbuwb"]
 [ext_resource type="Script" path="res://Scripts/Player/PlayerStateMachine/JumpingState.gd" id="4_ra8jk"]
 [ext_resource type="Texture2D" uid="uid://63niv7i4a2v3" path="res://Sprites/Player/MagliDefense.png" id="4_x7fww"]
 [ext_resource type="Script" path="res://Scripts/Player/PlayerStateMachine/FallingState.gd" id="5_02o4b"]
 [ext_resource type="Texture2D" uid="uid://crftcj56pc5eb" path="res://Sprites/Player/DraelynWalk.png" id="5_q55rd"]
+[ext_resource type="Script" path="res://Scripts/Hub Scripts/PlayerCollisions.gd" id="6_tj4nn"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_3rp8e"]
 atlas = ExtResource("1_6b42p")
@@ -704,21 +707,45 @@ height = 48.0
 disable_mode = 1
 floor_snap_length = 0.0
 
-[node name="Hub" type="Node" parent="." node_paths=PackedStringArray("state_machine", "movement", "animation", "char_body", "char_sprite")]
+[node name="Hub" type="Node" parent="." node_paths=PackedStringArray("state_machine", "collisions", "buffers", "movement", "jumping", "animation", "char_body", "char_sprite", "collision_shape")]
 script = ExtResource("1_fbdyy")
 state_machine = NodePath("../StateMachine")
+collisions = NodePath("Collisions")
+buffers = NodePath("Buffers")
 movement = NodePath("Movement")
+jumping = NodePath("Jumping")
 animation = NodePath("Animation")
 char_body = NodePath("..")
 char_sprite = NodePath("../AnimatedSprite2D")
+collision_shape = NodePath("../CollisionShape2D")
+
+[node name="Collisions" type="Node" parent="Hub" node_paths=PackedStringArray("hub")]
+script = ExtResource("6_tj4nn")
+hub = NodePath("..")
+wall_check_origin_offset = Vector2(0, 8)
+
+[node name="Buffers" type="Node" parent="Hub" node_paths=PackedStringArray("hub")]
+script = ExtResource("4_jbuwb")
+hub = NodePath("..")
 
 [node name="Movement" type="Node" parent="Hub" node_paths=PackedStringArray("hub")]
 script = ExtResource("2_ebc55")
 hub = NodePath("..")
+top_speed = 168.0
 acceleration = 800.0
 deceleration = 640.0
-top_speed = 168.0
 turning_speed = 1440.0
+air_acceleration = 2560.0
+air_deceleration = 1920.0
+air_turning_speed = 2240.0
+
+[node name="Jumping" type="Node" parent="Hub" node_paths=PackedStringArray("hub")]
+script = ExtResource("3_rs3b5")
+hub = NodePath("..")
+initial_jump_velocity = 384.0
+max_fall_speed = 320.0
+variable_jump_decay_rate = 3040.0
+running_jump_added_velocity = 48.0
 
 [node name="Animation" type="Node" parent="Hub" node_paths=PackedStringArray("hub")]
 script = ExtResource("3_01vwt")
@@ -731,7 +758,6 @@ current_state = NodePath("Standing")
 
 [node name="Standing" type="Node" parent="StateMachine"]
 script = ExtResource("2_w87d3")
-can_move = null
 
 [node name="Running" type="Node" parent="StateMachine"]
 script = ExtResource("3_65y85")
@@ -745,7 +771,7 @@ script = ExtResource("5_02o4b")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_5s7e1")
-animation = &"MagliRun"
+animation = &"MagliStand"
 autoplay = "MagliStand"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
