@@ -4,6 +4,9 @@ class_name PlayerMovement
 
 @export var hub : PlayerHub
 
+## Used to reduce jitter when using move_and_slide() up a steep slope and into a wall.
+@export var max_slides : int = 60
+
 ## Affects what direction(s) this character can interact with walls in while in midair.
 @export var can_change_facing_direction_in_midair : bool = true
 
@@ -31,6 +34,9 @@ class_name PlayerMovement
 var is_facing_right : bool = true
 var current_horizontal_velocity : float = 0
 
+func _ready():
+	hub.char_body.set_max_slides(max_slides)
+
 func update_facing_direction():
 	if ((!can_change_facing_direction_in_midair and !hub.char_body.is_on_floor())):
 		return
@@ -53,13 +59,10 @@ func is_turning():
 	var horizontal_axis = hub.get_input_vector().x
 	return (horizontal_axis * current_horizontal_velocity < 0)
 
-func is_running_into_a_wall():
-	return (hub.char_body.is_on_wall() and !is_turning() and hub.char_body.velocity.x == 0)
-
 func do_movement(delta):
 	var horizontal_axis = hub.get_input_vector().x
 	
-	if (is_running_into_a_wall()):
+	if (hub.collisions.is_moving_against_a_wall()):
 		current_horizontal_velocity = 0
 	elif (horizontal_axis != 0):
 		var accel = (acceleration if hub.char_body.is_on_floor() else air_acceleration)
@@ -71,6 +74,7 @@ func do_movement(delta):
 		current_horizontal_velocity = move_toward(current_horizontal_velocity, 0, decel * delta)
 	
 	hub.char_body.velocity.x = current_horizontal_velocity
+	
 	hub.char_body.move_and_slide()
 
 func get_speed_portion(clamped : bool = true):

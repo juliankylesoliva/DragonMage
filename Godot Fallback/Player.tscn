@@ -705,7 +705,13 @@ height = 48.0
 
 [node name="Player" type="CharacterBody2D"]
 disable_mode = 1
-floor_snap_length = 0.0
+collision_mask = 3
+floor_constant_speed = true
+floor_max_angle = 1.55334
+floor_snap_length = 16.0
+platform_floor_layers = 4294901761
+platform_wall_layers = 1
+safe_margin = 0.001
 
 [node name="Hub" type="Node" parent="." node_paths=PackedStringArray("state_machine", "collisions", "buffers", "movement", "jumping", "animation", "char_body", "char_sprite", "collision_shape")]
 script = ExtResource("1_fbdyy")
@@ -722,7 +728,6 @@ collision_shape = NodePath("../CollisionShape2D")
 [node name="Collisions" type="Node" parent="Hub" node_paths=PackedStringArray("hub")]
 script = ExtResource("6_tj4nn")
 hub = NodePath("..")
-wall_check_origin_offset = Vector2(0, 8)
 
 [node name="Buffers" type="Node" parent="Hub" node_paths=PackedStringArray("hub")]
 script = ExtResource("4_jbuwb")
