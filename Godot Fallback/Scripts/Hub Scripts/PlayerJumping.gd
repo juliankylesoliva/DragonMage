@@ -33,6 +33,20 @@ var current_min_jump_hold_timer : float = 0
 
 var is_jump_held : bool = false
 
+@export_group("Wall Jump Variables")
+
+@export var enable_wall_jumping : bool = true
+
+@export var min_wall_jump_height : float = 1
+
+@export var wall_slide_speed : float = 1.8
+
+@export var vertical_wall_jump_velocity : float = 12
+
+@export var horizontal_wall_jump_velocity : float = 5.25
+
+@export var max_wall_jump_direction_lock_time : float = 0.3
+
 @export_group("Running Jump Parameters")
 
 ## When enabled, this character's jump velocity will increase by a small amount depending on their horizontal speed.
@@ -43,6 +57,8 @@ var is_jump_held : bool = false
 
 var base_gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 var current_gravity_scale : float = 1
+
+var current_wall_jump_direction_lock_time : float = 0
 
 func _ready():
 	current_gravity_scale = falling_gravity_scale
@@ -61,6 +77,19 @@ func set_is_jump_held():
 
 func unset_is_jump_held():
 	is_jump_held = false
+
+func is_wall_jump_lock_timer_active():
+	return current_wall_jump_direction_lock_time > 0
+
+func activate_wall_jump_lock_timer():
+	current_wall_jump_direction_lock_time = max_wall_jump_direction_lock_time
+
+func reset_wall_jump_lock_timer():
+	current_wall_jump_direction_lock_time = 0
+
+func update_wall_jump_lock_timer(delta):
+	if (is_wall_jump_lock_timer_active()):
+		current_wall_jump_direction_lock_time = move_toward(current_wall_jump_direction_lock_time, 0, delta)
 
 func can_ground_jump():
 	return (hub.buffers.is_jump_buffer_active() and (hub.char_body.is_on_floor() or hub.buffers.is_coyote_time_active()))
@@ -106,6 +135,46 @@ func falling_update(delta : float):
 	if (hub.char_body.velocity.y > max_fall_speed):
 		hub.char_body.velocity.y = max_fall_speed
 
+func can_wall_slide():
+	return (enable_wall_jumping and hub.collisions.get_distance_to_ground() >= min_wall_jump_height and hub.char_body.is_on_wall_only() and hub.collisions.is_moving_against_a_wall() and (Input.get_action_strength("Jump") == 0 or !is_jump_held or hub.char_body.velocity.y >= 0))
+
+func start_wall_slide():
+	is_jump_held = false
+	switch_to_zero_gravity()
+	hub.char_body.velocity.x = 0
+	hub.char_body.velocity.y = wall_slide_speed
+	hub.movement.current_horizontal_velocity = 0
+
+func wall_slide_update():
+	hub.char_body.velocity.y = wall_slide_speed
+	hub.movement.current_horizontal_velocity = 0
+	hub.char_body.move_and_slide()
+
+func is_wall_slide_canceled():
+	return (!hub.collisions.is_facing_a_wall() or hub.char_body.velocity.y == 0 or hub.get_input_vector().x == -hub.movement.get_facing_value())
+
+func can_wall_jump():
+	return (hub.state_machine.current_state.name == "WallSliding" and !is_wall_jump_lock_timer_active() and hub.buffers.is_jump_buffer_active())
+
+func start_wall_jump():
+	hub.buffers.reset_jump_buffer()
+	set_is_jump_held()
+	switch_to_rising_gravity()
+	
+	reset_min_jump_hold_timer()
+	
+	var horizontal_result = abs(horizontal_wall_jump_velocity)
+	hub.movement.current_horizontal_velocity = (-horizontal_result if hub.movement.is_facing_right else horizontal_result)
+	hub.movement.set_facing_direction(-hub.movement.get_facing_value())
+	hub.char_body.velocity.x = hub.movement.current_horizontal_velocity
+	hub.char_body.velocity.y = -vertical_wall_jump_velocity
+	
+	hub.animation.set_animation("MagliJump")
+	hub.animation.set_animation_frame(0)
+	hub.animation.set_animation_speed(0)
+	
+	activate_wall_jump_lock_timer()
+
 func get_gravity_delta(delta : float):
 	return (base_gravity * current_gravity_scale * delta)
 
@@ -114,3 +183,6 @@ func switch_to_rising_gravity():
 
 func switch_to_falling_gravity():
 	current_gravity_scale = falling_gravity_scale
+
+func switch_to_zero_gravity():
+	current_gravity_scale = 0

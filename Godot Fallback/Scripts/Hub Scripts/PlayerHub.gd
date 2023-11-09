@@ -12,6 +12,7 @@ class_name PlayerHub
 @export var char_body : CharacterBody2D
 @export var char_sprite : AnimatedSprite2D
 @export var collision_shape : CollisionShape2D
+@export var raycast_2d : RayCast2D
 
 func get_input_vector():
 	var input_vector = Vector2.ZERO

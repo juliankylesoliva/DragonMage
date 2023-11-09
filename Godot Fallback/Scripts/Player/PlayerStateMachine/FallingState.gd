@@ -15,6 +15,8 @@ func state_process(_delta : float):
 	elif (hub.jumping.can_ground_jump()):
 		hub.jumping.start_ground_jump()
 		set_next_state(state_machine.get_state_by_name("Jumping"))
+	elif (hub.jumping.can_wall_slide()):
+		state_machine.switch_states(state_machine.get_state_by_name("WallSliding"))
 	else:
 		pass
 

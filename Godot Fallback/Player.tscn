@@ -1,4 +1,4 @@
-[gd_scene load_steps=100 format=3 uid="uid://c6qw77ovfwgfs"]
+[gd_scene load_steps=101 format=3 uid="uid://c6qw77ovfwgfs"]
 
 [ext_resource type="Texture2D" uid="uid://d381ahbcwydy8" path="res://Sprites/Player/DraelynCrouch.png" id="1_6b42p"]
 [ext_resource type="Texture2D" uid="uid://dls34a1qa8iy1" path="res://Sprites/Player/DraelynFireTackle.png" id="1_ddrlj"]
@@ -25,6 +25,7 @@
 [ext_resource type="Script" path="res://Scripts/Player/PlayerStateMachine/FallingState.gd" id="5_02o4b"]
 [ext_resource type="Texture2D" uid="uid://crftcj56pc5eb" path="res://Sprites/Player/DraelynWalk.png" id="5_q55rd"]
 [ext_resource type="Script" path="res://Scripts/Hub Scripts/PlayerCollisions.gd" id="6_tj4nn"]
+[ext_resource type="Script" path="res://Scripts/Player/PlayerStateMachine/WallSlidingState.gd" id="12_mju8y"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_3rp8e"]
 atlas = ExtResource("1_6b42p")
@@ -707,13 +708,13 @@ height = 48.0
 disable_mode = 1
 collision_mask = 3
 floor_constant_speed = true
-floor_max_angle = 1.55334
+floor_max_angle = 1.39626
 floor_snap_length = 16.0
 platform_floor_layers = 4294901761
 platform_wall_layers = 1
 safe_margin = 0.001
 
-[node name="Hub" type="Node" parent="." node_paths=PackedStringArray("state_machine", "collisions", "buffers", "movement", "jumping", "animation", "char_body", "char_sprite", "collision_shape")]
+[node name="Hub" type="Node" parent="." node_paths=PackedStringArray("state_machine", "collisions", "buffers", "movement", "jumping", "animation", "char_body", "char_sprite", "collision_shape", "raycast_2d")]
 script = ExtResource("1_fbdyy")
 state_machine = NodePath("../StateMachine")
 collisions = NodePath("Collisions")
@@ -724,6 +725,7 @@ animation = NodePath("Animation")
 char_body = NodePath("..")
 char_sprite = NodePath("../AnimatedSprite2D")
 collision_shape = NodePath("../CollisionShape2D")
+raycast_2d = NodePath("../RayCast2D")
 
 [node name="Collisions" type="Node" parent="Hub" node_paths=PackedStringArray("hub")]
 script = ExtResource("6_tj4nn")
@@ -750,6 +752,10 @@ hub = NodePath("..")
 initial_jump_velocity = 384.0
 max_fall_speed = 320.0
 variable_jump_decay_rate = 3040.0
+min_wall_jump_height = 32.0
+wall_slide_speed = 57.6
+vertical_wall_jump_velocity = 384.0
+horizontal_wall_jump_velocity = 168.0
 running_jump_added_velocity = 48.0
 
 [node name="Animation" type="Node" parent="Hub" node_paths=PackedStringArray("hub")]
@@ -773,6 +779,9 @@ script = ExtResource("4_ra8jk")
 [node name="Falling" type="Node" parent="StateMachine"]
 script = ExtResource("5_02o4b")
 
+[node name="WallSliding" type="Node" parent="StateMachine"]
+script = ExtResource("12_mju8y")
+
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_5s7e1")
@@ -782,3 +791,10 @@ autoplay = "MagliStand"
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 8)
 shape = SubResource("CapsuleShape2D_6k7o1")
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+position = Vector2(0, 32)
+exclude_parent = false
+target_position = Vector2(0, 999)
+collision_mask = 3
+collide_with_areas = true

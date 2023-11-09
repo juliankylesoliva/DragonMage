@@ -60,7 +60,7 @@ func is_turning():
 	return (horizontal_axis * current_horizontal_velocity < 0)
 
 func do_movement(delta):
-	var horizontal_axis = hub.get_input_vector().x
+	var horizontal_axis = (hub.get_input_vector().x if !hub.jumping.is_wall_jump_lock_timer_active() else get_facing_value())
 	
 	if (hub.collisions.is_moving_against_a_wall()):
 		current_horizontal_velocity = 0
