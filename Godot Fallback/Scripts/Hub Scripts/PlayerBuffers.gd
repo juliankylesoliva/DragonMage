@@ -13,6 +13,9 @@ var jump_buffer_time_left : float = 0
 var coyote_time_left : float = 0
 var prev_is_on_floor : bool = false
 
+## Used for preserving the player's glide time should a glide be activated right before a wall jump.
+@export var early_glide_buffer_time : float = 0.25
+
 func _ready():
 	prev_is_on_floor = hub.char_body.is_on_floor()
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=101 format=3 uid="uid://c6qw77ovfwgfs"]
+[gd_scene load_steps=117 format=3 uid="uid://c6qw77ovfwgfs"]
 
 [ext_resource type="Texture2D" uid="uid://d381ahbcwydy8" path="res://Sprites/Player/DraelynCrouch.png" id="1_6b42p"]
 [ext_resource type="Texture2D" uid="uid://dls34a1qa8iy1" path="res://Sprites/Player/DraelynFireTackle.png" id="1_ddrlj"]
@@ -7,7 +7,6 @@
 [ext_resource type="Script" path="res://Scripts/Player/PlayerStateMachine/PlayerStateMachine.gd" id="1_rgc8w"]
 [ext_resource type="Texture2D" uid="uid://bepyd7xti4hyt" path="res://Sprites/Player/MagliJumps.png" id="1_s7co6"]
 [ext_resource type="Texture2D" uid="uid://bd1jjd3w8f3c1" path="res://Sprites/Player/MagliRun.png" id="1_setk4"]
-[ext_resource type="Texture2D" uid="uid://bcie7umlygyyr" path="res://Sprites/Player/MagliStand.png" id="2_7tx02"]
 [ext_resource type="Script" path="res://Scripts/Hub Scripts/PlayerMovement.gd" id="2_ebc55"]
 [ext_resource type="Texture2D" uid="uid://bsyops5506ptd" path="res://Sprites/Player/DraelynHurt.png" id="2_h2opi"]
 [ext_resource type="Texture2D" uid="uid://bbkhtwnncuc7r" path="res://Sprites/Player/DraelynJumps.png" id="2_p0h7w"]
@@ -15,7 +14,6 @@
 [ext_resource type="Script" path="res://Scripts/Player/PlayerStateMachine/StandingState.gd" id="2_w87d3"]
 [ext_resource type="Script" path="res://Scripts/Hub Scripts/PlayerAnimation.gd" id="3_01vwt"]
 [ext_resource type="Script" path="res://Scripts/Player/PlayerStateMachine/RunningState.gd" id="3_65y85"]
-[ext_resource type="Texture2D" uid="uid://ckycrs1a8f53l" path="res://Sprites/Player/DraelynStand.png" id="3_n4ayw"]
 [ext_resource type="Script" path="res://Scripts/Hub Scripts/PlayerJumping.gd" id="3_rs3b5"]
 [ext_resource type="Texture2D" uid="uid://bejyweqbresc6" path="res://Sprites/Player/DraelynDefense.png" id="4_22c6w"]
 [ext_resource type="Texture2D" uid="uid://b8ckwbp7kmd5n" path="res://Sprites/Player/MagliDraelynTransformations.png" id="4_gxmp5"]
@@ -26,6 +24,9 @@
 [ext_resource type="Texture2D" uid="uid://crftcj56pc5eb" path="res://Sprites/Player/DraelynWalk.png" id="5_q55rd"]
 [ext_resource type="Script" path="res://Scripts/Hub Scripts/PlayerCollisions.gd" id="6_tj4nn"]
 [ext_resource type="Script" path="res://Scripts/Player/PlayerStateMachine/WallSlidingState.gd" id="12_mju8y"]
+[ext_resource type="Script" path="res://Scripts/Player/PlayerStateMachine/GlidingState.gd" id="12_tj6cc"]
+[ext_resource type="Texture2D" uid="uid://clp08lkqo6nh5" path="res://Sprites/Player/DraelynIdle.png" id="19_lfkpo"]
+[ext_resource type="Texture2D" uid="uid://c44t784vgugry" path="res://Sprites/Player/MagliIdle.png" id="27_my3k8"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_3rp8e"]
 atlas = ExtResource("1_6b42p")
@@ -111,13 +112,17 @@ region = Rect2(320, 0, 64, 64)
 atlas = ExtResource("1_6b42p")
 region = Rect2(256, 0, 64, 64)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_ewn84"]
-atlas = ExtResource("4_gxmp5")
-region = Rect2(256, 0, 64, 64)
+[sub_resource type="AtlasTexture" id="AtlasTexture_iq1d5"]
+atlas = ExtResource("19_lfkpo")
+region = Rect2(64, 0, 64, 64)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_1bt08"]
-atlas = ExtResource("4_gxmp5")
-region = Rect2(320, 0, 64, 64)
+[sub_resource type="AtlasTexture" id="AtlasTexture_8nlhm"]
+atlas = ExtResource("19_lfkpo")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y66gr"]
+atlas = ExtResource("19_lfkpo")
+region = Rect2(128, 0, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_8wjjn"]
 atlas = ExtResource("4_gxmp5")
@@ -126,6 +131,14 @@ region = Rect2(384, 0, 64, 64)
 [sub_resource type="AtlasTexture" id="AtlasTexture_pjba6"]
 atlas = ExtResource("4_gxmp5")
 region = Rect2(448, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_np3pq"]
+atlas = ExtResource("4_gxmp5")
+region = Rect2(512, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jpvbd"]
+atlas = ExtResource("4_gxmp5")
+region = Rect2(576, 0, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_6uptb"]
 atlas = ExtResource("2_p0h7w")
@@ -295,8 +308,52 @@ region = Rect2(256, 0, 64, 64)
 atlas = ExtResource("1_setk4")
 region = Rect2(320, 0, 64, 64)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_iv1qe"]
-atlas = ExtResource("4_gxmp5")
+[sub_resource type="AtlasTexture" id="AtlasTexture_gfewm"]
+atlas = ExtResource("27_my3k8")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gqpiv"]
+atlas = ExtResource("27_my3k8")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_31mio"]
+atlas = ExtResource("27_my3k8")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_31rqp"]
+atlas = ExtResource("27_my3k8")
+region = Rect2(192, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_blavh"]
+atlas = ExtResource("27_my3k8")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_to6wa"]
+atlas = ExtResource("27_my3k8")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ydy2c"]
+atlas = ExtResource("27_my3k8")
+region = Rect2(192, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_x38cu"]
+atlas = ExtResource("27_my3k8")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_didfw"]
+atlas = ExtResource("27_my3k8")
+region = Rect2(192, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_x41n4"]
+atlas = ExtResource("27_my3k8")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3epbl"]
+atlas = ExtResource("27_my3k8")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wyj1j"]
+atlas = ExtResource("27_my3k8")
 region = Rect2(0, 0, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_g13l3"]
@@ -310,6 +367,10 @@ region = Rect2(128, 0, 64, 64)
 [sub_resource type="AtlasTexture" id="AtlasTexture_ti80s"]
 atlas = ExtResource("4_gxmp5")
 region = Rect2(192, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4e7j2"]
+atlas = ExtResource("4_gxmp5")
+region = Rect2(256, 0, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_8pqdm"]
 atlas = ExtResource("1_s7co6")
@@ -421,13 +482,13 @@ animations = [{
 "speed": 60.0
 }, {
 "frames": [{
-"duration": 4.0,
+"duration": 6.0,
 "texture": SubResource("AtlasTexture_so5js")
 }, {
-"duration": 4.0,
+"duration": 6.0,
 "texture": SubResource("AtlasTexture_5k30x")
 }, {
-"duration": 4.0,
+"duration": 6.0,
 "texture": SubResource("AtlasTexture_aumdf")
 }, {
 "duration": 12.0,
@@ -446,25 +507,34 @@ animations = [{
 "speed": 60.0
 }, {
 "frames": [{
-"duration": 1.0,
-"texture": ExtResource("3_n4ayw")
+"duration": 12.0,
+"texture": SubResource("AtlasTexture_iq1d5")
+}, {
+"duration": 24.0,
+"texture": SubResource("AtlasTexture_8nlhm")
+}, {
+"duration": 12.0,
+"texture": SubResource("AtlasTexture_iq1d5")
+}, {
+"duration": 24.0,
+"texture": SubResource("AtlasTexture_y66gr")
 }],
 "loop": true,
 "name": &"DraelynStand",
 "speed": 60.0
 }, {
 "frames": [{
-"duration": 9.0,
-"texture": SubResource("AtlasTexture_ewn84")
-}, {
-"duration": 6.0,
-"texture": SubResource("AtlasTexture_1bt08")
-}, {
-"duration": 6.0,
+"duration": 12.0,
 "texture": SubResource("AtlasTexture_8wjjn")
 }, {
-"duration": 9.0,
+"duration": 4.0,
 "texture": SubResource("AtlasTexture_pjba6")
+}, {
+"duration": 4.0,
+"texture": SubResource("AtlasTexture_np3pq")
+}, {
+"duration": 12.0,
+"texture": SubResource("AtlasTexture_jpvbd")
 }],
 "loop": false,
 "name": &"DraelynToMagli",
@@ -627,13 +697,13 @@ animations = [{
 "speed": 60.0
 }, {
 "frames": [{
-"duration": 4.0,
+"duration": 6.0,
 "texture": SubResource("AtlasTexture_3fknw")
 }, {
-"duration": 4.0,
+"duration": 6.0,
 "texture": SubResource("AtlasTexture_0a7iv")
 }, {
-"duration": 4.0,
+"duration": 6.0,
 "texture": SubResource("AtlasTexture_tx6da")
 }, {
 "duration": 12.0,
@@ -667,25 +737,97 @@ animations = [{
 "speed": 60.0
 }, {
 "frames": [{
-"duration": 1.0,
-"texture": ExtResource("2_7tx02")
+"duration": 12.0,
+"texture": SubResource("AtlasTexture_gfewm")
+}, {
+"duration": 24.0,
+"texture": SubResource("AtlasTexture_gqpiv")
+}, {
+"duration": 12.0,
+"texture": SubResource("AtlasTexture_gfewm")
+}, {
+"duration": 24.0,
+"texture": SubResource("AtlasTexture_31mio")
 }],
-"loop": true,
+"loop": false,
 "name": &"MagliStand",
 "speed": 60.0
 }, {
 "frames": [{
-"duration": 9.0,
-"texture": SubResource("AtlasTexture_iv1qe")
+"duration": 6.0,
+"texture": SubResource("AtlasTexture_31rqp")
 }, {
 "duration": 6.0,
+"texture": SubResource("AtlasTexture_gfewm")
+}, {
+"duration": 24.0,
+"texture": SubResource("AtlasTexture_gqpiv")
+}, {
+"duration": 12.0,
+"texture": SubResource("AtlasTexture_gfewm")
+}, {
+"duration": 24.0,
+"texture": SubResource("AtlasTexture_31mio")
+}],
+"loop": false,
+"name": &"MagliStandBlink0",
+"speed": 60.0
+}, {
+"frames": [{
+"duration": 12.0,
+"texture": SubResource("AtlasTexture_blavh")
+}, {
+"duration": 24.0,
+"texture": SubResource("AtlasTexture_to6wa")
+}, {
+"duration": 6.0,
+"texture": SubResource("AtlasTexture_ydy2c")
+}, {
+"duration": 6.0,
+"texture": SubResource("AtlasTexture_blavh")
+}, {
+"duration": 24.0,
+"texture": SubResource("AtlasTexture_x38cu")
+}],
+"loop": false,
+"name": &"MagliStandBlink1",
+"speed": 60.0
+}, {
+"frames": [{
+"duration": 6.0,
+"texture": SubResource("AtlasTexture_didfw")
+}, {
+"duration": 6.0,
+"texture": SubResource("AtlasTexture_x41n4")
+}, {
+"duration": 24.0,
+"texture": SubResource("AtlasTexture_3epbl")
+}, {
+"duration": 6.0,
+"texture": SubResource("AtlasTexture_didfw")
+}, {
+"duration": 6.0,
+"texture": SubResource("AtlasTexture_x41n4")
+}, {
+"duration": 24.0,
+"texture": SubResource("AtlasTexture_wyj1j")
+}],
+"loop": false,
+"name": &"MagliStandBlink2",
+"speed": 60.0
+}, {
+"frames": [{
+"duration": 12.0,
 "texture": SubResource("AtlasTexture_g13l3")
 }, {
-"duration": 6.0,
+"duration": 4.0,
 "texture": SubResource("AtlasTexture_2ekn8")
 }, {
-"duration": 9.0,
+"duration": 4.0,
 "texture": SubResource("AtlasTexture_ti80s")
+}, {
+"duration": 12.0,
+"texture": SubResource("AtlasTexture_4e7j2")
 }],
 "loop": false,
 "name": &"MagliToDraelyn",
@@ -709,7 +851,7 @@ disable_mode = 1
 collision_mask = 3
 floor_constant_speed = true
 floor_max_angle = 1.39626
-floor_snap_length = 16.0
+floor_snap_length = 24.0
 platform_floor_layers = 4294901761
 platform_wall_layers = 1
 safe_margin = 0.001
@@ -738,6 +880,7 @@ hub = NodePath("..")
 [node name="Movement" type="Node" parent="Hub" node_paths=PackedStringArray("hub")]
 script = ExtResource("2_ebc55")
 hub = NodePath("..")
+max_slides = 999
 top_speed = 168.0
 acceleration = 800.0
 deceleration = 640.0
@@ -752,6 +895,7 @@ hub = NodePath("..")
 initial_jump_velocity = 384.0
 max_fall_speed = 320.0
 variable_jump_decay_rate = 3040.0
+glide_fall_speed = 24.0
 min_wall_jump_height = 32.0
 wall_slide_speed = 57.6
 vertical_wall_jump_velocity = 384.0
@@ -778,6 +922,9 @@ script = ExtResource("4_ra8jk")
 
 [node name="Falling" type="Node" parent="StateMachine"]
 script = ExtResource("5_02o4b")
+
+[node name="Gliding" type="Node" parent="StateMachine"]
+script = ExtResource("12_tj6cc")
 
 [node name="WallSliding" type="Node" parent="StateMachine"]
 script = ExtResource("12_mju8y")

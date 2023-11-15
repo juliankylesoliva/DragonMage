@@ -33,6 +33,18 @@ var current_min_jump_hold_timer : float = 0
 
 var is_jump_held : bool = false
 
+@export_group("Gliding Variables")
+
+@export var enable_gliding : bool = true
+
+@export var min_glide_height : float = 1
+
+@export var glide_fall_speed : float = 0.75
+
+@export_range(0.0, 5.0) var max_glide_time : float = 5
+
+var current_glide_time : float = 0
+
 @export_group("Wall Jump Variables")
 
 @export var enable_wall_jumping : bool = true
@@ -65,6 +77,8 @@ func _ready():
 
 func update_min_jump_hold_timer(delta : float):
 	current_min_jump_hold_timer = move_toward(current_min_jump_hold_timer, min_jump_hold_time, delta)
+	if (current_min_jump_hold_timer == 0):
+		is_jump_held = false
 
 func reset_min_jump_hold_timer():
 	current_min_jump_hold_timer = 0
@@ -99,6 +113,7 @@ func start_ground_jump():
 	set_is_jump_held()
 	switch_to_rising_gravity()
 	
+	landing_reset()
 	reset_min_jump_hold_timer()
 	
 	var horizontal_result = abs(hub.char_body.velocity.x)
@@ -134,6 +149,21 @@ func falling_update(delta : float):
 	hub.char_body.velocity.y += get_gravity_delta(delta)
 	if (hub.char_body.velocity.y > max_fall_speed):
 		hub.char_body.velocity.y = max_fall_speed
+
+func can_glide():
+	return (enable_gliding and !hub.buffers.is_coyote_time_active() and hub.char_body.velocity.y >= 0 and current_glide_time <= hub.buffers.early_glide_buffer_time and hub.collisions.get_distance_to_ground() >= min_glide_height and Input.get_action_strength("Jump") == 1)
+
+func start_glide():
+	switch_to_zero_gravity()
+	hub.char_body.velocity.y = glide_fall_speed
+
+func glide_update(delta : float):
+	hub.char_body.velocity.y = glide_fall_speed
+	current_glide_time = move_toward(current_glide_time, max_glide_time, delta)
+
+func cancel_glide():
+	if (current_glide_time > hub.buffers.early_glide_buffer_time or Input.get_action_strength("Jump") == 0):
+		current_glide_time = max_glide_time
 
 func can_wall_slide():
 	return (enable_wall_jumping and hub.collisions.get_distance_to_ground() >= min_wall_jump_height and hub.char_body.is_on_wall_only() and hub.collisions.is_moving_against_a_wall() and (Input.get_action_strength("Jump") == 0 or !is_jump_held or hub.char_body.velocity.y >= 0))
@@ -174,6 +204,9 @@ func start_wall_jump():
 	hub.animation.set_animation_speed(0)
 	
 	activate_wall_jump_lock_timer()
+
+func landing_reset():
+	current_glide_time = 0
 
 func get_gravity_delta(delta : float):
 	return (base_gravity * current_gravity_scale * delta)

@@ -2,9 +2,20 @@ extends State
 
 class_name StandingState
 
+@export var num_blink_animations : int = 3
+@export var min_blink_time : float = 3
+@export var max_blink_time : float = 4
+var current_blink_timer = 0
+
 func state_process(_delta):
 	hub.movement.do_movement(_delta)
 	hub.movement.update_facing_direction()
+	
+	update_blink_timer(_delta)
+	if (!hub.char_sprite.is_playing()):
+		if (!check_blink_animation()):
+			hub.animation.set_animation("MagliStand")
+			hub.animation.set_animation_speed(1)
 	
 	if (hub.char_body.is_on_floor() and (!hub.collisions.is_facing_a_wall() or (hub.get_input_vector().x * hub.movement.get_facing_value()) < 0) and hub.get_input_vector().x != 0):
 		set_next_state(state_machine.get_state_by_name("Running"))
@@ -17,5 +28,28 @@ func state_process(_delta):
 		pass
 
 func on_enter():
+	hub.jumping.landing_reset()
 	hub.animation.set_animation("MagliStand")
-	hub.animation.set_animation_speed(0)
+	hub.animation.set_animation_speed(1)
+
+func set_blink_timer():
+	current_blink_timer = randf_range(min_blink_time, max_blink_time)
+
+func update_blink_timer(delta):
+	if (num_blink_animations <= 0):
+		return
+	
+	current_blink_timer = move_toward(current_blink_timer, 0, delta)
+
+func check_blink_animation():
+	if (num_blink_animations <= 0):
+		return false
+	
+	if (current_blink_timer <= 0):
+		var blink_anim_num = (randi() % num_blink_animations)
+		hub.animation.set_animation("MagliStandBlink{num}".format({"num": blink_anim_num}))
+		hub.animation.set_animation_speed(1)
+		set_blink_timer()
+		return true
+	
+	return false

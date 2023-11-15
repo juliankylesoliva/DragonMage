@@ -22,4 +22,7 @@ func state_process(_delta):
 		pass
 
 func on_enter():
+	var prev_state_name : String = state_machine.previous_state.name
+	if (prev_state_name == "Falling" or prev_state_name == "Jumping"):
+		hub.jumping.landing_reset()
 	hub.animation.set_animation("MagliRun")
