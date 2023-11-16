@@ -67,6 +67,10 @@ var current_glide_time : float = 0
 ## The amount of added jump velocity at top speed.
 @export var running_jump_added_velocity : float = 1.5
 
+@export_group("Crouch-related Variables")
+
+@export var enable_crouch_jump : bool = true
+
 var base_gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 var current_gravity_scale : float = 1
 
@@ -106,21 +110,24 @@ func update_wall_jump_lock_timer(delta):
 		current_wall_jump_direction_lock_time = move_toward(current_wall_jump_direction_lock_time, 0, delta)
 
 func can_ground_jump():
-	return (hub.buffers.is_jump_buffer_active() and (hub.char_body.is_on_floor() or hub.buffers.is_coyote_time_active()))
+	return (hub.buffers.is_jump_buffer_active() and (hub.char_body.is_on_floor() or hub.buffers.is_coyote_time_active()) and (!hub.movement.is_crouching or enable_crouch_jump or !hub.collisions.is_in_ceiling_when_uncrouched()))
 
 func start_ground_jump():
 	hub.buffers.reset_jump_buffer()
 	set_is_jump_held()
 	switch_to_rising_gravity()
 	
+	if (!enable_crouch_jump):
+		hub.movement.reset_crouch_state()
+	
 	landing_reset()
 	reset_min_jump_hold_timer()
 	
 	var horizontal_result = abs(hub.char_body.velocity.x)
 	
-	var running_jump_result = (min((horizontal_result / hub.movement.top_speed), 1) * running_jump_added_velocity if enable_running_jump else 0)
+	var running_jump_result = (min((horizontal_result / hub.movement.top_speed), 1) * running_jump_added_velocity if enable_running_jump and !hub.movement.is_crouching else 0)
 	
-	hub.animation.set_animation("MagliJump")
+	hub.animation.set_animation("MagliJump" if !hub.movement.is_crouching else "MagliCrouchJump")
 	hub.animation.set_animation_frame(0)
 	hub.animation.set_animation_speed(0)
 	
@@ -131,7 +138,7 @@ func ground_jump_update(delta : float):
 	if (hub.char_body.velocity.y < 0):
 		hub.char_body.velocity.y += get_gravity_delta(delta)
 		
-		if (current_min_jump_hold_timer >= min_jump_hold_time and is_jump_held and Input.get_action_strength("Jump") == 0):
+		if (current_min_jump_hold_timer >= min_jump_hold_time and is_jump_held and !Input.is_action_pressed("Jump")):
 			unset_is_jump_held()
 		
 		if ((is_jump_held or current_min_jump_hold_timer < min_jump_hold_time) and hub.char_body.is_on_ceiling()):
@@ -151,9 +158,10 @@ func falling_update(delta : float):
 		hub.char_body.velocity.y = max_fall_speed
 
 func can_glide():
-	return (enable_gliding and !hub.buffers.is_coyote_time_active() and hub.char_body.velocity.y >= 0 and current_glide_time <= hub.buffers.early_glide_buffer_time and hub.collisions.get_distance_to_ground() >= min_glide_height and Input.get_action_strength("Jump") == 1)
+	return (enable_gliding and !hub.movement.is_crouching and !hub.buffers.is_coyote_time_active() and (hub.char_body.velocity.y >= 0 or Input.get_action_strength("Technical") == 1) and current_glide_time <= hub.buffers.early_glide_buffer_time and hub.collisions.get_distance_to_ground() >= min_glide_height and Input.is_action_pressed("Jump"))
 
 func start_glide():
+	hub.movement.reset_crouch_state()
 	switch_to_zero_gravity()
 	hub.char_body.velocity.y = glide_fall_speed
 
@@ -162,13 +170,14 @@ func glide_update(delta : float):
 	current_glide_time = move_toward(current_glide_time, max_glide_time, delta)
 
 func cancel_glide():
-	if (current_glide_time > hub.buffers.early_glide_buffer_time or Input.get_action_strength("Jump") == 0):
+	if (current_glide_time > hub.buffers.early_glide_buffer_time or !Input.is_action_pressed("Jump")):
 		current_glide_time = max_glide_time
 
 func can_wall_slide():
-	return (enable_wall_jumping and hub.collisions.get_distance_to_ground() >= min_wall_jump_height and hub.char_body.is_on_wall_only() and hub.collisions.is_moving_against_a_wall() and (Input.get_action_strength("Jump") == 0 or !is_jump_held or hub.char_body.velocity.y >= 0))
+	return (enable_wall_jumping and !hub.movement.is_crouching and hub.collisions.get_distance_to_ground() >= min_wall_jump_height and hub.char_body.is_on_wall_only() and hub.collisions.is_facing_a_wall() and hub.collisions.is_moving_against_a_wall() and (!Input.is_action_pressed("Jump") or !is_jump_held or hub.char_body.velocity.y >= 0))
 
 func start_wall_slide():
+	hub.movement.reset_crouch_state()
 	is_jump_held = false
 	switch_to_zero_gravity()
 	hub.char_body.velocity.x = 0
@@ -190,6 +199,7 @@ func start_wall_jump():
 	hub.buffers.reset_jump_buffer()
 	set_is_jump_held()
 	switch_to_rising_gravity()
+	hub.movement.reset_crouch_state()
 	
 	reset_min_jump_hold_timer()
 	

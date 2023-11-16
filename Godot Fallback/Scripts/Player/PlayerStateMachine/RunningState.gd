@@ -3,8 +3,10 @@ extends State
 class_name RunningState
 
 func state_process(_delta):
+	hub.movement.check_crouch_state()
 	hub.movement.do_movement(_delta)
 	hub.movement.update_facing_direction()
+	hub.animation.set_animation("MagliRun" if !hub.movement.is_crouching else "MagliCrouchWalk")
 	
 	if (hub.movement.is_turning()):
 		hub.animation.set_animation_frame(0)
@@ -25,4 +27,4 @@ func on_enter():
 	var prev_state_name : String = state_machine.previous_state.name
 	if (prev_state_name == "Falling" or prev_state_name == "Jumping"):
 		hub.jumping.landing_reset()
-	hub.animation.set_animation("MagliRun")
+	hub.animation.set_animation("MagliRun" if !hub.movement.is_crouching else "MagliCrouchWalk")

@@ -541,7 +541,7 @@ animations = [{
 "speed": 60.0
 }, {
 "frames": [{
-"duration": 12.0,
+"duration": 6.0,
 "texture": SubResource("AtlasTexture_6uptb")
 }, {
 "duration": 12.0,
@@ -595,7 +595,7 @@ animations = [{
 "speed": 60.0
 }, {
 "frames": [{
-"duration": 12.0,
+"duration": 6.0,
 "texture": SubResource("AtlasTexture_lycxg")
 }, {
 "duration": 12.0,
@@ -888,6 +888,7 @@ turning_speed = 1440.0
 air_acceleration = 2560.0
 air_deceleration = 1920.0
 air_turning_speed = 2240.0
+crouching_top_speed = 84.0
 
 [node name="Jumping" type="Node" parent="Hub" node_paths=PackedStringArray("hub")]
 script = ExtResource("3_rs3b5")
@@ -895,6 +896,7 @@ hub = NodePath("..")
 initial_jump_velocity = 384.0
 max_fall_speed = 320.0
 variable_jump_decay_rate = 3040.0
+min_glide_height = 32.0
 glide_fall_speed = 24.0
 min_wall_jump_height = 32.0
 wall_slide_speed = 57.6
@@ -913,6 +915,8 @@ current_state = NodePath("Standing")
 
 [node name="Standing" type="Node" parent="StateMachine"]
 script = ExtResource("2_w87d3")
+min_blink_time = 2.0
+max_blink_time = 3.0
 
 [node name="Running" type="Node" parent="StateMachine"]
 script = ExtResource("3_65y85")
@@ -931,6 +935,7 @@ script = ExtResource("12_mju8y")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
+position = Vector2(0, 1)
 sprite_frames = SubResource("SpriteFrames_5s7e1")
 animation = &"MagliStand"
 autoplay = "MagliStand"

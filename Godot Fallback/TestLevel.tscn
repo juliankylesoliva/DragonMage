@@ -12,4 +12,4 @@ position = Vector2(-256, -160)
 process_callback = 0
 
 [node name="Player" parent="." instance=ExtResource("2_mjfj3")]
-position = Vector2(-80, 64)
+position = Vector2(-112, 63)
