@@ -1,29 +1,29 @@
-[gd_resource type="Resource" load_steps=2 format=3 uid="uid://cmvqhahmdifp7"]
+[gd_resource type="Resource" script_class="PlayerCtrlProperties" load_steps=2 format=3 uid="uid://cmvqhahmdifp7"]
 
 [ext_resource type="Script" path="res://Scripts/Resources/PlayerCtrlProperties/PlayerCtrlProperties.gd" id="1_r7y26"]
 
 [resource]
 script = ExtResource("1_r7y26")
-acceleration = 25.0
-deceleration = 20.0
-top_speed = 5.25
-turning_speed = 45.0
+acceleration = 800.0
+deceleration = 640.0
+top_speed = 168.0
+turning_speed = 1440.0
 can_change_facing_direction_in_midair = true
 enable_speed_hopping = true
-initial_jump_velocity = 12.0
+initial_jump_velocity = 384.0
 rising_gravity_scale = 2.2
 falling_gravity_scale = 3.8
-max_fall_speed = 10.0
-air_acceleration = 80.0
-air_deceleration = 60.0
-air_turning_speed = 70.0
+max_fall_speed = 320.0
+air_acceleration = 2560.0
+air_deceleration = 1920.0
+air_turning_speed = 2240.0
 enable_variable_jumps = true
 min_jump_hold_time = 0.05
-variable_jump_decay_rate = 95.0
-enable_glide = true
-min_glide_height = 1.0
-glide_fall_speed = 0.75
-max_glide_time = 3.0
+variable_jump_decay_rate = 3040.0
+enable_gliding = true
+min_glide_height = 32.0
+glide_fall_speed = 24.0
+max_glide_time = 5.0
 enable_wall_climbing = false
 min_wall_climb_height = 0.0
 base_climbing_speed = 0.0
@@ -35,18 +35,18 @@ wall_popup_time = 0.0
 base_wall_popup_speed = 0.0
 max_wall_popup_speed = 0.0
 enable_wall_jumping = true
-min_wall_jump_height = 1.1
-wall_slide_speed = 1.8
-vertical_jump_velocity = 12.0
-horizontal_jump_velocity = 5.25
-wall_jump_cooldown_time = 0.3
+min_wall_jump_height = 32.0
+wall_slide_speed = 57.6
+vertical_wall_jump_velocity = 384.0
+horizontal_wall_jump_velocity = 168.0
+max_wall_jump_direction_lock_time = 0.3
 max_midair_jumps = 0
 midair_jump_velocity = 0.0
 forward_midair_jump_bonus = Vector2(0, 0)
-enable_running_jump_bonus = true
-running_jump_velocity_multiplier = 1.5
+enable_running_jump = true
+running_jump_added_velocity = 48.0
 enable_crouch_walking = true
-crouching_top_speed = 2.625
+crouching_top_speed = 84.0
 enable_crouch_jumping = true
 enable_super_jumping = false
 super_jump_charge_time = 0.0

@@ -81,13 +81,13 @@ func check_crouch_state():
 		return
 	
 	if (!is_crouching):
-		is_crouching = (current_crouch_cooldown_timer <= 0 and Input.is_action_pressed("Crouch") and (hub.jumping.enable_crouch_jump or hub.char_body.is_on_floor()))
+		is_crouching = (current_crouch_cooldown_timer <= 0 and Input.is_action_pressed("Crouch") and (hub.jumping.enable_crouch_jumping or hub.char_body.is_on_floor()))
 		if (is_crouching):
 			current_min_crouch_timer = min_crouch_time
 	else:
-		is_crouching = (current_min_crouch_timer > 0 or hub.collisions.is_in_ceiling_when_uncrouched() or (Input.is_action_pressed("Crouch") and (hub.char_body.is_on_floor() or hub.jumping.enable_crouch_jump)))
-		if (!is_crouching and state_name == "Jumping" and !hub.jumping.enable_crouch_jump):
-			hub.animation.set_animation("MagliJump")
+		is_crouching = (current_min_crouch_timer > 0 or hub.collisions.is_in_ceiling_when_uncrouched() or (Input.is_action_pressed("Crouch") and (hub.char_body.is_on_floor() or hub.jumping.enable_crouch_jumping)))
+		if (!is_crouching and state_name == "Jumping" and !hub.jumping.enable_crouch_jumping):
+			hub.animation.set_animation("{name}Jump".format({"name" : hub.form.get_current_form_name()}))
 			hub.animation.set_animation_frame(0)
 			hub.animation.set_animation_speed(0)
 		if (!is_crouching):
@@ -113,7 +113,6 @@ func do_movement(delta):
 	if (horizontal_axis != 0 and (!is_crouching or enable_crouch_walking)):
 		if (hub.collisions.is_moving_against_a_wall()):
 			current_horizontal_velocity = 0
-			print_debug("Stopping!")
 		elif ((current_horizontal_velocity * horizontal_axis) >= 0):
 			var accel = (acceleration if hub.char_body.is_on_floor() else air_acceleration)
 			var turn = (turning_speed if hub.char_body.is_on_floor() else air_turning_speed)

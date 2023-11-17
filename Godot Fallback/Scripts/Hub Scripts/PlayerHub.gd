@@ -7,6 +7,7 @@ class_name PlayerHub
 @export var buffers : PlayerBuffers
 @export var movement : PlayerMovement
 @export var jumping : PlayerJumping
+@export var form : PlayerForm
 @export var animation : PlayerAnimation
 
 @export var char_body : CharacterBody2D

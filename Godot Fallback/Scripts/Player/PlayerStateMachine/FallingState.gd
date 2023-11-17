@@ -5,25 +5,28 @@ class_name FallingState
 var prev_is_crouching : bool = false
 
 func state_process(_delta : float):
+	var char_name : String = hub.form.get_current_form_name()
 	prev_is_crouching = hub.movement.is_crouching
 	hub.movement.check_crouch_state()
 	hub.movement.do_movement(_delta)
 	hub.movement.update_facing_direction()
 	hub.jumping.falling_update(_delta)
 	
-	if (hub.jumping.enable_crouch_jump):
+	if (hub.jumping.enable_crouch_jumping):
 		if (prev_is_crouching and !hub.movement.is_crouching):
-			hub.animation.set_animation("MagliJump")
+			hub.animation.set_animation("{name}Jump".format({"name" : char_name}))
 			hub.animation.set_animation_frame(1)
 			hub.animation.set_animation_speed(1)
 		elif (!prev_is_crouching and hub.movement.is_crouching):
-			hub.animation.set_animation("MagliCrouchJump")
+			hub.animation.set_animation("{name}CrouchJump".format({"name" : char_name}))
 			hub.animation.set_animation_frame(1)
 			hub.animation.set_animation_speed(1)
 		else:
 			pass
 	
-	if (hub.char_body.is_on_floor()):
+	if (hub.form.can_change_form()):
+		set_next_state(state_machine.get_state_by_name("FormChanging"))
+	elif (hub.char_body.is_on_floor()):
 		if (hub.char_body.velocity.x != 0):
 			state_machine.switch_states(state_machine.get_state_by_name("Running"))
 		else:
@@ -40,6 +43,6 @@ func state_process(_delta : float):
 
 func on_enter():
 	hub.jumping.switch_to_falling_gravity()
-	hub.animation.set_animation("MagliJump" if !hub.movement.is_crouching else "MagliCrouchJump")
+	hub.animation.set_animation("{name}Jump".format({"name" : hub.form.get_current_form_name()}) if !hub.movement.is_crouching or !hub.jumping.enable_crouch_jumping else "MagliCrouchJump")
 	hub.animation.set_animation_frame(1)
 	hub.animation.set_animation_speed(1)

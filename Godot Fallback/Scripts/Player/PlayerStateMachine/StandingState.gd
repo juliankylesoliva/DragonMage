@@ -10,6 +10,7 @@ var current_blink_timer = 0
 var prev_is_crouching = false
 
 func state_process(_delta):
+	var char_name : String = hub.form.get_current_form_name()
 	prev_is_crouching = hub.movement.is_crouching
 	hub.movement.check_crouch_state()
 	hub.movement.do_movement(_delta)
@@ -17,19 +18,21 @@ func state_process(_delta):
 	
 	if (hub.movement.is_crouching):
 		if (!Input.is_action_pressed("Crouch") and hub.collisions.is_in_ceiling_when_uncrouched()):
-			hub.animation.set_animation("MagliCrouchHeadbonk")
+			hub.animation.set_animation("{name}CrouchHeadbonk".format({"name" : char_name}))
 		else:
-			hub.animation.set_animation("MagliCrouch")
+			hub.animation.set_animation("{name}Crouch".format({"name" : char_name}))
 	else:
 		if(Input.is_action_just_released("Crouch") or (prev_is_crouching and !hub.movement.is_crouching)):
-			hub.animation.set_animation("MagliStand")
+			hub.animation.set_animation("{name}Stand".format({"name" : char_name}))
 		update_blink_timer(_delta)
 		if (!hub.char_sprite.is_playing()):
 			if (!check_blink_animation()):
-				hub.animation.set_animation("MagliStand")
+				hub.animation.set_animation("{name}Stand".format({"name" : char_name}))
 				hub.animation.set_animation_speed(1)
 	
-	if (hub.char_body.is_on_floor() and (!hub.collisions.is_facing_a_wall() or (hub.get_input_vector().x * hub.movement.get_facing_value()) < 0) and hub.get_input_vector().x != 0):
+	if (hub.form.can_change_form()):
+		set_next_state(state_machine.get_state_by_name("FormChanging"))
+	elif (hub.char_body.is_on_floor() and (!hub.collisions.is_facing_a_wall() or (hub.get_input_vector().x * hub.movement.get_facing_value()) < 0) and hub.get_input_vector().x != 0):
 		set_next_state(state_machine.get_state_by_name("Running"))
 	elif (hub.jumping.can_ground_jump()):
 		hub.jumping.start_ground_jump()
@@ -40,8 +43,10 @@ func state_process(_delta):
 		pass
 
 func on_enter():
+	var char_name : String = hub.form.get_current_form_name()
+	var anim_name : String = ("{name}Stand" if !hub.movement.is_crouching else "{name}Crouch")
 	hub.jumping.landing_reset()
-	hub.animation.set_animation("MagliStand" if !hub.movement.is_crouching else "MagliCrouch")
+	hub.animation.set_animation(anim_name.format({"name" : char_name}))
 	hub.animation.set_animation_speed(1)
 
 func set_blink_timer():
@@ -59,7 +64,7 @@ func check_blink_animation():
 	
 	if (current_blink_timer <= 0):
 		var blink_anim_num = (randi() % num_blink_animations)
-		hub.animation.set_animation("MagliStandBlink{num}".format({"num": blink_anim_num}))
+		hub.animation.set_animation("{name}StandBlink{num}".format({"name" : hub.form.get_current_form_name(), "num": blink_anim_num}))
 		hub.animation.set_animation_speed(1)
 		set_blink_timer()
 		return true

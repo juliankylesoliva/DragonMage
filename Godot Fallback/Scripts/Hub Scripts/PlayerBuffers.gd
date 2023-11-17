@@ -4,6 +4,10 @@ class_name PlayerBuffers
 
 @export var hub : PlayerHub
 
+## Allows a player to press the form change button early and still have their input be registered withing a small window of time.
+@export var form_change_buffer_time : float = 0.1
+var form_change_buffer_time_left : float = 0
+
 ## Allows a player to press the jump button early and still have their input be registered within a small window of time.
 @export var jump_buffer_time : float = 0.15
 var jump_buffer_time_left : float = 0
@@ -22,10 +26,26 @@ func _ready():
 func _input(event):
 	if (event.is_action_pressed("Jump")):
 		refresh_jump_buffer()
+	if (event.is_action_pressed("Change Form")):
+		refresh_form_change_buffer()
 
 func _process(delta):
 	check_jump_buffer(delta)
+	check_form_change_buffer(delta)
 	check_coyote_time(delta)
+
+func check_form_change_buffer(delta : float):
+	if (is_form_change_buffer_active()):
+		form_change_buffer_time_left = move_toward(form_change_buffer_time_left, 0, delta)
+
+func is_form_change_buffer_active():
+	return form_change_buffer_time_left > 0
+
+func reset_form_change_buffer():
+	form_change_buffer_time_left = 0
+
+func refresh_form_change_buffer():
+	form_change_buffer_time_left = form_change_buffer_time
 
 func check_jump_buffer(delta : float):
 	if (is_jump_buffer_active()):
