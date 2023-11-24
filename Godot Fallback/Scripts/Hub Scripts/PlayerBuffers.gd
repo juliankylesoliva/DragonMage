@@ -12,6 +12,11 @@ var form_change_buffer_time_left : float = 0
 @export var jump_buffer_time : float = 0.15
 var jump_buffer_time_left : float = 0
 
+## Allows a player to conserve their increased speed by performing certain actions.
+@export var speed_preservation_buffer_time : float = 0.5
+var speed_preservation_buffer_time_left : float = 0
+var highest_speed : float = 0
+
 ## Allows a player to jump within a small window of time if they had just ran off of a ledge.
 @export var coyote_time : float = 0.2
 var coyote_time_left : float = 0
@@ -32,6 +37,7 @@ func _input(event):
 func _process(delta):
 	check_jump_buffer(delta)
 	check_form_change_buffer(delta)
+	check_speed_preservation_buffer(delta)
 	check_coyote_time(delta)
 
 func check_form_change_buffer(delta : float):
@@ -59,6 +65,27 @@ func reset_jump_buffer():
 
 func refresh_jump_buffer():
 	jump_buffer_time_left = jump_buffer_time
+
+func check_speed_preservation_buffer(delta):
+	var current_horizontal_speed = abs(hub.movement.current_horizontal_velocity)
+	if (current_horizontal_speed > highest_speed):
+		highest_speed = current_horizontal_speed
+		refresh_speed_preservation_buffer()
+	else:
+		if (hub.state_machine.current_state.name != "FormChanging"):
+			if (is_speed_preservation_buffer_active() and (hub.char_body.is_on_floor() or hub.char_body.is_on_wall() or hub.char_body.velocity.x == 0 or hub.state_machine.current_state.name == "WallSliding")):
+				speed_preservation_buffer_time_left = move_toward(speed_preservation_buffer_time_left, 0, delta)
+		if (!is_speed_preservation_buffer_active() or hub.movement.is_turning()):
+			highest_speed = current_horizontal_speed
+
+func is_speed_preservation_buffer_active():
+	return speed_preservation_buffer_time_left > 0
+
+func reset_speed_preservation_buffer():
+	speed_preservation_buffer_time_left = 0
+
+func refresh_speed_preservation_buffer():
+	speed_preservation_buffer_time_left = speed_preservation_buffer_time
 
 func check_coyote_time(delta : float):
 	if (!hub.char_body.is_on_floor() and prev_is_on_floor and coyote_time_left <= 0 and hub.char_body.velocity.y >= 0):

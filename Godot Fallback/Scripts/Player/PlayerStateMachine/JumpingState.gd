@@ -17,11 +17,9 @@ func state_process(_delta : float):
 	if (hub.jumping.enable_crouch_jumping):
 		if (prev_is_crouching and !hub.movement.is_crouching):
 			hub.animation.set_animation("{name}Jump".format({"name" : hub.form.get_current_form_name()}))
-			hub.animation.set_animation_frame(0)
 			hub.animation.set_animation_speed(0)
 		elif (!prev_is_crouching and hub.movement.is_crouching):
 			hub.animation.set_animation("MagliCrouchJump")
-			hub.animation.set_animation_frame(0)
 			hub.animation.set_animation_speed(0)
 		else:
 			pass
@@ -32,6 +30,9 @@ func state_process(_delta : float):
 		state_machine.switch_states(state_machine.get_state_by_name("WallSliding"))
 	elif (hub.jumping.can_glide()):
 		state_machine.switch_states(state_machine.get_state_by_name("Gliding"))
+	elif (hub.jumping.can_midair_jump()):
+		hub.jumping.do_midair_jump()
+		set_next_state(state_machine.get_state_by_name("Jumping"))
 	elif (hub.char_body.velocity.y >= 0):
 		state_machine.switch_states(state_machine.get_state_by_name("Falling"))
 	else:
@@ -42,8 +43,6 @@ func on_enter():
 	if (state_machine.previous_state.name == "FormChanging"):
 		var char_name : String = hub.form.get_current_form_name()
 		hub.animation.set_animation("{name}Jump".format({"name" : char_name}) if !hub.movement.is_crouching else "MagliCrouchJump")
-	hub.animation.set_animation_frame(0)
-	hub.animation.set_animation_speed(0)
 
 func on_exit():
 	hub.jumping.reset_wall_jump_lock_timer()

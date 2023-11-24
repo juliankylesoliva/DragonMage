@@ -61,7 +61,7 @@ func set_ctrl_properties(p : PlayerCtrlProperties):
 	hub.movement.turning_speed = p.turning_speed
 	
 	hub.movement.can_change_facing_direction_in_midair = p.can_change_facing_direction_in_midair
-	# hub.jumping.enable_speed_hopping = p.enable_speed_hopping
+	hub.jumping.enable_speed_hopping = p.enable_speed_hopping
 	hub.jumping.initial_jump_velocity = p.initial_jump_velocity
 	hub.jumping.rising_gravity_scale = p.rising_gravity_scale
 	hub.jumping.falling_gravity_scale = p.falling_gravity_scale
@@ -104,9 +104,9 @@ func set_ctrl_properties(p : PlayerCtrlProperties):
 	hub.jumping.horizontal_wall_jump_velocity = p.horizontal_wall_jump_velocity
 	hub.jumping.max_wall_jump_direction_lock_time = p.max_wall_jump_direction_lock_time
 	
-	# hub.jumping.max_midair_jumps = p.max_midair_jumps
-	# hub.jumping.midair_jump_velocity = p.midair_jump_velocity
-	# hub.jumping.forward_midair_jump_bonus = p.forward_midair_jump_bonus
+	hub.jumping.max_midair_jumps = p.max_midair_jumps
+	hub.jumping.midair_jump_velocity = p.midair_jump_velocity
+	hub.jumping.forward_midair_jump_bonus = p.forward_midair_jump_bonus
 	
 	hub.jumping.enable_running_jump = p.enable_running_jump
 	hub.jumping.running_jump_added_velocity = p.running_jump_added_velocity

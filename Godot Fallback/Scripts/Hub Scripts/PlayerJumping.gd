@@ -6,6 +6,9 @@ class_name PlayerJumping
 
 @export_group("Standard Jump Parameters")
 
+## Allows the player to preserve their speed by jumping as soon as they land.
+@export var enable_speed_hopping : bool = true
+
 ## Affects how fast this character initially jumps from the ground.
 @export var initial_jump_velocity : float = 12
 
@@ -58,6 +61,16 @@ var current_glide_time : float = 0
 @export var horizontal_wall_jump_velocity : float = 5.25
 
 @export var max_wall_jump_direction_lock_time : float = 0.3
+
+@export_group("Midair Jump Parameters")
+
+@export_range(0, 5) var max_midair_jumps : int = 0
+
+@export var midair_jump_velocity : float = 0
+
+@export var forward_midair_jump_bonus : Vector2 = Vector2.ZERO
+
+var current_midair_jumps : int = 0
 
 @export_group("Running Jump Parameters")
 
@@ -123,17 +136,21 @@ func start_ground_jump():
 	landing_reset()
 	reset_min_jump_hold_timer()
 	
-	var horizontal_result = abs(hub.char_body.velocity.x)
+	var did_player_speed_hop : bool = (enable_speed_hopping and !hub.movement.is_crouching and (hub.char_body.velocity.x * hub.get_input_vector().x > 0) and hub.buffers.highest_speed > hub.movement.top_speed and hub.buffers.is_speed_preservation_buffer_active())
+	var horizontal_result = (maxf(hub.buffers.highest_speed, abs(hub.char_body.velocity.x)) if did_player_speed_hop else abs(hub.char_body.velocity.x))
 	
 	var running_jump_result = (min((horizontal_result / hub.movement.top_speed), 1) * running_jump_added_velocity if enable_running_jump and !hub.movement.is_crouching else 0)
 	
 	var char_name : String = hub.form.get_current_form_name()
 	hub.animation.set_animation("{name}Jump".format({"name" : char_name}) if !hub.movement.is_crouching else "MagliCrouchJump")
-	hub.animation.set_animation_frame(0)
-	hub.animation.set_animation_speed(0)
+	hub.animation.set_animation_speed(1)
 	
-	hub.char_body.velocity.x = (horizontal_result * hub.movement.get_facing_value())
+	hub.movement.current_horizontal_velocity = (horizontal_result * hub.movement.get_facing_value())
+	hub.char_body.velocity.x = hub.movement.current_horizontal_velocity
 	hub.char_body.velocity.y = -(initial_jump_velocity + running_jump_result)
+	
+	if (did_player_speed_hop):
+		hub.buffers.refresh_speed_preservation_buffer()
 
 func ground_jump_update(delta : float):
 	if (hub.char_body.velocity.y < 0):
@@ -174,6 +191,32 @@ func cancel_glide():
 	if (current_glide_time > hub.buffers.early_glide_buffer_time or !Input.is_action_pressed("Jump")):
 		current_glide_time = max_glide_time
 
+func can_midair_jump():
+	return ((hub.state_machine.previous_state.name != "WallVaulting" or hub.char_body.velocity.y >= 0) and !hub.char_body.is_on_floor() and current_midair_jumps < max_midair_jumps and hub.buffers.is_jump_buffer_active())
+
+func do_midair_jump():
+	hub.animation.set_animation("DraelynMidairJump")
+	hub.animation.set_animation_frame(0)
+	hub.animation.set_animation_speed(1)
+	
+	hub.buffers.reset_jump_buffer()
+	set_is_jump_held()
+	switch_to_rising_gravity()
+	hub.char_body.velocity.y = -midair_jump_velocity
+	
+	if (hub.movement.get_facing_value() * hub.get_input_vector().x > 0):
+		var bonus_velocity : Vector2 = Vector2.ZERO
+		bonus_velocity.x = (forward_midair_jump_bonus.x * hub.movement.get_facing_value())
+		bonus_velocity.y = -abs(forward_midair_jump_bonus.y)
+		hub.char_body.velocity += bonus_velocity
+		hub.movement.current_horizontal_velocity += bonus_velocity.x
+	else:
+		if (abs(hub.char_body.velocity.x) > hub.movement.top_speed):
+			var speed_cap : float = (hub.movement.top_speed * hub.get_input_vector().x)
+			hub.char_body.velocity.x = speed_cap
+			hub.movement.current_horizontal_velocity = speed_cap
+	current_midair_jumps += 1
+
 func can_wall_slide():
 	return (enable_wall_jumping and !hub.movement.is_crouching and hub.collisions.get_distance_to_ground() >= min_wall_jump_height and hub.char_body.is_on_wall_only() and hub.collisions.is_facing_a_wall() and hub.collisions.is_moving_against_a_wall() and (!Input.is_action_pressed("Jump") or !is_jump_held or hub.char_body.velocity.y >= 0))
 
@@ -204,20 +247,21 @@ func start_wall_jump():
 	
 	reset_min_jump_hold_timer()
 	
-	var horizontal_result = abs(horizontal_wall_jump_velocity)
+	var did_player_speed_kick = (enable_speed_hopping and hub.buffers.highest_speed > hub.movement.top_speed and hub.buffers.is_speed_preservation_buffer_active())
+	var horizontal_result = (maxf(hub.buffers.highest_speed, abs(horizontal_wall_jump_velocity)) if did_player_speed_kick else abs(horizontal_wall_jump_velocity))
 	hub.movement.current_horizontal_velocity = (-horizontal_result if hub.movement.is_facing_right else horizontal_result)
 	hub.movement.set_facing_direction(-hub.movement.get_facing_value())
 	hub.char_body.velocity.x = hub.movement.current_horizontal_velocity
 	hub.char_body.velocity.y = -vertical_wall_jump_velocity
 	
 	hub.animation.set_animation("MagliJump")
-	hub.animation.set_animation_frame(0)
-	hub.animation.set_animation_speed(0)
+	hub.animation.set_animation_speed(1)
 	
 	activate_wall_jump_lock_timer()
 
 func landing_reset():
 	current_glide_time = 0
+	current_midair_jumps = 0
 
 func get_gravity_delta(delta : float):
 	return (base_gravity * current_gravity_scale * delta)
