@@ -84,18 +84,24 @@ func set_ctrl_properties(p : PlayerCtrlProperties):
 	if (hub.jumping.enable_gliding and hub.jumping.current_glide_time > hub.buffers.early_glide_buffer_time and hub.jumping.max_glide_time > 0):
 		hub.jumping.current_glide_time = hub.jumping.max_glide_time
 	
-	# hub.jumping.enable_wall_climbing = p.enable_wall_climbing
-	# hub.jumping.min_wall_climb_height = p.min_wall_climb_height
-	# hub.jumping.base_climbing_speed = p.base_climbing_speed
-	# hub.jumping.max_climbing_speed = p.max_climbing_speed
-	# hub.jumping.climbing_gravity_scale = p.climbing_gravity_scale
-	# hub.jumping.max_wall_climb_time = p.max_wall_climb_time
-	# hub.jumping.ledge_snap_distance = p.ledge_snap_distance
-	# hub.jumping.wall_popup_time = p.wall_popup_time
-	# hub.jumping.base_wall_popup_speed = p.base_wall_popup_speed
-	# hub.jumping.max_wall_popup_speed = p.max_wall_popup_speed
+	hub.jumping.enable_wall_climbing = p.enable_wall_climbing
+	hub.jumping.min_wall_climb_height = p.min_wall_climb_height
+	hub.jumping.min_climbing_speed = p.min_climbing_speed
+	hub.jumping.max_climbing_speed = p.max_climbing_speed
+	hub.jumping.wall_climbing_gravity_scale = p.wall_climbing_gravity_scale
+	hub.jumping.max_wall_climb_time = p.max_wall_climb_time
+	hub.jumping.ledge_snap_distance = p.ledge_snap_distance
+	hub.jumping.wall_popup_time = p.wall_popup_time
+	hub.jumping.min_wall_popup_speed = p.min_wall_popup_speed
+	hub.jumping.max_wall_popup_speed = p.max_wall_popup_speed
 	
-	# if (hub.jumping.enable_wall_climbing) ...
+	if (hub.jumping.enable_wall_climbing):
+		if (hub.jumping.current_wall_climb_time > 0 and hub.jumping.max_wall_climb_time):
+			hub.jumping.current_wall_climb_time = hub.jumping.max_wall_climb_time
+		if (hub.jumping.stored_wall_climb_speed > 0):
+			hub.jumping.stored_wall_climb_speed = 0
+		if (hub.jumping.wall_popup_time_left > 0):
+			hub.jumping.wall_popup_time_left = 0
 	
 	hub.jumping.enable_wall_jumping = p.enable_wall_jumping
 	hub.jumping.min_wall_jump_height = p.min_wall_jump_height

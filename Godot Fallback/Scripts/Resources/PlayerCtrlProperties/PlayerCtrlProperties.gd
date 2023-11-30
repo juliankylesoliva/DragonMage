@@ -33,13 +33,13 @@ class_name PlayerCtrlProperties
 @export_subgroup("Wall Climb Variables")
 @export var enable_wall_climbing = false
 @export var min_wall_climb_height = 0.0
-@export var base_climbing_speed = 0.0
+@export var min_climbing_speed = 0.0
 @export var max_climbing_speed = 0.0
-@export var climbing_gravity_scale = 0.0
+@export var wall_climbing_gravity_scale = 0.0
 @export var max_wall_climb_time = 0.0
 @export var ledge_snap_distance = 0.0
 @export var wall_popup_time = 0.0
-@export var base_wall_popup_speed = 0.0
+@export var min_wall_popup_speed = 0.0
 @export var max_wall_popup_speed = 0.0
 
 @export_subgroup("Wall Jump Variables")

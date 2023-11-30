@@ -31,6 +31,6 @@ func on_enter():
 	var prev_state_name : String = state_machine.previous_state.name
 	var char_name : String = hub.form.get_current_form_name()
 	var anim_name : String = ("{name}Move" if !hub.movement.is_crouching else "{name}CrouchWalk")
-	if (prev_state_name == "Falling" or prev_state_name == "Jumping"):
+	if (hub.char_body.is_on_floor() or prev_state_name == "Falling" or prev_state_name == "Jumping"):
 		hub.jumping.landing_reset()
 	hub.animation.set_animation(anim_name.format({"name" : char_name}))

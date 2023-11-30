@@ -29,6 +29,8 @@
 [ext_resource type="Script" path="res://Scripts/Player/PlayerStateMachine/WallSlidingState.gd" id="12_mju8y"]
 [ext_resource type="Script" path="res://Scripts/Player/PlayerStateMachine/GlidingState.gd" id="12_tj6cc"]
 [ext_resource type="Script" path="res://Scripts/Player/PlayerStateMachine/FormChangingState.gd" id="17_1yv22"]
+[ext_resource type="Script" path="res://Scripts/Player/PlayerStateMachine/WallClimbingState.gd" id="17_ve68u"]
+[ext_resource type="Script" path="res://Scripts/Player/PlayerStateMachine/WallVaultingState.gd" id="18_vi6ah"]
 [ext_resource type="Texture2D" uid="uid://clp08lkqo6nh5" path="res://Sprites/Player/DraelynIdle.png" id="19_lfkpo"]
 [ext_resource type="Texture2D" uid="uid://c44t784vgugry" path="res://Sprites/Player/MagliIdle.png" id="27_my3k8"]
 
@@ -187,14 +189,6 @@ region = Rect2(64, 0, 64, 64)
 [sub_resource type="AtlasTexture" id="AtlasTexture_3otxp"]
 atlas = ExtResource("2_p0h7w")
 region = Rect2(0, 0, 64, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_tp485"]
-atlas = ExtResource("2_p0h7w")
-region = Rect2(192, 0, 64, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_gq74q"]
-atlas = ExtResource("2_p0h7w")
-region = Rect2(64, 0, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_51lw1"]
 atlas = ExtResource("2_p0h7w")
@@ -648,12 +642,6 @@ animations = [{
 }, {
 "duration": 12.0,
 "texture": SubResource("AtlasTexture_3otxp")
-}, {
-"duration": 12.0,
-"texture": SubResource("AtlasTexture_tp485")
-}, {
-"duration": 12.0,
-"texture": SubResource("AtlasTexture_gq74q")
 }],
 "loop": false,
 "name": &"DraelynVault",
@@ -1014,6 +1002,12 @@ script = ExtResource("12_tj6cc")
 
 [node name="WallSliding" type="Node" parent="StateMachine"]
 script = ExtResource("12_mju8y")
+
+[node name="WallClimbing" type="Node" parent="StateMachine"]
+script = ExtResource("17_ve68u")
+
+[node name="WallVaulting" type="Node" parent="StateMachine"]
+script = ExtResource("18_vi6ah")
 
 [node name="FormChanging" type="Node" parent="StateMachine"]
 script = ExtResource("17_1yv22")

@@ -17,6 +17,7 @@ class_name PlayerHub
 
 func get_input_vector():
 	var input_vector = Vector2.ZERO
-	input_vector.x = (Input.get_action_strength("Move Right") - Input.get_action_strength("Move Left"))
-	input_vector.y = (Input.get_action_strength("Move Up") - Input.get_action_strength("Move Down"))
+	
+	input_vector.x = ((1 if Input.is_action_pressed("Move Right") else 0) - (1 if Input.is_action_pressed("Move Left") else 0))
+	input_vector.y = ((1 if Input.is_action_pressed("Move Up") else 0) - (1 if Input.is_action_pressed("Move Down") else 0))
 	return input_vector

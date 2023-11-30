@@ -48,6 +48,36 @@ var is_jump_held : bool = false
 
 var current_glide_time : float = 0
 
+@export_group("Wall Climb Variables")
+
+@export var enable_wall_climbing : bool = false
+
+@export var min_wall_climb_height : float = 1
+
+@export var min_climbing_speed : float = 6
+
+@export var max_climbing_speed : float = 12
+
+@export var wall_climbing_gravity_scale : float = 0.5
+
+@export var max_wall_climb_time : float = 3
+
+@export var ledge_snap_distance : float = 0.35
+
+@export var wall_popup_time : float = 1.5
+
+@export var min_wall_popup_speed : float = 3
+
+@export var max_wall_popup_speed : float = 6
+
+@export var min_climbing_animation_speed : float = 0.5
+
+var current_wall_climb_time : float = 0
+
+var stored_wall_climb_speed : float = 0
+
+var wall_popup_time_left : float = 0
+
 @export_group("Wall Jump Variables")
 
 @export var enable_wall_jumping : bool = true
@@ -192,7 +222,7 @@ func cancel_glide():
 		current_glide_time = max_glide_time
 
 func can_midair_jump():
-	return ((hub.state_machine.previous_state.name != "WallVaulting" or hub.char_body.velocity.y >= 0) and !hub.char_body.is_on_floor() and current_midair_jumps < max_midair_jumps and hub.buffers.is_jump_buffer_active())
+	return (((hub.state_machine.previous_state.name != "WallVaulting") or hub.char_body.velocity.y >= 0 or current_midair_jumps > 0) and !hub.char_body.is_on_floor() and current_midair_jumps < max_midair_jumps and hub.buffers.is_jump_buffer_active())
 
 func do_midair_jump():
 	hub.animation.set_animation("DraelynMidairJump")
@@ -219,6 +249,9 @@ func do_midair_jump():
 
 func can_wall_slide():
 	return (enable_wall_jumping and !hub.movement.is_crouching and hub.collisions.get_distance_to_ground() >= min_wall_jump_height and hub.char_body.is_on_wall_only() and hub.collisions.is_facing_a_wall() and hub.collisions.is_moving_against_a_wall() and (!Input.is_action_pressed("Jump") or !is_jump_held or hub.char_body.velocity.y >= 0))
+
+func can_wall_slide_from_wall_climb():
+	return (enable_wall_jumping and hub.collisions.is_facing_a_wall() and (hub.get_input_vector().x * hub.movement.get_facing_value()) >= 0)
 
 func start_wall_slide():
 	hub.movement.reset_crouch_state()
@@ -259,12 +292,107 @@ func start_wall_jump():
 	
 	activate_wall_jump_lock_timer()
 
-func landing_reset():
+func can_wall_climb():
+	return (enable_wall_climbing and !hub.movement.is_crouching and !hub.char_body.is_on_ceiling() and hub.collisions.get_distance_to_ground() >= min_wall_climb_height and current_wall_climb_time <= 0 and hub.char_body.is_on_wall_only() and hub.collisions.is_moving_against_a_wall() and (hub.get_input_vector().x * hub.movement.get_facing_value()) > 0)
+
+func can_wall_climb_from_wall_slide():
+	return (enable_wall_climbing and current_wall_climb_time <= 0 and !hub.char_body.is_on_ceiling() and hub.collisions.is_facing_a_wall() and (hub.get_input_vector().x * hub.movement.get_facing_value()) >= 0)
+
+func start_wall_climb():
+	hub.movement.reset_crouch_state()
+	hub.movement.reset_current_horizontal_velocity()
+	switch_to_wall_climbing_gravity()
+	if (stored_wall_climb_speed <= 0):
+		stored_wall_climb_speed = min(max(hub.buffers.highest_speed, min_climbing_speed), max_climbing_speed)
+		hub.char_body.velocity = (Vector2.UP * stored_wall_climb_speed)
+
+func wall_climb_update(delta : float):
+	hub.char_body.velocity.x = 0
+	hub.movement.reset_current_horizontal_velocity()
+	hub.char_body.move_and_slide()
+	current_wall_climb_time = move_toward(current_wall_climb_time, max_wall_climb_time, delta)
+	hub.char_body.velocity.y += get_gravity_delta(delta)
+
+func end_wall_climb():
+	current_wall_climb_time = max_wall_climb_time
+
+func cancel_wall_climb():
+	hub.char_body.velocity = Vector2.ZERO
+	switch_to_falling_gravity()
+
+func is_wall_climb_canceled():
+	return (current_wall_climb_time <= 0 or hub.char_body.velocity.y >= 0 or hub.char_body.is_on_ceiling() or !hub.collisions.is_facing_a_wall() or (hub.get_input_vector().x * hub.movement.get_facing_value()) < 0)
+
+func can_start_wall_popup():
+	return (current_wall_climb_time < max_wall_climb_time and hub.char_body.velocity.y < 0 and !hub.collisions.is_facing_a_wall() and (hub.get_input_vector().x * hub.movement.get_facing_value()) >= 0)
+
+func start_wall_popup():
+	hub.animation.set_animation("DraelynMidairJump")
+	hub.animation.set_animation_frame(0)
+	hub.animation.set_animation_speed(1)
+	hub.movement.reset_current_horizontal_velocity()
+	hub.movement.reset_crouch_state()
+	
+	var vertical_result : float = min(max_wall_popup_speed, max(min_wall_popup_speed, hub.char_body.velocity.y))
+	
+	wall_popup_time_left = wall_popup_time
+	switch_to_rising_gravity()
+	hub.char_body.velocity = (Vector2.UP * vertical_result)
+
+func can_wall_vault():
+	return (wall_popup_time_left > 0 and hub.char_body.velocity.y < 0 and !hub.movement.is_crouching and !hub.collisions.is_moving_against_a_wall() and (hub.get_input_vector().x * hub.movement.get_facing_value()) > 0 and Input.is_action_pressed("Jump"))
+
+func wall_popup_update(delta : float):
+	hub.char_body.velocity.x = 0
+	hub.movement.reset_current_horizontal_velocity()
+	hub.char_body.move_and_slide()
+	wall_popup_time_left = move_toward(wall_popup_time_left, 0, delta)
+	hub.char_body.velocity.y += get_gravity_delta(delta)
+
+func start_wall_vault():
+	hub.animation.set_animation("DraelynVault")
+	hub.animation.set_animation_frame(0)
+	hub.animation.set_animation_speed(1)
+	
 	current_glide_time = 0
 	current_midair_jumps = 0
+	wall_popup_time_left = 0
+	
+	hub.buffers.reset_jump_buffer()
+	is_jump_held = true
+	switch_to_rising_gravity()
+	
+	hub.char_body.velocity = Vector2(stored_wall_climb_speed * hub.get_input_vector().x, -initial_jump_velocity)
+	hub.movement.current_horizontal_velocity = hub.char_body.velocity.x
+
+func end_wall_popup():
+	wall_popup_time_left = 0
+
+func is_wall_popup_canceled():
+	return (wall_popup_time_left <= 0 or hub.char_body.velocity.y >= 0 or (hub.get_input_vector().x * hub.movement.get_facing_value()) < 0)
+
+func do_ledge_snap():
+	hub.char_body.position.x += (hub.movement.get_facing_value() * ledge_snap_distance)
+	hub.char_body.apply_floor_snap()
+	switch_to_falling_gravity()
+	hub.char_body.velocity = Vector2(stored_wall_climb_speed * hub.get_input_vector().x, 0)
+	hub.movement.current_horizontal_velocity = hub.char_body.velocity.x
+
+func landing_reset():
+	current_glide_time = 0
+	current_wall_climb_time = 0
+	stored_wall_climb_speed = 0
+	wall_popup_time_left = 0
+	current_midair_jumps = 0
+
+func get_climbing_animation_speed():
+	return max(-hub.char_body.velocity.y / min_climbing_speed, min_climbing_animation_speed)
 
 func get_gravity_delta(delta : float):
 	return (base_gravity * current_gravity_scale * delta)
+
+func switch_to_wall_climbing_gravity():
+	current_gravity_scale = wall_climbing_gravity_scale
 
 func switch_to_rising_gravity():
 	current_gravity_scale = rising_gravity_scale

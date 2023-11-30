@@ -11,9 +11,9 @@ func state_process(_delta):
 			"Gliding":
 				set_next_state(state_machine.get_state_by_name("Falling"))
 			"WallSliding":
-				set_next_state(state_machine.get_state_by_name("Falling"))
+				set_next_state(state_machine.get_state_by_name("WallClimbing" if hub.jumping.can_wall_climb_from_wall_slide() else "Falling"))
 			"WallClimbing":
-				set_next_state(state_machine.get_state_by_name("WallSliding" if hub.jumping.can_wall_slide() else "Falling"))
+				set_next_state(state_machine.get_state_by_name("WallSliding" if hub.jumping.can_wall_slide_from_wall_climb() else "Falling"))
 			"WallVaulting":
 				set_next_state(state_machine.get_state_by_name("Jumping" if hub.char_body.velocity.y < 0 else "Falling"))
 			"Damaged":

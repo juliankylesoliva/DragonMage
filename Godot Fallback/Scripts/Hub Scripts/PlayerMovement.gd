@@ -93,6 +93,9 @@ func check_crouch_state():
 		if (!is_crouching):
 			current_crouch_cooldown_timer = crouch_cooldown_time
 
+func reset_current_horizontal_velocity():
+	current_horizontal_velocity = 0
+
 func reset_crouch_state():
 	current_min_crouch_timer = 0
 	if (is_crouching):
