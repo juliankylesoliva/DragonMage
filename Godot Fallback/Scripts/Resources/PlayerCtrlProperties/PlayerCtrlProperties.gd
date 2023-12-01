@@ -67,3 +67,11 @@ class_name PlayerCtrlProperties
 @export var super_jump_charge_time = 0.0
 @export var super_jump_retention_time = 0.0
 @export var super_jump_velocity_multiplier = 0.0
+
+@export_subgroup("Fast Falling Variables")
+@export var enable_fast_falling : bool = false
+@export var fast_fall_threshold : float = 0
+@export var fast_falling_speed : float = 0
+@export var super_jump_after_fast_fall_time : float = 0
+@export var fast_fall_slope_boost_threshold : float = 1
+@export var fast_fall_slope_boost_multiplier : float = 0

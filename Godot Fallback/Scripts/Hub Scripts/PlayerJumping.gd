@@ -52,23 +52,23 @@ var current_glide_time : float = 0
 
 @export var enable_wall_climbing : bool = false
 
-@export var min_wall_climb_height : float = 1
+@export var min_wall_climb_height : float = 0
 
-@export var min_climbing_speed : float = 6
+@export var min_climbing_speed : float = 0
 
-@export var max_climbing_speed : float = 12
+@export var max_climbing_speed : float = 0
 
-@export var wall_climbing_gravity_scale : float = 0.5
+@export var wall_climbing_gravity_scale : float = 0
 
-@export var max_wall_climb_time : float = 3
+@export var max_wall_climb_time : float = 0
 
-@export var ledge_snap_distance : float = 0.35
+@export var ledge_snap_distance : float = 0
 
-@export var wall_popup_time : float = 1.5
+@export var wall_popup_time : float = 0
 
-@export var min_wall_popup_speed : float = 3
+@export var min_wall_popup_speed : float = 0
 
-@export var max_wall_popup_speed : float = 6
+@export var max_wall_popup_speed : float = 0
 
 @export var min_climbing_animation_speed : float = 0.5
 
@@ -114,6 +114,34 @@ var current_midair_jumps : int = 0
 
 @export var enable_crouch_jumping : bool = true
 
+@export var enable_super_jumping : bool = false
+
+@export var super_jump_charge_time : float = 0
+
+@export var super_jump_retention_time : float = 0
+
+@export var super_jump_velocity_multiplier : float = 0
+
+var current_super_jump_charge_timer : float = 0
+
+var current_super_jump_retention_timer : float = 0
+
+@export_group("Fast Falling Variables")
+
+@export var enable_fast_falling : bool = false
+
+@export var fast_fall_threshold : float = -32
+
+@export var fast_falling_speed : float = 0
+
+@export var super_jump_after_fast_fall_time : float = 0
+
+@export var fast_fall_slope_boost_threshold : float = 1
+
+@export var fast_fall_slope_boost_multiplier : float = 0
+
+var is_fast_falling : float = false
+
 var base_gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 var current_gravity_scale : float = 1
 
@@ -121,6 +149,10 @@ var current_wall_jump_direction_lock_time : float = 0
 
 func _ready():
 	current_gravity_scale = falling_gravity_scale
+
+func _process(delta):
+	update_super_jump_charge_timer(delta)
+	update_super_jump_retention_timer(delta)
 
 func update_min_jump_hold_timer(delta : float):
 	current_min_jump_hold_timer = move_toward(current_min_jump_hold_timer, min_jump_hold_time, delta)
@@ -152,6 +184,36 @@ func update_wall_jump_lock_timer(delta):
 	if (is_wall_jump_lock_timer_active()):
 		current_wall_jump_direction_lock_time = move_toward(current_wall_jump_direction_lock_time, 0, delta)
 
+func is_super_jump_ready():
+	return (current_super_jump_retention_timer > 0)
+
+func update_super_jump_charge_timer(delta : float):
+	if (hub.movement.is_crouching and hub.get_input_vector().x == 0 and Input.is_action_pressed("Crouch") and hub.char_body.is_on_floor() and hub.state_machine.current_state.name == "Standing"):
+		if (current_super_jump_charge_timer < super_jump_charge_time and current_super_jump_retention_timer <= 0):
+			current_super_jump_charge_timer = move_toward(current_super_jump_charge_timer, super_jump_charge_time, delta)
+			if (current_super_jump_charge_timer >= super_jump_charge_time):
+				current_super_jump_retention_timer = super_jump_retention_time
+	else:
+		if (current_super_jump_retention_timer <= 0):
+			current_super_jump_charge_timer = 0
+
+func update_super_jump_retention_timer(delta : float):
+	if (current_super_jump_retention_timer > 0):
+		if (current_super_jump_retention_timer >= super_jump_retention_time and hub.movement.is_crouching and Input.is_action_pressed("Crouch") and hub.char_body.is_on_floor() and (hub.state_machine.current_state.name == "Standing" or hub.state_machine.current_state.name == "Running")):
+			current_super_jump_retention_timer = super_jump_retention_time
+		else:
+			current_super_jump_retention_timer = move_toward(current_super_jump_retention_timer, 0, delta)
+			if (current_super_jump_retention_timer <= 0):
+				pass
+
+func charge_super_jump_with_fast_fall():
+	current_super_jump_charge_timer = super_jump_charge_time
+	current_super_jump_retention_timer = super_jump_after_fast_fall_time
+
+func reset_super_jump_timers():
+	current_super_jump_charge_timer = 0
+	current_super_jump_retention_timer = 0
+
 func can_ground_jump():
 	return (hub.buffers.is_jump_buffer_active() and (hub.char_body.is_on_floor() or hub.buffers.is_coyote_time_active()) and (!hub.movement.is_crouching or enable_crouch_jumping or !hub.collisions.is_in_ceiling_when_uncrouched()))
 
@@ -170,6 +232,7 @@ func start_ground_jump():
 	var horizontal_result = (maxf(hub.buffers.highest_speed, abs(hub.char_body.velocity.x)) if did_player_speed_hop else abs(hub.char_body.velocity.x))
 	
 	var running_jump_result = (min((horizontal_result / hub.movement.top_speed), 1) * running_jump_added_velocity if enable_running_jump and !hub.movement.is_crouching else 0)
+	var super_jump_result : float = (super_jump_velocity_multiplier if is_super_jump_ready() else 1.0)
 	
 	var char_name : String = hub.form.get_current_form_name()
 	hub.animation.set_animation("{name}Jump".format({"name" : char_name}) if !hub.movement.is_crouching else "MagliCrouchJump")
@@ -177,14 +240,21 @@ func start_ground_jump():
 	
 	hub.movement.current_horizontal_velocity = (horizontal_result * hub.movement.get_facing_value())
 	hub.char_body.velocity.x = hub.movement.current_horizontal_velocity
-	hub.char_body.velocity.y = -(initial_jump_velocity + running_jump_result)
+	hub.char_body.velocity.y = -((initial_jump_velocity * super_jump_result) + running_jump_result)
 	
 	if (did_player_speed_hop):
 		hub.buffers.refresh_speed_preservation_buffer()
+	
+	if (is_super_jump_ready()):
+		reset_super_jump_timers()
 
 func ground_jump_update(delta : float):
 	if (hub.char_body.velocity.y < 0):
-		hub.char_body.velocity.y += get_gravity_delta(delta)
+		if (can_fast_fall()):
+			set_fast_fall()
+			hub.char_body.velocity.y = fast_falling_speed
+		else:
+			hub.char_body.velocity.y += get_gravity_delta(delta)
 		
 		if (current_min_jump_hold_timer >= min_jump_hold_time and is_jump_held and !Input.is_action_pressed("Jump")):
 			unset_is_jump_held()
@@ -201,9 +271,25 @@ func ground_jump_update(delta : float):
 		update_min_jump_hold_timer(delta)
 
 func falling_update(delta : float):
-	hub.char_body.velocity.y += get_gravity_delta(delta)
-	if (hub.char_body.velocity.y > max_fall_speed):
-		hub.char_body.velocity.y = max_fall_speed
+	if (can_fast_fall()):
+		set_fast_fall()
+		hub.char_body.velocity.y = fast_falling_speed
+	else:
+		hub.char_body.velocity.y += get_gravity_delta(delta)
+	
+	var max_fall_speed_to_use = (fast_falling_speed if enable_fast_falling and is_fast_falling else max_fall_speed)
+	if (hub.char_body.velocity.y > max_fall_speed_to_use):
+		hub.char_body.velocity.y = max_fall_speed_to_use
+
+func can_fast_fall():
+	return (enable_fast_falling and !is_fast_falling and Input.is_action_pressed("Crouch") and fast_falling_speed > max_fall_speed and !hub.char_body.is_on_floor() and hub.char_body.velocity.y >= fast_fall_threshold and hub.char_body.velocity.y < fast_falling_speed)
+
+func can_fast_fall_slope_boost():
+	return (hub.collisions.get_distance_to_ground() <= hub.char_body.floor_snap_length and hub.char_body.get_floor_angle() > fast_fall_slope_boost_threshold and (hub.char_body.get_floor_normal().x * hub.movement.get_facing_value()) > 0)
+
+func do_fast_fall_slope_boost():
+	hub.movement.current_horizontal_velocity += (fast_fall_slope_boost_multiplier * hub.jumping.fast_falling_speed * hub.char_body.get_floor_normal().x)
+	hub.char_body.velocity.x = hub.movement.current_horizontal_velocity
 
 func can_glide():
 	return (enable_gliding and !hub.movement.is_crouching and !hub.buffers.is_coyote_time_active() and (hub.char_body.velocity.y >= 0 or Input.is_action_pressed("Technical")) and current_glide_time <= hub.buffers.early_glide_buffer_time and hub.collisions.get_distance_to_ground() >= min_glide_height and Input.is_action_pressed("Jump"))
@@ -333,8 +419,8 @@ func start_wall_popup():
 	hub.movement.reset_current_horizontal_velocity()
 	hub.movement.reset_crouch_state()
 	
-	var vertical_result : float = min(max_wall_popup_speed, max(min_wall_popup_speed, hub.char_body.velocity.y))
-	
+	var vertical_result : float = min(max_wall_popup_speed, max(min_wall_popup_speed, -hub.char_body.velocity.y))
+	print_debug(vertical_result)
 	wall_popup_time_left = wall_popup_time
 	switch_to_rising_gravity()
 	hub.char_body.velocity = (Vector2.UP * vertical_result)
@@ -384,6 +470,12 @@ func landing_reset():
 	stored_wall_climb_speed = 0
 	wall_popup_time_left = 0
 	current_midair_jumps = 0
+
+func set_fast_fall():
+	is_fast_falling = true
+
+func reset_fast_fall():
+	is_fast_falling = false
 
 func get_climbing_animation_speed():
 	return max(-hub.char_body.velocity.y / min_climbing_speed, min_climbing_animation_speed)

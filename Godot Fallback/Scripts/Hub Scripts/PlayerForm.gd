@@ -124,12 +124,20 @@ func set_ctrl_properties(p : PlayerCtrlProperties):
 	if (!hub.jumping.enable_crouch_jumping and hub.movement.is_crouching and !hub.char_body.is_on_floor()):
 		hub.movement.reset_crouch_state()
 	
-	# hub.jumping. = p.
-	# hub.jumping. = p.
-	# hub.jumping. = p.
-	# hub.jumping. = p.
+	hub.jumping.enable_super_jumping = p.enable_super_jumping
+	hub.jumping.super_jump_charge_time = p.super_jump_charge_time
+	hub.jumping.super_jump_retention_time = p.super_jump_retention_time
+	hub.jumping.super_jump_velocity_multiplier = p.super_jump_velocity_multiplier
 	
-	# if (!hub.jumping.enable_super_jumping) ...
+	if (!hub.jumping.enable_super_jumping):
+		hub.jumping.reset_super_jump_timers()
+	
+	hub.jumping.enable_fast_falling = p.enable_fast_falling
+	hub.jumping.fast_fall_threshold = p.fast_fall_threshold
+	hub.jumping.fast_falling_speed = p.fast_falling_speed
+	hub.jumping.super_jump_after_fast_fall_time = p.super_jump_after_fast_fall_time
+	hub.jumping.fast_fall_slope_boost_threshold = p.fast_fall_slope_boost_threshold
+	hub.jumping.fast_fall_slope_boost_multiplier = p.fast_fall_slope_boost_multiplier
 
 func change_mode(mode : CharacterMode):
 	set_ctrl_properties(mage_properties if mode == CharacterMode.MAGE else dragon_properties)

@@ -35,7 +35,7 @@ func state_process(_delta : float):
 	elif (hub.jumping.can_midair_jump()):
 		hub.jumping.do_midair_jump()
 		set_next_state(state_machine.get_state_by_name("Jumping"))
-	elif (hub.char_body.velocity.y >= 0):
+	elif (hub.jumping.is_fast_falling || hub.char_body.velocity.y >= 0):
 		state_machine.switch_states(state_machine.get_state_by_name("Falling"))
 	else:
 		pass

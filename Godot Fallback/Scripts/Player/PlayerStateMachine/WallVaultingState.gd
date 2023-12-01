@@ -14,8 +14,5 @@ func state_process(_delta):
 		hub.jumping.cancel_wall_climb()
 		set_next_state(state_machine.get_state_by_name("Falling"))
 
-func on_enter():
-	hub.jumping.start_wall_popup()
-
 func on_exit():
 	hub.jumping.end_wall_popup()
