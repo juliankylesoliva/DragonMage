@@ -11,6 +11,8 @@ class_name PlayerCtrlProperties
 @export_subgroup("Jumping Variables")
 @export var can_change_facing_direction_in_midair = true
 @export var enable_speed_hopping = true
+@export var speed_hop_slope_boost_threshold : float = 0.4
+@export var speed_hop_slope_boost_multiplier : float = 0.5
 @export var initial_jump_velocity = 12.0
 @export var rising_gravity_scale = 2.2
 @export var falling_gravity_scale = 3.8
@@ -75,3 +77,7 @@ class_name PlayerCtrlProperties
 @export var super_jump_after_fast_fall_time : float = 0
 @export var fast_fall_slope_boost_threshold : float = 1
 @export var fast_fall_slope_boost_multiplier : float = 0
+
+@export_subgroup("Attack Variables")
+@export var standing_attack_name : String = "MagicBlast"
+@export var crouching_attack_name : String = "Dodge"

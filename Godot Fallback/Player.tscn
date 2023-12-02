@@ -1,4 +1,4 @@
-[gd_scene load_steps=120 format=3 uid="uid://c6qw77ovfwgfs"]
+[gd_scene load_steps=123 format=3 uid="uid://c6qw77ovfwgfs"]
 
 [ext_resource type="Texture2D" uid="uid://d381ahbcwydy8" path="res://Sprites/Player/DraelynCrouch.png" id="1_6b42p"]
 [ext_resource type="Texture2D" uid="uid://dls34a1qa8iy1" path="res://Sprites/Player/DraelynFireTackle.png" id="1_ddrlj"]
@@ -22,9 +22,11 @@
 [ext_resource type="Texture2D" uid="uid://63niv7i4a2v3" path="res://Sprites/Player/MagliDefense.png" id="4_x7fww"]
 [ext_resource type="Script" path="res://Scripts/Player/PlayerStateMachine/FallingState.gd" id="5_02o4b"]
 [ext_resource type="Texture2D" uid="uid://crftcj56pc5eb" path="res://Sprites/Player/DraelynWalk.png" id="5_q55rd"]
+[ext_resource type="Script" path="res://Scripts/Hub Scripts/PlayerAttacks.gd" id="6_mwpxq"]
 [ext_resource type="Script" path="res://Scripts/Hub Scripts/PlayerForm.gd" id="6_oq5ip"]
 [ext_resource type="Script" path="res://Scripts/Hub Scripts/PlayerCollisions.gd" id="6_tj4nn"]
 [ext_resource type="Resource" uid="uid://cmvqhahmdifp7" path="res://Scripts/Resources/PlayerCtrlProperties/MageProperties.tres" id="7_6wdx5"]
+[ext_resource type="Script" path="res://Scripts/Player/Attack Scripts/SlideAttack.gd" id="7_i41w2"]
 [ext_resource type="Resource" uid="uid://ddn481v3p2t3" path="res://Scripts/Resources/PlayerCtrlProperties/DragonProperties.tres" id="8_aybqf"]
 [ext_resource type="Script" path="res://Scripts/Player/PlayerStateMachine/WallSlidingState.gd" id="12_mju8y"]
 [ext_resource type="Script" path="res://Scripts/Player/PlayerStateMachine/GlidingState.gd" id="12_tj6cc"]
@@ -32,6 +34,7 @@
 [ext_resource type="Script" path="res://Scripts/Player/PlayerStateMachine/WallClimbingState.gd" id="17_ve68u"]
 [ext_resource type="Script" path="res://Scripts/Player/PlayerStateMachine/WallVaultingState.gd" id="18_vi6ah"]
 [ext_resource type="Texture2D" uid="uid://clp08lkqo6nh5" path="res://Sprites/Player/DraelynIdle.png" id="19_lfkpo"]
+[ext_resource type="Script" path="res://Scripts/Player/PlayerStateMachine/AttackingState.gd" id="20_dbcpj"]
 [ext_resource type="Texture2D" uid="uid://c44t784vgugry" path="res://Sprites/Player/MagliIdle.png" id="27_my3k8"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_3rp8e"]
@@ -916,23 +919,34 @@ platform_floor_layers = 4294901761
 platform_wall_layers = 1
 safe_margin = 0.001
 
-[node name="Hub" type="Node" parent="." node_paths=PackedStringArray("state_machine", "collisions", "buffers", "movement", "jumping", "form", "animation", "char_body", "char_sprite", "collision_shape", "raycast_2d")]
+[node name="Hub" type="Node" parent="." node_paths=PackedStringArray("state_machine", "collisions", "buffers", "movement", "jumping", "attacks", "form", "animation", "char_body", "char_sprite", "collision_shape", "raycast_dl", "raycast_dm", "raycast_dr", "raycast_ledge_l", "raycast_ledge_r", "raycast_ul", "raycast_um", "raycast_ur", "raycast_ceiling_l", "raycast_ceiling_r")]
 script = ExtResource("1_fbdyy")
 state_machine = NodePath("../StateMachine")
 collisions = NodePath("Collisions")
 buffers = NodePath("Buffers")
 movement = NodePath("Movement")
 jumping = NodePath("Jumping")
+attacks = NodePath("Attacks")
 form = NodePath("Form")
 animation = NodePath("Animation")
 char_body = NodePath("..")
 char_sprite = NodePath("../AnimatedSprite2D")
 collision_shape = NodePath("../CollisionShape2D")
-raycast_2d = NodePath("../RayCast2D")
+raycast_dl = NodePath("../RayCastDL")
+raycast_dm = NodePath("../RayCastDM")
+raycast_dr = NodePath("../RayCastDR")
+raycast_ledge_l = NodePath("../RayCastLedgeL")
+raycast_ledge_r = NodePath("../RayCastLedgeR")
+raycast_ul = NodePath("../RayCastUL")
+raycast_um = NodePath("../RayCastUM")
+raycast_ur = NodePath("../RayCastUR")
+raycast_ceiling_l = NodePath("../RayCastCeilingL")
+raycast_ceiling_r = NodePath("../RayCastCeilingR")
 
 [node name="Collisions" type="Node" parent="Hub" node_paths=PackedStringArray("hub")]
 script = ExtResource("6_tj4nn")
 hub = NodePath("..")
+ledge_nudge_easing = 0.25
 
 [node name="Buffers" type="Node" parent="Hub" node_paths=PackedStringArray("hub")]
 script = ExtResource("4_jbuwb")
@@ -956,6 +970,7 @@ crouching_top_speed = 84.0
 [node name="Jumping" type="Node" parent="Hub" node_paths=PackedStringArray("hub")]
 script = ExtResource("3_rs3b5")
 hub = NodePath("..")
+speed_hop_slope_boost_multiplier = 0.25
 initial_jump_velocity = 384.0
 max_fall_speed = 320.0
 variable_jump_decay_rate = 3040.0
@@ -966,6 +981,25 @@ wall_slide_speed = 57.6
 vertical_wall_jump_velocity = 384.0
 horizontal_wall_jump_velocity = 168.0
 running_jump_added_velocity = 48.0
+
+[node name="Attacks" type="Node" parent="Hub" node_paths=PackedStringArray("hub")]
+script = ExtResource("6_mwpxq")
+hub = NodePath("..")
+
+[node name="MagicBlast" type="Node" parent="Hub/Attacks"]
+
+[node name="FireTackle" type="Node" parent="Hub/Attacks"]
+
+[node name="Dodge" type="Node" parent="Hub/Attacks"]
+
+[node name="Slide" type="Node" parent="Hub/Attacks"]
+script = ExtResource("7_i41w2")
+slide_min_horizontal_speed = 256.0
+slide_max_horizontal_speed = 512.0
+slide_deceleration_rate = 192.0
+slide_min_duration = 0.3
+slide_uncancelable_time = 0.2
+uses_attack_state = true
 
 [node name="Form" type="Node" parent="Hub" node_paths=PackedStringArray("hub")]
 script = ExtResource("6_oq5ip")
@@ -1009,6 +1043,9 @@ script = ExtResource("17_ve68u")
 [node name="WallVaulting" type="Node" parent="StateMachine"]
 script = ExtResource("18_vi6ah")
 
+[node name="Attacking" type="Node" parent="StateMachine"]
+script = ExtResource("20_dbcpj")
+
 [node name="FormChanging" type="Node" parent="StateMachine"]
 script = ExtResource("17_1yv22")
 
@@ -1023,9 +1060,72 @@ autoplay = "MagliStand"
 position = Vector2(0, 8)
 shape = SubResource("CapsuleShape2D_6k7o1")
 
-[node name="RayCast2D" type="RayCast2D" parent="."]
-position = Vector2(0, 32)
-exclude_parent = false
+[node name="RayCastDL" type="RayCast2D" parent="."]
+position = Vector2(-8, 32)
 target_position = Vector2(0, 999)
 collision_mask = 3
+hit_from_inside = true
+collide_with_areas = true
+
+[node name="RayCastDM" type="RayCast2D" parent="."]
+position = Vector2(0, 32)
+target_position = Vector2(0, 999)
+collision_mask = 3
+hit_from_inside = true
+collide_with_areas = true
+
+[node name="RayCastDR" type="RayCast2D" parent="."]
+position = Vector2(8, 32)
+target_position = Vector2(0, 999)
+collision_mask = 3
+hit_from_inside = true
+collide_with_areas = true
+
+[node name="RayCastLedgeL" type="RayCast2D" parent="."]
+position = Vector2(8, 56)
+target_position = Vector2(-16, 0)
+collision_mask = 3
+hit_from_inside = true
+collide_with_areas = true
+
+[node name="RayCastLedgeR" type="RayCast2D" parent="."]
+position = Vector2(-8, 56)
+target_position = Vector2(16, 0)
+collision_mask = 3
+hit_from_inside = true
+collide_with_areas = true
+
+[node name="RayCastUL" type="RayCast2D" parent="."]
+position = Vector2(-8, -16)
+target_position = Vector2(0, -999)
+collision_mask = 3
+hit_from_inside = true
+collide_with_areas = true
+
+[node name="RayCastUM" type="RayCast2D" parent="."]
+position = Vector2(0, -16)
+target_position = Vector2(0, -999)
+collision_mask = 3
+hit_from_inside = true
+collide_with_areas = true
+
+[node name="RayCastUR" type="RayCast2D" parent="."]
+position = Vector2(8, -16)
+target_position = Vector2(0, -999)
+collision_mask = 3
+hit_from_inside = true
+collide_with_areas = true
+
+[node name="RayCastCeilingL" type="RayCast2D" parent="."]
+position = Vector2(8, -40)
+target_position = Vector2(-16, 0)
+collision_mask = 3
+hit_from_inside = true
+collide_with_areas = true
+
+[node name="RayCastCeilingR" type="RayCast2D" parent="."]
+position = Vector2(-8, -40)
+target_position = Vector2(16, 0)
+collision_mask = 3
+hit_from_inside = true
 collide_with_areas = true

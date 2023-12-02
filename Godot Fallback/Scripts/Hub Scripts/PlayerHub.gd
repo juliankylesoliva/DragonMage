@@ -7,13 +7,25 @@ class_name PlayerHub
 @export var buffers : PlayerBuffers
 @export var movement : PlayerMovement
 @export var jumping : PlayerJumping
+@export var attacks : PlayerAttacks
 @export var form : PlayerForm
 @export var animation : PlayerAnimation
 
 @export var char_body : CharacterBody2D
 @export var char_sprite : AnimatedSprite2D
 @export var collision_shape : CollisionShape2D
-@export var raycast_2d : RayCast2D
+
+@export var raycast_dl : RayCast2D
+@export var raycast_dm : RayCast2D
+@export var raycast_dr : RayCast2D
+@export var raycast_ledge_l : RayCast2D
+@export var raycast_ledge_r : RayCast2D
+
+@export var raycast_ul : RayCast2D
+@export var raycast_um : RayCast2D
+@export var raycast_ur : RayCast2D
+@export var raycast_ceiling_l : RayCast2D
+@export var raycast_ceiling_r : RayCast2D
 
 func get_input_vector():
 	var input_vector = Vector2.ZERO

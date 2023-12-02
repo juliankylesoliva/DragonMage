@@ -9,6 +9,12 @@ class_name PlayerJumping
 ## Allows the player to preserve their speed by jumping as soon as they land.
 @export var enable_speed_hopping : bool = true
 
+## The minimum slope angle (in radians) needed to trigger a speed hop from landing on a downward slope.
+@export var speed_hop_slope_boost_threshold : float = 0.4
+
+## Adjusts the amount of speed hop velocity added from landing on a downward slope.
+@export var speed_hop_slope_boost_multiplier : float = 0.5
+
 ## Affects how fast this character initially jumps from the ground.
 @export var initial_jump_velocity : float = 12
 
@@ -282,14 +288,30 @@ func falling_update(delta : float):
 		hub.char_body.velocity.y = max_fall_speed_to_use
 
 func can_fast_fall():
-	return (enable_fast_falling and !is_fast_falling and Input.is_action_pressed("Crouch") and fast_falling_speed > max_fall_speed and !hub.char_body.is_on_floor() and hub.char_body.velocity.y >= fast_fall_threshold and hub.char_body.velocity.y < fast_falling_speed)
+	return (enable_fast_falling and !is_fast_falling and hub.buffers.is_fast_fall_buffer_active() and fast_falling_speed > max_fall_speed and !hub.char_body.is_on_floor() and hub.char_body.velocity.y >= fast_fall_threshold and hub.char_body.velocity.y < fast_falling_speed)
 
 func can_fast_fall_slope_boost():
-	return (hub.collisions.get_distance_to_ground() <= hub.char_body.floor_snap_length and hub.char_body.get_floor_angle() > fast_fall_slope_boost_threshold and (hub.char_body.get_floor_normal().x * hub.movement.get_facing_value()) > 0)
+	return (enable_fast_falling and is_fast_falling and hub.char_body.is_on_floor() and hub.collisions.get_distance_to_ground() <= hub.char_body.floor_snap_length and hub.char_body.get_floor_angle() > fast_fall_slope_boost_threshold)
 
 func do_fast_fall_slope_boost():
+	var flip : bool = ((hub.char_body.get_floor_normal().x * hub.movement.get_facing_value()) <= 0)
+	if (flip):
+		hub.movement.current_horizontal_velocity *= (-1 if Input.is_action_pressed("Crouch") else 0)
+		hub.movement.set_facing_direction(-hub.movement.get_facing_value())
 	hub.movement.current_horizontal_velocity += (fast_fall_slope_boost_multiplier * hub.jumping.fast_falling_speed * hub.char_body.get_floor_normal().x)
 	hub.char_body.velocity.x = hub.movement.current_horizontal_velocity
+
+func can_speed_hop_slope_boost():
+	return (enable_speed_hopping and !hub.movement.is_crouching and hub.char_body.is_on_floor() and hub.collisions.get_distance_to_ground() <= hub.char_body.floor_snap_length and hub.char_body.get_floor_angle() > speed_hop_slope_boost_threshold)
+
+func do_speed_hop_slope_boost():
+	if ((hub.char_body.get_floor_normal().x * hub.movement.get_facing_value()) > 0 and (hub.char_body.velocity.x * hub.get_input_vector().x) > 0):
+		hub.buffers.refresh_speed_preservation_buffer()
+		hub.buffers.highest_speed += (speed_hop_slope_boost_multiplier * hub.jumping.max_fall_speed * hub.char_body.get_floor_normal().x * hub.movement.get_facing_value())
+	else:
+		hub.buffers.highest_speed = move_toward(hub.buffers.highest_speed, min(hub.movement.top_speed, abs(hub.movement.current_horizontal_velocity)), speed_hop_slope_boost_multiplier * hub.jumping.max_fall_speed * abs(hub.char_body.get_floor_normal().x))
+		hub.movement.current_horizontal_velocity = (min(hub.movement.current_horizontal_velocity, hub.buffers.highest_speed) if hub.movement.get_facing_value() > 0 else max(hub.movement.current_horizontal_velocity, -hub.buffers.highest_speed))
+		hub.char_body.velocity.x = hub.movement.current_horizontal_velocity
 
 func can_glide():
 	return (enable_gliding and !hub.movement.is_crouching and !hub.buffers.is_coyote_time_active() and (hub.char_body.velocity.y >= 0 or Input.is_action_pressed("Technical")) and current_glide_time <= hub.buffers.early_glide_buffer_time and hub.collisions.get_distance_to_ground() >= min_glide_height and Input.is_action_pressed("Jump"))
@@ -420,7 +442,6 @@ func start_wall_popup():
 	hub.movement.reset_crouch_state()
 	
 	var vertical_result : float = min(max_wall_popup_speed, max(min_wall_popup_speed, -hub.char_body.velocity.y))
-	print_debug(vertical_result)
 	wall_popup_time_left = wall_popup_time
 	switch_to_rising_gravity()
 	hub.char_body.velocity = (Vector2.UP * vertical_result)

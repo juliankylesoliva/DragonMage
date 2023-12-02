@@ -24,9 +24,16 @@ func state_process(_delta : float):
 	
 	if (hub.form.can_change_form()):
 		set_next_state(state_machine.get_state_by_name("FormChanging"))
+	elif (hub.attacks.is_using_attack_state() and hub.attacks.current_attack != null):
+		set_next_state(state_machine.get_state_by_name("Attacking"))
 	elif (hub.char_body.is_on_floor()):
 		if (hub.char_body.velocity.x != 0 || hub.jumping.can_fast_fall_slope_boost()):
-			state_machine.switch_states(state_machine.get_state_by_name("Running"))
+			var selected_attack : Attack = (null if !hub.jumping.can_fast_fall_slope_boost() else hub.attacks.get_attack_by_name(hub.attacks.crouching_attack_name))
+			if (selected_attack != null and selected_attack.can_use_attack() and Input.is_action_pressed("Crouch")):
+				hub.attacks.current_attack = selected_attack
+				state_machine.switch_states(state_machine.get_state_by_name("Attacking"))
+			else:
+				state_machine.switch_states(state_machine.get_state_by_name("Running"))
 		else:
 			state_machine.switch_states(state_machine.get_state_by_name("Standing"))
 	elif (hub.jumping.can_ground_jump()):
@@ -55,4 +62,8 @@ func on_exit():
 			hub.jumping.do_fast_fall_slope_boost()
 		else:
 			hub.jumping.charge_super_jump_with_fast_fall()
+	elif (hub.jumping.can_speed_hop_slope_boost()):
+		hub.jumping.do_speed_hop_slope_boost()
+	else:
+		pass
 	hub.jumping.reset_fast_fall()

@@ -62,6 +62,8 @@ func set_ctrl_properties(p : PlayerCtrlProperties):
 	
 	hub.movement.can_change_facing_direction_in_midair = p.can_change_facing_direction_in_midair
 	hub.jumping.enable_speed_hopping = p.enable_speed_hopping
+	hub.jumping.speed_hop_slope_boost_threshold = p.speed_hop_slope_boost_threshold
+	hub.jumping.speed_hop_slope_boost_multiplier = p.speed_hop_slope_boost_multiplier
 	hub.jumping.initial_jump_velocity = p.initial_jump_velocity
 	hub.jumping.rising_gravity_scale = p.rising_gravity_scale
 	hub.jumping.falling_gravity_scale = p.falling_gravity_scale
@@ -138,6 +140,9 @@ func set_ctrl_properties(p : PlayerCtrlProperties):
 	hub.jumping.super_jump_after_fast_fall_time = p.super_jump_after_fast_fall_time
 	hub.jumping.fast_fall_slope_boost_threshold = p.fast_fall_slope_boost_threshold
 	hub.jumping.fast_fall_slope_boost_multiplier = p.fast_fall_slope_boost_multiplier
+	
+	hub.attacks.standing_attack_name = p.standing_attack_name
+	hub.attacks.crouching_attack_name = p.crouching_attack_name
 
 func change_mode(mode : CharacterMode):
 	set_ctrl_properties(mage_properties if mode == CharacterMode.MAGE else dragon_properties)

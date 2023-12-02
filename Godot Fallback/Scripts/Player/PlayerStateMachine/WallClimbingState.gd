@@ -8,6 +8,8 @@ func state_process(_delta):
 	
 	if (hub.form.can_change_form()):
 		set_next_state(state_machine.get_state_by_name("FormChanging"))
+	elif (hub.attacks.is_using_attack_state() and hub.attacks.current_attack != null):
+		set_next_state(state_machine.get_state_by_name("Attacking"))
 	elif (hub.jumping.can_start_wall_popup() and Input.is_action_pressed("Technical")):
 		hub.jumping.do_ledge_snap()
 		set_next_state(state_machine.get_state_by_name("Running"))

@@ -15,6 +15,7 @@ func state_process(_delta):
 	hub.movement.check_crouch_state()
 	hub.movement.do_movement(_delta)
 	hub.movement.update_facing_direction()
+	hub.collisions.do_ledge_nudge()
 	
 	if (hub.movement.is_crouching):
 		if (!Input.is_action_pressed("Crouch") and hub.collisions.is_in_ceiling_when_uncrouched()):
@@ -37,6 +38,8 @@ func state_process(_delta):
 	elif (hub.jumping.can_ground_jump()):
 		hub.jumping.start_ground_jump()
 		set_next_state(state_machine.get_state_by_name("Jumping"))
+	elif (hub.attacks.is_using_attack_state() and hub.attacks.current_attack != null):
+		set_next_state(state_machine.get_state_by_name("Attacking"))
 	elif (!hub.char_body.is_on_floor()):
 		set_next_state((state_machine.get_state_by_name("Falling")))
 	else:

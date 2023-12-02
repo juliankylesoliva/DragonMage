@@ -8,12 +8,13 @@
 [node name="Room" parent="." instance=ExtResource("2_0d6c4")]
 position = Vector2(-256, -160)
 
-[node name="Camera2D" type="Camera2D" parent="."]
-process_callback = 0
-limit_left = -256
-limit_top = -384
-limit_right = 256
-limit_bottom = 160
-
 [node name="Player" parent="." instance=ExtResource("2_mjfj3")]
 position = Vector2(-128, 63)
+
+[node name="Camera2D" type="Camera2D" parent="Player"]
+position = Vector2(0, -63)
+process_callback = 0
+limit_left = -256
+limit_top = -160
+limit_right = 768
+limit_bottom = 160

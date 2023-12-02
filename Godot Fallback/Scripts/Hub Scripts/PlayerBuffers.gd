@@ -4,13 +4,21 @@ class_name PlayerBuffers
 
 @export var hub : PlayerHub
 
-## Allows a player to press the form change button early and still have their input be registered withing a small window of time.
+## Allows a player to press the form change button early and still have their input be registered within a small window of time.
 @export var form_change_buffer_time : float = 0.1
 var form_change_buffer_time_left : float = 0
 
 ## Allows a player to press the jump button early and still have their input be registered within a small window of time.
 @export var jump_buffer_time : float = 0.15
 var jump_buffer_time_left : float = 0
+
+## Allows a player to press crouch early while jumping and still have their fast fall input be registered within a small window of time.
+@export var fast_fall_buffer_time : float = 0.1
+var fast_fall_buffer_time_left : float = 0
+
+## Allows a player to press the attack button early and still have their input be registered within a small window of time.
+@export var attack_buffer_time : float = 0.25
+var attack_buffer_time_left : float = 0
 
 ## Allows a player to conserve their increased speed by performing certain actions.
 @export var speed_preservation_buffer_time : float = 0.5
@@ -31,11 +39,17 @@ func _ready():
 func _input(event):
 	if (event.is_action_pressed("Jump")):
 		refresh_jump_buffer()
+	if (event.is_action_pressed("Crouch") and !hub.char_body.is_on_floor()):
+		refresh_fast_fall_buffer()
+	if (event.is_action_pressed("Attack")):
+		refresh_attack_buffer()
 	if (event.is_action_pressed("Change Form")):
 		refresh_form_change_buffer()
 
 func _process(delta):
 	check_jump_buffer(delta)
+	check_fast_fall_buffer(delta)
+	check_attack_buffer(delta)
 	check_form_change_buffer(delta)
 	check_speed_preservation_buffer(delta)
 	check_coyote_time(delta)
@@ -66,6 +80,35 @@ func reset_jump_buffer():
 func refresh_jump_buffer():
 	jump_buffer_time_left = jump_buffer_time
 
+func check_fast_fall_buffer(delta : float):
+	if (is_fast_fall_buffer_active() and !hub.char_body.is_on_floor()):
+		fast_fall_buffer_time_left = move_toward(fast_fall_buffer_time_left, 0, delta)
+	else:
+		if (fast_fall_buffer_time_left > 0):
+			fast_fall_buffer_time_left = 0
+
+func is_fast_fall_buffer_active():
+	return (!hub.char_body.is_on_floor() and fast_fall_buffer_time_left > 0)
+
+func reset_fast_fall_buffer():
+	fast_fall_buffer_time_left = 0
+
+func refresh_fast_fall_buffer():
+	fast_fall_buffer_time_left = fast_fall_buffer_time
+
+func check_attack_buffer(delta : float):
+	if (is_attack_buffer_active()):
+		attack_buffer_time_left = move_toward(attack_buffer_time_left, 0, delta)
+
+func is_attack_buffer_active():
+	return attack_buffer_time_left > 0
+
+func reset_attack_buffer():
+	attack_buffer_time_left = 0
+
+func refresh_attack_buffer():
+	attack_buffer_time_left = attack_buffer_time
+
 func check_speed_preservation_buffer(delta):
 	var current_horizontal_speed = abs(hub.movement.current_horizontal_velocity)
 	if (current_horizontal_speed > highest_speed):
@@ -73,10 +116,10 @@ func check_speed_preservation_buffer(delta):
 		refresh_speed_preservation_buffer()
 	else:
 		if (hub.state_machine.current_state.name != "FormChanging"):
-			if (is_speed_preservation_buffer_active() and (hub.char_body.is_on_floor() or hub.char_body.is_on_wall() or hub.char_body.velocity.x == 0 or hub.state_machine.current_state.name == "WallSliding")):
+			if (is_speed_preservation_buffer_active() and (hub.char_body.is_on_floor() or hub.char_body.is_on_wall() or hub.char_body.velocity.x == 0 or hub.state_machine.current_state.name == "WallSliding" or hub.state_machine.current_state.name == "WallClimbing" or hub.state_machine.current_state.name == "WallVaulting")):
 				speed_preservation_buffer_time_left = move_toward(speed_preservation_buffer_time_left, 0, delta)
-		if (!is_speed_preservation_buffer_active() or hub.movement.is_turning()):
-			highest_speed = current_horizontal_speed
+			if (!is_speed_preservation_buffer_active() or hub.movement.is_turning() or (hub.get_input_vector().x == 0 and hub.state_machine.current_state.name != "WallSliding" and hub.state_machine.current_state.name != "WallClimbing" and hub.state_machine.current_state.name != "WallVaulting" and !hub.jumping.is_wall_jump_lock_timer_active())):
+				highest_speed = current_horizontal_speed
 
 func is_speed_preservation_buffer_active():
 	return speed_preservation_buffer_time_left > 0
