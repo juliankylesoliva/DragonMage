@@ -4,6 +4,8 @@ class_name PlayerAttacks
 
 @export var hub : PlayerHub
 
+@export var global_attack_cooldown_time : float = 0.25
+
 @export var standing_attack_name : String = "MagicBlast"
 @export var crouching_attack_name : String = "Dodge"
 
@@ -12,6 +14,8 @@ var attacks_list : Array[Attack]
 var current_attack_cooldown_timer : float = 0
 
 var current_attack : Attack = null
+
+var previous_attack : Attack = null
 
 func _ready():
 	for child in get_children():
@@ -36,8 +40,9 @@ func is_using_attack_state():
 				selected_attack.use_attack()
 	return false
 
-func set_attack_cooldown_timer(time : float):
-	current_attack_cooldown_timer = time
+func set_attack_cooldown_timer(time : float = 0):
+	if (current_attack_cooldown_timer <= 0):
+		current_attack_cooldown_timer = (time if time > 0 else global_attack_cooldown_time)
 
 func update_attack_cooldown_timer(delta : float):
 	if (current_attack_cooldown_timer > 0):

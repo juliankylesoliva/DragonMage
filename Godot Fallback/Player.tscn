@@ -1,4 +1,4 @@
-[gd_scene load_steps=123 format=3 uid="uid://c6qw77ovfwgfs"]
+[gd_scene load_steps=125 format=3 uid="uid://c6qw77ovfwgfs"]
 
 [ext_resource type="Texture2D" uid="uid://d381ahbcwydy8" path="res://Sprites/Player/DraelynCrouch.png" id="1_6b42p"]
 [ext_resource type="Texture2D" uid="uid://dls34a1qa8iy1" path="res://Sprites/Player/DraelynFireTackle.png" id="1_ddrlj"]
@@ -25,6 +25,7 @@
 [ext_resource type="Script" path="res://Scripts/Hub Scripts/PlayerAttacks.gd" id="6_mwpxq"]
 [ext_resource type="Script" path="res://Scripts/Hub Scripts/PlayerForm.gd" id="6_oq5ip"]
 [ext_resource type="Script" path="res://Scripts/Hub Scripts/PlayerCollisions.gd" id="6_tj4nn"]
+[ext_resource type="Script" path="res://Scripts/Player/Attack Scripts/DodgeAttack.gd" id="7_06h44"]
 [ext_resource type="Resource" uid="uid://cmvqhahmdifp7" path="res://Scripts/Resources/PlayerCtrlProperties/MageProperties.tres" id="7_6wdx5"]
 [ext_resource type="Script" path="res://Scripts/Player/Attack Scripts/SlideAttack.gd" id="7_i41w2"]
 [ext_resource type="Resource" uid="uid://ddn481v3p2t3" path="res://Scripts/Resources/PlayerCtrlProperties/DragonProperties.tres" id="8_aybqf"]
@@ -240,6 +241,10 @@ region = Rect2(0, 0, 64, 64)
 [sub_resource type="AtlasTexture" id="AtlasTexture_stdyf"]
 atlas = ExtResource("2_ptbuf")
 region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2nnq2"]
+atlas = ExtResource("1_m21y2")
+region = Rect2(448, 0, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_prgn7"]
 atlas = ExtResource("1_s7co6")
@@ -722,6 +727,14 @@ animations = [{
 "speed": 60.0
 }, {
 "frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2nnq2")
+}],
+"loop": true,
+"name": &"MagliDodge",
+"speed": 60.0
+}, {
+"frames": [{
 "duration": 18.0,
 "texture": SubResource("AtlasTexture_prgn7")
 }, {
@@ -953,6 +966,9 @@ script = ExtResource("4_jbuwb")
 hub = NodePath("..")
 form_change_buffer_time = 0.25
 jump_buffer_time = 0.167
+fast_fall_buffer_time = 0.167
+attack_buffer_time = 0.1
+speed_preservation_buffer_time = 0.4
 
 [node name="Movement" type="Node" parent="Hub" node_paths=PackedStringArray("hub")]
 script = ExtResource("2_ebc55")
@@ -991,6 +1007,11 @@ hub = NodePath("..")
 [node name="FireTackle" type="Node" parent="Hub/Attacks"]
 
 [node name="Dodge" type="Node" parent="Hub/Attacks"]
+script = ExtResource("7_06h44")
+dodge_initial_speed = 320.0
+dodge_deceleration = 704.0
+dodge_floor_snap_distance = 16.0
+uses_attack_state = true
 
 [node name="Slide" type="Node" parent="Hub/Attacks"]
 script = ExtResource("7_i41w2")

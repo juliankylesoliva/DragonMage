@@ -270,7 +270,7 @@ public class PlayerAttacks : MonoBehaviour
             else if (dodgeDirection.y == 0f)
             {
                 Vector2 newVelocity = (player.collisions.GetRightVector() * (!player.collisions.IsAgainstWall ? currentDodgeSpeed : 0f));
-                if (newVelocity.x > 0f & newVelocity.x < currentDodgeSpeed) { newVelocity *= (currentDodgeSpeed / newVelocity.x); }
+                if (newVelocity.x > 0f && newVelocity.x < currentDodgeSpeed) { newVelocity *= (currentDodgeSpeed / newVelocity.x); }
                 player.rb2d.velocity = (newVelocity * player.movement.GetFacingValue());
                 player.collisions.SnapToGround(false, player.collisions.IsOnASlope, dodgeMaxSlopeSnapDistance);
             }

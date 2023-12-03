@@ -7,6 +7,7 @@ var prev_is_crouching : bool = false
 func state_process(_delta : float):
 	prev_is_crouching = hub.movement.is_crouching
 	hub.movement.check_crouch_state()
+	hub.collisions.do_ceiling_nudge()
 	hub.movement.do_movement(_delta)
 	if (!hub.jumping.is_wall_jump_lock_timer_active()):
 		hub.movement.update_facing_direction()

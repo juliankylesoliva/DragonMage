@@ -3,8 +3,9 @@ extends State
 class_name RunningState
 
 func state_process(_delta):
+	var did_a_wavedash : bool = (hub.form.current_mode == PlayerForm.CharacterMode.MAGE and hub.state_machine.previous_state.name == "Attacking" and hub.attacks.previous_attack.name == "Dodge" and abs(hub.movement.current_horizontal_velocity) > hub.movement.top_speed)
 	var char_name : String = hub.form.get_current_form_name()
-	var anim_name : String = ("{name}Move" if !hub.movement.is_crouching else "{name}CrouchWalk")
+	var anim_name : String = ("{name}Move" if !hub.movement.is_crouching else "MagliDodge" if did_a_wavedash else "{name}CrouchWalk")
 	hub.movement.check_crouch_state()
 	hub.movement.do_movement(_delta)
 	hub.movement.update_facing_direction()
