@@ -21,5 +21,5 @@ func on_exit():
 	pass
 
 func set_next_state(next : State):
-	if (next_state == null && next != self):
+	if (next_state == null && (next != self or self.name == "Attacking")):
 		next_state = next

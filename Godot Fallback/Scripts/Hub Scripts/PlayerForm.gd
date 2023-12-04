@@ -39,7 +39,7 @@ func is_form_change_cooldown_active():
 	return (current_form_change_cooldown_timer > 0)
 
 func can_change_form():
-	return (enable_form_changing and !is_form_change_cooldown_active() and hub.state_machine.current_state.name != "FormChanging" and hub.buffers.is_form_change_buffer_active())
+	return (enable_form_changing and !is_form_change_cooldown_active() and !hub.attacks.is_attack_cooldown_active() and hub.state_machine.current_state.name != "FormChanging" and hub.state_machine.current_state.name != "Attacking" and hub.buffers.is_form_change_buffer_active())
 
 func cannot_change_form():
 	return false

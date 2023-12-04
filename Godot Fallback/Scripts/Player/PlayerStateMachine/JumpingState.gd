@@ -30,16 +30,16 @@ func state_process(_delta : float):
 	elif (hub.attacks.is_using_attack_state() and hub.attacks.current_attack != null):
 		set_next_state(state_machine.get_state_by_name("Attacking"))
 	elif (hub.jumping.can_wall_climb()):
-		state_machine.switch_states(state_machine.get_state_by_name("WallClimbing"))
+		set_next_state(state_machine.get_state_by_name("WallClimbing"))
 	elif (hub.jumping.can_wall_slide()):
-		state_machine.switch_states(state_machine.get_state_by_name("WallSliding"))
+		set_next_state(state_machine.get_state_by_name("WallSliding"))
 	elif (hub.jumping.can_glide()):
-		state_machine.switch_states(state_machine.get_state_by_name("Gliding"))
+		set_next_state(state_machine.get_state_by_name("Gliding"))
 	elif (hub.jumping.can_midair_jump()):
 		hub.jumping.do_midair_jump()
 		set_next_state(state_machine.get_state_by_name("Jumping"))
 	elif (hub.jumping.is_fast_falling || hub.char_body.velocity.y >= 0):
-		state_machine.switch_states(state_machine.get_state_by_name("Falling"))
+		set_next_state(state_machine.get_state_by_name("Falling"))
 	else:
 		pass
 

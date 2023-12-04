@@ -36,7 +36,6 @@ func switch_states(new_state : State):
 	
 	previous_state = current_state
 	current_state = new_state
-	
 	current_state.on_enter()
 
 func get_state_by_name(state_name : String):

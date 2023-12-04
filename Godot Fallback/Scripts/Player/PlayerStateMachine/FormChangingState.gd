@@ -11,10 +11,17 @@ func state_process(_delta):
 			"Gliding":
 				set_next_state(state_machine.get_state_by_name("Falling"))
 			"WallSliding":
-				set_next_state(state_machine.get_state_by_name("WallClimbing" if hub.jumping.can_wall_climb_from_wall_slide() else "Falling"))
+				hub.buffers.refresh_speed_preservation_buffer()
+				set_next_state(state_machine.get_state_by_name("WallClimbing" if hub.jumping.can_wall_climb_from_wall_slide() else "Jumping" if prev_velocity.y < 0 else "Falling"))
 			"WallClimbing":
+				if (hub.jumping.stored_wall_climb_speed > hub.buffers.highest_speed):
+					hub.buffers.highest_speed = hub.jumping.stored_wall_climb_speed
+					hub.buffers.refresh_speed_preservation_buffer()
 				set_next_state(state_machine.get_state_by_name("WallSliding" if hub.jumping.can_wall_slide_from_wall_climb() else "Falling"))
 			"WallVaulting":
+				if (hub.jumping.stored_wall_climb_speed > hub.buffers.highest_speed):
+					hub.buffers.highest_speed = hub.jumping.stored_wall_climb_speed
+					hub.buffers.refresh_speed_preservation_buffer()
 				set_next_state(state_machine.get_state_by_name("Jumping" if hub.char_body.velocity.y < 0 else "Falling"))
 			"Damaged":
 				set_next_state(state_machine.get_state_by_name("Standing"))

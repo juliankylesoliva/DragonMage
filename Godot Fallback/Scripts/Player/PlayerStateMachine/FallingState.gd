@@ -31,20 +31,20 @@ func state_process(_delta : float):
 			var selected_attack : Attack = (null if !hub.jumping.can_fast_fall_slope_boost() else hub.attacks.get_attack_by_name(hub.attacks.crouching_attack_name))
 			if (selected_attack != null and selected_attack.can_use_attack() and Input.is_action_pressed("Crouch")):
 				hub.attacks.current_attack = selected_attack
-				state_machine.switch_states(state_machine.get_state_by_name("Attacking"))
+				set_next_state(state_machine.get_state_by_name("Attacking"))
 			else:
-				state_machine.switch_states(state_machine.get_state_by_name("Running"))
+				set_next_state(state_machine.get_state_by_name("Running"))
 		else:
-			state_machine.switch_states(state_machine.get_state_by_name("Standing"))
+			set_next_state(state_machine.get_state_by_name("Standing"))
 	elif (hub.jumping.can_ground_jump()):
 		hub.jumping.start_ground_jump()
 		set_next_state(state_machine.get_state_by_name("Jumping"))
 	elif (hub.jumping.can_wall_climb()):
-		state_machine.switch_states(state_machine.get_state_by_name("WallClimbing"))
+		set_next_state(state_machine.get_state_by_name("WallClimbing"))
 	elif (hub.jumping.can_wall_slide()):
-		state_machine.switch_states(state_machine.get_state_by_name("WallSliding"))
+		set_next_state(state_machine.get_state_by_name("WallSliding"))
 	elif (hub.jumping.can_glide()):
-		state_machine.switch_states(state_machine.get_state_by_name("Gliding"))
+		set_next_state(state_machine.get_state_by_name("Gliding"))
 	elif (hub.jumping.can_midair_jump()):
 		hub.jumping.do_midair_jump()
 		set_next_state(state_machine.get_state_by_name("Jumping"))

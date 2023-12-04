@@ -14,6 +14,8 @@ class_name PlayerCollisions
 @export var ledge_nudge_check_depth : float = 24
 @export var ledge_nudge_easing : float = 0.99
 
+@export_flags_2d_physics var intangible_wall_layer
+
 func _process(_delta):
 	collider_crouch_update()
 
@@ -82,7 +84,7 @@ func do_ledge_nudge():
 				pass
 
 func do_ceiling_nudge():
-	if (hub.state_machine.current_state.name == "Jumping"):
+	if (hub.state_machine.current_state.name == "Jumping" and hub.get_input_vector().x == 0):
 		var left_distance : float = get_distance_to_ceiling(-1)
 		var middle_distance : float = get_distance_to_ceiling(0)
 		var right_distance : float = get_distance_to_ceiling(1)

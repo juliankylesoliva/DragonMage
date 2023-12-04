@@ -359,10 +359,11 @@ func can_wall_slide():
 	return (enable_wall_jumping and !hub.movement.is_crouching and hub.collisions.get_distance_to_ground() >= min_wall_jump_height and hub.char_body.is_on_wall_only() and hub.collisions.is_facing_a_wall() and hub.collisions.is_moving_against_a_wall() and (!Input.is_action_pressed("Jump") or !is_jump_held or hub.char_body.velocity.y >= 0))
 
 func can_wall_slide_from_wall_climb():
-	return (enable_wall_jumping and hub.collisions.is_facing_a_wall() and (hub.get_input_vector().x * hub.movement.get_facing_value()) >= 0)
+	return (enable_wall_jumping and hub.collisions.is_facing_a_wall() and !hub.char_body.is_on_floor() and (hub.get_input_vector().x * hub.movement.get_facing_value()) >= 0)
 
 func start_wall_slide():
 	hub.movement.reset_crouch_state()
+	hub.buffers.refresh_speed_preservation_buffer()
 	is_jump_held = false
 	switch_to_zero_gravity()
 	hub.char_body.velocity.x = 0
@@ -404,13 +405,17 @@ func can_wall_climb():
 	return (enable_wall_climbing and !hub.movement.is_crouching and !hub.char_body.is_on_ceiling() and hub.collisions.get_distance_to_ground() >= min_wall_climb_height and current_wall_climb_time <= 0 and hub.char_body.is_on_wall_only() and hub.collisions.is_moving_against_a_wall() and (hub.get_input_vector().x * hub.movement.get_facing_value()) > 0)
 
 func can_wall_climb_from_wall_slide():
-	return (enable_wall_climbing and current_wall_climb_time <= 0 and !hub.char_body.is_on_ceiling() and hub.collisions.is_facing_a_wall() and (hub.get_input_vector().x * hub.movement.get_facing_value()) >= 0)
+	return (enable_wall_climbing and current_wall_climb_time <= 0 and !hub.char_body.is_on_ceiling() and !hub.char_body.is_on_floor() and hub.collisions.is_facing_a_wall() and (hub.get_input_vector().x * hub.movement.get_facing_value()) >= 0)
+
+func can_wall_climb_from_fire_tackle():
+	return can_wall_climb_from_wall_slide()
 
 func start_wall_climb():
 	hub.movement.reset_crouch_state()
 	hub.movement.reset_current_horizontal_velocity()
 	switch_to_wall_climbing_gravity()
 	if (stored_wall_climb_speed <= 0):
+		hub.buffers.refresh_speed_preservation_buffer()
 		stored_wall_climb_speed = min(max(hub.buffers.highest_speed, min_climbing_speed), max_climbing_speed)
 		hub.char_body.velocity = (Vector2.UP * stored_wall_climb_speed)
 

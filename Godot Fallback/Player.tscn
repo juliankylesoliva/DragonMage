@@ -1,4 +1,4 @@
-[gd_scene load_steps=125 format=3 uid="uid://c6qw77ovfwgfs"]
+[gd_scene load_steps=128 format=3 uid="uid://c6qw77ovfwgfs"]
 
 [ext_resource type="Texture2D" uid="uid://d381ahbcwydy8" path="res://Sprites/Player/DraelynCrouch.png" id="1_6b42p"]
 [ext_resource type="Texture2D" uid="uid://dls34a1qa8iy1" path="res://Sprites/Player/DraelynFireTackle.png" id="1_ddrlj"]
@@ -27,8 +27,11 @@
 [ext_resource type="Script" path="res://Scripts/Hub Scripts/PlayerCollisions.gd" id="6_tj4nn"]
 [ext_resource type="Script" path="res://Scripts/Player/Attack Scripts/DodgeAttack.gd" id="7_06h44"]
 [ext_resource type="Resource" uid="uid://cmvqhahmdifp7" path="res://Scripts/Resources/PlayerCtrlProperties/MageProperties.tres" id="7_6wdx5"]
+[ext_resource type="Script" path="res://Scripts/Player/Attack Scripts/MagicBlastAttack.gd" id="7_e0q0e"]
+[ext_resource type="Script" path="res://Scripts/Player/Attack Scripts/FireTackleAttack.gd" id="7_hucxn"]
 [ext_resource type="Script" path="res://Scripts/Player/Attack Scripts/SlideAttack.gd" id="7_i41w2"]
 [ext_resource type="Resource" uid="uid://ddn481v3p2t3" path="res://Scripts/Resources/PlayerCtrlProperties/DragonProperties.tres" id="8_aybqf"]
+[ext_resource type="PackedScene" uid="uid://cwhtijthju8df" path="res://MagicBlastProjectile.tscn" id="8_sbpil"]
 [ext_resource type="Script" path="res://Scripts/Player/PlayerStateMachine/WallSlidingState.gd" id="12_mju8y"]
 [ext_resource type="Script" path="res://Scripts/Player/PlayerStateMachine/GlidingState.gd" id="12_tj6cc"]
 [ext_resource type="Script" path="res://Scripts/Player/PlayerStateMachine/FormChangingState.gd" id="17_1yv22"]
@@ -924,12 +927,13 @@ height = 48.0
 
 [node name="Player" type="CharacterBody2D"]
 disable_mode = 1
+collision_layer = 4
 collision_mask = 3
 floor_constant_speed = true
 floor_max_angle = 1.39626
 floor_snap_length = 24.0
-platform_floor_layers = 4294901761
-platform_wall_layers = 1
+platform_floor_layers = 3
+platform_wall_layers = 3
 safe_margin = 0.001
 
 [node name="Hub" type="Node" parent="." node_paths=PackedStringArray("state_machine", "collisions", "buffers", "movement", "jumping", "attacks", "form", "animation", "char_body", "char_sprite", "collision_shape", "raycast_dl", "raycast_dm", "raycast_dr", "raycast_ledge_l", "raycast_ledge_r", "raycast_ul", "raycast_um", "raycast_ur", "raycast_ceiling_l", "raycast_ceiling_r")]
@@ -960,6 +964,7 @@ raycast_ceiling_r = NodePath("../RayCastCeilingR")
 script = ExtResource("6_tj4nn")
 hub = NodePath("..")
 ledge_nudge_easing = 0.25
+intangible_wall_layer = 8
 
 [node name="Buffers" type="Node" parent="Hub" node_paths=PackedStringArray("hub")]
 script = ExtResource("4_jbuwb")
@@ -1003,8 +1008,36 @@ script = ExtResource("6_mwpxq")
 hub = NodePath("..")
 
 [node name="MagicBlast" type="Node" parent="Hub/Attacks"]
+script = ExtResource("7_e0q0e")
+projectile_scene = ExtResource("8_sbpil")
+knockback_effect_radius = 57.6
+knockback_strength = 320.0
+inertia_multiplier = 0.5
+forward_throw_strength = 320.0
+lob_throw_strength = 384.0
+drop_throw_strength = 64.0
+forward_throw_offset = Vector2(8, 0)
+lob_throw_offset = Vector2(4, -8)
+drop_throw_offset = Vector2(4, 8)
+forward_throw_angle = -30.0
+lob_throw_angle = -80.0
+drop_throw_angle = 45.0
+forward_throw_rotation = 320.0
+lob_throw_rotation = 640.0
+drop_throw_rotation = -160.0
 
 [node name="FireTackle" type="Node" parent="Hub/Attacks"]
+script = ExtResource("7_hucxn")
+fire_tackle_min_horizontal_speed = 304.0
+fire_tackle_max_horizontal_speed = 1280.0
+fire_tackle_vertical_acceleration = 704.0
+fire_tackle_bonk_knockback = 192.0
+fire_tackle_duration = 0.45
+fire_tackle_fireball_recoil_strength = 128.0
+fire_tackle_endlag_duration = 0.4
+fire_tackle_endlag_deceleration = 640.0
+fire_tackle_endlag_cancelable_time = 0.35
+uses_attack_state = true
 
 [node name="Dodge" type="Node" parent="Hub/Attacks"]
 script = ExtResource("7_06h44")

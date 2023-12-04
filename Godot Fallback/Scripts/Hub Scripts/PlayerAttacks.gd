@@ -17,6 +17,8 @@ var current_attack : Attack = null
 
 var previous_attack : Attack = null
 
+var queued_attack : Attack = null
+
 func _ready():
 	for child in get_children():
 		if (child is Attack):
@@ -39,6 +41,10 @@ func is_using_attack_state():
 			else:
 				selected_attack.use_attack()
 	return false
+
+func set_queued_attack(next : Attack):
+	if (hub.state_machine.current_state.name == "Attacking"):
+		queued_attack = next
 
 func set_attack_cooldown_timer(time : float = 0):
 	if (current_attack_cooldown_timer <= 0):
