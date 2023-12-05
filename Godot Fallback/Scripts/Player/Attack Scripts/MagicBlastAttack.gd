@@ -4,11 +4,19 @@ class_name MagicBlastAttack
 
 @export var projectile_scene : PackedScene
 
-@export var knockback_effect_radius : float = 1.8
-
-@export var knockback_strength : float = 10
-
 @export var inertia_multiplier : float = 0.9
+
+@export var projectile_despawn_distance : float = 20
+
+@export var blast_jump_min_velocity_magnitude : float = 6
+
+@export var blast_jump_max_fall_speed : float = 20
+
+@export var blast_jump_min_active_time : float = 0.25
+
+@export var blast_jump_temper_increase_interval : float = 0.5
+
+@export_color_no_alpha var blast_jump_active_color : Color
 
 @export_group("Throw Velocities")
 @export var forward_throw_strength : float = 5
@@ -32,21 +40,38 @@ class_name MagicBlastAttack
 
 var projectile_instance : Node = null
 
-var pixels_per_unit : float = 32
+var is_blast_jumping : bool = false
+
+var blast_jump_current_active_time : float = 0
+
+var blast_jump_current_temper_interval_time : float = 0
+
+func _process(delta):
+	blast_jump_update(delta)
 
 func can_use_attack():
 	return (hub.form.current_mode == PlayerForm.CharacterMode.MAGE)
 
 func use_attack():
 	if (projectile_instance == null):
+		throw_projectile()
+	else:
+		do_detonation()
+	
+	hub.attacks.set_attack_cooldown_timer()
+
+func throw_projectile():
+	if (projectile_instance == null):
 		projectile_instance = projectile_scene.instantiate()
-		add_child(projectile_instance)
+		add_sibling(projectile_instance)
 		
 		var vertical_axis = hub.get_input_vector().y
 		var throw_offset = (forward_throw_offset if vertical_axis == 0 else lob_throw_offset if vertical_axis > 0 else drop_throw_offset)
+		throw_offset.x *= hub.movement.get_facing_value()
 		
 		var throw_direction : Vector2 = Vector2.from_angle(deg_to_rad(forward_throw_angle if vertical_axis == 0 else lob_throw_angle if vertical_axis > 0 else drop_throw_angle))
 		throw_direction.x *= hub.movement.get_facing_value()
+		throw_direction.x *= (-1 if hub.state_machine.current_state.name == "WallSliding" else 1)
 		
 		var throw_strength = (forward_throw_strength if vertical_axis == 0 else lob_throw_strength if vertical_axis > 0 else drop_throw_strength)
 		
@@ -61,20 +86,31 @@ func use_attack():
 		var projectile_rb = (projectile_instance as RigidBody2D)
 		projectile_rb.linear_velocity = projectile_velocity
 		projectile_rb.apply_torque_impulse(throw_rotation * hub.movement.get_facing_value())
-	else:
-		var projectile_node : Node2D = (projectile_instance as Node2D)
-		var distance_to_projectile : float = (hub.collision_shape.global_position.distance_to(projectile_node.global_position))
+
+func do_detonation():
+	if (projectile_instance != null):
+		var projectile_script = (projectile_instance as MagicBlastProjectile)
+		projectile_script.detonate()
+
+func activate_blast_jump():
+	is_blast_jumping = true
+	hub.char_sprite.modulate = blast_jump_active_color
+	blast_jump_current_active_time = blast_jump_min_active_time
+	blast_jump_current_temper_interval_time = blast_jump_temper_increase_interval
+
+func blast_jump_update(delta : float):
+	if (is_blast_jumping):
 		var state_name : String = hub.state_machine.current_state.name
+		if (blast_jump_current_active_time <= 0 or hub.state_machine.current_state.name == "FormChanging"):
+			if (hub.char_body.velocity.length() < blast_jump_min_velocity_magnitude or hub.char_body.is_on_floor() or state_name == "FormChanging" or state_name == "Gliding" or hub.form.current_mode != PlayerForm.CharacterMode.MAGE):
+				is_blast_jumping = false
+				hub.char_sprite.modulate = Color.WHITE
+		else:
+			blast_jump_current_active_time = move_toward(blast_jump_current_active_time, 0, delta)
+			if (blast_jump_current_active_time <= 0 or hub.state_machine.current_state.name == "FormChanging"):
+				blast_jump_current_active_time = 0
 		
-		if (distance_to_projectile <= knockback_effect_radius and state_name != "Standing" and state_name != "WallSliding" and state_name != "Attacking" and state_name != "FormChanging"):
-			var launch_direction : Vector2 = projectile_node.global_position.direction_to(hub.collision_shape.global_position)
-			var launch_power : float = (knockback_strength / (1 + (distance_to_projectile / pixels_per_unit)))
-			var launch_velocity = (launch_direction * launch_power)
-			if (hub.char_body.is_on_floor() or state_name == "Gliding"):
-				launch_velocity.y = 0
-			hub.char_body.velocity += launch_velocity
-			hub.movement.current_horizontal_velocity = hub.char_body.velocity.x
-		
-		projectile_instance.queue_free()
-	
-	hub.attacks.set_attack_cooldown_timer()
+		if (blast_jump_current_temper_interval_time > 0):
+			blast_jump_current_temper_interval_time -= delta
+			if (blast_jump_current_temper_interval_time <= 0):
+				blast_jump_current_temper_interval_time += blast_jump_temper_increase_interval

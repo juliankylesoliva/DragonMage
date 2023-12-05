@@ -4,6 +4,8 @@ class_name PlayerJumping
 
 @export var hub : PlayerHub
 
+@export var magic_blast_attack : MagicBlastAttack = null
+
 @export_group("Standard Jump Parameters")
 
 ## Allows the player to preserve their speed by jumping as soon as they land.
@@ -283,7 +285,7 @@ func falling_update(delta : float):
 	else:
 		hub.char_body.velocity.y += get_gravity_delta(delta)
 	
-	var max_fall_speed_to_use = (fast_falling_speed if enable_fast_falling and is_fast_falling else max_fall_speed)
+	var max_fall_speed_to_use = (fast_falling_speed if enable_fast_falling and is_fast_falling else max_fall_speed if magic_blast_attack == null or !magic_blast_attack.is_blast_jumping else magic_blast_attack.blast_jump_max_fall_speed)
 	if (hub.char_body.velocity.y > max_fall_speed_to_use):
 		hub.char_body.velocity.y = max_fall_speed_to_use
 
@@ -306,8 +308,9 @@ func can_speed_hop_slope_boost():
 
 func do_speed_hop_slope_boost():
 	if ((hub.char_body.get_floor_normal().x * hub.movement.get_facing_value()) > 0 and (hub.char_body.velocity.x * hub.get_input_vector().x) > 0):
+		var fall_speed_to_use : float = (max_fall_speed if magic_blast_attack == null or !magic_blast_attack.is_blast_jumping else magic_blast_attack.blast_jump_max_fall_speed)
 		hub.buffers.refresh_speed_preservation_buffer()
-		hub.buffers.highest_speed += (speed_hop_slope_boost_multiplier * hub.jumping.max_fall_speed * hub.char_body.get_floor_normal().x * hub.movement.get_facing_value())
+		hub.buffers.highest_speed += (speed_hop_slope_boost_multiplier * fall_speed_to_use * hub.char_body.get_floor_normal().x * hub.movement.get_facing_value())
 	else:
 		hub.buffers.highest_speed = move_toward(hub.buffers.highest_speed, min(hub.movement.top_speed, abs(hub.movement.current_horizontal_velocity)), speed_hop_slope_boost_multiplier * hub.jumping.max_fall_speed * abs(hub.char_body.get_floor_normal().x))
 		hub.movement.current_horizontal_velocity = (min(hub.movement.current_horizontal_velocity, hub.buffers.highest_speed) if hub.movement.get_facing_value() > 0 else max(hub.movement.current_horizontal_velocity, -hub.buffers.highest_speed))
@@ -408,7 +411,7 @@ func can_wall_climb_from_wall_slide():
 	return (enable_wall_climbing and current_wall_climb_time <= 0 and !hub.char_body.is_on_ceiling() and !hub.char_body.is_on_floor() and hub.collisions.is_facing_a_wall() and (hub.get_input_vector().x * hub.movement.get_facing_value()) >= 0)
 
 func can_wall_climb_from_fire_tackle():
-	return can_wall_climb_from_wall_slide()
+	return (enable_wall_climbing and current_wall_climb_time <= 0 and !hub.char_body.is_on_ceiling() and !hub.char_body.is_on_floor() and hub.collisions.is_facing_a_wall() and (hub.get_input_vector().x * hub.movement.get_facing_value()) > 0)
 
 func start_wall_climb():
 	hub.movement.reset_crouch_state()
@@ -487,7 +490,8 @@ func do_ledge_snap():
 	hub.char_body.position.x += (hub.movement.get_facing_value() * ledge_snap_distance)
 	hub.char_body.apply_floor_snap()
 	switch_to_falling_gravity()
-	hub.char_body.velocity = Vector2(stored_wall_climb_speed * hub.get_input_vector().x, 0)
+	# var vertical_result = min(max_wall_popup_speed, max(min_wall_popup_speed, -hub.char_body.velocity.y))
+	hub.char_body.velocity = Vector2(stored_wall_climb_speed * hub.movement.get_facing_value(), 0)
 	hub.movement.current_horizontal_velocity = hub.char_body.velocity.x
 
 func landing_reset():

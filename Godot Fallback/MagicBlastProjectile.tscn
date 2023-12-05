@@ -1,6 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://cwhtijthju8df"]
+[gd_scene load_steps=9 format=3 uid="uid://cwhtijthju8df"]
 
 [ext_resource type="Texture2D" uid="uid://cy0v185dvnlpm" path="res://Sprites/Objects/MagicProjectile.png" id="1_4lhks"]
+[ext_resource type="Script" path="res://Scripts/Player/Attack Scripts/MagicBlastProjectile.gd" id="1_tghvp"]
+[ext_resource type="PackedScene" uid="uid://kvdmcis3p0gf" path="res://MagicBlastKnockbackHitbox.tscn" id="2_a0rpq"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_isp8s"]
 friction = 0.5
@@ -30,7 +32,7 @@ animations = [{
 "speed": 60.0
 }]
 
-[node name="MagicBlastProjectile" type="RigidBody2D"]
+[node name="MagicBlastProjectile" type="RigidBody2D" node_paths=PackedStringArray("sprite")]
 collision_layer = 16
 collision_mask = 11
 inertia = 32.0
@@ -39,6 +41,11 @@ physics_material_override = SubResource("PhysicsMaterial_isp8s")
 gravity_scale = 2.0
 continuous_cd = 2
 can_sleep = false
+script = ExtResource("1_tghvp")
+hitbox_scene = ExtResource("2_a0rpq")
+sprite = NodePath("AnimatedSprite2D")
+pulse_color = Color(0.08, 0.08, 0.4, 1)
+max_lerp_delta = 0.25
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_rm236")

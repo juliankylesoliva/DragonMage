@@ -2,6 +2,8 @@ extends Attack
 
 class_name FireTackleAttack
 
+@export var fireball_scene : PackedScene
+
 @export var fire_tackle_min_horizontal_speed : float = 6
 
 @export var fire_tackle_max_horizontal_speed : float = 30
@@ -18,11 +20,17 @@ class_name FireTackleAttack
 
 @export var fire_tackle_fireball_recoil_strength : float = 4
 
+@export var fire_tackle_fireball_base_launch_speed : float = 4
+
+@export var fire_tackle_fireball_inertia_multiplier : float = 0.5
+
 @export var fire_tackle_endlag_duration : float = 0.25
 
 @export var fire_tackle_endlag_deceleration : float = 20
 
 @export var fire_tackle_endlag_cancelable_time : float = 0.125
+
+@export var fire_tackle_floor_snap_distance : float = 32
 
 @export var fire_tackle_startup_hold_temper_drain_interval : float = 0.8
 
@@ -131,6 +139,8 @@ func active_update(delta : float):
 				hub.char_body.velocity.y = abs(hub.char_body.velocity.x)
 		else:
 			hub.char_body.velocity = (Vector2.RIGHT * (horizontal_result if !hub.collisions.is_facing_a_wall() else 0.0))
+		
+		if (current_vertical_axis <= 0 and (hub.char_body.is_on_floor() or hub.collisions.get_distance_to_ground() <= fire_tackle_floor_snap_distance)):
 			hub.char_body.apply_floor_snap()
 		
 		# Trail effect here
@@ -160,7 +170,17 @@ func endlag_init():
 			hub.animation.set_animation("DraelynFireTackleFireball")
 			hub.animation.set_animation_speed(1)
 			is_player_firing_projectile = true
-			# Spawn fireball projectile here
+			
+			var fireball_instance = fireball_scene.instantiate()
+			add_sibling(fireball_instance)
+			var fireball_speed : float = ((fire_tackle_fireball_base_launch_speed * hub.movement.get_facing_value()) + (horizontal_result * fire_tackle_fireball_inertia_multiplier))
+			(fireball_instance as Node2D).global_position = hub.char_body.global_position
+			(fireball_instance as RigidBody2D).linear_velocity.x = fireball_speed
+			for child in fireball_instance.get_children():
+				if (child is AnimatedSprite2D):
+					(child as AnimatedSprite2D).flip_h = (hub.movement.get_facing_value() < 0)
+					break
+			
 			hub.movement.reset_current_horizontal_velocity()
 			hub.char_body.velocity = (((Vector2.UP if !hub.char_body.is_on_floor() else Vector2.ZERO) + (Vector2.RIGHT * -hub.movement.get_facing_value())).normalized() * fire_tackle_fireball_recoil_strength)
 		else:
@@ -176,13 +196,15 @@ func endlag_update(delta : float):
 			is_fire_tackle_endlag_canceled = true
 			if (hub.buffers.is_jump_buffer_active() and hub.char_body.is_on_floor()):
 				hub.buffers.refresh_jump_buffer()
+			elif (hub.jumping.can_wall_climb_from_fire_tackle()):
+				hub.char_body.velocity.x = (horizontal_result * hub.movement.get_facing_value())
 			else:
 				hub.buffers.reset_jump_buffer()
 			return
 		elif (!did_player_bump and hub.char_body.is_on_floor() and hub.char_body.velocity.x != 0):
 			hub.char_body.velocity.x = (0.0 if hub.collisions.is_facing_a_wall() or hub.collisions.is_near_a_ledge() else move_toward(hub.char_body.velocity.x, 0, delta * fire_tackle_endlag_deceleration))
-			hub.char_body.apply_floor_snap()
 			hub.collisions.do_ledge_nudge()
+			hub.char_body.apply_floor_snap()
 		elif (did_player_bump and hub.char_body.is_on_floor() and current_endlag_timer < fire_tackle_endlag_cancelable_time):
 			hub.movement.reset_current_horizontal_velocity()
 			hub.char_body.velocity.x = 0
@@ -203,6 +225,9 @@ func end_fire_tackle():
 	current_attack_state = AttackState.NOTHING
 	
 	hub.movement.current_horizontal_velocity = hub.char_body.velocity.x
+	if (abs(hub.movement.current_horizontal_velocity) > hub.buffers.highest_speed):
+		hub.buffers.highest_speed = hub.movement.current_horizontal_velocity
+		hub.buffers.refresh_speed_preservation_buffer()
 	
 	hub.attacks.set_attack_cooldown_timer()
 	hub.form.start_form_change_timer()

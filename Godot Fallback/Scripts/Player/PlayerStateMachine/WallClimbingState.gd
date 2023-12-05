@@ -12,7 +12,13 @@ func state_process(_delta):
 		set_next_state(state_machine.get_state_by_name("Attacking"))
 	elif (hub.jumping.can_start_wall_popup() and Input.is_action_pressed("Technical")):
 		hub.jumping.do_ledge_snap()
-		set_next_state(state_machine.get_state_by_name("Running"))
+		if (Input.is_action_pressed("Crouch")):
+			var selected_attack : Attack = hub.attacks.get_attack_by_name(hub.attacks.crouching_attack_name)
+			if (selected_attack != null):
+				hub.attacks.current_attack = selected_attack
+				set_next_state(state_machine.get_state_by_name("Attacking"))
+		else:
+			set_next_state(state_machine.get_state_by_name("Running"))
 	elif (hub.jumping.can_start_wall_popup()):
 		hub.jumping.start_wall_popup()
 		set_next_state(state_machine.get_state_by_name("WallVaulting"))
