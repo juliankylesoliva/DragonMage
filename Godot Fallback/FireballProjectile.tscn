@@ -1,7 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://dewpfs6cr2ffe"]
+[gd_scene load_steps=8 format=3 uid="uid://dewpfs6cr2ffe"]
 
 [ext_resource type="Texture2D" uid="uid://cwx0neqd78q6m" path="res://Sprites/Objects/FireProjectile.png" id="1_e5ryi"]
 [ext_resource type="Script" path="res://Scripts/Utility Scripts/SelfDestructTimer.gd" id="1_e42ge"]
+[ext_resource type="PackedScene" uid="uid://sf5dm50r0ovr" path="res://FireballKnockbackHitbox.tscn" id="3_q43tb"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_orr1x"]
 
@@ -28,6 +29,8 @@ animations = [{
 }]
 
 [node name="FireProjectile" type="RigidBody2D"]
+visibility_layer = 16
+z_index = 5
 collision_layer = 16
 collision_mask = 0
 center_of_mass_mode = 1
@@ -45,3 +48,5 @@ sprite_frames = SubResource("SpriteFrames_lmq6s")
 animation = &"FireballProjectile"
 autoplay = "FireballProjectile"
 frame_progress = 0.138846
+
+[node name="FireballKnockbackHitbox" parent="." instance=ExtResource("3_q43tb")]

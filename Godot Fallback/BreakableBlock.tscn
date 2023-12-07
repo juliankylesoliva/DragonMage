@@ -1,11 +1,20 @@
-[gd_scene load_steps=3 format=3 uid="uid://cs4s34scsvcfr"]
+[gd_scene load_steps=5 format=3 uid="uid://cs4s34scsvcfr"]
 
+[ext_resource type="Script" path="res://Scripts/Utility Scripts/Breakable.gd" id="1_mr02b"]
 [ext_resource type="Texture2D" uid="uid://caahvt434hqkt" path="res://Sprites/Objects/BreakableNormalBlock.png" id="1_wsx6d"]
+[ext_resource type="PackedScene" uid="uid://dnqfo4knpej54" path="res://BlockFragments.tscn" id="2_3twm7"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ry55m"]
 size = Vector2(64, 64)
 
-[node name="BreakableBlock" type="StaticBody2D"]
+[node name="BreakableBlock" type="StaticBody2D" node_paths=PackedStringArray("node_2d")]
+visibility_layer = 2
+z_index = 2
+collision_mask = 36
+script = ExtResource("1_mr02b")
+node_2d = NodePath(".")
+fragments_scene = ExtResource("2_3twm7")
+break_durablility = 1
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_wsx6d")

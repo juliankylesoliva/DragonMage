@@ -3,11 +3,13 @@ extends KnockbackHitbox
 class_name MagicBlastKnockbackHitbox
 
 func _on_body_entered(body):
-	if (body.has_meta("Tag")):
-		match body.get_meta("Tag"):
-			"Player":
-				if (body is CharacterBody2D):
-					do_magic_blast_knockback(body)
+	if (body is CharacterBody2D):
+		if (body.has_meta("Tag") and body.get_meta("Tag") == "Player"):
+			do_magic_blast_knockback(body)
+	elif (body is Breakable):
+		do_break_object(body)
+	else:
+		pass
 
 func do_magic_blast_knockback(body):
 	var hub : PlayerHub = null
@@ -17,10 +19,10 @@ func do_magic_blast_knockback(body):
 			break
 	
 	if (hub != null and hub.form.current_mode == PlayerForm.CharacterMode.MAGE):
-		ray.target_position = (hub.collision_shape.global_position - ray.global_position)
+		var target_pos : Vector2 = (hub.collision_shape.global_position - ray.global_position)
 		ray.force_raycast_update()
 		
-		if (!ray.is_colliding() or ray.get_collider_rid() != hub.char_body.get_rid()):
+		if (is_going_thru_a_wall(target_pos, hub.char_body.get_rid())):
 			return
 		
 		var state_name : String = hub.state_machine.current_state.name
@@ -36,3 +38,16 @@ func do_magic_blast_knockback(body):
 			hub.movement.current_horizontal_velocity = hub.char_body.velocity.x
 		
 		hub.attacks.get_attack_by_name(hub.attacks.standing_attack_name).activate_blast_jump()
+
+func do_break_object(body):
+	var target_pos : Vector2 = ((body as Node2D).global_position - ray.global_position)
+	if (!is_going_thru_a_wall(target_pos, body.get_rid())):
+		(body as Breakable).break_object(self)
+
+func is_going_thru_a_wall(target_pos : Vector2, body_rid : RID):
+	ray.target_position = target_pos
+	ray.force_raycast_update()
+	
+	if (!ray.is_colliding() or ray.get_collider_rid() != body_rid):
+		return true
+	return false

@@ -32,6 +32,7 @@ func on_attack_state_enter():
 	did_player_leave_ground = (was_jump_input_on_first_frame or !hub.char_body.is_on_floor() or hub.state_machine.previous_state.name == "Jumping" or hub.state_machine.previous_state.name == "Falling")
 	dodge_direction = Vector2(hub.movement.get_facing_value(), 1 if did_player_leave_ground else 0)
 	hub.char_body.velocity = (dodge_direction * current_dodge_speed)
+	hub.sprite_trail.activate_trail()
 	if (was_jump_input_on_first_frame and hub.collisions.get_distance_to_ground() <= dodge_floor_snap_distance):
 		hub.char_body.apply_floor_snap()
 
@@ -64,6 +65,7 @@ func attack_state_process(_delta : float):
 		current_dodge_speed = move_toward(current_dodge_speed, 0, dodge_deceleration * _delta)
 
 func on_attack_state_exit():
+	hub.sprite_trail.deactivate_trail()
 	if (current_dodge_speed <= 0 or hub.collisions.is_facing_a_wall()):
 		hub.char_body.velocity = Vector2.ZERO
 	elif (current_dodge_speed > 0 and hub.char_body.get_floor_angle() > slope_threshold):

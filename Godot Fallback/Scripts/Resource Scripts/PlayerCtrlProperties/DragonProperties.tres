@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="PlayerCtrlProperties" load_steps=2 format=3 uid="uid://ddn481v3p2t3"]
 
-[ext_resource type="Script" path="res://Scripts/Resources/PlayerCtrlProperties/PlayerCtrlProperties.gd" id="1_ftjvu"]
+[ext_resource type="Script" path="res://Scripts/Resource Scripts/PlayerCtrlProperties/PlayerCtrlProperties.gd" id="1_ftjvu"]
 
 [resource]
 script = ExtResource("1_ftjvu")

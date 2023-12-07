@@ -10,6 +10,7 @@ class_name PlayerHub
 @export var attacks : PlayerAttacks
 @export var form : PlayerForm
 @export var animation : PlayerAnimation
+@export var sprite_trail : PlayerSpriteTrail
 
 @export var char_body : CharacterBody2D
 @export var char_sprite : AnimatedSprite2D

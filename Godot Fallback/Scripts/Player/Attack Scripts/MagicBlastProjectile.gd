@@ -12,7 +12,7 @@ class_name MagicBlastProjectile
 
 @export var fuse_time : float = 5
 
-@export var max_lerp_delta : float = 0.5
+@export var max_lerp_change : float = 1
 
 var current_fuse_time_left : float = 0
 
@@ -24,7 +24,7 @@ func _ready():
 func _process(delta):
 	sprite.modulate = normal_color.lerp(pulse_color, pingpong(current_lerp_weight, 1))
 	current_fuse_time_left = move_toward(current_fuse_time_left, 0, delta)
-	current_lerp_weight += (min(max_lerp_delta, (fuse_time / current_fuse_time_left) * delta))
+	current_lerp_weight += (min(max_lerp_change, (fuse_time / current_fuse_time_left) * delta))
 	
 	if (current_fuse_time_left <= 0):
 		detonate()

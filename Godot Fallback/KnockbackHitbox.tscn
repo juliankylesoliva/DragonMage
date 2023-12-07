@@ -1,11 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://5myi2cvpjcqk"]
+[gd_scene load_steps=3 format=3 uid="uid://5myi2cvpjcqk"]
 
 [ext_resource type="Script" path="res://Scripts/Utility Scripts/KnockbackHitbox.gd" id="1_chi5j"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_4qmb1"]
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_d5gm1"]
-radius = 0.01
 
 [node name="KnockbackHitbox" type="Area2D" node_paths=PackedStringArray("collision_shape", "ray")]
 collision_layer = 32
@@ -17,13 +14,6 @@ ray = NodePath("RayCast2D")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_4qmb1")
-
-[node name="ShapeCast2D" type="ShapeCast2D" parent="."]
-enabled = false
-shape = SubResource("CircleShape2D_d5gm1")
-target_position = Vector2(0, 0)
-collision_mask = 4
-collide_with_areas = true
 
 [node name="RayCast2D" type="RayCast2D" parent="."]
 enabled = false

@@ -1,4 +1,4 @@
-[gd_scene load_steps=129 format=3 uid="uid://c6qw77ovfwgfs"]
+[gd_scene load_steps=133 format=3 uid="uid://c6qw77ovfwgfs"]
 
 [ext_resource type="Texture2D" uid="uid://d381ahbcwydy8" path="res://Sprites/Player/DraelynCrouch.png" id="1_6b42p"]
 [ext_resource type="Texture2D" uid="uid://dls34a1qa8iy1" path="res://Sprites/Player/DraelynFireTackle.png" id="1_ddrlj"]
@@ -26,19 +26,23 @@
 [ext_resource type="Script" path="res://Scripts/Hub Scripts/PlayerForm.gd" id="6_oq5ip"]
 [ext_resource type="Script" path="res://Scripts/Hub Scripts/PlayerCollisions.gd" id="6_tj4nn"]
 [ext_resource type="Script" path="res://Scripts/Player/Attack Scripts/DodgeAttack.gd" id="7_06h44"]
-[ext_resource type="Resource" uid="uid://cmvqhahmdifp7" path="res://Scripts/Resources/PlayerCtrlProperties/MageProperties.tres" id="7_6wdx5"]
 [ext_resource type="Script" path="res://Scripts/Player/Attack Scripts/MagicBlastAttack.gd" id="7_e0q0e"]
 [ext_resource type="Script" path="res://Scripts/Player/Attack Scripts/FireTackleAttack.gd" id="7_hucxn"]
 [ext_resource type="Script" path="res://Scripts/Player/Attack Scripts/SlideAttack.gd" id="7_i41w2"]
-[ext_resource type="Resource" uid="uid://ddn481v3p2t3" path="res://Scripts/Resources/PlayerCtrlProperties/DragonProperties.tres" id="8_aybqf"]
 [ext_resource type="PackedScene" uid="uid://cwhtijthju8df" path="res://MagicBlastProjectile.tscn" id="8_sbpil"]
+[ext_resource type="PackedScene" uid="uid://c1npwnxy6sqnx" path="res://BlastJumpKnockbackHitbox.tscn" id="9_mq073"]
 [ext_resource type="PackedScene" uid="uid://dewpfs6cr2ffe" path="res://FireballProjectile.tscn" id="10_8jlqc"]
+[ext_resource type="PackedScene" uid="uid://dj2kj4mpixb27" path="res://FireTackleKnockbackHitbox.tscn" id="10_gg7wu"]
 [ext_resource type="Script" path="res://Scripts/Player/PlayerStateMachine/WallSlidingState.gd" id="12_mju8y"]
 [ext_resource type="Script" path="res://Scripts/Player/PlayerStateMachine/GlidingState.gd" id="12_tj6cc"]
+[ext_resource type="Resource" uid="uid://cmvqhahmdifp7" path="res://Scripts/Resource Scripts/PlayerCtrlProperties/MageProperties.tres" id="14_8gg24"]
+[ext_resource type="Resource" uid="uid://ddn481v3p2t3" path="res://Scripts/Resource Scripts/PlayerCtrlProperties/DragonProperties.tres" id="15_356k0"]
 [ext_resource type="Script" path="res://Scripts/Player/PlayerStateMachine/FormChangingState.gd" id="17_1yv22"]
 [ext_resource type="Script" path="res://Scripts/Player/PlayerStateMachine/WallClimbingState.gd" id="17_ve68u"]
 [ext_resource type="Script" path="res://Scripts/Player/PlayerStateMachine/WallVaultingState.gd" id="18_vi6ah"]
 [ext_resource type="Texture2D" uid="uid://clp08lkqo6nh5" path="res://Sprites/Player/DraelynIdle.png" id="19_lfkpo"]
+[ext_resource type="Script" path="res://Scripts/Utility Scripts/PlayerSpriteTrail.gd" id="19_sik2o"]
+[ext_resource type="PackedScene" uid="uid://bpxyaxwfw7023" path="res://SpriteTrailSegment.tscn" id="20_31hod"]
 [ext_resource type="Script" path="res://Scripts/Player/PlayerStateMachine/AttackingState.gd" id="20_dbcpj"]
 [ext_resource type="Texture2D" uid="uid://c44t784vgugry" path="res://Sprites/Player/MagliIdle.png" id="27_my3k8"]
 
@@ -938,7 +942,7 @@ platform_wall_layers = 3
 safe_margin = 0.001
 metadata/Tag = "Player"
 
-[node name="Hub" type="Node" parent="." node_paths=PackedStringArray("state_machine", "collisions", "buffers", "movement", "jumping", "attacks", "form", "animation", "char_body", "char_sprite", "collision_shape", "raycast_dl", "raycast_dm", "raycast_dr", "raycast_ledge_l", "raycast_ledge_r", "raycast_ul", "raycast_um", "raycast_ur", "raycast_ceiling_l", "raycast_ceiling_r")]
+[node name="Hub" type="Node" parent="." node_paths=PackedStringArray("state_machine", "collisions", "buffers", "movement", "jumping", "attacks", "form", "animation", "sprite_trail", "char_body", "char_sprite", "collision_shape", "raycast_dl", "raycast_dm", "raycast_dr", "raycast_ledge_l", "raycast_ledge_r", "raycast_ul", "raycast_um", "raycast_ur", "raycast_ceiling_l", "raycast_ceiling_r")]
 script = ExtResource("1_fbdyy")
 state_machine = NodePath("../StateMachine")
 collisions = NodePath("Collisions")
@@ -948,6 +952,7 @@ jumping = NodePath("Jumping")
 attacks = NodePath("Attacks")
 form = NodePath("Form")
 animation = NodePath("Animation")
+sprite_trail = NodePath("SpriteTrail")
 char_body = NodePath("..")
 char_sprite = NodePath("../AnimatedSprite2D")
 collision_shape = NodePath("../CollisionShape2D")
@@ -1013,10 +1018,14 @@ hub = NodePath("..")
 [node name="MagicBlast" type="Node" parent="Hub/Attacks"]
 script = ExtResource("7_e0q0e")
 projectile_scene = ExtResource("8_sbpil")
+blast_jump_hitbox_scene = ExtResource("9_mq073")
 inertia_multiplier = 0.5
 projectile_despawn_distance = 640.0
 blast_jump_min_velocity_magnitude = 192.0
 blast_jump_max_fall_speed = 640.0
+blast_jump_offset_multiplier = 1.5
+blast_jump_facing_offset = 4.0
+blast_jump_jumping_offset = 8.0
 blast_jump_active_color = Color(0.721569, 0.356863, 0.768627, 1)
 forward_throw_strength = 320.0
 lob_throw_strength = 384.0
@@ -1033,6 +1042,7 @@ drop_throw_rotation = -160.0
 
 [node name="FireTackle" type="Node" parent="Hub/Attacks"]
 script = ExtResource("7_hucxn")
+fire_tackle_hitbox_scene = ExtResource("10_gg7wu")
 fireball_scene = ExtResource("10_8jlqc")
 fire_tackle_min_horizontal_speed = 304.0
 fire_tackle_max_horizontal_speed = 1280.0
@@ -1044,6 +1054,9 @@ fire_tackle_endlag_duration = 0.4
 fire_tackle_endlag_deceleration = 640.0
 fire_tackle_endlag_cancelable_time = 0.35
 fire_tackle_floor_snap_distance = 16.0
+fire_tackle_startup_color = Color(0.901961, 0.858824, 0.458824, 1)
+fire_tackle_active_color = Color(0.980392, 0.568627, 0.317647, 1)
+fire_tackle_endlag_color = Color(0.8, 0.8, 0.8, 1)
 uses_attack_state = true
 
 [node name="Dodge" type="Node" parent="Hub/Attacks"]
@@ -1065,13 +1078,21 @@ uses_attack_state = true
 [node name="Form" type="Node" parent="Hub" node_paths=PackedStringArray("hub")]
 script = ExtResource("6_oq5ip")
 hub = NodePath("..")
-mage_properties = ExtResource("7_6wdx5")
-dragon_properties = ExtResource("8_aybqf")
+mage_properties = ExtResource("14_8gg24")
+dragon_properties = ExtResource("15_356k0")
 form_change_cooldown_time = 0.4
 
 [node name="Animation" type="Node" parent="Hub" node_paths=PackedStringArray("hub")]
 script = ExtResource("3_01vwt")
 hub = NodePath("..")
+
+[node name="SpriteTrail" type="Node" parent="Hub" node_paths=PackedStringArray("hub")]
+script = ExtResource("19_sik2o")
+hub = NodePath("..")
+sprite_trail_segment_scene = ExtResource("20_31hod")
+trail_spawn_interval = 0.05
+mage_trail_color = Color(0.384314, 0.517647, 0.905882, 1)
+dragon_trail_color = Color(1, 0.6, 0.431373, 1)
 
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("hub", "current_state")]
 script = ExtResource("1_rgc8w")
@@ -1111,6 +1132,8 @@ script = ExtResource("20_dbcpj")
 script = ExtResource("17_1yv22")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+visibility_layer = 8
+z_index = 4
 texture_filter = 1
 position = Vector2(0, 1)
 sprite_frames = SubResource("SpriteFrames_5s7e1")

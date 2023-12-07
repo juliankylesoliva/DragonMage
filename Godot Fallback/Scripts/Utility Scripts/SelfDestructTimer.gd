@@ -1,5 +1,7 @@
 extends Node
 
+class_name SelfDestructTimer
+
 @export var lifetime : float = 1
 
 var current_lifetime_left : float = 0

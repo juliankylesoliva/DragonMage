@@ -33,6 +33,7 @@ func on_attack_state_enter():
 	hub.char_body.velocity = (Vector2.RIGHT * horizontal_result * hub.movement.get_facing_value())
 	hub.movement.current_horizontal_velocity = hub.char_body.velocity.x
 	current_slide_timer = 0
+	hub.sprite_trail.activate_trail()
 
 func attack_state_process(_delta : float):
 	if (hub.collisions.is_facing_a_wall() or hub.collisions.is_near_a_ledge() or hub.collisions.get_distance_to_ground() > hub.char_body.floor_snap_length):
@@ -47,6 +48,7 @@ func attack_state_process(_delta : float):
 		slide_update(_delta)
 
 func on_attack_state_exit():
+	hub.sprite_trail.deactivate_trail()
 	current_attack_state = AttackState.NOTHING
 	prev_horizontal_velocity = 0
 	horizontal_result = 0
@@ -55,7 +57,7 @@ func on_attack_state_exit():
 func do_jump_cancel():
 	if (current_attack_state != AttackState.ACTIVE):
 		return
-	hub.buffers.reset_jump_buffer()
+	
 	hub.char_body.velocity.x = (hub.get_input_vector().x * horizontal_result)
 	hub.movement.current_horizontal_velocity = hub.char_body.velocity.x
 	hub.jumping.start_ground_jump()

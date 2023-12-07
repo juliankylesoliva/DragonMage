@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://sf5dm50r0ovr"]
+
+[ext_resource type="PackedScene" uid="uid://5myi2cvpjcqk" path="res://KnockbackHitbox.tscn" id="1_0f0lt"]
+[ext_resource type="Script" path="res://Scripts/Player/Attack Scripts/FireballKnockbackHitbox.gd" id="2_at8cf"]
+
+[node name="FireballKnockbackHitbox" instance=ExtResource("1_0f0lt")]
+collision_mask = 1
+script = ExtResource("2_at8cf")
+pixels_per_unit = 32.0
+knockback_effect_radius = 30.0
+metadata/BreakStrength = 2
+metadata/BreakType = "FIRE"

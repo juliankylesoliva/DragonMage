@@ -10393,10 +10393,10 @@ MonoBehaviour:
   groundCheckRadius: 0.125
   wallCheckRadius: 0.05
   headbonkCheckRadius: 0.125
-  headbonkSpeedThreshold: 1
   slopeCheckDistance: 0.25
   ledgeCheckOffset: 0.25
   ledgeCheckDepth: 0.85
+  nudgeCheckOffset: 0.6
   groundNormalXThreshold: 0.1
   uncrouchedYOffset: -0.25
   crouchedYOffset: -0.53125
