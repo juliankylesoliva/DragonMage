@@ -11,10 +11,12 @@ class_name PlayerHub
 @export var form : PlayerForm
 @export var animation : PlayerAnimation
 @export var sprite_trail : PlayerSpriteTrail
+@export var audio : AudioHandler
 
 @export var char_body : CharacterBody2D
 @export var char_sprite : AnimatedSprite2D
 @export var collision_shape : CollisionShape2D
+@export var stream_player : AudioStreamPlayer2D
 
 @export var raycast_dl : RayCast2D
 @export var raycast_dm : RayCast2D

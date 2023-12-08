@@ -1,0 +1,68 @@
+[gd_scene load_steps=10 format=3 uid="uid://cwhtijthju8df"]
+
+[ext_resource type="Script" path="res://Scripts/Player/Attack Scripts/MagicBlastProjectile.gd" id="1_jkuo4"]
+[ext_resource type="PackedScene" uid="uid://kvdmcis3p0gf" path="res://Scene Objects/Hitboxes/MagicBlastKnockbackHitbox.tscn" id="2_2lgif"]
+[ext_resource type="Texture2D" uid="uid://cy0v185dvnlpm" path="res://Sprites/Objects/MagicProjectile.png" id="3_6o04l"]
+[ext_resource type="AudioStream" uid="uid://dkrhvomi2f0gy" path="res://Sounds/attack_magli_throw.wav" id="4_c22al"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_isp8s"]
+friction = 0.5
+bounce = 0.8
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_rm236"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yhbiu"]
+atlas = ExtResource("3_6o04l")
+region = Rect2(0, 0, 20, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jch64"]
+atlas = ExtResource("3_6o04l")
+region = Rect2(20, 0, 20, 20)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_3oipw"]
+animations = [{
+"frames": [{
+"duration": 6.0,
+"texture": SubResource("AtlasTexture_yhbiu")
+}, {
+"duration": 6.0,
+"texture": SubResource("AtlasTexture_jch64")
+}],
+"loop": true,
+"name": &"default",
+"speed": 60.0
+}]
+
+[node name="MagicBlastProjectile" type="RigidBody2D" node_paths=PackedStringArray("sprite")]
+visibility_layer = 16
+z_index = 5
+collision_layer = 16
+collision_mask = 3
+inertia = 32.0
+center_of_mass_mode = 1
+physics_material_override = SubResource("PhysicsMaterial_isp8s")
+gravity_scale = 2.0
+continuous_cd = 2
+max_contacts_reported = 1
+contact_monitor = true
+can_sleep = false
+script = ExtResource("1_jkuo4")
+hitbox_scene = ExtResource("2_2lgif")
+sprite = NodePath("AnimatedSprite2D")
+pulse_color = Color(0.0941176, 0.0627451, 0.290196, 1)
+max_lerp_change = 0.125
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_rm236")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_3oipw")
+autoplay = "default"
+frame_progress = 0.589104
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_c22al")
+autoplay = true
+bus = &"SFX"
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

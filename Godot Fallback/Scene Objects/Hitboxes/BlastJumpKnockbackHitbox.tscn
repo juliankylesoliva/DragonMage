@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://c1npwnxy6sqnx"]
+
+[ext_resource type="PackedScene" uid="uid://5myi2cvpjcqk" path="res://Scene Objects/Hitboxes/KnockbackHitbox.tscn" id="1_ky8o2"]
+[ext_resource type="Script" path="res://Scripts/Player/Attack Scripts/BlastJumpKnockbackHitbox.gd" id="2_8oxtp"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_qsjgy"]
+radius = 8.0
+height = 48.0
+
+[node name="BlastJumpKnockbackHitbox" instance=ExtResource("1_ky8o2")]
+collision_mask = 1
+script = ExtResource("2_8oxtp")
+pixels_per_unit = 32.0
+knockback_effect_radius = 8.0
+metadata/BreakStrength = 2
+metadata/BreakType = "MAGIC"
+
+[node name="CollisionShape2D" parent="." index="0"]
+shape = SubResource("CapsuleShape2D_qsjgy")

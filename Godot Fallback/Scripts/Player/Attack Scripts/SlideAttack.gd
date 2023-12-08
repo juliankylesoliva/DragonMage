@@ -27,6 +27,7 @@ func on_attack_state_enter():
 		hub.movement.is_crouching = true
 		hub.movement.current_min_crouch_timer = hub.movement.min_crouch_time
 	current_attack_state = AttackState.ACTIVE
+	SoundFactory.play_sound_by_name("movement_draelyn_slide", hub.char_body.global_position, 0, 1, "SFX")
 	prev_horizontal_velocity = abs(hub.movement.current_horizontal_velocity)
 	hub.animation.set_animation("DraelynSlide")
 	horizontal_result = abs(min((prev_horizontal_velocity + slide_min_horizontal_speed) , slide_max_horizontal_speed))

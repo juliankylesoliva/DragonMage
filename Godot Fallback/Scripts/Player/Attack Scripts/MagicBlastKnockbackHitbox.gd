@@ -2,14 +2,20 @@ extends KnockbackHitbox
 
 class_name MagicBlastKnockbackHitbox
 
+@export_flags_2d_physics var player_layer
+@export_flags_2d_physics var ground_layer
+
 func _on_body_entered(body):
+	var temp_ray_mask = ray.collision_mask
 	if (body is CharacterBody2D):
 		if (body.has_meta("Tag") and body.get_meta("Tag") == "Player"):
 			do_magic_blast_knockback(body)
 	elif (body is Breakable):
+		ray.collision_mask = ground_layer
 		do_break_object(body)
 	else:
 		pass
+	ray.collision_mask = temp_ray_mask
 
 func do_magic_blast_knockback(body):
 	var hub : PlayerHub = null

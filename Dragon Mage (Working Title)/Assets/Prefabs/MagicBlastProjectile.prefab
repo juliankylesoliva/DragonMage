@@ -466,7 +466,12 @@ MonoBehaviour:
   despawnDistance: 20
   fuseTime: 5
   verticalLaunchSpeed: 2.5
+  verticalLaunchWithVerticalAxisUpModifier: 5
+  verticalLaunchWithVerticalAxisDownModifier: -0.5
+  verticalInertiaModifier: 0.25
   horizontalLaunchSpeed: 8
+  horizontalLaunchWithVerticalAxisModifier: 0.25
+  horizontalInertiaModifier: 0.5
   rotationSpeed: 10
   blastDuration: 0.1
   blastStrength: 10

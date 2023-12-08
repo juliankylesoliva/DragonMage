@@ -15,6 +15,10 @@ run/main_scene="res://TestLevel.tscn"
 config/features=PackedStringArray("4.1", "GL Compatibility")
 config/icon="res://icon.svg"
 
+[autoload]
+
+SoundFactory="*res://Scripts/Utility Scripts/SoundFactory.gd"
+
 [display]
 
 window/size/viewport_width=512

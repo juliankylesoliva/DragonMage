@@ -33,7 +33,11 @@ func detonate():
 	var hitbox_instance = hitbox_scene.instantiate()
 	add_sibling(hitbox_instance)
 	(hitbox_instance as Node2D).global_position = sprite.global_position
+	SoundFactory.play_sound_by_name("attack_magli_explosion", sprite.global_position, -6, 1, "SFX")
 	despawn()
 
 func despawn():
 	queue_free()
+
+func _on_body_entered(_body):
+	SoundFactory.play_sound_by_name("attack_magli_bounce", sprite.global_position, -4, 1, "SFX")

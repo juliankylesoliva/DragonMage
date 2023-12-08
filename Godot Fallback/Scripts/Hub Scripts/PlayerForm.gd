@@ -50,6 +50,7 @@ func do_form_change():
 	hub.animation.set_animation_speed(form_change_animation_time / form_change_time)
 	
 	change_mode(CharacterMode.DRAGON if current_mode == CharacterMode.MAGE else CharacterMode.MAGE)
+	hub.audio.play_sound("transformation_magli" if current_mode == CharacterMode.MAGE else "transformation_draelyn")
 
 func form_change_failed():
 	pass

@@ -24,6 +24,7 @@ func can_use_attack():
 
 func on_attack_state_enter():
 	current_attack_state = AttackState.ACTIVE
+	SoundFactory.play_sound_by_name("movement_magli_dodge", hub.char_body.global_position, 0, 1, "SFX")
 	was_jump_input_on_first_frame = (Input.is_action_just_pressed("Jump") or hub.state_machine.previous_state.name == "Jumping" or hub.state_machine.previous_state.name == "Falling")
 	hub.jumping.switch_to_zero_gravity()
 	hub.animation.set_animation("MagliDodge")
@@ -67,7 +68,7 @@ func attack_state_process(_delta : float):
 func on_attack_state_exit():
 	hub.sprite_trail.deactivate_trail()
 	if (current_dodge_speed <= 0 or hub.collisions.is_facing_a_wall()):
-		hub.char_body.velocity = Vector2.ZERO
+		hub.char_body.velocity.x = 0
 	elif (current_dodge_speed > 0 and hub.char_body.get_floor_angle() > slope_threshold):
 		var new_velocity : Vector2 = (Vector2.RIGHT * (current_dodge_speed if !hub.collisions.is_facing_a_wall() else 0.0))
 		hub.char_body.velocity = (new_velocity * hub.movement.get_facing_value())

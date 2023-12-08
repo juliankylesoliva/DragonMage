@@ -200,6 +200,7 @@ func update_super_jump_charge_timer(delta : float):
 		if (current_super_jump_charge_timer < super_jump_charge_time and current_super_jump_retention_timer <= 0):
 			current_super_jump_charge_timer = move_toward(current_super_jump_charge_timer, super_jump_charge_time, delta)
 			if (current_super_jump_charge_timer >= super_jump_charge_time):
+				SoundFactory.play_sound_by_name("jump_draelyn_charged", hub.char_body.global_position, 0, 1, "SFX")
 				current_super_jump_retention_timer = super_jump_retention_time
 	else:
 		if (current_super_jump_retention_timer <= 0):
@@ -241,6 +242,10 @@ func start_ground_jump():
 	
 	var running_jump_result = (min((horizontal_result / hub.movement.top_speed), 1) * running_jump_added_velocity if enable_running_jump and !hub.movement.is_crouching else 0)
 	var super_jump_result : float = (super_jump_velocity_multiplier if is_super_jump_ready() else 1.0)
+	
+	var sound_name : String = ("jump_magli" if hub.form.current_mode == PlayerForm.CharacterMode.MAGE else "jump_draelyn")
+	var sound_pitch : float = (1.5 if did_player_speed_hop or is_super_jump_ready() else 1.0)
+	hub.audio.play_sound(sound_name, 0, sound_pitch, "SFX")
 	
 	var char_name : String = hub.form.get_current_form_name()
 	hub.animation.set_animation("{name}Jump".format({"name" : char_name}) if !hub.movement.is_crouching else "MagliCrouchJump")
@@ -321,6 +326,7 @@ func can_glide():
 
 func start_glide():
 	hub.movement.reset_crouch_state()
+	hub.audio.play_sound("jump_magli_glide")
 	switch_to_zero_gravity()
 	hub.char_body.velocity.y = glide_fall_speed
 
@@ -339,6 +345,8 @@ func do_midair_jump():
 	hub.animation.set_animation("DraelynMidairJump")
 	hub.animation.set_animation_frame(0)
 	hub.animation.set_animation_speed(1)
+	
+	hub.audio.play_sound("jump_draelyn_midair", 0, lerp(1.0, 1.3, (current_midair_jumps as float) / ((max_midair_jumps - 1) as float)))
 	
 	hub.buffers.reset_jump_buffer()
 	set_is_jump_held()
@@ -366,6 +374,7 @@ func can_wall_slide_from_wall_climb():
 
 func start_wall_slide():
 	hub.movement.reset_crouch_state()
+	hub.audio.play_sound("jump_magli_wallslide")
 	hub.buffers.refresh_speed_preservation_buffer()
 	is_jump_held = false
 	switch_to_zero_gravity()
@@ -402,6 +411,9 @@ func start_wall_jump():
 	hub.animation.set_animation("MagliJump")
 	hub.animation.set_animation_speed(1)
 	
+	SoundFactory.play_sound_by_name("jump_magli_wallkick", hub.char_body.global_position)
+	hub.audio.play_sound("jump_magli", 0, 1.5 if did_player_speed_kick else 1.0)
+	
 	activate_wall_jump_lock_timer()
 
 func can_wall_climb():
@@ -416,6 +428,7 @@ func can_wall_climb_from_fire_tackle():
 func start_wall_climb():
 	hub.movement.reset_crouch_state()
 	hub.movement.reset_current_horizontal_velocity()
+	hub.audio.play_sound("jump_draelyn_wallclimb")
 	switch_to_wall_climbing_gravity()
 	if (stored_wall_climb_speed <= 0):
 		hub.buffers.refresh_speed_preservation_buffer()
@@ -446,6 +459,7 @@ func start_wall_popup():
 	hub.animation.set_animation("DraelynMidairJump")
 	hub.animation.set_animation_frame(0)
 	hub.animation.set_animation_speed(1)
+	hub.audio.play_sound("jump_draelyn_wallpopup")
 	hub.movement.reset_current_horizontal_velocity()
 	hub.movement.reset_crouch_state()
 	
@@ -469,6 +483,8 @@ func start_wall_vault():
 	hub.animation.set_animation_frame(0)
 	hub.animation.set_animation_speed(1)
 	
+	hub.audio.play_sound("jump_draelyn_wallvault")
+	
 	current_glide_time = 0
 	current_midair_jumps = 0
 	wall_popup_time_left = 0
@@ -487,6 +503,7 @@ func is_wall_popup_canceled():
 	return (wall_popup_time_left <= 0 or hub.char_body.velocity.y >= 0 or (hub.get_input_vector().x * hub.movement.get_facing_value()) < 0)
 
 func do_ledge_snap():
+	hub.audio.play_sound("jump_draelyn_wallpopup", 0, 1.5)
 	hub.char_body.position.x += (hub.movement.get_facing_value() * ledge_snap_distance)
 	hub.char_body.apply_floor_snap()
 	switch_to_falling_gravity()

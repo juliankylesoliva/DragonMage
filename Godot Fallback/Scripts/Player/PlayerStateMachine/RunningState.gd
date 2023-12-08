@@ -2,6 +2,10 @@ extends State
 
 class_name RunningState
 
+@export var dust_frames : Array
+
+var did_turn_spark_appear : bool = false
+
 func state_process(_delta):
 	var did_a_wavedash : bool = (hub.form.current_mode == PlayerForm.CharacterMode.MAGE and hub.state_machine.previous_state.name == "Attacking" and hub.attacks.previous_attack.name == "Dodge" and abs(hub.movement.current_horizontal_velocity) > hub.movement.top_speed)
 	var char_name : String = hub.form.get_current_form_name()
@@ -13,8 +17,13 @@ func state_process(_delta):
 	
 	if (hub.movement.is_turning()):
 		hub.animation.set_animation_frame(0)
+		if (!did_turn_spark_appear):
+			var sound_name : String = ("movement_magli_turnaround" if hub.form.current_mode == PlayerForm.CharacterMode.MAGE else "movement_draelyn_turnaround")
+			did_turn_spark_appear = true
+			SoundFactory.play_sound_by_name(sound_name, hub.char_body.global_position, 0, 1, "SFX")
 	else:
 		hub.animation.set_animation_speed(hub.movement.get_speed_portion())
+		did_turn_spark_appear = false
 	
 	if (hub.form.can_change_form()):
 		set_next_state(state_machine.get_state_by_name("FormChanging"))
@@ -31,9 +40,22 @@ func state_process(_delta):
 		pass
 
 func on_enter():
+	did_turn_spark_appear = false
 	var prev_state_name : String = state_machine.previous_state.name
 	var char_name : String = hub.form.get_current_form_name()
 	var anim_name : String = ("{name}Move" if !hub.movement.is_crouching else "{name}CrouchWalk")
 	if (hub.char_body.is_on_floor() or prev_state_name == "Falling" or prev_state_name == "Jumping"):
 		hub.jumping.landing_reset()
 	hub.animation.set_animation(anim_name.format({"name" : char_name}))
+
+func dust_check():
+	did_turn_spark_appear = false
+	if (state_machine.current_state.name == "Running" and !hub.movement.is_crouching):
+		for i in dust_frames:
+			if (i == hub.char_sprite.frame):
+				var walk_sound : String = ("jump_magli_landing" if hub.form.current_mode == PlayerForm.CharacterMode.MAGE else "jump_draelyn_landing")
+				SoundFactory.play_sound_by_name(walk_sound, hub.char_body.global_position, 0, 1, "SFX")
+				return
+
+func _on_animated_sprite_2d_frame_changed():
+	dust_check()

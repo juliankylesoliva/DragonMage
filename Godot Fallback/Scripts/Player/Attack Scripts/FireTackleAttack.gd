@@ -2,9 +2,13 @@ extends Attack
 
 class_name FireTackleAttack
 
+@export var fire_tackle_particles : GPUParticles2D
+
 @export var fire_tackle_hitbox_scene : PackedScene
 
 @export var fireball_scene : PackedScene
+
+@export var fire_trail_scene : PackedScene
 
 @export var fire_tackle_min_horizontal_speed : float = 6
 
@@ -40,7 +44,11 @@ class_name FireTackleAttack
 
 @export_color_no_alpha var fire_tackle_active_color : Color = Color.WHITE
 
+@export_color_no_alpha var fire_tackle_jump_cancel_buffer_color : Color = Color.WHITE
+
 @export_color_no_alpha var fire_tackle_endlag_color : Color = Color.WHITE
+
+@export var fire_tackle_trail_spawn_interval : float = 0.05
 
 @export var fire_tackle_startup_hold_temper_drain_interval : float = 0.8
 
@@ -56,6 +64,7 @@ var was_interacting_with_wall : bool = false
 var horizontal_result : float = 0
 var current_rising_speed : float = 0
 var current_attack_timer : float = 0
+var current_trail_spawn_timer : float = 0
 var current_bump_immunity_timer : float = 0
 
 var did_player_bump : bool = false
@@ -92,6 +101,7 @@ func on_attack_state_exit():
 	horizontal_result = 0
 	current_rising_speed = 0
 	current_attack_timer = 0
+	current_trail_spawn_timer = 0
 	current_bump_immunity_timer = 0
 	
 	did_player_bump = false
@@ -101,6 +111,7 @@ func on_attack_state_exit():
 
 func startup_init():
 	current_attack_state = AttackState.STARTUP
+	hub.audio.play_sound("attack_draelyn_startup")
 	hub.char_sprite.modulate = fire_tackle_startup_color
 	hub.animation.set_animation("DraelynFireTackleWindup")
 	hub.animation.set_animation_speed(1)
@@ -129,6 +140,8 @@ func startup_update(delta : float):
 
 func active_init():
 	current_attack_state = AttackState.ACTIVE
+	hub.audio.play_sound("attack_draelyn_tackle")
+	fire_tackle_particles.emitting = true
 	hub.char_sprite.modulate = fire_tackle_active_color
 	hub.sprite_trail.activate_trail()
 	hub.animation.set_animation("DraelynFireTackleActive")
@@ -146,6 +159,9 @@ func active_init():
 
 func active_update(delta : float):
 	if (current_attack_timer > 0 and (current_bump_immunity_timer > 0 or (!hub.collisions.is_facing_a_wall() and !hub.char_body.is_on_ceiling()))):
+		if (current_attack_timer <= hub.buffers.jump_buffer_time):
+			hub.char_sprite.modulate = fire_tackle_jump_cancel_buffer_color
+		
 		hub.char_body.velocity.x = (horizontal_result if !hub.collisions.is_facing_a_wall() else 0.0)
 		if (current_vertical_axis > 0):
 			current_rising_speed -= (fire_tackle_vertical_acceleration * delta)
@@ -162,13 +178,24 @@ func active_update(delta : float):
 		if (current_vertical_axis <= 0 and (hub.char_body.is_on_floor() or hub.collisions.get_distance_to_ground() <= fire_tackle_floor_snap_distance)):
 			hub.char_body.apply_floor_snap()
 		
-		# Trail effect here
+		if (hub.char_body.is_on_floor() and current_vertical_axis <= 0 and current_trail_spawn_timer >= 0):
+			current_trail_spawn_timer -= (hub.char_body.velocity.length() * delta)
+			if (current_trail_spawn_timer <= 0):
+				current_trail_spawn_timer += fire_tackle_trail_spawn_interval
+				var trail_instance : Node = fire_trail_scene.instantiate()
+				add_sibling(trail_instance)
+				(trail_instance as Node2D).global_position = hub.collisions.get_ground_point()
+		else:
+			current_trail_spawn_timer = 0
 		
 		var horizontal_offset : Vector2 = (Vector2.RIGHT * hub.movement.get_facing_value())
 		var vertical_offset : Vector2 = (Vector2.UP if current_vertical_axis > 0 else Vector2.DOWN if current_vertical_axis < 0 else Vector2.ZERO)
 		var velocity_offset : Vector2 = (hub.char_body.velocity * delta)
 		
 		(fire_tackle_hitbox_instance as Node2D).global_position = (hub.collision_shape.global_position + ((horizontal_offset + vertical_offset) * fire_tackle_hitbox_offset) + velocity_offset)
+		
+		var temp_velocity = -hub.char_body.velocity.normalized()
+		fire_tackle_particles.process_material.direction = Vector3(temp_velocity.x, temp_velocity.y, 0)
 		
 		hub.char_body.move_and_slide()
 		
@@ -182,11 +209,13 @@ func endlag_init():
 		fire_tackle_hitbox_instance.queue_free()
 	
 	current_attack_state = AttackState.ENDLAG
+	fire_tackle_particles.emitting = false
 	hub.char_sprite.modulate = fire_tackle_endlag_color
 	hub.sprite_trail.deactivate_trail()
 	did_player_bump = false
 	is_player_firing_projectile = false
 	if (hub.collisions.is_facing_a_wall() or hub.char_body.is_on_ceiling()):
+		hub.audio.play_sound("attack_draelyn_bump")
 		did_player_bump = true
 		hub.buffers.reset_speed_preservation_buffer()
 		hub.movement.reset_current_horizontal_velocity()
@@ -198,6 +227,7 @@ func endlag_init():
 			hub.buffers.reset_attack_buffer()
 			hub.buffers.reset_speed_preservation_buffer()
 			
+			hub.audio.play_sound("attack_draelyn_fireball")
 			hub.animation.set_animation("DraelynFireTackleFireball")
 			hub.animation.set_animation_speed(1)
 			is_player_firing_projectile = true
@@ -215,6 +245,7 @@ func endlag_init():
 			hub.movement.reset_current_horizontal_velocity()
 			hub.char_body.velocity = (((Vector2.UP if !hub.char_body.is_on_floor() else Vector2.ZERO) + (Vector2.RIGHT * -hub.movement.get_facing_value())).normalized() * fire_tackle_fireball_recoil_strength)
 		else:
+			hub.audio.play_sound("attack_draelyn_endlag", -2)
 			hub.animation.set_animation("DraelynFireTackleEndlag")
 			hub.animation.set_animation_speed(1)
 	
@@ -254,6 +285,10 @@ func can_cancel_fire_tackle_endlag():
 
 func end_fire_tackle():
 	current_attack_state = AttackState.NOTHING
+	fire_tackle_particles.emitting = false
+	
+	if (hub.stream_player.playing):
+		hub.stream_player.stop()
 	
 	if (fire_tackle_hitbox_instance != null):
 		fire_tackle_hitbox_instance.queue_free()

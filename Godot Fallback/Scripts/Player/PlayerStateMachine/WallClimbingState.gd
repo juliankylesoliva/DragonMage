@@ -2,6 +2,8 @@ extends State
 
 class_name WallClimbingState
 
+@export var sprite_x_offset : float = 6
+
 func state_process(_delta):
 	hub.animation.set_animation_speed(hub.jumping.get_climbing_animation_speed())
 	hub.jumping.wall_climb_update(_delta)
@@ -33,7 +35,9 @@ func on_enter():
 	hub.animation.set_animation("DraelynWallClimb")
 	hub.animation.set_animation_frame(0)
 	hub.animation.set_animation_speed(hub.jumping.get_climbing_animation_speed())
+	hub.char_sprite.offset.x = (sprite_x_offset * -hub.movement.get_facing_value())
 
 func on_exit():
 	hub.jumping.end_wall_climb()
 	hub.animation.set_animation_speed(1)
+	hub.char_sprite.offset.x = 0

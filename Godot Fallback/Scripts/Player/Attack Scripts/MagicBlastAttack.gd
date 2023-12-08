@@ -2,6 +2,10 @@ extends Attack
 
 class_name MagicBlastAttack
 
+@export var blast_jump_particles : GPUParticles2D
+
+@export var projectile_trail : LineTrail
+
 @export var projectile_scene : PackedScene
 
 @export var blast_jump_hitbox_scene : PackedScene
@@ -93,6 +97,8 @@ func throw_projectile():
 		
 		(projectile_instance as Node2D).global_position = (hub.char_body.position + throw_offset)
 		
+		projectile_trail.set_node_to_follow(projectile_instance)
+		
 		var projectile_rb = (projectile_instance as RigidBody2D)
 		projectile_rb.linear_velocity = projectile_velocity
 		projectile_rb.apply_torque_impulse(throw_rotation * hub.movement.get_facing_value())
@@ -103,7 +109,9 @@ func do_detonation():
 		projectile_script.detonate()
 
 func activate_blast_jump():
+	SoundFactory.play_sound_by_name("attack_magli_blastjump", hub.char_body.global_position, 0, 1, "SFX")
 	is_blast_jumping = true
+	blast_jump_particles.emitting = true
 	hub.char_sprite.modulate = blast_jump_active_color
 	hub.sprite_trail.activate_trail()
 	blast_jump_current_active_time = blast_jump_min_active_time
@@ -116,6 +124,9 @@ func blast_jump_update(delta : float):
 		var facing_offset : Vector2 = (Vector2.RIGHT * blast_jump_facing_offset * hub.movement.get_facing_value() * abs(hub.movement.current_horizontal_velocity / hub.movement.top_speed))
 		var jumping_offset : Vector2 = ((Vector2.UP * blast_jump_jumping_offset) if hub.state_machine.current_state.name == "Jumping" else (Vector2.DOWN * blast_jump_jumping_offset) if hub.state_machine.current_state.name == "Falling" else Vector2.ZERO)
 		
+		var velocity_temp = -hub.char_body.velocity.normalized()
+		blast_jump_particles.process_material.direction = Vector3(velocity_temp.x, velocity_temp.y, 0)
+		
 		if (blast_jump_hitbox_instance == null):
 			blast_jump_hitbox_instance = blast_jump_hitbox_scene.instantiate()
 			add_child(blast_jump_hitbox_instance)
@@ -125,6 +136,7 @@ func blast_jump_update(delta : float):
 		if (blast_jump_current_active_time <= 0 or hub.state_machine.current_state.name == "FormChanging"):
 			if (hub.char_body.velocity.length() < blast_jump_min_velocity_magnitude or hub.char_body.is_on_floor() or state_name == "FormChanging" or state_name == "Gliding" or hub.form.current_mode != PlayerForm.CharacterMode.MAGE):
 				is_blast_jumping = false
+				blast_jump_particles.emitting = false
 				hub.sprite_trail.deactivate_trail()
 				blast_jump_hitbox_instance.queue_free()
 				hub.char_sprite.modulate = Color.WHITE

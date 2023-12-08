@@ -49,6 +49,9 @@ func get_distance_to_ground(ray_num : int = 0):
 		result = 999
 	return max(0, result)
 
+func get_ground_point():
+	return (hub.raycast_dm.get_collision_point() if hub.raycast_dm.is_colliding() and get_distance_to_ground(0) <= hub.char_body.floor_snap_length else hub.raycast_dm.global_position)
+
 func get_distance_to_ceiling(ray_num : int = 0):
 	var raycast_to_use : RayCast2D = (hub.raycast_um if ray_num == 0 else hub.raycast_ul if ray_num < 0 else hub.raycast_ur)
 	var result : float = -1

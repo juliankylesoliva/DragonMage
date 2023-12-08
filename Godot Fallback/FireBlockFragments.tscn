@@ -1,7 +1,0 @@
-[gd_scene load_steps=3 format=3 uid="uid://ch67081hapyej"]
-
-[ext_resource type="PackedScene" uid="uid://dnqfo4knpej54" path="res://BlockFragments.tscn" id="1_n2mpv"]
-[ext_resource type="Texture2D" uid="uid://dq2qp6rx22ylg" path="res://Sprites/Objects/BreakableFireBlock.png" id="2_jfhpn"]
-
-[node name="FireBlockFragments" instance=ExtResource("1_n2mpv")]
-texture = ExtResource("2_jfhpn")

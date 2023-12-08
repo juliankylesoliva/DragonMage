@@ -1,0 +1,12 @@
+[gd_scene load_steps=4 format=3 uid="uid://cokv5pygwyda"]
+
+[ext_resource type="PackedScene" uid="uid://cs4s34scsvcfr" path="res://Scene Objects/Objects/BreakableBlock.tscn" id="1_1ax5o"]
+[ext_resource type="Texture2D" uid="uid://dq2qp6rx22ylg" path="res://Sprites/Objects/BreakableFireBlock.png" id="2_ign8c"]
+[ext_resource type="PackedScene" uid="uid://ch67081hapyej" path="res://Scene Objects/Effects/FireBlockFragments.tscn" id="2_pl24b"]
+
+[node name="BreakableFireBlock" instance=ExtResource("1_1ax5o")]
+fragments_scene = ExtResource("2_pl24b")
+breakable_by = "FIRE"
+
+[node name="Sprite2D" parent="." index="0"]
+texture = ExtResource("2_ign8c")

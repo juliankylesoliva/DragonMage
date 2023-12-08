@@ -45,6 +45,7 @@ func state_process(_delta : float):
 
 func on_enter():
 	hub.jumping.switch_to_rising_gravity()
+	hub.jumping.reset_fast_fall()
 	if (state_machine.previous_state.name == "FormChanging"):
 		var char_name : String = hub.form.get_current_form_name()
 		hub.animation.set_animation("{name}Jump".format({"name" : char_name}) if !hub.movement.is_crouching else "MagliCrouchJump")

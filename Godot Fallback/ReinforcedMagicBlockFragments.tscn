@@ -1,7 +1,0 @@
-[gd_scene load_steps=3 format=3 uid="uid://hpc2cpwnv2h5"]
-
-[ext_resource type="PackedScene" uid="uid://dnqfo4knpej54" path="res://BlockFragments.tscn" id="1_1krhw"]
-[ext_resource type="Texture2D" uid="uid://drg1pffjtd6m2" path="res://Sprites/Objects/ReinforcedMagicBlock.png" id="2_kyf8v"]
-
-[node name="ReinforcedMagicBlockFragments" instance=ExtResource("1_1krhw")]
-texture = ExtResource("2_kyf8v")

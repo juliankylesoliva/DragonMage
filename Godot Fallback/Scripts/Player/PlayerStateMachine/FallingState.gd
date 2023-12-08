@@ -64,6 +64,9 @@ func on_exit():
 			hub.jumping.charge_super_jump_with_fast_fall()
 	elif (hub.jumping.can_speed_hop_slope_boost()):
 		hub.jumping.do_speed_hop_slope_boost()
+	elif (hub.char_body.is_on_floor()):
+		var walk_sound : String = ("jump_magli_landing" if hub.form.current_mode == PlayerForm.CharacterMode.MAGE else "jump_draelyn_landing")
+		SoundFactory.play_sound_by_name(walk_sound, hub.char_body.global_position, 0, 1, "SFX")
 	else:
 		pass
 	hub.jumping.reset_fast_fall()

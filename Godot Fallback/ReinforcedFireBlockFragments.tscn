@@ -1,7 +1,0 @@
-[gd_scene load_steps=3 format=3 uid="uid://s8xlxdfykpii"]
-
-[ext_resource type="PackedScene" uid="uid://dnqfo4knpej54" path="res://BlockFragments.tscn" id="1_ipyav"]
-[ext_resource type="Texture2D" uid="uid://c4ujd37hv5mpl" path="res://Sprites/Objects/ReinforcedFireBlock.png" id="2_km64e"]
-
-[node name="ReinforcedFireBlockFragments" instance=ExtResource("1_ipyav")]
-texture = ExtResource("2_km64e")

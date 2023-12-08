@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://bvsf6oco0mhms"]
+
+[ext_resource type="Texture2D" uid="uid://nskhc48w5xs3" path="res://Sprites/Effects/FireTackleTrail.png" id="1_koun2"]
+[ext_resource type="Script" path="res://Scripts/Utility Scripts/SpriteTrailSegment.gd" id="2_ibmww"]
+
+[node name="FireTrail" type="Sprite2D" node_paths=PackedStringArray("sprite")]
+visibility_layer = 32
+z_index = 6
+scale = Vector2(3, 3)
+texture = ExtResource("1_koun2")
+offset = Vector2(0, -4)
+script = ExtResource("2_ibmww")
+sprite = NodePath(".")
+shrink_to_zero = true
+fade_to_black = true
+enable_sprite_flip = true
+will_set_colors_when_instantiating = false
+lifetime = 0.8

@@ -1,4 +1,4 @@
-[gd_scene load_steps=133 format=3 uid="uid://c6qw77ovfwgfs"]
+[gd_scene load_steps=146 format=3 uid="uid://c6qw77ovfwgfs"]
 
 [ext_resource type="Texture2D" uid="uid://d381ahbcwydy8" path="res://Sprites/Player/DraelynCrouch.png" id="1_6b42p"]
 [ext_resource type="Texture2D" uid="uid://dls34a1qa8iy1" path="res://Sprites/Player/DraelynFireTackle.png" id="1_ddrlj"]
@@ -29,12 +29,14 @@
 [ext_resource type="Script" path="res://Scripts/Player/Attack Scripts/MagicBlastAttack.gd" id="7_e0q0e"]
 [ext_resource type="Script" path="res://Scripts/Player/Attack Scripts/FireTackleAttack.gd" id="7_hucxn"]
 [ext_resource type="Script" path="res://Scripts/Player/Attack Scripts/SlideAttack.gd" id="7_i41w2"]
-[ext_resource type="PackedScene" uid="uid://cwhtijthju8df" path="res://MagicBlastProjectile.tscn" id="8_sbpil"]
-[ext_resource type="PackedScene" uid="uid://c1npwnxy6sqnx" path="res://BlastJumpKnockbackHitbox.tscn" id="9_mq073"]
-[ext_resource type="PackedScene" uid="uid://dewpfs6cr2ffe" path="res://FireballProjectile.tscn" id="10_8jlqc"]
-[ext_resource type="PackedScene" uid="uid://dj2kj4mpixb27" path="res://FireTackleKnockbackHitbox.tscn" id="10_gg7wu"]
+[ext_resource type="PackedScene" uid="uid://cwhtijthju8df" path="res://Scene Objects/Objects/MagicBlastProjectile.tscn" id="8_37vyn"]
+[ext_resource type="PackedScene" uid="uid://c1npwnxy6sqnx" path="res://Scene Objects/Hitboxes/BlastJumpKnockbackHitbox.tscn" id="9_lcig4"]
+[ext_resource type="Script" path="res://Scripts/Utility Scripts/LineTrail.gd" id="10_rgamg"]
+[ext_resource type="PackedScene" uid="uid://dj2kj4mpixb27" path="res://Scene Objects/Hitboxes/FireTackleKnockbackHitbox.tscn" id="11_hrntu"]
+[ext_resource type="PackedScene" uid="uid://dewpfs6cr2ffe" path="res://Scene Objects/Objects/FireballProjectile.tscn" id="12_ayvdi"]
 [ext_resource type="Script" path="res://Scripts/Player/PlayerStateMachine/WallSlidingState.gd" id="12_mju8y"]
 [ext_resource type="Script" path="res://Scripts/Player/PlayerStateMachine/GlidingState.gd" id="12_tj6cc"]
+[ext_resource type="PackedScene" uid="uid://bvsf6oco0mhms" path="res://Scene Objects/Effects/FireTrail.tscn" id="13_oroww"]
 [ext_resource type="Resource" uid="uid://cmvqhahmdifp7" path="res://Scripts/Resource Scripts/PlayerCtrlProperties/MageProperties.tres" id="14_8gg24"]
 [ext_resource type="Resource" uid="uid://ddn481v3p2t3" path="res://Scripts/Resource Scripts/PlayerCtrlProperties/DragonProperties.tres" id="15_356k0"]
 [ext_resource type="Script" path="res://Scripts/Player/PlayerStateMachine/FormChangingState.gd" id="17_1yv22"]
@@ -42,9 +44,20 @@
 [ext_resource type="Script" path="res://Scripts/Player/PlayerStateMachine/WallVaultingState.gd" id="18_vi6ah"]
 [ext_resource type="Texture2D" uid="uid://clp08lkqo6nh5" path="res://Sprites/Player/DraelynIdle.png" id="19_lfkpo"]
 [ext_resource type="Script" path="res://Scripts/Utility Scripts/PlayerSpriteTrail.gd" id="19_sik2o"]
-[ext_resource type="PackedScene" uid="uid://bpxyaxwfw7023" path="res://SpriteTrailSegment.tscn" id="20_31hod"]
 [ext_resource type="Script" path="res://Scripts/Player/PlayerStateMachine/AttackingState.gd" id="20_dbcpj"]
+[ext_resource type="PackedScene" uid="uid://bpxyaxwfw7023" path="res://Scene Objects/Effects/SpriteTrailSegment.tscn" id="20_yb7yy"]
+[ext_resource type="Script" path="res://Scripts/Utility Scripts/AudioHandler.gd" id="23_55p2k"]
 [ext_resource type="Texture2D" uid="uid://c44t784vgugry" path="res://Sprites/Player/MagliIdle.png" id="27_my3k8"]
+[ext_resource type="Texture2D" uid="uid://b8o0u22mxyifu" path="res://Sprites/Effects/BlastJumpParticle.png" id="47_v16qd"]
+[ext_resource type="Texture2D" uid="uid://nskhc48w5xs3" path="res://Sprites/Effects/FireTackleTrail.png" id="48_hn1hc"]
+
+[sub_resource type="Curve" id="Curve_qnqge"]
+_data = [Vector2(0, 1), 0.0, -0.658891, 0, 0, Vector2(1, 0), -1.2831, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Gradient" id="Gradient_veqdj"]
+offsets = PackedFloat32Array(0, 0.600583, 0.997085, 1)
+colors = PackedColorArray(0.376471, 0.309804, 0.639216, 1, 0.376471, 0.309804, 0.639216, 1, 0.376471, 0.309804, 0.639216, 0, 0.376471, 0.309804, 0.639216, 0)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_3rp8e"]
 atlas = ExtResource("1_6b42p")
@@ -930,6 +943,49 @@ animations = [{
 radius = 8.0
 height = 48.0
 
+[sub_resource type="Curve" id="Curve_jyf8q"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -3.36466, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_i0g0y"]
+curve = SubResource("Curve_jyf8q")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_k22s0"]
+lifetime_randomness = 0.2
+emission_shape = 3
+emission_box_extents = Vector3(8, 32, 1)
+particle_flag_align_y = true
+particle_flag_disable_z = true
+direction = Vector3(0, -1, 0)
+spread = 90.0
+gravity = Vector3(0, 0, 0)
+initial_velocity_max = 64.0
+orbit_velocity_min = 0.0
+orbit_velocity_max = 0.0
+scale_curve = SubResource("CurveTexture_i0g0y")
+attractor_interaction_enabled = false
+
+[sub_resource type="Curve" id="Curve_glaul"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -4.0583, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_okhhl"]
+curve = SubResource("Curve_glaul")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_1si3k"]
+lifetime_randomness = 0.2
+emission_shape = 3
+emission_box_extents = Vector3(8, 32, 1)
+particle_flag_disable_z = true
+direction = Vector3(0, 1, 0)
+flatness = 1.0
+gravity = Vector3(0, 0, 0)
+initial_velocity_max = 64.0
+orbit_velocity_min = 0.0
+orbit_velocity_max = 0.0
+scale_curve = SubResource("CurveTexture_okhhl")
+attractor_interaction_enabled = false
+
 [node name="Player" type="CharacterBody2D"]
 disable_mode = 1
 collision_layer = 4
@@ -942,7 +998,7 @@ platform_wall_layers = 3
 safe_margin = 0.001
 metadata/Tag = "Player"
 
-[node name="Hub" type="Node" parent="." node_paths=PackedStringArray("state_machine", "collisions", "buffers", "movement", "jumping", "attacks", "form", "animation", "sprite_trail", "char_body", "char_sprite", "collision_shape", "raycast_dl", "raycast_dm", "raycast_dr", "raycast_ledge_l", "raycast_ledge_r", "raycast_ul", "raycast_um", "raycast_ur", "raycast_ceiling_l", "raycast_ceiling_r")]
+[node name="Hub" type="Node" parent="." node_paths=PackedStringArray("state_machine", "collisions", "buffers", "movement", "jumping", "attacks", "form", "animation", "sprite_trail", "audio", "char_body", "char_sprite", "collision_shape", "stream_player", "raycast_dl", "raycast_dm", "raycast_dr", "raycast_ledge_l", "raycast_ledge_r", "raycast_ul", "raycast_um", "raycast_ur", "raycast_ceiling_l", "raycast_ceiling_r")]
 script = ExtResource("1_fbdyy")
 state_machine = NodePath("../StateMachine")
 collisions = NodePath("Collisions")
@@ -953,9 +1009,11 @@ attacks = NodePath("Attacks")
 form = NodePath("Form")
 animation = NodePath("Animation")
 sprite_trail = NodePath("SpriteTrail")
+audio = NodePath("Audio")
 char_body = NodePath("..")
 char_sprite = NodePath("../AnimatedSprite2D")
 collision_shape = NodePath("../CollisionShape2D")
+stream_player = NodePath("../AudioStreamPlayer2D")
 raycast_dl = NodePath("../RayCastDL")
 raycast_dm = NodePath("../RayCastDM")
 raycast_dr = NodePath("../RayCastDR")
@@ -979,7 +1037,7 @@ hub = NodePath("..")
 form_change_buffer_time = 0.25
 jump_buffer_time = 0.167
 fast_fall_buffer_time = 0.167
-attack_buffer_time = 0.1
+attack_buffer_time = 0.167
 speed_preservation_buffer_time = 0.4
 
 [node name="Movement" type="Node" parent="Hub" node_paths=PackedStringArray("hub")]
@@ -1015,10 +1073,12 @@ running_jump_added_velocity = 48.0
 script = ExtResource("6_mwpxq")
 hub = NodePath("..")
 
-[node name="MagicBlast" type="Node" parent="Hub/Attacks"]
+[node name="MagicBlast" type="Node" parent="Hub/Attacks" node_paths=PackedStringArray("blast_jump_particles", "projectile_trail")]
 script = ExtResource("7_e0q0e")
-projectile_scene = ExtResource("8_sbpil")
-blast_jump_hitbox_scene = ExtResource("9_mq073")
+blast_jump_particles = NodePath("../../../BlastJumpParticles")
+projectile_trail = NodePath("ProjectileTrail")
+projectile_scene = ExtResource("8_37vyn")
+blast_jump_hitbox_scene = ExtResource("9_lcig4")
 inertia_multiplier = 0.5
 projectile_despawn_distance = 640.0
 blast_jump_min_velocity_magnitude = 192.0
@@ -1040,23 +1100,34 @@ forward_throw_rotation = 320.0
 lob_throw_rotation = 640.0
 drop_throw_rotation = -160.0
 
-[node name="FireTackle" type="Node" parent="Hub/Attacks"]
+[node name="ProjectileTrail" type="Line2D" parent="Hub/Attacks/MagicBlast"]
+width_curve = SubResource("Curve_qnqge")
+default_color = Color(0.376471, 0.309804, 0.639216, 1)
+gradient = SubResource("Gradient_veqdj")
+script = ExtResource("10_rgamg")
+
+[node name="FireTackle" type="Node" parent="Hub/Attacks" node_paths=PackedStringArray("fire_tackle_particles")]
 script = ExtResource("7_hucxn")
-fire_tackle_hitbox_scene = ExtResource("10_gg7wu")
-fireball_scene = ExtResource("10_8jlqc")
+fire_tackle_particles = NodePath("../../../FireTackleParticles")
+fire_tackle_hitbox_scene = ExtResource("11_hrntu")
+fireball_scene = ExtResource("12_ayvdi")
+fire_trail_scene = ExtResource("13_oroww")
 fire_tackle_min_horizontal_speed = 304.0
 fire_tackle_max_horizontal_speed = 1280.0
 fire_tackle_vertical_acceleration = 704.0
 fire_tackle_bonk_knockback = 192.0
 fire_tackle_duration = 0.45
 fire_tackle_fireball_recoil_strength = 128.0
+fire_tackle_fireball_base_launch_speed = 128.0
 fire_tackle_endlag_duration = 0.4
 fire_tackle_endlag_deceleration = 640.0
 fire_tackle_endlag_cancelable_time = 0.35
 fire_tackle_floor_snap_distance = 16.0
 fire_tackle_startup_color = Color(0.901961, 0.858824, 0.458824, 1)
 fire_tackle_active_color = Color(0.980392, 0.568627, 0.317647, 1)
+fire_tackle_jump_cancel_buffer_color = Color(0.831373, 0.219608, 0.0666667, 1)
 fire_tackle_endlag_color = Color(0.8, 0.8, 0.8, 1)
+fire_tackle_trail_spawn_interval = 0.333
 uses_attack_state = true
 
 [node name="Dodge" type="Node" parent="Hub/Attacks"]
@@ -1089,10 +1160,14 @@ hub = NodePath("..")
 [node name="SpriteTrail" type="Node" parent="Hub" node_paths=PackedStringArray("hub")]
 script = ExtResource("19_sik2o")
 hub = NodePath("..")
-sprite_trail_segment_scene = ExtResource("20_31hod")
+sprite_trail_segment_scene = ExtResource("20_yb7yy")
 trail_spawn_interval = 0.05
 mage_trail_color = Color(0.384314, 0.517647, 0.905882, 1)
 dragon_trail_color = Color(1, 0.6, 0.431373, 1)
+
+[node name="Audio" type="Node" parent="Hub" node_paths=PackedStringArray("hub")]
+script = ExtResource("23_55p2k")
+hub = NodePath("..")
 
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("hub", "current_state")]
 script = ExtResource("1_rgc8w")
@@ -1106,6 +1181,7 @@ max_blink_time = 3.0
 
 [node name="Running" type="Node" parent="StateMachine"]
 script = ExtResource("3_65y85")
+dust_frames = [1, 4]
 
 [node name="Jumping" type="Node" parent="StateMachine"]
 script = ExtResource("4_ra8jk")
@@ -1143,6 +1219,12 @@ autoplay = "MagliStand"
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 8)
 shape = SubResource("CapsuleShape2D_6k7o1")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+bus = &"SFX"
+
+[node name="AudioListener2D" type="AudioListener2D" parent="."]
+current = true
 
 [node name="RayCastDL" type="RayCast2D" parent="."]
 position = Vector2(-8, 32)
@@ -1213,3 +1295,27 @@ target_position = Vector2(16, 0)
 collision_mask = 3
 hit_from_inside = true
 collide_with_areas = true
+
+[node name="BlastJumpParticles" type="GPUParticles2D" parent="."]
+visibility_layer = 32
+z_index = 6
+emitting = false
+amount = 32
+process_material = SubResource("ParticleProcessMaterial_k22s0")
+texture = ExtResource("47_v16qd")
+randomness = 1.0
+fixed_fps = 60
+visibility_rect = Rect2(-512, -512, 1024, 1024)
+
+[node name="FireTackleParticles" type="GPUParticles2D" parent="."]
+visibility_layer = 32
+z_index = 6
+emitting = false
+amount = 64
+process_material = SubResource("ParticleProcessMaterial_1si3k")
+texture = ExtResource("48_hn1hc")
+randomness = 1.0
+fixed_fps = 60
+visibility_rect = Rect2(-512, -512, 1024, 1024)
+
+[connection signal="frame_changed" from="AnimatedSprite2D" to="StateMachine/Running" method="_on_animated_sprite_2d_frame_changed"]
