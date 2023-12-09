@@ -7,6 +7,7 @@
 [node name="ReinforcedBlock" instance=ExtResource("1_ux246")]
 fragments_scene = ExtResource("2_ruw1f")
 break_durablility = 2
+break_sound = "object_block_reinforced"
 
 [node name="Sprite2D" parent="." index="0"]
 texture = ExtResource("2_4i3wi")

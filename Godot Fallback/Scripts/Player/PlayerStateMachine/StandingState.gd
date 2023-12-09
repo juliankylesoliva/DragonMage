@@ -9,6 +9,8 @@ var current_blink_timer = 0
 
 var prev_is_crouching = false
 
+var is_headbonking : bool = false
+
 func state_process(_delta):
 	var char_name : String = hub.form.get_current_form_name()
 	prev_is_crouching = hub.movement.is_crouching
@@ -20,7 +22,12 @@ func state_process(_delta):
 	if (hub.movement.is_crouching):
 		if (!Input.is_action_pressed("Crouch") and hub.collisions.is_in_ceiling_when_uncrouched()):
 			hub.animation.set_animation("{name}CrouchHeadbonk".format({"name" : char_name}))
+			if (!is_headbonking):
+				is_headbonking = true
+				var sound_name : String = ("jump_magli_headbonk" if hub.form.current_mode == PlayerForm.CharacterMode.MAGE else "jump_draelyn_headbonk")
+				SoundFactory.play_sound_by_name(sound_name, hub.char_body.global_position, -2)
 		else:
+			is_headbonking = false
 			hub.animation.set_animation("{name}Crouch".format({"name" : char_name}))
 	else:
 		if(Input.is_action_just_released("Crouch") or (prev_is_crouching and !hub.movement.is_crouching)):
@@ -30,6 +37,7 @@ func state_process(_delta):
 			if (!check_blink_animation()):
 				hub.animation.set_animation("{name}Stand".format({"name" : char_name}))
 				hub.animation.set_animation_speed(1)
+		is_headbonking = false
 	
 	if (hub.form.can_change_form()):
 		set_next_state(state_machine.get_state_by_name("FormChanging"))
@@ -46,6 +54,7 @@ func state_process(_delta):
 		pass
 
 func on_enter():
+	is_headbonking = false
 	var char_name : String = hub.form.get_current_form_name()
 	var anim_name : String = ("{name}Stand" if !hub.movement.is_crouching else "{name}Crouch")
 	hub.jumping.landing_reset()

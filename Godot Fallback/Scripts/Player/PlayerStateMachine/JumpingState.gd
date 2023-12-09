@@ -39,6 +39,9 @@ func state_process(_delta : float):
 		hub.jumping.do_midair_jump()
 		set_next_state(state_machine.get_state_by_name("Jumping"))
 	elif (hub.jumping.is_fast_falling || hub.char_body.velocity.y >= 0):
+		if (hub.char_body.is_on_ceiling()):
+			var sound_name : String = ("jump_magli_headbonk" if hub.form.current_mode == PlayerForm.CharacterMode.MAGE else "jump_draelyn_headbonk")
+			SoundFactory.play_sound_by_name(sound_name, hub.char_body.global_position, -2)
 		set_next_state(state_machine.get_state_by_name("Falling"))
 	else:
 		pass

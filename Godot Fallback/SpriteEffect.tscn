@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://dr8a8qg84vihm"]
+
+[ext_resource type="SpriteFrames" uid="uid://cxb5mjrw5mrd4" path="res://SpriteEffects.tres" id="1_hggh7"]
+
+[node name="SpriteEffect" type="AnimatedSprite2D"]
+sprite_frames = ExtResource("1_hggh7")
+animation = &"WalkingDust"
+autoplay = "default"
+frame = 4
+frame_progress = 1.0

@@ -1,0 +1,4 @@
+JumpSpark,0,-8
+SpeedhopSpark,-16,-16
+LandingDust,0,-8
+WalkingDust,-8,-8

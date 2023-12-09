@@ -64,9 +64,14 @@ func on_exit():
 			hub.jumping.charge_super_jump_with_fast_fall()
 	elif (hub.jumping.can_speed_hop_slope_boost()):
 		hub.jumping.do_speed_hop_slope_boost()
-	elif (hub.char_body.is_on_floor()):
-		var walk_sound : String = ("jump_magli_landing" if hub.form.current_mode == PlayerForm.CharacterMode.MAGE else "jump_draelyn_landing")
-		SoundFactory.play_sound_by_name(walk_sound, hub.char_body.global_position, 0, 1, "SFX")
 	else:
 		pass
+	
+	if (hub.char_body.is_on_floor()):
+		var effect_instance : AnimatedSprite2D = EffectFactory.get_effect("LandingDust", hub.collisions.get_ground_point())
+		effect_instance.rotation = hub.char_body.up_direction.angle_to(hub.char_body.get_floor_normal())
+		
+		var walk_sound : String = ("jump_magli_landing" if hub.form.current_mode == PlayerForm.CharacterMode.MAGE else "jump_draelyn_landing")
+		SoundFactory.play_sound_by_name(walk_sound, hub.char_body.global_position, 0, 1, "SFX")
+	
 	hub.jumping.reset_fast_fall()

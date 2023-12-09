@@ -53,6 +53,9 @@ func dust_check():
 	if (state_machine.current_state.name == "Running" and !hub.movement.is_crouching):
 		for i in dust_frames:
 			if (i == hub.char_sprite.frame):
+				var effect_instance = EffectFactory.get_effect("WalkingDust", hub.collisions.get_ground_point(), 1, hub.movement.get_facing_value() < 0)
+				effect_instance.rotation = hub.char_body.up_direction.angle_to(hub.char_body.get_floor_normal())
+				
 				var walk_sound : String = ("jump_magli_landing" if hub.form.current_mode == PlayerForm.CharacterMode.MAGE else "jump_draelyn_landing")
 				SoundFactory.play_sound_by_name(walk_sound, hub.char_body.global_position, 0, 1, "SFX")
 				return

@@ -14,6 +14,10 @@ class_name MagicBlastProjectile
 
 @export var max_lerp_change : float = 1
 
+@export var blast_radius : float = 57.6
+
+@export var base_radius : float = 16
+
 var current_fuse_time_left : float = 0
 
 var current_lerp_weight : float = 0
@@ -34,6 +38,7 @@ func detonate():
 	add_sibling(hitbox_instance)
 	(hitbox_instance as Node2D).global_position = sprite.global_position
 	SoundFactory.play_sound_by_name("attack_magli_explosion", sprite.global_position, -6, 1, "SFX")
+	EffectFactory.get_effect("MagicBlastExplosion", sprite.global_position, blast_radius / base_radius)
 	despawn()
 
 func despawn():

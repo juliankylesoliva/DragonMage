@@ -25,7 +25,7 @@ res://Sounds/jump_draelyn_wallpopup.wav
 res://Sounds/jump_draelyn_wallvault.wav
 res://Sounds/jump_magli.wav
 res://Sounds/jump_magli_glide.wav
-res://Sounds/jump_magli_glide.wav
+res://Sounds/jump_magli_headbonk.wav
 res://Sounds/jump_magli_landing.wav
 res://Sounds/jump_magli_wallkick.wav
 res://Sounds/jump_magli_wallslide.wav

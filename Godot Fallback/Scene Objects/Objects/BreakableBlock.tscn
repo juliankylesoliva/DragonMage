@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://Scripts/Utility Scripts/Breakable.gd" id="1_mr02b"]
 [ext_resource type="Texture2D" uid="uid://caahvt434hqkt" path="res://Sprites/Objects/BreakableNormalBlock.png" id="1_wsx6d"]
-[ext_resource type="PackedScene" uid="uid://dnqfo4knpej54" path="res://BlockFragments.tscn" id="2_3twm7"]
+[ext_resource type="PackedScene" uid="uid://dnqfo4knpej54" path="res://Scene Objects/Effects/BlockFragments.tscn" id="2_3twm7"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ry55m"]
 size = Vector2(64, 64)
