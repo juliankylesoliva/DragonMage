@@ -1,4 +1,4 @@
-[gd_scene load_steps=146 format=3 uid="uid://c6qw77ovfwgfs"]
+[gd_scene load_steps=147 format=3 uid="uid://c6qw77ovfwgfs"]
 
 [ext_resource type="Texture2D" uid="uid://d381ahbcwydy8" path="res://Sprites/Player/DraelynCrouch.png" id="1_6b42p"]
 [ext_resource type="Texture2D" uid="uid://dls34a1qa8iy1" path="res://Sprites/Player/DraelynFireTackle.png" id="1_ddrlj"]
@@ -48,6 +48,7 @@
 [ext_resource type="PackedScene" uid="uid://bpxyaxwfw7023" path="res://Scene Objects/Effects/SpriteTrailSegment.tscn" id="20_yb7yy"]
 [ext_resource type="Script" path="res://Scripts/Utility Scripts/AudioHandler.gd" id="23_55p2k"]
 [ext_resource type="Texture2D" uid="uid://c44t784vgugry" path="res://Sprites/Player/MagliIdle.png" id="27_my3k8"]
+[ext_resource type="Texture2D" uid="uid://bcwdksusecuad" path="res://Sprites/Player/DraelynFastFall.png" id="38_akwr7"]
 [ext_resource type="Texture2D" uid="uid://b8o0u22mxyifu" path="res://Sprites/Effects/BlastJumpParticle.png" id="47_v16qd"]
 [ext_resource type="Texture2D" uid="uid://nskhc48w5xs3" path="res://Sprites/Effects/FireTackleTrail.png" id="48_hn1hc"]
 
@@ -448,6 +449,14 @@ animations = [{
 }],
 "loop": false,
 "name": &"DraelynFall",
+"speed": 60.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("38_akwr7")
+}],
+"loop": true,
+"name": &"DraelynFastFall",
 "speed": 60.0
 }, {
 "frames": [{

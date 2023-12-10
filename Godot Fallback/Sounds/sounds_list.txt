@@ -17,6 +17,7 @@ res://Sounds/enemy_dragoon_jump.wav
 res://Sounds/enemy_dragoon_projectile_destroy.wav
 res://Sounds/jump_draelyn.wav
 res://Sounds/jump_draelyn_charged.wav
+res://Sounds/jump_draelyn_fastfall.wav
 res://Sounds/jump_draelyn_headbonk.wav
 res://Sounds/jump_draelyn_landing.wav
 res://Sounds/jump_draelyn_midair.wav

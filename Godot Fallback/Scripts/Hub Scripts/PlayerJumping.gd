@@ -524,6 +524,7 @@ func landing_reset():
 
 func set_fast_fall():
 	is_fast_falling = true
+	SoundFactory.play_sound_by_name("jump_draelyn_fastfall", hub.char_body.global_position, 0, 1, "SFX")
 
 func reset_fast_fall():
 	is_fast_falling = false

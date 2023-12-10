@@ -21,6 +21,11 @@ func state_process(_delta : float):
 			hub.animation.set_animation_speed(1)
 		else:
 			pass
+	elif (hub.jumping.enable_fast_falling and hub.jumping.is_fast_falling):
+		hub.animation.set_animation("DraelynFastFall")
+		hub.animation.set_animation_speed(1)
+	else:
+		pass
 	
 	if (hub.form.can_change_form()):
 		set_next_state(state_machine.get_state_by_name("FormChanging"))
@@ -53,7 +58,10 @@ func state_process(_delta : float):
 
 func on_enter():
 	hub.jumping.switch_to_falling_gravity()
-	hub.animation.set_animation("{name}Fall".format({"name" : hub.form.get_current_form_name()}) if !hub.movement.is_crouching or !hub.jumping.enable_crouch_jumping else "MagliCrouchFall")
+	if (hub.jumping.is_fast_falling):
+		hub.animation.set_animation("DraelynFastFall")
+	else:
+		hub.animation.set_animation("{name}Fall".format({"name" : hub.form.get_current_form_name()}) if !hub.movement.is_crouching or !hub.jumping.enable_crouch_jumping else "MagliCrouchFall")
 	hub.animation.set_animation_speed(1)
 
 func on_exit():
