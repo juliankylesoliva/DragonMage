@@ -4,7 +4,8 @@
 
 [node name="SpriteEffect" type="AnimatedSprite2D"]
 sprite_frames = ExtResource("1_hggh7")
-animation = &"WalkingDust"
+animation = &"HeadbonkFX"
 autoplay = "default"
-frame = 4
+frame = 3
 frame_progress = 1.0
+offset = Vector2(0, -7.5)

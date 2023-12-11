@@ -24,6 +24,7 @@ func state_process(_delta : float):
 	elif (hub.jumping.enable_fast_falling and hub.jumping.is_fast_falling):
 		hub.animation.set_animation("DraelynFastFall")
 		hub.animation.set_animation_speed(1)
+		hub.sprite_trail.activate_trail()
 	else:
 		pass
 	
@@ -60,6 +61,7 @@ func on_enter():
 	hub.jumping.switch_to_falling_gravity()
 	if (hub.jumping.is_fast_falling):
 		hub.animation.set_animation("DraelynFastFall")
+		hub.sprite_trail.activate_trail()
 	else:
 		hub.animation.set_animation("{name}Fall".format({"name" : hub.form.get_current_form_name()}) if !hub.movement.is_crouching or !hub.jumping.enable_crouch_jumping else "MagliCrouchFall")
 	hub.animation.set_animation_speed(1)
@@ -82,4 +84,5 @@ func on_exit():
 		var walk_sound : String = ("jump_magli_landing" if hub.form.current_mode == PlayerForm.CharacterMode.MAGE else "jump_draelyn_landing")
 		SoundFactory.play_sound_by_name(walk_sound, hub.char_body.global_position, 0, 1, "SFX")
 	
+	hub.sprite_trail.deactivate_trail()
 	hub.jumping.reset_fast_fall()

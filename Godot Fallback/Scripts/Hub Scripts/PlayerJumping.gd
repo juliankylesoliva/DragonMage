@@ -243,7 +243,7 @@ func start_ground_jump():
 	var running_jump_result = (min((horizontal_result / hub.movement.top_speed), 1) * running_jump_added_velocity if enable_running_jump and !hub.movement.is_crouching else 0)
 	var super_jump_result : float = (super_jump_velocity_multiplier if is_super_jump_ready() else 1.0)
 	
-	var effect_name : String = ("SpeedhopSpark" if did_player_speed_hop else "JumpSpark")
+	var effect_name : String = ("SpeedhopSpark" if did_player_speed_hop else "SuperJumpSpark" if is_super_jump_ready() else "JumpSpark")
 	var effect_instance : AnimatedSprite2D = EffectFactory.get_effect(effect_name, hub.collisions.get_ground_point(), 1, hub.movement.get_facing_value() < 0)
 	effect_instance.rotation = hub.char_body.up_direction.angle_to(hub.char_body.get_floor_normal())
 	

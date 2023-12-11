@@ -52,6 +52,9 @@ func get_distance_to_ground(ray_num : int = 0):
 func get_ground_point():
 	return (hub.raycast_dm.get_collision_point() if hub.raycast_dm.is_colliding() and get_distance_to_ground(0) <= hub.char_body.floor_snap_length else hub.raycast_dm.global_position)
 
+func get_ground_normal():
+	return (hub.raycast_dm.get_collision_normal() if hub.raycast_dm.is_colliding() and get_distance_to_ground(0) <= hub.char_body.floor_snap_length else hub.char_body.up_direction)
+
 func get_distance_to_ceiling(ray_num : int = 0):
 	var raycast_to_use : RayCast2D = (hub.raycast_um if ray_num == 0 else hub.raycast_ul if ray_num < 0 else hub.raycast_ur)
 	var result : float = -1
@@ -60,6 +63,12 @@ func get_distance_to_ceiling(ray_num : int = 0):
 	else:
 		result = (raycast_to_use.global_position.distance_to(raycast_to_use.global_position + raycast_to_use.target_position))
 	return max(0, result)
+
+func get_ceiling_point():
+	return (hub.raycast_um.get_collision_point() if hub.raycast_um.is_colliding() and get_distance_to_ceiling(0) <= hub.char_body.floor_snap_length else hub.raycast_um.global_position)
+
+func get_ceiling_normal():
+	return (hub.raycast_um.get_collision_normal() if hub.raycast_um.is_colliding() and get_distance_to_ceiling(0) <= hub.char_body.floor_snap_length else -hub.char_body.up_direction)
 
 func collider_crouch_update():
 	hub.collision_shape.shape.height = (crouched_height if hub.movement.is_crouching else uncrouched_height)

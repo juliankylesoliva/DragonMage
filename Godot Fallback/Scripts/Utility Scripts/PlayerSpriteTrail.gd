@@ -24,25 +24,30 @@ func _process(delta):
 			current_spawn_timer = move_toward(current_spawn_timer, 0, delta)
 			if (current_spawn_timer <= 0):
 				current_spawn_timer = trail_spawn_interval
-				var instance = sprite_trail_segment_scene.instantiate()
-				add_child(instance)
-				(instance as Node2D).global_position = hub.char_body.global_position
-				
-				var animation_name : String = hub.char_sprite.animation
-				var animation_frame : int = hub.char_sprite.frame
-				var current_texture = hub.char_sprite.sprite_frames.get_frame_texture(animation_name, animation_frame)
-				var trail_sprite = (instance as Sprite2D)
-				
-				trail_sprite.texture = current_texture
-				trail_sprite.modulate = (mage_trail_color if hub.form.current_mode == PlayerForm.CharacterMode.MAGE else dragon_trail_color)
-				trail_sprite.flip_h = hub.char_sprite.flip_h
-				trail_sprite.flip_v = hub.char_sprite.flip_v
-				trail_sprite.z_index = hub.char_body.z_index
-				trail_sprite.initialize_color_params()
+				spawn_sprite_segment()
+
+func spawn_sprite_segment():
+	var instance = sprite_trail_segment_scene.instantiate()
+	add_child(instance)
+	(instance as Node2D).global_position = hub.char_body.global_position
+	
+	var animation_name : String = hub.char_sprite.animation
+	var animation_frame : int = hub.char_sprite.frame
+	var current_texture = hub.char_sprite.sprite_frames.get_frame_texture(animation_name, animation_frame)
+	var trail_sprite = (instance as Sprite2D)
+	
+	trail_sprite.texture = current_texture
+	trail_sprite.modulate = (mage_trail_color if hub.form.current_mode == PlayerForm.CharacterMode.MAGE else dragon_trail_color)
+	trail_sprite.flip_h = hub.char_sprite.flip_h
+	trail_sprite.flip_v = hub.char_sprite.flip_v
+	trail_sprite.z_index = hub.char_body.z_index
+	trail_sprite.initialize_color_params()
 
 func activate_trail():
-	is_active = true
-	current_spawn_timer = trail_spawn_interval
+	if (!is_active):
+		is_active = true
+		current_spawn_timer = trail_spawn_interval
+		spawn_sprite_segment()
 
 func deactivate_trail():
 	is_active = false

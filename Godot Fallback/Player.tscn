@@ -1206,6 +1206,7 @@ script = ExtResource("12_mju8y")
 
 [node name="WallClimbing" type="Node" parent="StateMachine"]
 script = ExtResource("17_ve68u")
+sprite_x_offset = 5.0
 
 [node name="WallVaulting" type="Node" parent="StateMachine"]
 script = ExtResource("18_vi6ah")

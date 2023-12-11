@@ -18,6 +18,9 @@ func state_process(_delta):
 	if (hub.movement.is_turning()):
 		hub.animation.set_animation_frame(0)
 		if (!did_turn_spark_appear):
+			var spark_instance = EffectFactory.get_effect("TurnaroundSpark", hub.collisions.get_ground_point(), 1, hub.movement.get_facing_value() < 0)
+			spark_instance.rotation = hub.char_body.up_direction.angle_to(hub.char_body.get_floor_normal())
+			
 			var sound_name : String = ("movement_magli_turnaround" if hub.form.current_mode == PlayerForm.CharacterMode.MAGE else "movement_draelyn_turnaround")
 			did_turn_spark_appear = true
 			SoundFactory.play_sound_by_name(sound_name, hub.char_body.global_position, 0, 1, "SFX")
