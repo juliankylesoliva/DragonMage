@@ -64,4 +64,6 @@ func on_enter():
 
 func on_exit():
 	has_headbonked = false
+	if (hub.jumping.midair_jump_particles.emitting):
+		hub.jumping.midair_jump_particles.emitting = false
 	hub.jumping.reset_wall_jump_lock_timer()

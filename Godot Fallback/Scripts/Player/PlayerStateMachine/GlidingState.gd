@@ -2,10 +2,13 @@ extends State
 
 class_name GlidingState
 
+@export var glide_particles : GPUParticles2D
+
 func state_process(_delta : float):
 	hub.movement.do_movement(_delta)
-	#hub.movement.update_facing_direction()
 	hub.jumping.glide_update(_delta)
+	
+	glide_particles.process_material.direction.x = -hub.get_input_vector().x
 	
 	if (hub.form.can_change_form()):
 		set_next_state(state_machine.get_state_by_name("FormChanging"))
@@ -19,6 +22,8 @@ func state_process(_delta : float):
 func on_enter():
 	hub.jumping.start_glide()
 	hub.animation.set_animation("MagliGlide")
+	glide_particles.emitting = true
 
 func on_exit():
 	hub.jumping.cancel_glide()
+	glide_particles.emitting = false

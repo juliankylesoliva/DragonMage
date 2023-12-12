@@ -102,6 +102,22 @@ var wall_popup_time_left : float = 0
 
 @export_group("Midair Jump Parameters")
 
+@export var midair_jump_particles : GPUParticles2D
+
+@export_color_no_alpha var forward_midair_jump_color : Color = Color.WHITE
+
+@export_color_no_alpha var neutral_midair_jump_color : Color = Color.WHITE
+
+@export_color_no_alpha var backward_midair_jump_color : Color = Color.WHITE
+
+@export var forward_midair_jump_texture : Texture2D
+
+@export var neutral_midair_jump_texture : Texture2D
+
+@export var backward_midair_jump_texture : Texture2D
+
+@export var midair_jump_particle_multiplier : int = 3
+
 @export_range(0, 5) var max_midair_jumps : int = 0
 
 @export var midair_jump_velocity : float = 0
@@ -129,6 +145,8 @@ var current_midair_jumps : int = 0
 @export var super_jump_retention_time : float = 0
 
 @export var super_jump_velocity_multiplier : float = 0
+
+@export var super_jump_particles : GPUParticles2D
 
 var current_super_jump_charge_timer : float = 0
 
@@ -200,10 +218,12 @@ func update_super_jump_charge_timer(delta : float):
 		if (current_super_jump_charge_timer < super_jump_charge_time and current_super_jump_retention_timer <= 0):
 			current_super_jump_charge_timer = move_toward(current_super_jump_charge_timer, super_jump_charge_time, delta)
 			if (current_super_jump_charge_timer >= super_jump_charge_time):
+				super_jump_particles.emitting = true
 				SoundFactory.play_sound_by_name("jump_draelyn_charged", hub.char_body.global_position, 0, 1, "SFX")
 				current_super_jump_retention_timer = super_jump_retention_time
 	else:
 		if (current_super_jump_retention_timer <= 0):
+			super_jump_particles.emitting = false
 			current_super_jump_charge_timer = 0
 
 func update_super_jump_retention_timer(delta : float):
@@ -213,15 +233,17 @@ func update_super_jump_retention_timer(delta : float):
 		else:
 			current_super_jump_retention_timer = move_toward(current_super_jump_retention_timer, 0, delta)
 			if (current_super_jump_retention_timer <= 0):
-				pass
+				super_jump_particles.emitting = false
 
 func charge_super_jump_with_fast_fall():
 	current_super_jump_charge_timer = super_jump_charge_time
 	current_super_jump_retention_timer = super_jump_after_fast_fall_time
+	super_jump_particles.emitting = true
 
 func reset_super_jump_timers():
 	current_super_jump_charge_timer = 0
 	current_super_jump_retention_timer = 0
+	super_jump_particles.emitting = false
 
 func can_ground_jump():
 	return (hub.buffers.is_jump_buffer_active() and (hub.char_body.is_on_floor() or hub.buffers.is_coyote_time_active()) and (!hub.movement.is_crouching or enable_crouch_jumping or !hub.collisions.is_in_ceiling_when_uncrouched()))
@@ -368,6 +390,16 @@ func do_midair_jump():
 			var speed_cap : float = (hub.movement.top_speed * hub.get_input_vector().x)
 			hub.char_body.velocity.x = speed_cap
 			hub.movement.current_horizontal_velocity = speed_cap
+	
+	var input_direction : float = hub.get_input_vector().x
+	var input_facing_direction : float = (input_direction * hub.movement.get_facing_value())
+	midair_jump_particles.amount = (midair_jump_particle_multiplier * (max_midair_jumps - current_midair_jumps))
+	midair_jump_particles.texture = (forward_midair_jump_texture if input_facing_direction > 0 else backward_midair_jump_texture if input_facing_direction < 0 else neutral_midair_jump_texture)
+	midair_jump_particles.process_material.direction.x = -input_direction
+	midair_jump_particles.process_material.color = (forward_midair_jump_color if input_facing_direction > 0 else backward_midair_jump_color if input_facing_direction < 0 else neutral_midair_jump_color)
+	midair_jump_particles.restart()
+	midair_jump_particles.emitting = true
+	
 	current_midair_jumps += 1
 
 func can_wall_slide():
@@ -414,6 +446,9 @@ func start_wall_jump():
 	
 	hub.animation.set_animation("MagliJump")
 	hub.animation.set_animation_speed(1)
+	
+	var effect_name : String = ("FastWallJump" if did_player_speed_kick else "NormalWallJump")
+	EffectFactory.get_effect(effect_name, hub.raycast_dm.global_position, 1, hub.movement.get_facing_value() > 0)
 	
 	SoundFactory.play_sound_by_name("jump_magli_wallkick", hub.char_body.global_position)
 	hub.audio.play_sound("jump_magli", 0, 1.5 if did_player_speed_kick else 1.0)
@@ -468,6 +503,8 @@ func start_wall_popup():
 	hub.movement.reset_crouch_state()
 	
 	var vertical_result : float = min(max_wall_popup_speed, max(min_wall_popup_speed, -hub.char_body.velocity.y))
+	var result_scale : float = (vertical_result / min_wall_popup_speed)
+	EffectFactory.get_effect("WallVaultSpark", hub.collisions.get_ground_point(), result_scale, hub.movement.get_facing_value() < 0)
 	wall_popup_time_left = wall_popup_time
 	switch_to_rising_gravity()
 	hub.char_body.velocity = (Vector2.UP * vertical_result)
@@ -486,6 +523,8 @@ func start_wall_vault():
 	hub.animation.set_animation("DraelynVault")
 	hub.animation.set_animation_frame(0)
 	hub.animation.set_animation_speed(1)
+	
+	EffectFactory.get_effect("WallVaultRing", hub.collision_shape.global_position, stored_wall_climb_speed / min_climbing_speed)
 	
 	hub.audio.play_sound("jump_draelyn_wallvault")
 	
@@ -507,11 +546,14 @@ func is_wall_popup_canceled():
 	return (wall_popup_time_left <= 0 or hub.char_body.velocity.y >= 0 or (hub.get_input_vector().x * hub.movement.get_facing_value()) < 0)
 
 func do_ledge_snap():
+	var vertical_result = min(max_wall_popup_speed, max(min_wall_popup_speed, -hub.char_body.velocity.y))
+	var result_scale : float = (vertical_result / min_wall_popup_speed)
+	EffectFactory.get_effect("WallVaultSpark", hub.collisions.get_ground_point(), result_scale, hub.movement.get_facing_value() < 0)
+	
 	hub.audio.play_sound("jump_draelyn_wallpopup", 0, 1.5)
 	hub.char_body.position.x += (hub.movement.get_facing_value() * ledge_snap_distance)
 	hub.char_body.apply_floor_snap()
 	switch_to_falling_gravity()
-	# var vertical_result = min(max_wall_popup_speed, max(min_wall_popup_speed, -hub.char_body.velocity.y))
 	hub.char_body.velocity = Vector2(stored_wall_climb_speed * hub.movement.get_facing_value(), 0)
 	hub.movement.current_horizontal_velocity = hub.char_body.velocity.x
 

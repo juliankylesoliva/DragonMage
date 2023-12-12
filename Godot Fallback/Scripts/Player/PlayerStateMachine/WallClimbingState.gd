@@ -4,9 +4,25 @@ class_name WallClimbingState
 
 @export var sprite_x_offset : float = 6
 
+@export var effect_name_normal : String = "WallClimbSpark"
+
+@export var effect_name_fast : String = "WallClimbSparkFast"
+
+var spark_effect_instance : AnimatedSprite2D
+
 func state_process(_delta):
 	hub.animation.set_animation_speed(hub.jumping.get_climbing_animation_speed())
 	hub.jumping.wall_climb_update(_delta)
+	
+	if (spark_effect_instance != null):
+		spark_effect_instance.global_position = hub.raycast_dm.global_position
+		if (spark_effect_instance.animation == effect_name_fast and -hub.char_body.velocity.y <= hub.jumping.min_climbing_speed):
+			var frame_num = spark_effect_instance.frame
+			var frame_progress = spark_effect_instance.frame_progress
+			
+			spark_effect_instance.animation = effect_name_normal
+			spark_effect_instance.frame = frame_num
+			spark_effect_instance.frame_progress = frame_progress
 	
 	if (hub.form.can_change_form()):
 		set_next_state(state_machine.get_state_by_name("FormChanging"))
@@ -34,6 +50,7 @@ func state_process(_delta):
 			var sound_name : String = ("jump_magli_headbonk" if hub.form.current_mode == PlayerForm.CharacterMode.MAGE else "jump_draelyn_headbonk")
 			SoundFactory.play_sound_by_name(sound_name, hub.char_body.global_position, -2)
 		
+		hub.buffers.reset_speed_preservation_buffer()
 		set_next_state(state_machine.get_state_by_name("Falling"))
 	else:
 		pass
@@ -42,13 +59,22 @@ func on_enter():
 	if (hub.jumping.is_fast_falling):
 		hub.jumping.reset_fast_fall()
 	
+	if (spark_effect_instance != null):
+		spark_effect_instance.queue_free()
+	
 	hub.jumping.start_wall_climb()
 	hub.animation.set_animation("DraelynWallClimb")
 	hub.animation.set_animation_frame(0)
 	hub.animation.set_animation_speed(hub.jumping.get_climbing_animation_speed())
 	hub.char_sprite.offset.x = (sprite_x_offset * -hub.movement.get_facing_value())
+	
+	var effect_name = (effect_name_fast if -hub.char_body.velocity.y > hub.jumping.min_climbing_speed else effect_name_normal)
+	spark_effect_instance = EffectFactory.get_effect(effect_name, hub.raycast_dm.global_position, 1, hub.movement.get_facing_value() < 0)
 
 func on_exit():
+	if (spark_effect_instance != null):
+		spark_effect_instance.queue_free()
+	
 	hub.jumping.end_wall_climb()
 	hub.animation.set_animation_speed(1)
 	hub.char_sprite.offset.x = 0

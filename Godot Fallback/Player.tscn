@@ -1,4 +1,4 @@
-[gd_scene load_steps=147 format=3 uid="uid://c6qw77ovfwgfs"]
+[gd_scene load_steps=164 format=3 uid="uid://c6qw77ovfwgfs"]
 
 [ext_resource type="Texture2D" uid="uid://d381ahbcwydy8" path="res://Sprites/Player/DraelynCrouch.png" id="1_6b42p"]
 [ext_resource type="Texture2D" uid="uid://dls34a1qa8iy1" path="res://Sprites/Player/DraelynFireTackle.png" id="1_ddrlj"]
@@ -22,6 +22,7 @@
 [ext_resource type="Texture2D" uid="uid://63niv7i4a2v3" path="res://Sprites/Player/MagliDefense.png" id="4_x7fww"]
 [ext_resource type="Script" path="res://Scripts/Player/PlayerStateMachine/FallingState.gd" id="5_02o4b"]
 [ext_resource type="Texture2D" uid="uid://crftcj56pc5eb" path="res://Sprites/Player/DraelynWalk.png" id="5_q55rd"]
+[ext_resource type="Texture2D" uid="uid://r6ajqwnopine" path="res://Sprites/Effects/ForwardMidairJumpParticle.png" id="6_k24kp"]
 [ext_resource type="Script" path="res://Scripts/Hub Scripts/PlayerAttacks.gd" id="6_mwpxq"]
 [ext_resource type="Script" path="res://Scripts/Hub Scripts/PlayerForm.gd" id="6_oq5ip"]
 [ext_resource type="Script" path="res://Scripts/Hub Scripts/PlayerCollisions.gd" id="6_tj4nn"]
@@ -29,6 +30,7 @@
 [ext_resource type="Script" path="res://Scripts/Player/Attack Scripts/MagicBlastAttack.gd" id="7_e0q0e"]
 [ext_resource type="Script" path="res://Scripts/Player/Attack Scripts/FireTackleAttack.gd" id="7_hucxn"]
 [ext_resource type="Script" path="res://Scripts/Player/Attack Scripts/SlideAttack.gd" id="7_i41w2"]
+[ext_resource type="Texture2D" uid="uid://bev0iekwuw81c" path="res://Sprites/Effects/BackwardsMidairJumpParticle.png" id="8_1f0td"]
 [ext_resource type="PackedScene" uid="uid://cwhtijthju8df" path="res://Scene Objects/Objects/MagicBlastProjectile.tscn" id="8_37vyn"]
 [ext_resource type="PackedScene" uid="uid://c1npwnxy6sqnx" path="res://Scene Objects/Hitboxes/BlastJumpKnockbackHitbox.tscn" id="9_lcig4"]
 [ext_resource type="Script" path="res://Scripts/Utility Scripts/LineTrail.gd" id="10_rgamg"]
@@ -51,6 +53,9 @@
 [ext_resource type="Texture2D" uid="uid://bcwdksusecuad" path="res://Sprites/Player/DraelynFastFall.png" id="38_akwr7"]
 [ext_resource type="Texture2D" uid="uid://b8o0u22mxyifu" path="res://Sprites/Effects/BlastJumpParticle.png" id="47_v16qd"]
 [ext_resource type="Texture2D" uid="uid://nskhc48w5xs3" path="res://Sprites/Effects/FireTackleTrail.png" id="48_hn1hc"]
+[ext_resource type="Texture2D" uid="uid://cajxrlpp0g7oo" path="res://Sprites/Effects/NeutralMidairJumpParticle.png" id="52_4345i"]
+[ext_resource type="Texture2D" uid="uid://cdrl535qe7xx0" path="res://Sprites/Effects/SuperJumpChargeParticle.png" id="52_kmjhs"]
+[ext_resource type="Texture2D" uid="uid://bj6vmo7ahwtpf" path="res://Sprites/Effects/SpeedBufferParticle.png" id="52_u3vuf"]
 
 [sub_resource type="Curve" id="Curve_qnqge"]
 _data = [Vector2(0, 1), 0.0, -0.658891, 0, 0, Vector2(1, 0), -1.2831, 0.0, 0, 0]
@@ -220,13 +225,13 @@ region = Rect2(0, 0, 64, 64)
 atlas = ExtResource("2_p0h7w")
 region = Rect2(384, 0, 64, 64)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_ypnyb"]
-atlas = ExtResource("2_p0h7w")
-region = Rect2(320, 0, 64, 64)
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_l64bu"]
 atlas = ExtResource("2_p0h7w")
 region = Rect2(256, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ypnyb"]
+atlas = ExtResource("2_p0h7w")
+region = Rect2(320, 0, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_tian5"]
 atlas = ExtResource("1_m21y2")
@@ -690,10 +695,10 @@ animations = [{
 "texture": SubResource("AtlasTexture_51lw1")
 }, {
 "duration": 6.0,
-"texture": SubResource("AtlasTexture_ypnyb")
+"texture": SubResource("AtlasTexture_l64bu")
 }, {
 "duration": 6.0,
-"texture": SubResource("AtlasTexture_l64bu")
+"texture": SubResource("AtlasTexture_ypnyb")
 }],
 "loop": true,
 "name": &"DraelynWallClimb",
@@ -995,6 +1000,94 @@ orbit_velocity_max = 0.0
 scale_curve = SubResource("CurveTexture_okhhl")
 attractor_interaction_enabled = false
 
+[sub_resource type="Curve" id="Curve_vq12d"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -2.6693, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_lvqo3"]
+curve = SubResource("Curve_vq12d")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_gkovr"]
+emission_shape = 3
+emission_box_extents = Vector3(8, 1, 1)
+particle_flag_rotate_y = true
+particle_flag_disable_z = true
+direction = Vector3(-1, 1, 0)
+spread = 35.0
+flatness = 1.0
+gravity = Vector3(0, 0, 0)
+initial_velocity_min = 64.0
+initial_velocity_max = 64.0
+angular_velocity_min = 640.0
+angular_velocity_max = 640.0
+orbit_velocity_min = 0.0
+orbit_velocity_max = 0.0
+scale_curve = SubResource("CurveTexture_lvqo3")
+attractor_interaction_enabled = false
+
+[sub_resource type="Curve" id="Curve_cvkih"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -5.46421, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_ddj2a"]
+curve = SubResource("Curve_cvkih")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_3oooo"]
+emission_shape = 3
+emission_box_extents = Vector3(16, 0, 1)
+particle_flag_disable_z = true
+direction = Vector3(0, 1, 0)
+flatness = 1.0
+gravity = Vector3(0, 0, 0)
+initial_velocity_min = 256.0
+initial_velocity_max = 256.0
+orbit_velocity_min = 0.0
+orbit_velocity_max = 0.0
+linear_accel_min = -256.0
+linear_accel_max = -256.0
+scale_curve = SubResource("CurveTexture_ddj2a")
+attractor_interaction_enabled = false
+
+[sub_resource type="Curve" id="Curve_un2gh"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -3.53289, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_a534e"]
+curve = SubResource("Curve_un2gh")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ufmsw"]
+emission_shape = 3
+emission_box_extents = Vector3(8, 24, 1)
+particle_flag_disable_z = true
+direction = Vector3(0, -1, 0)
+spread = 0.0
+gravity = Vector3(0, 0, 0)
+initial_velocity_min = 64.0
+initial_velocity_max = 64.0
+orbit_velocity_min = 0.0
+orbit_velocity_max = 0.0
+scale_curve = SubResource("CurveTexture_a534e")
+attractor_interaction_enabled = false
+
+[sub_resource type="Gradient" id="Gradient_00nnj"]
+offsets = PackedFloat32Array(0, 0.535168, 1)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_3arg3"]
+gradient = SubResource("Gradient_00nnj")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_fjpvl"]
+emission_shape = 2
+emission_sphere_radius = 24.0
+particle_flag_disable_z = true
+direction = Vector3(-1, 0, 0)
+spread = 0.0
+flatness = 1.0
+gravity = Vector3(0, 0, 0)
+orbit_velocity_min = 0.0
+orbit_velocity_max = 0.0
+color_ramp = SubResource("GradientTexture1D_3arg3")
+
 [node name="Player" type="CharacterBody2D"]
 disable_mode = 1
 collision_layer = 4
@@ -1040,7 +1133,7 @@ hub = NodePath("..")
 ledge_nudge_easing = 0.5
 intangible_wall_layer = 8
 
-[node name="Buffers" type="Node" parent="Hub" node_paths=PackedStringArray("hub")]
+[node name="Buffers" type="Node" parent="Hub" node_paths=PackedStringArray("hub", "speed_preservation_particles")]
 script = ExtResource("4_jbuwb")
 hub = NodePath("..")
 form_change_buffer_time = 0.25
@@ -1048,6 +1141,7 @@ jump_buffer_time = 0.167
 fast_fall_buffer_time = 0.167
 attack_buffer_time = 0.167
 speed_preservation_buffer_time = 0.4
+speed_preservation_particles = NodePath("../../SpeedBufferParticles")
 
 [node name="Movement" type="Node" parent="Hub" node_paths=PackedStringArray("hub")]
 script = ExtResource("2_ebc55")
@@ -1062,7 +1156,7 @@ air_deceleration = 1920.0
 air_turning_speed = 2240.0
 crouching_top_speed = 84.0
 
-[node name="Jumping" type="Node" parent="Hub" node_paths=PackedStringArray("hub", "magic_blast_attack")]
+[node name="Jumping" type="Node" parent="Hub" node_paths=PackedStringArray("hub", "magic_blast_attack", "midair_jump_particles", "super_jump_particles")]
 script = ExtResource("3_rs3b5")
 hub = NodePath("..")
 magic_blast_attack = NodePath("../Attacks/MagicBlast")
@@ -1076,7 +1170,15 @@ min_wall_jump_height = 32.0
 wall_slide_speed = 57.6
 vertical_wall_jump_velocity = 384.0
 horizontal_wall_jump_velocity = 168.0
+midair_jump_particles = NodePath("../../MidairJumpParticles")
+forward_midair_jump_color = Color(0.9375, 0.601563, 0.347656, 1)
+neutral_midair_jump_color = Color(0.835938, 0.835938, 0.835938, 1)
+backward_midair_jump_color = Color(0.5, 0.0976563, 0.0976563, 1)
+forward_midair_jump_texture = ExtResource("6_k24kp")
+neutral_midair_jump_texture = ExtResource("52_4345i")
+backward_midair_jump_texture = ExtResource("8_1f0td")
 running_jump_added_velocity = 48.0
+super_jump_particles = NodePath("../../SuperJumpParticles")
 
 [node name="Attacks" type="Node" parent="Hub" node_paths=PackedStringArray("hub")]
 script = ExtResource("6_mwpxq")
@@ -1198,8 +1300,9 @@ script = ExtResource("4_ra8jk")
 [node name="Falling" type="Node" parent="StateMachine"]
 script = ExtResource("5_02o4b")
 
-[node name="Gliding" type="Node" parent="StateMachine"]
+[node name="Gliding" type="Node" parent="StateMachine" node_paths=PackedStringArray("glide_particles")]
 script = ExtResource("12_tj6cc")
+glide_particles = NodePath("../../GlideParticles")
 
 [node name="WallSliding" type="Node" parent="StateMachine"]
 script = ExtResource("12_mju8y")
@@ -1325,6 +1428,54 @@ amount = 64
 process_material = SubResource("ParticleProcessMaterial_1si3k")
 texture = ExtResource("48_hn1hc")
 randomness = 1.0
+fixed_fps = 60
+visibility_rect = Rect2(-512, -512, 1024, 1024)
+
+[node name="GlideParticles" type="GPUParticles2D" parent="."]
+visibility_layer = 32
+z_index = 6
+position = Vector2(0, 32)
+emitting = false
+amount = 16
+process_material = SubResource("ParticleProcessMaterial_gkovr")
+texture = ExtResource("47_v16qd")
+lifetime = 0.85
+fixed_fps = 60
+visibility_rect = Rect2(-512, -512, 1024, 1024)
+
+[node name="MidairJumpParticles" type="GPUParticles2D" parent="."]
+visibility_layer = 32
+z_index = 6
+position = Vector2(0, 8)
+emitting = false
+amount = 9
+process_material = SubResource("ParticleProcessMaterial_3oooo")
+texture = ExtResource("52_4345i")
+lifetime = 0.35
+one_shot = true
+explosiveness = 1.0
+fixed_fps = 60
+visibility_rect = Rect2(-512, -512, 1024, 1024)
+
+[node name="SuperJumpParticles" type="GPUParticles2D" parent="."]
+visibility_layer = 32
+z_index = 6
+position = Vector2(0, 8)
+emitting = false
+process_material = SubResource("ParticleProcessMaterial_ufmsw")
+texture = ExtResource("52_kmjhs")
+lifetime = 0.5
+fixed_fps = 60
+visibility_rect = Rect2(-512, -512, 1024, 1024)
+
+[node name="SpeedBufferParticles" type="GPUParticles2D" parent="."]
+visibility_layer = 32
+z_index = 6
+position = Vector2(0, 8)
+emitting = false
+process_material = SubResource("ParticleProcessMaterial_fjpvl")
+texture = ExtResource("52_u3vuf")
+lifetime = 0.2
 fixed_fps = 60
 visibility_rect = Rect2(-512, -512, 1024, 1024)
 

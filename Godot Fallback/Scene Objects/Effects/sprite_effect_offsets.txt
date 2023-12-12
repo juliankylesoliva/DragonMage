@@ -5,3 +5,11 @@ WalkingDust,-8,-8
 SuperJumpSpark,0,-16
 TurnaroundSpark,-16,-8
 HeadbonkFX,0,-7.5
+NormalWallJump,0,-16
+FastWallJump,-8,-16
+WallSlideDust,0,-8
+WallClimbSpark,-8,8
+WallClimbSparkFast,-8,8
+SlideDustSlow,-20,-16
+SlideDust,-20,-16
+SlideDustFast,-20,-16

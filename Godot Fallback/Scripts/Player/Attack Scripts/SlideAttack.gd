@@ -12,17 +12,30 @@ class_name SlideAttack
 
 @export var slide_uncancelable_time : float = 0.25
 
+@export var slide_effect_fast : String = "SlideDustFast"
+
+@export var slide_effect_normal : String = "SlideDust"
+
+@export var slide_effect_slow : String = "SlideDustSlow"
+
+@export var slide_effect_slowdown_threshold : float = 0.5
+
 var prev_horizontal_velocity : float = 0
 
 var horizontal_result : float = 0
 
 var current_slide_timer : float = 0
 
+var slide_effect_instance : AnimatedSprite2D = null
+
 func can_use_attack():
 	var state_name : String = hub.state_machine.current_state.name
 	return (hub.form.current_mode == PlayerForm.CharacterMode.DRAGON and state_name != "Attacking" and (hub.attacks.current_attack == null or hub.attacks.current_attack.name != self.name) and (!hub.attacks.is_attack_cooldown_active() or hub.jumping.can_fast_fall_slope_boost()) and (hub.movement.is_crouching or hub.jumping.can_fast_fall_slope_boost()) and (state_name == "Standing" or state_name == "Running" or (state_name == "Falling" and hub.jumping.can_fast_fall_slope_boost())) and hub.char_body.is_on_floor() and ((!hub.collisions.is_facing_a_wall() and !hub.collisions.is_near_a_ledge(hub.movement.get_facing_value())) or (hub.jumping.can_fast_fall_slope_boost() and !hub.collisions.is_near_a_ledge(hub.movement.get_facing_value()))))
 
 func on_attack_state_enter():
+	if (slide_effect_instance != null):
+		slide_effect_instance.queue_free()
+	
 	if (!hub.movement.is_crouching):
 		hub.movement.is_crouching = true
 		hub.movement.current_min_crouch_timer = hub.movement.min_crouch_time
@@ -35,6 +48,10 @@ func on_attack_state_enter():
 	hub.movement.current_horizontal_velocity = hub.char_body.velocity.x
 	current_slide_timer = 0
 	hub.sprite_trail.activate_trail()
+	
+	var slide_effect_name : String = (slide_effect_fast if horizontal_result > slide_min_horizontal_speed else slide_effect_normal if horizontal_result > (slide_min_horizontal_speed * slide_effect_slowdown_threshold) else slide_effect_slow)
+	slide_effect_instance = EffectFactory.get_effect(slide_effect_name, hub.raycast_dm.global_position, 1, hub.movement.get_facing_value() < 0)
+	slide_effect_instance.rotation = hub.char_body.up_direction.angle_to(hub.collisions.get_ground_normal())
 
 func attack_state_process(_delta : float):
 	if (hub.collisions.is_facing_a_wall() or hub.collisions.is_near_a_ledge() or hub.collisions.get_distance_to_ground() > hub.char_body.floor_snap_length):
@@ -47,8 +64,31 @@ func attack_state_process(_delta : float):
 		stop_slide()
 	else:
 		slide_update(_delta)
+	
+	if (slide_effect_instance != null):
+		slide_effect_instance.global_position = hub.raycast_dm.global_position
+		slide_effect_instance.rotation = hub.char_body.up_direction.angle_to(hub.collisions.get_ground_normal())
+		if (slide_effect_instance.animation == slide_effect_fast and abs(hub.char_body.velocity.x) <= slide_min_horizontal_speed):
+			var frame_num = slide_effect_instance.frame
+			var frame_progress = slide_effect_instance.frame_progress
+			
+			slide_effect_instance.animation = slide_effect_normal
+			slide_effect_instance.frame = frame_num
+			slide_effect_instance.frame_progress = frame_progress
+		elif (slide_effect_instance.animation == slide_effect_normal and abs(hub.char_body.velocity.x) <= (slide_min_horizontal_speed * slide_effect_slowdown_threshold)):
+			var frame_num = slide_effect_instance.frame
+			var frame_progress = slide_effect_instance.frame_progress
+			
+			slide_effect_instance.animation = slide_effect_slow
+			slide_effect_instance.frame = frame_num
+			slide_effect_instance.frame_progress = frame_progress
+		else:
+			pass
 
 func on_attack_state_exit():
+	if (slide_effect_instance != null):
+		slide_effect_instance.queue_free()
+	
 	hub.sprite_trail.deactivate_trail()
 	current_attack_state = AttackState.NOTHING
 	prev_horizontal_velocity = 0
