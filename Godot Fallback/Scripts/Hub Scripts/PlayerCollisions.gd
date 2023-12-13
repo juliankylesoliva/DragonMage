@@ -96,7 +96,7 @@ func do_ledge_nudge():
 				pass
 
 func do_ceiling_nudge():
-	if (hub.state_machine.current_state.name == "Jumping" and hub.get_input_vector().x == 0):
+	if (hub.state_machine.current_state.name == "Jumping" and hub.get_input_vector().x == 0 and get_ceiling_normal().x == 0):
 		var left_distance : float = get_distance_to_ceiling(-1)
 		var middle_distance : float = get_distance_to_ceiling(0)
 		var right_distance : float = get_distance_to_ceiling(1)

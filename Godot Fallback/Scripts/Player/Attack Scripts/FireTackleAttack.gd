@@ -10,6 +10,16 @@ class_name FireTackleAttack
 
 @export var fire_trail_scene : PackedScene
 
+@export var fire_tackle_hit_temper_increase : int = 1
+
+@export var fireball_hit_temper_increase : int = 2
+
+@export var fire_tackle_launch_temper_decrease : int = -1
+
+@export var fire_tackle_hold_temper_decrease : int = -1
+
+@export var fireball_launch_temper_decrease : int = -1
+
 @export var fire_tackle_min_horizontal_speed : float = 6
 
 @export var fire_tackle_max_horizontal_speed : float = 30
@@ -134,7 +144,10 @@ func startup_update(delta : float):
 			current_startup_hold_timer -= delta
 			if (current_startup_hold_timer <= 0):
 				current_startup_hold_timer += fire_tackle_startup_hold_temper_drain_interval
-				# temper drain
+				if (hub.temper.current_temper_level >= hub.temper.hot_threshold):
+					hub.temper.change_temper_by(fire_tackle_hold_temper_decrease)
+				else:
+					hub.temper.neutralize_temper_by(fire_tackle_hold_temper_decrease)
 	else:
 		active_init()
 
@@ -152,10 +165,12 @@ func active_init():
 	hub.char_body.velocity = Vector2(horizontal_result, (-abs(hub.char_body.velocity.x) if current_vertical_axis > 0 else 0))
 	current_attack_timer = fire_tackle_duration
 	current_bump_immunity_timer = fire_tackle_bump_immunity_duration
+	hub.temper.change_temper_by(fire_tackle_launch_temper_decrease)
 	
 	fire_tackle_hitbox_instance = fire_tackle_hitbox_scene.instantiate()
 	add_child(fire_tackle_hitbox_instance)
 	(fire_tackle_hitbox_instance as Node2D).global_position = hub.collision_shape.global_position
+	(fire_tackle_hitbox_instance as KnockbackHitbox).hit.connect(_on_fire_tackle_hit)
 
 func active_update(delta : float):
 	if (current_attack_timer > 0 and (current_bump_immunity_timer > 0 or (!hub.collisions.is_facing_a_wall() and !hub.char_body.is_on_ceiling()))):
@@ -240,8 +255,12 @@ func endlag_init():
 			for child in fireball_instance.get_children():
 				if (child is AnimatedSprite2D):
 					(child as AnimatedSprite2D).flip_h = (hub.movement.get_facing_value() < 0)
-					break
+				elif (child is KnockbackHitbox):
+					(child as KnockbackHitbox).hit.connect(_on_fireball_hit)
+				else:
+					pass
 			
+			hub.temper.change_temper_by(fireball_launch_temper_decrease)
 			hub.movement.reset_current_horizontal_velocity()
 			hub.char_body.velocity = (((Vector2.UP if !hub.char_body.is_on_floor() else Vector2.ZERO) + (Vector2.RIGHT * -hub.movement.get_facing_value())).normalized() * fire_tackle_fireball_recoil_strength)
 		else:
@@ -281,7 +300,7 @@ func endlag_update(delta : float):
 		end_fire_tackle()
 
 func can_cancel_fire_tackle_endlag():
-	return (true and (hub.jumping.can_wall_climb_from_fire_tackle() or (hub.get_input_vector().x * hub.movement.get_facing_value()) > 0 and hub.char_body.is_on_floor() and hub.buffers.is_jump_buffer_active()))
+	return (!hub.temper.is_forcing_form_change() and (hub.jumping.can_wall_climb_from_fire_tackle() or (hub.get_input_vector().x * hub.movement.get_facing_value()) > 0 and hub.char_body.is_on_floor() and hub.buffers.is_jump_buffer_active()))
 
 func end_fire_tackle():
 	current_attack_state = AttackState.NOTHING
@@ -302,16 +321,24 @@ func end_fire_tackle():
 	hub.attacks.set_attack_cooldown_timer()
 	hub.form.start_form_change_timer()
 	
-	if (hub.jumping.can_wall_climb_from_fire_tackle()):
-		hub.state_machine.switch_states(hub.state_machine.get_state_by_name("WallClimbing"))
+	if (hub.temper.is_forcing_form_change()):
+		hub.state_machine.current_state.set_next_state(hub.state_machine.get_state_by_name("FormChanging"))
+	elif (hub.jumping.can_wall_climb_from_fire_tackle()):
+		hub.state_machine.current_state.set_next_state(hub.state_machine.get_state_by_name("WallClimbing"))
 	elif (is_fire_tackle_endlag_canceled and hub.buffers.is_jump_buffer_active()):
 		hub.jumping.start_ground_jump()
-		hub.state_machine.switch_states(hub.state_machine.get_state_by_name("Jumping"))
+		hub.state_machine.current_state.set_next_state(hub.state_machine.get_state_by_name("Jumping"))
 	elif (hub.char_body.is_on_floor() and (hub.get_input_vector().x != 0 or hub.char_body.velocity.x != 0)):
-		hub.state_machine.switch_states(hub.state_machine.get_state_by_name("Running"))
+		hub.state_machine.current_state.set_next_state(hub.state_machine.get_state_by_name("Running"))
 	elif (hub.char_body.velocity.y < 0 and !hub.char_body.is_on_floor()):
-		hub.state_machine.switch_states(hub.state_machine.get_state_by_name("Jumping"))
+		hub.state_machine.current_state.set_next_state(hub.state_machine.get_state_by_name("Jumping"))
 	elif (hub.char_body.velocity.y >= 0 and !hub.char_body.is_on_floor()):
-		hub.state_machine.switch_states(hub.state_machine.get_state_by_name("Falling"))
+		hub.state_machine.current_state.set_next_state(hub.state_machine.get_state_by_name("Falling"))
 	else:
-		hub.state_machine.switch_states(hub.state_machine.get_state_by_name("Standing"))
+		hub.state_machine.current_state.set_next_state(hub.state_machine.get_state_by_name("Standing"))
+
+func _on_fire_tackle_hit():
+	hub.temper.neutralize_temper_by(fire_tackle_hit_temper_increase)
+
+func _on_fireball_hit():
+	hub.temper.neutralize_temper_by(fireball_hit_temper_increase)

@@ -22,9 +22,18 @@ func state_process(_delta):
 				if (hub.jumping.stored_wall_climb_speed > hub.buffers.highest_speed):
 					hub.buffers.highest_speed = hub.jumping.stored_wall_climb_speed
 					hub.buffers.refresh_speed_preservation_buffer()
-				set_next_state(state_machine.get_state_by_name("Jumping" if hub.char_body.velocity.y < 0 else "Falling"))
+				set_next_state(state_machine.get_state_by_name("Jumping" if prev_velocity.y < 0 else "Falling"))
 			"Damaged":
 				set_next_state(state_machine.get_state_by_name("Standing"))
+			"Attacking":
+				if (hub.char_body.is_on_floor() and (hub.get_input_vector().x != 0 or prev_velocity.x != 0)):
+					set_next_state(state_machine.get_state_by_name("Running"))
+				elif (prev_velocity.y < 0 and !hub.char_body.is_on_floor()):
+					set_next_state(state_machine.get_state_by_name("Jumping"))
+				elif (prev_velocity.y >= 0 and !hub.char_body.is_on_floor()):
+					set_next_state(state_machine.get_state_by_name("Falling"))
+				else:
+					set_next_state(state_machine.get_state_by_name("Standing"))
 			_:
 				set_next_state(state_machine.get_state_by_name(prev_state))
 	else:

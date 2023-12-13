@@ -24,6 +24,9 @@ func state_process(_delta):
 			spark_effect_instance.frame = frame_num
 			spark_effect_instance.frame_progress = frame_progress
 	
+	if (hub.form.cannot_change_form()):
+		hub.form.form_change_failed()
+	
 	if (hub.form.can_change_form()):
 		set_next_state(state_machine.get_state_by_name("FormChanging"))
 	elif (hub.attacks.is_using_attack_state() and hub.attacks.current_attack != null):
@@ -46,9 +49,7 @@ func state_process(_delta):
 		if (hub.char_body.is_on_ceiling()):
 			var effect_instance = EffectFactory.get_effect("HeadbonkFX", hub.collisions.get_ceiling_point())
 			effect_instance.rotation = hub.char_body.up_direction.angle_to(hub.collisions.get_ceiling_normal())
-			
-			var sound_name : String = ("jump_magli_headbonk" if hub.form.current_mode == PlayerForm.CharacterMode.MAGE else "jump_draelyn_headbonk")
-			SoundFactory.play_sound_by_name(sound_name, hub.char_body.global_position, -2)
+			SoundFactory.play_sound_by_name("jump_draelyn_headbonk", hub.char_body.global_position, -2)
 		
 		hub.buffers.reset_speed_preservation_buffer()
 		set_next_state(state_machine.get_state_by_name("Falling"))

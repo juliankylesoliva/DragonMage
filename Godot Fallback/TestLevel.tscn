@@ -1,20 +1,25 @@
-[gd_scene load_steps=3 format=3 uid="uid://ditx5iixwbmbo"]
+[gd_scene load_steps=4 format=3 uid="uid://ditx5iixwbmbo"]
 
 [ext_resource type="PackedScene" uid="uid://q7ww8bbiiqqn" path="res://room.tscn" id="2_0d6c4"]
 [ext_resource type="PackedScene" uid="uid://c6qw77ovfwgfs" path="res://Player.tscn" id="2_mjfj3"]
+[ext_resource type="PackedScene" uid="uid://bdypi7w73c6kq" path="res://Scene Objects/UI/TemperMeterUI.tscn" id="3_vdeox"]
 
 [node name="TestLevel" type="Node2D"]
 
 [node name="Room" parent="." instance=ExtResource("2_0d6c4")]
-position = Vector2(-256, -160)
 
 [node name="Player" parent="." instance=ExtResource("2_mjfj3")]
-position = Vector2(-128, 63)
+position = Vector2(128, 223)
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 position = Vector2(0, -63)
 process_callback = 0
-limit_left = -256
-limit_top = -160
-limit_right = 768
-limit_bottom = 160
+limit_left = 0
+limit_top = 0
+limit_right = 1056
+limit_bottom = 320
+
+[node name="TemperMeterUI" parent="." node_paths=PackedStringArray("player_node") instance=ExtResource("3_vdeox")]
+position = Vector2(1, 8)
+player_node = NodePath("../Player")
+camera_offset = Vector2(-255, -152)

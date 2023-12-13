@@ -269,7 +269,7 @@ func start_ground_jump():
 	var effect_instance : AnimatedSprite2D = EffectFactory.get_effect(effect_name, hub.collisions.get_ground_point(), 1, hub.movement.get_facing_value() < 0)
 	effect_instance.rotation = hub.char_body.up_direction.angle_to(hub.char_body.get_floor_normal())
 	
-	var sound_name : String = ("jump_magli" if hub.form.current_mode == PlayerForm.CharacterMode.MAGE else "jump_draelyn")
+	var sound_name : String = ("jump_magli" if hub.form.is_a_mage() else "jump_draelyn")
 	var sound_pitch : float = (1.5 if did_player_speed_hop or is_super_jump_ready() else 1.0)
 	hub.audio.play_sound(sound_name, 0, sound_pitch, "SFX")
 	
@@ -565,6 +565,7 @@ func landing_reset():
 	current_midair_jumps = 0
 
 func set_fast_fall():
+	hub.buffers.reset_fast_fall_buffer()
 	is_fast_falling = true
 	SoundFactory.play_sound_by_name("jump_draelyn_fastfall", hub.char_body.global_position, 0, 1, "SFX")
 

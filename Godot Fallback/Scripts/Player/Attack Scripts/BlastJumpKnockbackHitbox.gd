@@ -7,4 +7,5 @@ func _on_body_entered(body):
 		do_break_object(body)
 
 func do_break_object(body):
-	(body as Breakable).break_object(self)
+	if ((body as Breakable).break_object(self)):
+		hit.emit()

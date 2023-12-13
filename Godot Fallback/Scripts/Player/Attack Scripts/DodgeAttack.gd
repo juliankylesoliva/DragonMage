@@ -20,7 +20,7 @@ var dodge_direction : Vector2 = Vector2.ZERO
 
 func can_use_attack():
 	var state_name : String = hub.state_machine.current_state.name
-	return (hub.form.current_mode == PlayerForm.CharacterMode.MAGE and state_name != "Attacking" and (hub.attacks.current_attack == null or hub.attacks.current_attack.name != self.name) and !hub.attacks.is_attack_cooldown_active() and hub.movement.is_crouching)
+	return (hub.form.is_a_mage() and state_name != "Attacking" and (hub.attacks.current_attack == null or hub.attacks.current_attack.name != self.name) and !hub.attacks.is_attack_cooldown_active() and hub.movement.is_crouching)
 
 func on_attack_state_enter():
 	current_attack_state = AttackState.ACTIVE

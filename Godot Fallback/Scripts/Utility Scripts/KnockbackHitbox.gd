@@ -2,6 +2,8 @@ extends Node
 
 class_name KnockbackHitbox
 
+signal hit
+
 @export var collision_shape : CollisionShape2D
 
 @export var ray : RayCast2D

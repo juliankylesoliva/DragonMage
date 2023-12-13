@@ -39,12 +39,17 @@ func is_form_change_cooldown_active():
 	return (current_form_change_cooldown_timer > 0)
 
 func can_change_form():
-	return (enable_form_changing and !is_form_change_cooldown_active() and !hub.attacks.is_attack_cooldown_active() and hub.state_machine.current_state.name != "FormChanging" and hub.state_machine.current_state.name != "Attacking" and !hub.attacks.get_attack_by_name("MagicBlast").is_blast_jumping and hub.buffers.is_form_change_buffer_active())
+	return (enable_form_changing and !is_form_change_cooldown_active() and !hub.attacks.is_attack_cooldown_active() and hub.state_machine.current_state.name != "FormChanging" and hub.state_machine.current_state.name != "Attacking" and !hub.attacks.get_attack_by_name("MagicBlast").is_blast_jumping and (hub.temper.is_forcing_form_change() or (!hub.temper.is_form_locked() and hub.buffers.is_form_change_buffer_active())))
 
 func cannot_change_form():
-	return false
+	return (!is_changing_form() and !hub.attacks.get_attack_by_name("MagicBlast").is_blast_jumping and hub.state_machine.current_state.name != "Attacking" and (hub.temper.is_form_locked() or !enable_form_changing) and hub.buffers.is_form_change_buffer_active())
 
 func do_form_change():
+	if (hub.temper.is_forcing_form_change()):
+		hub.temper.form_lock_temper_change()
+	
+	hub.buffers.reset_form_change_buffer()
+	
 	hub.animation.set_animation("{name1}To{name2}".format({"name1" : get_current_form_name(), "name2" : get_opposite_form_name()}))
 	hub.animation.set_animation_frame(0)
 	hub.animation.set_animation_speed(form_change_animation_time / form_change_time)
@@ -53,7 +58,8 @@ func do_form_change():
 	hub.audio.play_sound("transformation_magli" if current_mode == CharacterMode.MAGE else "transformation_draelyn")
 
 func form_change_failed():
-	pass
+	hub.buffers.reset_form_change_buffer()
+	hub.audio.play_sound("transformation_magli_locked" if current_mode == CharacterMode.MAGE else "transformation_draelyn_locked")
 
 func set_ctrl_properties(p : PlayerCtrlProperties):
 	hub.movement.acceleration = p.acceleration
@@ -164,6 +170,12 @@ func start_form_change_cooldown_timer():
 func update_form_change_cooldown_timer(delta : float):
 	if (current_form_change_cooldown_timer > 0):
 		current_form_change_cooldown_timer = move_toward(current_form_change_cooldown_timer, 0, delta)
+
+func is_a_mage():
+	return (current_mode == CharacterMode.MAGE)
+
+func is_a_dragon():
+	return (current_mode == CharacterMode.DRAGON)
 
 func get_current_form_name():
 	return mage_name if current_mode == CharacterMode.MAGE else dragon_name

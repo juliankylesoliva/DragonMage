@@ -28,6 +28,9 @@ func state_process(_delta : float):
 	else:
 		pass
 	
+	if (hub.form.cannot_change_form()):
+		hub.form.form_change_failed()
+	
 	if (hub.form.can_change_form()):
 		set_next_state(state_machine.get_state_by_name("FormChanging"))
 	elif (hub.attacks.is_using_attack_state() and hub.attacks.current_attack != null):
@@ -81,7 +84,7 @@ func on_exit():
 		var effect_instance : AnimatedSprite2D = EffectFactory.get_effect("LandingDust", hub.collisions.get_ground_point())
 		effect_instance.rotation = hub.char_body.up_direction.angle_to(hub.char_body.get_floor_normal())
 		
-		var walk_sound : String = ("jump_magli_landing" if hub.form.current_mode == PlayerForm.CharacterMode.MAGE else "jump_draelyn_landing")
+		var walk_sound : String = ("jump_magli_landing" if hub.form.is_a_mage() else "jump_draelyn_landing")
 		SoundFactory.play_sound_by_name(walk_sound, hub.char_body.global_position, 0, 1, "SFX")
 	
 	hub.sprite_trail.deactivate_trail()

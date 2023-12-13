@@ -8,6 +8,7 @@ class_name PlayerHub
 @export var movement : PlayerMovement
 @export var jumping : PlayerJumping
 @export var attacks : PlayerAttacks
+@export var temper : PlayerTemper
 @export var form : PlayerForm
 @export var animation : PlayerAnimation
 @export var sprite_trail : PlayerSpriteTrail

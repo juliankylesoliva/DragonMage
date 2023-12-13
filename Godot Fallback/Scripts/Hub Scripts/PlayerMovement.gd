@@ -134,6 +134,7 @@ func do_movement(delta):
 				var turn = (turning_speed if hub.char_body.is_on_floor() else air_turning_speed)
 				var target_speed = (top_speed if !is_crouching else crouching_top_speed)
 				current_horizontal_velocity = move_toward(current_horizontal_velocity, -target_speed if current_horizontal_velocity > 0 else target_speed, turn * delta)
+				hub.collisions.do_ledge_nudge()
 	else:
 		var decel = (deceleration if hub.char_body.is_on_floor() else air_deceleration)
 		current_horizontal_velocity = (move_toward(current_horizontal_velocity, 0, decel * delta) if !hub.collisions.is_near_a_ledge() else 0.0)

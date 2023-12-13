@@ -48,7 +48,8 @@ func do_magic_blast_knockback(body):
 func do_break_object(body):
 	var target_pos : Vector2 = ((body as Node2D).global_position - ray.global_position)
 	if (!is_going_thru_a_wall(target_pos, body.get_rid())):
-		(body as Breakable).break_object(self)
+		if ((body as Breakable).break_object(self)):
+			hit.emit()
 
 func is_going_thru_a_wall(target_pos : Vector2, body_rid : RID):
 	ray.target_position = target_pos

@@ -28,7 +28,7 @@ func state_process(_delta):
 				var effect_instance = EffectFactory.get_effect("HeadbonkFX", hub.collisions.get_ceiling_point())
 				effect_instance.rotation = hub.char_body.up_direction.angle_to(hub.collisions.get_ceiling_normal())
 				
-				var sound_name : String = ("jump_magli_headbonk" if hub.form.current_mode == PlayerForm.CharacterMode.MAGE else "jump_draelyn_headbonk")
+				var sound_name : String = ("jump_magli_headbonk" if hub.form.is_a_mage() else "jump_draelyn_headbonk")
 				SoundFactory.play_sound_by_name(sound_name, hub.char_body.global_position, -2)
 		else:
 			is_headbonking = false
@@ -42,6 +42,9 @@ func state_process(_delta):
 				hub.animation.set_animation("{name}Stand".format({"name" : char_name}))
 				hub.animation.set_animation_speed(1)
 		is_headbonking = false
+	
+	if (hub.form.cannot_change_form()):
+		hub.form.form_change_failed()
 	
 	if (hub.form.can_change_form()):
 		set_next_state(state_machine.get_state_by_name("FormChanging"))

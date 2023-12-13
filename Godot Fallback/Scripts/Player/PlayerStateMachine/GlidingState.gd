@@ -10,6 +10,9 @@ func state_process(_delta : float):
 	
 	glide_particles.process_material.direction.x = -hub.get_input_vector().x
 	
+	if (hub.form.cannot_change_form()):
+		hub.form.form_change_failed()
+	
 	if (hub.form.can_change_form()):
 		set_next_state(state_machine.get_state_by_name("FormChanging"))
 	elif (hub.attacks.is_using_attack_state() and hub.attacks.current_attack != null):

@@ -23,3 +23,5 @@ func break_object(other : Object):
 					(instance as Node2D).global_position = node_2d.global_position
 					(instance as GPUParticles2D).emitting = true
 				queue_free()
+				return true
+	return false

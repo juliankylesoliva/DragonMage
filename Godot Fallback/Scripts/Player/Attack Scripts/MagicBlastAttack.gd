@@ -10,6 +10,14 @@ class_name MagicBlastAttack
 
 @export var blast_jump_hitbox_scene : PackedScene
 
+@export var magic_blast_hit_temper_reduction : int = -1
+
+@export var blast_jump_hit_temper_reduction : int = -2
+
+@export var blast_jump_start_temper_increase : int = 1
+
+@export var blast_jump_continuous_temper_increase : int = 1
+
 @export var inertia_multiplier : float = 0.9
 
 @export var projectile_despawn_distance : float = 20
@@ -64,7 +72,7 @@ func _process(delta):
 	blast_jump_update(delta)
 
 func can_use_attack():
-	return (hub.form.current_mode == PlayerForm.CharacterMode.MAGE)
+	return (hub.form.is_a_mage())
 
 func use_attack():
 	if (projectile_instance == null):
@@ -103,6 +111,8 @@ func throw_projectile():
 		var projectile_rb = (projectile_instance as RigidBody2D)
 		projectile_rb.linear_velocity = projectile_velocity
 		projectile_rb.apply_torque_impulse(throw_rotation * hub.movement.get_facing_value())
+		
+		(projectile_instance as MagicBlastProjectile).attack_ref = self
 
 func do_detonation():
 	if (projectile_instance != null):
@@ -115,6 +125,7 @@ func activate_blast_jump():
 	blast_jump_particles.emitting = true
 	hub.char_sprite.modulate = blast_jump_active_color
 	hub.sprite_trail.activate_trail()
+	hub.temper.change_temper_by(blast_jump_start_temper_increase)
 	blast_jump_current_active_time = blast_jump_min_active_time
 	blast_jump_current_temper_interval_time = blast_jump_temper_increase_interval
 
@@ -131,6 +142,7 @@ func blast_jump_update(delta : float):
 		if (blast_jump_hitbox_instance == null):
 			blast_jump_hitbox_instance = blast_jump_hitbox_scene.instantiate()
 			add_child(blast_jump_hitbox_instance)
+			(blast_jump_hitbox_instance as KnockbackHitbox).hit.connect(_on_blast_jump_hit)
 		
 		(blast_jump_hitbox_instance as Node2D).global_position = (hub.collision_shape.global_position + facing_offset + jumping_offset + velocity_offset)
 		
@@ -149,4 +161,11 @@ func blast_jump_update(delta : float):
 		if (blast_jump_current_temper_interval_time > 0):
 			blast_jump_current_temper_interval_time -= delta
 			if (blast_jump_current_temper_interval_time <= 0):
+				hub.temper.change_temper_by(blast_jump_continuous_temper_increase)
 				blast_jump_current_temper_interval_time += blast_jump_temper_increase_interval
+
+func _on_magic_blast_hit():
+	hub.temper.neutralize_temper_by(magic_blast_hit_temper_reduction)
+
+func _on_blast_jump_hit():
+	hub.temper.neutralize_temper_by(blast_jump_hit_temper_reduction)
