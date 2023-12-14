@@ -1148,7 +1148,7 @@ speed_preservation_particles = NodePath("../../SpeedBufferParticles")
 [node name="Movement" type="Node" parent="Hub" node_paths=PackedStringArray("hub")]
 script = ExtResource("2_ebc55")
 hub = NodePath("..")
-max_slides = 999
+max_slides = 9999
 top_speed = 168.0
 acceleration = 800.0
 deceleration = 640.0
@@ -1192,10 +1192,15 @@ blast_jump_particles = NodePath("../../../BlastJumpParticles")
 projectile_trail = NodePath("ProjectileTrail")
 projectile_scene = ExtResource("8_37vyn")
 blast_jump_hitbox_scene = ExtResource("9_lcig4")
+magic_blast_hit_temper_reduction = null
+blast_jump_hit_temper_reduction = null
+blast_jump_start_temper_increase = null
+blast_jump_continuous_temper_increase = null
 inertia_multiplier = 0.5
 projectile_despawn_distance = 640.0
 blast_jump_min_velocity_magnitude = 192.0
 blast_jump_max_fall_speed = 640.0
+blast_jump_min_active_time = null
 blast_jump_offset_multiplier = 1.5
 blast_jump_facing_offset = 4.0
 blast_jump_jumping_offset = 8.0
@@ -1213,6 +1218,7 @@ drop_throw_angle = 45.0
 forward_throw_rotation = 320.0
 lob_throw_rotation = 640.0
 drop_throw_rotation = -160.0
+uses_attack_state = null
 
 [node name="ProjectileTrail" type="Line2D" parent="Hub/Attacks/MagicBlast"]
 width_curve = SubResource("Curve_qnqge")

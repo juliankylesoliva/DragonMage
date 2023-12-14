@@ -44,7 +44,7 @@ func get_distance_to_ground(ray_num : int = 0):
 	var raycast_to_use : RayCast2D = (hub.raycast_dm if ray_num == 0 else hub.raycast_dl if ray_num < 0 else hub.raycast_dr)
 	var result : float = -1
 	if (raycast_to_use.is_colliding()):
-		result = (raycast_to_use.global_position.distance_to(raycast_to_use.get_collision_point()))
+		result = abs(raycast_to_use.global_position.y - raycast_to_use.get_collision_point().y)
 	else:
 		result = 999
 	return max(0, result)
@@ -59,9 +59,9 @@ func get_distance_to_ceiling(ray_num : int = 0):
 	var raycast_to_use : RayCast2D = (hub.raycast_um if ray_num == 0 else hub.raycast_ul if ray_num < 0 else hub.raycast_ur)
 	var result : float = -1
 	if (raycast_to_use.is_colliding()):
-		result = (raycast_to_use.global_position.distance_to(raycast_to_use.get_collision_point()))
+		result = abs(raycast_to_use.global_position.y - raycast_to_use.get_collision_point().y)
 	else:
-		result = (raycast_to_use.global_position.distance_to(raycast_to_use.global_position + raycast_to_use.target_position))
+		result = abs(raycast_to_use.global_position.y - (raycast_to_use.global_position + raycast_to_use.target_position).y)
 	return max(0, result)
 
 func get_ceiling_point():
@@ -82,7 +82,7 @@ func collider_crouch_update():
 	hub.raycast_ceiling_r.position.y = (upper_raycasts_y_pos - ledge_nudge_check_depth)
 
 func do_ledge_nudge():
-	if (is_near_a_ledge()):
+	if (is_near_a_ledge() and get_ground_normal().x == 0):
 		var is_left_grounded : bool = (get_distance_to_ground(-1) <= hub.char_body.floor_snap_length)
 		var is_middle_grounded : bool = (get_distance_to_ground(0) <= hub.char_body.floor_snap_length)
 		var is_right_grounded : bool = (get_distance_to_ground(1) <= hub.char_body.floor_snap_length)

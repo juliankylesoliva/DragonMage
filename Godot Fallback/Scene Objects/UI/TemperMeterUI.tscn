@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://bdypi7w73c6kq"]
+[gd_scene load_steps=14 format=3 uid="uid://bdypi7w73c6kq"]
 
 [ext_resource type="Script" path="res://Scripts/UI Scripts/TemperMeterUI.gd" id="1_1ab38"]
 [ext_resource type="Texture2D" uid="uid://40rkni2q8rx7" path="res://Sprites/UI/TemperMeterBackingStart.png" id="1_w743b"]
@@ -6,6 +6,9 @@
 [ext_resource type="Texture2D" uid="uid://dwlfwm4vj3h7a" path="res://Sprites/UI/TemperMeterBackingEnd.png" id="3_x72yt"]
 [ext_resource type="Texture2D" uid="uid://d2mb763stp37i" path="res://Sprites/UI/TemperMeterSegment.png" id="4_tpqwn"]
 [ext_resource type="Texture2D" uid="uid://cpokjticuax3" path="res://Sprites/UI/TemperMeterSegmentInactive.png" id="5_iqph0"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lnqu5"]
+size = Vector2(208, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_op7vf"]
 atlas = ExtResource("4_tpqwn")
@@ -70,11 +73,27 @@ script = ExtResource("1_1ab38")
 meter_start = NodePath("MeterStart")
 meter_middle = NodePath("MeterMiddle")
 meter_end = NodePath("MeterEnd")
+player_collision_alpha = 0.5
+player_collision_alpha_delta_multiplier = 2.5
 cold_segment_color = Color(0.34902, 0.254902, 0.662745, 1)
 neutral_segment_color = Color(0.254902, 0.662745, 0.34902, 1)
 hot_segment_color = Color(0.811765, 0.478431, 0.188235, 1)
 segment_list = [NodePath("Segments/Segment1"), NodePath("Segments/Segment2"), NodePath("Segments/Segment3"), NodePath("Segments/Segment4"), NodePath("Segments/Segment5"), NodePath("Segments/Segment6"), NodePath("Segments/Segment7"), NodePath("Segments/Segment8"), NodePath("Segments/Segment9"), NodePath("Segments/Segment10"), NodePath("Segments/Segment11"), NodePath("Segments/Segment12")]
 process_callback = "Physics"
+
+[node name="RigidBody2D" type="RigidBody2D" parent="."]
+collision_layer = 32
+collision_mask = 4
+gravity_scale = 0.0
+max_contacts_reported = 1
+contact_monitor = true
+lock_rotation = true
+freeze = true
+freeze_mode = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D"]
+position = Vector2(111, 8)
+shape = SubResource("RectangleShape2D_lnqu5")
 
 [node name="MeterStart" type="Sprite2D" parent="."]
 texture = ExtResource("1_w743b")
@@ -198,3 +217,6 @@ sprite_frames = SubResource("SpriteFrames_e708d")
 animation = &"Off"
 autoplay = "Off"
 frame_progress = 0.5
+
+[connection signal="body_entered" from="RigidBody2D" to="." method="_on_rigid_body_2d_body_entered"]
+[connection signal="body_exited" from="RigidBody2D" to="." method="_on_rigid_body_2d_body_exited"]

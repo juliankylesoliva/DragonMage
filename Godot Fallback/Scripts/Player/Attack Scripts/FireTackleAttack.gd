@@ -81,6 +81,7 @@ var did_player_bump : bool = false
 var is_player_firing_projectile : bool = false
 var current_endlag_timer : float = 0
 var is_fire_tackle_endlag_canceled : bool = false
+var saved_endlag_velocity : float = 0
 
 func can_use_attack():
 	var state_name : String = hub.state_machine.current_state.name
@@ -118,6 +119,7 @@ func on_attack_state_exit():
 	is_player_firing_projectile = false
 	current_endlag_timer = 0
 	is_fire_tackle_endlag_canceled = false
+	saved_endlag_velocity = 0
 
 func startup_init():
 	current_attack_state = AttackState.STARTUP
@@ -131,6 +133,7 @@ func startup_init():
 	current_vertical_axis = 0
 
 func startup_update(delta : float):
+	hub.buffers.refresh_speed_preservation_buffer()
 	if ((current_windup_timer > 0 or is_attack_button_held)):
 		if (!Input.is_action_pressed("Attack")):
 			is_attack_button_held = false
@@ -173,7 +176,8 @@ func active_init():
 	(fire_tackle_hitbox_instance as KnockbackHitbox).hit.connect(_on_fire_tackle_hit)
 
 func active_update(delta : float):
-	if (current_attack_timer > 0 and (current_bump_immunity_timer > 0 or (!hub.collisions.is_facing_a_wall() and !hub.char_body.is_on_ceiling()))):
+	hub.buffers.refresh_speed_preservation_buffer()
+	if (current_attack_timer > 0 and (current_bump_immunity_timer > 0 or (!hub.collisions.is_facing_a_wall() and !(hub.char_body.is_on_ceiling() and !hub.char_body.is_on_floor())))):
 		if (current_attack_timer <= hub.buffers.jump_buffer_time):
 			hub.char_sprite.modulate = fire_tackle_jump_cancel_buffer_color
 		
@@ -229,7 +233,7 @@ func endlag_init():
 	hub.sprite_trail.deactivate_trail()
 	did_player_bump = false
 	is_player_firing_projectile = false
-	if (hub.collisions.is_facing_a_wall() or hub.char_body.is_on_ceiling()):
+	if (hub.collisions.is_facing_a_wall() or (hub.char_body.is_on_ceiling() and !hub.char_body.is_on_floor())):
 		hub.audio.play_sound("attack_draelyn_bump")
 		did_player_bump = true
 		hub.buffers.reset_speed_preservation_buffer()
@@ -264,6 +268,7 @@ func endlag_init():
 			hub.movement.reset_current_horizontal_velocity()
 			hub.char_body.velocity = (((Vector2.UP if !hub.char_body.is_on_floor() else Vector2.ZERO) + (Vector2.RIGHT * -hub.movement.get_facing_value())).normalized() * fire_tackle_fireball_recoil_strength)
 		else:
+			saved_endlag_velocity = hub.char_body.velocity.x
 			hub.audio.play_sound("attack_draelyn_endlag", -2)
 			hub.animation.set_animation("DraelynFireTackleEndlag")
 			hub.animation.set_animation_speed(1)
@@ -282,8 +287,9 @@ func endlag_update(delta : float):
 			else:
 				hub.buffers.reset_jump_buffer()
 			return
-		elif (!did_player_bump and hub.char_body.is_on_floor() and hub.char_body.velocity.x != 0):
-			hub.char_body.velocity.x = (0.0 if hub.collisions.is_facing_a_wall() or hub.collisions.is_near_a_ledge() else move_toward(hub.char_body.velocity.x, 0, delta * fire_tackle_endlag_deceleration))
+		elif (!did_player_bump and hub.char_body.is_on_floor() and saved_endlag_velocity != 0):
+			saved_endlag_velocity = move_toward(saved_endlag_velocity, 0, delta * fire_tackle_endlag_deceleration * (0 if hub.collisions.is_facing_a_wall() or hub.collisions.is_near_a_ledge() else 1))
+			hub.char_body.velocity.x = saved_endlag_velocity
 			hub.collisions.do_ledge_nudge()
 			hub.char_body.apply_floor_snap()
 		elif (did_player_bump and hub.char_body.is_on_floor() and current_endlag_timer < fire_tackle_endlag_cancelable_time):

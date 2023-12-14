@@ -69,6 +69,7 @@ var blast_jump_current_active_time : float = 0
 var blast_jump_current_temper_interval_time : float = 0
 
 func _process(delta):
+	check_despawn_distance()
 	blast_jump_update(delta)
 
 func can_use_attack():
@@ -113,6 +114,15 @@ func throw_projectile():
 		projectile_rb.apply_torque_impulse(throw_rotation * hub.movement.get_facing_value())
 		
 		(projectile_instance as MagicBlastProjectile).attack_ref = self
+
+func check_despawn_distance():
+	if (projectile_instance != null):
+		if (hub.char_body.global_position.distance_to((projectile_instance as Node2D).global_position) > projectile_despawn_distance):
+			destroy_projectile()
+
+func destroy_projectile():
+	if (projectile_instance != null):
+		projectile_instance.queue_free()
 
 func do_detonation():
 	if (projectile_instance != null):

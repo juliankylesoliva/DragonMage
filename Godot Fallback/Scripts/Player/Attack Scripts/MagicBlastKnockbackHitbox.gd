@@ -3,7 +3,10 @@ extends KnockbackHitbox
 class_name MagicBlastKnockbackHitbox
 
 @export_flags_2d_physics var player_layer
+
 @export_flags_2d_physics var ground_layer
+
+var rid_list : Array[RID]
 
 func _on_body_entered(body):
 	var temp_ray_mask = ray.collision_mask
@@ -30,6 +33,11 @@ func do_magic_blast_knockback(body):
 		
 		if (is_going_thru_a_wall(target_pos, hub.char_body.get_rid())):
 			return
+		
+		if (rid_list.count(hub.char_body.get_rid()) > 0):
+			return
+		else:
+			rid_list.append(hub.char_body.get_rid())
 		
 		var state_name : String = hub.state_machine.current_state.name
 		var distance_to_projectile : float = (hub.collision_shape.global_position.distance_to(collision_shape.global_position))
