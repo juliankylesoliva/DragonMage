@@ -35,13 +35,13 @@ func state_process(_delta):
 		set_next_state(state_machine.get_state_by_name("FormChanging"))
 	elif (((hub.collisions.is_moving_against_a_wall()) and (hub.get_input_vector().x * hub.movement.get_facing_value() > 0)) or (hub.get_input_vector().x == 0 and hub.char_body.velocity.x == 0)):
 		set_next_state(state_machine.get_state_by_name("Standing"))
+	elif (!hub.char_body.is_on_floor() and hub.char_body.velocity.y >= 0):
+		set_next_state((state_machine.get_state_by_name("Falling")))
 	elif (hub.jumping.can_ground_jump()):
 		hub.jumping.start_ground_jump()
 		set_next_state(state_machine.get_state_by_name("Jumping"))
 	elif (hub.attacks.is_using_attack_state() and hub.attacks.current_attack != null):
 		set_next_state(state_machine.get_state_by_name("Attacking"))
-	elif (!hub.char_body.is_on_floor()):
-		set_next_state((state_machine.get_state_by_name("Falling")))
 	else:
 		pass
 

@@ -57,6 +57,12 @@ func state_process(_delta):
 		set_next_state(state_machine.get_state_by_name("Attacking"))
 	elif (!hub.char_body.is_on_floor()):
 		set_next_state((state_machine.get_state_by_name("Falling")))
+	elif (!hub.char_body.is_on_floor() and hub.char_body.velocity.y < 0):
+		set_next_state(state_machine.get_state_by_name("Jumping"))
+	elif (!hub.char_body.is_on_floor() and hub.char_body.velocity.y >= 0):
+		set_next_state((state_machine.get_state_by_name("Falling")))
+	elif (hub.char_body.velocity.x != 0):
+		set_next_state(state_machine.get_state_by_name("Running"))
 	else:
 		pass
 

@@ -287,9 +287,9 @@ func endlag_update(delta : float):
 			else:
 				hub.buffers.reset_jump_buffer()
 			return
-		elif (!did_player_bump and hub.char_body.is_on_floor() and saved_endlag_velocity != 0):
-			saved_endlag_velocity = move_toward(saved_endlag_velocity, 0, delta * fire_tackle_endlag_deceleration * (0 if hub.collisions.is_facing_a_wall() or hub.collisions.is_near_a_ledge() else 1))
-			hub.char_body.velocity.x = saved_endlag_velocity
+		elif (!did_player_bump and hub.char_body.is_on_floor() and hub.char_body.velocity.x != 0):
+			saved_endlag_velocity = hub.char_body.velocity.x
+			hub.char_body.velocity.x = (0.0 if hub.collisions.is_facing_a_wall() or hub.collisions.is_near_a_ledge() else move_toward(hub.char_body.velocity.x, 0, delta * fire_tackle_endlag_deceleration))
 			hub.collisions.do_ledge_nudge()
 			hub.char_body.apply_floor_snap()
 		elif (did_player_bump and hub.char_body.is_on_floor() and current_endlag_timer < fire_tackle_endlag_cancelable_time):
@@ -300,6 +300,8 @@ func endlag_update(delta : float):
 		
 		hub.char_body.velocity.y += hub.jumping.get_gravity_delta(delta)
 		hub.char_body.move_and_slide()
+		if (hub.char_body.velocity == Vector2.ZERO and hub.char_body.is_on_ceiling()):
+			hub.char_body.velocity.x = saved_endlag_velocity
 		
 		current_endlag_timer = move_toward(current_endlag_timer, 0, delta)
 	else:
