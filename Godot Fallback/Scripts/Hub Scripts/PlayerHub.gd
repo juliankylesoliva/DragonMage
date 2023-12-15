@@ -12,6 +12,7 @@ class_name PlayerHub
 @export var form : PlayerForm
 @export var animation : PlayerAnimation
 @export var sprite_trail : PlayerSpriteTrail
+@export var camera : PlayerCamera
 @export var audio : AudioHandler
 
 @export var char_body : CharacterBody2D

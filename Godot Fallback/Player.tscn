@@ -1,4 +1,4 @@
-[gd_scene load_steps=165 format=3 uid="uid://c6qw77ovfwgfs"]
+[gd_scene load_steps=166 format=3 uid="uid://c6qw77ovfwgfs"]
 
 [ext_resource type="Texture2D" uid="uid://d381ahbcwydy8" path="res://Sprites/Player/DraelynCrouch.png" id="1_6b42p"]
 [ext_resource type="Texture2D" uid="uid://dls34a1qa8iy1" path="res://Sprites/Player/DraelynFireTackle.png" id="1_ddrlj"]
@@ -52,6 +52,7 @@
 [ext_resource type="Script" path="res://Scripts/Utility Scripts/AudioHandler.gd" id="23_55p2k"]
 [ext_resource type="Texture2D" uid="uid://c44t784vgugry" path="res://Sprites/Player/MagliIdle.png" id="27_my3k8"]
 [ext_resource type="Texture2D" uid="uid://bcwdksusecuad" path="res://Sprites/Player/DraelynFastFall.png" id="38_akwr7"]
+[ext_resource type="Script" path="res://Scripts/Utility Scripts/PlayerCamera.gd" id="39_6wpeu"]
 [ext_resource type="Texture2D" uid="uid://b8o0u22mxyifu" path="res://Sprites/Effects/BlastJumpParticle.png" id="47_v16qd"]
 [ext_resource type="Texture2D" uid="uid://nskhc48w5xs3" path="res://Sprites/Effects/FireTackleTrail.png" id="48_hn1hc"]
 [ext_resource type="Texture2D" uid="uid://cajxrlpp0g7oo" path="res://Sprites/Effects/NeutralMidairJumpParticle.png" id="52_4345i"]
@@ -1101,7 +1102,7 @@ platform_wall_layers = 3
 safe_margin = 0.001
 metadata/Tag = "Player"
 
-[node name="Hub" type="Node" parent="." node_paths=PackedStringArray("state_machine", "collisions", "buffers", "movement", "jumping", "attacks", "temper", "form", "animation", "sprite_trail", "audio", "char_body", "char_sprite", "collision_shape", "stream_player", "raycast_dl", "raycast_dm", "raycast_dr", "raycast_ledge_l", "raycast_ledge_r", "raycast_ul", "raycast_um", "raycast_ur", "raycast_ceiling_l", "raycast_ceiling_r")]
+[node name="Hub" type="Node" parent="." node_paths=PackedStringArray("state_machine", "collisions", "buffers", "movement", "jumping", "attacks", "temper", "form", "animation", "sprite_trail", "camera", "audio", "char_body", "char_sprite", "collision_shape", "stream_player", "raycast_dl", "raycast_dm", "raycast_dr", "raycast_ledge_l", "raycast_ledge_r", "raycast_ul", "raycast_um", "raycast_ur", "raycast_ceiling_l", "raycast_ceiling_r")]
 script = ExtResource("1_fbdyy")
 state_machine = NodePath("../StateMachine")
 collisions = NodePath("Collisions")
@@ -1113,6 +1114,7 @@ temper = NodePath("Temper")
 form = NodePath("Form")
 animation = NodePath("Animation")
 sprite_trail = NodePath("SpriteTrail")
+camera = NodePath("../Camera2D")
 audio = NodePath("Audio")
 char_body = NodePath("..")
 char_sprite = NodePath("../AnimatedSprite2D")
@@ -1319,19 +1321,36 @@ glide_particles = NodePath("../../GlideParticles")
 
 [node name="WallSliding" type="Node" parent="StateMachine"]
 script = ExtResource("12_mju8y")
+can_update_camera = false
 
 [node name="WallClimbing" type="Node" parent="StateMachine"]
 script = ExtResource("17_ve68u")
 sprite_x_offset = 5.0
+can_update_camera = false
 
 [node name="WallVaulting" type="Node" parent="StateMachine"]
 script = ExtResource("18_vi6ah")
+can_update_camera = false
 
 [node name="Attacking" type="Node" parent="StateMachine"]
 script = ExtResource("20_dbcpj")
+can_update_camera = false
 
 [node name="FormChanging" type="Node" parent="StateMachine"]
 script = ExtResource("17_1yv22")
+can_update_camera = false
+
+[node name="Camera2D" type="Camera2D" parent="." node_paths=PackedStringArray("hub")]
+process_callback = 0
+drag_vertical_enabled = true
+drag_top_margin = 0.6
+drag_bottom_margin = 0.0
+editor_draw_limits = true
+editor_draw_drag_margin = true
+script = ExtResource("39_6wpeu")
+hub = NodePath("../Hub")
+target_x_lookahead_delta_multiplier = 3.0
+falling_lookahead_threshold = 32.0
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 visibility_layer = 8

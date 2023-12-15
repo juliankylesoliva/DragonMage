@@ -66,6 +66,7 @@ func attack_state_process(_delta : float):
 		
 		hub.char_body.move_and_slide()
 		current_dodge_speed = move_toward(current_dodge_speed, 0, dodge_deceleration * _delta)
+	hub.camera.update_lookahead(_delta)
 
 func on_attack_state_exit():
 	hub.sprite_trail.deactivate_trail()

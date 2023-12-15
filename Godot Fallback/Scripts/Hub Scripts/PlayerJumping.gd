@@ -365,7 +365,7 @@ func cancel_glide():
 		current_glide_time = max_glide_time
 
 func can_midair_jump():
-	return (((hub.state_machine.previous_state.name != "WallVaulting") or hub.char_body.velocity.y >= 0 or current_midair_jumps > 0) and !hub.char_body.is_on_floor() and current_midair_jumps < max_midair_jumps and hub.buffers.is_jump_buffer_active())
+	return (((hub.state_machine.previous_state.name != "WallVaulting") or hub.char_body.velocity.y >= 0 or current_midair_jumps > 0) and (!hub.char_body.is_on_floor() or hub.state_machine.current_state.name == "Jumping") and current_midair_jumps < max_midair_jumps and hub.buffers.is_jump_buffer_active())
 
 func do_midair_jump():
 	hub.animation.set_animation("DraelynMidairJump")
