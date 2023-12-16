@@ -16,9 +16,27 @@ room_list = [NodePath("Room")]
 [node name="Player" parent="." instance=ExtResource("2_mjfj3")]
 position = Vector2(128, 223)
 
-[node name="TemperMeterUI" parent="." node_paths=PackedStringArray("player_node") instance=ExtResource("3_vdeox")]
+[node name="Camera" parent="Player/Hub" index="9" node_paths=PackedStringArray("player_cam")]
+player_cam = NodePath("../../../Camera2D")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+drag_left_margin = 0.0
+drag_top_margin = 0.6
+drag_right_margin = 0.0
+editor_draw_limits = true
+editor_draw_drag_margin = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TemperMeterUI" parent="VBoxContainer" node_paths=PackedStringArray("player_node") instance=ExtResource("3_vdeox")]
 position = Vector2(1, 8)
-player_node = NodePath("../Player")
+player_node = NodePath("../../Player")
+process_callback = "Idle"
 camera_offset = Vector2(-255, -152)
 
 [editable path="Player"]

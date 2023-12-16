@@ -26,6 +26,7 @@ func _on_body_entered(body):
 			room_destination.activate_room()
 		
 		hub.char_body.global_position = destination_coords
+		hub.camera.snap_camera_to_player()
 		
 		if (room_destination != room_origin):
 			room_destination.deactivate_room()

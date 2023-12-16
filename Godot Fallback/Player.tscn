@@ -52,12 +52,12 @@
 [ext_resource type="Script" path="res://Scripts/Utility Scripts/AudioHandler.gd" id="23_55p2k"]
 [ext_resource type="Texture2D" uid="uid://c44t784vgugry" path="res://Sprites/Player/MagliIdle.png" id="27_my3k8"]
 [ext_resource type="Texture2D" uid="uid://bcwdksusecuad" path="res://Sprites/Player/DraelynFastFall.png" id="38_akwr7"]
-[ext_resource type="Script" path="res://Scripts/Utility Scripts/PlayerCamera.gd" id="39_6wpeu"]
 [ext_resource type="Texture2D" uid="uid://b8o0u22mxyifu" path="res://Sprites/Effects/BlastJumpParticle.png" id="47_v16qd"]
 [ext_resource type="Texture2D" uid="uid://nskhc48w5xs3" path="res://Sprites/Effects/FireTackleTrail.png" id="48_hn1hc"]
 [ext_resource type="Texture2D" uid="uid://cajxrlpp0g7oo" path="res://Sprites/Effects/NeutralMidairJumpParticle.png" id="52_4345i"]
 [ext_resource type="Texture2D" uid="uid://cdrl535qe7xx0" path="res://Sprites/Effects/SuperJumpChargeParticle.png" id="52_kmjhs"]
 [ext_resource type="Texture2D" uid="uid://bj6vmo7ahwtpf" path="res://Sprites/Effects/SpeedBufferParticle.png" id="52_u3vuf"]
+[ext_resource type="Script" path="res://Scripts/Utility Scripts/PlayerCamera.gd" id="54_k03tc"]
 
 [sub_resource type="Curve" id="Curve_qnqge"]
 _data = [Vector2(0, 1), 0.0, -0.658891, 0, 0, Vector2(1, 0), -1.2831, 0.0, 0, 0]
@@ -1114,7 +1114,7 @@ temper = NodePath("Temper")
 form = NodePath("Form")
 animation = NodePath("Animation")
 sprite_trail = NodePath("SpriteTrail")
-camera = NodePath("../Camera2D")
+camera = NodePath("Camera")
 audio = NodePath("Audio")
 char_body = NodePath("..")
 char_sprite = NodePath("../AnimatedSprite2D")
@@ -1291,6 +1291,12 @@ trail_spawn_interval = 0.05
 mage_trail_color = Color(0.384314, 0.517647, 0.905882, 1)
 dragon_trail_color = Color(1, 0.6, 0.431373, 1)
 
+[node name="Camera" type="Node" parent="Hub" node_paths=PackedStringArray("hub")]
+script = ExtResource("54_k03tc")
+hub = NodePath("..")
+base_x_lookahead = 128.0
+upper_camera_threshold = 192.0
+
 [node name="Audio" type="Node" parent="Hub" node_paths=PackedStringArray("hub")]
 script = ExtResource("23_55p2k")
 hub = NodePath("..")
@@ -1334,17 +1340,6 @@ script = ExtResource("20_dbcpj")
 
 [node name="FormChanging" type="Node" parent="StateMachine"]
 script = ExtResource("17_1yv22")
-
-[node name="Camera2D" type="Camera2D" parent="." node_paths=PackedStringArray("hub")]
-process_callback = 0
-position_smoothing_speed = 10.0
-drag_top_margin = 0.6
-drag_bottom_margin = 0.0
-editor_draw_limits = true
-editor_draw_drag_margin = true
-script = ExtResource("39_6wpeu")
-hub = NodePath("../Hub")
-target_x_lookahead_delta_multiplier = 3.0
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 visibility_layer = 8

@@ -46,10 +46,13 @@ func _ready():
 
 func _process(_delta):
 	super._process(_delta)
-	refresh_meter_ui()
+	uniform_process(_delta)
 
 func _physics_process(_delta):
 	super._physics_process(_delta)
+	uniform_process(_delta)
+
+func uniform_process(_delta):
 	refresh_meter_ui()
 	update_modulate_alpha(_delta)
 

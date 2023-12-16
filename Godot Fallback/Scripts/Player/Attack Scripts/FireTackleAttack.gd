@@ -220,7 +220,6 @@ func active_update(delta : float):
 		
 		current_attack_timer = move_toward(current_attack_timer, 0, delta)
 		current_bump_immunity_timer = move_toward(current_bump_immunity_timer, 0, delta)
-		hub.camera.update_lookahead(delta)
 	else:
 		endlag_init()
 
@@ -305,7 +304,6 @@ func endlag_update(delta : float):
 			hub.char_body.velocity.x = saved_endlag_velocity
 		
 		current_endlag_timer = move_toward(current_endlag_timer, 0, delta)
-		hub.camera.update_lookahead(delta)
 	else:
 		end_fire_tackle()
 
