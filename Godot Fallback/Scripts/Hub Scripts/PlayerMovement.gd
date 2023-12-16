@@ -111,7 +111,11 @@ func update_crouch_cooldown_timer(delta):
 		current_crouch_cooldown_timer = move_toward(current_crouch_cooldown_timer, 0, delta)
 
 func do_movement(delta):
-	var horizontal_axis = (hub.get_input_vector().x if !hub.jumping.is_wall_jump_lock_timer_active() else get_facing_value())
+	if (hub.jumping.is_wall_jump_lock_timer_active()):
+		hub.char_body.move_and_slide()
+		return
+	
+	var horizontal_axis = hub.get_input_vector().x
 	
 	if (horizontal_axis != 0 and (!is_crouching or enable_crouch_walking)):
 		if (hub.collisions.is_moving_against_a_wall()):

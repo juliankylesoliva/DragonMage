@@ -207,7 +207,7 @@ func reset_wall_jump_lock_timer():
 	current_wall_jump_direction_lock_time = 0
 
 func update_wall_jump_lock_timer(delta):
-	if (is_wall_jump_lock_timer_active()):
+	if (hub.state_machine.current_state.name == "FormChanging" and (is_wall_jump_lock_timer_active() or hub.char_body.velocity.y < 0)):
 		current_wall_jump_direction_lock_time = move_toward(current_wall_jump_direction_lock_time, 0, delta)
 
 func is_super_jump_ready():

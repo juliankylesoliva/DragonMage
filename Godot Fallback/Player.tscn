@@ -1321,28 +1321,23 @@ glide_particles = NodePath("../../GlideParticles")
 
 [node name="WallSliding" type="Node" parent="StateMachine"]
 script = ExtResource("12_mju8y")
-can_update_camera = false
 
 [node name="WallClimbing" type="Node" parent="StateMachine"]
 script = ExtResource("17_ve68u")
 sprite_x_offset = 5.0
-can_update_camera = false
 
 [node name="WallVaulting" type="Node" parent="StateMachine"]
 script = ExtResource("18_vi6ah")
-can_update_camera = false
 
 [node name="Attacking" type="Node" parent="StateMachine"]
 script = ExtResource("20_dbcpj")
-can_update_camera = false
 
 [node name="FormChanging" type="Node" parent="StateMachine"]
 script = ExtResource("17_1yv22")
-can_update_camera = false
 
 [node name="Camera2D" type="Camera2D" parent="." node_paths=PackedStringArray("hub")]
 process_callback = 0
-drag_vertical_enabled = true
+position_smoothing_speed = 10.0
 drag_top_margin = 0.6
 drag_bottom_margin = 0.0
 editor_draw_limits = true
@@ -1350,7 +1345,6 @@ editor_draw_drag_margin = true
 script = ExtResource("39_6wpeu")
 hub = NodePath("../Hub")
 target_x_lookahead_delta_multiplier = 3.0
-falling_lookahead_threshold = 32.0
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 visibility_layer = 8
