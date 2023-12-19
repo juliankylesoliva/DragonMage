@@ -95,10 +95,16 @@ func on_attack_state_enter():
 func attack_state_process(_delta : float):
 	if (current_attack_state == AttackState.STARTUP):
 		startup_update(_delta)
+		hub.camera.fire_tackle_camera_update(_delta, abs(horizontal_result), current_vertical_axis)
 	elif (current_attack_state == AttackState.ACTIVE):
 		active_update(_delta)
+		hub.camera.update_x_lookahead(_delta)
+		hub.camera.update_y_lookahead(_delta)
 	elif (current_attack_state == AttackState.ENDLAG):
 		endlag_update(_delta)
+		if (!is_player_firing_projectile and !did_player_bump):
+			hub.camera.update_x_lookahead(_delta)
+		hub.camera.update_y_lookahead(_delta)
 	else:
 		pass
 
@@ -107,9 +113,9 @@ func on_attack_state_exit():
 	current_startup_hold_timer = 0
 	previous_horizontal_velocity = 0
 	current_vertical_axis = 0
-	
 	was_interacting_with_wall = false
 	horizontal_result = 0
+	
 	current_rising_speed = 0
 	current_attack_timer = 0
 	current_trail_spawn_timer = 0
@@ -131,6 +137,8 @@ func startup_init():
 	current_startup_hold_timer = fire_tackle_startup_hold_temper_drain_interval
 	previous_horizontal_velocity = abs(hub.char_body.velocity.x)
 	current_vertical_axis = 0
+	was_interacting_with_wall = (hub.state_machine.previous_state.name == "WallVaulting" or hub.state_machine.previous_state.name == "WallClimbing")
+	horizontal_result = min(((hub.jumping.stored_wall_climb_speed if was_interacting_with_wall else previous_horizontal_velocity) + fire_tackle_min_horizontal_speed), fire_tackle_max_horizontal_speed)
 
 func startup_update(delta : float):
 	hub.buffers.refresh_speed_preservation_buffer()
@@ -162,10 +170,9 @@ func active_init():
 	hub.sprite_trail.activate_trail()
 	hub.animation.set_animation("DraelynFireTackleActive")
 	hub.animation.set_animation_speed(1)
-	was_interacting_with_wall = (hub.state_machine.previous_state.name == "WallVaulting" or hub.state_machine.previous_state.name == "WallClimbing")
-	horizontal_result = (min(((hub.jumping.stored_wall_climb_speed if was_interacting_with_wall else previous_horizontal_velocity) + fire_tackle_min_horizontal_speed), fire_tackle_max_horizontal_speed) * hub.movement.get_facing_value())
 	current_rising_speed = 0
-	hub.char_body.velocity = Vector2(horizontal_result, (-abs(hub.char_body.velocity.x) if current_vertical_axis > 0 else 0))
+	hub.char_body.velocity = Vector2(horizontal_result * hub.movement.get_facing_value(), (-abs(hub.char_body.velocity.x) if current_vertical_axis > 0 else 0))
+	hub.movement.set_facing_direction(hub.char_body.velocity.x)
 	current_attack_timer = fire_tackle_duration
 	current_bump_immunity_timer = fire_tackle_bump_immunity_duration
 	hub.temper.change_temper_by(fire_tackle_launch_temper_decrease)
@@ -181,7 +188,7 @@ func active_update(delta : float):
 		if (current_attack_timer <= hub.buffers.jump_buffer_time):
 			hub.char_sprite.modulate = fire_tackle_jump_cancel_buffer_color
 		
-		hub.char_body.velocity.x = (horizontal_result if !hub.collisions.is_facing_a_wall() else 0.0)
+		hub.char_body.velocity.x = (horizontal_result * hub.movement.get_facing_value() if !hub.collisions.is_facing_a_wall() else 0.0)
 		if (current_vertical_axis > 0):
 			current_rising_speed -= (fire_tackle_vertical_acceleration * delta)
 			hub.char_body.velocity.y = current_rising_speed
@@ -192,7 +199,7 @@ func active_update(delta : float):
 			else:
 				hub.char_body.velocity.y = abs(hub.char_body.velocity.x)
 		else:
-			hub.char_body.velocity = (Vector2.RIGHT * (horizontal_result if !hub.collisions.is_facing_a_wall() else 0.0))
+			hub.char_body.velocity = (Vector2.RIGHT * (horizontal_result * hub.movement.get_facing_value() if !hub.collisions.is_facing_a_wall() else 0.0))
 		
 		if (current_vertical_axis <= 0 and (hub.char_body.is_on_floor() or hub.collisions.get_distance_to_ground() <= fire_tackle_floor_snap_distance)):
 			hub.char_body.apply_floor_snap()
@@ -253,7 +260,7 @@ func endlag_init():
 			
 			var fireball_instance = fireball_scene.instantiate()
 			add_sibling(fireball_instance)
-			var fireball_speed : float = ((fire_tackle_fireball_base_launch_speed * hub.movement.get_facing_value()) + (horizontal_result * fire_tackle_fireball_inertia_multiplier))
+			var fireball_speed : float = ((fire_tackle_fireball_base_launch_speed + (horizontal_result * fire_tackle_fireball_inertia_multiplier)) * hub.movement.get_facing_value())
 			(fireball_instance as Node2D).global_position = hub.char_body.global_position
 			(fireball_instance as RigidBody2D).linear_velocity.x = fireball_speed
 			for child in fireball_instance.get_children():
@@ -327,7 +334,9 @@ func end_fire_tackle():
 		hub.buffers.refresh_speed_preservation_buffer()
 	
 	hub.attacks.set_attack_cooldown_timer()
-	hub.form.start_form_change_timer()
+	
+	if (!is_fire_tackle_endlag_canceled):
+		hub.form.start_form_change_cooldown_timer()
 	
 	if (hub.temper.is_forcing_form_change()):
 		hub.state_machine.current_state.set_next_state(hub.state_machine.get_state_by_name("FormChanging"))

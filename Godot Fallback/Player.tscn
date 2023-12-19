@@ -1150,7 +1150,7 @@ speed_preservation_particles = NodePath("../../SpeedBufferParticles")
 [node name="Movement" type="Node" parent="Hub" node_paths=PackedStringArray("hub")]
 script = ExtResource("2_ebc55")
 hub = NodePath("..")
-max_slides = 9999
+max_slides = 999
 top_speed = 168.0
 acceleration = 800.0
 deceleration = 640.0
@@ -1295,7 +1295,11 @@ dragon_trail_color = Color(1, 0.6, 0.431373, 1)
 script = ExtResource("54_k03tc")
 hub = NodePath("..")
 base_x_lookahead = 128.0
-upper_camera_threshold = 192.0
+time_to_update_x = 0.35
+max_y_lookahead = 288.0
+fast_fall_y_lookahead = 640.0
+lower_camera_threshold = 128.0
+time_to_update_y = 0.35
 
 [node name="Audio" type="Node" parent="Hub" node_paths=PackedStringArray("hub")]
 script = ExtResource("23_55p2k")
@@ -1327,19 +1331,25 @@ glide_particles = NodePath("../../GlideParticles")
 
 [node name="WallSliding" type="Node" parent="StateMachine"]
 script = ExtResource("12_mju8y")
+can_update_camera_x_pos = false
 
 [node name="WallClimbing" type="Node" parent="StateMachine"]
 script = ExtResource("17_ve68u")
 sprite_x_offset = 5.0
+can_update_camera_x_pos = false
 
 [node name="WallVaulting" type="Node" parent="StateMachine"]
 script = ExtResource("18_vi6ah")
+can_update_camera_x_pos = false
 
 [node name="Attacking" type="Node" parent="StateMachine"]
 script = ExtResource("20_dbcpj")
+can_update_camera_x_pos = false
+can_update_camera_y_pos = false
 
 [node name="FormChanging" type="Node" parent="StateMachine"]
 script = ExtResource("17_1yv22")
+can_update_camera_x_pos = false
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 visibility_layer = 8

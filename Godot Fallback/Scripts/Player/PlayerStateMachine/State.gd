@@ -2,6 +2,10 @@ extends Node
 
 class_name State
 
+@export var can_update_camera_x_pos : bool = true
+
+@export var can_update_camera_y_pos : bool = true
+
 var state_machine : PlayerStateMachine
 var hub : PlayerHub
 var next_state : State

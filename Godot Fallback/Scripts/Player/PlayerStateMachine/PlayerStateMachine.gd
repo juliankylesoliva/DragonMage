@@ -26,9 +26,6 @@ func _physics_process(delta):
 	if (current_state.next_state != null):
 		switch_states(current_state.next_state)
 
-func can_current_state_move():
-	return current_state.can_move
-
 func switch_states(new_state : State):
 	if (current_state != null):
 		current_state.on_exit()

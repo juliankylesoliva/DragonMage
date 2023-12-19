@@ -18,8 +18,10 @@ position = Vector2(128, 223)
 
 [node name="Camera" parent="Player/Hub" index="9" node_paths=PackedStringArray("player_cam")]
 player_cam = NodePath("../../../Camera2D")
+camera_y_pos_update_cooldown = 0.25
 
 [node name="Camera2D" type="Camera2D" parent="."]
+process_callback = 0
 drag_left_margin = 0.0
 drag_top_margin = 0.6
 drag_right_margin = 0.0

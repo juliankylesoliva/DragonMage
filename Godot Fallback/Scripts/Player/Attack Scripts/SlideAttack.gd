@@ -84,6 +84,8 @@ func attack_state_process(_delta : float):
 			slide_effect_instance.frame_progress = frame_progress
 		else:
 			pass
+	hub.camera.update_x_lookahead(_delta)
+	hub.camera.update_y_lookahead(_delta)
 
 func on_attack_state_exit():
 	if (slide_effect_instance != null):
