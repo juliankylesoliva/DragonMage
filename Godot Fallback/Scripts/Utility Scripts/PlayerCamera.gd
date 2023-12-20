@@ -56,7 +56,7 @@ func update_x_lookahead(delta : float):
 func update_y_lookahead(delta : float):
 	if (hub.char_body.is_on_floor() or !is_between_thresholds() or hub.jumping.is_fast_falling):
 		var state_name : String = hub.state_machine.current_state.name
-		if (hub.char_body.is_on_floor() or state_name == "WallSliding" or state_name == "WallClimbing"):
+		if (hub.char_body.is_on_floor() or state_name == "WallSliding" or state_name == "WallClimbing" or state_name == "WallVaulting"):
 			was_upper_threshold_crossed = false
 			was_lower_threshold_crossed = false
 		
