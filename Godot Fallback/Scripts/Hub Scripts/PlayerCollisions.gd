@@ -29,6 +29,28 @@ func is_facing_a_wall():
 	var collide_result : KinematicCollision2D = hub.char_body.move_and_collide(horizontal_movement, true, hub.char_body.safe_margin)
 	return (collide_result != null and collide_result.get_normal().y == 0 and (hub.movement.get_facing_value() * collide_result.get_normal().x < 0))
 
+func is_moving_against_an_intangible_wall():
+	var horizontal_movement : Vector2 = (Vector2.RIGHT * hub.movement.current_horizontal_velocity * get_physics_process_delta_time())
+	var collide_result : KinematicCollision2D = hub.char_body.move_and_collide(horizontal_movement, true, hub.char_body.safe_margin)
+	
+	if (hub.char_body.is_on_wall() and collide_result != null and collide_result.get_normal().y == 0 and (hub.movement.current_horizontal_velocity * collide_result.get_normal().x < 0)):
+		var collider : Object = collide_result.get_collider()
+		if (collider.has_meta("IsIntangibleWall") and collider.get_meta("IsIntangibleWall")):
+			return true
+	
+	return false
+
+func is_facing_an_intangible_wall():
+	var horizontal_movement : Vector2 = (Vector2.RIGHT * hub.movement.get_facing_value() * hub.movement.top_speed * get_physics_process_delta_time())
+	var collide_result : KinematicCollision2D = hub.char_body.move_and_collide(horizontal_movement, true, hub.char_body.safe_margin)
+	
+	if (collide_result != null and collide_result.get_normal().y == 0 and (hub.movement.get_facing_value() * collide_result.get_normal().x < 0)):
+		var collider : Object = collide_result.get_collider()
+		if (collider.has_meta("IsIntangibleWall") and collider.get_meta("IsIntangibleWall")):
+			return true
+	
+	return false
+
 func is_near_a_ledge(ray_num : int = 0):
 	return (hub.char_body.is_on_floor() and get_distance_to_ground(ray_num) > hub.char_body.floor_snap_length)
 

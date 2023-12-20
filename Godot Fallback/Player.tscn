@@ -1298,6 +1298,7 @@ base_x_lookahead = 128.0
 time_to_update_x = 0.35
 max_y_lookahead = 288.0
 fast_fall_y_lookahead = 640.0
+fast_fall_ground_distance_threshold = 256.0
 lower_camera_threshold = 128.0
 time_to_update_y = 0.35
 

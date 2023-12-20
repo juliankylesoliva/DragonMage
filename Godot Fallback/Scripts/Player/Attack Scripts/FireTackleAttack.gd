@@ -330,7 +330,7 @@ func end_fire_tackle():
 	hub.char_sprite.modulate = Color.WHITE
 	hub.movement.current_horizontal_velocity = hub.char_body.velocity.x
 	if (abs(hub.movement.current_horizontal_velocity) > hub.buffers.highest_speed):
-		hub.buffers.highest_speed = hub.movement.current_horizontal_velocity
+		hub.buffers.highest_speed = abs(hub.movement.current_horizontal_velocity)
 		hub.buffers.refresh_speed_preservation_buffer()
 	
 	hub.attacks.set_attack_cooldown_timer()
