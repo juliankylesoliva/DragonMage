@@ -91,11 +91,11 @@ func throw_projectile():
 		var vertical_axis = hub.get_input_vector().y
 		var throw_offset = (forward_throw_offset if vertical_axis == 0 else lob_throw_offset if vertical_axis > 0 else drop_throw_offset)
 		throw_offset.x *= hub.movement.get_facing_value()
-		throw_offset.x *= (-1 if hub.collisions.is_facing_a_wall() else 1)
+		throw_offset.x *= (-1 if hub.state_machine.current_state.name == "WallSliding" else 1)
 		
 		var throw_direction : Vector2 = Vector2.from_angle(deg_to_rad(forward_throw_angle if vertical_axis == 0 else lob_throw_angle if vertical_axis > 0 else drop_throw_angle))
 		throw_direction.x *= hub.movement.get_facing_value()
-		throw_direction.x *= (-1 if hub.collisions.is_facing_a_wall() else 1)
+		throw_direction.x *= (-1 if hub.state_machine.current_state.name == "WallSliding" else 1)
 		
 		var throw_strength = (forward_throw_strength if vertical_axis == 0 else lob_throw_strength if vertical_axis > 0 else drop_throw_strength)
 		

@@ -35,7 +35,7 @@ func is_moving_against_an_intangible_wall():
 	
 	if (hub.char_body.is_on_wall() and collide_result != null and collide_result.get_normal().y == 0 and (hub.movement.current_horizontal_velocity * collide_result.get_normal().x < 0)):
 		var collider : Object = collide_result.get_collider()
-		if (collider.has_meta("IsIntangibleWall") and collider.get_meta("IsIntangibleWall")):
+		if (collider.has_meta("Tag") and collider.get_meta("Tag") == "IntangibleWall"):
 			return true
 	
 	return false
@@ -46,7 +46,7 @@ func is_facing_an_intangible_wall():
 	
 	if (collide_result != null and collide_result.get_normal().y == 0 and (hub.movement.get_facing_value() * collide_result.get_normal().x < 0)):
 		var collider : Object = collide_result.get_collider()
-		if (collider.has_meta("IsIntangibleWall") and collider.get_meta("IsIntangibleWall")):
+		if (collider.has_meta("Tag") and collider.get_meta("Tag") == "IntangibleWall"):
 			return true
 	
 	return false

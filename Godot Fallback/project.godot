@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Dragon Mage (Godot Build)"
-run/main_scene="res://TestLevel.tscn"
+run/main_scene="res://Level Scenes/CH0_LV1/CH0_LV1.tscn"
 config/features=PackedStringArray("4.1", "GL Compatibility")
 config/icon="res://icon.svg"
 

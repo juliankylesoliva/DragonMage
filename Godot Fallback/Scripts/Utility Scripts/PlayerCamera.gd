@@ -54,25 +54,21 @@ func update_x_lookahead(delta : float):
 	player_cam.global_position.x = move_toward(player_cam.global_position.x, target_x, (abs(target_x - player_cam.global_position.x) / time_to_update_x) * delta)
 
 func update_y_lookahead(delta : float):
-	if (hub.char_body.is_on_floor() or !is_between_thresholds() or hub.jumping.is_fast_falling):
-		var state_name : String = hub.state_machine.current_state.name
-		if (hub.char_body.is_on_floor() or state_name == "WallSliding" or state_name == "WallClimbing" or state_name == "WallVaulting"):
-			was_upper_threshold_crossed = false
-			was_lower_threshold_crossed = false
-		
-		if ((hub.jumping.is_fast_falling and hub.collisions.get_distance_to_ground() > fast_fall_ground_distance_threshold) or (is_below_lower_threshold() and hub.char_body.velocity.y >= 0 and !was_lower_threshold_crossed)):
-			saved_y_position = (hub.char_body.position.y + (fast_fall_y_lookahead if hub.jumping.is_fast_falling else max_y_lookahead))
-			was_lower_threshold_crossed = true
-		elif (!hub.jumping.is_fast_falling and is_above_upper_threshold() and hub.char_body.velocity.y <= 0 and !was_upper_threshold_crossed and !was_lower_threshold_crossed):
-			saved_y_position = (hub.char_body.position.y - max_y_lookahead)
-			was_upper_threshold_crossed = true
-		if (!hub.jumping.is_fast_falling and (hub.char_body.is_on_floor() or !is_between_thresholds()) and was_upper_threshold_crossed and was_lower_threshold_crossed):
-			saved_y_position = hub.char_body.position.y
-			if ((is_above_upper_threshold() and hub.char_body.velocity.y <= 0) or (is_below_lower_threshold() and hub.char_body.velocity.y >= 0)):
-				was_upper_threshold_crossed = false
-				was_lower_threshold_crossed = false
-		else:
-			pass
+	var state_name : String = hub.state_machine.current_state.name
+	if (hub.char_body.is_on_floor() or state_name == "WallSliding" or state_name == "WallClimbing" or state_name == "WallVaulting"):
+		was_upper_threshold_crossed = false
+		was_lower_threshold_crossed = false
+	
+	if ((hub.jumping.is_fast_falling and hub.collisions.get_distance_to_ground() > fast_fall_ground_distance_threshold) or (is_below_lower_threshold() and hub.char_body.velocity.y >= 0)):
+		saved_y_position = (hub.char_body.position.y + (fast_fall_y_lookahead if hub.jumping.is_fast_falling else max_y_lookahead))
+		was_lower_threshold_crossed = true
+	elif (!hub.jumping.is_fast_falling and is_above_upper_threshold() and hub.char_body.velocity.y <= 0 and !was_upper_threshold_crossed and !was_lower_threshold_crossed):
+		saved_y_position = (hub.char_body.position.y - max_y_lookahead)
+		was_upper_threshold_crossed = true
+	elif (!hub.jumping.is_fast_falling and (hub.char_body.is_on_floor() or (is_above_upper_threshold() and (was_upper_threshold_crossed or was_lower_threshold_crossed)))):
+		saved_y_position = hub.char_body.position.y
+	else:
+		pass
 	
 	var target_y : float = saved_y_position
 	player_cam.global_position.y = (move_toward(player_cam.global_position.y, target_y, (abs(target_y - player_cam.global_position.y) / time_to_update_y) * delta) if hub.char_body.is_on_floor() or player_cam.global_position.y != target_y else saved_y_position)

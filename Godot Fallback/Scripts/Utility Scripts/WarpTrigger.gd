@@ -29,7 +29,7 @@ func _on_body_entered(body):
 		hub.camera.snap_camera_to_player()
 		
 		if (room_destination != room_origin):
-			room_destination.deactivate_room()
+			room_origin.deactivate_room()
 	elif (body is MagicBlastProjectile):
 		body.queue_free()
 	else:
