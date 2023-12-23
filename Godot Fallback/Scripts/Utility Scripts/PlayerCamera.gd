@@ -6,13 +6,19 @@ class_name PlayerCamera
 
 @export var player_cam : Camera2D
 
+@export var screen_width : float = 512
+
+@export var screen_height : float = 320
+
 @export var base_x_lookahead : float = 64
 
 @export var max_x_lookahead : float = 192
 
-@export var time_to_update_x : float = 0.25
-
 @export var max_y_lookahead : float = 128
+
+@export var camera_height_from_ground : float = 96
+
+@export var ground_level_update_height_threshold : float = 128
 
 @export var fast_fall_y_lookahead : float = 256
 
@@ -26,6 +32,8 @@ class_name PlayerCamera
 
 @export var time_to_update_y : float = 0.25
 
+var current_x_lookahead : float = 0
+
 var saved_y_position : float = 0
 
 var was_upper_threshold_crossed : bool = false
@@ -33,7 +41,7 @@ var was_upper_threshold_crossed : bool = false
 var was_lower_threshold_crossed : bool = false
 
 func _ready():
-	saved_y_position = hub.char_body.global_position.y
+	saved_y_position = hub.collisions.get_ground_point().y
 	snap_camera_to_player()
 
 func _physics_process(delta):
@@ -43,15 +51,14 @@ func _physics_process(delta):
 		update_y_lookahead(delta)
 
 func update_x_lookahead(delta : float):
-	var x_lookahead : float = (base_x_lookahead * (hub.char_body.velocity.x / hub.movement.top_speed))
-	if (abs(x_lookahead) > max_x_lookahead):
-		if (x_lookahead > 0):
-			x_lookahead = max_x_lookahead
-		else:
-			x_lookahead = -max_x_lookahead
+	var target_direction : float = (hub.movement.get_facing_value() if hub.state_machine.current_state.name != "Gliding" else hub.get_input_vector().x)
+	var max_lookahead : float = (max_x_lookahead if abs(hub.char_body.velocity.x) > hub.movement.top_speed else base_x_lookahead)
+	current_x_lookahead = move_toward(current_x_lookahead, target_direction * max_lookahead, max(hub.movement.top_speed, abs(hub.char_body.velocity.x)) * delta)
 	
-	var target_x : float = (hub.char_body.global_position.x + x_lookahead)
-	player_cam.global_position.x = move_toward(player_cam.global_position.x, target_x, (abs(target_x - player_cam.global_position.x) / time_to_update_x) * delta)
+	var target_x : float = (hub.char_body.global_position.x + current_x_lookahead)
+	target_x = clamp_x_target(target_x)
+	
+	player_cam.global_position.x = target_x
 
 func update_y_lookahead(delta : float):
 	var state_name : String = hub.state_machine.current_state.name
@@ -60,35 +67,53 @@ func update_y_lookahead(delta : float):
 		was_lower_threshold_crossed = false
 	
 	if ((hub.jumping.is_fast_falling and hub.collisions.get_distance_to_ground() > fast_fall_ground_distance_threshold) or (is_below_lower_threshold() and hub.char_body.velocity.y >= 0)):
-		saved_y_position = (hub.char_body.position.y + (fast_fall_y_lookahead if hub.jumping.is_fast_falling else max_y_lookahead))
+		saved_y_position = (hub.collisions.get_ground_point().y + (fast_fall_y_lookahead if hub.jumping.is_fast_falling else max_y_lookahead))
 		was_lower_threshold_crossed = true
 	elif (!hub.jumping.is_fast_falling and is_above_upper_threshold() and hub.char_body.velocity.y <= 0 and !was_upper_threshold_crossed and !was_lower_threshold_crossed):
-		saved_y_position = (hub.char_body.position.y - max_y_lookahead)
+		saved_y_position = (hub.collisions.get_ground_point().y - max_y_lookahead)
 		was_upper_threshold_crossed = true
-	elif (!hub.jumping.is_fast_falling and (hub.char_body.is_on_floor() or (is_above_upper_threshold() and (was_upper_threshold_crossed or was_lower_threshold_crossed)))):
-		saved_y_position = hub.char_body.position.y
+	elif (!hub.jumping.is_fast_falling and ((hub.char_body.is_on_floor() and (abs(hub.collisions.get_ground_point().y - saved_y_position) > ground_level_update_height_threshold or (hub.collisions.get_ground_point().y > saved_y_position))) or (is_above_upper_threshold() and (was_upper_threshold_crossed or was_lower_threshold_crossed)))):
+		saved_y_position = hub.collisions.get_ground_point().y
 	else:
 		pass
 	
-	var target_y : float = saved_y_position
-	player_cam.global_position.y = (move_toward(player_cam.global_position.y, target_y, (abs(target_y - player_cam.global_position.y) / time_to_update_y) * delta) if hub.char_body.is_on_floor() or player_cam.global_position.y != target_y else saved_y_position)
+	var target_y : float = (saved_y_position - camera_height_from_ground)
+	target_y = clamp_y_target(target_y)
+	
+	player_cam.global_position.y = (move_toward(player_cam.global_position.y, target_y, (abs(target_y - player_cam.global_position.y) / time_to_update_y) * delta) if !hub.char_body.is_on_floor() or player_cam.global_position.y != target_y else target_y)
 
 func fire_tackle_camera_update(delta : float, prev_x_velocity : float, vertical_axis : float):
-	var x_lookahead : float = (base_x_lookahead * ((prev_x_velocity * hub.movement.get_facing_value()) / hub.movement.top_speed))
-	if (abs(x_lookahead) > max_x_lookahead):
-		if (x_lookahead > 0):
-			x_lookahead = max_x_lookahead
-		else:
-			x_lookahead = -max_x_lookahead
+	current_x_lookahead = move_toward(current_x_lookahead, hub.movement.get_facing_value() * (max_x_lookahead if abs(prev_x_velocity) > hub.movement.top_speed else base_x_lookahead), max(hub.movement.top_speed, abs(prev_x_velocity)) * delta)
 	
-	var target_x : float = (hub.char_body.global_position.x + x_lookahead)
-	player_cam.global_position.x = (move_toward(player_cam.global_position.x, target_x, (abs(target_x - player_cam.global_position.x) / time_to_update_x) * delta) as int)
+	var target_x : float = (hub.char_body.global_position.x + current_x_lookahead)
+	target_x = clamp_x_target(target_x)
+	player_cam.global_position.x = target_x
 	
-	var target_y : float = hub.char_body.global_position.y + (-fire_tackle_y_lookahead if vertical_axis > 0 else fire_tackle_y_lookahead if vertical_axis < 0 else 0.0)
-	player_cam.global_position.y = ((move_toward(player_cam.global_position.y, target_y, (abs(target_y - player_cam.global_position.y) / time_to_update_y) * delta) as int))
+	var target_y : float = hub.collisions.get_ground_point().y - camera_height_from_ground + (-fire_tackle_y_lookahead if vertical_axis > 0 else fire_tackle_y_lookahead if vertical_axis < 0 else 0.0)
+	target_y = clamp_y_target(target_y)
+	player_cam.global_position.y = (move_toward(player_cam.global_position.y, target_y, (abs(target_y - player_cam.global_position.y) / time_to_update_y) * delta))
+
+func clamp_x_target(x_pos : float):
+	if (x_pos < (player_cam.limit_left + (screen_width / 2))):
+		return (player_cam.limit_left + (screen_width / 2))
+	elif (x_pos > (player_cam.limit_right - (screen_width / 2))):
+		return (player_cam.limit_right - (screen_width / 2))
+	else:
+		return x_pos
+
+func clamp_y_target(y_pos : float):
+	if (y_pos < (player_cam.limit_top + (screen_height / 2))):
+		return (player_cam.limit_top + (screen_height / 2))
+	elif (y_pos > (player_cam.limit_bottom - (screen_height / 2))):
+		return (player_cam.limit_bottom - (screen_height / 2))
+	else:
+		return y_pos
 
 func snap_camera_to_player():
-	player_cam.global_position = hub.char_body.global_position
+	player_cam.global_position.x = hub.char_body.global_position.x
+	player_cam.global_position.x = clamp_x_target(player_cam.global_position.x)
+	player_cam.global_position.y = (hub.collisions.get_ground_point().y - camera_height_from_ground)
+	player_cam.global_position.y = clamp_y_target(player_cam.global_position.y)
 
 func is_above_upper_threshold():
 	return (hub.char_body.global_position.y < (player_cam.get_screen_center_position().y - upper_camera_threshold))

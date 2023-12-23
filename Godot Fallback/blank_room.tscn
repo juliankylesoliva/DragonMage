@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://Scripts/Utility Scripts/Room.gd" id="1_3d07d"]
 [ext_resource type="TileSet" uid="uid://dhwi7i1loa2pd" path="res://Sprites/Tiles/Test Tiles/TestTileSet.tres" id="2_tphx2"]
 
-[node name="CH0_LV1_R1" type="Node2D"]
+[node name="CH0_LV0_R0" type="Node2D"]
 script = ExtResource("1_3d07d")
 
 [node name="BoundaryCollisionTilemap" type="TileMap" parent="."]

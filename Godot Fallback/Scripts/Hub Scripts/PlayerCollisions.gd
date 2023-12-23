@@ -20,7 +20,7 @@ func _process(_delta):
 	collider_crouch_update()
 
 func is_moving_against_a_wall():
-	var horizontal_movement : Vector2 = (Vector2.RIGHT * hub.movement.current_horizontal_velocity * get_physics_process_delta_time())
+	var horizontal_movement : Vector2 = (Vector2.RIGHT * hub.get_input_vector().x * get_physics_process_delta_time())
 	var collide_result : KinematicCollision2D = hub.char_body.move_and_collide(horizontal_movement, true, hub.char_body.safe_margin)
 	return (hub.char_body.is_on_wall() and collide_result != null and collide_result.get_normal().y == 0 and (hub.movement.current_horizontal_velocity * collide_result.get_normal().x < 0))
 
@@ -57,10 +57,7 @@ func is_near_a_ledge(ray_num : int = 0):
 func is_in_ceiling_when_uncrouched():
 	if (!hub.movement.is_crouching):
 		return false
-	
-	var test_movement : Vector2 = (Vector2.UP * ground_check_offset)
-	var collide_result : KinematicCollision2D = hub.char_body.move_and_collide(test_movement, true, hub.char_body.safe_margin)
-	return (collide_result != null)
+	return (get_distance_to_ceiling() <= (uncrouched_height - crouched_height))
 
 func get_distance_to_ground(ray_num : int = 0):
 	var raycast_to_use : RayCast2D = (hub.raycast_dm if ray_num == 0 else hub.raycast_dl if ray_num < 0 else hub.raycast_dr)

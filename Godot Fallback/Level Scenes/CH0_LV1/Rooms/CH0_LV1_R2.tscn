@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://dqbo0wu6hm8lj" path="res://Scene Objects/Objects/WarpTrigger.tscn" id="3_1edmx"]
 [ext_resource type="PackedScene" uid="uid://cs4s34scsvcfr" path="res://Scene Objects/Objects/BreakableBlock.tscn" id="3_y5m3t"]
 
-[node name="CH0_LV1_R1" type="Node2D" node_paths=PackedStringArray("room_entrances")]
+[node name="CH0_LV1_R2" type="Node2D" node_paths=PackedStringArray("room_entrances")]
 script = ExtResource("1_yegfu")
 room_entrances = [NodePath("Entrance 0"), NodePath("Entrance 1")]
 
