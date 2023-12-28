@@ -360,8 +360,11 @@ func glide_update(delta : float):
 	hub.char_body.velocity.y = glide_fall_speed
 	current_glide_time = move_toward(current_glide_time, max_glide_time, delta)
 
+func is_glide_canceled():
+	return (Input.is_action_pressed("Crouch") or !Input.is_action_pressed("Jump") or hub.char_body.is_on_floor() or hub.jumping.current_glide_time >= hub.jumping.max_glide_time)
+
 func cancel_glide():
-	if (current_glide_time > hub.buffers.early_glide_buffer_time or !Input.is_action_pressed("Jump")):
+	if (current_glide_time > hub.buffers.early_glide_buffer_time or !Input.is_action_pressed("Jump") or Input.is_action_pressed("Crouch")):
 		current_glide_time = max_glide_time
 
 func can_midair_jump():
@@ -403,7 +406,7 @@ func do_midair_jump():
 	current_midair_jumps += 1
 
 func can_wall_slide():
-	return (enable_wall_jumping and !hub.movement.is_crouching and hub.collisions.get_distance_to_ground() >= min_wall_jump_height and hub.char_body.is_on_wall_only() and hub.collisions.is_facing_a_wall() and hub.collisions.is_moving_against_a_wall() and !hub.collisions.is_facing_an_intangible_wall() and !hub.collisions.is_moving_against_an_intangible_wall() and (!Input.is_action_pressed("Jump") or !is_jump_held or hub.char_body.velocity.y >= 0))
+	return (enable_wall_jumping and !hub.movement.is_crouching and hub.collisions.get_distance_to_ground() >= min_wall_jump_height and hub.collisions.is_facing_a_wall() and hub.collisions.is_moving_against_a_wall() and !hub.collisions.is_facing_an_intangible_wall() and !hub.collisions.is_moving_against_an_intangible_wall() and (!Input.is_action_pressed("Jump") or !is_jump_held or hub.char_body.velocity.y >= 0))
 
 func can_wall_slide_from_wall_climb():
 	return (enable_wall_jumping and hub.collisions.is_facing_a_wall() and !hub.collisions.is_facing_an_intangible_wall() and !hub.char_body.is_on_floor() and (hub.get_input_vector().x * hub.movement.get_facing_value()) >= 0)
@@ -424,7 +427,7 @@ func wall_slide_update():
 	hub.char_body.move_and_slide()
 
 func is_wall_slide_canceled():
-	return (!hub.collisions.is_facing_a_wall() or hub.collisions.is_facing_an_intangible_wall() or hub.char_body.velocity.y == 0 or hub.get_input_vector().x == -hub.movement.get_facing_value())
+	return (!hub.collisions.is_facing_a_wall() or hub.collisions.is_facing_an_intangible_wall() or hub.char_body.velocity.y == 0 or hub.get_input_vector().x == -hub.movement.get_facing_value() or (hub.jumping.enable_crouch_jumping and Input.is_action_pressed("Crouch")))
 
 func can_wall_jump():
 	return (hub.state_machine.current_state.name == "WallSliding" and !is_wall_jump_lock_timer_active() and hub.buffers.is_jump_buffer_active())
@@ -456,7 +459,7 @@ func start_wall_jump():
 	activate_wall_jump_lock_timer()
 
 func can_wall_climb():
-	return (enable_wall_climbing and !hub.movement.is_crouching and !hub.char_body.is_on_ceiling() and hub.collisions.get_distance_to_ground() >= min_wall_climb_height and current_wall_climb_time <= 0 and hub.char_body.is_on_wall_only() and hub.collisions.is_moving_against_a_wall() and !hub.collisions.is_moving_against_an_intangible_wall() and (hub.get_input_vector().x * hub.movement.get_facing_value()) > 0)
+	return (enable_wall_climbing and !hub.movement.is_crouching and !hub.char_body.is_on_ceiling() and hub.collisions.get_distance_to_ground() >= min_wall_climb_height and current_wall_climb_time <= 0 and hub.collisions.is_moving_against_a_wall() and !hub.collisions.is_moving_against_an_intangible_wall() and (hub.get_input_vector().x * hub.movement.get_facing_value()) > 0)
 
 func can_wall_climb_from_wall_slide():
 	return (enable_wall_climbing and current_wall_climb_time <= 0 and !hub.char_body.is_on_ceiling() and !hub.char_body.is_on_floor() and hub.collisions.is_facing_a_wall() and !hub.collisions.is_facing_an_intangible_wall() and (hub.get_input_vector().x * hub.movement.get_facing_value()) >= 0)

@@ -26,6 +26,8 @@ func _on_body_entered(body):
 			room_destination.activate_room()
 		
 		hub.char_body.global_position = destination_coords
+		
+		hub.camera.saved_y_position = hub.collisions.get_ground_point().y
 		hub.camera.snap_camera_to_player()
 		
 		if (room_destination != room_origin):

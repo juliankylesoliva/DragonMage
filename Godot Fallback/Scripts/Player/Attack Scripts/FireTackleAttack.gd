@@ -48,6 +48,8 @@ class_name FireTackleAttack
 
 @export var fire_tackle_floor_snap_distance : float = 32
 
+@export var fire_tackle_max_ledge_nudge_ease : float = 1.5
+
 @export var fire_tackle_hitbox_offset : float = 16
 
 @export_color_no_alpha var fire_tackle_startup_color : Color = Color.WHITE
@@ -64,6 +66,8 @@ class_name FireTackleAttack
 
 var fire_tackle_hitbox_instance : Node = null
 
+var saved_floor_snap_distance : float = 0
+
 var is_attack_button_held : bool = false
 var current_windup_timer : float = 0
 var current_startup_hold_timer : float = 0
@@ -72,6 +76,7 @@ var current_vertical_axis : float = 0
 
 var was_interacting_with_wall : bool = false
 var horizontal_result : float = 0
+var snap_lerp : float = 0
 var current_rising_speed : float = 0
 var current_attack_timer : float = 0
 var current_trail_spawn_timer : float = 0
@@ -89,6 +94,7 @@ func can_use_attack():
 
 func on_attack_state_enter():
 	hub.movement.reset_crouch_state()
+	saved_floor_snap_distance = hub.char_body.floor_snap_length
 	is_attack_button_held = true
 	startup_init()
 
@@ -109,13 +115,17 @@ func attack_state_process(_delta : float):
 		pass
 
 func on_attack_state_exit():
+	hub.char_body.floor_snap_length = saved_floor_snap_distance
+	saved_floor_snap_distance = 0
+	
 	current_windup_timer = 0
 	current_startup_hold_timer = 0
 	previous_horizontal_velocity = 0
 	current_vertical_axis = 0
+	
 	was_interacting_with_wall = false
 	horizontal_result = 0
-	
+	snap_lerp = 0
 	current_rising_speed = 0
 	current_attack_timer = 0
 	current_trail_spawn_timer = 0
@@ -181,6 +191,9 @@ func active_init():
 	add_child(fire_tackle_hitbox_instance)
 	(fire_tackle_hitbox_instance as Node2D).global_position = hub.collision_shape.global_position
 	(fire_tackle_hitbox_instance as KnockbackHitbox).hit.connect(_on_fire_tackle_hit)
+	
+	snap_lerp = (horizontal_result / fire_tackle_max_horizontal_speed)
+	hub.char_body.floor_snap_length = lerp(saved_floor_snap_distance, fire_tackle_floor_snap_distance, pow(snap_lerp, 2))
 
 func active_update(delta : float):
 	hub.buffers.refresh_speed_preservation_buffer()
@@ -218,12 +231,14 @@ func active_update(delta : float):
 		var vertical_offset : Vector2 = (Vector2.UP if current_vertical_axis > 0 else Vector2.DOWN if current_vertical_axis < 0 else Vector2.ZERO)
 		var velocity_offset : Vector2 = (hub.char_body.velocity * delta)
 		
-		(fire_tackle_hitbox_instance as Node2D).global_position = (hub.collision_shape.global_position + ((horizontal_offset + vertical_offset) * fire_tackle_hitbox_offset) + velocity_offset)
+		(fire_tackle_hitbox_instance as Node2D).global_position = (hub.collision_shape.global_position + ((horizontal_offset + vertical_offset) * fire_tackle_hitbox_offset) + velocity_offset + (Vector2.DOWN if current_vertical_axis == 0 else Vector2.ZERO))
 		
 		var temp_velocity = -hub.char_body.velocity.normalized()
 		fire_tackle_particles.process_material.direction = Vector3(temp_velocity.x, temp_velocity.y, 0)
 		
+		var intended_velocity : Vector2 = hub.char_body.velocity
 		hub.char_body.move_and_slide()
+		hub.collisions.upward_slope_correction(intended_velocity)
 		
 		current_attack_timer = move_toward(current_attack_timer, 0, delta)
 		current_bump_immunity_timer = move_toward(current_bump_immunity_timer, 0, delta)
@@ -296,8 +311,8 @@ func endlag_update(delta : float):
 			return
 		elif (!did_player_bump and hub.char_body.is_on_floor() and hub.char_body.velocity.x != 0):
 			saved_endlag_velocity = hub.char_body.velocity.x
-			hub.char_body.velocity.x = (0.0 if hub.collisions.is_facing_a_wall() or hub.collisions.is_near_a_ledge() else move_toward(hub.char_body.velocity.x, 0, delta * fire_tackle_endlag_deceleration))
-			hub.collisions.do_ledge_nudge()
+			hub.char_body.velocity.x = (0.0 if hub.collisions.is_facing_a_wall() or hub.collisions.is_near_a_ledge(hub.movement.get_facing_value()) else move_toward(hub.char_body.velocity.x, 0, delta * fire_tackle_endlag_deceleration))
+			hub.collisions.do_ledge_nudge(lerp(hub.collisions.ledge_nudge_easing, fire_tackle_max_ledge_nudge_ease, abs(hub.char_body.velocity.x) / fire_tackle_max_horizontal_speed))
 			hub.char_body.apply_floor_snap()
 		elif (did_player_bump and hub.char_body.is_on_floor() and current_endlag_timer < fire_tackle_endlag_cancelable_time):
 			hub.movement.reset_current_horizontal_velocity()
@@ -306,7 +321,11 @@ func endlag_update(delta : float):
 			pass
 		
 		hub.char_body.velocity.y += hub.jumping.get_gravity_delta(delta)
+		
+		var intended_velocity : Vector2 = hub.char_body.velocity
 		hub.char_body.move_and_slide()
+		hub.collisions.upward_slope_correction(intended_velocity)
+		
 		if (hub.char_body.velocity == Vector2.ZERO and hub.char_body.is_on_ceiling()):
 			hub.char_body.velocity.x = saved_endlag_velocity
 		
@@ -326,6 +345,8 @@ func end_fire_tackle():
 	
 	if (fire_tackle_hitbox_instance != null):
 		fire_tackle_hitbox_instance.queue_free()
+	
+	hub.char_body.floor_snap_length = saved_floor_snap_distance
 	
 	hub.char_sprite.modulate = Color.WHITE
 	hub.movement.current_horizontal_velocity = hub.char_body.velocity.x

@@ -64,7 +64,10 @@ func attack_state_process(_delta : float):
 		if (!did_player_leave_ground and !hub.char_body.is_on_floor()):
 			did_player_leave_ground = true
 		
+		var intended_velocity : Vector2 = hub.char_body.velocity
 		hub.char_body.move_and_slide()
+		hub.collisions.upward_slope_correction(intended_velocity)
+		
 		current_dodge_speed = move_toward(current_dodge_speed, 0, dodge_deceleration * _delta)
 	hub.camera.update_x_lookahead(_delta)
 	hub.camera.update_y_lookahead(_delta)

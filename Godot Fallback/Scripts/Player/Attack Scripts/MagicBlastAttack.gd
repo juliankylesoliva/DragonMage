@@ -30,7 +30,9 @@ class_name MagicBlastAttack
 
 @export var blast_jump_offset_multiplier : float = 1
 
-@export var blast_jump_facing_offset : float = 16
+@export var blast_jump_standing_facing_offset : float = 3
+
+@export var blast_jump_moving_facing_offset : float = 16
 
 @export var blast_jump_jumping_offset : float = 32
 
@@ -143,7 +145,7 @@ func blast_jump_update(delta : float):
 	if (is_blast_jumping):
 		var state_name : String = hub.state_machine.current_state.name
 		var velocity_offset : Vector2 = (hub.char_body.velocity * delta)
-		var facing_offset : Vector2 = ((Vector2.RIGHT * hub.movement.get_facing_value()) + (Vector2.RIGHT * blast_jump_facing_offset * hub.movement.get_facing_value() * abs(hub.movement.current_horizontal_velocity / hub.movement.top_speed)))
+		var facing_offset : Vector2 = ((Vector2.RIGHT * blast_jump_standing_facing_offset * hub.movement.get_facing_value()) + (Vector2.RIGHT * blast_jump_moving_facing_offset * hub.movement.get_facing_value() * abs(hub.movement.current_horizontal_velocity / hub.movement.top_speed)))
 		var jumping_offset : Vector2 = ((Vector2.UP * blast_jump_jumping_offset) if hub.state_machine.current_state.name == "Jumping" else (Vector2.DOWN * blast_jump_jumping_offset) if hub.state_machine.current_state.name == "Falling" else Vector2.DOWN)
 		
 		var velocity_temp = -hub.char_body.velocity.normalized()

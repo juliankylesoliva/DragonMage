@@ -130,6 +130,10 @@ func slide_update(delta : float):
 		return
 	hub.char_body.velocity.x = (horizontal_result * hub.movement.get_facing_value())
 	hub.movement.current_horizontal_velocity = hub.char_body.velocity.x
+	
+	var intended_velocity : Vector2 = hub.char_body.velocity
 	hub.char_body.move_and_slide()
+	hub.collisions.upward_slope_correction(intended_velocity)
+	
 	current_slide_timer += delta
 	horizontal_result = move_toward(horizontal_result, 0, slide_deceleration_rate * delta)

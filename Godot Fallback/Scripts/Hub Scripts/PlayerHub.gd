@@ -32,6 +32,13 @@ class_name PlayerHub
 @export var raycast_ceiling_l : RayCast2D
 @export var raycast_ceiling_r : RayCast2D
 
+@export var raycast_wall_top_l : RayCast2D
+@export var raycast_wall_mid_l : RayCast2D
+@export var raycast_wall_bot_l : RayCast2D
+@export var raycast_wall_top_r : RayCast2D
+@export var raycast_wall_mid_r : RayCast2D
+@export var raycast_wall_bot_r : RayCast2D
+
 func get_input_vector():
 	var input_vector = Vector2.ZERO
 	

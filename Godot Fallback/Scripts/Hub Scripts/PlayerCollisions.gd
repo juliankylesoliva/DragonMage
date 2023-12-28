@@ -11,45 +11,116 @@ class_name PlayerCollisions
 @export var uncrouched_height : float = 48
 @export var crouched_height : float = 28
 
+@export var ceiling_nudge_check_depth : float = 32
 @export var ledge_nudge_check_depth : float = 24
 @export var ledge_nudge_easing : float = 0.99
 
-@export_flags_2d_physics var intangible_wall_layer
+@export var wall_raycast_collision_threshold : int = 2
+@export var intangible_wall_raycast_collision_threshold : int = 2
+@export var capsule_curve_offset : float = 6
+
+@export var max_upward_slope_correction_iterations : float = 16
 
 func _process(_delta):
 	collider_crouch_update()
 
 func is_moving_against_a_wall():
-	var horizontal_movement : Vector2 = (Vector2.RIGHT * hub.get_input_vector().x * get_physics_process_delta_time())
-	var collide_result : KinematicCollision2D = hub.char_body.move_and_collide(horizontal_movement, true, hub.char_body.safe_margin)
-	return (hub.char_body.is_on_wall() and collide_result != null and collide_result.get_normal().y == 0 and (hub.movement.current_horizontal_velocity * collide_result.get_normal().x < 0))
+	var total_collisions : int = 0
+	var direction : float = (1 if hub.char_body.velocity.x > 0 else -1 if hub.char_body.velocity.x < 0 else hub.get_input_vector().x)
+	
+	if (direction > 0):
+		hub.raycast_wall_top_r.force_raycast_update()
+		hub.raycast_wall_mid_r.force_raycast_update()
+		hub.raycast_wall_bot_r.force_raycast_update()
+		
+		total_collisions += (1 if hub.raycast_wall_top_r.is_colliding() and hub.raycast_wall_top_r.get_collision_normal().y == 0 else 0)
+		total_collisions += (1 if hub.raycast_wall_mid_r.is_colliding() and hub.raycast_wall_mid_r.get_collision_normal().y == 0 else 0)
+		total_collisions += (1 if !hub.char_body.is_on_floor() and hub.raycast_wall_bot_r.is_colliding() and hub.raycast_wall_bot_r.get_collision_normal().y == 0 else 0)
+	elif (direction < 0):
+		hub.raycast_wall_top_l.force_raycast_update()
+		hub.raycast_wall_mid_l.force_raycast_update()
+		hub.raycast_wall_bot_l.force_raycast_update()
+		
+		total_collisions += (1 if hub.raycast_wall_top_l.is_colliding() and hub.raycast_wall_top_l.get_collision_normal().y == 0 else 0)
+		total_collisions += (1 if hub.raycast_wall_mid_l.is_colliding() and hub.raycast_wall_mid_l.get_collision_normal().y == 0 else 0)
+		total_collisions += (1 if !hub.char_body.is_on_floor() and hub.raycast_wall_bot_l.is_colliding() and hub.raycast_wall_bot_l.get_collision_normal().y == 0 else 0)
+	else:
+		pass
+	
+	return (total_collisions >= wall_raycast_collision_threshold)
 
 func is_facing_a_wall():
-	var horizontal_movement : Vector2 = (Vector2.RIGHT * hub.movement.get_facing_value() * hub.movement.top_speed * get_physics_process_delta_time())
-	var collide_result : KinematicCollision2D = hub.char_body.move_and_collide(horizontal_movement, true, hub.char_body.safe_margin)
-	return (collide_result != null and collide_result.get_normal().y == 0 and (hub.movement.get_facing_value() * collide_result.get_normal().x < 0))
+	var total_collisions : int = 0
+	
+	if (hub.movement.get_facing_value() > 0):
+		hub.raycast_wall_top_r.force_raycast_update()
+		hub.raycast_wall_mid_r.force_raycast_update()
+		hub.raycast_wall_bot_r.force_raycast_update()
+		
+		total_collisions += (1 if hub.raycast_wall_top_r.is_colliding() and hub.raycast_wall_top_r.get_collision_normal().y == 0 else 0)
+		total_collisions += (1 if hub.raycast_wall_mid_r.is_colliding() and hub.raycast_wall_mid_r.get_collision_normal().y == 0 else 0)
+		total_collisions += (1 if !hub.char_body.is_on_floor() and hub.raycast_wall_bot_r.is_colliding() and hub.raycast_wall_bot_r.get_collision_normal().y == 0 else 0)
+	elif (hub.movement.get_facing_value() < 0):
+		hub.raycast_wall_top_l.force_raycast_update()
+		hub.raycast_wall_mid_l.force_raycast_update()
+		hub.raycast_wall_bot_l.force_raycast_update()
+		
+		total_collisions += (1 if hub.raycast_wall_top_l.is_colliding() and hub.raycast_wall_top_l.get_collision_normal().y == 0 else 0)
+		total_collisions += (1 if hub.raycast_wall_mid_l.is_colliding() and hub.raycast_wall_mid_l.get_collision_normal().y == 0 else 0)
+		total_collisions += (1 if !hub.char_body.is_on_floor() and hub.raycast_wall_bot_l.is_colliding() and hub.raycast_wall_bot_l.get_collision_normal().y == 0 else 0)
+	else:
+		pass
+	
+	return (total_collisions >= wall_raycast_collision_threshold)
 
 func is_moving_against_an_intangible_wall():
-	var horizontal_movement : Vector2 = (Vector2.RIGHT * hub.movement.current_horizontal_velocity * get_physics_process_delta_time())
-	var collide_result : KinematicCollision2D = hub.char_body.move_and_collide(horizontal_movement, true, hub.char_body.safe_margin)
+	var total_collisions : int = 0
+	var direction : float = (1 if hub.char_body.velocity.x > 0 else -1 if hub.char_body.velocity.x < 0 else hub.get_input_vector().x)
 	
-	if (hub.char_body.is_on_wall() and collide_result != null and collide_result.get_normal().y == 0 and (hub.movement.current_horizontal_velocity * collide_result.get_normal().x < 0)):
-		var collider : Object = collide_result.get_collider()
-		if (collider.has_meta("Tag") and collider.get_meta("Tag") == "IntangibleWall"):
-			return true
+	if (direction > 0):
+		hub.raycast_wall_top_r.force_raycast_update()
+		hub.raycast_wall_mid_r.force_raycast_update()
+		hub.raycast_wall_bot_r.force_raycast_update()
+		
+		total_collisions += (1 if hub.raycast_wall_top_r.is_colliding() and hub.raycast_wall_top_r.get_collision_normal().y == 0 and hub.raycast_wall_top_r.get_collider().has_meta("Tag") and hub.raycast_wall_top_r.get_collider().get_meta("Tag") == "IntangibleWall" else 0)
+		total_collisions += (1 if hub.raycast_wall_mid_r.is_colliding() and hub.raycast_wall_mid_r.get_collision_normal().y == 0 and hub.raycast_wall_mid_r.get_collider().has_meta("Tag") and hub.raycast_wall_mid_r.get_collider().get_meta("Tag") == "IntangibleWall" else 0)
+		total_collisions += (1 if !hub.char_body.is_on_floor() and hub.raycast_wall_bot_r.is_colliding() and hub.raycast_wall_bot_r.get_collision_normal().y == 0 and hub.raycast_wall_bot_r.get_collider().has_meta("Tag") and hub.raycast_wall_bot_r.get_collider().get_meta("Tag") == "IntangibleWall" else 0)
+	elif (direction < 0):
+		hub.raycast_wall_top_l.force_raycast_update()
+		hub.raycast_wall_mid_l.force_raycast_update()
+		hub.raycast_wall_bot_l.force_raycast_update()
+		
+		total_collisions += (1 if hub.raycast_wall_top_l.is_colliding() and hub.raycast_wall_top_l.get_collision_normal().y == 0 and hub.raycast_wall_top_l.get_collider().has_meta("Tag") and hub.raycast_wall_top_l.get_collider().get_meta("Tag") == "IntangibleWall" else 0)
+		total_collisions += (1 if hub.raycast_wall_mid_l.is_colliding() and hub.raycast_wall_mid_l.get_collision_normal().y == 0 and hub.raycast_wall_mid_l.get_collider().has_meta("Tag") and hub.raycast_wall_mid_l.get_collider().get_meta("Tag") == "IntangibleWall" else 0)
+		total_collisions += (1 if !hub.char_body.is_on_floor() and hub.raycast_wall_bot_l.is_colliding() and hub.raycast_wall_bot_l.get_collision_normal().y == 0 and hub.raycast_wall_bot_l.get_collider().has_meta("Tag") and hub.raycast_wall_bot_l.get_collider().get_meta("Tag") == "IntangibleWall" else 0)
+	else:
+		pass
 	
-	return false
+	return (total_collisions >= intangible_wall_raycast_collision_threshold)
 
 func is_facing_an_intangible_wall():
-	var horizontal_movement : Vector2 = (Vector2.RIGHT * hub.movement.get_facing_value() * hub.movement.top_speed * get_physics_process_delta_time())
-	var collide_result : KinematicCollision2D = hub.char_body.move_and_collide(horizontal_movement, true, hub.char_body.safe_margin)
+	var total_collisions : int = 0
 	
-	if (collide_result != null and collide_result.get_normal().y == 0 and (hub.movement.get_facing_value() * collide_result.get_normal().x < 0)):
-		var collider : Object = collide_result.get_collider()
-		if (collider.has_meta("Tag") and collider.get_meta("Tag") == "IntangibleWall"):
-			return true
+	if (hub.movement.get_facing_value() > 0):
+		hub.raycast_wall_top_r.force_raycast_update()
+		hub.raycast_wall_mid_r.force_raycast_update()
+		hub.raycast_wall_bot_r.force_raycast_update()
+		
+		total_collisions += (1 if hub.raycast_wall_top_r.is_colliding() and hub.raycast_wall_top_r.get_collision_normal().y == 0 and hub.raycast_wall_top_r.get_collider().has_meta("Tag") and hub.raycast_wall_top_r.get_collider().get_meta("Tag") == "IntangibleWall" else 0)
+		total_collisions += (1 if hub.raycast_wall_mid_r.is_colliding() and hub.raycast_wall_mid_r.get_collision_normal().y == 0 and hub.raycast_wall_mid_r.get_collider().has_meta("Tag") and hub.raycast_wall_mid_r.get_collider().get_meta("Tag") == "IntangibleWall" else 0)
+		total_collisions += (1 if !hub.char_body.is_on_floor() and hub.raycast_wall_bot_r.is_colliding() and hub.raycast_wall_bot_r.get_collision_normal().y == 0 and hub.raycast_wall_bot_r.get_collider().has_meta("Tag") and hub.raycast_wall_bot_r.get_collider().get_meta("Tag") == "IntangibleWall" else 0)
+	elif (hub.movement.get_facing_value() < 0):
+		hub.raycast_wall_top_l.force_raycast_update()
+		hub.raycast_wall_mid_l.force_raycast_update()
+		hub.raycast_wall_bot_l.force_raycast_update()
+		
+		total_collisions += (1 if hub.raycast_wall_top_l.is_colliding() and hub.raycast_wall_top_l.get_collision_normal().y == 0 and hub.raycast_wall_top_l.get_collider().has_meta("Tag") and hub.raycast_wall_top_l.get_collider().get_meta("Tag") == "IntangibleWall" else 0)
+		total_collisions += (1 if hub.raycast_wall_mid_l.is_colliding() and hub.raycast_wall_mid_l.get_collision_normal().y == 0 and hub.raycast_wall_mid_l.get_collider().has_meta("Tag") and hub.raycast_wall_mid_l.get_collider().get_meta("Tag") == "IntangibleWall" else 0)
+		total_collisions += (1 if !hub.char_body.is_on_floor() and hub.raycast_wall_bot_l.is_colliding() and hub.raycast_wall_bot_l.get_collision_normal().y == 0 and hub.raycast_wall_bot_l.get_collider().has_meta("Tag") and hub.raycast_wall_bot_l.get_collider().get_meta("Tag") == "IntangibleWall" else 0)
+	else:
+		pass
 	
-	return false
+	return (total_collisions >= intangible_wall_raycast_collision_threshold)
 
 func is_near_a_ledge(ray_num : int = 0):
 	return (hub.char_body.is_on_floor() and get_distance_to_ground(ray_num) > hub.char_body.floor_snap_length)
@@ -62,6 +133,7 @@ func is_in_ceiling_when_uncrouched():
 func get_distance_to_ground(ray_num : int = 0):
 	var raycast_to_use : RayCast2D = (hub.raycast_dm if ray_num == 0 else hub.raycast_dl if ray_num < 0 else hub.raycast_dr)
 	var result : float = -1
+	raycast_to_use.force_raycast_update()
 	if (raycast_to_use.is_colliding()):
 		result = abs(raycast_to_use.global_position.y - raycast_to_use.get_collision_point().y)
 	else:
@@ -87,7 +159,7 @@ func get_ceiling_point():
 	return (hub.raycast_um.get_collision_point() if hub.raycast_um.is_colliding() and get_distance_to_ceiling(0) <= hub.char_body.floor_snap_length else hub.raycast_um.global_position)
 
 func get_ceiling_normal():
-	return (hub.raycast_um.get_collision_normal() if hub.raycast_um.is_colliding() and get_distance_to_ceiling(0) <= hub.char_body.floor_snap_length else -hub.char_body.up_direction)
+	return (hub.raycast_um.get_collision_normal() if hub.raycast_um.is_colliding() else -hub.char_body.up_direction)
 
 func collider_crouch_update():
 	hub.collision_shape.shape.height = (crouched_height if hub.movement.is_crouching else uncrouched_height)
@@ -97,10 +169,16 @@ func collider_crouch_update():
 	hub.raycast_ul.position.y = upper_raycasts_y_pos
 	hub.raycast_um.position.y = upper_raycasts_y_pos
 	hub.raycast_ur.position.y = upper_raycasts_y_pos
+	
 	hub.raycast_ceiling_l.position.y = (upper_raycasts_y_pos - ledge_nudge_check_depth)
 	hub.raycast_ceiling_r.position.y = (upper_raycasts_y_pos - ledge_nudge_check_depth)
+	
+	hub.raycast_wall_top_l.position.y = (upper_raycasts_y_pos + capsule_curve_offset)
+	hub.raycast_wall_top_r.position.y = (upper_raycasts_y_pos + capsule_curve_offset)
+	hub.raycast_wall_mid_l.position.y = hub.collision_shape.position.y
+	hub.raycast_wall_mid_r.position.y = hub.collision_shape.position.y
 
-func do_ledge_nudge():
+func do_ledge_nudge(custom_ease : float = 0):
 	if (is_near_a_ledge() and get_ground_normal().x == 0):
 		var is_left_grounded : bool = (get_distance_to_ground(-1) <= hub.char_body.floor_snap_length)
 		var is_middle_grounded : bool = (get_distance_to_ground(0) <= hub.char_body.floor_snap_length)
@@ -108,14 +186,14 @@ func do_ledge_nudge():
 		
 		if (!is_middle_grounded and (is_left_grounded or is_right_grounded) and (!is_left_grounded or !is_right_grounded)):
 			if (!is_left_grounded and is_right_grounded):
-				hub.char_body.position.x += (((hub.raycast_ledge_r.get_collision_point().x if hub.raycast_ledge_r.is_colliding() else hub.raycast_ledge_r.target_position.x) - hub.raycast_ledge_r.global_position.x) * ledge_nudge_easing)
+				hub.char_body.position.x += (((hub.raycast_ledge_r.get_collision_point().x if hub.raycast_ledge_r.is_colliding() else hub.raycast_ledge_r.target_position.x) - hub.raycast_ledge_r.global_position.x) * (ledge_nudge_easing if custom_ease <= 0 else abs(custom_ease)))
 			elif (is_left_grounded and !is_right_grounded):
-				hub.char_body.position.x += (((hub.raycast_ledge_l.get_collision_point().x if hub.raycast_ledge_l.is_colliding() else hub.raycast_ledge_l.target_position.x) - hub.raycast_ledge_l.global_position.x) * ledge_nudge_easing)
+				hub.char_body.position.x += (((hub.raycast_ledge_l.get_collision_point().x if hub.raycast_ledge_l.is_colliding() else hub.raycast_ledge_l.target_position.x) - hub.raycast_ledge_l.global_position.x) * (ledge_nudge_easing if custom_ease <= 0 else abs(custom_ease)))
 			else:
 				pass
 
 func do_ceiling_nudge():
-	if (hub.state_machine.current_state.name == "Jumping" and hub.get_input_vector().x == 0 and get_ceiling_normal().x == 0):
+	if (hub.state_machine.current_state.name == "Jumping" and hub.get_input_vector().x == 0 and (get_ceiling_normal().x == 0 or get_distance_to_ceiling(0) > ceiling_nudge_check_depth)):
 		var left_distance : float = get_distance_to_ceiling(-1)
 		var middle_distance : float = get_distance_to_ceiling(0)
 		var right_distance : float = get_distance_to_ceiling(1)
@@ -123,10 +201,10 @@ func do_ceiling_nudge():
 		var raycast_to_use : RayCast2D = null
 		var sign_multiplier : float = 0
 		
-		if (left_distance < middle_distance and left_distance < right_distance):
+		if (left_distance < middle_distance and left_distance < right_distance and ((middle_distance - left_distance) >= ceiling_nudge_check_depth or (right_distance - left_distance) >= ceiling_nudge_check_depth)):
 			raycast_to_use = hub.raycast_ceiling_l
 			sign_multiplier = 1
-		elif (right_distance < middle_distance and right_distance < left_distance):
+		elif (right_distance < middle_distance and right_distance < left_distance and ((middle_distance - right_distance) >= ceiling_nudge_check_depth or (left_distance - right_distance) >= ceiling_nudge_check_depth)):
 			raycast_to_use = hub.raycast_ceiling_r
 			sign_multiplier = -1
 		else:
@@ -137,3 +215,15 @@ func do_ceiling_nudge():
 			var partial_magnitude : float = (raycast_to_use.global_position.distance_to(raycast_to_use.get_collision_point()) if raycast_to_use.is_colliding() else total_magnitude)
 			if (partial_magnitude < total_magnitude):
 				hub.char_body.position.x += ((total_magnitude - partial_magnitude) * sign_multiplier)
+
+func upward_slope_correction(intended_velocity : Vector2):
+	var num_iters : int = 0
+	
+	while (num_iters < max_upward_slope_correction_iterations and hub.char_body.is_on_floor() and hub.char_body.is_on_wall() and hub.char_body.velocity.x == 0 and intended_velocity.x != hub.char_body.velocity.x and !hub.collisions.is_facing_a_wall() and !hub.collisions.is_moving_against_a_wall()):
+		num_iters += 1
+		hub.char_body.velocity = intended_velocity
+		hub.char_body.global_translate(hub.char_body.up_direction)
+		hub.char_body.move_and_slide()
+	
+	if (num_iters > 0):
+		print_debug("Upward slope correction engaged {num} time(s)!".format({"num" : num_iters}))

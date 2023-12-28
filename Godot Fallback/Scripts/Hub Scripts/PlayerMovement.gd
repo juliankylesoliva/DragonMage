@@ -76,7 +76,7 @@ func is_turning():
 
 func check_crouch_state():
 	var state_name : String = hub.state_machine.current_state.name
-	if (state_name != "Standing" and state_name != "Running" and state_name != "Jumping" and state_name != "Falling"):
+	if (state_name != "Standing" and state_name != "Running" and state_name != "Jumping" and state_name != "Falling" and state_name != "Gliding" and state_name != "WallSliding"):
 		is_crouching = false
 		return
 	
@@ -119,7 +119,7 @@ func do_movement(delta):
 	
 	if (horizontal_axis != 0 and (!is_crouching or enable_crouch_walking)):
 		if (hub.collisions.is_moving_against_a_wall()):
-			current_horizontal_velocity = 0
+			reset_current_horizontal_velocity()
 		elif ((current_horizontal_velocity * horizontal_axis) >= 0):
 			var accel = (acceleration if hub.char_body.is_on_floor() else air_acceleration)
 			var turn = (turning_speed if hub.char_body.is_on_floor() else air_turning_speed)
@@ -145,7 +145,10 @@ func do_movement(delta):
 		hub.collisions.do_ledge_nudge()
 	
 	hub.char_body.velocity.x = current_horizontal_velocity
+	var intended_velocity : Vector2 = hub.char_body.velocity
 	hub.char_body.move_and_slide()
+	hub.collisions.upward_slope_correction(intended_velocity)
+
 
 func get_speed_portion(clamped : bool = true):
 	var ret_val = abs(hub.char_body.velocity.x / (top_speed if !is_crouching else crouching_top_speed))

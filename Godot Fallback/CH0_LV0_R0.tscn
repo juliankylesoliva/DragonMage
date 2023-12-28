@@ -3,12 +3,14 @@
 [ext_resource type="Script" path="res://Scripts/Utility Scripts/Room.gd" id="1_3d07d"]
 [ext_resource type="TileSet" uid="uid://dhwi7i1loa2pd" path="res://Sprites/Tiles/Test Tiles/TestTileSet.tres" id="2_tphx2"]
 
-[node name="CH0_LV0_R0" type="Node2D"]
+[node name="CH0_LV0_R0" type="Node2D" node_paths=PackedStringArray("tilemap_list")]
 script = ExtResource("1_3d07d")
+tilemap_list = [NodePath("BoundaryCollisionTilemap"), NodePath("LevelCollisionTilemap")]
 
 [node name="BoundaryCollisionTilemap" type="TileMap" parent="."]
 z_index = 4
 tile_set = ExtResource("2_tphx2")
+cell_quadrant_size = 32
 format = 2
 layer_0/name = "Intangible"
 metadata/Tag = "IntangibleWall"
@@ -28,10 +30,3 @@ layer_1/y_sort_enabled = false
 layer_1/y_sort_origin = 0
 layer_1/z_index = 0
 layer_1/tile_data = PackedInt32Array()
-layer_2/name = "Intangible"
-layer_2/enabled = true
-layer_2/modulate = Color(0.858824, 0.858824, 0.858824, 1)
-layer_2/y_sort_enabled = false
-layer_2/y_sort_origin = 0
-layer_2/z_index = 0
-layer_2/tile_data = PackedInt32Array()

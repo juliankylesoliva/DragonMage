@@ -19,8 +19,12 @@ func state_process(_delta : float):
 		set_next_state(state_machine.get_state_by_name("Attacking"))
 	elif (hub.jumping.can_wall_slide()):
 		set_next_state(state_machine.get_state_by_name("WallSliding"))
-	elif (!Input.is_action_pressed("Jump") or hub.char_body.is_on_floor() or hub.jumping.current_glide_time  >= hub.jumping.max_glide_time):
+	elif (hub.jumping.is_glide_canceled()):
+		if (hub.jumping.enable_crouch_jumping and Input.is_action_pressed("Crouch")):
+				hub.movement.check_crouch_state()
 		set_next_state(state_machine.get_state_by_name("Falling"))
+	else:
+		pass
 
 func on_enter():
 	hub.jumping.start_glide()

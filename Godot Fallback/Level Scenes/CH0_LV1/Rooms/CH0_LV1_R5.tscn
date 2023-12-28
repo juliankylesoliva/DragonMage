@@ -5,8 +5,9 @@
 [ext_resource type="PackedScene" uid="uid://dqbo0wu6hm8lj" path="res://Scene Objects/Objects/WarpTrigger.tscn" id="3_sagms"]
 [ext_resource type="PackedScene" uid="uid://bajk0w7eoh6o8" path="res://Scene Objects/Objects/ReinforcedBlock.tscn" id="4_dqfmy"]
 
-[node name="CH0_LV1_R5" type="Node2D" node_paths=PackedStringArray("room_entrances")]
+[node name="CH0_LV1_R5" type="Node2D" node_paths=PackedStringArray("tilemap_list", "room_entrances")]
 script = ExtResource("1_gyvrj")
+tilemap_list = [NodePath("BoundaryCollisionTilemap"), NodePath("LevelCollisionTilemap")]
 bottom_camera_limit = 640
 room_entrances = [NodePath("Entrance 0"), NodePath("Entrance 1")]
 
@@ -34,13 +35,6 @@ layer_1/y_sort_enabled = false
 layer_1/y_sort_origin = 0
 layer_1/z_index = 0
 layer_1/tile_data = PackedInt32Array()
-layer_2/name = "Intangible"
-layer_2/enabled = true
-layer_2/modulate = Color(0.858824, 0.858824, 0.858824, 1)
-layer_2/y_sort_enabled = false
-layer_2/y_sort_origin = 0
-layer_2/z_index = 0
-layer_2/tile_data = PackedInt32Array()
 
 [node name="Entrance 0" type="Node2D" parent="."]
 position = Vector2(16, 224)
