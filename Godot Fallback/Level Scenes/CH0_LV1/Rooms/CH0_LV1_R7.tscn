@@ -15,6 +15,7 @@ room_entrances = [NodePath("Entrance 0"), NodePath("Entrance 1")]
 [node name="BoundaryCollisionTilemap" type="TileMap" parent="."]
 z_index = 4
 tile_set = ExtResource("2_s00jp")
+cell_quadrant_size = 32
 format = 2
 layer_0/name = "Intangible"
 layer_0/tile_data = PackedInt32Array(393213, 196608, 0, 458749, 196608, 0, 524285, 196608, 0, 589821, 196608, 0, -327619, 196608, 0, -262083, 196608, 0, -196547, 196608, 0, -131011, 196608, 0)

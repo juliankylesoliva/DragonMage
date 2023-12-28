@@ -89,7 +89,7 @@ func fire_tackle_camera_update(delta : float, prev_x_velocity : float, vertical_
 	target_x = clamp_x_target(target_x)
 	player_cam.global_position.x = target_x
 	
-	var target_y : float = hub.collisions.get_ground_point().y - camera_height_from_ground + (-fire_tackle_y_lookahead if vertical_axis > 0 else fire_tackle_y_lookahead if vertical_axis < 0 else 0.0)
+	var target_y : float = hub.char_body.global_position.y + (-fire_tackle_y_lookahead if vertical_axis > 0 else fire_tackle_y_lookahead if vertical_axis < 0 else 0.0)
 	target_y = clamp_y_target(target_y)
 	player_cam.global_position.y = (move_toward(player_cam.global_position.y, target_y, (abs(target_y - player_cam.global_position.y) / time_to_update_y) * delta))
 

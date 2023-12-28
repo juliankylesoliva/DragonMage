@@ -1242,6 +1242,7 @@ fire_tackle_fireball_base_launch_speed = 128.0
 fire_tackle_endlag_duration = 0.4
 fire_tackle_endlag_deceleration = 640.0
 fire_tackle_endlag_cancelable_time = 0.35
+fire_tackle_hitbox_offset = 24.0
 fire_tackle_startup_color = Color(0.901961, 0.858824, 0.458824, 1)
 fire_tackle_active_color = Color(0.980392, 0.568627, 0.317647, 1)
 fire_tackle_jump_cancel_buffer_color = Color(0.831373, 0.219608, 0.0666667, 1)
