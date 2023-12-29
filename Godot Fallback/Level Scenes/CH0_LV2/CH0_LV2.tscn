@@ -102,7 +102,7 @@ room_destination = NodePath("../../CH0_LV2_R6")
 room_destination = NodePath("../../CH0_LV2_R8")
 
 [node name="CH0_LV2_R8" parent="." instance=ExtResource("10_2kavy")]
-position = Vector2(-544, -864)
+position = Vector2(-640, -864)
 
 [node name="Warp 0" parent="CH0_LV2_R8" index="5" node_paths=PackedStringArray("room_destination")]
 room_destination = NodePath("../../CH0_LV2_R7")
@@ -120,7 +120,7 @@ room_destination = NodePath("../../CH0_LV2_R8")
 room_destination = NodePath("../../CH0_LV2_R10")
 
 [node name="CH0_LV2_R10" parent="." instance=ExtResource("12_avml0")]
-position = Vector2(1984, -1760)
+position = Vector2(864, 576)
 
 [node name="Warp 0" parent="CH0_LV2_R10" index="4" node_paths=PackedStringArray("room_destination")]
 room_destination = NodePath("../../CH0_LV2_R9")
@@ -139,3 +139,4 @@ room_entrance_index = 1
 [editable path="CH0_LV2_R8/FallWarp"]
 [editable path="CH0_LV2_R9"]
 [editable path="CH0_LV2_R10"]
+[editable path="CH0_LV2_R10/FallWarp"]

@@ -54,7 +54,6 @@ func update_x_lookahead(delta : float):
 	var target_direction : float = (hub.movement.get_facing_value() if hub.state_machine.current_state.name != "Gliding" else hub.get_input_vector().x)
 	var max_lookahead : float = (max_x_lookahead if abs(hub.char_body.velocity.x) > hub.movement.top_speed else base_x_lookahead)
 	current_x_lookahead = move_toward(current_x_lookahead, target_direction * max_lookahead, max(hub.movement.top_speed, abs(hub.char_body.velocity.x)) * delta)
-	
 	var target_x : float = (hub.char_body.global_position.x + current_x_lookahead)
 	target_x = clamp_x_target(target_x)
 	
@@ -72,7 +71,7 @@ func update_y_lookahead(delta : float):
 	elif (!hub.jumping.is_fast_falling and is_above_upper_threshold() and hub.char_body.velocity.y <= 0 and !was_upper_threshold_crossed and !was_lower_threshold_crossed):
 		saved_y_position = (hub.collisions.get_ground_point().y - max_y_lookahead)
 		was_upper_threshold_crossed = true
-	elif (!hub.jumping.is_fast_falling and ((hub.char_body.is_on_floor() and (abs(hub.collisions.get_ground_point().y - saved_y_position) > ground_level_update_height_threshold or (hub.collisions.get_ground_point().y > saved_y_position))) or (is_above_upper_threshold() and (was_upper_threshold_crossed or was_lower_threshold_crossed)))):
+	elif (!hub.jumping.is_fast_falling and ((hub.char_body.is_on_floor() and (abs(hub.collisions.get_ground_point().y - saved_y_position) >= ground_level_update_height_threshold or (hub.collisions.get_ground_point().y > saved_y_position))) or (is_above_upper_threshold() and (was_upper_threshold_crossed or was_lower_threshold_crossed)))):
 		saved_y_position = hub.collisions.get_ground_point().y
 	else:
 		pass
@@ -89,9 +88,16 @@ func fire_tackle_camera_update(delta : float, prev_x_velocity : float, vertical_
 	target_x = clamp_x_target(target_x)
 	player_cam.global_position.x = target_x
 	
-	var target_y : float = hub.char_body.global_position.y + (-fire_tackle_y_lookahead if vertical_axis > 0 else fire_tackle_y_lookahead if vertical_axis < 0 else 0.0)
+	var target_y : float = (hub.char_body.global_position.y if !hub.char_body.is_on_floor() else (saved_y_position - camera_height_from_ground)) + (-fire_tackle_y_lookahead if vertical_axis > 0 else fire_tackle_y_lookahead if vertical_axis < 0 else 0.0)
 	target_y = clamp_y_target(target_y)
 	player_cam.global_position.y = (move_toward(player_cam.global_position.y, target_y, (abs(target_y - player_cam.global_position.y) / time_to_update_y) * delta))
+
+func wall_climb_horizontal_camera_update(delta : float, stored_speed : float, use_max_lookahead):
+	current_x_lookahead = move_toward(current_x_lookahead, -hub.movement.get_facing_value() * (max_x_lookahead if use_max_lookahead else base_x_lookahead), stored_speed * delta)
+	
+	var target_x : float = (hub.char_body.global_position.x + current_x_lookahead)
+	target_x = clamp_x_target(target_x)
+	player_cam.global_position.x = target_x
 
 func clamp_x_target(x_pos : float):
 	if (x_pos < (player_cam.limit_left + (screen_width / 2))):

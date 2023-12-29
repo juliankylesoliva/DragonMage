@@ -27,6 +27,8 @@ func state_process(_delta):
 	if (hub.form.cannot_change_form()):
 		hub.form.form_change_failed()
 	
+	hub.camera.wall_climb_horizontal_camera_update(_delta, hub.jumping.stored_wall_climb_speed, hub.jumping.stored_wall_climb_speed > hub.jumping.min_climbing_speed)
+	
 	if (hub.form.can_change_form()):
 		set_next_state(state_machine.get_state_by_name("FormChanging"))
 	elif (hub.attacks.is_using_attack_state() and hub.attacks.current_attack != null):

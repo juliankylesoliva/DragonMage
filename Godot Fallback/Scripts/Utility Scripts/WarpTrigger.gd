@@ -32,6 +32,8 @@ func _on_body_entered(body):
 		
 		if (room_destination != room_origin):
 			room_origin.deactivate_room()
+		
+		room_destination.room_activated.emit()
 	elif (body is MagicBlastProjectile):
 		body.queue_free()
 	else:

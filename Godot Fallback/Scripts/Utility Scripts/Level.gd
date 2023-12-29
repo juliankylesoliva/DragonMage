@@ -25,6 +25,7 @@ func level_startup():
 	
 	starting_room.activate_room()
 	starting_room.enable_collisions()
+	preenable_adjacent_room_collisions()
 	
 	for child in player_reference.get_children():
 		if child is PlayerHub:
@@ -38,7 +39,8 @@ func preenable_adjacent_room_collisions():
 			for j in room_list.size():
 				if (j == prev_i or j == next_i):
 					room_list[j].enable_collisions()
-				elif (j != i):
+				elif (j != i and j != prev_i and j != next_i):
 					room_list[j].disable_collisions()
 				else:
 					pass
+			return

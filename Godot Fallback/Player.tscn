@@ -1141,6 +1141,7 @@ script = ExtResource("6_tj4nn")
 hub = NodePath("..")
 ledge_nudge_easing = 0.5
 wall_raycast_collision_threshold = 1
+max_upward_slope_correction_iterations = 8.0
 
 [node name="Buffers" type="Node" parent="Hub" node_paths=PackedStringArray("hub", "speed_preservation_particles")]
 script = ExtResource("4_jbuwb")
@@ -1204,7 +1205,8 @@ projectile_despawn_distance = 640.0
 blast_jump_min_velocity_magnitude = 192.0
 blast_jump_max_fall_speed = 640.0
 blast_jump_offset_multiplier = 1.5
-blast_jump_jumping_offset = 16.0
+blast_jump_moving_facing_offset = 8.0
+blast_jump_jumping_offset = 20.0
 blast_jump_temper_increase_interval = 0.6
 blast_jump_active_color = Color(0.721569, 0.356863, 0.768627, 1)
 forward_throw_strength = 320.0
@@ -1242,7 +1244,7 @@ fire_tackle_fireball_base_launch_speed = 128.0
 fire_tackle_endlag_duration = 0.4
 fire_tackle_endlag_deceleration = 640.0
 fire_tackle_endlag_cancelable_time = 0.35
-fire_tackle_hitbox_offset = 24.0
+fire_tackle_hitbox_offset = 28.0
 fire_tackle_startup_color = Color(0.901961, 0.858824, 0.458824, 1)
 fire_tackle_active_color = Color(0.980392, 0.568627, 0.317647, 1)
 fire_tackle_jump_cancel_buffer_color = Color(0.831373, 0.219608, 0.0666667, 1)
