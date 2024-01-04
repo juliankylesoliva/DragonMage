@@ -1,4 +1,4 @@
-[gd_scene load_steps=166 format=3 uid="uid://c6qw77ovfwgfs"]
+[gd_scene load_steps=173 format=3 uid="uid://c6qw77ovfwgfs"]
 
 [ext_resource type="Texture2D" uid="uid://d381ahbcwydy8" path="res://Sprites/Player/DraelynCrouch.png" id="1_6b42p"]
 [ext_resource type="Texture2D" uid="uid://dls34a1qa8iy1" path="res://Sprites/Player/DraelynFireTackle.png" id="1_ddrlj"]
@@ -50,13 +50,16 @@
 [ext_resource type="Script" path="res://Scripts/Hub Scripts/PlayerTemper.gd" id="20_r5okj"]
 [ext_resource type="PackedScene" uid="uid://bpxyaxwfw7023" path="res://Scene Objects/Effects/SpriteTrailSegment.tscn" id="20_yb7yy"]
 [ext_resource type="Script" path="res://Scripts/Utility Scripts/AudioHandler.gd" id="23_55p2k"]
+[ext_resource type="Script" path="res://Scripts/Hub Scripts/PlayerDamage.gd" id="24_0wgyj"]
 [ext_resource type="Texture2D" uid="uid://c44t784vgugry" path="res://Sprites/Player/MagliIdle.png" id="27_my3k8"]
 [ext_resource type="Texture2D" uid="uid://bcwdksusecuad" path="res://Sprites/Player/DraelynFastFall.png" id="38_akwr7"]
+[ext_resource type="Texture2D" uid="uid://t0uxr4ou5r1d" path="res://Sprites/Player/DraelynIdleGlasses.png" id="46_r2ngl"]
 [ext_resource type="Texture2D" uid="uid://b8o0u22mxyifu" path="res://Sprites/Effects/BlastJumpParticle.png" id="47_v16qd"]
 [ext_resource type="Texture2D" uid="uid://nskhc48w5xs3" path="res://Sprites/Effects/FireTackleTrail.png" id="48_hn1hc"]
 [ext_resource type="Texture2D" uid="uid://cajxrlpp0g7oo" path="res://Sprites/Effects/NeutralMidairJumpParticle.png" id="52_4345i"]
 [ext_resource type="Texture2D" uid="uid://cdrl535qe7xx0" path="res://Sprites/Effects/SuperJumpChargeParticle.png" id="52_kmjhs"]
 [ext_resource type="Texture2D" uid="uid://bj6vmo7ahwtpf" path="res://Sprites/Effects/SpeedBufferParticle.png" id="52_u3vuf"]
+[ext_resource type="Texture2D" uid="uid://bobu8jpoly5wb" path="res://Sprites/Player/MagliIdleShy.png" id="53_c0t7y"]
 [ext_resource type="Script" path="res://Scripts/Utility Scripts/PlayerCamera.gd" id="54_k03tc"]
 
 [sub_resource type="Curve" id="Curve_qnqge"]
@@ -125,6 +128,14 @@ region = Rect2(0, 0, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_wyl5m"]
 atlas = ExtResource("4_22c6w")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7jrcn"]
+atlas = ExtResource("46_r2ngl")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sa6vw"]
+atlas = ExtResource("46_r2ngl")
 region = Rect2(64, 0, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_j5jx7"]
@@ -294,6 +305,14 @@ region = Rect2(0, 0, 64, 64)
 [sub_resource type="AtlasTexture" id="AtlasTexture_n6tkc"]
 atlas = ExtResource("4_x7fww")
 region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wl8k2"]
+atlas = ExtResource("53_c0t7y")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mexpw"]
+atlas = ExtResource("53_c0t7y")
+region = Rect2(0, 0, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ba2gs"]
 atlas = ExtResource("1_s7co6")
@@ -515,6 +534,20 @@ animations = [{
 }],
 "loop": false,
 "name": &"DraelynGuard",
+"speed": 60.0
+}, {
+"frames": [{
+"duration": 15.0,
+"texture": SubResource("AtlasTexture_7jrcn")
+}, {
+"duration": 15.0,
+"texture": SubResource("AtlasTexture_sa6vw")
+}, {
+"duration": 30.0,
+"texture": SubResource("AtlasTexture_7jrcn")
+}],
+"loop": false,
+"name": &"DraelynIdle",
 "speed": 60.0
 }, {
 "frames": [{
@@ -799,6 +832,23 @@ animations = [{
 }],
 "loop": false,
 "name": &"MagliGuard",
+"speed": 60.0
+}, {
+"frames": [{
+"duration": 15.0,
+"texture": SubResource("AtlasTexture_wl8k2")
+}, {
+"duration": 15.0,
+"texture": SubResource("AtlasTexture_mexpw")
+}, {
+"duration": 15.0,
+"texture": SubResource("AtlasTexture_wl8k2")
+}, {
+"duration": 15.0,
+"texture": SubResource("AtlasTexture_mexpw")
+}],
+"loop": false,
+"name": &"MagliIdle",
 "speed": 60.0
 }, {
 "frames": [{
@@ -1101,7 +1151,7 @@ platform_floor_layers = 3
 safe_margin = 0.001
 metadata/Tag = "Player"
 
-[node name="Hub" type="Node" parent="." node_paths=PackedStringArray("state_machine", "collisions", "buffers", "movement", "jumping", "attacks", "temper", "form", "animation", "sprite_trail", "camera", "audio", "char_body", "char_sprite", "collision_shape", "stream_player", "raycast_dl", "raycast_dm", "raycast_dr", "raycast_ledge_l", "raycast_ledge_r", "raycast_ul", "raycast_um", "raycast_ur", "raycast_ceiling_l", "raycast_ceiling_r", "raycast_wall_top_l", "raycast_wall_mid_l", "raycast_wall_bot_l", "raycast_wall_top_r", "raycast_wall_mid_r", "raycast_wall_bot_r")]
+[node name="Hub" type="Node" parent="." node_paths=PackedStringArray("state_machine", "collisions", "buffers", "movement", "jumping", "attacks", "temper", "form", "damage", "animation", "sprite_trail", "camera", "audio", "char_body", "char_sprite", "collision_shape", "stream_player", "raycast_dl", "raycast_dm", "raycast_dr", "raycast_ledge_l", "raycast_ledge_r", "raycast_ul", "raycast_um", "raycast_ur", "raycast_ceiling_l", "raycast_ceiling_r", "raycast_wall_top_l", "raycast_wall_mid_l", "raycast_wall_bot_l", "raycast_wall_top_r", "raycast_wall_mid_r", "raycast_wall_bot_r")]
 script = ExtResource("1_fbdyy")
 state_machine = NodePath("../StateMachine")
 collisions = NodePath("Collisions")
@@ -1111,6 +1161,7 @@ jumping = NodePath("Jumping")
 attacks = NodePath("Attacks")
 temper = NodePath("Temper")
 form = NodePath("Form")
+damage = NodePath("Damage")
 animation = NodePath("Animation")
 sprite_trail = NodePath("SpriteTrail")
 camera = NodePath("Camera")
@@ -1279,6 +1330,10 @@ mage_properties = ExtResource("14_8gg24")
 dragon_properties = ExtResource("15_356k0")
 form_change_cooldown_time = 0.4
 
+[node name="Damage" type="Node" parent="Hub" node_paths=PackedStringArray("hub")]
+script = ExtResource("24_0wgyj")
+hub = NodePath("..")
+
 [node name="Animation" type="Node" parent="Hub" node_paths=PackedStringArray("hub")]
 script = ExtResource("3_01vwt")
 hub = NodePath("..")
@@ -1314,6 +1369,8 @@ current_state = NodePath("Standing")
 
 [node name="Standing" type="Node" parent="StateMachine"]
 script = ExtResource("2_w87d3")
+min_stand_cycles_per_idle_anim = 8
+max_stand_cycles_per_idle_anim = 12
 min_blink_time = 2.0
 max_blink_time = 3.0
 

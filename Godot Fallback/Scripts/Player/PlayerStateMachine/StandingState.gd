@@ -2,14 +2,21 @@ extends State
 
 class_name StandingState
 
+@export var min_stand_cycles_per_idle_anim : int = 4
+@export var max_stand_cycles_per_idle_anim : int = 6
 @export var num_blink_animations : int = 3
 @export var min_blink_time : float = 3
 @export var max_blink_time : float = 4
-var current_blink_timer = 0
+var current_blink_timer : float = 0
+var target_stand_cycles : int = 0
+var current_stand_cycles : int = 0
 
 var prev_is_crouching = false
 
 var is_headbonking : bool = false
+
+func _ready():
+	target_stand_cycles = randi_range(min_stand_cycles_per_idle_anim, max_stand_cycles_per_idle_anim)
 
 func state_process(_delta):
 	var char_name : String = hub.form.get_current_form_name()
@@ -38,7 +45,8 @@ func state_process(_delta):
 			hub.animation.set_animation("{name}Stand".format({"name" : char_name}))
 		update_blink_timer(_delta)
 		if (!hub.char_sprite.is_playing()):
-			if (!check_blink_animation()):
+			current_stand_cycles += 1
+			if (!check_idle_animation() and !check_blink_animation()):
 				hub.animation.set_animation("{name}Stand".format({"name" : char_name}))
 				hub.animation.set_animation_speed(1)
 		is_headbonking = false
@@ -82,6 +90,16 @@ func update_blink_timer(delta):
 		return
 	
 	current_blink_timer = move_toward(current_blink_timer, 0, delta)
+
+func check_idle_animation():
+	if (current_stand_cycles >= target_stand_cycles):
+		current_stand_cycles = 0
+		hub.animation.set_animation("{name}Idle".format({"name" : hub.form.get_current_form_name()}))
+		hub.animation.set_animation_speed(1)
+		target_stand_cycles = randi_range(min_stand_cycles_per_idle_anim, max_stand_cycles_per_idle_anim)
+		return true
+	
+	return false
 
 func check_blink_animation():
 	if (num_blink_animations <= 0):

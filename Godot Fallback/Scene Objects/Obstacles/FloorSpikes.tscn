@@ -1,0 +1,27 @@
+[gd_scene load_steps=4 format=3 uid="uid://c4cg3xgbq7eyh"]
+
+[ext_resource type="Script" path="res://Scripts/Object Scripts/FloorSpikes.gd" id="1_wocwk"]
+[ext_resource type="PackedScene" uid="uid://3642347t2rd" path="res://Scene Objects/Obstacles/FloorSpikesSegment.tscn" id="2_tt1ei"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_65dy5"]
+size = Vector2(32, 16)
+
+[node name="FloorSpikes" type="RigidBody2D" node_paths=PackedStringArray("collision_shape")]
+collision_layer = 0
+collision_mask = 4
+gravity_scale = 0.0
+max_contacts_reported = 10
+contact_monitor = true
+lock_rotation = true
+freeze = true
+freeze_mode = 1
+script = ExtResource("1_wocwk")
+floor_spikes_segment_scene = ExtResource("2_tt1ei")
+collision_shape = NodePath("CollisionShape2D")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 8)
+shape = SubResource("RectangleShape2D_65dy5")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]
