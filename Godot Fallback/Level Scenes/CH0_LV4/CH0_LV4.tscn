@@ -1,16 +1,17 @@
-[gd_scene load_steps=6 format=3 uid="uid://qa22n4g30owo"]
+[gd_scene load_steps=7 format=3 uid="uid://qa22n4g30owo"]
 
 [ext_resource type="Script" path="res://Scripts/Utility Scripts/Level.gd" id="1_xccb8"]
 [ext_resource type="PackedScene" uid="uid://c6qw77ovfwgfs" path="res://Player.tscn" id="2_616c6"]
 [ext_resource type="PackedScene" uid="uid://bdypi7w73c6kq" path="res://Scene Objects/UI/TemperMeterUI.tscn" id="3_hvbu7"]
 [ext_resource type="PackedScene" uid="uid://c0cgya1qileg7" path="res://Level Scenes/CH0_LV4/Rooms/CH0_LV4_R1.tscn" id="4_gh53s"]
 [ext_resource type="PackedScene" uid="uid://clan4gyici7s" path="res://Level Scenes/CH0_LV4/Rooms/CH0_LV4_R2.tscn" id="5_q0riv"]
+[ext_resource type="PackedScene" uid="uid://bsfyytd8n23kb" path="res://Level Scenes/CH0_LV4/Rooms/CH0_LV4_R3.tscn" id="6_1s4e1"]
 
 [node name="CH0_LV4" type="Node2D" node_paths=PackedStringArray("player_reference", "starting_room", "room_list")]
 script = ExtResource("1_xccb8")
 player_reference = NodePath("Player")
 starting_room = NodePath("CH0_LV4_R1")
-room_list = [NodePath("CH0_LV4_R1"), NodePath("CH0_LV4_R2")]
+room_list = [NodePath("CH0_LV4_R1"), NodePath("CH0_LV4_R2"), NodePath("CH0_LV4_R3")]
 
 [node name="Player" parent="." instance=ExtResource("2_616c6")]
 position = Vector2(96, 159)
@@ -51,8 +52,19 @@ position = Vector2(1248, -96)
 [node name="Warp 0" parent="CH0_LV4_R2" index="5" node_paths=PackedStringArray("room_destination")]
 room_destination = NodePath("../../CH0_LV4_R1")
 
+[node name="Warp 1" parent="CH0_LV4_R2" index="6" node_paths=PackedStringArray("room_destination")]
+room_destination = NodePath("../../CH0_LV4_R3")
+
+[node name="CH0_LV4_R3" parent="." instance=ExtResource("6_1s4e1")]
+position = Vector2(2944, -160)
+
+[node name="Warp 0" parent="CH0_LV4_R3" index="5" node_paths=PackedStringArray("room_destination")]
+room_destination = NodePath("../../CH0_LV4_R2")
+
 [editable path="Player"]
 [editable path="CH0_LV4_R1"]
 [editable path="CH0_LV4_R1/FallWarp"]
 [editable path="CH0_LV4_R2"]
 [editable path="CH0_LV4_R2/FallWarp"]
+[editable path="CH0_LV4_R3"]
+[editable path="CH0_LV4_R3/FallWarp"]

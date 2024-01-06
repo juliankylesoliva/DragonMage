@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://clan4gyici7s"]
+[gd_scene load_steps=7 format=3 uid="uid://clan4gyici7s"]
 
 [ext_resource type="Script" path="res://Scripts/Utility Scripts/Room.gd" id="1_r13uf"]
 [ext_resource type="TileSet" uid="uid://dhwi7i1loa2pd" path="res://Sprites/Tiles/Test Tiles/TestTileSet.tres" id="2_pi25u"]
 [ext_resource type="PackedScene" uid="uid://dqbo0wu6hm8lj" path="res://Scene Objects/Objects/WarpTrigger.tscn" id="3_5i30y"]
 [ext_resource type="PackedScene" uid="uid://c4cg3xgbq7eyh" path="res://Scene Objects/Obstacles/FloorSpikes.tscn" id="4_q7sec"]
+[ext_resource type="PackedScene" uid="uid://b2a0ttqvejk51" path="res://Scene Objects/Objects/TemperDragonFruit.tscn" id="5_1vauo"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yamn2"]
 size = Vector2(320, 32)
@@ -68,6 +69,9 @@ room_entrance_index = 2
 
 [node name="CollisionShape2D" parent="FallWarp" index="0"]
 shape = SubResource("RectangleShape2D_yamn2")
+
+[node name="TemperDragonFruit" parent="." instance=ExtResource("5_1vauo")]
+position = Vector2(160, 160)
 
 [node name="FloorSpikes" parent="." instance=ExtResource("4_q7sec")]
 position = Vector2(384, 240)

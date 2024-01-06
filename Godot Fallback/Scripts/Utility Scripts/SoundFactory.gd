@@ -6,6 +6,8 @@ const path_prefix : String = "res://Sounds/"
 
 const path_suffix : String = ".wav"
 
+const default_distance : float = 512
+
 func _ready():
 	var file : FileAccess = FileAccess.open("res://Sounds/sounds_list.txt", FileAccess.READ)
 	while (file.get_position() < file.get_length()):
@@ -22,6 +24,7 @@ func play_sound(stream : AudioStream, position : Vector2, volume : float = 0, pi
 	instance.volume_db = volume
 	instance.pitch_scale = pitch
 	instance.bus = bus_name
+	instance.max_distance = default_distance
 	instance.finished.connect(remove_node.bind(instance))
 	add_child(instance)
 	(instance as Node2D).global_position = position
@@ -47,6 +50,7 @@ func get_sound_instance_by_name(sound_name : String, volume : float = 0, pitch :
 		instance.volume_db = volume
 		instance.pitch_scale = pitch
 		instance.bus = bus_name
+		instance.max_distance = default_distance
 		instance.finished.connect(remove_node.bind(instance))
 		return instance
 	return null

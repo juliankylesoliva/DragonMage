@@ -37,6 +37,8 @@ res://Sounds/movement_magli_turnaround.wav
 res://Sounds/object_block_breakable.wav
 res://Sounds/object_block_reinforced.wav
 res://Sounds/object_fragment_pickup.wav
+res://Sounds/object_item_pickup.wav
+res://Sounds/object_item_spawn.wav
 res://Sounds/object_medal_pickup.wav
 res://Sounds/obstacle_spikes_active.wav
 res://Sounds/obstacle_spikes_retract.wav

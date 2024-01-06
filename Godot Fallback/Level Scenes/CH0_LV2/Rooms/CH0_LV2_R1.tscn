@@ -34,7 +34,7 @@ layer_1/modulate = Color(0.701961, 0.215686, 0.105882, 1)
 layer_1/y_sort_enabled = false
 layer_1/y_sort_origin = 0
 layer_1/z_index = 0
-layer_1/tile_data = PackedInt32Array(458771, 131072, 2, 458772, 196608, 2, 393234, 65536, 0)
+layer_1/tile_data = PackedInt32Array(393234, 65536, 0, 458771, 65536, 0)
 
 [node name="Entrance 0" type="Node2D" parent="."]
 position = Vector2(96, 224)

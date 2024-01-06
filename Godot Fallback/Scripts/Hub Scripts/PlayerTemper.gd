@@ -70,6 +70,9 @@ func change_temper_by(num : int):
 	else:
 		pass
 
+func set_temper_level(num : int):
+	current_temper_level = clampi(num, min_temper_level, total_segments)
+
 func form_lock_temper_change():
 	if (current_temper_level >= hot_threshold):
 		current_temper_level = total_segments
@@ -77,3 +80,12 @@ func form_lock_temper_change():
 		current_temper_level = min_temper_level
 	else:
 		pass
+
+func get_min_warm_threshold():
+	return (cold_threshold + 1)
+
+func get_max_warm_threshold():
+	return (hot_threshold - 1)
+
+func get_warm_midpoint():
+	return (((get_min_warm_threshold() + get_max_warm_threshold()) / 2.0) as int)
