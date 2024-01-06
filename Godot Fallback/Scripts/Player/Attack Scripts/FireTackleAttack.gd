@@ -152,7 +152,7 @@ func startup_init():
 
 func startup_update(delta : float):
 	hub.buffers.refresh_speed_preservation_buffer()
-	if ((current_windup_timer > 0 or is_attack_button_held)):
+	if ((current_windup_timer > 0 or is_attack_button_held) and !hub.damage.is_player_damaged()):
 		if (!Input.is_action_pressed("Attack")):
 			is_attack_button_held = false
 		hub.char_body.velocity = Vector2.ZERO
@@ -161,7 +161,7 @@ func startup_update(delta : float):
 		if (hub.char_body.is_on_floor() and current_vertical_axis < 0):
 			current_vertical_axis = 0
 		current_windup_timer = move_toward(current_windup_timer, 0, delta)
-		if (current_windup_timer <= 0 and current_startup_hold_timer > 0):
+		if (!hub.temper.is_form_locked() and current_windup_timer <= 0 and current_startup_hold_timer > 0):
 			current_startup_hold_timer -= delta
 			if (current_startup_hold_timer <= 0):
 				current_startup_hold_timer += fire_tackle_startup_hold_temper_drain_interval
@@ -169,6 +169,8 @@ func startup_update(delta : float):
 					hub.temper.change_temper_by(fire_tackle_hold_temper_decrease)
 				else:
 					hub.temper.neutralize_temper_by(fire_tackle_hold_temper_decrease)
+	elif (hub.damage.is_player_damaged()):
+		end_fire_tackle()
 	else:
 		active_init()
 
@@ -185,7 +187,8 @@ func active_init():
 	hub.movement.set_facing_direction(hub.char_body.velocity.x)
 	current_attack_timer = fire_tackle_duration
 	current_bump_immunity_timer = fire_tackle_bump_immunity_duration
-	hub.temper.change_temper_by(fire_tackle_launch_temper_decrease)
+	if (!hub.temper.is_form_locked()):
+		hub.temper.change_temper_by(fire_tackle_launch_temper_decrease)
 	
 	fire_tackle_hitbox_instance = fire_tackle_hitbox_scene.instantiate()
 	add_child(fire_tackle_hitbox_instance)
@@ -285,8 +288,8 @@ func endlag_init():
 					(child as KnockbackHitbox).hit.connect(_on_fireball_hit)
 				else:
 					pass
-			
-			hub.temper.change_temper_by(fireball_launch_temper_decrease)
+			if (!hub.temper.is_form_locked()):
+				hub.temper.change_temper_by(fireball_launch_temper_decrease)
 			hub.movement.reset_current_horizontal_velocity()
 			hub.char_body.velocity = (((Vector2.UP if !hub.char_body.is_on_floor() else Vector2.ZERO) + (Vector2.RIGHT * -hub.movement.get_facing_value())).normalized() * fire_tackle_fireball_recoil_strength)
 		else:
@@ -299,7 +302,7 @@ func endlag_init():
 	current_endlag_timer = fire_tackle_endlag_duration
 
 func endlag_update(delta : float):
-	if (current_endlag_timer > 0 and !is_fire_tackle_endlag_canceled):
+	if (current_endlag_timer > 0 and !is_fire_tackle_endlag_canceled and !hub.damage.is_player_damaged()):
 		if (!is_player_firing_projectile and !did_player_bump and current_endlag_timer < fire_tackle_endlag_cancelable_time and can_cancel_fire_tackle_endlag()):
 			is_fire_tackle_endlag_canceled = true
 			if (hub.buffers.is_jump_buffer_active() and hub.char_body.is_on_floor()):
@@ -321,6 +324,8 @@ func endlag_update(delta : float):
 			pass
 		
 		hub.char_body.velocity.y += hub.jumping.get_gravity_delta(delta)
+		if (hub.char_body.velocity.y > hub.jumping.max_fall_speed):
+			hub.char_body.velocity.y = hub.jumping.max_fall_speed
 		
 		var intended_velocity : Vector2 = hub.char_body.velocity
 		hub.char_body.move_and_slide()
@@ -349,17 +354,19 @@ func end_fire_tackle():
 	hub.char_body.floor_snap_length = saved_floor_snap_distance
 	
 	hub.char_sprite.modulate = Color.WHITE
-	hub.movement.current_horizontal_velocity = hub.char_body.velocity.x
-	if (abs(hub.movement.current_horizontal_velocity) > hub.buffers.highest_speed):
+	hub.movement.current_horizontal_velocity = (hub.char_body.velocity.x if !hub.damage.is_player_damaged() else 0.0)
+	if (abs(hub.movement.current_horizontal_velocity) > hub.buffers.highest_speed and !hub.damage.is_player_damaged()):
 		hub.buffers.highest_speed = abs(hub.movement.current_horizontal_velocity)
 		hub.buffers.refresh_speed_preservation_buffer()
 	
 	hub.attacks.set_attack_cooldown_timer()
 	
-	if (!is_fire_tackle_endlag_canceled):
+	if (!is_fire_tackle_endlag_canceled and !hub.damage.is_player_damaged()):
 		hub.form.start_form_change_cooldown_timer()
 	
-	if (hub.temper.is_forcing_form_change()):
+	if (hub.damage.is_player_damaged()):
+		hub.state_machine.current_state.set_next_state(hub.state_machine.get_state_by_name("Damaged"))
+	elif (hub.temper.is_forcing_form_change()):
 		hub.state_machine.current_state.set_next_state(hub.state_machine.get_state_by_name("FormChanging"))
 	elif (hub.jumping.can_wall_climb_from_fire_tackle()):
 		hub.state_machine.current_state.set_next_state(hub.state_machine.get_state_by_name("WallClimbing"))
@@ -376,7 +383,13 @@ func end_fire_tackle():
 		hub.state_machine.current_state.set_next_state(hub.state_machine.get_state_by_name("Standing"))
 
 func _on_fire_tackle_hit():
-	hub.temper.neutralize_temper_by(fire_tackle_hit_temper_increase)
+	if (hub.temper.is_form_locked()):
+		hub.temper.neutralize_temper_by(-fire_tackle_hit_temper_increase)
+	else:
+		hub.temper.neutralize_temper_by(fire_tackle_hit_temper_increase)
 
 func _on_fireball_hit():
-	hub.temper.neutralize_temper_by(fireball_hit_temper_increase)
+	if (hub.temper.is_form_locked()):
+		hub.temper.neutralize_temper_by(-fireball_hit_temper_increase)
+	else:
+		hub.temper.neutralize_temper_by(fireball_hit_temper_increase)

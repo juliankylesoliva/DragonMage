@@ -24,7 +24,10 @@ func state_process(_delta):
 					hub.buffers.refresh_speed_preservation_buffer()
 				set_next_state(state_machine.get_state_by_name("Jumping" if prev_velocity.y < 0 else "Falling"))
 			"Damaged":
-				set_next_state(state_machine.get_state_by_name("Standing"))
+				if (hub.char_body.is_on_floor()):
+					set_next_state(state_machine.get_state_by_name("Standing"))
+				else:
+					set_next_state(state_machine.get_state_by_name("Falling"))
 			"Attacking":
 				if (hub.char_body.is_on_floor() and (hub.get_input_vector().x != 0 or prev_velocity.x != 0)):
 					set_next_state(state_machine.get_state_by_name("Running"))

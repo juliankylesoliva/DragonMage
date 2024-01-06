@@ -53,9 +53,9 @@ func validate_parameters():
 func neutralize_temper_by(num : int):
 	current_temper_level += num
 	
-	if (current_temper_level <= cold_threshold):
+	if (num < 0 and current_temper_level <= cold_threshold):
 		current_temper_level = (cold_threshold + 1)
-	elif (current_temper_level >= hot_threshold):
+	elif (num > 0 and current_temper_level >= hot_threshold):
 		current_temper_level = (hot_threshold - 1)
 	else:
 		pass

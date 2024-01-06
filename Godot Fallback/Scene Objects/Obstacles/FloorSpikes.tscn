@@ -4,9 +4,10 @@
 [ext_resource type="PackedScene" uid="uid://3642347t2rd" path="res://Scene Objects/Obstacles/FloorSpikesSegment.tscn" id="2_tt1ei"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_65dy5"]
+resource_local_to_scene = true
 size = Vector2(32, 16)
 
-[node name="FloorSpikes" type="RigidBody2D" node_paths=PackedStringArray("collision_shape")]
+[node name="FloorSpikes" type="RigidBody2D" node_paths=PackedStringArray("collision_shape", "audio_stream_player")]
 collision_layer = 0
 collision_mask = 4
 gravity_scale = 0.0
@@ -18,10 +19,15 @@ freeze_mode = 1
 script = ExtResource("1_wocwk")
 floor_spikes_segment_scene = ExtResource("2_tt1ei")
 collision_shape = NodePath("CollisionShape2D")
+audio_stream_player = NodePath("AudioStreamPlayer2D")
+time_between_states = 1.25
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 8)
 shape = SubResource("RectangleShape2D_65dy5")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+bus = &"SFX"
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="body_exited" from="." to="." method="_on_body_exited"]

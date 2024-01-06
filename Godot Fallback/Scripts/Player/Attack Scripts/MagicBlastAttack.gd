@@ -137,7 +137,8 @@ func activate_blast_jump():
 	blast_jump_particles.emitting = true
 	hub.char_sprite.modulate = blast_jump_active_color
 	hub.sprite_trail.activate_trail()
-	hub.temper.change_temper_by(blast_jump_start_temper_increase)
+	if (!hub.temper.is_form_locked()):
+		hub.temper.change_temper_by(blast_jump_start_temper_increase)
 	blast_jump_current_active_time = blast_jump_min_active_time
 	blast_jump_current_temper_interval_time = blast_jump_temper_increase_interval
 
@@ -170,14 +171,20 @@ func blast_jump_update(delta : float):
 			if (blast_jump_current_active_time <= 0 or hub.state_machine.current_state.name == "FormChanging"):
 				blast_jump_current_active_time = 0
 		
-		if (blast_jump_current_temper_interval_time > 0):
+		if (!hub.temper.is_form_locked() and blast_jump_current_temper_interval_time > 0):
 			blast_jump_current_temper_interval_time -= delta
 			if (blast_jump_current_temper_interval_time <= 0):
 				hub.temper.change_temper_by(blast_jump_continuous_temper_increase)
 				blast_jump_current_temper_interval_time += blast_jump_temper_increase_interval
 
 func _on_magic_blast_hit():
-	hub.temper.neutralize_temper_by(magic_blast_hit_temper_reduction)
+	if (hub.temper.is_form_locked()):
+		hub.temper.neutralize_temper_by(-magic_blast_hit_temper_reduction)
+	else:
+		hub.temper.neutralize_temper_by(magic_blast_hit_temper_reduction)
 
 func _on_blast_jump_hit():
-	hub.temper.neutralize_temper_by(blast_jump_hit_temper_reduction)
+	if (hub.temper.is_form_locked()):
+		hub.temper.neutralize_temper_by(-blast_jump_hit_temper_reduction)
+	else:
+		hub.temper.neutralize_temper_by(blast_jump_hit_temper_reduction)

@@ -55,6 +55,8 @@ func state_process(_delta):
 		
 		hub.buffers.reset_speed_preservation_buffer()
 		set_next_state(state_machine.get_state_by_name("Falling"))
+	elif (hub.damage.is_player_damaged()):
+		set_next_state(state_machine.get_state_by_name("Damaged"))
 	else:
 		pass
 

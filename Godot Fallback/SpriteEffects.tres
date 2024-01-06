@@ -1,5 +1,6 @@
-[gd_resource type="SpriteFrames" load_steps=75 format=3 uid="uid://cxb5mjrw5mrd4"]
+[gd_resource type="SpriteFrames" load_steps=79 format=3 uid="uid://cxb5mjrw5mrd4"]
 
+[ext_resource type="Texture2D" uid="uid://du8qhvwbopk0k" path="res://Sprites/Effects/EnemyContactImpact.png" id="1_n3i0w"]
 [ext_resource type="Texture2D" uid="uid://b4ytlcj6u57e" path="res://Sprites/Effects/FastWallJump.png" id="1_t1i07"]
 [ext_resource type="Texture2D" uid="uid://b5tckipl6qpsb" path="res://Sprites/Effects/HeadbonkFX.png" id="1_u4l24"]
 [ext_resource type="Texture2D" uid="uid://d1x6a3myheyt1" path="res://Sprites/Effects/MagicExplosion.png" id="1_yyot1"]
@@ -15,6 +16,18 @@
 [ext_resource type="Texture2D" uid="uid://ed8b4dp3lh6p" path="res://Sprites/Effects/WallSlideDust.png" id="11_p4txb"]
 [ext_resource type="Texture2D" uid="uid://dmnsasokd658s" path="res://Sprites/Effects/WallClimbSpark.png" id="11_xjhqo"]
 [ext_resource type="Texture2D" uid="uid://b5hl51iqnatr0" path="res://Sprites/Effects/WallVaultSpark.png" id="12_7qlv5"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_525tt"]
+atlas = ExtResource("1_n3i0w")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_glldc"]
+atlas = ExtResource("1_n3i0w")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_l6ohs"]
+atlas = ExtResource("1_n3i0w")
+region = Rect2(64, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_o7l10"]
 atlas = ExtResource("1_t1i07")
@@ -254,6 +267,23 @@ region = Rect2(64, 0, 32, 32)
 
 [resource]
 animations = [{
+"frames": [{
+"duration": 4.0,
+"texture": SubResource("AtlasTexture_525tt")
+}, {
+"duration": 8.0,
+"texture": SubResource("AtlasTexture_glldc")
+}, {
+"duration": 2.0,
+"texture": SubResource("AtlasTexture_l6ohs")
+}, {
+"duration": 1.0,
+"texture": null
+}],
+"loop": false,
+"name": &"EnemyContactImpact",
+"speed": 60.0
+}, {
 "frames": [{
 "duration": 3.0,
 "texture": SubResource("AtlasTexture_o7l10")

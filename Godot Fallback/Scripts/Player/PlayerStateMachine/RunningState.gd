@@ -42,6 +42,8 @@ func state_process(_delta):
 		set_next_state(state_machine.get_state_by_name("Jumping"))
 	elif (hub.attacks.is_using_attack_state() and hub.attacks.current_attack != null):
 		set_next_state(state_machine.get_state_by_name("Attacking"))
+	elif (hub.damage.is_player_damaged()):
+		set_next_state(state_machine.get_state_by_name("Damaged"))
 	else:
 		pass
 

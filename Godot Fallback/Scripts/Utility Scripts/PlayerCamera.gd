@@ -99,6 +99,13 @@ func wall_climb_horizontal_camera_update(delta : float, stored_speed : float, us
 	target_x = clamp_x_target(target_x)
 	player_cam.global_position.x = target_x
 
+func damaged_horizontal_camera_update(delta : float):
+	current_x_lookahead = move_toward(current_x_lookahead, 0, abs(hub.damage.horizontal_damage_knockback) * delta)
+	
+	var target_x : float = (hub.char_body.global_position.x + current_x_lookahead)
+	target_x = clamp_x_target(target_x)
+	player_cam.global_position.x = target_x
+
 func clamp_x_target(x_pos : float):
 	if (x_pos < (player_cam.limit_left + (screen_width / 2))):
 		return (player_cam.limit_left + (screen_width / 2))

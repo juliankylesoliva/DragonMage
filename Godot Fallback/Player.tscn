@@ -1,4 +1,4 @@
-[gd_scene load_steps=173 format=3 uid="uid://c6qw77ovfwgfs"]
+[gd_scene load_steps=174 format=3 uid="uid://c6qw77ovfwgfs"]
 
 [ext_resource type="Texture2D" uid="uid://d381ahbcwydy8" path="res://Sprites/Player/DraelynCrouch.png" id="1_6b42p"]
 [ext_resource type="Texture2D" uid="uid://dls34a1qa8iy1" path="res://Sprites/Player/DraelynFireTackle.png" id="1_ddrlj"]
@@ -53,6 +53,7 @@
 [ext_resource type="Script" path="res://Scripts/Hub Scripts/PlayerDamage.gd" id="24_0wgyj"]
 [ext_resource type="Texture2D" uid="uid://c44t784vgugry" path="res://Sprites/Player/MagliIdle.png" id="27_my3k8"]
 [ext_resource type="Texture2D" uid="uid://bcwdksusecuad" path="res://Sprites/Player/DraelynFastFall.png" id="38_akwr7"]
+[ext_resource type="Script" path="res://Scripts/Player/PlayerStateMachine/DamagedState.gd" id="41_7pdlp"]
 [ext_resource type="Texture2D" uid="uid://t0uxr4ou5r1d" path="res://Sprites/Player/DraelynIdleGlasses.png" id="46_r2ngl"]
 [ext_resource type="Texture2D" uid="uid://b8o0u22mxyifu" path="res://Sprites/Effects/BlastJumpParticle.png" id="47_v16qd"]
 [ext_resource type="Texture2D" uid="uid://nskhc48w5xs3" path="res://Sprites/Effects/FireTackleTrail.png" id="48_hn1hc"]
@@ -306,13 +307,13 @@ region = Rect2(0, 0, 64, 64)
 atlas = ExtResource("4_x7fww")
 region = Rect2(64, 0, 64, 64)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_wl8k2"]
-atlas = ExtResource("53_c0t7y")
-region = Rect2(64, 0, 64, 64)
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_mexpw"]
 atlas = ExtResource("53_c0t7y")
 region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wl8k2"]
+atlas = ExtResource("53_c0t7y")
+region = Rect2(64, 0, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ba2gs"]
 atlas = ExtResource("1_s7co6")
@@ -835,16 +836,19 @@ animations = [{
 "speed": 60.0
 }, {
 "frames": [{
-"duration": 15.0,
-"texture": SubResource("AtlasTexture_wl8k2")
-}, {
-"duration": 15.0,
+"duration": 10.0,
 "texture": SubResource("AtlasTexture_mexpw")
 }, {
 "duration": 15.0,
 "texture": SubResource("AtlasTexture_wl8k2")
 }, {
+"duration": 10.0,
+"texture": SubResource("AtlasTexture_mexpw")
+}, {
 "duration": 15.0,
+"texture": SubResource("AtlasTexture_wl8k2")
+}, {
+"duration": 10.0,
 "texture": SubResource("AtlasTexture_mexpw")
 }],
 "loop": false,
@@ -1333,6 +1337,10 @@ form_change_cooldown_time = 0.4
 [node name="Damage" type="Node" parent="Hub" node_paths=PackedStringArray("hub")]
 script = ExtResource("24_0wgyj")
 hub = NodePath("..")
+vertical_damage_knockback = -320.0
+hitstun_time = 0.65
+hitstun_ground_cancel_portion = 0.25
+invulnerability_alpha = 0.25
 
 [node name="Animation" type="Node" parent="Hub" node_paths=PackedStringArray("hub")]
 script = ExtResource("3_01vwt")
@@ -1408,6 +1416,10 @@ can_update_camera_y_pos = false
 
 [node name="FormChanging" type="Node" parent="StateMachine"]
 script = ExtResource("17_1yv22")
+can_update_camera_x_pos = false
+
+[node name="Damaged" type="Node" parent="StateMachine"]
+script = ExtResource("41_7pdlp")
 can_update_camera_x_pos = false
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
