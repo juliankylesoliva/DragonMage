@@ -93,7 +93,7 @@ func fire_tackle_camera_update(delta : float, prev_x_velocity : float, vertical_
 	player_cam.global_position.y = (move_toward(player_cam.global_position.y, target_y, (abs(target_y - player_cam.global_position.y) / time_to_update_y) * delta))
 
 func wall_climb_horizontal_camera_update(delta : float, stored_speed : float, use_max_lookahead):
-	current_x_lookahead = move_toward(current_x_lookahead, -hub.movement.get_facing_value() * (max_x_lookahead if use_max_lookahead else base_x_lookahead), stored_speed * delta)
+	current_x_lookahead = move_toward(current_x_lookahead, hub.movement.get_facing_value() * (-1 if (hub.movement.get_facing_value() * hub.get_input_vector().x) <= 0 else 1) * (max_x_lookahead if use_max_lookahead else base_x_lookahead), stored_speed * delta)
 	
 	var target_x : float = (hub.char_body.global_position.x + current_x_lookahead)
 	target_x = clamp_x_target(target_x)

@@ -14,8 +14,8 @@ dest_files=["res://.godot/imported/damage_player.wav-31e472d7a86c2e2918403d3fb35
 
 force/8_bit=false
 force/mono=false
-force/max_rate=false
-force/max_rate_hz=44100
+force/max_rate=true
+force/max_rate_hz=48000.0
 edit/trim=false
 edit/normalize=false
 edit/loop_mode=0

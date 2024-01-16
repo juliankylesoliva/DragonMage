@@ -14,8 +14,8 @@ dest_files=["res://.godot/imported/movement_draelyn_slide.wav-4a33d10731f09f5fb5
 
 force/8_bit=false
 force/mono=false
-force/max_rate=false
-force/max_rate_hz=44100
+force/max_rate=true
+force/max_rate_hz=48000.0
 edit/trim=false
 edit/normalize=false
 edit/loop_mode=0

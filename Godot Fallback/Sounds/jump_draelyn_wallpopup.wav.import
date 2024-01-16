@@ -14,8 +14,8 @@ dest_files=["res://.godot/imported/jump_draelyn_wallpopup.wav-5c3029e951e69d0830
 
 force/8_bit=false
 force/mono=false
-force/max_rate=false
-force/max_rate_hz=44100
+force/max_rate=true
+force/max_rate_hz=48000.0
 edit/trim=false
 edit/normalize=false
 edit/loop_mode=0

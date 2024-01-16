@@ -14,8 +14,8 @@ dest_files=["res://.godot/imported/attack_draelyn_startup.wav-f3d6a9b190c3e66f44
 
 force/8_bit=false
 force/mono=false
-force/max_rate=false
-force/max_rate_hz=44100
+force/max_rate=true
+force/max_rate_hz=48000.0
 edit/trim=false
 edit/normalize=false
 edit/loop_mode=2
