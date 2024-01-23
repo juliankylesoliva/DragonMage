@@ -8,7 +8,7 @@ class_name FloorSpikes
 
 @export var audio_stream_player : AudioStreamPlayer2D
 
-@export_range(1, 8) var floor_length : int = 1
+@export_range(1, 16) var floor_length : int = 1
 
 @export var tile_size : float = 32
 

@@ -112,7 +112,9 @@ func update_crouch_cooldown_timer(delta):
 
 func do_movement(delta):
 	if (hub.jumping.is_wall_jump_lock_timer_active()):
+		var intended_velocity : Vector2 = hub.char_body.velocity
 		hub.char_body.move_and_slide()
+		hub.collisions.upward_slope_correction(intended_velocity)
 		return
 	
 	var horizontal_axis = hub.get_input_vector().x

@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://qa22n4g30owo"]
+[gd_scene load_steps=12 format=3 uid="uid://qa22n4g30owo"]
 
 [ext_resource type="Script" path="res://Scripts/Utility Scripts/Level.gd" id="1_xccb8"]
 [ext_resource type="PackedScene" uid="uid://c6qw77ovfwgfs" path="res://Player.tscn" id="2_616c6"]
@@ -7,12 +7,16 @@
 [ext_resource type="PackedScene" uid="uid://clan4gyici7s" path="res://Level Scenes/CH0_LV4/Rooms/CH0_LV4_R2.tscn" id="5_q0riv"]
 [ext_resource type="PackedScene" uid="uid://bsfyytd8n23kb" path="res://Level Scenes/CH0_LV4/Rooms/CH0_LV4_R3.tscn" id="6_1s4e1"]
 [ext_resource type="PackedScene" uid="uid://b2c658ex7s65i" path="res://Level Scenes/CH0_LV4/Rooms/CH0_LV4_R4.tscn" id="7_lrfd6"]
+[ext_resource type="PackedScene" uid="uid://xgybmv8avqjs" path="res://Level Scenes/CH0_LV4/Rooms/CH0_LV4_R5.tscn" id="8_m1bih"]
+[ext_resource type="PackedScene" uid="uid://ckyckpse03ag" path="res://Level Scenes/CH0_LV4/Rooms/CH0_LV4_R6.tscn" id="9_fgydk"]
+[ext_resource type="PackedScene" uid="uid://bsdn7w7f8yil8" path="res://Level Scenes/CH0_LV4/Rooms/CH0_LV4_R7.tscn" id="10_ggfgt"]
+[ext_resource type="PackedScene" uid="uid://bq7ruy715yf60" path="res://Level Scenes/CH0_LV4/Rooms/CH0_LV4_R8.tscn" id="11_51ny3"]
 
 [node name="CH0_LV4" type="Node2D" node_paths=PackedStringArray("player_reference", "starting_room", "room_list")]
 script = ExtResource("1_xccb8")
 player_reference = NodePath("Player")
 starting_room = NodePath("CH0_LV4_R1")
-room_list = [NodePath("CH0_LV4_R1"), NodePath("CH0_LV4_R2"), NodePath("CH0_LV4_R3"), NodePath("CH0_LV4_R4")]
+room_list = [NodePath("CH0_LV4_R1"), NodePath("CH0_LV4_R2"), NodePath("CH0_LV4_R3"), NodePath("CH0_LV4_R4"), NodePath("CH0_LV4_R5"), NodePath("CH0_LV4_R6"), NodePath("CH0_LV4_R7"), NodePath("CH0_LV4_R8")]
 
 [node name="Player" parent="." instance=ExtResource("2_616c6")]
 position = Vector2(96, 159)
@@ -71,6 +75,42 @@ position = Vector2(0, 576)
 [node name="Warp 0" parent="CH0_LV4_R4" index="6" node_paths=PackedStringArray("room_destination")]
 room_destination = NodePath("../../CH0_LV4_R3")
 
+[node name="Warp 1" parent="CH0_LV4_R4" index="7" node_paths=PackedStringArray("room_destination")]
+room_destination = NodePath("../../CH0_LV4_R5")
+
+[node name="CH0_LV4_R5" parent="." instance=ExtResource("8_m1bih")]
+position = Vector2(64, -352)
+
+[node name="Warp 0" parent="CH0_LV4_R5" index="4" node_paths=PackedStringArray("room_destination")]
+room_destination = NodePath("../../CH0_LV4_R4")
+
+[node name="Warp 1" parent="CH0_LV4_R5" index="5" node_paths=PackedStringArray("room_destination")]
+room_destination = NodePath("../../CH0_LV4_R6")
+
+[node name="CH0_LV4_R6" parent="." instance=ExtResource("9_fgydk")]
+position = Vector2(800, -448)
+
+[node name="Warp 0" parent="CH0_LV4_R6" index="4" node_paths=PackedStringArray("room_destination")]
+room_destination = NodePath("../../CH0_LV4_R5")
+
+[node name="Warp 1" parent="CH0_LV4_R6" index="5" node_paths=PackedStringArray("room_destination")]
+room_destination = NodePath("../../CH0_LV4_R7")
+
+[node name="CH0_LV4_R7" parent="." instance=ExtResource("10_ggfgt")]
+position = Vector2(1536, -960)
+
+[node name="Warp 0" parent="CH0_LV4_R7" index="4" node_paths=PackedStringArray("room_destination")]
+room_destination = NodePath("../../CH0_LV4_R6")
+
+[node name="Warp 1" parent="CH0_LV4_R7" index="5" node_paths=PackedStringArray("room_destination")]
+room_destination = NodePath("../../CH0_LV4_R8")
+
+[node name="CH0_LV4_R8" parent="." instance=ExtResource("11_51ny3")]
+position = Vector2(-3008, 1376)
+
+[node name="Warp 0" parent="CH0_LV4_R8" index="4" node_paths=PackedStringArray("room_destination")]
+room_destination = NodePath("../../CH0_LV4_R7")
+
 [editable path="Player"]
 [editable path="CH0_LV4_R1"]
 [editable path="CH0_LV4_R1/FallWarp"]
@@ -81,3 +121,8 @@ room_destination = NodePath("../../CH0_LV4_R3")
 [editable path="CH0_LV4_R4"]
 [editable path="CH0_LV4_R4/FallWarp 0"]
 [editable path="CH0_LV4_R4/FallWarp 1"]
+[editable path="CH0_LV4_R5"]
+[editable path="CH0_LV4_R6"]
+[editable path="CH0_LV4_R7"]
+[editable path="CH0_LV4_R8"]
+[editable path="CH0_LV4_R8/FallWarp"]
