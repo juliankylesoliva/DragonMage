@@ -40,7 +40,7 @@ func spawn_sprite_segment():
 	trail_sprite.modulate = (mage_trail_color if hub.form.is_a_mage() else dragon_trail_color)
 	trail_sprite.flip_h = hub.char_sprite.flip_h
 	trail_sprite.flip_v = hub.char_sprite.flip_v
-	trail_sprite.z_index = hub.char_body.z_index
+	trail_sprite.z_index = (hub.char_sprite.z_index - 1)
 	trail_sprite.initialize_color_params()
 
 func activate_trail():

@@ -56,6 +56,8 @@ max_lerp_change = 0.125
 shape = SubResource("CircleShape2D_rm236")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+visibility_layer = 16
+z_index = 5
 sprite_frames = SubResource("SpriteFrames_3oipw")
 autoplay = "default"
 frame_progress = 0.589104

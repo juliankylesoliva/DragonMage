@@ -4,6 +4,8 @@ class_name Room
 
 signal room_activated
 
+@export var parallax_bg : ParallaxBackground
+
 @export var tilemap_list : Array[TileMap]
 
 @export var left_camera_limit : int = 0
@@ -27,6 +29,10 @@ func get_room_entrance_coordinates(i : int):
 
 func activate_room():
 	visible = true
+	if (parallax_bg != null):
+		parallax_bg.visible = true
+		parallax_bg.offset = global_position
+		parallax_bg.scroll_base_offset = global_position
 	is_room_active = true
 	var camera : Camera2D = get_viewport().get_camera_2d()
 	camera.limit_left = ((global_position.x as int) + left_camera_limit)
@@ -37,6 +43,8 @@ func activate_room():
 
 func deactivate_room():
 	visible = false
+	if (parallax_bg != null):
+		parallax_bg.visible = false
 	is_room_active = false
 	deactivate_enemies()
 

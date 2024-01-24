@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://dgi7me5crgi8q"]
+[gd_scene load_steps=13 format=3 uid="uid://dgi7me5crgi8q"]
 
 [ext_resource type="Script" path="res://Scripts/Utility Scripts/Level.gd" id="1_6mws2"]
 [ext_resource type="PackedScene" uid="uid://cevmm5dwm345v" path="res://Level Scenes/CH0_LV1/Rooms/CH0_LV1_R1.tscn" id="2_7b35j"]
@@ -12,7 +12,6 @@
 [ext_resource type="PackedScene" uid="uid://dnrvj1k4v8ojw" path="res://Level Scenes/CH0_LV1/Rooms/CH0_LV1_R8.tscn" id="10_40xoc"]
 [ext_resource type="PackedScene" uid="uid://bsvxvuyq2tbm0" path="res://Level Scenes/CH0_LV1/Rooms/CH0_LV1_R9.tscn" id="11_eb1id"]
 [ext_resource type="PackedScene" uid="uid://c8quw8sgdw2un" path="res://Level Scenes/CH0_LV1/Rooms/CH0_LV1_R10.tscn" id="12_ra648"]
-[ext_resource type="Texture2D" uid="uid://dwglk8sf6ymwd" path="res://Sprites/Backgrounds/0_1_BG/ForestSkyGradientBG.png" id="13_81s62"]
 
 [node name="CH0_LV1" type="Node" node_paths=PackedStringArray("player_reference", "starting_room", "room_list")]
 script = ExtResource("1_6mws2")
@@ -119,20 +118,6 @@ position = Vector2(1568, 1568)
 [node name="Warp 0" parent="CH0_LV1_R10" index="3" node_paths=PackedStringArray("room_destination")]
 room_destination = NodePath("../../CH0_LV1_R9")
 room_entrance_index = 1
-
-[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
-follow_viewport_enabled = true
-scroll_ignore_camera_zoom = true
-
-[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
-motion_scale = Vector2(0.05, 0)
-
-[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
-texture_repeat = 2
-texture = ExtResource("13_81s62")
-centered = false
-region_enabled = true
-region_rect = Rect2(0, 0, 1024, 320)
 
 [editable path="Player"]
 [editable path="CH0_LV1_R1"]

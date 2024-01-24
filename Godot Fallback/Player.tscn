@@ -1279,6 +1279,8 @@ lob_throw_rotation = 640.0
 drop_throw_rotation = -160.0
 
 [node name="ProjectileTrail" type="Line2D" parent="Hub/Attacks/MagicBlast"]
+visibility_layer = 16
+z_index = 5
 width_curve = SubResource("Curve_qnqge")
 default_color = Color(0.376471, 0.309804, 0.639216, 1)
 gradient = SubResource("Gradient_veqdj")
