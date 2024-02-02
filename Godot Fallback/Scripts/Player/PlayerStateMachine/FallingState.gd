@@ -4,6 +4,8 @@ class_name FallingState
 
 var prev_is_crouching : bool = false
 
+var is_throwing : bool = false
+
 func state_process(_delta : float):
 	var char_name : String = hub.form.get_current_form_name()
 	prev_is_crouching = hub.movement.is_crouching
@@ -11,6 +13,11 @@ func state_process(_delta : float):
 	hub.movement.do_movement(_delta)
 	hub.movement.update_facing_direction()
 	hub.jumping.falling_update(_delta)
+	
+	if (!hub.char_sprite.is_playing() and hub.char_sprite.animation == "MagliThrowAir"):
+		is_throwing = false
+		hub.animation.set_animation("{name}Fall".format({"name" : char_name}))
+		hub.animation.set_animation_speed(1)
 	
 	if (hub.jumping.enable_crouch_jumping):
 		if (prev_is_crouching and !hub.movement.is_crouching):
@@ -63,12 +70,14 @@ func state_process(_delta : float):
 		pass
 
 func on_enter():
+	is_throwing = hub.char_sprite.animation.contains("MagliThrow")
 	hub.jumping.switch_to_falling_gravity()
 	if (hub.jumping.is_fast_falling):
 		hub.animation.set_animation("DraelynFastFall")
 		hub.sprite_trail.activate_trail()
 	else:
-		hub.animation.set_animation("{name}Fall".format({"name" : hub.form.get_current_form_name()}) if !hub.movement.is_crouching or !hub.jumping.enable_crouch_jumping else "MagliCrouchFall")
+		hub.animation.set_animation("MagliThrowAir" if is_throwing else "{name}Fall".format({"name" : hub.form.get_current_form_name()}) if !hub.movement.is_crouching or !hub.jumping.enable_crouch_jumping else "MagliCrouchFall")
+		hub.animation.set_animation_frame(1 if is_throwing else 0)
 	hub.animation.set_animation_speed(1)
 
 func on_exit():
@@ -91,3 +100,9 @@ func on_exit():
 	
 	hub.sprite_trail.deactivate_trail()
 	hub.jumping.reset_fast_fall()
+
+func _on_magic_blast_magic_blast_thrown():
+	if (state_machine.current_state == self):
+		is_throwing = true
+		hub.animation.set_animation("MagliThrowAir")
+		hub.animation.set_animation_speed(1)

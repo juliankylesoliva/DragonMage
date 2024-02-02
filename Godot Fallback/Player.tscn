@@ -1,4 +1,4 @@
-[gd_scene load_steps=174 format=3 uid="uid://c6qw77ovfwgfs"]
+[gd_scene load_steps=181 format=3 uid="uid://c6qw77ovfwgfs"]
 
 [ext_resource type="Texture2D" uid="uid://d381ahbcwydy8" path="res://Sprites/Player/DraelynCrouch.png" id="1_6b42p"]
 [ext_resource type="Texture2D" uid="uid://dls34a1qa8iy1" path="res://Sprites/Player/DraelynFireTackle.png" id="1_ddrlj"]
@@ -62,6 +62,7 @@
 [ext_resource type="Texture2D" uid="uid://bj6vmo7ahwtpf" path="res://Sprites/Effects/SpeedBufferParticle.png" id="52_u3vuf"]
 [ext_resource type="Texture2D" uid="uid://bobu8jpoly5wb" path="res://Sprites/Player/MagliIdleShy.png" id="53_c0t7y"]
 [ext_resource type="Script" path="res://Scripts/Utility Scripts/PlayerCamera.gd" id="54_k03tc"]
+[ext_resource type="Texture2D" uid="uid://db8gs3h636p2c" path="res://Sprites/Player/MagliThrow.png" id="59_lhaxn"]
 
 [sub_resource type="Curve" id="Curve_qnqge"]
 _data = [Vector2(0, 1), 0.0, -0.658891, 0, 0, Vector2(1, 0), -1.2831, 0.0, 0, 0]
@@ -406,6 +407,30 @@ region = Rect2(128, 0, 64, 64)
 [sub_resource type="AtlasTexture" id="AtlasTexture_wyj1j"]
 atlas = ExtResource("27_my3k8")
 region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_odrlq"]
+atlas = ExtResource("59_lhaxn")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jk0gh"]
+atlas = ExtResource("59_lhaxn")
+region = Rect2(192, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8fgis"]
+atlas = ExtResource("59_lhaxn")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mbrhw"]
+atlas = ExtResource("59_lhaxn")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ilm5d"]
+atlas = ExtResource("59_lhaxn")
+region = Rect2(256, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1xjl8"]
+atlas = ExtResource("59_lhaxn")
+region = Rect2(320, 0, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_g13l3"]
 atlas = ExtResource("4_gxmp5")
@@ -984,6 +1009,39 @@ animations = [{
 "speed": 60.0
 }, {
 "frames": [{
+"duration": 4.0,
+"texture": SubResource("AtlasTexture_odrlq")
+}, {
+"duration": 12.0,
+"texture": SubResource("AtlasTexture_jk0gh")
+}],
+"loop": false,
+"name": &"MagliThrowAir",
+"speed": 60.0
+}, {
+"frames": [{
+"duration": 4.0,
+"texture": SubResource("AtlasTexture_8fgis")
+}, {
+"duration": 12.0,
+"texture": SubResource("AtlasTexture_mbrhw")
+}],
+"loop": false,
+"name": &"MagliThrowGround",
+"speed": 60.0
+}, {
+"frames": [{
+"duration": 4.0,
+"texture": SubResource("AtlasTexture_ilm5d")
+}, {
+"duration": 12.0,
+"texture": SubResource("AtlasTexture_1xjl8")
+}],
+"loop": false,
+"name": &"MagliThrowWall",
+"speed": 60.0
+}, {
+"frames": [{
 "duration": 16.0,
 "texture": SubResource("AtlasTexture_g13l3")
 }, {
@@ -1407,23 +1465,28 @@ can_update_camera_x_pos = false
 script = ExtResource("17_ve68u")
 sprite_x_offset = 5.0
 can_update_camera_x_pos = false
+can_use_throw_animation = null
 
 [node name="WallVaulting" type="Node" parent="StateMachine"]
 script = ExtResource("18_vi6ah")
 can_update_camera_x_pos = false
+can_use_throw_animation = null
 
 [node name="Attacking" type="Node" parent="StateMachine"]
 script = ExtResource("20_dbcpj")
 can_update_camera_x_pos = false
 can_update_camera_y_pos = false
+can_use_throw_animation = null
 
 [node name="FormChanging" type="Node" parent="StateMachine"]
 script = ExtResource("17_1yv22")
 can_update_camera_x_pos = false
+can_use_throw_animation = null
 
 [node name="Damaged" type="Node" parent="StateMachine"]
 script = ExtResource("41_7pdlp")
 can_update_camera_x_pos = false
+can_use_throw_animation = null
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 visibility_layer = 8
@@ -1626,4 +1689,10 @@ lifetime = 0.2
 fixed_fps = 60
 visibility_rect = Rect2(-512, -512, 1024, 1024)
 
+[connection signal="magic_blast_thrown" from="Hub/Attacks/MagicBlast" to="StateMachine/Standing" method="_on_magic_blast_magic_blast_thrown"]
+[connection signal="magic_blast_thrown" from="Hub/Attacks/MagicBlast" to="StateMachine/Running" method="_on_magic_blast_magic_blast_thrown"]
+[connection signal="magic_blast_thrown" from="Hub/Attacks/MagicBlast" to="StateMachine/Jumping" method="_on_magic_blast_magic_blast_thrown"]
+[connection signal="magic_blast_thrown" from="Hub/Attacks/MagicBlast" to="StateMachine/Falling" method="_on_magic_blast_magic_blast_thrown"]
+[connection signal="magic_blast_thrown" from="Hub/Attacks/MagicBlast" to="StateMachine/Gliding" method="_on_magic_blast_magic_blast_thrown"]
+[connection signal="magic_blast_thrown" from="Hub/Attacks/MagicBlast" to="StateMachine/WallSliding" method="_on_magic_blast_magic_blast_thrown"]
 [connection signal="frame_changed" from="AnimatedSprite2D" to="StateMachine/Running" method="_on_animated_sprite_2d_frame_changed"]

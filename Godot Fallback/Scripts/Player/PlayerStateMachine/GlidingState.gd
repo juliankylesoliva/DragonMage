@@ -4,6 +4,8 @@ class_name GlidingState
 
 @export var glide_particles : GPUParticles2D
 
+var is_throwing : bool = false
+
 func state_process(_delta : float):
 	hub.movement.do_movement(_delta)
 	hub.jumping.glide_update(_delta)
@@ -12,6 +14,10 @@ func state_process(_delta : float):
 	
 	if (hub.form.cannot_change_form()):
 		hub.form.form_change_failed()
+	
+	if (!hub.char_sprite.is_playing() and hub.char_sprite.animation == "MagliThrowAir"):
+		is_throwing = false
+		hub.animation.set_animation("MagliGlide")
 	
 	if (hub.form.can_change_form()):
 		set_next_state(state_machine.get_state_by_name("FormChanging"))
@@ -29,10 +35,18 @@ func state_process(_delta : float):
 		pass
 
 func on_enter():
+	is_throwing = hub.char_sprite.animation.contains("MagliThrow")
 	hub.jumping.start_glide()
-	hub.animation.set_animation("MagliGlide")
+	hub.animation.set_animation("MagliThrowAir" if is_throwing else "MagliGlide")
+	hub.animation.set_animation_frame(1 if is_throwing else 0)
 	glide_particles.emitting = true
 
 func on_exit():
 	hub.jumping.cancel_glide()
 	glide_particles.emitting = false
+
+func _on_magic_blast_magic_blast_thrown():
+	if (state_machine.current_state == self):
+		is_throwing = true
+		hub.animation.set_animation("MagliThrowAir")
+		hub.animation.set_animation_speed(1)

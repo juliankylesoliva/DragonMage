@@ -6,6 +6,8 @@ var prev_is_crouching : bool = false
 
 var has_headbonked : bool = false
 
+var is_throwing : bool = false
+
 func state_process(_delta : float):
 	prev_is_crouching = hub.movement.is_crouching
 	hub.movement.check_crouch_state()
@@ -17,11 +19,17 @@ func state_process(_delta : float):
 		hub.jumping.update_wall_jump_lock_timer(_delta)
 	hub.jumping.ground_jump_update(_delta)
 	
+	if (!hub.char_sprite.is_playing() and hub.char_sprite.animation == "MagliThrowAir"):
+		is_throwing = false
+		hub.animation.set_animation("{name}Jump".format({"name" : hub.form.get_current_form_name()}))
+		hub.animation.set_animation_speed(0)
+	
 	if (hub.jumping.enable_crouch_jumping):
 		if (prev_is_crouching and !hub.movement.is_crouching):
 			hub.animation.set_animation("{name}Jump".format({"name" : hub.form.get_current_form_name()}))
 			hub.animation.set_animation_speed(0)
 		elif (!prev_is_crouching and hub.movement.is_crouching):
+			is_throwing = false
 			hub.animation.set_animation("MagliCrouchJump")
 			hub.animation.set_animation_speed(0)
 		else:
@@ -60,15 +68,28 @@ func state_process(_delta : float):
 		pass
 
 func on_enter():
+	is_throwing = hub.char_sprite.animation.contains("MagliThrow")
 	has_headbonked = false
 	hub.jumping.switch_to_rising_gravity()
 	hub.jumping.reset_fast_fall()
 	if (state_machine.previous_state.name == "FormChanging"):
 		var char_name : String = hub.form.get_current_form_name()
 		hub.animation.set_animation("{name}Jump".format({"name" : char_name}) if !hub.movement.is_crouching else "MagliCrouchJump")
+	elif (is_throwing):
+		hub.animation.set_animation("MagliThrowAir")
+		hub.animation.set_animation_frame(1)
+	else:
+		pass
 
 func on_exit():
 	has_headbonked = false
 	if (hub.jumping.midair_jump_particles.emitting):
 		hub.jumping.midair_jump_particles.emitting = false
 	hub.jumping.reset_wall_jump_lock_timer()
+
+
+func _on_magic_blast_magic_blast_thrown():
+	if (state_machine.current_state == self):
+		is_throwing = true
+		hub.animation.set_animation("MagliThrowAir")
+		hub.animation.set_animation_speed(1)

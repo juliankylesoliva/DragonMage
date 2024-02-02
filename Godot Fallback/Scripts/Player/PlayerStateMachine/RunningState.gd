@@ -6,16 +6,24 @@ class_name RunningState
 
 var did_turn_spark_appear : bool = false
 
+var is_throwing : bool = false
+
 func state_process(_delta):
+	if (!hub.char_sprite.is_playing() and hub.char_sprite.animation == "MagliThrowGround"):
+		is_throwing = false
+	
 	var did_a_wavedash : bool = (hub.form.is_a_mage() and hub.state_machine.previous_state.name == "Attacking" and hub.attacks.previous_attack.name == "Dodge" and abs(hub.movement.current_horizontal_velocity) > hub.movement.top_speed)
 	var char_name : String = hub.form.get_current_form_name()
-	var anim_name : String = ("{name}Move" if !hub.movement.is_crouching else "MagliDodge" if did_a_wavedash else "{name}CrouchWalk")
+	var anim_name : String = ("MagliThrowGround" if is_throwing and !hub.movement.is_crouching else "{name}Move" if !hub.movement.is_crouching else "MagliDodge" if did_a_wavedash else "{name}CrouchWalk")
 	hub.movement.check_crouch_state()
 	hub.movement.do_movement(_delta)
 	hub.movement.update_facing_direction()
 	hub.animation.set_animation(anim_name.format({"name" : char_name}))
 	
 	if (hub.movement.is_turning() and !hub.movement.is_crouching):
+		if (is_throwing):
+			is_throwing = false
+			hub.animation.set_animation("{name}Move".format({"name" : char_name}))
 		hub.animation.set_animation_frame(0)
 		if (!did_turn_spark_appear):
 			var spark_instance = EffectFactory.get_effect("TurnaroundSpark", hub.collisions.get_ground_point(), 1, hub.movement.get_facing_value() < 0)
@@ -48,17 +56,22 @@ func state_process(_delta):
 		pass
 
 func on_enter():
+	is_throwing = hub.char_sprite.animation.contains("MagliThrow")
 	did_turn_spark_appear = false
 	var prev_state_name : String = state_machine.previous_state.name
 	var char_name : String = hub.form.get_current_form_name()
 	var anim_name : String = ("{name}Move" if !hub.movement.is_crouching else "{name}CrouchWalk")
 	if (hub.char_body.is_on_floor() or prev_state_name == "Falling" or prev_state_name == "Jumping"):
 		hub.jumping.landing_reset()
-	hub.animation.set_animation(anim_name.format({"name" : char_name}))
+	hub.animation.set_animation("MagliThrowGround" if is_throwing else anim_name.format({"name" : char_name}))
+	hub.animation.set_animation_frame(1 if is_throwing else 0)
+
+func on_exit():
+	pass
 
 func dust_check():
 	did_turn_spark_appear = false
-	if (state_machine.current_state.name == "Running" and !hub.movement.is_crouching):
+	if (hub.char_sprite.animation.contains("Move") and state_machine.current_state.name == "Running" and !hub.movement.is_crouching):
 		for i in dust_frames:
 			if (i == hub.char_sprite.frame):
 				var effect_instance = EffectFactory.get_effect("WalkingDust", hub.collisions.get_ground_point(), 1, hub.movement.get_facing_value() < 0)
@@ -70,3 +83,9 @@ func dust_check():
 
 func _on_animated_sprite_2d_frame_changed():
 	dust_check()
+
+func _on_magic_blast_magic_blast_thrown():
+	if (state_machine.current_state == self):
+		is_throwing = true
+		hub.animation.set_animation("MagliThrowGround")
+		hub.animation.set_animation_speed(1)

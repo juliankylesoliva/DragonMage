@@ -15,6 +15,8 @@ var prev_is_crouching = false
 
 var is_headbonking : bool = false
 
+var is_throwing : bool = false
+
 func _ready():
 	target_stand_cycles = randi_range(min_stand_cycles_per_idle_anim, max_stand_cycles_per_idle_anim)
 
@@ -27,6 +29,7 @@ func state_process(_delta):
 	hub.collisions.do_ledge_nudge()
 	
 	if (hub.movement.is_crouching):
+		is_throwing = false
 		if (!Input.is_action_pressed("Crouch") and hub.collisions.is_in_ceiling_when_uncrouched()):
 			hub.animation.set_animation("{name}CrouchHeadbonk".format({"name" : char_name}))
 			if (!is_headbonking):
@@ -45,7 +48,13 @@ func state_process(_delta):
 			hub.animation.set_animation("{name}Stand".format({"name" : char_name}))
 		update_blink_timer(_delta)
 		if (!hub.char_sprite.is_playing()):
-			current_stand_cycles += 1
+			if (hub.char_sprite.animation.contains("Stand")):
+				current_stand_cycles += 1
+			elif (hub.char_sprite.animation == "MagliThrowGround"):
+				is_throwing = false
+			else:
+				pass
+			
 			if (!check_idle_animation() and !check_blink_animation()):
 				hub.animation.set_animation("{name}Stand".format({"name" : char_name}))
 				hub.animation.set_animation_speed(1)
@@ -77,11 +86,13 @@ func state_process(_delta):
 		pass
 
 func on_enter():
+	is_throwing = hub.char_sprite.animation.contains("MagliThrow")
 	is_headbonking = false
 	var char_name : String = hub.form.get_current_form_name()
 	var anim_name : String = ("{name}Stand" if !hub.movement.is_crouching else "{name}Crouch")
 	hub.jumping.landing_reset()
-	hub.animation.set_animation(anim_name.format({"name" : char_name}))
+	hub.animation.set_animation("MagliThrowGround" if is_throwing else anim_name.format({"name" : char_name}))
+	hub.animation.set_animation_frame(1 if is_throwing else 0)
 	hub.animation.set_animation_speed(1)
 
 func set_blink_timer():
@@ -115,3 +126,9 @@ func check_blink_animation():
 		return true
 	
 	return false
+
+func _on_magic_blast_magic_blast_thrown():
+	if (state_machine.current_state == self):
+		is_throwing = true
+		hub.animation.set_animation("MagliThrowGround")
+		hub.animation.set_animation_speed(1)

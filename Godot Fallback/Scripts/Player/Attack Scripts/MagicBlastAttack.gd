@@ -2,6 +2,8 @@ extends Attack
 
 class_name MagicBlastAttack
 
+signal magic_blast_thrown
+
 @export var blast_jump_particles : GPUParticles2D
 
 @export var projectile_trail : LineTrail
@@ -116,6 +118,8 @@ func throw_projectile():
 		projectile_rb.apply_torque_impulse(throw_rotation * hub.movement.get_facing_value())
 		
 		(projectile_instance as MagicBlastProjectile).attack_ref = self
+		
+		magic_blast_thrown.emit()
 
 func check_despawn_distance():
 	if (projectile_instance != null):

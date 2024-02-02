@@ -274,7 +274,9 @@ func start_ground_jump():
 	hub.audio.play_sound(sound_name, 0, sound_pitch, "SFX")
 	
 	var char_name : String = hub.form.get_current_form_name()
-	hub.animation.set_animation("{name}Jump".format({"name" : char_name}) if !hub.movement.is_crouching else "MagliCrouchJump")
+	var is_throwing : bool = hub.char_sprite.animation.contains("MagliThrow")
+	hub.animation.set_animation("MagliThrowAir" if is_throwing else "{name}Jump".format({"name" : char_name}) if !hub.movement.is_crouching else "MagliCrouchJump")
+	hub.animation.set_animation_frame(1 if is_throwing else 0)
 	hub.animation.set_animation_speed(1)
 	
 	hub.movement.current_horizontal_velocity = (horizontal_result * hub.movement.get_facing_value())
@@ -447,7 +449,9 @@ func start_wall_jump():
 	hub.char_body.velocity.x = hub.movement.current_horizontal_velocity
 	hub.char_body.velocity.y = -vertical_wall_jump_velocity
 	
-	hub.animation.set_animation("MagliJump")
+	var is_throwing : bool = hub.char_sprite.animation.contains("MagliThrow")
+	hub.animation.set_animation("MagliThrowAir" if is_throwing else "MagliJump")
+	hub.animation.set_animation_frame(1 if is_throwing else 0)
 	hub.animation.set_animation_speed(1)
 	
 	var effect_name : String = ("FastWallJump" if did_player_speed_kick else "NormalWallJump")
