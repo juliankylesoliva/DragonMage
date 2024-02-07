@@ -1465,28 +1465,23 @@ can_update_camera_x_pos = false
 script = ExtResource("17_ve68u")
 sprite_x_offset = 5.0
 can_update_camera_x_pos = false
-can_use_throw_animation = null
 
 [node name="WallVaulting" type="Node" parent="StateMachine"]
 script = ExtResource("18_vi6ah")
 can_update_camera_x_pos = false
-can_use_throw_animation = null
 
 [node name="Attacking" type="Node" parent="StateMachine"]
 script = ExtResource("20_dbcpj")
 can_update_camera_x_pos = false
 can_update_camera_y_pos = false
-can_use_throw_animation = null
 
 [node name="FormChanging" type="Node" parent="StateMachine"]
 script = ExtResource("17_1yv22")
 can_update_camera_x_pos = false
-can_use_throw_animation = null
 
 [node name="Damaged" type="Node" parent="StateMachine"]
 script = ExtResource("41_7pdlp")
 can_update_camera_x_pos = false
-can_use_throw_animation = null
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 visibility_layer = 8

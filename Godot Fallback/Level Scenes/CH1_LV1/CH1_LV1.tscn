@@ -1,0 +1,66 @@
+[gd_scene load_steps=7 format=3 uid="uid://b6ourfnqhy0wk"]
+
+[ext_resource type="Script" path="res://Scripts/Utility Scripts/Level.gd" id="1_3mmw4"]
+[ext_resource type="PackedScene" uid="uid://c6qw77ovfwgfs" path="res://Player.tscn" id="2_isfe7"]
+[ext_resource type="PackedScene" uid="uid://bdypi7w73c6kq" path="res://Scene Objects/UI/TemperMeterUI.tscn" id="3_bvq0l"]
+[ext_resource type="PackedScene" uid="uid://cn18g24teqsm4" path="res://Level Scenes/CH1_LV1/Rooms/CH1_LV1_R1.tscn" id="4_m63j7"]
+[ext_resource type="PackedScene" uid="uid://clq45175f8df8" path="res://Level Scenes/CH1_LV1/Rooms/CH1_LV1_R2.tscn" id="5_pnvd3"]
+[ext_resource type="PackedScene" uid="uid://b0wpmmqthstws" path="res://Level Scenes/CH1_LV1/Rooms/CH1_LV1_R3.tscn" id="6_dbe8q"]
+
+[node name="CH0_LV0" type="Node2D" node_paths=PackedStringArray("player_reference", "starting_room", "room_list")]
+script = ExtResource("1_3mmw4")
+player_reference = NodePath("Player")
+starting_room = NodePath("CH1_LV1_R1")
+room_list = [NodePath("CH1_LV1_R1"), NodePath("CH1_LV1_R2"), NodePath("CH1_LV1_R3")]
+
+[node name="Player" parent="." instance=ExtResource("2_isfe7")]
+position = Vector2(96, 223)
+
+[node name="Camera" parent="Player/Hub" index="10" node_paths=PackedStringArray("player_cam")]
+player_cam = NodePath("../../../Camera2D")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+process_callback = 0
+drag_left_margin = 0.0
+drag_top_margin = 0.6
+drag_right_margin = 0.0
+editor_draw_limits = true
+editor_draw_drag_margin = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TemperMeterUI" parent="VBoxContainer" node_paths=PackedStringArray("player_node") instance=ExtResource("3_bvq0l")]
+position = Vector2(1, 8)
+player_node = NodePath("../../Player")
+process_callback = "Idle"
+camera_offset = Vector2(-255, -152)
+
+[node name="CH1_LV1_R1" parent="." instance=ExtResource("4_m63j7")]
+
+[node name="Warp 0" parent="CH1_LV1_R1" index="4" node_paths=PackedStringArray("room_destination")]
+room_destination = NodePath("../../CH1_LV1_R2")
+
+[node name="CH1_LV1_R2" parent="." instance=ExtResource("5_pnvd3")]
+position = Vector2(1920, 0)
+
+[node name="Warp 0" parent="CH1_LV1_R2" index="4" node_paths=PackedStringArray("room_destination")]
+room_destination = NodePath("../../CH1_LV1_R1")
+
+[node name="Warp 1" parent="CH1_LV1_R2" index="5" node_paths=PackedStringArray("room_destination")]
+room_destination = NodePath("../../CH1_LV1_R3")
+
+[node name="CH1_LV1_R3" parent="." instance=ExtResource("6_dbe8q")]
+position = Vector2(2656, 0)
+
+[node name="Warp 0" parent="CH1_LV1_R3" index="5" node_paths=PackedStringArray("room_destination")]
+room_destination = NodePath("../../CH1_LV1_R2")
+
+[editable path="Player"]
+[editable path="CH1_LV1_R1"]
+[editable path="CH1_LV1_R2"]
+[editable path="CH1_LV1_R3"]

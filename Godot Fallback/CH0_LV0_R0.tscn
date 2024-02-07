@@ -1,15 +1,15 @@
-[gd_scene load_steps=3 format=3 uid="uid://clq45175f8df8"]
+[gd_scene load_steps=3 format=3 uid="uid://do606lk4dq76k"]
 
-[ext_resource type="Script" path="res://Scripts/Utility Scripts/Room.gd" id="1_3d07d"]
-[ext_resource type="TileSet" uid="uid://dhwi7i1loa2pd" path="res://Sprites/Tiles/Test Tiles/TestTileSet.tres" id="2_tphx2"]
+[ext_resource type="Script" path="res://Scripts/Utility Scripts/Room.gd" id="1_uqmki"]
+[ext_resource type="TileSet" uid="uid://dhwi7i1loa2pd" path="res://Sprites/Tiles/Test Tiles/TestTileSet.tres" id="2_wo2w3"]
 
 [node name="CH0_LV0_R0" type="Node2D" node_paths=PackedStringArray("tilemap_list")]
-script = ExtResource("1_3d07d")
+script = ExtResource("1_uqmki")
 tilemap_list = [NodePath("BoundaryCollisionTilemap"), NodePath("LevelCollisionTilemap")]
 
 [node name="BoundaryCollisionTilemap" type="TileMap" parent="."]
 z_index = 4
-tile_set = ExtResource("2_tphx2")
+tile_set = ExtResource("2_wo2w3")
 cell_quadrant_size = 32
 format = 2
 layer_0/name = "Intangible"
@@ -19,7 +19,7 @@ metadata/Tag = "IntangibleWall"
 [node name="LevelCollisionTilemap" type="TileMap" parent="."]
 visibility_layer = 4
 z_index = 3
-tile_set = ExtResource("2_tphx2")
+tile_set = ExtResource("2_wo2w3")
 cell_quadrant_size = 32
 format = 2
 layer_0/name = "Decoration"

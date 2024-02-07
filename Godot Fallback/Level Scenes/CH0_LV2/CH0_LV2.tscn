@@ -33,21 +33,6 @@ starting_mode = 1
 [node name="Camera" parent="Player/Hub" index="10" node_paths=PackedStringArray("player_cam")]
 player_cam = NodePath("../../../Camera2D")
 
-[node name="WallClimbing" parent="Player/StateMachine" index="6"]
-can_use_throw_animation = null
-
-[node name="WallVaulting" parent="Player/StateMachine" index="7"]
-can_use_throw_animation = null
-
-[node name="Attacking" parent="Player/StateMachine" index="8"]
-can_use_throw_animation = null
-
-[node name="FormChanging" parent="Player/StateMachine" index="9"]
-can_use_throw_animation = null
-
-[node name="Damaged" parent="Player/StateMachine" index="10"]
-can_use_throw_animation = null
-
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(256, 160)
 process_callback = 0
