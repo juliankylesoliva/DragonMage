@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://b6ourfnqhy0wk"]
+[gd_scene load_steps=15 format=3 uid="uid://b6ourfnqhy0wk"]
 
 [ext_resource type="Script" path="res://Scripts/Utility Scripts/Level.gd" id="1_3mmw4"]
 [ext_resource type="PackedScene" uid="uid://c6qw77ovfwgfs" path="res://Player.tscn" id="2_isfe7"]
@@ -6,12 +6,20 @@
 [ext_resource type="PackedScene" uid="uid://cn18g24teqsm4" path="res://Level Scenes/CH1_LV1/Rooms/CH1_LV1_R1.tscn" id="4_m63j7"]
 [ext_resource type="PackedScene" uid="uid://clq45175f8df8" path="res://Level Scenes/CH1_LV1/Rooms/CH1_LV1_R2.tscn" id="5_pnvd3"]
 [ext_resource type="PackedScene" uid="uid://b0wpmmqthstws" path="res://Level Scenes/CH1_LV1/Rooms/CH1_LV1_R3.tscn" id="6_dbe8q"]
+[ext_resource type="PackedScene" uid="uid://1d826suvfta8" path="res://Level Scenes/CH1_LV1/Rooms/CH1_LV1_R4.tscn" id="7_vo2pd"]
+[ext_resource type="PackedScene" uid="uid://esl3vmft18qp" path="res://Level Scenes/CH1_LV1/Rooms/CH1_LV1_R5.tscn" id="8_irmt2"]
+[ext_resource type="PackedScene" uid="uid://b4ktrkxjiurmk" path="res://Level Scenes/CH1_LV1/Rooms/CH1_LV1_R6.tscn" id="9_nqhij"]
+[ext_resource type="PackedScene" uid="uid://cj8q5uurbc2o8" path="res://Level Scenes/CH1_LV1/Rooms/CH1_LV1_R7.tscn" id="10_ijxom"]
+[ext_resource type="PackedScene" uid="uid://cvs86w1eriytn" path="res://Level Scenes/CH1_LV1/Rooms/CH1_LV1_R8.tscn" id="11_lbudt"]
+[ext_resource type="PackedScene" uid="uid://8mf8ipsh2you" path="res://Level Scenes/CH1_LV1/Rooms/CH1_LV1_R9.tscn" id="12_jkpqh"]
+[ext_resource type="PackedScene" uid="uid://drbl7ccxv7sa0" path="res://Level Scenes/CH1_LV1/Rooms/CH1_LV1_R10.tscn" id="13_lfovm"]
+[ext_resource type="PackedScene" uid="uid://ctjuhf6dkkqy8" path="res://Level Scenes/CH1_LV1/Rooms/CH1_LV1_R11.tscn" id="14_daiil"]
 
-[node name="CH0_LV0" type="Node2D" node_paths=PackedStringArray("player_reference", "starting_room", "room_list")]
+[node name="CH1_LV1" type="Node2D" node_paths=PackedStringArray("player_reference", "starting_room", "room_list")]
 script = ExtResource("1_3mmw4")
 player_reference = NodePath("Player")
 starting_room = NodePath("CH1_LV1_R1")
-room_list = [NodePath("CH1_LV1_R1"), NodePath("CH1_LV1_R2"), NodePath("CH1_LV1_R3")]
+room_list = [NodePath("CH1_LV1_R1"), NodePath("CH1_LV1_R2"), NodePath("CH1_LV1_R3"), NodePath("CH1_LV1_R4"), NodePath("CH1_LV1_R5"), NodePath("CH1_LV1_R6"), NodePath("CH1_LV1_R7"), NodePath("CH1_LV1_R8"), NodePath("CH1_LV1_R9"), NodePath("CH1_LV1_R10"), NodePath("CH1_LV1_R11")]
 
 [node name="Player" parent="." instance=ExtResource("2_isfe7")]
 position = Vector2(96, 223)
@@ -60,7 +68,82 @@ position = Vector2(2656, 0)
 [node name="Warp 0" parent="CH1_LV1_R3" index="5" node_paths=PackedStringArray("room_destination")]
 room_destination = NodePath("../../CH1_LV1_R2")
 
+[node name="Warp 1" parent="CH1_LV1_R3" index="6" node_paths=PackedStringArray("room_destination")]
+room_destination = NodePath("../../CH1_LV1_R4")
+
+[node name="CH1_LV1_R4" parent="." instance=ExtResource("7_vo2pd")]
+position = Vector2(3392, -64)
+
+[node name="Warp 0" parent="CH1_LV1_R4" index="4" node_paths=PackedStringArray("room_destination")]
+room_destination = NodePath("../../CH1_LV1_R3")
+
+[node name="Warp 1" parent="CH1_LV1_R4" index="5" node_paths=PackedStringArray("room_destination")]
+room_destination = NodePath("../../CH1_LV1_R5")
+
+[node name="CH1_LV1_R5" parent="." instance=ExtResource("8_irmt2")]
+position = Vector2(96, -576)
+
+[node name="Warp 0" parent="CH1_LV1_R5" index="4" node_paths=PackedStringArray("room_destination")]
+room_destination = NodePath("../../CH1_LV1_R4")
+
+[node name="Warp 1" parent="CH1_LV1_R5" index="5" node_paths=PackedStringArray("room_destination")]
+room_destination = NodePath("../../CH1_LV1_R6")
+
+[node name="CH1_LV1_R6" parent="." instance=ExtResource("9_nqhij")]
+position = Vector2(832, -576)
+
+[node name="Warp 0" parent="CH1_LV1_R6" index="4" node_paths=PackedStringArray("room_destination")]
+room_destination = NodePath("../../CH1_LV1_R5")
+
+[node name="Warp 1" parent="CH1_LV1_R6" index="5" node_paths=PackedStringArray("room_destination")]
+room_destination = NodePath("../../CH1_LV1_R7")
+
+[node name="CH1_LV1_R7" parent="." instance=ExtResource("10_ijxom")]
+position = Vector2(1472, -608)
+
+[node name="Warp 0" parent="CH1_LV1_R7" index="4" node_paths=PackedStringArray("room_destination")]
+room_destination = NodePath("../../CH1_LV1_R6")
+
+[node name="Warp 1" parent="CH1_LV1_R7" index="5" node_paths=PackedStringArray("room_destination")]
+room_destination = NodePath("../../CH1_LV1_R8")
+
+[node name="CH1_LV1_R8" parent="." instance=ExtResource("11_lbudt")]
+position = Vector2(2208, -576)
+
+[node name="Warp 0" parent="CH1_LV1_R8" index="5" node_paths=PackedStringArray("room_destination")]
+room_destination = NodePath("../../CH1_LV1_R7")
+
+[node name="Warp 1" parent="CH1_LV1_R8" index="6" node_paths=PackedStringArray("room_destination")]
+room_destination = NodePath("../../CH1_LV1_R9")
+
+[node name="CH1_LV1_R9" parent="." instance=ExtResource("12_jkpqh")]
+position = Vector2(0, 1856)
+
+[node name="Warp 0" parent="CH1_LV1_R9" index="3" node_paths=PackedStringArray("room_destination")]
+room_destination = NodePath("../../CH1_LV1_R8")
+
+[node name="Warp 1" parent="CH1_LV1_R9" index="4" node_paths=PackedStringArray("room_destination")]
+room_destination = NodePath("../../CH1_LV1_R10")
+
+[node name="CH1_LV1_R10" parent="." instance=ExtResource("13_lfovm")]
+position = Vector2(704, 576)
+
+[node name="Warp 0" parent="CH1_LV1_R10" index="3" node_paths=PackedStringArray("room_destination")]
+room_destination = NodePath("../../CH1_LV1_R11")
+
+[node name="CH1_LV1_R11" parent="." instance=ExtResource("14_daiil")]
+position = Vector2(1312, 1760)
+
 [editable path="Player"]
 [editable path="CH1_LV1_R1"]
 [editable path="CH1_LV1_R2"]
 [editable path="CH1_LV1_R3"]
+[editable path="CH1_LV1_R4"]
+[editable path="CH1_LV1_R5"]
+[editable path="CH1_LV1_R6"]
+[editable path="CH1_LV1_R7"]
+[editable path="CH1_LV1_R8"]
+[editable path="CH1_LV1_R9"]
+[editable path="CH1_LV1_R9/Warp 1"]
+[editable path="CH1_LV1_R10"]
+[editable path="CH1_LV1_R10/Warp 0"]

@@ -52,6 +52,8 @@ class_name FireTackleAttack
 
 @export var fire_tackle_hitbox_offset : float = 16
 
+@export var fire_tackle_rising_hitbox_offset : float = 16
+
 @export_color_no_alpha var fire_tackle_startup_color : Color = Color.WHITE
 
 @export_color_no_alpha var fire_tackle_active_color : Color = Color.WHITE
@@ -234,7 +236,7 @@ func active_update(delta : float):
 		var vertical_offset : Vector2 = (Vector2.UP if current_vertical_axis > 0 else Vector2.DOWN if current_vertical_axis < 0 else Vector2.ZERO)
 		var velocity_offset : Vector2 = (hub.char_body.velocity * delta)
 		
-		(fire_tackle_hitbox_instance as Node2D).global_position = (hub.collision_shape.global_position + ((horizontal_offset + vertical_offset) * fire_tackle_hitbox_offset) + velocity_offset + (Vector2.DOWN if current_vertical_axis == 0 else Vector2.ZERO))
+		(fire_tackle_hitbox_instance as Node2D).global_position = (hub.collision_shape.global_position + ((horizontal_offset + (Vector2.ZERO if current_vertical_axis > 0 else vertical_offset)) * fire_tackle_hitbox_offset) + velocity_offset + (Vector2.DOWN if current_vertical_axis == 0 else Vector2.ZERO) + ((Vector2.UP * fire_tackle_rising_hitbox_offset) if current_vertical_axis > 0 else Vector2.ZERO))
 		
 		var temp_velocity = -hub.char_body.velocity.normalized()
 		fire_tackle_particles.process_material.direction = Vector3(temp_velocity.x, temp_velocity.y, 0)

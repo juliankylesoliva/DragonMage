@@ -11,52 +11,6 @@ tilemap_list = [NodePath("BoundaryCollisionTilemap"), NodePath("LevelCollisionTi
 bottom_camera_limit = 640
 room_entrances = [NodePath("Entrance 0"), NodePath("Entrance 1")]
 
-[node name="HiddenTilemap" type="TileMap" parent="."]
-z_as_relative = false
-tile_set = ExtResource("2_1fie0")
-cell_quadrant_size = 32
-format = 2
-layer_0/name = "Hidden"
-layer_0/z_index = 4
-layer_0/tile_data = PackedInt32Array(458756, 4, 1, 458757, 131076, 1, 458759, 131076, 1, 458760, 65540, 1, 524291, 131074, 0, 524292, 131074, 0, 524293, 131074, 0, 524294, 327682, 2, 524295, 131074, 0, 524296, 131074, 0, 524297, 131074, 0, 589827, 131074, 1, 589828, 131074, 1, 589829, 131074, 1, 589830, 131074, 1, 589831, 131074, 1, 589832, 131074, 1, 589833, 131074, 1, 655369, 131074, 1, 655368, 131074, 1, 655367, 131074, 1, 655366, 131074, 1, 655365, 131074, 1, 655364, 131074, 1, 655363, 131074, 1, 720899, 131074, 1, 720900, 131074, 1, 720905, 131074, 1, 720904, 131074, 1, 720903, 131074, 1, 720902, 131074, 1, 720901, 131074, 1, 786435, 131074, 1, 851971, 131074, 1, 917507, 131074, 1, 983043, 131074, 1, 1048579, 131074, 1, 1114115, 131074, 1, 1179651, 131074, 1, 1179652, 131074, 1, 1179653, 131074, 1, 1179654, 131074, 1, 1179655, 131074, 1, 1179656, 131074, 1, 1179657, 131074, 1, 1114121, 131074, 1, 1048585, 131074, 1, 983049, 131074, 1, 917513, 131074, 1, 851977, 131074, 1, 786441, 131074, 1, 1048581, 131074, 1, 983045, 131074, 1, 917509, 131074, 1, 851973, 131074, 1, 786437, 131074, 1, 786436, 131074, 1, 851972, 131074, 1, 917508, 131074, 1, 983044, 131074, 1, 1048580, 131074, 1, 1114116, 131074, 1, 1114117, 131074, 1, 1114118, 131074, 1, 1048582, 131074, 1, 983046, 131074, 1, 917510, 131074, 1, 851974, 131074, 1, 786438, 131074, 1, 786439, 131074, 1, 851975, 131074, 1, 917511, 131074, 1, 983047, 131074, 1, 1048583, 131074, 1, 1114119, 131074, 1, 1114120, 131074, 1, 1048584, 131074, 1, 983048, 131074, 1, 917512, 131074, 1, 851976, 131074, 1, 786440, 131074, 1)
-script = ExtResource("3_i7bba")
-
-[node name="RigidBody2D" type="RigidBody2D" parent="HiddenTilemap"]
-collision_layer = 0
-collision_mask = 4
-gravity_scale = 0.0
-max_contacts_reported = 1
-contact_monitor = true
-lock_rotation = true
-freeze = true
-freeze_mode = 1
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="HiddenTilemap/RigidBody2D"]
-polygon = PackedVector2Array(128, 256, 288, 256, 288, 576, 128, 576)
-
-[node name="HiddenTilemap2" type="TileMap" parent="."]
-z_as_relative = false
-tile_set = ExtResource("2_1fie0")
-cell_quadrant_size = 32
-format = 2
-layer_0/name = "Hidden"
-layer_0/z_index = 4
-layer_0/tile_data = PackedInt32Array(262152, 196610, 5, 262155, 262146, 5, 262158, 131074, 1, 262153, 131074, 2, 262154, 131074, 2, 262156, 131074, 1, 262157, 131074, 1, 196616, 131074, 1, 196617, 131074, 1, 196618, 131074, 1, 196619, 131074, 1, 196620, 131074, 1, 196621, 131074, 1, 196622, 131074, 1, 131086, 131074, 1, 131085, 131074, 1, 131084, 131074, 1, 131083, 131074, 1, 131082, 131074, 1, 131081, 131074, 1, 131080, 131074, 1, 65544, 131074, 1, 65545, 131074, 1, 65546, 131074, 1, 65547, 131074, 1, 65548, 131074, 1, 65549, 131074, 1, 65550, 131074, 1, 14, 131074, 1, 13, 131074, 1, 12, 131074, 1, 11, 131074, 1, 10, 131074, 1, 9, 131074, 1, 8, 131074, 1, 327692, 131074, 2, 327693, 131074, 2, 327694, 131074, 2, 327691, 524290, 2)
-script = ExtResource("3_i7bba")
-
-[node name="RigidBody2D" type="RigidBody2D" parent="HiddenTilemap2"]
-collision_layer = 0
-collision_mask = 4
-gravity_scale = 0.0
-max_contacts_reported = 1
-contact_monitor = true
-lock_rotation = true
-freeze = true
-freeze_mode = 1
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="HiddenTilemap2/RigidBody2D"]
-polygon = PackedVector2Array(288, -64, 448, -64, 448, 192, 384, 192, 352, 192, 352, 160, 288, 160)
-
 [node name="BoundaryCollisionTilemap" type="TileMap" parent="."]
 z_index = 4
 tile_set = ExtResource("2_1fie0")
@@ -95,6 +49,52 @@ layer_3/y_sort_enabled = false
 layer_3/y_sort_origin = 0
 layer_3/z_index = -1
 layer_3/tile_data = PackedInt32Array()
+
+[node name="HiddenTilemap" type="TileMap" parent="."]
+z_as_relative = false
+tile_set = ExtResource("2_1fie0")
+cell_quadrant_size = 32
+format = 2
+layer_0/name = "Hidden"
+layer_0/z_index = 3
+layer_0/tile_data = PackedInt32Array(458756, 4, 1, 458757, 131076, 1, 458759, 131076, 1, 458760, 65540, 1, 524291, 131074, 0, 524292, 131074, 0, 524293, 131074, 0, 524294, 327682, 2, 524295, 131074, 0, 524296, 131074, 0, 524297, 131074, 0, 589827, 131074, 1, 589828, 131074, 1, 589829, 131074, 1, 589830, 131074, 1, 589831, 131074, 1, 589832, 131074, 1, 589833, 131074, 1, 655369, 131074, 1, 655368, 131074, 1, 655367, 131074, 1, 655366, 131074, 1, 655365, 131074, 1, 655364, 131074, 1, 655363, 131074, 1, 720899, 131074, 1, 720900, 131074, 1, 720905, 131074, 1, 720904, 131074, 1, 720903, 131074, 1, 720902, 131074, 1, 720901, 131074, 1, 786435, 131074, 1, 851971, 131074, 1, 917507, 131074, 1, 983043, 131074, 1, 1048579, 131074, 1, 1114115, 131074, 1, 1179651, 131074, 1, 1179652, 131074, 1, 1179653, 131074, 1, 1179654, 131074, 1, 1179655, 131074, 1, 1179656, 131074, 1, 1179657, 131074, 1, 1114121, 131074, 1, 1048585, 131074, 1, 983049, 131074, 1, 917513, 131074, 1, 851977, 131074, 1, 786441, 131074, 1, 1048581, 131074, 1, 983045, 131074, 1, 917509, 131074, 1, 851973, 131074, 1, 786437, 131074, 1, 786436, 131074, 1, 851972, 131074, 1, 917508, 131074, 1, 983044, 131074, 1, 1048580, 131074, 1, 1114116, 131074, 1, 1114117, 131074, 1, 1114118, 131074, 1, 1048582, 131074, 1, 983046, 131074, 1, 917510, 131074, 1, 851974, 131074, 1, 786438, 131074, 1, 786439, 131074, 1, 851975, 131074, 1, 917511, 131074, 1, 983047, 131074, 1, 1048583, 131074, 1, 1114119, 131074, 1, 1114120, 131074, 1, 1048584, 131074, 1, 983048, 131074, 1, 917512, 131074, 1, 851976, 131074, 1, 786440, 131074, 1)
+script = ExtResource("3_i7bba")
+
+[node name="RigidBody2D" type="RigidBody2D" parent="HiddenTilemap"]
+collision_layer = 0
+collision_mask = 4
+gravity_scale = 0.0
+max_contacts_reported = 1
+contact_monitor = true
+lock_rotation = true
+freeze = true
+freeze_mode = 1
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="HiddenTilemap/RigidBody2D"]
+polygon = PackedVector2Array(128, 256, 288, 256, 288, 576, 128, 576)
+
+[node name="HiddenTilemap2" type="TileMap" parent="."]
+z_as_relative = false
+tile_set = ExtResource("2_1fie0")
+cell_quadrant_size = 32
+format = 2
+layer_0/name = "Hidden"
+layer_0/z_index = 3
+layer_0/tile_data = PackedInt32Array(262152, 196610, 5, 262155, 262146, 5, 262158, 131074, 1, 262153, 131074, 2, 262154, 131074, 2, 262156, 131074, 1, 262157, 131074, 1, 196616, 131074, 1, 196617, 131074, 1, 196618, 131074, 1, 196619, 131074, 1, 196620, 131074, 1, 196621, 131074, 1, 196622, 131074, 1, 131086, 131074, 1, 131085, 131074, 1, 131084, 131074, 1, 131083, 131074, 1, 131082, 131074, 1, 131081, 131074, 1, 131080, 131074, 1, 65544, 131074, 1, 65545, 131074, 1, 65546, 131074, 1, 65547, 131074, 1, 65548, 131074, 1, 65549, 131074, 1, 65550, 131074, 1, 14, 131074, 1, 13, 131074, 1, 12, 131074, 1, 11, 131074, 1, 10, 131074, 1, 9, 131074, 1, 8, 131074, 1, 327692, 131074, 2, 327693, 131074, 2, 327694, 131074, 2, 327691, 524290, 2)
+script = ExtResource("3_i7bba")
+
+[node name="RigidBody2D" type="RigidBody2D" parent="HiddenTilemap2"]
+collision_layer = 0
+collision_mask = 4
+gravity_scale = 0.0
+max_contacts_reported = 1
+contact_monitor = true
+lock_rotation = true
+freeze = true
+freeze_mode = 1
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="HiddenTilemap2/RigidBody2D"]
+polygon = PackedVector2Array(288, -64, 448, -64, 448, 192, 384, 192, 352, 192, 352, 160, 288, 160)
 
 [node name="Entrance 0" type="Node2D" parent="."]
 position = Vector2(16, 224)

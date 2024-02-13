@@ -83,7 +83,7 @@ func refresh_meter_ui():
 					current_segment.play()
 
 func update_modulate_alpha(delta : float):
-	modulate.a = move_toward(modulate.a, player_collision_alpha if is_player_colliding else 1.0, delta * player_collision_alpha_delta_multiplier)
+	modulate.a = move_toward(modulate.a, player_collision_alpha if is_player_colliding or hub.char_body.global_position.y < global_position.y else 1.0, delta * player_collision_alpha_delta_multiplier)
 
 func _on_rigid_body_2d_body_entered(body):
 	if (body is CharacterBody2D and body.has_meta("Tag") and body.get_meta("Tag") == "Player"):
