@@ -1,21 +1,37 @@
-[gd_resource type="SpriteFrames" load_steps=79 format=3 uid="uid://cxb5mjrw5mrd4"]
+[gd_resource type="SpriteFrames" load_steps=95 format=3 uid="uid://cxb5mjrw5mrd4"]
 
+[ext_resource type="Texture2D" uid="uid://dox4bkppa7wvs" path="res://Sprites/Effects/DragoonProjectileImpact.png" id="1_1qdun"]
 [ext_resource type="Texture2D" uid="uid://du8qhvwbopk0k" path="res://Sprites/Effects/EnemyContactImpact.png" id="1_n3i0w"]
 [ext_resource type="Texture2D" uid="uid://b4ytlcj6u57e" path="res://Sprites/Effects/FastWallJump.png" id="1_t1i07"]
 [ext_resource type="Texture2D" uid="uid://b5tckipl6qpsb" path="res://Sprites/Effects/HeadbonkFX.png" id="1_u4l24"]
 [ext_resource type="Texture2D" uid="uid://d1x6a3myheyt1" path="res://Sprites/Effects/MagicExplosion.png" id="1_yyot1"]
 [ext_resource type="Texture2D" uid="uid://4mhavpqgy8v7" path="res://Sprites/Effects/LandingDust.png" id="2_l537n"]
 [ext_resource type="Texture2D" uid="uid://b20gj53qb5wa7" path="res://Sprites/Effects/NormalJumpSpark.png" id="2_lv184"]
+[ext_resource type="Texture2D" uid="uid://byygjv0bh4ql3" path="res://Sprites/Effects/FireImpact.png" id="3_caqym"]
 [ext_resource type="Texture2D" uid="uid://br5qr73syx42o" path="res://Sprites/Effects/SpeedHopSpark.png" id="3_s2txq"]
 [ext_resource type="Texture2D" uid="uid://ixemmtjkjr0b" path="res://Sprites/Effects/WalkingDust.png" id="5_dwefw"]
 [ext_resource type="Texture2D" uid="uid://bftd30fd4fw1d" path="res://Sprites/Effects/NormalWallJump.png" id="5_jvcee"]
 [ext_resource type="Texture2D" uid="uid://blbvlao1in035" path="res://Sprites/Effects/SuperJumpSpark.png" id="5_nlh8e"]
 [ext_resource type="Texture2D" uid="uid://5n03s2bcxmak" path="res://Sprites/Effects/TurnaroundSpark.png" id="6_hgyfw"]
 [ext_resource type="Texture2D" uid="uid://dt50w1ffl6ev6" path="res://Sprites/Effects/SlideDust.png" id="7_fgprp"]
+[ext_resource type="Texture2D" uid="uid://cjdsbykclytxb" path="res://Sprites/Effects/MagicImpact.png" id="7_xxep4"]
 [ext_resource type="Texture2D" uid="uid://bbdeubiarucu4" path="res://Sprites/Effects/WallVaultRing.png" id="9_wwesk"]
 [ext_resource type="Texture2D" uid="uid://ed8b4dp3lh6p" path="res://Sprites/Effects/WallSlideDust.png" id="11_p4txb"]
 [ext_resource type="Texture2D" uid="uid://dmnsasokd658s" path="res://Sprites/Effects/WallClimbSpark.png" id="11_xjhqo"]
 [ext_resource type="Texture2D" uid="uid://b5hl51iqnatr0" path="res://Sprites/Effects/WallVaultSpark.png" id="12_7qlv5"]
+[ext_resource type="Texture2D" uid="uid://c0qux165gk8v3" path="res://Sprites/Effects/StompEffect.png" id="12_h7vex"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_q608l"]
+atlas = ExtResource("1_1qdun")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cwtlm"]
+atlas = ExtResource("1_1qdun")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i72fl"]
+atlas = ExtResource("1_1qdun")
+region = Rect2(64, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_525tt"]
 atlas = ExtResource("1_n3i0w")
@@ -44,6 +60,18 @@ region = Rect2(64, 0, 32, 32)
 [sub_resource type="AtlasTexture" id="AtlasTexture_oex5h"]
 atlas = ExtResource("1_t1i07")
 region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sq0hi"]
+atlas = ExtResource("3_caqym")
+region = Rect2(0, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2r7o2"]
+atlas = ExtResource("3_caqym")
+region = Rect2(48, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6t8a3"]
+atlas = ExtResource("3_caqym")
+region = Rect2(96, 0, 48, 48)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_wc8cu"]
 atlas = ExtResource("1_u4l24")
@@ -105,6 +133,18 @@ region = Rect2(64, 0, 32, 32)
 atlas = ExtResource("1_yyot1")
 region = Rect2(96, 0, 32, 32)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_ffspo"]
+atlas = ExtResource("7_xxep4")
+region = Rect2(0, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m8htv"]
+atlas = ExtResource("7_xxep4")
+region = Rect2(48, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_il67s"]
+atlas = ExtResource("7_xxep4")
+region = Rect2(96, 0, 48, 48)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_i055k"]
 atlas = ExtResource("5_jvcee")
 region = Rect2(0, 0, 16, 32)
@@ -164,6 +204,18 @@ region = Rect2(64, 0, 32, 32)
 [sub_resource type="AtlasTexture" id="AtlasTexture_2m1gk"]
 atlas = ExtResource("3_s2txq")
 region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_28kwr"]
+atlas = ExtResource("12_h7vex")
+region = Rect2(0, 0, 64, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cnkua"]
+atlas = ExtResource("12_h7vex")
+region = Rect2(64, 0, 64, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cq1od"]
+atlas = ExtResource("12_h7vex")
+region = Rect2(128, 0, 64, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_kttet"]
 atlas = ExtResource("5_nlh8e")
@@ -268,6 +320,23 @@ region = Rect2(64, 0, 32, 32)
 [resource]
 animations = [{
 "frames": [{
+"duration": 6.0,
+"texture": SubResource("AtlasTexture_q608l")
+}, {
+"duration": 6.0,
+"texture": SubResource("AtlasTexture_cwtlm")
+}, {
+"duration": 6.0,
+"texture": SubResource("AtlasTexture_i72fl")
+}, {
+"duration": 1.0,
+"texture": null
+}],
+"loop": false,
+"name": &"DragoonProjectileImpact",
+"speed": 60.0
+}, {
+"frames": [{
 "duration": 4.0,
 "texture": SubResource("AtlasTexture_525tt")
 }, {
@@ -302,6 +371,23 @@ animations = [{
 }],
 "loop": false,
 "name": &"FastWallJump",
+"speed": 60.0
+}, {
+"frames": [{
+"duration": 6.0,
+"texture": SubResource("AtlasTexture_sq0hi")
+}, {
+"duration": 6.0,
+"texture": SubResource("AtlasTexture_2r7o2")
+}, {
+"duration": 6.0,
+"texture": SubResource("AtlasTexture_6t8a3")
+}, {
+"duration": 1.0,
+"texture": null
+}],
+"loop": false,
+"name": &"FireImpact",
 "speed": 60.0
 }, {
 "frames": [{
@@ -383,6 +469,23 @@ animations = [{
 }, {
 "frames": [{
 "duration": 6.0,
+"texture": SubResource("AtlasTexture_ffspo")
+}, {
+"duration": 6.0,
+"texture": SubResource("AtlasTexture_m8htv")
+}, {
+"duration": 6.0,
+"texture": SubResource("AtlasTexture_il67s")
+}, {
+"duration": 1.0,
+"texture": null
+}],
+"loop": false,
+"name": &"MagicImpact",
+"speed": 60.0
+}, {
+"frames": [{
+"duration": 6.0,
 "texture": SubResource("AtlasTexture_i055k")
 }, {
 "duration": 6.0,
@@ -455,6 +558,23 @@ animations = [{
 }],
 "loop": false,
 "name": &"SpeedhopSpark",
+"speed": 60.0
+}, {
+"frames": [{
+"duration": 6.0,
+"texture": SubResource("AtlasTexture_28kwr")
+}, {
+"duration": 6.0,
+"texture": SubResource("AtlasTexture_cnkua")
+}, {
+"duration": 6.0,
+"texture": SubResource("AtlasTexture_cq1od")
+}, {
+"duration": 1.0,
+"texture": null
+}],
+"loop": false,
+"name": &"StompImpact",
 "speed": 60.0
 }, {
 "frames": [{

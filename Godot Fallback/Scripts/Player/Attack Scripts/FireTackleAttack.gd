@@ -196,6 +196,7 @@ func active_init():
 	add_child(fire_tackle_hitbox_instance)
 	(fire_tackle_hitbox_instance as Node2D).global_position = hub.collision_shape.global_position
 	(fire_tackle_hitbox_instance as KnockbackHitbox).hit.connect(_on_fire_tackle_hit)
+	(fire_tackle_hitbox_instance as FireTackleKnockbackHitbox).player_body = hub.char_body
 	
 	snap_lerp = (horizontal_result / fire_tackle_max_horizontal_speed)
 	hub.char_body.floor_snap_length = lerp(saved_floor_snap_distance, fire_tackle_floor_snap_distance, pow(snap_lerp, 2))

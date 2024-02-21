@@ -17,8 +17,18 @@ func level_startup():
 	var destination_coords : Vector2 = starting_room.get_room_entrance_coordinates(starting_room_entrance_index)
 	player_reference.global_position = destination_coords
 	
+	var player_temp : PlayerHub = null
+	for child in player_reference.get_children():
+		if child is PlayerHub:
+			player_temp = (child as PlayerHub)
+			break
+	
+	if (player_temp == null):
+		push_warning("PlayerHub not found in player reference!")
+	
 	for room in room_list:
 		room.room_activated.connect(preenable_adjacent_room_collisions)
+		room.set_enemy_player_refs(player_temp)
 		if (room != starting_room):
 			room.deactivate_room()
 			room.disable_collisions()
@@ -27,9 +37,7 @@ func level_startup():
 	starting_room.enable_collisions()
 	preenable_adjacent_room_collisions()
 	
-	for child in player_reference.get_children():
-		if child is PlayerHub:
-			(child as PlayerHub).camera.snap_camera_to_player()
+	player_temp.camera.snap_camera_to_player()
 
 func preenable_adjacent_room_collisions():
 	for i in room_list.size():

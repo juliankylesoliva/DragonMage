@@ -30,8 +30,6 @@ signal magic_blast_thrown
 
 @export var blast_jump_min_active_time : float = 0.25
 
-@export var blast_jump_offset_multiplier : float = 1
-
 @export var blast_jump_standing_facing_offset : float = 3
 
 @export var blast_jump_moving_facing_offset : float = 16
@@ -160,6 +158,7 @@ func blast_jump_update(delta : float):
 			blast_jump_hitbox_instance = blast_jump_hitbox_scene.instantiate()
 			add_child(blast_jump_hitbox_instance)
 			(blast_jump_hitbox_instance as KnockbackHitbox).hit.connect(_on_blast_jump_hit)
+			(blast_jump_hitbox_instance as BlastJumpKnockbackHitbox).player_body = hub.char_body
 		
 		(blast_jump_hitbox_instance as Node2D).global_position = (hub.collision_shape.global_position + facing_offset + jumping_offset + velocity_offset)
 		

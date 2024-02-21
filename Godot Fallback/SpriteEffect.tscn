@@ -4,7 +4,7 @@
 
 [node name="SpriteEffect" type="AnimatedSprite2D"]
 sprite_frames = ExtResource("1_hggh7")
-animation = &"EnemyContactImpact"
+animation = &"DragoonProjectileImpact"
 autoplay = "default"
 frame = 3
 frame_progress = 1.0

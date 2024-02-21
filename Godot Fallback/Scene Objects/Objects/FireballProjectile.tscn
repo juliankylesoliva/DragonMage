@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://cwx0neqd78q6m" path="res://Sprites/Objects/FireProjectile.png" id="1_e5ryi"]
 [ext_resource type="Script" path="res://Scripts/Utility Scripts/SelfDestructTimer.gd" id="1_e42ge"]
-[ext_resource type="PackedScene" uid="uid://sf5dm50r0ovr" path="res://FireballKnockbackHitbox.tscn" id="3_q43tb"]
+[ext_resource type="PackedScene" uid="uid://sf5dm50r0ovr" path="res://Scene Objects/Hitboxes/FireballKnockbackHitbox.tscn" id="3_q43tb"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_orr1x"]
 
@@ -50,3 +50,7 @@ autoplay = "FireballProjectile"
 frame_progress = 0.138846
 
 [node name="FireballKnockbackHitbox" parent="." instance=ExtResource("3_q43tb")]
+enemy_defeat_knockback_multiplier = 1.5
+damage_type = &"NONE"
+knockback_strength = 0.0
+lifetime = -1.0

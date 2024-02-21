@@ -4,6 +4,8 @@ class_name KnockbackHitbox
 
 signal hit
 
+@export var damage_type : StringName = "NONE"
+
 @export var collision_shape : CollisionShape2D
 
 @export var ray : RayCast2D

@@ -113,6 +113,7 @@ Attack={
 2d_physics/layer_4="IntangibleWall"
 2d_physics/layer_5="Projectile"
 2d_physics/layer_6="Hitboxes"
+2d_physics/layer_7="Enemy"
 
 [physics]
 

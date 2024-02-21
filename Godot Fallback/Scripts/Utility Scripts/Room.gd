@@ -18,9 +18,11 @@ signal room_activated
 
 @export var room_entrances : Array[Node2D]
 
-var is_room_active : bool = true
+@export var enemy_nodes : Array[Node]
 
-# Enemy list goes here
+var enemy_list : Array[Enemy]
+
+var is_room_active : bool = true
 
 func get_room_entrance_coordinates(i : int):
 	if (i >= 0 and i < room_entrances.size()):
@@ -59,7 +61,25 @@ func disable_collisions():
 			tilemap.set_layer_enabled(i, false)
 
 func activate_enemies():
-	pass
+	initialize_enemy_list()
+	
+	for enemy in enemy_list:
+		enemy.activate_enemy()
 
 func deactivate_enemies():
 	pass
+
+func set_enemy_player_refs(player : PlayerHub):
+	initialize_enemy_list()
+	
+	for enemy in enemy_list:
+		if (enemy.player_detection.player_ref == null):
+			enemy.player_detection.player_ref = player
+
+func initialize_enemy_list():
+	if (enemy_list.size() == 0 and enemy_nodes.size() > 0):
+		for node in enemy_nodes:
+			for child in node.get_children():
+				if (child is Enemy):
+					enemy_list.append(child as Enemy)
+					break

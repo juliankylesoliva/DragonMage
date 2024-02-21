@@ -258,6 +258,7 @@ func start_ground_jump():
 	
 	landing_reset()
 	reset_min_jump_hold_timer()
+	reset_fast_fall()
 	
 	var did_player_speed_hop : bool = (enable_speed_hopping and !hub.movement.is_crouching and (hub.char_body.velocity.x * hub.get_input_vector().x > 0) and hub.buffers.highest_speed > hub.movement.top_speed and hub.buffers.is_speed_preservation_buffer_active())
 	var horizontal_result = (maxf(hub.buffers.highest_speed, abs(hub.char_body.velocity.x)) if did_player_speed_hop else abs(hub.char_body.velocity.x))

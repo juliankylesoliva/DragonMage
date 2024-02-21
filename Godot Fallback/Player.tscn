@@ -1,31 +1,28 @@
-[gd_scene load_steps=181 format=3 uid="uid://c6qw77ovfwgfs"]
+[gd_scene load_steps=183 format=3 uid="uid://c6qw77ovfwgfs"]
 
 [ext_resource type="Texture2D" uid="uid://d381ahbcwydy8" path="res://Sprites/Player/DraelynCrouch.png" id="1_6b42p"]
 [ext_resource type="Texture2D" uid="uid://dls34a1qa8iy1" path="res://Sprites/Player/DraelynFireTackle.png" id="1_ddrlj"]
-[ext_resource type="Script" path="res://Scripts/Hub Scripts/PlayerHub.gd" id="1_fbdyy"]
 [ext_resource type="Texture2D" uid="uid://b6iqle47ksrq6" path="res://Sprites/Player/MagliCrouch.png" id="1_m21y2"]
 [ext_resource type="Script" path="res://Scripts/Player/PlayerStateMachine/PlayerStateMachine.gd" id="1_rgc8w"]
 [ext_resource type="Texture2D" uid="uid://bepyd7xti4hyt" path="res://Sprites/Player/MagliJumps.png" id="1_s7co6"]
 [ext_resource type="Texture2D" uid="uid://bd1jjd3w8f3c1" path="res://Sprites/Player/MagliRun.png" id="1_setk4"]
-[ext_resource type="Script" path="res://Scripts/Hub Scripts/PlayerMovement.gd" id="2_ebc55"]
+[ext_resource type="Script" path="res://Scripts/Player/Hub Scripts/PlayerHub.gd" id="1_vr0jy"]
 [ext_resource type="Texture2D" uid="uid://bsyops5506ptd" path="res://Sprites/Player/DraelynHurt.png" id="2_h2opi"]
 [ext_resource type="Texture2D" uid="uid://bbkhtwnncuc7r" path="res://Sprites/Player/DraelynJumps.png" id="2_p0h7w"]
 [ext_resource type="Texture2D" uid="uid://qrayeurpifu" path="res://Sprites/Player/MagliHurt.png" id="2_ptbuf"]
 [ext_resource type="Script" path="res://Scripts/Player/PlayerStateMachine/StandingState.gd" id="2_w87d3"]
-[ext_resource type="Script" path="res://Scripts/Hub Scripts/PlayerAnimation.gd" id="3_01vwt"]
+[ext_resource type="Script" path="res://Scripts/Player/Hub Scripts/PlayerCollisions.gd" id="2_yj5hr"]
+[ext_resource type="Script" path="res://Scripts/Player/Hub Scripts/PlayerBuffers.gd" id="3_37ht5"]
 [ext_resource type="Script" path="res://Scripts/Player/PlayerStateMachine/RunningState.gd" id="3_65y85"]
-[ext_resource type="Script" path="res://Scripts/Hub Scripts/PlayerJumping.gd" id="3_rs3b5"]
 [ext_resource type="Texture2D" uid="uid://bejyweqbresc6" path="res://Sprites/Player/DraelynDefense.png" id="4_22c6w"]
+[ext_resource type="Script" path="res://Scripts/Player/Hub Scripts/PlayerMovement.gd" id="4_62hun"]
 [ext_resource type="Texture2D" uid="uid://b8ckwbp7kmd5n" path="res://Sprites/Player/MagliDraelynTransformations.png" id="4_gxmp5"]
-[ext_resource type="Script" path="res://Scripts/Hub Scripts/PlayerBuffers.gd" id="4_jbuwb"]
 [ext_resource type="Script" path="res://Scripts/Player/PlayerStateMachine/JumpingState.gd" id="4_ra8jk"]
 [ext_resource type="Texture2D" uid="uid://63niv7i4a2v3" path="res://Sprites/Player/MagliDefense.png" id="4_x7fww"]
 [ext_resource type="Script" path="res://Scripts/Player/PlayerStateMachine/FallingState.gd" id="5_02o4b"]
 [ext_resource type="Texture2D" uid="uid://crftcj56pc5eb" path="res://Sprites/Player/DraelynWalk.png" id="5_q55rd"]
+[ext_resource type="Script" path="res://Scripts/Player/Hub Scripts/PlayerJumping.gd" id="5_tagnk"]
 [ext_resource type="Texture2D" uid="uid://r6ajqwnopine" path="res://Sprites/Effects/ForwardMidairJumpParticle.png" id="6_k24kp"]
-[ext_resource type="Script" path="res://Scripts/Hub Scripts/PlayerAttacks.gd" id="6_mwpxq"]
-[ext_resource type="Script" path="res://Scripts/Hub Scripts/PlayerForm.gd" id="6_oq5ip"]
-[ext_resource type="Script" path="res://Scripts/Hub Scripts/PlayerCollisions.gd" id="6_tj4nn"]
 [ext_resource type="Script" path="res://Scripts/Player/Attack Scripts/DodgeAttack.gd" id="7_06h44"]
 [ext_resource type="Script" path="res://Scripts/Player/Attack Scripts/MagicBlastAttack.gd" id="7_e0q0e"]
 [ext_resource type="Script" path="res://Scripts/Player/Attack Scripts/FireTackleAttack.gd" id="7_hucxn"]
@@ -33,6 +30,7 @@
 [ext_resource type="Texture2D" uid="uid://bev0iekwuw81c" path="res://Sprites/Effects/BackwardsMidairJumpParticle.png" id="8_1f0td"]
 [ext_resource type="PackedScene" uid="uid://cwhtijthju8df" path="res://Scene Objects/Objects/MagicBlastProjectile.tscn" id="8_37vyn"]
 [ext_resource type="PackedScene" uid="uid://c1npwnxy6sqnx" path="res://Scene Objects/Hitboxes/BlastJumpKnockbackHitbox.tscn" id="9_lcig4"]
+[ext_resource type="Script" path="res://Scripts/Player/Hub Scripts/PlayerAttacks.gd" id="9_r5qyh"]
 [ext_resource type="Script" path="res://Scripts/Utility Scripts/LineTrail.gd" id="10_rgamg"]
 [ext_resource type="PackedScene" uid="uid://dj2kj4mpixb27" path="res://Scene Objects/Hitboxes/FireTackleKnockbackHitbox.tscn" id="11_hrntu"]
 [ext_resource type="PackedScene" uid="uid://dewpfs6cr2ffe" path="res://Scene Objects/Objects/FireballProjectile.tscn" id="12_ayvdi"]
@@ -47,10 +45,14 @@
 [ext_resource type="Texture2D" uid="uid://clp08lkqo6nh5" path="res://Sprites/Player/DraelynIdle.png" id="19_lfkpo"]
 [ext_resource type="Script" path="res://Scripts/Utility Scripts/PlayerSpriteTrail.gd" id="19_sik2o"]
 [ext_resource type="Script" path="res://Scripts/Player/PlayerStateMachine/AttackingState.gd" id="20_dbcpj"]
-[ext_resource type="Script" path="res://Scripts/Hub Scripts/PlayerTemper.gd" id="20_r5okj"]
+[ext_resource type="Script" path="res://Scripts/Player/Hub Scripts/PlayerTemper.gd" id="20_fbl3q"]
 [ext_resource type="PackedScene" uid="uid://bpxyaxwfw7023" path="res://Scene Objects/Effects/SpriteTrailSegment.tscn" id="20_yb7yy"]
+[ext_resource type="Script" path="res://Scripts/Player/Hub Scripts/PlayerForm.gd" id="21_3xv74"]
 [ext_resource type="Script" path="res://Scripts/Utility Scripts/AudioHandler.gd" id="23_55p2k"]
-[ext_resource type="Script" path="res://Scripts/Hub Scripts/PlayerDamage.gd" id="24_0wgyj"]
+[ext_resource type="Script" path="res://Scripts/Player/Hub Scripts/PlayerDamage.gd" id="24_45h1i"]
+[ext_resource type="Script" path="res://Scripts/Player/Hub Scripts/PlayerAnimation.gd" id="25_c4dam"]
+[ext_resource type="Script" path="res://Scripts/Player/Hub Scripts/PlayerStomp.gd" id="25_ls0ah"]
+[ext_resource type="PackedScene" uid="uid://bwf8fyp043kh4" path="res://Scene Objects/Hitboxes/StompKnockbackHitbox.tscn" id="26_36k6y"]
 [ext_resource type="Texture2D" uid="uid://c44t784vgugry" path="res://Sprites/Player/MagliIdle.png" id="27_my3k8"]
 [ext_resource type="Texture2D" uid="uid://bcwdksusecuad" path="res://Sprites/Player/DraelynFastFall.png" id="38_akwr7"]
 [ext_resource type="Script" path="res://Scripts/Player/PlayerStateMachine/DamagedState.gd" id="41_7pdlp"]
@@ -1214,7 +1216,7 @@ safe_margin = 0.001
 metadata/Tag = "Player"
 
 [node name="Hub" type="Node" parent="." node_paths=PackedStringArray("state_machine", "collisions", "buffers", "movement", "jumping", "attacks", "temper", "form", "damage", "animation", "sprite_trail", "camera", "audio", "char_body", "char_sprite", "collision_shape", "stream_player", "raycast_dl", "raycast_dm", "raycast_dr", "raycast_ledge_l", "raycast_ledge_r", "raycast_ul", "raycast_um", "raycast_ur", "raycast_ceiling_l", "raycast_ceiling_r", "raycast_wall_top_l", "raycast_wall_mid_l", "raycast_wall_bot_l", "raycast_wall_top_r", "raycast_wall_mid_r", "raycast_wall_bot_r")]
-script = ExtResource("1_fbdyy")
+script = ExtResource("1_vr0jy")
 state_machine = NodePath("../StateMachine")
 collisions = NodePath("Collisions")
 buffers = NodePath("Buffers")
@@ -1250,7 +1252,7 @@ raycast_wall_mid_r = NodePath("../RayCastWallMidR")
 raycast_wall_bot_r = NodePath("../RayCastWallBotR")
 
 [node name="Collisions" type="Node" parent="Hub" node_paths=PackedStringArray("hub")]
-script = ExtResource("6_tj4nn")
+script = ExtResource("2_yj5hr")
 hub = NodePath("..")
 ledge_nudge_easing = 0.5
 wall_raycast_collision_threshold = 1
@@ -1258,7 +1260,7 @@ intangible_wall_raycast_collision_threshold = 3
 max_upward_slope_correction_iterations = 8.0
 
 [node name="Buffers" type="Node" parent="Hub" node_paths=PackedStringArray("hub", "speed_preservation_particles")]
-script = ExtResource("4_jbuwb")
+script = ExtResource("3_37ht5")
 hub = NodePath("..")
 form_change_buffer_time = 0.25
 jump_buffer_time = 0.167
@@ -1268,7 +1270,7 @@ speed_preservation_buffer_time = 0.4
 speed_preservation_particles = NodePath("../../SpeedBufferParticles")
 
 [node name="Movement" type="Node" parent="Hub" node_paths=PackedStringArray("hub")]
-script = ExtResource("2_ebc55")
+script = ExtResource("4_62hun")
 hub = NodePath("..")
 max_slides = 999
 top_speed = 168.0
@@ -1281,7 +1283,7 @@ air_turning_speed = 2240.0
 crouching_top_speed = 84.0
 
 [node name="Jumping" type="Node" parent="Hub" node_paths=PackedStringArray("hub", "magic_blast_attack", "midair_jump_particles", "super_jump_particles")]
-script = ExtResource("3_rs3b5")
+script = ExtResource("5_tagnk")
 hub = NodePath("..")
 magic_blast_attack = NodePath("../Attacks/MagicBlast")
 speed_hop_slope_boost_multiplier = 0.25
@@ -1305,7 +1307,7 @@ running_jump_added_velocity = 48.0
 super_jump_particles = NodePath("../../SuperJumpParticles")
 
 [node name="Attacks" type="Node" parent="Hub" node_paths=PackedStringArray("hub")]
-script = ExtResource("6_mwpxq")
+script = ExtResource("9_r5qyh")
 hub = NodePath("..")
 
 [node name="MagicBlast" type="Node" parent="Hub/Attacks" node_paths=PackedStringArray("blast_jump_particles", "projectile_trail")]
@@ -1318,7 +1320,6 @@ inertia_multiplier = 0.5
 projectile_despawn_distance = 640.0
 blast_jump_min_velocity_magnitude = 192.0
 blast_jump_max_fall_speed = 640.0
-blast_jump_offset_multiplier = 1.5
 blast_jump_moving_facing_offset = 8.0
 blast_jump_jumping_offset = 20.0
 blast_jump_temper_increase_interval = 0.6
@@ -1386,35 +1387,31 @@ slide_uncancelable_time = 0.2
 uses_attack_state = true
 
 [node name="Temper" type="Node" parent="Hub" node_paths=PackedStringArray("hub")]
-script = ExtResource("20_r5okj")
+script = ExtResource("20_fbl3q")
 hub = NodePath("..")
 
 [node name="Form" type="Node" parent="Hub" node_paths=PackedStringArray("hub")]
-script = ExtResource("6_oq5ip")
+script = ExtResource("21_3xv74")
 hub = NodePath("..")
 mage_properties = ExtResource("14_8gg24")
 dragon_properties = ExtResource("15_356k0")
 form_change_cooldown_time = 0.4
 
 [node name="Damage" type="Node" parent="Hub" node_paths=PackedStringArray("hub")]
-script = ExtResource("24_0wgyj")
+script = ExtResource("24_45h1i")
 hub = NodePath("..")
 vertical_damage_knockback = -320.0
 hitstun_time = 0.65
 hitstun_ground_cancel_portion = 0.25
 invulnerability_alpha = 0.25
 
-[node name="Animation" type="Node" parent="Hub" node_paths=PackedStringArray("hub")]
-script = ExtResource("3_01vwt")
+[node name="Stomp" type="Node" parent="Hub" node_paths=PackedStringArray("hub", "stomp_hitbox", "magic_blast_attack", "fire_tackle_attack")]
+script = ExtResource("25_ls0ah")
 hub = NodePath("..")
-
-[node name="SpriteTrail" type="Node" parent="Hub" node_paths=PackedStringArray("hub")]
-script = ExtResource("19_sik2o")
-hub = NodePath("..")
-sprite_trail_segment_scene = ExtResource("20_yb7yy")
-trail_spawn_interval = 0.05
-mage_trail_color = Color(0.384314, 0.517647, 0.905882, 1)
-dragon_trail_color = Color(1, 0.6, 0.431373, 1)
+stomp_hitbox = NodePath("../../StompKnockbackHitbox")
+valid_stomp_state_names = Array[String](["Jumping", "Falling", "Gliding", "WallSliding", "WallClimbing", "WallVaulting"])
+magic_blast_attack = NodePath("../Attacks/MagicBlast")
+fire_tackle_attack = NodePath("../Attacks/FireTackle")
 
 [node name="Camera" type="Node" parent="Hub" node_paths=PackedStringArray("hub")]
 script = ExtResource("54_k03tc")
@@ -1427,6 +1424,18 @@ fast_fall_ground_distance_threshold = 256.0
 upper_camera_threshold = 160.0
 lower_camera_threshold = 160.0
 time_to_update_y = 0.2
+
+[node name="Animation" type="Node" parent="Hub" node_paths=PackedStringArray("hub")]
+script = ExtResource("25_c4dam")
+hub = NodePath("..")
+
+[node name="SpriteTrail" type="Node" parent="Hub" node_paths=PackedStringArray("hub")]
+script = ExtResource("19_sik2o")
+hub = NodePath("..")
+sprite_trail_segment_scene = ExtResource("20_yb7yy")
+trail_spawn_interval = 0.05
+mage_trail_color = Color(0.384314, 0.517647, 0.905882, 1)
+dragon_trail_color = Color(1, 0.6, 0.431373, 1)
 
 [node name="Audio" type="Node" parent="Hub" node_paths=PackedStringArray("hub")]
 script = ExtResource("23_55p2k")
@@ -1483,6 +1492,9 @@ can_update_camera_x_pos = false
 [node name="Damaged" type="Node" parent="StateMachine"]
 script = ExtResource("41_7pdlp")
 can_update_camera_x_pos = false
+
+[node name="StompKnockbackHitbox" parent="." instance=ExtResource("26_36k6y")]
+position = Vector2(0, 32)
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 visibility_layer = 8

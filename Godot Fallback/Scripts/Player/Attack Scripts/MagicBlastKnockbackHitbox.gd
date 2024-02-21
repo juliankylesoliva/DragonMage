@@ -2,6 +2,8 @@ extends KnockbackHitbox
 
 class_name MagicBlastKnockbackHitbox
 
+@export var enemy_defeat_knockback_multiplier : float = 1.5
+
 @export_flags_2d_physics var player_layer
 
 @export_flags_2d_physics var ground_layer
@@ -13,6 +15,10 @@ func _on_body_entered(body):
 	if (body is CharacterBody2D):
 		if (body.has_meta("Tag") and body.get_meta("Tag") == "Player"):
 			do_magic_blast_knockback(body)
+		elif (body.has_meta("Tag") and body.get_meta("Tag") == "Enemy"):
+			defeat_enemy(body)
+		else:
+			pass
 	elif (body is Breakable):
 		ray.collision_mask = ground_layer
 		do_break_object(body)
@@ -52,6 +58,23 @@ func do_magic_blast_knockback(body):
 			hub.movement.current_horizontal_velocity = hub.char_body.velocity.x
 		
 		hub.attacks.get_attack_by_name(hub.attacks.standing_attack_name).activate_blast_jump()
+
+func defeat_enemy(body):
+	var target_pos : Vector2 = ((body as Node2D).global_position - ray.global_position)
+	if (!is_going_thru_a_wall(target_pos, body.get_rid())):
+		for child in body.get_children():
+			if (child is Enemy):
+				var enemy : Enemy = (child as Enemy)
+				if (enemy.defeat_enemy(damage_type)):
+					hit.emit()
+					EffectFactory.get_effect("MagicImpact", body.global_position)
+					var velocity_vector : Vector2 = (body.global_position - collision_shape.global_position)
+					var distance : float = velocity_vector.length()
+					velocity_vector = velocity_vector.normalized()
+					velocity_vector *= (knockback_strength / (1 + (distance / pixels_per_unit)))
+					velocity_vector *= enemy_defeat_knockback_multiplier
+					enemy.body.velocity += velocity_vector
+					return
 
 func do_break_object(body):
 	var target_pos : Vector2 = ((body as Node2D).global_position - ray.global_position)
