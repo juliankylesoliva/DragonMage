@@ -1389,6 +1389,7 @@ uses_attack_state = true
 [node name="Temper" type="Node" parent="Hub" node_paths=PackedStringArray("hub")]
 script = ExtResource("20_fbl3q")
 hub = NodePath("..")
+temper_rebound_interval = 5.0
 
 [node name="Form" type="Node" parent="Hub" node_paths=PackedStringArray("hub")]
 script = ExtResource("21_3xv74")
@@ -1401,6 +1402,7 @@ form_change_cooldown_time = 0.4
 script = ExtResource("24_45h1i")
 hub = NodePath("..")
 vertical_damage_knockback = -320.0
+knockback_steering_rate = 120.0
 hitstun_time = 0.65
 hitstun_ground_cancel_portion = 0.25
 invulnerability_alpha = 0.25
@@ -1409,7 +1411,7 @@ invulnerability_alpha = 0.25
 script = ExtResource("25_ls0ah")
 hub = NodePath("..")
 stomp_hitbox = NodePath("../../StompKnockbackHitbox")
-valid_stomp_state_names = Array[String](["Jumping", "Falling", "Gliding", "WallSliding", "WallClimbing", "WallVaulting"])
+valid_stomp_state_names = Array[String](["Falling", "Gliding", "WallSliding", "WallClimbing", "WallVaulting"])
 magic_blast_attack = NodePath("../Attacks/MagicBlast")
 fire_tackle_attack = NodePath("../Attacks/FireTackle")
 

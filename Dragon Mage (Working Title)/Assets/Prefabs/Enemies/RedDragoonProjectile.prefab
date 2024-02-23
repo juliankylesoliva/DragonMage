@@ -164,6 +164,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 6
+  reflectedMoveSpeedMultiplier: 1.5
+  enemyDefeatKnockbackMultiplier: 2
+  damageType: 6
+  impactEffectName: DragoonProjectileImpact
+  destroySoundName: enemy_dragoon_projectile_destroy
 --- !u!95 &6350311271352488541
 Animator:
   serializedVersion: 5

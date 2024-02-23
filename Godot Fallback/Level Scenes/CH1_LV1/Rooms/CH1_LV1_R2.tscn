@@ -1,13 +1,15 @@
-[gd_scene load_steps=4 format=3 uid="uid://clq45175f8df8"]
+[gd_scene load_steps=5 format=3 uid="uid://clq45175f8df8"]
 
 [ext_resource type="Script" path="res://Scripts/Utility Scripts/Room.gd" id="1_3d07d"]
 [ext_resource type="TileSet" uid="uid://dhwi7i1loa2pd" path="res://Sprites/Tiles/Test Tiles/TestTileSet.tres" id="2_tphx2"]
 [ext_resource type="PackedScene" uid="uid://dqbo0wu6hm8lj" path="res://Scene Objects/Objects/WarpTrigger.tscn" id="3_23cuo"]
+[ext_resource type="PackedScene" uid="uid://dwnpgujive352" path="res://Scene Objects/Enemies/RedDragoon.tscn" id="4_r5fyf"]
 
-[node name="CH1_LV1_R2" type="Node2D" node_paths=PackedStringArray("tilemap_list", "room_entrances")]
+[node name="CH1_LV1_R2" type="Node2D" node_paths=PackedStringArray("tilemap_list", "room_entrances", "enemy_nodes")]
 script = ExtResource("1_3d07d")
 tilemap_list = [NodePath("BoundaryCollisionTilemap"), NodePath("LevelCollisionTilemap")]
 room_entrances = [NodePath("Entrance 0"), NodePath("Entrance 1")]
+enemy_nodes = [NodePath("RedDragoon")]
 
 [node name="BoundaryCollisionTilemap" type="TileMap" parent="."]
 z_index = 4
@@ -65,3 +67,6 @@ room_entrance_index = 1
 position = Vector2(560, 64)
 room_origin = NodePath("..")
 room_destination = NodePath("..")
+
+[node name="RedDragoon" parent="." instance=ExtResource("4_r5fyf")]
+position = Vector2(400, 160)

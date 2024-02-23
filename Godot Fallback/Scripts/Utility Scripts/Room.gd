@@ -64,7 +64,8 @@ func activate_enemies():
 	initialize_enemy_list()
 	
 	for enemy in enemy_list:
-		enemy.activate_enemy()
+		if (!enemy.is_defeated):
+			enemy.activate_enemy()
 
 func deactivate_enemies():
 	pass

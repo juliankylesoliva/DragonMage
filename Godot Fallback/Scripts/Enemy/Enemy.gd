@@ -22,7 +22,7 @@ class_name Enemy
 
 @export var vertical_launch_velocity_on_defeat : float = 2
 
-@export var gravity_scale_on_defeat : float = 3
+@export var gravity_scale : float = 3
 
 @export_flags_2d_render var visibility_layer_on_defeat
 

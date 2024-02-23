@@ -61,3 +61,5 @@ func on_exit():
 	
 	hub.char_body.velocity = prev_velocity
 	hub.form.start_form_change_cooldown_timer()
+	if (hub.temper.is_form_locked()):
+		hub.temper.activate_temper_rebound_timer()

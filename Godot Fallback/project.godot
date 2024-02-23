@@ -114,6 +114,7 @@ Attack={
 2d_physics/layer_5="Projectile"
 2d_physics/layer_6="Hitboxes"
 2d_physics/layer_7="Enemy"
+2d_physics/layer_8="EnemyProjectile"
 
 [physics]
 

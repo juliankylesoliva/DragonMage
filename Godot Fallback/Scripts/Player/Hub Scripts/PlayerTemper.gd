@@ -14,6 +14,8 @@ class_name PlayerTemper
 
 @export var hot_segments : int = 3
 
+@export var temper_rebound_interval : float = 3
+
 var current_temper_level : int = 0
 
 var cold_threshold : int = 0
@@ -22,8 +24,30 @@ var hot_threshold : int = 0
 
 var min_temper_level : int = 1
 
+var current_temper_rebound_timer = 0
+
 func _ready():
 	validate_parameters()
+
+func _process(delta):
+	check_temper_rebound(delta)
+
+func check_temper_rebound(delta : float):
+	if (current_temper_rebound_timer > 0 and is_form_locked()):
+		current_temper_rebound_timer = move_toward(current_temper_rebound_timer, 0, delta)
+		if (current_temper_rebound_timer <= 0):
+			if (current_temper_level < cold_threshold):
+				neutralize_temper_by(1)
+			else:
+				neutralize_temper_by(-1)
+			
+			if (is_form_locked()):
+				current_temper_rebound_timer = temper_rebound_interval
+	else:
+		current_temper_rebound_timer = 0
+
+func activate_temper_rebound_timer():
+	current_temper_rebound_timer = temper_rebound_interval
 
 func is_form_locked():
 	return ((hub.form.is_a_mage() and current_temper_level <= cold_threshold) or (hub.form.is_a_dragon() and current_temper_level >= hot_threshold))
