@@ -43,6 +43,9 @@ scale = Vector2(3, 3)
 shape = SubResource("CircleShape2D_orr1x")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+light_mask = 16
+visibility_layer = 16
+z_index = 5
 scale = Vector2(3, 3)
 sprite_frames = SubResource("SpriteFrames_lmq6s")
 animation = &"FireballProjectile"
@@ -50,7 +53,4 @@ autoplay = "FireballProjectile"
 frame_progress = 0.138846
 
 [node name="FireballKnockbackHitbox" parent="." instance=ExtResource("3_q43tb")]
-enemy_defeat_knockback_multiplier = 1.5
 damage_type = &"NONE"
-knockback_strength = 0.0
-lifetime = -1.0

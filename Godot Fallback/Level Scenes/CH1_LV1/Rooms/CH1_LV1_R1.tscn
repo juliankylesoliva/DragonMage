@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://cn18g24teqsm4"]
+[gd_scene load_steps=7 format=3 uid="uid://cn18g24teqsm4"]
 
 [ext_resource type="Script" path="res://Scripts/Utility Scripts/Room.gd" id="1_0d1nf"]
 [ext_resource type="TileSet" uid="uid://dhwi7i1loa2pd" path="res://Sprites/Tiles/Test Tiles/TestTileSet.tres" id="2_btx66"]
 [ext_resource type="PackedScene" uid="uid://dqbo0wu6hm8lj" path="res://Scene Objects/Objects/WarpTrigger.tscn" id="3_l4qgb"]
 [ext_resource type="PackedScene" uid="uid://bajk0w7eoh6o8" path="res://Scene Objects/Objects/ReinforcedBlock.tscn" id="4_j0618"]
 [ext_resource type="PackedScene" uid="uid://clfqwsy4byrkf" path="res://Scene Objects/Enemies/GreenDragoon.tscn" id="5_80gu6"]
+[ext_resource type="PackedScene" uid="uid://b2a0ttqvejk51" path="res://Scene Objects/Objects/TemperDragonFruit.tscn" id="6_scfh6"]
 
 [node name="CH1_LV1_R1" type="Node2D" node_paths=PackedStringArray("tilemap_list", "room_entrances", "enemy_nodes")]
 script = ExtResource("1_0d1nf")
@@ -72,3 +73,6 @@ position = Vector2(784, 224)
 
 [node name="GreenDragoon2" parent="." instance=ExtResource("5_80gu6")]
 position = Vector2(1104, 128)
+
+[node name="TemperDragonFruit" parent="." instance=ExtResource("6_scfh6")]
+position = Vector2(1088, 32)

@@ -84,13 +84,13 @@ func check_enemy_sightline():
 		back_sightline_raycast.target_position.x = -front_sightline_raycast.target_position.x
 		back_sightline_raycast.force_raycast_update()
 	
-	if (front_sightline_raycast.is_colliding()):
+	if (front_sightline_raycast.is_colliding() and front_sightline_raycast.get_collider().has_meta("Tag") and front_sightline_raycast.get_collider().get_meta("Tag") == "Player"):
 		if (!is_player_in_sightline):
 			player_enter_sightline.emit()
 		else:
 			player_stay_sightline.emit()
 		is_player_in_sightline = true
-	elif (use_back_sightline and back_sightline_raycast.is_colliding()):
+	elif (use_back_sightline and back_sightline_raycast.is_colliding() and back_sightline_raycast.get_collider().has_meta("Tag") and back_sightline_raycast.get_collider().get_meta("Tag") == "Player"):
 		if (!is_player_in_sightline):
 			player_enter_sightline.emit()
 		else:

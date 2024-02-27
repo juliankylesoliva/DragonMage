@@ -1,7 +1,8 @@
-[gd_scene load_steps=12 format=3 uid="uid://bgww8jir45ktf"]
+[gd_scene load_steps=13 format=3 uid="uid://bgww8jir45ktf"]
 
 [ext_resource type="Script" path="res://Scripts/Enemy/BlueDragoon.gd" id="1_l21kt"]
 [ext_resource type="Script" path="res://Scripts/Enemy/EnemyMovement.gd" id="2_hl7h0"]
+[ext_resource type="PackedScene" uid="uid://c7rofcxvqilp6" path="res://Scene Objects/Effects/DragoonShades.tscn" id="2_l5ub2"]
 [ext_resource type="Script" path="res://Scripts/Enemy/EnemyPlayerDetection.gd" id="3_7a55a"]
 [ext_resource type="Script" path="res://Scripts/Enemy/EnemyCollisionDetection.gd" id="4_jvyhu"]
 [ext_resource type="Texture2D" uid="uid://bd7ilcb71gc0x" path="res://Sprites/Enemies/BlueDragoon.png" id="5_u74qk"]
@@ -71,6 +72,7 @@ metadata/Tag = "Enemy"
 script = ExtResource("1_l21kt")
 jump_speed = 320.0
 max_fall_speed = 256.0
+dropped_shades_scene = ExtResource("2_l5ub2")
 movement = NodePath("Movement")
 collision_detection = NodePath("CollisionDetection")
 player_detection = NodePath("PlayerDetection")
@@ -133,12 +135,14 @@ position = Vector2(0, 3)
 shape = SubResource("CapsuleShape2D_q7l5y")
 
 [node name="PlayerRayCastFront" type="RayCast2D" parent="."]
+position = Vector2(0, -12)
 target_position = Vector2(0, 0)
 collision_mask = 4
 hit_from_inside = true
 collide_with_areas = true
 
 [node name="PlayerRayCastBack" type="RayCast2D" parent="."]
+position = Vector2(0, -12)
 target_position = Vector2(0, 0)
 collision_mask = 4
 hit_from_inside = true

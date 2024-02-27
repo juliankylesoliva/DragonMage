@@ -23,6 +23,9 @@ func state_process(_delta : float):
 		set_next_state(state_machine.get_state_by_name("FormChanging"))
 	elif (hub.attacks.is_using_attack_state() and hub.attacks.current_attack != null):
 		set_next_state(state_machine.get_state_by_name("Attacking"))
+	elif (hub.stomp.is_stomping_enemy()):
+		hub.stomp.do_stomp_jump()
+		set_next_state(state_machine.get_state_by_name("Jumping"))
 	elif (hub.jumping.can_wall_slide()):
 		set_next_state(state_machine.get_state_by_name("WallSliding"))
 	elif (hub.jumping.is_glide_canceled()):
@@ -42,7 +45,8 @@ func on_enter():
 	glide_particles.emitting = true
 
 func on_exit():
-	hub.jumping.cancel_glide()
+	if (!hub.stomp.is_stomping_enemy()):
+		hub.jumping.cancel_glide()
 	glide_particles.emitting = false
 
 func _on_magic_blast_magic_blast_thrown():

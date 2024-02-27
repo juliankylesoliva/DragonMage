@@ -149,6 +149,7 @@ func do_movement(delta):
 	hub.char_body.velocity.x = current_horizontal_velocity
 	var intended_velocity : Vector2 = hub.char_body.velocity
 	hub.char_body.move_and_slide()
+	hub.collisions.magic_blast_jump_velocity_retention(intended_velocity)
 	hub.collisions.upward_slope_correction(intended_velocity)
 
 

@@ -1,9 +1,10 @@
-[gd_scene load_steps=15 format=3 uid="uid://dwnpgujive352"]
+[gd_scene load_steps=16 format=3 uid="uid://dwnpgujive352"]
 
 [ext_resource type="Script" path="res://Scripts/Enemy/RedDragoon.gd" id="1_33vrd"]
 [ext_resource type="Script" path="res://Scripts/Enemy/EnemyMovement.gd" id="2_sot6e"]
 [ext_resource type="PackedScene" uid="uid://jhdy76bwci08" path="res://Scene Objects/Enemies/RedDragoonProjectile.tscn" id="2_t01wj"]
 [ext_resource type="Script" path="res://Scripts/Enemy/EnemyPlayerDetection.gd" id="3_d4ci6"]
+[ext_resource type="PackedScene" uid="uid://c7rofcxvqilp6" path="res://Scene Objects/Effects/DragoonShades.tscn" id="3_uicur"]
 [ext_resource type="Script" path="res://Scripts/Enemy/EnemyCollisionDetection.gd" id="4_nup22"]
 [ext_resource type="Texture2D" uid="uid://csqde18tv4wya" path="res://Sprites/Enemies/RedDragoon.png" id="5_up84d"]
 
@@ -91,6 +92,7 @@ metadata/Tag = "Enemy"
 script = ExtResource("1_33vrd")
 red_dragoon_projectile_scene = ExtResource("2_t01wj")
 projectile_spawn_point = NodePath("../PlayerRayCastFront")
+dropped_shades_scene = ExtResource("3_uicur")
 movement = NodePath("Movement")
 collision_detection = NodePath("CollisionDetection")
 player_detection = NodePath("PlayerDetection")

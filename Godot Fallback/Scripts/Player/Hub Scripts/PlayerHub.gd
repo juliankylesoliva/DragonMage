@@ -11,6 +11,7 @@ class_name PlayerHub
 @export var temper : PlayerTemper
 @export var form : PlayerForm
 @export var damage : PlayerDamage
+@export var stomp : PlayerStomp
 @export var animation : PlayerAnimation
 @export var sprite_trail : PlayerSpriteTrail
 @export var camera : PlayerCamera

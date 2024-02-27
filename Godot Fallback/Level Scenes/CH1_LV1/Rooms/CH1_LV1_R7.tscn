@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://cj8q5uurbc2o8"]
+[gd_scene load_steps=7 format=3 uid="uid://cj8q5uurbc2o8"]
 
 [ext_resource type="Script" path="res://Scripts/Utility Scripts/Room.gd" id="1_cvffg"]
 [ext_resource type="TileSet" uid="uid://dhwi7i1loa2pd" path="res://Sprites/Tiles/Test Tiles/TestTileSet.tres" id="2_3gy77"]
 [ext_resource type="PackedScene" uid="uid://dqbo0wu6hm8lj" path="res://Scene Objects/Objects/WarpTrigger.tscn" id="3_53wbu"]
 [ext_resource type="PackedScene" uid="uid://cs4s34scsvcfr" path="res://Scene Objects/Objects/BreakableBlock.tscn" id="4_0nfhc"]
 [ext_resource type="PackedScene" uid="uid://curi6w4ex7jou" path="res://Scene Objects/Enemies/YellowDragoon.tscn" id="5_tl3qq"]
+[ext_resource type="PackedScene" uid="uid://b2a0ttqvejk51" path="res://Scene Objects/Objects/TemperDragonFruit.tscn" id="6_hr7b6"]
 
 [node name="CH1_LV1_R7" type="Node2D" node_paths=PackedStringArray("tilemap_list", "room_entrances", "enemy_nodes")]
 script = ExtResource("1_cvffg")
@@ -74,3 +75,8 @@ position = Vector2(384, 160)
 
 [node name="YellowDragoon" parent="." instance=ExtResource("5_tl3qq")]
 position = Vector2(96, 224)
+
+[node name="TemperDragonFruit" parent="." instance=ExtResource("6_hr7b6")]
+position = Vector2(448, 96)
+starting_state = 0
+enable_cycling = false

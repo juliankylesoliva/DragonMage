@@ -8,11 +8,17 @@ extends Enemy
 
 @export var post_fire_cooldown : float = 2
 
+@export var dropped_shades_scene : PackedScene
+
 var base_gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
 var current_projectile_state : String = "STANDBY"
 
 var current_projectile_state_timer : float = 0
+
+func _ready():
+	movement.set_physics_process(false)
+	movement.set_process(false)
 
 func _physics_process(delta):
 	check_defeated_camera_distance()
@@ -20,10 +26,17 @@ func _physics_process(delta):
 	if (is_defeated):
 		if (!shape.disabled):
 			shape.disabled = true
+			spawn_shades()
 		else:
 			body.move_and_slide()
 	else:
 		update_state_timer(delta)
+
+func spawn_shades():
+	var temp_shades : Node = dropped_shades_scene.instantiate()
+	body.add_sibling(temp_shades)
+	(temp_shades as Node2D).global_position = player_detection.front_sightline_raycast.global_position
+	(temp_shades as DragoonShades).setup(self)
 
 func launch_projectile():
 	if (current_projectile_state != "STANDBY" or !visibility_notifier.is_on_screen()):
@@ -58,6 +71,8 @@ func update_state_timer(delta : float):
 				sprite.play("Idle")
 
 func activate_enemy():
+	movement.set_physics_process(true)
+	movement.set_process(true)
 	movement.reset_to_initial_position()
 	reset_timer_and_state()
 
@@ -67,11 +82,15 @@ func on_defeat():
 
 func on_player_approach():
 	if (!is_defeated):
+		movement.set_physics_process(true)
+		movement.set_process(true)
 		movement.face_towards_player()
 		sprite.play("Idle")
 
 func on_player_retreat():
 	if (!is_defeated):
+		movement.set_physics_process(false)
+		movement.set_process(false)
 		sprite.play("Idle")
 
 func on_player_enter_sightline():

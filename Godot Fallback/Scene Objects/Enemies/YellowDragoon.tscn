@@ -1,6 +1,7 @@
-[gd_scene load_steps=15 format=3 uid="uid://curi6w4ex7jou"]
+[gd_scene load_steps=16 format=3 uid="uid://curi6w4ex7jou"]
 
 [ext_resource type="Script" path="res://Scripts/Enemy/YellowDragoon.gd" id="1_5fo06"]
+[ext_resource type="PackedScene" uid="uid://c7rofcxvqilp6" path="res://Scene Objects/Effects/DragoonShades.tscn" id="2_jarmg"]
 [ext_resource type="Script" path="res://Scripts/Enemy/EnemyMovement.gd" id="2_o8r77"]
 [ext_resource type="Script" path="res://Scripts/Enemy/EnemyPlayerDetection.gd" id="3_us44s"]
 [ext_resource type="Script" path="res://Scripts/Enemy/EnemyCollisionDetection.gd" id="4_fyxnf"]
@@ -91,6 +92,7 @@ metadata/Tag = "Enemy"
 [node name="Enemy" type="Node" parent="." node_paths=PackedStringArray("movement", "collision_detection", "player_detection", "body", "sprite", "shape", "visibility_notifier")]
 script = ExtResource("1_5fo06")
 move_speed = 128.0
+dropped_shades_scene = ExtResource("2_jarmg")
 movement = NodePath("Movement")
 collision_detection = NodePath("CollisionDetection")
 player_detection = NodePath("PlayerDetection")
@@ -155,16 +157,16 @@ position = Vector2(0, 3)
 shape = SubResource("CapsuleShape2D_q7l5y")
 
 [node name="PlayerRayCastFront" type="RayCast2D" parent="."]
-position = Vector2(0, 3)
+position = Vector2(0, -12)
 target_position = Vector2(0, 0)
-collision_mask = 4
+collision_mask = 15
 hit_from_inside = true
 collide_with_areas = true
 
 [node name="PlayerRayCastBack" type="RayCast2D" parent="."]
-position = Vector2(0, 3)
+position = Vector2(0, -12)
 target_position = Vector2(0, 0)
-collision_mask = 4
+collision_mask = 15
 hit_from_inside = true
 collide_with_areas = true
 
@@ -196,9 +198,11 @@ collision_mask = 11
 hit_from_inside = true
 collide_with_areas = true
 
+[connection signal="player_approach" from="Enemy/PlayerDetection" to="Enemy" method="on_player_approach"]
 [connection signal="player_enter_sightline" from="Enemy/PlayerDetection" to="Enemy" method="on_enter_sightline"]
 [connection signal="player_retreat" from="Enemy/PlayerDetection" to="Enemy" method="on_player_retreat"]
 [connection signal="player_stay_sightline" from="Enemy/PlayerDetection" to="Enemy" method="on_stay_sightline"]
+[connection signal="player_collision" from="Enemy/CollisionDetection" to="Enemy" method="on_player_collision"]
 [connection signal="touching_ledge" from="Enemy/CollisionDetection" to="Enemy" method="on_touching_ledge"]
 [connection signal="touching_wall" from="Enemy/CollisionDetection" to="Enemy" method="on_touching_wall"]
 [connection signal="body_entered" from="ContactHitbox" to="Enemy/CollisionDetection" method="_on_contact_hitbox_body_entered"]

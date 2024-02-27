@@ -52,6 +52,9 @@ func state_process(_delta : float):
 				set_next_state(state_machine.get_state_by_name("Running"))
 		else:
 			set_next_state(state_machine.get_state_by_name("Standing"))
+	elif (hub.stomp.is_stomping_enemy()):
+		hub.stomp.do_stomp_jump()
+		set_next_state(state_machine.get_state_by_name("Jumping"))
 	elif (hub.jumping.can_ground_jump()):
 		hub.jumping.start_ground_jump()
 		set_next_state(state_machine.get_state_by_name("Jumping"))

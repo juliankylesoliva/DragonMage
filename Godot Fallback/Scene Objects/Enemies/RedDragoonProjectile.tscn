@@ -31,6 +31,9 @@ animations = [{
 }]
 
 [node name="RedDragoonProjectile" type="RigidBody2D" node_paths=PackedStringArray("projectile_sprite")]
+light_mask = 16
+visibility_layer = 16
+z_index = 5
 collision_layer = 128
 collision_mask = 4
 gravity_scale = 0.0

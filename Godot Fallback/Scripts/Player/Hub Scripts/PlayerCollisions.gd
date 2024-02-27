@@ -216,6 +216,10 @@ func do_ceiling_nudge():
 			if (partial_magnitude < total_magnitude):
 				hub.char_body.position.x += ((total_magnitude - partial_magnitude) * sign_multiplier)
 
+func magic_blast_jump_velocity_retention(intended_velocity : Vector2):
+	if (hub.jumping.magic_blast_attack.is_blast_jumping and ((hub.char_body.is_on_floor() and intended_velocity.y > hub.jumping.max_fall_speed) or (hub.char_body.is_on_ceiling() and intended_velocity.y < 0) or (hub.char_body.is_on_wall() and is_moving_against_a_wall() and intended_velocity.x != 0))):
+		hub.char_body.velocity = intended_velocity
+
 func upward_slope_correction(intended_velocity : Vector2):
 	var num_iters : int = 0
 	
