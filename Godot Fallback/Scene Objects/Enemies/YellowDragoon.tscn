@@ -1,17 +1,80 @@
-[gd_scene load_steps=8 format=3 uid="uid://cj1i53652sisr"]
+[gd_scene load_steps=15 format=3 uid="uid://curi6w4ex7jou"]
 
-[ext_resource type="Script" path="res://Scripts/Enemy/Enemy.gd" id="1_b34y4"]
-[ext_resource type="Script" path="res://Scripts/Enemy/EnemyMovement.gd" id="2_dwxft"]
-[ext_resource type="Script" path="res://Scripts/Enemy/EnemyPlayerDetection.gd" id="3_ppd3f"]
-[ext_resource type="Script" path="res://Scripts/Enemy/EnemyCollisionDetection.gd" id="4_3uegx"]
+[ext_resource type="Script" path="res://Scripts/Enemy/YellowDragoon.gd" id="1_5fo06"]
+[ext_resource type="Script" path="res://Scripts/Enemy/EnemyMovement.gd" id="2_o8r77"]
+[ext_resource type="Script" path="res://Scripts/Enemy/EnemyPlayerDetection.gd" id="3_us44s"]
+[ext_resource type="Script" path="res://Scripts/Enemy/EnemyCollisionDetection.gd" id="4_fyxnf"]
+[ext_resource type="Texture2D" uid="uid://cat03jbesyy6f" path="res://Sprites/Enemies/YellowDragoon.png" id="5_fts2l"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_f1n2w"]
+radius = 12.0
+height = 57.6
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ajc5e"]
+atlas = ExtResource("5_fts2l")
+region = Rect2(320, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mdixi"]
+atlas = ExtResource("5_fts2l")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ole6t"]
+atlas = ExtResource("5_fts2l")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8qtgs"]
+atlas = ExtResource("5_fts2l")
+region = Rect2(192, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jwiuy"]
+atlas = ExtResource("5_fts2l")
+region = Rect2(256, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pelrs"]
+atlas = ExtResource("5_fts2l")
+region = Rect2(64, 0, 64, 64)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_q7jna"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ajc5e")
+}],
+"loop": true,
+"name": &"Defeat",
+"speed": 60.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mdixi")
+}],
+"loop": true,
+"name": &"Idle",
+"speed": 60.0
+}, {
+"frames": [{
+"duration": 5.0,
+"texture": SubResource("AtlasTexture_ole6t")
+}, {
+"duration": 10.0,
+"texture": SubResource("AtlasTexture_8qtgs")
+}, {
+"duration": 5.0,
+"texture": SubResource("AtlasTexture_jwiuy")
+}, {
+"duration": 10.0,
+"texture": SubResource("AtlasTexture_pelrs")
+}],
+"loop": true,
+"name": &"Walk",
+"speed": 60.0
+}]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_q7l5y"]
+radius = 12.0
+height = 57.6
 
-[node name="EnemyTemplate" type="CharacterBody2D"]
+[node name="YellowDragoon" type="CharacterBody2D"]
 light_mask = 8
 visibility_layer = 8
 disable_mode = 1
@@ -26,7 +89,8 @@ safe_margin = 0.001
 metadata/Tag = "Enemy"
 
 [node name="Enemy" type="Node" parent="." node_paths=PackedStringArray("movement", "collision_detection", "player_detection", "body", "sprite", "shape", "visibility_notifier")]
-script = ExtResource("1_b34y4")
+script = ExtResource("1_5fo06")
+move_speed = 128.0
 movement = NodePath("Movement")
 collision_detection = NodePath("CollisionDetection")
 player_detection = NodePath("PlayerDetection")
@@ -39,20 +103,22 @@ vertical_launch_velocity_on_defeat = -128.0
 visibility_layer_on_defeat = 32
 
 [node name="Movement" type="Node" parent="Enemy" node_paths=PackedStringArray("enemy")]
-script = ExtResource("2_dwxft")
+script = ExtResource("2_o8r77")
 enemy = NodePath("..")
+is_always_facing_player = false
 
 [node name="PlayerDetection" type="Node" parent="Enemy" node_paths=PackedStringArray("enemy", "front_sightline_raycast", "back_sightline_raycast")]
-script = ExtResource("3_ppd3f")
+script = ExtResource("3_us44s")
 enemy = NodePath("..")
 player_detection_distance = 640.0
 enemy_sightline_distance = 448.0
 enemy_short_sightline_distance = 224.0
 front_sightline_raycast = NodePath("../../PlayerRayCastFront")
 back_sightline_raycast = NodePath("../../PlayerRayCastBack")
+use_back_sightline = true
 
 [node name="CollisionDetection" type="Node" parent="Enemy" node_paths=PackedStringArray("enemy", "raycast_wall_mid_l", "raycast_wall_mid_r", "raycast_ledge_l", "raycast_ledge_r")]
-script = ExtResource("4_3uegx")
+script = ExtResource("4_fyxnf")
 enemy = NodePath("..")
 raycast_wall_mid_l = NodePath("../../WallRayCastMidL")
 raycast_wall_mid_r = NodePath("../../WallRayCastMidR")
@@ -62,6 +128,7 @@ raycast_ledge_r = NodePath("../../LedgeRayCastR")
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 3)
 shape = SubResource("CapsuleShape2D_f1n2w")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
@@ -69,6 +136,10 @@ light_mask = 8
 visibility_layer = 8
 z_index = 3
 sprite_frames = SubResource("SpriteFrames_q7jna")
+animation = &"Idle"
+autoplay = "Idle"
+frame_progress = 0.416667
+flip_h = true
 
 [node name="ContactHitbox" type="RigidBody2D" parent="."]
 collision_layer = 32
@@ -80,43 +151,55 @@ freeze = true
 freeze_mode = 1
 
 [node name="ContactHitboxShape" type="CollisionShape2D" parent="ContactHitbox"]
+position = Vector2(0, 3)
 shape = SubResource("CapsuleShape2D_q7l5y")
 
 [node name="PlayerRayCastFront" type="RayCast2D" parent="."]
+position = Vector2(0, 3)
 target_position = Vector2(0, 0)
 collision_mask = 4
 hit_from_inside = true
 collide_with_areas = true
 
 [node name="PlayerRayCastBack" type="RayCast2D" parent="."]
+position = Vector2(0, 3)
 target_position = Vector2(0, 0)
 collision_mask = 4
 hit_from_inside = true
 collide_with_areas = true
 
 [node name="WallRayCastMidL" type="RayCast2D" parent="."]
-target_position = Vector2(0, 0)
+position = Vector2(0, 3)
+target_position = Vector2(-13, 0)
 collision_mask = 11
 hit_from_inside = true
 collide_with_areas = true
 
 [node name="WallRayCastMidR" type="RayCast2D" parent="."]
-target_position = Vector2(0, 0)
+position = Vector2(0, 3)
+target_position = Vector2(13, 0)
 collision_mask = 11
 hit_from_inside = true
 collide_with_areas = true
 
 [node name="LedgeRayCastL" type="RayCast2D" parent="."]
-target_position = Vector2(0, 0)
+position = Vector2(-12, 32)
+target_position = Vector2(0, 24)
 collision_mask = 11
 hit_from_inside = true
 collide_with_areas = true
 
 [node name="LedgeRayCastR" type="RayCast2D" parent="."]
-target_position = Vector2(0, 0)
+position = Vector2(12, 32)
+target_position = Vector2(0, 24)
 collision_mask = 11
 hit_from_inside = true
 collide_with_areas = true
 
+[connection signal="player_enter_sightline" from="Enemy/PlayerDetection" to="Enemy" method="on_enter_sightline"]
+[connection signal="player_retreat" from="Enemy/PlayerDetection" to="Enemy" method="on_player_retreat"]
+[connection signal="player_stay_sightline" from="Enemy/PlayerDetection" to="Enemy" method="on_stay_sightline"]
+[connection signal="touching_ledge" from="Enemy/CollisionDetection" to="Enemy" method="on_touching_ledge"]
+[connection signal="touching_wall" from="Enemy/CollisionDetection" to="Enemy" method="on_touching_wall"]
 [connection signal="body_entered" from="ContactHitbox" to="Enemy/CollisionDetection" method="_on_contact_hitbox_body_entered"]
 [connection signal="body_exited" from="ContactHitbox" to="Enemy/CollisionDetection" method="_on_contact_hitbox_body_exited"]

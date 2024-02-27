@@ -77,7 +77,7 @@ func reset_to_initial_move_vector():
 	set_move_vector(initial_move_vector)
 
 func check_if_facing_player():
-	if (is_always_facing_player):
+	if (!enemy.is_defeated and is_always_facing_player):
 		face_towards_player()
 
 func update_velocity_vector():

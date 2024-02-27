@@ -120,7 +120,7 @@ func do_movement(delta):
 	var horizontal_axis = hub.get_input_vector().x
 	
 	if (horizontal_axis != 0 and (!is_crouching or enable_crouch_walking)):
-		if (hub.collisions.is_moving_against_a_wall()):
+		if (hub.collisions.is_moving_against_a_wall() and !hub.jumping.magic_blast_attack.is_blast_jumping):
 			reset_current_horizontal_velocity()
 		elif ((current_horizontal_velocity * horizontal_axis) >= 0):
 			var accel = (acceleration if hub.char_body.is_on_floor() else air_acceleration)

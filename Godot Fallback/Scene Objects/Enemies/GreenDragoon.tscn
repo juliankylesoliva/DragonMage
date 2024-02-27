@@ -125,6 +125,7 @@ raycast_ledge_l = NodePath("../../LedgeRayCastL")
 raycast_ledge_r = NodePath("../../LedgeRayCastR")
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+rect = Rect2(-16, -32, 32, 64)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 3)
@@ -135,12 +136,12 @@ light_mask = 8
 visibility_layer = 8
 z_index = 3
 sprite_frames = SubResource("SpriteFrames_q7jna")
-animation = &"Idle"
+animation = &"Walk"
 autoplay = "Idle"
 flip_h = true
 
 [node name="ContactHitbox" type="RigidBody2D" parent="."]
-collision_layer = 64
+collision_layer = 32
 collision_mask = 36
 gravity_scale = 0.0
 max_contacts_reported = 3

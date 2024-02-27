@@ -75,11 +75,11 @@ func on_player_retreat():
 		sprite.play("Idle")
 
 func on_player_enter_sightline():
-	if (!is_defeated):
+	if (!is_defeated and visibility_notifier.is_on_screen()):
 		launch_projectile()
 
 func on_player_stay_sightline():
-	if (!is_defeated):
+	if (!is_defeated and visibility_notifier.is_on_screen()):
 		launch_projectile()
 
 func on_touching_wall():

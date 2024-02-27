@@ -1,5 +1,7 @@
 extends Enemy
 
+@export var move_speed : float = 4
+
 var base_gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
 func _physics_process(delta):
@@ -14,34 +16,31 @@ func _physics_process(delta):
 func activate_enemy():
 	movement.reset_to_initial_position()
 	movement.reset_to_initial_move_vector()
-	sprite.play("Walk")
+	sprite.play("Idle")
 
 func on_defeat():
 	play_damage_sound()
 	sprite.play("Defeat")
 
-func on_player_approach():
-	if (!is_defeated):
-		movement.set_physics_process(true)
-		movement.set_process(true)
-		sprite.play("Walk")
-
 func on_player_retreat():
-	if (!is_defeated):
-		movement.set_physics_process(false)
-		movement.set_process(false)
-		sprite.play("Idle")
+	sprite.play("Idle")
+
+func on_enter_sightline():
+	movement.face_towards_player()
+	movement.set_move_vector(Vector2.RIGHT * movement.get_facing_value() * move_speed)
+	sprite.play("Walk")
+
+func on_stay_sightline():
+	sprite.play("Walk")
+
+func on_touching_wall():
+	movement.flip_movement(true)
+
+func on_touching_ledge():
+	movement.flip_movement(true)
 
 func on_player_collision():
 	if (!is_defeated and player_detection.damage_player()):
 		movement.face_away_from_player()
 		collision_detection.play_player_collision_sound()
 		collision_detection.spawn_player_collision_effect()
-
-func on_touching_wall():
-	if (!is_defeated):
-		movement.flip_movement()
-
-func on_touching_ledge():
-	if (!is_defeated):
-		movement.flip_movement()

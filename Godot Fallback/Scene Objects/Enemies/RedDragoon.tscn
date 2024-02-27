@@ -109,7 +109,7 @@ enemy = NodePath("..")
 [node name="PlayerDetection" type="Node" parent="Enemy" node_paths=PackedStringArray("enemy", "front_sightline_raycast", "back_sightline_raycast")]
 script = ExtResource("3_d4ci6")
 enemy = NodePath("..")
-player_detection_distance = 160.0
+player_detection_distance = 640.0
 enemy_sightline_distance = 448.0
 enemy_short_sightline_distance = 224.0
 front_sightline_raycast = NodePath("../../PlayerRayCastFront")
@@ -124,6 +124,7 @@ raycast_ledge_l = NodePath("../../LedgeRayCastL")
 raycast_ledge_r = NodePath("../../LedgeRayCastR")
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+rect = Rect2(-16, -32, 32, 64)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 3)
@@ -139,7 +140,7 @@ autoplay = "Idle"
 flip_h = true
 
 [node name="ContactHitbox" type="RigidBody2D" parent="."]
-collision_layer = 64
+collision_layer = 32
 collision_mask = 36
 max_contacts_reported = 3
 contact_monitor = true

@@ -1,14 +1,16 @@
-[gd_scene load_steps=5 format=3 uid="uid://1d826suvfta8"]
+[gd_scene load_steps=6 format=3 uid="uid://1d826suvfta8"]
 
 [ext_resource type="Script" path="res://Scripts/Utility Scripts/Room.gd" id="1_cvffg"]
 [ext_resource type="TileSet" uid="uid://dhwi7i1loa2pd" path="res://Sprites/Tiles/Test Tiles/TestTileSet.tres" id="2_3gy77"]
 [ext_resource type="PackedScene" uid="uid://dqbo0wu6hm8lj" path="res://Scene Objects/Objects/WarpTrigger.tscn" id="3_6pmbf"]
 [ext_resource type="PackedScene" uid="uid://cs4s34scsvcfr" path="res://Scene Objects/Objects/BreakableBlock.tscn" id="4_mb1la"]
+[ext_resource type="PackedScene" uid="uid://bgww8jir45ktf" path="res://Scene Objects/Enemies/BlueDragoon.tscn" id="5_f028b"]
 
-[node name="CH1_LV1_R4" type="Node2D" node_paths=PackedStringArray("tilemap_list", "room_entrances")]
+[node name="CH1_LV1_R4" type="Node2D" node_paths=PackedStringArray("tilemap_list", "room_entrances", "enemy_nodes")]
 script = ExtResource("1_cvffg")
 tilemap_list = [NodePath("BoundaryCollisionTilemap"), NodePath("LevelCollisionTilemap")]
 room_entrances = [NodePath("Entrance 0"), NodePath("Entrance 1")]
+enemy_nodes = [NodePath("BlueDragoon")]
 
 [node name="BoundaryCollisionTilemap" type="TileMap" parent="."]
 z_index = 4
@@ -72,3 +74,6 @@ position = Vector2(256, 96)
 
 [node name="BreakableBlock2" parent="." instance=ExtResource("4_mb1la")]
 position = Vector2(256, 160)
+
+[node name="BlueDragoon" parent="." instance=ExtResource("5_f028b")]
+position = Vector2(368, 224)

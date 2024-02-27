@@ -304,8 +304,9 @@ func ground_jump_update(delta : float):
 		if ((is_jump_held or current_min_jump_hold_timer < min_jump_hold_time) and hub.char_body.is_on_ceiling()):
 			unset_is_jump_held()
 			max_out_min_jump_hold_timer()
-			hub.char_body.velocity.x = (min(abs(hub.char_body.velocity.x), hub.movement.top_speed) * hub.movement.get_facing_value())
-			hub.char_body.velocity.y = 0
+			if (!magic_blast_attack.is_blast_jumping):
+				hub.char_body.velocity.x = (min(abs(hub.char_body.velocity.x), hub.movement.top_speed) * hub.movement.get_facing_value())
+				hub.char_body.velocity.y = 0
 		
 		if (enable_variable_jumps and !is_jump_held && current_min_jump_hold_timer >= min_jump_hold_time):
 			hub.char_body.velocity.y = move_toward(hub.char_body.velocity.y, 0, variable_jump_decay_rate * delta)

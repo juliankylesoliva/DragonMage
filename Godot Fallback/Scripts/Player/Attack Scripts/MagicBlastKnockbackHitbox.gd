@@ -88,4 +88,5 @@ func is_going_thru_a_wall(target_pos : Vector2, body_rid : RID):
 	
 	if (!ray.is_colliding() or ray.get_collider_rid() != body_rid):
 		return true
+	
 	return false
