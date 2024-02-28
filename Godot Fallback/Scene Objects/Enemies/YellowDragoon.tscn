@@ -143,14 +143,9 @@ autoplay = "Idle"
 frame_progress = 0.416667
 flip_h = true
 
-[node name="ContactHitbox" type="RigidBody2D" parent="."]
+[node name="ContactHitbox" type="Area2D" parent="."]
 collision_layer = 32
 collision_mask = 36
-max_contacts_reported = 3
-contact_monitor = true
-lock_rotation = true
-freeze = true
-freeze_mode = 1
 
 [node name="ContactHitboxShape" type="CollisionShape2D" parent="ContactHitbox"]
 position = Vector2(0, 3)

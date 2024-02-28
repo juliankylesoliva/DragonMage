@@ -51,5 +51,8 @@ func play_damage_sound():
 func activate_enemy():
 	pass
 
+func deactivate_enemy():
+	pass
+
 func on_defeat():
 	pass

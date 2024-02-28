@@ -27,28 +27,10 @@ func level_startup():
 		push_warning("PlayerHub not found in player reference!")
 	
 	for room in room_list:
-		room.room_activated.connect(preenable_adjacent_room_collisions)
 		room.set_enemy_player_refs(player_temp)
 		if (room != starting_room):
 			room.deactivate_room()
-			room.disable_collisions()
 	
 	starting_room.activate_room()
-	starting_room.enable_collisions()
-	preenable_adjacent_room_collisions()
 	
 	player_temp.camera.snap_camera_to_player()
-
-func preenable_adjacent_room_collisions():
-	for i in room_list.size():
-		if (room_list[i].is_room_active):
-			var prev_i : int = (i - 1)
-			var next_i : int = (i + 1)
-			for j in room_list.size():
-				if (j == prev_i or j == next_i):
-					room_list[j].enable_collisions()
-				elif (j != i and j != prev_i and j != next_i):
-					room_list[j].disable_collisions()
-				else:
-					pass
-			return

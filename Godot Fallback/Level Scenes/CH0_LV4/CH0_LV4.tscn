@@ -21,7 +21,7 @@ room_list = [NodePath("CH0_LV4_R1"), NodePath("CH0_LV4_R2"), NodePath("CH0_LV4_R
 [node name="Player" parent="." instance=ExtResource("2_616c6")]
 position = Vector2(96, 159)
 
-[node name="Camera" parent="Player/Hub" index="10" node_paths=PackedStringArray("player_cam")]
+[node name="Camera" parent="Player/Hub" index="9" node_paths=PackedStringArray("player_cam")]
 player_cam = NodePath("../../../Camera2D")
 
 [node name="Camera2D" type="Camera2D" parent="."]

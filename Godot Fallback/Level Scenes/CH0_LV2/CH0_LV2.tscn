@@ -30,7 +30,7 @@ hot_segments = 0
 enable_form_changing = false
 starting_mode = 1
 
-[node name="Camera" parent="Player/Hub" index="10" node_paths=PackedStringArray("player_cam")]
+[node name="Camera" parent="Player/Hub" index="9" node_paths=PackedStringArray("player_cam")]
 player_cam = NodePath("../../../Camera2D")
 
 [node name="Camera2D" type="Camera2D" parent="."]

@@ -31,6 +31,11 @@ func activate_enemy():
 	movement.reset_to_initial_move_vector()
 	sprite.play("Walk")
 
+func deactivate_enemy():
+	movement.set_physics_process(false)
+	movement.set_process(false)
+	sprite.play("Idle")
+
 func on_defeat():
 	play_damage_sound()
 	sprite.play("Defeat")

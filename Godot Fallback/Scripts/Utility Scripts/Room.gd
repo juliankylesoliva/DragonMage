@@ -50,16 +50,6 @@ func deactivate_room():
 	is_room_active = false
 	deactivate_enemies()
 
-func enable_collisions():
-	for tilemap in tilemap_list:
-		for i in tilemap.get_layers_count():
-			tilemap.set_layer_enabled(i, true)
-
-func disable_collisions():
-	for tilemap in tilemap_list:
-		for i in tilemap.get_layers_count():
-			tilemap.set_layer_enabled(i, false)
-
 func activate_enemies():
 	initialize_enemy_list()
 	
@@ -68,7 +58,11 @@ func activate_enemies():
 			enemy.activate_enemy()
 
 func deactivate_enemies():
-	pass
+	initialize_enemy_list()
+	
+	for enemy in enemy_list:
+		if (!enemy.is_defeated):
+			enemy.deactivate_enemy()
 
 func set_enemy_player_refs(player : PlayerHub):
 	initialize_enemy_list()
