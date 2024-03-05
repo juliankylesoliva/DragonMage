@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://cn18g24teqsm4"]
+[gd_scene load_steps=8 format=3 uid="uid://cn18g24teqsm4"]
 
 [ext_resource type="Script" path="res://Scripts/Utility Scripts/Room.gd" id="1_0d1nf"]
 [ext_resource type="TileSet" uid="uid://dhwi7i1loa2pd" path="res://Sprites/Tiles/Test Tiles/TestTileSet.tres" id="2_btx66"]
@@ -6,13 +6,15 @@
 [ext_resource type="PackedScene" uid="uid://bajk0w7eoh6o8" path="res://Scene Objects/Objects/ReinforcedBlock.tscn" id="4_j0618"]
 [ext_resource type="PackedScene" uid="uid://clfqwsy4byrkf" path="res://Scene Objects/Enemies/GreenDragoon.tscn" id="5_80gu6"]
 [ext_resource type="PackedScene" uid="uid://b2a0ttqvejk51" path="res://Scene Objects/Objects/TemperDragonFruit.tscn" id="6_scfh6"]
+[ext_resource type="PackedScene" uid="uid://dfkmxoba64spw" path="res://Scene Objects/Objects/MedalFragment.tscn" id="7_gogac"]
 
-[node name="CH1_LV1_R1" type="Node2D" node_paths=PackedStringArray("tilemap_list", "room_entrances", "enemy_nodes")]
+[node name="CH1_LV1_R1" type="Node2D" node_paths=PackedStringArray("tilemap_list", "room_entrances", "enemy_nodes", "medal_fragments")]
 script = ExtResource("1_0d1nf")
 tilemap_list = [NodePath("BoundaryCollisionTilemap"), NodePath("LevelCollisionTilemap")]
 right_camera_limit = 1696
 room_entrances = [NodePath("Entrance 0"), NodePath("Entrance 1")]
 enemy_nodes = [NodePath("GreenDragoon"), NodePath("GreenDragoon2")]
+medal_fragments = [NodePath("Medal Fragments/MedalFragment"), NodePath("Medal Fragments/MedalFragment2"), NodePath("Medal Fragments/MedalFragment3"), NodePath("Medal Fragments/MedalFragment4"), NodePath("Medal Fragments/MedalFragment5")]
 
 [node name="BoundaryCollisionTilemap" type="TileMap" parent="."]
 z_index = 4
@@ -64,6 +66,23 @@ position = Vector2(1680, 224)
 position = Vector2(1744, 224)
 room_origin = NodePath("..")
 room_destination = NodePath("..")
+
+[node name="Medal Fragments" type="Node2D" parent="."]
+
+[node name="MedalFragment" parent="Medal Fragments" instance=ExtResource("7_gogac")]
+position = Vector2(656, 80)
+
+[node name="MedalFragment2" parent="Medal Fragments" instance=ExtResource("7_gogac")]
+position = Vector2(688, 48)
+
+[node name="MedalFragment3" parent="Medal Fragments" instance=ExtResource("7_gogac")]
+position = Vector2(720, 80)
+
+[node name="MedalFragment4" parent="Medal Fragments" instance=ExtResource("7_gogac")]
+position = Vector2(752, 48)
+
+[node name="MedalFragment5" parent="Medal Fragments" instance=ExtResource("7_gogac")]
+position = Vector2(784, 80)
 
 [node name="ReinforcedBlock" parent="." instance=ExtResource("4_j0618")]
 position = Vector2(1600, 224)

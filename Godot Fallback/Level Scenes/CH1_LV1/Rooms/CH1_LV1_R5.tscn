@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://esl3vmft18qp"]
+[gd_scene load_steps=8 format=3 uid="uid://esl3vmft18qp"]
 
 [ext_resource type="Script" path="res://Scripts/Utility Scripts/Room.gd" id="1_cvffg"]
 [ext_resource type="TileSet" uid="uid://dhwi7i1loa2pd" path="res://Sprites/Tiles/Test Tiles/TestTileSet.tres" id="2_3gy77"]
@@ -6,13 +6,15 @@
 [ext_resource type="PackedScene" uid="uid://dck0mc2tc82kx" path="res://Scene Objects/Objects/ReinforcedFireBlock.tscn" id="4_f0nli"]
 [ext_resource type="PackedScene" uid="uid://dwnpgujive352" path="res://Scene Objects/Enemies/RedDragoon.tscn" id="5_ljbr8"]
 [ext_resource type="PackedScene" uid="uid://bgww8jir45ktf" path="res://Scene Objects/Enemies/BlueDragoon.tscn" id="6_ciggk"]
+[ext_resource type="PackedScene" uid="uid://dfkmxoba64spw" path="res://Scene Objects/Objects/MedalFragment.tscn" id="7_tfm26"]
 
-[node name="CH1_LV1_R5" type="Node2D" node_paths=PackedStringArray("tilemap_list", "room_entrances", "enemy_nodes")]
+[node name="CH1_LV1_R5" type="Node2D" node_paths=PackedStringArray("tilemap_list", "room_entrances", "enemy_nodes", "medal_fragments")]
 script = ExtResource("1_cvffg")
 tilemap_list = [NodePath("BoundaryCollisionTilemap"), NodePath("LevelCollisionTilemap")]
 top_camera_limit = -128
 room_entrances = [NodePath("Entrance 0"), NodePath("Entrance 1")]
 enemy_nodes = [NodePath("RedDragoon"), NodePath("RedDragoon2"), NodePath("BlueDragoon")]
+medal_fragments = [NodePath("Medal Fragments/MedalFragment"), NodePath("Medal Fragments/MedalFragment2"), NodePath("Medal Fragments/MedalFragment3"), NodePath("Medal Fragments/MedalFragment4"), NodePath("Medal Fragments/MedalFragment5"), NodePath("Medal Fragments/MedalFragment6"), NodePath("Medal Fragments/MedalFragment7"), NodePath("Medal Fragments/MedalFragment8"), NodePath("Medal Fragments/MedalFragment9"), NodePath("Medal Fragments/MedalFragment10"), NodePath("Medal Fragments/MedalFragment11"), NodePath("Medal Fragments/MedalFragment12")]
 
 [node name="BoundaryCollisionTilemap" type="TileMap" parent="."]
 z_index = 4
@@ -70,6 +72,44 @@ room_entrance_index = 1
 position = Vector2(560, 224)
 room_origin = NodePath("..")
 room_destination = NodePath("..")
+
+[node name="Medal Fragments" type="Node2D" parent="."]
+
+[node name="MedalFragment" parent="Medal Fragments" instance=ExtResource("7_tfm26")]
+position = Vector2(208, 16)
+
+[node name="MedalFragment2" parent="Medal Fragments" instance=ExtResource("7_tfm26")]
+position = Vector2(240, 16)
+
+[node name="MedalFragment3" parent="Medal Fragments" instance=ExtResource("7_tfm26")]
+position = Vector2(272, 16)
+
+[node name="MedalFragment4" parent="Medal Fragments" instance=ExtResource("7_tfm26")]
+position = Vector2(304, 16)
+
+[node name="MedalFragment5" parent="Medal Fragments" instance=ExtResource("7_tfm26")]
+position = Vector2(48, -16)
+
+[node name="MedalFragment6" parent="Medal Fragments" instance=ExtResource("7_tfm26")]
+position = Vector2(80, -16)
+
+[node name="MedalFragment7" parent="Medal Fragments" instance=ExtResource("7_tfm26")]
+position = Vector2(48, 16)
+
+[node name="MedalFragment8" parent="Medal Fragments" instance=ExtResource("7_tfm26")]
+position = Vector2(80, 16)
+
+[node name="MedalFragment9" parent="Medal Fragments" instance=ExtResource("7_tfm26")]
+position = Vector2(432, -48)
+
+[node name="MedalFragment10" parent="Medal Fragments" instance=ExtResource("7_tfm26")]
+position = Vector2(464, -48)
+
+[node name="MedalFragment11" parent="Medal Fragments" instance=ExtResource("7_tfm26")]
+position = Vector2(432, -16)
+
+[node name="MedalFragment12" parent="Medal Fragments" instance=ExtResource("7_tfm26")]
+position = Vector2(464, -16)
 
 [node name="ReinforcedFireBlock" parent="." instance=ExtResource("4_f0nli")]
 position = Vector2(64, 0)

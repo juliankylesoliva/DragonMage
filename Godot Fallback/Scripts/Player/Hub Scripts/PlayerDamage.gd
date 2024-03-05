@@ -2,6 +2,8 @@ extends Node
 
 class_name PlayerDamage
 
+signal took_damage
+
 @export var hub : PlayerHub
 
 @export var mage_temper_damage : int = 3
@@ -46,6 +48,7 @@ func take_damage(knockback : int = 0):
 	
 	knockback_direction = knockback
 	current_hitstun_timer = hitstun_time
+	took_damage.emit()
 	return true
 
 func do_knockback():

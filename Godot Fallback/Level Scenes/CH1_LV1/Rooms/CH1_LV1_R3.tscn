@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://b0wpmmqthstws"]
+[gd_scene load_steps=9 format=3 uid="uid://b0wpmmqthstws"]
 
 [ext_resource type="Script" path="res://Scripts/Utility Scripts/Room.gd" id="1_3d07d"]
 [ext_resource type="TileSet" uid="uid://dhwi7i1loa2pd" path="res://Sprites/Tiles/Test Tiles/TestTileSet.tres" id="2_tphx2"]
@@ -7,12 +7,14 @@
 [ext_resource type="PackedScene" uid="uid://dgtmsbsmeieyh" path="res://Scene Objects/Objects/ReinforcedMagicBlock.tscn" id="5_2dtil"]
 [ext_resource type="PackedScene" uid="uid://clfqwsy4byrkf" path="res://Scene Objects/Enemies/GreenDragoon.tscn" id="6_gq8ab"]
 [ext_resource type="PackedScene" uid="uid://dwnpgujive352" path="res://Scene Objects/Enemies/RedDragoon.tscn" id="7_bnewy"]
+[ext_resource type="PackedScene" uid="uid://dfkmxoba64spw" path="res://Scene Objects/Objects/MedalFragment.tscn" id="8_yd6tm"]
 
-[node name="CH1_LV1_R3" type="Node2D" node_paths=PackedStringArray("tilemap_list", "room_entrances", "enemy_nodes")]
+[node name="CH1_LV1_R3" type="Node2D" node_paths=PackedStringArray("tilemap_list", "room_entrances", "enemy_nodes", "medal_fragments")]
 script = ExtResource("1_3d07d")
 tilemap_list = [NodePath("BoundaryCollisionTilemap"), NodePath("LevelCollisionTilemap")]
 room_entrances = [NodePath("Entrance 0"), NodePath("Entrance 1")]
 enemy_nodes = [NodePath("GreenDragoon"), NodePath("RedDragoon")]
+medal_fragments = [NodePath("Medal Fragments/MedalFragment"), NodePath("Medal Fragments/MedalFragment2"), NodePath("Medal Fragments/MedalFragment3"), NodePath("Medal Fragments/MedalFragment4"), NodePath("Medal Fragments/MedalFragment5"), NodePath("Medal Fragments/MedalFragment6"), NodePath("Medal Fragments/MedalFragment7"), NodePath("Medal Fragments/MedalFragment8"), NodePath("Medal Fragments/MedalFragment9"), NodePath("Medal Fragments/MedalFragment10"), NodePath("Medal Fragments/MedalFragment11")]
 
 [node name="BoundaryCollisionTilemap" type="TileMap" parent="."]
 z_index = 4
@@ -54,6 +56,70 @@ layer_3/y_sort_origin = 0
 layer_3/z_index = -1
 layer_3/tile_data = PackedInt32Array()
 
+[node name="Entrance 0" type="Node2D" parent="."]
+position = Vector2(16, 64)
+
+[node name="Entrance 1" type="Node2D" parent="."]
+position = Vector2(496, 160)
+
+[node name="Warp 0" parent="." node_paths=PackedStringArray("room_origin", "room_destination") instance=ExtResource("4_bp7at")]
+position = Vector2(-48, 64)
+room_origin = NodePath("..")
+room_destination = NodePath("..")
+room_entrance_index = 1
+
+[node name="Warp 1" parent="." node_paths=PackedStringArray("room_origin", "room_destination") instance=ExtResource("4_bp7at")]
+position = Vector2(560, 160)
+room_origin = NodePath("..")
+room_destination = NodePath("..")
+
+[node name="Medal Fragments" type="Node2D" parent="."]
+
+[node name="MedalFragment" parent="Medal Fragments" instance=ExtResource("8_yd6tm")]
+position = Vector2(240, 48)
+
+[node name="MedalFragment2" parent="Medal Fragments" instance=ExtResource("8_yd6tm")]
+position = Vector2(272, 16)
+
+[node name="MedalFragment3" parent="Medal Fragments" instance=ExtResource("8_yd6tm")]
+position = Vector2(272, 80)
+
+[node name="MedalFragment4" parent="Medal Fragments" instance=ExtResource("8_yd6tm")]
+position = Vector2(304, 48)
+
+[node name="MedalFragment5" parent="Medal Fragments" instance=ExtResource("8_yd6tm")]
+position = Vector2(336, 16)
+
+[node name="MedalFragment6" parent="Medal Fragments" instance=ExtResource("8_yd6tm")]
+position = Vector2(336, 80)
+
+[node name="MedalFragment7" parent="Medal Fragments" instance=ExtResource("8_yd6tm")]
+position = Vector2(368, 48)
+
+[node name="MedalFragment8" parent="Medal Fragments" instance=ExtResource("8_yd6tm")]
+position = Vector2(400, 16)
+
+[node name="MedalFragment9" parent="Medal Fragments" instance=ExtResource("8_yd6tm")]
+position = Vector2(400, 80)
+
+[node name="MedalFragment10" parent="Medal Fragments" instance=ExtResource("8_yd6tm")]
+position = Vector2(176, 112)
+
+[node name="MedalFragment11" parent="Medal Fragments" instance=ExtResource("8_yd6tm")]
+position = Vector2(208, 112)
+
+[node name="ReinforcedMagicBlock" parent="." instance=ExtResource("5_2dtil")]
+position = Vector2(192, 96)
+
+[node name="ReinforcedMagicBlock2" parent="." instance=ExtResource("5_2dtil")]
+position = Vector2(448, 96)
+
+[node name="GreenDragoon" parent="." instance=ExtResource("6_gq8ab")]
+position = Vector2(320, 224)
+
+[node name="RedDragoon" parent="." instance=ExtResource("7_bnewy")]
+position = Vector2(448, 160)
+
 [node name="HiddenTilemap" type="TileMap" parent="."]
 z_as_relative = false
 tile_set = ExtResource("2_tphx2")
@@ -76,35 +142,6 @@ freeze_mode = 1
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="HiddenTilemap/RigidBody2D"]
 polygon = PackedVector2Array(160, 0, 416, 0, 416, 64, 480, 64, 480, 128, 416, 128, 416, 96, 224, 96, 224, 128, 160, 128)
-
-[node name="Entrance 0" type="Node2D" parent="."]
-position = Vector2(16, 64)
-
-[node name="Entrance 1" type="Node2D" parent="."]
-position = Vector2(496, 160)
-
-[node name="Warp 0" parent="." node_paths=PackedStringArray("room_origin", "room_destination") instance=ExtResource("4_bp7at")]
-position = Vector2(-48, 64)
-room_origin = NodePath("..")
-room_destination = NodePath("..")
-room_entrance_index = 1
-
-[node name="Warp 1" parent="." node_paths=PackedStringArray("room_origin", "room_destination") instance=ExtResource("4_bp7at")]
-position = Vector2(560, 160)
-room_origin = NodePath("..")
-room_destination = NodePath("..")
-
-[node name="ReinforcedMagicBlock" parent="." instance=ExtResource("5_2dtil")]
-position = Vector2(192, 96)
-
-[node name="ReinforcedMagicBlock2" parent="." instance=ExtResource("5_2dtil")]
-position = Vector2(448, 96)
-
-[node name="GreenDragoon" parent="." instance=ExtResource("6_gq8ab")]
-position = Vector2(320, 224)
-
-[node name="RedDragoon" parent="." instance=ExtResource("7_bnewy")]
-position = Vector2(448, 160)
 
 [connection signal="body_entered" from="HiddenTilemap/RigidBody2D" to="HiddenTilemap" method="_on_rigid_body_2d_body_entered"]
 [connection signal="body_exited" from="HiddenTilemap/RigidBody2D" to="HiddenTilemap" method="_on_rigid_body_2d_body_exited"]

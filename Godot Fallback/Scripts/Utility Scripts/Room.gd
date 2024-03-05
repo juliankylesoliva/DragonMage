@@ -20,6 +20,8 @@ signal room_activated
 
 @export var enemy_nodes : Array[Node]
 
+@export var medal_fragments : Array[Node]
+
 var enemy_list : Array[Enemy]
 
 var is_room_active : bool = true

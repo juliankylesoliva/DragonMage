@@ -1,0 +1,109 @@
+[gd_scene load_steps=14 format=3 uid="uid://dfkmxoba64spw"]
+
+[ext_resource type="Script" path="res://Scripts/Object Scripts/MedalFragment.gd" id="1_0blim"]
+[ext_resource type="Texture2D" uid="uid://d0ujp4jm7f6yw" path="res://Sprites/Objects/MedalFragmentSpin.png" id="2_hjixm"]
+[ext_resource type="AudioStream" uid="uid://dbu8bsyq8ver1" path="res://Sounds/object_fragment_pickup.wav" id="3_etp2q"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_7482d"]
+radius = 16.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ta0tu"]
+atlas = ExtResource("2_hjixm")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ojn21"]
+atlas = ExtResource("2_hjixm")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_58aby"]
+atlas = ExtResource("2_hjixm")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qecaj"]
+atlas = ExtResource("2_hjixm")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7467k"]
+atlas = ExtResource("2_hjixm")
+region = Rect2(128, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_g160g"]
+atlas = ExtResource("2_hjixm")
+region = Rect2(160, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_e5yon"]
+atlas = ExtResource("2_hjixm")
+region = Rect2(192, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hktvv"]
+atlas = ExtResource("2_hjixm")
+region = Rect2(224, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_awoup"]
+animations = [{
+"frames": [{
+"duration": 8.0,
+"texture": SubResource("AtlasTexture_ta0tu")
+}, {
+"duration": 8.0,
+"texture": SubResource("AtlasTexture_ojn21")
+}, {
+"duration": 8.0,
+"texture": SubResource("AtlasTexture_58aby")
+}, {
+"duration": 8.0,
+"texture": SubResource("AtlasTexture_qecaj")
+}, {
+"duration": 8.0,
+"texture": SubResource("AtlasTexture_7467k")
+}, {
+"duration": 8.0,
+"texture": SubResource("AtlasTexture_g160g")
+}, {
+"duration": 8.0,
+"texture": SubResource("AtlasTexture_e5yon")
+}, {
+"duration": 8.0,
+"texture": SubResource("AtlasTexture_hktvv")
+}],
+"loop": true,
+"name": &"default",
+"speed": 60.0
+}]
+
+[node name="MedalFragment" type="Node2D" node_paths=PackedStringArray("sprite", "stream_player")]
+light_mask = 2
+visibility_layer = 2
+script = ExtResource("1_0blim")
+sprite = NodePath("AnimatedSprite2D")
+stream_player = NodePath("AudioStreamPlayer2D")
+mage_color = Color(0.266667, 0.203922, 0.509804, 1)
+dragon_color = Color(0.811765, 0.478431, 0.188235, 1)
+collect_spin_rate = 5.0
+collect_jump_velocity = 320.0
+collect_gravity_scale = 4.0
+
+[node name="Area2D" type="Area2D" parent="."]
+light_mask = 2
+visibility_layer = 2
+z_index = 2
+collision_layer = 0
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_7482d")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+light_mask = 2
+visibility_layer = 2
+z_index = 2
+sprite_frames = SubResource("SpriteFrames_awoup")
+autoplay = "default"
+frame_progress = 0.945404
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_etp2q")
+max_distance = 512.0
+bus = &"SFX"
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

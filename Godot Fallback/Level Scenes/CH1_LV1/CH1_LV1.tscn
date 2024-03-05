@@ -20,6 +20,7 @@ script = ExtResource("1_3mmw4")
 player_reference = NodePath("Player")
 starting_room = NodePath("CH1_LV1_R1")
 room_list = [NodePath("CH1_LV1_R1"), NodePath("CH1_LV1_R2"), NodePath("CH1_LV1_R3"), NodePath("CH1_LV1_R4"), NodePath("CH1_LV1_R5"), NodePath("CH1_LV1_R6"), NodePath("CH1_LV1_R7"), NodePath("CH1_LV1_R8"), NodePath("CH1_LV1_R9"), NodePath("CH1_LV1_R10"), NodePath("CH1_LV1_R11")]
+min_fragment_collection_rate = 0.64
 
 [node name="Player" parent="." instance=ExtResource("2_isfe7")]
 position = Vector2(96, 223)
@@ -65,10 +66,10 @@ room_destination = NodePath("../../CH1_LV1_R3")
 [node name="CH1_LV1_R3" parent="." instance=ExtResource("6_dbe8q")]
 position = Vector2(2656, 0)
 
-[node name="Warp 0" parent="CH1_LV1_R3" index="5" node_paths=PackedStringArray("room_destination")]
+[node name="Warp 0" parent="CH1_LV1_R3" index="4" node_paths=PackedStringArray("room_destination")]
 room_destination = NodePath("../../CH1_LV1_R2")
 
-[node name="Warp 1" parent="CH1_LV1_R3" index="6" node_paths=PackedStringArray("room_destination")]
+[node name="Warp 1" parent="CH1_LV1_R3" index="5" node_paths=PackedStringArray("room_destination")]
 room_destination = NodePath("../../CH1_LV1_R4")
 
 [node name="CH1_LV1_R4" parent="." instance=ExtResource("7_vo2pd")]
@@ -98,6 +99,38 @@ room_destination = NodePath("../../CH1_LV1_R5")
 [node name="Warp 1" parent="CH1_LV1_R6" index="5" node_paths=PackedStringArray("room_destination")]
 room_destination = NodePath("../../CH1_LV1_R7")
 
+[node name="MedalFragment" parent="CH1_LV1_R6/Medal Fragments" index="0"]
+normal_z_index = 2
+collect_z_index = 6
+
+[node name="MedalFragment2" parent="CH1_LV1_R6/Medal Fragments" index="1"]
+normal_z_index = 2
+collect_z_index = 6
+
+[node name="MedalFragment3" parent="CH1_LV1_R6/Medal Fragments" index="2"]
+normal_z_index = 2
+collect_z_index = 6
+
+[node name="MedalFragment4" parent="CH1_LV1_R6/Medal Fragments" index="3"]
+normal_z_index = 2
+collect_z_index = 6
+
+[node name="MedalFragment5" parent="CH1_LV1_R6/Medal Fragments" index="4"]
+normal_z_index = 2
+collect_z_index = 6
+
+[node name="MedalFragment6" parent="CH1_LV1_R6/Medal Fragments" index="5"]
+normal_z_index = 2
+collect_z_index = 6
+
+[node name="MedalFragment7" parent="CH1_LV1_R6/Medal Fragments" index="6"]
+normal_z_index = 2
+collect_z_index = 6
+
+[node name="MedalFragment8" parent="CH1_LV1_R6/Medal Fragments" index="7"]
+normal_z_index = 2
+collect_z_index = 6
+
 [node name="CH1_LV1_R7" parent="." instance=ExtResource("10_ijxom")]
 position = Vector2(1472, -608)
 
@@ -110,10 +143,10 @@ room_destination = NodePath("../../CH1_LV1_R8")
 [node name="CH1_LV1_R8" parent="." instance=ExtResource("11_lbudt")]
 position = Vector2(2208, -576)
 
-[node name="Warp 0" parent="CH1_LV1_R8" index="5" node_paths=PackedStringArray("room_destination")]
+[node name="Warp 0" parent="CH1_LV1_R8" index="4" node_paths=PackedStringArray("room_destination")]
 room_destination = NodePath("../../CH1_LV1_R7")
 
-[node name="Warp 1" parent="CH1_LV1_R8" index="6" node_paths=PackedStringArray("room_destination")]
+[node name="Warp 1" parent="CH1_LV1_R8" index="5" node_paths=PackedStringArray("room_destination")]
 room_destination = NodePath("../../CH1_LV1_R9")
 
 [node name="CH1_LV1_R9" parent="." instance=ExtResource("12_jkpqh")]
