@@ -14,6 +14,8 @@ class_name Level
 
 @export var max_fragments_dropped : int = 10
 
+@export var fragment_drop_split : int = 5
+
 var fragment_array : Array[MedalFragment]
 
 var num_fragments_in_level : int = 0
@@ -40,7 +42,7 @@ func level_startup():
 	if (player_temp == null):
 		push_warning("PlayerHub not found in player reference!")
 	
-	# connect player damage signal here
+	player_temp.damage.took_damage.connect(drop_fragments)
 	
 	for room in room_list:
 		room.set_enemy_player_refs(player_temp)
@@ -70,4 +72,39 @@ func get_total_fragments():
 	return (mage_fragments + dragon_fragments)
 
 func drop_fragments():
-	pass
+	var dropped_mage_fragments : int = 0
+	var dropped_dragon_fragments : int = 0
+	
+	var total_fragments : int = get_total_fragments()
+	
+	if (total_fragments > 0):
+		if (total_fragments <= max_fragments_dropped):
+			dropped_mage_fragments = mage_fragments
+			dropped_dragon_fragments = dragon_fragments
+		else:
+			if (mage_fragments == 0):
+				dropped_dragon_fragments = max_fragments_dropped
+			elif (dragon_fragments == 0):
+				dropped_mage_fragments = max_fragments_dropped
+			else:
+				var mage_fragments_to_drop : int = fragment_drop_split
+				var dragon_fragments_to_drop : int = fragment_drop_split
+				var fragment_diff = (mage_fragments - dragon_fragments)
+				
+				if (fragment_diff != 0):
+					fragment_diff = min(max(fragment_diff, -fragment_drop_split), fragment_drop_split)
+					mage_fragments_to_drop += fragment_diff
+					dragon_fragments_to_drop -= fragment_diff
+					
+					if (mage_fragments_to_drop > mage_fragments):
+						mage_fragments_to_drop = mage_fragments
+						dragon_fragments_to_drop = (max_fragments_dropped - mage_fragments_to_drop)
+					elif (dragon_fragments_to_drop > dragon_fragments):
+						dragon_fragments_to_drop = dragon_fragments
+						mage_fragments_to_drop = (max_fragments_dropped - dragon_fragments_to_drop)
+					else:
+						pass
+				dropped_mage_fragments = mage_fragments_to_drop
+				dropped_dragon_fragments = dragon_fragments_to_drop
+	mage_fragments -= dropped_mage_fragments
+	dragon_fragments -= dropped_dragon_fragments

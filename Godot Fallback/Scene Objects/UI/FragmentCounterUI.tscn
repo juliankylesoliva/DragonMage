@@ -1,0 +1,122 @@
+[gd_scene load_steps=14 format=3 uid="uid://vmiu4klr3ywc"]
+
+[ext_resource type="Script" path="res://Scripts/UI Scripts/FragmentCounterUI.gd" id="1_aybfr"]
+[ext_resource type="FontFile" uid="uid://blejgst41tdnl" path="res://PressStart2P.ttf" id="1_lq62u"]
+[ext_resource type="Texture2D" uid="uid://d0ujp4jm7f6yw" path="res://Sprites/Objects/MedalFragmentSpin.png" id="3_wxxja"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ut3aj"]
+size = Vector2(170, 44)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b8oni"]
+atlas = ExtResource("3_wxxja")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lfey4"]
+atlas = ExtResource("3_wxxja")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_q7ej4"]
+atlas = ExtResource("3_wxxja")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_65lk3"]
+atlas = ExtResource("3_wxxja")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_k7ogy"]
+atlas = ExtResource("3_wxxja")
+region = Rect2(128, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uuxg7"]
+atlas = ExtResource("3_wxxja")
+region = Rect2(160, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rg8va"]
+atlas = ExtResource("3_wxxja")
+region = Rect2(192, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8q3vf"]
+atlas = ExtResource("3_wxxja")
+region = Rect2(224, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_6hjhl"]
+animations = [{
+"frames": [{
+"duration": 8.0,
+"texture": SubResource("AtlasTexture_b8oni")
+}, {
+"duration": 8.0,
+"texture": SubResource("AtlasTexture_lfey4")
+}, {
+"duration": 8.0,
+"texture": SubResource("AtlasTexture_q7ej4")
+}, {
+"duration": 8.0,
+"texture": SubResource("AtlasTexture_65lk3")
+}, {
+"duration": 8.0,
+"texture": SubResource("AtlasTexture_k7ogy")
+}, {
+"duration": 8.0,
+"texture": SubResource("AtlasTexture_uuxg7")
+}, {
+"duration": 8.0,
+"texture": SubResource("AtlasTexture_rg8va")
+}, {
+"duration": 8.0,
+"texture": SubResource("AtlasTexture_8q3vf")
+}],
+"loop": true,
+"name": &"default",
+"speed": 60.0
+}]
+
+[node name="FragmentCounterUI" type="Node2D" node_paths=PackedStringArray("rich_text_label")]
+script = ExtResource("1_aybfr")
+rich_text_label = NodePath("RichTextLabel")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(-93, 30)
+shape = SubResource("RectangleShape2D_ut3aj")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+light_mask = 64
+visibility_layer = 64
+z_index = 7
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -202.0
+offset_top = 8.0
+offset_right = -42.0
+offset_bottom = 48.0
+grow_horizontal = 0
+size_flags_horizontal = 8
+auto_translate = false
+mouse_filter = 2
+mouse_force_pass_scroll_events = false
+theme_override_fonts/normal_font = ExtResource("1_lq62u")
+bbcode_enabled = true
+text = "[right][font_size=24]###[font_size=16]/###
+[[color=#443482]##[color=white]:[color=#cf7a30]##[color=white]]"
+fit_content = true
+scroll_active = false
+shortcut_keys_enabled = false
+meta_underlined = false
+hint_underlined = false
+deselect_on_focus_loss_enabled = false
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+light_mask = 64
+visibility_layer = 64
+z_index = 7
+position = Vector2(-22, 31)
+sprite_frames = SubResource("SpriteFrames_6hjhl")
+autoplay = "default"
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]

@@ -1,9 +1,10 @@
-[gd_scene load_steps=15 format=3 uid="uid://b6ourfnqhy0wk"]
+[gd_scene load_steps=16 format=3 uid="uid://b6ourfnqhy0wk"]
 
 [ext_resource type="Script" path="res://Scripts/Utility Scripts/Level.gd" id="1_3mmw4"]
 [ext_resource type="PackedScene" uid="uid://c6qw77ovfwgfs" path="res://Player.tscn" id="2_isfe7"]
 [ext_resource type="PackedScene" uid="uid://bdypi7w73c6kq" path="res://Scene Objects/UI/TemperMeterUI.tscn" id="3_bvq0l"]
 [ext_resource type="PackedScene" uid="uid://cn18g24teqsm4" path="res://Level Scenes/CH1_LV1/Rooms/CH1_LV1_R1.tscn" id="4_m63j7"]
+[ext_resource type="PackedScene" uid="uid://vmiu4klr3ywc" path="res://Scene Objects/UI/FragmentCounterUI.tscn" id="4_svt6n"]
 [ext_resource type="PackedScene" uid="uid://clq45175f8df8" path="res://Level Scenes/CH1_LV1/Rooms/CH1_LV1_R2.tscn" id="5_pnvd3"]
 [ext_resource type="PackedScene" uid="uid://b0wpmmqthstws" path="res://Level Scenes/CH1_LV1/Rooms/CH1_LV1_R3.tscn" id="6_dbe8q"]
 [ext_resource type="PackedScene" uid="uid://1d826suvfta8" path="res://Level Scenes/CH1_LV1/Rooms/CH1_LV1_R4.tscn" id="7_vo2pd"]
@@ -48,6 +49,12 @@ position = Vector2(1, 8)
 player_node = NodePath("../../Player")
 process_callback = "Idle"
 camera_offset = Vector2(-255, -152)
+
+[node name="FragmentCounterUI" parent="VBoxContainer" node_paths=PackedStringArray("player_node", "level_ref") instance=ExtResource("4_svt6n")]
+position = Vector2(512, 0)
+player_node = NodePath("../../Player")
+level_ref = NodePath("../..")
+camera_offset = Vector2(257, -160)
 
 [node name="CH1_LV1_R1" parent="." instance=ExtResource("4_m63j7")]
 
@@ -165,7 +172,7 @@ position = Vector2(704, 576)
 room_destination = NodePath("../../CH1_LV1_R11")
 
 [node name="CH1_LV1_R11" parent="." instance=ExtResource("14_daiil")]
-position = Vector2(1312, 1760)
+position = Vector2(1312, 640)
 
 [editable path="Player"]
 [editable path="CH1_LV1_R1"]

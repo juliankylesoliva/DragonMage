@@ -1,4 +1,4 @@
-extends RigidBody2D
+extends CharacterBody2D
 
 class_name EnemyProjectile
 
@@ -12,8 +12,11 @@ class_name EnemyProjectile
 
 var is_moving_right : bool = false
 
+func _physics_process(_delta):
+	move_and_slide()
+
 func setup(enemy_source : Enemy):
-	linear_velocity = (Vector2.RIGHT * enemy_source.movement.get_facing_value() * move_speed)
+	velocity = (Vector2.RIGHT * enemy_source.movement.get_facing_value() * move_speed)
 	is_moving_right = (enemy_source.movement.get_facing_value() >= 0)
 	projectile_sprite.flip_h = !is_moving_right
 
@@ -30,11 +33,15 @@ func _on_body_entered(body):
 
 func hit_check(body):
 	if (body.has_meta("Tag") and body.get_meta("Tag") == "Player"):
+		var player_temp : PlayerHub = null
+		
 		for child in body.get_children():
 			if (child is PlayerHub):
-				var player_temp : PlayerHub = (child as PlayerHub)
-				var direction = (body.global_position.x - global_position.x)
-				direction = (1.0 if direction >= 0 else -1.0)
-				player_temp.damage.take_damage(direction)
+				player_temp = (child as PlayerHub)
 				break
-		destroy_projectile()
+		
+		if (player_temp != null):
+			var direction = (body.global_position.x - global_position.x)
+			direction = (1.0 if direction >= 0 else -1.0)
+			if (player_temp.damage.take_damage(direction)):
+				destroy_projectile()

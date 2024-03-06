@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://jhdy76bwci08"]
+[gd_scene load_steps=9 format=3 uid="uid://jhdy76bwci08"]
 
 [ext_resource type="Script" path="res://Scripts/Enemy/EnemyProjectile.gd" id="1_pbxlj"]
 [ext_resource type="Texture2D" uid="uid://dn5vydlu1pqgp" path="res://Sprites/Enemies/RedDragoonProjectile.png" id="2_8lpvt"]
@@ -30,21 +30,20 @@ animations = [{
 "speed": 60.0
 }]
 
-[node name="RedDragoonProjectile" type="RigidBody2D" node_paths=PackedStringArray("projectile_sprite")]
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_x8f7j"]
+radius = 6.0
+height = 26.0
+
+[node name="RedDragoonProjectile" type="CharacterBody2D" node_paths=PackedStringArray("projectile_sprite")]
 light_mask = 16
 visibility_layer = 16
 z_index = 5
 collision_layer = 128
-collision_mask = 4
-gravity_scale = 0.0
-max_contacts_reported = 3
-contact_monitor = true
-can_sleep = false
-lock_rotation = true
-freeze_mode = 1
+collision_mask = 0
 script = ExtResource("1_pbxlj")
 projectile_sprite = NodePath("AnimatedSprite2D")
 move_speed = 160.0
+metadata/Tag = "EnemyProjectile"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 rotation = 1.5708
@@ -66,5 +65,12 @@ stream = ExtResource("3_csidy")
 autoplay = true
 max_distance = 512.0
 
-[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CapsuleShape2D_x8f7j")
+
 [connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]
+[connection signal="body_entered" from="Area2D" to="." method="_on_body_entered"]

@@ -81,17 +81,11 @@ hot_segment_color = Color(0.811765, 0.478431, 0.188235, 1)
 segment_list = [NodePath("Segments/Segment1"), NodePath("Segments/Segment2"), NodePath("Segments/Segment3"), NodePath("Segments/Segment4"), NodePath("Segments/Segment5"), NodePath("Segments/Segment6"), NodePath("Segments/Segment7"), NodePath("Segments/Segment8"), NodePath("Segments/Segment9"), NodePath("Segments/Segment10"), NodePath("Segments/Segment11"), NodePath("Segments/Segment12")]
 process_callback = "Physics"
 
-[node name="RigidBody2D" type="RigidBody2D" parent="."]
+[node name="Area2D" type="Area2D" parent="."]
 collision_layer = 32
 collision_mask = 4
-gravity_scale = 0.0
-max_contacts_reported = 1
-contact_monitor = true
-lock_rotation = true
-freeze = true
-freeze_mode = 1
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 position = Vector2(111, 8)
 shape = SubResource("RectangleShape2D_lnqu5")
 
@@ -218,5 +212,5 @@ animation = &"Off"
 autoplay = "Off"
 frame_progress = 0.5
 
-[connection signal="body_entered" from="RigidBody2D" to="." method="_on_rigid_body_2d_body_entered"]
-[connection signal="body_exited" from="RigidBody2D" to="." method="_on_rigid_body_2d_body_exited"]
+[connection signal="body_entered" from="Area2D" to="." method="_on_rigid_body_2d_body_entered"]
+[connection signal="body_exited" from="Area2D" to="." method="_on_rigid_body_2d_body_exited"]

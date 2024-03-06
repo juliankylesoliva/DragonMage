@@ -4,7 +4,7 @@
 [ext_resource type="Script" path="res://Scripts/Player/Attack Scripts/MagicBlastKnockbackHitbox.gd" id="2_lhs3m"]
 
 [node name="MagicBlastKnockbackHitbox" instance=ExtResource("1_msf1o")]
-collision_mask = 69
+collision_mask = 197
 script = ExtResource("2_lhs3m")
 enemy_defeat_knockback_multiplier = 1.5
 player_layer = 4
@@ -18,4 +18,4 @@ metadata/BreakStrength = 1
 metadata/BreakType = "MAGIC"
 
 [node name="RayCast2D" parent="." index="1"]
-collision_mask = 79
+collision_mask = 207

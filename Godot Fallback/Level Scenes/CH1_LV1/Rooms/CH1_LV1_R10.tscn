@@ -56,7 +56,7 @@ layer_3/z_index = -1
 layer_3/tile_data = PackedInt32Array()
 
 [node name="Entrance 0" type="Node2D" parent="."]
-position = Vector2(32, -32)
+position = Vector2(32, 32)
 
 [node name="Warp 0" parent="." node_paths=PackedStringArray("room_origin", "room_destination") instance=ExtResource("3_rxdjf")]
 position = Vector2(256, 1456)

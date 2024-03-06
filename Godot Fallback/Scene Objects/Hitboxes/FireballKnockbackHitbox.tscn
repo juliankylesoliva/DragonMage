@@ -4,7 +4,7 @@
 [ext_resource type="Script" path="res://Scripts/Player/Attack Scripts/FireballKnockbackHitbox.gd" id="2_at8cf"]
 
 [node name="FireballKnockbackHitbox" instance=ExtResource("1_0f0lt")]
-collision_mask = 97
+collision_mask = 225
 script = ExtResource("2_at8cf")
 enemy_defeat_knockback_multiplier = 1.5
 damage_type = &"FIRE"
@@ -14,4 +14,4 @@ metadata/BreakStrength = 2
 metadata/BreakType = "FIRE"
 
 [node name="RayCast2D" parent="." index="1"]
-collision_mask = 71
+collision_mask = 231
