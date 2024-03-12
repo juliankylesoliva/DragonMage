@@ -41,9 +41,25 @@ class_name PlayerHub
 @export var raycast_wall_mid_r : RayCast2D
 @export var raycast_wall_bot_r : RayCast2D
 
+var current_respawn_position : Vector2 = Vector2.ZERO
+
+var is_level_complete : bool = false
+
 func get_input_vector():
 	var input_vector = Vector2.ZERO
 	
 	input_vector.x = ((1 if Input.is_action_pressed("Move Right") else 0) - (1 if Input.is_action_pressed("Move Left") else 0))
 	input_vector.y = ((1 if Input.is_action_pressed("Move Up") else 0) - (1 if Input.is_action_pressed("Move Down") else 0))
 	return input_vector
+
+func set_respawn_position(pos : Vector2):
+	current_respawn_position = pos
+
+func do_respawn():
+	char_body.global_position = current_respawn_position
+
+func set_level_complete():
+	is_level_complete = true
+
+func unset_level_complete():
+	is_level_complete = false

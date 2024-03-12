@@ -16,6 +16,8 @@ class_name Level
 
 @export var fragment_drop_split : int = 5
 
+var player_ref : PlayerHub
+
 var fragment_array : Array[MedalFragment]
 
 var num_fragments_in_level : int = 0
@@ -33,19 +35,18 @@ func level_startup():
 	var destination_coords : Vector2 = starting_room.get_room_entrance_coordinates(starting_room_entrance_index)
 	player_reference.global_position = destination_coords
 	
-	var player_temp : PlayerHub = null
 	for child in player_reference.get_children():
 		if child is PlayerHub:
-			player_temp = (child as PlayerHub)
+			player_ref = (child as PlayerHub)
 			break
 	
-	if (player_temp == null):
+	if (player_ref == null):
 		push_warning("PlayerHub not found in player reference!")
 	
-	player_temp.damage.took_damage.connect(drop_fragments)
+	player_ref.damage.took_damage.connect(drop_fragments)
 	
 	for room in room_list:
-		room.set_enemy_player_refs(player_temp)
+		room.set_enemy_player_refs(player_ref)
 		
 		if (room != starting_room):
 			room.deactivate_room()
@@ -60,7 +61,10 @@ func level_startup():
 	
 	starting_room.activate_room()
 	
-	player_temp.camera.snap_camera_to_player()
+	player_ref.camera.snap_camera_to_player()
+
+func level_finish():
+	pass
 
 func increment_fragments(is_mage : bool):
 	if (is_mage):

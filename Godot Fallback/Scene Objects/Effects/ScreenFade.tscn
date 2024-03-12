@@ -1,0 +1,15 @@
+[gd_scene load_steps=2 format=3 uid="uid://8beel2odcuky"]
+
+[ext_resource type="Script" path="res://Scripts/UI Scripts/ScreenFade.gd" id="1_xjsdx"]
+
+[node name="ScreenFade" type="ColorRect"]
+light_mask = 64
+visibility_layer = 64
+z_index = 7
+offset_right = 544.0
+offset_bottom = 352.0
+color = Color(0, 0, 0, 0)
+script = ExtResource("1_xjsdx")
+fade_from_black = true
+starting_fade_duration = 3.0
+camera_offset = Vector2(-272, -176)

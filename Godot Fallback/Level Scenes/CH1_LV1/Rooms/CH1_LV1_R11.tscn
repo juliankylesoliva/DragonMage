@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://ctjuhf6dkkqy8"]
+[gd_scene load_steps=4 format=3 uid="uid://ctjuhf6dkkqy8"]
 
 [ext_resource type="Script" path="res://Scripts/Utility Scripts/Room.gd" id="1_cvffg"]
 [ext_resource type="TileSet" uid="uid://dhwi7i1loa2pd" path="res://Sprites/Tiles/Test Tiles/TestTileSet.tres" id="2_3gy77"]
+[ext_resource type="PackedScene" uid="uid://durwtm4ocfbmv" path="res://Scene Objects/Objects/FinishLine.tscn" id="3_edfcm"]
 
 [node name="CH1_LV1_R11" type="Node2D" node_paths=PackedStringArray("tilemap_list", "room_entrances")]
 script = ExtResource("1_cvffg")
@@ -51,3 +52,6 @@ layer_3/tile_data = PackedInt32Array(458776, 131072, 2, 458777, 196608, 2, 45877
 
 [node name="Entrance 0" type="Node2D" parent="."]
 position = Vector2(256, -224)
+
+[node name="FinishLine" parent="." instance=ExtResource("3_edfcm")]
+position = Vector2(704, 224)

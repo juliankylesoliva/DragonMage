@@ -162,6 +162,8 @@ position = Vector2(448, 1504)
 room_destination = NodePath("../../CH0_LV3_R13")
 room_entrance_index = 1
 
+[connection signal="level_finished" from="CH0_LV3_R14/FinishLine" to="." method="level_finish"]
+
 [editable path="Player"]
 [editable path="CH0_LV3_R1"]
 [editable path="CH0_LV3_R2"]

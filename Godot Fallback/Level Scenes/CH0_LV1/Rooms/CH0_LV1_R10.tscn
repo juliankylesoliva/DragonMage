@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://c8quw8sgdw2un"]
+[gd_scene load_steps=6 format=3 uid="uid://c8quw8sgdw2un"]
 
 [ext_resource type="Script" path="res://Scripts/Utility Scripts/Room.gd" id="1_bioys"]
 [ext_resource type="TileSet" uid="uid://dhwi7i1loa2pd" path="res://Sprites/Tiles/Test Tiles/TestTileSet.tres" id="2_86gvv"]
 [ext_resource type="PackedScene" uid="uid://dqbo0wu6hm8lj" path="res://Scene Objects/Objects/WarpTrigger.tscn" id="3_gpswg"]
 [ext_resource type="PackedScene" uid="uid://bajk0w7eoh6o8" path="res://Scene Objects/Objects/ReinforcedBlock.tscn" id="4_w00x3"]
+[ext_resource type="PackedScene" uid="uid://durwtm4ocfbmv" path="res://Scene Objects/Objects/FinishLine.tscn" id="5_sq6dl"]
 
 [node name="CH0_LV1_R10" type="Node2D" node_paths=PackedStringArray("tilemap_list", "room_entrances")]
 script = ExtResource("1_bioys")
@@ -70,3 +71,6 @@ position = Vector2(224, 256)
 
 [node name="ReinforcedBlock4" parent="." instance=ExtResource("4_w00x3")]
 position = Vector2(288, 96)
+
+[node name="FinishLine" parent="." instance=ExtResource("5_sq6dl")]
+position = Vector2(896, 224)

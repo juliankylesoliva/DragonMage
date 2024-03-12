@@ -1,4 +1,4 @@
-[gd_scene load_steps=183 format=3 uid="uid://c6qw77ovfwgfs"]
+[gd_scene load_steps=184 format=3 uid="uid://c6qw77ovfwgfs"]
 
 [ext_resource type="Texture2D" uid="uid://d381ahbcwydy8" path="res://Sprites/Player/DraelynCrouch.png" id="1_6b42p"]
 [ext_resource type="Texture2D" uid="uid://dls34a1qa8iy1" path="res://Sprites/Player/DraelynFireTackle.png" id="1_ddrlj"]
@@ -56,6 +56,7 @@
 [ext_resource type="Texture2D" uid="uid://c44t784vgugry" path="res://Sprites/Player/MagliIdle.png" id="27_my3k8"]
 [ext_resource type="Texture2D" uid="uid://bcwdksusecuad" path="res://Sprites/Player/DraelynFastFall.png" id="38_akwr7"]
 [ext_resource type="Script" path="res://Scripts/Player/PlayerStateMachine/DamagedState.gd" id="41_7pdlp"]
+[ext_resource type="Script" path="res://Scripts/Player/PlayerStateMachine/DeactivatedState.gd" id="42_yhbki"]
 [ext_resource type="Texture2D" uid="uid://t0uxr4ou5r1d" path="res://Sprites/Player/DraelynIdleGlasses.png" id="46_r2ngl"]
 [ext_resource type="Texture2D" uid="uid://b8o0u22mxyifu" path="res://Sprites/Effects/BlastJumpParticle.png" id="47_v16qd"]
 [ext_resource type="Texture2D" uid="uid://nskhc48w5xs3" path="res://Sprites/Effects/FireTackleTrail.png" id="48_hn1hc"]
@@ -1492,6 +1493,9 @@ can_update_camera_y_pos = false
 [node name="FormChanging" type="Node" parent="StateMachine"]
 script = ExtResource("17_1yv22")
 can_update_camera_x_pos = false
+
+[node name="Deactivated" type="Node" parent="StateMachine"]
+script = ExtResource("42_yhbki")
 
 [node name="Damaged" type="Node" parent="StateMachine"]
 script = ExtResource("41_7pdlp")
