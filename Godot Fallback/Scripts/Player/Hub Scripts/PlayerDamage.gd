@@ -24,6 +24,8 @@ signal took_damage
 
 @export_range(0, 1) var invulnerability_alpha : float = 0.75
 
+var damage_taken : int = 0
+
 var knockback_direction : int = 0
 
 var current_hitstun_timer : float = 0
@@ -48,6 +50,7 @@ func take_damage(knockback : int = 0):
 	
 	knockback_direction = knockback
 	current_hitstun_timer = hitstun_time
+	damage_taken += 1
 	took_damage.emit()
 	return true
 

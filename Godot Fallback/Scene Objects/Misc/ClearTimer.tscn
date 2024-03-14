@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://b5wwivjk8sl7b"]
+
+[ext_resource type="Script" path="res://Scripts/Utility Scripts/ClearTimer.gd" id="1_ln1tx"]
+
+[node name="ClearTimer" type="Node"]
+script = ExtResource("1_ln1tx")

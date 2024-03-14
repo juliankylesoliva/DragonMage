@@ -16,6 +16,8 @@ class_name Level
 
 @export var fragment_drop_split : int = 5
 
+@export var ui_container : Control
+
 var player_ref : PlayerHub
 
 var fragment_array : Array[MedalFragment]
@@ -67,6 +69,8 @@ func level_startup():
 
 func level_finish():
 	player_ref.set_level_complete()
+	if (ui_container != null):
+		ui_container.set_visible(false)
 
 func increment_fragments(is_mage : bool):
 	if (is_mage):

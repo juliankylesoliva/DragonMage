@@ -1,0 +1,193 @@
+[gd_scene load_steps=5 format=3 uid="uid://buykytsdrlnsg"]
+
+[ext_resource type="Script" path="res://Scripts/UI Scripts/ResultsScreen.gd" id="1_1edmg"]
+[ext_resource type="Texture2D" uid="uid://c0ppcrv311x36" path="res://Sprites/Backgrounds/Misc/ResultsBG_Blue.png" id="1_c7qjv"]
+[ext_resource type="Texture2D" uid="uid://dfe34iptk8wab" path="res://Sprites/Backgrounds/Misc/ResultsBG_Orange.png" id="2_vioce"]
+[ext_resource type="FontFile" uid="uid://blejgst41tdnl" path="res://PressStart2P.ttf" id="4_2bog7"]
+
+[node name="ResultsScreen" type="Node2D" node_paths=PackedStringArray("blue_bg", "orange_bg", "text_header_label", "clear_time_label", "damage_taken_label", "fragment_ratio_label", "mage_fragments_label", "dragon_fragments_label", "min_fragments_label", "medal_message_label", "retry_button_label", "menu_button_label")]
+process_mode = 4
+visible = false
+script = ExtResource("1_1edmg")
+blue_bg = NodePath("BlueBG")
+orange_bg = NodePath("OrangeBG")
+combine_point_offset = Vector2(1, 0)
+bg_combine_duration = 0.5
+text_header_label = NodePath("TextHeader")
+clear_time_label = NodePath("ClearTime")
+damage_taken_label = NodePath("DamageTaken")
+fragment_ratio_label = NodePath("FragmentRatio")
+mage_fragments_label = NodePath("MageFragments")
+dragon_fragments_label = NodePath("DragonFragments")
+min_fragments_label = NodePath("MinFragments")
+medal_message_label = NodePath("MedalMessage")
+retry_button_label = NodePath("RetryLevel")
+menu_button_label = NodePath("ReturnToMenu")
+
+[node name="BlueBG" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.8)
+light_mask = 64
+visibility_layer = 64
+z_index = 7
+texture = ExtResource("1_c7qjv")
+
+[node name="OrangeBG" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.8)
+light_mask = 64
+visibility_layer = 64
+z_index = 7
+texture = ExtResource("2_vioce")
+
+[node name="TextHeader" type="RichTextLabel" parent="."]
+visible = false
+light_mask = 64
+visibility_layer = 64
+z_index = 7
+offset_left = -248.0
+offset_top = -144.0
+offset_right = 248.0
+offset_bottom = -96.0
+theme_override_fonts/normal_font = ExtResource("4_2bog7")
+theme_override_font_sizes/normal_font_size = 32
+bbcode_enabled = true
+text = "[center]LEVEL COMPLETE!"
+scroll_active = false
+
+[node name="ClearTime" type="RichTextLabel" parent="."]
+visible = false
+light_mask = 64
+visibility_layer = 64
+z_index = 7
+offset_left = -224.0
+offset_top = -96.0
+offset_right = -32.0
+offset_bottom = -65.0
+theme_override_fonts/normal_font = ExtResource("4_2bog7")
+theme_override_font_sizes/normal_font_size = 16
+bbcode_enabled = true
+text = "[left]CLEAR TIME
+##:##.##"
+scroll_active = false
+
+[node name="DamageTaken" type="RichTextLabel" parent="."]
+visible = false
+light_mask = 64
+visibility_layer = 64
+z_index = 7
+offset_left = 32.0
+offset_top = -96.0
+offset_right = 224.0
+offset_bottom = -65.0
+theme_override_fonts/normal_font = ExtResource("4_2bog7")
+theme_override_font_sizes/normal_font_size = 16
+bbcode_enabled = true
+text = "[left]DAMAGE TAKEN
+#"
+scroll_active = false
+
+[node name="FragmentRatio" type="RichTextLabel" parent="."]
+visible = false
+light_mask = 64
+visibility_layer = 64
+z_index = 7
+offset_left = -160.0
+offset_top = -46.0
+offset_right = 160.0
+offset_bottom = -32.0
+theme_override_fonts/normal_font = ExtResource("4_2bog7")
+theme_override_font_sizes/normal_font_size = 16
+bbcode_enabled = true
+text = "[center]FINAL FRAGMENT RATIO"
+scroll_active = false
+
+[node name="MageFragments" type="RichTextLabel" parent="."]
+visible = false
+modulate = Color(0.34902, 0.254902, 0.662745, 1)
+light_mask = 64
+visibility_layer = 64
+z_index = 7
+offset_left = -224.0
+offset_top = -17.0
+offset_right = -128.0
+offset_bottom = 4.0
+theme_override_fonts/normal_font = ExtResource("4_2bog7")
+theme_override_font_sizes/normal_font_size = 24
+bbcode_enabled = true
+text = "[center]###"
+scroll_active = false
+
+[node name="DragonFragments" type="RichTextLabel" parent="."]
+visible = false
+modulate = Color(0.941176, 0.603922, 0.34902, 1)
+light_mask = 64
+visibility_layer = 64
+z_index = 7
+offset_left = 128.0
+offset_top = -17.0
+offset_right = 224.0
+offset_bottom = 4.0
+theme_override_fonts/normal_font = ExtResource("4_2bog7")
+theme_override_font_sizes/normal_font_size = 24
+bbcode_enabled = true
+text = "[center]###"
+scroll_active = false
+
+[node name="MinFragments" type="RichTextLabel" parent="."]
+visible = false
+light_mask = 64
+visibility_layer = 64
+z_index = 7
+offset_left = -64.0
+offset_top = 19.0
+offset_right = 64.0
+offset_bottom = 33.0
+theme_override_fonts/normal_font = ExtResource("4_2bog7")
+theme_override_font_sizes/normal_font_size = 16
+bbcode_enabled = true
+text = "[center]###/###"
+scroll_active = false
+
+[node name="MedalMessage" type="RichTextLabel" parent="."]
+visible = false
+light_mask = 64
+visibility_layer = 64
+z_index = 7
+offset_left = -240.0
+offset_top = 57.0
+offset_right = 144.0
+offset_bottom = 71.0
+theme_override_fonts/normal_font = ExtResource("4_2bog7")
+theme_override_font_sizes/normal_font_size = 16
+bbcode_enabled = true
+text = "GOT A ??????? MEDALLION!"
+scroll_active = false
+
+[node name="RetryLevel" type="RichTextLabel" parent="."]
+visible = false
+light_mask = 64
+visibility_layer = 64
+z_index = 7
+offset_left = -96.0
+offset_top = 128.0
+offset_right = 96.0
+offset_bottom = 142.0
+theme_override_fonts/normal_font = ExtResource("4_2bog7")
+theme_override_font_sizes/normal_font_size = 16
+bbcode_enabled = true
+text = "[center]RETRY LEVEL"
+scroll_active = false
+
+[node name="ReturnToMenu" type="RichTextLabel" parent="."]
+visible = false
+light_mask = 64
+visibility_layer = 64
+z_index = 7
+offset_left = -118.0
+offset_top = 96.0
+offset_right = 118.0
+offset_bottom = 110.0
+theme_override_fonts/normal_font = ExtResource("4_2bog7")
+theme_override_font_sizes/normal_font_size = 16
+bbcode_enabled = true
+text = "[center]RETURN TO MENU"
+scroll_active = false

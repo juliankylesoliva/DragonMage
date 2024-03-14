@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://qa22n4g30owo"]
+[gd_scene load_steps=15 format=3 uid="uid://qa22n4g30owo"]
 
 [ext_resource type="Script" path="res://Scripts/Utility Scripts/Level.gd" id="1_xccb8"]
 [ext_resource type="PackedScene" uid="uid://c6qw77ovfwgfs" path="res://Player.tscn" id="2_616c6"]
@@ -12,12 +12,15 @@
 [ext_resource type="PackedScene" uid="uid://bsdn7w7f8yil8" path="res://Level Scenes/CH0_LV4/Rooms/CH0_LV4_R7.tscn" id="10_ggfgt"]
 [ext_resource type="PackedScene" uid="uid://bq7ruy715yf60" path="res://Level Scenes/CH0_LV4/Rooms/CH0_LV4_R8.tscn" id="11_51ny3"]
 [ext_resource type="PackedScene" uid="uid://8beel2odcuky" path="res://Scene Objects/Effects/ScreenFade.tscn" id="12_ue1v1"]
+[ext_resource type="PackedScene" uid="uid://b5wwivjk8sl7b" path="res://Scene Objects/Misc/ClearTimer.tscn" id="13_vkigm"]
+[ext_resource type="PackedScene" uid="uid://buykytsdrlnsg" path="res://Scene Objects/Misc/ResultsScreen.tscn" id="14_rug2n"]
 
-[node name="CH0_LV4" type="Node2D" node_paths=PackedStringArray("player_reference", "starting_room", "room_list")]
+[node name="CH0_LV4" type="Node2D" node_paths=PackedStringArray("player_reference", "starting_room", "room_list", "ui_container")]
 script = ExtResource("1_xccb8")
 player_reference = NodePath("Player")
 starting_room = NodePath("CH0_LV4_R1")
 room_list = [NodePath("CH0_LV4_R1"), NodePath("CH0_LV4_R2"), NodePath("CH0_LV4_R3"), NodePath("CH0_LV4_R4"), NodePath("CH0_LV4_R5"), NodePath("CH0_LV4_R6"), NodePath("CH0_LV4_R7"), NodePath("CH0_LV4_R8")]
+ui_container = NodePath("VBoxContainer")
 
 [node name="Player" parent="." instance=ExtResource("2_616c6")]
 position = Vector2(96, 159)
@@ -114,7 +117,15 @@ room_destination = NodePath("../../CH0_LV4_R7")
 
 [node name="ScreenFade" parent="." instance=ExtResource("12_ue1v1")]
 
+[node name="ClearTimer" parent="." instance=ExtResource("13_vkigm")]
+
+[node name="ResultsScreen" parent="." node_paths=PackedStringArray("level", "clear_timer") instance=ExtResource("14_rug2n")]
+level = NodePath("..")
+clear_timer = NodePath("../ClearTimer")
+
 [connection signal="level_finished" from="CH0_LV4_R8/FinishLine" to="." method="level_finish"]
+[connection signal="level_finished" from="CH0_LV4_R8/FinishLine" to="ClearTimer" method="stop_timer"]
+[connection signal="level_finished" from="CH0_LV4_R8/FinishLine" to="ResultsScreen" method="on_level_complete"]
 
 [editable path="Player"]
 [editable path="CH0_LV4_R1"]
