@@ -39,7 +39,9 @@ func state_process(_delta):
 	if (hub.form.cannot_change_form()):
 		hub.form.form_change_failed()
 	
-	if (hub.form.can_change_form()):
+	if (hub.is_level_complete):
+		set_next_state(state_machine.get_state_by_name("Deactivated"))
+	elif (hub.form.can_change_form()):
 		set_next_state(state_machine.get_state_by_name("FormChanging"))
 	elif (((hub.collisions.is_moving_against_a_wall()) and (hub.get_input_vector().x * hub.movement.get_facing_value() > 0)) or (hub.get_input_vector().x == 0 and hub.char_body.velocity.x == 0)):
 		set_next_state(state_machine.get_state_by_name("Standing"))

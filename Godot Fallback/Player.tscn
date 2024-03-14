@@ -1,4 +1,4 @@
-[gd_scene load_steps=184 format=3 uid="uid://c6qw77ovfwgfs"]
+[gd_scene load_steps=190 format=3 uid="uid://c6qw77ovfwgfs"]
 
 [ext_resource type="Texture2D" uid="uid://d381ahbcwydy8" path="res://Sprites/Player/DraelynCrouch.png" id="1_6b42p"]
 [ext_resource type="Texture2D" uid="uid://dls34a1qa8iy1" path="res://Sprites/Player/DraelynFireTackle.png" id="1_ddrlj"]
@@ -57,6 +57,7 @@
 [ext_resource type="Texture2D" uid="uid://bcwdksusecuad" path="res://Sprites/Player/DraelynFastFall.png" id="38_akwr7"]
 [ext_resource type="Script" path="res://Scripts/Player/PlayerStateMachine/DamagedState.gd" id="41_7pdlp"]
 [ext_resource type="Script" path="res://Scripts/Player/PlayerStateMachine/DeactivatedState.gd" id="42_yhbki"]
+[ext_resource type="Texture2D" uid="uid://0dwiqviols6t" path="res://Sprites/Player/DraelynChangeFail.png" id="45_8n3d3"]
 [ext_resource type="Texture2D" uid="uid://t0uxr4ou5r1d" path="res://Sprites/Player/DraelynIdleGlasses.png" id="46_r2ngl"]
 [ext_resource type="Texture2D" uid="uid://b8o0u22mxyifu" path="res://Sprites/Effects/BlastJumpParticle.png" id="47_v16qd"]
 [ext_resource type="Texture2D" uid="uid://nskhc48w5xs3" path="res://Sprites/Effects/FireTackleTrail.png" id="48_hn1hc"]
@@ -65,6 +66,7 @@
 [ext_resource type="Texture2D" uid="uid://bj6vmo7ahwtpf" path="res://Sprites/Effects/SpeedBufferParticle.png" id="52_u3vuf"]
 [ext_resource type="Texture2D" uid="uid://bobu8jpoly5wb" path="res://Sprites/Player/MagliIdleShy.png" id="53_c0t7y"]
 [ext_resource type="Script" path="res://Scripts/Utility Scripts/PlayerCamera.gd" id="54_k03tc"]
+[ext_resource type="Texture2D" uid="uid://cka8kg4bes2os" path="res://Sprites/Player/MagliChangeFail.png" id="55_2sqhj"]
 [ext_resource type="Texture2D" uid="uid://db8gs3h636p2c" path="res://Sprites/Player/MagliThrow.png" id="59_lhaxn"]
 
 [sub_resource type="Curve" id="Curve_qnqge"]
@@ -74,6 +76,14 @@ point_count = 2
 [sub_resource type="Gradient" id="Gradient_veqdj"]
 offsets = PackedFloat32Array(0, 0.600583, 0.997085, 1)
 colors = PackedColorArray(0.376471, 0.309804, 0.639216, 1, 0.376471, 0.309804, 0.639216, 1, 0.376471, 0.309804, 0.639216, 0, 0.376471, 0.309804, 0.639216, 0)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_u51m5"]
+atlas = ExtResource("45_8n3d3")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h5cn6"]
+atlas = ExtResource("45_8n3d3")
+region = Rect2(64, 0, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_3rp8e"]
 atlas = ExtResource("1_6b42p")
@@ -250,6 +260,14 @@ region = Rect2(256, 0, 64, 64)
 [sub_resource type="AtlasTexture" id="AtlasTexture_ypnyb"]
 atlas = ExtResource("2_p0h7w")
 region = Rect2(320, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qx4ik"]
+atlas = ExtResource("55_2sqhj")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0lolr"]
+atlas = ExtResource("55_2sqhj")
+region = Rect2(0, 0, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_tian5"]
 atlas = ExtResource("1_m21y2")
@@ -457,6 +475,20 @@ region = Rect2(256, 0, 64, 64)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_5s7e1"]
 animations = [{
+"frames": [{
+"duration": 18.0,
+"texture": SubResource("AtlasTexture_u51m5")
+}, {
+"duration": 12.0,
+"texture": SubResource("AtlasTexture_h5cn6")
+}, {
+"duration": 18.0,
+"texture": SubResource("AtlasTexture_u51m5")
+}],
+"loop": false,
+"name": &"DraelynChangeFail",
+"speed": 60.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_3rp8e")
@@ -766,6 +798,23 @@ animations = [{
 }],
 "loop": true,
 "name": &"DraelynWallClimb",
+"speed": 60.0
+}, {
+"frames": [{
+"duration": 12.0,
+"texture": SubResource("AtlasTexture_qx4ik")
+}, {
+"duration": 12.0,
+"texture": SubResource("AtlasTexture_0lolr")
+}, {
+"duration": 12.0,
+"texture": SubResource("AtlasTexture_qx4ik")
+}, {
+"duration": 12.0,
+"texture": SubResource("AtlasTexture_0lolr")
+}],
+"loop": false,
+"name": &"MagliChangeFail",
 "speed": 60.0
 }, {
 "frames": [{

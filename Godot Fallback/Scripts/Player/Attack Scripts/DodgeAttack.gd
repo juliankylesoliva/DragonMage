@@ -41,7 +41,9 @@ func on_attack_state_enter():
 
 func attack_state_process(_delta : float):
 	if (current_dodge_speed <= 0 or (did_player_leave_ground and hub.char_body.is_on_floor())):
-		if (hub.jumping.can_ground_jump()):
+		if (hub.is_level_complete):
+			hub.state_machine.current_state.set_next_state(hub.state_machine.get_state_by_name("Deactivated"))
+		elif (hub.jumping.can_ground_jump()):
 			hub.jumping.start_ground_jump()
 			hub.state_machine.current_state.set_next_state(hub.state_machine.get_state_by_name("Jumping"))
 		elif (hub.char_body.is_on_floor() and hub.char_body.velocity.x != 0):

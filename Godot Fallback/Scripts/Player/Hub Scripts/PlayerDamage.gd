@@ -92,6 +92,9 @@ func update_hitstun_timer(delta : float):
 		if (current_hitstun_timer < (hitstun_time * hitstun_ground_cancel_portion) and hub.char_body.is_on_floor()):
 			current_hitstun_timer = 0
 
+func reset_hitstun_timer():
+	current_hitstun_timer = 0
+
 func update_iframe_timer(delta : float):
 	if (is_damage_invulnerability_active()):
 		current_iframe_timer = move_toward(current_iframe_timer, 0, delta)

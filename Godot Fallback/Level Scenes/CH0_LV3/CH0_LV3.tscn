@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://bee26tq601smv"]
+[gd_scene load_steps=18 format=3 uid="uid://bee26tq601smv"]
 
 [ext_resource type="Script" path="res://Scripts/Utility Scripts/Level.gd" id="1_2pe2a"]
 [ext_resource type="PackedScene" uid="uid://c6qw77ovfwgfs" path="res://Player.tscn" id="2_oq6xx"]
@@ -16,6 +16,7 @@
 [ext_resource type="PackedScene" uid="uid://dpm7e2tlgsbt1" path="res://Level Scenes/CH0_LV3/Rooms/CH0_LV3_R12.tscn" id="14_x2u1b"]
 [ext_resource type="PackedScene" uid="uid://b4er0uavb2uvc" path="res://Level Scenes/CH0_LV3/Rooms/CH0_LV3_R13.tscn" id="15_nd0sx"]
 [ext_resource type="PackedScene" uid="uid://k7ndi0emu4fk" path="res://Level Scenes/CH0_LV3/Rooms/CH0_LV3_R14.tscn" id="16_e8cqc"]
+[ext_resource type="PackedScene" uid="uid://8beel2odcuky" path="res://Scene Objects/Effects/ScreenFade.tscn" id="17_3vcxg"]
 
 [node name="CH0_LV3" type="Node2D" node_paths=PackedStringArray("player_reference", "starting_room", "room_list")]
 script = ExtResource("1_2pe2a")
@@ -161,6 +162,8 @@ position = Vector2(448, 1504)
 [node name="Warp 0" parent="CH0_LV3_R14" index="3" node_paths=PackedStringArray("room_destination")]
 room_destination = NodePath("../../CH0_LV3_R13")
 room_entrance_index = 1
+
+[node name="ScreenFade" parent="." instance=ExtResource("17_3vcxg")]
 
 [connection signal="level_finished" from="CH0_LV3_R14/FinishLine" to="." method="level_finish"]
 

@@ -163,7 +163,7 @@ func blast_jump_update(delta : float):
 		(blast_jump_hitbox_instance as Node2D).global_position = (hub.collision_shape.global_position + facing_offset + jumping_offset + velocity_offset)
 		
 		if (blast_jump_current_active_time <= 0 or hub.state_machine.current_state.name == "FormChanging"):
-			if (hub.char_body.velocity.length() < blast_jump_min_velocity_magnitude or hub.char_body.is_on_floor() or state_name == "FormChanging" or state_name == "Gliding" or hub.form.current_mode != PlayerForm.CharacterMode.MAGE):
+			if (hub.char_body.velocity.length() < blast_jump_min_velocity_magnitude or hub.char_body.is_on_floor() or state_name == "FormChanging" or state_name == "Gliding" or state_name == "Deactivated" or hub.form.current_mode != PlayerForm.CharacterMode.MAGE):
 				is_blast_jumping = false
 				blast_jump_particles.emitting = false
 				hub.sprite_trail.deactivate_trail()

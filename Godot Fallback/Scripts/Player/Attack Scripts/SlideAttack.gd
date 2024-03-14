@@ -54,7 +54,9 @@ func on_attack_state_enter():
 	slide_effect_instance.rotation = hub.char_body.up_direction.angle_to(hub.collisions.get_ground_normal())
 
 func attack_state_process(_delta : float):
-	if (hub.damage.is_player_damaged() or hub.collisions.is_facing_a_wall() or hub.collisions.is_near_a_ledge() or hub.collisions.get_distance_to_ground() > hub.char_body.floor_snap_length):
+	if (hub.is_level_complete):
+		hub.state_machine.current_state.set_next_state(hub.state_machine.get_state_by_name("Deactivated"))
+	elif (hub.damage.is_player_damaged() or hub.collisions.is_facing_a_wall() or hub.collisions.is_near_a_ledge() or hub.collisions.get_distance_to_ground() > hub.char_body.floor_snap_length):
 		stop_slide()
 	elif (!hub.collisions.is_in_ceiling_when_uncrouched() and current_slide_timer > slide_uncancelable_time and (hub.get_input_vector().x * hub.char_body.velocity.x) > 0 and hub.buffers.is_jump_buffer_active()):
 		do_jump_cancel()

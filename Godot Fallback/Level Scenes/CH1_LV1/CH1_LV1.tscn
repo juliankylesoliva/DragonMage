@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://b6ourfnqhy0wk"]
+[gd_scene load_steps=17 format=3 uid="uid://b6ourfnqhy0wk"]
 
 [ext_resource type="Script" path="res://Scripts/Utility Scripts/Level.gd" id="1_3mmw4"]
 [ext_resource type="PackedScene" uid="uid://c6qw77ovfwgfs" path="res://Player.tscn" id="2_isfe7"]
@@ -15,11 +15,12 @@
 [ext_resource type="PackedScene" uid="uid://8mf8ipsh2you" path="res://Level Scenes/CH1_LV1/Rooms/CH1_LV1_R9.tscn" id="12_jkpqh"]
 [ext_resource type="PackedScene" uid="uid://drbl7ccxv7sa0" path="res://Level Scenes/CH1_LV1/Rooms/CH1_LV1_R10.tscn" id="13_lfovm"]
 [ext_resource type="PackedScene" uid="uid://ctjuhf6dkkqy8" path="res://Level Scenes/CH1_LV1/Rooms/CH1_LV1_R11.tscn" id="14_daiil"]
+[ext_resource type="PackedScene" uid="uid://8beel2odcuky" path="res://Scene Objects/Effects/ScreenFade.tscn" id="16_gb8bt"]
 
 [node name="CH1_LV1" type="Node2D" node_paths=PackedStringArray("player_reference", "starting_room", "room_list")]
 script = ExtResource("1_3mmw4")
 player_reference = NodePath("Player")
-starting_room = NodePath("CH1_LV1_R1")
+starting_room = NodePath("CH1_LV1_R11")
 room_list = [NodePath("CH1_LV1_R1"), NodePath("CH1_LV1_R2"), NodePath("CH1_LV1_R3"), NodePath("CH1_LV1_R4"), NodePath("CH1_LV1_R5"), NodePath("CH1_LV1_R6"), NodePath("CH1_LV1_R7"), NodePath("CH1_LV1_R8"), NodePath("CH1_LV1_R9"), NodePath("CH1_LV1_R10"), NodePath("CH1_LV1_R11")]
 min_fragment_collection_rate = 0.64
 
@@ -173,6 +174,8 @@ room_destination = NodePath("../../CH1_LV1_R11")
 
 [node name="CH1_LV1_R11" parent="." instance=ExtResource("14_daiil")]
 position = Vector2(1312, 640)
+
+[node name="ScreenFade" parent="." instance=ExtResource("16_gb8bt")]
 
 [connection signal="level_finished" from="CH1_LV1_R11/FinishLine" to="." method="level_finish"]
 

@@ -43,6 +43,8 @@ func level_startup():
 	if (player_ref == null):
 		push_warning("PlayerHub not found in player reference!")
 	
+	player_ref.set_respawn_position(destination_coords)
+	
 	player_ref.damage.took_damage.connect(drop_fragments)
 	
 	for room in room_list:
@@ -64,7 +66,7 @@ func level_startup():
 	player_ref.camera.snap_camera_to_player()
 
 func level_finish():
-	pass
+	player_ref.set_level_complete()
 
 func increment_fragments(is_mage : bool):
 	if (is_mage):
