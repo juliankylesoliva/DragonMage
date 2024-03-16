@@ -12,6 +12,8 @@ class_name Level
 
 @export_range(0, 1) var min_fragment_collection_rate : float = 0.5
 
+@export_range(1, 9) var min_fragment_majority_ratio : float = 2
+
 @export var max_fragments_dropped : int = 10
 
 @export var fragment_drop_split : int = 5
@@ -80,6 +82,23 @@ func increment_fragments(is_mage : bool):
 
 func get_total_fragments():
 	return (mage_fragments + dragon_fragments)
+
+func can_get_medal():
+	return (get_total_fragments() >= min_fragment_req_for_medal)
+
+func get_medal_type():
+	if (can_get_medal()):
+		var maximum : float = max(mage_fragments, dragon_fragments)
+		var minimum : float = min(mage_fragments, dragon_fragments)
+		if (minimum == 0 or (maximum / minimum) >= min_fragment_majority_ratio):
+			if (mage_fragments > dragon_fragments):
+				return "MAGIC"
+			else:
+				return "DRAGON"
+		else:
+			return "BALANCE"
+	else:
+		return "NOTHING"
 
 func drop_fragments():
 	var dropped_mage_fragments : int = 0

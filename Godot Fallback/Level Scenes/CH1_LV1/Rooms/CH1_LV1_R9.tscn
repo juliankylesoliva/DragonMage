@@ -22,7 +22,7 @@ tilemap_list = [NodePath("BoundaryCollisionTilemap"), NodePath("LevelCollisionTi
 top_camera_limit = -1280
 room_entrances = [NodePath("Entrance 0")]
 enemy_nodes = [NodePath("BlueDragoon"), NodePath("RedDragoon"), NodePath("RedDragoon2"), NodePath("GreenDragoon"), NodePath("GreenDragoon2"), NodePath("RedDragoon3"), NodePath("YellowDragoon"), NodePath("RedDragoon4"), NodePath("GreenDragoon3"), NodePath("GreenDragoon4"), NodePath("BlueDragoon2"), NodePath("RedDragoon5"), NodePath("RedDragoon6"), NodePath("RedDragoon7"), NodePath("BlueDragoon3"), NodePath("YellowDragoon2"), NodePath("BlueDragoon4"), NodePath("YellowDragoon3"), NodePath("RedDragoon8"), NodePath("GreenDragoon5"), NodePath("BlueDragoon5"), NodePath("RedDragoon9")]
-medal_fragments = [NodePath("Medal Fragment/MedalFragment"), NodePath("Medal Fragment/MedalFragment2"), NodePath("Medal Fragment/MedalFragment3"), NodePath("Medal Fragment/MedalFragment4"), NodePath("Medal Fragment/MedalFragment5"), NodePath("Medal Fragment/MedalFragment6"), NodePath("Medal Fragment/MedalFragment7"), NodePath("Medal Fragment/MedalFragment8"), NodePath("Medal Fragment/MedalFragment9"), NodePath("Medal Fragment/MedalFragment10"), NodePath("Medal Fragment/MedalFragment11"), NodePath("Medal Fragment/MedalFragment12"), NodePath("Medal Fragment/MedalFragment13"), NodePath("Medal Fragment/MedalFragment14")]
+medal_fragments = [NodePath("Medal Fragments/MedalFragment"), NodePath("Medal Fragments/MedalFragment2"), NodePath("Medal Fragments/MedalFragment3"), NodePath("Medal Fragments/MedalFragment4"), NodePath("Medal Fragments/MedalFragment5"), NodePath("Medal Fragments/MedalFragment6"), NodePath("Medal Fragments/MedalFragment7"), NodePath("Medal Fragments/MedalFragment8"), NodePath("Medal Fragments/MedalFragment9"), NodePath("Medal Fragments/MedalFragment10"), NodePath("Medal Fragments/MedalFragment11"), NodePath("Medal Fragments/MedalFragment12"), NodePath("Medal Fragments/MedalFragment13"), NodePath("Medal Fragments/MedalFragment14")]
 
 [node name="BoundaryCollisionTilemap" type="TileMap" parent="."]
 z_index = 4
@@ -74,7 +74,7 @@ room_destination = NodePath("..")
 room_entrance_index = 1
 
 [node name="Warp 1" parent="." node_paths=PackedStringArray("room_origin", "room_destination") instance=ExtResource("3_8gtd7")]
-position = Vector2(592, -1184)
+position = Vector2(624, -1184)
 room_origin = NodePath("..")
 room_destination = NodePath("..")
 
@@ -82,48 +82,48 @@ room_destination = NodePath("..")
 position = Vector2(-48, 0)
 shape = SubResource("RectangleShape2D_rr12y")
 
-[node name="Medal Fragment" type="Node2D" parent="."]
+[node name="Medal Fragments" type="Node2D" parent="."]
 
-[node name="MedalFragment" parent="Medal Fragment" instance=ExtResource("12_ynbm6")]
+[node name="MedalFragment" parent="Medal Fragments" instance=ExtResource("12_ynbm6")]
 position = Vector2(240, 208)
 
-[node name="MedalFragment2" parent="Medal Fragment" instance=ExtResource("12_ynbm6")]
+[node name="MedalFragment2" parent="Medal Fragments" instance=ExtResource("12_ynbm6")]
 position = Vector2(272, 208)
 
-[node name="MedalFragment3" parent="Medal Fragment" instance=ExtResource("12_ynbm6")]
+[node name="MedalFragment3" parent="Medal Fragments" instance=ExtResource("12_ynbm6")]
 position = Vector2(208, -112)
 
-[node name="MedalFragment4" parent="Medal Fragment" instance=ExtResource("12_ynbm6")]
+[node name="MedalFragment4" parent="Medal Fragments" instance=ExtResource("12_ynbm6")]
 position = Vector2(240, -144)
 
-[node name="MedalFragment5" parent="Medal Fragment" instance=ExtResource("12_ynbm6")]
+[node name="MedalFragment5" parent="Medal Fragments" instance=ExtResource("12_ynbm6")]
 position = Vector2(272, -176)
 
-[node name="MedalFragment6" parent="Medal Fragment" instance=ExtResource("12_ynbm6")]
+[node name="MedalFragment6" parent="Medal Fragments" instance=ExtResource("12_ynbm6")]
 position = Vector2(304, -208)
 
-[node name="MedalFragment7" parent="Medal Fragment" instance=ExtResource("12_ynbm6")]
+[node name="MedalFragment7" parent="Medal Fragments" instance=ExtResource("12_ynbm6")]
 position = Vector2(112, -752)
 
-[node name="MedalFragment8" parent="Medal Fragment" instance=ExtResource("12_ynbm6")]
+[node name="MedalFragment8" parent="Medal Fragments" instance=ExtResource("12_ynbm6")]
 position = Vector2(144, -784)
 
-[node name="MedalFragment9" parent="Medal Fragment" instance=ExtResource("12_ynbm6")]
+[node name="MedalFragment9" parent="Medal Fragments" instance=ExtResource("12_ynbm6")]
 position = Vector2(112, -816)
 
-[node name="MedalFragment10" parent="Medal Fragment" instance=ExtResource("12_ynbm6")]
+[node name="MedalFragment10" parent="Medal Fragments" instance=ExtResource("12_ynbm6")]
 position = Vector2(144, -848)
 
-[node name="MedalFragment11" parent="Medal Fragment" instance=ExtResource("12_ynbm6")]
+[node name="MedalFragment11" parent="Medal Fragments" instance=ExtResource("12_ynbm6")]
 position = Vector2(48, -1168)
 
-[node name="MedalFragment12" parent="Medal Fragment" instance=ExtResource("12_ynbm6")]
+[node name="MedalFragment12" parent="Medal Fragments" instance=ExtResource("12_ynbm6")]
 position = Vector2(80, -1168)
 
-[node name="MedalFragment13" parent="Medal Fragment" instance=ExtResource("12_ynbm6")]
+[node name="MedalFragment13" parent="Medal Fragments" instance=ExtResource("12_ynbm6")]
 position = Vector2(48, -1136)
 
-[node name="MedalFragment14" parent="Medal Fragment" instance=ExtResource("12_ynbm6")]
+[node name="MedalFragment14" parent="Medal Fragments" instance=ExtResource("12_ynbm6")]
 position = Vector2(80, -1136)
 
 [node name="ReinforcedMagicBlock" parent="." instance=ExtResource("4_fo4jk")]

@@ -1,0 +1,73 @@
+[gd_scene load_steps=10 format=3 uid="uid://dqer84f2unm5v"]
+
+[ext_resource type="Texture2D" uid="uid://cy0v185dvnlpm" path="res://Sprites/Objects/MagicProjectile.png" id="1_5ikkx"]
+[ext_resource type="Script" path="res://Scripts/UI Scripts/MenuCursor.gd" id="1_kcvgr"]
+[ext_resource type="Texture2D" uid="uid://cwx0neqd78q6m" path="res://Sprites/Objects/FireProjectile.png" id="2_c6sjv"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xsfw0"]
+atlas = ExtResource("1_5ikkx")
+region = Rect2(0, 0, 20, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_q7gx5"]
+atlas = ExtResource("1_5ikkx")
+region = Rect2(20, 0, 20, 20)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_pnfcy"]
+animations = [{
+"frames": [{
+"duration": 8.0,
+"texture": SubResource("AtlasTexture_xsfw0")
+}, {
+"duration": 8.0,
+"texture": SubResource("AtlasTexture_q7gx5")
+}],
+"loop": true,
+"name": &"default",
+"speed": 60.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h3la0"]
+atlas = ExtResource("2_c6sjv")
+region = Rect2(0, 0, 20, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_a0e42"]
+atlas = ExtResource("2_c6sjv")
+region = Rect2(20, 0, 20, 20)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_im2t0"]
+animations = [{
+"frames": [{
+"duration": 8.0,
+"texture": SubResource("AtlasTexture_h3la0")
+}, {
+"duration": 8.0,
+"texture": SubResource("AtlasTexture_a0e42")
+}],
+"loop": true,
+"name": &"default",
+"speed": 60.0
+}]
+
+[node name="MenuCursor" type="Node2D" node_paths=PackedStringArray("left_cursor", "right_cursor")]
+script = ExtResource("1_kcvgr")
+left_cursor = NodePath("MagicCursorL")
+right_cursor = NodePath("FireCursorR")
+
+[node name="MagicCursorL" type="AnimatedSprite2D" parent="."]
+light_mask = 64
+visibility_layer = 64
+z_index = 7
+sprite_frames = SubResource("SpriteFrames_pnfcy")
+autoplay = "default"
+frame_progress = 0.639192
+offset = Vector2(-16, 0)
+
+[node name="FireCursorR" type="AnimatedSprite2D" parent="."]
+light_mask = 64
+visibility_layer = 64
+z_index = 7
+sprite_frames = SubResource("SpriteFrames_im2t0")
+autoplay = "default"
+frame_progress = 0.301727
+offset = Vector2(16, 0)
+flip_h = true

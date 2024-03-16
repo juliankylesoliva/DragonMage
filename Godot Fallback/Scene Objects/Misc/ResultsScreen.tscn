@@ -1,17 +1,215 @@
-[gd_scene load_steps=5 format=3 uid="uid://buykytsdrlnsg"]
+[gd_scene load_steps=38 format=3 uid="uid://buykytsdrlnsg"]
 
 [ext_resource type="Script" path="res://Scripts/UI Scripts/ResultsScreen.gd" id="1_1edmg"]
 [ext_resource type="Texture2D" uid="uid://c0ppcrv311x36" path="res://Sprites/Backgrounds/Misc/ResultsBG_Blue.png" id="1_c7qjv"]
 [ext_resource type="Texture2D" uid="uid://dfe34iptk8wab" path="res://Sprites/Backgrounds/Misc/ResultsBG_Orange.png" id="2_vioce"]
 [ext_resource type="FontFile" uid="uid://blejgst41tdnl" path="res://PressStart2P.ttf" id="4_2bog7"]
+[ext_resource type="Texture2D" uid="uid://djauojj440lof" path="res://Sprites/Objects/NeutralityMedallion.png" id="5_5bs41"]
+[ext_resource type="Texture2D" uid="uid://d137cm85hy3ae" path="res://Sprites/Backgrounds/Misc/FragmentSliderBacking.png" id="5_bwmpg"]
+[ext_resource type="Texture2D" uid="uid://4bb3wwit825a" path="res://Sprites/Backgrounds/Misc/FragmentSliderTexture.png" id="5_fguki"]
+[ext_resource type="Texture2D" uid="uid://bgfx7c2so7cch" path="res://Sprites/Objects/DraconicMedallion.png" id="5_k8a8q"]
+[ext_resource type="Texture2D" uid="uid://b0mn3bgw4138b" path="res://Sprites/Objects/MagicalMedallion.png" id="5_wvlwn"]
+[ext_resource type="Texture2D" uid="uid://b6wlx88et5qbf" path="res://Sprites/Objects/BlankMedallion.png" id="6_1ujg4"]
+[ext_resource type="Texture2D" uid="uid://dtpjbh2447tgn" path="res://Sprites/Backgrounds/Misc/FragmentSliderFrame.png" id="7_rk666"]
+[ext_resource type="PackedScene" uid="uid://dqer84f2unm5v" path="res://Scene Objects/Misc/MenuCursor.tscn" id="9_b2jxb"]
 
-[node name="ResultsScreen" type="Node2D" node_paths=PackedStringArray("blue_bg", "orange_bg", "text_header_label", "clear_time_label", "damage_taken_label", "fragment_ratio_label", "mage_fragments_label", "dragon_fragments_label", "min_fragments_label", "medal_message_label", "retry_button_label", "menu_button_label")]
+[sub_resource type="AtlasTexture" id="AtlasTexture_k340p"]
+atlas = ExtResource("5_5bs41")
+region = Rect2(0, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_oadnl"]
+atlas = ExtResource("5_5bs41")
+region = Rect2(48, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nykbi"]
+atlas = ExtResource("5_5bs41")
+region = Rect2(96, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6p0ss"]
+atlas = ExtResource("5_5bs41")
+region = Rect2(144, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_p6sil"]
+atlas = ExtResource("5_5bs41")
+region = Rect2(192, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6r4ve"]
+atlas = ExtResource("5_5bs41")
+region = Rect2(240, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_15jx7"]
+atlas = ExtResource("5_k8a8q")
+region = Rect2(0, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_oy8wl"]
+atlas = ExtResource("5_k8a8q")
+region = Rect2(48, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xclmr"]
+atlas = ExtResource("5_k8a8q")
+region = Rect2(96, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b0f2y"]
+atlas = ExtResource("5_k8a8q")
+region = Rect2(144, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7exd4"]
+atlas = ExtResource("5_k8a8q")
+region = Rect2(192, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_e5xnw"]
+atlas = ExtResource("5_k8a8q")
+region = Rect2(240, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_72dii"]
+atlas = ExtResource("5_wvlwn")
+region = Rect2(0, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1a23a"]
+atlas = ExtResource("5_wvlwn")
+region = Rect2(48, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_drwww"]
+atlas = ExtResource("5_wvlwn")
+region = Rect2(96, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8iq0x"]
+atlas = ExtResource("5_wvlwn")
+region = Rect2(144, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1pqws"]
+atlas = ExtResource("5_wvlwn")
+region = Rect2(192, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xjpnp"]
+atlas = ExtResource("5_wvlwn")
+region = Rect2(240, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4mfeq"]
+atlas = ExtResource("6_1ujg4")
+region = Rect2(0, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8rvw7"]
+atlas = ExtResource("6_1ujg4")
+region = Rect2(48, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sykx1"]
+atlas = ExtResource("6_1ujg4")
+region = Rect2(96, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lkcmf"]
+atlas = ExtResource("6_1ujg4")
+region = Rect2(144, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vo0ad"]
+atlas = ExtResource("6_1ujg4")
+region = Rect2(192, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ypxlo"]
+atlas = ExtResource("6_1ujg4")
+region = Rect2(240, 0, 48, 48)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_akhko"]
+animations = [{
+"frames": [{
+"duration": 8.0,
+"texture": SubResource("AtlasTexture_k340p")
+}, {
+"duration": 8.0,
+"texture": SubResource("AtlasTexture_oadnl")
+}, {
+"duration": 8.0,
+"texture": SubResource("AtlasTexture_nykbi")
+}, {
+"duration": 8.0,
+"texture": SubResource("AtlasTexture_6p0ss")
+}, {
+"duration": 8.0,
+"texture": SubResource("AtlasTexture_p6sil")
+}, {
+"duration": 8.0,
+"texture": SubResource("AtlasTexture_6r4ve")
+}],
+"loop": true,
+"name": &"BALANCE",
+"speed": 60.0
+}, {
+"frames": [{
+"duration": 8.0,
+"texture": SubResource("AtlasTexture_15jx7")
+}, {
+"duration": 8.0,
+"texture": SubResource("AtlasTexture_oy8wl")
+}, {
+"duration": 8.0,
+"texture": SubResource("AtlasTexture_xclmr")
+}, {
+"duration": 8.0,
+"texture": SubResource("AtlasTexture_b0f2y")
+}, {
+"duration": 8.0,
+"texture": SubResource("AtlasTexture_7exd4")
+}, {
+"duration": 8.0,
+"texture": SubResource("AtlasTexture_e5xnw")
+}],
+"loop": true,
+"name": &"DRAGON",
+"speed": 60.0
+}, {
+"frames": [{
+"duration": 8.0,
+"texture": SubResource("AtlasTexture_72dii")
+}, {
+"duration": 8.0,
+"texture": SubResource("AtlasTexture_1a23a")
+}, {
+"duration": 8.0,
+"texture": SubResource("AtlasTexture_drwww")
+}, {
+"duration": 8.0,
+"texture": SubResource("AtlasTexture_8iq0x")
+}, {
+"duration": 8.0,
+"texture": SubResource("AtlasTexture_1pqws")
+}, {
+"duration": 8.0,
+"texture": SubResource("AtlasTexture_xjpnp")
+}],
+"loop": true,
+"name": &"MAGIC",
+"speed": 60.0
+}, {
+"frames": [{
+"duration": 8.0,
+"texture": SubResource("AtlasTexture_4mfeq")
+}, {
+"duration": 8.0,
+"texture": SubResource("AtlasTexture_8rvw7")
+}, {
+"duration": 8.0,
+"texture": SubResource("AtlasTexture_sykx1")
+}, {
+"duration": 8.0,
+"texture": SubResource("AtlasTexture_lkcmf")
+}, {
+"duration": 8.0,
+"texture": SubResource("AtlasTexture_vo0ad")
+}, {
+"duration": 8.0,
+"texture": SubResource("AtlasTexture_ypxlo")
+}],
+"loop": true,
+"name": &"NOTHING",
+"speed": 60.0
+}]
+
+[node name="ResultsScreen" type="Node2D" node_paths=PackedStringArray("blue_bg", "orange_bg", "text_header_label", "clear_time_label", "damage_taken_label", "fragment_ratio_label", "mage_fragments_label", "dragon_fragments_label", "fragment_slider_back", "mage_fragments_slider", "dragon_fragments_slider", "fragment_slider_front", "min_fragments_label", "medal_message_label", "medal_sprite", "retry_button_label", "menu_button_label", "menu_cursor")]
 process_mode = 4
 visible = false
 script = ExtResource("1_1edmg")
 blue_bg = NodePath("BlueBG")
 orange_bg = NodePath("OrangeBG")
-combine_point_offset = Vector2(1, 0)
 bg_combine_duration = 0.5
 text_header_label = NodePath("TextHeader")
 clear_time_label = NodePath("ClearTime")
@@ -19,12 +217,23 @@ damage_taken_label = NodePath("DamageTaken")
 fragment_ratio_label = NodePath("FragmentRatio")
 mage_fragments_label = NodePath("MageFragments")
 dragon_fragments_label = NodePath("DragonFragments")
+fragment_slider_back = NodePath("FragmentSliderBack")
+mage_fragments_slider = NodePath("MageSlider")
+dragon_fragments_slider = NodePath("DragonSlider")
+fragment_slider_front = NodePath("FragmentSliderFront")
 min_fragments_label = NodePath("MinFragments")
 medal_message_label = NodePath("MedalMessage")
+medal_sprite = NodePath("MedalSprite")
+no_medal_message = "NO MEDALLION EARNED..."
+mage_message_color = Color(0.34902, 0.254902, 0.662745, 1)
+dragon_message_color = Color(0.941176, 0.603922, 0.34902, 1)
+balance_message_color = Color(0.839216, 0.839216, 0.839216, 1)
 retry_button_label = NodePath("RetryLevel")
 menu_button_label = NodePath("ReturnToMenu")
+menu_cursor = NodePath("MenuCursor")
 
 [node name="BlueBG" type="Sprite2D" parent="."]
+visible = false
 modulate = Color(1, 1, 1, 0.8)
 light_mask = 64
 visibility_layer = 64
@@ -32,6 +241,7 @@ z_index = 7
 texture = ExtResource("1_c7qjv")
 
 [node name="OrangeBG" type="Sprite2D" parent="."]
+visible = false
 modulate = Color(1, 1, 1, 0.8)
 light_mask = 64
 visibility_layer = 64
@@ -66,7 +276,7 @@ theme_override_fonts/normal_font = ExtResource("4_2bog7")
 theme_override_font_sizes/normal_font_size = 16
 bbcode_enabled = true
 text = "[left]CLEAR TIME
-##:##.##"
+0:00.00"
 scroll_active = false
 
 [node name="DamageTaken" type="RichTextLabel" parent="."]
@@ -82,7 +292,7 @@ theme_override_fonts/normal_font = ExtResource("4_2bog7")
 theme_override_font_sizes/normal_font_size = 16
 bbcode_enabled = true
 text = "[left]DAMAGE TAKEN
-#"
+0"
 scroll_active = false
 
 [node name="FragmentRatio" type="RichTextLabel" parent="."]
@@ -113,7 +323,7 @@ offset_bottom = 4.0
 theme_override_fonts/normal_font = ExtResource("4_2bog7")
 theme_override_font_sizes/normal_font_size = 24
 bbcode_enabled = true
-text = "[center]###"
+text = "[center]0"
 scroll_active = false
 
 [node name="DragonFragments" type="RichTextLabel" parent="."]
@@ -129,8 +339,55 @@ offset_bottom = 4.0
 theme_override_fonts/normal_font = ExtResource("4_2bog7")
 theme_override_font_sizes/normal_font_size = 24
 bbcode_enabled = true
-text = "[center]###"
+text = "[center]0"
 scroll_active = false
+
+[node name="FragmentSliderBack" type="Sprite2D" parent="."]
+visible = false
+light_mask = 64
+visibility_layer = 64
+z_index = 7
+position = Vector2(0, -6)
+texture = ExtResource("5_bwmpg")
+
+[node name="MageSlider" type="TextureProgressBar" parent="."]
+visible = false
+light_mask = 64
+visibility_layer = 64
+z_index = 7
+offset_left = -128.0
+offset_top = -22.0
+offset_right = 128.0
+offset_bottom = 10.0
+max_value = 1.0
+step = 0.001
+texture_progress = ExtResource("5_fguki")
+texture_progress_offset = Vector2(0, 4)
+tint_progress = Color(0.34902, 0.254902, 0.662745, 1)
+
+[node name="DragonSlider" type="TextureProgressBar" parent="."]
+visible = false
+light_mask = 64
+visibility_layer = 64
+z_index = 7
+offset_left = -128.0
+offset_top = -22.0
+offset_right = 128.0
+offset_bottom = 10.0
+max_value = 1.0
+step = 0.01
+fill_mode = 1
+texture_progress = ExtResource("5_fguki")
+texture_progress_offset = Vector2(0, 4)
+tint_progress = Color(0.941176, 0.603922, 0.34902, 1)
+
+[node name="FragmentSliderFront" type="Sprite2D" parent="."]
+visible = false
+light_mask = 64
+visibility_layer = 64
+z_index = 7
+position = Vector2(0, -6)
+texture = ExtResource("7_rk666")
 
 [node name="MinFragments" type="RichTextLabel" parent="."]
 visible = false
@@ -144,7 +401,7 @@ offset_bottom = 33.0
 theme_override_fonts/normal_font = ExtResource("4_2bog7")
 theme_override_font_sizes/normal_font_size = 16
 bbcode_enabled = true
-text = "[center]###/###"
+text = "[center]0/0"
 scroll_active = false
 
 [node name="MedalMessage" type="RichTextLabel" parent="."]
@@ -162,20 +419,15 @@ bbcode_enabled = true
 text = "GOT A ??????? MEDALLION!"
 scroll_active = false
 
-[node name="RetryLevel" type="RichTextLabel" parent="."]
+[node name="MedalSprite" type="AnimatedSprite2D" parent="."]
 visible = false
 light_mask = 64
 visibility_layer = 64
 z_index = 7
-offset_left = -96.0
-offset_top = 128.0
-offset_right = 96.0
-offset_bottom = 142.0
-theme_override_fonts/normal_font = ExtResource("4_2bog7")
-theme_override_font_sizes/normal_font_size = 16
-bbcode_enabled = true
-text = "[center]RETRY LEVEL"
-scroll_active = false
+position = Vector2(192, 64)
+sprite_frames = SubResource("SpriteFrames_akhko")
+animation = &"NOTHING"
+autoplay = "NOTHING"
 
 [node name="ReturnToMenu" type="RichTextLabel" parent="."]
 visible = false
@@ -186,8 +438,30 @@ offset_left = -118.0
 offset_top = 96.0
 offset_right = 118.0
 offset_bottom = 110.0
+pivot_offset = Vector2(118, 7)
 theme_override_fonts/normal_font = ExtResource("4_2bog7")
 theme_override_font_sizes/normal_font_size = 16
 bbcode_enabled = true
 text = "[center]RETURN TO MENU"
 scroll_active = false
+
+[node name="RetryLevel" type="RichTextLabel" parent="."]
+visible = false
+light_mask = 64
+visibility_layer = 64
+z_index = 7
+offset_left = -96.0
+offset_top = 128.0
+offset_right = 96.0
+offset_bottom = 142.0
+pivot_offset = Vector2(96, 7)
+theme_override_fonts/normal_font = ExtResource("4_2bog7")
+theme_override_font_sizes/normal_font_size = 16
+bbcode_enabled = true
+text = "[center]RETRY LEVEL"
+scroll_active = false
+
+[node name="MenuCursor" parent="." instance=ExtResource("9_b2jxb")]
+visible = false
+position = Vector2(0, 176)
+initial_spacing = 256.0

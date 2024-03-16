@@ -122,6 +122,7 @@ room_destination = NodePath("../../CH0_LV4_R7")
 [node name="ResultsScreen" parent="." node_paths=PackedStringArray("level", "clear_timer") instance=ExtResource("14_rug2n")]
 level = NodePath("..")
 clear_timer = NodePath("../ClearTimer")
+show_fragment_result = false
 
 [connection signal="level_finished" from="CH0_LV4_R8/FinishLine" to="." method="level_finish"]
 [connection signal="level_finished" from="CH0_LV4_R8/FinishLine" to="ClearTimer" method="stop_timer"]

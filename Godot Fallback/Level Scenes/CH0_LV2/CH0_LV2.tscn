@@ -136,6 +136,7 @@ room_entrance_index = 1
 [node name="ResultsScreen" parent="." node_paths=PackedStringArray("level", "clear_timer") instance=ExtResource("15_nbxo5")]
 level = NodePath("..")
 clear_timer = NodePath("../ClearTimer")
+show_fragment_result = false
 
 [connection signal="level_finished" from="CH0_LV2_R10/FinishLine" to="." method="level_finish"]
 [connection signal="level_finished" from="CH0_LV2_R10/FinishLine" to="ClearTimer" method="stop_timer"]
