@@ -119,7 +119,8 @@ room_destination = NodePath("../../CH0_LV4_R7")
 
 [node name="ClearTimer" parent="." instance=ExtResource("13_vkigm")]
 
-[node name="ResultsScreen" parent="." node_paths=PackedStringArray("level", "clear_timer") instance=ExtResource("14_rug2n")]
+[node name="ResultsScreen" parent="." node_paths=PackedStringArray("screen_fade", "level", "clear_timer") instance=ExtResource("14_rug2n")]
+screen_fade = NodePath("../ScreenFade")
 level = NodePath("..")
 clear_timer = NodePath("../ClearTimer")
 show_fragment_result = false

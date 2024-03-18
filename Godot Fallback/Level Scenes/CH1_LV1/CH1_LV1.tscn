@@ -182,7 +182,8 @@ position = Vector2(1312, 640)
 
 [node name="ClearTimer" parent="." instance=ExtResource("17_21jxy")]
 
-[node name="ResultsScreen" parent="." node_paths=PackedStringArray("level", "clear_timer") instance=ExtResource("18_wudxn")]
+[node name="ResultsScreen" parent="." node_paths=PackedStringArray("screen_fade", "level", "clear_timer") instance=ExtResource("18_wudxn")]
+screen_fade = NodePath("../ScreenFade")
 level = NodePath("..")
 clear_timer = NodePath("../ClearTimer")
 

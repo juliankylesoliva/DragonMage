@@ -35,4 +35,4 @@ func uniform_process(delta):
 func set_fade(alpha : float, rate : float, col : Color):
 	target_alpha = alpha
 	current_alpha_change_rate = (1.0 / rate)
-	color = col
+	color = Color(col, current_alpha)

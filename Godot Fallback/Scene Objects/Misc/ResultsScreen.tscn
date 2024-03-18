@@ -1,16 +1,23 @@
-[gd_scene load_steps=38 format=3 uid="uid://buykytsdrlnsg"]
+[gd_scene load_steps=45 format=3 uid="uid://buykytsdrlnsg"]
 
 [ext_resource type="Script" path="res://Scripts/UI Scripts/ResultsScreen.gd" id="1_1edmg"]
 [ext_resource type="Texture2D" uid="uid://c0ppcrv311x36" path="res://Sprites/Backgrounds/Misc/ResultsBG_Blue.png" id="1_c7qjv"]
+[ext_resource type="AudioStream" uid="uid://culpp6ftwxchs" path="res://Sounds/enemy_contact_impact.wav" id="2_uuw7t"]
 [ext_resource type="Texture2D" uid="uid://dfe34iptk8wab" path="res://Sprites/Backgrounds/Misc/ResultsBG_Orange.png" id="2_vioce"]
+[ext_resource type="AudioStream" uid="uid://ddbc0beb17ahn" path="res://Sounds/damage_player.wav" id="3_4ojgh"]
 [ext_resource type="FontFile" uid="uid://blejgst41tdnl" path="res://PressStart2P.ttf" id="4_2bog7"]
+[ext_resource type="AudioStream" uid="uid://dbu8bsyq8ver1" path="res://Sounds/object_fragment_pickup.wav" id="4_avjeo"]
+[ext_resource type="AudioStream" uid="uid://drv6xlsr5c46m" path="res://Sounds/transformation_magli.wav" id="5_0k012"]
 [ext_resource type="Texture2D" uid="uid://djauojj440lof" path="res://Sprites/Objects/NeutralityMedallion.png" id="5_5bs41"]
 [ext_resource type="Texture2D" uid="uid://d137cm85hy3ae" path="res://Sprites/Backgrounds/Misc/FragmentSliderBacking.png" id="5_bwmpg"]
 [ext_resource type="Texture2D" uid="uid://4bb3wwit825a" path="res://Sprites/Backgrounds/Misc/FragmentSliderTexture.png" id="5_fguki"]
 [ext_resource type="Texture2D" uid="uid://bgfx7c2so7cch" path="res://Sprites/Objects/DraconicMedallion.png" id="5_k8a8q"]
 [ext_resource type="Texture2D" uid="uid://b0mn3bgw4138b" path="res://Sprites/Objects/MagicalMedallion.png" id="5_wvlwn"]
 [ext_resource type="Texture2D" uid="uid://b6wlx88et5qbf" path="res://Sprites/Objects/BlankMedallion.png" id="6_1ujg4"]
+[ext_resource type="AudioStream" uid="uid://b4newloskxo6e" path="res://Sounds/transformation_draelyn.wav" id="6_8mhyb"]
+[ext_resource type="AudioStream" uid="uid://djc0umicd17pj" path="res://Sounds/object_medal_pickup.wav" id="7_64yt6"]
 [ext_resource type="Texture2D" uid="uid://dtpjbh2447tgn" path="res://Sprites/Backgrounds/Misc/FragmentSliderFrame.png" id="7_rk666"]
+[ext_resource type="AudioStream" uid="uid://dkinfw0fgiggr" path="res://Sounds/transformation_magli_locked.wav" id="8_rkpgd"]
 [ext_resource type="PackedScene" uid="uid://dqer84f2unm5v" path="res://Scene Objects/Misc/MenuCursor.tscn" id="9_b2jxb"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_k340p"]
@@ -204,10 +211,18 @@ animations = [{
 "speed": 60.0
 }]
 
-[node name="ResultsScreen" type="Node2D" node_paths=PackedStringArray("blue_bg", "orange_bg", "text_header_label", "clear_time_label", "damage_taken_label", "fragment_ratio_label", "mage_fragments_label", "dragon_fragments_label", "fragment_slider_back", "mage_fragments_slider", "dragon_fragments_slider", "fragment_slider_front", "min_fragments_label", "medal_message_label", "medal_sprite", "retry_button_label", "menu_button_label", "menu_cursor")]
+[node name="ResultsScreen" type="Node2D" node_paths=PackedStringArray("results_sfx", "blue_bg", "orange_bg", "text_header_label", "clear_time_label", "damage_taken_label", "fragment_ratio_label", "mage_fragments_label", "dragon_fragments_label", "fragment_slider_back", "mage_fragments_slider", "dragon_fragments_slider", "fragment_slider_front", "min_fragments_label", "medal_message_label", "medal_sprite", "retry_button_label", "menu_button_label", "menu_cursor")]
 process_mode = 4
 visible = false
 script = ExtResource("1_1edmg")
+results_sfx = NodePath("ResultsSFX")
+time_tick_sfx_stream = ExtResource("2_uuw7t")
+damage_tick_sfx_stream = ExtResource("3_4ojgh")
+fragment_tick_sfx_stream = ExtResource("4_avjeo")
+magic_medal_get_sfx_stream = ExtResource("5_0k012")
+dragon_medal_get_sfx_stream = ExtResource("6_8mhyb")
+balance_medal_get_sfx_stream = ExtResource("7_64yt6")
+no_medal_get_sfx_stream = ExtResource("8_rkpgd")
 blue_bg = NodePath("BlueBG")
 orange_bg = NodePath("OrangeBG")
 bg_combine_duration = 0.5
@@ -231,6 +246,10 @@ balance_message_color = Color(0.839216, 0.839216, 0.839216, 1)
 retry_button_label = NodePath("RetryLevel")
 menu_button_label = NodePath("ReturnToMenu")
 menu_cursor = NodePath("MenuCursor")
+
+[node name="ResultsSFX" type="AudioStreamPlayer2D" parent="."]
+volume_db = -2.0
+bus = &"SFX"
 
 [node name="BlueBG" type="Sprite2D" parent="."]
 visible = false

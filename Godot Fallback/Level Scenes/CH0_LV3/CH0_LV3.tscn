@@ -169,7 +169,8 @@ room_entrance_index = 1
 
 [node name="ClearTimer" parent="." instance=ExtResource("18_el865")]
 
-[node name="ResultsScreen" parent="." node_paths=PackedStringArray("level", "clear_timer") instance=ExtResource("19_d5div")]
+[node name="ResultsScreen" parent="." node_paths=PackedStringArray("screen_fade", "level", "clear_timer") instance=ExtResource("19_d5div")]
+screen_fade = NodePath("../ScreenFade")
 level = NodePath("..")
 clear_timer = NodePath("../ClearTimer")
 show_fragment_result = false

@@ -1,8 +1,12 @@
-[gd_scene load_steps=10 format=3 uid="uid://dqer84f2unm5v"]
+[gd_scene load_steps=14 format=3 uid="uid://dqer84f2unm5v"]
 
 [ext_resource type="Texture2D" uid="uid://cy0v185dvnlpm" path="res://Sprites/Objects/MagicProjectile.png" id="1_5ikkx"]
 [ext_resource type="Script" path="res://Scripts/UI Scripts/MenuCursor.gd" id="1_kcvgr"]
 [ext_resource type="Texture2D" uid="uid://cwx0neqd78q6m" path="res://Sprites/Objects/FireProjectile.png" id="2_c6sjv"]
+[ext_resource type="AudioStream" uid="uid://d0ew7uvtoogcu" path="res://Sounds/attack_magli_blastjump.wav" id="4_a10cd"]
+[ext_resource type="AudioStream" uid="uid://doexpubjj7iw2" path="res://Sounds/attack_magli_bounce.wav" id="4_db8r8"]
+[ext_resource type="AudioStream" uid="uid://b1a0wj3h6eyxq" path="res://Sounds/attack_draelyn_bump.wav" id="5_lupmt"]
+[ext_resource type="AudioStream" uid="uid://ck21y7xsah3fy" path="res://Sounds/attack_draelyn_tackle.wav" id="5_ynkcm"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_xsfw0"]
 atlas = ExtResource("1_5ikkx")
@@ -48,10 +52,16 @@ animations = [{
 "speed": 60.0
 }]
 
-[node name="MenuCursor" type="Node2D" node_paths=PackedStringArray("left_cursor", "right_cursor")]
+[node name="MenuCursor" type="Node2D" node_paths=PackedStringArray("left_cursor", "right_cursor", "magic_sfx", "dragon_sfx")]
 script = ExtResource("1_kcvgr")
 left_cursor = NodePath("MagicCursorL")
 right_cursor = NodePath("FireCursorR")
+magic_sfx = NodePath("MagicSFX")
+dragon_sfx = NodePath("DragonSFX")
+magic_move_sfx_stream = ExtResource("4_db8r8")
+dragon_move_sfx_stream = ExtResource("5_lupmt")
+magic_select_sfx_stream = ExtResource("4_a10cd")
+dragon_select_sfx_stream = ExtResource("5_ynkcm")
 
 [node name="MagicCursorL" type="AnimatedSprite2D" parent="."]
 light_mask = 64
@@ -71,3 +81,13 @@ autoplay = "default"
 frame_progress = 0.301727
 offset = Vector2(16, 0)
 flip_h = true
+
+[node name="MagicSFX" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_db8r8")
+volume_db = -2.0
+bus = &"SFX"
+
+[node name="DragonSFX" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_lupmt")
+volume_db = -2.0
+bus = &"SFX"

@@ -36,6 +36,9 @@ starting_mode = 1
 [node name="Camera" parent="Player/Hub" index="9" node_paths=PackedStringArray("player_cam")]
 player_cam = NodePath("../../../Camera2D")
 
+[node name="AnimatedSprite2D" parent="Player" index="3"]
+animation = &"DraelynStand"
+
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(256, 160)
 process_callback = 0
@@ -133,7 +136,8 @@ room_entrance_index = 1
 
 [node name="ClearTimer" parent="." instance=ExtResource("14_s76pj")]
 
-[node name="ResultsScreen" parent="." node_paths=PackedStringArray("level", "clear_timer") instance=ExtResource("15_nbxo5")]
+[node name="ResultsScreen" parent="." node_paths=PackedStringArray("screen_fade", "level", "clear_timer") instance=ExtResource("15_nbxo5")]
+screen_fade = NodePath("../ScreenFade")
 level = NodePath("..")
 clear_timer = NodePath("../ClearTimer")
 show_fragment_result = false

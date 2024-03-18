@@ -2,6 +2,24 @@ extends Node2D
 
 class_name ResultsScreen
 
+@export var results_sfx : AudioStreamPlayer2D
+
+@export var time_tick_sfx_stream : AudioStream
+
+@export var damage_tick_sfx_stream : AudioStream
+
+@export var fragment_tick_sfx_stream : AudioStream
+
+@export var magic_medal_get_sfx_stream : AudioStream
+
+@export var dragon_medal_get_sfx_stream : AudioStream
+
+@export var balance_medal_get_sfx_stream : AudioStream
+
+@export var no_medal_get_sfx_stream : AudioStream
+
+@export var screen_fade : ScreenFade
+
 @export var blue_bg : Sprite2D
 
 @export var orange_bg : Sprite2D
@@ -94,6 +112,7 @@ func do_menu():
 			current_menu_selection = (1 if current_menu_selection == 0 else 0)
 		
 		if (current_menu_selection != previous_menu_selection):
+			menu_cursor.play_move_sound()
 			match current_menu_selection:
 				0:
 					menu_cursor.global_position = (menu_button_label.global_position + menu_button_label.pivot_offset)
@@ -103,9 +122,24 @@ func do_menu():
 					current_menu_selection = 0
 					menu_cursor.global_position = (menu_button_label.global_position + menu_button_label.pivot_offset)
 		
-		# handle selection input
+		if (Input.is_action_just_pressed("Jump")):
+			are_menu_options_selectable = false
+			match current_menu_selection:
+				0:
+					pass
+				1:
+					do_retry_level()
+				_:
+					pass
 		
 		previous_menu_selection = current_menu_selection
+
+func do_retry_level():
+	menu_cursor.do_selection_movement()
+	await get_tree().create_timer(1.0).timeout
+	screen_fade.set_fade(1, 1, Color.BLACK)
+	await get_tree().create_timer(2.0).timeout
+	get_tree().reload_current_scene()
 
 func do_results_screen():
 	await get_tree().create_timer(1.0).timeout
@@ -123,21 +157,39 @@ func do_results_screen():
 	text_header_label.set_visible(true)
 	await get_tree().create_timer(1.0).timeout
 	
+	var previous_whole_value : int = 0
+	var current_whole_value : int = 0
+	
 	clear_time_label.set_visible(true)
 	var current_time_value : float = 0
 	var target_time_value : float = clear_timer.get_current_time()
+	results_sfx.stream = time_tick_sfx_stream
 	while (current_time_value < target_time_value):
 		current_time_value = move_toward(current_time_value, target_time_value, (target_time_value * get_physics_process_delta_time()) / time_count_duration)
 		clear_time_label.text = clear_time_format.format({"minutes" : "%02d" % (floor(current_time_value / 60) as int), "seconds" : "%05.2f" % fmod(current_time_value, 60.0)})
+		
+		current_whole_value = (current_time_value as int)
+		if (current_whole_value != previous_whole_value):
+			results_sfx.play()
+		previous_whole_value = current_whole_value
+		
 		await get_tree().process_frame
 	await get_tree().create_timer(0.5).timeout
 	
 	damage_taken_label.set_visible(true)
 	var current_damage_value : float = 0
 	var target_damage_value : float = level.player_ref.damage.damage_taken
+	previous_whole_value = 0
+	results_sfx.stream = damage_tick_sfx_stream
 	while (current_damage_value < target_damage_value):
 		current_damage_value = move_toward(current_damage_value, target_damage_value, (target_damage_value * get_physics_process_delta_time()) / damage_count_duration)
 		damage_taken_label.text = damage_text_format.format({"damage" : (current_damage_value as int)})
+		
+		current_whole_value = (current_damage_value as int)
+		if (current_whole_value != previous_whole_value):
+			results_sfx.play()
+		previous_whole_value = current_whole_value
+		
 		await get_tree().process_frame
 	await get_tree().create_timer(0.5).timeout
 	
@@ -168,6 +220,8 @@ func do_results_screen():
 		var current_dragon_slider_value : float = 0
 		var target_dragon_slider_value : float = (level.dragon_fragments / slider_denominator)
 		
+		previous_whole_value = 0
+		results_sfx.stream = fragment_tick_sfx_stream
 		while(current_mage_value < target_mage_value or current_dragon_value < target_dragon_value or current_total_value < target_total_value):
 			var delta : float = get_physics_process_delta_time()
 			
@@ -186,6 +240,11 @@ func do_results_screen():
 			current_dragon_slider_value = move_toward(current_dragon_slider_value, target_dragon_slider_value, (target_dragon_slider_value * delta) / fragment_count_duration)
 			dragon_fragments_slider.value = current_dragon_slider_value
 			
+			current_whole_value = (current_total_value as int)
+			if (current_whole_value != previous_whole_value):
+				results_sfx.play()
+			previous_whole_value = current_whole_value
+			
 			await get_tree().process_frame
 		await get_tree().create_timer(1.0).timeout
 		
@@ -195,13 +254,18 @@ func do_results_screen():
 		medal_message_label.text = (medal_format.format({"medal" : medal_type}) if level.can_get_medal() else no_medal_message)
 		match medal_type:
 			"MAGIC":
+				results_sfx.stream = magic_medal_get_sfx_stream
 				medal_message_label.modulate = mage_message_color
 			"DRAGON":
+				results_sfx.stream = dragon_medal_get_sfx_stream
 				medal_message_label.modulate = dragon_message_color
 			"BALANCE":
+				results_sfx.stream = balance_medal_get_sfx_stream
 				medal_message_label.modulate = balance_message_color
 			_:
+				results_sfx.stream = no_medal_get_sfx_stream
 				medal_message_label.modulate = Color.WHITE
+		results_sfx.play()
 		medal_sprite.animation = medal_type
 		await get_tree().create_timer(1.0).timeout
 	

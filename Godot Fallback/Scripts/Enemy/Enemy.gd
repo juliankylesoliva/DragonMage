@@ -35,6 +35,7 @@ func defeat_enemy(damage_type : StringName):
 		is_defeated = true
 		body.velocity = (vertical_launch_velocity_on_defeat * Vector2.UP)
 		sprite.visibility_layer = visibility_layer_on_defeat
+		sprite.z_index = z_index_on_defeat
 		on_defeat()
 		return true
 	return false
