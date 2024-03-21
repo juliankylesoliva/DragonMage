@@ -11,10 +11,12 @@ config_version=5
 [application]
 
 config/name="Dragon Mage (Godot Build)"
-run/main_scene="res://Level Scenes/CH1_LV1/CH1_LV1.tscn"
+run/main_scene="res://Misc Scenes/TitleScreen.tscn"
 config/features=PackedStringArray("4.1", "GL Compatibility")
 run/max_fps=60
-config/icon="res://icon.svg"
+boot_splash/use_filter=false
+config/icon="res://icon.png"
+boot_splash/minimum_display_time=3000
 
 [audio]
 

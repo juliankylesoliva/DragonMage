@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="LevelInfo" load_steps=3 format=3 uid="uid://cax712djysfpf"]
+
+[ext_resource type="Script" path="res://Scripts/Resource Scripts/LevelInfo/LevelInfo.gd" id="1_qaov2"]
+[ext_resource type="PackedScene" uid="uid://bee26tq601smv" path="res://Level Scenes/CH0_LV3/CH0_LV3.tscn" id="1_qp6kj"]
+
+[resource]
+script = ExtResource("1_qaov2")
+level_scene = ExtResource("1_qp6kj")
+name_header = "Ch. 0-3: Prisoner Predicament"
+story_description = ""

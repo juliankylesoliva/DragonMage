@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="LevelInfo" load_steps=3 format=3 uid="uid://cu7rb7wbifvei"]
+
+[ext_resource type="Script" path="res://Scripts/Resource Scripts/LevelInfo/LevelInfo.gd" id="1_7y5t6"]
+[ext_resource type="PackedScene" uid="uid://bq3ow3qdwirck" path="res://Level Scenes/CH0_LV2/CH0_LV2.tscn" id="1_w2omk"]
+
+[resource]
+script = ExtResource("1_7y5t6")
+level_scene = ExtResource("1_w2omk")
+name_header = "Ch. 0-2: Catharsis Cliffs"
+story_description = "05/06/202X - Afternoon
+
+GRAAAH!!! I CAN'T BELIEVE MY MAGIC BLAST MALFUNCTIONED! The spell was just fine once I arrived at work, but my boss rushed me into the meeting with NO TIME TO PREPARE! I got so nervous and stressed from all those people watching me fumble throughout my presentation that MY MAGIC GOT UNSTABLE AND MADE THE SPELL BOUNCE ALL OVER THE ROOM, KNOCKING AROUND MOST OF THOSE PRESENT!!!!!
+
+Luckily, nobody got hurt as per my spell's intended design, but my boss threatened to fire me after that blunder... At least until Knigel--my boyfriend / my roommate / the security knight at Magi Co.--convinced him otherwise, and I was simply sent home for the day while he decides the fate of my employment by tommorow. For now, I really owe Knigel for supporting me over the past 15 years. Before I went back to our apartment, Knigel reminded me about our nightly training at the mountains later, and I can't wait to show him the new tricks I came up with for my dragon powers!
+
+- M. DRAELYN -"

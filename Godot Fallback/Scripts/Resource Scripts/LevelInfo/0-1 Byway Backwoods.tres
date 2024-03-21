@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="LevelInfo" load_steps=3 format=3 uid="uid://c50cen4ku054b"]
+
+[ext_resource type="PackedScene" uid="uid://dgi7me5crgi8q" path="res://Level Scenes/CH0_LV1/CH0_LV1.tscn" id="1_mn0j0"]
+[ext_resource type="Script" path="res://Scripts/Resource Scripts/LevelInfo/LevelInfo.gd" id="2_brn82"]
+
+[resource]
+script = ExtResource("2_brn82")
+level_scene = ExtResource("1_mn0j0")
+name_header = "Ch. 0-1: Byway Backwoods"
+story_description = "May 6, 202X - Early Morning
+
+Oh, just my luck... The trains are delayed due to the Dragon Syndicate's latest shenanigans and I'm going to be late for work at this rate! Of all days it had to be the day I have to present my work to Magi Co.'s investors...
+
+Luckily, there's a forest I can take a shortcut through, which is the perfect spot to test out my latest spell, the Magic Blast! It's still just a prototype, so I hope it doesn't get worn out too much by the time the meeting starts...
+
+~ Magli D. ~"
