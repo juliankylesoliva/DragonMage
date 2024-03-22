@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://dqer84f2unm5v"]
+[gd_scene load_steps=16 format=3 uid="uid://dqer84f2unm5v"]
 
 [ext_resource type="Texture2D" uid="uid://cy0v185dvnlpm" path="res://Sprites/Objects/MagicProjectile.png" id="1_5ikkx"]
 [ext_resource type="Script" path="res://Scripts/UI Scripts/MenuCursor.gd" id="1_kcvgr"]
@@ -7,6 +7,8 @@
 [ext_resource type="AudioStream" uid="uid://doexpubjj7iw2" path="res://Sounds/attack_magli_bounce.wav" id="4_db8r8"]
 [ext_resource type="AudioStream" uid="uid://b1a0wj3h6eyxq" path="res://Sounds/attack_draelyn_bump.wav" id="5_lupmt"]
 [ext_resource type="AudioStream" uid="uid://ck21y7xsah3fy" path="res://Sounds/attack_draelyn_tackle.wav" id="5_ynkcm"]
+[ext_resource type="AudioStream" uid="uid://drv6xlsr5c46m" path="res://Sounds/transformation_magli.wav" id="6_171ah"]
+[ext_resource type="AudioStream" uid="uid://b4newloskxo6e" path="res://Sounds/transformation_draelyn.wav" id="7_ytjli"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_xsfw0"]
 atlas = ExtResource("1_5ikkx")
@@ -62,6 +64,8 @@ magic_move_sfx_stream = ExtResource("4_db8r8")
 dragon_move_sfx_stream = ExtResource("5_lupmt")
 magic_select_sfx_stream = ExtResource("4_a10cd")
 dragon_select_sfx_stream = ExtResource("5_ynkcm")
+magic_accept_sfx_stream = ExtResource("6_171ah")
+dragon_cancel_sfx_stream = ExtResource("7_ytjli")
 
 [node name="MagicCursorL" type="AnimatedSprite2D" parent="."]
 light_mask = 64

@@ -18,6 +18,10 @@ class_name MenuCursor
 
 @export var dragon_select_sfx_stream : AudioStream
 
+@export var magic_accept_sfx_stream : AudioStream
+
+@export var dragon_cancel_sfx_stream : AudioStream
+
 @export var padding : float = 16
 
 @export var initial_spacing : float = 0
@@ -69,6 +73,14 @@ func play_move_sound():
 	magic_sfx.stream = magic_move_sfx_stream
 	dragon_sfx.stream = dragon_move_sfx_stream
 	magic_sfx.play()
+	dragon_sfx.play()
+
+func play_accept_sound():
+	magic_sfx.stream = magic_accept_sfx_stream
+	magic_sfx.play()
+
+func play_cancel_sound():
+	dragon_sfx.stream = dragon_cancel_sfx_stream
 	dragon_sfx.play()
 
 func play_select_sound():

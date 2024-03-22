@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://b6ourfnqhy0wk"]
+[gd_scene load_steps=20 format=3 uid="uid://b6ourfnqhy0wk"]
 
 [ext_resource type="Script" path="res://Scripts/Utility Scripts/Level.gd" id="1_3mmw4"]
 [ext_resource type="PackedScene" uid="uid://c6qw77ovfwgfs" path="res://Player.tscn" id="2_isfe7"]
@@ -16,6 +16,7 @@
 [ext_resource type="PackedScene" uid="uid://drbl7ccxv7sa0" path="res://Level Scenes/CH1_LV1/Rooms/CH1_LV1_R10.tscn" id="13_lfovm"]
 [ext_resource type="PackedScene" uid="uid://ctjuhf6dkkqy8" path="res://Level Scenes/CH1_LV1/Rooms/CH1_LV1_R11.tscn" id="14_daiil"]
 [ext_resource type="PackedScene" uid="uid://8beel2odcuky" path="res://Scene Objects/Effects/ScreenFade.tscn" id="16_gb8bt"]
+[ext_resource type="PackedScene" uid="uid://d1eef1xjuwf3b" path="res://Scene Objects/Misc/PauseMenu.tscn" id="17_5ns53"]
 [ext_resource type="PackedScene" uid="uid://b5wwivjk8sl7b" path="res://Scene Objects/Misc/ClearTimer.tscn" id="17_21jxy"]
 [ext_resource type="PackedScene" uid="uid://buykytsdrlnsg" path="res://Scene Objects/Misc/ResultsScreen.tscn" id="18_wudxn"]
 
@@ -178,14 +179,18 @@ room_destination = NodePath("../../CH1_LV1_R11")
 [node name="CH1_LV1_R11" parent="." instance=ExtResource("14_daiil")]
 position = Vector2(1312, 640)
 
-[node name="ScreenFade" parent="." instance=ExtResource("16_gb8bt")]
-
 [node name="ClearTimer" parent="." instance=ExtResource("17_21jxy")]
+
+[node name="PauseMenu" parent="." node_paths=PackedStringArray("screen_fade") instance=ExtResource("17_5ns53")]
+screen_fade = NodePath("../ScreenFade")
 
 [node name="ResultsScreen" parent="." node_paths=PackedStringArray("screen_fade", "level", "clear_timer") instance=ExtResource("18_wudxn")]
 screen_fade = NodePath("../ScreenFade")
 level = NodePath("..")
 clear_timer = NodePath("../ClearTimer")
+
+[node name="ScreenFade" parent="." instance=ExtResource("16_gb8bt")]
+starting_fade_duration = 1.0
 
 [connection signal="level_finished" from="CH1_LV1_R11/FinishLine" to="." method="level_finish"]
 [connection signal="level_finished" from="CH1_LV1_R11/FinishLine" to="ClearTimer" method="stop_timer"]

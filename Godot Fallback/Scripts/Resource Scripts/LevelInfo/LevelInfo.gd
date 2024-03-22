@@ -2,7 +2,7 @@ extends Resource
 
 class_name LevelInfo
 
-@export var level_scene : PackedScene
+@export var level_scene_path : String
 
 @export var name_header : String
 

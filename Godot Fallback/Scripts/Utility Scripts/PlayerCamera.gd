@@ -32,6 +32,10 @@ class_name PlayerCamera
 
 @export var time_to_update_y : float = 0.25
 
+@export var enable_camera_lock : bool = false
+
+@export var locked_camera_move_speed : float = 192
+
 var current_x_lookahead : float = 0
 
 var saved_y_position : float = 0
@@ -40,17 +44,26 @@ var was_upper_threshold_crossed : bool = false
 
 var was_lower_threshold_crossed : bool = false
 
+var is_camera_locked : bool = false
+
 func _ready():
 	saved_y_position = hub.collisions.get_ground_point().y
 	snap_camera_to_player()
 
 func _physics_process(delta):
-	if (hub.state_machine.current_state.can_update_camera_x_pos):
-		update_x_lookahead(delta)
-	if (hub.state_machine.current_state.can_update_camera_y_pos):
-		update_y_lookahead(delta)
+	check_camera_lock()
+	if (!is_camera_locked):
+		if (hub.state_machine.current_state.can_update_camera_x_pos):
+			update_x_lookahead(delta)
+		if (hub.state_machine.current_state.can_update_camera_y_pos):
+			update_y_lookahead(delta)
+	else:
+		move_locked_camera(delta)
 
 func update_x_lookahead(delta : float):
+	if (is_camera_locked):
+		return
+	
 	var target_direction : float = (hub.movement.get_facing_value() if hub.state_machine.current_state.name != "Gliding" else hub.get_input_vector().x)
 	var max_lookahead : float = (max_x_lookahead if abs(hub.char_body.velocity.x) > hub.movement.top_speed else base_x_lookahead)
 	current_x_lookahead = move_toward(current_x_lookahead, target_direction * max_lookahead, max(hub.movement.top_speed, abs(hub.char_body.velocity.x)) * delta)
@@ -60,6 +73,9 @@ func update_x_lookahead(delta : float):
 	player_cam.global_position.x = target_x
 
 func update_y_lookahead(delta : float):
+	if (is_camera_locked):
+		return
+	
 	var state_name : String = hub.state_machine.current_state.name
 	if (hub.char_body.is_on_floor() or state_name == "WallSliding" or state_name == "WallClimbing" or state_name == "WallVaulting"):
 		was_upper_threshold_crossed = false
@@ -82,6 +98,9 @@ func update_y_lookahead(delta : float):
 	player_cam.global_position.y = (move_toward(player_cam.global_position.y, target_y, (abs(target_y - player_cam.global_position.y) / time_to_update_y) * delta) if !hub.char_body.is_on_floor() or player_cam.global_position.y != target_y else target_y)
 
 func fire_tackle_camera_update(delta : float, prev_x_velocity : float, vertical_axis : float):
+	if (is_camera_locked):
+		return
+	
 	current_x_lookahead = move_toward(current_x_lookahead, hub.movement.get_facing_value() * (max_x_lookahead if abs(prev_x_velocity) > hub.movement.top_speed else base_x_lookahead), max(hub.movement.top_speed, abs(prev_x_velocity)) * delta)
 	
 	var target_x : float = (hub.char_body.global_position.x + current_x_lookahead)
@@ -93,6 +112,9 @@ func fire_tackle_camera_update(delta : float, prev_x_velocity : float, vertical_
 	player_cam.global_position.y = (move_toward(player_cam.global_position.y, target_y, (abs(target_y - player_cam.global_position.y) / time_to_update_y) * delta))
 
 func wall_climb_horizontal_camera_update(delta : float, stored_speed : float, use_max_lookahead):
+	if (is_camera_locked):
+		return
+	
 	current_x_lookahead = move_toward(current_x_lookahead, hub.movement.get_facing_value() * (-1 if (hub.movement.get_facing_value() * hub.get_input_vector().x) <= 0 else 1) * (max_x_lookahead if use_max_lookahead else base_x_lookahead), stored_speed * delta)
 	
 	var target_x : float = (hub.char_body.global_position.x + current_x_lookahead)
@@ -100,6 +122,9 @@ func wall_climb_horizontal_camera_update(delta : float, stored_speed : float, us
 	player_cam.global_position.x = target_x
 
 func damaged_horizontal_camera_update(delta : float):
+	if (is_camera_locked):
+		return
+	
 	current_x_lookahead = move_toward(current_x_lookahead, 0, abs(hub.damage.horizontal_damage_knockback) * delta)
 	
 	var target_x : float = (hub.char_body.global_position.x + current_x_lookahead)
@@ -136,3 +161,15 @@ func is_below_lower_threshold():
 
 func is_between_thresholds():
 	return (!is_above_upper_threshold() and !is_below_lower_threshold())
+
+func check_camera_lock():
+	if (Input.is_action_just_pressed("Lock Camera")):
+		is_camera_locked = !is_camera_locked
+
+func move_locked_camera(delta : float):
+	if (hub.is_level_complete):
+		return
+	var input_vector = Vector2.ZERO
+	input_vector.x = ((1 if Input.is_action_pressed("Move Camera Right") else 0) - (1 if Input.is_action_pressed("Move Camera Left") else 0))
+	input_vector.y = ((1 if Input.is_action_pressed("Move Camera Down") else 0) - (1 if Input.is_action_pressed("Move Camera Up") else 0))
+	get_viewport().get_camera_2d().global_position += (locked_camera_move_speed * input_vector * delta)

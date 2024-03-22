@@ -246,6 +246,7 @@ balance_message_color = Color(0.839216, 0.839216, 0.839216, 1)
 retry_button_label = NodePath("RetryLevel")
 menu_button_label = NodePath("ReturnToMenu")
 menu_cursor = NodePath("MenuCursor")
+title_scene_path = "res://Misc Scenes/TitleScreen.tscn"
 
 [node name="ResultsSFX" type="AudioStreamPlayer2D" parent="."]
 volume_db = -2.0

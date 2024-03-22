@@ -3,6 +3,7 @@
 [ext_resource type="Script" path="res://Scripts/UI Scripts/ScreenFade.gd" id="1_xjsdx"]
 
 [node name="ScreenFade" type="ColorRect"]
+process_mode = 3
 light_mask = 64
 visibility_layer = 64
 z_index = 20

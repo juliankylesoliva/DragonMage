@@ -33,6 +33,7 @@ var mage_fragments : int = 0
 var dragon_fragments : int = 0
 
 func _ready():
+	PauseHandler.enable_pausing(true)
 	level_startup()
 
 func level_startup():

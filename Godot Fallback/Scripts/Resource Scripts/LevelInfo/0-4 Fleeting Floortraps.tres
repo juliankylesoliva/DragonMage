@@ -1,10 +1,9 @@
-[gd_resource type="Resource" script_class="LevelInfo" load_steps=3 format=3 uid="uid://bplmduteoqxky"]
+[gd_resource type="Resource" script_class="LevelInfo" load_steps=2 format=3 uid="uid://bplmduteoqxky"]
 
-[ext_resource type="PackedScene" uid="uid://qa22n4g30owo" path="res://Level Scenes/CH0_LV4/CH0_LV4.tscn" id="1_u4xuv"]
 [ext_resource type="Script" path="res://Scripts/Resource Scripts/LevelInfo/LevelInfo.gd" id="2_3r7tc"]
 
 [resource]
 script = ExtResource("2_3r7tc")
-level_scene = ExtResource("1_u4xuv")
+level_scene_path = "res://Level Scenes/CH0_LV4/CH0_LV4.tscn"
 name_header = "Ch. 0-4: Fleeting Floortraps"
 story_description = ""

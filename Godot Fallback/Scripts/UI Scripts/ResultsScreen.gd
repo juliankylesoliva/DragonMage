@@ -90,6 +90,8 @@ class_name ResultsScreen
 
 @export var menu_cursor : MenuCursor
 
+@export var title_scene_path : String
+
 var are_menu_options_selectable : bool = false
 
 var current_menu_selection : int = 0
@@ -126,13 +128,20 @@ func do_menu():
 			are_menu_options_selectable = false
 			match current_menu_selection:
 				0:
-					pass
+					do_main_menu()
 				1:
 					do_retry_level()
 				_:
 					pass
 		
 		previous_menu_selection = current_menu_selection
+
+func do_main_menu():
+	menu_cursor.do_selection_movement()
+	await get_tree().create_timer(1.0).timeout
+	screen_fade.set_fade(1, 1, Color.BLACK)
+	await get_tree().create_timer(2.0).timeout
+	get_tree().change_scene_to_file(title_scene_path)
 
 func do_retry_level():
 	menu_cursor.do_selection_movement()

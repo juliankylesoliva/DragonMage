@@ -1468,6 +1468,7 @@ fire_tackle_attack = NodePath("../Attacks/FireTackle")
 script = ExtResource("54_k03tc")
 hub = NodePath("..")
 max_x_lookahead = 128.0
+max_y_lookahead = 160.0
 ground_level_update_height_threshold = 96.0
 fast_fall_y_lookahead = 320.0
 fast_fall_ground_distance_threshold = 256.0

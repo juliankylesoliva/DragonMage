@@ -19,4 +19,5 @@ func _on_area_2d_body_entered(body):
 			is_tape_broken = true
 			z_index = broken_z_index
 			play("Break")
+			PauseHandler.enable_pausing(false)
 			level_finished.emit()

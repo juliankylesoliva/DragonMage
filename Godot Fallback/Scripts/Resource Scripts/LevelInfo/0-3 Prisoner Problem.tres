@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="LevelInfo" load_steps=2 format=3 uid="uid://cax712djysfpf"]
+
+[ext_resource type="Script" path="res://Scripts/Resource Scripts/LevelInfo/LevelInfo.gd" id="2_s3kf1"]
+
+[resource]
+script = ExtResource("2_s3kf1")
+level_scene_path = "res://Level Scenes/CH0_LV3/CH0_LV3.tscn"
+name_header = "Ch. 0-3: Prisoner Problem"
+story_description = "May 6, 202X - Evening
+	How did we get so careless!? Knigel and I strayed too far from our usual training route, and we ended up getting ambushed by some Dragoons from the Dragon Syndicate! They were after my magic powers, but Knigel managed to hold them back long enough for me to run away and hide. As I was watching him fight, I saw one of the Dragoons zapping Knigel with a strange device, which left behind nothing but his clothes! Without thinking, I ran back to those Dragoons and knocked them all away with my Magic Blast!
+	When I knelt beside where Knigel stood, I was shocked to see that Knigel was alive, but as a tiny fairy! He then explained that his name used to be Faeson and that he's insecure about being a weak fairy, so he used his magic to make himself human-sized so he could train to become a knight. The Dragoons just took his magic, so Knigel can no longer retain his human form. We tried to leave the mountains to get help, but the Dragoons caught up to us again and kidnapped us! Now we're in a prison, and I must use both my mage and dragon powers to help us escape!
+
+~ Magli DRAELYN -"

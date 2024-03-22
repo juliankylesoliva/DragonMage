@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://dgi7me5crgi8q"]
+[gd_scene load_steps=17 format=3 uid="uid://dgi7me5crgi8q"]
 
 [ext_resource type="Script" path="res://Scripts/Utility Scripts/Level.gd" id="1_6mws2"]
 [ext_resource type="PackedScene" uid="uid://cevmm5dwm345v" path="res://Level Scenes/CH0_LV1/Rooms/CH0_LV1_R1.tscn" id="2_7b35j"]
@@ -12,6 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://dnrvj1k4v8ojw" path="res://Level Scenes/CH0_LV1/Rooms/CH0_LV1_R8.tscn" id="10_40xoc"]
 [ext_resource type="PackedScene" uid="uid://bsvxvuyq2tbm0" path="res://Level Scenes/CH0_LV1/Rooms/CH0_LV1_R9.tscn" id="11_eb1id"]
 [ext_resource type="PackedScene" uid="uid://c8quw8sgdw2un" path="res://Level Scenes/CH0_LV1/Rooms/CH0_LV1_R10.tscn" id="12_ra648"]
+[ext_resource type="PackedScene" uid="uid://d1eef1xjuwf3b" path="res://Scene Objects/Misc/PauseMenu.tscn" id="13_1kf77"]
 [ext_resource type="PackedScene" uid="uid://8beel2odcuky" path="res://Scene Objects/Effects/ScreenFade.tscn" id="13_ggxcq"]
 [ext_resource type="PackedScene" uid="uid://b5wwivjk8sl7b" path="res://Scene Objects/Misc/ClearTimer.tscn" id="14_dibul"]
 [ext_resource type="PackedScene" uid="uid://buykytsdrlnsg" path="res://Scene Objects/Misc/ResultsScreen.tscn" id="15_g0j50"]
@@ -122,15 +123,19 @@ position = Vector2(1568, 1568)
 room_destination = NodePath("../../CH0_LV1_R9")
 room_entrance_index = 1
 
-[node name="ScreenFade" parent="." instance=ExtResource("13_ggxcq")]
-
 [node name="ClearTimer" parent="." instance=ExtResource("14_dibul")]
+
+[node name="PauseMenu" parent="." node_paths=PackedStringArray("screen_fade") instance=ExtResource("13_1kf77")]
+screen_fade = NodePath("../ScreenFade")
 
 [node name="ResultsScreen" parent="." node_paths=PackedStringArray("screen_fade", "level", "clear_timer") instance=ExtResource("15_g0j50")]
 screen_fade = NodePath("../ScreenFade")
 level = NodePath("..")
 clear_timer = NodePath("../ClearTimer")
 show_fragment_result = false
+
+[node name="ScreenFade" parent="." instance=ExtResource("13_ggxcq")]
+starting_fade_duration = 1.0
 
 [connection signal="level_finished" from="CH0_LV1_R10/FinishLine" to="." method="level_finish"]
 [connection signal="level_finished" from="CH0_LV1_R10/FinishLine" to="ClearTimer" method="stop_timer"]
