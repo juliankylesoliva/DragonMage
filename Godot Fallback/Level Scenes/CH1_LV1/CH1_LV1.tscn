@@ -1,6 +1,7 @@
-[gd_scene load_steps=20 format=3 uid="uid://b6ourfnqhy0wk"]
+[gd_scene load_steps=21 format=3 uid="uid://b6ourfnqhy0wk"]
 
 [ext_resource type="Script" path="res://Scripts/Utility Scripts/Level.gd" id="1_3mmw4"]
+[ext_resource type="PackedScene" uid="uid://d0ff35cm57xb7" path="res://Scene Objects/Effects/DroppedFragment.tscn" id="2_gdxu6"]
 [ext_resource type="PackedScene" uid="uid://c6qw77ovfwgfs" path="res://Player.tscn" id="2_isfe7"]
 [ext_resource type="PackedScene" uid="uid://bdypi7w73c6kq" path="res://Scene Objects/UI/TemperMeterUI.tscn" id="3_bvq0l"]
 [ext_resource type="PackedScene" uid="uid://cn18g24teqsm4" path="res://Level Scenes/CH1_LV1/Rooms/CH1_LV1_R1.tscn" id="4_m63j7"]
@@ -27,6 +28,7 @@ starting_room = NodePath("CH1_LV1_R1")
 room_list = [NodePath("CH1_LV1_R1"), NodePath("CH1_LV1_R2"), NodePath("CH1_LV1_R3"), NodePath("CH1_LV1_R4"), NodePath("CH1_LV1_R5"), NodePath("CH1_LV1_R6"), NodePath("CH1_LV1_R7"), NodePath("CH1_LV1_R8"), NodePath("CH1_LV1_R9"), NodePath("CH1_LV1_R10"), NodePath("CH1_LV1_R11")]
 min_fragment_collection_rate = 0.64
 ui_container = NodePath("VBoxContainer")
+dropped_fragment_scene = ExtResource("2_gdxu6")
 
 [node name="Player" parent="." instance=ExtResource("2_isfe7")]
 position = Vector2(96, 223)

@@ -43,6 +43,9 @@ res://Sounds/object_medal_pickup.wav
 res://Sounds/obstacle_spikes_active.wav
 res://Sounds/obstacle_spikes_retract.wav
 res://Sounds/obstacle_spikes_warning.wav
+res://Sounds/player_falling.wav
+res://Sounds/player_falling_impact.wav
+res://Sounds/player_falling_respawn.wav
 res://Sounds/transformation_draelyn.wav
 res://Sounds/transformation_draelyn_locked.wav
 res://Sounds/transformation_magli.wav

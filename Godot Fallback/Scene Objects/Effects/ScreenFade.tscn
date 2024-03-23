@@ -6,7 +6,7 @@
 process_mode = 3
 light_mask = 64
 visibility_layer = 64
-z_index = 20
+z_index = 50
 offset_right = 544.0
 offset_bottom = 352.0
 color = Color(0, 0, 0, 0)

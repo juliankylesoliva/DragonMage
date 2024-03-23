@@ -1,7 +1,8 @@
-[gd_scene load_steps=17 format=3 uid="uid://dgi7me5crgi8q"]
+[gd_scene load_steps=18 format=3 uid="uid://dgi7me5crgi8q"]
 
 [ext_resource type="Script" path="res://Scripts/Utility Scripts/Level.gd" id="1_6mws2"]
 [ext_resource type="PackedScene" uid="uid://cevmm5dwm345v" path="res://Level Scenes/CH0_LV1/Rooms/CH0_LV1_R1.tscn" id="2_7b35j"]
+[ext_resource type="PackedScene" uid="uid://d0ff35cm57xb7" path="res://Scene Objects/Effects/DroppedFragment.tscn" id="2_wgkbh"]
 [ext_resource type="PackedScene" uid="uid://c6qw77ovfwgfs" path="res://Player.tscn" id="3_kxyfd"]
 [ext_resource type="PackedScene" uid="uid://dnpvuqoaw1br7" path="res://Level Scenes/CH0_LV1/Rooms/CH0_LV1_R2.tscn" id="3_upqvj"]
 [ext_resource type="PackedScene" uid="uid://mh0whhxa3l8w" path="res://Level Scenes/CH0_LV1/Rooms/CH0_LV1_R3.tscn" id="5_vfoci"]
@@ -22,6 +23,7 @@ script = ExtResource("1_6mws2")
 player_reference = NodePath("Player")
 starting_room = NodePath("CH0_LV1_R1")
 room_list = [NodePath("CH0_LV1_R1"), NodePath("CH0_LV1_R2"), NodePath("CH0_LV1_R3"), NodePath("CH0_LV1_R4"), NodePath("CH0_LV1_R5"), NodePath("CH0_LV1_R6"), NodePath("CH0_LV1_R7"), NodePath("CH1_LV1_R8"), NodePath("CH0_LV1_R9"), NodePath("CH0_LV1_R10")]
+dropped_fragment_scene = ExtResource("2_wgkbh")
 
 [node name="Player" parent="." instance=ExtResource("3_kxyfd")]
 position = Vector2(96, 223)
@@ -132,6 +134,7 @@ screen_fade = NodePath("../ScreenFade")
 screen_fade = NodePath("../ScreenFade")
 level = NodePath("..")
 clear_timer = NodePath("../ClearTimer")
+show_damage_result = false
 show_fragment_result = false
 
 [node name="ScreenFade" parent="." instance=ExtResource("13_ggxcq")]

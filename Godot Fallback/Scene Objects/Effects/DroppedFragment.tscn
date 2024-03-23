@@ -1,0 +1,101 @@
+[gd_scene load_steps=13 format=3 uid="uid://d0ff35cm57xb7"]
+
+[ext_resource type="Script" path="res://Scripts/Utility Scripts/DroppedFragment.gd" id="1_ci80r"]
+[ext_resource type="Texture2D" uid="uid://d0ujp4jm7f6yw" path="res://Sprites/Objects/MedalFragmentSpin.png" id="1_ydwfa"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_0aarb"]
+radius = 16.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h0oer"]
+atlas = ExtResource("1_ydwfa")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f1i5d"]
+atlas = ExtResource("1_ydwfa")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_03vg5"]
+atlas = ExtResource("1_ydwfa")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rx3o8"]
+atlas = ExtResource("1_ydwfa")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i5ego"]
+atlas = ExtResource("1_ydwfa")
+region = Rect2(128, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jfhhw"]
+atlas = ExtResource("1_ydwfa")
+region = Rect2(160, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6jsvn"]
+atlas = ExtResource("1_ydwfa")
+region = Rect2(192, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j4oqj"]
+atlas = ExtResource("1_ydwfa")
+region = Rect2(224, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_kije7"]
+animations = [{
+"frames": [{
+"duration": 2.0,
+"texture": SubResource("AtlasTexture_h0oer")
+}, {
+"duration": 2.0,
+"texture": SubResource("AtlasTexture_f1i5d")
+}, {
+"duration": 2.0,
+"texture": SubResource("AtlasTexture_03vg5")
+}, {
+"duration": 2.0,
+"texture": SubResource("AtlasTexture_rx3o8")
+}, {
+"duration": 2.0,
+"texture": SubResource("AtlasTexture_i5ego")
+}, {
+"duration": 2.0,
+"texture": SubResource("AtlasTexture_jfhhw")
+}, {
+"duration": 2.0,
+"texture": SubResource("AtlasTexture_6jsvn")
+}, {
+"duration": 2.0,
+"texture": SubResource("AtlasTexture_j4oqj")
+}],
+"loop": true,
+"name": &"default",
+"speed": 60.0
+}]
+
+[node name="DroppedFragment" type="RigidBody2D" node_paths=PackedStringArray("sprite")]
+light_mask = 33
+visibility_layer = 32
+z_index = 6
+collision_layer = 0
+collision_mask = 0
+gravity_scale = 3.0
+lock_rotation = true
+script = ExtResource("1_ci80r")
+sprite = NodePath("AnimatedSprite2D")
+min_vertical_launch = -384.0
+max_vertical_launch = -576.0
+min_horizontal_launch = -320.0
+max_horizontal_launch = 320.0
+mage_color = Color(0.266667, 0.203922, 0.509804, 1)
+dragon_color = Color(0.811765, 0.478431, 0.188235, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_0aarb")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_kije7")
+autoplay = "default"
+frame_progress = 0.93068
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+rect = Rect2(-16, -16, 32, 32)
+
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

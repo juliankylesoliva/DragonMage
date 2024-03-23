@@ -20,6 +20,8 @@ class_name Level
 
 @export var ui_container : Control
 
+@export var dropped_fragment_scene : PackedScene
+
 var player_ref : PlayerHub
 
 var fragment_array : Array[MedalFragment]
@@ -138,3 +140,26 @@ func drop_fragments():
 				dropped_dragon_fragments = dragon_fragments_to_drop
 	mage_fragments -= dropped_mage_fragments
 	dragon_fragments -= dropped_dragon_fragments
+	spawn_dropped_fragments(dropped_mage_fragments, dropped_dragon_fragments)
+
+func spawn_dropped_fragments(mage : int, dragon : int):
+	while (mage > 0 or dragon > 0):
+		var temp_node : Node = dropped_fragment_scene.instantiate()
+		call_deferred("add_child", temp_node)
+		
+		var temp_fragment : DroppedFragment = (temp_node as DroppedFragment)
+		if (mage == 0):
+			temp_fragment.setup_color(false)
+			dragon -= 1
+		elif (dragon == 0):
+			temp_fragment.setup_color(true)
+			mage -= 1
+		else:
+			var is_mage : bool = ((randi() % 2) == 0)
+			temp_fragment.setup_color(is_mage)
+			if (is_mage):
+				mage -= 1
+			else:
+				dragon -= 1
+		
+		temp_fragment.global_position = player_ref.char_body.global_position

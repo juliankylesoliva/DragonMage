@@ -40,6 +40,8 @@ class_name ResultsScreen
 
 @export var time_count_duration : float = 1
 
+@export var show_damage_result : bool = true
+
 @export var damage_taken_label : RichTextLabel
 
 @export var damage_text_format : String = "DAMAGE TAKEN\n{damage}"
@@ -185,22 +187,23 @@ func do_results_screen():
 		await get_tree().process_frame
 	await get_tree().create_timer(0.5).timeout
 	
-	damage_taken_label.set_visible(true)
-	var current_damage_value : float = 0
-	var target_damage_value : float = level.player_ref.damage.damage_taken
-	previous_whole_value = 0
-	results_sfx.stream = damage_tick_sfx_stream
-	while (current_damage_value < target_damage_value):
-		current_damage_value = move_toward(current_damage_value, target_damage_value, (target_damage_value * get_physics_process_delta_time()) / damage_count_duration)
-		damage_taken_label.text = damage_text_format.format({"damage" : (current_damage_value as int)})
-		
-		current_whole_value = (current_damage_value as int)
-		if (current_whole_value != previous_whole_value):
-			results_sfx.play()
-		previous_whole_value = current_whole_value
-		
-		await get_tree().process_frame
-	await get_tree().create_timer(0.5).timeout
+	if (show_damage_result):
+		damage_taken_label.set_visible(true)
+		var current_damage_value : float = 0
+		var target_damage_value : float = level.player_ref.damage.damage_taken
+		previous_whole_value = 0
+		results_sfx.stream = damage_tick_sfx_stream
+		while (current_damage_value < target_damage_value):
+			current_damage_value = move_toward(current_damage_value, target_damage_value, (target_damage_value * get_physics_process_delta_time()) / damage_count_duration)
+			damage_taken_label.text = damage_text_format.format({"damage" : (current_damage_value as int)})
+			
+			current_whole_value = (current_damage_value as int)
+			if (current_whole_value != previous_whole_value):
+				results_sfx.play()
+			previous_whole_value = current_whole_value
+			
+			await get_tree().process_frame
+		await get_tree().create_timer(0.5).timeout
 	
 	if (show_fragment_result):
 		fragment_ratio_label.set_visible(true)
