@@ -1,5 +1,12 @@
 extends Enemy
 
+enum EnemyProjectileState
+{
+	STANDBY,
+	WINDUP,
+	COOLDOWN
+}
+
 @export var red_dragoon_projectile_scene : PackedScene
 
 @export var projectile_spawn_point : Node2D
@@ -12,7 +19,7 @@ extends Enemy
 
 var base_gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
-var current_projectile_state : String = "STANDBY"
+var current_projectile_state : EnemyProjectileState = EnemyProjectileState.STANDBY
 
 var current_projectile_state_timer : float = 0
 
@@ -39,34 +46,34 @@ func spawn_shades():
 	(temp_shades as DragoonShades).setup(self)
 
 func launch_projectile():
-	if (current_projectile_state != "STANDBY" or !visibility_notifier.is_on_screen()):
+	if (current_projectile_state != EnemyProjectileState.STANDBY or !visibility_notifier.is_on_screen()):
 		return
-	current_projectile_state = "WINDUP"
+	current_projectile_state = EnemyProjectileState.WINDUP
 	current_projectile_state_timer = pre_fire_windup
 	sprite.play("AttackWindup")
 
 func reset_timer_and_state():
-	current_projectile_state = "STANDBY"
+	current_projectile_state = EnemyProjectileState.STANDBY
 	current_projectile_state_timer = 0
 
 func update_state_timer(delta : float):
-	if (current_projectile_state == "WINDUP" or current_projectile_state == "COOLDOWN"):
+	if (current_projectile_state == EnemyProjectileState.WINDUP or current_projectile_state == EnemyProjectileState.COOLDOWN):
 		if (current_projectile_state_timer > 0):
 			current_projectile_state_timer = move_toward(current_projectile_state_timer, 0, delta)
 		
 		if (current_projectile_state_timer <= 0):
-			if (current_projectile_state == "WINDUP"):
+			if (current_projectile_state == EnemyProjectileState.WINDUP):
 				var proj_temp: Node = red_dragoon_projectile_scene.instantiate()
 				body.add_sibling(proj_temp)
 				(proj_temp as Node2D).global_position = projectile_spawn_point.global_position
 				
 				(proj_temp as EnemyProjectile).setup(self)
 				
-				current_projectile_state = "COOLDOWN"
+				current_projectile_state = EnemyProjectileState.COOLDOWN
 				current_projectile_state_timer = post_fire_cooldown
 				sprite.play("AttackLaunch")
 			else:
-				current_projectile_state = "STANDBY"
+				current_projectile_state = EnemyProjectileState.STANDBY
 				current_projectile_state_timer = 0
 				sprite.play("Idle")
 

@@ -43,7 +43,7 @@ class_name PlayerHub
 
 var current_respawn_position : Vector2 = Vector2.ZERO
 
-var is_level_complete : bool = false
+var is_deactivated : bool = false
 
 func get_input_vector():
 	var input_vector = Vector2.ZERO
@@ -58,8 +58,5 @@ func set_respawn_position(pos : Vector2):
 func do_respawn():
 	char_body.global_position = current_respawn_position
 
-func set_level_complete():
-	is_level_complete = true
-
-func unset_level_complete():
-	is_level_complete = false
+func set_deactivation(b : bool):
+	is_deactivated = b

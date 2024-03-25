@@ -1,0 +1,26 @@
+Joypad Button 0 (Bottom Action, Sony Cross, Xbox A, Nintendo B)|res://Sprites/UI/ButtonIcons/SouthFaceButton.png
+Joypad Button 1 (Right Action, Sony Circle, Xbox B, Nintendo A)|res://Sprites/UI/ButtonIcons/EastFaceButton.png
+Joypad Button 2 (Left Action, Sony Square, Xbox X, Nintendo Y)|res://Sprites/UI/ButtonIcons/WestFaceButton.png
+Joypad Button 6 (Start, Xbox Menu, Nintendo +)|res://Sprites/UI/ButtonIcons/Start.png
+Joypad Button 9 (Left Shoulder, Sony L1, Xbox LB)|res://Sprites/UI/ButtonIcons/LeftBumper.png
+Joypad Button 10 (Right Shoulder, Sony R1, Xbox RB)|res://Sprites/UI/ButtonIcons/RightBumper.png
+Joypad Button 11 (D-pad Up)|res://Sprites/UI/ButtonIcons/DPadUp.png
+Joypad Button 12 (D-pad Down)|res://Sprites/UI/ButtonIcons/DPadDown.png
+Joypad Button 13 (D-pad Left)|res://Sprites/UI/ButtonIcons/DPadLeft.png
+Joypad Button 14 (D-pad Right)|res://Sprites/UI/ButtonIcons/DPadRight.png
+Joypad Motion on Axis 5 (Joystick 2 Y-Axis, Right Trigger, Sony R2, Xbox RT) with Value 1.00|res://Sprites/UI/ButtonIcons/RightTrigger.png
+Joypad Motion on Axis 0 (Left Stick X-Axis, Joystick 0 X-Axis) with Value -1.00|res://Sprites/UI/ButtonIcons/DPadLeft.png
+Joypad Motion on Axis 0 (Left Stick X-Axis, Joystick 0 X-Axis) with Value 1.00|res://Sprites/UI/ButtonIcons/DPadRight.png
+Joypad Motion on Axis 1 (Left Stick Y-Axis, Joystick 0 Y-Axis) with Value -1.00|res://Sprites/UI/ButtonIcons/DPadUp.png
+Joypad Motion on Axis 1 (Left Stick Y-Axis, Joystick 0 Y-Axis) with Value 1.00|res://Sprites/UI/ButtonIcons/DPadDown.png
+Z (Physical)|res://Sprites/UI/ButtonIcons/ZKey.png
+X (Physical)|res://Sprites/UI/ButtonIcons/XKey.png
+C (Physical)|res://Sprites/UI/ButtonIcons/CKey.png
+Up (Physical)|res://Sprites/UI/ButtonIcons/UpKey.png
+Right (Physical)|res://Sprites/UI/ButtonIcons/RightKey.png
+Down (Physical)|res://Sprites/UI/ButtonIcons/DownKey.png
+Left (Physical)|res://Sprites/UI/ButtonIcons/LeftKey.png
+Ctrl (Physical)|res://Sprites/UI/ButtonIcons/CtrlKey.png
+Shift (Physical)|res://Sprites/UI/ButtonIcons/ShiftKey.png
+Enter (Physical)|res://Sprites/UI/ButtonIcons/EnterKey.png
+Space (Physical)|res://Sprites/UI/ButtonIcons/Spacebar.png

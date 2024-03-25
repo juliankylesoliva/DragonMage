@@ -99,7 +99,7 @@ func on_attack_state_enter():
 	startup_init()
 
 func attack_state_process(_delta : float):
-	if (hub.is_level_complete):
+	if (hub.is_deactivated):
 		end_fire_tackle()
 	elif (current_attack_state == AttackState.STARTUP):
 		startup_update(_delta)
@@ -366,7 +366,7 @@ func end_fire_tackle():
 	if (!is_fire_tackle_endlag_canceled and !hub.damage.is_player_damaged()):
 		hub.form.start_form_change_cooldown_timer()
 	
-	if (hub.is_level_complete):
+	if (hub.is_deactivated):
 		hub.state_machine.current_state.set_next_state(hub.state_machine.get_state_by_name("Deactivated"))
 	elif (hub.damage.is_player_damaged()):
 		hub.state_machine.current_state.set_next_state(hub.state_machine.get_state_by_name("Damaged"))

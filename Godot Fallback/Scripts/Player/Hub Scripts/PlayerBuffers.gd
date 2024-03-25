@@ -124,7 +124,7 @@ func check_speed_preservation_buffer(delta):
 			if (!is_speed_preservation_buffer_active() or hub.movement.is_turning() or (hub.get_input_vector().x == 0 and hub.state_machine.current_state.name != "WallSliding" and hub.state_machine.current_state.name != "WallClimbing" and hub.state_machine.current_state.name != "WallVaulting" and !hub.jumping.is_wall_jump_lock_timer_active())):
 				highest_speed = current_horizontal_speed
 	
-	speed_preservation_particles.emitting = ((highest_speed > hub.movement.top_speed) and is_speed_preservation_buffer_active() and !hub.is_level_complete)
+	speed_preservation_particles.emitting = ((highest_speed > hub.movement.top_speed) and is_speed_preservation_buffer_active() and !hub.is_deactivated)
 	if (speed_preservation_particles.emitting):
 		speed_preservation_particles.process_material.direction.x = -hub.movement.get_facing_value()
 		speed_preservation_particles.process_material.initial_velocity_min = highest_speed

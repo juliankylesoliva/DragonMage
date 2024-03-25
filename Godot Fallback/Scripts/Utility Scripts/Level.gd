@@ -73,7 +73,7 @@ func level_startup():
 	player_ref.camera.snap_camera_to_player()
 
 func level_finish():
-	player_ref.set_level_complete()
+	player_ref.set_deactivation(true)
 	if (ui_container != null):
 		ui_container.set_visible(false)
 

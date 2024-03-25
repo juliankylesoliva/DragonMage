@@ -167,7 +167,7 @@ func check_camera_lock():
 		is_camera_locked = !is_camera_locked
 
 func move_locked_camera(delta : float):
-	if (hub.is_level_complete):
+	if (hub.is_deactivated):
 		return
 	var input_vector = Vector2.ZERO
 	input_vector.x = ((1 if Input.is_action_pressed("Move Camera Right") else 0) - (1 if Input.is_action_pressed("Move Camera Left") else 0))

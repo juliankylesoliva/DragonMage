@@ -7,7 +7,7 @@ func state_process(_delta):
 	hub.damage.update_hitstun_timer(_delta)
 	hub.camera.damaged_horizontal_camera_update(_delta)
 	
-	if (!hub.damage.is_player_damaged() or hub.is_level_complete):
+	if (!hub.damage.is_player_damaged() or hub.is_deactivated):
 		hub.damage.reset_hitstun_timer()
 		if (hub.temper.is_forcing_form_change()):
 			set_next_state(state_machine.get_state_by_name("FormChanging"))

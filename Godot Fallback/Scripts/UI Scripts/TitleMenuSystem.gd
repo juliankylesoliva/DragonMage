@@ -34,6 +34,8 @@ var current_menu_selection : int = 0
 
 var current_level_selection : int = 0
 
+var current_level_desc_page : int = 0
+
 var current_credits_page : int = 0
 
 func _ready():

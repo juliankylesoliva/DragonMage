@@ -19,7 +19,7 @@ func state_process(_delta):
 		is_throwing = false
 		hub.animation.set_animation("MagliWallSlide")
 	
-	if (hub.is_level_complete):
+	if (hub.is_deactivated):
 		set_next_state(state_machine.get_state_by_name("Deactivated"))
 	elif (hub.form.can_change_form()):
 		set_next_state(state_machine.get_state_by_name("FormChanging"))

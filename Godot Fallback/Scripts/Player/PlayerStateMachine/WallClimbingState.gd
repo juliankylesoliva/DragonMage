@@ -29,7 +29,7 @@ func state_process(_delta):
 	
 	hub.camera.wall_climb_horizontal_camera_update(_delta, hub.jumping.stored_wall_climb_speed, hub.jumping.stored_wall_climb_speed > hub.jumping.min_climbing_speed)
 	
-	if (hub.is_level_complete):
+	if (hub.is_deactivated):
 		set_next_state(state_machine.get_state_by_name("Deactivated"))
 	elif (hub.form.can_change_form()):
 		set_next_state(state_machine.get_state_by_name("FormChanging"))

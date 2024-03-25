@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://bsa6d8rvv2wwr"]
+[gd_scene load_steps=13 format=3 uid="uid://bsa6d8rvv2wwr"]
 
 [ext_resource type="Texture2D" uid="uid://bynovrsyg4ial" path="res://Sprites/Backgrounds/Misc/TitleBG.png" id="1_joivi"]
 [ext_resource type="Texture2D" uid="uid://dxau746ghx5pb" path="res://Sprites/UI/DemoTitle.png" id="2_a8k6e"]
@@ -9,6 +9,7 @@
 [ext_resource type="Script" path="res://Scripts/UI Scripts/TitleMenuSystem.gd" id="6_7tvge"]
 [ext_resource type="Resource" uid="uid://c50cen4ku054b" path="res://Scripts/Resource Scripts/LevelInfo/0-1 Byway Backwoods.tres" id="7_kaf74"]
 [ext_resource type="Resource" uid="uid://cu7rb7wbifvei" path="res://Scripts/Resource Scripts/LevelInfo/0-2 Catharsis Cliffs.tres" id="8_8fveg"]
+[ext_resource type="Script" path="res://Scripts/Utility Scripts/ButtonPromptTextLabel.gd" id="10_cmn2p"]
 [ext_resource type="Resource" uid="uid://bplmduteoqxky" path="res://Scripts/Resource Scripts/LevelInfo/0-4 Fleeting Floortraps.tres" id="10_tud14"]
 [ext_resource type="Resource" uid="uid://boqluwgcgag0t" path="res://Scripts/Resource Scripts/LevelInfo/1-1 Dragoons' Domain.tres" id="11_mbwv5"]
 
@@ -70,6 +71,7 @@ position = Vector2(256, 160)
 texture = ExtResource("1_joivi")
 
 [node name="TopMenu" type="Node2D" parent="."]
+visible = false
 
 [node name="Title" type="Sprite2D" parent="TopMenu"]
 position = Vector2(256, 64)
@@ -136,6 +138,26 @@ text = "[center]EXIT
 scroll_active = false
 shortcut_keys_enabled = false
 
+[node name="ControlPromptLabel" type="RichTextLabel" parent="TopMenu"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 96.0
+offset_top = 272.0
+offset_right = 416.0
+offset_bottom = 288.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/normal_font = ExtResource("3_ethht")
+theme_override_font_sizes/normal_font_size = 8
+bbcode_enabled = true
+text = "[center][Move Up]/[Move Down] Move | [Jump] Confirm"
+scroll_active = false
+shortcut_keys_enabled = false
+script = ExtResource("10_cmn2p")
+
 [node name="MadeByTextLabel" type="RichTextLabel" parent="TopMenu"]
 offset_left = 112.0
 offset_top = 300.0
@@ -150,7 +172,6 @@ scroll_active = false
 shortcut_keys_enabled = false
 
 [node name="LevelSelectSubscreen" type="Node2D" parent="."]
-visible = false
 
 [node name="HeaderTextLabel" type="RichTextLabel" parent="LevelSelectSubscreen"]
 anchors_preset = 8
@@ -199,7 +220,7 @@ anchor_bottom = 0.5
 offset_left = 32.0
 offset_top = 96.0
 offset_right = 480.0
-offset_bottom = 288.0
+offset_bottom = 256.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_fonts/normal_font = ExtResource("3_ethht")
@@ -208,6 +229,28 @@ bbcode_enabled = true
 text = "?????"
 scroll_active = false
 shortcut_keys_enabled = false
+
+[node name="ControlPromptLabel" type="RichTextLabel" parent="LevelSelectSubscreen"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 32.0
+offset_top = 276.0
+offset_right = 480.0
+offset_bottom = 316.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/normal_font = ExtResource("3_ethht")
+theme_override_font_sizes/normal_font_size = 8
+bbcode_enabled = true
+text = "[center][Move Left]/[Move Right] Change Level | [Move Up]/[Move Down] Read Diary Entry
+
+[Attack] Back | [Jump] Start!"
+scroll_active = false
+shortcut_keys_enabled = false
+script = ExtResource("10_cmn2p")
 
 [node name="CreditsSubscreen" type="Node2D" parent="."]
 visible = false
