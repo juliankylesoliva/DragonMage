@@ -1,0 +1,101 @@
+[gd_scene load_steps=7 format=3 uid="uid://brhoroc2w6jwi"]
+
+[ext_resource type="FontFile" uid="uid://blejgst41tdnl" path="res://PressStart2P.ttf" id="1_o1awr"]
+[ext_resource type="Script" path="res://Scripts/UI Scripts/Textbox.gd" id="1_rpbyb"]
+[ext_resource type="Texture2D" uid="uid://d1rym8ol501v8" path="res://Sprites/UI/TextboxBacking.png" id="2_wccb0"]
+[ext_resource type="Texture2D" uid="uid://ufg3j4ffwtsw" path="res://Sprites/UI/TextboxFrame.png" id="4_40f5x"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_6ktwc"]
+texture = ExtResource("2_wccb0")
+modulate_color = Color(1, 1, 1, 0.6)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_hwotn"]
+texture = ExtResource("4_40f5x")
+
+[node name="Textbox" type="CanvasLayer" node_paths=PackedStringArray("textbox_container", "start_symbol", "end_symbol", "text_label")]
+layer = 10
+script = ExtResource("1_rpbyb")
+textbox_container = NodePath("TextboxContainer")
+start_symbol = NodePath("TextboxContainer/TextboxBacking/MarginContainer/HBoxContainer/StartSymbol")
+end_symbol = NodePath("TextboxContainer/TextboxBacking/MarginContainer/HBoxContainer/EndSymbol")
+text_label = NodePath("TextboxContainer/TextboxBacking/MarginContainer/HBoxContainer/RichTextLabel")
+
+[node name="TextboxContainer" type="MarginContainer" parent="."]
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 96.0
+grow_horizontal = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="TextboxBacking" type="Panel" parent="TextboxContainer"]
+layout_mode = 2
+mouse_force_pass_scroll_events = false
+theme_override_styles/panel = SubResource("StyleBoxTexture_6ktwc")
+
+[node name="MarginContainer" type="MarginContainer" parent="TextboxContainer/TextboxBacking"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="HBoxContainer" type="HBoxContainer" parent="TextboxContainer/TextboxBacking/MarginContainer"]
+layout_mode = 2
+
+[node name="StartSymbol" type="RichTextLabel" parent="TextboxContainer/TextboxBacking/MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(8, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.5
+theme_override_fonts/normal_font = ExtResource("1_o1awr")
+theme_override_font_sizes/normal_font_size = 8
+bbcode_enabled = true
+text = ">"
+scroll_active = false
+shortcut_keys_enabled = false
+deselect_on_focus_loss_enabled = false
+
+[node name="RichTextLabel" type="RichTextLabel" parent="TextboxContainer/TextboxBacking/MarginContainer/HBoxContainer"]
+clip_contents = false
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 20.0
+theme_override_fonts/normal_font = ExtResource("1_o1awr")
+theme_override_font_sizes/normal_font_size = 8
+bbcode_enabled = true
+text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus eu tempus lectus. Praesent ac ultricies lectus, eu convallis sapien. Nulla faucibus ex id nisi rhoncus aliquet. Praesent id quam nisl. Vestibulum tempus sem tortor, vel convallis nibh dignissim id. Cras eu dolor scelerisque, tristique mi et, egestas metus. Ut pretium congue justo, et mollis sapien aliquam et. Suspendisse non justo odio."
+scroll_active = false
+shortcut_keys_enabled = false
+deselect_on_focus_loss_enabled = false
+
+[node name="EndSymbol" type="RichTextLabel" parent="TextboxContainer/TextboxBacking/MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(16, 0)
+layout_mode = 2
+size_flags_horizontal = 10
+size_flags_vertical = 9
+theme_override_fonts/normal_font = ExtResource("1_o1awr")
+theme_override_font_sizes/normal_font_size = 8
+bbcode_enabled = true
+text = "
+
+
+
+
+
+[center][img=16x16]res://Sprites/UI/ButtonIcons/Spacebar.png[/img]"
+scroll_active = false
+shortcut_keys_enabled = false
+deselect_on_focus_loss_enabled = false
+
+[node name="TextboxFrame" type="Panel" parent="TextboxContainer"]
+layout_mode = 2
+mouse_force_pass_scroll_events = false
+theme_override_styles/panel = SubResource("StyleBoxTexture_hwotn")

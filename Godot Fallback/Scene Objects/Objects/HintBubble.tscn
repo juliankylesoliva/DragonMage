@@ -1,0 +1,81 @@
+[gd_scene load_steps=10 format=3 uid="uid://cp3kaarqt7vdo"]
+
+[ext_resource type="Texture2D" uid="uid://cb0gdukhl3opy" path="res://Sprites/Objects/HintBubble.png" id="1_5xfw2"]
+[ext_resource type="Script" path="res://Scripts/Object Scripts/HintBubble.gd" id="1_87ysu"]
+[ext_resource type="FontFile" uid="uid://blejgst41tdnl" path="res://PressStart2P.ttf" id="2_84ke2"]
+[ext_resource type="Script" path="res://Scripts/Utility Scripts/ButtonPromptTextLabel.gd" id="3_38jdd"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_q06o1"]
+size = Vector2(32, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o2m5v"]
+atlas = ExtResource("1_5xfw2")
+region = Rect2(0, 0, 32, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ekiec"]
+atlas = ExtResource("1_5xfw2")
+region = Rect2(32, 0, 32, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kqr1x"]
+atlas = ExtResource("1_5xfw2")
+region = Rect2(64, 0, 32, 48)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_m4jyr"]
+animations = [{
+"frames": [{
+"duration": 20.0,
+"texture": SubResource("AtlasTexture_o2m5v")
+}, {
+"duration": 20.0,
+"texture": SubResource("AtlasTexture_ekiec")
+}, {
+"duration": 20.0,
+"texture": SubResource("AtlasTexture_kqr1x")
+}],
+"loop": true,
+"name": &"default",
+"speed": 60.0
+}]
+
+[node name="HintBubble" type="Area2D" node_paths=PackedStringArray("sprite", "button_prompt")]
+collision_layer = 0
+collision_mask = 4
+monitorable = false
+script = ExtResource("1_87ysu")
+sprite = NodePath("AnimatedSprite2D")
+button_prompt = NodePath("ButtonPrompt")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+light_mask = 2
+visibility_layer = 2
+z_index = 2
+shape = SubResource("RectangleShape2D_q06o1")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+light_mask = 2
+visibility_layer = 2
+z_index = 2
+sprite_frames = SubResource("SpriteFrames_m4jyr")
+autoplay = "default"
+frame_progress = 0.771618
+
+[node name="ButtonPrompt" type="RichTextLabel" parent="."]
+visible = false
+light_mask = 64
+visibility_layer = 64
+z_index = 7
+clip_contents = false
+offset_left = -8.0
+offset_top = -56.0
+offset_right = 8.0
+offset_bottom = -40.0
+theme_override_fonts/normal_font = ExtResource("2_84ke2")
+theme_override_font_sizes/normal_font_size = 8
+bbcode_enabled = true
+text = "[center][Interact]"
+scroll_active = false
+shortcut_keys_enabled = false
+script = ExtResource("3_38jdd")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]

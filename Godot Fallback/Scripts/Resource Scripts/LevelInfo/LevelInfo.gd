@@ -6,4 +6,4 @@ class_name LevelInfo
 
 @export var name_header : String
 
-@export_multiline var story_description : String
+@export_multiline var story_description : Array[String]

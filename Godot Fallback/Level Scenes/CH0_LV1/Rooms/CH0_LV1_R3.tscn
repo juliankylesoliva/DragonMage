@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://mh0whhxa3l8w"]
+[gd_scene load_steps=6 format=3 uid="uid://mh0whhxa3l8w"]
 
 [ext_resource type="Script" path="res://Scripts/Utility Scripts/Room.gd" id="1_u044j"]
 [ext_resource type="TileSet" uid="uid://dhwi7i1loa2pd" path="res://Sprites/Tiles/Test Tiles/TestTileSet.tres" id="2_xfqe8"]
 [ext_resource type="PackedScene" uid="uid://dqbo0wu6hm8lj" path="res://Scene Objects/Objects/WarpTrigger.tscn" id="3_jm803"]
 [ext_resource type="PackedScene" uid="uid://cs4s34scsvcfr" path="res://Scene Objects/Objects/BreakableBlock.tscn" id="4_6r42f"]
+[ext_resource type="PackedScene" uid="uid://cp3kaarqt7vdo" path="res://Scene Objects/Objects/HintBubble.tscn" id="4_bdy1j"]
 
 [node name="CH0_LV1_R3" type="Node2D" node_paths=PackedStringArray("tilemap_list", "room_entrances")]
 script = ExtResource("1_u044j")
@@ -67,6 +68,21 @@ room_entrance_index = 1
 position = Vector2(560, -352)
 room_origin = NodePath("..")
 room_destination = NodePath("..")
+
+[node name="HintBubble" parent="." instance=ExtResource("4_bdy1j")]
+position = Vector2(64, 232)
+textbox_strings = Array[String](["[center]\"Hold [Crouch] to crouch--you can still move and jump while crouching.\""])
+
+[node name="HintBubble2" parent="." instance=ExtResource("4_bdy1j")]
+position = Vector2(128, -24)
+textbox_strings = Array[String](["[center]~ Phase Dodge ~
+\"Press [Attack] while crouching to avoid damage and cross pits in narrow spaces.\"
+\"Dodging in midair sends you diagonally downwards.\"", "Magli: Note to self: doing a dodge in midair and immediately touching the ground not only cancels my invincibility, but makes me slide for a considerable distance. While I did not intend to make this slight error when writing this spell, I might need to look into this phenomenon further for practical use cases..."])
+
+[node name="HintBubble3" parent="." instance=ExtResource("4_bdy1j")]
+position = Vector2(64, -184)
+textbox_strings = Array[String](["[center]~ Short Glide ~
+\"Pressing [Technical] while rising and holding [Jump] during a jump will start a glide earlier and closer to the ground.\"", "Magli: Good thing I remembered to remove vertical inertia on this orb at the last minute! Trying to line up my throws while jumping was already difficult enough as is..."])
 
 [node name="BreakableBlock" parent="." instance=ExtResource("4_6r42f")]
 position = Vector2(192, 96)

@@ -45,14 +45,15 @@ func parse_text(raw_text : String):
 		for result in results:
 			var current_prompt : String = result.get_string()
 			var action_name : String = current_prompt.substr(1, current_prompt.length() - 2)
-			var input_events : Array[InputEvent] = InputMap.action_get_events(action_name)
-			for event in input_events:
-				if (current_control_mode == ControlMode.GAMEPAD and (event is InputEventJoypadButton or event is InputEventJoypadMotion)):
-					if (event_to_input_prompt_dictionary.has(event.as_text())):
-						result_text = result_text.replace(current_prompt, (IMAGE_STRING_FORMAT % event_to_input_prompt_dictionary[event.as_text()]))
-				elif (current_control_mode == ControlMode.KEYBOARD and (event is InputEventKey)):
-					if (event_to_input_prompt_dictionary.has(event.as_text())):
-						result_text = result_text.replace(current_prompt, (IMAGE_STRING_FORMAT % event_to_input_prompt_dictionary[event.as_text()]))
-				else:
-					pass
+			if (InputMap.has_action(action_name)):
+				var input_events : Array[InputEvent] = InputMap.action_get_events(action_name)
+				for event in input_events:
+					if (current_control_mode == ControlMode.GAMEPAD and (event is InputEventJoypadButton or event is InputEventJoypadMotion)):
+						if (event_to_input_prompt_dictionary.has(event.as_text())):
+							result_text = result_text.replace(current_prompt, (IMAGE_STRING_FORMAT % event_to_input_prompt_dictionary[event.as_text()]))
+					elif (current_control_mode == ControlMode.KEYBOARD and (event is InputEventKey)):
+						if (event_to_input_prompt_dictionary.has(event.as_text())):
+							result_text = result_text.replace(current_prompt, (IMAGE_STRING_FORMAT % event_to_input_prompt_dictionary[event.as_text()]))
+					else:
+						pass
 	return result_text

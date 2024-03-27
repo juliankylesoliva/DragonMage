@@ -1,4 +1,4 @@
-[gd_scene load_steps=190 format=3 uid="uid://c6qw77ovfwgfs"]
+[gd_scene load_steps=191 format=3 uid="uid://c6qw77ovfwgfs"]
 
 [ext_resource type="Texture2D" uid="uid://d381ahbcwydy8" path="res://Sprites/Player/DraelynCrouch.png" id="1_6b42p"]
 [ext_resource type="Texture2D" uid="uid://dls34a1qa8iy1" path="res://Sprites/Player/DraelynFireTackle.png" id="1_ddrlj"]
@@ -52,6 +52,7 @@
 [ext_resource type="Script" path="res://Scripts/Player/Hub Scripts/PlayerDamage.gd" id="24_45h1i"]
 [ext_resource type="Script" path="res://Scripts/Player/Hub Scripts/PlayerAnimation.gd" id="25_c4dam"]
 [ext_resource type="Script" path="res://Scripts/Player/Hub Scripts/PlayerStomp.gd" id="25_ls0ah"]
+[ext_resource type="Script" path="res://Scripts/Player/Hub Scripts/PlayerInteraction.gd" id="25_xbxt7"]
 [ext_resource type="PackedScene" uid="uid://bwf8fyp043kh4" path="res://Scene Objects/Hitboxes/StompKnockbackHitbox.tscn" id="26_36k6y"]
 [ext_resource type="Texture2D" uid="uid://c44t784vgugry" path="res://Sprites/Player/MagliIdle.png" id="27_my3k8"]
 [ext_resource type="Texture2D" uid="uid://bcwdksusecuad" path="res://Sprites/Player/DraelynFastFall.png" id="38_akwr7"]
@@ -1265,7 +1266,7 @@ platform_floor_layers = 3
 safe_margin = 0.001
 metadata/Tag = "Player"
 
-[node name="Hub" type="Node" parent="." node_paths=PackedStringArray("state_machine", "collisions", "buffers", "movement", "jumping", "attacks", "temper", "form", "damage", "stomp", "animation", "sprite_trail", "camera", "audio", "char_body", "char_sprite", "collision_shape", "stream_player", "raycast_dl", "raycast_dm", "raycast_dr", "raycast_ledge_l", "raycast_ledge_r", "raycast_ul", "raycast_um", "raycast_ur", "raycast_ceiling_l", "raycast_ceiling_r", "raycast_wall_top_l", "raycast_wall_mid_l", "raycast_wall_bot_l", "raycast_wall_top_r", "raycast_wall_mid_r", "raycast_wall_bot_r")]
+[node name="Hub" type="Node" parent="." node_paths=PackedStringArray("state_machine", "collisions", "buffers", "movement", "jumping", "attacks", "temper", "form", "damage", "interaction", "stomp", "animation", "sprite_trail", "camera", "audio", "char_body", "char_sprite", "collision_shape", "stream_player", "raycast_dl", "raycast_dm", "raycast_dr", "raycast_ledge_l", "raycast_ledge_r", "raycast_ul", "raycast_um", "raycast_ur", "raycast_ceiling_l", "raycast_ceiling_r", "raycast_wall_top_l", "raycast_wall_mid_l", "raycast_wall_bot_l", "raycast_wall_top_r", "raycast_wall_mid_r", "raycast_wall_bot_r")]
 script = ExtResource("1_vr0jy")
 state_machine = NodePath("../StateMachine")
 collisions = NodePath("Collisions")
@@ -1276,6 +1277,7 @@ attacks = NodePath("Attacks")
 temper = NodePath("Temper")
 form = NodePath("Form")
 damage = NodePath("Damage")
+interaction = NodePath("Interaction")
 stomp = NodePath("Stomp")
 animation = NodePath("Animation")
 sprite_trail = NodePath("SpriteTrail")
@@ -1455,6 +1457,10 @@ knockback_steering_rate = 120.0
 hitstun_time = 0.65
 hitstun_ground_cancel_portion = 0.25
 invulnerability_alpha = 0.25
+
+[node name="Interaction" type="Node" parent="Hub" node_paths=PackedStringArray("hub")]
+script = ExtResource("25_xbxt7")
+hub = NodePath("..")
 
 [node name="Stomp" type="Node" parent="Hub" node_paths=PackedStringArray("hub", "stomp_hitbox", "magic_blast_attack", "fire_tackle_attack")]
 script = ExtResource("25_ls0ah")

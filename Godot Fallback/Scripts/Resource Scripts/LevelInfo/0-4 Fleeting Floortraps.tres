@@ -6,4 +6,4 @@
 script = ExtResource("2_3r7tc")
 level_scene_path = "res://Level Scenes/CH0_LV4/CH0_LV4.tscn"
 name_header = "Ch. 0-4: Fleeting Floortraps"
-story_description = ""
+story_description = Array[String]([""])

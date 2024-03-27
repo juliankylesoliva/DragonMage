@@ -108,16 +108,14 @@ offset = Vector2(208, 0)
 
 [node name="Segment1" type="AnimatedSprite2D" parent="Segments"]
 visibility_layer = 64
-z_index = 8
 position = Vector2(24, 8)
 sprite_frames = SubResource("SpriteFrames_e708d")
 animation = &"Off"
 autoplay = "Off"
-frame_progress = 1.0
+frame_progress = 0.55156
 
 [node name="Segment2" type="AnimatedSprite2D" parent="Segments"]
 visibility_layer = 64
-z_index = 8
 position = Vector2(40, 8)
 sprite_frames = SubResource("SpriteFrames_e708d")
 animation = &"Off"
@@ -125,7 +123,6 @@ autoplay = "Off"
 
 [node name="Segment3" type="AnimatedSprite2D" parent="Segments"]
 visibility_layer = 64
-z_index = 8
 position = Vector2(56, 8)
 sprite_frames = SubResource("SpriteFrames_e708d")
 animation = &"Off"
@@ -133,7 +130,6 @@ autoplay = "Off"
 
 [node name="Segment4" type="AnimatedSprite2D" parent="Segments"]
 visibility_layer = 64
-z_index = 8
 position = Vector2(72, 8)
 sprite_frames = SubResource("SpriteFrames_e708d")
 animation = &"Off"
@@ -142,7 +138,6 @@ frame_progress = 0.292193
 
 [node name="Segment5" type="AnimatedSprite2D" parent="Segments"]
 visibility_layer = 64
-z_index = 8
 position = Vector2(88, 8)
 sprite_frames = SubResource("SpriteFrames_e708d")
 animation = &"Off"
@@ -151,7 +146,6 @@ frame_progress = 0.5
 
 [node name="Segment6" type="AnimatedSprite2D" parent="Segments"]
 visibility_layer = 64
-z_index = 8
 position = Vector2(104, 8)
 sprite_frames = SubResource("SpriteFrames_e708d")
 animation = &"Off"
@@ -160,7 +154,6 @@ frame_progress = 0.5
 
 [node name="Segment7" type="AnimatedSprite2D" parent="Segments"]
 visibility_layer = 64
-z_index = 8
 position = Vector2(120, 8)
 sprite_frames = SubResource("SpriteFrames_e708d")
 animation = &"Off"
@@ -169,7 +162,6 @@ frame_progress = 0.414207
 
 [node name="Segment8" type="AnimatedSprite2D" parent="Segments"]
 visibility_layer = 64
-z_index = 8
 position = Vector2(136, 8)
 sprite_frames = SubResource("SpriteFrames_e708d")
 animation = &"Off"
@@ -178,7 +170,6 @@ frame_progress = 0.5
 
 [node name="Segment9" type="AnimatedSprite2D" parent="Segments"]
 visibility_layer = 64
-z_index = 8
 position = Vector2(152, 8)
 sprite_frames = SubResource("SpriteFrames_e708d")
 animation = &"Off"
@@ -187,7 +178,6 @@ frame_progress = 0.5
 
 [node name="Segment10" type="AnimatedSprite2D" parent="Segments"]
 visibility_layer = 64
-z_index = 8
 position = Vector2(168, 8)
 sprite_frames = SubResource("SpriteFrames_e708d")
 animation = &"Off"
@@ -196,7 +186,6 @@ frame_progress = 0.292193
 
 [node name="Segment11" type="AnimatedSprite2D" parent="Segments"]
 visibility_layer = 64
-z_index = 8
 position = Vector2(184, 8)
 sprite_frames = SubResource("SpriteFrames_e708d")
 animation = &"Off"
@@ -205,7 +194,6 @@ frame_progress = 0.5
 
 [node name="Segment12" type="AnimatedSprite2D" parent="Segments"]
 visibility_layer = 64
-z_index = 8
 position = Vector2(200, 8)
 sprite_frames = SubResource("SpriteFrames_e708d")
 animation = &"Off"

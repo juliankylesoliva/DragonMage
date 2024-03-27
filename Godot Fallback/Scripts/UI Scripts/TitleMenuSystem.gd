@@ -99,6 +99,7 @@ func do_top_menu_selection():
 	if (is_input_allowed and !is_in_subscreen() and Input.is_action_just_pressed("Jump")):
 		match current_menu_selection:
 			0:
+				current_level_desc_page = 0
 				menu_cursor.play_accept_sound()
 				top_menu_screen.set_visible(false)
 				level_select_subscreen.set_visible(true)
@@ -120,6 +121,8 @@ func do_level_selection():
 	if (is_input_allowed and is_in_subscreen() and level_select_subscreen.visible):
 		var left_pressed : bool = Input.is_action_just_pressed("Move Left")
 		var right_pressed : bool = Input.is_action_just_pressed("Move Right")
+		var up_pressed : bool = Input.is_action_just_pressed("Move Up")
+		var down_pressed : bool = Input.is_action_just_pressed("Move Down")
 		if (Input.is_action_just_pressed("Jump")):
 			menu_cursor.do_selection_movement()
 			start_game()
@@ -129,14 +132,28 @@ func do_level_selection():
 					current_level_selection -= 1
 				else:
 					current_level_selection = (level_info_list.size() - 1)
+				current_level_desc_page = 0
 			elif (right_pressed):
 				if (current_level_selection < (level_info_list.size() - 1)):
 					current_level_selection += 1
 				else:
 					current_level_selection = 0
+				current_level_desc_page = 0
 			else:
 				pass
 			menu_cursor.play_move_sound()
+			update_level_select_text(level_info_list[current_level_selection])
+		elif ((up_pressed or down_pressed) and !(up_pressed and down_pressed)):
+			if (up_pressed):
+				if (current_level_desc_page > 0):
+					current_level_desc_page -= 1
+					menu_cursor.play_move_sound()
+			elif (down_pressed):
+				if (current_level_desc_page < (level_info_list[current_level_selection].story_description.size() - 1)):
+					current_level_desc_page += 1
+					menu_cursor.play_move_sound()
+			else:
+				pass
 			update_level_select_text(level_info_list[current_level_selection])
 		else:
 			pass
@@ -164,7 +181,7 @@ func update_credits_subscreen():
 
 func update_level_select_text(info : LevelInfo):
 	level_name_label.text = info.name_header
-	level_description_label.text = info.story_description
+	level_description_label.text = info.story_description[current_level_desc_page]
 
 func return_to_top_menu():
 	if (is_input_allowed and is_in_subscreen() and Input.is_action_just_pressed("Attack")):
