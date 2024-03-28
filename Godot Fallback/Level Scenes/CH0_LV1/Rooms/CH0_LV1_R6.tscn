@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://cwu70jgkk7f63"]
+[gd_scene load_steps=6 format=3 uid="uid://cwu70jgkk7f63"]
 
 [ext_resource type="Script" path="res://Scripts/Utility Scripts/Room.gd" id="1_kfuh4"]
 [ext_resource type="TileSet" uid="uid://dhwi7i1loa2pd" path="res://Sprites/Tiles/Test Tiles/TestTileSet.tres" id="2_s00jp"]
 [ext_resource type="PackedScene" uid="uid://dqbo0wu6hm8lj" path="res://Scene Objects/Objects/WarpTrigger.tscn" id="3_uujf4"]
+[ext_resource type="PackedScene" uid="uid://cp3kaarqt7vdo" path="res://Scene Objects/Objects/HintBubble.tscn" id="4_e3jp4"]
 [ext_resource type="PackedScene" uid="uid://bajk0w7eoh6o8" path="res://Scene Objects/Objects/ReinforcedBlock.tscn" id="4_oavt0"]
 
 [node name="CH0_LV1_R6" type="Node2D" node_paths=PackedStringArray("tilemap_list", "room_entrances")]
@@ -68,6 +69,18 @@ room_entrance_index = 1
 position = Vector2(1296, 0)
 room_origin = NodePath("..")
 room_destination = NodePath("..")
+
+[node name="HintBubble" parent="." instance=ExtResource("4_e3jp4")]
+position = Vector2(64, 232)
+textbox_strings = Array[String](["[center]~ Magic Boost (4/5) ~
+\"For maximum height, remember to run and hold [Jump], and make sure the orb is directly underneath you when you detonate.\""])
+
+[node name="HintBubble2" parent="." instance=ExtResource("4_e3jp4")]
+position = Vector2(448, 200)
+textbox_strings = Array[String](["[center]~ Magic Boost (5/5) ~
+\"When boosting your horizontal momentum, be sure to jump immediately after detonating to preserve that speed through the air. You can still control your jump height while doing this.\"", "Magli: This was a bit tricky for me to get down, so I scribbled this in the margin:
+
+[center][Move Down]+[Attack], [Move Right], [Attack]+[Jump]"])
 
 [node name="ReinforcedBlock" parent="." instance=ExtResource("4_oavt0")]
 position = Vector2(64, 32)

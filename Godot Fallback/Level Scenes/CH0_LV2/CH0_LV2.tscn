@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://bq3ow3qdwirck"]
+[gd_scene load_steps=19 format=3 uid="uid://bq3ow3qdwirck"]
 
 [ext_resource type="Script" path="res://Scripts/Utility Scripts/Level.gd" id="1_3eixt"]
 [ext_resource type="PackedScene" uid="uid://d0ff35cm57xb7" path="res://Scene Objects/Effects/DroppedFragment.tscn" id="2_im3cc"]
@@ -17,6 +17,7 @@
 [ext_resource type="PackedScene" uid="uid://d1eef1xjuwf3b" path="res://Scene Objects/Misc/PauseMenu.tscn" id="14_dx8cr"]
 [ext_resource type="PackedScene" uid="uid://b5wwivjk8sl7b" path="res://Scene Objects/Misc/ClearTimer.tscn" id="14_s76pj"]
 [ext_resource type="PackedScene" uid="uid://buykytsdrlnsg" path="res://Scene Objects/Misc/ResultsScreen.tscn" id="15_nbxo5"]
+[ext_resource type="PackedScene" uid="uid://brhoroc2w6jwi" path="res://Scene Objects/UI/Textbox.tscn" id="18_x5lsp"]
 
 [node name="CH0_LV2" type="Node2D" node_paths=PackedStringArray("player_reference", "starting_room", "room_list")]
 script = ExtResource("1_3eixt")
@@ -150,6 +151,10 @@ show_fragment_result = false
 
 [node name="ScreenFade" parent="." instance=ExtResource("13_ngewc")]
 starting_fade_duration = 1.0
+
+[node name="Textbox" parent="." instance=ExtResource("18_x5lsp")]
+text_scrolling_duration = 2.0
+accept_input_events = false
 
 [connection signal="level_finished" from="CH0_LV2_R10/FinishLine" to="." method="level_finish"]
 [connection signal="level_finished" from="CH0_LV2_R10/FinishLine" to="ClearTimer" method="stop_timer"]

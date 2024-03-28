@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://ca75o1edmetef"]
+[gd_scene load_steps=6 format=3 uid="uid://ca75o1edmetef"]
 
 [ext_resource type="Script" path="res://Scripts/Utility Scripts/Room.gd" id="1_kfuh4"]
 [ext_resource type="TileSet" uid="uid://dhwi7i1loa2pd" path="res://Sprites/Tiles/Test Tiles/TestTileSet.tres" id="2_s00jp"]
 [ext_resource type="PackedScene" uid="uid://dqbo0wu6hm8lj" path="res://Scene Objects/Objects/WarpTrigger.tscn" id="3_5frs6"]
+[ext_resource type="PackedScene" uid="uid://cp3kaarqt7vdo" path="res://Scene Objects/Objects/HintBubble.tscn" id="4_kb12k"]
 [ext_resource type="PackedScene" uid="uid://bajk0w7eoh6o8" path="res://Scene Objects/Objects/ReinforcedBlock.tscn" id="4_u2ord"]
 
 [node name="CH0_LV1_R7" type="Node2D" node_paths=PackedStringArray("tilemap_list", "room_entrances")]
@@ -68,6 +69,17 @@ room_entrance_index = 1
 position = Vector2(1936, -96)
 room_origin = NodePath("..")
 room_destination = NodePath("..")
+
+[node name="HintBubble" parent="." instance=ExtResource("4_kb12k")]
+position = Vector2(224, 200)
+textbox_strings = Array[String](["[center]~ Slipstream (1/2) ~
+\"Whenever you're moving faster than your normal speed (i.e. using the Magic Boost), white sparkles will start to fly right past you. When this happens, jumping as soon as you touch the ground or a wall will allow you to preserve your speed. This effect wears off if you slow down too much or turn around in midair, so keep holding forward.\"", "[center]~ Slipstream (2/2) ~
+\"Additionally, landing on a downward or upward slope will add to or subtract from your preserved speed respectively. The steeper the slope, the more speed you gain or lose.\""])
+
+[node name="HintBubble2" parent="." instance=ExtResource("4_kb12k")]
+position = Vector2(96, -88)
+textbox_strings = Array[String](["[center]~ Addendum to the Magic Boost ~
+\"You can continue to increase your horizontal momentum in the air by repeatedly pressing [Attack]+[Move Down] while gliding forward.\""])
 
 [node name="ReinforcedBlock" parent="." instance=ExtResource("4_u2ord")]
 position = Vector2(480, -160)

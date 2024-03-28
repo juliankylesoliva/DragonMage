@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://dok6q87h1aesj"]
+[gd_scene load_steps=6 format=3 uid="uid://dok6q87h1aesj"]
 
 [ext_resource type="Script" path="res://Scripts/Utility Scripts/Room.gd" id="1_5gkt7"]
 [ext_resource type="TileSet" uid="uid://dhwi7i1loa2pd" path="res://Sprites/Tiles/Test Tiles/TestTileSet.tres" id="2_apyc1"]
 [ext_resource type="PackedScene" uid="uid://dqbo0wu6hm8lj" path="res://Scene Objects/Objects/WarpTrigger.tscn" id="3_sxioj"]
+[ext_resource type="PackedScene" uid="uid://cp3kaarqt7vdo" path="res://Scene Objects/Objects/HintBubble.tscn" id="4_f03c7"]
 [ext_resource type="PackedScene" uid="uid://cs4s34scsvcfr" path="res://Scene Objects/Objects/BreakableBlock.tscn" id="4_v6cqi"]
 
 [node name="CH0_LV1_R4" type="Node2D" node_paths=PackedStringArray("tilemap_list", "room_entrances")]
@@ -68,6 +69,12 @@ room_entrance_index = 1
 position = Vector2(1136, 224)
 room_origin = NodePath("..")
 room_destination = NodePath("..")
+
+[node name="HintBubble" parent="." instance=ExtResource("4_f03c7")]
+position = Vector2(96, 72)
+textbox_strings = Array[String](["[center]~ Addendum to the Magic Blast ~
+\"The orb will carry some of your horizontal momentum when thrown.\"
+\"The orb can also be thrown while sliding down a wall or gliding.\""])
 
 [node name="BreakableBlock" parent="." instance=ExtResource("4_v6cqi")]
 position = Vector2(352, 0)

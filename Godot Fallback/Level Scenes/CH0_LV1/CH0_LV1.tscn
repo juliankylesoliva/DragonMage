@@ -95,6 +95,9 @@ room_destination = NodePath("../../CH0_LV1_R3")
 [node name="Warp 1" parent="CH0_LV1_R4" index="5" node_paths=PackedStringArray("room_destination")]
 room_destination = NodePath("../../CH0_LV1_R5")
 
+[node name="HintBubble" parent="CH0_LV1_R4" index="6" node_paths=PackedStringArray("textbox")]
+textbox = NodePath("../../Textbox")
+
 [node name="CH0_LV1_R5" parent="." instance=ExtResource("7_xg6ta")]
 position = Vector2(1728, 32)
 
@@ -103,6 +106,15 @@ room_destination = NodePath("../../CH0_LV1_R4")
 
 [node name="Warp 1" parent="CH0_LV1_R5" index="5" node_paths=PackedStringArray("room_destination")]
 room_destination = NodePath("../../CH0_LV1_R6")
+
+[node name="HintBubble" parent="CH0_LV1_R5" index="6" node_paths=PackedStringArray("textbox")]
+textbox = NodePath("../../Textbox")
+
+[node name="HintBubble2" parent="CH0_LV1_R5" index="7" node_paths=PackedStringArray("textbox")]
+textbox = NodePath("../../Textbox")
+
+[node name="HintBubble3" parent="CH0_LV1_R5" index="8" node_paths=PackedStringArray("textbox")]
+textbox = NodePath("../../Textbox")
 
 [node name="CH0_LV1_R6" parent="." instance=ExtResource("8_w0yoj")]
 position = Vector2(2368, 480)
@@ -113,6 +125,12 @@ room_destination = NodePath("../../CH0_LV1_R5")
 [node name="Warp 1" parent="CH0_LV1_R6" index="5" node_paths=PackedStringArray("room_destination")]
 room_destination = NodePath("../../CH0_LV1_R7")
 
+[node name="HintBubble" parent="CH0_LV1_R6" index="6" node_paths=PackedStringArray("textbox")]
+textbox = NodePath("../../Textbox")
+
+[node name="HintBubble2" parent="CH0_LV1_R6" index="7" node_paths=PackedStringArray("textbox")]
+textbox = NodePath("../../Textbox")
+
 [node name="CH0_LV1_R7" parent="." instance=ExtResource("9_lk4j6")]
 position = Vector2(-96, 672)
 
@@ -121,6 +139,12 @@ room_destination = NodePath("../../CH0_LV1_R6")
 
 [node name="Warp 1" parent="CH0_LV1_R7" index="5" node_paths=PackedStringArray("room_destination")]
 room_destination = NodePath("../../CH1_LV1_R8")
+
+[node name="HintBubble" parent="CH0_LV1_R7" index="6" node_paths=PackedStringArray("textbox")]
+textbox = NodePath("../../Textbox")
+
+[node name="HintBubble2" parent="CH0_LV1_R7" index="7" node_paths=PackedStringArray("textbox")]
+textbox = NodePath("../../Textbox")
 
 [node name="CH1_LV1_R8" parent="." instance=ExtResource("10_40xoc")]
 position = Vector2(-1280, 928)
@@ -163,7 +187,7 @@ show_fragment_result = false
 starting_fade_duration = 1.0
 
 [node name="Textbox" parent="." instance=ExtResource("18_itco1")]
-text_scrolling_duration = 3.0
+text_scrolling_duration = 2.0
 accept_input_events = false
 
 [connection signal="level_finished" from="CH0_LV1_R10/FinishLine" to="." method="level_finish"]
