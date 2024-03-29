@@ -1,9 +1,11 @@
-[gd_scene load_steps=5 format=3 uid="uid://due5vl0qgc45g"]
+[gd_scene load_steps=7 format=3 uid="uid://due5vl0qgc45g"]
 
 [ext_resource type="Script" path="res://Scripts/Utility Scripts/Room.gd" id="1_l2bk6"]
 [ext_resource type="TileSet" uid="uid://dhwi7i1loa2pd" path="res://Sprites/Tiles/Test Tiles/TestTileSet.tres" id="2_1fie0"]
 [ext_resource type="PackedScene" uid="uid://dqbo0wu6hm8lj" path="res://Scene Objects/Objects/WarpTrigger.tscn" id="3_gjimo"]
 [ext_resource type="Script" path="res://Scripts/Object Scripts/HiddenPassage.gd" id="3_i7bba"]
+[ext_resource type="PackedScene" uid="uid://cp3kaarqt7vdo" path="res://Scene Objects/Objects/HintBubble.tscn" id="5_1wrr8"]
+[ext_resource type="PackedScene" uid="uid://cw6gype8pgf7a" path="res://Scene Objects/Characters/KnigelNPC.tscn" id="6_pd3el"]
 
 [node name="CH0_LV2_R7" type="Node2D" node_paths=PackedStringArray("tilemap_list", "room_entrances")]
 script = ExtResource("1_l2bk6")
@@ -50,6 +52,32 @@ layer_3/y_sort_origin = 0
 layer_3/z_index = -1
 layer_3/tile_data = PackedInt32Array()
 
+[node name="Entrance 0" type="Node2D" parent="."]
+position = Vector2(16, 224)
+
+[node name="Entrance 1" type="Node2D" parent="."]
+position = Vector2(496, 224)
+
+[node name="Warp 0" parent="." node_paths=PackedStringArray("room_origin", "room_destination") instance=ExtResource("3_gjimo")]
+position = Vector2(-48, 224)
+room_origin = NodePath("..")
+room_destination = NodePath("..")
+room_entrance_index = 1
+
+[node name="Warp 1" parent="." node_paths=PackedStringArray("room_origin", "room_destination") instance=ExtResource("3_gjimo")]
+position = Vector2(560, 224)
+room_origin = NodePath("..")
+room_destination = NodePath("..")
+
+[node name="HintBubble" parent="." instance=ExtResource("5_1wrr8")]
+position = Vector2(96, 232)
+textbox_strings = Array[String](["Knigel: DRAE, WATCH YOUR STEP! I FELL DOWN THIS HIDDEN PIT!", "Draelyn: Knigel? Hold on! I'll be right there!
+(I can fall down there faster by pressing [Crouch] as I fall...)"])
+
+[node name="KnigelNPC" parent="." instance=ExtResource("6_pd3el")]
+position = Vector2(208, 544)
+textbox_strings = Array[String](["Draelyn: You alright?", "Knigel: I'm fine, thanks. I managed to slow down my fall with my lance. You got down here rather quickly, so do you have a way to get back up?", "Draelyn: I've got two ways, in fact! The first is that I can charge up a higher jump by crouching in place for a second.", "Knigel: And the second way?", "Draelyn: The same jump, except that I do that fast fall from earlier and then jump as soon as I land with it.", "Knigel: Right, pick whichever method is easiest for you, then.", "Draelyn: You need any help, though?", "Knigel: Don't worry about me, I'm still good to climb back up. Go on ahead, I'll catch up."])
+
 [node name="HiddenTilemap" type="TileMap" parent="."]
 z_as_relative = false
 tile_set = ExtResource("2_1fie0")
@@ -83,23 +111,6 @@ collision_mask = 4
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="HiddenTilemap2/Area2D"]
 polygon = PackedVector2Array(288, -64, 448, -64, 448, 192, 384, 192, 352, 192, 352, 160, 288, 160)
-
-[node name="Entrance 0" type="Node2D" parent="."]
-position = Vector2(16, 224)
-
-[node name="Entrance 1" type="Node2D" parent="."]
-position = Vector2(496, 224)
-
-[node name="Warp 0" parent="." node_paths=PackedStringArray("room_origin", "room_destination") instance=ExtResource("3_gjimo")]
-position = Vector2(-48, 224)
-room_origin = NodePath("..")
-room_destination = NodePath("..")
-room_entrance_index = 1
-
-[node name="Warp 1" parent="." node_paths=PackedStringArray("room_origin", "room_destination") instance=ExtResource("3_gjimo")]
-position = Vector2(560, 224)
-room_origin = NodePath("..")
-room_destination = NodePath("..")
 
 [connection signal="body_entered" from="HiddenTilemap/Area2D" to="HiddenTilemap" method="_on_rigid_body_2d_body_entered"]
 [connection signal="body_exited" from="HiddenTilemap/Area2D" to="HiddenTilemap" method="_on_rigid_body_2d_body_exited"]

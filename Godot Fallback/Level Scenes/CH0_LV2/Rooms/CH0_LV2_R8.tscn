@@ -1,8 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://b0t45tk6kgt57"]
+[gd_scene load_steps=7 format=3 uid="uid://b0t45tk6kgt57"]
 
 [ext_resource type="Script" path="res://Scripts/Utility Scripts/Room.gd" id="1_l2bk6"]
 [ext_resource type="TileSet" uid="uid://dhwi7i1loa2pd" path="res://Sprites/Tiles/Test Tiles/TestTileSet.tres" id="2_1fie0"]
 [ext_resource type="PackedScene" uid="uid://dqbo0wu6hm8lj" path="res://Scene Objects/Objects/WarpTrigger.tscn" id="3_m4103"]
+[ext_resource type="PackedScene" uid="uid://cw6gype8pgf7a" path="res://Scene Objects/Characters/KnigelNPC.tscn" id="4_lbegf"]
+[ext_resource type="PackedScene" uid="uid://cp3kaarqt7vdo" path="res://Scene Objects/Objects/HintBubble.tscn" id="5_2v3kh"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_u81gb"]
 size = Vector2(864, 32)
@@ -81,5 +83,13 @@ room_entrance_index = 2
 
 [node name="CollisionShape2D" parent="FallWarp" index="0"]
 shape = SubResource("RectangleShape2D_u81gb")
+
+[node name="KnigelNPC" parent="." instance=ExtResource("4_lbegf")]
+position = Vector2(192, 224)
+textbox_strings = Array[String](["Knigel: How long do you think you can climb with your wings, Drae? Looking at this tall wall up ahead had me wondering about that...", "Draelyn: Hmm... It should depend on how fast my slipstream is so that my wings can carry that extra momentum to the top. The easiest way should be a running start combined with an upwards Fire Tackle by pressing [Move Up]+[Attack]. I'll gain a little bit of height to start with, but I should distance myself so that I don't bump into the wall before my Fire Tackle ends.", "Knigel: So basically the faster you are, the higher you'll climb?", "Draelyn: Pretty much."])
+
+[node name="HintBubble" parent="." instance=ExtResource("5_2v3kh")]
+position = Vector2(736, -248)
+textbox_strings = Array[String](["Draelyn: While my upward Fire Tackle rises slowly, I can dive diagonally downwards with my Fire Tackle by pressing [Move Down]+[Attack]!"])
 
 [editable path="FallWarp"]

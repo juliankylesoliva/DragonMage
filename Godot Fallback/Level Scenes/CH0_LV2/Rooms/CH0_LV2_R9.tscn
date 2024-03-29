@@ -1,9 +1,11 @@
-[gd_scene load_steps=5 format=3 uid="uid://cdc2woq15yytv"]
+[gd_scene load_steps=7 format=3 uid="uid://cdc2woq15yytv"]
 
 [ext_resource type="Script" path="res://Scripts/Utility Scripts/Room.gd" id="1_vafex"]
 [ext_resource type="TileSet" uid="uid://dhwi7i1loa2pd" path="res://Sprites/Tiles/Test Tiles/TestTileSet.tres" id="2_xo2ac"]
 [ext_resource type="PackedScene" uid="uid://dqbo0wu6hm8lj" path="res://Scene Objects/Objects/WarpTrigger.tscn" id="3_o6djf"]
 [ext_resource type="PackedScene" uid="uid://cs4s34scsvcfr" path="res://Scene Objects/Objects/BreakableBlock.tscn" id="4_h0dsw"]
+[ext_resource type="PackedScene" uid="uid://cw6gype8pgf7a" path="res://Scene Objects/Characters/KnigelNPC.tscn" id="4_vue7h"]
+[ext_resource type="PackedScene" uid="uid://cp3kaarqt7vdo" path="res://Scene Objects/Objects/HintBubble.tscn" id="5_ec42s"]
 
 [node name="CH0_LV2_R9" type="Node2D" node_paths=PackedStringArray("tilemap_list", "room_entrances")]
 script = ExtResource("1_vafex")
@@ -67,6 +69,26 @@ room_entrance_index = 1
 position = Vector2(1136, -288)
 room_origin = NodePath("..")
 room_destination = NodePath("..")
+
+[node name="KnigelNPC" parent="." instance=ExtResource("4_vue7h")]
+position = Vector2(96, 224)
+textbox_strings = Array[String](["Draelyn: Hey, Knigel. Do you mind if I just rattle off these last few tricks as fast as I can real quick?", "Knigel: Not at all. Take it away!", "Draelyn: Nice! First, I can start a Fire Tackle while sliding by pressing [Attack] while [Crouch] is still held!"])
+
+[node name="HintBubble" parent="." instance=ExtResource("5_ec42s")]
+position = Vector2(544, 232)
+textbox_strings = Array[String](["Draelyn: Next, I can start a Fire Tackle while climbing a wall!"])
+
+[node name="HintBubble2" parent="." instance=ExtResource("5_ec42s")]
+position = Vector2(800, 232)
+textbox_strings = Array[String](["Draelyn: If I hold [Attack], I'll have time to change or even reverse the direction of my Fire Tackle before launching it by releasing [Attack]!"])
+
+[node name="HintBubble3" parent="." instance=ExtResource("5_ec42s")]
+position = Vector2(800, -88)
+textbox_strings = Array[String](["Draelyn: I can jump out of a slide by pressing [Jump] while holding forward and [Crouch]. I can jump out of my Fire Tackle in a similar way by pressing [Jump] while holding forward towards the end of the tackle."])
+
+[node name="HintBubble4" parent="." instance=ExtResource("5_ec42s")]
+position = Vector2(544, -120)
+textbox_strings = Array[String](["Draelyn: If I fast fall onto a slope while holding [Crouch], I'll instantly start sliding down it with added speed, depending on how steep the slope is!"])
 
 [node name="BreakableBlock" parent="." instance=ExtResource("4_h0dsw")]
 position = Vector2(288, 224)

@@ -173,6 +173,9 @@ room_entrance_index = 1
 
 [node name="ClearTimer" parent="." instance=ExtResource("14_dibul")]
 
+[node name="Textbox" parent="." instance=ExtResource("18_itco1")]
+accept_input_events = false
+
 [node name="PauseMenu" parent="." node_paths=PackedStringArray("screen_fade") instance=ExtResource("13_1kf77")]
 screen_fade = NodePath("../ScreenFade")
 
@@ -185,10 +188,6 @@ show_fragment_result = false
 
 [node name="ScreenFade" parent="." instance=ExtResource("13_ggxcq")]
 starting_fade_duration = 1.0
-
-[node name="Textbox" parent="." instance=ExtResource("18_itco1")]
-text_scrolling_duration = 2.0
-accept_input_events = false
 
 [connection signal="level_finished" from="CH0_LV1_R10/FinishLine" to="." method="level_finish"]
 [connection signal="level_finished" from="CH0_LV1_R10/FinishLine" to="ClearTimer" method="stop_timer"]

@@ -35,7 +35,7 @@ func state_process(_delta):
 		set_next_state(state_machine.get_state_by_name("FormChanging"))
 	elif (hub.attacks.is_using_attack_state() and hub.attacks.current_attack != null):
 		set_next_state(state_machine.get_state_by_name("Attacking"))
-	elif (hub.jumping.can_start_wall_popup() and Input.is_action_pressed("Technical")):
+	elif (hub.jumping.can_start_wall_popup() and (Input.is_action_pressed("Technical") or Input.is_action_pressed("Crouch"))):
 		hub.jumping.do_ledge_snap()
 		if (Input.is_action_pressed("Crouch")):
 			var selected_attack : Attack = hub.attacks.get_attack_by_name(hub.attacks.crouching_attack_name)

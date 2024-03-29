@@ -1,9 +1,11 @@
-[gd_scene load_steps=5 format=3 uid="uid://bjcpeaymgnlph"]
+[gd_scene load_steps=7 format=3 uid="uid://bjcpeaymgnlph"]
 
 [ext_resource type="Script" path="res://Scripts/Utility Scripts/Room.gd" id="1_l2bk6"]
 [ext_resource type="TileSet" uid="uid://dhwi7i1loa2pd" path="res://Sprites/Tiles/Test Tiles/TestTileSet.tres" id="2_1fie0"]
 [ext_resource type="PackedScene" uid="uid://dqbo0wu6hm8lj" path="res://Scene Objects/Objects/WarpTrigger.tscn" id="3_5f0b8"]
 [ext_resource type="PackedScene" uid="uid://cs4s34scsvcfr" path="res://Scene Objects/Objects/BreakableBlock.tscn" id="4_qlho3"]
+[ext_resource type="PackedScene" uid="uid://cw6gype8pgf7a" path="res://Scene Objects/Characters/KnigelNPC.tscn" id="5_31tjs"]
+[ext_resource type="PackedScene" uid="uid://cp3kaarqt7vdo" path="res://Scene Objects/Objects/HintBubble.tscn" id="5_kfrof"]
 
 [node name="CH0_LV2_R4" type="Node2D" node_paths=PackedStringArray("tilemap_list", "room_entrances")]
 script = ExtResource("1_l2bk6")
@@ -66,6 +68,18 @@ room_entrance_index = 1
 position = Vector2(1232, 224)
 room_origin = NodePath("..")
 room_destination = NodePath("..")
+
+[node name="KnigelNPC" parent="." instance=ExtResource("5_31tjs")]
+position = Vector2(64, 224)
+textbox_strings = Array[String](["Draelyn: Stand back, Knigel. This is the move I've been wanting to show you the most. I call it the Fire Tackle!", "Knigel: I'm listening... and standing back. How does it work?", "Draelyn: I press [Attack] to shroud myself in my own fire breath while charging forward along slopes and over gaps to break stuff! Don't worry, I'm immune to my own flames."])
+
+[node name="HintBubble" parent="." instance=ExtResource("5_kfrof")]
+position = Vector2(320, 232)
+textbox_strings = Array[String](["Draelyn: If I get a running start, my Fire Tackle will go farther and faster!"])
+
+[node name="HintBubble2" parent="." instance=ExtResource("5_kfrof")]
+position = Vector2(832, 232)
+textbox_strings = Array[String](["Draelyn: I can even start the Fire Tackle in midair without falling!"])
 
 [node name="BreakableBlock" parent="." instance=ExtResource("4_qlho3")]
 position = Vector2(192, 224)

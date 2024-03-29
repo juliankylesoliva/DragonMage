@@ -1,8 +1,10 @@
-[gd_scene load_steps=4 format=3 uid="uid://dw3wsldpopyl0"]
+[gd_scene load_steps=6 format=3 uid="uid://dw3wsldpopyl0"]
 
 [ext_resource type="Script" path="res://Scripts/Utility Scripts/Room.gd" id="1_ikux7"]
 [ext_resource type="TileSet" uid="uid://dhwi7i1loa2pd" path="res://Sprites/Tiles/Test Tiles/TestTileSet.tres" id="2_exnxq"]
 [ext_resource type="PackedScene" uid="uid://dqbo0wu6hm8lj" path="res://Scene Objects/Objects/WarpTrigger.tscn" id="3_0wu0d"]
+[ext_resource type="PackedScene" uid="uid://cw6gype8pgf7a" path="res://Scene Objects/Characters/KnigelNPC.tscn" id="4_tiytc"]
+[ext_resource type="PackedScene" uid="uid://cp3kaarqt7vdo" path="res://Scene Objects/Objects/HintBubble.tscn" id="5_dnkxd"]
 
 [node name="CH0_LV2_R1" type="Node2D" node_paths=PackedStringArray("tilemap_list", "room_entrances")]
 script = ExtResource("1_ikux7")
@@ -59,3 +61,11 @@ position = Vector2(1040, 64)
 position = Vector2(1104, 64)
 room_origin = NodePath("..")
 room_destination = NodePath("..")
+
+[node name="KnigelNPC" parent="." instance=ExtResource("4_tiytc")]
+position = Vector2(320, 192)
+textbox_strings = Array[String](["Knigel: So, Drae, you mentioned wanting to show me some new techniques you came up with for tonight's training session?", "Draelyn: You bet, Knigel! For this first technique, I figured out a way to climb walls without using my arms or legs!", "Knigel: Really? How so?", "Draelyn: All I gotta do is jump against a wall, then I just hold onto it while beating my wings to go up!", "Knigel: Just be mindful of where you're facing. I've noticed that you have trouble turning yourself around while in midair.", "Draelyn: Yeah... I can't do much with a wall I'm not facing. Normally, my mage robe makes my wings and tail feel weightless, so I'm not yet used to moving around with this extra weight."])
+
+[node name="HintBubble" parent="." instance=ExtResource("5_dnkxd")]
+position = Vector2(480, 104)
+textbox_strings = Array[String](["Draelyn: Of course, I can also just use my wings to gain height by pressing [Jump] in midair.", "Knigel: By pressing what in midair? How are you even saying that out loud?", "Draelyn: What? [Jump]? It's just magic sigil notation. I have a bad habit of using it during normal conversation, sorry...", "Knigel: No worries. Feel free to explain these things to me in your own way, Drae."])

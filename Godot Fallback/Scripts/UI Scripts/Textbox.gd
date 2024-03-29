@@ -37,6 +37,7 @@ func _ready():
 	hide_textbox()
 
 func _process(_delta):
+	self.set_visible(!get_tree().is_paused())
 	if (current_state == TextboxState.READY and !text_queue.is_empty()):
 		display_text()
 
@@ -90,7 +91,8 @@ func do_text_scrolling():
 		text_label.visible_ratio = 0
 		
 		while (textbox_container.visible and text_label.visible_ratio < 1):
-			text_label.visible_ratio = move_toward(text_label.visible_ratio, 1, get_process_delta_time() / text_scrolling_duration)
+			if (!get_tree().is_paused()):
+				text_label.visible_ratio = move_toward(text_label.visible_ratio, 1, get_process_delta_time() / text_scrolling_duration)
 			await get_tree().process_frame
 		
 		if (textbox_container.visible):

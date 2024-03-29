@@ -1,8 +1,10 @@
-[gd_scene load_steps=4 format=3 uid="uid://ct51kuu2jp0o4"]
+[gd_scene load_steps=6 format=3 uid="uid://ct51kuu2jp0o4"]
 
 [ext_resource type="Script" path="res://Scripts/Utility Scripts/Room.gd" id="1_ikux7"]
 [ext_resource type="TileSet" uid="uid://dhwi7i1loa2pd" path="res://Sprites/Tiles/Test Tiles/TestTileSet.tres" id="2_exnxq"]
 [ext_resource type="PackedScene" uid="uid://dqbo0wu6hm8lj" path="res://Scene Objects/Objects/WarpTrigger.tscn" id="3_jikma"]
+[ext_resource type="PackedScene" uid="uid://cw6gype8pgf7a" path="res://Scene Objects/Characters/KnigelNPC.tscn" id="4_qctdh"]
+[ext_resource type="PackedScene" uid="uid://cp3kaarqt7vdo" path="res://Scene Objects/Objects/HintBubble.tscn" id="5_8ls14"]
 
 [node name="CH0_LV2_R2" type="Node2D" node_paths=PackedStringArray("tilemap_list", "room_entrances")]
 script = ExtResource("1_ikux7")
@@ -66,3 +68,11 @@ room_entrance_index = 1
 position = Vector2(1136, -192)
 room_origin = NodePath("..")
 room_destination = NodePath("..")
+
+[node name="KnigelNPC" parent="." instance=ExtResource("4_qctdh")]
+position = Vector2(128, 224)
+textbox_strings = Array[String](["Draelyn: Another thing about me climbing this way, Knigel, is that once I get to the top of a wall, I do a little pop-up. During that time, I can press [Jump] while holding forward to vault over it! I can even hold [Jump] to vault as early as possible.", "Knigel: Could you keep climbing forever this way, I wonder?", "Draelyn: Unfortunately no--I gradually lose speed as I climb, and if I already climbed on a wall after leaving the ground, I can't climb again until I touch the ground."])
+
+[node name="HintBubble" parent="." instance=ExtResource("5_8ls14")]
+position = Vector2(352, 104)
+textbox_strings = Array[String](["Knigel: If you're not going to vault, wouldn't you be slower if you kept doing that pop-up you do every time you climb?", "Draelyn: Alternatively, I can hold [Technical] as I climb to snap to the ledge and keep moving instead of popping up."])

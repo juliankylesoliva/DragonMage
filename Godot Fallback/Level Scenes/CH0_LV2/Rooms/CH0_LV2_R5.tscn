@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://d22s40sq3qi37"]
+[gd_scene load_steps=6 format=3 uid="uid://d22s40sq3qi37"]
 
 [ext_resource type="Script" path="res://Scripts/Utility Scripts/Room.gd" id="1_l2bk6"]
 [ext_resource type="TileSet" uid="uid://dhwi7i1loa2pd" path="res://Sprites/Tiles/Test Tiles/TestTileSet.tres" id="2_1fie0"]
 [ext_resource type="PackedScene" uid="uid://dqbo0wu6hm8lj" path="res://Scene Objects/Objects/WarpTrigger.tscn" id="3_epr8a"]
 [ext_resource type="PackedScene" uid="uid://bajk0w7eoh6o8" path="res://Scene Objects/Objects/ReinforcedBlock.tscn" id="4_136hc"]
+[ext_resource type="PackedScene" uid="uid://cw6gype8pgf7a" path="res://Scene Objects/Characters/KnigelNPC.tscn" id="5_eo4gl"]
 
 [node name="CH0_LV2_R5" type="Node2D" node_paths=PackedStringArray("tilemap_list", "room_entrances")]
 script = ExtResource("1_l2bk6")
@@ -65,6 +66,10 @@ room_entrance_index = 1
 position = Vector2(560, 96)
 room_origin = NodePath("..")
 room_destination = NodePath("..")
+
+[node name="KnigelNPC" parent="." instance=ExtResource("5_eo4gl")]
+position = Vector2(64, 224)
+textbox_strings = Array[String](["Knigel: Bad news, Drae... there's a rather sturdy roadblock just past this slope. Do you think you can use your Magic Boost to break it down?", "Draelyn: Man, I don't even want to think about the Magic Boost after what happened that afternoon...", "Knigel: Oh right... Sorry for bringing that up.", "You're fine. Besides, I have a different idea: If I press [Attack] to Fire Tackle and hold [Attack] near the end of it, I'll spit out a large fireball that can go through walls and destroy that roadblock!", "Knigel: I'll be out of your way, then. Fire away!"])
 
 [node name="ReinforcedBlock" parent="." instance=ExtResource("4_136hc")]
 position = Vector2(416, 96)

@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://13q3gbpsi8ua"]
+[gd_scene load_steps=6 format=3 uid="uid://13q3gbpsi8ua"]
 
 [ext_resource type="Script" path="res://Scripts/Utility Scripts/Room.gd" id="1_l2bk6"]
 [ext_resource type="TileSet" uid="uid://dhwi7i1loa2pd" path="res://Sprites/Tiles/Test Tiles/TestTileSet.tres" id="2_1fie0"]
 [ext_resource type="PackedScene" uid="uid://dqbo0wu6hm8lj" path="res://Scene Objects/Objects/WarpTrigger.tscn" id="3_1p0xu"]
+[ext_resource type="PackedScene" uid="uid://cw6gype8pgf7a" path="res://Scene Objects/Characters/KnigelNPC.tscn" id="4_3j1xx"]
 [ext_resource type="PackedScene" uid="uid://cs4s34scsvcfr" path="res://Scene Objects/Objects/BreakableBlock.tscn" id="4_yqup0"]
 
 [node name="CH0_LV2_R6" type="Node2D" node_paths=PackedStringArray("tilemap_list", "room_entrances")]
@@ -66,6 +67,10 @@ room_entrance_index = 1
 position = Vector2(560, 416)
 room_origin = NodePath("..")
 room_destination = NodePath("..")
+
+[node name="KnigelNPC" parent="." instance=ExtResource("4_3j1xx")]
+position = Vector2(96, 96)
+textbox_strings = Array[String](["Knigel: Got another cool trick up your sleeve for getting past this narrow space?", "Draelyn: You know it! I can press [Crouch]+[Attack] to slide for as long as I'm holding down [Crouch]! I can also get a running start for more momentum.", "Draelyn: For the record, though, I'm not even wearing sleeves.", "Knigel: So your gloves, then?"])
 
 [node name="BreakableBlock" parent="." instance=ExtResource("4_yqup0")]
 position = Vector2(128, 224)

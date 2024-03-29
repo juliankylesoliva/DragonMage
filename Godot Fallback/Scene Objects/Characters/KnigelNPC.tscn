@@ -1,0 +1,189 @@
+[gd_scene load_steps=23 format=3 uid="uid://cw6gype8pgf7a"]
+
+[ext_resource type="FontFile" uid="uid://blejgst41tdnl" path="res://PressStart2P.ttf" id="1_06613"]
+[ext_resource type="Script" path="res://Scripts/NPC Scripts/KnigelNPC.gd" id="1_t6ktj"]
+[ext_resource type="Texture2D" uid="uid://cwpt6c7gtmrws" path="res://Sprites/Characters/KnigelIdle.png" id="2_ifm51"]
+[ext_resource type="Script" path="res://Scripts/Utility Scripts/ButtonPromptTextLabel.gd" id="2_rnmjy"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ok8y2"]
+size = Vector2(64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_opuuu"]
+atlas = ExtResource("2_ifm51")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_67d5p"]
+atlas = ExtResource("2_ifm51")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_njxgs"]
+atlas = ExtResource("2_ifm51")
+region = Rect2(192, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kms5p"]
+atlas = ExtResource("2_ifm51")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1xpws"]
+atlas = ExtResource("2_ifm51")
+region = Rect2(256, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xq3xn"]
+atlas = ExtResource("2_ifm51")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1qotp"]
+atlas = ExtResource("2_ifm51")
+region = Rect2(192, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7ecyr"]
+atlas = ExtResource("2_ifm51")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ue5wb"]
+atlas = ExtResource("2_ifm51")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_l0xgq"]
+atlas = ExtResource("2_ifm51")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w85ti"]
+atlas = ExtResource("2_ifm51")
+region = Rect2(320, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c1nv0"]
+atlas = ExtResource("2_ifm51")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_l2jqi"]
+atlas = ExtResource("2_ifm51")
+region = Rect2(256, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nnlp8"]
+atlas = ExtResource("2_ifm51")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_s2aqc"]
+atlas = ExtResource("2_ifm51")
+region = Rect2(320, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0os1r"]
+atlas = ExtResource("2_ifm51")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_hjlmv"]
+animations = [{
+"frames": [{
+"duration": 6.0,
+"texture": SubResource("AtlasTexture_opuuu")
+}, {
+"duration": 30.0,
+"texture": SubResource("AtlasTexture_67d5p")
+}, {
+"duration": 6.0,
+"texture": SubResource("AtlasTexture_njxgs")
+}, {
+"duration": 30.0,
+"texture": SubResource("AtlasTexture_kms5p")
+}],
+"loop": false,
+"name": &"KnigelStand",
+"speed": 60.0
+}, {
+"frames": [{
+"duration": 6.0,
+"texture": SubResource("AtlasTexture_1xpws")
+}, {
+"duration": 30.0,
+"texture": SubResource("AtlasTexture_xq3xn")
+}, {
+"duration": 6.0,
+"texture": SubResource("AtlasTexture_1qotp")
+}, {
+"duration": 30.0,
+"texture": SubResource("AtlasTexture_7ecyr")
+}],
+"loop": false,
+"name": &"KnigelStandBlink0",
+"speed": 60.0
+}, {
+"frames": [{
+"duration": 6.0,
+"texture": SubResource("AtlasTexture_ue5wb")
+}, {
+"duration": 30.0,
+"texture": SubResource("AtlasTexture_l0xgq")
+}, {
+"duration": 6.0,
+"texture": SubResource("AtlasTexture_w85ti")
+}, {
+"duration": 30.0,
+"texture": SubResource("AtlasTexture_c1nv0")
+}],
+"loop": false,
+"name": &"KnigelStandBlink1",
+"speed": 60.0
+}, {
+"frames": [{
+"duration": 6.0,
+"texture": SubResource("AtlasTexture_l2jqi")
+}, {
+"duration": 30.0,
+"texture": SubResource("AtlasTexture_nnlp8")
+}, {
+"duration": 6.0,
+"texture": SubResource("AtlasTexture_s2aqc")
+}, {
+"duration": 30.0,
+"texture": SubResource("AtlasTexture_0os1r")
+}],
+"loop": false,
+"name": &"KnigelStandBlink2",
+"speed": 60.0
+}]
+
+[node name="KnigelNPC" type="Area2D" node_paths=PackedStringArray("sprite", "button_prompt")]
+disable_mode = 1
+collision_layer = 0
+collision_mask = 4
+script = ExtResource("1_t6ktj")
+sprite = NodePath("AnimatedSprite2D")
+min_blink_time = 2.0
+max_blink_time = 3.0
+button_prompt = NodePath("ButtonPrompt")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+light_mask = 8
+visibility_layer = 8
+z_index = 4
+shape = SubResource("RectangleShape2D_ok8y2")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+light_mask = 8
+visibility_layer = 8
+z_index = 3
+sprite_frames = SubResource("SpriteFrames_hjlmv")
+animation = &"KnigelStand"
+flip_h = true
+
+[node name="ButtonPrompt" type="RichTextLabel" parent="."]
+visible = false
+light_mask = 64
+visibility_layer = 64
+z_index = 7
+clip_contents = false
+offset_left = -8.0
+offset_top = -56.0
+offset_right = 8.0
+offset_bottom = -40.0
+theme_override_fonts/normal_font = ExtResource("1_06613")
+theme_override_font_sizes/normal_font_size = 8
+bbcode_enabled = true
+text = "[center][Interact]"
+scroll_active = false
+shortcut_keys_enabled = false
+script = ExtResource("2_rnmjy")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]

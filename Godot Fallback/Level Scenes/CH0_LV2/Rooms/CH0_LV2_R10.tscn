@@ -1,11 +1,13 @@
-[gd_scene load_steps=8 format=3 uid="uid://dsfiw4qtp8buo"]
+[gd_scene load_steps=10 format=3 uid="uid://dsfiw4qtp8buo"]
 
 [ext_resource type="Script" path="res://Scripts/Utility Scripts/Room.gd" id="1_vafex"]
 [ext_resource type="TileSet" uid="uid://dhwi7i1loa2pd" path="res://Sprites/Tiles/Test Tiles/TestTileSet.tres" id="2_xo2ac"]
 [ext_resource type="PackedScene" uid="uid://durwtm4ocfbmv" path="res://Scene Objects/Objects/FinishLine.tscn" id="3_1q1vm"]
 [ext_resource type="PackedScene" uid="uid://dqbo0wu6hm8lj" path="res://Scene Objects/Objects/WarpTrigger.tscn" id="3_ai1v1"]
 [ext_resource type="PackedScene" uid="uid://cs4s34scsvcfr" path="res://Scene Objects/Objects/BreakableBlock.tscn" id="4_5mmy5"]
+[ext_resource type="PackedScene" uid="uid://cp3kaarqt7vdo" path="res://Scene Objects/Objects/HintBubble.tscn" id="4_s2tg2"]
 [ext_resource type="PackedScene" uid="uid://bajk0w7eoh6o8" path="res://Scene Objects/Objects/ReinforcedBlock.tscn" id="5_dbm4k"]
+[ext_resource type="PackedScene" uid="uid://cw6gype8pgf7a" path="res://Scene Objects/Characters/KnigelNPC.tscn" id="5_imsol"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_37inf"]
 size = Vector2(512, 32)
@@ -75,6 +77,14 @@ room_entrance_index = 1
 
 [node name="CollisionShape2D" parent="FallWarp" index="0"]
 shape = SubResource("RectangleShape2D_37inf")
+
+[node name="HintBubble" parent="." instance=ExtResource("4_s2tg2")]
+position = Vector2(320, 552)
+textbox_strings = Array[String](["Draelyn: One last thing, holding [Crouch] as I climb a wall will let me slide as soon as I get to the top!"])
+
+[node name="KnigelNPC" parent="." instance=ExtResource("5_imsol")]
+position = Vector2(1152, 544)
+textbox_strings = Array[String](["Knigel: Excellent work this session, Drae! Though, we might have strayed a bit from our usual training path this time.", "Draelyn: Sorry, I think I got carried away with the last of my new moves at the end there. I hope we didn't go too far off the path..."])
 
 [node name="BreakableBlock" parent="." instance=ExtResource("4_5mmy5")]
 position = Vector2(160, 225)

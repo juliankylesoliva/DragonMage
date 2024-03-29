@@ -58,6 +58,12 @@ editor_draw_drag_margin = true
 [node name="Warp 0" parent="CH0_LV2_R1" index="4" node_paths=PackedStringArray("room_destination")]
 room_destination = NodePath("../../CH0_LV2_R2")
 
+[node name="KnigelNPC" parent="CH0_LV2_R1" index="5" node_paths=PackedStringArray("textbox")]
+textbox = NodePath("../../Textbox")
+
+[node name="HintBubble" parent="CH0_LV2_R1" index="6" node_paths=PackedStringArray("textbox")]
+textbox = NodePath("../../Textbox")
+
 [node name="CH0_LV2_R2" parent="." instance=ExtResource("4_k1xdo")]
 position = Vector2(1184, 0)
 
@@ -66,6 +72,12 @@ room_destination = NodePath("../../CH0_LV2_R1")
 
 [node name="Warp 1" parent="CH0_LV2_R2" index="5" node_paths=PackedStringArray("room_destination")]
 room_destination = NodePath("../../CH0_LV2_R3")
+
+[node name="KnigelNPC" parent="CH0_LV2_R2" index="6" node_paths=PackedStringArray("textbox")]
+textbox = NodePath("../../Textbox")
+
+[node name="HintBubble" parent="CH0_LV2_R2" index="7" node_paths=PackedStringArray("textbox")]
+textbox = NodePath("../../Textbox")
 
 [node name="CH0_LV2_R3" parent="." instance=ExtResource("5_v45bg")]
 position = Vector2(1728, -864)
@@ -76,6 +88,9 @@ room_destination = NodePath("../../CH0_LV2_R2")
 [node name="Warp 1" parent="CH0_LV2_R3" index="6" node_paths=PackedStringArray("room_destination")]
 room_destination = NodePath("../../CH0_LV2_R4")
 
+[node name="KnigelNPC" parent="CH0_LV2_R3" index="8" node_paths=PackedStringArray("textbox")]
+textbox = NodePath("../../Textbox")
+
 [node name="CH0_LV2_R4" parent="." instance=ExtResource("6_h2ors")]
 position = Vector2(2144, -160)
 
@@ -84,6 +99,15 @@ room_destination = NodePath("../../CH0_LV2_R3")
 
 [node name="Warp 1" parent="CH0_LV2_R4" index="5" node_paths=PackedStringArray("room_destination")]
 room_destination = NodePath("../../CH0_LV2_R5")
+
+[node name="KnigelNPC" parent="CH0_LV2_R4" index="6" node_paths=PackedStringArray("textbox")]
+textbox = NodePath("../../Textbox")
+
+[node name="HintBubble" parent="CH0_LV2_R4" index="7" node_paths=PackedStringArray("textbox")]
+textbox = NodePath("../../Textbox")
+
+[node name="HintBubble2" parent="CH0_LV2_R4" index="8" node_paths=PackedStringArray("textbox")]
+textbox = NodePath("../../Textbox")
 
 [node name="CH0_LV2_R5" parent="." instance=ExtResource("7_ho7jv")]
 position = Vector2(2048, 192)
@@ -94,6 +118,9 @@ room_destination = NodePath("../../CH0_LV2_R4")
 [node name="Warp 1" parent="CH0_LV2_R5" index="5" node_paths=PackedStringArray("room_destination")]
 room_destination = NodePath("../../CH0_LV2_R6")
 
+[node name="KnigelNPC" parent="CH0_LV2_R5" index="6" node_paths=PackedStringArray("textbox")]
+textbox = NodePath("../../Textbox")
+
 [node name="CH0_LV2_R6" parent="." instance=ExtResource("8_2excb")]
 position = Vector2(2784, 192)
 
@@ -103,14 +130,23 @@ room_destination = NodePath("../../CH0_LV2_R5")
 [node name="Warp 1" parent="CH0_LV2_R6" index="5" node_paths=PackedStringArray("room_destination")]
 room_destination = NodePath("../../CH0_LV2_R7")
 
+[node name="KnigelNPC" parent="CH0_LV2_R6" index="6" node_paths=PackedStringArray("textbox")]
+textbox = NodePath("../../Textbox")
+
 [node name="CH0_LV2_R7" parent="." instance=ExtResource("9_bfkiw")]
 position = Vector2(640, -672)
 
-[node name="Warp 0" parent="CH0_LV2_R7" index="6" node_paths=PackedStringArray("room_destination")]
+[node name="Warp 0" parent="CH0_LV2_R7" index="4" node_paths=PackedStringArray("room_destination")]
 room_destination = NodePath("../../CH0_LV2_R6")
 
-[node name="Warp 1" parent="CH0_LV2_R7" index="7" node_paths=PackedStringArray("room_destination")]
+[node name="Warp 1" parent="CH0_LV2_R7" index="5" node_paths=PackedStringArray("room_destination")]
 room_destination = NodePath("../../CH0_LV2_R8")
+
+[node name="HintBubble" parent="CH0_LV2_R7" index="6" node_paths=PackedStringArray("textbox")]
+textbox = NodePath("../../Textbox")
+
+[node name="KnigelNPC" parent="CH0_LV2_R7" index="7" node_paths=PackedStringArray("textbox")]
+textbox = NodePath("../../Textbox")
 
 [node name="CH0_LV2_R8" parent="." instance=ExtResource("10_2kavy")]
 position = Vector2(-640, -864)
@@ -121,6 +157,12 @@ room_destination = NodePath("../../CH0_LV2_R7")
 [node name="Warp 1" parent="CH0_LV2_R8" index="6" node_paths=PackedStringArray("room_destination")]
 room_destination = NodePath("../../CH0_LV2_R9")
 
+[node name="KnigelNPC" parent="CH0_LV2_R8" index="8" node_paths=PackedStringArray("textbox")]
+textbox = NodePath("../../Textbox")
+
+[node name="HintBubble" parent="CH0_LV2_R8" index="9" node_paths=PackedStringArray("textbox")]
+textbox = NodePath("../../Textbox")
+
 [node name="CH0_LV2_R9" parent="." instance=ExtResource("11_lvhf0")]
 position = Vector2(768, -1216)
 
@@ -130,6 +172,21 @@ room_destination = NodePath("../../CH0_LV2_R8")
 [node name="Warp 1" parent="CH0_LV2_R9" index="5" node_paths=PackedStringArray("room_destination")]
 room_destination = NodePath("../../CH0_LV2_R10")
 
+[node name="KnigelNPC" parent="CH0_LV2_R9" index="6" node_paths=PackedStringArray("textbox")]
+textbox = NodePath("../../Textbox")
+
+[node name="HintBubble" parent="CH0_LV2_R9" index="7" node_paths=PackedStringArray("textbox")]
+textbox = NodePath("../../Textbox")
+
+[node name="HintBubble2" parent="CH0_LV2_R9" index="8" node_paths=PackedStringArray("textbox")]
+textbox = NodePath("../../Textbox")
+
+[node name="HintBubble3" parent="CH0_LV2_R9" index="9" node_paths=PackedStringArray("textbox")]
+textbox = NodePath("../../Textbox")
+
+[node name="HintBubble4" parent="CH0_LV2_R9" index="10" node_paths=PackedStringArray("textbox")]
+textbox = NodePath("../../Textbox")
+
 [node name="CH0_LV2_R10" parent="." instance=ExtResource("12_avml0")]
 position = Vector2(864, 576)
 
@@ -137,7 +194,16 @@ position = Vector2(864, 576)
 room_destination = NodePath("../../CH0_LV2_R9")
 room_entrance_index = 1
 
+[node name="HintBubble" parent="CH0_LV2_R10" index="6" node_paths=PackedStringArray("textbox")]
+textbox = NodePath("../../Textbox")
+
+[node name="KnigelNPC" parent="CH0_LV2_R10" index="7" node_paths=PackedStringArray("textbox")]
+textbox = NodePath("../../Textbox")
+
 [node name="ClearTimer" parent="." instance=ExtResource("14_s76pj")]
+
+[node name="Textbox" parent="." instance=ExtResource("18_x5lsp")]
+accept_input_events = false
 
 [node name="PauseMenu" parent="." node_paths=PackedStringArray("screen_fade") instance=ExtResource("14_dx8cr")]
 screen_fade = NodePath("../ScreenFade")
@@ -151,10 +217,6 @@ show_fragment_result = false
 
 [node name="ScreenFade" parent="." instance=ExtResource("13_ngewc")]
 starting_fade_duration = 1.0
-
-[node name="Textbox" parent="." instance=ExtResource("18_x5lsp")]
-text_scrolling_duration = 2.0
-accept_input_events = false
 
 [connection signal="level_finished" from="CH0_LV2_R10/FinishLine" to="." method="level_finish"]
 [connection signal="level_finished" from="CH0_LV2_R10/FinishLine" to="ClearTimer" method="stop_timer"]
