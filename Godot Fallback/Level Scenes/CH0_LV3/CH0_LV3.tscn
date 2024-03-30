@@ -32,11 +32,14 @@ dropped_fragment_scene = ExtResource("2_qdijq")
 [node name="Player" parent="." instance=ExtResource("2_oq6xx")]
 position = Vector2(224, 223)
 
-[node name="Temper" parent="Player/Hub" index="5"]
+[node name="Fairy" parent="Player/Hub" index="4"]
+is_using_fairy = true
+
+[node name="Temper" parent="Player/Hub" index="6"]
 cold_segments = 0
 hot_segments = 0
 
-[node name="Camera" parent="Player/Hub" index="10" node_paths=PackedStringArray("player_cam")]
+[node name="Camera" parent="Player/Hub" index="11" node_paths=PackedStringArray("player_cam")]
 player_cam = NodePath("../../../Camera2D")
 
 [node name="Camera2D" type="Camera2D" parent="."]

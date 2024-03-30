@@ -1,0 +1,43 @@
+[gd_scene load_steps=6 format=3 uid="uid://dnhdan6vub1w"]
+
+[ext_resource type="Texture2D" uid="uid://b71jbwr7ppc6p" path="res://Sprites/Characters/FaesonIdle.png" id="1_0uu6c"]
+[ext_resource type="Script" path="res://Scripts/NPC Scripts/FairyFollow.gd" id="2_cr1nc"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nnscl"]
+atlas = ExtResource("1_0uu6c")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xcswx"]
+atlas = ExtResource("1_0uu6c")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_iw80g"]
+animations = [{
+"frames": [{
+"duration": 6.0,
+"texture": SubResource("AtlasTexture_nnscl")
+}, {
+"duration": 6.0,
+"texture": SubResource("AtlasTexture_xcswx")
+}],
+"loop": true,
+"name": &"default",
+"speed": 60.0
+}]
+
+[node name="Faeson" type="AnimatedSprite2D" node_paths=PackedStringArray("sprite")]
+light_mask = 8
+visibility_layer = 8
+z_index = 4
+sprite_frames = SubResource("SpriteFrames_iw80g")
+autoplay = "default"
+frame_progress = 0.899822
+script = ExtResource("2_cr1nc")
+sprite = NodePath(".")
+min_theta_change_rate = 0.628
+max_theta_change_rate = 0.942
+min_sine_amplitude = 8.0
+max_sine_amplitude = 16.0
+min_rotation_shift = -0.314
+max_rotation_shift = 0.314
+easing = 0.125

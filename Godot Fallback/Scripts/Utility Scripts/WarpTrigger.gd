@@ -28,6 +28,9 @@ func _on_body_entered(body):
 		hub.char_body.global_position = destination_coords
 		hub.set_respawn_position(destination_coords)
 		
+		if (hub.fairy.fairy_ref != null):
+			hub.fairy.fairy_ref.snap_to_target_node()
+		
 		hub.camera.saved_y_position = hub.collisions.get_ground_point().y
 		hub.camera.snap_camera_to_player()
 		

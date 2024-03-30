@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://cw6gype8pgf7a"]
+[gd_scene load_steps=27 format=3 uid="uid://cw6gype8pgf7a"]
 
 [ext_resource type="FontFile" uid="uid://blejgst41tdnl" path="res://PressStart2P.ttf" id="1_06613"]
 [ext_resource type="Script" path="res://Scripts/NPC Scripts/KnigelNPC.gd" id="1_t6ktj"]
@@ -28,6 +28,10 @@ region = Rect2(0, 0, 64, 64)
 atlas = ExtResource("2_ifm51")
 region = Rect2(256, 0, 64, 64)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_ga336"]
+atlas = ExtResource("2_ifm51")
+region = Rect2(64, 0, 64, 64)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_xq3xn"]
 atlas = ExtResource("2_ifm51")
 region = Rect2(128, 0, 64, 64)
@@ -52,6 +56,10 @@ region = Rect2(128, 0, 64, 64)
 atlas = ExtResource("2_ifm51")
 region = Rect2(320, 0, 64, 64)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_re1kj"]
+atlas = ExtResource("2_ifm51")
+region = Rect2(192, 0, 64, 64)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_c1nv0"]
 atlas = ExtResource("2_ifm51")
 region = Rect2(0, 0, 64, 64)
@@ -60,6 +68,10 @@ region = Rect2(0, 0, 64, 64)
 atlas = ExtResource("2_ifm51")
 region = Rect2(256, 0, 64, 64)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_8qrgv"]
+atlas = ExtResource("2_ifm51")
+region = Rect2(64, 0, 64, 64)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_nnlp8"]
 atlas = ExtResource("2_ifm51")
 region = Rect2(128, 0, 64, 64)
@@ -67,6 +79,10 @@ region = Rect2(128, 0, 64, 64)
 [sub_resource type="AtlasTexture" id="AtlasTexture_s2aqc"]
 atlas = ExtResource("2_ifm51")
 region = Rect2(320, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dbdcb"]
+atlas = ExtResource("2_ifm51")
+region = Rect2(192, 0, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_0os1r"]
 atlas = ExtResource("2_ifm51")
@@ -92,8 +108,11 @@ animations = [{
 "speed": 60.0
 }, {
 "frames": [{
-"duration": 6.0,
+"duration": 3.0,
 "texture": SubResource("AtlasTexture_1xpws")
+}, {
+"duration": 3.0,
+"texture": SubResource("AtlasTexture_ga336")
 }, {
 "duration": 30.0,
 "texture": SubResource("AtlasTexture_xq3xn")
@@ -115,8 +134,11 @@ animations = [{
 "duration": 30.0,
 "texture": SubResource("AtlasTexture_l0xgq")
 }, {
-"duration": 6.0,
+"duration": 3.0,
 "texture": SubResource("AtlasTexture_w85ti")
+}, {
+"duration": 3.0,
+"texture": SubResource("AtlasTexture_re1kj")
 }, {
 "duration": 30.0,
 "texture": SubResource("AtlasTexture_c1nv0")
@@ -126,14 +148,20 @@ animations = [{
 "speed": 60.0
 }, {
 "frames": [{
-"duration": 6.0,
+"duration": 3.0,
 "texture": SubResource("AtlasTexture_l2jqi")
+}, {
+"duration": 3.0,
+"texture": SubResource("AtlasTexture_8qrgv")
 }, {
 "duration": 30.0,
 "texture": SubResource("AtlasTexture_nnlp8")
 }, {
-"duration": 6.0,
+"duration": 3.0,
 "texture": SubResource("AtlasTexture_s2aqc")
+}, {
+"duration": 3.0,
+"texture": SubResource("AtlasTexture_dbdcb")
 }, {
 "duration": 30.0,
 "texture": SubResource("AtlasTexture_0os1r")
@@ -162,7 +190,7 @@ shape = SubResource("RectangleShape2D_ok8y2")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 light_mask = 8
 visibility_layer = 8
-z_index = 3
+z_index = 4
 sprite_frames = SubResource("SpriteFrames_hjlmv")
 animation = &"KnigelStand"
 flip_h = true

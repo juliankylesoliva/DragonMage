@@ -28,7 +28,10 @@ dropped_fragment_scene = ExtResource("2_ahodx")
 [node name="Player" parent="." instance=ExtResource("2_616c6")]
 position = Vector2(96, 159)
 
-[node name="Camera" parent="Player/Hub" index="10" node_paths=PackedStringArray("player_cam")]
+[node name="Fairy" parent="Player/Hub" index="4"]
+is_using_fairy = true
+
+[node name="Camera" parent="Player/Hub" index="11" node_paths=PackedStringArray("player_cam")]
 player_cam = NodePath("../../../Camera2D")
 
 [node name="Camera2D" type="Camera2D" parent="."]
@@ -39,19 +42,6 @@ drag_top_margin = 0.6
 drag_right_margin = 0.0
 editor_draw_limits = true
 editor_draw_drag_margin = true
-
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="TemperMeterUI" parent="VBoxContainer" node_paths=PackedStringArray("player_node") instance=ExtResource("3_hvbu7")]
-position = Vector2(1, 8)
-player_node = NodePath("../../Player")
-process_callback = "Idle"
-camera_offset = Vector2(-255, -152)
 
 [node name="CH0_LV4_R1" parent="." instance=ExtResource("4_gh53s")]
 
@@ -117,6 +107,19 @@ position = Vector2(-3008, 1376)
 
 [node name="Warp 0" parent="CH0_LV4_R8" index="4" node_paths=PackedStringArray("room_destination")]
 room_destination = NodePath("../../CH0_LV4_R7")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TemperMeterUI" parent="VBoxContainer" node_paths=PackedStringArray("player_node") instance=ExtResource("3_hvbu7")]
+position = Vector2(1, 8)
+player_node = NodePath("../../Player")
+process_callback = "Idle"
+camera_offset = Vector2(-255, -152)
 
 [node name="ClearTimer" parent="." instance=ExtResource("13_vkigm")]
 

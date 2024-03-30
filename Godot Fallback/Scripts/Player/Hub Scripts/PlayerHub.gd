@@ -7,6 +7,7 @@ class_name PlayerHub
 @export var buffers : PlayerBuffers
 @export var movement : PlayerMovement
 @export var jumping : PlayerJumping
+@export var fairy : PlayerFairy
 @export var attacks : PlayerAttacks
 @export var temper : PlayerTemper
 @export var form : PlayerForm

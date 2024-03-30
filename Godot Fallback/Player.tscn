@@ -1,4 +1,4 @@
-[gd_scene load_steps=191 format=3 uid="uid://c6qw77ovfwgfs"]
+[gd_scene load_steps=193 format=3 uid="uid://c6qw77ovfwgfs"]
 
 [ext_resource type="Texture2D" uid="uid://d381ahbcwydy8" path="res://Sprites/Player/DraelynCrouch.png" id="1_6b42p"]
 [ext_resource type="Texture2D" uid="uid://dls34a1qa8iy1" path="res://Sprites/Player/DraelynFireTackle.png" id="1_ddrlj"]
@@ -29,6 +29,7 @@
 [ext_resource type="Script" path="res://Scripts/Player/Attack Scripts/SlideAttack.gd" id="7_i41w2"]
 [ext_resource type="Texture2D" uid="uid://bev0iekwuw81c" path="res://Sprites/Effects/BackwardsMidairJumpParticle.png" id="8_1f0td"]
 [ext_resource type="PackedScene" uid="uid://cwhtijthju8df" path="res://Scene Objects/Objects/MagicBlastProjectile.tscn" id="8_37vyn"]
+[ext_resource type="Script" path="res://Scripts/Player/Hub Scripts/PlayerFairy.gd" id="9_56tik"]
 [ext_resource type="PackedScene" uid="uid://c1npwnxy6sqnx" path="res://Scene Objects/Hitboxes/BlastJumpKnockbackHitbox.tscn" id="9_lcig4"]
 [ext_resource type="Script" path="res://Scripts/Player/Hub Scripts/PlayerAttacks.gd" id="9_r5qyh"]
 [ext_resource type="Script" path="res://Scripts/Utility Scripts/LineTrail.gd" id="10_rgamg"]
@@ -69,6 +70,7 @@
 [ext_resource type="Script" path="res://Scripts/Utility Scripts/PlayerCamera.gd" id="54_k03tc"]
 [ext_resource type="Texture2D" uid="uid://cka8kg4bes2os" path="res://Sprites/Player/MagliChangeFail.png" id="55_2sqhj"]
 [ext_resource type="Texture2D" uid="uid://db8gs3h636p2c" path="res://Sprites/Player/MagliThrow.png" id="59_lhaxn"]
+[ext_resource type="PackedScene" uid="uid://dnhdan6vub1w" path="res://Scene Objects/Characters/Faeson.tscn" id="70_s35oi"]
 
 [sub_resource type="Curve" id="Curve_qnqge"]
 _data = [Vector2(0, 1), 0.0, -0.658891, 0, 0, Vector2(1, 0), -1.2831, 0.0, 0, 0]
@@ -1266,13 +1268,14 @@ platform_floor_layers = 3
 safe_margin = 0.001
 metadata/Tag = "Player"
 
-[node name="Hub" type="Node" parent="." node_paths=PackedStringArray("state_machine", "collisions", "buffers", "movement", "jumping", "attacks", "temper", "form", "damage", "interaction", "stomp", "animation", "sprite_trail", "camera", "audio", "char_body", "char_sprite", "collision_shape", "stream_player", "raycast_dl", "raycast_dm", "raycast_dr", "raycast_ledge_l", "raycast_ledge_r", "raycast_ul", "raycast_um", "raycast_ur", "raycast_ceiling_l", "raycast_ceiling_r", "raycast_wall_top_l", "raycast_wall_mid_l", "raycast_wall_bot_l", "raycast_wall_top_r", "raycast_wall_mid_r", "raycast_wall_bot_r")]
+[node name="Hub" type="Node" parent="." node_paths=PackedStringArray("state_machine", "collisions", "buffers", "movement", "jumping", "fairy", "attacks", "temper", "form", "damage", "interaction", "stomp", "animation", "sprite_trail", "camera", "audio", "char_body", "char_sprite", "collision_shape", "stream_player", "raycast_dl", "raycast_dm", "raycast_dr", "raycast_ledge_l", "raycast_ledge_r", "raycast_ul", "raycast_um", "raycast_ur", "raycast_ceiling_l", "raycast_ceiling_r", "raycast_wall_top_l", "raycast_wall_mid_l", "raycast_wall_bot_l", "raycast_wall_top_r", "raycast_wall_mid_r", "raycast_wall_bot_r")]
 script = ExtResource("1_vr0jy")
 state_machine = NodePath("../StateMachine")
 collisions = NodePath("Collisions")
 buffers = NodePath("Buffers")
 movement = NodePath("Movement")
 jumping = NodePath("Jumping")
+fairy = NodePath("Fairy")
 attacks = NodePath("Attacks")
 temper = NodePath("Temper")
 form = NodePath("Form")
@@ -1358,6 +1361,12 @@ neutral_midair_jump_texture = ExtResource("52_4345i")
 backward_midair_jump_texture = ExtResource("8_1f0td")
 running_jump_added_velocity = 48.0
 super_jump_particles = NodePath("../../SuperJumpParticles")
+
+[node name="Fairy" type="Node" parent="Hub" node_paths=PackedStringArray("hub", "fairy_target_node")]
+script = ExtResource("9_56tik")
+hub = NodePath("..")
+fairy_follower_scene = ExtResource("70_s35oi")
+fairy_target_node = NodePath("../../FairyTarget")
 
 [node name="Attacks" type="Node" parent="Hub" node_paths=PackedStringArray("hub")]
 script = ExtResource("9_r5qyh")
@@ -1757,6 +1766,9 @@ texture = ExtResource("52_u3vuf")
 lifetime = 0.2
 fixed_fps = 60
 visibility_rect = Rect2(-512, -512, 1024, 1024)
+
+[node name="FairyTarget" type="Node2D" parent="."]
+position = Vector2(-32, 0)
 
 [connection signal="magic_blast_thrown" from="Hub/Attacks/MagicBlast" to="StateMachine/Standing" method="_on_magic_blast_magic_blast_thrown"]
 [connection signal="magic_blast_thrown" from="Hub/Attacks/MagicBlast" to="StateMachine/Running" method="_on_magic_blast_magic_blast_thrown"]
