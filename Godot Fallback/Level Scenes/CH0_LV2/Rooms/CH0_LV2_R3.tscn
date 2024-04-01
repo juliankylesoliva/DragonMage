@@ -84,6 +84,6 @@ shape = SubResource("RectangleShape2D_h1u86")
 
 [node name="KnigelNPC" parent="." instance=ExtResource("4_efqdm")]
 position = Vector2(320, 224)
-textbox_strings = Array[String](["Draelyn: I can make that gap!", "Knigel: This is quite a large gap to cross, Drae. Are you sure you can make it across?", "Draelyn: Of course! As long as I keep holding forward as I do winged jumps, I'll gain a bit of speed and height each time and I'll be across in no time!", "Knigel: But you only have the stamina to do four winged jumps after leaving the ground, no?", "Draelyn: True, but there's a wall in the middle of that gap that I can quickly vault over, and doing so will give me a second wind to do four more wing jumps while also preserving some of my speed!", "Knigel: If you say so, Drae. Just don't push yourself too hard--remember to space out your winged jumps!"])
+textbox_strings = Array[String](["Knigel: I hope your wings aren't sore because it's time for long distance flying! Use your winged jumps while moving forward to increase your speed! Remember to space them out! If you need to catch your breath, there's a small wall up ahead that you can climb up and vault over to refresh your winged jumps while preserving the speed you need to get across."])
 
 [editable path="FallWarp"]

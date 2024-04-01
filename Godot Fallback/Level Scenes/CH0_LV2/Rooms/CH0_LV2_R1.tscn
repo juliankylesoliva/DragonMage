@@ -62,10 +62,14 @@ position = Vector2(1104, 64)
 room_origin = NodePath("..")
 room_destination = NodePath("..")
 
+[node name="HintBubble" parent="." instance=ExtResource("5_dnkxd")]
+position = Vector2(192, 232)
+textbox_strings = Array[String](["Draelyn: (I should really be mindful of how I move around as a dragon. Normally, my mage robe makes my wings and tail feel weightless in addition to hiding them, but without it, I move much slower and can't jump as high... It's also difficult for me to turn around in midair, so I can't hold on to any walls behind me.)"])
+
 [node name="KnigelNPC" parent="." instance=ExtResource("4_tiytc")]
 position = Vector2(320, 192)
-textbox_strings = Array[String](["Knigel: So, Drae, you mentioned wanting to show me some new techniques you came up with for tonight's training session?", "Draelyn: You bet, Knigel! For this first technique, I figured out a way to climb walls without using my arms or legs!", "Knigel: Really? How so?", "Draelyn: All I gotta do is jump against a wall, then I just hold onto it while beating my wings to go up!", "Knigel: Just be mindful of where you're facing. I've noticed that you have trouble turning yourself around while in midair.", "Draelyn: Yeah... I can't do much with a wall I'm not facing. Normally, my mage robe makes my wings and tail feel weightless, so I'm not yet used to moving around with this extra weight."])
+textbox_strings = Array[String](["Knigel: Alright, Drae. Let's go over some of the basics of your dragon powers!", "Draelyn: I'm fired up, Knigel! Literally!", "Knigel: Start by jumping into this wall to climb! Remember to use your wings!", "Draelyn: Piece of cake, I don't even NEED to use my arms!"])
 
-[node name="HintBubble" parent="." instance=ExtResource("5_dnkxd")]
-position = Vector2(480, 104)
-textbox_strings = Array[String](["Draelyn: Of course, I can also just use my wings to gain height by pressing [Jump] in midair.", "Knigel: By pressing what in midair? How are you even saying that out loud?", "Draelyn: What? [Jump]? It's just magic sigil notation. I have a bad habit of using it during normal conversation, sorry...", "Knigel: No worries. Feel free to explain these things to me in your own way, Drae."])
+[node name="HintBubble2" parent="." instance=ExtResource("5_dnkxd")]
+position = Vector2(896, 232)
+textbox_strings = Array[String](["Knigel: Now use your winged jumps to get up to that ledge! You seem to only have the energy to do four of those before landing, so be sure to space them out for maximum height!"])

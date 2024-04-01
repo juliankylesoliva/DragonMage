@@ -71,7 +71,7 @@ room_destination = NodePath("..")
 
 [node name="HintBubble" parent="." instance=ExtResource("4_ffm1v")]
 position = Vector2(192, 200)
-textbox_strings = Array[String](["[center]~Magic Boost (1/5)~
+textbox_strings = Array[String](["[center]~ Magic Boost (1/5) ~
 \"Detonating the orb on yourself allows you to break through sturdier material than with just the blast alone. This effect lasts until you touch the ground, slow down or glide.\""])
 
 [node name="HintBubble2" parent="." instance=ExtResource("4_ffm1v")]

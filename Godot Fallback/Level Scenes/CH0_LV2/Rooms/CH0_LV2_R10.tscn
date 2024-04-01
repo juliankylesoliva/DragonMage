@@ -80,11 +80,11 @@ shape = SubResource("RectangleShape2D_37inf")
 
 [node name="HintBubble" parent="." instance=ExtResource("4_s2tg2")]
 position = Vector2(320, 552)
-textbox_strings = Array[String](["Draelyn: One last thing, holding [Crouch] as I climb a wall will let me slide as soon as I get to the top!"])
+textbox_strings = Array[String](["Draelyn: (Finally, holding [Crouch] as I climb up a wall will let me slide as soon as I get to the top!)"])
 
 [node name="KnigelNPC" parent="." instance=ExtResource("5_imsol")]
 position = Vector2(1152, 544)
-textbox_strings = Array[String](["Knigel: Excellent work this session, Drae! Though, we might have strayed a bit from our usual training path this time.", "Draelyn: Sorry, I think I got carried away with the last of my new moves at the end there. I hope we didn't go too far off the path..."])
+textbox_strings = Array[String](["Knigel: Excellent work this session, Drae! You've certainly improved controlling your dragon powers!", "Draelyn: Oh, you sure? I still feel like I messed up in certain places...", "Knigel: But you messed up way less this time compared to when we first started training, and you're even carrying yourself with much more confidence than before as a dragon! That's all that really matters!", "Draelyn: I guess you're right, but the only thing I'm not exactly confident in yet is showing this side of myself to other people...", "Knigel: You'll get there when the time is right, Draelyn. For now, just take it one day at a time.", "Draelyn: *sigh* Thank you, Knigel... You always know how to make me feel better about myself...", "Knigel: Anytime, Draelyn... Anytime. "])
 
 [node name="BreakableBlock" parent="." instance=ExtResource("4_5mmy5")]
 position = Vector2(160, 225)

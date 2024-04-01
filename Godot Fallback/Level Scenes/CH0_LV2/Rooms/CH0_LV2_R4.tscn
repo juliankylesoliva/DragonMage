@@ -71,15 +71,15 @@ room_destination = NodePath("..")
 
 [node name="KnigelNPC" parent="." instance=ExtResource("5_31tjs")]
 position = Vector2(64, 224)
-textbox_strings = Array[String](["Draelyn: Stand back, Knigel. This is the move I've been wanting to show you the most. I call it the Fire Tackle!", "Knigel: I'm listening... and standing back. How does it work?", "Draelyn: I press [Attack] to shroud myself in my own fire breath while charging forward along slopes and over gaps to break stuff! Don't worry, I'm immune to my own flames."])
+textbox_strings = Array[String](["Knigel: Now use your Fire Tackle to break through these blocks!", "Draelyn: Aw yeah, my favorite move! I just gotta press [Attack] to charge forward with my fire breath!"])
 
 [node name="HintBubble" parent="." instance=ExtResource("5_kfrof")]
 position = Vector2(320, 232)
-textbox_strings = Array[String](["Draelyn: If I get a running start, my Fire Tackle will go farther and faster!"])
+textbox_strings = Array[String](["Draelyn: If I get a running start, my Fire Tackle will go farther and faster! I can even easily cross gaps like this one!"])
 
 [node name="HintBubble2" parent="." instance=ExtResource("5_kfrof")]
 position = Vector2(832, 232)
-textbox_strings = Array[String](["Draelyn: I can even start the Fire Tackle in midair without falling!"])
+textbox_strings = Array[String](["Draelyn: I can also start the Fire Tackle in midair without falling!"])
 
 [node name="BreakableBlock" parent="." instance=ExtResource("4_qlho3")]
 position = Vector2(192, 224)

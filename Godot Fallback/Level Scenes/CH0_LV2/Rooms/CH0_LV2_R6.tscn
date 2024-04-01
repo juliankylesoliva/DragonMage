@@ -70,7 +70,7 @@ room_destination = NodePath("..")
 
 [node name="KnigelNPC" parent="." instance=ExtResource("4_3j1xx")]
 position = Vector2(96, 96)
-textbox_strings = Array[String](["Knigel: Got another cool trick up your sleeve for getting past this narrow space?", "Draelyn: You know it! I can press [Crouch]+[Attack] to slide for as long as I'm holding down [Crouch]! I can also get a running start for more momentum.", "Draelyn: For the record, though, I'm not even wearing sleeves.", "Knigel: So your gloves, then?"])
+textbox_strings = Array[String](["Knigel: You good to crouch walk under this narrow space?", "Draelyn: Maybe... Or I can press [Crouch]+[Attack] to slide for as long as I'm holding down [Crouch]! I can also get a running start for a faster slide.", "Knigel: You really like thinking about speed when it comes to your dragon moves, huh?", "Draelyn: Can ya blame me? It beats my more methodical mage spells!"])
 
 [node name="BreakableBlock" parent="." instance=ExtResource("4_yqup0")]
 position = Vector2(128, 224)

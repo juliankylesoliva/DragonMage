@@ -71,10 +71,9 @@ room_destination = NodePath("..")
 [node name="HintBubble" parent="." instance=ExtResource("4_78svx")]
 position = Vector2(128, 232)
 textbox_strings = Array[String](["[center]~ Magic Blast (1/2) ~
-\"Press [Attack] to throw a magic orb of concentrated kinetic energy.
-Press [Attack] again to detonate aformentioned magic orb of concentrated kinetic energy.\"", "[center]~ Magic Blast (2/2) ~
+\"Press [Attack] to throw a magic orb of concentrated kinetic energy. Press [Attack] again to detonate it.\"", "[center]~ Magic Blast (2/2) ~
 \"Pressing [Move Up]+[Attack] lobs the orb above you.\"
-\"Pressing [Move Down]+[Attack] drops the orb at your feet.\"", "Magli: ...Should I be less wordy when I explain all of this to the shareholders?"])
+\"Pressing [Move Down]+[Attack] drops the orb at your feet.\""])
 
 [node name="BreakableBlock" parent="." instance=ExtResource("3_y5m3t")]
 position = Vector2(224, 224)

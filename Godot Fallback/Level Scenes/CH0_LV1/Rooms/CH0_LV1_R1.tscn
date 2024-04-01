@@ -163,19 +163,16 @@ room_destination = NodePath("..")
 
 [node name="HintBubble" parent="." instance=ExtResource("9_rpvgy")]
 position = Vector2(352, 232)
-textbox_strings = Array[String](["Magli: I better get going if I don't want to be late, but I should really review the sigils for each of my magic spells so that I don't forget them before the presentation! Let's see here...
-[center]\"Use [Move Left]/[Move Right] to move.\"
-[center]\"Press [Jump] to jump--hold it for extra height.\""])
+textbox_strings = Array[String](["Magli: I better get going if I don't want to be late, but I should really review the notes and sigils for each of my magic spells so that I don't forget them before the presentation! Let's see here...", "[center]~ Basic Movement ~
+\"Use [Move Left]/[Move Right] to move.\"
+\"Press [Jump] to jump--hold while running for extra height.\""])
 
 [node name="HintBubble2" parent="." instance=ExtResource("9_rpvgy")]
 position = Vector2(928, 104)
-textbox_strings = Array[String](["Magli: This next part says:
-
-[center]\"Hold [Jump] in midair to glide.\""])
+textbox_strings = Array[String](["[center]~ Gliding ~
+\"Hold [Jump] in midair to glide and slow down your descent for a few seconds.\""])
 
 [node name="HintBubble3" parent="." instance=ExtResource("9_rpvgy")]
 position = Vector2(1440, 232)
 textbox_strings = Array[String](["[center]~ Wallkick ~
-\"Jump against a wall in midair to slide down it, then press [Jump] to kick off of it.\"
-
-[left]Magli: Hmm... I'm still deciding whether to call it a wallJUMP or a wallKICK..."])
+\"Jump against a wall to start sliding down it, then press [Jump] to kick off of it.\"", "Magli: Hmm... I'm still deciding whether to call it a wallJUMP or a wallKICK..."])

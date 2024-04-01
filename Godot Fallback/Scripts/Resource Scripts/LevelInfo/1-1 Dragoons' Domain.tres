@@ -6,4 +6,6 @@
 script = ExtResource("1_vjg70")
 level_scene_path = "res://Level Scenes/CH1_LV1/CH1_LV1.tscn"
 name_header = "Ch. 1-1: Dragoons' Domain"
-story_description = Array[String]([""])
+story_description = Array[String](["May 7, 202X - Dawn
+
+	???"])

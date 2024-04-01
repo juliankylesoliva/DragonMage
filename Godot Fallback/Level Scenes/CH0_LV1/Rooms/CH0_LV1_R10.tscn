@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://c8quw8sgdw2un"]
+[gd_scene load_steps=7 format=3 uid="uid://c8quw8sgdw2un"]
 
 [ext_resource type="Script" path="res://Scripts/Utility Scripts/Room.gd" id="1_bioys"]
 [ext_resource type="TileSet" uid="uid://dhwi7i1loa2pd" path="res://Sprites/Tiles/Test Tiles/TestTileSet.tres" id="2_86gvv"]
 [ext_resource type="PackedScene" uid="uid://dqbo0wu6hm8lj" path="res://Scene Objects/Objects/WarpTrigger.tscn" id="3_gpswg"]
+[ext_resource type="PackedScene" uid="uid://cw6gype8pgf7a" path="res://Scene Objects/Characters/KnigelNPC.tscn" id="4_60xso"]
 [ext_resource type="PackedScene" uid="uid://bajk0w7eoh6o8" path="res://Scene Objects/Objects/ReinforcedBlock.tscn" id="4_w00x3"]
 [ext_resource type="PackedScene" uid="uid://durwtm4ocfbmv" path="res://Scene Objects/Objects/FinishLine.tscn" id="5_sq6dl"]
 
@@ -59,6 +60,10 @@ position = Vector2(16, 64)
 position = Vector2(-48, 64)
 room_origin = NodePath("..")
 room_destination = NodePath("..")
+
+[node name="KnigelNPC" parent="." instance=ExtResource("4_60xso")]
+position = Vector2(704, 224)
+textbox_strings = Array[String](["Knigel: Hey, Mags! I got your message about what happened to the trains. That Magic Blast spell you created sure came in handy today, didn't it?", "Magli: I guess it did, and still in perfect working order, no less. I might've had to take some extra time to review my notes along the way, though...", "Knigel: Let's not keep everyone waiting, then! The boss has been waiting for a few minutes now, so get in there and knock 'em dead!", "Magli: ...N-Not literally, right?", "Knigel: Of course not! Good luck, Mags!", "Magli: Hehe... Thank you, Knigel!"])
 
 [node name="ReinforcedBlock" parent="." instance=ExtResource("4_w00x3")]
 position = Vector2(160, 96)

@@ -110,7 +110,7 @@ func attack_state_process(_delta : float):
 		hub.camera.update_y_lookahead(_delta)
 	elif (current_attack_state == AttackState.ENDLAG):
 		endlag_update(_delta)
-		if (!is_player_firing_projectile and !did_player_bump):
+		if (!is_player_firing_projectile):
 			hub.camera.update_x_lookahead(_delta)
 		hub.camera.update_y_lookahead(_delta)
 	else:

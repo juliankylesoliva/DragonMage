@@ -22,8 +22,9 @@ func _ready():
 		fairy_ref.set_home_position_target(fairy_target_node)
 
 func _physics_process(_delta):
-	fairy_ref.set_facing_direction(hub.movement.get_facing_value())
-	update_target_node_position()
+	if (is_using_fairy and fairy_ref != null):
+		fairy_ref.set_facing_direction(hub.movement.get_facing_value())
+		update_target_node_position()
 
 func update_target_node_position():
 	fairy_target_node.position.x = (fairy_target_offset * -hub.movement.get_facing_value())

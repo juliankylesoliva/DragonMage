@@ -6,4 +6,8 @@
 script = ExtResource("2_3r7tc")
 level_scene_path = "res://Level Scenes/CH0_LV4/CH0_LV4.tscn"
 name_header = "Ch. 0-4: Fleeting Floortraps"
-story_description = Array[String]([""])
+story_description = Array[String](["May 6, 202X - Unknown Time
+
+	After experimenting with my mage and dragon powers to escape our prison, Faeson--I mean--Knigel and I managed to find what looked like some sort of exit tunnel. We walked through hoping it would be a simple tunnel to the outside, but we were quickly proven wrong when we noticed that the floors ahead of us were starting to protrude spikes! I don't know who runs this place, but it seems like they've caught wind of our whereabouts and are now trying to make our escape as difficult as possible!
+
+~ Magli DRAELYN -"])

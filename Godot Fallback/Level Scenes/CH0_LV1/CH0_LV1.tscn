@@ -155,6 +155,9 @@ room_destination = NodePath("../../CH0_LV1_R7")
 [node name="Warp 1" parent="CH1_LV1_R8" index="6" node_paths=PackedStringArray("room_destination")]
 room_destination = NodePath("../../CH0_LV1_R9")
 
+[node name="HintBubble" parent="CH1_LV1_R8" index="8" node_paths=PackedStringArray("textbox")]
+textbox = NodePath("../../Textbox")
+
 [node name="CH0_LV1_R9" parent="." instance=ExtResource("11_eb1id")]
 position = Vector2(-1248, 1664)
 
@@ -170,6 +173,9 @@ position = Vector2(1568, 1568)
 [node name="Warp 0" parent="CH0_LV1_R10" index="3" node_paths=PackedStringArray("room_destination")]
 room_destination = NodePath("../../CH0_LV1_R9")
 room_entrance_index = 1
+
+[node name="KnigelNPC" parent="CH0_LV1_R10" index="4" node_paths=PackedStringArray("textbox")]
+textbox = NodePath("../../Textbox")
 
 [node name="ClearTimer" parent="." instance=ExtResource("14_dibul")]
 

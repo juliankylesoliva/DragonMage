@@ -58,10 +58,13 @@ editor_draw_drag_margin = true
 [node name="Warp 0" parent="CH0_LV2_R1" index="4" node_paths=PackedStringArray("room_destination")]
 room_destination = NodePath("../../CH0_LV2_R2")
 
-[node name="KnigelNPC" parent="CH0_LV2_R1" index="5" node_paths=PackedStringArray("textbox")]
+[node name="HintBubble" parent="CH0_LV2_R1" index="5" node_paths=PackedStringArray("textbox")]
 textbox = NodePath("../../Textbox")
 
-[node name="HintBubble" parent="CH0_LV2_R1" index="6" node_paths=PackedStringArray("textbox")]
+[node name="KnigelNPC" parent="CH0_LV2_R1" index="6" node_paths=PackedStringArray("textbox")]
+textbox = NodePath("../../Textbox")
+
+[node name="HintBubble2" parent="CH0_LV2_R1" index="7" node_paths=PackedStringArray("textbox")]
 textbox = NodePath("../../Textbox")
 
 [node name="CH0_LV2_R2" parent="." instance=ExtResource("4_k1xdo")]
@@ -74,9 +77,6 @@ room_destination = NodePath("../../CH0_LV2_R1")
 room_destination = NodePath("../../CH0_LV2_R3")
 
 [node name="KnigelNPC" parent="CH0_LV2_R2" index="6" node_paths=PackedStringArray("textbox")]
-textbox = NodePath("../../Textbox")
-
-[node name="HintBubble" parent="CH0_LV2_R2" index="7" node_paths=PackedStringArray("textbox")]
 textbox = NodePath("../../Textbox")
 
 [node name="CH0_LV2_R3" parent="." instance=ExtResource("5_v45bg")]

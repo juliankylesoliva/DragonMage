@@ -1,8 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://dnrvj1k4v8ojw"]
+[gd_scene load_steps=8 format=3 uid="uid://dnrvj1k4v8ojw"]
 
 [ext_resource type="Script" path="res://Scripts/Utility Scripts/Room.gd" id="1_4obmb"]
 [ext_resource type="TileSet" uid="uid://dhwi7i1loa2pd" path="res://Sprites/Tiles/Test Tiles/TestTileSet.tres" id="2_lywq3"]
 [ext_resource type="PackedScene" uid="uid://dqbo0wu6hm8lj" path="res://Scene Objects/Objects/WarpTrigger.tscn" id="3_w7yoc"]
+[ext_resource type="PackedScene" uid="uid://cp3kaarqt7vdo" path="res://Scene Objects/Objects/HintBubble.tscn" id="4_krffr"]
 [ext_resource type="PackedScene" uid="uid://cs4s34scsvcfr" path="res://Scene Objects/Objects/BreakableBlock.tscn" id="4_uaeu8"]
 [ext_resource type="PackedScene" uid="uid://bajk0w7eoh6o8" path="res://Scene Objects/Objects/ReinforcedBlock.tscn" id="5_rak66"]
 
@@ -76,6 +77,10 @@ room_entrance_index = 2
 
 [node name="CollisionShape2D" parent="FallWarp" index="0"]
 shape = SubResource("RectangleShape2D_epuvv")
+
+[node name="HintBubble" parent="." instance=ExtResource("4_krffr")]
+position = Vector2(96, 232)
+textbox_strings = Array[String](["Magli: Almost there... I just have to apply everything I've written down..."])
 
 [node name="BreakableBlock" parent="." instance=ExtResource("4_uaeu8")]
 position = Vector2(896, 64)

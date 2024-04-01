@@ -72,19 +72,19 @@ room_destination = NodePath("..")
 
 [node name="KnigelNPC" parent="." instance=ExtResource("4_vue7h")]
 position = Vector2(96, 224)
-textbox_strings = Array[String](["Draelyn: Hey, Knigel. Do you mind if I just rattle off these last few tricks as fast as I can real quick?", "Knigel: Not at all. Take it away!", "Draelyn: Nice! First, I can start a Fire Tackle while sliding by pressing [Attack] while [Crouch] is still held!"])
+textbox_strings = Array[String](["Knigel: Final stretch, Drae! Give it everything you got!", "Draelyn: On it! (First, I'll start a Fire Tackle while sliding by pressing [Attack] while [Crouch] is still held!)"])
 
 [node name="HintBubble" parent="." instance=ExtResource("5_ec42s")]
 position = Vector2(544, 232)
-textbox_strings = Array[String](["Draelyn: Next, I can start a Fire Tackle while climbing a wall!"])
+textbox_strings = Array[String](["Draelyn: (Next, I can start a Fire Tackle while climbing a wall!)"])
 
 [node name="HintBubble2" parent="." instance=ExtResource("5_ec42s")]
 position = Vector2(800, 232)
-textbox_strings = Array[String](["Draelyn: If I hold [Attack], I'll have time to change or even reverse the direction of my Fire Tackle before launching it by releasing [Attack]!"])
+textbox_strings = Array[String](["Draelyn: (If I hold [Attack], I'll have time to change or even reverse the direction of my Fire Tackle before launching it by releasing [Attack]!)"])
 
 [node name="HintBubble3" parent="." instance=ExtResource("5_ec42s")]
 position = Vector2(800, -88)
-textbox_strings = Array[String](["Draelyn: I can jump out of a slide by pressing [Jump] while holding forward and [Crouch]. I can jump out of my Fire Tackle in a similar way by pressing [Jump] while holding forward towards the end of the tackle."])
+textbox_strings = Array[String](["Draelyn: I can jump out of a slide by jumping forward while holding [Crouch]. I can jump out of my Fire Tackle in a similar way by jumping forward towards the end of the tackle."])
 
 [node name="HintBubble4" parent="." instance=ExtResource("5_ec42s")]
 position = Vector2(544, -120)
