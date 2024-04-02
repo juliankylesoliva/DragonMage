@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://dvmcbiscgwbyx"]
+[gd_scene load_steps=5 format=3 uid="uid://dvmcbiscgwbyx"]
 
 [ext_resource type="Script" path="res://Scripts/Utility Scripts/Room.gd" id="1_6o4g6"]
 [ext_resource type="TileSet" uid="uid://dhwi7i1loa2pd" path="res://Sprites/Tiles/Test Tiles/TestTileSet.tres" id="2_f37q7"]
 [ext_resource type="PackedScene" uid="uid://dqbo0wu6hm8lj" path="res://Scene Objects/Objects/WarpTrigger.tscn" id="3_xkxbr"]
+[ext_resource type="PackedScene" uid="uid://cp3kaarqt7vdo" path="res://Scene Objects/Objects/HintBubble.tscn" id="4_3pso5"]
 
 [node name="CH0_LV3_R2" type="Node2D" node_paths=PackedStringArray("tilemap_list", "room_entrances")]
 script = ExtResource("1_6o4g6")
@@ -64,3 +65,7 @@ room_entrance_index = 1
 position = Vector2(560, 224)
 room_origin = NodePath("..")
 room_destination = NodePath("..")
+
+[node name="HintBubble" parent="." instance=ExtResource("4_3pso5")]
+position = Vector2(96, 232)
+textbox_strings = Array[String](["Faeson: Heads up, EmDee: There may be certain areas where either your mage or dragon powers are better suited for the situation. In these cases, you'll need to be prepared to switch up your style. You still have that clothes-changing spell?", "{player_name}: Yeah, I can use [Change Form] to quickly switch between my mage and dragon powers as well as my clothing!", "Faeson: How do you do that so quickly, though?", "{player_name}: I'm actually just wearing my dragon outfit underneath my mage robe, so I only need to either remove or put on my robe each time I use the spell. I... might be getting too used to wearing my new dragon clothes...", "Faeson: Well it's a surprising contrast from your usual mage attire, for sure, but you should be proud of the outfit you chose!"])

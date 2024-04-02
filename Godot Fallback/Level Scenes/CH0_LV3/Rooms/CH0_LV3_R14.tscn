@@ -1,8 +1,9 @@
-[gd_scene load_steps=9 format=3 uid="uid://k7ndi0emu4fk"]
+[gd_scene load_steps=10 format=3 uid="uid://k7ndi0emu4fk"]
 
 [ext_resource type="Script" path="res://Scripts/Utility Scripts/Room.gd" id="1_6o4g6"]
 [ext_resource type="TileSet" uid="uid://dhwi7i1loa2pd" path="res://Sprites/Tiles/Test Tiles/TestTileSet.tres" id="2_f37q7"]
 [ext_resource type="PackedScene" uid="uid://dqbo0wu6hm8lj" path="res://Scene Objects/Objects/WarpTrigger.tscn" id="3_nxi3b"]
+[ext_resource type="PackedScene" uid="uid://cp3kaarqt7vdo" path="res://Scene Objects/Objects/HintBubble.tscn" id="4_g3c28"]
 [ext_resource type="PackedScene" uid="uid://cokv5pygwyda" path="res://Scene Objects/Objects/BreakableFireBlock.tscn" id="4_vtw7p"]
 [ext_resource type="PackedScene" uid="uid://cs4s34scsvcfr" path="res://Scene Objects/Objects/BreakableBlock.tscn" id="5_lh05x"]
 [ext_resource type="PackedScene" uid="uid://dcs7w117uukcd" path="res://Scene Objects/Objects/BreakableMagicBlock.tscn" id="6_33ua2"]
@@ -62,6 +63,10 @@ position = Vector2(16, 224)
 position = Vector2(-48, 224)
 room_origin = NodePath("..")
 room_destination = NodePath("..")
+
+[node name="HintBubble" parent="." instance=ExtResource("4_g3c28")]
+position = Vector2(976, 136)
+textbox_strings = Array[String](["Faeson: I think I feel a slight draft coming from above... There must be an exit nearby! EmDee, try combining moves to get up there!", "{player_name}: Ugh... I already feel overwhelmed by all the different combinations of moves I could do...", "Faeson: My advice, EmDee, is to try all kinds of combinations to see what works best for you, but try not to stick to only one method for too long.", "{player_name}: Alright, time for some good ol' experimentation!"])
 
 [node name="BreakableFireBlock" parent="." instance=ExtResource("4_vtw7p")]
 position = Vector2(160, 224)

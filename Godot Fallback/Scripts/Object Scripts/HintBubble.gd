@@ -13,6 +13,8 @@ func _process(_delta):
 		sprite.modulate.a = (1.0 if textbox.current_state == Textbox.TextboxState.READY or player == null else active_alpha)
 		if (player != null):
 			button_prompt.set_visible(textbox.current_state == Textbox.TextboxState.READY)
+			if (textbox.unformatted_text.contains("{player_name}")):
+				textbox.update_player_name_format_text(player.form.get_current_form_name())
 
 func interact(hub : PlayerHub):
 	if (player != null and hub == player):

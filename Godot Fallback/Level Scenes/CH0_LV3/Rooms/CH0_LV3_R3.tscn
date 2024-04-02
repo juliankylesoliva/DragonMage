@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://dkt6dkplggb0c"]
+[gd_scene load_steps=5 format=3 uid="uid://dkt6dkplggb0c"]
 
 [ext_resource type="Script" path="res://Scripts/Utility Scripts/Room.gd" id="1_6o4g6"]
 [ext_resource type="TileSet" uid="uid://dhwi7i1loa2pd" path="res://Sprites/Tiles/Test Tiles/TestTileSet.tres" id="2_f37q7"]
 [ext_resource type="PackedScene" uid="uid://dqbo0wu6hm8lj" path="res://Scene Objects/Objects/WarpTrigger.tscn" id="3_88aaf"]
+[ext_resource type="PackedScene" uid="uid://cp3kaarqt7vdo" path="res://Scene Objects/Objects/HintBubble.tscn" id="4_sgpe1"]
 
 [node name="CH0_LV3_R3" type="Node2D" node_paths=PackedStringArray("tilemap_list", "room_entrances")]
 script = ExtResource("1_6o4g6")
@@ -66,3 +67,7 @@ room_entrance_index = 1
 position = Vector2(688, 0)
 room_origin = NodePath("..")
 room_destination = NodePath("..")
+
+[node name="HintBubble" parent="." instance=ExtResource("4_sgpe1")]
+position = Vector2(80, 232)
+textbox_strings = Array[String](["Faeson: If you change while touching a wall, you can either gain some extra height with your wall climb, or you can wallkick with increased speed after climbing up to a high place."])

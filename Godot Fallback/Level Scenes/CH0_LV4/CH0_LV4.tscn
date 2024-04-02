@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://qa22n4g30owo"]
+[gd_scene load_steps=18 format=3 uid="uid://qa22n4g30owo"]
 
 [ext_resource type="Script" path="res://Scripts/Utility Scripts/Level.gd" id="1_xccb8"]
 [ext_resource type="PackedScene" uid="uid://c6qw77ovfwgfs" path="res://Player.tscn" id="2_616c6"]
@@ -15,6 +15,7 @@
 [ext_resource type="PackedScene" uid="uid://8beel2odcuky" path="res://Scene Objects/Effects/ScreenFade.tscn" id="12_ue1v1"]
 [ext_resource type="PackedScene" uid="uid://d1eef1xjuwf3b" path="res://Scene Objects/Misc/PauseMenu.tscn" id="13_6h45c"]
 [ext_resource type="PackedScene" uid="uid://b5wwivjk8sl7b" path="res://Scene Objects/Misc/ClearTimer.tscn" id="13_vkigm"]
+[ext_resource type="PackedScene" uid="uid://brhoroc2w6jwi" path="res://Scene Objects/UI/Textbox.tscn" id="14_54vdq"]
 [ext_resource type="PackedScene" uid="uid://buykytsdrlnsg" path="res://Scene Objects/Misc/ResultsScreen.tscn" id="14_rug2n"]
 
 [node name="CH0_LV4" type="Node2D" node_paths=PackedStringArray("player_reference", "starting_room", "room_list", "ui_container")]
@@ -48,6 +49,9 @@ editor_draw_drag_margin = true
 [node name="Warp 0" parent="CH0_LV4_R1" index="5" node_paths=PackedStringArray("room_destination")]
 room_destination = NodePath("../../CH0_LV4_R2")
 
+[node name="HintBubble" parent="CH0_LV4_R1" index="8" node_paths=PackedStringArray("textbox")]
+textbox = NodePath("../../Textbox")
+
 [node name="CH0_LV4_R2" parent="." instance=ExtResource("5_q0riv")]
 position = Vector2(1248, -96)
 
@@ -56,6 +60,9 @@ room_destination = NodePath("../../CH0_LV4_R1")
 
 [node name="Warp 1" parent="CH0_LV4_R2" index="6" node_paths=PackedStringArray("room_destination")]
 room_destination = NodePath("../../CH0_LV4_R3")
+
+[node name="HintBubble" parent="CH0_LV4_R2" index="15" node_paths=PackedStringArray("textbox")]
+textbox = NodePath("../../Textbox")
 
 [node name="CH0_LV4_R3" parent="." instance=ExtResource("6_1s4e1")]
 position = Vector2(2944, -160)
@@ -122,6 +129,9 @@ process_callback = "Idle"
 camera_offset = Vector2(-255, -152)
 
 [node name="ClearTimer" parent="." instance=ExtResource("13_vkigm")]
+
+[node name="Textbox" parent="." instance=ExtResource("14_54vdq")]
+accept_input_events = false
 
 [node name="PauseMenu" parent="." node_paths=PackedStringArray("screen_fade") instance=ExtResource("13_6h45c")]
 screen_fade = NodePath("../ScreenFade")

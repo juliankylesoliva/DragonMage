@@ -21,7 +21,7 @@ enum TextboxState
 
 @export var end_symbol_char : String = "\n\n\n\n\n\n[center][Interact]"
 
-@export var text_scrolling_duration : float = 1
+@export var characters_per_second : float = 50
 
 @export var accept_input_events : bool = true
 
@@ -32,6 +32,10 @@ enum TextboxState
 var current_state : TextboxState = TextboxState.READY
 
 var text_queue : Array[String]
+
+var unformatted_text : String = ""
+
+var current_characters : float = 0
 
 func _ready():
 	hide_textbox()
@@ -59,14 +63,15 @@ func advance_textbox():
 				hide_textbox()
 
 func hide_textbox():
+	unformatted_text = ""
 	text_label.text = ""
 	end_symbol.text = ""
 	start_symbol.text = ""
 	textbox_container.set_visible(false)
 	change_state(TextboxState.READY)
 
-func set_text_scroll_duration(time : float):
-	text_scrolling_duration = time
+func set_characters_per_second(cps : float):
+	characters_per_second = cps
 
 func show_textbox():
 	start_symbol.text = start_symbol_char
@@ -81,6 +86,7 @@ func clear_all_text():
 
 func display_text():
 	var next_text : String = text_queue.pop_front()
+	unformatted_text = next_text
 	text_label.text = next_text
 	show_textbox()
 	do_text_scrolling()
@@ -89,11 +95,14 @@ func do_text_scrolling():
 	if (current_state == TextboxState.READY):
 		change_state(TextboxState.SCROLLING)
 		text_label.visible_ratio = 0
+		current_characters = 0
 		
 		while (textbox_container.visible and text_label.visible_ratio < 1):
 			if (!get_tree().is_paused()):
-				text_label.visible_ratio = move_toward(text_label.visible_ratio, 1, get_process_delta_time() / text_scrolling_duration)
+				current_characters += (characters_per_second * get_physics_process_delta_time())
+				text_label.visible_characters = (current_characters as int)
 			await get_tree().process_frame
+		text_label.visible_characters = -1
 		
 		if (textbox_container.visible):
 			end_symbol.text = TextPromptParser.parse_text(end_symbol_char)
@@ -106,3 +115,6 @@ func skip_text_scrolling():
 
 func change_state(next_state : TextboxState):
 	current_state = next_state
+
+func update_player_name_format_text(char_name : String):
+	text_label.text = unformatted_text.format({"player_name" : char_name})
