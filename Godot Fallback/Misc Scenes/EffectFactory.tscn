@@ -1,0 +1,25 @@
+[gd_scene load_steps=3 format=3 uid="uid://cpkqowua71tx0"]
+
+[ext_resource type="Script" path="res://Scripts/Utility Scripts/EffectFactory.gd" id="1_6675l"]
+[ext_resource type="SpriteFrames" uid="uid://cxb5mjrw5mrd4" path="res://SpriteEffects.tres" id="2_5ukn8"]
+
+[node name="EffectFactory" type="Node"]
+script = ExtResource("1_6675l")
+offset_dictonary = {
+"FastWallJump": Vector2(-8, -16),
+"HeadbonkFX": Vector2(0, -7.5),
+"JumpSpark": Vector2(0, -8),
+"LandingDust": Vector2(0, -8),
+"NormalWallJump": Vector2(0, -16),
+"SlideDust": Vector2(-20, -16),
+"SlideDustFast": Vector2(-20, -16),
+"SlideDustSlow": Vector2(-20, -16),
+"SpeedhopSpark": Vector2(-16, -16),
+"SuperJumpSpark": Vector2(0, -16),
+"TurnaroundSpark": Vector2(-16, -8),
+"WalkingDust": Vector2(-8, -8),
+"WallClimbSpark": Vector2(-8, 8),
+"WallClimbSparkFast": Vector2(-8, 8),
+"WallSlideDust": Vector2(0, -8)
+}
+frames = ExtResource("2_5ukn8")

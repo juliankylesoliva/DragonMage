@@ -2,7 +2,7 @@ extends Node2D
 
 class_name ResultsScreen
 
-@export var results_sfx : AudioStreamPlayer2D
+@export var results_sfx : AudioStreamPlayer
 
 @export var time_tick_sfx_stream : AudioStream
 
@@ -104,11 +104,7 @@ func _ready():
 	set_visible(false)
 
 func _physics_process(_delta):
-	follow_camera()
 	do_menu()
-
-func follow_camera():
-	global_position = get_viewport().get_camera_2d().global_position
 
 func do_menu():
 	if (are_menu_options_selectable):

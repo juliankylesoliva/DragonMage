@@ -1,10 +1,13 @@
-[gd_scene load_steps=8 format=3 uid="uid://b2c658ex7s65i"]
+[gd_scene load_steps=11 format=3 uid="uid://b2c658ex7s65i"]
 
 [ext_resource type="Script" path="res://Scripts/Utility Scripts/Room.gd" id="1_2xpe0"]
 [ext_resource type="TileSet" uid="uid://dhwi7i1loa2pd" path="res://Sprites/Tiles/Test Tiles/TestTileSet.tres" id="2_kmjyc"]
 [ext_resource type="PackedScene" uid="uid://dqbo0wu6hm8lj" path="res://Scene Objects/Objects/WarpTrigger.tscn" id="3_1585h"]
 [ext_resource type="PackedScene" uid="uid://c4cg3xgbq7eyh" path="res://Scene Objects/Obstacles/FloorSpikes.tscn" id="4_qdwq6"]
 [ext_resource type="PackedScene" uid="uid://b2a0ttqvejk51" path="res://Scene Objects/Objects/TemperDragonFruit.tscn" id="5_k1xns"]
+[ext_resource type="Texture2D" uid="uid://bv65yl4nt5gs4" path="res://Sprites/Backgrounds/0_4_BG/BackWall.png" id="6_c0cxh"]
+[ext_resource type="Texture2D" uid="uid://miqcvhqk5etv" path="res://Sprites/Backgrounds/0_4_BG/Catwalks.png" id="7_crw32"]
+[ext_resource type="Texture2D" uid="uid://bsykoqgrumq5c" path="res://Sprites/Backgrounds/0_4_BG/BackFloor.png" id="8_skxdu"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_nfqvy"]
 size = Vector2(896, 32)
@@ -12,8 +15,9 @@ size = Vector2(896, 32)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_v8exb"]
 size = Vector2(896, 32)
 
-[node name="CH0_LV4_R4" type="Node2D" node_paths=PackedStringArray("tilemap_list", "room_entrances")]
+[node name="CH0_LV4_R4" type="Node2D" node_paths=PackedStringArray("parallax_bg", "tilemap_list", "room_entrances")]
 script = ExtResource("1_2xpe0")
+parallax_bg = NodePath("ParallaxBackground")
 tilemap_list = [NodePath("BoundaryCollisionTilemap"), NodePath("LevelCollisionTilemap")]
 right_camera_limit = 2816
 room_entrances = [NodePath("Entrance 0"), NodePath("Entrance 1"), NodePath("FallReentry 0"), NodePath("FallReentry 1")]
@@ -131,6 +135,39 @@ enable_cycling = false
 position = Vector2(1312, 128)
 starting_state = 1
 enable_cycling = false
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+visible = false
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2(0.01, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
+texture_repeat = 2
+texture = ExtResource("6_c0cxh")
+centered = false
+offset = Vector2(-512, 0)
+region_enabled = true
+region_rect = Rect2(0, 0, 3328, 320)
+
+[node name="ParallaxLayer2" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2(0.02, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer2"]
+texture_repeat = 2
+texture = ExtResource("7_crw32")
+centered = false
+offset = Vector2(-512, 0)
+region_enabled = true
+region_rect = Rect2(0, 0, 3328, 320)
+
+[node name="Sprite2D2" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer2"]
+texture_repeat = 2
+texture = ExtResource("8_skxdu")
+centered = false
+offset = Vector2(-512, 0)
+region_enabled = true
+region_rect = Rect2(0, 0, 3328, 320)
 
 [editable path="FallWarp 0"]
 [editable path="FallWarp 1"]

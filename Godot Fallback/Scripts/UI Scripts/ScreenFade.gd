@@ -21,13 +21,6 @@ func _ready():
 	color = Color(color, current_alpha)
 
 func _process(delta):
-	uniform_process(delta)
-
-func _physics_process(delta):
-	uniform_process(delta)
-
-func uniform_process(delta):
-	global_position = (get_viewport().get_camera_2d().global_position + camera_offset)
 	if (current_alpha != target_alpha):
 		current_alpha = move_toward(current_alpha, target_alpha, delta * current_alpha_change_rate)
 		color = Color(color, current_alpha)

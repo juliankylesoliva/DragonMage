@@ -35,7 +35,6 @@ func activate_room():
 	visible = true
 	if (parallax_bg != null):
 		parallax_bg.visible = true
-		parallax_bg.offset = global_position
 		parallax_bg.scroll_base_offset = global_position
 	is_room_active = true
 	var camera : Camera2D = get_viewport().get_camera_2d()

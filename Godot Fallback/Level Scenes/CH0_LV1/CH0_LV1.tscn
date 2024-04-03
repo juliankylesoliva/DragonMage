@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://dgi7me5crgi8q"]
+[gd_scene load_steps=21 format=3 uid="uid://dgi7me5crgi8q"]
 
 [ext_resource type="Script" path="res://Scripts/Utility Scripts/Level.gd" id="1_6mws2"]
 [ext_resource type="PackedScene" uid="uid://cevmm5dwm345v" path="res://Level Scenes/CH0_LV1/Rooms/CH0_LV1_R1.tscn" id="2_7b35j"]
@@ -18,6 +18,8 @@
 [ext_resource type="PackedScene" uid="uid://b5wwivjk8sl7b" path="res://Scene Objects/Misc/ClearTimer.tscn" id="14_dibul"]
 [ext_resource type="PackedScene" uid="uid://buykytsdrlnsg" path="res://Scene Objects/Misc/ResultsScreen.tscn" id="15_g0j50"]
 [ext_resource type="PackedScene" uid="uid://brhoroc2w6jwi" path="res://Scene Objects/UI/Textbox.tscn" id="18_itco1"]
+[ext_resource type="PackedScene" uid="uid://btq4qla5fyq0n" path="res://Scene Objects/Misc/LevelMusicPlayer.tscn" id="19_l87bk"]
+[ext_resource type="AudioStream" uid="uid://c4w62ivppptim" path="res://Music/RoccoW - A Bed of Snakes - 05 17092017.wav" id="20_oukke"]
 
 [node name="CH0_LV1" type="Node" node_paths=PackedStringArray("player_reference", "starting_room", "room_list")]
 script = ExtResource("1_6mws2")
@@ -44,16 +46,16 @@ process_callback = 0
 
 [node name="CH0_LV1_R1" parent="." instance=ExtResource("2_7b35j")]
 
-[node name="WarpTrigger" parent="CH0_LV1_R1" index="5" node_paths=PackedStringArray("room_destination")]
+[node name="WarpTrigger" parent="CH0_LV1_R1" index="4" node_paths=PackedStringArray("room_destination")]
 room_destination = NodePath("../../CH0_LV1_R2")
 
-[node name="HintBubble" parent="CH0_LV1_R1" index="6" node_paths=PackedStringArray("textbox")]
+[node name="HintBubble" parent="CH0_LV1_R1" index="5" node_paths=PackedStringArray("textbox")]
 textbox = NodePath("../../Textbox")
 
-[node name="HintBubble2" parent="CH0_LV1_R1" index="7" node_paths=PackedStringArray("textbox")]
+[node name="HintBubble2" parent="CH0_LV1_R1" index="6" node_paths=PackedStringArray("textbox")]
 textbox = NodePath("../../Textbox")
 
-[node name="HintBubble3" parent="CH0_LV1_R1" index="8" node_paths=PackedStringArray("textbox")]
+[node name="HintBubble3" parent="CH0_LV1_R1" index="7" node_paths=PackedStringArray("textbox")]
 textbox = NodePath("../../Textbox")
 
 [node name="CH0_LV1_R2" parent="." instance=ExtResource("3_upqvj")]
@@ -177,27 +179,33 @@ room_entrance_index = 1
 [node name="KnigelNPC" parent="CH0_LV1_R10" index="4" node_paths=PackedStringArray("textbox")]
 textbox = NodePath("../../Textbox")
 
+[node name="UI_Canvas" type="CanvasLayer" parent="."]
+
+[node name="PauseMenu" parent="UI_Canvas" node_paths=PackedStringArray("screen_fade") instance=ExtResource("13_1kf77")]
+screen_fade = NodePath("../ScreenFade")
+
+[node name="ResultsScreen" parent="UI_Canvas" node_paths=PackedStringArray("screen_fade", "level", "clear_timer") instance=ExtResource("15_g0j50")]
+screen_fade = NodePath("../ScreenFade")
+level = NodePath("../..")
+clear_timer = NodePath("../../ClearTimer")
+show_damage_result = false
+show_fragment_result = false
+
+[node name="ScreenFade" parent="UI_Canvas" instance=ExtResource("13_ggxcq")]
+starting_fade_duration = 1.0
+
 [node name="ClearTimer" parent="." instance=ExtResource("14_dibul")]
 
 [node name="Textbox" parent="." instance=ExtResource("18_itco1")]
 accept_input_events = false
 
-[node name="PauseMenu" parent="." node_paths=PackedStringArray("screen_fade") instance=ExtResource("13_1kf77")]
-screen_fade = NodePath("../ScreenFade")
-
-[node name="ResultsScreen" parent="." node_paths=PackedStringArray("screen_fade", "level", "clear_timer") instance=ExtResource("15_g0j50")]
-screen_fade = NodePath("../ScreenFade")
-level = NodePath("..")
-clear_timer = NodePath("../ClearTimer")
-show_damage_result = false
-show_fragment_result = false
-
-[node name="ScreenFade" parent="." instance=ExtResource("13_ggxcq")]
-starting_fade_duration = 1.0
+[node name="LevelMusicPlayer" parent="." instance=ExtResource("19_l87bk")]
+stream = ExtResource("20_oukke")
 
 [connection signal="level_finished" from="CH0_LV1_R10/FinishLine" to="." method="level_finish"]
+[connection signal="level_finished" from="CH0_LV1_R10/FinishLine" to="UI_Canvas/ResultsScreen" method="on_level_complete"]
 [connection signal="level_finished" from="CH0_LV1_R10/FinishLine" to="ClearTimer" method="stop_timer"]
-[connection signal="level_finished" from="CH0_LV1_R10/FinishLine" to="ResultsScreen" method="on_level_complete"]
+[connection signal="level_finished" from="CH0_LV1_R10/FinishLine" to="LevelMusicPlayer" method="fade_out"]
 
 [editable path="Player"]
 [editable path="CH0_LV1_R1"]

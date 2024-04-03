@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://esl3vmft18qp"]
+[gd_scene load_steps=13 format=3 uid="uid://esl3vmft18qp"]
 
 [ext_resource type="Script" path="res://Scripts/Utility Scripts/Room.gd" id="1_cvffg"]
 [ext_resource type="TileSet" uid="uid://dhwi7i1loa2pd" path="res://Sprites/Tiles/Test Tiles/TestTileSet.tres" id="2_3gy77"]
@@ -7,9 +7,15 @@
 [ext_resource type="PackedScene" uid="uid://dwnpgujive352" path="res://Scene Objects/Enemies/RedDragoon.tscn" id="5_ljbr8"]
 [ext_resource type="PackedScene" uid="uid://bgww8jir45ktf" path="res://Scene Objects/Enemies/BlueDragoon.tscn" id="6_ciggk"]
 [ext_resource type="PackedScene" uid="uid://dfkmxoba64spw" path="res://Scene Objects/Objects/MedalFragment.tscn" id="7_tfm26"]
+[ext_resource type="Texture2D" uid="uid://3q4m4jsumo45" path="res://Sprites/Backgrounds/1_1_BG/Sky.png" id="8_gxlot"]
+[ext_resource type="Texture2D" uid="uid://b58coqp1miryx" path="res://Sprites/Backgrounds/1_1_BG/CityFront.png" id="9_0f443"]
+[ext_resource type="Texture2D" uid="uid://i8aas1iwgonq" path="res://Sprites/Backgrounds/1_1_BG/CityEdge.png" id="10_mbjbq"]
+[ext_resource type="Texture2D" uid="uid://c0sqls5mvywg6" path="res://Sprites/Backgrounds/1_1_BG/WaterBack.png" id="11_c313k"]
+[ext_resource type="Texture2D" uid="uid://btitmfjswpf6e" path="res://Sprites/Backgrounds/1_1_BG/WaterFront.png" id="12_s8a7t"]
 
-[node name="CH1_LV1_R5" type="Node2D" node_paths=PackedStringArray("tilemap_list", "room_entrances", "enemy_nodes", "medal_fragments")]
+[node name="CH1_LV1_R5" type="Node2D" node_paths=PackedStringArray("parallax_bg", "tilemap_list", "room_entrances", "enemy_nodes", "medal_fragments")]
 script = ExtResource("1_cvffg")
+parallax_bg = NodePath("ParallaxBackground")
 tilemap_list = [NodePath("BoundaryCollisionTilemap"), NodePath("LevelCollisionTilemap")]
 top_camera_limit = -128
 room_entrances = [NodePath("Entrance 0"), NodePath("Entrance 1")]
@@ -125,3 +131,56 @@ position = Vector2(448, 32)
 
 [node name="BlueDragoon" parent="." instance=ExtResource("6_ciggk")]
 position = Vector2(256, 96)
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+visible = false
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2(0.01, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
+texture_repeat = 2
+texture = ExtResource("8_gxlot")
+centered = false
+region_enabled = true
+region_rect = Rect2(0, 0, 512, 320)
+
+[node name="ParallaxLayer2" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2(0.04, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer2"]
+texture_repeat = 2
+texture = ExtResource("9_0f443")
+centered = false
+region_enabled = true
+region_rect = Rect2(0, 0, 512, 320)
+
+[node name="ParallaxLayer3" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2(0.05, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer3"]
+texture_repeat = 2
+texture = ExtResource("10_mbjbq")
+centered = false
+region_enabled = true
+region_rect = Rect2(0, 0, 512, 320)
+
+[node name="ParallaxLayer4" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2(0.06, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer4"]
+texture_repeat = 2
+texture = ExtResource("11_c313k")
+centered = false
+region_enabled = true
+region_rect = Rect2(0, 0, 512, 320)
+
+[node name="ParallaxLayer5" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2(0.12, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer5"]
+texture_repeat = 2
+texture = ExtResource("12_s8a7t")
+centered = false
+region_enabled = true
+region_rect = Rect2(0, 0, 512, 320)

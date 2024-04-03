@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://btq4qla5fyq0n"]
+
+[ext_resource type="Script" path="res://Scripts/UI Scripts/LevelMusicPlayer.gd" id="1_7w8ew"]
+
+[node name="LevelMusicPlayer" type="AudioStreamPlayer"]
+volume_db = -12.0
+autoplay = true
+bus = &"Music"
+script = ExtResource("1_7w8ew")
+fadeout_time = 5.0
+starting_volume = -12.0

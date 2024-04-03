@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://qa22n4g30owo"]
+[gd_scene load_steps=20 format=3 uid="uid://qa22n4g30owo"]
 
 [ext_resource type="Script" path="res://Scripts/Utility Scripts/Level.gd" id="1_xccb8"]
 [ext_resource type="PackedScene" uid="uid://c6qw77ovfwgfs" path="res://Player.tscn" id="2_616c6"]
@@ -17,13 +17,14 @@
 [ext_resource type="PackedScene" uid="uid://b5wwivjk8sl7b" path="res://Scene Objects/Misc/ClearTimer.tscn" id="13_vkigm"]
 [ext_resource type="PackedScene" uid="uid://brhoroc2w6jwi" path="res://Scene Objects/UI/Textbox.tscn" id="14_54vdq"]
 [ext_resource type="PackedScene" uid="uid://buykytsdrlnsg" path="res://Scene Objects/Misc/ResultsScreen.tscn" id="14_rug2n"]
+[ext_resource type="PackedScene" uid="uid://btq4qla5fyq0n" path="res://Scene Objects/Misc/LevelMusicPlayer.tscn" id="18_seqrb"]
+[ext_resource type="AudioStream" uid="uid://cknfggv1ublsj" path="res://Music/02 Underclocked (underunderclocked mix).wav" id="19_k0bib"]
 
-[node name="CH0_LV4" type="Node2D" node_paths=PackedStringArray("player_reference", "starting_room", "room_list", "ui_container")]
+[node name="CH0_LV4" type="Node2D" node_paths=PackedStringArray("player_reference", "starting_room", "room_list")]
 script = ExtResource("1_xccb8")
 player_reference = NodePath("Player")
 starting_room = NodePath("CH0_LV4_R1")
 room_list = [NodePath("CH0_LV4_R1"), NodePath("CH0_LV4_R2"), NodePath("CH0_LV4_R3"), NodePath("CH0_LV4_R4"), NodePath("CH0_LV4_R5"), NodePath("CH0_LV4_R6"), NodePath("CH0_LV4_R7"), NodePath("CH0_LV4_R8")]
-ui_container = NodePath("VBoxContainer")
 dropped_fragment_scene = ExtResource("2_ahodx")
 
 [node name="Player" parent="." instance=ExtResource("2_616c6")]
@@ -115,39 +116,37 @@ position = Vector2(-3008, 1376)
 [node name="Warp 0" parent="CH0_LV4_R8" index="4" node_paths=PackedStringArray("room_destination")]
 room_destination = NodePath("../../CH0_LV4_R7")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+[node name="UI_Canvas" type="CanvasLayer" parent="."]
 
-[node name="TemperMeterUI" parent="VBoxContainer" node_paths=PackedStringArray("player_node") instance=ExtResource("3_hvbu7")]
+[node name="TemperMeterUI" parent="UI_Canvas" node_paths=PackedStringArray("player_node") instance=ExtResource("3_hvbu7")]
 position = Vector2(1, 8)
 player_node = NodePath("../../Player")
-process_callback = "Idle"
-camera_offset = Vector2(-255, -152)
+
+[node name="PauseMenu" parent="UI_Canvas" node_paths=PackedStringArray("screen_fade") instance=ExtResource("13_6h45c")]
+screen_fade = NodePath("../ScreenFade")
+
+[node name="ResultsScreen" parent="UI_Canvas" node_paths=PackedStringArray("screen_fade", "level", "clear_timer") instance=ExtResource("14_rug2n")]
+screen_fade = NodePath("../ScreenFade")
+level = NodePath("../..")
+clear_timer = NodePath("../../ClearTimer")
+show_fragment_result = false
+
+[node name="ScreenFade" parent="UI_Canvas" instance=ExtResource("12_ue1v1")]
+starting_fade_duration = 1.0
 
 [node name="ClearTimer" parent="." instance=ExtResource("13_vkigm")]
 
 [node name="Textbox" parent="." instance=ExtResource("14_54vdq")]
 accept_input_events = false
 
-[node name="PauseMenu" parent="." node_paths=PackedStringArray("screen_fade") instance=ExtResource("13_6h45c")]
-screen_fade = NodePath("../ScreenFade")
-
-[node name="ResultsScreen" parent="." node_paths=PackedStringArray("screen_fade", "level", "clear_timer") instance=ExtResource("14_rug2n")]
-screen_fade = NodePath("../ScreenFade")
-level = NodePath("..")
-clear_timer = NodePath("../ClearTimer")
-show_fragment_result = false
-
-[node name="ScreenFade" parent="." instance=ExtResource("12_ue1v1")]
-starting_fade_duration = 1.0
+[node name="LevelMusicPlayer" parent="." instance=ExtResource("18_seqrb")]
+stream = ExtResource("19_k0bib")
 
 [connection signal="level_finished" from="CH0_LV4_R8/FinishLine" to="." method="level_finish"]
+[connection signal="level_finished" from="CH0_LV4_R8/FinishLine" to="UI_Canvas/TemperMeterUI" method="hide"]
+[connection signal="level_finished" from="CH0_LV4_R8/FinishLine" to="UI_Canvas/ResultsScreen" method="on_level_complete"]
 [connection signal="level_finished" from="CH0_LV4_R8/FinishLine" to="ClearTimer" method="stop_timer"]
-[connection signal="level_finished" from="CH0_LV4_R8/FinishLine" to="ResultsScreen" method="on_level_complete"]
+[connection signal="level_finished" from="CH0_LV4_R8/FinishLine" to="LevelMusicPlayer" method="fade_out"]
 
 [editable path="Player"]
 [editable path="CH0_LV4_R1"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://8mf8ipsh2you"]
+[gd_scene load_steps=15 format=3 uid="uid://8mf8ipsh2you"]
 
 [ext_resource type="Script" path="res://Scripts/Utility Scripts/Room.gd" id="1_cvffg"]
 [ext_resource type="TileSet" uid="uid://dhwi7i1loa2pd" path="res://Sprites/Tiles/Test Tiles/TestTileSet.tres" id="2_3gy77"]
@@ -12,12 +12,14 @@
 [ext_resource type="PackedScene" uid="uid://curi6w4ex7jou" path="res://Scene Objects/Enemies/YellowDragoon.tscn" id="10_camky"]
 [ext_resource type="PackedScene" uid="uid://b2a0ttqvejk51" path="res://Scene Objects/Objects/TemperDragonFruit.tscn" id="11_gbo2s"]
 [ext_resource type="PackedScene" uid="uid://dfkmxoba64spw" path="res://Scene Objects/Objects/MedalFragment.tscn" id="12_ynbm6"]
+[ext_resource type="Texture2D" uid="uid://3q4m4jsumo45" path="res://Sprites/Backgrounds/1_1_BG/Sky.png" id="13_debfn"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rr12y"]
 size = Vector2(128, 128)
 
-[node name="CH1_LV1_R9" type="Node2D" node_paths=PackedStringArray("tilemap_list", "room_entrances", "enemy_nodes", "medal_fragments")]
+[node name="CH1_LV1_R9" type="Node2D" node_paths=PackedStringArray("parallax_bg", "tilemap_list", "room_entrances", "enemy_nodes", "medal_fragments")]
 script = ExtResource("1_cvffg")
+parallax_bg = NodePath("ParallaxBackground")
 tilemap_list = [NodePath("BoundaryCollisionTilemap"), NodePath("LevelCollisionTilemap")]
 top_camera_limit = -1280
 room_entrances = [NodePath("Entrance 0")]
@@ -249,5 +251,18 @@ enable_cycling = false
 
 [node name="TemperDragonFruit4" parent="." instance=ExtResource("11_gbo2s")]
 position = Vector2(224, -1248)
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+visible = false
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2(0.01, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
+texture_repeat = 2
+texture = ExtResource("13_debfn")
+centered = false
+region_enabled = true
+region_rect = Rect2(0, 0, 512, 320)
 
 [editable path="Warp 1"]

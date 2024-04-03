@@ -1,16 +1,20 @@
-[gd_scene load_steps=7 format=3 uid="uid://b0t45tk6kgt57"]
+[gd_scene load_steps=10 format=3 uid="uid://b0t45tk6kgt57"]
 
 [ext_resource type="Script" path="res://Scripts/Utility Scripts/Room.gd" id="1_l2bk6"]
 [ext_resource type="TileSet" uid="uid://dhwi7i1loa2pd" path="res://Sprites/Tiles/Test Tiles/TestTileSet.tres" id="2_1fie0"]
 [ext_resource type="PackedScene" uid="uid://dqbo0wu6hm8lj" path="res://Scene Objects/Objects/WarpTrigger.tscn" id="3_m4103"]
 [ext_resource type="PackedScene" uid="uid://cw6gype8pgf7a" path="res://Scene Objects/Characters/KnigelNPC.tscn" id="4_lbegf"]
 [ext_resource type="PackedScene" uid="uid://cp3kaarqt7vdo" path="res://Scene Objects/Objects/HintBubble.tscn" id="5_2v3kh"]
+[ext_resource type="Texture2D" uid="uid://bvv2k3ewneasg" path="res://Sprites/Backgrounds/0_2_BG/Stars.png" id="6_fx1d0"]
+[ext_resource type="Texture2D" uid="uid://0uuhxw1dnvqw" path="res://Sprites/Backgrounds/0_2_BG/MountainsBack.png" id="7_4gba3"]
+[ext_resource type="Texture2D" uid="uid://cqdxwg0yhese4" path="res://Sprites/Backgrounds/0_2_BG/MountainsFront.png" id="8_4salp"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_u81gb"]
 size = Vector2(864, 32)
 
-[node name="CH0_LV2_R8" type="Node2D" node_paths=PackedStringArray("tilemap_list", "room_entrances")]
+[node name="CH0_LV2_R8" type="Node2D" node_paths=PackedStringArray("parallax_bg", "tilemap_list", "room_entrances")]
 script = ExtResource("1_l2bk6")
+parallax_bg = NodePath("ParallaxBackground")
 tilemap_list = [NodePath("BoundaryCollisionTilemap"), NodePath("LevelCollisionTilemap")]
 top_camera_limit = -416
 right_camera_limit = 1312
@@ -90,6 +94,42 @@ textbox_strings = Array[String](["Knigel: Before we continue, Drae, I've gotta a
 
 [node name="HintBubble" parent="." instance=ExtResource("5_2v3kh")]
 position = Vector2(736, -248)
-textbox_strings = Array[String](["Draelyn: While my upward Fire Tackle rises slowly, I can dive diagonally downwards with my Fire Tackle by pressing [Move Down]+[Attack]!"])
+textbox_strings = Array[String](["Draelyn: (While my upward Fire Tackle rises slowly, I can dive diagonally downwards with my Fire Tackle by pressing [Move Down]+[Attack]!)"])
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+visible = false
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2(0.01, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
+texture_repeat = 2
+texture = ExtResource("6_fx1d0")
+centered = false
+offset = Vector2(-512, 0)
+region_enabled = true
+region_rect = Rect2(0, 0, 1824, 320)
+
+[node name="ParallaxLayer2" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2(0.02, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer2"]
+texture_repeat = 2
+texture = ExtResource("7_4gba3")
+centered = false
+offset = Vector2(-512, 0)
+region_enabled = true
+region_rect = Rect2(0, 0, 1824, 320)
+
+[node name="ParallaxLayer3" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2(0.04, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer3"]
+texture_repeat = 2
+texture = ExtResource("8_4salp")
+centered = false
+offset = Vector2(-512, 0)
+region_enabled = true
+region_rect = Rect2(0, 0, 1824, 320)
 
 [editable path="FallWarp"]

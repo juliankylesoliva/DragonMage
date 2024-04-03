@@ -1,16 +1,22 @@
-[gd_scene load_steps=7 format=3 uid="uid://bsvxvuyq2tbm0"]
+[gd_scene load_steps=12 format=3 uid="uid://bsvxvuyq2tbm0"]
 
 [ext_resource type="Script" path="res://Scripts/Utility Scripts/Room.gd" id="1_bioys"]
 [ext_resource type="TileSet" uid="uid://dhwi7i1loa2pd" path="res://Sprites/Tiles/Test Tiles/TestTileSet.tres" id="2_86gvv"]
 [ext_resource type="PackedScene" uid="uid://dqbo0wu6hm8lj" path="res://Scene Objects/Objects/WarpTrigger.tscn" id="3_6dcyi"]
 [ext_resource type="PackedScene" uid="uid://bajk0w7eoh6o8" path="res://Scene Objects/Objects/ReinforcedBlock.tscn" id="4_t6mp6"]
 [ext_resource type="PackedScene" uid="uid://cs4s34scsvcfr" path="res://Scene Objects/Objects/BreakableBlock.tscn" id="5_twvne"]
+[ext_resource type="Texture2D" uid="uid://d0bbhi1k118mg" path="res://Sprites/Backgrounds/0_1_BG/ForestSkyGradientBG.png" id="6_s56mq"]
+[ext_resource type="Texture2D" uid="uid://dl53dquuiyv20" path="res://Sprites/Backgrounds/0_1_BG/GrassBG.png" id="7_3o5ox"]
+[ext_resource type="Texture2D" uid="uid://d1g47vu3omw2c" path="res://Sprites/Backgrounds/0_1_BG/TreeBG.png" id="8_6ylm8"]
+[ext_resource type="Texture2D" uid="uid://bqjgsis2ebgdf" path="res://Sprites/Backgrounds/0_1_BG/LeavesBackBG.png" id="9_wwcwa"]
+[ext_resource type="Texture2D" uid="uid://wvc78b7rcsop" path="res://Sprites/Backgrounds/0_1_BG/LeavesBG.png" id="10_okj0i"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ge5vl"]
 size = Vector2(2240, 32)
 
-[node name="CH0_LV1_R9" type="Node2D" node_paths=PackedStringArray("tilemap_list", "room_entrances")]
+[node name="CH0_LV1_R9" type="Node2D" node_paths=PackedStringArray("parallax_bg", "tilemap_list", "room_entrances")]
 script = ExtResource("1_bioys")
+parallax_bg = NodePath("ParallaxBackground")
 tilemap_list = [NodePath("BoundaryCollisionTilemap"), NodePath("LevelCollisionTilemap")]
 top_camera_limit = -320
 right_camera_limit = 2720
@@ -86,5 +92,80 @@ position = Vector2(2592, -192)
 
 [node name="BreakableBlock" parent="." instance=ExtResource("5_twvne")]
 position = Vector2(2656, -192)
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+visible = false
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2(0.01, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
+texture_repeat = 2
+texture = ExtResource("6_s56mq")
+centered = false
+offset = Vector2(-512, 0)
+region_enabled = true
+region_rect = Rect2(0, 0, 3232, 320)
+
+[node name="ParallaxLayer2" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2(0.02, 0)
+
+[node name="Sprite2D2" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer2"]
+modulate = Color(0.0235294, 0.439216, 0.439216, 1)
+texture_repeat = 2
+texture = ExtResource("7_3o5ox")
+centered = false
+offset = Vector2(-512, 144)
+region_enabled = true
+region_rect = Rect2(0, 0, 3232, 288)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer2"]
+modulate = Color(0.388235, 0.0470588, 0.176471, 1)
+texture_repeat = 2
+texture = ExtResource("8_6ylm8")
+centered = false
+offset = Vector2(-512, -112)
+region_enabled = true
+region_rect = Rect2(0, 0, 3232, 288)
+
+[node name="ParallaxLayer3" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2(0.03, 0)
+
+[node name="Sprite2D2" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer3"]
+modulate = Color(0.0470588, 0.521569, 0.458824, 1)
+texture_repeat = 2
+texture = ExtResource("7_3o5ox")
+centered = false
+offset = Vector2(-512, 192)
+region_enabled = true
+region_rect = Rect2(0, 0, 3232, 288)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer3"]
+modulate = Color(0.521569, 0.223529, 0.0980392, 1)
+texture_repeat = 2
+texture = ExtResource("8_6ylm8")
+centered = false
+offset = Vector2(-512, -64)
+region_enabled = true
+region_rect = Rect2(32, 0, 3232, 288)
+
+[node name="ParallaxLayer4" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2(0.04, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer4"]
+texture_repeat = 2
+texture = ExtResource("9_wwcwa")
+centered = false
+offset = Vector2(-512, 0)
+region_enabled = true
+region_rect = Rect2(0, 0, 3232, 64)
+
+[node name="Sprite2D2" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer4"]
+texture_repeat = 2
+texture = ExtResource("10_okj0i")
+centered = false
+offset = Vector2(-512, 0)
+region_enabled = true
+region_rect = Rect2(0, 0, 3232, 32)
 
 [editable path="FallWarp"]

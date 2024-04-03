@@ -10,8 +10,9 @@ config_version=5
 
 [application]
 
-config/name="Dragon Mage (Godot Build)"
+config/name="Magli Draelyn the Half-Dragon Mage [DEMO]"
 run/main_scene="res://Misc Scenes/TitleScreen.tscn"
+config/quit_on_go_back=false
 config/features=PackedStringArray("4.1", "GL Compatibility")
 run/max_fps=60
 boot_splash/use_filter=false
@@ -24,10 +25,10 @@ driver/mix_rate=48000
 
 [autoload]
 
-SoundFactory="*res://Scripts/Utility Scripts/SoundFactory.gd"
-EffectFactory="*res://Scripts/Utility Scripts/EffectFactory.gd"
 PauseHandler="*res://Scripts/Utility Scripts/PauseHandler.gd"
-TextPromptParser="*res://Scripts/Utility Scripts/TextPromptParser.gd"
+SoundFactory="*res://Misc Scenes/SoundFactory.tscn"
+EffectFactory="*res://Misc Scenes/EffectFactory.tscn"
+TextPromptParser="*res://Misc Scenes/TextPromptParser.tscn"
 
 [display]
 

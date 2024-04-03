@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://bsdn7w7f8yil8"]
+[gd_scene load_steps=14 format=3 uid="uid://bsdn7w7f8yil8"]
 
 [ext_resource type="Script" path="res://Scripts/Utility Scripts/Room.gd" id="1_e4gek"]
 [ext_resource type="TileSet" uid="uid://dhwi7i1loa2pd" path="res://Sprites/Tiles/Test Tiles/TestTileSet.tres" id="2_n0mpe"]
@@ -10,9 +10,13 @@
 [ext_resource type="PackedScene" uid="uid://dcs7w117uukcd" path="res://Scene Objects/Objects/BreakableMagicBlock.tscn" id="8_xe1tv"]
 [ext_resource type="PackedScene" uid="uid://dgtmsbsmeieyh" path="res://Scene Objects/Objects/ReinforcedMagicBlock.tscn" id="9_qlp8j"]
 [ext_resource type="PackedScene" uid="uid://bajk0w7eoh6o8" path="res://Scene Objects/Objects/ReinforcedBlock.tscn" id="10_nmdcr"]
+[ext_resource type="Texture2D" uid="uid://bv65yl4nt5gs4" path="res://Sprites/Backgrounds/0_4_BG/BackWall.png" id="11_widii"]
+[ext_resource type="Texture2D" uid="uid://miqcvhqk5etv" path="res://Sprites/Backgrounds/0_4_BG/Catwalks.png" id="12_xhflh"]
+[ext_resource type="Texture2D" uid="uid://bsykoqgrumq5c" path="res://Sprites/Backgrounds/0_4_BG/BackFloor.png" id="13_4q7yx"]
 
-[node name="CH0_LV4_R7" type="Node2D" node_paths=PackedStringArray("tilemap_list", "room_entrances")]
+[node name="CH0_LV4_R7" type="Node2D" node_paths=PackedStringArray("parallax_bg", "tilemap_list", "room_entrances")]
 script = ExtResource("1_e4gek")
+parallax_bg = NodePath("ParallaxBackground")
 tilemap_list = [NodePath("BoundaryCollisionTilemap"), NodePath("LevelCollisionTilemap")]
 bottom_camera_limit = 832
 room_entrances = [NodePath("Entrance 0"), NodePath("Entrance 1")]
@@ -156,3 +160,33 @@ position = Vector2(352, 608)
 
 [node name="ReinforcedBlock2" parent="." instance=ExtResource("10_nmdcr")]
 position = Vector2(352, 672)
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+visible = false
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2(0.01, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
+texture_repeat = 2
+texture = ExtResource("11_widii")
+centered = false
+region_enabled = true
+region_rect = Rect2(0, 0, 512, 320)
+
+[node name="ParallaxLayer2" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2(0.02, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer2"]
+texture_repeat = 2
+texture = ExtResource("12_xhflh")
+centered = false
+region_enabled = true
+region_rect = Rect2(0, 0, 512, 320)
+
+[node name="Sprite2D2" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer2"]
+texture_repeat = 2
+texture = ExtResource("13_4q7yx")
+centered = false
+region_enabled = true
+region_rect = Rect2(0, 0, 512, 320)

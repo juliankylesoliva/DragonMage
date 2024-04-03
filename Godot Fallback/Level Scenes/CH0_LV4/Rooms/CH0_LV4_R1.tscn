@@ -1,16 +1,20 @@
-[gd_scene load_steps=7 format=3 uid="uid://c0cgya1qileg7"]
+[gd_scene load_steps=10 format=3 uid="uid://c0cgya1qileg7"]
 
 [ext_resource type="Script" path="res://Scripts/Utility Scripts/Room.gd" id="1_f7afm"]
 [ext_resource type="TileSet" uid="uid://dhwi7i1loa2pd" path="res://Sprites/Tiles/Test Tiles/TestTileSet.tres" id="2_ly4uo"]
 [ext_resource type="PackedScene" uid="uid://dqbo0wu6hm8lj" path="res://Scene Objects/Objects/WarpTrigger.tscn" id="3_7x0e5"]
 [ext_resource type="PackedScene" uid="uid://cp3kaarqt7vdo" path="res://Scene Objects/Objects/HintBubble.tscn" id="4_0jqtx"]
 [ext_resource type="PackedScene" uid="uid://c4cg3xgbq7eyh" path="res://Scene Objects/Obstacles/FloorSpikes.tscn" id="4_oolf0"]
+[ext_resource type="Texture2D" uid="uid://bv65yl4nt5gs4" path="res://Sprites/Backgrounds/0_4_BG/BackWall.png" id="6_dsw2u"]
+[ext_resource type="Texture2D" uid="uid://miqcvhqk5etv" path="res://Sprites/Backgrounds/0_4_BG/Catwalks.png" id="7_rfxa3"]
+[ext_resource type="Texture2D" uid="uid://bsykoqgrumq5c" path="res://Sprites/Backgrounds/0_4_BG/BackFloor.png" id="8_wd2k0"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_sab4s"]
 size = Vector2(352, 32)
 
-[node name="CH0_LV4_R1" type="Node2D" node_paths=PackedStringArray("tilemap_list", "room_entrances")]
+[node name="CH0_LV4_R1" type="Node2D" node_paths=PackedStringArray("parallax_bg", "tilemap_list", "room_entrances")]
 script = ExtResource("1_f7afm")
+parallax_bg = NodePath("ParallaxBackground")
 tilemap_list = [NodePath("BoundaryCollisionTilemap"), NodePath("LevelCollisionTilemap")]
 right_camera_limit = 1024
 room_entrances = [NodePath("Entrance 0"), NodePath("Entrance 1"), NodePath("FallReentry")]
@@ -84,5 +88,38 @@ floor_length = 5
 [node name="HintBubble" parent="." instance=ExtResource("4_0jqtx")]
 position = Vector2(224, 200)
 textbox_strings = Array[String](["Faeson: You alright, EmDee? You seem a little bit tense...", "{player_name}: I'm alright, Knigel, I'm just trying to steel myself, that's all. I just don't do well around spikes--they're like giant needles!", "Faeson: Try not to think about it too hard, okay, EmDee? It'd be best that you maintain an even temper for both of our sakes.", "{player_name}: Right... (I need to calm down... If I get too worked up from overusing my powers or by getting hurt, one of my powers tends to stop working for a good while...)"])
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+visible = false
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2(0.01, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
+texture_repeat = 2
+texture = ExtResource("6_dsw2u")
+centered = false
+offset = Vector2(-512, 0)
+region_enabled = true
+region_rect = Rect2(0, 0, 1536, 320)
+
+[node name="ParallaxLayer2" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2(0.02, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer2"]
+texture_repeat = 2
+texture = ExtResource("7_rfxa3")
+centered = false
+offset = Vector2(-512, 0)
+region_enabled = true
+region_rect = Rect2(0, 0, 1536, 320)
+
+[node name="Sprite2D2" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer2"]
+texture_repeat = 2
+texture = ExtResource("8_wd2k0")
+centered = false
+offset = Vector2(-512, 0)
+region_enabled = true
+region_rect = Rect2(0, 0, 1536, 320)
 
 [editable path="FallWarp"]

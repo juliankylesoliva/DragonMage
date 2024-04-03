@@ -25,7 +25,6 @@ func _physics_process(_delta):
 	if (get_tree().is_paused()):
 		toggle_hiding()
 		self.set_visible(true and !is_hiding)
-		global_position = get_viewport().get_camera_2d().global_position
 		check_menu_cursor_movement()
 		check_menu_selection()
 	else:

@@ -40,7 +40,7 @@ func spawn_shades():
 func jump():
 	if (body.is_on_floor()):
 		body.velocity.y = -jump_speed
-		SoundFactory.play_sound_by_name(jump_sound_name, body.global_position, -4, 1, "SFX")
+		SoundFactory.play_sound_by_name(jump_sound_name, body.global_position, 0, 1, "SFX")
 
 func jump_update():
 	if (!body.is_on_floor()):

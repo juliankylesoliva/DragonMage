@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://b6ourfnqhy0wk"]
+[gd_scene load_steps=23 format=3 uid="uid://b6ourfnqhy0wk"]
 
 [ext_resource type="Script" path="res://Scripts/Utility Scripts/Level.gd" id="1_3mmw4"]
 [ext_resource type="PackedScene" uid="uid://d0ff35cm57xb7" path="res://Scene Objects/Effects/DroppedFragment.tscn" id="2_gdxu6"]
@@ -20,14 +20,15 @@
 [ext_resource type="PackedScene" uid="uid://d1eef1xjuwf3b" path="res://Scene Objects/Misc/PauseMenu.tscn" id="17_5ns53"]
 [ext_resource type="PackedScene" uid="uid://b5wwivjk8sl7b" path="res://Scene Objects/Misc/ClearTimer.tscn" id="17_21jxy"]
 [ext_resource type="PackedScene" uid="uid://buykytsdrlnsg" path="res://Scene Objects/Misc/ResultsScreen.tscn" id="18_wudxn"]
+[ext_resource type="AudioStream" uid="uid://u3a1srjlcm6f" path="res://Music/Kubbi - Up In My Jam (All Of A Sudden).wav" id="21_4frsm"]
+[ext_resource type="PackedScene" uid="uid://btq4qla5fyq0n" path="res://Scene Objects/Misc/LevelMusicPlayer.tscn" id="21_sl55a"]
 
-[node name="CH1_LV1" type="Node2D" node_paths=PackedStringArray("player_reference", "starting_room", "room_list", "ui_container")]
+[node name="CH1_LV1" type="Node2D" node_paths=PackedStringArray("player_reference", "starting_room", "room_list")]
 script = ExtResource("1_3mmw4")
 player_reference = NodePath("Player")
 starting_room = NodePath("CH1_LV1_R1")
 room_list = [NodePath("CH1_LV1_R1"), NodePath("CH1_LV1_R2"), NodePath("CH1_LV1_R3"), NodePath("CH1_LV1_R4"), NodePath("CH1_LV1_R5"), NodePath("CH1_LV1_R6"), NodePath("CH1_LV1_R7"), NodePath("CH1_LV1_R8"), NodePath("CH1_LV1_R9"), NodePath("CH1_LV1_R10"), NodePath("CH1_LV1_R11")]
 min_fragment_collection_rate = 0.64
-ui_container = NodePath("VBoxContainer")
 dropped_fragment_scene = ExtResource("2_gdxu6")
 
 [node name="Player" parent="." instance=ExtResource("2_isfe7")]
@@ -165,41 +166,39 @@ room_destination = NodePath("../../CH1_LV1_R11")
 [node name="CH1_LV1_R11" parent="." instance=ExtResource("14_daiil")]
 position = Vector2(1312, 640)
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+[node name="UI_Canvas" type="CanvasLayer" parent="."]
 
-[node name="TemperMeterUI" parent="VBoxContainer" node_paths=PackedStringArray("player_node") instance=ExtResource("3_bvq0l")]
+[node name="TemperMeterUI" parent="UI_Canvas" node_paths=PackedStringArray("player_node") instance=ExtResource("3_bvq0l")]
 position = Vector2(1, 8)
 player_node = NodePath("../../Player")
-process_callback = "Idle"
-camera_offset = Vector2(-255, -152)
 
-[node name="FragmentCounterUI" parent="VBoxContainer" node_paths=PackedStringArray("player_node", "level_ref") instance=ExtResource("4_svt6n")]
+[node name="FragmentCounterUI" parent="UI_Canvas" node_paths=PackedStringArray("player_node", "level_ref") instance=ExtResource("4_svt6n")]
 position = Vector2(512, 0)
 player_node = NodePath("../../Player")
 level_ref = NodePath("../..")
-camera_offset = Vector2(257, -160)
+
+[node name="PauseMenu" parent="UI_Canvas" node_paths=PackedStringArray("screen_fade") instance=ExtResource("17_5ns53")]
+screen_fade = NodePath("../ScreenFade")
+
+[node name="ResultsScreen" parent="UI_Canvas" node_paths=PackedStringArray("screen_fade", "level", "clear_timer") instance=ExtResource("18_wudxn")]
+screen_fade = NodePath("../ScreenFade")
+level = NodePath("../..")
+clear_timer = NodePath("../../ClearTimer")
+
+[node name="ScreenFade" parent="UI_Canvas" instance=ExtResource("16_gb8bt")]
+starting_fade_duration = 1.0
+
+[node name="LevelMusicPlayer" parent="." instance=ExtResource("21_sl55a")]
+stream = ExtResource("21_4frsm")
 
 [node name="ClearTimer" parent="." instance=ExtResource("17_21jxy")]
 
-[node name="PauseMenu" parent="." node_paths=PackedStringArray("screen_fade") instance=ExtResource("17_5ns53")]
-screen_fade = NodePath("../ScreenFade")
-
-[node name="ResultsScreen" parent="." node_paths=PackedStringArray("screen_fade", "level", "clear_timer") instance=ExtResource("18_wudxn")]
-screen_fade = NodePath("../ScreenFade")
-level = NodePath("..")
-clear_timer = NodePath("../ClearTimer")
-
-[node name="ScreenFade" parent="." instance=ExtResource("16_gb8bt")]
-starting_fade_duration = 1.0
-
 [connection signal="level_finished" from="CH1_LV1_R11/FinishLine" to="." method="level_finish"]
+[connection signal="level_finished" from="CH1_LV1_R11/FinishLine" to="UI_Canvas/TemperMeterUI" method="hide"]
+[connection signal="level_finished" from="CH1_LV1_R11/FinishLine" to="UI_Canvas/FragmentCounterUI" method="hide"]
+[connection signal="level_finished" from="CH1_LV1_R11/FinishLine" to="UI_Canvas/ResultsScreen" method="on_level_complete"]
+[connection signal="level_finished" from="CH1_LV1_R11/FinishLine" to="LevelMusicPlayer" method="fade_out"]
 [connection signal="level_finished" from="CH1_LV1_R11/FinishLine" to="ClearTimer" method="stop_timer"]
-[connection signal="level_finished" from="CH1_LV1_R11/FinishLine" to="ResultsScreen" method="on_level_complete"]
 
 [editable path="Player"]
 [editable path="CH1_LV1_R1"]

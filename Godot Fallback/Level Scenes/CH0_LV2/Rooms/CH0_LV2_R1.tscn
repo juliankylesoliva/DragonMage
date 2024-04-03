@@ -1,13 +1,17 @@
-[gd_scene load_steps=6 format=3 uid="uid://dw3wsldpopyl0"]
+[gd_scene load_steps=9 format=3 uid="uid://dw3wsldpopyl0"]
 
 [ext_resource type="Script" path="res://Scripts/Utility Scripts/Room.gd" id="1_ikux7"]
 [ext_resource type="TileSet" uid="uid://dhwi7i1loa2pd" path="res://Sprites/Tiles/Test Tiles/TestTileSet.tres" id="2_exnxq"]
 [ext_resource type="PackedScene" uid="uid://dqbo0wu6hm8lj" path="res://Scene Objects/Objects/WarpTrigger.tscn" id="3_0wu0d"]
 [ext_resource type="PackedScene" uid="uid://cw6gype8pgf7a" path="res://Scene Objects/Characters/KnigelNPC.tscn" id="4_tiytc"]
 [ext_resource type="PackedScene" uid="uid://cp3kaarqt7vdo" path="res://Scene Objects/Objects/HintBubble.tscn" id="5_dnkxd"]
+[ext_resource type="Texture2D" uid="uid://bvv2k3ewneasg" path="res://Sprites/Backgrounds/0_2_BG/Stars.png" id="6_qmo67"]
+[ext_resource type="Texture2D" uid="uid://0uuhxw1dnvqw" path="res://Sprites/Backgrounds/0_2_BG/MountainsBack.png" id="7_5ec5b"]
+[ext_resource type="Texture2D" uid="uid://cqdxwg0yhese4" path="res://Sprites/Backgrounds/0_2_BG/MountainsFront.png" id="8_mw40m"]
 
-[node name="CH0_LV2_R1" type="Node2D" node_paths=PackedStringArray("tilemap_list", "room_entrances")]
+[node name="CH0_LV2_R1" type="Node2D" node_paths=PackedStringArray("parallax_bg", "tilemap_list", "room_entrances")]
 script = ExtResource("1_ikux7")
+parallax_bg = NodePath("ParallaxBackground")
 tilemap_list = [NodePath("BoundaryCollisionTilemap"), NodePath("LevelCollisionTilemap")]
 right_camera_limit = 1056
 room_entrances = [NodePath("Entrance 0"), NodePath("Entrance 1")]
@@ -73,3 +77,39 @@ textbox_strings = Array[String](["Knigel: Alright, Drae. Let's go over some of t
 [node name="HintBubble2" parent="." instance=ExtResource("5_dnkxd")]
 position = Vector2(896, 232)
 textbox_strings = Array[String](["Knigel: Now use your winged jumps to get up to that ledge! You seem to only have the energy to do four of those before landing, so be sure to space them out for maximum height!"])
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+visible = false
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2(0.01, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
+texture_repeat = 2
+texture = ExtResource("6_qmo67")
+centered = false
+offset = Vector2(-512, 0)
+region_enabled = true
+region_rect = Rect2(0, 0, 1568, 320)
+
+[node name="ParallaxLayer2" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2(0.02, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer2"]
+texture_repeat = 2
+texture = ExtResource("7_5ec5b")
+centered = false
+offset = Vector2(-512, 0)
+region_enabled = true
+region_rect = Rect2(0, 0, 1568, 320)
+
+[node name="ParallaxLayer3" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2(0.04, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer3"]
+texture_repeat = 2
+texture = ExtResource("8_mw40m")
+centered = false
+offset = Vector2(-512, 0)
+region_enabled = true
+region_rect = Rect2(0, 0, 1568, 320)

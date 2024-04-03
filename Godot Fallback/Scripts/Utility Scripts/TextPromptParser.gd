@@ -6,11 +6,9 @@ enum ControlMode
 	GAMEPAD
 }
 
-const EVENT_TO_INPUT_PROMPT_PATH : String = "res://Sprites/UI/ButtonIcons/event_to_input_prompt.txt"
-
 const IMAGE_STRING_FORMAT : String = "[img=16x16]%s[/img]"
 
-var event_to_input_prompt_dictionary : Dictionary
+@export var event_to_input_prompt_dictionary : Dictionary
 
 var current_control_mode : ControlMode = ControlMode.KEYBOARD
 
@@ -30,10 +28,11 @@ func _input(event):
 		pass
 
 func event_to_prompt_init():
-	var file : FileAccess = FileAccess.open(EVENT_TO_INPUT_PROMPT_PATH, FileAccess.READ)
-	while (file.get_position() < file.get_length()):
-		var csv_line : PackedStringArray = file.get_csv_line("|")
-		event_to_input_prompt_dictionary[csv_line[0]] = csv_line[1]
+	#var file : FileAccess = FileAccess.open(EVENT_TO_INPUT_PROMPT_PATH, FileAccess.READ)
+	#while (file.get_position() < file.get_length()):
+	#	var csv_line : PackedStringArray = file.get_csv_line("|")
+	#	event_to_input_prompt_dictionary[csv_line[0]] = csv_line[1]
+	pass
 
 func parse_text(raw_text : String):
 	var result_text : String = raw_text

@@ -1,15 +1,17 @@
-[gd_scene load_steps=6 format=3 uid="uid://drbl7ccxv7sa0"]
+[gd_scene load_steps=7 format=3 uid="uid://drbl7ccxv7sa0"]
 
 [ext_resource type="Script" path="res://Scripts/Utility Scripts/Room.gd" id="1_cvffg"]
 [ext_resource type="TileSet" uid="uid://dhwi7i1loa2pd" path="res://Sprites/Tiles/Test Tiles/TestTileSet.tres" id="2_3gy77"]
 [ext_resource type="PackedScene" uid="uid://dqbo0wu6hm8lj" path="res://Scene Objects/Objects/WarpTrigger.tscn" id="3_rxdjf"]
 [ext_resource type="PackedScene" uid="uid://dfkmxoba64spw" path="res://Scene Objects/Objects/MedalFragment.tscn" id="4_v6ukr"]
+[ext_resource type="Texture2D" uid="uid://3q4m4jsumo45" path="res://Sprites/Backgrounds/1_1_BG/Sky.png" id="5_anmyq"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_w6n03"]
 size = Vector2(512, 32)
 
-[node name="CH1_LV1_R10" type="Node2D" node_paths=PackedStringArray("tilemap_list", "room_entrances", "medal_fragments")]
+[node name="CH1_LV1_R10" type="Node2D" node_paths=PackedStringArray("parallax_bg", "tilemap_list", "room_entrances", "medal_fragments")]
 script = ExtResource("1_cvffg")
+parallax_bg = NodePath("ParallaxBackground")
 tilemap_list = [NodePath("BoundaryCollisionTilemap"), NodePath("LevelCollisionTilemap")]
 bottom_camera_limit = 1216
 room_entrances = [NodePath("Entrance 0")]
@@ -139,5 +141,18 @@ position = Vector2(240, 1200)
 
 [node name="MedalFragment24" parent="Medal Fragments" instance=ExtResource("4_v6ukr")]
 position = Vector2(272, 1200)
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+visible = false
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2(0.01, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
+texture_repeat = 2
+texture = ExtResource("5_anmyq")
+centered = false
+region_enabled = true
+region_rect = Rect2(0, 0, 512, 320)
 
 [editable path="Warp 0"]

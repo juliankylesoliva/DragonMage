@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://b0wpmmqthstws"]
+[gd_scene load_steps=14 format=3 uid="uid://b0wpmmqthstws"]
 
 [ext_resource type="Script" path="res://Scripts/Utility Scripts/Room.gd" id="1_3d07d"]
 [ext_resource type="TileSet" uid="uid://dhwi7i1loa2pd" path="res://Sprites/Tiles/Test Tiles/TestTileSet.tres" id="2_tphx2"]
@@ -8,9 +8,15 @@
 [ext_resource type="PackedScene" uid="uid://clfqwsy4byrkf" path="res://Scene Objects/Enemies/GreenDragoon.tscn" id="6_gq8ab"]
 [ext_resource type="PackedScene" uid="uid://dwnpgujive352" path="res://Scene Objects/Enemies/RedDragoon.tscn" id="7_bnewy"]
 [ext_resource type="PackedScene" uid="uid://dfkmxoba64spw" path="res://Scene Objects/Objects/MedalFragment.tscn" id="8_yd6tm"]
+[ext_resource type="Texture2D" uid="uid://3q4m4jsumo45" path="res://Sprites/Backgrounds/1_1_BG/Sky.png" id="9_37cq2"]
+[ext_resource type="Texture2D" uid="uid://b58coqp1miryx" path="res://Sprites/Backgrounds/1_1_BG/CityFront.png" id="10_inbuk"]
+[ext_resource type="Texture2D" uid="uid://i8aas1iwgonq" path="res://Sprites/Backgrounds/1_1_BG/CityEdge.png" id="11_j11ff"]
+[ext_resource type="Texture2D" uid="uid://c0sqls5mvywg6" path="res://Sprites/Backgrounds/1_1_BG/WaterBack.png" id="12_r4mfp"]
+[ext_resource type="Texture2D" uid="uid://btitmfjswpf6e" path="res://Sprites/Backgrounds/1_1_BG/WaterFront.png" id="13_f5ehd"]
 
-[node name="CH1_LV1_R3" type="Node2D" node_paths=PackedStringArray("tilemap_list", "room_entrances", "enemy_nodes", "medal_fragments")]
+[node name="CH1_LV1_R3" type="Node2D" node_paths=PackedStringArray("parallax_bg", "tilemap_list", "room_entrances", "enemy_nodes", "medal_fragments")]
 script = ExtResource("1_3d07d")
+parallax_bg = NodePath("ParallaxBackground")
 tilemap_list = [NodePath("BoundaryCollisionTilemap"), NodePath("LevelCollisionTilemap")]
 room_entrances = [NodePath("Entrance 0"), NodePath("Entrance 1")]
 enemy_nodes = [NodePath("GreenDragoon"), NodePath("RedDragoon")]
@@ -126,7 +132,7 @@ tile_set = ExtResource("2_tphx2")
 cell_quadrant_size = 32
 format = 2
 layer_0/name = "Hidden"
-layer_0/z_index = 3
+layer_0/z_index = 6
 layer_0/tile_data = PackedInt32Array(196612, 11, 2, 131076, 11, 1, 65543, 262155, 5, 131079, 65547, 1, 131084, 131083, 1, 131083, 131083, 1, 131082, 131083, 1, 131081, 131083, 1, 131080, 131083, 1, 65544, 131083, 1, 65545, 131083, 1, 65546, 131083, 1, 65547, 131083, 1, 65548, 131083, 1, 65549, 131083, 1, 10, 131083, 1, 9, 131083, 1, 8, 131083, 1, 7, 131083, 1, 196615, 65547, 1, 196616, 196619, 5, 196617, 131083, 2, 196618, 131083, 2, 196619, 131083, 2, 196620, 131083, 2, 13, 131083, 1, 12, 131083, 1, 11, 131083, 1, 131086, 131083, 1, 131085, 131083, 1, 196621, 131083, 2, 196622, 131083, 2, 196623, 131083, 2, 131087, 131083, 1, 65551, 131083, 1, 15, 131083, 1, 14, 131083, 1, 65550, 131083, 1, 65541, 131083, 2, 5, 131083, 1, 6, 131083, 1, 65542, 131083, 2, 65540, 524299, 2, 4, 262155, 5)
 script = ExtResource("3_bclwk")
 
@@ -136,6 +142,59 @@ collision_mask = 4
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="HiddenTilemap/Area2D"]
 polygon = PackedVector2Array(160, 0, 416, 0, 416, 64, 480, 64, 480, 128, 416, 128, 416, 96, 224, 96, 224, 128, 160, 128)
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+visible = false
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2(0.01, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
+texture_repeat = 2
+texture = ExtResource("9_37cq2")
+centered = false
+region_enabled = true
+region_rect = Rect2(0, 0, 512, 320)
+
+[node name="ParallaxLayer2" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2(0.04, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer2"]
+texture_repeat = 2
+texture = ExtResource("10_inbuk")
+centered = false
+region_enabled = true
+region_rect = Rect2(0, 0, 512, 320)
+
+[node name="ParallaxLayer3" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2(0.05, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer3"]
+texture_repeat = 2
+texture = ExtResource("11_j11ff")
+centered = false
+region_enabled = true
+region_rect = Rect2(0, 0, 512, 320)
+
+[node name="ParallaxLayer4" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2(0.06, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer4"]
+texture_repeat = 2
+texture = ExtResource("12_r4mfp")
+centered = false
+region_enabled = true
+region_rect = Rect2(0, 0, 512, 320)
+
+[node name="ParallaxLayer5" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2(0.12, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer5"]
+texture_repeat = 2
+texture = ExtResource("13_f5ehd")
+centered = false
+region_enabled = true
+region_rect = Rect2(0, 0, 512, 320)
 
 [connection signal="body_entered" from="HiddenTilemap/Area2D" to="HiddenTilemap" method="_on_rigid_body_2d_body_entered"]
 [connection signal="body_exited" from="HiddenTilemap/Area2D" to="HiddenTilemap" method="_on_rigid_body_2d_body_exited"]

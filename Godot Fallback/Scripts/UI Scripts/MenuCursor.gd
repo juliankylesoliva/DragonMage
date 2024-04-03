@@ -6,9 +6,9 @@ class_name MenuCursor
 
 @export var right_cursor : AnimatedSprite2D
 
-@export var magic_sfx : AudioStreamPlayer2D
+@export var magic_sfx : AudioStreamPlayer
 
-@export var dragon_sfx : AudioStreamPlayer2D
+@export var dragon_sfx : AudioStreamPlayer
 
 @export var magic_move_sfx_stream : AudioStream
 

@@ -17,99 +17,6 @@ tilemap_list = [NodePath("BoundaryCollisionTilemap"), NodePath("LevelCollisionTi
 right_camera_limit = 1600
 room_entrances = [NodePath("Entrance 0"), NodePath("Entrance 1")]
 
-[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
-follow_viewport_enabled = true
-scroll_ignore_camera_zoom = true
-
-[node name="ParallaxLayer5" type="ParallaxLayer" parent="ParallaxBackground"]
-z_index = -2
-motion_scale = Vector2(0.05, 0.05)
-
-[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer5"]
-modulate = Color(0.0898438, 0.609375, 0.488281, 1)
-texture_repeat = 2
-position = Vector2(0, 192)
-texture = ExtResource("4_obmfv")
-centered = false
-region_enabled = true
-region_rect = Rect2(0, 0, 2048, 288)
-
-[node name="ParallaxLayer6" type="ParallaxLayer" parent="ParallaxBackground"]
-z_index = -3
-motion_scale = Vector2(0.05, 0.05)
-
-[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer6"]
-modulate = Color(0.0705882, 0.470588, 0.376471, 1)
-texture_repeat = 2
-position = Vector2(0, 128)
-texture = ExtResource("4_obmfv")
-centered = false
-region_enabled = true
-region_rect = Rect2(0, 0, 2048, 288)
-
-[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
-z_index = -2
-motion_scale = Vector2(0.05, 0.05)
-
-[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
-modulate = Color(0.476563, 0.0820313, 0.167969, 1)
-texture_repeat = 2
-position = Vector2(0, -64)
-texture = ExtResource("4_yli20")
-centered = false
-region_enabled = true
-region_rect = Rect2(0, 0, 2048, 288)
-
-[node name="ParallaxLayer3" type="ParallaxLayer" parent="ParallaxBackground"]
-z_index = -1
-motion_scale = Vector2(0.05, 0.05)
-
-[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer3"]
-texture_repeat = 2
-position = Vector2(0, -256)
-texture = ExtResource("5_14rpx")
-centered = false
-region_enabled = true
-region_rect = Rect2(0, 0, 2048, 288)
-
-[node name="ParallaxLayer4" type="ParallaxLayer" parent="ParallaxBackground"]
-z_index = -4
-motion_scale = Vector2(0.025, 0.025)
-
-[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer4"]
-texture_repeat = 2
-position = Vector2(-32, -256)
-texture = ExtResource("5_n6g4m")
-centered = false
-region_enabled = true
-region_rect = Rect2(0, 0, 2048, 320)
-
-[node name="ParallaxLayer2" type="ParallaxLayer" parent="ParallaxBackground"]
-z_index = -3
-motion_scale = Vector2(0.025, 0.025)
-
-[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer2"]
-modulate = Color(0.360784, 0.0235294, 0.168627, 1)
-texture_repeat = 2
-position = Vector2(-32, -112)
-texture = ExtResource("4_yli20")
-centered = false
-region_enabled = true
-region_rect = Rect2(0, 0, 2048, 288)
-
-[node name="ParallaxLayer7" type="ParallaxLayer" parent="ParallaxBackground"]
-z_index = -5
-texture_repeat = 2
-motion_scale = Vector2(0.025, 0.025)
-
-[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer7"]
-texture_repeat = 2
-position = Vector2(-32, -128)
-texture = ExtResource("8_8br3k")
-centered = false
-region_enabled = true
-region_rect = Rect2(0, 0, 2048, 288)
-
 [node name="BoundaryCollisionTilemap" type="TileMap" parent="."]
 z_index = 4
 tile_set = ExtResource("2_ba7rg")
@@ -176,3 +83,78 @@ textbox_strings = Array[String](["[center]~ Gliding ~
 position = Vector2(1440, 232)
 textbox_strings = Array[String](["[center]~ Wallkick ~
 \"Jump against a wall to start sliding down it, then press [Jump] to kick off of it.\"", "Magli: Hmm... I'm still deciding whether to call it a wallJUMP or a wallKICK..."])
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+visible = false
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2(0.01, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
+texture_repeat = 2
+texture = ExtResource("8_8br3k")
+centered = false
+offset = Vector2(-512, 0)
+region_enabled = true
+region_rect = Rect2(0, 0, 2112, 320)
+
+[node name="ParallaxLayer2" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2(0.02, 0)
+
+[node name="Sprite2D2" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer2"]
+modulate = Color(0.0235294, 0.439216, 0.439216, 1)
+texture_repeat = 2
+texture = ExtResource("4_obmfv")
+centered = false
+offset = Vector2(-512, 144)
+region_enabled = true
+region_rect = Rect2(0, 0, 2112, 288)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer2"]
+modulate = Color(0.388235, 0.0470588, 0.176471, 1)
+texture_repeat = 2
+texture = ExtResource("4_yli20")
+centered = false
+offset = Vector2(-512, -112)
+region_enabled = true
+region_rect = Rect2(0, 0, 2112, 288)
+
+[node name="ParallaxLayer3" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2(0.03, 0)
+
+[node name="Sprite2D2" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer3"]
+modulate = Color(0.0470588, 0.521569, 0.458824, 1)
+texture_repeat = 2
+texture = ExtResource("4_obmfv")
+centered = false
+offset = Vector2(-512, 192)
+region_enabled = true
+region_rect = Rect2(0, 0, 2112, 288)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer3"]
+modulate = Color(0.521569, 0.223529, 0.0980392, 1)
+texture_repeat = 2
+texture = ExtResource("4_yli20")
+centered = false
+offset = Vector2(-512, -64)
+region_enabled = true
+region_rect = Rect2(32, 0, 2112, 288)
+
+[node name="ParallaxLayer4" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2(0.04, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer4"]
+texture_repeat = 2
+texture = ExtResource("5_n6g4m")
+centered = false
+offset = Vector2(-512, 0)
+region_enabled = true
+region_rect = Rect2(0, 0, 2112, 64)
+
+[node name="Sprite2D2" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer4"]
+texture_repeat = 2
+texture = ExtResource("5_14rpx")
+centered = false
+offset = Vector2(-512, 0)
+region_enabled = true
+region_rect = Rect2(0, 0, 2112, 32)

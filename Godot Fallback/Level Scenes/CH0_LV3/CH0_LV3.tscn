@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://bee26tq601smv"]
+[gd_scene load_steps=25 format=3 uid="uid://bee26tq601smv"]
 
 [ext_resource type="Script" path="res://Scripts/Utility Scripts/Level.gd" id="1_2pe2a"]
 [ext_resource type="PackedScene" uid="uid://c6qw77ovfwgfs" path="res://Player.tscn" id="2_oq6xx"]
@@ -22,6 +22,8 @@
 [ext_resource type="PackedScene" uid="uid://d1eef1xjuwf3b" path="res://Scene Objects/Misc/PauseMenu.tscn" id="18_krh2f"]
 [ext_resource type="PackedScene" uid="uid://brhoroc2w6jwi" path="res://Scene Objects/UI/Textbox.tscn" id="19_3e3bj"]
 [ext_resource type="PackedScene" uid="uid://buykytsdrlnsg" path="res://Scene Objects/Misc/ResultsScreen.tscn" id="19_d5div"]
+[ext_resource type="PackedScene" uid="uid://btq4qla5fyq0n" path="res://Scene Objects/Misc/LevelMusicPlayer.tscn" id="23_c6dlv"]
+[ext_resource type="AudioStream" uid="uid://bs4yog04kmdd6" path="res://Music/Eight_Bit_Dungeon_Monster_Stomp.wav" id="24_ar4bd"]
 
 [node name="CH0_LV3" type="Node2D" node_paths=PackedStringArray("player_reference", "starting_room", "room_list")]
 script = ExtResource("1_2pe2a")
@@ -193,27 +195,33 @@ room_entrance_index = 1
 [node name="HintBubble" parent="CH0_LV3_R14" index="4" node_paths=PackedStringArray("textbox")]
 textbox = NodePath("../../Textbox")
 
+[node name="UI_Canvas" type="CanvasLayer" parent="."]
+
+[node name="PauseMenu" parent="UI_Canvas" node_paths=PackedStringArray("screen_fade") instance=ExtResource("18_krh2f")]
+screen_fade = NodePath("../ScreenFade")
+
+[node name="ResultsScreen" parent="UI_Canvas" node_paths=PackedStringArray("screen_fade", "level", "clear_timer") instance=ExtResource("19_d5div")]
+screen_fade = NodePath("../ScreenFade")
+level = NodePath("../..")
+clear_timer = NodePath("../../ClearTimer")
+show_damage_result = false
+show_fragment_result = false
+
+[node name="ScreenFade" parent="UI_Canvas" instance=ExtResource("17_3vcxg")]
+starting_fade_duration = 1.0
+
 [node name="ClearTimer" parent="." instance=ExtResource("18_el865")]
 
 [node name="Textbox" parent="." instance=ExtResource("19_3e3bj")]
 accept_input_events = false
 
-[node name="PauseMenu" parent="." node_paths=PackedStringArray("screen_fade") instance=ExtResource("18_krh2f")]
-screen_fade = NodePath("../ScreenFade")
-
-[node name="ResultsScreen" parent="." node_paths=PackedStringArray("screen_fade", "level", "clear_timer") instance=ExtResource("19_d5div")]
-screen_fade = NodePath("../ScreenFade")
-level = NodePath("..")
-clear_timer = NodePath("../ClearTimer")
-show_damage_result = false
-show_fragment_result = false
-
-[node name="ScreenFade" parent="." instance=ExtResource("17_3vcxg")]
-starting_fade_duration = 1.0
+[node name="LevelMusicPlayer" parent="." instance=ExtResource("23_c6dlv")]
+stream = ExtResource("24_ar4bd")
 
 [connection signal="level_finished" from="CH0_LV3_R14/FinishLine" to="." method="level_finish"]
+[connection signal="level_finished" from="CH0_LV3_R14/FinishLine" to="UI_Canvas/ResultsScreen" method="on_level_complete"]
 [connection signal="level_finished" from="CH0_LV3_R14/FinishLine" to="ClearTimer" method="stop_timer"]
-[connection signal="level_finished" from="CH0_LV3_R14/FinishLine" to="ResultsScreen" method="on_level_complete"]
+[connection signal="level_finished" from="CH0_LV3_R14/FinishLine" to="LevelMusicPlayer" method="fade_out"]
 
 [editable path="Player"]
 [editable path="CH0_LV3_R1"]

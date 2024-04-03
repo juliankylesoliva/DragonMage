@@ -1,15 +1,19 @@
-[gd_scene load_steps=6 format=3 uid="uid://wqx3tn0p622r"]
+[gd_scene load_steps=9 format=3 uid="uid://wqx3tn0p622r"]
 
 [ext_resource type="Script" path="res://Scripts/Utility Scripts/Room.gd" id="1_6ptud"]
 [ext_resource type="TileSet" uid="uid://dhwi7i1loa2pd" path="res://Sprites/Tiles/Test Tiles/TestTileSet.tres" id="2_ginko"]
 [ext_resource type="PackedScene" uid="uid://dqbo0wu6hm8lj" path="res://Scene Objects/Objects/WarpTrigger.tscn" id="3_fm3fr"]
 [ext_resource type="PackedScene" uid="uid://cw6gype8pgf7a" path="res://Scene Objects/Characters/KnigelNPC.tscn" id="4_efqdm"]
+[ext_resource type="Texture2D" uid="uid://bvv2k3ewneasg" path="res://Sprites/Backgrounds/0_2_BG/Stars.png" id="5_onhog"]
+[ext_resource type="Texture2D" uid="uid://0uuhxw1dnvqw" path="res://Sprites/Backgrounds/0_2_BG/MountainsBack.png" id="6_r1ii5"]
+[ext_resource type="Texture2D" uid="uid://cqdxwg0yhese4" path="res://Sprites/Backgrounds/0_2_BG/MountainsFront.png" id="7_82435"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_h1u86"]
 size = Vector2(1408, 32)
 
-[node name="CH0_LV2_R3" type="Node2D" node_paths=PackedStringArray("tilemap_list", "room_entrances")]
+[node name="CH0_LV2_R3" type="Node2D" node_paths=PackedStringArray("parallax_bg", "tilemap_list", "room_entrances")]
 script = ExtResource("1_6ptud")
+parallax_bg = NodePath("ParallaxBackground")
 tilemap_list = [NodePath("BoundaryCollisionTilemap"), NodePath("LevelCollisionTilemap")]
 right_camera_limit = 1920
 room_entrances = [NodePath("Entrance 0"), NodePath("Entrance 1"), NodePath("FallReentry")]
@@ -85,5 +89,41 @@ shape = SubResource("RectangleShape2D_h1u86")
 [node name="KnigelNPC" parent="." instance=ExtResource("4_efqdm")]
 position = Vector2(320, 224)
 textbox_strings = Array[String](["Knigel: I hope your wings aren't sore because it's time for long distance flying! Use your winged jumps while moving forward to increase your speed! Remember to space them out! If you need to catch your breath, there's a small wall up ahead that you can climb up and vault over to refresh your winged jumps while preserving the speed you need to get across."])
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+visible = false
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2(0.01, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
+texture_repeat = 2
+texture = ExtResource("5_onhog")
+centered = false
+offset = Vector2(-512, 0)
+region_enabled = true
+region_rect = Rect2(0, 0, 2432, 320)
+
+[node name="ParallaxLayer2" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2(0.02, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer2"]
+texture_repeat = 2
+texture = ExtResource("6_r1ii5")
+centered = false
+offset = Vector2(-512, 0)
+region_enabled = true
+region_rect = Rect2(0, 0, 2432, 320)
+
+[node name="ParallaxLayer3" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2(0.04, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer3"]
+texture_repeat = 2
+texture = ExtResource("7_82435")
+centered = false
+offset = Vector2(-512, 0)
+region_enabled = true
+region_rect = Rect2(0, 0, 2432, 320)
 
 [editable path="FallWarp"]

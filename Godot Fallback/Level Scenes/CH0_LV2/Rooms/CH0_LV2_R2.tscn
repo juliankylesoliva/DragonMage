@@ -1,12 +1,16 @@
-[gd_scene load_steps=5 format=3 uid="uid://ct51kuu2jp0o4"]
+[gd_scene load_steps=8 format=3 uid="uid://ct51kuu2jp0o4"]
 
 [ext_resource type="Script" path="res://Scripts/Utility Scripts/Room.gd" id="1_ikux7"]
 [ext_resource type="TileSet" uid="uid://dhwi7i1loa2pd" path="res://Sprites/Tiles/Test Tiles/TestTileSet.tres" id="2_exnxq"]
 [ext_resource type="PackedScene" uid="uid://dqbo0wu6hm8lj" path="res://Scene Objects/Objects/WarpTrigger.tscn" id="3_jikma"]
 [ext_resource type="PackedScene" uid="uid://cw6gype8pgf7a" path="res://Scene Objects/Characters/KnigelNPC.tscn" id="4_qctdh"]
+[ext_resource type="Texture2D" uid="uid://bvv2k3ewneasg" path="res://Sprites/Backgrounds/0_2_BG/Stars.png" id="5_jbbex"]
+[ext_resource type="Texture2D" uid="uid://0uuhxw1dnvqw" path="res://Sprites/Backgrounds/0_2_BG/MountainsBack.png" id="6_xffmb"]
+[ext_resource type="Texture2D" uid="uid://cqdxwg0yhese4" path="res://Sprites/Backgrounds/0_2_BG/MountainsFront.png" id="7_ojb8j"]
 
-[node name="CH0_LV2_R2" type="Node2D" node_paths=PackedStringArray("tilemap_list", "room_entrances")]
+[node name="CH0_LV2_R2" type="Node2D" node_paths=PackedStringArray("parallax_bg", "tilemap_list", "room_entrances")]
 script = ExtResource("1_ikux7")
+parallax_bg = NodePath("ParallaxBackground")
 tilemap_list = [NodePath("BoundaryCollisionTilemap"), NodePath("LevelCollisionTilemap")]
 top_camera_limit = -288
 right_camera_limit = 1088
@@ -71,3 +75,39 @@ room_destination = NodePath("..")
 [node name="KnigelNPC" parent="." instance=ExtResource("4_qctdh")]
 position = Vector2(128, 224)
 textbox_strings = Array[String](["Knigel: Next, vault over these walls by climbing and then jumping forward as soon as you pop up at the top, but be careful! You lose speed as you climb, and you can't climb another wall until you land!", "Draelyn: I could also hold [Technical] to snap to the ledge and keep walking instead of popping up, right?", "Knigel: You could do that. Wait, hold what? Are you speaking in sigil notation again?", "Draelyn: Haha! Sorry, it's kind of a bad habit, I know...", "Knigel: Nothing wrong with that, Drae. Feel free to add anything to my explanations in your own unique way!"])
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+visible = false
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2(0.01, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
+texture_repeat = 2
+texture = ExtResource("5_jbbex")
+centered = false
+offset = Vector2(-512, 0)
+region_enabled = true
+region_rect = Rect2(0, 0, 1600, 320)
+
+[node name="ParallaxLayer2" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2(0.02, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer2"]
+texture_repeat = 2
+texture = ExtResource("6_xffmb")
+centered = false
+offset = Vector2(-512, 0)
+region_enabled = true
+region_rect = Rect2(0, 0, 1600, 320)
+
+[node name="ParallaxLayer3" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2(0.04, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer3"]
+texture_repeat = 2
+texture = ExtResource("7_ojb8j")
+centered = false
+offset = Vector2(-512, 0)
+region_enabled = true
+region_rect = Rect2(0, 0, 1600, 320)

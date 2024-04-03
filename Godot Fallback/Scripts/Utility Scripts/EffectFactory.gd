@@ -1,20 +1,21 @@
 extends Node
 
-var offset_dictonary : Dictionary
+@export var offset_dictonary : Dictionary
+
+@export var frames : SpriteFrames
 
 const frames_path : String = "res://SpriteEffects.tres"
 
 const effects_z_layer : int = 6
 
-var frames : SpriteFrames
-
 func _ready():
-	frames = load(frames_path)
-	var file : FileAccess = FileAccess.open("res://Scene Objects/Effects/sprite_effect_offsets.txt", FileAccess.READ)
-	while (file.get_position() < file.get_length()):
-		var csv_line : PackedStringArray = file.get_csv_line()
-		offset_dictonary[csv_line[0]] = Vector2(csv_line[1].to_float(), csv_line[2].to_float())
-	file.close()
+	#frames = load(frames_path)
+	#var file : FileAccess = FileAccess.open("res://Scene Objects/Effects/sprite_effect_offsets.txt", FileAccess.READ)
+	#while (file.get_position() < file.get_length()):
+	#	var csv_line : PackedStringArray = file.get_csv_line()
+	#	offset_dictonary[csv_line[0]] = Vector2(csv_line[1].to_float(), csv_line[2].to_float())
+	#file.close()
+	pass
 
 func get_effect(anim_name : String, position : Vector2, scale : float = 1, flip_h : bool = false):
 	var instance = AnimatedSprite2D.new()

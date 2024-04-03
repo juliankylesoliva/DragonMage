@@ -103,6 +103,7 @@ visibility_notifier = NodePath("../VisibleOnScreenNotifier2D")
 defeated_deactivation_camera_distance = 800.0
 vertical_launch_velocity_on_defeat = -128.0
 visibility_layer_on_defeat = 32
+z_index_on_defeat = 8
 
 [node name="Movement" type="Node" parent="Enemy" node_paths=PackedStringArray("enemy")]
 script = ExtResource("2_sot6e")

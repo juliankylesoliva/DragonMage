@@ -70,4 +70,4 @@ room_destination = NodePath("..")
 
 [node name="HintBubble" parent="." instance=ExtResource("4_sgpe1")]
 position = Vector2(80, 232)
-textbox_strings = Array[String](["Faeson: If you change while touching a wall, you can either gain some extra height with your wall climb, or you can wallkick with increased speed after climbing up to a high place."])
+textbox_strings = Array[String](["Faeson: If you change while holding onto a wall, you can either make up the extra height you need to reach a ledge with your wall climb, or you can wallkick with increased speed after climbing up to a high place."])

@@ -86,12 +86,12 @@ frame_progress = 0.301727
 offset = Vector2(16, 0)
 flip_h = true
 
-[node name="MagicSFX" type="AudioStreamPlayer2D" parent="."]
+[node name="MagicSFX" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("4_db8r8")
-volume_db = -2.0
+volume_db = -8.0
 bus = &"SFX"
 
-[node name="DragonSFX" type="AudioStreamPlayer2D" parent="."]
+[node name="DragonSFX" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("5_lupmt")
-volume_db = -2.0
+volume_db = -8.0
 bus = &"SFX"

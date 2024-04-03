@@ -213,6 +213,7 @@ animations = [{
 
 [node name="ResultsScreen" type="Node2D" node_paths=PackedStringArray("results_sfx", "blue_bg", "orange_bg", "text_header_label", "clear_time_label", "damage_taken_label", "fragment_ratio_label", "mage_fragments_label", "dragon_fragments_label", "fragment_slider_back", "mage_fragments_slider", "dragon_fragments_slider", "fragment_slider_front", "min_fragments_label", "medal_message_label", "medal_sprite", "retry_button_label", "menu_button_label", "menu_cursor")]
 process_mode = 4
+position = Vector2(256, 160)
 script = ExtResource("1_1edmg")
 results_sfx = NodePath("ResultsSFX")
 time_tick_sfx_stream = ExtResource("2_uuw7t")
@@ -247,8 +248,8 @@ menu_button_label = NodePath("ReturnToMenu")
 menu_cursor = NodePath("MenuCursor")
 title_scene_path = "res://Misc Scenes/TitleScreen.tscn"
 
-[node name="ResultsSFX" type="AudioStreamPlayer2D" parent="."]
-volume_db = -2.0
+[node name="ResultsSFX" type="AudioStreamPlayer" parent="."]
+volume_db = -8.0
 bus = &"SFX"
 
 [node name="BlueBG" type="Sprite2D" parent="."]

@@ -76,11 +76,11 @@ textbox_strings = Array[String](["Knigel: Final stretch, Drae! Give it everythin
 
 [node name="HintBubble" parent="." instance=ExtResource("5_ec42s")]
 position = Vector2(544, 232)
-textbox_strings = Array[String](["Draelyn: (Next, I can start a Fire Tackle while climbing a wall!)"])
+textbox_strings = Array[String](["Draelyn: (Next, I'll start a Fire Tackle while climbing this wall!)"])
 
 [node name="HintBubble2" parent="." instance=ExtResource("5_ec42s")]
 position = Vector2(800, 232)
-textbox_strings = Array[String](["Draelyn: (If I hold [Attack], I'll have time to change or even reverse the direction of my Fire Tackle before launching it by releasing [Attack]!)"])
+textbox_strings = Array[String](["Draelyn: (If I hold [Attack], I'll delay my Fire Tackle to change or even reverse the direction of my Fire Tackle before launching it by releasing [Attack]!)"])
 
 [node name="HintBubble3" parent="." instance=ExtResource("5_ec42s")]
 position = Vector2(800, -88)

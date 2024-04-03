@@ -11,6 +11,7 @@ visible = false
 light_mask = 64
 visibility_layer = 64
 z_index = 20
+position = Vector2(256, 160)
 script = ExtResource("1_iiemp")
 menu_cursor = NodePath("MenuCursor")
 selection_labels = [NodePath("RestartLabel"), NodePath("ExitLabel"), NodePath("QuitLabel")]

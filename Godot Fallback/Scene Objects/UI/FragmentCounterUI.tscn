@@ -1,11 +1,8 @@
-[gd_scene load_steps=14 format=3 uid="uid://vmiu4klr3ywc"]
+[gd_scene load_steps=13 format=3 uid="uid://vmiu4klr3ywc"]
 
 [ext_resource type="Script" path="res://Scripts/UI Scripts/FragmentCounterUI.gd" id="1_aybfr"]
 [ext_resource type="FontFile" uid="uid://blejgst41tdnl" path="res://PressStart2P.ttf" id="1_lq62u"]
 [ext_resource type="Texture2D" uid="uid://d0ujp4jm7f6yw" path="res://Sprites/Objects/MedalFragmentSpin.png" id="3_wxxja"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_ut3aj"]
-size = Vector2(170, 44)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_b8oni"]
 atlas = ExtResource("3_wxxja")
@@ -75,14 +72,6 @@ animations = [{
 script = ExtResource("1_aybfr")
 rich_text_label = NodePath("RichTextLabel")
 
-[node name="Area2D" type="Area2D" parent="."]
-collision_layer = 0
-collision_mask = 4
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2(-93, 30)
-shape = SubResource("RectangleShape2D_ut3aj")
-
 [node name="RichTextLabel" type="RichTextLabel" parent="."]
 light_mask = 64
 visibility_layer = 64
@@ -117,6 +106,3 @@ z_index = 7
 position = Vector2(-22, 31)
 sprite_frames = SubResource("SpriteFrames_6hjhl")
 autoplay = "default"
-
-[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
-[connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]
