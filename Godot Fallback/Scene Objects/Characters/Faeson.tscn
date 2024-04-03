@@ -1,7 +1,16 @@
-[gd_scene load_steps=6 format=3 uid="uid://dnhdan6vub1w"]
+[gd_scene load_steps=9 format=3 uid="uid://dnhdan6vub1w"]
 
 [ext_resource type="Texture2D" uid="uid://b71jbwr7ppc6p" path="res://Sprites/Characters/FaesonIdle.png" id="1_0uu6c"]
+[ext_resource type="Texture2D" uid="uid://c4w80vpvl0fc6" path="res://Sprites/Characters/FaesonGuard.png" id="1_r4cf1"]
 [ext_resource type="Script" path="res://Scripts/NPC Scripts/FairyFollow.gd" id="2_cr1nc"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2qx5i"]
+atlas = ExtResource("1_r4cf1")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7aina"]
+atlas = ExtResource("1_r4cf1")
+region = Rect2(32, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_nnscl"]
 atlas = ExtResource("1_0uu6c")
@@ -15,13 +24,24 @@ region = Rect2(32, 0, 32, 32)
 animations = [{
 "frames": [{
 "duration": 6.0,
+"texture": SubResource("AtlasTexture_2qx5i")
+}, {
+"duration": 6.0,
+"texture": SubResource("AtlasTexture_7aina")
+}],
+"loop": true,
+"name": &"FaesonGuard",
+"speed": 60.0
+}, {
+"frames": [{
+"duration": 6.0,
 "texture": SubResource("AtlasTexture_nnscl")
 }, {
 "duration": 6.0,
 "texture": SubResource("AtlasTexture_xcswx")
 }],
 "loop": true,
-"name": &"default",
+"name": &"FaesonIdle",
 "speed": 60.0
 }]
 
@@ -30,8 +50,9 @@ light_mask = 8
 visibility_layer = 8
 z_index = 4
 sprite_frames = SubResource("SpriteFrames_iw80g")
-autoplay = "default"
-frame_progress = 0.899822
+animation = &"FaesonGuard"
+autoplay = "FaesonIdle"
+frame_progress = 0.874999
 script = ExtResource("2_cr1nc")
 sprite = NodePath(".")
 min_theta_change_rate = 0.628

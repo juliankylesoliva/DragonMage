@@ -1,4 +1,4 @@
-[gd_scene load_steps=193 format=3 uid="uid://c6qw77ovfwgfs"]
+[gd_scene load_steps=195 format=3 uid="uid://c6qw77ovfwgfs"]
 
 [ext_resource type="Texture2D" uid="uid://d381ahbcwydy8" path="res://Sprites/Player/DraelynCrouch.png" id="1_6b42p"]
 [ext_resource type="Texture2D" uid="uid://dls34a1qa8iy1" path="res://Sprites/Player/DraelynFireTackle.png" id="1_ddrlj"]
@@ -147,6 +147,10 @@ region = Rect2(0, 0, 64, 64)
 [sub_resource type="AtlasTexture" id="AtlasTexture_wyl5m"]
 atlas = ExtResource("4_22c6w")
 region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_33ftq"]
+atlas = ExtResource("4_22c6w")
+region = Rect2(384, 0, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_7jrcn"]
 atlas = ExtResource("46_r2ngl")
@@ -331,6 +335,10 @@ region = Rect2(0, 0, 64, 64)
 [sub_resource type="AtlasTexture" id="AtlasTexture_n6tkc"]
 atlas = ExtResource("4_x7fww")
 region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_p8ait"]
+atlas = ExtResource("4_x7fww")
+region = Rect2(384, 0, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_mexpw"]
 atlas = ExtResource("53_c0t7y")
@@ -590,7 +598,7 @@ animations = [{
 "speed": 60.0
 }, {
 "frames": [{
-"duration": 12.0,
+"duration": 6.0,
 "texture": SubResource("AtlasTexture_0xy3v")
 }, {
 "duration": 12.0,
@@ -598,6 +606,14 @@ animations = [{
 }],
 "loop": false,
 "name": &"DraelynGuard",
+"speed": 60.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_33ftq")
+}],
+"loop": false,
+"name": &"DraelynGuardRelease",
 "speed": 60.0
 }, {
 "frames": [{
@@ -657,13 +673,13 @@ animations = [{
 "speed": 60.0
 }, {
 "frames": [{
-"duration": 6.0,
+"duration": 3.0,
 "texture": SubResource("AtlasTexture_so5js")
 }, {
-"duration": 6.0,
+"duration": 3.0,
 "texture": SubResource("AtlasTexture_5k30x")
 }, {
-"duration": 6.0,
+"duration": 3.0,
 "texture": SubResource("AtlasTexture_aumdf")
 }, {
 "duration": 12.0,
@@ -905,7 +921,7 @@ animations = [{
 "speed": 60.0
 }, {
 "frames": [{
-"duration": 12.0,
+"duration": 6.0,
 "texture": SubResource("AtlasTexture_6kou1")
 }, {
 "duration": 12.0,
@@ -913,6 +929,14 @@ animations = [{
 }],
 "loop": false,
 "name": &"MagliGuard",
+"speed": 60.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_p8ait")
+}],
+"loop": false,
+"name": &"MagliGuardRelease",
 "speed": 60.0
 }, {
 "frames": [{
@@ -967,13 +991,13 @@ animations = [{
 "speed": 60.0
 }, {
 "frames": [{
-"duration": 6.0,
+"duration": 3.0,
 "texture": SubResource("AtlasTexture_3fknw")
 }, {
-"duration": 6.0,
+"duration": 3.0,
 "texture": SubResource("AtlasTexture_0a7iv")
 }, {
-"duration": 6.0,
+"duration": 3.0,
 "texture": SubResource("AtlasTexture_tx6da")
 }, {
 "duration": 12.0,
