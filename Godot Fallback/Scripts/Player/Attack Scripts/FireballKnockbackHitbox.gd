@@ -29,5 +29,5 @@ func defeat_enemy(body):
 				return
 
 func destroy_enemy_projectile(body):
-	if (body is EnemyProjectile):
+	if (body is EnemyProjectile and !(body as EnemyProjectile).is_reflected):
 		(body as EnemyProjectile).destroy_projectile()

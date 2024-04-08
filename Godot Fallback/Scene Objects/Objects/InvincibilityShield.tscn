@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=3 uid="uid://pjw4cp1vl74t"]
+
+[ext_resource type="Texture2D" uid="uid://t3f4d4l0ven" path="res://Sprites/Effects/InvincibilityShield.png" id="1_q736e"]
+[ext_resource type="PackedScene" uid="uid://c2gtx8g0uvof2" path="res://Scene Objects/Hitboxes/InvincibilityShieldHitbox.tscn" id="2_e6h3h"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_u0n8c"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_q736e")
+}],
+"loop": true,
+"name": &"default",
+"speed": 60.0
+}]
+
+[node name="InvincibilityShield" type="AnimatedSprite2D"]
+modulate = Color(1, 1, 1, 0.5)
+light_mask = 32
+visibility_layer = 32
+z_index = 6
+sprite_frames = SubResource("SpriteFrames_u0n8c")
+
+[node name="InvincibilityShieldHitbox" parent="." instance=ExtResource("2_e6h3h")]

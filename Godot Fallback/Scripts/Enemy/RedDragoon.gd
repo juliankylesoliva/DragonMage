@@ -122,7 +122,11 @@ func on_touching_ledge():
 		movement.flip_movement()
 
 func on_player_collision():
-	if (!is_defeated and player_detection.damage_player()):
-		movement.face_away_from_player()
-		collision_detection.play_player_collision_sound()
-		collision_detection.spawn_player_collision_effect()
+	if (!is_defeated):
+		if (player_detection.damage_player()):
+			collision_detection.play_player_collision_sound()
+			collision_detection.spawn_player_collision_effect()
+		elif (player_detection.check_player_parry()):
+			defeat_enemy("PARRY")
+		else:
+			pass

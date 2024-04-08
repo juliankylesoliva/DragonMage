@@ -1,8 +1,10 @@
-[gd_scene load_steps=9 format=3 uid="uid://dnhdan6vub1w"]
+[gd_scene load_steps=14 format=3 uid="uid://dnhdan6vub1w"]
 
 [ext_resource type="Texture2D" uid="uid://b71jbwr7ppc6p" path="res://Sprites/Characters/FaesonIdle.png" id="1_0uu6c"]
 [ext_resource type="Texture2D" uid="uid://c4w80vpvl0fc6" path="res://Sprites/Characters/FaesonGuard.png" id="1_r4cf1"]
+[ext_resource type="Texture2D" uid="uid://b1vb3xyfgldk3" path="res://Sprites/Characters/FaesonGuardRelease.png" id="2_037xu"]
 [ext_resource type="Script" path="res://Scripts/NPC Scripts/FairyFollow.gd" id="2_cr1nc"]
+[ext_resource type="Texture2D" uid="uid://cx881pda25gm8" path="res://Sprites/Effects/GuardShield.png" id="5_81jti"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_2qx5i"]
 atlas = ExtResource("1_r4cf1")
@@ -10,6 +12,14 @@ region = Rect2(0, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_7aina"]
 atlas = ExtResource("1_r4cf1")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wy814"]
+atlas = ExtResource("2_037xu")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mqqkh"]
+atlas = ExtResource("2_037xu")
 region = Rect2(32, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_nnscl"]
@@ -35,6 +45,17 @@ animations = [{
 }, {
 "frames": [{
 "duration": 6.0,
+"texture": SubResource("AtlasTexture_wy814")
+}, {
+"duration": 6.0,
+"texture": SubResource("AtlasTexture_mqqkh")
+}],
+"loop": true,
+"name": &"FaesonGuardRelease",
+"speed": 60.0
+}, {
+"frames": [{
+"duration": 6.0,
 "texture": SubResource("AtlasTexture_nnscl")
 }, {
 "duration": 6.0,
@@ -45,16 +66,28 @@ animations = [{
 "speed": 60.0
 }]
 
-[node name="Faeson" type="AnimatedSprite2D" node_paths=PackedStringArray("sprite")]
+[sub_resource type="SpriteFrames" id="SpriteFrames_4hqcg"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_81jti")
+}],
+"loop": false,
+"name": &"Guard",
+"speed": 60.0
+}]
+
+[node name="Faeson" type="AnimatedSprite2D" node_paths=PackedStringArray("sprite", "sigil_sprite")]
 light_mask = 8
 visibility_layer = 8
 z_index = 4
 sprite_frames = SubResource("SpriteFrames_iw80g")
-animation = &"FaesonGuard"
+animation = &"FaesonIdle"
 autoplay = "FaesonIdle"
-frame_progress = 0.874999
+frame_progress = 0.555611
 script = ExtResource("2_cr1nc")
 sprite = NodePath(".")
+sigil_sprite = NodePath("AbilitySigil")
 min_theta_change_rate = 0.628
 max_theta_change_rate = 0.942
 min_sine_amplitude = 8.0
@@ -62,3 +95,12 @@ max_sine_amplitude = 16.0
 min_rotation_shift = -0.314
 max_rotation_shift = 0.314
 easing = 0.125
+
+[node name="AbilitySigil" type="AnimatedSprite2D" parent="."]
+visible = false
+modulate = Color(1, 1, 1, 0.5)
+light_mask = 32
+visibility_layer = 32
+z_index = 6
+sprite_frames = SubResource("SpriteFrames_4hqcg")
+animation = &"Guard"

@@ -20,7 +20,9 @@ class_name Enemy
 
 @export var defeated_deactivation_camera_distance : float = 25
 
-@export var vertical_launch_velocity_on_defeat : float = 2
+@export var vertical_launch_velocity_on_defeat : float = -128
+
+@export var launch_velocity_on_parry : float = 480
 
 @export var gravity_scale : float = 3
 
@@ -33,7 +35,7 @@ var is_defeated : bool = false
 func defeat_enemy(damage_type : StringName):
 	if (!is_defeated and !immunity_list.has(damage_type)):
 		is_defeated = true
-		body.velocity = (vertical_launch_velocity_on_defeat * Vector2.UP)
+		body.velocity = (vertical_launch_velocity_on_defeat * Vector2.UP if damage_type != "PARRY" and damage_type != "INVINCIBILITY" else launch_velocity_on_parry * Vector2(-movement.get_facing_value(), -1))
 		sprite.visibility_layer = visibility_layer_on_defeat
 		sprite.z_index = z_index_on_defeat
 		on_defeat()

@@ -67,7 +67,7 @@ max_distance = 512.0
 
 [node name="Area2D" type="Area2D" parent="."]
 collision_layer = 0
-collision_mask = 4
+collision_mask = 196
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource("CapsuleShape2D_x8f7j")

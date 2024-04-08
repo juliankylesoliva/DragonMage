@@ -4,6 +4,8 @@ class_name FairyFollow
 
 @export var sprite : AnimatedSprite2D
 
+@export var sigil_sprite : AnimatedSprite2D
+
 @export var home_position_target : Node2D
 
 @export var min_theta_change_rate : float = PI
@@ -36,6 +38,8 @@ var current_theta : float = 0
 
 var target_position : Vector2 = Vector2.ZERO
 
+var enable_idle_motion : bool = true
+
 func _ready():
 	default_home_position = self.global_position
 	randomize_rotation()
@@ -43,6 +47,13 @@ func _ready():
 	randomize_sine_amplitudes()
 
 func _physics_process(delta):
+	if (enable_idle_motion):
+		do_idle_motion(delta)
+
+func set_enable_idle_motion(b : bool):
+	enable_idle_motion = b
+
+func do_idle_motion(delta : float):
 	update_home_position()
 	update_idle_motion(delta)
 	do_easing_motion()

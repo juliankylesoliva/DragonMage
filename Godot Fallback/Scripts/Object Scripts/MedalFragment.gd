@@ -20,6 +20,8 @@ class_name MedalFragment
 
 @export var collect_gravity_scale : float = 2
 
+@export var magic_restore_amount : float = 1
+
 var level_ref : Level
 
 var is_collected = false
@@ -58,5 +60,7 @@ func _on_area_2d_body_entered(body):
 					sprite.z_index = collect_z_index
 					sprite.speed_scale = collect_spin_rate
 					current_jump_velocity = -collect_jump_velocity
+					
+					temp_hub.fairy.change_current_magic_by(magic_restore_amount)
 					
 					return

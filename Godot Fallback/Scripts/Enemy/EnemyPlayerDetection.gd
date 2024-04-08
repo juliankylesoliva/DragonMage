@@ -64,6 +64,11 @@ func damage_player():
 		return player_ref.damage.take_damage(get_direction_to_player())
 	return false
 
+func check_player_parry():
+	if (player_ref != null):
+		return player_ref.damage.is_player_parrying()
+	return false
+
 func check_player_detection_radius():
 	if (player_ref != null):
 		var player_distance : float = get_distance_to_player()

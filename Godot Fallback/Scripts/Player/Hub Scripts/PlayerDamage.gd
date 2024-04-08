@@ -6,6 +6,8 @@ signal took_damage
 
 @export var hub : PlayerHub
 
+@export var fairy_guard_attack : FairyGuardAttack
+
 @export var mage_temper_damage : int = 3
 
 @export var dragon_temper_damage : int = -2
@@ -38,6 +40,12 @@ func _process(delta):
 	update_iframe_timer(delta)
 	do_iframe_sprite_alpha()
 
+func is_player_guarding():
+	return fairy_guard_attack.current_attack_state == Attack.AttackState.ACTIVE
+
+func is_player_parrying():
+	return (fairy_guard_attack.can_parry() or fairy_guard_attack.did_player_parry)
+
 func is_player_damaged():
 	return (current_hitstun_timer > 0)
 
@@ -45,14 +53,23 @@ func is_damage_invulnerability_active():
 	return (current_iframe_timer > 0)
 
 func take_damage(knockback : int = 0):
-	if (is_player_damaged() or !can_take_damage()):
+	if (is_player_parrying()):
+		on_parry()
 		return false
-	
-	knockback_direction = knockback
-	current_hitstun_timer = hitstun_time
-	damage_taken += 1
-	took_damage.emit()
-	return true
+	elif (is_player_damaged() or !can_take_damage()):
+		return false
+	elif (is_player_guarding() and (knockback * hub.movement.get_facing_value() < 0)):
+		fairy_guard_attack.do_blockstun()
+		return false
+	else:
+		knockback_direction = knockback
+		current_hitstun_timer = hitstun_time
+		damage_taken += 1
+		took_damage.emit()
+		return true
+
+func on_parry():
+	fairy_guard_attack.do_parry()
 
 func do_knockback():
 	if (knockback_direction == 0):
@@ -87,7 +104,7 @@ func can_take_damage():
 	var magic_blast : MagicBlastAttack = (hub.attacks.get_attack_by_name("MagicBlast") as MagicBlastAttack)
 	var fire_tackle : FireTackleAttack = (hub.attacks.get_attack_by_name("FireTackle") as FireTackleAttack)
 	var dodge : DodgeAttack = (hub.attacks.get_attack_by_name("Dodge") as DodgeAttack)
-	return (!is_damage_invulnerability_active() and !magic_blast.is_blast_jumping and fire_tackle.current_attack_state != Attack.AttackState.ACTIVE and dodge.current_attack_state != Attack.AttackState.ACTIVE and state_name != "FormChanging" and state_name != "Damaged")
+	return (!is_damage_invulnerability_active() and !fairy_guard_attack.is_invincibility_active and !fairy_guard_attack.did_player_parry and !magic_blast.is_blast_jumping and fire_tackle.current_attack_state != Attack.AttackState.ACTIVE and dodge.current_attack_state != Attack.AttackState.ACTIVE and state_name != "FormChanging" and state_name != "Damaged")
 
 func update_hitstun_timer(delta : float):
 	if (is_player_damaged()):

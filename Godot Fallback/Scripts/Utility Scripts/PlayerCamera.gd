@@ -97,6 +97,16 @@ func update_y_lookahead(delta : float):
 	
 	player_cam.global_position.y = (move_toward(player_cam.global_position.y, target_y, (abs(target_y - player_cam.global_position.y) / time_to_update_y) * delta) if !hub.char_body.is_on_floor() or player_cam.global_position.y != target_y else target_y)
 
+func fairy_guard_camera_update(delta : float):
+	if (is_camera_locked):
+		return
+	
+	current_x_lookahead = move_toward(current_x_lookahead, 0, hub.movement.top_speed * delta)
+	
+	var target_x : float = (hub.char_body.global_position.x + current_x_lookahead)
+	target_x = clamp_x_target(target_x)
+	player_cam.global_position.x = target_x
+
 func fire_tackle_camera_update(delta : float, prev_x_velocity : float, vertical_axis : float):
 	if (is_camera_locked):
 		return

@@ -14,6 +14,8 @@ class_name FloorSpikes
 
 @export var time_between_states : float = 1
 
+@export var stun_duration_on_parry : float = 3
+
 var spike_segment_list : Array[AnimatedSprite2D]
 
 var is_player_detected : bool = false
@@ -38,6 +40,14 @@ func _process(delta):
 		if (player_ref.damage.take_damage()):
 			EffectFactory.get_effect("EnemyContactImpact", player_ref.char_body.global_position)
 			SoundFactory.play_sound_by_name("enemy_contact_impact", player_ref.char_body.global_position, 0, 1, "SFX")
+		elif (player_ref.damage.is_player_parrying()):
+			for spike in spike_segment_list:
+					spike.play("Retract")
+			spike_state = 0
+			spike_state_timer = stun_duration_on_parry
+			play_sound("obstacle_spikes_retract")
+		else:
+			pass
 	
 	spike_state_timer = move_toward(spike_state_timer, 0, delta)
 	if (spike_state_timer <= 0):

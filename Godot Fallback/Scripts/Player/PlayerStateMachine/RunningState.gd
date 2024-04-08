@@ -50,6 +50,8 @@ func state_process(_delta):
 	elif (hub.jumping.can_ground_jump()):
 		hub.jumping.start_ground_jump()
 		set_next_state(state_machine.get_state_by_name("Jumping"))
+	elif (hub.fairy.is_using_fairy_ability() and hub.attacks.current_attack != null):
+		set_next_state(state_machine.get_state_by_name("Attacking"))
 	elif (hub.attacks.is_using_attack_state() and hub.attacks.current_attack != null):
 		set_next_state(state_machine.get_state_by_name("Attacking"))
 	elif (hub.damage.is_player_damaged()):

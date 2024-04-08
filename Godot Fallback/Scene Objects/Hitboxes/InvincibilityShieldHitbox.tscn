@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://c2gtx8g0uvof2"]
+
+[ext_resource type="PackedScene" uid="uid://5myi2cvpjcqk" path="res://Scene Objects/Hitboxes/KnockbackHitbox.tscn" id="1_ttu4k"]
+[ext_resource type="Script" path="res://Scripts/Player/Fairy Ability Scripts/InvincibilityShieldHitbox.gd" id="2_e4iju"]
+
+[node name="InvincibilityShieldHitbox" instance=ExtResource("1_ttu4k")]
+collision_mask = 192
+script = ExtResource("2_e4iju")
+damage_type = &"INVINCIBILITY"
+pixels_per_unit = 32.0
+knockback_strength = 480.0
+knockback_effect_radius = 32.0

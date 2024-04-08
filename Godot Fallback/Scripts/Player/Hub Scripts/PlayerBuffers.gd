@@ -16,6 +16,9 @@ var jump_buffer_time_left : float = 0
 @export var fast_fall_buffer_time : float = 0.1
 var fast_fall_buffer_time_left : float = 0
 
+@export var fairy_ability_buffer_time : float = 0.25
+var fairy_ability_buffer_time_left : float = 0
+
 ## Allows a player to press the attack button early and still have their input be registered within a small window of time.
 @export var attack_buffer_time : float = 0.25
 var attack_buffer_time_left : float = 0
@@ -43,6 +46,8 @@ func _input(event):
 		refresh_jump_buffer()
 	if (event.is_action_pressed("Crouch") and !hub.char_body.is_on_floor()):
 		refresh_fast_fall_buffer()
+	if (event.is_action_pressed("Fairy Ability")):
+		refresh_fairy_ability_buffer()
 	if (event.is_action_pressed("Attack")):
 		refresh_attack_buffer()
 	if (event.is_action_pressed("Change Form")):
@@ -110,6 +115,19 @@ func reset_attack_buffer():
 
 func refresh_attack_buffer():
 	attack_buffer_time_left = attack_buffer_time
+
+func check_fairy_ability_buffer(delta : float):
+	if (is_fairy_ability_buffer_active()):
+		fairy_ability_buffer_time_left = move_toward(fairy_ability_buffer_time_left, 0, delta)
+
+func is_fairy_ability_buffer_active():
+	return fairy_ability_buffer_time_left > 0
+
+func reset_fairy_ability_buffer():
+	fairy_ability_buffer_time_left = 0
+
+func refresh_fairy_ability_buffer():
+	fairy_ability_buffer_time_left = fairy_ability_buffer_time
 
 func check_speed_preservation_buffer(delta):
 	var current_horizontal_speed = abs(hub.movement.current_horizontal_velocity)
