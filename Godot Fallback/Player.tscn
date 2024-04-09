@@ -1399,6 +1399,7 @@ fairy_target_node = NodePath("../../FairyTarget")
 script = ExtResource("11_8a08i")
 blockstun_knockback = 192.0
 parry_window_duration = 0.083
+parry_magic_reward = 20.0
 guard_offset_from_char = Vector2(16, 0)
 invincibility_shield_scene = ExtResource("12_n03ih")
 uses_attack_state = true

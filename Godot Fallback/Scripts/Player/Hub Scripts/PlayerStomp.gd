@@ -4,6 +4,12 @@ class_name PlayerStomp
 
 @export var hub : PlayerHub
 
+@export var base_magic_gain : float = 1
+
+@export var stomp_combo_multiplier : float = 2
+
+@export var max_stomp_combo : int = 4
+
 @export var stomp_hitbox : StompKnockbackHitbox
 
 @export var valid_stomp_state_names : Array[String]
@@ -11,6 +17,8 @@ class_name PlayerStomp
 @export var magic_blast_attack : MagicBlastAttack
 
 @export var fire_tackle_attack : FireTackleAttack
+
+var current_stomp_combo : int = 0
 
 func is_stomping_enemy():
 	if (!hub.damage.is_player_damaged() and !hub.char_body.is_on_floor() and !magic_blast_attack.is_blast_jumping and fire_tackle_attack.current_attack_state == Attack.AttackState.NOTHING and valid_stomp_state_names.has(hub.state_machine.current_state.name)):
@@ -24,3 +32,12 @@ func do_stomp_jump():
 		if (hub.jumping.is_fast_falling):
 			hub.jumping.charge_super_jump_with_fast_fall()
 		hub.jumping.start_ground_jump()
+		hub.fairy.change_current_magic_by(base_magic_gain * pow(stomp_combo_multiplier, current_stomp_combo))
+		increase_stomp_combo()
+
+func increase_stomp_combo():
+	if (current_stomp_combo < max_stomp_combo):
+		current_stomp_combo += 1
+
+func reset_stomp_combo():
+	current_stomp_combo = 0

@@ -65,6 +65,7 @@ func take_damage(knockback : int = 0):
 		knockback_direction = knockback
 		current_hitstun_timer = hitstun_time
 		damage_taken += 1
+		hub.fairy.cut_magic_in_half()
 		took_damage.emit()
 		return true
 

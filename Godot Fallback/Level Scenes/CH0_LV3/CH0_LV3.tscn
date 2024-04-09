@@ -37,6 +37,7 @@ position = Vector2(224, 223)
 
 [node name="Fairy" parent="Player/Hub" index="4"]
 is_using_fairy = true
+enable_abilities = false
 
 [node name="Temper" parent="Player/Hub" index="6"]
 cold_segments = 0

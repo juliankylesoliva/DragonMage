@@ -42,6 +42,8 @@ func state_process(_delta : float):
 		set_next_state(state_machine.get_state_by_name("Deactivated"))
 	elif (hub.form.can_change_form()):
 		set_next_state(state_machine.get_state_by_name("FormChanging"))
+	elif (hub.fairy.is_using_fairy_ability() and hub.attacks.current_attack != null):
+		set_next_state(state_machine.get_state_by_name("Attacking"))
 	elif (hub.attacks.is_using_attack_state() and hub.attacks.current_attack != null):
 		set_next_state(state_machine.get_state_by_name("Attacking"))
 	elif (hub.char_body.is_on_floor()):
@@ -97,6 +99,8 @@ func on_exit():
 		pass
 	
 	if (hub.char_body.is_on_floor()):
+		hub.stomp.reset_stomp_combo()
+		
 		var effect_instance : AnimatedSprite2D = EffectFactory.get_effect("LandingDust", hub.collisions.get_ground_point())
 		effect_instance.rotation = hub.char_body.up_direction.angle_to(hub.char_body.get_floor_normal())
 		

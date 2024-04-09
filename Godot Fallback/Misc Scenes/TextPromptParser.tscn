@@ -7,6 +7,7 @@ script = ExtResource("1_u3kpi")
 event_to_input_prompt_dictionary = {
 "C (Physical)": "res://Sprites/UI/ButtonIcons/CKey.png",
 "Ctrl (Physical)": "res://Sprites/UI/ButtonIcons/CtrlKey.png",
+"D (Physical)": "res://Sprites/UI/ButtonIcons/DKey.png",
 "Down (Physical)": "res://Sprites/UI/ButtonIcons/DownKey.png",
 "Enter (Physical)": "res://Sprites/UI/ButtonIcons/EnterKey.png",
 "Joypad Button 0 (Bottom Action, Sony Cross, Xbox A, Nintendo B)": "res://Sprites/UI/ButtonIcons/SouthFaceButton.png",
@@ -17,6 +18,7 @@ event_to_input_prompt_dictionary = {
 "Joypad Button 13 (D-pad Left)": "res://Sprites/UI/ButtonIcons/DPadLeft.png",
 "Joypad Button 14 (D-pad Right)": "res://Sprites/UI/ButtonIcons/DPadRight.png",
 "Joypad Button 2 (Left Action, Sony Square, Xbox X, Nintendo Y)": "res://Sprites/UI/ButtonIcons/WestFaceButton.png",
+"Joypad Button 3 (Top Action, Sony Triangle, Xbox Y, Nintendo X)": "res://Sprites/UI/ButtonIcons/NorthFaceButton.png",
 "Joypad Button 6 (Start, Xbox Menu, Nintendo +)": "res://Sprites/UI/ButtonIcons/Start.png",
 "Joypad Button 9 (Left Shoulder, Sony L1, Xbox LB)": "res://Sprites/UI/ButtonIcons/LeftBumper.png",
 "Joypad Motion on Axis 0 (Left Stick X-Axis, Joystick 0 X-Axis) with Value -1.00": "res://Sprites/UI/ButtonIcons/DPadLeft.png",

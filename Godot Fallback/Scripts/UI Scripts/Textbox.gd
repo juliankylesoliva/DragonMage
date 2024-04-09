@@ -25,6 +25,8 @@ enum TextboxState
 
 @export var accept_input_events : bool = true
 
+@export var ui_canvas : CanvasLayer
+
 # @export var default_stretch_ratio : float = 0.5
 
 # @export var portrait_stretch_ratio : float = 3
@@ -68,6 +70,8 @@ func hide_textbox():
 	end_symbol.text = ""
 	start_symbol.text = ""
 	textbox_container.set_visible(false)
+	if (ui_canvas != null):
+		ui_canvas.show()
 	change_state(TextboxState.READY)
 
 func set_characters_per_second(cps : float):
@@ -89,6 +93,8 @@ func display_text():
 	unformatted_text = next_text
 	text_label.text = next_text
 	show_textbox()
+	if (ui_canvas != null):
+		ui_canvas.hide()
 	do_text_scrolling()
 
 func do_text_scrolling():

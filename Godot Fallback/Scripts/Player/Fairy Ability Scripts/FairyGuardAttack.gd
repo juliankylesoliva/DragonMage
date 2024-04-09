@@ -63,8 +63,15 @@ func attack_state_condition():
 	return !hub.fairy.is_magic_full()
 
 func can_use_attack():
-	var state_name : String = hub.state_machine.current_state.name
-	return (!is_invincibility_active and hub.fairy.current_magic >= min_magic_cost and hub.char_body.is_on_floor() and !hub.damage.is_player_damaged() and state_name != "Attacking" and (hub.attacks.current_attack == null or hub.attacks.current_attack.name != self.name) and !hub.fairy.is_fairy_ability_cooldown_active())
+	if (is_invincibility_active):
+		return false
+	
+	if (attack_state_condition()):
+		var state_name : String = hub.state_machine.current_state.name
+		return (!is_invincibility_active and hub.fairy.current_magic >= min_magic_cost and !hub.fairy.is_magic_full() and hub.char_body.is_on_floor() and !hub.damage.is_player_damaged() and state_name != "Attacking" and (hub.attacks.current_attack == null or hub.attacks.current_attack.name != self.name) and !hub.fairy.is_fairy_ability_cooldown_active())
+	else:
+		return (hub.fairy.is_magic_full() and !is_invincibility_active and shield_instance == null)
+	
 
 func use_attack():
 	if (shield_instance == null):

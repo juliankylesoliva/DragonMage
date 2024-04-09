@@ -12,6 +12,10 @@ signal magic_blast_thrown
 
 @export var blast_jump_hitbox_scene : PackedScene
 
+@export var magic_blast_hit_magic_gain : float = 2
+
+@export var blast_jump_hit_magic_gain : float = 3
+
 @export var magic_blast_hit_temper_reduction : int = -1
 
 @export var blast_jump_hit_temper_reduction : int = -2
@@ -176,12 +180,14 @@ func blast_jump_update(delta : float):
 				blast_jump_current_temper_interval_time += blast_jump_temper_increase_interval
 
 func _on_magic_blast_hit():
+	hub.fairy.change_current_magic_by(magic_blast_hit_magic_gain)
 	if (hub.temper.is_form_locked()):
 		hub.temper.neutralize_temper_by(-magic_blast_hit_temper_reduction)
 	else:
 		hub.temper.neutralize_temper_by(magic_blast_hit_temper_reduction)
 
 func _on_blast_jump_hit():
+	hub.fairy.change_current_magic_by(blast_jump_hit_magic_gain)
 	if (hub.temper.is_form_locked()):
 		hub.temper.neutralize_temper_by(-blast_jump_hit_temper_reduction)
 	else:

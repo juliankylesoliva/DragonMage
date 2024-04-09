@@ -1,9 +1,10 @@
-[gd_scene load_steps=13 format=3 uid="uid://cn18g24teqsm4"]
+[gd_scene load_steps=14 format=3 uid="uid://cn18g24teqsm4"]
 
 [ext_resource type="Script" path="res://Scripts/Utility Scripts/Room.gd" id="1_0d1nf"]
 [ext_resource type="TileSet" uid="uid://dhwi7i1loa2pd" path="res://Sprites/Tiles/Test Tiles/TestTileSet.tres" id="2_btx66"]
 [ext_resource type="PackedScene" uid="uid://dqbo0wu6hm8lj" path="res://Scene Objects/Objects/WarpTrigger.tscn" id="3_l4qgb"]
 [ext_resource type="PackedScene" uid="uid://bajk0w7eoh6o8" path="res://Scene Objects/Objects/ReinforcedBlock.tscn" id="4_j0618"]
+[ext_resource type="PackedScene" uid="uid://cp3kaarqt7vdo" path="res://Scene Objects/Objects/HintBubble.tscn" id="4_qc07r"]
 [ext_resource type="PackedScene" uid="uid://clfqwsy4byrkf" path="res://Scene Objects/Enemies/GreenDragoon.tscn" id="5_80gu6"]
 [ext_resource type="PackedScene" uid="uid://b2a0ttqvejk51" path="res://Scene Objects/Objects/TemperDragonFruit.tscn" id="6_scfh6"]
 [ext_resource type="PackedScene" uid="uid://dfkmxoba64spw" path="res://Scene Objects/Objects/MedalFragment.tscn" id="7_gogac"]
@@ -72,6 +73,14 @@ position = Vector2(1680, 224)
 position = Vector2(1744, 224)
 room_origin = NodePath("..")
 room_destination = NodePath("..")
+
+[node name="HintBubble" parent="." instance=ExtResource("4_qc07r")]
+position = Vector2(160, 232)
+textbox_strings = Array[String](["Faeson: Sorry I can't be more helpful, EmDee... I've been training as a knight for so much of my life that I'm not even sure where to begin with magic as a fairy...", "{player_name}: Hmm... I think I can help with that! Take a look at this spell I found just lying around in the prison.", "Faeson: \"Guardian\", huh?", "{player_name}: I was wondering if I should use it myself, but your earlier concerns gave me a better idea: I'll teach you how to use spells like these so that we can work together!", "Faeson: This sounds like a lot of work...", "{player_name}: Don't worry, it's a pretty simple spell--let me read it out for you, sigil notation and all. *ahem*", "[center]~ Guardian (1/4) ~
+\"Hold [Fairy Ability] while on the ground to generate a shield in front of yourself. Press [Move Left] or [Move Right] to change directions. Jumping instantly cancels the spell.\"", "[center]~ Guardian (2/4) ~
+\"This spell requires at least 5% Magic to cast and constantly drains Magic as the shield is held up or when attacks get blocked.\"", "[center]~ Guardian (3/4) ~
+\"If [Fairy Ability] is released right before you get hit, you can counter and deflect attacks. This will also refill some of your Magic\"", "[center]~ Guardian (4/4) ~
+\"Activating this spell with 100% Magic will briefly make you invincible! You don't even need to be on the ground to activate it!\"", "Faeson: Alright, I might need some time to get used to this, but I'll be sure to protect you as much as I can, EmDee!"])
 
 [node name="Medal Fragments" type="Node2D" parent="."]
 

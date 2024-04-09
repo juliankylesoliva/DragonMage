@@ -32,6 +32,7 @@ position = Vector2(96, 159)
 
 [node name="Fairy" parent="Player/Hub" index="4"]
 is_using_fairy = true
+enable_abilities = false
 
 [node name="Camera" parent="Player/Hub" index="11" node_paths=PackedStringArray("player_cam")]
 player_cam = NodePath("../../../Camera2D")
@@ -136,8 +137,9 @@ starting_fade_duration = 1.0
 
 [node name="ClearTimer" parent="." instance=ExtResource("13_vkigm")]
 
-[node name="Textbox" parent="." instance=ExtResource("14_54vdq")]
+[node name="Textbox" parent="." node_paths=PackedStringArray("ui_canvas") instance=ExtResource("14_54vdq")]
 accept_input_events = false
+ui_canvas = NodePath("../UI_Canvas")
 
 [node name="LevelMusicPlayer" parent="." instance=ExtResource("18_seqrb")]
 stream = ExtResource("19_k0bib")

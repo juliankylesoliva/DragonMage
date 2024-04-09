@@ -1,0 +1,112 @@
+[gd_scene load_steps=14 format=3 uid="uid://cg3dhm1wv5w67"]
+
+[ext_resource type="Script" path="res://Scripts/UI Scripts/MagicMeterUI.gd" id="1_ey5kd"]
+[ext_resource type="Texture2D" uid="uid://c0odlikdb04dj" path="res://Sprites/UI/MagicMeterBacking.png" id="1_l2no4"]
+[ext_resource type="Texture2D" uid="uid://8dqauv2b1m1s" path="res://Sprites/UI/MagicMeterFrame.png" id="2_anlsx"]
+[ext_resource type="Texture2D" uid="uid://ccywjcpve2vqg" path="res://Sprites/UI/MagicMeterFill.png" id="2_qpbwj"]
+[ext_resource type="Texture2D" uid="uid://dqki36ecpjway" path="res://Sprites/UI/GuardAbilityIcon.png" id="5_38cwo"]
+[ext_resource type="FontFile" uid="uid://blejgst41tdnl" path="res://PressStart2P.ttf" id="6_kr04d"]
+[ext_resource type="Script" path="res://Scripts/Utility Scripts/ButtonPromptTextLabel.gd" id="7_fai6a"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nlqe4"]
+atlas = ExtResource("2_qpbwj")
+region = Rect2(0, 0, 112, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_86nk6"]
+atlas = ExtResource("2_qpbwj")
+region = Rect2(112, 0, 112, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4v1jj"]
+atlas = ExtResource("2_qpbwj")
+region = Rect2(224, 0, 112, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cha6l"]
+atlas = ExtResource("2_qpbwj")
+region = Rect2(336, 0, 112, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dwx41"]
+atlas = ExtResource("2_qpbwj")
+region = Rect2(0, 0, 112, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_cqkji"]
+animations = [{
+"frames": [{
+"duration": 6.0,
+"texture": SubResource("AtlasTexture_nlqe4")
+}, {
+"duration": 6.0,
+"texture": SubResource("AtlasTexture_86nk6")
+}, {
+"duration": 6.0,
+"texture": SubResource("AtlasTexture_4v1jj")
+}, {
+"duration": 6.0,
+"texture": SubResource("AtlasTexture_cha6l")
+}],
+"loop": true,
+"name": &"Flashing",
+"speed": 60.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dwx41")
+}],
+"loop": true,
+"name": &"Steady",
+"speed": 60.0
+}]
+
+[node name="MagicMeterUI" type="Node2D" node_paths=PackedStringArray("fill_sprite", "ability_icon", "percent_label")]
+light_mask = 64
+visibility_layer = 64
+z_index = 7
+script = ExtResource("1_ey5kd")
+fill_sprite = NodePath("FillMask/Fill")
+ability_icon = NodePath("AbilityIcon")
+percent_label = NodePath("PercentLabel")
+normal_fill_color = Color(0.85098, 0.298039, 0.74902, 1)
+maxed_fill_color = Color(0.568627, 0.619608, 0.788235, 1)
+
+[node name="MeterBacking" type="Sprite2D" parent="."]
+texture = ExtResource("1_l2no4")
+
+[node name="FillMask" type="Sprite2D" parent="."]
+clip_children = 1
+texture = ExtResource("1_l2no4")
+region_rect = Rect2(0, 0, 112, 16)
+
+[node name="Fill" type="AnimatedSprite2D" parent="FillMask"]
+sprite_frames = SubResource("SpriteFrames_cqkji")
+animation = &"Steady"
+autoplay = "Steady"
+frame_progress = 0.78396
+
+[node name="MeterFrame" type="Sprite2D" parent="."]
+texture = ExtResource("2_anlsx")
+
+[node name="AbilityIcon" type="Sprite2D" parent="."]
+position = Vector2(-72, -4)
+texture = ExtResource("5_38cwo")
+
+[node name="AbilityPrompt" type="RichTextLabel" parent="AbilityIcon"]
+offset_right = 16.0
+offset_bottom = 16.0
+theme_override_fonts/normal_font = ExtResource("6_kr04d")
+theme_override_font_sizes/normal_font_size = 16
+bbcode_enabled = true
+text = "[Fairy Ability]"
+scroll_active = false
+shortcut_keys_enabled = false
+script = ExtResource("7_fai6a")
+
+[node name="PercentLabel" type="RichTextLabel" parent="."]
+offset_left = 60.0
+offset_top = -8.0
+offset_right = 124.0
+offset_bottom = 8.0
+theme_override_fonts/normal_font = ExtResource("6_kr04d")
+theme_override_font_sizes/normal_font_size = 16
+bbcode_enabled = true
+text = "100%"
+scroll_active = false
+shortcut_keys_enabled = false

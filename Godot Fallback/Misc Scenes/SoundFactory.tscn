@@ -1,9 +1,12 @@
-[gd_scene load_steps=54 format=3 uid="uid://bxiipehx61lsf"]
+[gd_scene load_steps=60 format=3 uid="uid://bxiipehx61lsf"]
 
 [ext_resource type="Script" path="res://Scripts/Utility Scripts/SoundFactory.gd" id="1_8kf8o"]
 [ext_resource type="AudioStream" uid="uid://b1a0wj3h6eyxq" path="res://Sounds/attack_draelyn_bump.wav" id="2_i2phu"]
+[ext_resource type="AudioStream" uid="uid://0dvkv5hc7bc2" path="res://Sounds/ability_guard_activate.wav" id="2_yahik"]
+[ext_resource type="AudioStream" uid="uid://dg80h77pas3kv" path="res://Sounds/ability_guard_invincibility.wav" id="3_0wdob"]
 [ext_resource type="AudioStream" uid="uid://cxekcnir1e5gw" path="res://Sounds/attack_draelyn_endlag.wav" id="3_2mqyr"]
 [ext_resource type="AudioStream" uid="uid://cj4si1yv00voa" path="res://Sounds/attack_draelyn_fireball.wav" id="4_k2uwj"]
+[ext_resource type="AudioStream" uid="uid://cw7kbbyefjmle" path="res://Sounds/ability_guard_release.wav" id="4_kxg73"]
 [ext_resource type="AudioStream" uid="uid://vkvkqjmv78p0" path="res://Sounds/attack_draelyn_startup.wav" id="5_gaf27"]
 [ext_resource type="AudioStream" uid="uid://ck21y7xsah3fy" path="res://Sounds/attack_draelyn_tackle.wav" id="6_xywb4"]
 [ext_resource type="AudioStream" uid="uid://d0ew7uvtoogcu" path="res://Sounds/attack_magli_blastjump.wav" id="7_vsfns"]
@@ -14,6 +17,7 @@
 [ext_resource type="AudioStream" uid="uid://bda3g331aik66" path="res://Sounds/damage_enemy.wav" id="12_7s7oe"]
 [ext_resource type="AudioStream" uid="uid://ddbc0beb17ahn" path="res://Sounds/damage_player.wav" id="13_mycou"]
 [ext_resource type="AudioStream" uid="uid://cfr1j54yuw52q" path="res://Sounds/damage_player_guarding.wav" id="14_i5jlv"]
+[ext_resource type="AudioStream" uid="uid://bw2cq5nos4lbl" path="res://Sounds/attack_reflect.wav" id="15_avfxa"]
 [ext_resource type="AudioStream" uid="uid://culpp6ftwxchs" path="res://Sounds/enemy_contact_impact.wav" id="15_jriir"]
 [ext_resource type="AudioStream" uid="uid://cv3hqverpvy3g" path="res://Sounds/enemy_dragoon_fireball.wav" id="16_8xgig"]
 [ext_resource type="AudioStream" uid="uid://xhxy1d3vxwrw" path="res://Sounds/enemy_dragoon_jump.wav" id="17_5i4l3"]
@@ -50,10 +54,12 @@
 [ext_resource type="AudioStream" uid="uid://dgx0gl7548pbt" path="res://Sounds/player_falling_impact.wav" id="48_2ehde"]
 [ext_resource type="AudioStream" uid="uid://b7yfwcjpybnl2" path="res://Sounds/player_falling_respawn.wav" id="49_w82g1"]
 [ext_resource type="AudioStream" uid="uid://b4newloskxo6e" path="res://Sounds/transformation_draelyn.wav" id="50_c88qg"]
+[ext_resource type="AudioStream" uid="uid://d0gmo4rhpbj6h" path="res://Sounds/player_death.wav" id="51_1gmvn"]
 [ext_resource type="AudioStream" uid="uid://cet3yfu2fespo" path="res://Sounds/transformation_draelyn_locked.wav" id="51_xpdba"]
+[ext_resource type="AudioStream" uid="uid://uyancda6at4r" path="res://Sounds/player_death_hitstop.wav" id="52_ndqkp"]
 [ext_resource type="AudioStream" uid="uid://drv6xlsr5c46m" path="res://Sounds/transformation_magli.wav" id="52_w1vrd"]
 [ext_resource type="AudioStream" uid="uid://dkinfw0fgiggr" path="res://Sounds/transformation_magli_locked.wav" id="53_6ukct"]
 
 [node name="SoundFactory" type="Node"]
 script = ExtResource("1_8kf8o")
-stream_list = Array[AudioStream]([ExtResource("2_i2phu"), ExtResource("3_2mqyr"), ExtResource("4_k2uwj"), ExtResource("5_gaf27"), ExtResource("6_xywb4"), ExtResource("7_vsfns"), ExtResource("8_4u06v"), ExtResource("9_w01ok"), ExtResource("10_d5vgd"), ExtResource("11_55cwv"), ExtResource("12_7s7oe"), ExtResource("13_mycou"), ExtResource("14_i5jlv"), ExtResource("15_jriir"), ExtResource("16_8xgig"), ExtResource("17_5i4l3"), ExtResource("18_sxdo4"), ExtResource("19_1extc"), ExtResource("20_6l1vh"), ExtResource("21_vwpr7"), ExtResource("22_yt7qg"), ExtResource("23_njt0x"), ExtResource("24_d0at2"), ExtResource("25_qul7o"), ExtResource("26_o3umo"), ExtResource("27_y3wc7"), ExtResource("28_42e3f"), ExtResource("29_nkeke"), ExtResource("30_fymh6"), ExtResource("31_crpxn"), ExtResource("32_oqvek"), ExtResource("33_dpv0u"), ExtResource("34_cq6sg"), ExtResource("35_0s4l7"), ExtResource("36_x5jn0"), ExtResource("37_ip7hd"), ExtResource("38_f3ktp"), ExtResource("39_x5jj1"), ExtResource("40_iex6d"), ExtResource("41_o6eek"), ExtResource("42_jofh5"), ExtResource("43_kv07f"), ExtResource("44_i02mj"), ExtResource("45_2gd4l"), ExtResource("46_wddhe"), ExtResource("47_5hu7g"), ExtResource("48_2ehde"), ExtResource("49_w82g1"), ExtResource("50_c88qg"), ExtResource("51_xpdba"), ExtResource("52_w1vrd"), ExtResource("53_6ukct")])
+stream_list = Array[AudioStream]([ExtResource("2_yahik"), ExtResource("3_0wdob"), ExtResource("4_kxg73"), ExtResource("2_i2phu"), ExtResource("3_2mqyr"), ExtResource("4_k2uwj"), ExtResource("5_gaf27"), ExtResource("6_xywb4"), ExtResource("7_vsfns"), ExtResource("8_4u06v"), ExtResource("9_w01ok"), ExtResource("10_d5vgd"), ExtResource("11_55cwv"), ExtResource("15_avfxa"), ExtResource("12_7s7oe"), ExtResource("13_mycou"), ExtResource("14_i5jlv"), ExtResource("15_jriir"), ExtResource("16_8xgig"), ExtResource("17_5i4l3"), ExtResource("18_sxdo4"), ExtResource("19_1extc"), ExtResource("20_6l1vh"), ExtResource("21_vwpr7"), ExtResource("22_yt7qg"), ExtResource("23_njt0x"), ExtResource("24_d0at2"), ExtResource("25_qul7o"), ExtResource("26_o3umo"), ExtResource("27_y3wc7"), ExtResource("28_42e3f"), ExtResource("29_nkeke"), ExtResource("30_fymh6"), ExtResource("31_crpxn"), ExtResource("32_oqvek"), ExtResource("33_dpv0u"), ExtResource("34_cq6sg"), ExtResource("35_0s4l7"), ExtResource("36_x5jn0"), ExtResource("37_ip7hd"), ExtResource("38_f3ktp"), ExtResource("39_x5jj1"), ExtResource("40_iex6d"), ExtResource("41_o6eek"), ExtResource("42_jofh5"), ExtResource("43_kv07f"), ExtResource("44_i02mj"), ExtResource("45_2gd4l"), ExtResource("46_wddhe"), ExtResource("51_1gmvn"), ExtResource("52_ndqkp"), ExtResource("47_5hu7g"), ExtResource("48_2ehde"), ExtResource("49_w82g1"), ExtResource("50_c88qg"), ExtResource("51_xpdba"), ExtResource("52_w1vrd"), ExtResource("53_6ukct")])

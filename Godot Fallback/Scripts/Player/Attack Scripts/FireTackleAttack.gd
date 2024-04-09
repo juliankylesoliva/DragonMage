@@ -14,6 +14,10 @@ class_name FireTackleAttack
 
 @export var fireball_hit_temper_increase : int = 2
 
+@export var fire_tackle_hit_magic_gain : float = 2
+
+@export var fireball_hit_magic_gain : float = 3
+
 @export var fire_tackle_launch_temper_decrease : int = -1
 
 @export var fire_tackle_hold_temper_decrease : int = -1
@@ -386,12 +390,14 @@ func end_fire_tackle():
 		hub.state_machine.current_state.set_next_state(hub.state_machine.get_state_by_name("Standing"))
 
 func _on_fire_tackle_hit():
+	hub.fairy.change_current_magic_by(fire_tackle_hit_magic_gain)
 	if (hub.temper.is_form_locked()):
 		hub.temper.neutralize_temper_by(-fire_tackle_hit_temper_increase)
 	else:
 		hub.temper.neutralize_temper_by(fire_tackle_hit_temper_increase)
 
 func _on_fireball_hit():
+	hub.fairy.change_current_magic_by(fireball_hit_magic_gain)
 	if (hub.temper.is_form_locked()):
 		hub.temper.neutralize_temper_by(-fireball_hit_temper_increase)
 	else:

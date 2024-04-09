@@ -8,6 +8,8 @@ enum ControlMode
 
 const IMAGE_STRING_FORMAT : String = "[img=16x16]%s[/img]"
 
+@export var print_actions_and_inputs : bool = false
+
 @export var event_to_input_prompt_dictionary : Dictionary
 
 var current_control_mode : ControlMode = ControlMode.KEYBOARD
@@ -15,7 +17,7 @@ var current_control_mode : ControlMode = ControlMode.KEYBOARD
 signal control_mode_changed
 
 func _ready():
-	event_to_prompt_init()
+	print_action_and_input_names()
 
 func _input(event):
 	if (current_control_mode == ControlMode.KEYBOARD and (event is InputEventJoypadButton or event is InputEventJoypadMotion)):
@@ -27,12 +29,13 @@ func _input(event):
 	else:
 		pass
 
-func event_to_prompt_init():
-	#var file : FileAccess = FileAccess.open(EVENT_TO_INPUT_PROMPT_PATH, FileAccess.READ)
-	#while (file.get_position() < file.get_length()):
-	#	var csv_line : PackedStringArray = file.get_csv_line("|")
-	#	event_to_input_prompt_dictionary[csv_line[0]] = csv_line[1]
-	pass
+func print_action_and_input_names():
+	if (print_actions_and_inputs):
+		for action_name in InputMap.get_actions():
+			if (!action_name.begins_with("ui_")):
+				print_debug(action_name)
+				for event in InputMap.action_get_events(action_name):
+					print_debug("\t%s" % event.as_text())
 
 func parse_text(raw_text : String):
 	var result_text : String = raw_text
