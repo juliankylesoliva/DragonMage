@@ -50,7 +50,7 @@ func _ready():
 			if (fairy_ability_list.size() > 0):
 				current_selected_ability_index = 0
 		
-		current_magic = starting_magic
+		reset_starting_magic()
 
 func _process(delta):
 	update_fairy_ability_cooldown_timer(delta)
@@ -60,6 +60,11 @@ func _physics_process(_delta):
 	if (is_using_fairy and fairy_ref != null):
 		fairy_ref.set_facing_direction(hub.movement.get_facing_value())
 		update_target_node_position()
+
+func reset_fairy():
+	if (is_using_fairy and fairy_ref != null):
+		fairy_ref.set_enable_idle_motion(true)
+		fairy_ref.sprite.play("FaesonIdle")
 
 func update_target_node_position():
 	fairy_target_node.position.x = (fairy_target_offset * -hub.movement.get_facing_value())
@@ -107,6 +112,9 @@ func move_magic_toward(to : float, delta : float):
 func cut_magic_in_half():
 	current_magic *= 0.5
 
+func reset_starting_magic():
+	current_magic = starting_magic
+
 func set_fairy_ability_cooldown_timer(time : float = 0):
 	if (current_fairy_ability_cooldown_timer <= 0):
 		current_fairy_ability_cooldown_timer = (time if time > 0 else global_fairy_ability_cooldown_time)
@@ -123,5 +131,5 @@ func check_input_type(attack : Attack):
 	return ((attack.input_type == Attack.AttackInputType.PRESS and hub.buffers.is_fairy_ability_buffer_active()) or (attack.input_type == Attack.AttackInputType.HOLD and Input.is_action_pressed("Fairy Ability")))
 
 func do_magic_danger_increase(delta : float):
-	if (is_using_fairy and enable_abilities and hub.temper.is_form_locked()):
+	if (is_using_fairy and enable_abilities and !hub.damage.is_player_defeated and hub.temper.is_form_locked()):
 		move_magic_toward(max_magic, magic_danger_increase_rate * get_current_magic_portion() * hub.movement.get_speed_portion() * delta)

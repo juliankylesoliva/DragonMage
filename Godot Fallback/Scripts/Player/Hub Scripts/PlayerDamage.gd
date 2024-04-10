@@ -4,6 +4,8 @@ class_name PlayerDamage
 
 signal took_damage
 
+signal defeated
+
 @export var hub : PlayerHub
 
 @export var fairy_guard_attack : FairyGuardAttack
@@ -36,6 +38,8 @@ var current_iframe_timer : float = 0
 
 var is_damage_invulnerability_flickering : bool = false
 
+var is_player_defeated = false
+
 func _process(delta):
 	update_iframe_timer(delta)
 	do_iframe_sprite_alpha()
@@ -62,11 +66,16 @@ func take_damage(knockback : int = 0):
 		fairy_guard_attack.do_blockstun()
 		return false
 	else:
-		knockback_direction = knockback
-		current_hitstun_timer = hitstun_time
-		damage_taken += 1
-		hub.fairy.cut_magic_in_half()
-		took_damage.emit()
+		if (hub.temper.is_form_locked()):
+			is_player_defeated = true
+			defeated.emit()
+		else:
+			knockback_direction = knockback
+			current_hitstun_timer = hitstun_time
+			damage_taken += 1
+			hub.fairy.cut_magic_in_half()
+			hub.stomp.reset_stomp_combo()
+			took_damage.emit()
 		return true
 
 func on_parry():

@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://dtrw082okub86"]
+
+[ext_resource type="Script" path="res://Scripts/Utility Scripts/CheckpointHandler.gd" id="1_md6wg"]
+
+[node name="CheckpointHandler" type="Node2D"]
+script = ExtResource("1_md6wg")

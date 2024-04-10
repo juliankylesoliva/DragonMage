@@ -29,6 +29,7 @@ PauseHandler="*res://Scripts/Utility Scripts/PauseHandler.gd"
 SoundFactory="*res://Misc Scenes/SoundFactory.tscn"
 EffectFactory="*res://Misc Scenes/EffectFactory.tscn"
 TextPromptParser="*res://Misc Scenes/TextPromptParser.tscn"
+CheckpointHandler="*res://Misc Scenes/CheckpointHandler.tscn"
 
 [display]
 

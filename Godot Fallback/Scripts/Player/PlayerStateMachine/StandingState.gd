@@ -69,6 +69,8 @@ func state_process(_delta):
 		set_next_state(state_machine.get_state_by_name("Deactivated"))
 	elif (hub.form.can_change_form()):
 		set_next_state(state_machine.get_state_by_name("FormChanging"))
+	elif (hub.damage.is_player_defeated):
+		set_next_state(state_machine.get_state_by_name("Defeated"))
 	elif (hub.damage.is_player_damaged()):
 		set_next_state(state_machine.get_state_by_name("Damaged"))
 	elif (hub.char_body.is_on_floor() and (!hub.collisions.is_facing_a_wall() or (hub.get_input_vector().x * hub.movement.get_facing_value()) < 0) and hub.get_input_vector().x != 0):

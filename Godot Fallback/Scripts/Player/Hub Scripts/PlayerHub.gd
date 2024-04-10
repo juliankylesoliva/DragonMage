@@ -23,6 +23,7 @@ class_name PlayerHub
 @export var char_sprite : AnimatedSprite2D
 @export var collision_shape : CollisionShape2D
 @export var stream_player : AudioStreamPlayer2D
+@export var visibility : VisibleOnScreenNotifier2D
 
 @export var raycast_dl : RayCast2D
 @export var raycast_dm : RayCast2D
@@ -62,3 +63,14 @@ func do_respawn():
 
 func set_deactivation(b : bool):
 	is_deactivated = b
+
+func reset_player():
+	movement.reset_crouch_state()
+	movement.reset_current_horizontal_velocity()
+	char_body.velocity = Vector2.ZERO
+	jumping.landing_reset()
+	fairy.reset_starting_magic()
+	fairy.reset_fairy()
+	form.change_to_starting_mode()
+	temper.set_starting_temper_level()
+	stomp.reset_stomp_combo()

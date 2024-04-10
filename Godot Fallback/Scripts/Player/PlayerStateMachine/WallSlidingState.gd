@@ -44,6 +44,8 @@ func state_process(_delta):
 				hub.movement.check_crouch_state()
 			
 			set_next_state(state_machine.get_state_by_name("Falling"))
+	elif (hub.damage.is_player_defeated):
+		set_next_state(state_machine.get_state_by_name("Defeated"))
 	elif (hub.damage.is_player_damaged()):
 		set_next_state(state_machine.get_state_by_name("Damaged"))
 	else:

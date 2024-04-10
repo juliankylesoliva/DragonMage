@@ -26,7 +26,7 @@ var current_form_change_timer : float = 0
 var current_form_change_cooldown_timer : float = 0
 
 func _ready():
-	change_mode(starting_mode)
+	change_to_starting_mode()
 
 func _process(delta):
 	update_form_change_cooldown_timer(delta)
@@ -150,6 +150,9 @@ func set_ctrl_properties(p : PlayerCtrlProperties):
 	
 	hub.attacks.standing_attack_name = p.standing_attack_name
 	hub.attacks.crouching_attack_name = p.crouching_attack_name
+
+func change_to_starting_mode():
+	change_mode(starting_mode)
 
 func change_mode(mode : CharacterMode):
 	set_ctrl_properties(mage_properties if mode == CharacterMode.MAGE else dragon_properties)

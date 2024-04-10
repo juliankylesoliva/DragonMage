@@ -157,7 +157,7 @@ func startup_init():
 
 func startup_update(delta : float):
 	hub.buffers.refresh_speed_preservation_buffer()
-	if ((current_windup_timer > 0 or is_attack_button_held) and !hub.damage.is_player_damaged()):
+	if ((current_windup_timer > 0 or is_attack_button_held) and !hub.damage.is_player_defeated and !hub.damage.is_player_damaged()):
 		if (!Input.is_action_pressed("Attack")):
 			is_attack_button_held = false
 		hub.char_body.velocity = Vector2.ZERO
@@ -174,7 +174,7 @@ func startup_update(delta : float):
 					hub.temper.change_temper_by(fire_tackle_hold_temper_decrease)
 				else:
 					hub.temper.neutralize_temper_by(fire_tackle_hold_temper_decrease)
-	elif (hub.damage.is_player_damaged()):
+	elif (hub.damage.is_player_defeated or hub.damage.is_player_damaged()):
 		end_fire_tackle()
 	else:
 		active_init()
@@ -307,7 +307,7 @@ func endlag_init():
 	current_endlag_timer = fire_tackle_endlag_duration
 
 func endlag_update(delta : float):
-	if (current_endlag_timer > 0 and !is_fire_tackle_endlag_canceled and !hub.damage.is_player_damaged()):
+	if (current_endlag_timer > 0 and !is_fire_tackle_endlag_canceled and !hub.damage.is_player_defeated and !hub.damage.is_player_damaged()):
 		if (!is_player_firing_projectile and !did_player_bump and current_endlag_timer < fire_tackle_endlag_cancelable_time and can_cancel_fire_tackle_endlag()):
 			is_fire_tackle_endlag_canceled = true
 			if (hub.buffers.is_jump_buffer_active() and hub.char_body.is_on_floor()):
@@ -371,6 +371,8 @@ func end_fire_tackle():
 	
 	if (hub.is_deactivated):
 		hub.state_machine.current_state.set_next_state(hub.state_machine.get_state_by_name("Deactivated"))
+	elif (hub.damage.is_player_defeated):
+		hub.state_machine.current_state.set_next_state(hub.state_machine.get_state_by_name("Defeated"))
 	elif (hub.damage.is_player_damaged()):
 		hub.state_machine.current_state.set_next_state(hub.state_machine.get_state_by_name("Damaged"))
 	elif (hub.temper.is_forcing_form_change()):

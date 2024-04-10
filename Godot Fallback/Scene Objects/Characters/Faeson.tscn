@@ -1,9 +1,11 @@
-[gd_scene load_steps=14 format=3 uid="uid://dnhdan6vub1w"]
+[gd_scene load_steps=16 format=3 uid="uid://dnhdan6vub1w"]
 
 [ext_resource type="Texture2D" uid="uid://b71jbwr7ppc6p" path="res://Sprites/Characters/FaesonIdle.png" id="1_0uu6c"]
+[ext_resource type="Texture2D" uid="uid://n6ayjes8arrs" path="res://Sprites/Characters/FaesonDefeat.png" id="1_cfjlq"]
 [ext_resource type="Texture2D" uid="uid://c4w80vpvl0fc6" path="res://Sprites/Characters/FaesonGuard.png" id="1_r4cf1"]
 [ext_resource type="Texture2D" uid="uid://b1vb3xyfgldk3" path="res://Sprites/Characters/FaesonGuardRelease.png" id="2_037xu"]
 [ext_resource type="Script" path="res://Scripts/NPC Scripts/FairyFollow.gd" id="2_cr1nc"]
+[ext_resource type="PackedScene" uid="uid://bpxyaxwfw7023" path="res://Scene Objects/Effects/SpriteTrailSegment.tscn" id="5_0djeq"]
 [ext_resource type="Texture2D" uid="uid://cx881pda25gm8" path="res://Sprites/Effects/GuardShield.png" id="5_81jti"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_2qx5i"]
@@ -32,6 +34,14 @@ region = Rect2(32, 0, 32, 32)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_iw80g"]
 animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_cfjlq")
+}],
+"loop": true,
+"name": &"FaesonDefeat",
+"speed": 60.0
+}, {
 "frames": [{
 "duration": 6.0,
 "texture": SubResource("AtlasTexture_2qx5i")
@@ -82,9 +92,8 @@ light_mask = 8
 visibility_layer = 8
 z_index = 4
 sprite_frames = SubResource("SpriteFrames_iw80g")
-animation = &"FaesonIdle"
+animation = &"FaesonDefeat"
 autoplay = "FaesonIdle"
-frame_progress = 0.555611
 script = ExtResource("2_cr1nc")
 sprite = NodePath(".")
 sigil_sprite = NodePath("AbilitySigil")
@@ -95,6 +104,8 @@ max_sine_amplitude = 16.0
 min_rotation_shift = -0.314
 max_rotation_shift = 0.314
 easing = 0.125
+sprite_trail_segment_scene = ExtResource("5_0djeq")
+trail_color = Color(0.568627, 0.619608, 0.788235, 1)
 
 [node name="AbilitySigil" type="AnimatedSprite2D" parent="."]
 visible = false

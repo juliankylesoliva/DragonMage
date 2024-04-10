@@ -13,6 +13,9 @@ var is_fading_out : bool = false
 func _ready():
 	volume_db = starting_volume
 
+func restart_music():
+	play()
+
 func fade_out():
 	if (is_fading_out or !is_playing()):
 		return

@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://b6ourfnqhy0wk"]
+[gd_scene load_steps=26 format=3 uid="uid://b6ourfnqhy0wk"]
 
 [ext_resource type="Script" path="res://Scripts/Utility Scripts/Level.gd" id="1_3mmw4"]
 [ext_resource type="PackedScene" uid="uid://d0ff35cm57xb7" path="res://Scene Objects/Effects/DroppedFragment.tscn" id="2_gdxu6"]
@@ -24,6 +24,7 @@
 [ext_resource type="AudioStream" uid="uid://u3a1srjlcm6f" path="res://Music/Kubbi - Up In My Jam (All Of A Sudden).wav" id="21_4frsm"]
 [ext_resource type="PackedScene" uid="uid://btq4qla5fyq0n" path="res://Scene Objects/Misc/LevelMusicPlayer.tscn" id="21_sl55a"]
 [ext_resource type="PackedScene" uid="uid://brhoroc2w6jwi" path="res://Scene Objects/UI/Textbox.tscn" id="24_6d5rm"]
+[ext_resource type="PackedScene" uid="uid://bjeiexqfc7oht" path="res://Scene Objects/Misc/DefeatScreen.tscn" id="25_ho2ji"]
 
 [node name="CH1_LV1" type="Node2D" node_paths=PackedStringArray("player_reference", "starting_room", "room_list")]
 script = ExtResource("1_3mmw4")
@@ -153,6 +154,9 @@ room_destination = NodePath("../../CH1_LV1_R7")
 [node name="Warp 1" parent="CH1_LV1_R8" index="5" node_paths=PackedStringArray("room_destination")]
 room_destination = NodePath("../../CH1_LV1_R9")
 
+[node name="Checkpoint" parent="CH1_LV1_R8" index="6" node_paths=PackedStringArray("level_origin")]
+level_origin = NodePath("../..")
+
 [node name="CH1_LV1_R9" parent="." instance=ExtResource("12_jkpqh")]
 position = Vector2(0, 1856)
 
@@ -206,6 +210,15 @@ ui_canvas = NodePath("../UI_Canvas")
 [node name="LevelMusicPlayer" parent="." instance=ExtResource("21_sl55a")]
 stream = ExtResource("21_4frsm")
 
+[node name="DefeatScreen" parent="." node_paths=PackedStringArray("screen_fade") instance=ExtResource("25_ho2ji")]
+screen_fade = NodePath("../UI_Canvas/ScreenFade")
+
+[connection signal="player_defeated" from="." to="UI_Canvas/TemperMeterUI" method="hide"]
+[connection signal="player_defeated" from="." to="UI_Canvas/MagicMeterUI" method="hide"]
+[connection signal="player_defeated" from="." to="UI_Canvas/FragmentCounterUI" method="hide"]
+[connection signal="player_defeated" from="." to="Textbox" method="hide_textbox"]
+[connection signal="player_defeated" from="." to="LevelMusicPlayer" method="stop"]
+[connection signal="player_defeated" from="." to="DefeatScreen" method="do_defeat_screen"]
 [connection signal="level_finished" from="CH1_LV1_R11/FinishLine" to="." method="level_finish"]
 [connection signal="level_finished" from="CH1_LV1_R11/FinishLine" to="UI_Canvas/TemperMeterUI" method="hide"]
 [connection signal="level_finished" from="CH1_LV1_R11/FinishLine" to="UI_Canvas/MagicMeterUI" method="hide"]

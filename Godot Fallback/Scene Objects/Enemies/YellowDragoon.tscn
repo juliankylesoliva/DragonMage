@@ -101,7 +101,6 @@ sprite = NodePath("../AnimatedSprite2D")
 shape = NodePath("../CollisionShape2D")
 visibility_notifier = NodePath("../VisibleOnScreenNotifier2D")
 defeated_deactivation_camera_distance = 800.0
-vertical_launch_velocity_on_defeat = -128.0
 visibility_layer_on_defeat = 32
 z_index_on_defeat = 8
 

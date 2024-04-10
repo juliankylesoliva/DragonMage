@@ -1,9 +1,10 @@
-[gd_scene load_steps=18 format=3 uid="uid://cvs86w1eriytn"]
+[gd_scene load_steps=19 format=3 uid="uid://cvs86w1eriytn"]
 
 [ext_resource type="Script" path="res://Scripts/Utility Scripts/Room.gd" id="1_cvffg"]
 [ext_resource type="TileSet" uid="uid://dhwi7i1loa2pd" path="res://Sprites/Tiles/Test Tiles/TestTileSet.tres" id="2_3gy77"]
 [ext_resource type="PackedScene" uid="uid://dqbo0wu6hm8lj" path="res://Scene Objects/Objects/WarpTrigger.tscn" id="3_ghsya"]
 [ext_resource type="Script" path="res://Scripts/Object Scripts/HiddenPassage.gd" id="3_mvx1m"]
+[ext_resource type="PackedScene" uid="uid://vtyaphi47lrf" path="res://Scene Objects/Objects/Checkpoint.tscn" id="4_61onh"]
 [ext_resource type="PackedScene" uid="uid://cokv5pygwyda" path="res://Scene Objects/Objects/BreakableFireBlock.tscn" id="5_eprou"]
 [ext_resource type="PackedScene" uid="uid://bajk0w7eoh6o8" path="res://Scene Objects/Objects/ReinforcedBlock.tscn" id="6_c3otm"]
 [ext_resource type="PackedScene" uid="uid://bgww8jir45ktf" path="res://Scene Objects/Enemies/BlueDragoon.tscn" id="7_ouneq"]
@@ -83,6 +84,9 @@ room_entrance_index = 1
 position = Vector2(2192, 224)
 room_origin = NodePath("..")
 room_destination = NodePath("..")
+
+[node name="Checkpoint" parent="." instance=ExtResource("4_61onh")]
+position = Vector2(128, 192)
 
 [node name="Medal Fragments" type="Node2D" parent="."]
 

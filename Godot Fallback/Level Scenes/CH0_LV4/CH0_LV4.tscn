@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://qa22n4g30owo"]
+[gd_scene load_steps=21 format=3 uid="uid://qa22n4g30owo"]
 
 [ext_resource type="Script" path="res://Scripts/Utility Scripts/Level.gd" id="1_xccb8"]
 [ext_resource type="PackedScene" uid="uid://c6qw77ovfwgfs" path="res://Player.tscn" id="2_616c6"]
@@ -19,6 +19,7 @@
 [ext_resource type="PackedScene" uid="uid://buykytsdrlnsg" path="res://Scene Objects/Misc/ResultsScreen.tscn" id="14_rug2n"]
 [ext_resource type="PackedScene" uid="uid://btq4qla5fyq0n" path="res://Scene Objects/Misc/LevelMusicPlayer.tscn" id="18_seqrb"]
 [ext_resource type="AudioStream" uid="uid://cknfggv1ublsj" path="res://Music/02 Underclocked (underunderclocked mix).wav" id="19_k0bib"]
+[ext_resource type="PackedScene" uid="uid://bjeiexqfc7oht" path="res://Scene Objects/Misc/DefeatScreen.tscn" id="20_7hxk8"]
 
 [node name="CH0_LV4" type="Node2D" node_paths=PackedStringArray("player_reference", "starting_room", "room_list")]
 script = ExtResource("1_xccb8")
@@ -144,6 +145,13 @@ ui_canvas = NodePath("../UI_Canvas")
 [node name="LevelMusicPlayer" parent="." instance=ExtResource("18_seqrb")]
 stream = ExtResource("19_k0bib")
 
+[node name="DefeatScreen" parent="." node_paths=PackedStringArray("screen_fade") instance=ExtResource("20_7hxk8")]
+screen_fade = NodePath("../UI_Canvas/ScreenFade")
+
+[connection signal="player_defeated" from="." to="UI_Canvas/TemperMeterUI" method="hide"]
+[connection signal="player_defeated" from="." to="Textbox" method="hide_textbox"]
+[connection signal="player_defeated" from="." to="LevelMusicPlayer" method="stop"]
+[connection signal="player_defeated" from="." to="DefeatScreen" method="do_defeat_screen"]
 [connection signal="level_finished" from="CH0_LV4_R8/FinishLine" to="." method="level_finish"]
 [connection signal="level_finished" from="CH0_LV4_R8/FinishLine" to="UI_Canvas/TemperMeterUI" method="hide"]
 [connection signal="level_finished" from="CH0_LV4_R8/FinishLine" to="UI_Canvas/ResultsScreen" method="on_level_complete"]

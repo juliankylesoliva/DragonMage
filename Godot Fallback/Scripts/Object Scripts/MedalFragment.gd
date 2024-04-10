@@ -41,6 +41,10 @@ func _physics_process(delta):
 		else:
 			current_jump_velocity += (base_gravity * collect_gravity_scale * delta)
 
+func mark_as_collected():
+	is_collected = true
+	sprite.hide()
+
 func set_level_ref(level : Level):
 	level_ref = level
 

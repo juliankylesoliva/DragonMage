@@ -2,6 +2,8 @@ extends Node
 
 class_name Level
 
+signal player_defeated
+
 @export var player_reference : CharacterBody2D
 
 @export var starting_room : Room
@@ -22,7 +24,7 @@ class_name Level
 
 @export var dropped_fragment_scene : PackedScene
 
-var player_ref : PlayerHub
+var player_hub : PlayerHub
 
 var fragment_array : Array[MedalFragment]
 
@@ -34,30 +36,41 @@ var mage_fragments : int = 0
 
 var dragon_fragments : int = 0
 
+var restore_from_checkpoint : bool = false
+
 func _ready():
 	PauseHandler.enable_pausing(true)
 	level_startup()
 
 func level_startup():
-	var destination_coords : Vector2 = starting_room.get_room_entrance_coordinates(starting_room_entrance_index)
+	var restored_room_index : int = CheckpointHandler.saved_room_index
+	if (restored_room_index != -1 and restored_room_index >= 0 and restored_room_index < room_list.size()):
+		restore_from_checkpoint = true
+	
+	var room_to_use : Room = (room_list[restored_room_index] if restore_from_checkpoint else starting_room)
+	
+	var destination_coords : Vector2 = (CheckpointHandler.saved_destination_coords if restore_from_checkpoint else starting_room.get_room_entrance_coordinates(starting_room_entrance_index))
 	player_reference.global_position = destination_coords
 	
 	for child in player_reference.get_children():
 		if child is PlayerHub:
-			player_ref = (child as PlayerHub)
+			player_hub = (child as PlayerHub)
 			break
 	
-	if (player_ref == null):
+	if (player_hub == null):
 		push_warning("PlayerHub not found in player reference!")
 	
-	player_ref.set_respawn_position(destination_coords)
+	player_hub.set_respawn_position(destination_coords)
 	
-	player_ref.damage.took_damage.connect(drop_fragments)
+	player_hub.damage.took_damage.connect(drop_fragments)
+	player_hub.damage.defeated.connect(on_player_defeat)
+	
+	player_hub.fairy.fairy_ref.snap_to_target_node()
 	
 	for room in room_list:
-		room.set_enemy_player_refs(player_ref)
+		room.set_enemy_player_refs(player_hub)
 		
-		if (room != starting_room):
+		if (room != room_to_use):
 			room.deactivate_room()
 		
 		for fragment in room.medal_fragments:
@@ -68,14 +81,49 @@ func level_startup():
 	
 	min_fragment_req_for_medal = ((num_fragments_in_level * min_fragment_collection_rate) as int)
 	
-	starting_room.activate_room()
+	if (num_fragments_in_level == CheckpointHandler.saved_fragment_status_array.size()):
+		mage_fragments = CheckpointHandler.saved_mage_fragments
+		dragon_fragments = CheckpointHandler.saved_dragon_fragments
+		for i in CheckpointHandler.saved_fragment_status_array.size():
+			if (CheckpointHandler.saved_fragment_status_array[i]):
+				fragment_array[i].mark_as_collected()
 	
-	player_ref.camera.snap_camera_to_player()
+	room_to_use.activate_room()
+	
+	player_hub.camera.snap_camera_to_player()
+
+func level_respawn():
+	var current_room : Room = get_current_room()
+	PauseHandler.enable_pausing(true)
+	var destination_coords : Vector2 = current_room.get_room_entrance_coordinates(starting_room_entrance_index)
+	player_reference.global_position = destination_coords
+	player_hub.state_machine.current_state.set_next_state(player_hub.state_machine.get_state_by_name("Standing"))
+	player_hub.set_respawn_position(destination_coords)
+	player_hub.reset_player()
+	current_room.set_process_mode(PROCESS_MODE_INHERIT)
+	respawn_all_enemies()
+	current_room.activate_room()
+
+func respawn_all_enemies():
+	for room in room_list:
+		room.respawn_enemies()
 
 func level_finish():
-	player_ref.set_deactivation(true)
+	player_hub.set_deactivation(true)
 	if (ui_container != null):
 		ui_container.set_visible(false)
+
+func get_current_room():
+	for room in room_list:
+		if (room.is_room_active):
+			return room
+	return null
+
+func get_current_room_index():
+	for i in room_list.size():
+		if (room_list[i].is_room_active):
+			return i
+	return -1
 
 func increment_fragments(is_mage : bool):
 	if (is_mage):
@@ -162,4 +210,11 @@ func spawn_dropped_fragments(mage : int, dragon : int):
 			else:
 				dragon -= 1
 		
-		temp_fragment.global_position = player_ref.char_body.global_position
+		temp_fragment.global_position = player_hub.char_body.global_position
+
+func on_player_defeat():
+	PauseHandler.enable_pausing(false)
+	var current_room : Room = get_current_room()
+	if (current_room != null):
+		current_room.call_deferred("set_process_mode", PROCESS_MODE_DISABLED)
+	player_defeated.emit()

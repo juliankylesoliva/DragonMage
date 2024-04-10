@@ -75,6 +75,7 @@ func check_menu_selection():
 
 func do_restart():
 	PauseHandler.set_unpause_lock(true)
+	CheckpointHandler.clear_checkpoint()
 	is_input_allowed = false
 	menu_cursor.do_selection_movement()
 	await get_tree().create_timer(1.0).timeout
@@ -84,6 +85,7 @@ func do_restart():
 
 func do_title_screen():
 	PauseHandler.set_unpause_lock(true)
+	CheckpointHandler.clear_checkpoint()
 	is_input_allowed = false
 	menu_cursor.do_selection_movement()
 	await get_tree().create_timer(1.0).timeout

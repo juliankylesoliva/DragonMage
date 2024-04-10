@@ -1,16 +1,61 @@
-[gd_scene load_steps=4 format=3 uid="uid://pjw4cp1vl74t"]
+[gd_scene load_steps=9 format=3 uid="uid://pjw4cp1vl74t"]
 
 [ext_resource type="Texture2D" uid="uid://t3f4d4l0ven" path="res://Sprites/Effects/InvincibilityShield.png" id="1_q736e"]
 [ext_resource type="PackedScene" uid="uid://c2gtx8g0uvof2" path="res://Scene Objects/Hitboxes/InvincibilityShieldHitbox.tscn" id="2_e6h3h"]
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_epvxs"]
+atlas = ExtResource("1_q736e")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rb3q0"]
+atlas = ExtResource("1_q736e")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d8hl6"]
+atlas = ExtResource("1_q736e")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rl37g"]
+atlas = ExtResource("1_q736e")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_28ijt"]
+atlas = ExtResource("1_q736e")
+region = Rect2(0, 0, 64, 64)
+
 [sub_resource type="SpriteFrames" id="SpriteFrames_u0n8c"]
 animations = [{
 "frames": [{
-"duration": 1.0,
-"texture": ExtResource("1_q736e")
+"duration": 6.0,
+"texture": SubResource("AtlasTexture_epvxs")
+}, {
+"duration": 6.0,
+"texture": null
 }],
 "loop": true,
-"name": &"default",
+"name": &"Disappearing",
+"speed": 60.0
+}, {
+"frames": [{
+"duration": 6.0,
+"texture": SubResource("AtlasTexture_rb3q0")
+}, {
+"duration": 6.0,
+"texture": SubResource("AtlasTexture_d8hl6")
+}],
+"loop": true,
+"name": &"Loop",
+"speed": 60.0
+}, {
+"frames": [{
+"duration": 9.0,
+"texture": SubResource("AtlasTexture_rl37g")
+}, {
+"duration": 12.0,
+"texture": SubResource("AtlasTexture_28ijt")
+}],
+"loop": false,
+"name": &"Start",
 "speed": 60.0
 }]
 
@@ -20,5 +65,7 @@ light_mask = 32
 visibility_layer = 32
 z_index = 6
 sprite_frames = SubResource("SpriteFrames_u0n8c")
+animation = &"Disappearing"
+autoplay = "Start"
 
 [node name="InvincibilityShieldHitbox" parent="." instance=ExtResource("2_e6h3h")]

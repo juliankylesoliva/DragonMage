@@ -28,6 +28,8 @@ func state_process(_delta):
 			SoundFactory.play_sound_by_name("jump_draelyn_headbonk", hub.char_body.global_position, -2)
 		
 		set_next_state(state_machine.get_state_by_name("Falling"))
+	elif (hub.damage.is_player_defeated):
+		set_next_state(state_machine.get_state_by_name("Defeated"))
 	elif (hub.damage.is_player_damaged()):
 		set_next_state(state_machine.get_state_by_name("Damaged"))
 	else:

@@ -135,6 +135,7 @@ func do_menu():
 		previous_menu_selection = current_menu_selection
 
 func do_main_menu():
+	CheckpointHandler.clear_checkpoint()
 	menu_cursor.do_selection_movement()
 	await get_tree().create_timer(1.0).timeout
 	screen_fade.set_fade(1, 1, Color.BLACK)
@@ -142,6 +143,7 @@ func do_main_menu():
 	get_tree().change_scene_to_file(title_scene_path)
 
 func do_retry_level():
+	CheckpointHandler.clear_checkpoint()
 	menu_cursor.do_selection_movement()
 	await get_tree().create_timer(1.0).timeout
 	screen_fade.set_fade(1, 1, Color.BLACK)
@@ -186,7 +188,7 @@ func do_results_screen():
 	if (show_damage_result):
 		damage_taken_label.set_visible(true)
 		var current_damage_value : float = 0
-		var target_damage_value : float = level.player_ref.damage.damage_taken
+		var target_damage_value : float = level.player_hub.damage.damage_taken
 		previous_whole_value = 0
 		results_sfx.stream = damage_tick_sfx_stream
 		while (current_damage_value < target_damage_value):

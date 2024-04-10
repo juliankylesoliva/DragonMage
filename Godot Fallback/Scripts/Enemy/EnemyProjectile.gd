@@ -10,7 +10,11 @@ class_name EnemyProjectile
 
 @export var impact_effect_name : String = "DragoonProjectileImpact"
 
+@export var reflect_impact_effect_name : String = "ReflectImpact"
+
 @export var destroy_sound_name : String = "enemy_dragoon_projectile_destroy"
+
+@export var reflect_sound_name : String = "attack_reflect"
 
 var is_moving_right : bool = false
 
@@ -31,9 +35,11 @@ func destroy_projectile():
 
 func reflect_projectile():
 	is_reflected = true
+	EffectFactory.get_effect(reflect_impact_effect_name, global_position)
 	velocity.x *= -abs(reflected_speed_boost)
 	is_moving_right = !is_moving_right
 	projectile_sprite.flip_h = !is_moving_right
+	SoundFactory.play_sound_by_name(reflect_sound_name, global_position, 0, 1, "SFX")
 
 func _on_visible_on_screen_notifier_2d_screen_exited():
 	queue_free()
@@ -73,6 +79,5 @@ func hit_check(body):
 	elif (is_reflected and body.has_meta("Tag") and body.get_meta("Tag") == "EnemyProjectile"):
 		if (body is EnemyProjectile and !(body as EnemyProjectile).is_reflected):
 			(body as EnemyProjectile).destroy_projectile()
-			self.destroy_projectile()
 	else:
 		pass

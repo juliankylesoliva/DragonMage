@@ -16,7 +16,7 @@ func defeat_enemy(body):
 			var enemy : Enemy = (child as Enemy)
 			if (enemy.defeat_enemy(damage_type)):
 				#hit.emit()
-				EffectFactory.get_effect("MagicImpact", body.global_position)
+				EffectFactory.get_effect("InvincibilityShieldImpact", body.global_position)
 				return
 
 func destroy_enemy_projectile(body):

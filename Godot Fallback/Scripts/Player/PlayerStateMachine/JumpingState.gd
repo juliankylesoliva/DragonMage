@@ -66,6 +66,8 @@ func state_process(_delta : float):
 		set_next_state(state_machine.get_state_by_name("Jumping"))
 	elif (hub.jumping.is_fast_falling || hub.char_body.velocity.y >= 0):
 		set_next_state(state_machine.get_state_by_name("Falling"))
+	elif (hub.damage.is_player_defeated):
+		set_next_state(state_machine.get_state_by_name("Defeated"))
 	elif (hub.damage.is_player_damaged()):
 		set_next_state(state_machine.get_state_by_name("Damaged"))
 	else:

@@ -26,21 +26,26 @@ class_name Enemy
 
 @export var gravity_scale : float = 3
 
-@export_flags_2d_render var visibility_layer_on_defeat
+@export var normal_z_index : int = 3
 
 @export var z_index_on_defeat : int = 6
 
 var is_defeated : bool = false
 
+var home_position : Vector2 = Vector2.ZERO
+
 func defeat_enemy(damage_type : StringName):
 	if (!is_defeated and !immunity_list.has(damage_type)):
 		is_defeated = true
 		body.velocity = (vertical_launch_velocity_on_defeat * Vector2.UP if damage_type != "PARRY" and damage_type != "INVINCIBILITY" else launch_velocity_on_parry * Vector2(-movement.get_facing_value(), -1))
-		sprite.visibility_layer = visibility_layer_on_defeat
 		sprite.z_index = z_index_on_defeat
 		on_defeat()
 		return true
 	return false
+
+func respawn_enemy():
+	is_defeated = false
+	sprite.z_index = normal_z_index
 
 func check_defeated_camera_distance():
 	if (is_defeated):

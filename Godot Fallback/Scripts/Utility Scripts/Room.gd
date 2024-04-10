@@ -53,21 +53,23 @@ func deactivate_room():
 
 func activate_enemies():
 	initialize_enemy_list()
-	
 	for enemy in enemy_list:
 		if (!enemy.is_defeated):
 			enemy.activate_enemy()
 
 func deactivate_enemies():
 	initialize_enemy_list()
-	
 	for enemy in enemy_list:
 		if (!enemy.is_defeated):
 			enemy.deactivate_enemy()
 
+func respawn_enemies():
+	initialize_enemy_list()
+	for enemy in enemy_list:
+		enemy.respawn_enemy()
+
 func set_enemy_player_refs(player : PlayerHub):
 	initialize_enemy_list()
-	
 	for enemy in enemy_list:
 		if (enemy.player_detection.player_ref == null):
 			enemy.player_detection.player_ref = player

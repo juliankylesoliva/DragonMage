@@ -56,7 +56,7 @@ func on_attack_state_enter():
 func attack_state_process(_delta : float):
 	if (hub.is_deactivated):
 		hub.state_machine.current_state.set_next_state(hub.state_machine.get_state_by_name("Deactivated"))
-	elif (hub.damage.is_player_damaged() or hub.collisions.is_facing_a_wall() or hub.collisions.is_near_a_ledge() or hub.collisions.get_distance_to_ground() > hub.char_body.floor_snap_length):
+	elif (hub.damage.is_player_defeated or hub.damage.is_player_damaged() or hub.collisions.is_facing_a_wall() or hub.collisions.is_near_a_ledge() or hub.collisions.get_distance_to_ground() > hub.char_body.floor_snap_length):
 		stop_slide()
 	elif (!hub.collisions.is_in_ceiling_when_uncrouched() and current_slide_timer > slide_uncancelable_time and (hub.get_input_vector().x * hub.char_body.velocity.x) > 0 and hub.buffers.is_jump_buffer_active()):
 		do_jump_cancel()
@@ -120,7 +120,9 @@ func do_attack_cancel():
 func stop_slide():
 	hub.char_body.velocity.x = (0 if (hub.damage.is_player_damaged() or hub.collisions.is_facing_a_wall() or (hub.collisions.is_near_a_ledge() and hub.get_input_vector().x == 0)) else (hub.movement.get_facing_value() * min(horizontal_result, hub.movement.top_speed)))
 	hub.movement.current_horizontal_velocity = hub.char_body.velocity.x
-	if (hub.damage.is_player_damaged()):
+	if (hub.damage.is_player_defeated):
+		hub.state_machine.current_state.set_next_state(hub.state_machine.get_state_by_name("Defeated"))
+	elif (hub.damage.is_player_damaged()):
 		hub.state_machine.current_state.set_next_state(hub.state_machine.get_state_by_name("Damaged"))
 	elif (hub.char_body.is_on_floor() and (hub.get_input_vector().x != 0 or hub.char_body.velocity.x != 0)):
 		hub.state_machine.current_state.set_next_state(hub.state_machine.get_state_by_name("Running"))

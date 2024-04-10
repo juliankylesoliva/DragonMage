@@ -72,6 +72,9 @@ func validate_parameters():
 	cold_threshold = cold_segments
 	hot_threshold = (total_segments - (hot_segments - 1))
 	
+	set_starting_temper_level()
+
+func set_starting_temper_level():
 	current_temper_level = ((cold_threshold + 1) if hub.form.is_a_mage() else (hot_threshold - 1))
 
 func neutralize_temper_by(num : int):

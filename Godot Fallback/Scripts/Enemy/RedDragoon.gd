@@ -39,6 +39,10 @@ func _physics_process(delta):
 	else:
 		update_state_timer(delta)
 
+func respawn_enemy():
+	super.respawn_enemy()
+	shape.disabled = false
+
 func spawn_shades():
 	var temp_shades : Node = dropped_shades_scene.instantiate()
 	body.add_sibling(temp_shades)

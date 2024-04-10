@@ -22,6 +22,12 @@ class_name FairyFollow
 
 @export var easing : float = 0.99
 
+@export var sprite_trail_segment_scene : PackedScene
+
+@export var trail_spawn_interval : float = 0.05
+
+@export_color_no_alpha var trail_color = Color.WHITE
+
 var default_home_position : Vector2 = Vector2.ZERO
 
 var current_home_position : Vector2 = Vector2.ZERO
