@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://bq7ruy715yf60"]
+[gd_scene load_steps=15 format=3 uid="uid://bq7ruy715yf60"]
 
 [ext_resource type="Script" path="res://Scripts/Utility Scripts/Room.gd" id="1_e4gek"]
 [ext_resource type="TileSet" uid="uid://dhwi7i1loa2pd" path="res://Sprites/Tiles/Test Tiles/TestTileSet.tres" id="2_n0mpe"]
@@ -12,6 +12,7 @@
 [ext_resource type="Texture2D" uid="uid://bv65yl4nt5gs4" path="res://Sprites/Backgrounds/0_4_BG/BackWall.png" id="10_erh42"]
 [ext_resource type="Texture2D" uid="uid://miqcvhqk5etv" path="res://Sprites/Backgrounds/0_4_BG/Catwalks.png" id="11_ypv80"]
 [ext_resource type="Texture2D" uid="uid://bsykoqgrumq5c" path="res://Sprites/Backgrounds/0_4_BG/BackFloor.png" id="12_ia4a0"]
+[ext_resource type="PackedScene" uid="uid://vtyaphi47lrf" path="res://Scene Objects/Objects/Checkpoint.tscn" id="13_frfda"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fywpn"]
 size = Vector2(6272, 32)
@@ -83,6 +84,9 @@ room_entrance_index = 1
 
 [node name="CollisionShape2D" parent="FallWarp" index="0"]
 shape = SubResource("RectangleShape2D_fywpn")
+
+[node name="Checkpoint" parent="." instance=ExtResource("13_frfda")]
+position = Vector2(96, 224)
 
 [node name="Objects" type="Node2D" parent="."]
 

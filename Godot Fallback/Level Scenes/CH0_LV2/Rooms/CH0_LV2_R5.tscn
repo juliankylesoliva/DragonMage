@@ -69,7 +69,7 @@ room_destination = NodePath("..")
 
 [node name="KnigelNPC" parent="." instance=ExtResource("5_eo4gl")]
 position = Vector2(64, 224)
-textbox_strings = Array[String](["Knigel: Bad news, Drae... there's a rather sturdy roadblock just past this slope. Do you think you can use your fire breath to break it down?", "Draelyn: No problem! If I press or hold [Attack] towards the end of my Fire Tackle, I'll launch a large fireball that can go through walls! The extra momentum makes it strong enough to break sturdier blocks!"])
+textbox_strings = Array[String](["Knigel: Bad news, EmDee... there's a rather sturdy roadblock just past this slope. Do you think you can use your fire breath to break it down?", "Draelyn: No problem! If I press or hold [Attack] towards the end of my Fire Tackle, I'll launch a large fireball that can go through walls! The extra momentum makes it strong enough to break sturdier blocks!"])
 
 [node name="ReinforcedBlock" parent="." instance=ExtResource("4_136hc")]
 position = Vector2(416, 96)

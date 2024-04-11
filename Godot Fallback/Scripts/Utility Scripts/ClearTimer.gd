@@ -6,6 +6,10 @@ var current_time : float = 0
 
 var is_timer_stopped : bool = false
 
+func _ready():
+	if (CheckpointHandler.saved_clear_time >= 0):
+		current_time = CheckpointHandler.saved_clear_time
+
 func _physics_process(delta):
 	if (!is_timer_stopped):
 		current_time += delta

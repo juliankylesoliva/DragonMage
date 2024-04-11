@@ -72,7 +72,7 @@ textbox_strings = Array[String](["Draelyn: (I should really be mindful of how I 
 
 [node name="KnigelNPC" parent="." instance=ExtResource("4_tiytc")]
 position = Vector2(320, 192)
-textbox_strings = Array[String](["Knigel: Alright, Drae. Let's go over some of the basics of your dragon powers!", "Draelyn: I'm fired up, Knigel! Literally!", "Knigel: Start by jumping into this wall to climb! Remember to use your wings!", "Draelyn: Piece of cake, I don't even NEED to use my arms!"])
+textbox_strings = Array[String](["Knigel: Alright, EmDee. Let's go over some of the basics of your dragon powers!", "Draelyn: I'm fired up, Knigel! Literally!", "Knigel: Start by jumping into this wall to climb! Remember to use your wings!", "Draelyn: Piece of cake, I don't even NEED to use my arms!"])
 
 [node name="HintBubble2" parent="." instance=ExtResource("5_dnkxd")]
 position = Vector2(896, 232)

@@ -89,7 +89,6 @@ func can_use_attack():
 		return (!is_invincibility_active and hub.fairy.current_magic >= min_magic_cost and !hub.fairy.is_magic_full() and hub.char_body.is_on_floor() and !hub.damage.is_player_damaged() and state_name != "Attacking" and (hub.attacks.current_attack == null or hub.attacks.current_attack.name != self.name) and !hub.fairy.is_fairy_ability_cooldown_active())
 	else:
 		return (hub.fairy.is_magic_full() and !is_invincibility_active and shield_instance == null)
-	
 
 func use_attack():
 	if (shield_instance == null):
@@ -101,6 +100,7 @@ func use_attack():
 		shield_instance = (temp_instance as AnimatedSprite2D)
 		hub.char_body.add_child(shield_instance)
 		(shield_instance as Node2D).global_position = hub.char_body.global_position
+		hub.temper.set_starting_temper_level()
 
 func on_attack_state_enter():
 	startup_init()

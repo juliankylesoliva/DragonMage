@@ -90,7 +90,7 @@ shape = SubResource("RectangleShape2D_u81gb")
 
 [node name="KnigelNPC" parent="." instance=ExtResource("4_lbegf")]
 position = Vector2(192, 224)
-textbox_strings = Array[String](["Knigel: Before we continue, Drae, I've gotta ask: How do you climb so high up with your wings sometimes? Looking at this tall wall up ahead had me wondering about it...", "Draelyn: Hmm... It depends on how much speed I have--my wings can carry that extra momentum to the top. The easiest way should be a running start combined with an upwards Fire Tackle by pressing [Move Up]+[Attack]. I'll gain a little bit of height from the Fire Tackle, but I should also distance myself so that I don't bump into the wall before my Fire Tackle ends.", "Knigel: So basically the faster you are, the higher you'll climb?", "Draelyn: Pretty much."])
+textbox_strings = Array[String](["Knigel: Before we continue, EmDee, I've gotta ask: How do you climb so high up with your wings sometimes? Looking at this tall wall up ahead had me wondering about it...", "Draelyn: Hmm... It depends on how much speed I have--my wings can carry that extra momentum to the top. The easiest way should be a running start combined with an upwards Fire Tackle by pressing [Move Up]+[Attack]. I'll gain a little bit of height from the Fire Tackle, but I should also distance myself so that I don't bump into the wall before my Fire Tackle ends.", "Knigel: ...So basically the faster you are, the higher you'll climb?", "Draelyn: Pretty much."])
 
 [node name="HintBubble" parent="." instance=ExtResource("5_2v3kh")]
 position = Vector2(736, -248)

@@ -78,11 +78,12 @@ func _on_body_entered(body):
 		for child in body.get_children():
 			if (child is PlayerHub):
 				var hub : PlayerHub = (child as PlayerHub)
-				hub.temper.set_temper_level(hub.temper.get_min_warm_threshold() if current_state <= -1 else hub.temper.get_max_warm_threshold() if current_state >= 1 else hub.temper.get_warm_midpoint())
-				SoundFactory.play_sound_by_name("object_item_pickup", global_position, -2)
-				if (enable_respawning):
-					visible = false
-					current_respawn_time_left = respawn_time
+				if (!hub.damage.is_player_damaged()):
+					hub.temper.set_temper_level(hub.temper.get_min_warm_threshold() if current_state <= -1 else hub.temper.get_max_warm_threshold() if current_state >= 1 else hub.temper.get_warm_midpoint())
+					SoundFactory.play_sound_by_name("object_item_pickup", global_position, -2)
+					if (enable_respawning):
+						visible = false
+						current_respawn_time_left = respawn_time
 				break
 		if (!enable_respawning):
 			queue_free()

@@ -25,12 +25,13 @@
 [ext_resource type="PackedScene" uid="uid://btq4qla5fyq0n" path="res://Scene Objects/Misc/LevelMusicPlayer.tscn" id="23_c6dlv"]
 [ext_resource type="AudioStream" uid="uid://bs4yog04kmdd6" path="res://Music/Eight_Bit_Dungeon_Monster_Stomp.wav" id="24_ar4bd"]
 
-[node name="CH0_LV3" type="Node2D" node_paths=PackedStringArray("player_reference", "starting_room", "room_list")]
+[node name="CH0_LV3" type="Node2D" node_paths=PackedStringArray("player_reference", "starting_room", "room_list", "clear_timer")]
 script = ExtResource("1_2pe2a")
 player_reference = NodePath("Player")
 starting_room = NodePath("CH0_LV3_R1")
 room_list = [NodePath("CH0_LV3_R1"), NodePath("CH0_LV3_R2"), NodePath("CH0_LV3_R3"), NodePath("CH0_LV3_R4"), NodePath("CH0_LV3_R5"), NodePath("CH0_LV3_R6"), NodePath("CH0_LV3_R7"), NodePath("CH0_LV3_R8"), NodePath("CH0_LV3_R9"), NodePath("CH0_LV3_R10"), NodePath("CH0_LV3_R11"), NodePath("CH0_LV3_R12"), NodePath("CH0_LV3_R13"), NodePath("CH0_LV3_R14")]
 dropped_fragment_scene = ExtResource("2_qdijq")
+clear_timer = NodePath("ClearTimer")
 
 [node name="Player" parent="." instance=ExtResource("2_oq6xx")]
 position = Vector2(224, 223)

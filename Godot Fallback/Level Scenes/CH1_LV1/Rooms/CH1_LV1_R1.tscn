@@ -112,6 +112,7 @@ position = Vector2(1104, 128)
 position = Vector2(1088, 32)
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+visible = false
 
 [node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
 motion_scale = Vector2(0.01, 0)

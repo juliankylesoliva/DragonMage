@@ -69,6 +69,11 @@ func check_player_parry():
 		return player_ref.damage.is_player_parrying()
 	return false
 
+func check_player_guarding():
+	if (player_ref != null):
+		return (player_ref.damage.is_player_guarding() and ((enemy.movement.get_facing_value() * player_ref.movement.get_facing_value()) < 0))
+	return false
+
 func check_player_detection_radius():
 	if (player_ref != null):
 		var player_distance : float = get_distance_to_player()

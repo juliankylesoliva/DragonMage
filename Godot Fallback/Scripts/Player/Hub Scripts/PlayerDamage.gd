@@ -40,6 +40,10 @@ var is_damage_invulnerability_flickering : bool = false
 
 var is_player_defeated = false
 
+func _ready():
+	if (CheckpointHandler.saved_clear_time >= 0):
+		damage_taken = CheckpointHandler.saved_damage_taken
+
 func _process(delta):
 	update_iframe_timer(delta)
 	do_iframe_sprite_alpha()
@@ -66,13 +70,13 @@ func take_damage(knockback : int = 0):
 		fairy_guard_attack.do_blockstun()
 		return false
 	else:
+		damage_taken += 1
 		if (hub.temper.is_form_locked()):
 			is_player_defeated = true
 			defeated.emit()
 		else:
 			knockback_direction = knockback
 			current_hitstun_timer = hitstun_time
-			damage_taken += 1
 			hub.fairy.cut_magic_in_half()
 			hub.stomp.reset_stomp_combo()
 			took_damage.emit()

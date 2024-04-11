@@ -54,17 +54,18 @@ func _on_area_2d_body_entered(body):
 			for child in body.get_children():
 				if (child is PlayerHub):
 					var temp_hub : PlayerHub = (child as PlayerHub)
-					var is_mage = temp_hub.form.is_a_mage()
-					
-					stream_player.play()
-					is_collected = true
-					sprite.modulate = (mage_color if is_mage else dragon_color)
-					level_ref.increment_fragments(is_mage)
-					
-					sprite.z_index = collect_z_index
-					sprite.speed_scale = collect_spin_rate
-					current_jump_velocity = -collect_jump_velocity
-					
-					temp_hub.fairy.change_current_magic_by(magic_restore_amount)
+					if (!temp_hub.damage.is_player_damaged()):
+						var is_mage = temp_hub.form.is_a_mage()
+						
+						stream_player.play()
+						is_collected = true
+						sprite.modulate = (mage_color if is_mage else dragon_color)
+						level_ref.increment_fragments(is_mage)
+						
+						sprite.z_index = collect_z_index
+						sprite.speed_scale = collect_spin_rate
+						current_jump_velocity = -collect_jump_velocity
+						
+						temp_hub.fairy.change_current_magic_by(magic_restore_amount)
 					
 					return

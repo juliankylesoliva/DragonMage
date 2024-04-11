@@ -21,12 +21,13 @@
 [ext_resource type="PackedScene" uid="uid://btq4qla5fyq0n" path="res://Scene Objects/Misc/LevelMusicPlayer.tscn" id="19_l87bk"]
 [ext_resource type="AudioStream" uid="uid://c4w62ivppptim" path="res://Music/RoccoW - A Bed of Snakes - 05 17092017.wav" id="20_oukke"]
 
-[node name="CH0_LV1" type="Node" node_paths=PackedStringArray("player_reference", "starting_room", "room_list")]
+[node name="CH0_LV1" type="Node" node_paths=PackedStringArray("player_reference", "starting_room", "room_list", "clear_timer")]
 script = ExtResource("1_6mws2")
 player_reference = NodePath("Player")
 starting_room = NodePath("CH0_LV1_R1")
 room_list = [NodePath("CH0_LV1_R1"), NodePath("CH0_LV1_R2"), NodePath("CH0_LV1_R3"), NodePath("CH0_LV1_R4"), NodePath("CH0_LV1_R5"), NodePath("CH0_LV1_R6"), NodePath("CH0_LV1_R7"), NodePath("CH1_LV1_R8"), NodePath("CH0_LV1_R9"), NodePath("CH0_LV1_R10")]
 dropped_fragment_scene = ExtResource("2_wgkbh")
+clear_timer = NodePath("ClearTimer")
 
 [node name="Player" parent="." instance=ExtResource("3_kxyfd")]
 position = Vector2(96, 223)

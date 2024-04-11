@@ -22,6 +22,10 @@ class_name PlayerFairy
 
 @export var magic_danger_increase_rate : float = 0.833
 
+@export var starting_magic_consolation_bonus : float = 25
+
+@export var starting_magic_consolation_cadence : int = 3
+
 var fairy_ref : FairyFollow
 
 var fairy_ability_list : Array[Attack]
@@ -49,8 +53,8 @@ func _ready():
 			
 			if (fairy_ability_list.size() > 0):
 				current_selected_ability_index = 0
-		
-		reset_starting_magic()
+			
+			reset_starting_magic()
 
 func _process(delta):
 	update_fairy_ability_cooldown_timer(delta)
@@ -114,6 +118,7 @@ func cut_magic_in_half():
 
 func reset_starting_magic():
 	current_magic = starting_magic
+	change_current_magic_by(starting_magic_consolation_bonus * (CheckpointHandler.death_counter / starting_magic_consolation_cadence))
 
 func set_fairy_ability_cooldown_timer(time : float = 0):
 	if (current_fairy_ability_cooldown_timer <= 0):

@@ -16,13 +16,19 @@ signal player_defeated
 
 @export_range(1, 9) var min_fragment_majority_ratio : float = 2
 
+@export var fragment_requirement_death_penalty : int = 10
+
 @export var max_fragments_dropped : int = 10
 
 @export var fragment_drop_split : int = 5
 
-@export var ui_container : Control
-
 @export var dropped_fragment_scene : PackedScene
+
+@export var clear_timer : ClearTimer
+
+@export var collision_tilemap_name : String = "LevelCollisionTilemap"
+
+@export_color_no_alpha var tilemap_color : Color = Color.WHITE
 
 var player_hub : PlayerHub
 
@@ -65,7 +71,8 @@ func level_startup():
 	player_hub.damage.took_damage.connect(drop_fragments)
 	player_hub.damage.defeated.connect(on_player_defeat)
 	
-	player_hub.fairy.fairy_ref.snap_to_target_node()
+	if (player_hub.fairy.fairy_ref != null):
+		player_hub.fairy.fairy_ref.snap_to_target_node()
 	
 	for room in room_list:
 		room.set_enemy_player_refs(player_hub)
@@ -76,10 +83,18 @@ func level_startup():
 		for fragment in room.medal_fragments:
 			fragment.set_level_ref(self)
 			fragment_array.append(fragment)
+		
+		for tilemap in room.tilemap_list:
+			if (tilemap.name == collision_tilemap_name):
+				tilemap.modulate = tilemap_color
+				continue
 	
 	num_fragments_in_level = fragment_array.size()
 	
 	min_fragment_req_for_medal = ((num_fragments_in_level * min_fragment_collection_rate) as int)
+	min_fragment_req_for_medal += ((fragment_requirement_death_penalty * CheckpointHandler.death_counter) as int)
+	if (min_fragment_req_for_medal > num_fragments_in_level):
+		min_fragment_req_for_medal = num_fragments_in_level
 	
 	if (num_fragments_in_level == CheckpointHandler.saved_fragment_status_array.size()):
 		mage_fragments = CheckpointHandler.saved_mage_fragments
@@ -92,26 +107,12 @@ func level_startup():
 	
 	player_hub.camera.snap_camera_to_player()
 
-func level_respawn():
-	var current_room : Room = get_current_room()
-	PauseHandler.enable_pausing(true)
-	var destination_coords : Vector2 = current_room.get_room_entrance_coordinates(starting_room_entrance_index)
-	player_reference.global_position = destination_coords
-	player_hub.state_machine.current_state.set_next_state(player_hub.state_machine.get_state_by_name("Standing"))
-	player_hub.set_respawn_position(destination_coords)
-	player_hub.reset_player()
-	current_room.set_process_mode(PROCESS_MODE_INHERIT)
-	respawn_all_enemies()
-	current_room.activate_room()
-
 func respawn_all_enemies():
 	for room in room_list:
 		room.respawn_enemies()
 
 func level_finish():
 	player_hub.set_deactivation(true)
-	if (ui_container != null):
-		ui_container.set_visible(false)
 
 func get_current_room():
 	for room in room_list:
@@ -134,8 +135,18 @@ func increment_fragments(is_mage : bool):
 func get_total_fragments():
 	return (mage_fragments + dragon_fragments)
 
+func get_total_uncollected_fragments():
+	var sum : int = 0
+	for fragment in fragment_array:
+		if (!fragment.is_collected):
+			sum += 1
+	return sum
+
 func can_get_medal():
 	return (get_total_fragments() >= min_fragment_req_for_medal)
+
+func is_medal_possible():
+	return ((get_total_fragments() + get_total_uncollected_fragments()) >= min_fragment_req_for_medal)
 
 func get_medal_type():
 	if (can_get_medal()):
@@ -217,4 +228,7 @@ func on_player_defeat():
 	var current_room : Room = get_current_room()
 	if (current_room != null):
 		current_room.call_deferred("set_process_mode", PROCESS_MODE_DISABLED)
+	CheckpointHandler.save_clear_time(clear_timer.get_current_time())
+	CheckpointHandler.save_damage_taken(player_hub.damage.damage_taken)
+	CheckpointHandler.increment_death_counter()
 	player_defeated.emit()

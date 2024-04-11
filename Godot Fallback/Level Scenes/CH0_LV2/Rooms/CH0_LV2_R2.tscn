@@ -74,7 +74,7 @@ room_destination = NodePath("..")
 
 [node name="KnigelNPC" parent="." instance=ExtResource("4_qctdh")]
 position = Vector2(128, 224)
-textbox_strings = Array[String](["Knigel: Next, vault over these walls by climbing and then jumping forward as soon as you pop up at the top, but be careful! You lose speed as you climb, and you can't climb another wall until you land!", "Draelyn: I could also hold [Technical] to snap to the ledge and keep walking instead of popping up, right?", "Knigel: You could do that. Wait, hold what? Are you speaking in sigil notation again?", "Draelyn: Haha! Sorry, it's kind of a bad habit, I know...", "Knigel: Nothing wrong with that, Drae. Feel free to add anything to my explanations in your own unique way!"])
+textbox_strings = Array[String](["Knigel: Next, vault over these walls by climbing and then jumping forward as soon as you pop up at the top, but be careful! You lose speed as you climb, and you can't climb another wall until you land!", "Draelyn: I could also hold [Technical] to snap to the ledge and keep walking instead of popping up, right?", "Knigel: You could do that. Wait, hold what? Are you speaking in sigil notation again?", "Draelyn: Haha! Sorry, it's kind of a bad habit, I know...", "Knigel: Nothing wrong with that, EmDee. Feel free to add anything to my explanations in your own unique way!"])
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 visible = false

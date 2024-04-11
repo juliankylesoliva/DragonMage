@@ -38,7 +38,7 @@ func on_enter():
 	hub.fairy.fairy_ref.sprite.play("FaesonDefeat")
 	hub.buffers.reset_speed_preservation_buffer()
 	hub.jumping.reset_super_jump_timers()
-	hub.audio.play_sound("player_death_hitstop")
+	hub.audio.play_sound("player_death_hitstop", -2)
 	hub.jumping.switch_to_falling_gravity()
 	hub.animation.set_animation("{name}Defeat".format({"name" : hub.form.get_current_form_name()}))
 	hub.animation.set_animation_speed(0)
