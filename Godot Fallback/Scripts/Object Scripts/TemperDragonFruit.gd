@@ -65,13 +65,7 @@ func _process(delta):
 		collision_shape.disabled = true
 		current_respawn_time_left = move_toward(current_respawn_time_left, 0, delta)
 		if (current_respawn_time_left <= 0):
-			visible = true
-			collision_shape.disabled = false
-			current_state = starting_state
-			current_state_time_left = time_per_state
-			cycle_direction = (-1 if current_state >= 1 else 1)
-			set_initial_sprite()
-			play_sound("object_item_spawn")
+			do_respawn()
 
 func _on_body_entered(body):
 	if (current_respawn_time_left <= 0 and body is CharacterBody2D and body.has_meta("Tag") and body.get_meta("Tag") == "Player"):
@@ -100,6 +94,16 @@ func set_initial_sprite():
 		_:
 			current_state = -1
 			anim_sprite.play("ColdStart")
+
+func do_respawn():
+	if (current_respawn_time_left > 0):
+		visible = true
+		collision_shape.disabled = false
+		current_state = starting_state
+		current_state_time_left = time_per_state
+		cycle_direction = (-1 if current_state >= 1 else 1)
+		set_initial_sprite()
+		play_sound("object_item_spawn")
 
 func play_sound(sound_name : String, volume : float = 0, pitch : float = 1, bus_name : StringName = "SFX"):
 	var stream : AudioStream = SoundFactory.get_sound_by_name(sound_name)

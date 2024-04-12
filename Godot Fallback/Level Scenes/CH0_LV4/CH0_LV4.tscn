@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://qa22n4g30owo"]
+[gd_scene load_steps=22 format=3 uid="uid://qa22n4g30owo"]
 
 [ext_resource type="Script" path="res://Scripts/Utility Scripts/Level.gd" id="1_xccb8"]
 [ext_resource type="PackedScene" uid="uid://c6qw77ovfwgfs" path="res://Player.tscn" id="2_616c6"]
@@ -12,6 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://ckyckpse03ag" path="res://Level Scenes/CH0_LV4/Rooms/CH0_LV4_R6.tscn" id="9_fgydk"]
 [ext_resource type="PackedScene" uid="uid://bsdn7w7f8yil8" path="res://Level Scenes/CH0_LV4/Rooms/CH0_LV4_R7.tscn" id="10_ggfgt"]
 [ext_resource type="PackedScene" uid="uid://bq7ruy715yf60" path="res://Level Scenes/CH0_LV4/Rooms/CH0_LV4_R8.tscn" id="11_51ny3"]
+[ext_resource type="PackedScene" uid="uid://cee7iflvdedp" path="res://Level Scenes/CH0_LV4/Rooms/CH0_LV4_R9.tscn" id="12_joa6g"]
 [ext_resource type="PackedScene" uid="uid://8beel2odcuky" path="res://Scene Objects/Effects/ScreenFade.tscn" id="12_ue1v1"]
 [ext_resource type="PackedScene" uid="uid://d1eef1xjuwf3b" path="res://Scene Objects/Misc/PauseMenu.tscn" id="13_6h45c"]
 [ext_resource type="PackedScene" uid="uid://b5wwivjk8sl7b" path="res://Scene Objects/Misc/ClearTimer.tscn" id="13_vkigm"]
@@ -25,7 +26,7 @@
 script = ExtResource("1_xccb8")
 player_reference = NodePath("Player")
 starting_room = NodePath("CH0_LV4_R1")
-room_list = [NodePath("CH0_LV4_R1"), NodePath("CH0_LV4_R2"), NodePath("CH0_LV4_R3"), NodePath("CH0_LV4_R4"), NodePath("CH0_LV4_R5"), NodePath("CH0_LV4_R6"), NodePath("CH0_LV4_R7"), NodePath("CH0_LV4_R8")]
+room_list = [NodePath("CH0_LV4_R1"), NodePath("CH0_LV4_R2"), NodePath("CH0_LV4_R3"), NodePath("CH0_LV4_R4"), NodePath("CH0_LV4_R5"), NodePath("CH0_LV4_R6"), NodePath("CH0_LV4_R7"), NodePath("CH0_LV4_R8"), NodePath("CH0_LV4_R9")]
 dropped_fragment_scene = ExtResource("2_ahodx")
 clear_timer = NodePath("ClearTimer")
 tilemap_color = Color(0.745098, 0.639216, 0.8, 1)
@@ -120,8 +121,21 @@ position = Vector2(-3008, 1376)
 [node name="Warp 0" parent="CH0_LV4_R8" index="4" node_paths=PackedStringArray("room_destination")]
 room_destination = NodePath("../../CH0_LV4_R7")
 
-[node name="Checkpoint" parent="CH0_LV4_R8" index="6" node_paths=PackedStringArray("level_origin")]
+[node name="Warp 1" parent="CH0_LV4_R8" index="5" node_paths=PackedStringArray("room_destination")]
+room_destination = NodePath("../../CH0_LV4_R9")
+
+[node name="Checkpoint" parent="CH0_LV4_R8" index="7" node_paths=PackedStringArray("level_origin")]
 level_origin = NodePath("../..")
+
+[node name="HintBubble" parent="CH0_LV4_R8" index="8" node_paths=PackedStringArray("textbox")]
+textbox = NodePath("../../Textbox")
+
+[node name="CH0_LV4_R9" parent="." instance=ExtResource("12_joa6g")]
+position = Vector2(-1952, 576)
+
+[node name="Checkpoint" parent="CH0_LV4_R9" index="3" node_paths=PackedStringArray("level_origin", "subsequent_checkpoints")]
+level_origin = NodePath("../..")
+subsequent_checkpoints = [NodePath("../../CH0_LV4_R8/Checkpoint")]
 
 [node name="UI_Canvas" type="CanvasLayer" parent="."]
 
@@ -157,11 +171,12 @@ screen_fade = NodePath("../UI_Canvas/ScreenFade")
 [connection signal="player_defeated" from="." to="Textbox" method="hide_textbox"]
 [connection signal="player_defeated" from="." to="LevelMusicPlayer" method="stop"]
 [connection signal="player_defeated" from="." to="DefeatScreen" method="do_defeat_screen"]
-[connection signal="level_finished" from="CH0_LV4_R8/FinishLine" to="." method="level_finish"]
-[connection signal="level_finished" from="CH0_LV4_R8/FinishLine" to="UI_Canvas/TemperMeterUI" method="hide"]
-[connection signal="level_finished" from="CH0_LV4_R8/FinishLine" to="UI_Canvas/ResultsScreen" method="on_level_complete"]
-[connection signal="level_finished" from="CH0_LV4_R8/FinishLine" to="ClearTimer" method="stop_timer"]
-[connection signal="level_finished" from="CH0_LV4_R8/FinishLine" to="LevelMusicPlayer" method="fade_out"]
+[connection signal="room_activated" from="CH0_LV4_R9" to="LevelMusicPlayer" method="fade_out"]
+[connection signal="level_finished" from="CH0_LV4_R9/FinishLine" to="." method="level_finish"]
+[connection signal="level_finished" from="CH0_LV4_R9/FinishLine" to="UI_Canvas/TemperMeterUI" method="hide"]
+[connection signal="level_finished" from="CH0_LV4_R9/FinishLine" to="UI_Canvas/ResultsScreen" method="on_level_complete"]
+[connection signal="level_finished" from="CH0_LV4_R9/FinishLine" to="ClearTimer" method="stop_timer"]
+[connection signal="level_finished" from="CH0_LV4_R9/FinishLine" to="LevelMusicPlayer" method="fade_out"]
 
 [editable path="Player"]
 [editable path="CH0_LV4_R1"]
@@ -178,3 +193,4 @@ screen_fade = NodePath("../UI_Canvas/ScreenFade")
 [editable path="CH0_LV4_R7"]
 [editable path="CH0_LV4_R8"]
 [editable path="CH0_LV4_R8/FallWarp"]
+[editable path="CH0_LV4_R9"]
