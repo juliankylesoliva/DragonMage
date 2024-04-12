@@ -96,7 +96,7 @@ func set_initial_sprite():
 			anim_sprite.play("ColdStart")
 
 func do_respawn():
-	if (current_respawn_time_left > 0):
+	if (current_respawn_time_left <= 0):
 		visible = true
 		collision_shape.disabled = false
 		current_state = starting_state

@@ -25,6 +25,7 @@ event_to_input_prompt_dictionary = {
 "Joypad Motion on Axis 0 (Left Stick X-Axis, Joystick 0 X-Axis) with Value 1.00": "res://Sprites/UI/ButtonIcons/DPadRight.png",
 "Joypad Motion on Axis 1 (Left Stick Y-Axis, Joystick 0 Y-Axis) with Value -1.00": "res://Sprites/UI/ButtonIcons/DPadUp.png",
 "Joypad Motion on Axis 1 (Left Stick Y-Axis, Joystick 0 Y-Axis) with Value 1.00": "res://Sprites/UI/ButtonIcons/DPadDown.png",
+"Joypad Motion on Axis 4 (Joystick 2 X-Axis, Left Trigger, Sony L2, Xbox LT) with Value 1.00": "res://Sprites/UI/ButtonIcons/LeftTrigger.png",
 "Joypad Motion on Axis 5 (Joystick 2 Y-Axis, Right Trigger, Sony R2, Xbox RT) with Value 1.00": "res://Sprites/UI/ButtonIcons/RightTrigger.png",
 "Left (Physical)": "res://Sprites/UI/ButtonIcons/LeftKey.png",
 "Right (Physical)": "res://Sprites/UI/ButtonIcons/RightKey.png",
