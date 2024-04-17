@@ -96,5 +96,5 @@ func is_going_thru_a_wall(target_pos : Vector2, body_rid : RID):
 func destroy_enemy_projectile(body):
 	var target_pos : Vector2 = ((body as Node2D).global_position - ray.global_position)
 	if (!is_going_thru_a_wall(target_pos, body.get_rid())):
-		if (body is EnemyProjectile and !(body as EnemyProjectile).is_reflected):
+		if (body is EnemyProjectile and (body as EnemyProjectile).damage_type == "MAGIC" and !(body as EnemyProjectile).is_reflected):
 			(body as EnemyProjectile).destroy_projectile()

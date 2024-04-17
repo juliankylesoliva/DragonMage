@@ -1,0 +1,23 @@
+[gd_scene load_steps=3 format=3 uid="uid://lvrt2s5us3ln"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_l7jvo"]
+size = Vector2(32, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_3i5h2"]
+animations = [{
+"frames": [],
+"loop": true,
+"name": &"default",
+"speed": 60.0
+}]
+
+[node name="BossRoomBarricade" type="Area2D"]
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+z_index = 3
+shape = SubResource("RectangleShape2D_l7jvo")
+disabled = true
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_3i5h2")

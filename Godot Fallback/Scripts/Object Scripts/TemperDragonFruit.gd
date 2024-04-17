@@ -18,6 +18,8 @@ class_name TemperDragonFruit
 
 @export var respawn_time : float = 5
 
+@export var start_despawned : bool = false
+
 @export var floating_amplitude : int = 2
 
 @export var floating_speed_scale : float = 1
@@ -34,6 +36,8 @@ var current_theta : float = 0
 
 func _ready():
 	set_initial_sprite()
+	if (start_despawned):
+		do_despawn()
 
 func _process(delta):
 	if (current_respawn_time_left <= 0):
@@ -62,7 +66,6 @@ func _process(delta):
 					anim_sprite.play("ColdStart")
 					cycle_direction = 1
 	else:
-		collision_shape.disabled = true
 		current_respawn_time_left = move_toward(current_respawn_time_left, 0, delta)
 		if (current_respawn_time_left <= 0):
 			do_respawn()
@@ -75,11 +78,12 @@ func _on_body_entered(body):
 				if (!hub.damage.is_player_damaged()):
 					hub.temper.set_temper_level(hub.temper.get_min_warm_threshold() if current_state <= -1 else hub.temper.get_max_warm_threshold() if current_state >= 1 else hub.temper.get_warm_midpoint())
 					SoundFactory.play_sound_by_name("object_item_pickup", global_position, -2)
+					visible = false
+					collision_shape.call_deferred("set_disabled", true)
 					if (enable_respawning):
-						visible = false
 						current_respawn_time_left = respawn_time
 				break
-		if (!enable_respawning):
+		if (!enable_respawning and !start_despawned):
 			queue_free()
 
 func set_initial_sprite():
@@ -95,8 +99,18 @@ func set_initial_sprite():
 			current_state = -1
 			anim_sprite.play("ColdStart")
 
-func do_respawn():
+func set_starting_state(state : int):
+	if (state >= -1 and state <= 1):
+		starting_state = state
+
+func do_despawn():
 	if (current_respawn_time_left <= 0):
+		visible = false
+		collision_shape.disabled = true
+
+func do_respawn(force_respawn : bool = false):
+	if (current_respawn_time_left <= 0 or force_respawn):
+		current_respawn_time_left = 0
 		visible = true
 		collision_shape.disabled = false
 		current_state = starting_state
@@ -104,6 +118,9 @@ func do_respawn():
 		cycle_direction = (-1 if current_state >= 1 else 1)
 		set_initial_sprite()
 		play_sound("object_item_spawn")
+
+func is_despawned():
+	return (!visible or current_respawn_time_left > 0)
 
 func play_sound(sound_name : String, volume : float = 0, pitch : float = 1, bus_name : StringName = "SFX"):
 	var stream : AudioStream = SoundFactory.get_sound_by_name(sound_name)

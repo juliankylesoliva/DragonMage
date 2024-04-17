@@ -8,6 +8,8 @@ class_name EnemyProjectile
 
 @export var reflected_speed_boost : float = 2
 
+@export_enum("MAGIC", "FIRE") var damage_type : String = "FIRE"
+
 @export var impact_effect_name : String = "DragoonProjectileImpact"
 
 @export var reflect_impact_effect_name : String = "ReflectImpact"

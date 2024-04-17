@@ -1,0 +1,37 @@
+[gd_scene load_steps=5 format=3 uid="uid://b424auf7iyqa0"]
+
+[ext_resource type="Script" path="res://Scripts/Utility Scripts/Level.gd" id="1_1cc00"]
+[ext_resource type="PackedScene" uid="uid://c6qw77ovfwgfs" path="res://Player.tscn" id="2_eybo8"]
+[ext_resource type="PackedScene" uid="uid://bdypi7w73c6kq" path="res://Scene Objects/UI/TemperMeterUI.tscn" id="3_ot257"]
+[ext_resource type="PackedScene" uid="uid://d0hjhbnsicb1l" path="res://Level Scenes/GreenScreen/Rooms/CHGreen_LVScreen_R1.tscn" id="4_aoer1"]
+
+[node name="CH0_LV0" type="Node2D" node_paths=PackedStringArray("player_reference", "starting_room", "room_list")]
+script = ExtResource("1_1cc00")
+player_reference = NodePath("Player")
+starting_room = NodePath("CHGreen_LVScreen_R1")
+room_list = [NodePath("CHGreen_LVScreen_R1")]
+
+[node name="Player" parent="." instance=ExtResource("2_eybo8")]
+position = Vector2(256, 223)
+
+[node name="Camera" parent="Player/Hub" index="11" node_paths=PackedStringArray("player_cam")]
+player_cam = NodePath("../../../Camera2D")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+process_callback = 0
+drag_left_margin = 0.0
+drag_top_margin = 0.6
+drag_right_margin = 0.0
+editor_draw_limits = true
+editor_draw_drag_margin = true
+
+[node name="UI_Canvas" type="CanvasLayer" parent="."]
+
+[node name="TemperMeterUI" parent="UI_Canvas" node_paths=PackedStringArray("player_node") instance=ExtResource("3_ot257")]
+visible = false
+position = Vector2(1, 8)
+player_node = NodePath("../../Player")
+
+[node name="CHGreen_LVScreen_R1" parent="." instance=ExtResource("4_aoer1")]
+
+[editable path="Player"]

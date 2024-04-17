@@ -42,6 +42,7 @@ func activate_room():
 	camera.limit_top = ((global_position.y as int) + top_camera_limit)
 	camera.limit_right = ((global_position.x as int) + right_camera_limit)
 	camera.limit_bottom = ((global_position.y as int) + bottom_camera_limit)
+	room_activated.emit()
 	activate_enemies()
 
 func deactivate_room():

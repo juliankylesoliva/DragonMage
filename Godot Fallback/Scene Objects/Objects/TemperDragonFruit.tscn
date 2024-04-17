@@ -149,15 +149,9 @@ animations = [{
 "speed": 60.0
 }]
 
-[node name="TemperDragonFruit" type="RigidBody2D" node_paths=PackedStringArray("collision_shape", "anim_sprite", "stream_player")]
+[node name="TemperDragonFruit" type="Area2D" node_paths=PackedStringArray("collision_shape", "anim_sprite", "stream_player")]
 collision_layer = 0
 collision_mask = 4
-gravity_scale = 0.0
-max_contacts_reported = 1
-contact_monitor = true
-lock_rotation = true
-freeze = true
-freeze_mode = 1
 script = ExtResource("1_kwu5f")
 collision_shape = NodePath("CollisionShape2D")
 anim_sprite = NodePath("AnimatedSprite2D")

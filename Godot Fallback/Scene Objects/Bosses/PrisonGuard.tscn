@@ -5,7 +5,7 @@
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_8h4gk"]
 radius = 18.0
-height = 60.0
+height = 72.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_bnell"]
 atlas = ExtResource("2_2vm33")
@@ -35,6 +35,7 @@ floor_snap_length = 24.0
 platform_floor_layers = 3
 platform_wall_layers = 1
 script = ExtResource("1_satc3")
+total_health = 4
 body = NodePath(".")
 sprite = NodePath("AnimatedSprite2D")
 battle_left_camera_limit = 512
@@ -45,7 +46,7 @@ defeated_right_camera_limit = 1792
 defeated_bottom_camera_limit = 320
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, 2)
+position = Vector2(0, -4)
 shape = SubResource("CapsuleShape2D_8h4gk")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]

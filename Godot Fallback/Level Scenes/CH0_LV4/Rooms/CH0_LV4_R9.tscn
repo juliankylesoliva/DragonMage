@@ -1,10 +1,16 @@
-[gd_scene load_steps=6 format=3 uid="uid://cee7iflvdedp"]
+[gd_scene load_steps=10 format=3 uid="uid://cee7iflvdedp"]
 
 [ext_resource type="Script" path="res://Scripts/Utility Scripts/Room.gd" id="1_f5eec"]
 [ext_resource type="TileSet" uid="uid://dhwi7i1loa2pd" path="res://Sprites/Tiles/Test Tiles/TestTileSet.tres" id="2_hqynv"]
 [ext_resource type="PackedScene" uid="uid://c4cg3xgbq7eyh" path="res://Scene Objects/Obstacles/FloorSpikes.tscn" id="3_b7gfi"]
 [ext_resource type="PackedScene" uid="uid://vtyaphi47lrf" path="res://Scene Objects/Objects/Checkpoint.tscn" id="3_iqch3"]
 [ext_resource type="PackedScene" uid="uid://durwtm4ocfbmv" path="res://Scene Objects/Objects/FinishLine.tscn" id="4_svuwe"]
+[ext_resource type="PackedScene" uid="uid://dentdwi48jb2i" path="res://Scene Objects/Bosses/PrisonGuard.tscn" id="6_t5g2i"]
+[ext_resource type="Script" path="res://Scripts/Utility Scripts/Trigger.gd" id="6_x4fn3"]
+[ext_resource type="PackedScene" uid="uid://b2a0ttqvejk51" path="res://Scene Objects/Objects/TemperDragonFruit.tscn" id="7_bqbgw"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_flkat"]
+size = Vector2(16, 320)
 
 [node name="CH0_LV4_R9" type="Node2D" node_paths=PackedStringArray("tilemap_list", "room_entrances")]
 script = ExtResource("1_f5eec")
@@ -52,6 +58,29 @@ layer_3/y_sort_origin = 0
 layer_3/z_index = -1
 layer_3/tile_data = PackedInt32Array(458796, 65536, 2, 458795, 0, 2, 458803, 131072, 2, 458804, 196608, 2)
 
+[node name="BossRoomBoundaryTilemap" type="TileMap" parent="."]
+z_index = 3
+tile_set = ExtResource("2_hqynv")
+cell_quadrant_size = 32
+format = 2
+layer_0/name = "Decoration"
+layer_0/enabled = false
+layer_0/tile_data = PackedInt32Array(393232, 7, 0, 458768, 7, 0, 393247, 7, 0, 458783, 7, 0)
+layer_1/name = "CollisionL"
+layer_1/enabled = false
+layer_1/modulate = Color(1, 1, 1, 0)
+layer_1/y_sort_enabled = false
+layer_1/y_sort_origin = 0
+layer_1/z_index = -1
+layer_1/tile_data = PackedInt32Array(327736, 196608, 0, 393272, 196608, 0, 458808, 196608, 0, 524344, 196608, 0, 393215, 196608, 0, 458751, 196608, 0, 524287, 196608, 0, 589823, 196608, 0, 393232, 196608, 0, 458768, 196608, 0)
+layer_2/name = "CollisionR"
+layer_2/enabled = false
+layer_2/modulate = Color(1, 1, 1, 0)
+layer_2/y_sort_enabled = false
+layer_2/y_sort_origin = 0
+layer_2/z_index = 0
+layer_2/tile_data = PackedInt32Array(393247, 196608, 0, 458783, 196608, 0)
+
 [node name="Entrance 0" type="Node2D" parent="."]
 position = Vector2(16, 224)
 
@@ -67,6 +96,59 @@ floor_length = 2
 process_mode = 4
 position = Vector2(960, 272)
 floor_length = 2
+
+[node name="PrisonGuard" parent="." node_paths=PackedStringArray("floor_spikes_l", "floor_spikes_r", "temper_fruit_l", "temper_fruit_r", "room_side_trigger", "boss_room", "boss_trigger", "boss_room_boundary_tilemap") instance=ExtResource("6_t5g2i")]
+position = Vector2(796, -166)
+floor_spikes_l = NodePath("../FloorSpikes")
+floor_spikes_r = NodePath("../FloorSpikes2")
+temper_fruit_l = NodePath("../TemperDragonFruit")
+temper_fruit_r = NodePath("../TemperDragonFruit2")
+room_side_trigger = NodePath("../RoomSideTrigger")
+boss_room = NodePath("..")
+boss_trigger = NodePath("../BossActivationTrigger")
+boss_room_boundary_tilemap = NodePath("../BossRoomBoundaryTilemap")
+
+[node name="BossActivationTrigger" type="Area2D" parent="." node_paths=PackedStringArray("shape")]
+position = Vector2(728, 64)
+collision_layer = 0
+collision_mask = 4
+script = ExtResource("6_x4fn3")
+shape = NodePath("CollisionShape2D")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BossActivationTrigger"]
+shape = SubResource("RectangleShape2D_flkat")
+
+[node name="RoomSideTrigger" type="Area2D" parent="." node_paths=PackedStringArray("shape")]
+position = Vector2(768, 64)
+collision_layer = 0
+collision_mask = 4
+script = ExtResource("6_x4fn3")
+shape = NodePath("CollisionShape2D")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RoomSideTrigger"]
+shape = SubResource("RectangleShape2D_flkat")
+
+[node name="TemperDragonFruit" parent="." instance=ExtResource("7_bqbgw")]
+position = Vector2(576, 64)
+enable_respawning = false
+start_despawned = true
+
+[node name="TemperDragonFruit2" parent="." instance=ExtResource("7_bqbgw")]
+position = Vector2(960, 64)
+enable_respawning = false
+start_despawned = true
+
+[node name="BossPathingNodeTopLeft" type="Node2D" parent="."]
+position = Vector2(640, 64)
+
+[node name="BossPathingNodeTopRight" type="Node2D" parent="."]
+position = Vector2(896, 64)
+
+[node name="BossPathingNodeBottomRight" type="Node2D" parent="."]
+position = Vector2(896, 192)
+
+[node name="BossPathingNodeBottomLeft" type="Node2D" parent="."]
+position = Vector2(640, 192)
 
 [node name="FinishLine" parent="." instance=ExtResource("4_svuwe")]
 position = Vector2(1536, 224)
