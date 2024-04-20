@@ -1,20 +1,20 @@
 extends Node
 
-class_name PlayerStateMachine
+class_name BossStateMachine
 
-@export var hub : PlayerHub
-@export var current_state : State
-var previous_state : State
+@export var boss : Boss
+@export var current_state : BossState
+var previous_state : BossState
 
-var states_list : Array[State]
+var states_list : Array[BossState]
 
 func _ready():
 	for child in get_children():
-		if (child is State):
+		if (child is BossState):
 			states_list.append(child)
 			
 			child.state_machine = self
-			child.hub = hub
+			child.boss = boss
 		else:
 			push_warning("Invalid State! ({name})".format({"name": child.name}))
 			
@@ -25,7 +25,7 @@ func _physics_process(delta):
 	if (current_state.next_state != null):
 		switch_states(current_state.next_state)
 
-func switch_states(new_state : State):
+func switch_states(new_state : BossState):
 	if (current_state != null):
 		current_state.on_exit()
 		current_state.next_state = null

@@ -13,9 +13,10 @@ class_name Breakable
 @export var break_sound : String = "object_block_breakable"
 
 func break_object(other : Object):
-	if (other.has_meta("BreakType") and other.has_meta("BreakStrength")):
-		if (other.get_meta("BreakStrength") >= break_durablility):
-			if (breakable_by == "ANY" or other.get_meta("BreakType") == breakable_by):
+	if ((other is KnockbackHitbox)):
+		var hitbox_temp : KnockbackHitbox = (other as KnockbackHitbox)
+		if (hitbox_temp.damage_strength >= break_durablility):
+			if (breakable_by == "ANY" or hitbox_temp.damage_type == breakable_by):
 				SoundFactory.play_sound_by_name(break_sound, node_2d.global_position, -4)
 				if (fragments_scene != null):
 					var instance = fragments_scene.instantiate()

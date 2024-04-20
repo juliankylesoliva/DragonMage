@@ -53,4 +53,3 @@ autoplay = "FireballProjectile"
 frame_progress = 0.138846
 
 [node name="FireballKnockbackHitbox" parent="." instance=ExtResource("3_q43tb")]
-damage_type = &"NONE"

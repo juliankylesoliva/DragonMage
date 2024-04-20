@@ -6,6 +6,8 @@ signal hit
 
 @export var damage_type : StringName = "NONE"
 
+@export var damage_strength : int = 0
+
 @export var collision_shape : CollisionShape2D
 
 @export var ray : RayCast2D

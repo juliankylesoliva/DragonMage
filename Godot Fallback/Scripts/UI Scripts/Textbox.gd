@@ -9,6 +9,8 @@ enum TextboxState
 	FINISHED
 }
 
+signal textbox_finished
+
 @export var textbox_container : MarginContainer
 
 @export var start_symbol : RichTextLabel
@@ -62,6 +64,7 @@ func advance_textbox():
 				hide_textbox()
 				display_text()
 			else:
+				textbox_finished.emit()
 				hide_textbox()
 
 func hide_textbox():

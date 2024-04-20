@@ -80,7 +80,7 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3bll3"]
-size = Vector2(32, 27)
+size = Vector2(2, 27)
 
 [node name="FinishLine" type="AnimatedSprite2D"]
 light_mask = 4

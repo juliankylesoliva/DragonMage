@@ -40,9 +40,17 @@ func on_attack_state_enter():
 		hub.char_body.apply_floor_snap()
 
 func attack_state_process(_delta : float):
-	if (current_dodge_speed <= 0 or (did_player_leave_ground and hub.char_body.is_on_floor())):
+	if (hub.is_deactivated or hub.force_stand or current_dodge_speed <= 0 or (did_player_leave_ground and hub.char_body.is_on_floor())):
 		if (hub.is_deactivated):
 			hub.state_machine.current_state.set_next_state(hub.state_machine.get_state_by_name("Deactivated"))
+		elif (hub.force_stand):
+			hub.char_body.velocity = Vector2.ZERO
+			hub.movement.reset_crouch_state()
+			hub.movement.reset_current_horizontal_velocity()
+			if (!hub.char_body.is_on_floor()):
+				hub.state_machine.current_state.set_next_state(hub.state_machine.get_state_by_name("Falling"))
+			else:
+				hub.state_machine.current_state.set_next_state(hub.state_machine.get_state_by_name("Standing"))
 		elif (hub.jumping.can_ground_jump()):
 			hub.jumping.start_ground_jump()
 			hub.state_machine.current_state.set_next_state(hub.state_machine.get_state_by_name("Jumping"))

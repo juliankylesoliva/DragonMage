@@ -9,9 +9,12 @@ var is_throwing : bool = false
 func state_process(_delta : float):
 	var char_name : String = hub.form.get_current_form_name()
 	prev_is_crouching = hub.movement.is_crouching
-	hub.movement.check_crouch_state()
-	hub.movement.do_movement(_delta)
-	hub.movement.update_facing_direction()
+	if (!hub.force_stand):
+		hub.movement.check_crouch_state()
+		hub.movement.do_movement(_delta)
+		hub.movement.update_facing_direction()
+	else:
+		hub.movement.do_movement(_delta)
 	hub.jumping.falling_update(_delta)
 	
 	if (!hub.char_sprite.is_playing() and hub.char_sprite.animation == "MagliThrowAir"):
@@ -40,6 +43,9 @@ func state_process(_delta : float):
 	
 	if (hub.is_deactivated):
 		set_next_state(state_machine.get_state_by_name("Deactivated"))
+	elif (hub.force_stand):
+		if (hub.char_body.is_on_floor()):
+			set_next_state(state_machine.get_state_by_name("Standing"))
 	elif (hub.form.can_change_form()):
 		set_next_state(state_machine.get_state_by_name("FormChanging"))
 	elif (hub.fairy.is_using_fairy_ability() and hub.attacks.current_attack != null):

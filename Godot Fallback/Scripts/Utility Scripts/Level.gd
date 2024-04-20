@@ -112,7 +112,7 @@ func respawn_all_enemies():
 		room.respawn_enemies()
 
 func level_finish():
-	player_hub.set_deactivation(true)
+	player_hub.set_force_stand(true)
 
 func get_current_room():
 	for room in room_list:

@@ -23,9 +23,15 @@ func _ready():
 func state_process(_delta):
 	var char_name : String = hub.form.get_current_form_name()
 	prev_is_crouching = hub.movement.is_crouching
-	hub.movement.check_crouch_state()
-	hub.movement.do_movement(_delta)
-	hub.movement.update_facing_direction()
+	if (!hub.force_stand):
+		hub.movement.check_crouch_state()
+		hub.movement.do_movement(_delta)
+		hub.movement.update_facing_direction()
+	else:
+		hub.char_body.velocity = Vector2.ZERO
+		hub.movement.reset_current_horizontal_velocity()
+		hub.movement.reset_crouch_state()
+		hub.buffers.reset_speed_preservation_buffer()
 	hub.collisions.do_ledge_nudge()
 	
 	if (hub.movement.is_crouching):
@@ -65,33 +71,34 @@ func state_process(_delta):
 		hub.animation.set_animation_speed(1)
 		hub.form.form_change_failed()
 	
-	if (hub.is_deactivated):
-		set_next_state(state_machine.get_state_by_name("Deactivated"))
-	elif (hub.form.can_change_form()):
-		set_next_state(state_machine.get_state_by_name("FormChanging"))
-	elif (hub.damage.is_player_defeated):
-		set_next_state(state_machine.get_state_by_name("Defeated"))
-	elif (hub.damage.is_player_damaged()):
-		set_next_state(state_machine.get_state_by_name("Damaged"))
-	elif (hub.char_body.is_on_floor() and (!hub.collisions.is_facing_a_wall() or (hub.get_input_vector().x * hub.movement.get_facing_value()) < 0) and hub.get_input_vector().x != 0):
-		set_next_state(state_machine.get_state_by_name("Running"))
-	elif (hub.jumping.can_ground_jump()):
-		hub.jumping.start_ground_jump()
-		set_next_state(state_machine.get_state_by_name("Jumping"))
-	elif (hub.fairy.is_using_fairy_ability() and hub.attacks.current_attack != null):
-		set_next_state(state_machine.get_state_by_name("Attacking"))
-	elif (hub.attacks.is_using_attack_state() and hub.attacks.current_attack != null):
-		set_next_state(state_machine.get_state_by_name("Attacking"))
-	elif (!hub.char_body.is_on_floor()):
-		set_next_state((state_machine.get_state_by_name("Falling")))
-	elif (!hub.char_body.is_on_floor() and hub.char_body.velocity.y < 0):
-		set_next_state(state_machine.get_state_by_name("Jumping"))
-	elif (!hub.char_body.is_on_floor() and hub.char_body.velocity.y >= 0):
-		set_next_state((state_machine.get_state_by_name("Falling")))
-	elif (hub.char_body.velocity.x != 0):
-		set_next_state(state_machine.get_state_by_name("Running"))
-	else:
-		pass
+	if (!hub.force_stand):
+		if (hub.is_deactivated):
+			set_next_state(state_machine.get_state_by_name("Deactivated"))
+		elif (hub.form.can_change_form()):
+			set_next_state(state_machine.get_state_by_name("FormChanging"))
+		elif (hub.damage.is_player_defeated):
+			set_next_state(state_machine.get_state_by_name("Defeated"))
+		elif (hub.damage.is_player_damaged()):
+			set_next_state(state_machine.get_state_by_name("Damaged"))
+		elif (hub.char_body.is_on_floor() and (!hub.collisions.is_facing_a_wall() or (hub.get_input_vector().x * hub.movement.get_facing_value()) < 0) and hub.get_input_vector().x != 0):
+			set_next_state(state_machine.get_state_by_name("Running"))
+		elif (hub.jumping.can_ground_jump()):
+			hub.jumping.start_ground_jump()
+			set_next_state(state_machine.get_state_by_name("Jumping"))
+		elif (hub.fairy.is_using_fairy_ability() and hub.attacks.current_attack != null):
+			set_next_state(state_machine.get_state_by_name("Attacking"))
+		elif (hub.attacks.is_using_attack_state() and hub.attacks.current_attack != null):
+			set_next_state(state_machine.get_state_by_name("Attacking"))
+		elif (!hub.char_body.is_on_floor()):
+			set_next_state((state_machine.get_state_by_name("Falling")))
+		elif (!hub.char_body.is_on_floor() and hub.char_body.velocity.y < 0):
+			set_next_state(state_machine.get_state_by_name("Jumping"))
+		elif (!hub.char_body.is_on_floor() and hub.char_body.velocity.y >= 0):
+			set_next_state((state_machine.get_state_by_name("Falling")))
+		elif (hub.char_body.velocity.x != 0):
+			set_next_state(state_machine.get_state_by_name("Running"))
+		else:
+			pass
 
 func on_enter():
 	is_throwing = hub.char_sprite.animation.contains("MagliThrow")

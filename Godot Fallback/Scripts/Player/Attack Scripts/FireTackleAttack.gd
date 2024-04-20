@@ -103,7 +103,7 @@ func on_attack_state_enter():
 	startup_init()
 
 func attack_state_process(_delta : float):
-	if (hub.is_deactivated):
+	if (hub.force_stand or hub.is_deactivated):
 		end_fire_tackle()
 	elif (current_attack_state == AttackState.STARTUP):
 		startup_update(_delta)
@@ -371,6 +371,11 @@ func end_fire_tackle():
 	
 	if (hub.is_deactivated):
 		hub.state_machine.current_state.set_next_state(hub.state_machine.get_state_by_name("Deactivated"))
+	elif (hub.force_stand):
+		if (!hub.char_body.is_on_floor()):
+			hub.state_machine.current_state.set_next_state(hub.state_machine.get_state_by_name("Falling"))
+		else:
+			hub.state_machine.current_state.set_next_state(hub.state_machine.get_state_by_name("Standing"))
 	elif (hub.damage.is_player_defeated):
 		hub.state_machine.current_state.set_next_state(hub.state_machine.get_state_by_name("Defeated"))
 	elif (hub.damage.is_player_damaged()):

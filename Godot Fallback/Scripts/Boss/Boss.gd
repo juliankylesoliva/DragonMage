@@ -2,6 +2,8 @@ extends Node2D
 
 class_name Boss
 
+@export var state_machine : BossStateMachine
+
 @export var player_hub : PlayerHub
 
 @export var boss_room : Room
@@ -21,6 +23,8 @@ class_name Boss
 @export_multiline var introduction_text : Array[String]
 
 @export_multiline var defeat_text : Array[String]
+
+@export var textbox : Textbox
 
 @export var post_hit_invulnerability_duration : float = 1
 
@@ -59,7 +63,7 @@ var current_gravity_scale : float = 1
 func _ready():
 	boss_trigger.trigger_entered.connect(on_activation_trigger_entered)
 
-func damage_boss(_damage_type : StringName):
+func damage_boss(_damage_type : StringName, _damage_strength : int):
 	pass
 
 func lock_camera_to_boss_room():

@@ -111,6 +111,15 @@ func update_crouch_cooldown_timer(delta):
 		current_crouch_cooldown_timer = move_toward(current_crouch_cooldown_timer, 0, delta)
 
 func do_movement(delta):
+	if (hub.force_stand):
+		hub.char_body.velocity.x = 0
+		reset_current_horizontal_velocity()
+		
+		var intended_velocity : Vector2 = hub.char_body.velocity
+		hub.char_body.move_and_slide()
+		hub.collisions.upward_slope_correction(intended_velocity)
+		return
+	
 	if (hub.jumping.is_wall_jump_lock_timer_active()):
 		var intended_velocity : Vector2 = hub.char_body.velocity
 		hub.char_body.move_and_slide()

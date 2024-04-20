@@ -10,8 +10,8 @@ var is_throwing : bool = false
 
 func state_process(_delta : float):
 	prev_is_crouching = hub.movement.is_crouching
-	hub.movement.check_crouch_state()
 	hub.collisions.do_ceiling_nudge()
+	hub.movement.check_crouch_state()
 	hub.movement.do_movement(_delta)
 	if (!hub.jumping.is_wall_jump_lock_timer_active()):
 		hub.movement.update_facing_direction()
@@ -49,6 +49,9 @@ func state_process(_delta : float):
 	
 	if (hub.is_deactivated):
 		set_next_state(state_machine.get_state_by_name("Deactivated"))
+	elif (hub.force_stand):
+		hub.char_body.velocity.y = 0
+		set_next_state(state_machine.get_state_by_name("Falling"))
 	elif (hub.form.can_change_form()):
 		set_next_state(state_machine.get_state_by_name("FormChanging"))
 	elif (hub.fairy.is_using_fairy_ability() and hub.attacks.current_attack != null):

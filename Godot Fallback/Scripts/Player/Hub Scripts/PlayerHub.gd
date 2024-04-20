@@ -48,6 +48,8 @@ var current_respawn_position : Vector2 = Vector2.ZERO
 
 var is_deactivated : bool = false
 
+var force_stand : bool = false
+
 func get_input_vector():
 	var input_vector = Vector2.ZERO
 	
@@ -63,6 +65,9 @@ func do_respawn():
 
 func set_deactivation(b : bool):
 	is_deactivated = b
+
+func set_force_stand(b : bool):
+	force_stand = b
 
 func reset_player():
 	movement.reset_crouch_state()

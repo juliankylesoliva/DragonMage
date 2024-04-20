@@ -19,6 +19,7 @@ func _process(_delta):
 func interact(hub : PlayerHub):
 	if (player != null and hub == player):
 		if (textbox != null):
+			textbox.accept_input_events = false
 			if (textbox.current_state == Textbox.TextboxState.READY):
 				for s in textbox_strings:
 					textbox.queue_text(TextPromptParser.parse_text(s))

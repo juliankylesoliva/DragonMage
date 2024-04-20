@@ -137,8 +137,9 @@ position = Vector2(-1952, 576)
 level_origin = NodePath("../..")
 subsequent_checkpoints = [NodePath("../../CH0_LV4_R8/Checkpoint")]
 
-[node name="PrisonGuard" parent="CH0_LV4_R9" index="7" node_paths=PackedStringArray("player_hub")]
+[node name="PrisonGuard" parent="CH0_LV4_R9" index="7" node_paths=PackedStringArray("player_hub", "textbox")]
 player_hub = NodePath("../../Player/Hub")
+textbox = NodePath("../../Textbox")
 
 [node name="UI_Canvas" type="CanvasLayer" parent="."]
 

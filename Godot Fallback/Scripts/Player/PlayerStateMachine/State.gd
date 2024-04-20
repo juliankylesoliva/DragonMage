@@ -13,9 +13,6 @@ var next_state : State
 func state_process(_delta):
 	pass
 
-func state_input(_event : InputEvent):
-	pass
-
 func on_enter():
 	pass
 
