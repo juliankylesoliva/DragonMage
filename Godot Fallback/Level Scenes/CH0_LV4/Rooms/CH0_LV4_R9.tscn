@@ -98,7 +98,7 @@ position = Vector2(960, 272)
 floor_length = 2
 
 [node name="PrisonGuard" parent="." node_paths=PackedStringArray("floor_spikes_l", "floor_spikes_r", "temper_fruit_l", "temper_fruit_r", "room_side_trigger", "boss_room", "boss_trigger", "boss_room_boundary_tilemap") instance=ExtResource("6_t5g2i")]
-position = Vector2(896, 192)
+position = Vector2(864, 192)
 floor_spikes_l = NodePath("../FloorSpikes")
 floor_spikes_r = NodePath("../FloorSpikes2")
 temper_fruit_l = NodePath("../TemperDragonFruit")
@@ -107,6 +107,10 @@ room_side_trigger = NodePath("../RoomSideTrigger")
 boss_room = NodePath("..")
 boss_trigger = NodePath("../BossActivationTrigger")
 boss_room_boundary_tilemap = NodePath("../BossRoomBoundaryTilemap")
+
+[node name="SwitchingSides" parent="PrisonGuard/StateMachine" index="9" node_paths=PackedStringArray("left_ground_node", "right_ground_node")]
+left_ground_node = NodePath("../../../BossPathingNodeBottomLeft")
+right_ground_node = NodePath("../../../BossPathingNodeBottomRight")
 
 [node name="BossActivationTrigger" type="Area2D" parent="." node_paths=PackedStringArray("shape")]
 position = Vector2(728, 64)
@@ -139,16 +143,18 @@ enable_respawning = false
 start_despawned = true
 
 [node name="BossPathingNodeTopLeft" type="Node2D" parent="."]
-position = Vector2(640, 64)
+position = Vector2(672, 64)
 
 [node name="BossPathingNodeTopRight" type="Node2D" parent="."]
-position = Vector2(896, 64)
+position = Vector2(864, 64)
 
 [node name="BossPathingNodeBottomRight" type="Node2D" parent="."]
-position = Vector2(896, 192)
+position = Vector2(864, 192)
 
 [node name="BossPathingNodeBottomLeft" type="Node2D" parent="."]
-position = Vector2(640, 192)
+position = Vector2(672, 192)
 
 [node name="FinishLine" parent="." instance=ExtResource("4_svuwe")]
 position = Vector2(1536, 224)
+
+[editable path="PrisonGuard"]

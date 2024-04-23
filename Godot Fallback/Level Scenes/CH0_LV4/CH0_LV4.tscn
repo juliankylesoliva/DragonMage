@@ -198,3 +198,4 @@ screen_fade = NodePath("../UI_Canvas/ScreenFade")
 [editable path="CH0_LV4_R8"]
 [editable path="CH0_LV4_R8/FallWarp"]
 [editable path="CH0_LV4_R9"]
+[editable path="CH0_LV4_R9/PrisonGuard"]

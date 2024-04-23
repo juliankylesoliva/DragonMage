@@ -1,5 +1,7 @@
 extends Boss
 
+class_name PrisonGuardBoss
+
 @export var floor_spikes_l : FloorSpikes
 
 @export var floor_spikes_r : FloorSpikes
@@ -11,6 +13,8 @@ extends Boss
 @export var room_side_trigger : Trigger
 
 var is_player_on_right_side : bool = false
+
+var is_boss_on_right_side : bool = true
 
 func _ready():
 	super._ready()

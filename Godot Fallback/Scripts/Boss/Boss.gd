@@ -20,6 +20,8 @@ class_name Boss
 
 @export var sprite : AnimatedSprite2D
 
+@export var visibility : VisibleOnScreenNotifier2D
+
 @export_multiline var introduction_text : Array[String]
 
 @export_multiline var defeat_text : Array[String]
@@ -62,6 +64,8 @@ var current_gravity_scale : float = 1
 
 func _ready():
 	boss_trigger.trigger_entered.connect(on_activation_trigger_entered)
+	current_health = total_health
+	current_armor = armor
 
 func damage_boss(_damage_type : StringName, _damage_strength : int):
 	pass
@@ -93,6 +97,9 @@ func update_invulnerability_duration(delta : float):
 func set_knockback_velocity(vec : Vector2):
 	if (is_knockback_enabled):
 		body.velocity = vec
+
+func set_gravity_scale(g : float):
+	current_gravity_scale = g
 
 func get_gravity_delta(delta : float):
 	return (base_gravity * current_gravity_scale * delta)

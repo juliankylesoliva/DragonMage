@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://dentdwi48jb2i"]
+[gd_scene load_steps=17 format=3 uid="uid://dentdwi48jb2i"]
 
 [ext_resource type="Script" path="res://Scripts/Boss/PrisonGuard/PrisonGuardBoss.gd" id="1_g1gba"]
 [ext_resource type="Texture2D" uid="uid://pk7g70ysmn6" path="res://Sprites/Enemies/GreenDragoon.png" id="2_2vm33"]
@@ -12,6 +12,7 @@
 [ext_resource type="Script" path="res://Scripts/Boss/PrisonGuard/B0_P3_Attack.gd" id="9_gycg1"]
 [ext_resource type="Script" path="res://Scripts/Boss/PrisonGuard/B0_P4_Idle.gd" id="10_si2xg"]
 [ext_resource type="Script" path="res://Scripts/Boss/PrisonGuard/B0_P4_Attack.gd" id="11_vrixn"]
+[ext_resource type="Script" path="res://Scripts/Boss/PrisonGuard/B0_SwitchSides.gd" id="13_3fd8v"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_8h4gk"]
 radius = 18.0
@@ -32,12 +33,12 @@ animations = [{
 "speed": 60.0
 }]
 
-[node name="PrisonGuard" type="CharacterBody2D" node_paths=PackedStringArray("state_machine", "body", "sprite")]
+[node name="PrisonGuard" type="CharacterBody2D" node_paths=PackedStringArray("state_machine", "body", "sprite", "visibility")]
 light_mask = 8
 visibility_layer = 8
 disable_mode = 1
 collision_layer = 64
-collision_mask = 36
+collision_mask = 3
 floor_stop_on_slope = false
 floor_constant_speed = true
 floor_max_angle = 1.39626
@@ -49,6 +50,7 @@ state_machine = NodePath("StateMachine")
 total_health = 4
 body = NodePath(".")
 sprite = NodePath("AnimatedSprite2D")
+visibility = NodePath("VisibleOnScreenNotifier2D")
 introduction_text = Array[String](["Test Intro 1", "Test Intro 2", "Test Intro 3"])
 battle_left_camera_limit = 512
 battle_right_camera_limit = 1024
@@ -68,17 +70,27 @@ z_index = 3
 sprite_frames = SubResource("SpriteFrames_nlt6b")
 flip_h = true
 
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+rect = Rect2(-32, -40, 64, 72)
+
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("boss", "current_state")]
 process_mode = 4
 script = ExtResource("3_6suth")
 boss = NodePath("..")
 current_state = NodePath("PhaseOneIdle")
 
-[node name="PhaseOneIdle" type="Node" parent="StateMachine"]
+[node name="PhaseOneIdle" type="Node" parent="StateMachine" node_paths=PackedStringArray("phase_attack_state", "side_switch_state")]
 script = ExtResource("4_nfnxh")
+move_speed = 128.0
+initial_move_time = 0.25
+time_between_attacks = 0.5
+phase_attack_state = NodePath("../StandstillFireballSpit")
+side_switch_state = NodePath("../SwitchingSides")
 
-[node name="StandstillFireballSpit" type="Node" parent="StateMachine"]
+[node name="StandstillFireballSpit" type="Node" parent="StateMachine" node_paths=PackedStringArray("phase_idle_state")]
 script = ExtResource("5_dd0en")
+phase_idle_state = NodePath("../PhaseOneIdle")
+jump_speed = 384.0
 
 [node name="PhaseTwoIdle" type="Node" parent="StateMachine"]
 script = ExtResource("6_x0ye4")
@@ -100,3 +112,11 @@ script = ExtResource("11_vrixn")
 
 [node name="Stunned" type="Node" parent="StateMachine"]
 script = ExtResource("5_khlaa")
+
+[node name="SwitchingSides" type="Node" parent="StateMachine" node_paths=PackedStringArray("phase_one_state", "phase_two_state", "phase_three_state", "phase_four_state")]
+script = ExtResource("13_3fd8v")
+move_speed = 512.0
+phase_one_state = NodePath("../PhaseOneIdle")
+phase_two_state = NodePath("../PhaseTwoIdle")
+phase_three_state = NodePath("../PhaseThreeIdle")
+phase_four_state = NodePath("../PhaseFourIdle")
