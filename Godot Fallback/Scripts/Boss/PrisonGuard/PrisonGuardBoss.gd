@@ -27,7 +27,7 @@ func _physics_process(delta):
 	update_invulnerability_duration(delta)
 
 func on_activation():
-	if (player_hub.temper.is_forcing_form_change()):
+	if (player_hub.temper.is_forcing_form_change() or player_hub.temper.is_form_locked()):
 		player_hub.temper.set_boss_courtesy_temper_level()
 	if (textbox != null):
 		if (introduction_text.size() > 0):

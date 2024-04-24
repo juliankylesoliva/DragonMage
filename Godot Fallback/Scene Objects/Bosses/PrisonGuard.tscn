@@ -77,7 +77,7 @@ rect = Rect2(-32, -40, 64, 72)
 process_mode = 4
 script = ExtResource("3_6suth")
 boss = NodePath("..")
-current_state = NodePath("PhaseOneIdle")
+current_state = NodePath("PhaseTwoIdle")
 
 [node name="PhaseOneIdle" type="Node" parent="StateMachine" node_paths=PackedStringArray("phase_attack_state", "side_switch_state")]
 script = ExtResource("4_nfnxh")
@@ -92,11 +92,18 @@ script = ExtResource("5_dd0en")
 phase_idle_state = NodePath("../PhaseOneIdle")
 jump_speed = 384.0
 
-[node name="PhaseTwoIdle" type="Node" parent="StateMachine"]
+[node name="PhaseTwoIdle" type="Node" parent="StateMachine" node_paths=PackedStringArray("phase_attack_state")]
 script = ExtResource("6_x0ye4")
+move_speed = 48.0
+phase_attack_state = NodePath("../ShieldBash")
 
-[node name="ShieldBash" type="Node" parent="StateMachine"]
+[node name="ShieldBash" type="Node" parent="StateMachine" node_paths=PackedStringArray("phase_idle_state")]
 script = ExtResource("7_omg5d")
+phase_idle_state = NodePath("../PhaseTwoIdle")
+move_speed = 120.0
+attack_time = 2.0
+jump_time_threshold = 1.5
+player_jump_height_threshold = 64.0
 
 [node name="PhaseThreeIdle" type="Node" parent="StateMachine"]
 script = ExtResource("8_k1ctw")
