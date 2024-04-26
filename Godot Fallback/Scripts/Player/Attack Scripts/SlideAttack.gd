@@ -30,7 +30,7 @@ var slide_effect_instance : AnimatedSprite2D = null
 
 func can_use_attack():
 	var state_name : String = hub.state_machine.current_state.name
-	return (hub.form.current_mode == PlayerForm.CharacterMode.DRAGON and state_name != "Attacking" and (hub.attacks.current_attack == null or hub.attacks.current_attack.name != self.name) and (!hub.attacks.is_attack_cooldown_active() or hub.jumping.can_fast_fall_slope_boost()) and (hub.movement.is_crouching or hub.jumping.can_fast_fall_slope_boost()) and (state_name == "Standing" or state_name == "Running" or (state_name == "Falling" and hub.jumping.can_fast_fall_slope_boost())) and hub.char_body.is_on_floor() and ((!hub.collisions.is_facing_a_wall() and !hub.collisions.is_near_a_ledge(hub.movement.get_facing_value())) or (hub.jumping.can_fast_fall_slope_boost() and !hub.collisions.is_near_a_ledge(hub.movement.get_facing_value()))))
+	return (hub.form.current_mode == PlayerForm.CharacterMode.DRAGON and state_name != "Attacking" and (hub.attacks.current_attack == null or hub.attacks.current_attack.name != self.name) and (!hub.attacks.is_attack_cooldown_active() or hub.jumping.can_fast_fall_slope_boost()) and (hub.movement.is_crouching or hub.jumping.can_fast_fall_slope_boost()) and (state_name == "Standing" or state_name == "Running" or (state_name == "Falling" and hub.jumping.can_fast_fall_slope_boost())) and hub.char_body.is_on_floor() and ((!hub.collisions.is_facing_a_wall() and !hub.collisions.is_near_a_ledge(hub.movement.get_facing_value() and hub.get_input_vector().x == 0)) or (hub.jumping.can_fast_fall_slope_boost() and !hub.collisions.is_near_a_ledge(hub.movement.get_facing_value() and hub.get_input_vector().x == 0))))
 
 func on_attack_state_enter():
 	if (slide_effect_instance != null):
@@ -129,6 +129,11 @@ func stop_slide():
 	elif (hub.damage.is_player_damaged()):
 		hub.state_machine.current_state.set_next_state(hub.state_machine.get_state_by_name("Damaged"))
 	elif (hub.char_body.is_on_floor() and (hub.get_input_vector().x != 0 or hub.char_body.velocity.x != 0)):
+		if (hub.collisions.is_near_a_ledge() and hub.get_input_vector().x != 0):
+			hub.char_body.velocity.x = (hub.movement.get_facing_value() * horizontal_result)
+			hub.movement.current_horizontal_velocity = hub.char_body.velocity.x
+			if (!hub.collisions.is_in_ceiling_when_uncrouched()):
+				hub.movement.reset_crouch_state()
 		hub.state_machine.current_state.set_next_state(hub.state_machine.get_state_by_name("Running"))
 	elif (hub.char_body.velocity.y >= 0 and !hub.char_body.is_on_floor()):
 		hub.state_machine.current_state.set_next_state(hub.state_machine.get_state_by_name("Falling"))

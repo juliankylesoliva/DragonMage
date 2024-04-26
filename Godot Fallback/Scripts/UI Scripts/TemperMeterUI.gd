@@ -20,6 +20,10 @@ class_name TemperMeterUI
 
 @export var segment_list : Array[AnimatedSprite2D]
 
+@export_range(0, 1) var segment_shake_chance : float = 0.05
+
+@export var segment_shake_amplitude : int = 2
+
 var hub : PlayerHub = null
 
 var prev_temper_level : int = -1
@@ -63,5 +67,15 @@ func refresh_meter_ui():
 				else:
 					current_segment.visible = true
 					current_segment.modulate = (cold_segment_color if segment_level <= cold_threshold else hot_segment_color if segment_level >= hot_threshold else neutral_segment_color)
-					current_segment.animation = ("On" if segment_level < current_temper_level else "Off" if segment_level > current_temper_level else "Flashing")
+					current_segment.animation = ("Danger" if hub.temper.is_form_locked() and segment_level <= current_temper_level and ((current_temper_level <= cold_threshold and segment_level <= hub.temper.cold_threshold) or (current_temper_level >= hot_threshold and segment_level >= hot_threshold)) else "On" if segment_level < current_temper_level else "Off" if segment_level > current_temper_level else "Flashing")
+					
+					if (current_segment.animation == "Danger" and i > 0):
+						var previous_segment : AnimatedSprite2D = segment_list[i - 1]
+						if (previous_segment.animation == "Danger"):
+							current_segment.set_frame_and_progress(previous_segment.frame, previous_segment.frame_progress)
+					
+					if (current_segment.animation == "Danger" and randf() <= segment_shake_chance):
+						current_segment.offset = Vector2((randi() % 2) * segment_shake_amplitude, (randi() % 2) * segment_shake_amplitude)
+					else:
+						current_segment.offset = Vector2.ZERO
 					current_segment.play()

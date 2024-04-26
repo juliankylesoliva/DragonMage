@@ -7,7 +7,7 @@
 visible = false
 script = ExtResource("1_qkxtl")
 header_label = NodePath("HeaderLabel")
-label_messages = Array[String](["TRY AGAIN!", "KEEP GOING!", "DON'T GIVE UP!", "OOPSIE DAISIE!", "OH NOES!", "YIKES!", "TOO BAD!", "MISS!", "BAD LUCK!", "PLACEHOLDER TEXT", "MESSAGE TBD", "LOREM IPSUM"])
+label_messages = Array[String](["MELTDOWN!", "COLLAPSED!", "SNAPPED!", "TRY AGAIN!", "KEEP GOING!", "DON'T GIVE UP!", "OOPSIE DAISIE!", "OH NOES!", "YIKES!", "UNFORTUNATE!", "MISSED!", "HARD LUCK!", "PLACEHOLDER TEXT", "MESSAGE TBD", "LOREM IPSUM"])
 
 [node name="HeaderLabel" type="RichTextLabel" parent="."]
 visible = false

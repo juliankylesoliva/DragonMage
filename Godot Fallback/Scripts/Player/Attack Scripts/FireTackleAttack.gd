@@ -266,6 +266,7 @@ func endlag_init():
 	if (hub.collisions.is_facing_a_wall() or (hub.char_body.is_on_ceiling() and !hub.char_body.is_on_floor())):
 		hub.audio.play_sound("attack_draelyn_bump")
 		did_player_bump = true
+		hub.char_body.floor_snap_length = saved_floor_snap_distance
 		hub.buffers.reset_speed_preservation_buffer()
 		hub.movement.reset_current_horizontal_velocity()
 		hub.animation.set_animation("DraelynFireTackleBumped")

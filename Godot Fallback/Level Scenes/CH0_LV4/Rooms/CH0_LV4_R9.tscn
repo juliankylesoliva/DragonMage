@@ -108,6 +108,21 @@ boss_room = NodePath("..")
 boss_trigger = NodePath("../BossActivationTrigger")
 boss_room_boundary_tilemap = NodePath("../BossRoomBoundaryTilemap")
 
+[node name="PhaseThreeIdle" parent="PrisonGuard/StateMachine" index="4" node_paths=PackedStringArray("upper_left_node", "upper_right_node")]
+upper_left_node = NodePath("../../../BossPathingNodeTopLeft")
+upper_right_node = NodePath("../../../BossPathingNodeTopRight")
+min_rising_speed = 16.0
+
+[node name="PhaseFourIdle" parent="PrisonGuard/StateMachine" index="6" node_paths=PackedStringArray("left_start_point", "right_start_point")]
+left_start_point = NodePath("../../../BossPathingNodeTopLeft")
+right_start_point = NodePath("../../../BossPathingNodeTopRight")
+
+[node name="FlyingShieldBash" parent="PrisonGuard/StateMachine" index="7" node_paths=PackedStringArray("left_start_point", "right_start_point", "high_midpoint", "low_midpoint")]
+left_start_point = NodePath("../../../BossPathingInterceptL")
+right_start_point = NodePath("../../../BossPathingInterceptR")
+high_midpoint = NodePath("../../../BossPathingHighVertex")
+low_midpoint = NodePath("../../../BossPathingLowVertex")
+
 [node name="SwitchingSides" parent="PrisonGuard/StateMachine" index="9" node_paths=PackedStringArray("left_ground_node", "right_ground_node")]
 left_ground_node = NodePath("../../../BossPathingNodeBottomLeft")
 right_ground_node = NodePath("../../../BossPathingNodeBottomRight")
@@ -153,6 +168,18 @@ position = Vector2(864, 192)
 
 [node name="BossPathingNodeBottomLeft" type="Node2D" parent="."]
 position = Vector2(672, 192)
+
+[node name="BossPathingInterceptL" type="Node2D" parent="."]
+position = Vector2(624, 64)
+
+[node name="BossPathingInterceptR" type="Node2D" parent="."]
+position = Vector2(912, 64)
+
+[node name="BossPathingHighVertex" type="Node2D" parent="."]
+position = Vector2(768, 96)
+
+[node name="BossPathingLowVertex" type="Node2D" parent="."]
+position = Vector2(768, 192)
 
 [node name="FinishLine" parent="." instance=ExtResource("4_svuwe")]
 position = Vector2(1536, 224)

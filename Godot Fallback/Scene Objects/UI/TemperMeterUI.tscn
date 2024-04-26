@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://bdypi7w73c6kq"]
+[gd_scene load_steps=16 format=3 uid="uid://bdypi7w73c6kq"]
 
 [ext_resource type="Script" path="res://Scripts/UI Scripts/TemperMeterUI.gd" id="1_1ab38"]
 [ext_resource type="Texture2D" uid="uid://40rkni2q8rx7" path="res://Sprites/UI/TemperMeterBackingStart.png" id="1_w743b"]
@@ -6,6 +6,18 @@
 [ext_resource type="Texture2D" uid="uid://dwlfwm4vj3h7a" path="res://Sprites/UI/TemperMeterBackingEnd.png" id="3_x72yt"]
 [ext_resource type="Texture2D" uid="uid://d2mb763stp37i" path="res://Sprites/UI/TemperMeterSegment.png" id="4_tpqwn"]
 [ext_resource type="Texture2D" uid="uid://cpokjticuax3" path="res://Sprites/UI/TemperMeterSegmentInactive.png" id="5_iqph0"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vh2lh"]
+atlas = ExtResource("4_tpqwn")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7w3uy"]
+atlas = ExtResource("4_tpqwn")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6xort"]
+atlas = ExtResource("5_iqph0")
+region = Rect2(0, 0, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_op7vf"]
 atlas = ExtResource("4_tpqwn")
@@ -29,6 +41,20 @@ region = Rect2(0, 0, 16, 16)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_e708d"]
 animations = [{
+"frames": [{
+"duration": 8.0,
+"texture": SubResource("AtlasTexture_vh2lh")
+}, {
+"duration": 8.0,
+"texture": SubResource("AtlasTexture_7w3uy")
+}, {
+"duration": 16.0,
+"texture": SubResource("AtlasTexture_6xort")
+}],
+"loop": true,
+"name": &"Danger",
+"speed": 60.0
+}, {
 "frames": [{
 "duration": 12.0,
 "texture": SubResource("AtlasTexture_op7vf")
@@ -96,9 +122,9 @@ offset = Vector2(208, 0)
 visibility_layer = 64
 position = Vector2(24, 8)
 sprite_frames = SubResource("SpriteFrames_e708d")
-animation = &"Off"
+animation = &"Danger"
 autoplay = "Off"
-frame_progress = 0.55156
+frame_progress = 0.261279
 
 [node name="Segment2" type="AnimatedSprite2D" parent="Segments"]
 visibility_layer = 64
@@ -106,6 +132,7 @@ position = Vector2(40, 8)
 sprite_frames = SubResource("SpriteFrames_e708d")
 animation = &"Off"
 autoplay = "Off"
+frame_progress = 1.0
 
 [node name="Segment3" type="AnimatedSprite2D" parent="Segments"]
 visibility_layer = 64

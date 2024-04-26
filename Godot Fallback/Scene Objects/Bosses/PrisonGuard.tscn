@@ -77,7 +77,7 @@ rect = Rect2(-32, -40, 64, 72)
 process_mode = 4
 script = ExtResource("3_6suth")
 boss = NodePath("..")
-current_state = NodePath("PhaseTwoIdle")
+current_state = NodePath("PhaseFourIdle")
 
 [node name="PhaseOneIdle" type="Node" parent="StateMachine" node_paths=PackedStringArray("phase_attack_state", "side_switch_state")]
 script = ExtResource("4_nfnxh")
@@ -105,17 +105,30 @@ attack_time = 2.0
 jump_time_threshold = 1.5
 player_jump_height_threshold = 64.0
 
-[node name="PhaseThreeIdle" type="Node" parent="StateMachine"]
+[node name="PhaseThreeIdle" type="Node" parent="StateMachine" node_paths=PackedStringArray("phase_attack_state")]
 script = ExtResource("8_k1ctw")
+max_move_speed = 160.0
+turning_speed = 224.0
+rising_speed_multiplier = 3.0
+min_rising_speed = 64.0
+player_detection_radius = 16.0
+min_time_between_attacks = 0.85
+phase_attack_state = NodePath("../OverheadFireballSpit")
 
-[node name="OverheadFireballSpit" type="Node" parent="StateMachine"]
+[node name="OverheadFireballSpit" type="Node" parent="StateMachine" node_paths=PackedStringArray("phase_idle_state")]
 script = ExtResource("9_gycg1")
+phase_idle_state = NodePath("../PhaseThreeIdle")
 
-[node name="PhaseFourIdle" type="Node" parent="StateMachine"]
+[node name="PhaseFourIdle" type="Node" parent="StateMachine" node_paths=PackedStringArray("phase_attack_state")]
 script = ExtResource("10_si2xg")
+travel_time = 1.75
+phase_attack_state = NodePath("../FlyingShieldBash")
 
-[node name="FlyingShieldBash" type="Node" parent="StateMachine"]
+[node name="FlyingShieldBash" type="Node" parent="StateMachine" node_paths=PackedStringArray("phase_idle_state")]
 script = ExtResource("11_vrixn")
+phase_idle_state = NodePath("../PhaseFourIdle")
+windup_time = 0.65
+attack_time = 1.25
 
 [node name="Stunned" type="Node" parent="StateMachine"]
 script = ExtResource("5_khlaa")

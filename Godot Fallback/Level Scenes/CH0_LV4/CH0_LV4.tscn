@@ -131,7 +131,7 @@ level_origin = NodePath("../..")
 textbox = NodePath("../../Textbox")
 
 [node name="CH0_LV4_R9" parent="." instance=ExtResource("12_joa6g")]
-position = Vector2(-1952, 576)
+position = Vector2(2112, -704)
 
 [node name="Checkpoint" parent="CH0_LV4_R9" index="4" node_paths=PackedStringArray("level_origin", "subsequent_checkpoints")]
 level_origin = NodePath("../..")
