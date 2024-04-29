@@ -10,6 +10,7 @@ enemy_defeat_knockback_multiplier = 1.5
 damage_type = &"FIRE"
 damage_strength = 2
 pixels_per_unit = 32.0
+knockback_strength = 320.0
 knockback_effect_radius = 30.0
 
 [node name="RayCast2D" parent="." index="1"]

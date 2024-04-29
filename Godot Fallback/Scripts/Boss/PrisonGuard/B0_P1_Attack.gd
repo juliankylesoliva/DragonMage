@@ -2,6 +2,8 @@ extends BossState
 
 @export var phase_idle_state : BossState
 
+@export var stun_state : BossState
+
 @export var jump_speed : float = 32
 
 @export var jump_attack_cadence : int = 3
@@ -30,6 +32,10 @@ func on_enter():
 		boss.set_gravity_scale(jumping_gravity_scale)
 
 func state_process(_delta):
+	if (boss.current_armor <= 0):
+		set_next_state(stun_state)
+		return
+	
 	if (is_jumping):
 		if (!did_fire_projectile and boss.body.velocity.y <= 0 and !boss.body.is_on_floor()):
 			do_fire_projectile()

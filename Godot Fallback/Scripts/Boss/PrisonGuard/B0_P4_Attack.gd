@@ -2,6 +2,8 @@ extends BossState
 
 @export var phase_idle_state : BossState
 
+@export var stun_state : BossState
+
 @export var left_start_point : Node2D
 
 @export var right_start_point : Node2D
@@ -39,6 +41,10 @@ func on_enter():
 	is_windup_done = false
 
 func state_process(_delta):
+	if (boss.current_armor <= 0):
+		set_next_state(stun_state)
+		return
+	
 	if (!is_windup_done and boss.body.global_position.x != starting_point.x):
 		boss.body.global_position.x = move_toward(boss.body.global_position.x, starting_point.x, _delta * windup_speed)
 	elif (boss.visibility.is_on_screen()):

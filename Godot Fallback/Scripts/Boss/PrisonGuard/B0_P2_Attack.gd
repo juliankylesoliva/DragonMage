@@ -2,6 +2,8 @@ extends BossState
 
 @export var phase_idle_state : BossState
 
+@export var stun_state : BossState
+
 @export var move_speed : float = 224
 
 @export var attack_time : float = 1
@@ -34,6 +36,10 @@ func on_enter():
 	did_jump = false
 
 func state_process(_delta):
+	if (boss.current_armor <= 0):
+		set_next_state(stun_state)
+		return
+	
 	boss.body.velocity.x = (current_move_direction * move_speed)
 	
 	if (is_jumping and !did_jump and attack_time_left <= jump_time_threshold):

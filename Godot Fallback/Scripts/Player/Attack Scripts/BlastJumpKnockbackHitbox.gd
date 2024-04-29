@@ -9,6 +9,8 @@ var player_body : CharacterBody2D
 func _on_body_entered(body):
 	if (body is Breakable):
 		do_break_object(body)
+	elif (body is Boss):
+		do_damage_boss(body)
 	elif (body.has_meta("Tag") and body.get_meta("Tag") == "Enemy"):
 		defeat_enemy(body)
 	elif (body.has_meta("Tag") and body.get_meta("Tag") == "EnemyProjectile"):
@@ -18,6 +20,10 @@ func _on_body_entered(body):
 
 func do_break_object(body):
 	if ((body as Breakable).break_object(self)):
+		hit.emit()
+
+func do_damage_boss(body):
+	if ((body as Boss).damage_boss(damage_type, damage_strength, calculate_knockback(body))):
 		hit.emit()
 
 func defeat_enemy(body):
@@ -33,3 +39,11 @@ func defeat_enemy(body):
 func destroy_enemy_projectile(body):
 	if (body is EnemyProjectile and (body as EnemyProjectile).damage_type == "MAGIC" and !(body as EnemyProjectile).is_reflected):
 		(body as EnemyProjectile).destroy_projectile()
+
+func calculate_knockback(body):
+	var velocity_vector : Vector2 = (body.global_position - collision_shape.global_position)
+	var distance : float = velocity_vector.length()
+	velocity_vector = velocity_vector.normalized()
+	velocity_vector *= (knockback_strength / (1 + (distance / pixels_per_unit)))
+	velocity_vector *= enemy_defeat_knockback_multiplier
+	return velocity_vector

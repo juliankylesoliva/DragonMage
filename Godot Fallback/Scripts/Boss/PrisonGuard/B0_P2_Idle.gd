@@ -8,6 +8,8 @@ extends BossState
 
 @export var phase_attack_state : BossState
 
+@export var stun_state : BossState
+
 var prison_guard : PrisonGuardBoss
 
 var current_rest_timer : float = 0
@@ -24,6 +26,10 @@ func on_enter():
 	boss.sprite.flip_h = prison_guard.is_boss_on_right_side
 
 func state_process(_delta):
+	if (boss.current_armor <= 0):
+		set_next_state(stun_state)
+		return
+	
 	if (current_rest_timer > 0):
 		current_rest_timer = move_toward(current_rest_timer, 0, _delta)
 	else:

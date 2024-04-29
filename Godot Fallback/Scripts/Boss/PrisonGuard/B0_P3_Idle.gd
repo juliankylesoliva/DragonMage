@@ -18,6 +18,8 @@ extends BossState
 
 @export var phase_attack_state : BossState
 
+@export var stun_state : BossState
+
 var prison_guard : PrisonGuardBoss
 
 var current_move_direction : float = 1
@@ -35,6 +37,10 @@ func on_enter():
 	current_attack_cooldown_time = min_time_between_attacks
 
 func state_process(_delta):
+	if (boss.current_armor <= 0):
+		set_next_state(stun_state)
+		return
+	
 	check_boss_side()
 	if (boss.global_position.y > upper_left_node.global_position.y):
 		boss.body.velocity = Vector2.ZERO

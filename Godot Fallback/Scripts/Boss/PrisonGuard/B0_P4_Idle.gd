@@ -4,9 +4,15 @@ extends BossState
 
 @export var right_start_point : Node2D
 
+@export var left_respawn_point : Node2D
+
+@export var right_respawn_point : Node2D
+
 @export var travel_time : float = 1
 
 @export var phase_attack_state : BossState
+
+@export var stun_state : BossState
 
 var prison_guard : PrisonGuardBoss
 
@@ -19,11 +25,16 @@ func on_enter():
 	check_boss_side()
 	boss.body.velocity = Vector2.ZERO
 	boss.sprite.flip_h = prison_guard.is_boss_on_right_side
-	boss.body.global_position.x = (right_start_point.global_position.x if prison_guard.is_boss_on_right_side else left_start_point.global_position.x)
+	if (state_machine.previous_state != null and state_machine.previous_state.name == "FlyingShieldBash" and !boss.visibility.is_on_screen()):
+		boss.body.global_position = (right_respawn_point.global_position if prison_guard.is_boss_on_right_side else left_respawn_point.global_position)
 	target_point = (right_start_point.global_position if prison_guard.is_boss_on_right_side else left_start_point.global_position)
 	travel_speed = (boss.body.global_position.distance_to(target_point) / travel_time)
 
 func state_process(_delta):
+	if (boss.current_armor <= 0):
+		set_next_state(stun_state)
+		return
+	
 	if (boss.global_position != target_point):
 		boss.body.velocity = Vector2.ZERO
 		boss.body.global_position.x = move_toward(boss.global_position.x, target_point.x, travel_speed * _delta)

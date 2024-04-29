@@ -10,6 +10,8 @@ extends BossState
 
 @export var side_switch_state : BossState
 
+@export var stun_state : BossState
+
 var prison_guard : PrisonGuardBoss
 
 var current_attack_timer : float = 0
@@ -26,6 +28,10 @@ func on_enter():
 	# set idle animation
 
 func state_process(_delta):
+	if (boss.current_armor <= 0):
+		set_next_state(stun_state)
+		return
+	
 	boss.body.velocity.x = (current_move_direction * move_speed)
 	boss.body.velocity += (Vector2.DOWN * boss.get_gravity_delta(_delta))
 	boss.body.move_and_slide()

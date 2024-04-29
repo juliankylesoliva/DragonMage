@@ -67,8 +67,8 @@ func _ready():
 	current_health = total_health
 	current_armor = armor
 
-func damage_boss(_damage_type : StringName, _damage_strength : int):
-	pass
+func damage_boss(_damage_type : StringName, _damage_strength : int, _knockback_vector : Vector2):
+	return false
 
 func lock_camera_to_boss_room():
 	var camera : Camera2D = get_viewport().get_camera_2d()

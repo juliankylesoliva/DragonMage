@@ -16,6 +16,10 @@ var is_player_on_right_side : bool = false
 
 var is_boss_on_right_side : bool = true
 
+var current_weakness : StringName = "NONE"
+
+var current_defense : int = 1
+
 func _ready():
 	super._ready()
 	room_side_trigger.trigger_exited.connect(on_side_trigger_exited)
@@ -41,9 +45,23 @@ func on_activation():
 	floor_spikes_l.call_deferred("set_process_mode", PROCESS_MODE_INHERIT)
 	floor_spikes_r.call_deferred("set_process_mode", PROCESS_MODE_INHERIT)
 
-func damage_boss(_damage_type : StringName, _damage_strength : int):
+func damage_boss(_damage_type : StringName, _damage_strength : int, _knockback_vector : Vector2):
 	if (current_invulnerability_duration > 0):
-		return
+		return false
+	
+	if (current_armor <= 0 and is_knockback_enabled and state_machine.current_state.name == "Stunned" and state_machine.current_state.has_method("apply_knockback")):
+		state_machine.current_state.apply_knockback(_knockback_vector.x, 1.0 if _knockback_vector.x >= 0 else -1.0)
+		return true
+	elif (current_armor > 0 and _damage_type == current_weakness and _damage_strength >= current_defense):
+		current_armor -= 1
+		do_post_hit_invulnerability()
+		return true
+	else:
+		return false
+
+func set_current_weakness(damage_type : StringName):
+	if (current_weakness != damage_type):
+		current_weakness = damage_type
 
 func check_temper_fruit_spawn():
 	if (player_hub == null):
