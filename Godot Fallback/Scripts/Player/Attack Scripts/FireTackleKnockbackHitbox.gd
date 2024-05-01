@@ -23,7 +23,7 @@ func do_break_object(body):
 		hit.emit()
 
 func do_damage_boss(body):
-	if ((body as Boss).damage_boss(damage_type, damage_strength, calculate_knockback(body))):
+	if ((body as Boss).damage_boss(damage_type, damage_strength, player_body.velocity * enemy_defeat_knockback_multiplier)):
 		hit.emit()
 
 func defeat_enemy(body):
@@ -39,11 +39,3 @@ func defeat_enemy(body):
 func destroy_enemy_projectile(body):
 	if (body is EnemyProjectile and (body as EnemyProjectile).damage_type == "FIRE" and !(body as EnemyProjectile).is_reflected):
 		(body as EnemyProjectile).destroy_projectile()
-
-func calculate_knockback(body):
-	var velocity_vector : Vector2 = (body.global_position - collision_shape.global_position)
-	var distance : float = velocity_vector.length()
-	velocity_vector = velocity_vector.normalized()
-	velocity_vector *= (knockback_strength / (1 + (distance / pixels_per_unit)))
-	velocity_vector *= enemy_defeat_knockback_multiplier
-	return velocity_vector

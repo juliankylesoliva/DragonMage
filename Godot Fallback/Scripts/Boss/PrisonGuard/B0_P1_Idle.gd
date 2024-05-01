@@ -16,12 +16,13 @@ var prison_guard : PrisonGuardBoss
 
 var current_attack_timer : float = 0
 
-var current_move_direction : float = -1
+var current_move_direction : float = 1
 
 var is_first_move : bool = true
 
 func on_enter():
 	check_prison_guard_ref()
+	prison_guard.update_weakness_and_defense()
 	current_attack_timer = (time_between_attacks if !is_first_move else initial_move_time)
 	if (is_first_move):
 		is_first_move = false

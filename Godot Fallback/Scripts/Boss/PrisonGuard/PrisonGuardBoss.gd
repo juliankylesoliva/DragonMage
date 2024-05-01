@@ -20,6 +20,8 @@ var current_weakness : StringName = "NONE"
 
 var current_defense : int = 1
 
+var current_spike_reference : FloorSpikes
+
 func _ready():
 	super._ready()
 	room_side_trigger.trigger_exited.connect(on_side_trigger_exited)
@@ -50,9 +52,9 @@ func damage_boss(_damage_type : StringName, _damage_strength : int, _knockback_v
 		return false
 	
 	if (current_armor <= 0 and is_knockback_enabled and state_machine.current_state.name == "Stunned" and state_machine.current_state.has_method("apply_knockback")):
-		state_machine.current_state.apply_knockback(_knockback_vector.x, 1.0 if _knockback_vector.x >= 0 else -1.0)
+		state_machine.current_state.apply_knockback(abs(_knockback_vector.x), 1.0 if _knockback_vector.x >= 0 else -1.0)
 		return true
-	elif (current_armor > 0 and _damage_type == current_weakness and _damage_strength >= current_defense):
+	elif (current_armor > 0 and (_damage_type == current_weakness or current_weakness == "ANY") and _damage_strength >= current_defense):
 		current_armor -= 1
 		do_post_hit_invulnerability()
 		return true
@@ -62,6 +64,32 @@ func damage_boss(_damage_type : StringName, _damage_strength : int, _knockback_v
 func set_current_weakness(damage_type : StringName):
 	if (current_weakness != damage_type):
 		current_weakness = damage_type
+
+func set_current_defense(defense : int):
+	current_defense = defense
+
+func update_weakness_and_defense():
+	match current_health:
+		4:
+			set_current_weakness("MAGIC")
+			set_current_defense(1)
+		3:
+			set_current_weakness("FIRE")
+			set_current_defense(1)
+		2:
+			set_current_weakness("MAGIC")
+			set_current_defense(2)
+		1:
+			set_current_weakness("FIRE")
+			set_current_defense(2)
+		_:
+			pass
+
+func set_current_spike_reference(spikes : FloorSpikes):
+	current_spike_reference = spikes
+
+func unset_current_spike_reference():
+	current_spike_reference = null
 
 func check_temper_fruit_spawn():
 	if (player_hub == null):

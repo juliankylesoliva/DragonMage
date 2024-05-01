@@ -74,6 +74,17 @@ func _process(delta):
 			_:
 				pass
 
+func are_spikes_active():
+	return (spike_state == 2)
+
+func force_activate():
+	if (spike_state_timer <= 0 and spike_state == 0):
+		for spike in spike_segment_list:
+			spike.play("Warning")
+		spike_state = 1
+		spike_state_timer = time_between_states
+		play_sound("obstacle_spikes_warning")
+
 func play_sound(sound_name : String, volume : float = 0, pitch : float = 1, bus_name : StringName = "SFX"):
 	var stream : AudioStream = SoundFactory.get_sound_by_name(sound_name)
 	if (stream != null):
@@ -90,8 +101,16 @@ func _on_body_entered(body):
 			if (child is PlayerHub):
 				player_ref = (child as PlayerHub)
 				break
+	elif (body is PrisonGuardBoss):
+		(body as PrisonGuardBoss).set_current_spike_reference(self)
+	else:
+		pass
 
 func _on_body_exited(body):
 	if (body is CharacterBody2D and body.has_meta("Tag") and body.get_meta("Tag") == "Player"):
 		is_player_detected = false
 		player_ref = null
+	elif (body is PrisonGuardBoss):
+		(body as PrisonGuardBoss).unset_current_spike_reference()
+	else:
+		pass

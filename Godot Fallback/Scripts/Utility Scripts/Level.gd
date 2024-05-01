@@ -64,7 +64,7 @@ func level_startup():
 			break
 	
 	if (player_hub == null):
-		push_warning("PlayerHub not found in player reference!")
+		push_warning("PlayerHub not found in level!")
 	
 	player_hub.set_respawn_position(destination_coords)
 	

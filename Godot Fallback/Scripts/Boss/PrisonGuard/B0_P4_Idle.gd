@@ -22,6 +22,7 @@ var travel_speed : float = 0
 
 func on_enter():
 	check_prison_guard_ref()
+	prison_guard.update_weakness_and_defense()
 	check_boss_side()
 	boss.body.velocity = Vector2.ZERO
 	boss.sprite.flip_h = prison_guard.is_boss_on_right_side

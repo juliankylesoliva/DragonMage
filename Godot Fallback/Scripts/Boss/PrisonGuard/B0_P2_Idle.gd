@@ -20,6 +20,7 @@ var current_move_direction : float = -1
 
 func on_enter():
 	check_prison_guard_ref()
+	prison_guard.update_weakness_and_defense()
 	current_rest_timer = rest_duration
 	current_attack_timer = time_between_attacks
 	current_move_direction = (1 if prison_guard.is_boss_on_right_side else -1)

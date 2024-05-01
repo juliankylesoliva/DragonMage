@@ -104,8 +104,8 @@ stun_state = NodePath("../Stunned")
 script = ExtResource("7_omg5d")
 phase_idle_state = NodePath("../PhaseTwoIdle")
 stun_state = NodePath("../Stunned")
-move_speed = 120.0
-attack_time = 2.0
+move_speed = 160.0
+attack_time = 1.5
 jump_time_threshold = 1.5
 player_jump_height_threshold = 64.0
 
@@ -141,9 +141,10 @@ attack_time = 1.25
 [node name="Stunned" type="Node" parent="StateMachine" node_paths=PackedStringArray("switch_sides_state")]
 script = ExtResource("5_khlaa")
 switch_sides_state = NodePath("../SwitchingSides")
-initial_vertical_launch = 512.0
+initial_vertical_launch = 384.0
 knockback_vertical_launch = 128.0
 minimum_horizontal_knockback = 96.0
+horizontal_knockback_factor = 0.65
 
 [node name="SwitchingSides" type="Node" parent="StateMachine" node_paths=PackedStringArray("phase_one_state", "phase_two_state", "phase_three_state", "phase_four_state")]
 script = ExtResource("13_3fd8v")

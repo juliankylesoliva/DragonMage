@@ -30,6 +30,8 @@ class_name Boss
 
 @export var post_hit_invulnerability_duration : float = 1
 
+@export var post_damage_invulnerability_duration : float = 3
+
 @export var knockback_gravity_scale : float = 3
 
 @export var battle_left_camera_limit : int = 0
@@ -90,9 +92,16 @@ func on_activation():
 func do_post_hit_invulnerability():
 	current_invulnerability_duration = post_hit_invulnerability_duration
 
+func do_post_damage_invulnerability():
+	current_invulnerability_duration = post_damage_invulnerability_duration
+
 func update_invulnerability_duration(delta : float):
 	if (current_invulnerability_duration > 0):
 		current_invulnerability_duration = move_toward(current_invulnerability_duration, 0, delta)
+		if (current_invulnerability_duration > 0):
+			sprite.modulate.a = 0.5
+		else:
+			sprite.modulate.a = 1.0
 
 func set_knockback_velocity(vec : Vector2):
 	if (is_knockback_enabled):

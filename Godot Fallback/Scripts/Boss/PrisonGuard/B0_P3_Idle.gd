@@ -30,6 +30,7 @@ var current_attack_cooldown_time : float = 0
 
 func on_enter():
 	check_prison_guard_ref()
+	prison_guard.update_weakness_and_defense()
 	check_boss_side()
 	current_move_speed = 0
 	current_move_direction = (-1 if (boss.player_hub.char_body.global_position.x < boss.body.global_position.x) else 1)
