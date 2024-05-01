@@ -36,6 +36,7 @@ func state_process(_delta):
 		set_next_state(stun_state)
 		return
 	
+	prison_guard.check_player_collision()
 	if (boss.global_position != target_point):
 		boss.body.velocity = Vector2.ZERO
 		boss.body.global_position.x = move_toward(boss.global_position.x, target_point.x, travel_speed * _delta)

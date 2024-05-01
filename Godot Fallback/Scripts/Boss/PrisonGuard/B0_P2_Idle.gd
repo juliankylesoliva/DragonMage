@@ -20,6 +20,7 @@ var current_move_direction : float = -1
 
 func on_enter():
 	check_prison_guard_ref()
+	check_boss_side()
 	prison_guard.update_weakness_and_defense()
 	current_rest_timer = rest_duration
 	current_attack_timer = time_between_attacks
@@ -31,6 +32,7 @@ func state_process(_delta):
 		set_next_state(stun_state)
 		return
 	
+	prison_guard.check_player_collision()
 	if (current_rest_timer > 0):
 		current_rest_timer = move_toward(current_rest_timer, 0, _delta)
 	else:
@@ -40,6 +42,9 @@ func state_process(_delta):
 	boss.body.move_and_slide()
 	if (current_attack_timer <= 0):
 		set_next_state(phase_attack_state)
+
+func check_boss_side():
+	prison_guard.is_boss_on_right_side = (boss.body.global_position.x > prison_guard.room_side_trigger.global_position.x)
 
 func check_prison_guard_ref():
 	if (prison_guard == null and boss != null and (boss is PrisonGuardBoss)):

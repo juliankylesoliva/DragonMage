@@ -33,12 +33,13 @@ func state_process(_delta):
 		set_next_state(stun_state)
 		return
 	
+	prison_guard.check_player_collision()
 	boss.body.velocity.x = (current_move_direction * move_speed)
 	boss.body.velocity += (Vector2.DOWN * boss.get_gravity_delta(_delta))
 	boss.body.move_and_slide()
 	current_attack_timer = move_toward(current_attack_timer, 0, _delta)
 	
-	if ((prison_guard.is_boss_on_right_side and prison_guard.is_player_on_right_side) or (!prison_guard.is_boss_on_right_side and !prison_guard.is_player_on_right_side)):
+	if (boss.player_hub.char_body.is_on_floor() and ((prison_guard.is_boss_on_right_side and prison_guard.is_player_on_right_side) or (!prison_guard.is_boss_on_right_side and !prison_guard.is_player_on_right_side))):
 		set_next_state(side_switch_state)
 	elif (current_attack_timer <= 0):
 		set_next_state(phase_attack_state)

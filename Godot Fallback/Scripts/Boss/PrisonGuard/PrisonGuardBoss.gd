@@ -12,6 +12,8 @@ class_name PrisonGuardBoss
 
 @export var room_side_trigger : Trigger
 
+@export var fireball_projectile_scene : PackedScene
+
 var is_player_on_right_side : bool = false
 
 var is_boss_on_right_side : bool = true
@@ -47,8 +49,27 @@ func on_activation():
 	floor_spikes_l.call_deferred("set_process_mode", PROCESS_MODE_INHERIT)
 	floor_spikes_r.call_deferred("set_process_mode", PROCESS_MODE_INHERIT)
 
+func on_defeat():
+	is_activated = false
+	if (player_hub.temper.is_forcing_form_change() or player_hub.temper.is_form_locked()):
+		player_hub.temper.set_boss_courtesy_temper_level()
+	if (textbox != null):
+		if (defeat_text.size() > 0):
+			PauseHandler.enable_pausing(false)
+			player_hub.set_force_stand(true)
+			textbox.accept_input_events = true
+			textbox.textbox_finished.connect(on_dialogue_defeat_finished)
+			for text in defeat_text:
+				textbox.queue_text(text)
+		else:
+			on_dialogue_defeat_finished()
+	floor_spikes_l.force_reset()
+	floor_spikes_r.force_reset()
+	floor_spikes_l.call_deferred("set_process_mode", PROCESS_MODE_DISABLED)
+	floor_spikes_r.call_deferred("set_process_mode", PROCESS_MODE_DISABLED)
+
 func damage_boss(_damage_type : StringName, _damage_strength : int, _knockback_vector : Vector2):
-	if (current_invulnerability_duration > 0):
+	if (current_invulnerability_duration > 0 or current_health <= 0):
 		return false
 	
 	if (current_armor <= 0 and is_knockback_enabled and state_machine.current_state.name == "Stunned" and state_machine.current_state.has_method("apply_knockback")):
@@ -67,6 +88,16 @@ func set_current_weakness(damage_type : StringName):
 
 func set_current_defense(defense : int):
 	current_defense = defense
+
+func spawn_fireball(cancel_horizontal : bool = false):
+	var temp_node : Node = fireball_projectile_scene.instantiate()
+	add_sibling(temp_node)
+	(temp_node as Node2D).global_position = global_position
+	if (temp_node is EnemyProjectile):
+		var temp_proj : EnemyProjectile = (temp_node as EnemyProjectile)
+		temp_proj.boss_setup(self)
+		if (cancel_horizontal):
+			temp_proj.velocity.x = 0
 
 func update_weakness_and_defense():
 	match current_health:
@@ -100,12 +131,25 @@ func check_temper_fruit_spawn():
 		chosen_fruit_side.set_starting_state(-1 if player_hub.form.is_a_mage() else 1)
 		chosen_fruit_side.do_respawn(true)
 
+func check_player_collision():
+	if (is_activated and is_player_in_collider and current_invulnerability_duration <= 0):
+		player_hub.damage.take_damage(1 if body.global_position.x < player_hub.char_body.global_position.x else -1)
+
 func on_side_trigger_exited():
 	is_player_on_right_side = (player_hub.char_body.global_position.x > room_side_trigger.global_position.x)
 
 func on_dialogue_intro_finished():
 	if (is_activated):
 		PauseHandler.enable_pausing(true)
-		# unfreeze player
 		player_hub.set_force_stand(false)
 		state_machine.set_process_mode(PROCESS_MODE_INHERIT)
+		textbox.textbox_finished.disconnect(on_dialogue_intro_finished)
+
+func on_dialogue_defeat_finished():
+	PauseHandler.enable_pausing(true)
+	player_hub.set_force_stand(false)
+	release_camera_past_boss_room()
+	boss_room_boundary_tilemap.set_layer_enabled(1, false)
+	boss_room_boundary_tilemap.set_layer_enabled(3, false)
+	state_machine.set_process_mode(PROCESS_MODE_DISABLED)
+	textbox.textbox_finished.disconnect(on_dialogue_defeat_finished)

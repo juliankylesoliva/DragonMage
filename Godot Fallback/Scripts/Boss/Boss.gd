@@ -22,6 +22,8 @@ class_name Boss
 
 @export var visibility : VisibleOnScreenNotifier2D
 
+@export var player_contact_hitbox : Area2D
+
 @export_multiline var introduction_text : Array[String]
 
 @export_multiline var defeat_text : Array[String]
@@ -64,8 +66,12 @@ var is_knockback_enabled : bool = false
 
 var current_gravity_scale : float = 1
 
+var is_player_in_collider : bool = false
+
 func _ready():
 	boss_trigger.trigger_entered.connect(on_activation_trigger_entered)
+	player_contact_hitbox.body_entered.connect(on_player_contact_enter)
+	player_contact_hitbox.body_exited.connect(on_player_contact_exit)
 	current_health = total_health
 	current_armor = armor
 
@@ -88,6 +94,17 @@ func release_camera_past_boss_room():
 
 func on_activation():
 	pass
+
+func on_defeat():
+	pass
+
+func on_player_contact_enter(player_body):
+	if (player_body == player_hub.char_body):
+		is_player_in_collider = true
+
+func on_player_contact_exit(player_body):
+	if (player_body == player_hub.char_body):
+		is_player_in_collider = false
 
 func do_post_hit_invulnerability():
 	current_invulnerability_duration = post_hit_invulnerability_duration
@@ -112,6 +129,9 @@ func set_gravity_scale(g : float):
 
 func get_gravity_delta(delta : float):
 	return (base_gravity * current_gravity_scale * delta)
+
+func get_facing_value():
+	return (1.0 if !sprite.flip_h else -1.0)
 
 func activate_post_hit_invulnerability():
 	if (current_invulnerability_duration <= 0):

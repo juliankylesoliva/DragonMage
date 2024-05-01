@@ -45,6 +45,7 @@ func on_exit():
 func apply_knockback(horizontal_knockback_strength : float, horizontal_knockback_direction : float):
 	if (boss.is_knockback_enabled and boss.body.is_on_floor()):
 		boss.body.velocity = Vector2(horizontal_knockback_direction * abs(max(horizontal_knockback_strength, minimum_horizontal_knockback)), -knockback_vertical_launch)
+		boss.sprite.flip_h = (boss.body.velocity.x >= 0)
 
 func check_boss_side():
 	prison_guard.is_boss_on_right_side = (boss.body.global_position.x > prison_guard.room_side_trigger.global_position.x)

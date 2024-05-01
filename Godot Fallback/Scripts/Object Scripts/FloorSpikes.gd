@@ -85,6 +85,11 @@ func force_activate():
 		spike_state_timer = time_between_states
 		play_sound("obstacle_spikes_warning")
 
+func force_reset():
+	spike_state = 0
+	for spike in spike_segment_list:
+		spike.play("Inactive")
+
 func play_sound(sound_name : String, volume : float = 0, pitch : float = 1, bus_name : StringName = "SFX"):
 	var stream : AudioStream = SoundFactory.get_sound_by_name(sound_name)
 	if (stream != null):

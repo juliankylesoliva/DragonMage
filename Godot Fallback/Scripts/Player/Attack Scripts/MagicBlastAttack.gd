@@ -121,7 +121,7 @@ func throw_projectile():
 
 func check_despawn_distance():
 	if (projectile_instance != null):
-		if (hub.char_body.global_position.distance_to((projectile_instance as Node2D).global_position) > projectile_despawn_distance):
+		if (hub.force_stand or hub.char_body.global_position.distance_to((projectile_instance as Node2D).global_position) > projectile_despawn_distance):
 			destroy_projectile()
 
 func destroy_projectile():

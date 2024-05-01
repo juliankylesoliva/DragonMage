@@ -40,6 +40,7 @@ func state_process(_delta):
 		set_next_state(stun_state)
 		return
 	
+	prison_guard.check_player_collision()
 	boss.body.velocity.x = (current_move_direction * move_speed)
 	
 	if (is_jumping and !did_jump and attack_time_left <= jump_time_threshold):

@@ -6,6 +6,18 @@ class_name EnemyProjectile
 
 @export var move_speed : float = 3
 
+@export var jump_speed : float = 0
+
+@export var gravity_scale : float = 0
+
+@export var floor_bounce_modifier : float = 0
+
+@export var wall_bounce_modifier : float = 0
+
+@export var destroy_on_wall_bounce : bool = false
+
+@export var bounce_limit : int = 0
+
 @export var reflected_speed_boost : float = 2
 
 @export_enum("MAGIC", "FIRE") var damage_type : String = "FIRE"
@@ -18,12 +30,46 @@ class_name EnemyProjectile
 
 @export var reflect_sound_name : String = "attack_reflect"
 
+var base_gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
+
 var is_moving_right : bool = false
 
 var is_reflected = false
 
+var saved_velocity : Vector2
+
+var bounce_count : int = 0
+
 func _physics_process(_delta):
+	if ((is_on_floor() or is_on_ceiling()) and saved_velocity.y != 0):
+		if (bounce_count < bounce_limit):
+			bounce_count += 1
+			velocity.y = (-saved_velocity.y * abs(floor_bounce_modifier))
+		else:
+			destroy_projectile()
+			return
+	
+	if (is_on_wall() and saved_velocity.x != 0):
+		if (destroy_on_wall_bounce):
+			destroy_projectile()
+			return
+		
+		if (bounce_count < bounce_limit):
+			bounce_count += 1
+			velocity.x = (-saved_velocity.x * abs(wall_bounce_modifier))
+			is_reflected = !is_reflected
+		else:
+			destroy_projectile()
+			return
+	
+	saved_velocity = velocity
 	move_and_slide()
+	velocity += (Vector2.DOWN * get_gravity_delta(_delta))
+
+func boss_setup(boss_source : Boss):
+	velocity = Vector2(boss_source.get_facing_value() * move_speed, -jump_speed)
+	is_moving_right = (boss_source.get_facing_value() >= 0)
+	projectile_sprite.flip_h = !is_moving_right
 
 func setup(enemy_source : Enemy):
 	velocity = (Vector2.RIGHT * enemy_source.movement.get_facing_value() * move_speed)
@@ -42,6 +88,9 @@ func reflect_projectile():
 	is_moving_right = !is_moving_right
 	projectile_sprite.flip_h = !is_moving_right
 	SoundFactory.play_sound_by_name(reflect_sound_name, global_position, 0, 1, "SFX")
+
+func get_gravity_delta(delta : float):
+	return (base_gravity * gravity_scale * delta)
 
 func _on_visible_on_screen_notifier_2d_screen_exited():
 	queue_free()

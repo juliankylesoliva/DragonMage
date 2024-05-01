@@ -43,6 +43,7 @@ func state_process(_delta):
 		return
 	
 	check_boss_side()
+	prison_guard.check_player_collision()
 	if (boss.global_position.y > upper_left_node.global_position.y):
 		boss.body.velocity = Vector2.ZERO
 		boss.global_position.y = move_toward(boss.global_position.y, upper_left_node.global_position.y, _delta * max(min_rising_speed, abs(boss.global_position.y - upper_left_node.global_position.y) * rising_speed_multiplier))

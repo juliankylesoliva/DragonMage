@@ -14,6 +14,8 @@ extends BossState
 
 @export var phase_four_state : BossState
 
+@export var defeat_state : BossState
+
 var prison_guard : PrisonGuardBoss
 
 func on_enter():
@@ -26,7 +28,7 @@ func state_process(_delta):
 	if (boss.body.velocity.y < 0 and !boss.visibility.is_on_screen()):
 		boss.body.global_position.x = (left_ground_node.global_position.x if prison_guard.is_player_on_right_side else right_ground_node.global_position.x)
 		boss.body.velocity = (Vector2.DOWN * move_speed)
-		prison_guard.is_boss_on_right_side = !prison_guard.is_boss_on_right_side
+		prison_guard.is_boss_on_right_side = !prison_guard.is_player_on_right_side
 		boss.sprite.flip_h = prison_guard.is_boss_on_right_side
 	elif (boss.body.is_on_floor()):
 		match boss.current_health:
@@ -39,8 +41,7 @@ func state_process(_delta):
 			1:
 				set_next_state(phase_four_state)
 			0:
-				# de defeat state
-				pass
+				set_next_state(defeat_state)
 	else:
 		pass
 
