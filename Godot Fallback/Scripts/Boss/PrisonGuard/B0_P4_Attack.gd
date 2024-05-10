@@ -47,11 +47,13 @@ func state_process(_delta):
 	
 	prison_guard.check_player_collision()
 	if (!is_windup_done and boss.body.global_position.x != starting_point.x):
+		boss.sprite.play("Phase4WindupLookUp" if !boss.player_hub.char_body.is_on_floor() else "Phase4Windup")
 		boss.body.global_position.x = move_toward(boss.body.global_position.x, starting_point.x, _delta * windup_speed)
 	elif (boss.visibility.is_on_screen()):
 		if (!is_windup_done):
 			is_windup_done = true
 			midpoint = (high_midpoint.global_position if !boss.player_hub.char_body.is_on_floor() else low_midpoint.global_position)
+			boss.sprite.play("Phase4Attack")
 		boss.body.global_position.x += (_delta * horizontal_speed)
 		boss.body.global_position.y = calculate_vertical_position()
 		check_boss_side()

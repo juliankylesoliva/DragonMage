@@ -32,7 +32,7 @@ func on_enter():
 	check_prison_guard_ref()
 	attack_time_left = attack_time
 	current_move_direction = (-1 if prison_guard.is_boss_on_right_side else 1)
-	is_jumping = (!boss.player_hub.char_body.is_on_floor() and abs(boss.player_hub.char_body.global_position.y - boss.body.global_position.y) >= player_jump_height_threshold and is_facing_player())
+	is_jumping = check_if_jumping()
 	did_jump = false
 
 func state_process(_delta):
@@ -42,7 +42,7 @@ func state_process(_delta):
 	
 	prison_guard.check_player_collision()
 	boss.body.velocity.x = (current_move_direction * move_speed)
-	
+	boss.sprite.play("Phase2JumpAttack" if !boss.body.is_on_floor() else "Phase2Attack")
 	if (is_jumping and !did_jump and attack_time_left <= jump_time_threshold):
 		did_jump = true
 		boss.body.velocity += (Vector2.UP * jump_speed)
@@ -59,6 +59,9 @@ func state_process(_delta):
 func on_exit():
 	boss.body.velocity = Vector2.ZERO
 	prison_guard.is_boss_on_right_side = !prison_guard.is_boss_on_right_side
+
+func check_if_jumping():
+	return (!boss.player_hub.char_body.is_on_floor() and abs(boss.player_hub.char_body.global_position.y - boss.body.global_position.y) >= player_jump_height_threshold and is_facing_player())
 
 func is_facing_player():
 	if (boss.sprite.flip_h):

@@ -43,6 +43,10 @@ func state_process(_delta):
 	if (is_jumping):
 		if (!did_fire_projectile and boss.body.velocity.y >= 0 and !boss.body.is_on_floor()):
 			do_fire_projectile()
+			boss.sprite.play("Phase1JumpAttack")
+		else:
+			if (!did_fire_projectile):
+				boss.sprite.play("Phase1JumpAttackWindup")
 		boss.body.move_and_slide()
 		boss.body.velocity += (Vector2.DOWN * boss.get_gravity_delta(_delta))
 		if (boss.body.velocity.y >= 0 and boss.current_gravity_scale != falling_gravity_scale):
@@ -50,9 +54,14 @@ func state_process(_delta):
 		
 		if (boss.body.is_on_floor()):
 			is_jumping = false
+			boss.sprite.play("Phase1Stand")
 	else:
 		if (!did_fire_projectile and current_ground_time <= (ground_time / 2)):
 			do_fire_projectile()
+			boss.sprite.play("Phase1Attack")
+		else:
+			if (!did_fire_projectile):
+				boss.sprite.play("Phase1AttackWindup")
 		current_ground_time = move_toward(current_ground_time, 0, _delta)
 		if (current_ground_time <= 0):
 			set_next_state(phase_idle_state)

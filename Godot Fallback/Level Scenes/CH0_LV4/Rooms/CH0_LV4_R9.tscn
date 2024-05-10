@@ -105,7 +105,7 @@ position = Vector2(960, 272)
 floor_length = 2
 
 [node name="PrisonGuard" parent="." node_paths=PackedStringArray("floor_spikes_l", "floor_spikes_r", "temper_fruit_l", "temper_fruit_r", "room_side_trigger", "boss_room", "boss_trigger", "boss_room_boundary_tilemap") instance=ExtResource("6_t5g2i")]
-position = Vector2(864, 192)
+position = Vector2(864, 180)
 floor_spikes_l = NodePath("../FloorSpikes")
 floor_spikes_r = NodePath("../FloorSpikes2")
 temper_fruit_l = NodePath("../TemperDragonFruit")

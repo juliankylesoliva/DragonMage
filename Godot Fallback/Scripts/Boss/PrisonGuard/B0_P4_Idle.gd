@@ -30,6 +30,7 @@ func on_enter():
 		boss.body.global_position = (right_respawn_point.global_position if prison_guard.is_boss_on_right_side else left_respawn_point.global_position)
 	target_point = (right_start_point.global_position if prison_guard.is_boss_on_right_side else left_start_point.global_position)
 	travel_speed = (boss.body.global_position.distance_to(target_point) / travel_time)
+	boss.sprite.play("Phase4Windup")
 
 func state_process(_delta):
 	if (boss.current_armor <= 0):

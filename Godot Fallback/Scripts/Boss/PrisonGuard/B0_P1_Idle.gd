@@ -26,12 +26,16 @@ func on_enter():
 	current_attack_timer = (time_between_attacks if !is_first_move else initial_move_time)
 	if (is_first_move):
 		is_first_move = false
-	# set idle animation
+	if (state_machine.process_mode == PROCESS_MODE_INHERIT):
+		boss.sprite.play("Phase1Move")
 
 func state_process(_delta):
 	if (boss.current_armor <= 0):
 		set_next_state(stun_state)
 		return
+	
+	if (state_machine.process_mode == PROCESS_MODE_INHERIT):
+		boss.sprite.play("Phase1Move")
 	
 	prison_guard.check_player_collision()
 	boss.body.velocity.x = (current_move_direction * move_speed)

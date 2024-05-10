@@ -36,6 +36,7 @@ func on_enter():
 	current_move_direction = (-1 if (boss.player_hub.char_body.global_position.x < boss.body.global_position.x) else 1)
 	boss.sprite.flip_h = (current_move_direction < 0)
 	current_attack_cooldown_time = min_time_between_attacks
+	boss.sprite.play("Phase3Fly")
 
 func state_process(_delta):
 	if (boss.current_armor <= 0):

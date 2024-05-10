@@ -20,6 +20,7 @@ func on_enter():
 	boss.set_gravity_scale(knockback_gravity_scale)
 	boss.is_knockback_enabled = true
 	boss.body.velocity = (Vector2.UP * initial_vertical_launch)
+	boss.sprite.play("Stunned")
 
 func state_process(_delta):
 	if (prison_guard.current_spike_reference != null and (prison_guard.current_spike_reference == prison_guard.floor_spikes_l or prison_guard.current_spike_reference == prison_guard.floor_spikes_r)):

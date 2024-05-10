@@ -27,9 +27,11 @@ func state_process(_delta):
 	
 	prison_guard.check_player_collision()
 	if (current_windup_time > 0):
+		boss.sprite.play("Phase3AttackWindup")
 		current_windup_time = move_toward(current_windup_time, 0, _delta)
 		if (current_windup_time <= 0):
 			fire_projectile()
+			boss.sprite.play("Phase3Attack")
 	elif (current_endlag_time > 0):
 		current_endlag_time = move_toward(current_endlag_time, 0, _delta)
 	else:
