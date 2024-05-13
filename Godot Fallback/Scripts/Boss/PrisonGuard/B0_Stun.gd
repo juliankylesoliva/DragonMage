@@ -29,6 +29,8 @@ func state_process(_delta):
 			boss.current_armor = boss.armor
 			prison_guard.unset_current_spike_reference()
 			boss.do_post_damage_invulnerability()
+			EffectFactory.get_effect("EnemyContactImpact", boss.global_position)
+			SoundFactory.play_sound_by_name("damage_enemy", boss.global_position, 0, 1, "SFX")
 			set_next_state(switch_sides_state)
 			return
 		else:

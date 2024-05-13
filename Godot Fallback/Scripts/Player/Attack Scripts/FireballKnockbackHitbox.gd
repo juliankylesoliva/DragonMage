@@ -23,6 +23,7 @@ func do_break_object(body):
 func do_damage_boss(body):
 	if ((body as Boss).damage_boss(damage_type, damage_strength, (get_parent() as RigidBody2D).linear_velocity * enemy_defeat_knockback_multiplier)):
 		hit.emit()
+		EffectFactory.get_effect("FireImpact", body.global_position)
 
 func defeat_enemy(body):
 	for child in body.get_children():

@@ -31,8 +31,11 @@ func _on_body_entered(body):
 	ray.collision_mask = temp_ray_mask
 
 func do_damage_boss(body):
-	if ((body as Boss).damage_boss(damage_type, damage_strength, calculate_knockback(body))):
-		hit.emit()
+	var target_pos : Vector2 = ((body as Node2D).global_position - ray.global_position)
+	if (!is_going_thru_a_wall(target_pos, body.get_rid())):
+		if ((body as Boss).damage_boss(damage_type, damage_strength, calculate_knockback(body))):
+			hit.emit()
+			EffectFactory.get_effect("MagicImpact", body.global_position)
 
 func do_magic_blast_knockback(body):
 	var hub : PlayerHub = null

@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://bp3471su81u8g"
+path="res://.godot/imported/sawsquarenoise - Boss Theme.wav-4a73243588203676f49d6a0891c20b7f.sample"
+
+[deps]
+
+source_file="res://Music/sawsquarenoise - Boss Theme.wav"
+dest_files=["res://.godot/imported/sawsquarenoise - Boss Theme.wav-4a73243588203676f49d6a0891c20b7f.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=true
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=true
+edit/loop_mode=2
+edit/loop_begin=515935
+edit/loop_end=2055566
+compress/mode=0

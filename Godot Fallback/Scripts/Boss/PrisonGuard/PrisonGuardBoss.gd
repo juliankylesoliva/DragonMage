@@ -14,6 +14,8 @@ class_name PrisonGuardBoss
 
 @export var fireball_projectile_scene : PackedScene
 
+@export var projectile_launch_offset : float = 32
+
 var is_player_on_right_side : bool = false
 
 var is_boss_on_right_side : bool = true
@@ -33,6 +35,8 @@ func _ready():
 func _physics_process(delta):
 	check_temper_fruit_spawn()
 	update_invulnerability_duration(delta)
+	if (textbox.current_state != Textbox.TextboxState.READY and textbox.unformatted_text.contains("{player_name}")):
+		textbox.update_player_name_format_text(player_hub.form.get_current_form_name())
 
 func on_activation():
 	if (player_hub.temper.is_forcing_form_change() or player_hub.temper.is_form_locked()):
@@ -42,6 +46,8 @@ func on_activation():
 			PauseHandler.enable_pausing(false)
 			player_hub.set_force_stand(true)
 			textbox.accept_input_events = true
+			if (clear_timer != null):
+				clear_timer.stop_timer()
 			for text in introduction_text:
 				textbox.queue_text(text)
 		else:
@@ -51,6 +57,10 @@ func on_activation():
 
 func on_defeat():
 	is_activated = false
+	if (clear_timer != null):
+		clear_timer.stop_timer()
+	if (boss_music_player != null):
+		boss_music_player.fade_out()
 	if (player_hub.temper.is_forcing_form_change() or player_hub.temper.is_form_locked()):
 		player_hub.temper.set_boss_courtesy_temper_level()
 	if (textbox != null):
@@ -74,9 +84,13 @@ func damage_boss(_damage_type : StringName, _damage_strength : int, _knockback_v
 	
 	if (current_armor <= 0 and is_knockback_enabled and state_machine.current_state.name == "Stunned" and state_machine.current_state.has_method("apply_knockback")):
 		state_machine.current_state.apply_knockback(abs(_knockback_vector.x), 1.0 if _knockback_vector.x >= 0 else -1.0)
+		SoundFactory.play_sound_by_name("damage_enemy", body.global_position, 0, 1, "SFX")
 		return true
 	elif (current_armor > 0 and (_damage_type == current_weakness or current_weakness == "ANY") and _damage_strength >= current_defense):
 		current_armor -= 1
+		SoundFactory.play_sound_by_name("damage_enemy", body.global_position, 0, 1, "SFX")
+		if (current_armor <= 0):
+			SoundFactory.play_sound_by_name("object_block_breakable" if (current_health % 2) == 0 else "object_block_reinforced", body.global_position, 0, 1, "SFX")
 		do_post_hit_invulnerability()
 		return true
 	else:
@@ -92,7 +106,7 @@ func set_current_defense(defense : int):
 func spawn_fireball(cancel_horizontal : bool = false):
 	var temp_node : Node = fireball_projectile_scene.instantiate()
 	add_sibling(temp_node)
-	(temp_node as Node2D).global_position = global_position
+	(temp_node as Node2D).global_position = (global_position + ((Vector2.ZERO if cancel_horizontal else Vector2.RIGHT) * projectile_launch_offset * get_facing_value()))
 	if (temp_node is EnemyProjectile):
 		var temp_proj : EnemyProjectile = (temp_node as EnemyProjectile)
 		temp_proj.boss_setup(self)
@@ -133,7 +147,9 @@ func check_temper_fruit_spawn():
 
 func check_player_collision():
 	if (is_activated and is_player_in_collider and current_invulnerability_duration <= 0):
-		player_hub.damage.take_damage(1 if body.global_position.x < player_hub.char_body.global_position.x else -1)
+		if (player_hub.damage.take_damage(1 if body.global_position.x < player_hub.char_body.global_position.x else -1)):
+			EffectFactory.get_effect("EnemyContactImpact", player_hub.char_body.global_position)
+			SoundFactory.play_sound_by_name("enemy_contact_impact", player_hub.char_body.global_position, 0, 1, "SFX")
 
 func on_side_trigger_exited():
 	is_player_on_right_side = (player_hub.char_body.global_position.x > room_side_trigger.global_position.x)
@@ -143,6 +159,10 @@ func on_dialogue_intro_finished():
 		PauseHandler.enable_pausing(true)
 		player_hub.set_force_stand(false)
 		state_machine.set_process_mode(PROCESS_MODE_INHERIT)
+		if (boss_music_player != null):
+			boss_music_player.restart_music()
+		if (clear_timer != null):
+			clear_timer.start_timer()
 		textbox.textbox_finished.disconnect(on_dialogue_intro_finished)
 
 func on_dialogue_defeat_finished():
@@ -152,4 +172,8 @@ func on_dialogue_defeat_finished():
 	boss_room_boundary_tilemap.set_layer_enabled(1, false)
 	boss_room_boundary_tilemap.set_layer_enabled(3, false)
 	state_machine.set_process_mode(PROCESS_MODE_DISABLED)
+	if (normal_level_music_player != null):
+		normal_level_music_player.restart_music()
+	if (clear_timer != null):
+		clear_timer.start_timer()
 	textbox.textbox_finished.disconnect(on_dialogue_defeat_finished)

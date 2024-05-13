@@ -45,6 +45,7 @@ func state_process(_delta):
 	boss.sprite.play("Phase2JumpAttack" if !boss.body.is_on_floor() else "Phase2Attack")
 	if (is_jumping and !did_jump and attack_time_left <= jump_time_threshold):
 		did_jump = true
+		SoundFactory.play_sound_by_name("enemy_dragoon_jump", boss.global_position, 0, 1, "SFX")
 		boss.body.velocity += (Vector2.UP * jump_speed)
 		boss.set_gravity_scale(jumping_gravity_scale)
 	else:

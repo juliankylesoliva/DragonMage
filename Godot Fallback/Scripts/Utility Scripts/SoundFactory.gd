@@ -8,7 +8,7 @@ const path_prefix : String = "res://Sounds/"
 
 const path_suffix : String = ".wav"
 
-const default_distance : float = 512
+const default_distance : float = 1024
 
 func _ready():
 	for stream in stream_list:

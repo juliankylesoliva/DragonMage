@@ -1465,7 +1465,6 @@ projectile_despawn_distance = 640.0
 blast_jump_min_velocity_magnitude = 192.0
 blast_jump_max_fall_speed = 640.0
 blast_jump_temper_increase_interval = 0.6
-blast_jump_max_velocity_magnitude_offset = 32.0
 blast_jump_active_color = Color(0.721569, 0.356863, 0.768627, 1)
 forward_throw_strength = 320.0
 lob_throw_strength = 384.0

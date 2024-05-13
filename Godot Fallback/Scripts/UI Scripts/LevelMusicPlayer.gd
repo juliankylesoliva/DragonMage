@@ -28,3 +28,4 @@ func fade_out():
 	
 	stop()
 	volume_db = starting_volume
+	is_fading_out = false

@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://cee7iflvdedp"]
+[gd_scene load_steps=13 format=3 uid="uid://cee7iflvdedp"]
 
 [ext_resource type="Script" path="res://Scripts/Utility Scripts/Room.gd" id="1_f5eec"]
 [ext_resource type="TileSet" uid="uid://dhwi7i1loa2pd" path="res://Sprites/Tiles/Test Tiles/TestTileSet.tres" id="2_hqynv"]
@@ -8,6 +8,9 @@
 [ext_resource type="PackedScene" uid="uid://dentdwi48jb2i" path="res://Scene Objects/Bosses/PrisonGuard.tscn" id="6_t5g2i"]
 [ext_resource type="Script" path="res://Scripts/Utility Scripts/Trigger.gd" id="6_x4fn3"]
 [ext_resource type="PackedScene" uid="uid://b2a0ttqvejk51" path="res://Scene Objects/Objects/TemperDragonFruit.tscn" id="7_bqbgw"]
+[ext_resource type="PackedScene" uid="uid://btq4qla5fyq0n" path="res://Scene Objects/Misc/LevelMusicPlayer.tscn" id="8_xla2b"]
+[ext_resource type="AudioStream" uid="uid://bp3471su81u8g" path="res://Music/sawsquarenoise - Boss Theme.wav" id="9_y8e2d"]
+[ext_resource type="Texture2D" uid="uid://fkdlrh3b7i7e" path="res://Sprites/Backgrounds/0_4_BG/PrisonSecurityBossRoom.png" id="11_41a0q"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_flkat"]
 size = Vector2(16, 320)
@@ -42,7 +45,7 @@ layer_1/modulate = Color(1, 1, 1, 1)
 layer_1/y_sort_enabled = false
 layer_1/y_sort_origin = 0
 layer_1/z_index = -1
-layer_1/tile_data = PackedInt32Array(393216, 6, 0, 393217, 6, 0, 393218, 6, 0, 393219, 6, 0, 393220, 6, 0, 393221, 6, 0, 393222, 6, 0, 393223, 6, 0, 393224, 6, 0, 393225, 6, 0, 393226, 6, 0, 393227, 6, 0, 393228, 6, 0, 393229, 6, 0, 393230, 6, 0, 393231, 6, 0, 393232, 6, 0, 458768, 6, 0, 458767, 6, 0, 458766, 6, 0, 458765, 6, 0, 458764, 6, 0, 458763, 6, 0, 458762, 6, 0, 458761, 6, 0, 458760, 6, 0, 458759, 6, 0, 458758, 6, 0, 458757, 6, 0, 458756, 6, 0, 458755, 6, 0, 458754, 6, 0, 458753, 6, 0, 458752, 6, 0, 393247, 6, 0, 393248, 6, 0, 393249, 6, 0, 393250, 6, 0, 393251, 6, 0, 393252, 6, 0, 393253, 6, 0, 393254, 6, 0, 393255, 6, 0, 393256, 6, 0, 393257, 6, 0, 393258, 6, 0, 458794, 6, 0, 458793, 6, 0, 458792, 6, 0, 458791, 6, 0, 458790, 6, 0, 458789, 6, 0, 458788, 6, 0, 458787, 6, 0, 458786, 6, 0, 458785, 6, 0, 458784, 6, 0, 458783, 6, 0, 458795, 6, 0, 458796, 6, 0, 327722, 6, 0, 262186, 6, 0, 262187, 6, 0, 262188, 6, 0, 262189, 6, 0, 262190, 6, 0, 262191, 6, 0, 262192, 6, 0, 262193, 6, 0, 262194, 6, 0, 262195, 6, 0, 262196, 6, 0, 262197, 6, 0, 458803, 6, 0, 458804, 6, 0, 458805, 6, 0, 393269, 6, 0, 327733, 6, 0, 327732, 6, 0, 327731, 6, 0, 327730, 6, 0, 327729, 6, 0, 327728, 6, 0, 327727, 6, 0, 327726, 6, 0, 327725, 6, 0, 327724, 6, 0, 327723, 6, 0, 393260, 6, 0, 393261, 6, 0, 393262, 6, 0, 393263, 6, 0, 393264, 6, 0, 393265, 6, 0, 393266, 6, 0, 393267, 6, 0, 393268, 6, 0, 393259, 6, 0, 393270, 6, 0, 393271, 6, 0, 458807, 6, 0, 458806, 6, 0)
+layer_1/tile_data = PackedInt32Array(393216, 6, 0, 393217, 6, 0, 393218, 6, 0, 393219, 6, 0, 393220, 6, 0, 393221, 6, 0, 393222, 6, 0, 393223, 6, 0, 393224, 6, 0, 393225, 6, 0, 393226, 6, 0, 393227, 6, 0, 393228, 6, 0, 393229, 6, 0, 393230, 6, 0, 393231, 6, 0, 458767, 6, 0, 458766, 6, 0, 458765, 6, 0, 458764, 6, 0, 458763, 6, 0, 458762, 6, 0, 458761, 6, 0, 458760, 6, 0, 458759, 6, 0, 458758, 6, 0, 458757, 6, 0, 458756, 6, 0, 458755, 6, 0, 458754, 6, 0, 458753, 6, 0, 458752, 6, 0, 393248, 6, 0, 393249, 6, 0, 393250, 6, 0, 393251, 6, 0, 393252, 6, 0, 393253, 6, 0, 393254, 6, 0, 393255, 6, 0, 393256, 6, 0, 393257, 6, 0, 393258, 6, 0, 458794, 6, 0, 458793, 6, 0, 458792, 6, 0, 458791, 6, 0, 458790, 6, 0, 458789, 6, 0, 458788, 6, 0, 458787, 6, 0, 458786, 6, 0, 458785, 6, 0, 458784, 6, 0, 458795, 6, 0, 458796, 6, 0, 327722, 6, 0, 262186, 6, 0, 262187, 6, 0, 262188, 6, 0, 262189, 6, 0, 262190, 6, 0, 262191, 6, 0, 262192, 6, 0, 262193, 6, 0, 262194, 6, 0, 262195, 6, 0, 262196, 6, 0, 262197, 6, 0, 458803, 6, 0, 458804, 6, 0, 458805, 6, 0, 393269, 6, 0, 327733, 6, 0, 327732, 6, 0, 327731, 6, 0, 327730, 6, 0, 327729, 6, 0, 327728, 6, 0, 327727, 6, 0, 327726, 6, 0, 327725, 6, 0, 327724, 6, 0, 327723, 6, 0, 393260, 6, 0, 393261, 6, 0, 393262, 6, 0, 393263, 6, 0, 393264, 6, 0, 393265, 6, 0, 393266, 6, 0, 393267, 6, 0, 393268, 6, 0, 393259, 6, 0, 393270, 6, 0, 393271, 6, 0, 458807, 6, 0, 458806, 6, 0)
 layer_2/name = "Ground"
 layer_2/enabled = true
 layer_2/modulate = Color(0.0745098, 0.113725, 0.301961, 1)
@@ -104,7 +107,7 @@ process_mode = 4
 position = Vector2(960, 272)
 floor_length = 2
 
-[node name="PrisonGuard" parent="." node_paths=PackedStringArray("floor_spikes_l", "floor_spikes_r", "temper_fruit_l", "temper_fruit_r", "room_side_trigger", "boss_room", "boss_trigger", "boss_room_boundary_tilemap") instance=ExtResource("6_t5g2i")]
+[node name="PrisonGuard" parent="." node_paths=PackedStringArray("floor_spikes_l", "floor_spikes_r", "temper_fruit_l", "temper_fruit_r", "room_side_trigger", "boss_room", "boss_trigger", "boss_room_boundary_tilemap", "boss_music_player") instance=ExtResource("6_t5g2i")]
 position = Vector2(864, 180)
 floor_spikes_l = NodePath("../FloorSpikes")
 floor_spikes_r = NodePath("../FloorSpikes2")
@@ -114,6 +117,10 @@ room_side_trigger = NodePath("../RoomSideTrigger")
 boss_room = NodePath("..")
 boss_trigger = NodePath("../BossActivationTrigger")
 boss_room_boundary_tilemap = NodePath("../BossRoomBoundaryTilemap")
+boss_music_player = NodePath("../BossMusicPlayer")
+
+[node name="AnimatedSprite2D" parent="PrisonGuard" index="1"]
+animation = &"IntroIdle"
 
 [node name="PhaseThreeIdle" parent="PrisonGuard/StateMachine" index="4" node_paths=PackedStringArray("upper_left_node", "upper_right_node")]
 upper_left_node = NodePath("../../../BossPathingNodeTopLeft")
@@ -135,6 +142,9 @@ low_midpoint = NodePath("../../../BossPathingLowVertex")
 [node name="SwitchingSides" parent="PrisonGuard/StateMachine" index="9" node_paths=PackedStringArray("left_ground_node", "right_ground_node")]
 left_ground_node = NodePath("../../../BossPathingNodeBottomLeft")
 right_ground_node = NodePath("../../../BossPathingNodeBottomRight")
+
+[node name="BossRoomCameraCenter" type="Node2D" parent="."]
+position = Vector2(768, 160)
 
 [node name="BossActivationTrigger" type="Area2D" parent="." node_paths=PackedStringArray("shape")]
 position = Vector2(728, 64)
@@ -196,7 +206,15 @@ position = Vector2(672, -32)
 [node name="BossPathingRespawnR" type="Node2D" parent="."]
 position = Vector2(864, -32)
 
+[node name="BossMusicPlayer" parent="." instance=ExtResource("8_xla2b")]
+stream = ExtResource("9_y8e2d")
+autoplay = false
+
 [node name="FinishLine" parent="." instance=ExtResource("4_svuwe")]
 position = Vector2(1536, 224)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(768, 160)
+texture = ExtResource("11_41a0q")
 
 [editable path="PrisonGuard"]

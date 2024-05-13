@@ -30,6 +30,7 @@ func on_enter():
 	current_attack_counter += 1
 	if (current_attack_counter >= jump_attack_cadence):
 		is_jumping = true
+		SoundFactory.play_sound_by_name("enemy_dragoon_jump", boss.global_position, 0, 1, "SFX")
 		current_attack_counter = 0
 		boss.body.velocity = (Vector2.UP * jump_speed)
 		boss.set_gravity_scale(jumping_gravity_scale)

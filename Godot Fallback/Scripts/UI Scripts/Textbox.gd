@@ -73,8 +73,9 @@ func hide_textbox():
 	end_symbol.text = ""
 	start_symbol.text = ""
 	textbox_container.set_visible(false)
-	if (ui_canvas != null):
-		ui_canvas.show()
+	if (ui_canvas != null and current_state == TextboxState.FINISHED):
+		for child in ui_canvas.get_children():
+			child.show()
 	change_state(TextboxState.READY)
 
 func set_characters_per_second(cps : float):
@@ -97,7 +98,9 @@ func display_text():
 	text_label.text = next_text
 	show_textbox()
 	if (ui_canvas != null):
-		ui_canvas.hide()
+		for child in ui_canvas.get_children():
+			if (!(child is PauseMenu)):
+				child.hide()
 	do_text_scrolling()
 
 func do_text_scrolling():

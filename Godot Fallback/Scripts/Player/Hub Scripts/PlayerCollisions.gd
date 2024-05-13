@@ -14,6 +14,7 @@ class_name PlayerCollisions
 @export var ceiling_nudge_check_depth : float = 32
 @export var ledge_nudge_check_depth : float = 24
 @export var ledge_nudge_easing : float = 0.99
+@export var max_nudge_distance : float = 8
 
 @export var wall_raycast_collision_threshold : int = 2
 @export var intangible_wall_raycast_collision_threshold : int = 2
@@ -186,9 +187,11 @@ func do_ledge_nudge(custom_ease : float = 0):
 		
 		if (!is_middle_grounded and (is_left_grounded or is_right_grounded) and (!is_left_grounded or !is_right_grounded)):
 			if (!is_left_grounded and is_right_grounded):
-				hub.char_body.position.x += (((hub.raycast_ledge_r.get_collision_point().x if hub.raycast_ledge_r.is_colliding() else hub.raycast_ledge_r.target_position.x) - hub.raycast_ledge_r.global_position.x) * (ledge_nudge_easing if custom_ease <= 0 else abs(custom_ease)))
+				var calculated_nudge_distance : float = (((hub.raycast_ledge_r.get_collision_point().x if hub.raycast_ledge_r.is_colliding() else hub.raycast_ledge_r.target_position.x) - hub.raycast_ledge_r.global_position.x) * (ledge_nudge_easing if custom_ease <= 0 else abs(custom_ease)))
+				hub.char_body.position.x += min(max_nudge_distance, calculated_nudge_distance)
 			elif (is_left_grounded and !is_right_grounded):
-				hub.char_body.position.x += (((hub.raycast_ledge_l.get_collision_point().x if hub.raycast_ledge_l.is_colliding() else hub.raycast_ledge_l.target_position.x) - hub.raycast_ledge_l.global_position.x) * (ledge_nudge_easing if custom_ease <= 0 else abs(custom_ease)))
+				var calculated_nudge_distance = (((hub.raycast_ledge_l.get_collision_point().x if hub.raycast_ledge_l.is_colliding() else hub.raycast_ledge_l.target_position.x) - hub.raycast_ledge_l.global_position.x) * (ledge_nudge_easing if custom_ease <= 0 else abs(custom_ease)))
+				hub.char_body.position.x += max(calculated_nudge_distance, -max_nudge_distance)
 			else:
 				pass
 
@@ -214,7 +217,8 @@ func do_ceiling_nudge():
 			var total_magnitude : float = raycast_to_use.target_position.length()
 			var partial_magnitude : float = (raycast_to_use.global_position.distance_to(raycast_to_use.get_collision_point()) if raycast_to_use.is_colliding() else total_magnitude)
 			if (partial_magnitude < total_magnitude):
-				hub.char_body.position.x += ((total_magnitude - partial_magnitude) * sign_multiplier)
+				var calculated_nudge_distance : float = ((total_magnitude - partial_magnitude) * sign_multiplier)
+				hub.char_body.position.x += (calculated_nudge_distance if abs(calculated_nudge_distance) <= max_nudge_distance else (max_nudge_distance * sign_multiplier))
 
 func magic_blast_jump_velocity_retention(intended_velocity : Vector2):
 	if (hub.jumping.magic_blast_attack.is_blast_jumping and ((hub.char_body.is_on_floor() and intended_velocity.y > hub.jumping.max_fall_speed) or (hub.char_body.is_on_ceiling() and intended_velocity.y < 0) or (hub.char_body.is_on_wall() and is_moving_against_a_wall() and intended_velocity.x != 0))):

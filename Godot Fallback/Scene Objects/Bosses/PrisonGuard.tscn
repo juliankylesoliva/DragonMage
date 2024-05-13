@@ -424,8 +424,8 @@ body = NodePath(".")
 sprite = NodePath("AnimatedSprite2D")
 visibility = NodePath("VisibleOnScreenNotifier2D")
 player_contact_hitbox = NodePath("ContactHitbox")
-introduction_text = Array[String](["Test Intro 1", "Test Intro 2", "Test Intro 3"])
-defeat_text = Array[String](["Test Defeat 1", "Test Defeat 2", "Test Defeat 3"])
+introduction_text = Array[String](["?????: YOU TWO!!! Tryna' escape, huh?! WELL TOO BAD!!! I won't let some dainty lil' mage girl and her fairy boyfriend ruin MY perfect record!!!", "{player_name}: Dainty?!", "Knigel: Don't listen to him, EmDee! Hey, buddy, what's your damage, anyway?!", "?????: What's MY damage?! What about the damage that YOUR mood-swingin' girlfriend is causing to my prison?!", "{player_name}: What do you mean *your* prison? I thought this prison belonged to the Dragon Syndicate's?", "?????: I personally took it upon myself to design, construct, and manage this prison after the Dragon Syndicate's boss commissioned me to build it!", "?????: Everything in this here prison--the cells, tunnels, spike traps--were all made by me, Draunbord! Not a single inmate could escape thanks to my gauntlet of spikes...", "Draunbord: UNTIL YOU TWO CAME ALONG AND THREATENED TO RUIN EVERYTHIN' I'VE WORKED FOR WITH YOUR FOOLISH EXCUSE OF AN ESCAPE!!!", "{player_name}: I mean--can you really call us foolish if we just made it past your so-called gauntlet about a minute ago?", "Knigel: Yeah, why don't you just step aside and go back to the drawing board, Mr. Perfect Record!", "Draunbord: SHADDUP!!! I'VE HEARD ENOUGH LIP OUTTA YOU BOZOS!!!", "Draunbord: Don't think you've won just yet! You gotta get through ME first!!! And with this here stop sign that I've enhanced with a stolen magic spell to protect me, there ain't NO WAY y'all are beatin' me!"])
+defeat_text = Array[String](["Draunbord: OW! OW OW! OKAY, OKAY, I GIVE UP!!! I YIELD!!! UNCLE!!!", "{player_name}: What kind of lousy protection spell was that? You've seen all this security footage of me breaking a bunch of these magically marked blocks and thought I wouldn't pick up on the fact that your sign had the same markings?", "Draunbord: Gimme a break... I misplaced the protection spell I was going to use and had to improvise with the next best thing...", "Knigel: Sounds like you got a bit too comfortable with your perfect record there.", "Draunbord: Yeah, yeah, whatever... You win... Just get outta here already and leave me alone...", "{player_name}: Don't need to tell me twice... Come on, Knigel. Let's keep going--I can't stand this guy anymore...", "Draunbord: (Four years of architecture... wasted...)"])
 battle_left_camera_limit = 512
 battle_right_camera_limit = 1024
 battle_bottom_camera_limit = 320
@@ -442,7 +442,7 @@ light_mask = 8
 visibility_layer = 8
 z_index = 3
 sprite_frames = SubResource("SpriteFrames_nlt6b")
-animation = &"Phase1Stand"
+animation = &"Phase1Attack"
 autoplay = "IntroIdle"
 flip_h = true
 
@@ -465,9 +465,9 @@ current_state = NodePath("PhaseOneIdle")
 
 [node name="PhaseOneIdle" type="Node" parent="StateMachine" node_paths=PackedStringArray("phase_attack_state", "side_switch_state", "stun_state")]
 script = ExtResource("4_nfnxh")
-move_speed = 128.0
-initial_move_time = 0.25
-time_between_attacks = 0.5
+move_speed = 80.0
+initial_move_time = 0.4
+time_between_attacks = 0.8
 phase_attack_state = NodePath("../StandstillFireballSpit")
 side_switch_state = NodePath("../SwitchingSides")
 stun_state = NodePath("../Stunned")

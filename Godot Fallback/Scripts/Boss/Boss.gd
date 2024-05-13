@@ -10,7 +10,13 @@ class_name Boss
 
 @export var boss_trigger : Trigger
 
+@export var clear_timer : ClearTimer
+
 @export var boss_room_boundary_tilemap : TileMap
+
+@export var boss_music_player : LevelMusicPlayer
+
+@export var normal_level_music_player : LevelMusicPlayer
 
 @export var total_health : int = 3
 
@@ -33,6 +39,8 @@ class_name Boss
 @export var post_hit_invulnerability_duration : float = 1
 
 @export var post_damage_invulnerability_duration : float = 3
+
+@export_range(0, 1) var invulnerability_alpha : float = 0.35
 
 @export var knockback_gravity_scale : float = 3
 
@@ -67,6 +75,8 @@ var is_knockback_enabled : bool = false
 var current_gravity_scale : float = 1
 
 var is_player_in_collider : bool = false
+
+var is_applying_invulnerability_alpha : bool = false
 
 func _ready():
 	boss_trigger.trigger_entered.connect(on_activation_trigger_entered)
@@ -115,10 +125,11 @@ func do_post_damage_invulnerability():
 func update_invulnerability_duration(delta : float):
 	if (current_invulnerability_duration > 0):
 		current_invulnerability_duration = move_toward(current_invulnerability_duration, 0, delta)
-		if (current_invulnerability_duration > 0):
-			sprite.modulate.a = 0.5
+		if (current_invulnerability_duration > 0 and is_applying_invulnerability_alpha):
+			sprite.modulate.a = invulnerability_alpha
 		else:
 			sprite.modulate.a = 1.0
+		is_applying_invulnerability_alpha = !is_applying_invulnerability_alpha
 
 func set_knockback_velocity(vec : Vector2):
 	if (is_knockback_enabled):
@@ -135,6 +146,7 @@ func get_facing_value():
 
 func activate_post_hit_invulnerability():
 	if (current_invulnerability_duration <= 0):
+		is_applying_invulnerability_alpha = true
 		current_invulnerability_duration = post_hit_invulnerability_duration
 		while (current_invulnerability_duration > 0):
 			await get_tree().process_frame

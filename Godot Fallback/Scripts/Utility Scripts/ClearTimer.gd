@@ -14,6 +14,9 @@ func _physics_process(delta):
 	if (!is_timer_stopped):
 		current_time += delta
 
+func start_timer():
+	is_timer_stopped = false
+
 func stop_timer():
 	is_timer_stopped = true
 
