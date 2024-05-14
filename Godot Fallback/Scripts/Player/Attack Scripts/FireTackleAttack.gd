@@ -350,6 +350,7 @@ func can_cancel_fire_tackle_endlag():
 func end_fire_tackle():
 	current_attack_state = AttackState.NOTHING
 	fire_tackle_particles.emitting = false
+	hub.sprite_trail.deactivate_trail()
 	
 	if (hub.stream_player.playing):
 		hub.stream_player.stop()
