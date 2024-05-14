@@ -53,8 +53,8 @@ var force_stand : bool = false
 func get_input_vector():
 	var input_vector = Vector2.ZERO
 	
-	input_vector.x = ((1 if Input.is_action_pressed("Move Right") else 0) - (1 if Input.is_action_pressed("Move Left") else 0))
-	input_vector.y = ((1 if Input.is_action_pressed("Move Up") else 0) - (1 if Input.is_action_pressed("Move Down") else 0))
+	input_vector.x = ((1 if Input.is_action_pressed("Move Right") or Input.is_action_pressed("Move Right (Pad)") else 0) - (1 if Input.is_action_pressed("Move Left") or Input.is_action_pressed("Move Left (Pad)") else 0))
+	input_vector.y = ((1 if Input.is_action_pressed("Move Up") or Input.is_action_pressed("Move Up (Pad)") else 0) - (1 if Input.is_action_pressed("Move Down") or Input.is_action_pressed("Move Down (Pad)") else 0))
 	return input_vector
 
 func set_respawn_position(pos : Vector2):
