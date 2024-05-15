@@ -43,6 +43,10 @@ window/stretch/mode="viewport"
 
 project/assembly_name="Godot Fallback"
 
+[editor]
+
+export/convert_text_resources_to_binary=false
+
 [input]
 
 "Move Left (Pad)"={
