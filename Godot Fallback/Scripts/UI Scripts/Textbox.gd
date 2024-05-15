@@ -73,7 +73,7 @@ func hide_textbox():
 	end_symbol.text = ""
 	start_symbol.text = ""
 	textbox_container.set_visible(false)
-	if (ui_canvas != null and current_state == TextboxState.FINISHED):
+	if (ui_canvas != null and current_state != TextboxState.READY):
 		for child in ui_canvas.get_children():
 			child.show()
 	change_state(TextboxState.READY)

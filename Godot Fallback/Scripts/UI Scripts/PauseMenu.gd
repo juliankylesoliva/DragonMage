@@ -81,6 +81,7 @@ func do_restart():
 	await get_tree().create_timer(1.0).timeout
 	screen_fade.set_fade(1, 1, Color.BLACK)
 	await get_tree().create_timer(2.0).timeout
+	EffectFactory.clear_effects()
 	get_tree().reload_current_scene()
 
 func do_title_screen():
@@ -91,4 +92,5 @@ func do_title_screen():
 	await get_tree().create_timer(1.0).timeout
 	screen_fade.set_fade(1, 1, Color.BLACK)
 	await get_tree().create_timer(2.0).timeout
+	EffectFactory.clear_effects()
 	get_tree().change_scene_to_file(title_scene_path)

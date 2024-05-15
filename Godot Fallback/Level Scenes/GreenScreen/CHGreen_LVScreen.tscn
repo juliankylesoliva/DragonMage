@@ -12,7 +12,7 @@ starting_room = NodePath("CHGreen_LVScreen_R1")
 room_list = [NodePath("CHGreen_LVScreen_R1")]
 
 [node name="Player" parent="." instance=ExtResource("2_eybo8")]
-position = Vector2(256, 223)
+position = Vector2(-96, 159)
 
 [node name="Camera" parent="Player/Hub" index="11" node_paths=PackedStringArray("player_cam")]
 player_cam = NodePath("../../../Camera2D")
