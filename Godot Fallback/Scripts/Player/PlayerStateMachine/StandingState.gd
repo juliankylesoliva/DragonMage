@@ -67,7 +67,8 @@ func state_process(_delta):
 		is_headbonking = false
 	
 	if (hub.form.cannot_change_form()):
-		hub.animation.set_animation("{name}ChangeFail".format({"name" : char_name}))
+		if (!hub.movement.is_crouching):
+			hub.animation.set_animation("{name}ChangeFail".format({"name" : char_name}))
 		hub.animation.set_animation_speed(1)
 		hub.form.form_change_failed()
 	
