@@ -213,7 +213,7 @@ autoplay = false
 [node name="FinishLine" parent="." instance=ExtResource("4_svuwe")]
 position = Vector2(1536, 224)
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="BossBackground" type="Sprite2D" parent="."]
 position = Vector2(768, 160)
 texture = ExtResource("11_41a0q")
 
