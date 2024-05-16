@@ -15,6 +15,12 @@ func _ready():
 		var stream_name = stream.resource_path.right(-path_prefix.length()).left(-path_suffix.length())
 		stream_dictonary[stream_name] = stream
 
+func clear_sounds():
+	for child in get_children():
+		if (child is AudioStreamPlayer2D):
+			(child as AudioStreamPlayer2D).stop()
+		child.queue_free()
+
 func play_sound(stream : AudioStream, position : Vector2, volume : float = 0, pitch : float = 1, bus_name : StringName = "Master"):
 	var instance = AudioStreamPlayer2D.new()
 	instance.stream = stream

@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://ca75o1edmetef"]
+[gd_scene load_steps=18 format=3 uid="uid://ca75o1edmetef"]
 
 [ext_resource type="Script" path="res://Scripts/Utility Scripts/Room.gd" id="1_kfuh4"]
 [ext_resource type="TileSet" uid="uid://dhwi7i1loa2pd" path="res://Sprites/Tiles/Test Tiles/TestTileSet.tres" id="2_s00jp"]
@@ -10,6 +10,50 @@
 [ext_resource type="Texture2D" uid="uid://d1g47vu3omw2c" path="res://Sprites/Backgrounds/0_1_BG/TreeBG.png" id="8_fo8ke"]
 [ext_resource type="Texture2D" uid="uid://bqjgsis2ebgdf" path="res://Sprites/Backgrounds/0_1_BG/LeavesBackBG.png" id="9_04p7e"]
 [ext_resource type="Texture2D" uid="uid://wvc78b7rcsop" path="res://Sprites/Backgrounds/0_1_BG/LeavesBG.png" id="10_sw0h8"]
+[ext_resource type="Texture2D" uid="uid://cjullxfbyjbb2" path="res://Sprites/Demonstrations/SlipstreamVisualDemo.png" id="11_5c8ww"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hmqoo"]
+atlas = ExtResource("11_5c8ww")
+region = Rect2(0, 0, 224, 288)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jj1du"]
+atlas = ExtResource("11_5c8ww")
+region = Rect2(224, 0, 224, 288)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rf7mf"]
+atlas = ExtResource("11_5c8ww")
+region = Rect2(448, 0, 224, 288)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bdiiy"]
+atlas = ExtResource("11_5c8ww")
+region = Rect2(672, 0, 224, 288)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vx4o5"]
+atlas = ExtResource("11_5c8ww")
+region = Rect2(896, 0, 224, 288)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_7jagq"]
+animations = [{
+"frames": [{
+"duration": 45.0,
+"texture": SubResource("AtlasTexture_hmqoo")
+}, {
+"duration": 45.0,
+"texture": SubResource("AtlasTexture_jj1du")
+}, {
+"duration": 45.0,
+"texture": SubResource("AtlasTexture_rf7mf")
+}, {
+"duration": 45.0,
+"texture": SubResource("AtlasTexture_bdiiy")
+}, {
+"duration": 45.0,
+"texture": SubResource("AtlasTexture_vx4o5")
+}],
+"loop": true,
+"name": &"default",
+"speed": 60.0
+}]
 
 [node name="CH0_LV1_R7" type="Node2D" node_paths=PackedStringArray("parallax_bg", "tilemap_list", "room_entrances")]
 script = ExtResource("1_kfuh4")
@@ -80,7 +124,7 @@ room_destination = NodePath("..")
 position = Vector2(224, 200)
 textbox_strings = Array[String](["[center]~ Slipstream (1/2) ~
 \"Whenever you're moving faster than your normal speed (i.e. using the Magic Boost), white sparkles will start to fly right past you. When this happens, jumping as soon as you touch the ground or a wall will allow you to preserve your speed. This effect wears off if you slow down too much or turn around in midair, so keep holding forward.\"", "[center]~ Slipstream (2/2) ~
-\"Additionally, landing on a downward or upward slope will add to or subtract from your preserved speed respectively. The steeper the slope, the more speed you gain or lose.\""])
+\"Additionally, landing on a downward or upward slope will add to or subtract from your preserved speed respectively. The steeper the slope, the more speed you gain or lose.\"", "Magli: Oh boy... This might be tough to perform. I should cast a projection spell for a visual aid."])
 
 [node name="HintBubble2" parent="." instance=ExtResource("4_kb12k")]
 position = Vector2(96, -88)
@@ -167,3 +211,13 @@ centered = false
 offset = Vector2(-512, 0)
 region_enabled = true
 region_rect = Rect2(0, 0, 2400, 32)
+
+[node name="Demonstration" type="AnimatedSprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.65)
+light_mask = 4
+visibility_layer = 4
+z_index = 3
+position = Vector2(368, 144)
+sprite_frames = SubResource("SpriteFrames_7jagq")
+autoplay = "default"
+frame_progress = 0.331453

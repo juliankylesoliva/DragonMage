@@ -183,7 +183,9 @@ func active_update(delta : float):
 				var intended_velocity : Vector2 = hub.char_body.velocity
 				hub.char_body.move_and_slide()
 				hub.collisions.upward_slope_correction(intended_velocity)
-				hub.collisions.do_ledge_nudge()
+				if (hub.collisions.is_near_a_ledge()):
+					hub.collisions.do_ledge_nudge()
+					hub.char_body.velocity.x = 0
 		elif (hub.buffers.is_jump_buffer_active()):
 			is_jump_cancelling = true
 		else:

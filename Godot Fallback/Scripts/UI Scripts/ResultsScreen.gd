@@ -140,6 +140,8 @@ func do_main_menu():
 	await get_tree().create_timer(1.0).timeout
 	screen_fade.set_fade(1, 1, Color.BLACK)
 	await get_tree().create_timer(2.0).timeout
+	EffectFactory.clear_effects()
+	SoundFactory.clear_sounds()
 	get_tree().change_scene_to_file(title_scene_path)
 
 func do_retry_level():
@@ -148,6 +150,8 @@ func do_retry_level():
 	await get_tree().create_timer(1.0).timeout
 	screen_fade.set_fade(1, 1, Color.BLACK)
 	await get_tree().create_timer(2.0).timeout
+	EffectFactory.clear_effects()
+	SoundFactory.clear_sounds()
 	get_tree().reload_current_scene()
 
 func do_results_screen():
