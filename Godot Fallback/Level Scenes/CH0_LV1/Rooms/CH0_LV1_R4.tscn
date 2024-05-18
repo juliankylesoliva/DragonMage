@@ -79,7 +79,7 @@ room_destination = NodePath("..")
 [node name="HintBubble" parent="." instance=ExtResource("4_f03c7")]
 position = Vector2(96, 72)
 textbox_strings = Array[String](["[center]~ Addendum to the Magic Blast ~
-\"The orb will carry some of your horizontal momentum when thrown. The orb can also be thrown while sliding down a wall or gliding.\""])
+\"The star will carry some of your horizontal momentum when thrown. The star can also be thrown while sliding down a wall or gliding.\""])
 
 [node name="BreakableBlock" parent="." instance=ExtResource("4_v6cqi")]
 position = Vector2(352, 0)

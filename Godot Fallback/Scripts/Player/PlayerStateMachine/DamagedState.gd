@@ -22,6 +22,7 @@ func on_enter():
 		hub.movement.reset_crouch_state()
 	if (!hub.temper.is_form_locked()):
 		hub.temper.change_temper_by(hub.damage.mage_temper_damage if hub.form.current_mode == PlayerForm.CharacterMode.MAGE else hub.damage.dragon_temper_damage)
+	hub.movement.reset_current_horizontal_velocity()
 	hub.buffers.reset_speed_preservation_buffer()
 	hub.jumping.reset_super_jump_timers()
 	hub.audio.play_sound("damage_player")

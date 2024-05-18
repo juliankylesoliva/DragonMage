@@ -79,7 +79,7 @@ room_destination = NodePath("..")
 [node name="HintBubble" parent="." instance=ExtResource("4_e3jp4")]
 position = Vector2(64, 232)
 textbox_strings = Array[String](["[center]~ Magic Boost (4/5) ~
-\"For maximum height, remember to run and hold [Jump], and make sure the orb is directly underneath you when you detonate.\""])
+\"For maximum height, remember to run and hold [Jump], and make sure the star is directly underneath you when you detonate.\""])
 
 [node name="HintBubble2" parent="." instance=ExtResource("4_e3jp4")]
 position = Vector2(448, 200)

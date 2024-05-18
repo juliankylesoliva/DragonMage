@@ -72,17 +72,17 @@ room_destination = NodePath("..")
 [node name="HintBubble" parent="." instance=ExtResource("4_ffm1v")]
 position = Vector2(192, 200)
 textbox_strings = Array[String](["[center]~ Magic Boost (1/5) ~
-\"Detonating the orb on yourself allows you to break through sturdier material than with just the blast alone. This effect lasts until you touch the ground, slow down or glide.\""])
+\"Detonating the star on yourself allows you to break through sturdier material than with just the blast alone. This effect lasts until you touch the ground, slow down or glide.\""])
 
 [node name="HintBubble2" parent="." instance=ExtResource("4_ffm1v")]
 position = Vector2(256, 552)
 textbox_strings = Array[String](["[center]~ Magic Boost (2/5) ~
-\"Detonate the orb while it is behind you and while you're running to gain a slight burst of forward momentum.\""])
+\"Detonate the star while it is behind you and while you're running to gain a slight burst of forward momentum. The closer you are to the center of the blast, the bigger the boost.\""])
 
 [node name="HintBubble3" parent="." instance=ExtResource("4_ffm1v")]
 position = Vector2(416, 584)
 textbox_strings = Array[String](["[center]~ Magic Boost (3/5) ~
-\"Detonating the orb while it is at your feet and jumping at the same time will drastically increase your jump height.\"", "Magli: The sigil order to remember here is:
+\"Detonating the star while it is at your feet and jumping at the same time will drastically increase your jump height.\"", "Magli: The sigil order to remember here is:
 
 [center][Move Down]+[Attack] then [Jump]+[Attack]"])
 

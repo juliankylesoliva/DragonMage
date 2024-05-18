@@ -7,7 +7,7 @@
 light_mask = 16
 visibility_layer = 16
 z_index = 5
-collision_mask = 197
+collision_mask = 207
 script = ExtResource("2_lhs3m")
 enemy_defeat_knockback_multiplier = 1.5
 player_layer = 4
