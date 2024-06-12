@@ -28,7 +28,7 @@ var attack_buffer_time_left : float = 0
 var speed_preservation_buffer_time_left : float = 0
 var highest_speed : float = 0
 
-@export var speed_preservation_particles : GPUParticles2D
+@export var speed_preservation_particles : CPUParticles2D
 
 ## Allows a player to jump within a small window of time if they had just ran off of a ledge.
 @export var coyote_time : float = 0.2
@@ -144,9 +144,9 @@ func check_speed_preservation_buffer(delta):
 	
 	speed_preservation_particles.emitting = ((highest_speed > hub.movement.top_speed) and is_speed_preservation_buffer_active() and !hub.force_stand and !hub.is_deactivated and !hub.damage.is_player_defeated)
 	if (speed_preservation_particles.emitting):
-		speed_preservation_particles.process_material.direction.x = -hub.movement.get_facing_value()
-		speed_preservation_particles.process_material.initial_velocity_min = highest_speed
-		speed_preservation_particles.process_material.initial_velocity_max = highest_speed
+		speed_preservation_particles.direction.x = -hub.movement.get_facing_value()
+		speed_preservation_particles.initial_velocity_min = highest_speed
+		speed_preservation_particles.initial_velocity_max = highest_speed
 
 func is_speed_preservation_buffer_active():
 	return speed_preservation_buffer_time_left > 0

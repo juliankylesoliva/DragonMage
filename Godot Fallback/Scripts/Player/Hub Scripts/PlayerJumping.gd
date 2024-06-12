@@ -102,7 +102,7 @@ var wall_popup_time_left : float = 0
 
 @export_group("Midair Jump Parameters")
 
-@export var midair_jump_particles : GPUParticles2D
+@export var midair_jump_particles : CPUParticles2D
 
 @export_color_no_alpha var forward_midair_jump_color : Color = Color.WHITE
 
@@ -146,7 +146,7 @@ var current_midair_jumps : int = 0
 
 @export var super_jump_velocity_multiplier : float = 0
 
-@export var super_jump_particles : GPUParticles2D
+@export var super_jump_particles : CPUParticles2D
 
 var current_super_jump_charge_timer : float = 0
 
@@ -402,8 +402,8 @@ func do_midair_jump():
 	var input_facing_direction : float = (input_direction * hub.movement.get_facing_value())
 	midair_jump_particles.amount = (midair_jump_particle_multiplier * (max_midair_jumps - current_midair_jumps))
 	midair_jump_particles.texture = (forward_midair_jump_texture if input_facing_direction > 0 else backward_midair_jump_texture if input_facing_direction < 0 else neutral_midair_jump_texture)
-	midair_jump_particles.process_material.direction.x = -input_direction
-	midair_jump_particles.process_material.color = (forward_midair_jump_color if input_facing_direction > 0 else backward_midair_jump_color if input_facing_direction < 0 else neutral_midair_jump_color)
+	midair_jump_particles.direction.x = -input_direction
+	midair_jump_particles.color = (forward_midair_jump_color if input_facing_direction > 0 else backward_midair_jump_color if input_facing_direction < 0 else neutral_midair_jump_color)
 	midair_jump_particles.restart()
 	midair_jump_particles.emitting = true
 	

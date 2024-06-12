@@ -1,4 +1,4 @@
-[gd_scene load_steps=204 format=3 uid="uid://c6qw77ovfwgfs"]
+[gd_scene load_steps=192 format=3 uid="uid://c6qw77ovfwgfs"]
 
 [ext_resource type="Texture2D" uid="uid://d381ahbcwydy8" path="res://Sprites/Player/DraelynCrouch.png" id="1_6b42p"]
 [ext_resource type="Texture2D" uid="uid://dls34a1qa8iy1" path="res://Sprites/Player/DraelynFireTackle.png" id="1_ddrlj"]
@@ -1197,132 +1197,25 @@ height = 48.0
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -3.36466, 0.0, 0, 0]
 point_count = 2
 
-[sub_resource type="CurveTexture" id="CurveTexture_i0g0y"]
-curve = SubResource("Curve_jyf8q")
-
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_k22s0"]
-lifetime_randomness = 0.2
-emission_shape = 3
-emission_box_extents = Vector3(8, 32, 1)
-particle_flag_align_y = true
-particle_flag_disable_z = true
-direction = Vector3(0, -1, 0)
-spread = 90.0
-gravity = Vector3(0, 0, 0)
-initial_velocity_max = 64.0
-orbit_velocity_min = 0.0
-orbit_velocity_max = 0.0
-scale_curve = SubResource("CurveTexture_i0g0y")
-attractor_interaction_enabled = false
-
 [sub_resource type="Curve" id="Curve_glaul"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -4.0583, 0.0, 0, 0]
 point_count = 2
-
-[sub_resource type="CurveTexture" id="CurveTexture_okhhl"]
-curve = SubResource("Curve_glaul")
-
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_1si3k"]
-lifetime_randomness = 0.2
-emission_shape = 3
-emission_box_extents = Vector3(8, 32, 1)
-particle_flag_disable_z = true
-direction = Vector3(0, 1, 0)
-flatness = 1.0
-gravity = Vector3(0, 0, 0)
-initial_velocity_max = 64.0
-orbit_velocity_min = 0.0
-orbit_velocity_max = 0.0
-scale_curve = SubResource("CurveTexture_okhhl")
-attractor_interaction_enabled = false
 
 [sub_resource type="Curve" id="Curve_vq12d"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -2.6693, 0.0, 0, 0]
 point_count = 2
 
-[sub_resource type="CurveTexture" id="CurveTexture_lvqo3"]
-curve = SubResource("Curve_vq12d")
-
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_gkovr"]
-emission_shape = 3
-emission_box_extents = Vector3(8, 1, 1)
-particle_flag_rotate_y = true
-particle_flag_disable_z = true
-direction = Vector3(-1, 1, 0)
-spread = 35.0
-flatness = 1.0
-gravity = Vector3(0, 0, 0)
-initial_velocity_min = 64.0
-initial_velocity_max = 64.0
-angular_velocity_min = 640.0
-angular_velocity_max = 640.0
-orbit_velocity_min = 0.0
-orbit_velocity_max = 0.0
-scale_curve = SubResource("CurveTexture_lvqo3")
-attractor_interaction_enabled = false
-
 [sub_resource type="Curve" id="Curve_cvkih"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -5.46421, 0.0, 0, 0]
 point_count = 2
-
-[sub_resource type="CurveTexture" id="CurveTexture_ddj2a"]
-curve = SubResource("Curve_cvkih")
-
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_3oooo"]
-emission_shape = 3
-emission_box_extents = Vector3(16, 0, 1)
-particle_flag_disable_z = true
-direction = Vector3(0, 1, 0)
-flatness = 1.0
-gravity = Vector3(0, 0, 0)
-initial_velocity_min = 256.0
-initial_velocity_max = 256.0
-orbit_velocity_min = 0.0
-orbit_velocity_max = 0.0
-linear_accel_min = -256.0
-linear_accel_max = -256.0
-scale_curve = SubResource("CurveTexture_ddj2a")
-attractor_interaction_enabled = false
 
 [sub_resource type="Curve" id="Curve_un2gh"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -3.53289, 0.0, 0, 0]
 point_count = 2
 
-[sub_resource type="CurveTexture" id="CurveTexture_a534e"]
-curve = SubResource("Curve_un2gh")
-
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ufmsw"]
-emission_shape = 3
-emission_box_extents = Vector3(8, 24, 1)
-particle_flag_disable_z = true
-direction = Vector3(0, -1, 0)
-spread = 0.0
-gravity = Vector3(0, 0, 0)
-initial_velocity_min = 64.0
-initial_velocity_max = 64.0
-orbit_velocity_min = 0.0
-orbit_velocity_max = 0.0
-scale_curve = SubResource("CurveTexture_a534e")
-attractor_interaction_enabled = false
-
 [sub_resource type="Gradient" id="Gradient_00nnj"]
 offsets = PackedFloat32Array(0, 0.535168, 1)
 colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
-
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_3arg3"]
-gradient = SubResource("Gradient_00nnj")
-
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_fjpvl"]
-emission_shape = 2
-emission_sphere_radius = 24.0
-particle_flag_disable_z = true
-direction = Vector3(-1, 0, 0)
-spread = 0.0
-flatness = 1.0
-gravity = Vector3(0, 0, 0)
-orbit_velocity_min = 0.0
-orbit_velocity_max = 0.0
-color_ramp = SubResource("GradientTexture1D_3arg3")
 
 [node name="Player" type="CharacterBody2D"]
 disable_mode = 1
@@ -1787,75 +1680,118 @@ collision_mask = 3
 hit_from_inside = true
 collide_with_areas = true
 
-[node name="BlastJumpParticles" type="GPUParticles2D" parent="."]
+[node name="BlastJumpParticles" type="CPUParticles2D" parent="."]
 visibility_layer = 32
 z_index = 6
 emitting = false
 amount = 32
-process_material = SubResource("ParticleProcessMaterial_k22s0")
-texture = ExtResource("47_v16qd")
 randomness = 1.0
+lifetime_randomness = 0.2
 fixed_fps = 60
-visibility_rect = Rect2(-512, -512, 1024, 1024)
+draw_order = 1
+texture = ExtResource("47_v16qd")
+emission_shape = 3
+emission_rect_extents = Vector2(8, 32)
+particle_flag_align_y = true
+direction = Vector2(0, -1)
+spread = 90.0
+gravity = Vector2(0, 0)
+initial_velocity_max = 64.0
+scale_amount_curve = SubResource("Curve_jyf8q")
 
-[node name="FireTackleParticles" type="GPUParticles2D" parent="."]
+[node name="FireTackleParticles" type="CPUParticles2D" parent="."]
 visibility_layer = 32
 z_index = 6
 emitting = false
 amount = 64
-process_material = SubResource("ParticleProcessMaterial_1si3k")
-texture = ExtResource("48_hn1hc")
 randomness = 1.0
+lifetime_randomness = 0.2
 fixed_fps = 60
-visibility_rect = Rect2(-512, -512, 1024, 1024)
+draw_order = 1
+texture = ExtResource("48_hn1hc")
+emission_shape = 3
+emission_rect_extents = Vector2(8, 32)
+direction = Vector2(0, 1)
+gravity = Vector2(0, 0)
+initial_velocity_max = 64.0
+scale_amount_curve = SubResource("Curve_glaul")
 
-[node name="GlideParticles" type="GPUParticles2D" parent="."]
+[node name="GlideParticles" type="CPUParticles2D" parent="."]
 visibility_layer = 32
 z_index = 6
 position = Vector2(0, 32)
 emitting = false
 amount = 16
-process_material = SubResource("ParticleProcessMaterial_gkovr")
-texture = ExtResource("47_v16qd")
 lifetime = 0.85
 fixed_fps = 60
-visibility_rect = Rect2(-512, -512, 1024, 1024)
+draw_order = 1
+texture = ExtResource("47_v16qd")
+emission_shape = 3
+emission_rect_extents = Vector2(8, 1)
+direction = Vector2(-1, 1)
+spread = 35.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 64.0
+initial_velocity_max = 64.0
+angular_velocity_min = 640.0
+angular_velocity_max = 640.0
+scale_amount_curve = SubResource("Curve_vq12d")
 
-[node name="MidairJumpParticles" type="GPUParticles2D" parent="."]
+[node name="MidairJumpParticles" type="CPUParticles2D" parent="."]
 visibility_layer = 32
 z_index = 6
 position = Vector2(0, 8)
 emitting = false
 amount = 9
-process_material = SubResource("ParticleProcessMaterial_3oooo")
-texture = ExtResource("52_4345i")
 lifetime = 0.35
 one_shot = true
 explosiveness = 1.0
 fixed_fps = 60
-visibility_rect = Rect2(-512, -512, 1024, 1024)
+draw_order = 1
+texture = ExtResource("52_4345i")
+emission_shape = 3
+emission_rect_extents = Vector2(16, 0)
+direction = Vector2(0, 1)
+gravity = Vector2(0, 0)
+initial_velocity_min = 256.0
+initial_velocity_max = 256.0
+linear_accel_min = -256.0
+linear_accel_max = -256.0
+scale_amount_curve = SubResource("Curve_cvkih")
 
-[node name="SuperJumpParticles" type="GPUParticles2D" parent="."]
+[node name="SuperJumpParticles" type="CPUParticles2D" parent="."]
 visibility_layer = 32
 z_index = 6
 position = Vector2(0, 8)
 emitting = false
-process_material = SubResource("ParticleProcessMaterial_ufmsw")
-texture = ExtResource("52_kmjhs")
 lifetime = 0.5
 fixed_fps = 60
-visibility_rect = Rect2(-512, -512, 1024, 1024)
+draw_order = 1
+texture = ExtResource("52_kmjhs")
+emission_shape = 3
+emission_rect_extents = Vector2(8, 24)
+direction = Vector2(0, -1)
+spread = 0.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 64.0
+initial_velocity_max = 64.0
+scale_amount_curve = SubResource("Curve_un2gh")
 
-[node name="SpeedBufferParticles" type="GPUParticles2D" parent="."]
+[node name="SpeedBufferParticles" type="CPUParticles2D" parent="."]
 visibility_layer = 32
 z_index = 6
 position = Vector2(0, 8)
 emitting = false
-process_material = SubResource("ParticleProcessMaterial_fjpvl")
-texture = ExtResource("52_u3vuf")
 lifetime = 0.2
 fixed_fps = 60
-visibility_rect = Rect2(-512, -512, 1024, 1024)
+draw_order = 1
+texture = ExtResource("52_u3vuf")
+emission_shape = 2
+emission_sphere_radius = 24.0
+direction = Vector2(-1, 0)
+spread = 0.0
+gravity = Vector2(0, 0)
+color_ramp = SubResource("Gradient_00nnj")
 
 [node name="FairyTarget" type="Node2D" parent="."]
 position = Vector2(-32, 0)

@@ -2,7 +2,7 @@ extends State
 
 class_name GlidingState
 
-@export var glide_particles : GPUParticles2D
+@export var glide_particles : CPUParticles2D
 
 var is_throwing : bool = false
 
@@ -10,7 +10,7 @@ func state_process(_delta : float):
 	hub.movement.do_movement(_delta)
 	hub.jumping.glide_update(_delta)
 	
-	glide_particles.process_material.direction.x = -hub.get_input_vector().x
+	glide_particles.direction.x = -hub.get_input_vector().x
 	
 	if (hub.form.cannot_change_form()):
 		hub.form.form_change_failed()

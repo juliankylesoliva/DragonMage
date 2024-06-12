@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c7bpl72q355a"
-path="res://.godot/imported/BreakableMagicBlockFragments.png-48366bcc5dbd22299d0cfcc1c685592b.ctex"
+uid="uid://c85qao5o546q0"
+path="res://.godot/imported/ReinforcedMagicBlockFragment1.png-fd4c4ae5b080ed8fa5291588b34f6481.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/Effects/BreakableMagicBlockFragments.png"
-dest_files=["res://.godot/imported/BreakableMagicBlockFragments.png-48366bcc5dbd22299d0cfcc1c685592b.ctex"]
+source_file="res://Sprites/Effects/ReinforcedMagicBlockFragment1.png"
+dest_files=["res://.godot/imported/ReinforcedMagicBlockFragment1.png-fd4c4ae5b080ed8fa5291588b34f6481.ctex"]
 
 [params]
 

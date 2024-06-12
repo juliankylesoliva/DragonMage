@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://7466oab6q16v"
-path="res://.godot/imported/ReinforcedFireBlockFragments.png-767d12eebfefba82fde1534096317e63.ctex"
+uid="uid://bx7jash7usy2x"
+path="res://.godot/imported/BreakableFireBlockFragment1.png-97a6fb4133d7dc01ac0500c2624af0e8.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/Effects/ReinforcedFireBlockFragments.png"
-dest_files=["res://.godot/imported/ReinforcedFireBlockFragments.png-767d12eebfefba82fde1534096317e63.ctex"]
+source_file="res://Sprites/Effects/BreakableFireBlockFragment1.png"
+dest_files=["res://.godot/imported/BreakableFireBlockFragment1.png-97a6fb4133d7dc01ac0500c2624af0e8.ctex"]
 
 [params]
 

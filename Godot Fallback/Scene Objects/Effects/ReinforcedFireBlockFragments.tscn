@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://s8xlxdfykpii"]
 
 [ext_resource type="PackedScene" uid="uid://dnqfo4knpej54" path="res://Scene Objects/Effects/BlockFragments.tscn" id="1_s6y4c"]
-[ext_resource type="Texture2D" uid="uid://7466oab6q16v" path="res://Sprites/Effects/ReinforcedFireBlockFragments.png" id="2_gvhly"]
+[ext_resource type="Texture2D" uid="uid://qhnsxa3cs0xc" path="res://Sprites/Effects/ReinforcedFireBlockFragment1.png" id="2_dtb66"]
 
 [node name="ReinforcedFireBlockFragments" instance=ExtResource("1_s6y4c")]
-texture = ExtResource("2_gvhly")
+texture = ExtResource("2_dtb66")

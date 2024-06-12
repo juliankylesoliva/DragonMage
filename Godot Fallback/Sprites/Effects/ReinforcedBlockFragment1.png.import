@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bwr6vfk405e0x"
-path="res://.godot/imported/ReinforcedNormalBlockFragments.png-c8e78a6bb356697f96cffb4ca7da3af3.ctex"
+uid="uid://6hpimdhwteg5"
+path="res://.godot/imported/ReinforcedBlockFragment1.png-d0102bc4fb98667a872d71f48b4516e5.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/Effects/ReinforcedNormalBlockFragments.png"
-dest_files=["res://.godot/imported/ReinforcedNormalBlockFragments.png-c8e78a6bb356697f96cffb4ca7da3af3.ctex"]
+source_file="res://Sprites/Effects/ReinforcedBlockFragment1.png"
+dest_files=["res://.godot/imported/ReinforcedBlockFragment1.png-d0102bc4fb98667a872d71f48b4516e5.ctex"]
 
 [params]
 

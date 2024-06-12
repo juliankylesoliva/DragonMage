@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://bxbdfrhfx0jga"]
 
 [ext_resource type="PackedScene" uid="uid://dnqfo4knpej54" path="res://Scene Objects/Effects/BlockFragments.tscn" id="1_yil3e"]
-[ext_resource type="Texture2D" uid="uid://c7bpl72q355a" path="res://Sprites/Effects/BreakableMagicBlockFragments.png" id="2_jiprv"]
+[ext_resource type="Texture2D" uid="uid://cvpikt7jqsrvx" path="res://Sprites/Effects/BreakableMagicBlockFragment1.png" id="2_j4vjg"]
 
 [node name="MagicBlockFragments" instance=ExtResource("1_yil3e")]
-texture = ExtResource("2_jiprv")
+texture = ExtResource("2_j4vjg")

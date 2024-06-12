@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cpr06s5aecpir"
-path="res://.godot/imported/BreakableFireBlockFragments.png-09f93f7c386f8e495944d69da459fd63.ctex"
+uid="uid://cvpikt7jqsrvx"
+path="res://.godot/imported/BreakableMagicBlockFragment1.png-79e51e42fa40fc57ce89bbf49aabe4ec.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/Effects/BreakableFireBlockFragments.png"
-dest_files=["res://.godot/imported/BreakableFireBlockFragments.png-09f93f7c386f8e495944d69da459fd63.ctex"]
+source_file="res://Sprites/Effects/BreakableMagicBlockFragment1.png"
+dest_files=["res://.godot/imported/BreakableMagicBlockFragment1.png-79e51e42fa40fc57ce89bbf49aabe4ec.ctex"]
 
 [params]
 

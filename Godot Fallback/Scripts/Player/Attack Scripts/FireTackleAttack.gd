@@ -2,7 +2,7 @@ extends Attack
 
 class_name FireTackleAttack
 
-@export var fire_tackle_particles : GPUParticles2D
+@export var fire_tackle_particles : CPUParticles2D
 
 @export var fire_tackle_hitbox_scene : PackedScene
 
@@ -242,7 +242,7 @@ func active_update(delta : float):
 		(fire_tackle_hitbox_instance as Node2D).global_position = (hub.collision_shape.global_position + (normalized_velocity * velocity_offset))
 		
 		var temp_velocity = -hub.char_body.velocity.normalized()
-		fire_tackle_particles.process_material.direction = Vector3(temp_velocity.x, temp_velocity.y, 0)
+		fire_tackle_particles.direction = Vector2(temp_velocity.x, temp_velocity.y)
 		
 		var intended_velocity : Vector2 = hub.char_body.velocity
 		hub.char_body.move_and_slide()

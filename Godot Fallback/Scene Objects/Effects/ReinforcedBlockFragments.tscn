@@ -1,7 +1,8 @@
 [gd_scene load_steps=3 format=3 uid="uid://bln43wbqf2oqy"]
 
 [ext_resource type="PackedScene" uid="uid://dnqfo4knpej54" path="res://Scene Objects/Effects/BlockFragments.tscn" id="1_kwo4n"]
-[ext_resource type="Texture2D" uid="uid://bwr6vfk405e0x" path="res://Sprites/Effects/ReinforcedNormalBlockFragments.png" id="2_aq6h7"]
+[ext_resource type="Texture2D" uid="uid://6hpimdhwteg5" path="res://Sprites/Effects/ReinforcedBlockFragment1.png" id="2_2mvte"]
 
 [node name="ReinforcedBlockFragments" instance=ExtResource("1_kwo4n")]
-texture = ExtResource("2_aq6h7")
+emitting = true
+texture = ExtResource("2_2mvte")

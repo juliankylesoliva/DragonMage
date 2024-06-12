@@ -4,7 +4,7 @@ class_name MagicBlastAttack
 
 signal magic_blast_thrown
 
-@export var blast_jump_particles : GPUParticles2D
+@export var blast_jump_particles : CPUParticles2D
 
 @export var projectile_trail : LineTrail
 
@@ -151,7 +151,7 @@ func blast_jump_update(delta : float):
 		var velocity_offset : float = min(hub.char_body.velocity.length(), blast_jump_max_velocity_magnitude_offset)
 		
 		var velocity_temp = -hub.char_body.velocity.normalized()
-		blast_jump_particles.process_material.direction = Vector3(velocity_temp.x, velocity_temp.y, 0)
+		blast_jump_particles.direction = Vector2(velocity_temp.x, velocity_temp.y)
 		
 		if (blast_jump_hitbox_instance == null):
 			blast_jump_hitbox_instance = blast_jump_hitbox_scene.instantiate()

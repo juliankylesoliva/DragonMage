@@ -1,51 +1,29 @@
-[gd_scene load_steps=7 format=3 uid="uid://dnqfo4knpej54"]
+[gd_scene load_steps=4 format=3 uid="uid://dnqfo4knpej54"]
 
-[ext_resource type="Texture2D" uid="uid://gyjmgbkc2wpa" path="res://Sprites/Effects/BreakableNormalBlockFragments.png" id="1_0l0jp"]
+[ext_resource type="Texture2D" uid="uid://cwpl1f0o1slm2" path="res://Sprites/Effects/BreakableBlockFragment1.png" id="1_cwpad"]
 [ext_resource type="Script" path="res://Scripts/Utility Scripts/SelfDestructTimer.gd" id="2_lj45f"]
-
-[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_r44y3"]
-particles_animation = true
-particles_anim_h_frames = 2
-particles_anim_v_frames = 2
-particles_anim_loop = false
 
 [sub_resource type="Curve" id="Curve_evvcn"]
 max_value = 200.0
 _data = [Vector2(0, 31.5789), 0.0, 0.0, 0, 0, Vector2(1, 200), 589.839, 0.0, 0, 0]
 point_count = 2
 
-[sub_resource type="CurveTexture" id="CurveTexture_su7ps"]
-curve = SubResource("Curve_evvcn")
-
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_yqk7i"]
-emission_shape = 6
-emission_ring_axis = Vector3(0, 0, 1)
-emission_ring_height = 1.0
-emission_ring_radius = 0.5
-emission_ring_inner_radius = 0.0
-particle_flag_disable_z = true
-direction = Vector3(0, -1, 0)
-spread = 80.0
-gravity = Vector3(0, 980, 0)
-initial_velocity_min = 256.0
-initial_velocity_max = 256.0
-orbit_velocity_min = 0.0
-orbit_velocity_max = 0.0
-anim_speed_curve = SubResource("CurveTexture_su7ps")
-anim_offset_max = 1.0
-attractor_interaction_enabled = false
-
-[node name="BlockFragments" type="GPUParticles2D"]
+[node name="BlockFragments" type="CPUParticles2D"]
 visibility_layer = 32
-z_index = 6
-material = SubResource("CanvasItemMaterial_r44y3")
+z_index = 7
 emitting = false
 amount = 4
-process_material = SubResource("ParticleProcessMaterial_yqk7i")
-texture = ExtResource("1_0l0jp")
 one_shot = true
 explosiveness = 1.0
 fixed_fps = 60
-visibility_rect = Rect2(-64, -64, 128, 128)
-draw_order = 0
+texture = ExtResource("1_cwpad")
+direction = Vector2(0, -1)
+spread = 80.0
+initial_velocity_min = 256.0
+initial_velocity_max = 256.0
+angular_velocity_min = -64.0
+angular_velocity_max = 64.0
+angle_max = 360.0
+anim_speed_curve = SubResource("Curve_evvcn")
+anim_offset_max = 1.0
 script = ExtResource("2_lj45f")
