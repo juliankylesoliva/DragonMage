@@ -21,7 +21,9 @@ signal textbox_finished
 
 @export var start_symbol_char : String = ">"
 
-@export var end_symbol_char : String = "\n\n\n\n\n\n[center][Interact]"
+@export var end_symbol_char_more : String = "\n\n\n\n\n>>\n[center][Interact]"
+
+@export var end_symbol_char_last : String = "\n\n\n\n\n\n[center][Interact]"
 
 @export var characters_per_second : float = 50
 
@@ -117,7 +119,7 @@ func do_text_scrolling():
 		text_label.visible_characters = -1
 		
 		if (textbox_container.visible):
-			end_symbol.text = TextPromptParser.parse_text(end_symbol_char)
+			end_symbol.text = TextPromptParser.parse_text(end_symbol_char_more if !text_queue.is_empty() else end_symbol_char_last)
 			change_state(TextboxState.FINISHED)
 		else:
 			hide_textbox()
