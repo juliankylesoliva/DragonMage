@@ -135,15 +135,15 @@ textbox = NodePath("../../Textbox")
 textbox = NodePath("../../Textbox")
 
 [node name="CH0_LV1_R7" parent="." instance=ExtResource("9_lk4j6")]
-position = Vector2(-96, 672)
+position = Vector2(-2048, 352)
 
-[node name="Warp 0" parent="CH0_LV1_R7" index="4" node_paths=PackedStringArray("room_destination")]
+[node name="Warp 0" parent="CH0_LV1_R7" index="5" node_paths=PackedStringArray("room_destination")]
 room_destination = NodePath("../../CH0_LV1_R6")
 
-[node name="Warp 1" parent="CH0_LV1_R7" index="5" node_paths=PackedStringArray("room_destination")]
+[node name="Warp 1" parent="CH0_LV1_R7" index="6" node_paths=PackedStringArray("room_destination")]
 room_destination = NodePath("../../CH1_LV1_R8")
 
-[node name="HintBubble" parent="CH0_LV1_R7" index="6" node_paths=PackedStringArray("textbox")]
+[node name="HintBubble" parent="CH0_LV1_R7" index="8" node_paths=PackedStringArray("textbox")]
 textbox = NodePath("../../Textbox")
 
 [node name="CH1_LV1_R8" parent="." instance=ExtResource("10_40xoc")]
@@ -213,6 +213,7 @@ stream = ExtResource("20_oukke")
 [editable path="CH0_LV1_R5"]
 [editable path="CH0_LV1_R6"]
 [editable path="CH0_LV1_R7"]
+[editable path="CH0_LV1_R7/FallWarp"]
 [editable path="CH1_LV1_R8"]
 [editable path="CH1_LV1_R8/FallWarp"]
 [editable path="CH0_LV1_R9"]

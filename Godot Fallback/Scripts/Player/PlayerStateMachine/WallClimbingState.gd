@@ -29,6 +29,8 @@ func state_process(_delta):
 	
 	hub.camera.wall_climb_horizontal_camera_update(_delta, hub.jumping.stored_wall_climb_speed, hub.jumping.stored_wall_climb_speed > hub.jumping.min_climbing_speed)
 	
+	hub.jumping.update_wall_release_timer(_delta)
+	
 	if (hub.is_deactivated):
 		set_next_state(state_machine.get_state_by_name("Deactivated"))
 	elif (hub.form.can_change_form()):
@@ -67,6 +69,8 @@ func state_process(_delta):
 		pass
 
 func on_enter():
+	if (state_machine.previous_state.name != "WallSliding"):
+		hub.jumping.reset_wall_release_timer()
 	if (hub.jumping.is_fast_falling):
 		hub.jumping.reset_fast_fall()
 	

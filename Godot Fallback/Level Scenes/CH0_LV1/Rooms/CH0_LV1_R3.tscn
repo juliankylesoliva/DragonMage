@@ -81,7 +81,7 @@ textbox_strings = Array[String](["[center]~ Phase Dodge ~
 [node name="HintBubble3" parent="." instance=ExtResource("4_bdy1j")]
 position = Vector2(64, -184)
 textbox_strings = Array[String](["[center]~ Short Glide ~
-\"Pressing [Technical] while rising and holding [Jump] during a jump will start a glide earlier and closer to the ground.\"", "Magli: Good thing I remembered to remove vertical inertia on this orb at the last minute! Trying to line up my throws while jumping was already difficult enough as is..."])
+\"Pressing [Technical] while rising and holding [Jump] during a jump will start a glide earlier and closer to the ground.\"", "Magli: Good thing I remembered to remove vertical inertia on this star at the last minute! Trying to line up my throws while jumping was already difficult enough as is..."])
 
 [node name="BreakableBlock" parent="." instance=ExtResource("4_6r42f")]
 position = Vector2(192, 96)

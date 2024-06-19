@@ -82,7 +82,7 @@ textbox_strings = Array[String](["[center]~ Gliding ~
 [node name="HintBubble3" parent="." instance=ExtResource("9_rpvgy")]
 position = Vector2(1440, 232)
 textbox_strings = Array[String](["[center]~ Wallkick ~
-\"Jump and move against a wall to start sliding down it, then press [Jump] to kick off of it. Move away from a wall you're on to let go of it.\"", "Magli: Hmm... I'm still deciding whether to call it a wallJUMP or a wallKICK..."])
+\"Move against a wall while falling to start sliding down it, then press [Jump] to kick off of it. Move away from a wall you're on to let go of it.\"", "Magli: Hmm... I'm still deciding whether to call it a wallJUMP or a wallKICK..."])
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 visible = false
