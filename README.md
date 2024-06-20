@@ -5,6 +5,6 @@ https://jksun22.itch.io/dragonmage
 
 https://www.newgrounds.com/portal/view/935109
 
-**COPYRIGHT NOTICE: At the moment, this repository has no licence.**
+**COPYRIGHT NOTICE: At the moment, this repository has no license.**
 
 https://choosealicense.com/no-permission/
