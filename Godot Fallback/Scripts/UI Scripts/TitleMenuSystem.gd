@@ -18,6 +18,16 @@ class_name TitleMenuSystem
 
 @export var level_description_label : RichTextLabel
 
+@export var level_ctrl_prompt : ButtonPromptTextLabel
+
+@export_multiline var default_level_ctrl_text : String
+
+@export_multiline var form_level_ctrl_text : String
+
+@export var magli_name_sprite_path : String = "res://Sprites/UI/MagliNameSprite.png"
+
+@export var draelyn_name_sprite_path : String = "res://Sprites/UI/DraelynNameSprite.png"
+
 @export var credit_page_label : RichTextLabel
 
 @export var top_menu_screen : Node2D
@@ -43,6 +53,7 @@ func _ready():
 	top_menu_screen.set_visible(true)
 	level_select_subscreen.set_visible(false)
 	credits_subscreen.set_visible(false)
+	current_level_selection = clampi(NextLevelHelper.next_level_menu_index, 0, level_info_list.size() - 1)
 	update_cursor_position()
 	update_level_select_text(level_info_list[current_level_selection])
 
@@ -126,6 +137,13 @@ func do_level_selection():
 		if (Input.is_action_just_pressed("Jump")):
 			menu_cursor.do_selection_movement()
 			start_game()
+		elif (level_info_list[current_level_selection].form_changing_enabled and Input.is_action_just_pressed("Change Form")):
+			if (FormSelectionHelper.selected_form == FormSelectionHelper.mage_form):
+				menu_cursor.play_cancel_sound()
+			else:
+				menu_cursor.play_accept_sound()
+			FormSelectionHelper.toggle_selected_form()
+			update_level_select_text(level_info_list[current_level_selection])
 		elif ((left_pressed or right_pressed) and !(left_pressed and right_pressed)):
 			if (left_pressed):
 				if (current_level_selection > 0):
@@ -182,6 +200,9 @@ func update_credits_subscreen():
 func update_level_select_text(info : LevelInfo):
 	level_name_label.text = info.name_header
 	level_description_label.text = info.story_description[current_level_desc_page]
+	level_ctrl_prompt.raw_text = (form_level_ctrl_text.format({"file" : magli_name_sprite_path if FormSelectionHelper.is_mage_selected() else draelyn_name_sprite_path}) if info.form_changing_enabled else default_level_ctrl_text)
+	level_ctrl_prompt.refresh_label_text()
+	FormSelectionHelper.form_changing_enabled = info.form_changing_enabled
 
 func return_to_top_menu():
 	if (is_input_allowed and is_in_subscreen() and Input.is_action_just_pressed("Attack")):
@@ -195,6 +216,8 @@ func return_to_top_menu():
 func start_game():
 	if (!is_input_allowed):
 		return
+	
+	NextLevelHelper.set_next_level_menu_index(current_level_selection)
 	
 	is_input_allowed = false
 	

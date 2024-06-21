@@ -15,7 +15,7 @@
 
 [node name="TitleScreen" type="Node2D"]
 
-[node name="TitleMenuSystem" type="Node" parent="." node_paths=PackedStringArray("menu_cursor", "screen_fade", "start_label", "credits_label", "exit_label", "level_name_label", "level_description_label", "credit_page_label", "top_menu_screen", "level_select_subscreen", "credits_subscreen")]
+[node name="TitleMenuSystem" type="Node" parent="." node_paths=PackedStringArray("menu_cursor", "screen_fade", "start_label", "credits_label", "exit_label", "level_name_label", "level_description_label", "level_ctrl_prompt", "credit_page_label", "top_menu_screen", "level_select_subscreen", "credits_subscreen")]
 script = ExtResource("6_7tvge")
 level_info_list = Array[Resource("res://Scripts/Resource Scripts/LevelInfo/LevelInfo.gd")]([ExtResource("7_kaf74"), ExtResource("8_8fveg"), ExtResource("4_mc5lt"), ExtResource("10_tud14"), ExtResource("11_mbwv5")])
 menu_cursor = NodePath("../MenuCursor")
@@ -25,6 +25,13 @@ credits_label = NodePath("../TopMenu/CreditsTextLabel")
 exit_label = NodePath("../TopMenu/ExitTextLabel")
 level_name_label = NodePath("../LevelSelectSubscreen/LevelNameTextLabel")
 level_description_label = NodePath("../LevelSelectSubscreen/LevelDescTextLabel")
+level_ctrl_prompt = NodePath("../LevelSelectSubscreen/ControlPromptLabel")
+default_level_ctrl_text = "[center][Move Left]/[Move Right] Change Level | [Move Up]/[Move Down] Read Diary Entry
+
+[Jump] Start! | [Attack] Back"
+form_level_ctrl_text = "[center][Move Left]/[Move Right] Change Level | [Move Up]/[Move Down] Read Diary Entry
+
+[Jump] Start! | [Attack] Back | [Change Form] Starting Form: [img]{file}[/img]"
 credit_page_label = NodePath("../CreditsSubscreen/CreditsTextLabel")
 top_menu_screen = NodePath("../TopMenu")
 level_select_subscreen = NodePath("../LevelSelectSubscreen")
@@ -83,6 +90,7 @@ position = Vector2(256, 160)
 texture = ExtResource("1_joivi")
 
 [node name="TopMenu" type="Node2D" parent="."]
+visible = false
 
 [node name="Title" type="Sprite2D" parent="TopMenu"]
 position = Vector2(256, 64)
@@ -183,7 +191,6 @@ scroll_active = false
 shortcut_keys_enabled = false
 
 [node name="LevelSelectSubscreen" type="Node2D" parent="."]
-visible = false
 
 [node name="HeaderTextLabel" type="RichTextLabel" parent="LevelSelectSubscreen"]
 anchors_preset = 8
@@ -238,7 +245,9 @@ grow_vertical = 2
 theme_override_fonts/normal_font = ExtResource("3_ethht")
 theme_override_font_sizes/normal_font_size = 8
 bbcode_enabled = true
-text = "?????"
+text = "[center][Move Left]/[Move Right] Change Level | [Move Up]/[Move Down] Read Diary Entry
+
+[Jump] Start! | [Attack] Back | [Change Form] Starting Form: [img]res://Sprites/UI/DraelynNameSprite.png[/img]"
 scroll_active = false
 shortcut_keys_enabled = false
 

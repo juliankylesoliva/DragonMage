@@ -367,7 +367,7 @@ func do_speed_hop_slope_boost():
 		hub.char_body.velocity.x = hub.movement.current_horizontal_velocity
 
 func can_glide():
-	return (enable_gliding and !hub.movement.is_crouching and !hub.buffers.is_coyote_time_active() and (hub.char_body.velocity.y >= 0 or Input.is_action_pressed("Technical")) and current_glide_time <= hub.buffers.early_glide_buffer_time and hub.collisions.get_distance_to_ground() >= min_glide_height and Input.is_action_pressed("Jump"))
+	return (enable_gliding and !hub.movement.is_crouching and !hub.buffers.is_coyote_time_active() and (hub.char_body.velocity.y >= 0 or Input.is_action_pressed("Technical")) and current_glide_time <= hub.buffers.early_glide_buffer_time and hub.collisions.get_distance_to_ground() >= min_glide_height and (Input.is_action_just_pressed("Jump") or (Input.is_action_pressed("Technical") and Input.is_action_pressed("Jump"))))
 
 func start_glide():
 	hub.movement.reset_crouch_state()

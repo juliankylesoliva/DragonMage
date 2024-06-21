@@ -75,7 +75,7 @@ func validate_parameters():
 	set_starting_temper_level()
 
 func set_starting_temper_level():
-	current_temper_level = (get_min_warm_threshold() if hub.form.is_a_mage() else get_max_warm_threshold())
+	current_temper_level = get_warm_midpoint()
 
 func set_boss_courtesy_temper_level():
 	if (is_forcing_form_change() or is_form_locked()):

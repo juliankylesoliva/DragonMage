@@ -69,10 +69,18 @@ room_origin = NodePath("..")
 room_destination = NodePath("..")
 
 [node name="HintBubble" parent="." instance=ExtResource("4_78svx")]
-position = Vector2(128, 232)
-textbox_strings = Array[String](["[center]~ Magic Blast (1/2) ~
-\"Press [Attack] to throw a magic star of concentrated kinetic energy. Press [Attack] again to detonate it.\"", "[center]~ Magic Blast (2/2) ~
-\"Pressing [Move Up]+[Attack] lobs the star above you.\"
+position = Vector2(96, 232)
+textbox_strings = Array[String](["[center]~ Magic Blast (1/3) ~
+\"Press [Attack] to throw a magic star of concentrated kinetic energy. Press [Attack] again to detonate it.\""])
+
+[node name="HintBubble2" parent="." instance=ExtResource("4_78svx")]
+position = Vector2(288, 232)
+textbox_strings = Array[String](["[center]~ Magic Blast (2/3) ~
+\"Pressing [Move Up]+[Attack] lobs the star above you.\""])
+
+[node name="HintBubble3" parent="." instance=ExtResource("4_78svx")]
+position = Vector2(352, 104)
+textbox_strings = Array[String](["[center]~ Magic Blast (3/3) ~
 \"Pressing [Move Down]+[Attack] drops the star at your feet.\""])
 
 [node name="BreakableBlock" parent="." instance=ExtResource("3_y5m3t")]

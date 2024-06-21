@@ -23,6 +23,7 @@
 
 [node name="CH0_LV1" type="Node" node_paths=PackedStringArray("player_reference", "starting_room", "room_list", "clear_timer")]
 script = ExtResource("1_6mws2")
+level_index = 0
 player_reference = NodePath("Player")
 starting_room = NodePath("CH0_LV1_R1")
 room_list = [NodePath("CH0_LV1_R1"), NodePath("CH0_LV1_R2"), NodePath("CH0_LV1_R3"), NodePath("CH0_LV1_R4"), NodePath("CH0_LV1_R5"), NodePath("CH0_LV1_R6"), NodePath("CH0_LV1_R7"), NodePath("CH1_LV1_R8"), NodePath("CH0_LV1_R9"), NodePath("CH0_LV1_R10")]
@@ -69,6 +70,12 @@ room_destination = NodePath("../../CH0_LV1_R1")
 room_destination = NodePath("../../CH0_LV1_R3")
 
 [node name="HintBubble" parent="CH0_LV1_R2" index="6" node_paths=PackedStringArray("textbox")]
+textbox = NodePath("../../Textbox")
+
+[node name="HintBubble2" parent="CH0_LV1_R2" index="7" node_paths=PackedStringArray("textbox")]
+textbox = NodePath("../../Textbox")
+
+[node name="HintBubble3" parent="CH0_LV1_R2" index="8" node_paths=PackedStringArray("textbox")]
 textbox = NodePath("../../Textbox")
 
 [node name="CH0_LV1_R3" parent="." instance=ExtResource("5_vfoci")]

@@ -22,7 +22,15 @@ class_name MagicMeterUI
 
 @export_range(0, 1) var attack_unavailable_alpha : float = 0.5
 
+@export var y_fade_offset_from_center : float = -96
+
+@export var alpha_fade_time : float = 0.25
+
+@export_range(0, 1) var target_alpha : float = 0.5
+
 var hub : PlayerHub = null
+
+var current_fade_y_threshold : float = 0
 
 func _ready():
 	if (player_node != null):
@@ -33,6 +41,7 @@ func _ready():
 
 func _process(_delta):
 	refresh_meter_ui()
+	check_alpha_fade(_delta)
 
 func refresh_meter_ui():
 	if (!hub.fairy.is_using_fairy or !hub.fairy.enable_abilities):
@@ -56,3 +65,13 @@ func refresh_meter_ui():
 		fill_sprite.offset.x = zero_x_offset
 	
 	percent_label.text = ("{num}%".format({"num" : (hub.fairy.current_magic as int)}))
+
+func check_alpha_fade(delta):
+	current_fade_y_threshold = calculate_fade_y_threshold()
+	if (hub.char_body.global_position.y < current_fade_y_threshold):
+		modulate.a = move_toward(modulate.a, target_alpha, delta / alpha_fade_time)
+	else:
+		modulate.a = move_toward(modulate.a, 1.0, delta / alpha_fade_time)
+
+func calculate_fade_y_threshold():
+	return (get_viewport().get_camera_2d().get_screen_center_position().y + y_fade_offset_from_center)

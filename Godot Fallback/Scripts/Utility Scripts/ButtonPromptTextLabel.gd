@@ -1,5 +1,7 @@
 extends RichTextLabel
 
+class_name ButtonPromptTextLabel
+
 var raw_text : String
 
 func _init():

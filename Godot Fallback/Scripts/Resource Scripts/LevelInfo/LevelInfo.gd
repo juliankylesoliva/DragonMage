@@ -7,3 +7,5 @@ class_name LevelInfo
 @export var name_header : String
 
 @export_multiline var story_description : Array[String]
+
+@export var form_changing_enabled : bool = true

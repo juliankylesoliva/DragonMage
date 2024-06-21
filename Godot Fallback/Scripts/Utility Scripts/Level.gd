@@ -4,6 +4,8 @@ class_name Level
 
 signal player_defeated
 
+@export var level_index : int = -1
+
 @export var player_reference : CharacterBody2D
 
 @export var starting_room : Room
@@ -113,6 +115,7 @@ func respawn_all_enemies():
 
 func level_finish():
 	player_hub.set_force_stand(true)
+	NextLevelHelper.set_next_level_menu_index(level_index + 1)
 
 func get_current_room():
 	for room in room_list:

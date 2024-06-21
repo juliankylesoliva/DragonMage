@@ -24,6 +24,12 @@ class_name TemperMeterUI
 
 @export var segment_shake_amplitude : int = 2
 
+@export var y_fade_offset_from_center : float = -96
+
+@export var alpha_fade_time : float = 0.25
+
+@export_range(0, 1) var target_alpha : float = 0.5
+
 var hub : PlayerHub = null
 
 var prev_temper_level : int = -1
@@ -34,6 +40,8 @@ var prev_hot_threshold : int = -1
 
 var prev_total_segments : int = -1
 
+var current_fade_y_threshold : float = 0
+
 func _ready():
 	if (player_node != null):
 		for child in player_node.get_children():
@@ -43,6 +51,7 @@ func _ready():
 
 func _process(_delta):
 	refresh_meter_ui()
+	check_alpha_fade(_delta)
 
 func did_player_temper_change():
 	return (hub.temper.current_temper_level != prev_temper_level or hub.temper.cold_threshold != prev_cold_threshold or hub.temper.hot_threshold != prev_hot_threshold or hub.temper.total_segments != prev_total_segments)
@@ -79,3 +88,13 @@ func refresh_meter_ui():
 					else:
 						current_segment.offset = Vector2.ZERO
 					current_segment.play()
+
+func check_alpha_fade(delta):
+	current_fade_y_threshold = calculate_fade_y_threshold()
+	if (hub.char_body.global_position.y < current_fade_y_threshold):
+		modulate.a = move_toward(modulate.a, target_alpha, delta / alpha_fade_time)
+	else:
+		modulate.a = move_toward(modulate.a, 1.0, delta / alpha_fade_time)
+
+func calculate_fade_y_threshold():
+	return (get_viewport().get_camera_2d().get_screen_center_position().y + y_fade_offset_from_center)

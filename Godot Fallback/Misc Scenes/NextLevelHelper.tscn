@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://blqdfd4fslkux"]
+
+[ext_resource type="Script" path="res://Scripts/Utility Scripts/NextLevelHelper.gd" id="1_5rtgk"]
+
+[node name="NextLevelHelper" type="Node"]
+script = ExtResource("1_5rtgk")

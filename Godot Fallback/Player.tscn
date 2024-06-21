@@ -1553,7 +1553,6 @@ texture_filter = 1
 position = Vector2(0, 1)
 sprite_frames = SubResource("SpriteFrames_5s7e1")
 animation = &"MagliStand"
-autoplay = "MagliStand"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 8)

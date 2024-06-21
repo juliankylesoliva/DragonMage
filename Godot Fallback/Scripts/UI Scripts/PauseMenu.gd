@@ -6,6 +6,14 @@ class_name PauseMenu
 
 @export var selection_labels : Array[RichTextLabel]
 
+@export var form_select_prompt_label : ButtonPromptTextLabel
+
+@export_multiline var form_restart_text : String
+
+@export var magli_name_sprite_path : String = "res://Sprites/UI/MagliNameSprite.png"
+
+@export var draelyn_name_sprite_path : String = "res://Sprites/UI/DraelynNameSprite.png"
+
 @export var screen_fade : ScreenFade
 
 @export var title_scene_path : String
@@ -60,6 +68,11 @@ func check_menu_cursor_movement():
 		
 		move_cursor()
 		menu_cursor.play_move_sound()
+	
+	if (FormSelectionHelper.form_changing_enabled):
+		form_select_prompt_label.set_visible(current_selection == 0)
+		form_select_prompt_label.raw_text = (form_restart_text.format({"file" : magli_name_sprite_path if FormSelectionHelper.is_mage_selected() else draelyn_name_sprite_path}))
+		form_select_prompt_label.refresh_label_text()
 
 func check_menu_selection():
 	if (is_input_allowed and Input.is_action_just_pressed("Jump")):
@@ -72,6 +85,14 @@ func check_menu_selection():
 				get_tree().quit()
 			_:
 				pass
+	elif (FormSelectionHelper.form_changing_enabled and current_selection == 0 and Input.is_action_just_pressed("Change Form")):
+		if (FormSelectionHelper.selected_form == FormSelectionHelper.mage_form):
+			menu_cursor.play_cancel_sound()
+		else:
+			menu_cursor.play_accept_sound()
+		FormSelectionHelper.toggle_selected_form()
+	else:
+		pass
 
 func do_restart():
 	PauseHandler.set_unpause_lock(true)

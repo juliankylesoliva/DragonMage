@@ -152,7 +152,10 @@ func set_ctrl_properties(p : PlayerCtrlProperties):
 	hub.attacks.crouching_attack_name = p.crouching_attack_name
 
 func change_to_starting_mode():
-	change_mode(starting_mode)
+	if (!enable_form_changing):
+		change_mode(starting_mode)
+	else:
+		change_mode(CharacterMode.DRAGON if FormSelectionHelper.selected_form == CharacterMode.DRAGON else CharacterMode.MAGE)
 
 func change_mode(mode : CharacterMode):
 	set_ctrl_properties(mage_properties if mode == CharacterMode.MAGE else dragon_properties)
