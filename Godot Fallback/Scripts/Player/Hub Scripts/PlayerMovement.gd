@@ -39,6 +39,8 @@ class_name PlayerMovement
 
 @export var crouch_cooldown_time : float = 0.167
 
+@export var enable_crouch_toggle : bool = false
+
 var is_facing_right : bool = true
 var is_crouching : bool = false
 var current_min_crouch_timer : float = 0
@@ -85,7 +87,7 @@ func check_crouch_state():
 		if (is_crouching):
 			current_min_crouch_timer = min_crouch_time
 	else:
-		is_crouching = (current_min_crouch_timer > 0 or hub.collisions.is_in_ceiling_when_uncrouched() or (Input.is_action_pressed("Crouch") and (hub.char_body.is_on_floor() or hub.jumping.enable_crouch_jumping)))
+		is_crouching = (current_min_crouch_timer > 0 or hub.collisions.is_in_ceiling_when_uncrouched() or (((!enable_crouch_toggle and Input.is_action_pressed("Crouch")) or (enable_crouch_toggle and !Input.is_action_just_pressed("Crouch"))) and (hub.char_body.is_on_floor() or hub.jumping.enable_crouch_jumping)))
 		if (!is_crouching and state_name == "Jumping" and !hub.jumping.enable_crouch_jumping):
 			hub.animation.set_animation("{name}Jump".format({"name" : hub.form.get_current_form_name()}))
 			hub.animation.set_animation_frame(0)

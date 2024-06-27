@@ -3,4 +3,5 @@
 [ext_resource type="Script" path="res://Scripts/Utility Scripts/FormSelectionHelper.gd" id="1_3gqkd"]
 
 [node name="FormSelectionHelper" type="Node"]
+process_mode = 3
 script = ExtResource("1_3gqkd")

@@ -53,8 +53,8 @@ func check_menu_cursor_movement():
 	if (!is_input_allowed):
 		return
 	
-	var up_pressed : bool = Input.is_action_just_pressed("Move Up")
-	var down_pressed : bool = Input.is_action_just_pressed("Move Down")
+	var up_pressed : bool = Input.is_action_just_pressed("Menu Up")
+	var down_pressed : bool = Input.is_action_just_pressed("Menu Down")
 	
 	if ((up_pressed or down_pressed) and !(up_pressed and down_pressed)):
 		if (up_pressed):
@@ -75,7 +75,7 @@ func check_menu_cursor_movement():
 		form_select_prompt_label.refresh_label_text()
 
 func check_menu_selection():
-	if (is_input_allowed and Input.is_action_just_pressed("Jump")):
+	if (is_input_allowed and Input.is_action_just_pressed("Menu Confirm")):
 		match current_selection:
 			0:
 				do_restart()

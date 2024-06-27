@@ -50,6 +50,8 @@ class_name FireTackleAttack
 
 @export var fire_tackle_endlag_cancelable_time : float = 0.125
 
+@export_range(0, 1) var fire_tackle_slide_cancel_penalty : float = 0.4
+
 @export var fire_tackle_floor_snap_distance : float = 32
 
 @export var fire_tackle_max_ledge_nudge_ease : float = 1.5
@@ -206,7 +208,7 @@ func active_init():
 
 func active_update(delta : float):
 	hub.buffers.refresh_speed_preservation_buffer()
-	if (current_attack_timer > 0 and (current_bump_immunity_timer > 0 or (!hub.collisions.is_facing_a_wall() and !(hub.char_body.is_on_ceiling() and !hub.char_body.is_on_floor())))):
+	if (current_attack_timer > 0 and ((current_bump_immunity_timer > 0 and (!can_cancel_fire_tackle_endlag() or hub.temper.is_form_locked())) or (!hub.collisions.is_facing_a_wall() and !(hub.char_body.is_on_ceiling() and !hub.char_body.is_on_floor())))):
 		if (current_attack_timer <= hub.buffers.jump_buffer_time):
 			hub.char_sprite.modulate = fire_tackle_jump_cancel_buffer_color
 		
@@ -263,7 +265,10 @@ func endlag_init():
 	hub.sprite_trail.deactivate_trail()
 	did_player_bump = false
 	is_player_firing_projectile = false
-	if (hub.collisions.is_facing_a_wall() or (hub.char_body.is_on_ceiling() and !hub.char_body.is_on_floor())):
+	if (hub.collisions.is_facing_a_wall() and hub.jumping.can_wall_climb_from_fire_tackle() and !hub.temper.is_forcing_form_change()):
+		hub.char_body.velocity.x = (horizontal_result * hub.movement.get_facing_value())
+		end_fire_tackle()
+	elif (hub.collisions.is_facing_a_wall() or (hub.char_body.is_on_ceiling() and !hub.char_body.is_on_floor())):
 		hub.audio.play_sound("attack_draelyn_bump")
 		did_player_bump = true
 		hub.char_body.floor_snap_length = saved_floor_snap_distance
@@ -273,7 +278,7 @@ func endlag_init():
 		hub.animation.set_animation_speed(1)
 		hub.char_body.velocity = ((Vector2.UP + (Vector2.RIGHT * -hub.movement.get_facing_value())).normalized() * fire_tackle_bonk_knockback)
 	else:
-		if (hub.buffers.is_attack_buffer_active() or Input.is_action_pressed("Attack")):
+		if (!hub.jumping.can_wall_climb_from_fire_tackle() and (hub.buffers.is_attack_buffer_active() or Input.is_action_pressed("Attack"))):
 			hub.buffers.reset_attack_buffer()
 			hub.buffers.reset_speed_preservation_buffer()
 			
@@ -298,6 +303,15 @@ func endlag_init():
 				hub.temper.change_temper_by(fireball_launch_temper_decrease)
 			hub.movement.reset_current_horizontal_velocity()
 			hub.char_body.velocity = (((Vector2.UP if !hub.char_body.is_on_floor() else Vector2.ZERO) + (Vector2.RIGHT * -hub.movement.get_facing_value())).normalized() * fire_tackle_fireball_recoil_strength)
+		elif (!hub.temper.is_forcing_form_change() and hub.char_body.is_on_floor() and Input.is_action_pressed("Crouch")):
+			var selected_attack : Attack = hub.attacks.get_attack_by_name(hub.attacks.crouching_attack_name)
+			if (selected_attack != null):
+				hub.buffers.reset_attack_buffer()
+				hub.attacks.set_queued_attack(selected_attack)
+				hub.state_machine.current_state.set_next_state(hub.state_machine.get_state_by_name("Attacking"))
+				hub.char_body.velocity.x *= fire_tackle_slide_cancel_penalty
+				hub.movement.current_horizontal_velocity = hub.char_body.velocity.x
+				end_fire_tackle()
 		else:
 			saved_endlag_velocity = hub.char_body.velocity.x
 			hub.audio.play_sound("attack_draelyn_endlag", -2)
@@ -305,11 +319,11 @@ func endlag_init():
 			hub.animation.set_animation_speed(1)
 	
 	hub.jumping.switch_to_falling_gravity()
-	current_endlag_timer = fire_tackle_endlag_duration
+	current_endlag_timer = (fire_tackle_endlag_cancelable_time if hub.jumping.can_wall_climb_from_fire_tackle() else fire_tackle_endlag_duration)
 
 func endlag_update(delta : float):
 	if (current_endlag_timer > 0 and !is_fire_tackle_endlag_canceled and !hub.damage.is_player_defeated and !hub.damage.is_player_damaged()):
-		if (!is_player_firing_projectile and !did_player_bump and current_endlag_timer < fire_tackle_endlag_cancelable_time and can_cancel_fire_tackle_endlag()):
+		if (!is_player_firing_projectile and !did_player_bump and current_endlag_timer <= fire_tackle_endlag_cancelable_time and can_cancel_fire_tackle_endlag()):
 			is_fire_tackle_endlag_canceled = true
 			if (hub.buffers.is_jump_buffer_active() and hub.char_body.is_on_floor()):
 				hub.buffers.refresh_jump_buffer()

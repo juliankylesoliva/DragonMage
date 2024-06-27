@@ -54,6 +54,8 @@ var is_jump_held : bool = false
 
 @export_range(0.0, 5.0) var max_glide_time : float = 5
 
+@export var enable_glide_toggle : bool = false
+
 var current_glide_time : float = 0
 
 @export_group("Wall Climb Variables")
@@ -229,7 +231,7 @@ func is_super_jump_ready():
 	return (current_super_jump_retention_timer > 0)
 
 func update_super_jump_charge_timer(delta : float):
-	if (hub.movement.is_crouching and hub.get_input_vector().x == 0 and Input.is_action_pressed("Crouch") and hub.char_body.is_on_floor() and hub.state_machine.current_state.name == "Standing"):
+	if (hub.movement.is_crouching and hub.get_input_vector().x == 0 and ((!hub.movement.enable_crouch_toggle and Input.is_action_pressed("Crouch")) or hub.movement.enable_crouch_toggle) and hub.char_body.is_on_floor() and hub.state_machine.current_state.name == "Standing"):
 		if (current_super_jump_charge_timer < super_jump_charge_time and current_super_jump_retention_timer <= 0):
 			current_super_jump_charge_timer = move_toward(current_super_jump_charge_timer, super_jump_charge_time, delta)
 			if (current_super_jump_charge_timer >= super_jump_charge_time):
@@ -243,7 +245,7 @@ func update_super_jump_charge_timer(delta : float):
 
 func update_super_jump_retention_timer(delta : float):
 	if (current_super_jump_retention_timer > 0):
-		if (current_super_jump_retention_timer >= super_jump_retention_time and hub.movement.is_crouching and Input.is_action_pressed("Crouch") and hub.char_body.is_on_floor() and (hub.state_machine.current_state.name == "Standing" or hub.state_machine.current_state.name == "Running")):
+		if (current_super_jump_retention_timer >= super_jump_retention_time and hub.movement.is_crouching and ((!hub.movement.enable_crouch_toggle and Input.is_action_pressed("Crouch")) or hub.movement.enable_crouch_toggle) and hub.char_body.is_on_floor() and (hub.state_machine.current_state.name == "Standing" or hub.state_machine.current_state.name == "Running")):
 			current_super_jump_retention_timer = super_jump_retention_time
 		else:
 			current_super_jump_retention_timer = move_toward(current_super_jump_retention_timer, 0, delta)
@@ -367,7 +369,7 @@ func do_speed_hop_slope_boost():
 		hub.char_body.velocity.x = hub.movement.current_horizontal_velocity
 
 func can_glide():
-	return (enable_gliding and !hub.movement.is_crouching and !hub.buffers.is_coyote_time_active() and (hub.char_body.velocity.y >= 0 or Input.is_action_pressed("Technical")) and current_glide_time <= hub.buffers.early_glide_buffer_time and hub.collisions.get_distance_to_ground() >= min_glide_height and (Input.is_action_just_pressed("Jump") or (Input.is_action_pressed("Technical") and Input.is_action_pressed("Jump"))))
+	return (enable_gliding and !hub.movement.is_crouching and !hub.buffers.is_coyote_time_active() and (hub.char_body.velocity.y >= 0 or Input.is_action_pressed("Technical")) and current_glide_time <= hub.buffers.early_glide_buffer_time and hub.collisions.get_distance_to_ground() >= min_glide_height and (Input.is_action_just_pressed("Glide") or (Input.is_action_pressed("Technical") and Input.is_action_pressed("Glide"))))
 
 func start_glide():
 	hub.movement.reset_crouch_state()
@@ -380,10 +382,10 @@ func glide_update(delta : float):
 	current_glide_time = move_toward(current_glide_time, max_glide_time, delta)
 
 func is_glide_canceled():
-	return (Input.is_action_pressed("Crouch") or !Input.is_action_pressed("Jump") or hub.char_body.is_on_floor() or hub.jumping.current_glide_time >= hub.jumping.max_glide_time)
+	return (Input.is_action_pressed("Crouch") or (!enable_glide_toggle and !Input.is_action_pressed("Glide")) or (enable_glide_toggle and Input.is_action_just_pressed("Glide")) or hub.char_body.is_on_floor() or hub.jumping.current_glide_time >= hub.jumping.max_glide_time)
 
 func cancel_glide():
-	if (current_glide_time > hub.buffers.early_glide_buffer_time or !Input.is_action_pressed("Jump") or Input.is_action_pressed("Crouch")):
+	if (current_glide_time > hub.buffers.early_glide_buffer_time or (!enable_glide_toggle and !Input.is_action_pressed("Glide")) or (enable_glide_toggle and Input.is_action_just_pressed("Glide")) or Input.is_action_pressed("Crouch")):
 		current_glide_time = max_glide_time
 
 func can_midair_jump():
@@ -555,6 +557,7 @@ func start_wall_vault():
 	current_glide_time = 0
 	current_midair_jumps = 0
 	wall_popup_time_left = 0
+	current_wall_climb_time = 0
 	
 	hub.buffers.reset_jump_buffer()
 	is_jump_held = true
@@ -562,6 +565,7 @@ func start_wall_vault():
 	
 	hub.char_body.velocity = Vector2(stored_wall_climb_speed * hub.get_input_vector().x, -initial_jump_velocity)
 	hub.movement.current_horizontal_velocity = hub.char_body.velocity.x
+	stored_wall_climb_speed = 0
 
 func end_wall_popup():
 	wall_popup_time_left = 0

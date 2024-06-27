@@ -10,6 +10,8 @@ class_name TitleMenuSystem
 
 @export var start_label : RichTextLabel
 
+@export var options_label : RichTextLabel
+
 @export var credits_label : RichTextLabel
 
 @export var exit_label : RichTextLabel
@@ -77,17 +79,17 @@ func move_menu_cursor():
 	if (!is_input_allowed or is_in_subscreen()):
 		return
 	
-	var up_pressed : bool = Input.is_action_just_pressed("Move Up")
-	var down_pressed : bool = Input.is_action_just_pressed("Move Down")
+	var up_pressed : bool = Input.is_action_just_pressed("Menu Up")
+	var down_pressed : bool = Input.is_action_just_pressed("Menu Down")
 	
 	if ((up_pressed and !down_pressed) or (!up_pressed and down_pressed)):
 		if (up_pressed):
 			current_menu_selection -= 1
 			if (current_menu_selection < 0):
-				current_menu_selection = 2
+				current_menu_selection = 3
 		else:
 			current_menu_selection += 1
-			if (current_menu_selection > 2):
+			if (current_menu_selection > 3):
 				current_menu_selection = 0
 		menu_cursor.play_move_sound()
 		update_cursor_position()
@@ -98,16 +100,19 @@ func update_cursor_position():
 			menu_cursor.global_position = get_label_center(start_label)
 			menu_cursor.set_spacing(get_label_width(start_label))
 		1:
+			menu_cursor.global_position = get_label_center(options_label)
+			menu_cursor.set_spacing(get_label_width(options_label))
+		2:
 			menu_cursor.global_position = get_label_center(credits_label)
 			menu_cursor.set_spacing(get_label_width(credits_label))
-		2:
+		3:
 			menu_cursor.global_position = get_label_center(exit_label)
 			menu_cursor.set_spacing(get_label_width(exit_label))
 		_:
 			pass
 
 func do_top_menu_selection():
-	if (is_input_allowed and !is_in_subscreen() and Input.is_action_just_pressed("Jump")):
+	if (is_input_allowed and !is_in_subscreen() and Input.is_action_just_pressed("Menu Confirm")):
 		match current_menu_selection:
 			0:
 				current_level_desc_page = 0
@@ -117,24 +122,26 @@ func do_top_menu_selection():
 				menu_cursor.global_position = get_label_center(level_name_label)
 				menu_cursor.set_spacing(get_label_width(level_name_label))
 			1:
+				pass
+			2:
 				current_credits_page = 0
 				credit_page_label.text = credit_text_pages[current_credits_page]
 				menu_cursor.play_accept_sound()
 				top_menu_screen.set_visible(false)
 				credits_subscreen.set_visible(true)
 				menu_cursor.set_visible(false)
-			2:
+			3:
 				get_tree().quit()
 			_:
 				pass
 
 func do_level_selection():
 	if (is_input_allowed and is_in_subscreen() and level_select_subscreen.visible):
-		var left_pressed : bool = Input.is_action_just_pressed("Move Left")
-		var right_pressed : bool = Input.is_action_just_pressed("Move Right")
-		var up_pressed : bool = Input.is_action_just_pressed("Move Up")
-		var down_pressed : bool = Input.is_action_just_pressed("Move Down")
-		if (Input.is_action_just_pressed("Jump")):
+		var left_pressed : bool = Input.is_action_just_pressed("Menu Left")
+		var right_pressed : bool = Input.is_action_just_pressed("Menu Right")
+		var up_pressed : bool = Input.is_action_just_pressed("Menu Up")
+		var down_pressed : bool = Input.is_action_just_pressed("Menu Down")
+		if (Input.is_action_just_pressed("Menu Confirm")):
 			menu_cursor.do_selection_movement()
 			start_game()
 		elif (level_info_list[current_level_selection].form_changing_enabled and Input.is_action_just_pressed("Change Form")):
@@ -178,8 +185,8 @@ func do_level_selection():
 
 func update_credits_subscreen():
 	if (is_input_allowed and is_in_subscreen() and credits_subscreen.visible):
-		var left_pressed : bool = Input.is_action_just_pressed("Move Left")
-		var right_pressed : bool = Input.is_action_just_pressed("Move Right")
+		var left_pressed : bool = Input.is_action_just_pressed("Menu Left")
+		var right_pressed : bool = Input.is_action_just_pressed("Menu Right")
 		if ((left_pressed or right_pressed) and !(left_pressed and right_pressed)):
 			if (left_pressed):
 				if (current_credits_page > 0):
@@ -205,7 +212,7 @@ func update_level_select_text(info : LevelInfo):
 	FormSelectionHelper.form_changing_enabled = info.form_changing_enabled
 
 func return_to_top_menu():
-	if (is_input_allowed and is_in_subscreen() and Input.is_action_just_pressed("Attack")):
+	if (is_input_allowed and is_in_subscreen() and Input.is_action_just_pressed("Menu Cancel")):
 		menu_cursor.play_cancel_sound()
 		level_select_subscreen.set_visible(false)
 		credits_subscreen.set_visible(false)

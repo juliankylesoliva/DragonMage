@@ -66,7 +66,7 @@ func attack_state_process(_delta : float):
 		do_jump_cancel()
 	elif (!hub.collisions.is_in_ceiling_when_uncrouched() and current_slide_timer > slide_uncancelable_time and hub.buffers.is_attack_buffer_active()):
 		do_attack_cancel()
-	elif (horizontal_result <= 0 or (current_slide_timer > slide_min_duration and (!Input.is_action_pressed("Crouch") or (hub.get_input_vector().x * hub.movement.get_facing_value()) < 0))):
+	elif (horizontal_result <= 0 or (current_slide_timer > slide_min_duration and (((!hub.movement.enable_crouch_toggle and !Input.is_action_pressed("Crouch")) or (hub.movement.enable_crouch_toggle and Input.is_action_just_pressed("Crouch"))) or (hub.get_input_vector().x * hub.movement.get_facing_value()) < 0))):
 		stop_slide()
 	else:
 		slide_update(_delta)

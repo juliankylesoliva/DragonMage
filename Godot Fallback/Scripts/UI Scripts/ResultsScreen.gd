@@ -108,7 +108,7 @@ func _physics_process(_delta):
 
 func do_menu():
 	if (are_menu_options_selectable):
-		if (Input.is_action_just_pressed("Move Up") or Input.is_action_just_pressed("Move Down")):
+		if (Input.is_action_just_pressed("Menu Up") or Input.is_action_just_pressed("Menu Down")):
 			current_menu_selection = (1 if current_menu_selection == 0 else 0)
 		
 		if (current_menu_selection != previous_menu_selection):
@@ -122,7 +122,7 @@ func do_menu():
 					current_menu_selection = 0
 					menu_cursor.global_position = (menu_button_label.global_position + menu_button_label.pivot_offset)
 		
-		if (Input.is_action_just_pressed("Jump")):
+		if (Input.is_action_just_pressed("Menu Confirm")):
 			are_menu_options_selectable = false
 			match current_menu_selection:
 				0:

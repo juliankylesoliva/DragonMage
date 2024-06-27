@@ -115,7 +115,8 @@ func on_exit():
 		var walk_sound : String = ("jump_magli_landing" if hub.form.is_a_mage() else "jump_draelyn_landing")
 		SoundFactory.play_sound_by_name(walk_sound, hub.char_body.global_position, 0, 1, "SFX")
 	
-	hub.sprite_trail.deactivate_trail()
+	if (hub.jumping.is_fast_falling):
+		hub.sprite_trail.deactivate_trail()
 	hub.jumping.reset_fast_fall()
 
 func _on_magic_blast_magic_blast_thrown():
