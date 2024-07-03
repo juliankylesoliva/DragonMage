@@ -21,6 +21,7 @@ bbcode_enabled = true
 shortcut_keys_enabled = false
 
 [node name="ControlPromptLabel" type="RichTextLabel" parent="."]
+clip_contents = false
 anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0
@@ -38,6 +39,8 @@ theme_override_font_sizes/normal_font_size = 8
 bbcode_enabled = true
 text = "[center][Menu Left]/[Menu Right] Change Action
 
-[Menu Confirm] Select Action | [Menu Cancel] Back | [Menu Misc 1] Add Binding | [Menu Misc 2] Clear Bindings"
+[Menu Confirm] Select Action | [Menu Cancel] Back
+[Menu Misc 1] Add Binding | [Menu Misc 2] Clear Bindings"
+scroll_active = false
 shortcut_keys_enabled = false
 script = ExtResource("3_rnspw")
