@@ -41,6 +41,8 @@ func state_process(_delta : float):
 	if (hub.form.cannot_change_form()):
 		hub.form.form_change_failed()
 	
+	hub.jumping.update_wall_jump_lock_timer(_delta)
+	
 	if (hub.is_deactivated):
 		set_next_state(state_machine.get_state_by_name("Deactivated"))
 	elif (hub.force_stand):

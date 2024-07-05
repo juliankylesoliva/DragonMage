@@ -48,9 +48,14 @@ class_name PlayerCtrlProperties
 @export var enable_wall_jumping = true
 @export var min_wall_jump_height = 1.1
 @export var wall_slide_speed = 1.8
+@export var max_wall_slide_speed = 8.5
+@export var wall_slide_gravity_scale = 3.0
 @export var vertical_wall_jump_velocity = 12.0
+@export var min_vertical_wall_jump_velocity = 1.0
 @export var horizontal_wall_jump_velocity = 5.25
 @export var max_wall_jump_direction_lock_time = 0.3
+@export var max_wall_jumps = 3
+@export_range(0.0, 1.0) var wall_jump_height_decay_rate = 0.5
 
 @export_subgroup("Midair Jump Variables")
 @export_range(0, 5) var max_midair_jumps = 0

@@ -235,3 +235,8 @@ func upward_slope_correction(intended_velocity : Vector2):
 	
 	if (num_iters > 0):
 		print_debug("Upward slope correction engaged {num} time(s)!".format({"num" : num_iters}))
+
+func turnaround_wall_stop_correction():
+	if ((hub.char_body.is_on_wall() or is_near_a_ledge(-hub.get_input_vector().x)) and (hub.get_input_vector().x * hub.char_body.velocity.x) <= 0 and abs(hub.movement.current_horizontal_velocity) > hub.movement.top_speed):
+		hub.movement.current_horizontal_velocity = (hub.movement.top_speed if hub.movement.current_horizontal_velocity >= 0 else -hub.movement.top_speed)
+		hub.char_body.velocity.x = hub.movement.current_horizontal_velocity

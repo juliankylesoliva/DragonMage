@@ -7,7 +7,7 @@ var effect_instance : AnimatedSprite2D
 var is_throwing : bool = false
 
 func state_process(_delta):
-	hub.jumping.wall_slide_update()
+	hub.jumping.wall_slide_update(_delta)
 	
 	if (effect_instance != null):
 		effect_instance.global_position = (hub.raycast_dm.global_position)

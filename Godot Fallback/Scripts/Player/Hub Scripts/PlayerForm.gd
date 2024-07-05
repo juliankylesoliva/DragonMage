@@ -115,9 +115,14 @@ func set_ctrl_properties(p : PlayerCtrlProperties):
 	hub.jumping.enable_wall_jumping = p.enable_wall_jumping
 	hub.jumping.min_wall_jump_height = p.min_wall_jump_height
 	hub.jumping.wall_slide_speed = p.wall_slide_speed
+	hub.jumping.max_wall_slide_speed = p.max_wall_slide_speed
+	hub.jumping.wall_slide_gravity_scale = p.wall_slide_gravity_scale
 	hub.jumping.vertical_wall_jump_velocity = p.vertical_wall_jump_velocity
+	hub.jumping.min_vertical_wall_jump_velocity = p.min_vertical_wall_jump_velocity
 	hub.jumping.horizontal_wall_jump_velocity = p.horizontal_wall_jump_velocity
 	hub.jumping.max_wall_jump_direction_lock_time = p.max_wall_jump_direction_lock_time
+	hub.jumping.max_wall_jumps = p.max_wall_jumps
+	hub.jumping.wall_jump_height_decay_rate = p.wall_jump_height_decay_rate
 	
 	hub.jumping.max_midair_jumps = p.max_midair_jumps
 	hub.jumping.midair_jump_velocity = p.midair_jump_velocity

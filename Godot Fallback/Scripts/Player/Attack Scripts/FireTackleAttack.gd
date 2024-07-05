@@ -172,9 +172,7 @@ func startup_update(delta : float):
 			current_startup_hold_timer -= delta
 			if (current_startup_hold_timer <= 0):
 				current_startup_hold_timer += fire_tackle_startup_hold_temper_drain_interval
-				if (hub.temper.current_temper_level >= hub.temper.hot_threshold):
-					hub.temper.change_temper_by(fire_tackle_hold_temper_decrease)
-				else:
+				if (hub.temper.current_temper_level < hub.temper.hot_threshold):
 					hub.temper.neutralize_temper_by(fire_tackle_hold_temper_decrease)
 	elif (hub.damage.is_player_defeated or hub.damage.is_player_damaged()):
 		end_fire_tackle()
@@ -195,7 +193,7 @@ func active_init():
 	current_attack_timer = fire_tackle_duration
 	current_bump_immunity_timer = fire_tackle_bump_immunity_duration
 	if (!hub.temper.is_form_locked()):
-		hub.temper.change_temper_by(fire_tackle_launch_temper_decrease)
+		hub.temper.neutralize_temper_by(fire_tackle_launch_temper_decrease)
 	
 	fire_tackle_hitbox_instance = fire_tackle_hitbox_scene.instantiate()
 	add_child(fire_tackle_hitbox_instance)
@@ -300,7 +298,7 @@ func endlag_init():
 				else:
 					pass
 			if (!hub.temper.is_form_locked()):
-				hub.temper.change_temper_by(fireball_launch_temper_decrease)
+				hub.temper.neutralize_temper_by(fireball_launch_temper_decrease)
 			hub.movement.reset_current_horizontal_velocity()
 			hub.char_body.velocity = (((Vector2.UP if !hub.char_body.is_on_floor() else Vector2.ZERO) + (Vector2.RIGHT * -hub.movement.get_facing_value())).normalized() * fire_tackle_fireball_recoil_strength)
 		elif (!hub.temper.is_forcing_form_change() and hub.char_body.is_on_floor() and Input.is_action_pressed("Crouch")):

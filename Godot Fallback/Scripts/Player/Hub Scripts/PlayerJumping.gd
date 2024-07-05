@@ -96,11 +96,23 @@ var wall_popup_time_left : float = 0
 
 @export var wall_slide_speed : float = 1.8
 
+@export var max_wall_slide_speed : float = 8.5
+
+@export var wall_slide_gravity_scale : float = 3
+
 @export var vertical_wall_jump_velocity : float = 12
+
+@export var min_vertical_wall_jump_velocity : float = 1
 
 @export var horizontal_wall_jump_velocity : float = 5.25
 
 @export var max_wall_jump_direction_lock_time : float = 0.3
+
+@export var max_wall_jumps : int = 3
+
+@export_range(0, 1) var wall_jump_height_decay_rate : float = 0.5
+
+var current_wall_jumps : int = 0
 
 @export_group("Misc Wall Variables")
 
@@ -215,7 +227,7 @@ func reset_wall_jump_lock_timer():
 	current_wall_jump_direction_lock_time = 0
 
 func update_wall_jump_lock_timer(delta):
-	if (hub.state_machine.current_state.name == "FormChanging" and (is_wall_jump_lock_timer_active() or hub.char_body.velocity.y < 0)):
+	if (hub.state_machine.current_state.name != "FormChanging" and is_wall_jump_lock_timer_active() and hub.char_body.velocity.y > 0):
 		current_wall_jump_direction_lock_time = move_toward(current_wall_jump_direction_lock_time, 0, delta)
 
 func reset_wall_release_timer():
@@ -437,18 +449,18 @@ func start_wall_slide():
 	hub.audio.play_sound("jump_magli_wallslide")
 	hub.buffers.refresh_speed_preservation_buffer()
 	is_jump_held = false
-	switch_to_zero_gravity()
+	switch_to_wall_slide_gravity()
 	hub.char_body.velocity.x = 0
 	hub.char_body.velocity.y = wall_slide_speed
 	hub.movement.current_horizontal_velocity = 0
 
-func wall_slide_update():
-	hub.char_body.velocity.y = wall_slide_speed
+func wall_slide_update(delta):
+	hub.char_body.velocity.y = move_toward(hub.char_body.velocity.y, max_wall_slide_speed, get_gravity_delta(delta))
 	hub.movement.current_horizontal_velocity = 0
 	hub.char_body.move_and_slide()
 
 func is_wall_slide_canceled():
-	return (!hub.collisions.is_facing_a_wall() or hub.collisions.is_facing_an_intangible_wall() or hub.char_body.velocity.y == 0 or (hub.get_input_vector().x == -hub.movement.get_facing_value() and current_wall_release_timer >= wall_release_time) or (hub.jumping.enable_crouch_jumping and Input.is_action_pressed("Crouch")))
+	return (!hub.collisions.is_facing_a_wall() or hub.collisions.is_facing_an_intangible_wall() or hub.char_body.velocity.y == 0 or (hub.get_input_vector().x == -hub.movement.get_facing_value() and current_wall_release_timer >= wall_release_time) or (hub.jumping.enable_crouch_jumping and !hub.movement.is_crouch_cooldown_active() and Input.is_action_pressed("Crouch")))
 
 func can_wall_jump():
 	return (hub.state_machine.current_state.name == "WallSliding" and !is_wall_jump_lock_timer_active() and hub.buffers.is_jump_buffer_active())
@@ -466,7 +478,9 @@ func start_wall_jump():
 	hub.movement.current_horizontal_velocity = (-horizontal_result if hub.movement.is_facing_right else horizontal_result)
 	hub.movement.set_facing_direction(-hub.movement.get_facing_value())
 	hub.char_body.velocity.x = hub.movement.current_horizontal_velocity
-	hub.char_body.velocity.y = -vertical_wall_jump_velocity
+	hub.char_body.velocity.y = (-max(vertical_wall_jump_velocity * pow(wall_jump_height_decay_rate, current_wall_jumps), min_vertical_wall_jump_velocity) if current_wall_jumps < max_wall_jumps else -min_vertical_wall_jump_velocity)
+	if (current_wall_jumps < max_wall_jumps):
+		current_wall_jumps += 1
 	
 	var is_throwing : bool = hub.char_sprite.animation.contains("MagliThrow")
 	hub.animation.set_animation("MagliThrowAir" if is_throwing else "MagliJump")
@@ -556,6 +570,7 @@ func start_wall_vault():
 	
 	current_glide_time = 0
 	current_midair_jumps = 0
+	current_wall_jumps = 0
 	wall_popup_time_left = 0
 	current_wall_climb_time = 0
 	
@@ -591,6 +606,7 @@ func landing_reset():
 	stored_wall_climb_speed = 0
 	wall_popup_time_left = 0
 	current_midair_jumps = 0
+	current_wall_jumps = 0
 
 func set_fast_fall():
 	hub.buffers.reset_fast_fall_buffer()
@@ -605,6 +621,9 @@ func get_climbing_animation_speed():
 
 func get_gravity_delta(delta : float):
 	return (base_gravity * current_gravity_scale * delta)
+
+func switch_to_wall_slide_gravity():
+	current_gravity_scale = wall_slide_gravity_scale
 
 func switch_to_wall_climbing_gravity():
 	current_gravity_scale = wall_climbing_gravity_scale

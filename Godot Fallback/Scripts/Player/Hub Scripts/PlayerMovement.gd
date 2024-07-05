@@ -83,7 +83,7 @@ func check_crouch_state():
 		return
 	
 	if (!is_crouching):
-		is_crouching = (current_crouch_cooldown_timer <= 0 and Input.is_action_pressed("Crouch") and (hub.jumping.enable_crouch_jumping or hub.char_body.is_on_floor()))
+		is_crouching = (!is_crouch_cooldown_active() and Input.is_action_pressed("Crouch") and (hub.jumping.enable_crouch_jumping or hub.char_body.is_on_floor()))
 		if (is_crouching):
 			current_min_crouch_timer = min_crouch_time
 	else:
@@ -112,6 +112,9 @@ func update_crouch_cooldown_timer(delta):
 	if (current_crouch_cooldown_timer > 0):
 		current_crouch_cooldown_timer = move_toward(current_crouch_cooldown_timer, 0, delta)
 
+func is_crouch_cooldown_active():
+	return (current_crouch_cooldown_timer > 0)
+
 func do_movement(delta):
 	if (hub.force_stand):
 		hub.char_body.velocity.x = 0
@@ -120,12 +123,14 @@ func do_movement(delta):
 		var intended_velocity : Vector2 = hub.char_body.velocity
 		hub.char_body.move_and_slide()
 		hub.collisions.upward_slope_correction(intended_velocity)
+		hub.collisions.turnaround_wall_stop_correction()
 		return
 	
 	if (hub.jumping.is_wall_jump_lock_timer_active()):
 		var intended_velocity : Vector2 = hub.char_body.velocity
 		hub.char_body.move_and_slide()
 		hub.collisions.upward_slope_correction(intended_velocity)
+		hub.collisions.turnaround_wall_stop_correction()
 		return
 	
 	var horizontal_axis = hub.get_input_vector().x
@@ -162,6 +167,7 @@ func do_movement(delta):
 	hub.char_body.move_and_slide()
 	hub.collisions.magic_blast_jump_velocity_retention(intended_velocity)
 	hub.collisions.upward_slope_correction(intended_velocity)
+	hub.collisions.turnaround_wall_stop_correction()
 
 
 func get_speed_portion(clamped : bool = true):
