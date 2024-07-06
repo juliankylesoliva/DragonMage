@@ -480,6 +480,11 @@ func start_wall_jump():
 	hub.char_body.velocity.x = hub.movement.current_horizontal_velocity
 	hub.char_body.velocity.y = (-max(vertical_wall_jump_velocity * pow(wall_jump_height_decay_rate, current_wall_jumps), min_vertical_wall_jump_velocity) if current_wall_jumps < max_wall_jumps else -min_vertical_wall_jump_velocity)
 	if (current_wall_jumps < max_wall_jumps):
+		if (current_wall_jumps == 0):
+			current_glide_time = 0
+			current_midair_jumps = 0
+			wall_popup_time_left = 0
+			current_wall_climb_time = 0
 		current_wall_jumps += 1
 	
 	var is_throwing : bool = hub.char_sprite.animation.contains("MagliThrow")
@@ -571,8 +576,6 @@ func start_wall_vault():
 	current_glide_time = 0
 	current_midair_jumps = 0
 	current_wall_jumps = 0
-	wall_popup_time_left = 0
-	current_wall_climb_time = 0
 	
 	hub.buffers.reset_jump_buffer()
 	is_jump_held = true

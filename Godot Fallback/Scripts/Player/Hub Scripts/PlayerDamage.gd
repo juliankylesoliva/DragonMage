@@ -79,6 +79,7 @@ func take_damage(knockback : int = 0):
 			current_hitstun_timer = hitstun_time
 			hub.fairy.cut_magic_in_half()
 			hub.stomp.reset_stomp_combo()
+			hub.jumping.landing_reset()
 			took_damage.emit()
 		return true
 
