@@ -1,9 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://c5kr2yx1cbaxo"]
+[gd_scene load_steps=5 format=3 uid="uid://c5kr2yx1cbaxo"]
 
 [ext_resource type="Script" path="res://Scripts/Utility Scripts/Room.gd" id="1_6o4g6"]
 [ext_resource type="TileSet" uid="uid://dhwi7i1loa2pd" path="res://Sprites/Tiles/Test Tiles/TestTileSet.tres" id="2_f37q7"]
 [ext_resource type="PackedScene" uid="uid://dqbo0wu6hm8lj" path="res://Scene Objects/Objects/WarpTrigger.tscn" id="3_8176a"]
-[ext_resource type="PackedScene" uid="uid://cp3kaarqt7vdo" path="res://Scene Objects/Objects/HintBubble.tscn" id="4_gvk8k"]
 [ext_resource type="PackedScene" uid="uid://dcs7w117uukcd" path="res://Scene Objects/Objects/BreakableMagicBlock.tscn" id="4_uh8fj"]
 
 [node name="CH0_LV3_R4" type="Node2D" node_paths=PackedStringArray("tilemap_list", "room_entrances")]
@@ -66,10 +65,6 @@ room_entrance_index = 1
 position = Vector2(560, 224)
 room_origin = NodePath("..")
 room_destination = NodePath("..")
-
-[node name="HintBubble" parent="." instance=ExtResource("4_gvk8k")]
-position = Vector2(160, 232)
-textbox_strings = Array[String](["{player_name}: These markings... it looks like these blocks have been inscribed to only be destroyed by magic! I suspect there will be blocks that can only be destroyed by fire at some point."])
 
 [node name="BreakableMagicBlock" parent="." instance=ExtResource("4_uh8fj")]
 position = Vector2(320, 224)

@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://blcb1sif3nhwg"]
+[gd_scene load_steps=7 format=3 uid="uid://blcb1sif3nhwg"]
 
 [ext_resource type="Script" path="res://Scripts/Utility Scripts/Room.gd" id="1_gyvrj"]
 [ext_resource type="TileSet" uid="uid://dhwi7i1loa2pd" path="res://Sprites/Tiles/Test Tiles/TestTileSet.tres" id="2_axkbw"]
 [ext_resource type="PackedScene" uid="uid://dqbo0wu6hm8lj" path="res://Scene Objects/Objects/WarpTrigger.tscn" id="3_sagms"]
 [ext_resource type="PackedScene" uid="uid://bajk0w7eoh6o8" path="res://Scene Objects/Objects/ReinforcedBlock.tscn" id="4_dqfmy"]
-[ext_resource type="PackedScene" uid="uid://cp3kaarqt7vdo" path="res://Scene Objects/Objects/HintBubble.tscn" id="4_ffm1v"]
+[ext_resource type="FontFile" uid="uid://blejgst41tdnl" path="res://PressStart2P.ttf" id="6_iqevn"]
+[ext_resource type="Script" path="res://Scripts/Utility Scripts/ButtonPromptTextLabel.gd" id="7_ulwmk"]
 
 [node name="CH0_LV1_R5" type="Node2D" node_paths=PackedStringArray("tilemap_list", "room_entrances")]
 script = ExtResource("1_gyvrj")
@@ -69,23 +70,6 @@ position = Vector2(560, 384)
 room_origin = NodePath("..")
 room_destination = NodePath("..")
 
-[node name="HintBubble" parent="." instance=ExtResource("4_ffm1v")]
-position = Vector2(192, 200)
-textbox_strings = Array[String](["[center]~ Magic Boost (1/5) ~
-\"Detonating the star on yourself allows you to break through sturdier material than with just the blast alone. This effect lasts until you touch the ground, slow down or glide.\""])
-
-[node name="HintBubble2" parent="." instance=ExtResource("4_ffm1v")]
-position = Vector2(256, 552)
-textbox_strings = Array[String](["[center]~ Magic Boost (2/5) ~
-\"Detonate the star while it is behind you and while you're running to gain a slight burst of forward momentum. The closer you are to the center of the blast, the bigger the boost.\""])
-
-[node name="HintBubble3" parent="." instance=ExtResource("4_ffm1v")]
-position = Vector2(416, 584)
-textbox_strings = Array[String](["[center]~ Magic Boost (3/5) ~
-\"Detonating the star while it is at your feet and jumping at the same time will drastically increase your jump height.\"", "Magli: The sigil order to remember here is:
-
-[center][Move Down]+[Attack] then [Jump]+[Attack]"])
-
 [node name="ReinforcedBlock" parent="." instance=ExtResource("4_dqfmy")]
 position = Vector2(256, 288)
 
@@ -94,3 +78,73 @@ position = Vector2(352, 544)
 
 [node name="ReinforcedBlock3" parent="." instance=ExtResource("4_dqfmy")]
 position = Vector2(416, 448)
+
+[node name="BoostLabel" type="RichTextLabel" parent="."]
+light_mask = 4
+visibility_layer = 4
+z_index = 3
+clip_contents = false
+offset_left = 72.0
+offset_top = 140.0
+offset_right = 328.0
+offset_bottom = 148.0
+theme_override_fonts/normal_font = ExtResource("6_iqevn")
+theme_override_font_sizes/normal_font_size = 8
+bbcode_enabled = true
+text = "[center][Move Down]+[Attack],[Attack]: Star Boost"
+scroll_active = false
+shortcut_keys_enabled = false
+script = ExtResource("7_ulwmk")
+
+[node name="BoostLabel2" type="RichTextLabel" parent="."]
+light_mask = 4
+visibility_layer = 4
+z_index = 3
+clip_contents = false
+offset_left = -16.0
+offset_top = 284.0
+offset_right = 240.0
+offset_bottom = 292.0
+theme_override_fonts/normal_font = ExtResource("6_iqevn")
+theme_override_font_sizes/normal_font_size = 8
+bbcode_enabled = true
+text = "[center]Breaks stronger blocks! ->"
+scroll_active = false
+shortcut_keys_enabled = false
+script = ExtResource("7_ulwmk")
+
+[node name="BoostLabel3" type="RichTextLabel" parent="."]
+light_mask = 4
+visibility_layer = 4
+z_index = 3
+clip_contents = false
+offset_left = -17.0
+offset_top = 424.0
+offset_right = 239.0
+offset_bottom = 440.0
+theme_override_fonts/normal_font = ExtResource("6_iqevn")
+theme_override_font_sizes/normal_font_size = 8
+bbcode_enabled = true
+text = "[center]Run and boost!
+[Move Down]+[Attack],[Move Left]/[Move Right],[Attack]"
+scroll_active = false
+shortcut_keys_enabled = false
+script = ExtResource("7_ulwmk")
+
+[node name="BoostLabel4" type="RichTextLabel" parent="."]
+light_mask = 4
+visibility_layer = 4
+z_index = 3
+clip_contents = false
+offset_left = -17.0
+offset_top = 488.0
+offset_right = 239.0
+offset_bottom = 504.0
+theme_override_fonts/normal_font = ExtResource("6_iqevn")
+theme_override_font_sizes/normal_font_size = 8
+bbcode_enabled = true
+text = "[center]Jump and boost!
+[Move Down]+[Attack],[Jump]+[Attack]"
+scroll_active = false
+shortcut_keys_enabled = false
+script = ExtResource("7_ulwmk")

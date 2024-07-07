@@ -1,17 +1,15 @@
-[gd_scene load_steps=21 format=3 uid="uid://bq3ow3qdwirck"]
+[gd_scene load_steps=19 format=3 uid="uid://bq3ow3qdwirck"]
 
 [ext_resource type="Script" path="res://Scripts/Utility Scripts/Level.gd" id="1_3eixt"]
 [ext_resource type="PackedScene" uid="uid://d0ff35cm57xb7" path="res://Scene Objects/Effects/DroppedFragment.tscn" id="2_im3cc"]
 [ext_resource type="PackedScene" uid="uid://c6qw77ovfwgfs" path="res://Player.tscn" id="2_lvodu"]
 [ext_resource type="PackedScene" uid="uid://dw3wsldpopyl0" path="res://Level Scenes/CH0_LV2/Rooms/CH0_LV2_R1.tscn" id="3_sawbn"]
 [ext_resource type="PackedScene" uid="uid://ct51kuu2jp0o4" path="res://Level Scenes/CH0_LV2/Rooms/CH0_LV2_R2.tscn" id="4_k1xdo"]
-[ext_resource type="PackedScene" uid="uid://wqx3tn0p622r" path="res://Level Scenes/CH0_LV2/Rooms/CH0_LV2_R3.tscn" id="5_v45bg"]
 [ext_resource type="PackedScene" uid="uid://bjcpeaymgnlph" path="res://Level Scenes/CH0_LV2/Rooms/CH0_LV2_R4.tscn" id="6_h2ors"]
 [ext_resource type="PackedScene" uid="uid://d22s40sq3qi37" path="res://Level Scenes/CH0_LV2/Rooms/CH0_LV2_R5.tscn" id="7_ho7jv"]
 [ext_resource type="PackedScene" uid="uid://13q3gbpsi8ua" path="res://Level Scenes/CH0_LV2/Rooms/CH0_LV2_R6.tscn" id="8_2excb"]
 [ext_resource type="PackedScene" uid="uid://due5vl0qgc45g" path="res://Level Scenes/CH0_LV2/Rooms/CH0_LV2_R7.tscn" id="9_bfkiw"]
 [ext_resource type="PackedScene" uid="uid://b0t45tk6kgt57" path="res://Level Scenes/CH0_LV2/Rooms/CH0_LV2_R8.tscn" id="10_2kavy"]
-[ext_resource type="PackedScene" uid="uid://cdc2woq15yytv" path="res://Level Scenes/CH0_LV2/Rooms/CH0_LV2_R9.tscn" id="11_lvhf0"]
 [ext_resource type="PackedScene" uid="uid://dsfiw4qtp8buo" path="res://Level Scenes/CH0_LV2/Rooms/CH0_LV2_R10.tscn" id="12_avml0"]
 [ext_resource type="PackedScene" uid="uid://8beel2odcuky" path="res://Scene Objects/Effects/ScreenFade.tscn" id="13_ngewc"]
 [ext_resource type="PackedScene" uid="uid://d1eef1xjuwf3b" path="res://Scene Objects/Misc/PauseMenu.tscn" id="14_dx8cr"]
@@ -26,7 +24,7 @@ script = ExtResource("1_3eixt")
 level_index = 1
 player_reference = NodePath("Player")
 starting_room = NodePath("CH0_LV2_R1")
-room_list = [NodePath("CH0_LV2_R1"), NodePath("CH0_LV2_R2"), NodePath("CH0_LV2_R3"), NodePath("CH0_LV2_R4"), NodePath("CH0_LV2_R5"), NodePath("CH0_LV2_R6"), NodePath("CH0_LV2_R7"), NodePath("CH0_LV2_R8"), NodePath("CH0_LV2_R9"), NodePath("CH0_LV2_R10")]
+room_list = [NodePath("CH0_LV2_R1"), NodePath("CH0_LV2_R2"), NodePath("CH0_LV2_R4"), NodePath("CH0_LV2_R5"), NodePath("CH0_LV2_R6"), NodePath("CH0_LV2_R7"), NodePath("CH0_LV2_R8"), NodePath("CH0_LV2_R10")]
 dropped_fragment_scene = ExtResource("2_im3cc")
 clear_timer = NodePath("ClearTimer")
 
@@ -64,12 +62,6 @@ room_destination = NodePath("../../CH0_LV2_R2")
 [node name="HintBubble" parent="CH0_LV2_R1" index="5" node_paths=PackedStringArray("textbox")]
 textbox = NodePath("../../Textbox")
 
-[node name="KnigelNPC" parent="CH0_LV2_R1" index="6" node_paths=PackedStringArray("textbox")]
-textbox = NodePath("../../Textbox")
-
-[node name="HintBubble2" parent="CH0_LV2_R1" index="7" node_paths=PackedStringArray("textbox")]
-textbox = NodePath("../../Textbox")
-
 [node name="CH0_LV2_R2" parent="." instance=ExtResource("4_k1xdo")]
 position = Vector2(1184, 0)
 
@@ -77,40 +69,16 @@ position = Vector2(1184, 0)
 room_destination = NodePath("../../CH0_LV2_R1")
 
 [node name="Warp 1" parent="CH0_LV2_R2" index="5" node_paths=PackedStringArray("room_destination")]
-room_destination = NodePath("../../CH0_LV2_R3")
-
-[node name="KnigelNPC" parent="CH0_LV2_R2" index="6" node_paths=PackedStringArray("textbox")]
-textbox = NodePath("../../Textbox")
-
-[node name="CH0_LV2_R3" parent="." instance=ExtResource("5_v45bg")]
-position = Vector2(1728, -864)
-
-[node name="Warp 0" parent="CH0_LV2_R3" index="5" node_paths=PackedStringArray("room_destination")]
-room_destination = NodePath("../../CH0_LV2_R2")
-
-[node name="Warp 1" parent="CH0_LV2_R3" index="6" node_paths=PackedStringArray("room_destination")]
 room_destination = NodePath("../../CH0_LV2_R4")
-
-[node name="KnigelNPC" parent="CH0_LV2_R3" index="8" node_paths=PackedStringArray("textbox")]
-textbox = NodePath("../../Textbox")
 
 [node name="CH0_LV2_R4" parent="." instance=ExtResource("6_h2ors")]
 position = Vector2(2144, -160)
 
 [node name="Warp 0" parent="CH0_LV2_R4" index="4" node_paths=PackedStringArray("room_destination")]
-room_destination = NodePath("../../CH0_LV2_R3")
+room_destination = NodePath("../../CH0_LV2_R2")
 
 [node name="Warp 1" parent="CH0_LV2_R4" index="5" node_paths=PackedStringArray("room_destination")]
 room_destination = NodePath("../../CH0_LV2_R5")
-
-[node name="KnigelNPC" parent="CH0_LV2_R4" index="6" node_paths=PackedStringArray("textbox")]
-textbox = NodePath("../../Textbox")
-
-[node name="HintBubble" parent="CH0_LV2_R4" index="7" node_paths=PackedStringArray("textbox")]
-textbox = NodePath("../../Textbox")
-
-[node name="HintBubble2" parent="CH0_LV2_R4" index="8" node_paths=PackedStringArray("textbox")]
-textbox = NodePath("../../Textbox")
 
 [node name="CH0_LV2_R5" parent="." instance=ExtResource("7_ho7jv")]
 position = Vector2(2048, 192)
@@ -121,9 +89,6 @@ room_destination = NodePath("../../CH0_LV2_R4")
 [node name="Warp 1" parent="CH0_LV2_R5" index="5" node_paths=PackedStringArray("room_destination")]
 room_destination = NodePath("../../CH0_LV2_R6")
 
-[node name="KnigelNPC" parent="CH0_LV2_R5" index="6" node_paths=PackedStringArray("textbox")]
-textbox = NodePath("../../Textbox")
-
 [node name="CH0_LV2_R6" parent="." instance=ExtResource("8_2excb")]
 position = Vector2(2784, 192)
 
@@ -132,9 +97,6 @@ room_destination = NodePath("../../CH0_LV2_R5")
 
 [node name="Warp 1" parent="CH0_LV2_R6" index="5" node_paths=PackedStringArray("room_destination")]
 room_destination = NodePath("../../CH0_LV2_R7")
-
-[node name="KnigelNPC" parent="CH0_LV2_R6" index="6" node_paths=PackedStringArray("textbox")]
-textbox = NodePath("../../Textbox")
 
 [node name="CH0_LV2_R7" parent="." instance=ExtResource("9_bfkiw")]
 position = Vector2(640, -672)
@@ -145,12 +107,6 @@ room_destination = NodePath("../../CH0_LV2_R6")
 [node name="Warp 1" parent="CH0_LV2_R7" index="5" node_paths=PackedStringArray("room_destination")]
 room_destination = NodePath("../../CH0_LV2_R8")
 
-[node name="HintBubble" parent="CH0_LV2_R7" index="6" node_paths=PackedStringArray("textbox")]
-textbox = NodePath("../../Textbox")
-
-[node name="KnigelNPC" parent="CH0_LV2_R7" index="7" node_paths=PackedStringArray("textbox")]
-textbox = NodePath("../../Textbox")
-
 [node name="CH0_LV2_R8" parent="." instance=ExtResource("10_2kavy")]
 position = Vector2(-640, -864)
 
@@ -158,49 +114,16 @@ position = Vector2(-640, -864)
 room_destination = NodePath("../../CH0_LV2_R7")
 
 [node name="Warp 1" parent="CH0_LV2_R8" index="6" node_paths=PackedStringArray("room_destination")]
-room_destination = NodePath("../../CH0_LV2_R9")
-
-[node name="KnigelNPC" parent="CH0_LV2_R8" index="8" node_paths=PackedStringArray("textbox")]
-textbox = NodePath("../../Textbox")
-
-[node name="HintBubble" parent="CH0_LV2_R8" index="9" node_paths=PackedStringArray("textbox")]
-textbox = NodePath("../../Textbox")
-
-[node name="CH0_LV2_R9" parent="." instance=ExtResource("11_lvhf0")]
-position = Vector2(768, -1216)
-
-[node name="Warp 0" parent="CH0_LV2_R9" index="4" node_paths=PackedStringArray("room_destination")]
-room_destination = NodePath("../../CH0_LV2_R8")
-
-[node name="Warp 1" parent="CH0_LV2_R9" index="5" node_paths=PackedStringArray("room_destination")]
 room_destination = NodePath("../../CH0_LV2_R10")
-
-[node name="KnigelNPC" parent="CH0_LV2_R9" index="6" node_paths=PackedStringArray("textbox")]
-textbox = NodePath("../../Textbox")
-
-[node name="HintBubble" parent="CH0_LV2_R9" index="7" node_paths=PackedStringArray("textbox")]
-textbox = NodePath("../../Textbox")
-
-[node name="HintBubble2" parent="CH0_LV2_R9" index="8" node_paths=PackedStringArray("textbox")]
-textbox = NodePath("../../Textbox")
-
-[node name="HintBubble3" parent="CH0_LV2_R9" index="9" node_paths=PackedStringArray("textbox")]
-textbox = NodePath("../../Textbox")
-
-[node name="HintBubble4" parent="CH0_LV2_R9" index="10" node_paths=PackedStringArray("textbox")]
-textbox = NodePath("../../Textbox")
 
 [node name="CH0_LV2_R10" parent="." instance=ExtResource("12_avml0")]
 position = Vector2(864, 576)
 
 [node name="Warp 0" parent="CH0_LV2_R10" index="4" node_paths=PackedStringArray("room_destination")]
-room_destination = NodePath("../../CH0_LV2_R9")
+room_destination = NodePath("../../CH0_LV2_R8")
 room_entrance_index = 1
 
-[node name="HintBubble" parent="CH0_LV2_R10" index="6" node_paths=PackedStringArray("textbox")]
-textbox = NodePath("../../Textbox")
-
-[node name="KnigelNPC" parent="CH0_LV2_R10" index="7" node_paths=PackedStringArray("textbox")]
+[node name="KnigelNPC" parent="CH0_LV2_R10" index="6" node_paths=PackedStringArray("textbox")]
 textbox = NodePath("../../Textbox")
 
 [node name="UI_Canvas" type="CanvasLayer" parent="."]
@@ -234,14 +157,11 @@ stream = ExtResource("20_p18n4")
 [editable path="Player"]
 [editable path="CH0_LV2_R1"]
 [editable path="CH0_LV2_R2"]
-[editable path="CH0_LV2_R3"]
-[editable path="CH0_LV2_R3/FallWarp"]
 [editable path="CH0_LV2_R4"]
 [editable path="CH0_LV2_R5"]
 [editable path="CH0_LV2_R6"]
 [editable path="CH0_LV2_R7"]
 [editable path="CH0_LV2_R8"]
 [editable path="CH0_LV2_R8/FallWarp"]
-[editable path="CH0_LV2_R9"]
 [editable path="CH0_LV2_R10"]
 [editable path="CH0_LV2_R10/FallWarp"]

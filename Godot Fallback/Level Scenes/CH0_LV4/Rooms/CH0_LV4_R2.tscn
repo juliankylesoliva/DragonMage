@@ -1,11 +1,10 @@
-[gd_scene load_steps=11 format=3 uid="uid://clan4gyici7s"]
+[gd_scene load_steps=10 format=3 uid="uid://clan4gyici7s"]
 
 [ext_resource type="Script" path="res://Scripts/Utility Scripts/Room.gd" id="1_r13uf"]
 [ext_resource type="TileSet" uid="uid://dhwi7i1loa2pd" path="res://Sprites/Tiles/Test Tiles/TestTileSet.tres" id="2_pi25u"]
 [ext_resource type="PackedScene" uid="uid://dqbo0wu6hm8lj" path="res://Scene Objects/Objects/WarpTrigger.tscn" id="3_5i30y"]
 [ext_resource type="PackedScene" uid="uid://c4cg3xgbq7eyh" path="res://Scene Objects/Obstacles/FloorSpikes.tscn" id="4_q7sec"]
 [ext_resource type="PackedScene" uid="uid://b2a0ttqvejk51" path="res://Scene Objects/Objects/TemperDragonFruit.tscn" id="5_1vauo"]
-[ext_resource type="PackedScene" uid="uid://cp3kaarqt7vdo" path="res://Scene Objects/Objects/HintBubble.tscn" id="6_s4wp3"]
 [ext_resource type="Texture2D" uid="uid://bv65yl4nt5gs4" path="res://Sprites/Backgrounds/0_4_BG/BackWall.png" id="7_nkhfj"]
 [ext_resource type="Texture2D" uid="uid://miqcvhqk5etv" path="res://Sprites/Backgrounds/0_4_BG/Catwalks.png" id="8_ad1p5"]
 [ext_resource type="Texture2D" uid="uid://bsykoqgrumq5c" path="res://Sprites/Backgrounds/0_4_BG/BackFloor.png" id="9_um5jl"]
@@ -114,10 +113,6 @@ floor_length = 2
 [node name="FloorSpikes6" parent="." instance=ExtResource("4_q7sec")]
 position = Vector2(1248, 240)
 floor_length = 2
-
-[node name="HintBubble" parent="." instance=ExtResource("6_s4wp3")]
-position = Vector2(160, 232)
-textbox_strings = Array[String](["{player_name}: Whoa! I never thought I'd see one of these dragon fruits in my life!", "Faeson: What kind of dragon fruit is this, and why is it changing color so much?", "{player_name}: It's a very rare type of magic dragon fruit known as a Temperament Dragon Fruit. They have the unique quirk of changing color while still ripening, with fully ripened fruits settling on one of three possible colors, and each color is said to have a unique flavor and effect on one's mood! I wonder what they taste like...", "Faeson: Uh, EmDee? I wouldn't be eating any strange-looking fruit if I were y-- Why are you eating the skin?", "{player_name}: *chomp* WHAT? YOU DON'T? I CAN EAT DRAGON FRUIT SKIN WHENEVER I DAMN WELL PLEASE! MAN, THIS IS SO SOUR!", "Faeson: C-Calm down, EmDee! I-I was just trying to tell you to be careful, that's all!", "{player_name}: *chew* WAAAAAH!!! *sniff* I'M SORRY FOR YELLING AT YOU, KNIGEY! *sob* I FORGOT HOW POTENT THESE FRUITS WERE WHEN UNRIPENED! *weep* At least the sweetness can comfort me...", "Faeson: Uh... There, there...? Wow, you just love dragon fruits that much, huh?", "{player_name}: *nom* Alright, I'm good now. Sorry, I just couldn't help myself. Now THIS is a perfect blend of sweet and sour! What a satisfying contrast!", "Faeson: Heh. Just like someone I know..."])
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 visible = false

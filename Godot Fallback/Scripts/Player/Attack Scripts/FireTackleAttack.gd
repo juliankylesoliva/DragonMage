@@ -153,7 +153,7 @@ func startup_init():
 	current_windup_timer = fire_tackle_startup_duration
 	current_startup_hold_timer = fire_tackle_startup_hold_temper_drain_interval
 	previous_horizontal_velocity = abs(hub.char_body.velocity.x)
-	current_vertical_axis = 0
+	current_vertical_axis = hub.get_input_vector().y
 	was_interacting_with_wall = (hub.state_machine.previous_state.name == "WallVaulting" or hub.state_machine.previous_state.name == "WallClimbing")
 	horizontal_result = min(((hub.jumping.stored_wall_climb_speed if was_interacting_with_wall else previous_horizontal_velocity) + fire_tackle_min_horizontal_speed), fire_tackle_max_horizontal_speed)
 
@@ -164,7 +164,8 @@ func startup_update(delta : float):
 			is_attack_button_held = false
 		hub.char_body.velocity = Vector2.ZERO
 		hub.movement.set_facing_direction(hub.get_input_vector().x)
-		current_vertical_axis = hub.get_input_vector().y
+		if (hub.get_input_vector().y != 0 or hub.get_input_vector().x != 0):
+			current_vertical_axis = hub.get_input_vector().y
 		if (hub.char_body.is_on_floor() and current_vertical_axis < 0):
 			current_vertical_axis = 0
 		current_windup_timer = move_toward(current_windup_timer, 0, delta)

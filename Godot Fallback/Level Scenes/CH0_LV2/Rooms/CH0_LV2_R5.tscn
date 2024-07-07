@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://d22s40sq3qi37"]
+[gd_scene load_steps=7 format=3 uid="uid://d22s40sq3qi37"]
 
 [ext_resource type="Script" path="res://Scripts/Utility Scripts/Room.gd" id="1_l2bk6"]
 [ext_resource type="TileSet" uid="uid://dhwi7i1loa2pd" path="res://Sprites/Tiles/Test Tiles/TestTileSet.tres" id="2_1fie0"]
 [ext_resource type="PackedScene" uid="uid://dqbo0wu6hm8lj" path="res://Scene Objects/Objects/WarpTrigger.tscn" id="3_epr8a"]
 [ext_resource type="PackedScene" uid="uid://bajk0w7eoh6o8" path="res://Scene Objects/Objects/ReinforcedBlock.tscn" id="4_136hc"]
-[ext_resource type="PackedScene" uid="uid://cw6gype8pgf7a" path="res://Scene Objects/Characters/KnigelNPC.tscn" id="5_eo4gl"]
+[ext_resource type="FontFile" uid="uid://blejgst41tdnl" path="res://PressStart2P.ttf" id="5_jqmas"]
+[ext_resource type="Script" path="res://Scripts/Utility Scripts/ButtonPromptTextLabel.gd" id="6_m8xnf"]
 
 [node name="CH0_LV2_R5" type="Node2D" node_paths=PackedStringArray("tilemap_list", "room_entrances")]
 script = ExtResource("1_l2bk6")
@@ -67,12 +68,42 @@ position = Vector2(560, 96)
 room_origin = NodePath("..")
 room_destination = NodePath("..")
 
-[node name="KnigelNPC" parent="." instance=ExtResource("5_eo4gl")]
-position = Vector2(64, 224)
-textbox_strings = Array[String](["Knigel: Bad news, EmDee... there's a rather sturdy roadblock just past this slope. Do you think you can use your fire breath to break it down?", "Draelyn: No problem! If I press or hold [Attack] towards the end of my Fire Tackle, I'll launch a large fireball that can go through walls! The extra momentum makes it strong enough to break sturdier blocks!"])
-
 [node name="ReinforcedBlock" parent="." instance=ExtResource("4_136hc")]
 position = Vector2(416, 96)
 
 [node name="ReinforcedBlock2" parent="." instance=ExtResource("4_136hc")]
 position = Vector2(416, 160)
+
+[node name="FireballLabel" type="RichTextLabel" parent="."]
+light_mask = 4
+visibility_layer = 4
+z_index = 3
+clip_contents = false
+offset_top = 280.0
+offset_right = 256.0
+offset_bottom = 296.0
+theme_override_fonts/normal_font = ExtResource("5_jqmas")
+theme_override_font_sizes/normal_font_size = 8
+bbcode_enabled = true
+text = "[center][Attack],[Attack] (hold): Fireball"
+scroll_active = false
+shortcut_keys_enabled = false
+script = ExtResource("6_m8xnf")
+
+[node name="FireballLabel2" type="RichTextLabel" parent="."]
+light_mask = 4
+visibility_layer = 4
+z_index = 3
+clip_contents = false
+offset_left = 224.0
+offset_top = 216.0
+offset_right = 480.0
+offset_bottom = 232.0
+theme_override_fonts/normal_font = ExtResource("5_jqmas")
+theme_override_font_sizes/normal_font_size = 8
+bbcode_enabled = true
+text = "[center]Breaks stronger blocks!
+Goes through walls!"
+scroll_active = false
+shortcut_keys_enabled = false
+script = ExtResource("6_m8xnf")

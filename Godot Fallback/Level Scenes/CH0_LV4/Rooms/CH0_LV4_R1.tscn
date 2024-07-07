@@ -87,7 +87,7 @@ floor_length = 5
 
 [node name="HintBubble" parent="." instance=ExtResource("4_0jqtx")]
 position = Vector2(224, 200)
-textbox_strings = Array[String](["Faeson: You alright, EmDee? You seem a little bit tense...", "{player_name}: I'm alright, Knigel, I'm just trying to steel myself, that's all. I just don't do well around spikes--they're like giant needles!", "Faeson: Try not to think about it too hard, okay, EmDee? It'd be best that you maintain an even temper for both of our sakes.", "{player_name}: Right... (I need to calm down... If I get too worked up from overusing my powers or by getting hurt, one of my powers tends to stop working for a while...)", "{player_name}: (And if I take any further damage while my temper is too high or low, I might just collapse!)"])
+textbox_strings = Array[String](["Knigel: You alright, EmDee? You seem a little bit tense...", "{player_name}: I'm alright, Knigel, I'm just trying to steel myself, that's all. I just don't do well around spikes--they're like giant needles!", "Knigel: Try not to think about it too hard, okay, EmDee? It'd be best that you maintain an even temper for both of our sakes.", "{player_name}: Right... (I need to calm down... If I get too worked up from getting hurt a lot, one of my powers tends to stop working for a while...)", "{player_name}: (And if I take any further damage while my temper is too high or low, I might just collapse!)"])
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 visible = false

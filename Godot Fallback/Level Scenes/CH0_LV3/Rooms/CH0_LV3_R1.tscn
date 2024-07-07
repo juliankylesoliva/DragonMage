@@ -1,11 +1,12 @@
-[gd_scene load_steps=7 format=3 uid="uid://dvceloslxxn28"]
+[gd_scene load_steps=8 format=3 uid="uid://dvceloslxxn28"]
 
 [ext_resource type="Script" path="res://Scripts/Utility Scripts/Room.gd" id="1_6o4g6"]
 [ext_resource type="TileSet" uid="uid://dhwi7i1loa2pd" path="res://Sprites/Tiles/Test Tiles/TestTileSet.tres" id="2_f37q7"]
 [ext_resource type="PackedScene" uid="uid://dqbo0wu6hm8lj" path="res://Scene Objects/Objects/WarpTrigger.tscn" id="3_m6kmu"]
 [ext_resource type="PackedScene" uid="uid://cs4s34scsvcfr" path="res://Scene Objects/Objects/BreakableBlock.tscn" id="4_ybgg8"]
 [ext_resource type="Script" path="res://Scripts/Object Scripts/HiddenPassage.gd" id="5_uewm5"]
-[ext_resource type="PackedScene" uid="uid://cp3kaarqt7vdo" path="res://Scene Objects/Objects/HintBubble.tscn" id="6_altne"]
+[ext_resource type="FontFile" uid="uid://blejgst41tdnl" path="res://PressStart2P.ttf" id="6_cguo1"]
+[ext_resource type="Script" path="res://Scripts/Utility Scripts/ButtonPromptTextLabel.gd" id="7_y4sps"]
 
 [node name="CH0_LV3_R1" type="Node2D" node_paths=PackedStringArray("tilemap_list", "room_entrances")]
 script = ExtResource("1_6o4g6")
@@ -63,10 +64,6 @@ position = Vector2(560, 0)
 room_origin = NodePath("..")
 room_destination = NodePath("..")
 
-[node name="HintBubble" parent="." instance=ExtResource("6_altne")]
-position = Vector2(288, 232)
-textbox_strings = Array[String](["Knigel: I'm sorry, Magli. It's all my fault that we're stuck here...", "Magli: That's not true! If it weren't for you, I wouldn't have had any magic to fight back against those Dragoons!", "Knigel: I thought I could fight them on my own, but they saw right through me at who I really was, and look where it got us. I failed to protect you, Magli...", "Magli: Knigel, what are you saying? This isn't like you to--", "Knigel: I don't even deserve to be called that anymore! Not in this state. My fairy name was Faeson, but I had it changed to Knigel when I began training to become a knight.", "Faeson: I used a magic spell to make myself more human-sized, but now that my magic had been siphoned by those Dragoons, I've reverted back to this small, weak, and useless fairy form...", "Faeson: I never thought that you'd find out this way, but here we are... You must think I'm a total fraud now after all these years, huh? I was never your strong and brave knight in shining armor after all... *sob*", "Magli: Knigel... Remember what you said to me when I confessed that I was a dragon to you?", "Faeson: That... *sniff* I believed you're still a good person despite you being a dragon?", "Magli: That statement meant so much to me... Your belief gave me hope that I can use my dragon powers for good instead of seeing them as a curse! Now it's my turn:", "Magli: Knigel, I believe you're still a strong and brave knight despite you being a fairy! I swear on my life that I will use everything you taught me to help us escape and get home safely!", "Faeson: Magli... Thank you. You're right, I can still be useful regardless of my size! For now, I can give you advice on how to best use both of your powers.", "Magli: There's my knight in shining armor! So what's our move?", "Faeson: Hmm... the upper part of this back wall looks awfully suspicious... See if you can mess with it a bit."])
-
 [node name="BreakableBlock" parent="." instance=ExtResource("4_ybgg8")]
 position = Vector2(384, 0)
 
@@ -86,6 +83,23 @@ collision_mask = 4
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="HiddenTilemap/Area2D"]
 polygon = PackedVector2Array(352, -32, 384, -32, 384, 0, 576, 0, 576, 32, 352, 32)
+
+[node name="ChangeLabel" type="RichTextLabel" parent="."]
+light_mask = 4
+visibility_layer = 4
+z_index = 3
+clip_contents = false
+offset_left = 176.0
+offset_top = 140.0
+offset_right = 304.0
+offset_bottom = 148.0
+theme_override_fonts/normal_font = ExtResource("6_cguo1")
+theme_override_font_sizes/normal_font_size = 8
+bbcode_enabled = true
+text = "[center][Change Form]: Change"
+scroll_active = false
+shortcut_keys_enabled = false
+script = ExtResource("7_y4sps")
 
 [connection signal="body_entered" from="HiddenTilemap/Area2D" to="HiddenTilemap" method="_on_rigid_body_2d_body_entered"]
 [connection signal="body_exited" from="HiddenTilemap/Area2D" to="HiddenTilemap" method="_on_rigid_body_2d_body_exited"]

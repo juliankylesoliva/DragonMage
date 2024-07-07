@@ -3,11 +3,11 @@
 [ext_resource type="Script" path="res://Scripts/Utility Scripts/Room.gd" id="1_l2bk6"]
 [ext_resource type="TileSet" uid="uid://dhwi7i1loa2pd" path="res://Sprites/Tiles/Test Tiles/TestTileSet.tres" id="2_1fie0"]
 [ext_resource type="PackedScene" uid="uid://dqbo0wu6hm8lj" path="res://Scene Objects/Objects/WarpTrigger.tscn" id="3_m4103"]
-[ext_resource type="PackedScene" uid="uid://cw6gype8pgf7a" path="res://Scene Objects/Characters/KnigelNPC.tscn" id="4_lbegf"]
-[ext_resource type="PackedScene" uid="uid://cp3kaarqt7vdo" path="res://Scene Objects/Objects/HintBubble.tscn" id="5_2v3kh"]
 [ext_resource type="Texture2D" uid="uid://bvv2k3ewneasg" path="res://Sprites/Backgrounds/0_2_BG/Stars.png" id="6_fx1d0"]
 [ext_resource type="Texture2D" uid="uid://0uuhxw1dnvqw" path="res://Sprites/Backgrounds/0_2_BG/MountainsBack.png" id="7_4gba3"]
+[ext_resource type="FontFile" uid="uid://blejgst41tdnl" path="res://PressStart2P.ttf" id="7_kqii2"]
 [ext_resource type="Texture2D" uid="uid://cqdxwg0yhese4" path="res://Sprites/Backgrounds/0_2_BG/MountainsFront.png" id="8_4salp"]
+[ext_resource type="Script" path="res://Scripts/Utility Scripts/ButtonPromptTextLabel.gd" id="8_16veb"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_u81gb"]
 size = Vector2(864, 32)
@@ -88,14 +88,6 @@ room_entrance_index = 2
 [node name="CollisionShape2D" parent="FallWarp" index="0"]
 shape = SubResource("RectangleShape2D_u81gb")
 
-[node name="KnigelNPC" parent="." instance=ExtResource("4_lbegf")]
-position = Vector2(192, 224)
-textbox_strings = Array[String](["Knigel: Before we continue, EmDee, I've gotta ask: How do you climb so high up with your wings sometimes? Looking at this tall wall up ahead had me wondering about it...", "Draelyn: Hmm... It depends on how much speed I have--my wings can carry that extra momentum to the top. The easiest way should be a running start combined with an upwards Fire Tackle by pressing [Move Up]+[Attack]. I'll gain a little bit of height from the Fire Tackle, but I should also distance myself so that I don't bump into the wall before my Fire Tackle ends.", "Knigel: ...So basically the faster you are, the higher you'll climb?", "Draelyn: Pretty much."])
-
-[node name="HintBubble" parent="." instance=ExtResource("5_2v3kh")]
-position = Vector2(736, -248)
-textbox_strings = Array[String](["Draelyn: (While my upward Fire Tackle rises slowly, I can dive diagonally downwards with my Fire Tackle by pressing [Move Down]+[Attack]!)"])
-
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 visible = false
 
@@ -131,5 +123,40 @@ centered = false
 offset = Vector2(-512, 0)
 region_enabled = true
 region_rect = Rect2(0, 0, 1824, 320)
+
+[node name="FireTackleLabel4" type="RichTextLabel" parent="."]
+light_mask = 4
+visibility_layer = 4
+z_index = 3
+clip_contents = false
+offset_top = 280.0
+offset_right = 256.0
+offset_bottom = 304.0
+theme_override_fonts/normal_font = ExtResource("7_kqii2")
+theme_override_font_sizes/normal_font_size = 8
+bbcode_enabled = true
+text = "[center][Move Up]+[Attack]
+Rising Tackle"
+scroll_active = false
+shortcut_keys_enabled = false
+script = ExtResource("8_16veb")
+
+[node name="FireTackleLabel5" type="RichTextLabel" parent="."]
+light_mask = 4
+visibility_layer = 4
+z_index = 3
+clip_contents = false
+offset_left = 608.0
+offset_top = -200.0
+offset_right = 864.0
+offset_bottom = -176.0
+theme_override_fonts/normal_font = ExtResource("7_kqii2")
+theme_override_font_sizes/normal_font_size = 8
+bbcode_enabled = true
+text = "[center][Move Down]+[Attack]
+Diving Tackle"
+scroll_active = false
+shortcut_keys_enabled = false
+script = ExtResource("8_16veb")
 
 [editable path="FallWarp"]
