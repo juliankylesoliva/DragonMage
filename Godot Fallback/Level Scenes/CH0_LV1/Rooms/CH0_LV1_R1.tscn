@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://cevmm5dwm345v"]
+[gd_scene load_steps=12 format=3 uid="uid://cevmm5dwm345v"]
 
 [ext_resource type="Script" path="res://Scripts/Utility Scripts/Room.gd" id="1_l0lib"]
 [ext_resource type="TileSet" uid="uid://dhwi7i1loa2pd" path="res://Sprites/Tiles/Test Tiles/TestTileSet.tres" id="2_ba7rg"]
@@ -10,13 +10,15 @@
 [ext_resource type="Texture2D" uid="uid://d0bbhi1k118mg" path="res://Sprites/Backgrounds/0_1_BG/ForestSkyGradientBG.png" id="8_8br3k"]
 [ext_resource type="FontFile" uid="uid://blejgst41tdnl" path="res://PressStart2P.ttf" id="10_flmh4"]
 [ext_resource type="Script" path="res://Scripts/Utility Scripts/ButtonPromptTextLabel.gd" id="11_28p22"]
+[ext_resource type="PackedScene" uid="uid://dfkmxoba64spw" path="res://Scene Objects/Objects/MedalFragment.tscn" id="11_mxnwr"]
 
-[node name="CH0_LV1_R1" type="Node2D" node_paths=PackedStringArray("parallax_bg", "tilemap_list", "room_entrances")]
+[node name="CH0_LV1_R1" type="Node2D" node_paths=PackedStringArray("parallax_bg", "tilemap_list", "room_entrances", "medal_fragments")]
 script = ExtResource("1_l0lib")
 parallax_bg = NodePath("ParallaxBackground")
 tilemap_list = [NodePath("BoundaryCollisionTilemap"), NodePath("LevelCollisionTilemap")]
 right_camera_limit = 1600
 room_entrances = [NodePath("Entrance 0"), NodePath("Entrance 1")]
+medal_fragments = [NodePath("Fragments/MedalFragment"), NodePath("Fragments/MedalFragment2"), NodePath("Fragments/MedalFragment3"), NodePath("Fragments/MedalFragment4"), NodePath("Fragments/MedalFragment5"), NodePath("Fragments/MedalFragment6"), NodePath("Fragments/MedalFragment7"), NodePath("Fragments/MedalFragment8"), NodePath("Fragments/MedalFragment9"), NodePath("Fragments/MedalFragment10"), NodePath("Fragments/MedalFragment11"), NodePath("Fragments/MedalFragment12"), NodePath("Fragments/MedalFragment13"), NodePath("Fragments/MedalFragment14"), NodePath("Fragments/MedalFragment15"), NodePath("Fragments/MedalFragment16"), NodePath("Fragments/MedalFragment17"), NodePath("Fragments/MedalFragment18"), NodePath("Fragments/MedalFragment19"), NodePath("Fragments/MedalFragment20"), NodePath("Fragments/MedalFragment21")]
 
 [node name="BoundaryCollisionTilemap" type="TileMap" parent="."]
 z_index = 4
@@ -211,3 +213,68 @@ text = "[center][Jump],[Jump] (against wall): Wall Jump"
 scroll_active = false
 shortcut_keys_enabled = false
 script = ExtResource("11_28p22")
+
+[node name="Fragments" type="Node2D" parent="."]
+
+[node name="MedalFragment" parent="Fragments" instance=ExtResource("11_mxnwr")]
+position = Vector2(208, 208)
+
+[node name="MedalFragment2" parent="Fragments" instance=ExtResource("11_mxnwr")]
+position = Vector2(240, 208)
+
+[node name="MedalFragment3" parent="Fragments" instance=ExtResource("11_mxnwr")]
+position = Vector2(272, 208)
+
+[node name="MedalFragment4" parent="Fragments" instance=ExtResource("11_mxnwr")]
+position = Vector2(304, 208)
+
+[node name="MedalFragment5" parent="Fragments" instance=ExtResource("11_mxnwr")]
+position = Vector2(560, 208)
+
+[node name="MedalFragment6" parent="Fragments" instance=ExtResource("11_mxnwr")]
+position = Vector2(592, 208)
+
+[node name="MedalFragment7" parent="Fragments" instance=ExtResource("11_mxnwr")]
+position = Vector2(624, 208)
+
+[node name="MedalFragment8" parent="Fragments" instance=ExtResource("11_mxnwr")]
+position = Vector2(784, 208)
+
+[node name="MedalFragment9" parent="Fragments" instance=ExtResource("11_mxnwr")]
+position = Vector2(816, 208)
+
+[node name="MedalFragment10" parent="Fragments" instance=ExtResource("11_mxnwr")]
+position = Vector2(848, 208)
+
+[node name="MedalFragment11" parent="Fragments" instance=ExtResource("11_mxnwr")]
+position = Vector2(1008, 48)
+
+[node name="MedalFragment12" parent="Fragments" instance=ExtResource("11_mxnwr")]
+position = Vector2(1040, 48)
+
+[node name="MedalFragment13" parent="Fragments" instance=ExtResource("11_mxnwr")]
+position = Vector2(1072, 48)
+
+[node name="MedalFragment14" parent="Fragments" instance=ExtResource("11_mxnwr")]
+position = Vector2(1104, 48)
+
+[node name="MedalFragment15" parent="Fragments" instance=ExtResource("11_mxnwr")]
+position = Vector2(1136, 48)
+
+[node name="MedalFragment16" parent="Fragments" instance=ExtResource("11_mxnwr")]
+position = Vector2(1168, 48)
+
+[node name="MedalFragment17" parent="Fragments" instance=ExtResource("11_mxnwr")]
+position = Vector2(1456, 144)
+
+[node name="MedalFragment18" parent="Fragments" instance=ExtResource("11_mxnwr")]
+position = Vector2(1456, 112)
+
+[node name="MedalFragment19" parent="Fragments" instance=ExtResource("11_mxnwr")]
+position = Vector2(1488, 80)
+
+[node name="MedalFragment20" parent="Fragments" instance=ExtResource("11_mxnwr")]
+position = Vector2(1520, 48)
+
+[node name="MedalFragment21" parent="Fragments" instance=ExtResource("11_mxnwr")]
+position = Vector2(1552, 48)

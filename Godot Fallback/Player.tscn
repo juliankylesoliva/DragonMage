@@ -1281,6 +1281,7 @@ script = ExtResource("3_37ht5")
 hub = NodePath("..")
 form_change_buffer_time = 0.25
 jump_buffer_time = 0.167
+glide_buffer_time = 0.167
 fast_fall_buffer_time = 0.167
 fairy_ability_buffer_time = 0.167
 attack_buffer_time = 0.167

@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://cwu70jgkk7f63"]
+[gd_scene load_steps=18 format=3 uid="uid://cwu70jgkk7f63"]
 
 [ext_resource type="Script" path="res://Scripts/Utility Scripts/Room.gd" id="1_kfuh4"]
 [ext_resource type="TileSet" uid="uid://dhwi7i1loa2pd" path="res://Sprites/Tiles/Test Tiles/TestTileSet.tres" id="2_s00jp"]
@@ -11,13 +11,45 @@
 [ext_resource type="FontFile" uid="uid://blejgst41tdnl" path="res://PressStart2P.ttf" id="10_6ktsn"]
 [ext_resource type="Texture2D" uid="uid://wvc78b7rcsop" path="res://Sprites/Backgrounds/0_1_BG/LeavesBG.png" id="10_cn26l"]
 [ext_resource type="Script" path="res://Scripts/Utility Scripts/ButtonPromptTextLabel.gd" id="11_046rl"]
+[ext_resource type="Texture2D" uid="uid://bau4lmkgksep7" path="res://Sprites/UI/RunAndJumpBoostDemonstration.png" id="12_xtcqh"]
+[ext_resource type="PackedScene" uid="uid://dfkmxoba64spw" path="res://Scene Objects/Objects/MedalFragment.tscn" id="13_4eco7"]
 
-[node name="CH0_LV1_R6" type="Node2D" node_paths=PackedStringArray("parallax_bg", "tilemap_list", "room_entrances")]
+[sub_resource type="AtlasTexture" id="AtlasTexture_ldr1g"]
+atlas = ExtResource("12_xtcqh")
+region = Rect2(0, 0, 192, 176)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6iu3n"]
+atlas = ExtResource("12_xtcqh")
+region = Rect2(192, 0, 192, 176)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_njjm5"]
+atlas = ExtResource("12_xtcqh")
+region = Rect2(384, 0, 192, 176)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ee5n8"]
+animations = [{
+"frames": [{
+"duration": 60.0,
+"texture": SubResource("AtlasTexture_ldr1g")
+}, {
+"duration": 60.0,
+"texture": SubResource("AtlasTexture_6iu3n")
+}, {
+"duration": 60.0,
+"texture": SubResource("AtlasTexture_njjm5")
+}],
+"loop": true,
+"name": &"default",
+"speed": 60.0
+}]
+
+[node name="CH0_LV1_R6" type="Node2D" node_paths=PackedStringArray("parallax_bg", "tilemap_list", "room_entrances", "medal_fragments")]
 script = ExtResource("1_kfuh4")
 parallax_bg = NodePath("ParallaxBackground")
 tilemap_list = [NodePath("BoundaryCollisionTilemap"), NodePath("LevelCollisionTilemap")]
 right_camera_limit = 1024
 room_entrances = [NodePath("Entrance 0"), NodePath("Entrance 1")]
+medal_fragments = [NodePath("Fragments/MedalFragment"), NodePath("Fragments/MedalFragment2"), NodePath("Fragments/MedalFragment3"), NodePath("Fragments/MedalFragment4"), NodePath("Fragments/MedalFragment5")]
 
 [node name="BoundaryCollisionTilemap" type="TileMap" parent="."]
 z_index = 4
@@ -162,10 +194,10 @@ light_mask = 4
 visibility_layer = 4
 z_index = 3
 clip_contents = false
-offset_left = 192.0
-offset_top = 104.0
-offset_right = 448.0
-offset_bottom = 120.0
+offset_left = 160.0
+offset_top = 72.0
+offset_right = 416.0
+offset_bottom = 88.0
 theme_override_fonts/normal_font = ExtResource("10_6ktsn")
 theme_override_font_sizes/normal_font_size = 8
 bbcode_enabled = true
@@ -174,3 +206,30 @@ text = "[center]Run, boost, and jump!
 scroll_active = false
 shortcut_keys_enabled = false
 script = ExtResource("11_046rl")
+
+[node name="RunAndJumpBoostDemo" type="AnimatedSprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.7)
+light_mask = 8
+visibility_layer = 8
+z_index = 4
+position = Vector2(320, 184)
+sprite_frames = SubResource("SpriteFrames_ee5n8")
+autoplay = "default"
+frame_progress = 0.806717
+
+[node name="Fragments" type="Node2D" parent="."]
+
+[node name="MedalFragment" parent="Fragments" instance=ExtResource("13_4eco7")]
+position = Vector2(336, 176)
+
+[node name="MedalFragment2" parent="Fragments" instance=ExtResource("13_4eco7")]
+position = Vector2(368, 144)
+
+[node name="MedalFragment3" parent="Fragments" instance=ExtResource("13_4eco7")]
+position = Vector2(400, 112)
+
+[node name="MedalFragment4" parent="Fragments" instance=ExtResource("13_4eco7")]
+position = Vector2(432, 112)
+
+[node name="MedalFragment5" parent="Fragments" instance=ExtResource("13_4eco7")]
+position = Vector2(464, 112)

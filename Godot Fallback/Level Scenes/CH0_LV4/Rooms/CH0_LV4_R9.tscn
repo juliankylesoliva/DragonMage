@@ -168,12 +168,12 @@ shape = NodePath("CollisionShape2D")
 shape = SubResource("RectangleShape2D_flkat")
 
 [node name="TemperDragonFruit" parent="." instance=ExtResource("7_bqbgw")]
-position = Vector2(576, 64)
+position = Vector2(576, 128)
 enable_respawning = false
 start_despawned = true
 
 [node name="TemperDragonFruit2" parent="." instance=ExtResource("7_bqbgw")]
-position = Vector2(960, 64)
+position = Vector2(960, 128)
 enable_respawning = false
 start_despawned = true
 

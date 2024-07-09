@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://dgi7me5crgi8q"]
+[gd_scene load_steps=18 format=3 uid="uid://dgi7me5crgi8q"]
 
 [ext_resource type="Script" path="res://Scripts/Utility Scripts/Level.gd" id="1_6mws2"]
 [ext_resource type="PackedScene" uid="uid://cevmm5dwm345v" path="res://Level Scenes/CH0_LV1/Rooms/CH0_LV1_R1.tscn" id="2_7b35j"]
@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://cwu70jgkk7f63" path="res://Level Scenes/CH0_LV1/Rooms/CH0_LV1_R6.tscn" id="8_w0yoj"]
 [ext_resource type="PackedScene" uid="uid://c8quw8sgdw2un" path="res://Level Scenes/CH0_LV1/Rooms/CH0_LV1_R10.tscn" id="12_ra648"]
 [ext_resource type="PackedScene" uid="uid://d1eef1xjuwf3b" path="res://Scene Objects/Misc/PauseMenu.tscn" id="13_1kf77"]
+[ext_resource type="PackedScene" uid="uid://vmiu4klr3ywc" path="res://Scene Objects/UI/FragmentCounterUI.tscn" id="13_aa3ds"]
 [ext_resource type="PackedScene" uid="uid://8beel2odcuky" path="res://Scene Objects/Effects/ScreenFade.tscn" id="13_ggxcq"]
 [ext_resource type="PackedScene" uid="uid://b5wwivjk8sl7b" path="res://Scene Objects/Misc/ClearTimer.tscn" id="14_dibul"]
 [ext_resource type="PackedScene" uid="uid://buykytsdrlnsg" path="res://Scene Objects/Misc/ResultsScreen.tscn" id="15_g0j50"]
@@ -23,6 +24,7 @@ level_index = 0
 player_reference = NodePath("Player")
 starting_room = NodePath("CH0_LV1_R1")
 room_list = [NodePath("CH0_LV1_R1"), NodePath("CH0_LV1_R2"), NodePath("CH0_LV1_R3"), NodePath("CH0_LV1_R5"), NodePath("CH0_LV1_R6"), NodePath("CH0_LV1_R10")]
+min_fragment_collection_rate = 1.0
 dropped_fragment_scene = ExtResource("2_wgkbh")
 clear_timer = NodePath("ClearTimer")
 
@@ -95,6 +97,11 @@ textbox = NodePath("../../Textbox")
 
 [node name="UI_Canvas" type="CanvasLayer" parent="."]
 
+[node name="FragmentCounterUI" parent="UI_Canvas" node_paths=PackedStringArray("player_node", "level_ref") instance=ExtResource("13_aa3ds")]
+position = Vector2(512, 0)
+player_node = NodePath("../../Player")
+level_ref = NodePath("../..")
+
 [node name="PauseMenu" parent="UI_Canvas" node_paths=PackedStringArray("screen_fade") instance=ExtResource("13_1kf77")]
 screen_fade = NodePath("../ScreenFade")
 
@@ -103,7 +110,6 @@ screen_fade = NodePath("../ScreenFade")
 level = NodePath("../..")
 clear_timer = NodePath("../../ClearTimer")
 show_damage_result = false
-show_fragment_result = false
 
 [node name="ScreenFade" parent="UI_Canvas" instance=ExtResource("13_ggxcq")]
 starting_fade_duration = 1.0
@@ -117,6 +123,7 @@ accept_input_events = false
 stream = ExtResource("20_oukke")
 
 [connection signal="level_finished" from="CH0_LV1_R10/FinishLine" to="." method="level_finish"]
+[connection signal="level_finished" from="CH0_LV1_R10/FinishLine" to="UI_Canvas/FragmentCounterUI" method="hide"]
 [connection signal="level_finished" from="CH0_LV1_R10/FinishLine" to="UI_Canvas/ResultsScreen" method="on_level_complete"]
 [connection signal="level_finished" from="CH0_LV1_R10/FinishLine" to="ClearTimer" method="stop_timer"]
 [connection signal="level_finished" from="CH0_LV1_R10/FinishLine" to="LevelMusicPlayer" method="fade_out"]

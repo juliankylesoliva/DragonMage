@@ -12,6 +12,9 @@ var form_change_buffer_time_left : float = 0
 @export var jump_buffer_time : float = 0.15
 var jump_buffer_time_left : float = 0
 
+@export var glide_buffer_time : float = 0.15
+var glide_buffer_time_left : float = 0
+
 ## Allows a player to press crouch early while jumping and still have their fast fall input be registered within a small window of time.
 @export var fast_fall_buffer_time : float = 0.1
 var fast_fall_buffer_time_left : float = 0
@@ -44,6 +47,8 @@ func _ready():
 func _input(event):
 	if (event.is_action_pressed("Jump")):
 		refresh_jump_buffer()
+	if (event.is_action_pressed("Glide")):
+		refresh_glide_buffer()
 	if (event.is_action_pressed("Crouch") and !hub.char_body.is_on_floor()):
 		refresh_fast_fall_buffer()
 	if (event.is_action_pressed("Fairy Ability")):
@@ -55,6 +60,7 @@ func _input(event):
 
 func _process(delta):
 	check_jump_buffer(delta)
+	check_glide_buffer(delta)
 	check_fast_fall_buffer(delta)
 	check_attack_buffer(delta)
 	check_form_change_buffer(delta)
@@ -86,6 +92,19 @@ func reset_jump_buffer():
 
 func refresh_jump_buffer():
 	jump_buffer_time_left = jump_buffer_time
+
+func check_glide_buffer(delta : float):
+	if (is_glide_buffer_active()):
+		glide_buffer_time_left = move_toward(glide_buffer_time_left, 0, delta)
+
+func is_glide_buffer_active():
+	return glide_buffer_time_left > 0
+
+func reset_glide_buffer():
+	glide_buffer_time_left = 0
+
+func refresh_glide_buffer():
+	glide_buffer_time_left = glide_buffer_time
 
 func check_fast_fall_buffer(delta : float):
 	if (is_fast_fall_buffer_active() and !hub.char_body.is_on_floor()):

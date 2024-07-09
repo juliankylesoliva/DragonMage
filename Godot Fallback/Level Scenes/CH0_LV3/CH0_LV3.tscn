@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://bee26tq601smv"]
+[gd_scene load_steps=25 format=3 uid="uid://bee26tq601smv"]
 
 [ext_resource type="Script" path="res://Scripts/Utility Scripts/Level.gd" id="1_2pe2a"]
 [ext_resource type="PackedScene" uid="uid://c6qw77ovfwgfs" path="res://Player.tscn" id="2_oq6xx"]
@@ -13,7 +13,9 @@
 [ext_resource type="PackedScene" uid="uid://c45oquc4x7a1y" path="res://Level Scenes/CH0_LV3/Rooms/CH0_LV3_R9.tscn" id="11_mam11"]
 [ext_resource type="PackedScene" uid="uid://dyq362s5m45jq" path="res://Level Scenes/CH0_LV3/Rooms/CH0_LV3_R11.tscn" id="13_i3cvm"]
 [ext_resource type="PackedScene" uid="uid://dpm7e2tlgsbt1" path="res://Level Scenes/CH0_LV3/Rooms/CH0_LV3_R12.tscn" id="14_x2u1b"]
+[ext_resource type="PackedScene" uid="uid://d6ve2tpfkvve" path="res://Level Scenes/CH0_LV3/Rooms/CH0_LV3_R8.tscn" id="15_7csln"]
 [ext_resource type="PackedScene" uid="uid://b4er0uavb2uvc" path="res://Level Scenes/CH0_LV3/Rooms/CH0_LV3_R13.tscn" id="15_nd0sx"]
+[ext_resource type="PackedScene" uid="uid://d0vr7nxtwlvvf" path="res://Level Scenes/CH0_LV3/Rooms/CH0_LV3_R10.tscn" id="16_e6xgm"]
 [ext_resource type="PackedScene" uid="uid://k7ndi0emu4fk" path="res://Level Scenes/CH0_LV3/Rooms/CH0_LV3_R14.tscn" id="16_e8cqc"]
 [ext_resource type="PackedScene" uid="uid://8beel2odcuky" path="res://Scene Objects/Effects/ScreenFade.tscn" id="17_3vcxg"]
 [ext_resource type="PackedScene" uid="uid://b5wwivjk8sl7b" path="res://Scene Objects/Misc/ClearTimer.tscn" id="18_el865"]
@@ -28,7 +30,7 @@ script = ExtResource("1_2pe2a")
 level_index = 2
 player_reference = NodePath("Player")
 starting_room = NodePath("CH0_LV3_R1")
-room_list = [NodePath("CH0_LV3_R1"), NodePath("CH0_LV3_R2"), NodePath("CH0_LV3_R3"), NodePath("CH0_LV3_R4"), NodePath("CH0_LV3_R5"), NodePath("CH0_LV3_R6"), NodePath("CH0_LV3_R7"), NodePath("CH0_LV3_R9"), NodePath("CH0_LV3_R11"), NodePath("CH0_LV3_R12"), NodePath("CH0_LV3_R13"), NodePath("CH0_LV3_R14")]
+room_list = [NodePath("CH0_LV3_R1"), NodePath("CH0_LV3_R2"), NodePath("CH0_LV3_R4"), NodePath("CH0_LV3_R11"), NodePath("CH0_LV3_R5"), NodePath("CH0_LV3_R6"), NodePath("CH0_LV3_R12"), NodePath("CH0_LV3_R7"), NodePath("CH0_LV3_R13"), NodePath("CH0_LV3_R9"), NodePath("CH0_LV3_R3"), NodePath("CH0_LV3_R8"), NodePath("CH0_LV3_R10"), NodePath("CH0_LV3_R14")]
 dropped_fragment_scene = ExtResource("2_qdijq")
 clear_timer = NodePath("ClearTimer")
 
@@ -67,31 +69,31 @@ position = Vector2(736, -224)
 room_destination = NodePath("../../CH0_LV3_R1")
 
 [node name="Warp 1" parent="CH0_LV3_R2" index="5" node_paths=PackedStringArray("room_destination")]
-room_destination = NodePath("../../CH0_LV3_R3")
-
-[node name="CH0_LV3_R3" parent="." instance=ExtResource("5_xgu4u")]
-position = Vector2(1472, -224)
-
-[node name="Warp 0" parent="CH0_LV3_R3" index="4" node_paths=PackedStringArray("room_destination")]
-room_destination = NodePath("../../CH0_LV3_R2")
-
-[node name="Warp 1" parent="CH0_LV3_R3" index="5" node_paths=PackedStringArray("room_destination")]
 room_destination = NodePath("../../CH0_LV3_R4")
 
 [node name="CH0_LV3_R4" parent="." instance=ExtResource("6_im1di")]
 position = Vector2(2336, -448)
 
 [node name="Warp 0" parent="CH0_LV3_R4" index="4" node_paths=PackedStringArray("room_destination")]
-room_destination = NodePath("../../CH0_LV3_R3")
+room_destination = NodePath("../../CH0_LV3_R2")
 
 [node name="Warp 1" parent="CH0_LV3_R4" index="5" node_paths=PackedStringArray("room_destination")]
+room_destination = NodePath("../../CH0_LV3_R11")
+
+[node name="CH0_LV3_R11" parent="." instance=ExtResource("13_i3cvm")]
+position = Vector2(-768, 31)
+
+[node name="Warp 0" parent="CH0_LV3_R11" index="4" node_paths=PackedStringArray("room_destination")]
+room_destination = NodePath("../../CH0_LV3_R4")
+
+[node name="Warp 1" parent="CH0_LV3_R11" index="5" node_paths=PackedStringArray("room_destination")]
 room_destination = NodePath("../../CH0_LV3_R5")
 
 [node name="CH0_LV3_R5" parent="." instance=ExtResource("7_8amrw")]
 position = Vector2(160, 192)
 
 [node name="Warp 0" parent="CH0_LV3_R5" index="4" node_paths=PackedStringArray("room_destination")]
-room_destination = NodePath("../../CH0_LV3_R4")
+room_destination = NodePath("../../CH0_LV3_R11")
 
 [node name="Warp 1" parent="CH0_LV3_R5" index="5" node_paths=PackedStringArray("room_destination")]
 room_destination = NodePath("../../CH0_LV3_R6")
@@ -103,55 +105,76 @@ position = Vector2(896, 224)
 room_destination = NodePath("../../CH0_LV3_R5")
 
 [node name="Warp 1" parent="CH0_LV3_R6" index="5" node_paths=PackedStringArray("room_destination")]
-room_destination = NodePath("../../CH0_LV3_R7")
-
-[node name="CH0_LV3_R7" parent="." instance=ExtResource("9_y0vsy")]
-position = Vector2(1888, 96)
-
-[node name="Warp 0" parent="CH0_LV3_R7" index="4" node_paths=PackedStringArray("room_destination")]
-room_destination = NodePath("../../CH0_LV3_R6")
-
-[node name="Warp 1" parent="CH0_LV3_R7" index="5" node_paths=PackedStringArray("room_destination")]
-room_destination = NodePath("../../CH0_LV3_R9")
-
-[node name="CH0_LV3_R9" parent="." instance=ExtResource("11_mam11")]
-position = Vector2(736, 928)
-
-[node name="Warp 0" parent="CH0_LV3_R9" index="4" node_paths=PackedStringArray("room_destination")]
-room_destination = NodePath("../../CH0_LV3_R7")
-
-[node name="Warp 1" parent="CH0_LV3_R9" index="5" node_paths=PackedStringArray("room_destination")]
-room_destination = NodePath("../../CH0_LV3_R11")
-
-[node name="CH0_LV3_R11" parent="." instance=ExtResource("13_i3cvm")]
-position = Vector2(-768, 31)
-
-[node name="Warp 1" parent="CH0_LV3_R11" index="5" node_paths=PackedStringArray("room_destination")]
 room_destination = NodePath("../../CH0_LV3_R12")
 
 [node name="CH0_LV3_R12" parent="." instance=ExtResource("14_x2u1b")]
 position = Vector2(192, -672)
 
 [node name="Warp 0" parent="CH0_LV3_R12" index="4" node_paths=PackedStringArray("room_destination")]
-room_destination = NodePath("../../CH0_LV3_R11")
+room_destination = NodePath("../../CH0_LV3_R6")
 
 [node name="Warp 1" parent="CH0_LV3_R12" index="5" node_paths=PackedStringArray("room_destination")]
+room_destination = NodePath("../../CH0_LV3_R7")
+
+[node name="CH0_LV3_R7" parent="." instance=ExtResource("9_y0vsy")]
+position = Vector2(1888, 96)
+
+[node name="Warp 0" parent="CH0_LV3_R7" index="4" node_paths=PackedStringArray("room_destination")]
+room_destination = NodePath("../../CH0_LV3_R12")
+
+[node name="Warp 1" parent="CH0_LV3_R7" index="5" node_paths=PackedStringArray("room_destination")]
 room_destination = NodePath("../../CH0_LV3_R13")
 
 [node name="CH0_LV3_R13" parent="." instance=ExtResource("15_nd0sx")]
 position = Vector2(-800, 768)
 
 [node name="Warp 0" parent="CH0_LV3_R13" index="4" node_paths=PackedStringArray("room_destination")]
-room_destination = NodePath("../../CH0_LV3_R12")
+room_destination = NodePath("../../CH0_LV3_R7")
 
 [node name="Warp 1" parent="CH0_LV3_R13" index="5" node_paths=PackedStringArray("room_destination")]
+room_destination = NodePath("../../CH0_LV3_R9")
+
+[node name="CH0_LV3_R9" parent="." instance=ExtResource("11_mam11")]
+position = Vector2(736, 928)
+
+[node name="Warp 0" parent="CH0_LV3_R9" index="4" node_paths=PackedStringArray("room_destination")]
+room_destination = NodePath("../../CH0_LV3_R13")
+
+[node name="Warp 1" parent="CH0_LV3_R9" index="5" node_paths=PackedStringArray("room_destination")]
+room_destination = NodePath("../../CH0_LV3_R3")
+
+[node name="CH0_LV3_R3" parent="." instance=ExtResource("5_xgu4u")]
+position = Vector2(1472, -224)
+
+[node name="Warp 0" parent="CH0_LV3_R3" index="4" node_paths=PackedStringArray("room_destination")]
+room_destination = NodePath("../../CH0_LV3_R9")
+
+[node name="Warp 1" parent="CH0_LV3_R3" index="5" node_paths=PackedStringArray("room_destination")]
+room_destination = NodePath("../../CH0_LV3_R8")
+
+[node name="CH0_LV3_R8" parent="." instance=ExtResource("15_7csln")]
+position = Vector2(1728, -736)
+
+[node name="Warp 0" parent="CH0_LV3_R8" index="4" node_paths=PackedStringArray("room_destination")]
+room_destination = NodePath("../../CH0_LV3_R3")
+
+[node name="Warp 1" parent="CH0_LV3_R8" index="5" node_paths=PackedStringArray("room_destination")]
+room_destination = NodePath("../../CH0_LV3_R10")
+
+[node name="CH0_LV3_R10" parent="." instance=ExtResource("16_e6xgm")]
+position = Vector2(-1376, 1216)
+
+[node name="Warp 0" parent="CH0_LV3_R10" index="4" node_paths=PackedStringArray("room_destination")]
+room_destination = NodePath("../../CH0_LV3_R8")
+
+[node name="Warp 1" parent="CH0_LV3_R10" index="5" node_paths=PackedStringArray("room_destination")]
 room_destination = NodePath("../../CH0_LV3_R14")
 
 [node name="CH0_LV3_R14" parent="." instance=ExtResource("16_e8cqc")]
-position = Vector2(448, 1504)
+position = Vector2(-2272, 736)
 
 [node name="Warp 0" parent="CH0_LV3_R14" index="3" node_paths=PackedStringArray("room_destination")]
-room_destination = NodePath("../../CH0_LV3_R13")
+room_destination = NodePath("../../CH0_LV3_R10")
 room_entrance_index = 1
 
 [node name="UI_Canvas" type="CanvasLayer" parent="."]
@@ -185,13 +208,15 @@ stream = ExtResource("24_ar4bd")
 [editable path="Player"]
 [editable path="CH0_LV3_R1"]
 [editable path="CH0_LV3_R2"]
-[editable path="CH0_LV3_R3"]
 [editable path="CH0_LV3_R4"]
+[editable path="CH0_LV3_R11"]
 [editable path="CH0_LV3_R5"]
 [editable path="CH0_LV3_R6"]
-[editable path="CH0_LV3_R7"]
-[editable path="CH0_LV3_R9"]
-[editable path="CH0_LV3_R11"]
 [editable path="CH0_LV3_R12"]
+[editable path="CH0_LV3_R7"]
 [editable path="CH0_LV3_R13"]
+[editable path="CH0_LV3_R9"]
+[editable path="CH0_LV3_R3"]
+[editable path="CH0_LV3_R8"]
+[editable path="CH0_LV3_R10"]
 [editable path="CH0_LV3_R14"]
