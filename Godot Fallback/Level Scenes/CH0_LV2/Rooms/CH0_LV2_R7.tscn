@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://due5vl0qgc45g"]
+[gd_scene load_steps=8 format=3 uid="uid://due5vl0qgc45g"]
 
 [ext_resource type="Script" path="res://Scripts/Utility Scripts/Room.gd" id="1_l2bk6"]
 [ext_resource type="TileSet" uid="uid://dhwi7i1loa2pd" path="res://Sprites/Tiles/Test Tiles/TestTileSet.tres" id="2_1fie0"]
@@ -6,12 +6,14 @@
 [ext_resource type="Script" path="res://Scripts/Object Scripts/HiddenPassage.gd" id="3_i7bba"]
 [ext_resource type="FontFile" uid="uid://blejgst41tdnl" path="res://PressStart2P.ttf" id="5_i0ncy"]
 [ext_resource type="Script" path="res://Scripts/Utility Scripts/ButtonPromptTextLabel.gd" id="6_jemec"]
+[ext_resource type="PackedScene" uid="uid://dfkmxoba64spw" path="res://Scene Objects/Objects/MedalFragment.tscn" id="7_te605"]
 
-[node name="CH0_LV2_R7" type="Node2D" node_paths=PackedStringArray("tilemap_list", "room_entrances")]
+[node name="CH0_LV2_R7" type="Node2D" node_paths=PackedStringArray("tilemap_list", "room_entrances", "medal_fragments")]
 script = ExtResource("1_l2bk6")
 tilemap_list = [NodePath("BoundaryCollisionTilemap"), NodePath("LevelCollisionTilemap")]
 bottom_camera_limit = 640
 room_entrances = [NodePath("Entrance 0"), NodePath("Entrance 1")]
+medal_fragments = [NodePath("MedalFragment"), NodePath("MedalFragment2")]
 
 [node name="BoundaryCollisionTilemap" type="TileMap" parent="."]
 z_index = 4
@@ -136,6 +138,12 @@ text = "[center][Crouch] (hold),[Jump]: Super Jump"
 scroll_active = false
 shortcut_keys_enabled = false
 script = ExtResource("6_jemec")
+
+[node name="MedalFragment" parent="." instance=ExtResource("7_te605")]
+position = Vector2(160, 240)
+
+[node name="MedalFragment2" parent="." instance=ExtResource("7_te605")]
+position = Vector2(320, 176)
 
 [connection signal="body_entered" from="HiddenTilemap/Area2D" to="HiddenTilemap" method="_on_rigid_body_2d_body_entered"]
 [connection signal="body_exited" from="HiddenTilemap/Area2D" to="HiddenTilemap" method="_on_rigid_body_2d_body_exited"]

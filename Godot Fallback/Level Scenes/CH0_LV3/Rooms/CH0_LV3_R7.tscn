@@ -1,16 +1,18 @@
-[gd_scene load_steps=5 format=3 uid="uid://ducrksu5g7p7d"]
+[gd_scene load_steps=6 format=3 uid="uid://ducrksu5g7p7d"]
 
 [ext_resource type="Script" path="res://Scripts/Utility Scripts/Room.gd" id="1_6o4g6"]
 [ext_resource type="TileSet" uid="uid://dhwi7i1loa2pd" path="res://Sprites/Tiles/Test Tiles/TestTileSet.tres" id="2_f37q7"]
 [ext_resource type="PackedScene" uid="uid://dqbo0wu6hm8lj" path="res://Scene Objects/Objects/WarpTrigger.tscn" id="3_53c87"]
 [ext_resource type="PackedScene" uid="uid://dgtmsbsmeieyh" path="res://Scene Objects/Objects/ReinforcedMagicBlock.tscn" id="4_xvnd4"]
+[ext_resource type="PackedScene" uid="uid://dfkmxoba64spw" path="res://Scene Objects/Objects/MedalFragment.tscn" id="5_q73xy"]
 
-[node name="CH0_LV3_R7" type="Node2D" node_paths=PackedStringArray("tilemap_list", "room_entrances")]
+[node name="CH0_LV3_R7" type="Node2D" node_paths=PackedStringArray("tilemap_list", "room_entrances", "medal_fragments")]
 script = ExtResource("1_6o4g6")
 tilemap_list = [NodePath("BoundaryCollisionTilemap"), NodePath("LevelCollisionTilemap")]
 top_camera_limit = -192
 right_camera_limit = 800
 room_entrances = [NodePath("Entrance 0"), NodePath("Entrance 1")]
+medal_fragments = [NodePath("MedalFragment"), NodePath("MedalFragment2"), NodePath("MedalFragment3")]
 
 [node name="BoundaryCollisionTilemap" type="TileMap" parent="."]
 z_index = 4
@@ -76,3 +78,12 @@ position = Vector2(704, -128)
 
 [node name="ReinforcedMagicBlock3" parent="." instance=ExtResource("4_xvnd4")]
 position = Vector2(704, -64)
+
+[node name="MedalFragment" parent="." instance=ExtResource("5_q73xy")]
+position = Vector2(592, -80)
+
+[node name="MedalFragment2" parent="." instance=ExtResource("5_q73xy")]
+position = Vector2(624, -112)
+
+[node name="MedalFragment3" parent="." instance=ExtResource("5_q73xy")]
+position = Vector2(656, -112)

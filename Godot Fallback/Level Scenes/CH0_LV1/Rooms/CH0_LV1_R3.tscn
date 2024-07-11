@@ -11,7 +11,7 @@
 script = ExtResource("1_u044j")
 tilemap_list = [NodePath("BoundaryCollisionTilemap"), NodePath("LevelCollisionTilemap")]
 room_entrances = [NodePath("Entrance 0"), NodePath("Entrance 1")]
-medal_fragments = [NodePath("Fragments/MedalFragment"), NodePath("Fragments/MedalFragment2"), NodePath("Fragments/MedalFragment3"), NodePath("Fragments/MedalFragment4"), NodePath("Fragments/MedalFragment5"), NodePath("Fragments/MedalFragment6")]
+medal_fragments = [NodePath("Fragments/MedalFragment"), NodePath("Fragments/MedalFragment2"), NodePath("Fragments/MedalFragment3"), NodePath("Fragments/MedalFragment4"), NodePath("Fragments/MedalFragment5"), NodePath("Fragments/MedalFragment6"), NodePath("Fragments/MedalFragment7"), NodePath("Fragments/MedalFragment8")]
 
 [node name="BoundaryCollisionTilemap" type="TileMap" parent="."]
 z_index = 4
@@ -140,3 +140,9 @@ position = Vector2(400, 144)
 
 [node name="MedalFragment6" parent="Fragments" instance=ExtResource("6_gg26y")]
 position = Vector2(432, 144)
+
+[node name="MedalFragment7" parent="Fragments" instance=ExtResource("6_gg26y")]
+position = Vector2(272, 240)
+
+[node name="MedalFragment8" parent="Fragments" instance=ExtResource("6_gg26y")]
+position = Vector2(304, 240)
