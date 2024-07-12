@@ -89,6 +89,7 @@ animations = [{
 }]
 
 [node name="FloorSpikesSegment" type="AnimatedSprite2D"]
+light_mask = 4
 visibility_layer = 4
 z_index = 3
 texture_repeat = 2

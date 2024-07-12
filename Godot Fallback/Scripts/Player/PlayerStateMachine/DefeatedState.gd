@@ -33,9 +33,10 @@ func state_process(_delta):
 
 func on_enter():
 	starting_y_pos = hub.char_body.global_position.y
-	hub.fairy.fairy_ref.set_enable_idle_motion(false)
-	hub.fairy.fairy_ref.snap_to_target_node()
-	hub.fairy.fairy_ref.sprite.play("FaesonDefeat")
+	if (hub.fairy.fairy_ref != null):
+		hub.fairy.fairy_ref.set_enable_idle_motion(false)
+		hub.fairy.fairy_ref.snap_to_target_node()
+		hub.fairy.fairy_ref.sprite.play("FaesonDefeat")
 	hub.buffers.reset_speed_preservation_buffer()
 	hub.jumping.reset_super_jump_timers()
 	hub.audio.play_sound("player_death_hitstop", -2)
@@ -57,4 +58,5 @@ func on_exit():
 	hub.char_body.collision_layer = saved_collision_layer
 	hub.char_body.collision_mask = saved_collision_mask
 	hub.char_sprite.z_index = saved_z_index
-	hub.fairy.fairy_ref.sprite.z_index = saved_z_index
+	if (hub.fairy.fairy_ref != null):
+		hub.fairy.fairy_ref.sprite.z_index = saved_z_index

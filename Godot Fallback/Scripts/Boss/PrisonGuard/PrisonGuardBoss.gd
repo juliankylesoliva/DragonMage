@@ -156,17 +156,17 @@ func on_side_trigger_exited():
 
 func on_dialogue_intro_finished():
 	if (is_activated):
-		PauseHandler.enable_pausing(true)
 		player_hub.set_force_stand(false)
 		state_machine.set_process_mode(PROCESS_MODE_INHERIT)
 		if (boss_music_player != null):
 			boss_music_player.restart_music()
 		if (clear_timer != null):
 			clear_timer.start_timer()
+		await get_tree().process_frame # prevents pausing on the same frame
+		PauseHandler.enable_pausing(true)
 		textbox.textbox_finished.disconnect(on_dialogue_intro_finished)
 
 func on_dialogue_defeat_finished():
-	PauseHandler.enable_pausing(true)
 	player_hub.set_force_stand(false)
 	release_camera_past_boss_room()
 	boss_room_boundary_tilemap.set_layer_enabled(1, false)
@@ -176,4 +176,6 @@ func on_dialogue_defeat_finished():
 		normal_level_music_player.restart_music()
 	if (clear_timer != null):
 		clear_timer.start_timer()
+	await get_tree().process_frame # prevents pausing on the same frame
+	PauseHandler.enable_pausing(true)
 	textbox.textbox_finished.disconnect(on_dialogue_defeat_finished)

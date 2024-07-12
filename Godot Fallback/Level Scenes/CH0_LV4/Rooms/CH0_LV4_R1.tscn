@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://c0cgya1qileg7"]
+[gd_scene load_steps=11 format=3 uid="uid://c0cgya1qileg7"]
 
 [ext_resource type="Script" path="res://Scripts/Utility Scripts/Room.gd" id="1_f7afm"]
 [ext_resource type="TileSet" uid="uid://dhwi7i1loa2pd" path="res://Sprites/Tiles/Test Tiles/TestTileSet.tres" id="2_ly4uo"]
@@ -8,16 +8,18 @@
 [ext_resource type="Texture2D" uid="uid://bv65yl4nt5gs4" path="res://Sprites/Backgrounds/0_4_BG/BackWall.png" id="6_dsw2u"]
 [ext_resource type="Texture2D" uid="uid://miqcvhqk5etv" path="res://Sprites/Backgrounds/0_4_BG/Catwalks.png" id="7_rfxa3"]
 [ext_resource type="Texture2D" uid="uid://bsykoqgrumq5c" path="res://Sprites/Backgrounds/0_4_BG/BackFloor.png" id="8_wd2k0"]
+[ext_resource type="PackedScene" uid="uid://dfkmxoba64spw" path="res://Scene Objects/Objects/MedalFragment.tscn" id="9_g74p3"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_sab4s"]
 size = Vector2(352, 32)
 
-[node name="CH0_LV4_R1" type="Node2D" node_paths=PackedStringArray("parallax_bg", "tilemap_list", "room_entrances")]
+[node name="CH0_LV4_R1" type="Node2D" node_paths=PackedStringArray("parallax_bg", "tilemap_list", "room_entrances", "medal_fragments")]
 script = ExtResource("1_f7afm")
 parallax_bg = NodePath("ParallaxBackground")
 tilemap_list = [NodePath("BoundaryCollisionTilemap"), NodePath("LevelCollisionTilemap")]
 right_camera_limit = 1024
 room_entrances = [NodePath("Entrance 0"), NodePath("Entrance 1"), NodePath("FallReentry")]
+medal_fragments = [NodePath("Fragments/MedalFragment"), NodePath("Fragments/MedalFragment2"), NodePath("Fragments/MedalFragment3"), NodePath("Fragments/MedalFragment4"), NodePath("Fragments/MedalFragment5"), NodePath("Fragments/MedalFragment6")]
 
 [node name="BoundaryCollisionTilemap" type="TileMap" parent="."]
 z_index = 4
@@ -121,5 +123,25 @@ centered = false
 offset = Vector2(-512, 0)
 region_enabled = true
 region_rect = Rect2(0, 0, 1536, 320)
+
+[node name="Fragments" type="Node2D" parent="."]
+
+[node name="MedalFragment" parent="Fragments" instance=ExtResource("9_g74p3")]
+position = Vector2(528, 144)
+
+[node name="MedalFragment2" parent="Fragments" instance=ExtResource("9_g74p3")]
+position = Vector2(560, 112)
+
+[node name="MedalFragment3" parent="Fragments" instance=ExtResource("9_g74p3")]
+position = Vector2(592, 112)
+
+[node name="MedalFragment4" parent="Fragments" instance=ExtResource("9_g74p3")]
+position = Vector2(784, 80)
+
+[node name="MedalFragment5" parent="Fragments" instance=ExtResource("9_g74p3")]
+position = Vector2(816, 80)
+
+[node name="MedalFragment6" parent="Fragments" instance=ExtResource("9_g74p3")]
+position = Vector2(848, 80)
 
 [editable path="FallWarp"]

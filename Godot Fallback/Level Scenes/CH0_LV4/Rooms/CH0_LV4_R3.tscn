@@ -1,23 +1,26 @@
-[gd_scene load_steps=10 format=3 uid="uid://bsfyytd8n23kb"]
+[gd_scene load_steps=12 format=3 uid="uid://bsfyytd8n23kb"]
 
 [ext_resource type="Script" path="res://Scripts/Utility Scripts/Room.gd" id="1_vpbis"]
 [ext_resource type="TileSet" uid="uid://dhwi7i1loa2pd" path="res://Sprites/Tiles/Test Tiles/TestTileSet.tres" id="2_a65st"]
 [ext_resource type="PackedScene" uid="uid://dqbo0wu6hm8lj" path="res://Scene Objects/Objects/WarpTrigger.tscn" id="3_6w122"]
 [ext_resource type="PackedScene" uid="uid://c4cg3xgbq7eyh" path="res://Scene Objects/Obstacles/FloorSpikes.tscn" id="4_3vldg"]
+[ext_resource type="PackedScene" uid="uid://vtyaphi47lrf" path="res://Scene Objects/Objects/Checkpoint.tscn" id="4_l6cpo"]
 [ext_resource type="PackedScene" uid="uid://b2a0ttqvejk51" path="res://Scene Objects/Objects/TemperDragonFruit.tscn" id="5_g3sep"]
 [ext_resource type="Texture2D" uid="uid://bv65yl4nt5gs4" path="res://Sprites/Backgrounds/0_4_BG/BackWall.png" id="6_v4o3p"]
 [ext_resource type="Texture2D" uid="uid://miqcvhqk5etv" path="res://Sprites/Backgrounds/0_4_BG/Catwalks.png" id="7_y5tmf"]
 [ext_resource type="Texture2D" uid="uid://bsykoqgrumq5c" path="res://Sprites/Backgrounds/0_4_BG/BackFloor.png" id="8_ldw55"]
+[ext_resource type="PackedScene" uid="uid://dfkmxoba64spw" path="res://Scene Objects/Objects/MedalFragment.tscn" id="10_cbaqy"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3hb2j"]
 size = Vector2(448, 32)
 
-[node name="CH0_LV4_R3" type="Node2D" node_paths=PackedStringArray("parallax_bg", "tilemap_list", "room_entrances")]
+[node name="CH0_LV4_R3" type="Node2D" node_paths=PackedStringArray("parallax_bg", "tilemap_list", "room_entrances", "medal_fragments")]
 script = ExtResource("1_vpbis")
 parallax_bg = NodePath("ParallaxBackground")
 tilemap_list = [NodePath("BoundaryCollisionTilemap"), NodePath("LevelCollisionTilemap")]
 right_camera_limit = 1344
 room_entrances = [NodePath("Entrance 0"), NodePath("Entrance 1"), NodePath("FallReentry")]
+medal_fragments = [NodePath("Fragments/MedalFragment"), NodePath("Fragments/MedalFragment2"), NodePath("Fragments/MedalFragment3"), NodePath("Fragments/MedalFragment4"), NodePath("Fragments/MedalFragment5"), NodePath("Fragments/MedalFragment6"), NodePath("Fragments/MedalFragment7"), NodePath("Fragments/MedalFragment8"), NodePath("Fragments/MedalFragment9"), NodePath("Fragments/MedalFragment10")]
 
 [node name="BoundaryCollisionTilemap" type="TileMap" parent="."]
 z_index = 4
@@ -77,6 +80,9 @@ room_entrance_index = 1
 position = Vector2(1392, 128)
 room_origin = NodePath("..")
 room_destination = NodePath("..")
+
+[node name="Checkpoint" parent="." instance=ExtResource("4_l6cpo")]
+position = Vector2(96, 224)
 
 [node name="FallWarp" parent="." node_paths=PackedStringArray("room_origin", "room_destination") instance=ExtResource("3_6w122")]
 position = Vector2(1056, 496)
@@ -159,5 +165,37 @@ centered = false
 offset = Vector2(-512, 0)
 region_enabled = true
 region_rect = Rect2(0, 0, 1856, 320)
+
+[node name="Fragments" type="Node2D" parent="."]
+
+[node name="MedalFragment" parent="Fragments" instance=ExtResource("10_cbaqy")]
+position = Vector2(848, 144)
+
+[node name="MedalFragment2" parent="Fragments" instance=ExtResource("10_cbaqy")]
+position = Vector2(880, 144)
+
+[node name="MedalFragment3" parent="Fragments" instance=ExtResource("10_cbaqy")]
+position = Vector2(912, 144)
+
+[node name="MedalFragment4" parent="Fragments" instance=ExtResource("10_cbaqy")]
+position = Vector2(944, 144)
+
+[node name="MedalFragment5" parent="Fragments" instance=ExtResource("10_cbaqy")]
+position = Vector2(1040, 145)
+
+[node name="MedalFragment6" parent="Fragments" instance=ExtResource("10_cbaqy")]
+position = Vector2(1072, 144)
+
+[node name="MedalFragment7" parent="Fragments" instance=ExtResource("10_cbaqy")]
+position = Vector2(1168, 144)
+
+[node name="MedalFragment8" parent="Fragments" instance=ExtResource("10_cbaqy")]
+position = Vector2(1200, 144)
+
+[node name="MedalFragment9" parent="Fragments" instance=ExtResource("10_cbaqy")]
+position = Vector2(1232, 144)
+
+[node name="MedalFragment10" parent="Fragments" instance=ExtResource("10_cbaqy")]
+position = Vector2(1264, 144)
 
 [editable path="FallWarp"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://clan4gyici7s"]
+[gd_scene load_steps=11 format=3 uid="uid://clan4gyici7s"]
 
 [ext_resource type="Script" path="res://Scripts/Utility Scripts/Room.gd" id="1_r13uf"]
 [ext_resource type="TileSet" uid="uid://dhwi7i1loa2pd" path="res://Sprites/Tiles/Test Tiles/TestTileSet.tres" id="2_pi25u"]
@@ -7,17 +7,19 @@
 [ext_resource type="PackedScene" uid="uid://b2a0ttqvejk51" path="res://Scene Objects/Objects/TemperDragonFruit.tscn" id="5_1vauo"]
 [ext_resource type="Texture2D" uid="uid://bv65yl4nt5gs4" path="res://Sprites/Backgrounds/0_4_BG/BackWall.png" id="7_nkhfj"]
 [ext_resource type="Texture2D" uid="uid://miqcvhqk5etv" path="res://Sprites/Backgrounds/0_4_BG/Catwalks.png" id="8_ad1p5"]
+[ext_resource type="PackedScene" uid="uid://dfkmxoba64spw" path="res://Scene Objects/Objects/MedalFragment.tscn" id="9_tlrub"]
 [ext_resource type="Texture2D" uid="uid://bsykoqgrumq5c" path="res://Sprites/Backgrounds/0_4_BG/BackFloor.png" id="9_um5jl"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yamn2"]
 size = Vector2(320, 32)
 
-[node name="CH0_LV4_R2" type="Node2D" node_paths=PackedStringArray("parallax_bg", "tilemap_list", "room_entrances")]
+[node name="CH0_LV4_R2" type="Node2D" node_paths=PackedStringArray("parallax_bg", "tilemap_list", "room_entrances", "medal_fragments")]
 script = ExtResource("1_r13uf")
 parallax_bg = NodePath("ParallaxBackground")
 tilemap_list = [NodePath("BoundaryCollisionTilemap"), NodePath("LevelCollisionTilemap")]
 right_camera_limit = 1472
 room_entrances = [NodePath("Entrance 0"), NodePath("Entrance 1"), NodePath("FallReentry")]
+medal_fragments = [NodePath("Fragments/MedalFragment"), NodePath("Fragments/MedalFragment2"), NodePath("Fragments/MedalFragment3"), NodePath("Fragments/MedalFragment4"), NodePath("Fragments/MedalFragment5"), NodePath("Fragments/MedalFragment6"), NodePath("Fragments/MedalFragment7"), NodePath("Fragments/MedalFragment8"), NodePath("Fragments/MedalFragment9"), NodePath("Fragments/MedalFragment10")]
 
 [node name="BoundaryCollisionTilemap" type="TileMap" parent="."]
 z_index = 4
@@ -146,5 +148,37 @@ centered = false
 offset = Vector2(-512, 0)
 region_enabled = true
 region_rect = Rect2(0, 0, 1984, 320)
+
+[node name="Fragments" type="Node2D" parent="."]
+
+[node name="MedalFragment" parent="Fragments" instance=ExtResource("9_tlrub")]
+position = Vector2(368, 112)
+
+[node name="MedalFragment2" parent="Fragments" instance=ExtResource("9_tlrub")]
+position = Vector2(400, 112)
+
+[node name="MedalFragment3" parent="Fragments" instance=ExtResource("9_tlrub")]
+position = Vector2(368, 144)
+
+[node name="MedalFragment4" parent="Fragments" instance=ExtResource("9_tlrub")]
+position = Vector2(400, 144)
+
+[node name="MedalFragment5" parent="Fragments" instance=ExtResource("9_tlrub")]
+position = Vector2(1136, 176)
+
+[node name="MedalFragment6" parent="Fragments" instance=ExtResource("9_tlrub")]
+position = Vector2(1168, 176)
+
+[node name="MedalFragment7" parent="Fragments" instance=ExtResource("9_tlrub")]
+position = Vector2(1200, 208)
+
+[node name="MedalFragment8" parent="Fragments" instance=ExtResource("9_tlrub")]
+position = Vector2(1232, 208)
+
+[node name="MedalFragment9" parent="Fragments" instance=ExtResource("9_tlrub")]
+position = Vector2(1392, 240)
+
+[node name="MedalFragment10" parent="Fragments" instance=ExtResource("9_tlrub")]
+position = Vector2(1392, 208)
 
 [editable path="FallWarp"]

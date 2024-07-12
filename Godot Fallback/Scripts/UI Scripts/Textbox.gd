@@ -52,8 +52,13 @@ func _process(_delta):
 		display_text()
 
 func _input(event):
-	if (accept_input_events and event.is_action_pressed("Interact")):
-		advance_textbox()
+	if (accept_input_events):
+		if (event.is_action_pressed("Interact")):
+			advance_textbox()
+		elif (event.is_action_pressed("Pause")):
+			skip_textbox()
+		else:
+			pass
 
 func advance_textbox():
 	match current_state:
@@ -68,6 +73,12 @@ func advance_textbox():
 			else:
 				textbox_finished.emit()
 				hide_textbox()
+
+func skip_textbox():
+	if (current_state != TextboxState.READY):
+		text_queue.clear()
+		hide_textbox()
+		textbox_finished.emit()
 
 func hide_textbox():
 	unformatted_text = ""
