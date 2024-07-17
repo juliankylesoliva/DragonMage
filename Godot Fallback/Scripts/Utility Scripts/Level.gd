@@ -231,7 +231,8 @@ func on_player_defeat():
 	var current_room : Room = get_current_room()
 	if (current_room != null):
 		current_room.call_deferred("set_process_mode", PROCESS_MODE_DISABLED)
-	CheckpointHandler.save_clear_time(clear_timer.get_current_time())
+	if (clear_timer != null):
+		CheckpointHandler.save_clear_time(clear_timer.get_current_time())
 	CheckpointHandler.save_damage_taken(player_hub.damage.damage_taken)
 	CheckpointHandler.increment_death_counter()
 	player_defeated.emit()

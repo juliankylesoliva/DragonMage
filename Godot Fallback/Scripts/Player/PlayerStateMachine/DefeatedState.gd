@@ -27,7 +27,8 @@ func state_process(_delta):
 			hub.char_body.velocity = (Vector2.UP * vertical_launch)
 	else:
 		if (hub.visibility.is_on_screen() or hub.char_body.velocity.y <= 0 or hub.char_body.global_position.y <= starting_y_pos):
-			hub.fairy.fairy_ref.snap_to_target_node()
+			if (hub.fairy.fairy_ref != null):
+				hub.fairy.fairy_ref.snap_to_target_node()
 			hub.char_body.move_and_slide()
 			hub.char_body.velocity.y += hub.jumping.get_gravity_delta(_delta)
 
@@ -48,7 +49,8 @@ func on_enter():
 	saved_collision_mask = hub.char_body.collision_mask
 	saved_z_index = hub.char_sprite.z_index
 	hub.char_sprite.z_index = defeat_z_index
-	hub.fairy.fairy_ref.sprite.z_index = defeat_z_index
+	if (hub.fairy.fairy_ref != null):
+		hub.fairy.fairy_ref.sprite.z_index = defeat_z_index
 	hub.char_body.collision_layer = 0
 	hub.char_body.collision_mask = 0
 	current_hitstop_timer = 0
