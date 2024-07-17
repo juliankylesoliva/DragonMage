@@ -1,4 +1,4 @@
-[gd_scene load_steps=192 format=3 uid="uid://c6qw77ovfwgfs"]
+[gd_scene load_steps=200 format=3 uid="uid://c6qw77ovfwgfs"]
 
 [ext_resource type="Texture2D" uid="uid://d381ahbcwydy8" path="res://Sprites/Player/DraelynCrouch.png" id="1_6b42p"]
 [ext_resource type="Texture2D" uid="uid://dls34a1qa8iy1" path="res://Sprites/Player/DraelynFireTackle.png" id="1_ddrlj"]
@@ -74,8 +74,10 @@
 [ext_resource type="Script" path="res://Scripts/Utility Scripts/PlayerCamera.gd" id="54_k03tc"]
 [ext_resource type="Texture2D" uid="uid://cka8kg4bes2os" path="res://Sprites/Player/MagliChangeFail.png" id="55_2sqhj"]
 [ext_resource type="Texture2D" uid="uid://db8gs3h636p2c" path="res://Sprites/Player/MagliThrow.png" id="59_lhaxn"]
+[ext_resource type="Texture2D" uid="uid://db87nkl35d0cg" path="res://Sprites/Player/DraelynIdleVulnerable.png" id="62_nvbwf"]
 [ext_resource type="Texture2D" uid="uid://d2xanhhfkwgqf" path="res://Sprites/Player/MagliDefeat.png" id="64_552wg"]
 [ext_resource type="PackedScene" uid="uid://dnhdan6vub1w" path="res://Scene Objects/Characters/Faeson.tscn" id="70_s35oi"]
+[ext_resource type="Texture2D" uid="uid://de17eteiv8efd" path="res://Sprites/Player/MagliIdleVulnerable.png" id="72_o22w0"]
 
 [sub_resource type="Curve" id="Curve_qnqge"]
 _data = [Vector2(0, 1), 0.0, -0.658891, 0, 0, Vector2(1, 0), -1.2831, 0.0, 0, 0]
@@ -267,6 +269,18 @@ region = Rect2(64, 0, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_3otxp"]
 atlas = ExtResource("2_p0h7w")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_57tvq"]
+atlas = ExtResource("62_nvbwf")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0qb8w"]
+atlas = ExtResource("62_nvbwf")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d2ga2"]
+atlas = ExtResource("62_nvbwf")
 region = Rect2(0, 0, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_51lw1"]
@@ -500,6 +514,18 @@ region = Rect2(192, 0, 64, 64)
 [sub_resource type="AtlasTexture" id="AtlasTexture_4e7j2"]
 atlas = ExtResource("4_gxmp5")
 region = Rect2(256, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6olhl"]
+atlas = ExtResource("72_o22w0")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vu0bd"]
+atlas = ExtResource("72_o22w0")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wa4bk"]
+atlas = ExtResource("72_o22w0")
+region = Rect2(0, 0, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_8pqdm"]
 atlas = ExtResource("1_s7co6")
@@ -835,6 +861,23 @@ animations = [{
 }],
 "loop": false,
 "name": &"DraelynVault",
+"speed": 60.0
+}, {
+"frames": [{
+"duration": 15.0,
+"texture": SubResource("AtlasTexture_57tvq")
+}, {
+"duration": 45.0,
+"texture": SubResource("AtlasTexture_0qb8w")
+}, {
+"duration": 10.0,
+"texture": SubResource("AtlasTexture_57tvq")
+}, {
+"duration": 50.0,
+"texture": SubResource("AtlasTexture_d2ga2")
+}],
+"loop": false,
+"name": &"DraelynVulnerable",
 "speed": 60.0
 }, {
 "frames": [{
@@ -1178,6 +1221,23 @@ animations = [{
 }],
 "loop": false,
 "name": &"MagliToDraelyn",
+"speed": 60.0
+}, {
+"frames": [{
+"duration": 15.0,
+"texture": SubResource("AtlasTexture_6olhl")
+}, {
+"duration": 45.0,
+"texture": SubResource("AtlasTexture_vu0bd")
+}, {
+"duration": 10.0,
+"texture": SubResource("AtlasTexture_6olhl")
+}, {
+"duration": 50.0,
+"texture": SubResource("AtlasTexture_wa4bk")
+}],
+"loop": false,
+"name": &"MagliVulnerable",
 "speed": 60.0
 }, {
 "frames": [{

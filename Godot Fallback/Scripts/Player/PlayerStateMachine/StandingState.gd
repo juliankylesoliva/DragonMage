@@ -51,7 +51,7 @@ func state_process(_delta):
 			hub.animation.set_animation("{name}Crouch".format({"name" : char_name}))
 	else:
 		if(Input.is_action_just_released("Crouch") or (prev_is_crouching and !hub.movement.is_crouching)):
-			hub.animation.set_animation("{name}Stand".format({"name" : char_name}))
+			hub.animation.set_animation("{name}Vulnerable".format({"name" : char_name}) if hub.temper.is_form_locked() else "{name}Stand".format({"name" : char_name}))
 		update_blink_timer(_delta)
 		if (!hub.char_sprite.is_playing()):
 			if (hub.char_sprite.animation.contains("Stand")):
@@ -61,13 +61,13 @@ func state_process(_delta):
 			else:
 				pass
 			
-			if (!check_idle_animation() and !check_blink_animation()):
+			if (!check_vulnerable_animation() and !check_idle_animation() and !check_blink_animation()):
 				hub.animation.set_animation("{name}Stand".format({"name" : char_name}))
 				hub.animation.set_animation_speed(1)
 		is_headbonking = false
 	
 	if (hub.form.cannot_change_form()):
-		if (!hub.movement.is_crouching):
+		if (!hub.movement.is_crouching and !hub.temper.is_form_locked()):
 			hub.animation.set_animation("{name}ChangeFail".format({"name" : char_name}))
 		hub.animation.set_animation_speed(1)
 		hub.form.form_change_failed()
@@ -105,7 +105,7 @@ func on_enter():
 	is_throwing = hub.char_sprite.animation.contains("MagliThrow")
 	is_headbonking = false
 	var char_name : String = hub.form.get_current_form_name()
-	var anim_name : String = ("{name}Stand" if !hub.movement.is_crouching else "{name}Crouch")
+	var anim_name : String = ("{name}Vulnerable" if hub.temper.is_form_locked() and !hub.movement.is_crouching else "{name}Stand" if !hub.movement.is_crouching else "{name}Crouch")
 	hub.jumping.landing_reset()
 	hub.animation.set_animation("MagliThrowGround" if is_throwing else anim_name.format({"name" : char_name}))
 	hub.animation.set_animation_frame(1 if is_throwing else 0)
@@ -119,6 +119,14 @@ func update_blink_timer(delta):
 		return
 	
 	current_blink_timer = move_toward(current_blink_timer, 0, delta)
+
+func check_vulnerable_animation():
+	if (hub.temper.is_form_locked()):
+		hub.animation.set_animation("{name}Vulnerable".format({"name" : hub.form.get_current_form_name()}))
+		hub.animation.set_animation_speed(1)
+		return true
+	
+	return false
 
 func check_idle_animation():
 	if (current_stand_cycles >= target_stand_cycles):
