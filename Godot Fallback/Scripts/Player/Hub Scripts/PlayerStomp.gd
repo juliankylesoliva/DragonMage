@@ -37,6 +37,8 @@ func do_stomp_jump():
 		stomp_hitbox.boss_to_stomp.damage_boss(stomp_hitbox.damage_type, stomp_damage, Vector2.RIGHT * hub.movement.get_facing_value() * abs(hub.char_body.velocity.y))
 		EffectFactory.get_effect("StompImpact", hub.raycast_dm.global_position)
 		if (hub.jumping.is_fast_falling):
+			hub.sprite_trail.deactivate_trail()
+			hub.jumping.reset_fast_fall()
 			hub.jumping.charge_super_jump_with_fast_fall()
 		hub.jumping.start_ground_jump()
 		hub.fairy.change_current_magic_by(base_magic_gain * pow(stomp_combo_multiplier, current_stomp_combo))
@@ -44,6 +46,8 @@ func do_stomp_jump():
 	elif (stomp_hitbox.enemy_to_stomp.defeat_enemy(stomp_hitbox.damage_type)):
 		EffectFactory.get_effect("StompImpact", hub.raycast_dm.global_position)
 		if (hub.jumping.is_fast_falling):
+			hub.sprite_trail.deactivate_trail()
+			hub.jumping.reset_fast_fall()
 			hub.jumping.charge_super_jump_with_fast_fall()
 		hub.jumping.start_ground_jump()
 		hub.fairy.change_current_magic_by(base_magic_gain * pow(stomp_combo_multiplier, current_stomp_combo))

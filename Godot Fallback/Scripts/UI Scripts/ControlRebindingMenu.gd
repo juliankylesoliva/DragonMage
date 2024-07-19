@@ -40,7 +40,6 @@ func _input(event):
 					InputMap.action_erase_event(action_to_edit, e)
 			var key : InputEventKey = (event as InputEventKey)
 			key.keycode = KEY_NONE
-			key.unicode = KEY_NONE
 			InputMap.action_add_event(action_to_edit, key)
 		is_awaiting_input_rebind = false
 	

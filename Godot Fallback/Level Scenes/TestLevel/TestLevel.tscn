@@ -1,0 +1,62 @@
+[gd_scene load_steps=10 format=3 uid="uid://ditx5iixwbmbo"]
+
+[ext_resource type="Script" path="res://Scripts/Utility Scripts/Level.gd" id="1_kmw2k"]
+[ext_resource type="PackedScene" uid="uid://c6qw77ovfwgfs" path="res://Player.tscn" id="2_klk6k"]
+[ext_resource type="PackedScene" uid="uid://q7ww8bbiiqqn" path="res://Level Scenes/TestLevel/room.tscn" id="3_x0qt0"]
+[ext_resource type="PackedScene" uid="uid://bdypi7w73c6kq" path="res://Scene Objects/UI/TemperMeterUI.tscn" id="4_0ir14"]
+[ext_resource type="PackedScene" uid="uid://d1eef1xjuwf3b" path="res://Scene Objects/Misc/PauseMenu.tscn" id="5_1ndfl"]
+[ext_resource type="PackedScene" uid="uid://8beel2odcuky" path="res://Scene Objects/Effects/ScreenFade.tscn" id="6_fgimi"]
+[ext_resource type="PackedScene" uid="uid://brhoroc2w6jwi" path="res://Scene Objects/UI/Textbox.tscn" id="7_7x7bm"]
+[ext_resource type="PackedScene" uid="uid://btq4qla5fyq0n" path="res://Scene Objects/Misc/LevelMusicPlayer.tscn" id="8_g7p0o"]
+[ext_resource type="PackedScene" uid="uid://bjeiexqfc7oht" path="res://Scene Objects/Misc/DefeatScreen.tscn" id="9_isfmx"]
+
+[node name="TestLevel" type="Node2D" node_paths=PackedStringArray("player_reference", "starting_room", "room_list")]
+script = ExtResource("1_kmw2k")
+level_index = 6
+player_reference = NodePath("Player")
+starting_room = NodePath("Room")
+room_list = [NodePath("Room")]
+
+[node name="Player" parent="." instance=ExtResource("2_klk6k")]
+position = Vector2(128, 224)
+
+[node name="Camera" parent="Player/Hub" index="11" node_paths=PackedStringArray("player_cam")]
+player_cam = NodePath("../../../Camera2D")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+process_callback = 0
+drag_left_margin = 0.0
+drag_top_margin = 0.6
+drag_right_margin = 0.0
+editor_draw_limits = true
+editor_draw_drag_margin = true
+
+[node name="Room" parent="." instance=ExtResource("3_x0qt0")]
+visibility_layer = 4
+
+[node name="UI_Canvas" type="CanvasLayer" parent="."]
+
+[node name="TemperMeterUI" parent="UI_Canvas" node_paths=PackedStringArray("player_node") instance=ExtResource("4_0ir14")]
+position = Vector2(1, 8)
+player_node = NodePath("../../Player")
+
+[node name="PauseMenu" parent="UI_Canvas" node_paths=PackedStringArray("screen_fade") instance=ExtResource("5_1ndfl")]
+screen_fade = NodePath("../ScreenFade")
+
+[node name="ScreenFade" parent="UI_Canvas" instance=ExtResource("6_fgimi")]
+starting_fade_duration = 1.0
+
+[node name="Textbox" parent="." node_paths=PackedStringArray("ui_canvas") instance=ExtResource("7_7x7bm")]
+ui_canvas = NodePath("../UI_Canvas")
+
+[node name="LevelMusicPlayer" parent="." instance=ExtResource("8_g7p0o")]
+
+[node name="DefeatScreen" parent="." node_paths=PackedStringArray("screen_fade") instance=ExtResource("9_isfmx")]
+screen_fade = NodePath("../UI_Canvas/ScreenFade")
+
+[connection signal="player_defeated" from="." to="UI_Canvas/TemperMeterUI" method="hide"]
+[connection signal="player_defeated" from="." to="Textbox" method="hide_textbox"]
+[connection signal="player_defeated" from="." to="LevelMusicPlayer" method="stop"]
+[connection signal="player_defeated" from="." to="DefeatScreen" method="do_defeat_screen"]
+
+[editable path="Player"]

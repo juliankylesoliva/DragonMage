@@ -1371,6 +1371,7 @@ max_fall_speed = 320.0
 variable_jump_decay_rate = 3040.0
 min_glide_height = 32.0
 glide_fall_speed = 24.0
+max_glide_time = 3.0
 min_wall_jump_height = 32.0
 wall_slide_speed = 57.6
 max_wall_slide_speed = 272.0
