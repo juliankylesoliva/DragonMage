@@ -1,0 +1,106 @@
+[gd_scene load_steps=10 format=3 uid="uid://bb20j0e04mrjd"]
+
+[ext_resource type="FontFile" uid="uid://blejgst41tdnl" path="res://PressStart2P.ttf" id="1_q7joa"]
+[ext_resource type="Script" path="res://Scripts/UI Scripts/LevelSelectMenu.gd" id="1_r5y4c"]
+[ext_resource type="Resource" uid="uid://c50cen4ku054b" path="res://Scripts/Resource Scripts/LevelInfo/0-1 Byway Backwoods.tres" id="2_bgptb"]
+[ext_resource type="Script" path="res://Scripts/Utility Scripts/ButtonPromptTextLabel.gd" id="2_te2i0"]
+[ext_resource type="Resource" uid="uid://cu7rb7wbifvei" path="res://Scripts/Resource Scripts/LevelInfo/0-2 Catharsis Cliffs.tres" id="3_4dawo"]
+[ext_resource type="Resource" uid="uid://cax712djysfpf" path="res://Scripts/Resource Scripts/LevelInfo/0-3 Prisoner Problem.tres" id="4_p8fkt"]
+[ext_resource type="Resource" uid="uid://bplmduteoqxky" path="res://Scripts/Resource Scripts/LevelInfo/0-4 Fleeting Floortraps.tres" id="5_w2e2q"]
+[ext_resource type="Resource" uid="uid://boqluwgcgag0t" path="res://Scripts/Resource Scripts/LevelInfo/1-1 Dragoons' Domain.tres" id="6_w3drn"]
+[ext_resource type="Resource" uid="uid://rnumigaemg63" path="res://Scripts/Resource Scripts/LevelInfo/Test Level.tres" id="7_b0lbc"]
+
+[node name="LevelSelectSubscreen" type="Node2D" node_paths=PackedStringArray("level_name_label", "level_description_label", "level_ctrl_prompt")]
+script = ExtResource("1_r5y4c")
+level_info_list = Array[Resource("res://Scripts/Resource Scripts/LevelInfo/LevelInfo.gd")]([ExtResource("2_bgptb"), ExtResource("3_4dawo"), ExtResource("4_p8fkt"), ExtResource("5_w2e2q"), ExtResource("6_w3drn"), ExtResource("7_b0lbc")])
+level_name_label = NodePath("LevelNameTextLabel")
+level_description_label = NodePath("LevelDescTextLabel")
+level_ctrl_prompt = NodePath("ControlPromptLabel")
+default_level_ctrl_text = "[center][Menu Left]/[Menu Right] Change Level | [Menu Up]/[Menu Down] Read Diary Entry
+
+[Menu Confirm] Start! | [Menu Cancel] Back"
+form_level_ctrl_text = "[center][Menu Left]/[Menu Right] Change Level | [Menu Up]/[Menu Down] Read Diary Entry
+
+[Menu Confirm] Start! | [Menu Cancel] Back | [Change Form] Starting Form: [img]{file}[/img]"
+max_selections = 6
+
+[node name="HeaderTextLabel" type="RichTextLabel" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_top = 16.0
+offset_right = 512.0
+offset_bottom = 52.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/normal_font = ExtResource("1_q7joa")
+theme_override_font_sizes/normal_font_size = 40
+bbcode_enabled = true
+text = "[center]LEVEL SELECT"
+scroll_active = false
+shortcut_keys_enabled = false
+
+[node name="LevelNameTextLabel" type="RichTextLabel" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 32.0
+offset_top = 72.0
+offset_right = 480.0
+offset_bottom = 88.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(224, 7)
+theme_override_fonts/normal_font = ExtResource("1_q7joa")
+theme_override_font_sizes/normal_font_size = 16
+bbcode_enabled = true
+text = "[center]Ch. ?-?: ????????????"
+scroll_active = false
+shortcut_keys_enabled = false
+
+[node name="LevelDescTextLabel" type="RichTextLabel" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 32.0
+offset_top = 96.0
+offset_right = 480.0
+offset_bottom = 256.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/normal_font = ExtResource("1_q7joa")
+theme_override_font_sizes/normal_font_size = 8
+bbcode_enabled = true
+text = "[center][Move Left]/[Move Right] Change Level | [Move Up]/[Move Down] Read Diary Entry
+
+[Jump] Start! | [Attack] Back | [Change Form] Starting Form: [img]res://Sprites/UI/DraelynNameSprite.png[/img]"
+scroll_active = false
+shortcut_keys_enabled = false
+
+[node name="ControlPromptLabel" type="RichTextLabel" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 32.0
+offset_top = 276.0
+offset_right = 480.0
+offset_bottom = 316.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/normal_font = ExtResource("1_q7joa")
+theme_override_font_sizes/normal_font_size = 8
+bbcode_enabled = true
+text = "[center][Menu Left]/[Menu Right] Change Level | [Menu Up]/[Menu Down] Read Diary Entry
+
+[Menu Confirm] Start! | [Menu Cancel] Back"
+scroll_active = false
+shortcut_keys_enabled = false
+script = ExtResource("2_te2i0")

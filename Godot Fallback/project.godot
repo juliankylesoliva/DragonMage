@@ -32,6 +32,7 @@ TextPromptParser="*res://Misc Scenes/TextPromptParser.tscn"
 CheckpointHandler="*res://Misc Scenes/CheckpointHandler.tscn"
 FormSelectionHelper="*res://Misc Scenes/FormSelectionHelper.tscn"
 NextLevelHelper="*res://Misc Scenes/NextLevelHelper.tscn"
+OptionsHelper="*res://Misc Scenes/OptionsHelper.tscn"
 
 [display]
 

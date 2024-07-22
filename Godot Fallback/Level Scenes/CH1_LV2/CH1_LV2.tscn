@@ -10,7 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://vmiu4klr3ywc" path="res://Scene Objects/UI/FragmentCounterUI.tscn" id="5_p1yqw"]
 [ext_resource type="PackedScene" uid="uid://7stqd0bfphjy" path="res://Level Scenes/CH1_LV2/Rooms/CH1_LV2_R2.tscn" id="5_qne65"]
 [ext_resource type="PackedScene" uid="uid://b8huirjbc5typ" path="res://Level Scenes/CH1_LV2/Rooms/CH1_LV2_R3.tscn" id="6_7f8rd"]
-[ext_resource type="PackedScene" uid="uid://d1eef1xjuwf3b" path="res://Scene Objects/Misc/PauseMenu.tscn" id="6_xupbp"]
+[ext_resource type="PackedScene" uid="uid://d1eef1xjuwf3b" path="res://Menu Scenes/PauseMenu.tscn" id="6_xupbp"]
 [ext_resource type="PackedScene" uid="uid://buykytsdrlnsg" path="res://Scene Objects/Misc/ResultsScreen.tscn" id="7_hkfs2"]
 [ext_resource type="PackedScene" uid="uid://8beel2odcuky" path="res://Scene Objects/Effects/ScreenFade.tscn" id="8_qngh2"]
 [ext_resource type="PackedScene" uid="uid://b5wwivjk8sl7b" path="res://Scene Objects/Misc/ClearTimer.tscn" id="9_6aije"]

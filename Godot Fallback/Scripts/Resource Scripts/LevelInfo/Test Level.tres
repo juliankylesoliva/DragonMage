@@ -5,14 +5,14 @@
 [resource]
 script = ExtResource("1_6326f")
 level_scene_path = "res://Level Scenes/TestLevel/TestLevel.tscn"
-name_header = "Training Room"
+name_header = "Extra: Training Room"
 story_description = Array[String](["Thank you for playing!
 
 More levels to be added, uh... eventually!
 
-For now, feel free to replay any of these levels to try for faster clear times or to try for different medals.
+For now, feel free to replay any of these levels to try for faster clear times or for different medals.
 
-Or just pick this level to experiment with Magli Draelyn's moveset in this looping training room!
+Or you can pick this level to experiment with Magli Draelyn's moveset in this looping training room!
 
 - Kaysun (JKSun22)"])
 form_changing_enabled = true

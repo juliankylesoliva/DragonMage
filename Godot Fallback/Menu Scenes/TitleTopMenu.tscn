@@ -1,0 +1,130 @@
+[gd_scene load_steps=5 format=3 uid="uid://btu0klxrstfnf"]
+
+[ext_resource type="Texture2D" uid="uid://dxau746ghx5pb" path="res://Sprites/UI/DemoTitle.png" id="1_3n2rl"]
+[ext_resource type="Script" path="res://Scripts/UI Scripts/TitleTopMenu.gd" id="1_h2pbu"]
+[ext_resource type="FontFile" uid="uid://blejgst41tdnl" path="res://PressStart2P.ttf" id="2_mrg07"]
+[ext_resource type="Script" path="res://Scripts/Utility Scripts/ButtonPromptTextLabel.gd" id="3_pfewf"]
+
+[node name="TopMenu" type="Node2D" node_paths=PackedStringArray("menu_labels")]
+script = ExtResource("1_h2pbu")
+menu_labels = [NodePath("StartTextLabel"), NodePath("OptionsTextLabel"), NodePath("CreditsTextLabel"), NodePath("ExitTextLabel")]
+max_selections = 4
+max_secondary_selections = 0
+
+[node name="Title" type="Sprite2D" parent="."]
+position = Vector2(256, 64)
+texture = ExtResource("1_3n2rl")
+
+[node name="StartTextLabel" type="RichTextLabel" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 192.0
+offset_top = 137.0
+offset_right = 320.0
+offset_bottom = 151.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(64, 7)
+theme_override_fonts/normal_font = ExtResource("2_mrg07")
+theme_override_font_sizes/normal_font_size = 16
+bbcode_enabled = true
+text = "[center]START"
+scroll_active = false
+shortcut_keys_enabled = false
+
+[node name="OptionsTextLabel" type="RichTextLabel" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 192.0
+offset_top = 169.0
+offset_right = 320.0
+offset_bottom = 183.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(64, 7)
+theme_override_fonts/normal_font = ExtResource("2_mrg07")
+theme_override_font_sizes/normal_font_size = 16
+bbcode_enabled = true
+text = "[center]OPTIONS"
+scroll_active = false
+shortcut_keys_enabled = false
+
+[node name="CreditsTextLabel" type="RichTextLabel" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 192.0
+offset_top = 201.0
+offset_right = 320.0
+offset_bottom = 215.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(64, 7)
+theme_override_fonts/normal_font = ExtResource("2_mrg07")
+theme_override_font_sizes/normal_font_size = 16
+bbcode_enabled = true
+text = "[center]CREDITS"
+scroll_active = false
+shortcut_keys_enabled = false
+
+[node name="ExitTextLabel" type="RichTextLabel" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 192.0
+offset_top = 233.0
+offset_right = 320.0
+offset_bottom = 247.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(64, 7)
+theme_override_fonts/normal_font = ExtResource("2_mrg07")
+theme_override_font_sizes/normal_font_size = 16
+bbcode_enabled = true
+text = "[center]EXIT
+"
+scroll_active = false
+shortcut_keys_enabled = false
+
+[node name="ControlPromptLabel" type="RichTextLabel" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 96.0
+offset_top = 272.0
+offset_right = 416.0
+offset_bottom = 288.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/normal_font = ExtResource("2_mrg07")
+theme_override_font_sizes/normal_font_size = 8
+bbcode_enabled = true
+text = "[center][Menu Up]/[Menu Down] Move | [Menu Confirm] Confirm"
+scroll_active = false
+shortcut_keys_enabled = false
+script = ExtResource("3_pfewf")
+
+[node name="MadeByTextLabel" type="RichTextLabel" parent="."]
+offset_left = 112.0
+offset_top = 300.0
+offset_right = 400.0
+offset_bottom = 308.0
+theme_override_fonts/normal_font = ExtResource("2_mrg07")
+theme_override_font_sizes/normal_font_size = 8
+bbcode_enabled = true
+text = "[center]Made by Kaysun (JKSun22), 2023-2024
+"
+scroll_active = false
+shortcut_keys_enabled = false

@@ -1,12 +1,14 @@
-extends Node2D
+extends MenuTemplate
 
 class_name PauseMenu
 
-@export var menu_cursor : MenuCursor
+@export var pause_top_node : Node2D
 
 @export var selection_labels : Array[RichTextLabel]
 
 @export var form_select_prompt_label : ButtonPromptTextLabel
+
+@export_multiline var default_prompt_text : String
 
 @export_multiline var form_restart_text : String
 
@@ -14,90 +16,118 @@ class_name PauseMenu
 
 @export var draelyn_name_sprite_path : String = "res://Sprites/UI/DraelynNameSprite.png"
 
+@export var options_subscreen : MenuTemplate
+
 @export var screen_fade : ScreenFade
 
 @export var title_scene_path : String
 
 @export var enable_hiding : bool = false
 
-var current_selection : int = 0
-
-var is_input_allowed : bool = true
-
 var is_hiding : bool = false
 
 func _ready():
 	PauseHandler.set_unpause_lock(false)
+	max_selections = selection_labels.size()
+	PauseHandler.game_paused.connect(on_pause)
+	PauseHandler.game_unpaused.connect(on_unpause)
+
+func _process(_delta):
+	super._process(_delta)
+	if (enable_input and !was_menu_just_activated and Input.is_action_just_pressed("Hide Pause Menu")):
+		on_hide_pause_menu()
 
 func _physics_process(_delta):
 	if (get_tree().is_paused()):
-		toggle_hiding()
-		self.set_visible(true and !is_hiding)
-		check_menu_cursor_movement()
-		check_menu_selection()
-	else:
-		self.set_visible(false)
-		is_hiding = false
-		current_selection = 0
-		move_cursor()
+		# check_menu_selection()
+		pass
+
+func on_pause():
+	self.activate_menu()
+
+func on_unpause():
+	self.deactivate_menu()
+
+func on_hide_pause_menu():
+	toggle_hiding()
 
 func toggle_hiding():
-	if (enable_hiding and get_tree().is_paused() and Input.is_action_just_pressed("Hide Pause Menu")):
+	if (enable_hiding and get_tree().is_paused()):
 		is_hiding = !is_hiding
+		self.set_visible(!is_hiding)
 
-func move_cursor():
-	var selected_label : RichTextLabel = selection_labels[current_selection]
-	menu_cursor.global_position = (selected_label.global_position + selected_label.pivot_offset)
+func on_menu_activation():
+	PauseHandler.set_unpause_lock(false)
+	pause_top_node.set_visible(true)
+	update_prompt_text()
+	reset_selection()
+	move_cursor()
 
-func check_menu_cursor_movement():
-	if (!is_input_allowed):
-		return
-	
-	var up_pressed : bool = Input.is_action_just_pressed("Menu Up")
-	var down_pressed : bool = Input.is_action_just_pressed("Menu Down")
-	
-	if ((up_pressed or down_pressed) and !(up_pressed and down_pressed)):
-		if (up_pressed):
-			current_selection -= 1
-			if (current_selection < 0):
-				current_selection = (selection_labels.size() - 1)
-		else:
-			current_selection += 1
-			if (current_selection >= selection_labels.size()):
-				current_selection = 0
-		
-		move_cursor()
-		menu_cursor.play_move_sound()
-	
+func on_menu_deactivation():
+	is_hiding = false
+	reset_selection()
+	move_cursor()
+
+func on_up_pressed():
+	decrement_selection()
+
+func on_down_pressed():
+	increment_selection()
+
+func on_selection_reset():
+	move_cursor()
+
+func on_selection_change():
+	move_cursor()
+	menu_cursor.play_move_sound()
+
+func on_selection_confirm():
+	match current_selection:
+		0:
+			PauseHandler.set_unpause_lock(true)
+			options_subscreen.reset_selection()
+			menu_cursor.play_accept_sound()
+			enable_input = false
+			pause_top_node.set_visible(false)
+			options_subscreen.set_previous_menu(self)
+			options_subscreen.activate_menu()
+		1:
+			do_restart()
+		2:
+			do_title_screen()
+		3:
+			get_tree().quit()
+		_:
+			pass
+
+func on_change_form():
 	if (FormSelectionHelper.form_changing_enabled):
-		form_select_prompt_label.set_visible(current_selection == 0)
-		form_select_prompt_label.raw_text = (form_restart_text.format({"file" : magli_name_sprite_path if FormSelectionHelper.is_mage_selected() else draelyn_name_sprite_path}))
-		form_select_prompt_label.refresh_label_text()
-
-func check_menu_selection():
-	if (is_input_allowed and Input.is_action_just_pressed("Menu Confirm")):
-		match current_selection:
-			0:
-				do_restart()
-			1:
-				do_title_screen()
-			2:
-				get_tree().quit()
-			_:
-				pass
-	elif (FormSelectionHelper.form_changing_enabled and current_selection == 0 and Input.is_action_just_pressed("Change Form")):
 		if (FormSelectionHelper.selected_form == FormSelectionHelper.mage_form):
 			menu_cursor.play_cancel_sound()
 		else:
 			menu_cursor.play_accept_sound()
 		FormSelectionHelper.toggle_selected_form()
-	else:
-		pass
+		update_prompt_text()
+
+func move_cursor():
+	var selected_label : RichTextLabel = selection_labels[current_selection]
+	menu_cursor.global_position = (selected_label.global_position + selected_label.pivot_offset)
+	menu_cursor.set_spacing(get_label_width(selection_labels[current_selection]))
+
+func get_label_center(label : RichTextLabel):
+	return (label.global_position + label.pivot_offset)
+
+func get_label_width(label : RichTextLabel):
+	return label.size.x
+
+func update_prompt_text():
+	form_select_prompt_label.raw_text = (form_restart_text.format({"file" : magli_name_sprite_path if FormSelectionHelper.is_mage_selected() else draelyn_name_sprite_path}) if FormSelectionHelper.form_changing_enabled else default_prompt_text)
+	form_select_prompt_label.refresh_label_text()
 
 func do_restart():
 	PauseHandler.set_unpause_lock(true)
 	CheckpointHandler.clear_checkpoint()
-	is_input_allowed = false
+	enable_input = false
 	menu_cursor.do_selection_movement()
 	await get_tree().create_timer(1.0).timeout
 	screen_fade.set_fade(1, 1, Color.BLACK)
@@ -109,7 +139,7 @@ func do_restart():
 func do_title_screen():
 	PauseHandler.set_unpause_lock(true)
 	CheckpointHandler.clear_checkpoint()
-	is_input_allowed = false
+	enable_input = false
 	menu_cursor.do_selection_movement()
 	await get_tree().create_timer(1.0).timeout
 	screen_fade.set_fade(1, 1, Color.BLACK)

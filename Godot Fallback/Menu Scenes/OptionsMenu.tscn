@@ -1,0 +1,176 @@
+[gd_scene load_steps=4 format=3 uid="uid://b3khgcpr0ptbf"]
+
+[ext_resource type="Script" path="res://Scripts/UI Scripts/OptionsMenu.gd" id="1_af576"]
+[ext_resource type="FontFile" uid="uid://blejgst41tdnl" path="res://PressStart2P.ttf" id="2_bpn2p"]
+[ext_resource type="Script" path="res://Scripts/Utility Scripts/ButtonPromptTextLabel.gd" id="3_hq45k"]
+
+[node name="OptionsMenu" type="Node2D" node_paths=PackedStringArray("option_labels", "glide_toggle_state_label", "crouch_toggle_state_label", "options_description_label")]
+script = ExtResource("1_af576")
+option_labels = [NodePath("GlideToggleLabel"), NodePath("CrouchToggleLabel"), NodePath("EditBindingsLabel")]
+glide_toggle_state_label = NodePath("GlideToggleStateLabel")
+crouch_toggle_state_label = NodePath("CrouchToggleStateLabel")
+option_descriptions = Array[String](["[center]Keep gliding with just a single press of the button!", "[center]Keep crouching without needing to hold down the button!", "[center]View and edit which buttons do which actions!"])
+options_description_label = NodePath("OptionDescriptionLabel")
+
+[node name="HeaderTextLabel" type="RichTextLabel" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 16.0
+offset_top = 16.0
+offset_right = 496.0
+offset_bottom = 52.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/normal_font = ExtResource("2_bpn2p")
+theme_override_font_sizes/normal_font_size = 40
+bbcode_enabled = true
+text = "OPTIONS
+"
+scroll_active = false
+shortcut_keys_enabled = false
+
+[node name="GlideToggleLabel" type="RichTextLabel" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 64.0
+offset_top = 96.0
+offset_right = 448.0
+offset_bottom = 110.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(192, 7)
+theme_override_fonts/normal_font = ExtResource("2_bpn2p")
+theme_override_font_sizes/normal_font_size = 16
+bbcode_enabled = true
+text = "[left]GLIDE TOGGLE"
+scroll_active = false
+shortcut_keys_enabled = false
+
+[node name="GlideToggleStateLabel" type="RichTextLabel" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 384.0
+offset_top = 96.0
+offset_right = 448.0
+offset_bottom = 110.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(32, 7)
+theme_override_fonts/normal_font = ExtResource("2_bpn2p")
+theme_override_font_sizes/normal_font_size = 16
+bbcode_enabled = true
+text = "[right] OFF"
+scroll_active = false
+shortcut_keys_enabled = false
+
+[node name="CrouchToggleLabel" type="RichTextLabel" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 64.0
+offset_top = 140.0
+offset_right = 448.0
+offset_bottom = 154.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(192, 7)
+theme_override_fonts/normal_font = ExtResource("2_bpn2p")
+theme_override_font_sizes/normal_font_size = 16
+bbcode_enabled = true
+text = "[left]CROUCH TOGGLE"
+scroll_active = false
+shortcut_keys_enabled = false
+
+[node name="CrouchToggleStateLabel" type="RichTextLabel" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 384.0
+offset_top = 140.0
+offset_right = 448.0
+offset_bottom = 154.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(32, 7)
+theme_override_fonts/normal_font = ExtResource("2_bpn2p")
+theme_override_font_sizes/normal_font_size = 16
+bbcode_enabled = true
+text = "[right] OFF"
+scroll_active = false
+shortcut_keys_enabled = false
+
+[node name="EditBindingsLabel" type="RichTextLabel" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 176.0
+offset_top = 184.0
+offset_right = 336.0
+offset_bottom = 198.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(80, 7)
+theme_override_fonts/normal_font = ExtResource("2_bpn2p")
+theme_override_font_sizes/normal_font_size = 16
+bbcode_enabled = true
+text = "[center]CONTROLS"
+scroll_active = false
+shortcut_keys_enabled = false
+
+[node name="OptionDescriptionLabel" type="RichTextLabel" parent="."]
+clip_contents = false
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = 32.0
+offset_top = 232.0
+offset_right = 480.0
+offset_bottom = 248.0
+grow_horizontal = 2
+grow_vertical = 0
+pivot_offset = Vector2(224, 24)
+theme_override_fonts/normal_font = ExtResource("2_bpn2p")
+theme_override_font_sizes/normal_font_size = 8
+bbcode_enabled = true
+scroll_active = false
+shortcut_keys_enabled = false
+script = ExtResource("3_hq45k")
+
+[node name="ControlPromptLabel" type="RichTextLabel" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 32.0
+offset_top = 276.0
+offset_right = 480.0
+offset_bottom = 316.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/normal_font = ExtResource("2_bpn2p")
+theme_override_font_sizes/normal_font_size = 8
+bbcode_enabled = true
+text = "[center][Menu Up]/[Menu Down] Move
+
+[Menu Confirm] Select | [Menu Cancel] Back"
+scroll_active = false
+shortcut_keys_enabled = false
+script = ExtResource("3_hq45k")

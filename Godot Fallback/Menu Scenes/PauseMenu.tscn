@@ -1,0 +1,137 @@
+[gd_scene load_steps=8 format=3 uid="uid://d1eef1xjuwf3b"]
+
+[ext_resource type="Texture2D" uid="uid://xqtpj7gtmg3o" path="res://Sprites/Backgrounds/Misc/PauseBG.png" id="1_giym7"]
+[ext_resource type="Script" path="res://Scripts/UI Scripts/PauseMenu.gd" id="1_iiemp"]
+[ext_resource type="PackedScene" uid="uid://b3khgcpr0ptbf" path="res://Menu Scenes/OptionsMenu.tscn" id="2_qi3mg"]
+[ext_resource type="FontFile" uid="uid://blejgst41tdnl" path="res://PressStart2P.ttf" id="3_4cfu1"]
+[ext_resource type="PackedScene" uid="uid://dqer84f2unm5v" path="res://Scene Objects/Misc/MenuCursor.tscn" id="3_d0ijs"]
+[ext_resource type="Script" path="res://Scripts/Utility Scripts/ButtonPromptTextLabel.gd" id="4_ragny"]
+[ext_resource type="PackedScene" uid="uid://css77oibjn4bk" path="res://Menu Scenes/ControlRebindingMenu.tscn" id="6_3qd72"]
+
+[node name="PauseMenu" type="Node2D" node_paths=PackedStringArray("pause_top_node", "selection_labels", "form_select_prompt_label", "options_subscreen", "menu_cursor")]
+process_mode = 3
+light_mask = 64
+visibility_layer = 64
+z_index = 20
+position = Vector2(256, 160)
+script = ExtResource("1_iiemp")
+pause_top_node = NodePath("PauseTop")
+selection_labels = [NodePath("PauseTop/OptionsLabel"), NodePath("PauseTop/RestartLabel"), NodePath("PauseTop/ExitLabel"), NodePath("PauseTop/QuitLabel")]
+form_select_prompt_label = NodePath("PauseTop/FormSelectLabel")
+default_prompt_text = "[center][Pause] Resume | [Menu Confirm] Confirm"
+form_restart_text = "[center][Pause] Resume | [Menu Confirm] Confirm | [Change Form] Restart As: [img]{file}[/img]"
+options_subscreen = NodePath("OptionsMenu")
+title_scene_path = "res://Misc Scenes/TitleScreen.tscn"
+menu_cursor = NodePath("MenuCursor")
+max_secondary_selections = 0
+
+[node name="Background" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.8)
+texture = ExtResource("1_giym7")
+
+[node name="PauseTop" type="Node2D" parent="."]
+
+[node name="TextHeader" type="RichTextLabel" parent="PauseTop"]
+light_mask = 64
+visibility_layer = 64
+z_index = 7
+offset_left = -248.0
+offset_top = -128.0
+offset_right = 248.0
+offset_bottom = -80.0
+theme_override_fonts/normal_font = ExtResource("3_4cfu1")
+theme_override_font_sizes/normal_font_size = 32
+bbcode_enabled = true
+text = "[center]~ PAUSED -"
+scroll_active = false
+
+[node name="OptionsLabel" type="RichTextLabel" parent="PauseTop"]
+light_mask = 64
+visibility_layer = 64
+z_index = 7
+offset_left = -118.0
+offset_top = -55.0
+offset_right = 118.0
+offset_bottom = -41.0
+pivot_offset = Vector2(118, 7)
+theme_override_fonts/normal_font = ExtResource("3_4cfu1")
+theme_override_font_sizes/normal_font_size = 16
+bbcode_enabled = true
+text = "[center]OPTIONS"
+scroll_active = false
+
+[node name="RestartLabel" type="RichTextLabel" parent="PauseTop"]
+light_mask = 64
+visibility_layer = 64
+z_index = 7
+offset_left = -118.0
+offset_top = -23.0
+offset_right = 118.0
+offset_bottom = -9.0
+pivot_offset = Vector2(118, 7)
+theme_override_fonts/normal_font = ExtResource("3_4cfu1")
+theme_override_font_sizes/normal_font_size = 16
+bbcode_enabled = true
+text = "[center]RESTART LEVEL"
+scroll_active = false
+
+[node name="ExitLabel" type="RichTextLabel" parent="PauseTop"]
+light_mask = 64
+visibility_layer = 64
+z_index = 7
+offset_left = -118.0
+offset_top = 9.0
+offset_right = 118.0
+offset_bottom = 23.0
+pivot_offset = Vector2(118, 7)
+theme_override_fonts/normal_font = ExtResource("3_4cfu1")
+theme_override_font_sizes/normal_font_size = 16
+bbcode_enabled = true
+text = "[center]EXIT LEVEL"
+scroll_active = false
+
+[node name="QuitLabel" type="RichTextLabel" parent="PauseTop"]
+light_mask = 64
+visibility_layer = 64
+z_index = 7
+offset_left = -118.0
+offset_top = 41.0
+offset_right = 118.0
+offset_bottom = 55.0
+pivot_offset = Vector2(118, 7)
+theme_override_fonts/normal_font = ExtResource("3_4cfu1")
+theme_override_font_sizes/normal_font_size = 16
+bbcode_enabled = true
+text = "[center]QUIT GAME"
+scroll_active = false
+
+[node name="FormSelectLabel" type="RichTextLabel" parent="PauseTop"]
+light_mask = 64
+visibility_layer = 64
+z_index = 7
+offset_left = -250.0
+offset_top = 136.0
+offset_right = 250.0
+offset_bottom = 150.0
+pivot_offset = Vector2(250, 7)
+theme_override_fonts/normal_font = ExtResource("3_4cfu1")
+theme_override_font_sizes/normal_font_size = 8
+bbcode_enabled = true
+text = "[center][Pause] Resume | [Menu Confirm] Confirm | [Change Form] Restart As: "
+scroll_active = false
+script = ExtResource("4_ragny")
+
+[node name="OptionsMenu" parent="." node_paths=PackedStringArray("bindings_subscreen", "menu_cursor") instance=ExtResource("2_qi3mg")]
+visible = false
+position = Vector2(-256, -160)
+bindings_subscreen = NodePath("../ControlRebindingMenu")
+menu_cursor = NodePath("../MenuCursor")
+
+[node name="ControlRebindingMenu" parent="." node_paths=PackedStringArray("menu_cursor") instance=ExtResource("6_3qd72")]
+visible = false
+position = Vector2(-256, -160)
+menu_cursor = NodePath("../MenuCursor")
+
+[node name="MenuCursor" parent="." instance=ExtResource("3_d0ijs")]
+position = Vector2(0, -224)
+initial_spacing = 248.0

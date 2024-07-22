@@ -18,7 +18,7 @@
 [ext_resource type="PackedScene" uid="uid://ctjuhf6dkkqy8" path="res://Level Scenes/CH1_LV1/Rooms/CH1_LV1_R11.tscn" id="14_daiil"]
 [ext_resource type="PackedScene" uid="uid://cg3dhm1wv5w67" path="res://Scene Objects/UI/MagicMeterUI.tscn" id="16_djh7b"]
 [ext_resource type="PackedScene" uid="uid://8beel2odcuky" path="res://Scene Objects/Effects/ScreenFade.tscn" id="16_gb8bt"]
-[ext_resource type="PackedScene" uid="uid://d1eef1xjuwf3b" path="res://Scene Objects/Misc/PauseMenu.tscn" id="17_5ns53"]
+[ext_resource type="PackedScene" uid="uid://d1eef1xjuwf3b" path="res://Menu Scenes/PauseMenu.tscn" id="17_5ns53"]
 [ext_resource type="PackedScene" uid="uid://b5wwivjk8sl7b" path="res://Scene Objects/Misc/ClearTimer.tscn" id="17_21jxy"]
 [ext_resource type="PackedScene" uid="uid://buykytsdrlnsg" path="res://Scene Objects/Misc/ResultsScreen.tscn" id="18_wudxn"]
 [ext_resource type="AudioStream" uid="uid://u3a1srjlcm6f" path="res://Music/Kubbi - Up In My Jam (All Of A Sudden).wav" id="21_4frsm"]

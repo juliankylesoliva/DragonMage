@@ -50,6 +50,9 @@ var is_deactivated : bool = false
 
 var force_stand : bool = false
 
+func _process(_delta):
+	OptionsHelper.update_control_options(self)
+
 func get_input_vector():
 	var input_vector = Vector2.ZERO
 	
