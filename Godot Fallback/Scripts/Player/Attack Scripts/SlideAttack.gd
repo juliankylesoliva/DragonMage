@@ -20,11 +20,15 @@ class_name SlideAttack
 
 @export var slide_effect_slowdown_threshold : float = 0.5
 
+@export var slide_startup_coyote_time : float = 0.1
+
 var prev_horizontal_velocity : float = 0
 
 var horizontal_result : float = 0
 
 var current_slide_timer : float = 0
+
+var current_slide_coyote_timer : float = 0
 
 var slide_effect_instance : AnimatedSprite2D = null
 
@@ -47,6 +51,7 @@ func on_attack_state_enter():
 	hub.char_body.velocity = (Vector2.RIGHT * horizontal_result * hub.movement.get_facing_value())
 	hub.movement.current_horizontal_velocity = hub.char_body.velocity.x
 	current_slide_timer = 0
+	current_slide_coyote_timer = slide_startup_coyote_time
 	hub.sprite_trail.activate_trail()
 	
 	var slide_effect_name : String = (slide_effect_fast if horizontal_result > slide_min_horizontal_speed else slide_effect_normal if horizontal_result > (slide_min_horizontal_speed * slide_effect_slowdown_threshold) else slide_effect_slow)
@@ -60,7 +65,7 @@ func attack_state_process(_delta : float):
 		hub.state_machine.current_state.set_next_state(hub.state_machine.get_state_by_name("Standing"))
 	elif (hub.is_deactivated):
 		hub.state_machine.current_state.set_next_state(hub.state_machine.get_state_by_name("Deactivated"))
-	elif (hub.damage.is_player_defeated or hub.damage.is_player_damaged() or hub.collisions.is_facing_a_wall() or hub.collisions.is_near_a_ledge() or hub.collisions.get_distance_to_ground() > hub.char_body.floor_snap_length):
+	elif (hub.damage.is_player_defeated or hub.damage.is_player_damaged() or hub.collisions.is_facing_a_wall() or (current_slide_coyote_timer <= 0 and (hub.collisions.is_near_a_ledge() or hub.collisions.get_distance_to_ground() > hub.char_body.floor_snap_length))):
 		stop_slide()
 	elif (!hub.collisions.is_in_ceiling_when_uncrouched() and current_slide_timer > slide_uncancelable_time and (hub.get_input_vector().x * hub.char_body.velocity.x) > 0 and hub.buffers.is_jump_buffer_active()):
 		do_jump_cancel()
@@ -102,6 +107,7 @@ func on_attack_state_exit():
 	prev_horizontal_velocity = 0
 	horizontal_result = 0
 	current_slide_timer = 0
+	current_slide_coyote_timer = 0
 
 func do_jump_cancel():
 	if (current_attack_state != AttackState.ACTIVE):
@@ -129,16 +135,28 @@ func stop_slide():
 	elif (hub.damage.is_player_damaged()):
 		hub.state_machine.current_state.set_next_state(hub.state_machine.get_state_by_name("Damaged"))
 	elif (hub.char_body.is_on_floor() and (hub.get_input_vector().x != 0 or hub.char_body.velocity.x != 0)):
-		if (hub.collisions.is_near_a_ledge() and hub.get_input_vector().x != 0):
-			hub.char_body.velocity.x = (hub.movement.get_facing_value() * horizontal_result)
-			hub.movement.current_horizontal_velocity = hub.char_body.velocity.x
-			if (!hub.collisions.is_in_ceiling_when_uncrouched()):
-				hub.movement.reset_crouch_state()
+		if (hub.collisions.is_near_a_ledge() and hub.collisions.get_distance_to_ground() >= hub.char_body.floor_snap_length):
+			preserve_slide_speed()
+		else:
+			cap_slide_speed()
 		hub.state_machine.current_state.set_next_state(hub.state_machine.get_state_by_name("Running"))
 	elif (hub.char_body.velocity.y >= 0 and !hub.char_body.is_on_floor()):
+		preserve_slide_speed()
+		if (!hub.collisions.is_in_ceiling_when_uncrouched()):
+			hub.movement.reset_crouch_state()
 		hub.state_machine.current_state.set_next_state(hub.state_machine.get_state_by_name("Falling"))
 	else:
 		hub.state_machine.current_state.set_next_state(hub.state_machine.get_state_by_name("Standing"))
+
+func cap_slide_speed():
+	if (hub.get_input_vector().x != 0):
+		hub.char_body.velocity.x = (min(hub.movement.top_speed, abs(hub.char_body.velocity.x)) * hub.movement.get_facing_value())
+		hub.movement.current_horizontal_velocity = hub.char_body.velocity.x
+
+func preserve_slide_speed():
+	if (hub.get_input_vector().x != 0):
+		hub.char_body.velocity.x = (hub.movement.get_facing_value() * horizontal_result)
+		hub.movement.current_horizontal_velocity = hub.char_body.velocity.x
 
 func slide_update(delta : float):
 	if (current_attack_state != AttackState.ACTIVE):
@@ -151,4 +169,6 @@ func slide_update(delta : float):
 	hub.collisions.upward_slope_correction(intended_velocity)
 	
 	current_slide_timer += delta
+	if (current_slide_coyote_timer > 0):
+		current_slide_coyote_timer = move_toward(current_slide_coyote_timer, 0, delta)
 	horizontal_result = move_toward(horizontal_result, 0, slide_deceleration_rate * delta)

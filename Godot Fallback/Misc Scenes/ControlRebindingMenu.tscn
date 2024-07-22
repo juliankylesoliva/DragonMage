@@ -4,21 +4,71 @@
 [ext_resource type="FontFile" uid="uid://blejgst41tdnl" path="res://PressStart2P.ttf" id="2_bmd0n"]
 [ext_resource type="Script" path="res://Scripts/Utility Scripts/ButtonPromptTextLabel.gd" id="3_rnspw"]
 
-[node name="ControlRebindingMenu" type="Node2D" node_paths=PackedStringArray("test_label")]
+[node name="ControlRebindingMenu" type="Node2D" node_paths=PackedStringArray("bindings_display", "action_description_label")]
 script = ExtResource("1_h43jn")
-test_label = NodePath("RichTextLabel")
-rebindable_action_names = Array[StringName]([&"Move Left", &"Move Right", &"Move Up", &"Move Down", &"Jump", &"Attack", &"Change Form", &"Crouch", &"Technical", &"Fairy Ability", &"Interact", &"Pause", &"Move Left (Pad)", &"Move Right (Pad)", &"Move Up (Pad)", &"Move Down (Pad)"])
+bindings_display = NodePath("BindingsDisplay")
+action_description_label = NodePath("ActionDescriptionLabel")
+rebindable_action_names = Array[StringName]([&"Move Left", &"Move Right", &"Move Up", &"Move Down", &"Jump", &"Glide", &"Attack", &"Change Form", &"Crouch", &"Technical", &"Fairy Ability", &"Interact", &"Move Left (Pad)", &"Move Right (Pad)", &"Move Up (Pad)", &"Move Down (Pad)"])
+action_descriptions = {
+"Glide": "You may assign buttons that differ from the Jump action.",
+"Move Down (Pad)": "Standalone controller directional pad input action used as a failsafe.",
+"Move Left (Pad)": "Standalone controller directional pad input action used as a failsafe.",
+"Move Right (Pad)": "Standalone controller directional pad input action used as a failsafe.",
+"Move Up (Pad)": "Standalone controller directional pad input action used as a failsafe.",
+"Technical": "Used for Magli's Short Glide and Draelyn's Ledge Snap."
+}
 
-[node name="RichTextLabel" type="RichTextLabel" parent="."]
+[node name="HeaderTextLabel" type="RichTextLabel" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 16.0
+offset_top = 16.0
+offset_right = 496.0
+offset_bottom = 52.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/normal_font = ExtResource("2_bmd0n")
+theme_override_font_sizes/normal_font_size = 40
+bbcode_enabled = true
+text = "[center]CONTROLS
+"
+scroll_active = false
+shortcut_keys_enabled = false
+
+[node name="BindingsDisplay" type="RichTextLabel" parent="."]
 offset_left = 32.0
-offset_top = 64.0
+offset_top = 72.0
 offset_right = 480.0
-offset_bottom = 256.0
+offset_bottom = 184.0
 pivot_offset = Vector2(224, 96)
 theme_override_fonts/normal_font = ExtResource("2_bmd0n")
 theme_override_font_sizes/normal_font_size = 8
 bbcode_enabled = true
 shortcut_keys_enabled = false
+
+[node name="ActionDescriptionLabel" type="RichTextLabel" parent="."]
+clip_contents = false
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = 32.0
+offset_top = 200.0
+offset_right = 480.0
+offset_bottom = 248.0
+grow_horizontal = 2
+grow_vertical = 0
+pivot_offset = Vector2(224, 24)
+theme_override_fonts/normal_font = ExtResource("2_bmd0n")
+theme_override_font_sizes/normal_font_size = 8
+bbcode_enabled = true
+scroll_active = false
+shortcut_keys_enabled = false
+script = ExtResource("3_rnspw")
 
 [node name="ControlPromptLabel" type="RichTextLabel" parent="."]
 clip_contents = false
@@ -37,9 +87,9 @@ pivot_offset = Vector2(224, 24)
 theme_override_fonts/normal_font = ExtResource("2_bmd0n")
 theme_override_font_sizes/normal_font_size = 8
 bbcode_enabled = true
-text = "[center][Menu Left]/[Menu Right] Change Action
-[Menu Confirm] Add Binding (Max 3) | [Menu Cancel] Back
-[Menu Misc 1] Reset All Bindings | [Menu Misc 2] Clear Action Bindings"
+text = "[center][Menu Left]/[Menu Right] Select Current Action
+[Menu Misc 1] Reset All Action Inputs | [Menu Misc 2] Clear Assigned Inputs
+[Menu Confirm] Add New Input (Max 4) | [Menu Cancel] Back"
 scroll_active = false
 shortcut_keys_enabled = false
 script = ExtResource("3_rnspw")

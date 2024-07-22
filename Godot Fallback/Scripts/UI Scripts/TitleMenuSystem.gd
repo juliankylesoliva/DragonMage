@@ -85,14 +85,10 @@ func move_menu_cursor():
 	if ((up_pressed and !down_pressed) or (!up_pressed and down_pressed)):
 		if (up_pressed):
 			current_menu_selection -= 1
-			if (current_menu_selection == 1): # Delete later when options screen is finished
-				current_menu_selection -= 1
 			if (current_menu_selection < 0):
 				current_menu_selection = 3
 		else:
 			current_menu_selection += 1
-			if (current_menu_selection == 1): # Delete later when options screen is finished
-				current_menu_selection += 1
 			if (current_menu_selection > 3):
 				current_menu_selection = 0
 		menu_cursor.play_move_sound()

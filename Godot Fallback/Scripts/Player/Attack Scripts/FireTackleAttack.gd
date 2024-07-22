@@ -38,6 +38,8 @@ class_name FireTackleAttack
 
 @export var fire_tackle_duration : float = 0.5
 
+@export var fire_tackle_slide_cancelable_time : float = 0.35
+
 @export var fire_tackle_fireball_recoil_strength : float = 4
 
 @export var fire_tackle_fireball_base_launch_speed : float = 4
@@ -208,6 +210,17 @@ func active_init():
 func active_update(delta : float):
 	hub.buffers.refresh_speed_preservation_buffer()
 	if (current_attack_timer > 0 and ((current_bump_immunity_timer > 0 and (!can_cancel_fire_tackle_endlag() or hub.temper.is_form_locked())) or (!hub.collisions.is_facing_a_wall() and !(hub.char_body.is_on_ceiling() and !hub.char_body.is_on_floor())))):
+		if (!hub.temper.is_forcing_form_change() and current_attack_timer <= fire_tackle_slide_cancelable_time and hub.char_body.is_on_floor() and Input.is_action_pressed("Crouch")):
+			var selected_attack : Attack = hub.attacks.get_attack_by_name(hub.attacks.crouching_attack_name)
+			if (selected_attack != null):
+				hub.buffers.reset_attack_buffer()
+				hub.attacks.set_queued_attack(selected_attack)
+				hub.state_machine.current_state.set_next_state(hub.state_machine.get_state_by_name("Attacking"))
+				hub.char_body.velocity.x *= fire_tackle_slide_cancel_penalty
+				hub.movement.current_horizontal_velocity = hub.char_body.velocity.x
+				end_fire_tackle()
+				return
+		
 		if (current_attack_timer <= hub.buffers.jump_buffer_time):
 			hub.char_sprite.modulate = fire_tackle_jump_cancel_buffer_color
 		
@@ -322,14 +335,26 @@ func endlag_init():
 
 func endlag_update(delta : float):
 	if (current_endlag_timer > 0 and !is_fire_tackle_endlag_canceled and !hub.damage.is_player_defeated and !hub.damage.is_player_damaged()):
+		if (!hub.temper.is_forcing_form_change() and !is_player_firing_projectile and !did_player_bump and hub.char_body.is_on_floor() and Input.is_action_pressed("Crouch")):
+			var selected_attack : Attack = hub.attacks.get_attack_by_name(hub.attacks.crouching_attack_name)
+			if (selected_attack != null):
+				hub.buffers.reset_attack_buffer()
+				hub.attacks.set_queued_attack(selected_attack)
+				hub.state_machine.current_state.set_next_state(hub.state_machine.get_state_by_name("Attacking"))
+				hub.char_body.velocity.x *= fire_tackle_slide_cancel_penalty
+				hub.movement.current_horizontal_velocity = hub.char_body.velocity.x
+				end_fire_tackle()
+				return
+		
 		if (!is_player_firing_projectile and !did_player_bump and current_endlag_timer <= fire_tackle_endlag_cancelable_time and can_cancel_fire_tackle_endlag()):
 			is_fire_tackle_endlag_canceled = true
-			if (hub.buffers.is_jump_buffer_active() and hub.char_body.is_on_floor()):
+			if (hub.buffers.is_jump_buffer_active()):
 				hub.buffers.refresh_jump_buffer()
 			elif (hub.jumping.can_wall_climb_from_fire_tackle()):
 				hub.char_body.velocity.x = (horizontal_result * hub.movement.get_facing_value())
 			else:
-				hub.buffers.reset_jump_buffer()
+				if (hub.char_body.is_on_floor() or hub.jumping.can_midair_jump()):
+					hub.buffers.reset_jump_buffer()
 			return
 		elif (!did_player_bump and hub.char_body.is_on_floor() and hub.char_body.velocity.x != 0):
 			saved_endlag_velocity = hub.char_body.velocity.x
@@ -358,7 +383,7 @@ func endlag_update(delta : float):
 		end_fire_tackle()
 
 func can_cancel_fire_tackle_endlag():
-	return (!hub.temper.is_forcing_form_change() and (hub.jumping.can_wall_climb_from_fire_tackle() or (hub.get_input_vector().x * hub.movement.get_facing_value()) > 0 and hub.char_body.is_on_floor() and hub.buffers.is_jump_buffer_active()))
+	return (!hub.temper.is_forcing_form_change() and (hub.jumping.can_wall_climb_from_fire_tackle() or ((hub.get_input_vector().x * hub.movement.get_facing_value()) > 0 and (hub.buffers.is_jump_buffer_active() and (hub.char_body.is_on_floor() or hub.jumping.can_midair_jump())))))
 
 func end_fire_tackle():
 	current_attack_state = AttackState.NOTHING
@@ -400,7 +425,11 @@ func end_fire_tackle():
 	elif (hub.jumping.can_wall_climb_from_fire_tackle()):
 		hub.state_machine.current_state.set_next_state(hub.state_machine.get_state_by_name("WallClimbing"))
 	elif (is_fire_tackle_endlag_canceled and hub.buffers.is_jump_buffer_active()):
-		hub.jumping.start_ground_jump()
+		if (hub.char_body.is_on_floor()):
+			hub.jumping.start_ground_jump()
+		else:
+			if (hub.jumping.can_midair_jump()):
+				hub.jumping.do_midair_jump()
 		hub.state_machine.current_state.set_next_state(hub.state_machine.get_state_by_name("Jumping"))
 	elif (hub.char_body.is_on_floor() and (hub.get_input_vector().x != 0 or hub.char_body.velocity.x != 0)):
 		hub.state_machine.current_state.set_next_state(hub.state_machine.get_state_by_name("Running"))

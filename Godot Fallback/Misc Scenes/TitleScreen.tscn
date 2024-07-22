@@ -92,6 +92,7 @@ position = Vector2(256, 160)
 texture = ExtResource("1_joivi")
 
 [node name="TopMenu" type="Node2D" parent="."]
+visible = false
 
 [node name="Title" type="Sprite2D" parent="TopMenu"]
 position = Vector2(256, 64)
@@ -118,7 +119,6 @@ scroll_active = false
 shortcut_keys_enabled = false
 
 [node name="OptionsTextLabel" type="RichTextLabel" parent="TopMenu"]
-visible = false
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -145,9 +145,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = 192.0
-offset_top = 185.0
+offset_top = 201.0
 offset_right = 320.0
-offset_bottom = 199.0
+offset_bottom = 215.0
 grow_horizontal = 2
 grow_vertical = 2
 pivot_offset = Vector2(64, 7)
@@ -292,6 +292,171 @@ bbcode_enabled = true
 text = "[center][Menu Left]/[Menu Right] Change Level | [Menu Up]/[Menu Down] Read Diary Entry
 
 [Menu Confirm] Start! | [Menu Cancel] Back"
+scroll_active = false
+shortcut_keys_enabled = false
+script = ExtResource("10_cmn2p")
+
+[node name="OptionsSubscreen" type="Node2D" parent="."]
+
+[node name="HeaderTextLabel" type="RichTextLabel" parent="OptionsSubscreen"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 16.0
+offset_top = 16.0
+offset_right = 496.0
+offset_bottom = 52.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/normal_font = ExtResource("3_ethht")
+theme_override_font_sizes/normal_font_size = 40
+bbcode_enabled = true
+text = "OPTIONS
+"
+scroll_active = false
+shortcut_keys_enabled = false
+
+[node name="GlideToggleLabel" type="RichTextLabel" parent="OptionsSubscreen"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 64.0
+offset_top = 96.0
+offset_right = 448.0
+offset_bottom = 110.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(192, 7)
+theme_override_fonts/normal_font = ExtResource("3_ethht")
+theme_override_font_sizes/normal_font_size = 16
+bbcode_enabled = true
+text = "[left]GLIDE TOGGLE"
+scroll_active = false
+shortcut_keys_enabled = false
+
+[node name="GlideToggleStateLabel" type="RichTextLabel" parent="OptionsSubscreen"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 384.0
+offset_top = 96.0
+offset_right = 448.0
+offset_bottom = 110.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(32, 7)
+theme_override_fonts/normal_font = ExtResource("3_ethht")
+theme_override_font_sizes/normal_font_size = 16
+bbcode_enabled = true
+text = "[right] OFF"
+scroll_active = false
+shortcut_keys_enabled = false
+
+[node name="CrouchToggleLabel" type="RichTextLabel" parent="OptionsSubscreen"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 64.0
+offset_top = 140.0
+offset_right = 448.0
+offset_bottom = 154.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(192, 7)
+theme_override_fonts/normal_font = ExtResource("3_ethht")
+theme_override_font_sizes/normal_font_size = 16
+bbcode_enabled = true
+text = "[left]CROUCH TOGGLE"
+scroll_active = false
+shortcut_keys_enabled = false
+
+[node name="CrouchToggleStateLabel" type="RichTextLabel" parent="OptionsSubscreen"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 384.0
+offset_top = 140.0
+offset_right = 448.0
+offset_bottom = 154.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(32, 7)
+theme_override_fonts/normal_font = ExtResource("3_ethht")
+theme_override_font_sizes/normal_font_size = 16
+bbcode_enabled = true
+text = "[right] OFF"
+scroll_active = false
+shortcut_keys_enabled = false
+
+[node name="EditBindingsLabel" type="RichTextLabel" parent="OptionsSubscreen"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 128.0
+offset_top = 184.0
+offset_right = 384.0
+offset_bottom = 198.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(128, 7)
+theme_override_fonts/normal_font = ExtResource("3_ethht")
+theme_override_font_sizes/normal_font_size = 16
+bbcode_enabled = true
+text = "[center]CONTROLS"
+scroll_active = false
+shortcut_keys_enabled = false
+
+[node name="OptionDescriptionLabel" type="RichTextLabel" parent="OptionsSubscreen"]
+clip_contents = false
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = 32.0
+offset_top = 232.0
+offset_right = 480.0
+offset_bottom = 248.0
+grow_horizontal = 2
+grow_vertical = 0
+pivot_offset = Vector2(224, 24)
+theme_override_fonts/normal_font = ExtResource("3_ethht")
+theme_override_font_sizes/normal_font_size = 8
+bbcode_enabled = true
+scroll_active = false
+shortcut_keys_enabled = false
+script = ExtResource("10_cmn2p")
+
+[node name="ControlPromptLabel" type="RichTextLabel" parent="OptionsSubscreen"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 32.0
+offset_top = 276.0
+offset_right = 480.0
+offset_bottom = 316.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/normal_font = ExtResource("3_ethht")
+theme_override_font_sizes/normal_font_size = 8
+bbcode_enabled = true
+text = "[center][Menu Up]/[Menu Down] Move
+
+[Menu Confirm] Select | [Menu Cancel] Back"
 scroll_active = false
 shortcut_keys_enabled = false
 script = ExtResource("10_cmn2p")

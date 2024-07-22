@@ -29,6 +29,12 @@ func _input(event):
 	else:
 		pass
 
+func is_using_gamepad():
+	return current_control_mode == ControlMode.GAMEPAD
+
+func is_using_keyboard():
+	return current_control_mode == ControlMode.KEYBOARD
+
 func print_action_and_input_names():
 	if (print_actions_and_inputs):
 		for action_name in InputMap.get_actions():
