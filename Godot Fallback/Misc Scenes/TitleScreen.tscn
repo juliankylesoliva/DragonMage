@@ -11,8 +11,6 @@
 
 [node name="TitleScreen" type="Node2D"]
 
-[node name="TitleMenuSystem" type="Node" parent="."]
-
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(256, 160)
 

@@ -45,6 +45,7 @@ var current_characters : float = 0
 
 func _ready():
 	hide_textbox()
+	GlobalSignals.bindings_changed.connect(on_bindings_changed)
 
 func _process(_delta):
 	self.set_visible(!get_tree().is_paused())
@@ -108,7 +109,7 @@ func clear_all_text():
 func display_text():
 	var next_text : String = text_queue.pop_front()
 	unformatted_text = next_text
-	text_label.text = next_text
+	reformat_binding_text(next_text)
 	show_textbox()
 	if (ui_canvas != null):
 		for child in ui_canvas.get_children():
@@ -143,3 +144,12 @@ func change_state(next_state : TextboxState):
 
 func update_player_name_format_text(char_name : String):
 	text_label.text = unformatted_text.format({"player_name" : char_name})
+	reformat_binding_text(text_label.text)
+
+func reformat_binding_text(text : String):
+	text_label.text = TextPromptParser.parse_text(text)
+
+func on_bindings_changed():
+	reformat_binding_text(unformatted_text)
+	if (textbox_container.visible and current_state == TextboxState.FINISHED):
+		end_symbol.text = TextPromptParser.parse_text(end_symbol_char_more if !text_queue.is_empty() else end_symbol_char_last)

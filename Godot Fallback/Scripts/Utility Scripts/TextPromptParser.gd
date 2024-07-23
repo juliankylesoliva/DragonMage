@@ -59,9 +59,13 @@ func parse_text(raw_text : String):
 					if (current_control_mode == ControlMode.GAMEPAD and (event is InputEventJoypadButton or event is InputEventJoypadMotion)):
 						if (event_to_input_prompt_dictionary.has(event.as_text())):
 							result_text = result_text.replace(current_prompt, (IMAGE_STRING_FORMAT % event_to_input_prompt_dictionary[event.as_text()]))
+						else:
+							result_text = result_text.replace(current_prompt, "?")
 					elif (current_control_mode == ControlMode.KEYBOARD and (event is InputEventKey)):
 						if (event_to_input_prompt_dictionary.has(event.as_text())):
 							result_text = result_text.replace(current_prompt, (IMAGE_STRING_FORMAT % event_to_input_prompt_dictionary[event.as_text()]))
+						else:
+							result_text = result_text.replace(current_prompt, "?")
 					else:
-						pass
+						result_text = result_text.replace(current_prompt, "?")
 	return result_text

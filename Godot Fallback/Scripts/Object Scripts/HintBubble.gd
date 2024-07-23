@@ -22,7 +22,7 @@ func interact(hub : PlayerHub):
 			textbox.accept_input_events = false
 			if (textbox.current_state == Textbox.TextboxState.READY):
 				for s in textbox_strings:
-					textbox.queue_text(TextPromptParser.parse_text(s))
+					textbox.queue_text(s)
 			else:
 				textbox.advance_textbox()
 

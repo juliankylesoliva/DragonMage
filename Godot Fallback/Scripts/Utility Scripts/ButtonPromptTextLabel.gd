@@ -9,6 +9,7 @@ func _init():
 
 func _ready():
 	TextPromptParser.control_mode_changed.connect(refresh_label_text)
+	GlobalSignals.bindings_changed.connect(refresh_label_text)
 	refresh_label_text()
 
 func refresh_label_text():

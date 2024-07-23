@@ -47,17 +47,20 @@ func _input(event):
 			var key : InputEventKey = (event as InputEventKey)
 			InputMap.action_add_event(action_to_edit, key)
 			menu_cursor.play_accept_sound()
+			GlobalSignals.bindings_changed.emit()
 		elif (event is InputEventJoypadMotion):
 			var joy_motion : InputEventJoypadMotion = (event as InputEventJoypadMotion)
 			if (joy_motion.axis_value != 0):
 				joy_motion.axis_value = (1.0 if joy_motion.axis_value > 0 else -1.0)
 			InputMap.action_add_event(action_to_edit, joy_motion)
 			menu_cursor.play_accept_sound()
+			GlobalSignals.bindings_changed.emit()
 		elif (event is InputEventJoypadButton):
 			var joy_button : InputEventJoypadButton = (event as InputEventJoypadButton)
 			if (joy_button.is_pressed()):
 				InputMap.action_add_event(action_to_edit, joy_button)
 				menu_cursor.play_accept_sound()
+				GlobalSignals.bindings_changed.emit()
 			else:
 				return
 		else:
@@ -86,6 +89,7 @@ func on_menu_misc_1():
 	InputMap.load_from_project_settings()
 	menu_cursor.play_accept_sound()
 	refresh_bindings_display()
+	GlobalSignals.bindings_changed.emit()
 
 func on_menu_misc_2():
 	var matching_event_count : int = 0
@@ -104,6 +108,7 @@ func on_menu_misc_2():
 		InputMap.action_erase_events(action_to_edit)
 	menu_cursor.play_cancel_sound()
 	refresh_bindings_display()
+	GlobalSignals.bindings_changed.emit()
 
 func on_left_pressed():
 	decrement_selection()

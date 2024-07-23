@@ -17,6 +17,7 @@ action_descriptions = {
 "Move Up (Pad)": "Standalone controller directional pad input action used as a failsafe.",
 "Technical": "Used for Magli's Short Glide and Draelyn's Ledge Snap."
 }
+max_selections = 16
 
 [node name="HeaderTextLabel" type="RichTextLabel" parent="."]
 anchors_preset = 8

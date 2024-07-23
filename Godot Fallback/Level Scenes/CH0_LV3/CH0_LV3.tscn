@@ -18,7 +18,7 @@
 [ext_resource type="PackedScene" uid="uid://vmiu4klr3ywc" path="res://Scene Objects/UI/FragmentCounterUI.tscn" id="16_j1cgp"]
 [ext_resource type="PackedScene" uid="uid://8beel2odcuky" path="res://Scene Objects/Effects/ScreenFade.tscn" id="17_3vcxg"]
 [ext_resource type="PackedScene" uid="uid://b5wwivjk8sl7b" path="res://Scene Objects/Misc/ClearTimer.tscn" id="18_el865"]
-[ext_resource type="PackedScene" uid="uid://d1eef1xjuwf3b" path="res://Scene Objects/Misc/PauseMenu.tscn" id="18_krh2f"]
+[ext_resource type="PackedScene" uid="uid://d1eef1xjuwf3b" path="res://Menu Scenes/PauseMenu.tscn" id="18_krh2f"]
 [ext_resource type="PackedScene" uid="uid://brhoroc2w6jwi" path="res://Scene Objects/UI/Textbox.tscn" id="19_3e3bj"]
 [ext_resource type="PackedScene" uid="uid://buykytsdrlnsg" path="res://Scene Objects/Misc/ResultsScreen.tscn" id="19_d5div"]
 [ext_resource type="PackedScene" uid="uid://btq4qla5fyq0n" path="res://Scene Objects/Misc/LevelMusicPlayer.tscn" id="23_c6dlv"]
