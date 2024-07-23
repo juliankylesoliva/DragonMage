@@ -77,6 +77,7 @@ func on_selection_change():
 
 func on_secondary_selection_change():
 	update_level_select_text(level_info_list[current_selection])
+	menu_cursor.play_move_sound()
 
 func update_level_select_text(info : LevelInfo):
 	level_name_label.text = info.name_header
