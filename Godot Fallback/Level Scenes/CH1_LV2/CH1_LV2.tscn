@@ -44,6 +44,7 @@ editor_draw_limits = true
 editor_draw_drag_margin = true
 
 [node name="CH1_LV2_R1" parent="." instance=ExtResource("4_aws8p")]
+position = Vector2(-1152, -96)
 
 [node name="Warp 0" parent="CH1_LV2_R1" index="3" node_paths=PackedStringArray("room_destination")]
 room_destination = NodePath("../../CH1_LV2_R2")
@@ -55,7 +56,7 @@ position = Vector2(0, 928)
 room_destination = NodePath("../../CH1_LV2_R3")
 
 [node name="CH1_LV2_R3" parent="." instance=ExtResource("6_7f8rd")]
-position = Vector2(-576, 928)
+position = Vector2(2272, 832)
 
 [node name="Warp 1" parent="CH1_LV2_R3" index="4" node_paths=PackedStringArray("room_destination")]
 room_destination = NodePath("../../CH1_LV2_R2")
