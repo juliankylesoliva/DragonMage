@@ -61,7 +61,7 @@ room_destination = NodePath("../../CH1_LV2_R3")
 level_origin = NodePath("../..")
 
 [node name="CH1_LV2_R3" parent="." instance=ExtResource("6_7f8rd")]
-position = Vector2(96, 1568)
+position = Vector2(736, 1568)
 
 [node name="Warp 1" parent="CH1_LV2_R3" index="4" node_paths=PackedStringArray("room_destination")]
 room_destination = NodePath("../../CH1_LV2_R2")
@@ -82,7 +82,7 @@ room_destination = NodePath("../../CH1_LV2_R5")
 room_destination = NodePath("../../CH1_LV2_R2")
 
 [node name="CH1_LV2_R5" parent="." instance=ExtResource("8_peql8")]
-position = Vector2(640, 1568)
+position = Vector2(0, 1568)
 
 [node name="Warp 0" parent="CH1_LV2_R5" index="4" node_paths=PackedStringArray("room_destination")]
 room_destination = NodePath("../../CH1_LV2_R4")
