@@ -4,9 +4,17 @@ class_name EnemyCollisionDetection
 
 @export var enemy : Enemy
 
+@export var raycast_wall_top_l : RayCast2D
+
 @export var raycast_wall_mid_l : RayCast2D
 
+@export var raycast_wall_bot_l : RayCast2D
+
+@export var raycast_wall_top_r : RayCast2D
+
 @export var raycast_wall_mid_r : RayCast2D
+
+@export var raycast_wall_bot_r : RayCast2D
 
 @export var raycast_ledge_l : RayCast2D
 
@@ -49,11 +57,15 @@ func ground_check():
 		leaving_ground.emit()
 
 func wall_check():
-	var raycast_to_check : RayCast2D = (raycast_wall_mid_l if enemy.movement.get_facing_value() < 0 else raycast_wall_mid_r)
+	var top_check : RayCast2D = (raycast_wall_top_l if enemy.movement.get_facing_value() < 0 else raycast_wall_top_r)
+	var mid_check : RayCast2D = (raycast_wall_mid_l if enemy.movement.get_facing_value() < 0 else raycast_wall_mid_r)
+	var bot_check : RayCast2D = (raycast_wall_bot_l if enemy.movement.get_facing_value() < 0 else raycast_wall_bot_r)
 	
-	raycast_to_check.force_raycast_update()
+	top_check.force_raycast_update()
+	mid_check.force_raycast_update()
+	bot_check.force_raycast_update()
 	
-	if (enemy.body.is_on_wall() and raycast_to_check.is_colliding() and raycast_to_check.get_collision_normal().y == 0):
+	if (enemy.body.is_on_wall() and (top_check.is_colliding() or mid_check.is_colliding() or bot_check.is_colliding()) and (top_check.get_collision_normal().y == 0 or mid_check.get_collision_normal().y == 0 or bot_check.get_collision_normal().y == 0)):
 		touching_wall.emit()
 
 func ledge_check():

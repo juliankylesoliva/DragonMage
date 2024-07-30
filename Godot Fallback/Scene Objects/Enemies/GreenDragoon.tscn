@@ -117,11 +117,15 @@ enemy_short_sightline_distance = 0.0
 front_sightline_raycast = NodePath("../../PlayerRayCastFront")
 back_sightline_raycast = NodePath("../../PlayerRayCastBack")
 
-[node name="CollisionDetection" type="Node" parent="Enemy" node_paths=PackedStringArray("enemy", "raycast_wall_mid_l", "raycast_wall_mid_r", "raycast_ledge_l", "raycast_ledge_r")]
+[node name="CollisionDetection" type="Node" parent="Enemy" node_paths=PackedStringArray("enemy", "raycast_wall_top_l", "raycast_wall_mid_l", "raycast_wall_bot_l", "raycast_wall_top_r", "raycast_wall_mid_r", "raycast_wall_bot_r", "raycast_ledge_l", "raycast_ledge_r")]
 script = ExtResource("4_tw0i4")
 enemy = NodePath("..")
+raycast_wall_top_l = NodePath("../../WallRayCastTopL")
 raycast_wall_mid_l = NodePath("../../WallRayCastMidL")
+raycast_wall_bot_l = NodePath("../../WallRayCastBotL")
+raycast_wall_top_r = NodePath("../../WallRayCastTopR")
 raycast_wall_mid_r = NodePath("../../WallRayCastMidR")
+raycast_wall_bot_r = NodePath("../../WallRayCastBotR")
 raycast_ledge_l = NodePath("../../LedgeRayCastL")
 raycast_ledge_r = NodePath("../../LedgeRayCastR")
 
@@ -164,6 +168,13 @@ collision_mask = 4
 hit_from_inside = true
 collide_with_areas = true
 
+[node name="WallRayCastTopL" type="RayCast2D" parent="."]
+position = Vector2(0, -17)
+target_position = Vector2(-13, 0)
+collision_mask = 11
+hit_from_inside = true
+collide_with_areas = true
+
 [node name="WallRayCastMidL" type="RayCast2D" parent="."]
 position = Vector2(0, 3)
 target_position = Vector2(-13, 0)
@@ -171,8 +182,29 @@ collision_mask = 11
 hit_from_inside = true
 collide_with_areas = true
 
+[node name="WallRayCastBotL" type="RayCast2D" parent="."]
+position = Vector2(0, 23)
+target_position = Vector2(-13, 0)
+collision_mask = 11
+hit_from_inside = true
+collide_with_areas = true
+
+[node name="WallRayCastTopR" type="RayCast2D" parent="."]
+position = Vector2(0, -17)
+target_position = Vector2(13, 0)
+collision_mask = 11
+hit_from_inside = true
+collide_with_areas = true
+
 [node name="WallRayCastMidR" type="RayCast2D" parent="."]
 position = Vector2(0, 3)
+target_position = Vector2(13, 0)
+collision_mask = 11
+hit_from_inside = true
+collide_with_areas = true
+
+[node name="WallRayCastBotR" type="RayCast2D" parent="."]
+position = Vector2(0, 23)
 target_position = Vector2(13, 0)
 collision_mask = 11
 hit_from_inside = true

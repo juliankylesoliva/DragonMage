@@ -5,10 +5,10 @@
 [ext_resource type="PackedScene" uid="uid://dqbo0wu6hm8lj" path="res://Scene Objects/Objects/WarpTrigger.tscn" id="3_t6r4o"]
 [ext_resource type="PackedScene" uid="uid://clfqwsy4byrkf" path="res://Scene Objects/Enemies/GreenDragoon.tscn" id="4_uknnx"]
 [ext_resource type="PackedScene" uid="uid://bgww8jir45ktf" path="res://Scene Objects/Enemies/BlueDragoon.tscn" id="5_07t1q"]
-[ext_resource type="PackedScene" uid="uid://curi6w4ex7jou" path="res://Scene Objects/Enemies/YellowDragoon.tscn" id="5_g21le"]
 [ext_resource type="PackedScene" uid="uid://dwnpgujive352" path="res://Scene Objects/Enemies/RedDragoon.tscn" id="6_7vcns"]
 [ext_resource type="PackedScene" uid="uid://dfkmxoba64spw" path="res://Scene Objects/Objects/MedalFragment.tscn" id="8_uk2gy"]
 [ext_resource type="PackedScene" uid="uid://cs4s34scsvcfr" path="res://Scene Objects/Objects/BreakableBlock.tscn" id="9_c8msf"]
+[ext_resource type="PackedScene" uid="uid://vtyaphi47lrf" path="res://Scene Objects/Objects/Checkpoint.tscn" id="10_el8w5"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ci1uh"]
 size = Vector2(128, 32)
@@ -18,7 +18,7 @@ script = ExtResource("1_v8vs2")
 tilemap_list = [NodePath("BoundaryCollisionTilemap"), NodePath("LevelCollisionTilemap")]
 right_camera_limit = 2048
 room_entrances = [NodePath("Entrance 0"), NodePath("Entrance 1")]
-enemy_nodes = [NodePath("Enemies/GreenDragoon"), NodePath("Enemies/YellowDragoon"), NodePath("Enemies/BlueDragoon"), NodePath("Enemies/BlueDragoon2"), NodePath("Enemies/RedDragoon"), NodePath("Enemies/BlueDragoon3"), NodePath("Enemies/RedDragoon2")]
+enemy_nodes = [NodePath("Enemies/GreenDragoon"), NodePath("Enemies/BlueDragoon"), NodePath("Enemies/BlueDragoon2"), NodePath("Enemies/RedDragoon"), NodePath("Enemies/BlueDragoon3"), NodePath("Enemies/RedDragoon2")]
 medal_fragments = [NodePath("Fragments/MedalFragment"), NodePath("Fragments/MedalFragment2"), NodePath("Fragments/MedalFragment3"), NodePath("Fragments/MedalFragment4"), NodePath("Fragments/MedalFragment5"), NodePath("Fragments/MedalFragment6"), NodePath("Fragments/MedalFragment7"), NodePath("Fragments/MedalFragment8"), NodePath("Fragments/MedalFragment9"), NodePath("Fragments/MedalFragment10"), NodePath("Fragments/MedalFragment11"), NodePath("Fragments/MedalFragment12"), NodePath("Fragments/MedalFragment13"), NodePath("Fragments/MedalFragment14"), NodePath("Fragments/MedalFragment15"), NodePath("Fragments/MedalFragment16"), NodePath("Fragments/MedalFragment17")]
 
 [node name="BoundaryCollisionTilemap" type="TileMap" parent="."]
@@ -82,10 +82,7 @@ shape = SubResource("RectangleShape2D_ci1uh")
 [node name="Enemies" type="Node2D" parent="."]
 
 [node name="GreenDragoon" parent="Enemies" instance=ExtResource("4_uknnx")]
-position = Vector2(352, 224)
-
-[node name="YellowDragoon" parent="Enemies" instance=ExtResource("5_g21le")]
-position = Vector2(544, 160)
+position = Vector2(480, 160)
 
 [node name="BlueDragoon" parent="Enemies" instance=ExtResource("5_07t1q")]
 position = Vector2(896, 224)
@@ -157,5 +154,8 @@ position = Vector2(1584, 144)
 
 [node name="BreakableBlock" parent="." instance=ExtResource("9_c8msf")]
 position = Vector2(1824, 128)
+
+[node name="Checkpoint" parent="." instance=ExtResource("10_el8w5")]
+position = Vector2(128, 224)
 
 [editable path="FallWarp"]
