@@ -23,7 +23,7 @@ parallax_bg = NodePath("ParallaxBackground")
 tilemap_list = [NodePath("BoundaryCollisionTilemap"), NodePath("LevelCollisionTilemap")]
 top_camera_limit = -1280
 room_entrances = [NodePath("Entrance 0")]
-enemy_nodes = [NodePath("BlueDragoon"), NodePath("RedDragoon"), NodePath("RedDragoon2"), NodePath("GreenDragoon"), NodePath("GreenDragoon2"), NodePath("RedDragoon3"), NodePath("YellowDragoon"), NodePath("RedDragoon4"), NodePath("GreenDragoon3"), NodePath("GreenDragoon4"), NodePath("BlueDragoon2"), NodePath("RedDragoon5"), NodePath("RedDragoon6"), NodePath("RedDragoon7"), NodePath("BlueDragoon3"), NodePath("YellowDragoon2"), NodePath("BlueDragoon4"), NodePath("YellowDragoon3"), NodePath("RedDragoon8"), NodePath("GreenDragoon5"), NodePath("BlueDragoon5"), NodePath("RedDragoon9")]
+enemy_nodes = [NodePath("RedDragoon"), NodePath("RedDragoon2"), NodePath("GreenDragoon2"), NodePath("RedDragoon3"), NodePath("YellowDragoon"), NodePath("BlueDragoon2"), NodePath("RedDragoon5"), NodePath("RedDragoon6"), NodePath("RedDragoon7"), NodePath("BlueDragoon3"), NodePath("YellowDragoon3"), NodePath("RedDragoon8"), NodePath("GreenDragoon5"), NodePath("BlueDragoon5"), NodePath("RedDragoon9")]
 medal_fragments = [NodePath("Medal Fragments/MedalFragment"), NodePath("Medal Fragments/MedalFragment2"), NodePath("Medal Fragments/MedalFragment3"), NodePath("Medal Fragments/MedalFragment4"), NodePath("Medal Fragments/MedalFragment5"), NodePath("Medal Fragments/MedalFragment6"), NodePath("Medal Fragments/MedalFragment7"), NodePath("Medal Fragments/MedalFragment8"), NodePath("Medal Fragments/MedalFragment9"), NodePath("Medal Fragments/MedalFragment10"), NodePath("Medal Fragments/MedalFragment11"), NodePath("Medal Fragments/MedalFragment12"), NodePath("Medal Fragments/MedalFragment13"), NodePath("Medal Fragments/MedalFragment14")]
 
 [node name="BoundaryCollisionTilemap" type="TileMap" parent="."]
@@ -170,17 +170,11 @@ position = Vector2(512, -1216)
 [node name="BreakableFireBlock2" parent="." instance=ExtResource("6_5wdci")]
 position = Vector2(512, -1152)
 
-[node name="BlueDragoon" parent="." instance=ExtResource("7_cg0t5")]
-position = Vector2(256, 192)
-
 [node name="RedDragoon" parent="." instance=ExtResource("8_lwtfq")]
 position = Vector2(448, 192)
 
 [node name="RedDragoon2" parent="." instance=ExtResource("8_lwtfq")]
 position = Vector2(64, 32)
-
-[node name="GreenDragoon" parent="." instance=ExtResource("9_k5rey")]
-position = Vector2(384, 32)
 
 [node name="GreenDragoon2" parent="." instance=ExtResource("9_k5rey")]
 position = Vector2(112, -64)
@@ -190,15 +184,6 @@ position = Vector2(448, -64)
 
 [node name="YellowDragoon" parent="." instance=ExtResource("10_camky")]
 position = Vector2(448, -160)
-
-[node name="RedDragoon4" parent="." instance=ExtResource("8_lwtfq")]
-position = Vector2(64, -256)
-
-[node name="GreenDragoon3" parent="." instance=ExtResource("9_k5rey")]
-position = Vector2(64, -448)
-
-[node name="GreenDragoon4" parent="." instance=ExtResource("9_k5rey")]
-position = Vector2(128, -544)
 
 [node name="BlueDragoon2" parent="." instance=ExtResource("7_cg0t5")]
 position = Vector2(64, -640)
@@ -214,12 +199,6 @@ position = Vector2(384, -544)
 
 [node name="BlueDragoon3" parent="." instance=ExtResource("7_cg0t5")]
 position = Vector2(448, -736)
-
-[node name="YellowDragoon2" parent="." instance=ExtResource("10_camky")]
-position = Vector2(352, -832)
-
-[node name="BlueDragoon4" parent="." instance=ExtResource("7_cg0t5")]
-position = Vector2(288, -1024)
 
 [node name="YellowDragoon3" parent="." instance=ExtResource("10_camky")]
 position = Vector2(160, -1088)

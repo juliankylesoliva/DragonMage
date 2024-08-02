@@ -53,12 +53,16 @@ func deactivate_room():
 	deactivate_enemies()
 
 func activate_enemies():
+	for enode in enemy_nodes:
+		enode.call_deferred("set_process_mode", Node.PROCESS_MODE_INHERIT)
 	initialize_enemy_list()
 	for enemy in enemy_list:
 		if (!enemy.is_defeated):
 			enemy.activate_enemy()
 
 func deactivate_enemies():
+	for enode in enemy_nodes:
+		enode.call_deferred("set_process_mode", Node.PROCESS_MODE_DISABLED)
 	initialize_enemy_list()
 	for enemy in enemy_list:
 		if (!enemy.is_defeated):

@@ -9,6 +9,7 @@ var base_gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 func _ready():
 	movement.set_physics_process(false)
 	movement.set_process(false)
+	movement.set_process_mode(Node.PROCESS_MODE_DISABLED)
 
 func _physics_process(delta):
 	check_defeated_camera_distance()
@@ -31,6 +32,7 @@ func spawn_shades():
 	(temp_shades as DragoonShades).setup(self)
 
 func activate_enemy():
+	movement.set_process_mode(Node.PROCESS_MODE_INHERIT)
 	movement.set_physics_process(true)
 	movement.set_process(true)
 	movement.set_facing_direction(-1)
@@ -42,6 +44,7 @@ func deactivate_enemy():
 	movement.set_physics_process(false)
 	movement.set_process(false)
 	sprite.play("Idle")
+	movement.set_process_mode(Node.PROCESS_MODE_DISABLED)
 
 func on_defeat():
 	play_damage_sound()
@@ -49,6 +52,7 @@ func on_defeat():
 
 func on_player_approach():
 	if (!is_defeated):
+		movement.set_process_mode(Node.PROCESS_MODE_INHERIT)
 		movement.set_physics_process(true)
 		movement.set_process(true)
 		movement.reset_to_initial_move_vector()
@@ -60,6 +64,7 @@ func on_player_retreat():
 		movement.set_physics_process(false)
 		movement.set_process(false)
 		sprite.play("Idle")
+		movement.set_process_mode(Node.PROCESS_MODE_DISABLED)
 
 func on_enter_sightline():
 	if (!is_defeated and visibility_notifier.is_on_screen()):
