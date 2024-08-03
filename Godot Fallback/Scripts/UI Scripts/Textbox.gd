@@ -90,6 +90,8 @@ func hide_textbox():
 	if (ui_canvas != null and current_state != TextboxState.READY):
 		for child in ui_canvas.get_children():
 			child.show()
+			if (child is PauseMenu):
+				child.hide()
 	change_state(TextboxState.READY)
 
 func set_characters_per_second(cps : float):

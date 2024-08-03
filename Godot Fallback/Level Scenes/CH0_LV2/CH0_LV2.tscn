@@ -13,7 +13,7 @@
 [ext_resource type="PackedScene" uid="uid://dsfiw4qtp8buo" path="res://Level Scenes/CH0_LV2/Rooms/CH0_LV2_R10.tscn" id="12_avml0"]
 [ext_resource type="PackedScene" uid="uid://vmiu4klr3ywc" path="res://Scene Objects/UI/FragmentCounterUI.tscn" id="12_v0omn"]
 [ext_resource type="PackedScene" uid="uid://8beel2odcuky" path="res://Scene Objects/Effects/ScreenFade.tscn" id="13_ngewc"]
-[ext_resource type="PackedScene" uid="uid://d1eef1xjuwf3b" path="res://Scene Objects/Misc/PauseMenu.tscn" id="14_dx8cr"]
+[ext_resource type="PackedScene" uid="uid://d1eef1xjuwf3b" path="res://Menu Scenes/PauseMenu.tscn" id="14_dx8cr"]
 [ext_resource type="PackedScene" uid="uid://b5wwivjk8sl7b" path="res://Scene Objects/Misc/ClearTimer.tscn" id="14_s76pj"]
 [ext_resource type="PackedScene" uid="uid://buykytsdrlnsg" path="res://Scene Objects/Misc/ResultsScreen.tscn" id="15_nbxo5"]
 [ext_resource type="PackedScene" uid="uid://brhoroc2w6jwi" path="res://Scene Objects/UI/Textbox.tscn" id="18_x5lsp"]
