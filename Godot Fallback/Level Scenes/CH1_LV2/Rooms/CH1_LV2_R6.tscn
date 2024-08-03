@@ -20,7 +20,7 @@ tilemap_list = [NodePath("BoundaryCollisionTilemap"), NodePath("LevelCollisionTi
 right_camera_limit = 2048
 room_entrances = [NodePath("Entrance 0"), NodePath("Entrance 1"), NodePath("Entrance 2")]
 enemy_nodes = [NodePath("Enemies/BlueDragoon"), NodePath("Enemies/GreenDragoon"), NodePath("Enemies/RedDragoon"), NodePath("Enemies/RedDragoon2"), NodePath("Enemies/RedDragoon3")]
-medal_fragments = [NodePath("Fragments/MedalFragment"), NodePath("Fragments/MedalFragment2"), NodePath("Fragments/MedalFragment3"), NodePath("Fragments/MedalFragment4"), NodePath("Fragments/MedalFragment5"), NodePath("Fragments/MedalFragment6"), NodePath("Fragments/MedalFragment7"), NodePath("Fragments/MedalFragment8"), NodePath("Fragments/MedalFragment9"), NodePath("Fragments/MedalFragment10"), NodePath("Fragments/MedalFragment11"), NodePath("Fragments/MedalFragment12"), NodePath("Fragments/MedalFragment13"), NodePath("Fragments/MedalFragment14"), NodePath("Fragments/MedalFragment15"), NodePath("Fragments/MedalFragment16"), NodePath("Fragments/MedalFragment17"), NodePath("Fragments/MedalFragment18"), NodePath("Fragments/MedalFragment19"), NodePath("Fragments/MedalFragment20"), NodePath("Fragments/MedalFragment21"), NodePath("Fragments/MedalFragment22")]
+medal_fragments = [NodePath("Fragments/MedalFragment"), NodePath("Fragments/MedalFragment2"), NodePath("Fragments/MedalFragment3"), NodePath("Fragments/MedalFragment4"), NodePath("Fragments/MedalFragment5"), NodePath("Fragments/MedalFragment6"), NodePath("Fragments/MedalFragment7"), NodePath("Fragments/MedalFragment8"), NodePath("Fragments/MedalFragment9"), NodePath("Fragments/MedalFragment10"), NodePath("Fragments/MedalFragment11"), NodePath("Fragments/MedalFragment12"), NodePath("Fragments/MedalFragment13"), NodePath("Fragments/MedalFragment15"), NodePath("Fragments/MedalFragment16"), NodePath("Fragments/MedalFragment18"), NodePath("Fragments/MedalFragment19"), NodePath("Fragments/MedalFragment20"), NodePath("Fragments/MedalFragment21"), NodePath("Fragments/MedalFragment22")]
 
 [node name="BoundaryCollisionTilemap" type="TileMap" parent="."]
 z_index = 4
@@ -166,17 +166,11 @@ position = Vector2(848, 240)
 [node name="MedalFragment13" parent="Fragments" instance=ExtResource("10_3qnlg")]
 position = Vector2(880, 208)
 
-[node name="MedalFragment14" parent="Fragments" instance=ExtResource("10_3qnlg")]
-position = Vector2(1072, 240)
-
 [node name="MedalFragment15" parent="Fragments" instance=ExtResource("10_3qnlg")]
 position = Vector2(1104, 240)
 
 [node name="MedalFragment16" parent="Fragments" instance=ExtResource("10_3qnlg")]
 position = Vector2(1136, 240)
-
-[node name="MedalFragment17" parent="Fragments" instance=ExtResource("10_3qnlg")]
-position = Vector2(1456, 208)
 
 [node name="MedalFragment18" parent="Fragments" instance=ExtResource("10_3qnlg")]
 position = Vector2(1456, 176)

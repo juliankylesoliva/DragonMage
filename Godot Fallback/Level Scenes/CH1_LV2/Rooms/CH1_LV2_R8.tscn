@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://blkavapp0nigt"]
+[gd_scene load_steps=12 format=3 uid="uid://blkavapp0nigt"]
 
 [ext_resource type="Script" path="res://Scripts/Utility Scripts/Room.gd" id="1_xbwwl"]
 [ext_resource type="TileSet" uid="uid://dhwi7i1loa2pd" path="res://Sprites/Tiles/Test Tiles/TestTileSet.tres" id="2_isxfa"]
@@ -9,16 +9,18 @@
 [ext_resource type="PackedScene" uid="uid://dwnpgujive352" path="res://Scene Objects/Enemies/RedDragoon.tscn" id="7_5fgae"]
 [ext_resource type="PackedScene" uid="uid://clfqwsy4byrkf" path="res://Scene Objects/Enemies/GreenDragoon.tscn" id="8_ruwul"]
 [ext_resource type="PackedScene" uid="uid://curi6w4ex7jou" path="res://Scene Objects/Enemies/YellowDragoon.tscn" id="9_v5jd3"]
+[ext_resource type="PackedScene" uid="uid://dfkmxoba64spw" path="res://Scene Objects/Objects/MedalFragment.tscn" id="10_chcob"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ekffo"]
 size = Vector2(1536, 32)
 
-[node name="CH1_LV2_R8" type="Node2D" node_paths=PackedStringArray("tilemap_list", "room_entrances", "enemy_nodes")]
+[node name="CH1_LV2_R8" type="Node2D" node_paths=PackedStringArray("tilemap_list", "room_entrances", "enemy_nodes", "medal_fragments")]
 script = ExtResource("1_xbwwl")
 tilemap_list = [NodePath("BoundaryCollisionTilemap"), NodePath("LevelCollisionTilemap")]
 left_camera_limit = -1536
 room_entrances = [NodePath("Entrance 0"), NodePath("Entrance 1"), NodePath("Entrance 2")]
 enemy_nodes = [NodePath("Enemies/GreenDragoon"), NodePath("Enemies/RedDragoon"), NodePath("Enemies/BlueDragoon"), NodePath("Enemies/RedDragoon2"), NodePath("Enemies/RedDragoon3"), NodePath("Enemies/YellowDragoon"), NodePath("Enemies/YellowDragoon2")]
+medal_fragments = [NodePath("Fragments/MedalFragment"), NodePath("Fragments/MedalFragment2"), NodePath("Fragments/MedalFragment3"), NodePath("Fragments/MedalFragment4"), NodePath("Fragments/MedalFragment5"), NodePath("Fragments/MedalFragment6"), NodePath("Fragments/MedalFragment7"), NodePath("Fragments/MedalFragment8"), NodePath("Fragments/MedalFragment9"), NodePath("Fragments/MedalFragment10"), NodePath("Fragments/MedalFragment11"), NodePath("Fragments/MedalFragment12"), NodePath("Fragments/MedalFragment13"), NodePath("Fragments/MedalFragment14"), NodePath("Fragments/MedalFragment15"), NodePath("Fragments/MedalFragment16"), NodePath("Fragments/MedalFragment17"), NodePath("Fragments/MedalFragment18"), NodePath("Fragments/MedalFragment19"), NodePath("Fragments/MedalFragment20"), NodePath("Fragments/MedalFragment21"), NodePath("Fragments/MedalFragment22"), NodePath("Fragments/MedalFragment23")]
 
 [node name="BoundaryCollisionTilemap" type="TileMap" parent="."]
 z_index = 4
@@ -136,5 +138,76 @@ position = Vector2(-736, 223)
 
 [node name="YellowDragoon2" parent="Enemies" instance=ExtResource("9_v5jd3")]
 position = Vector2(-1376, 128)
+
+[node name="Fragments" type="Node2D" parent="."]
+
+[node name="MedalFragment" parent="Fragments" instance=ExtResource("10_chcob")]
+position = Vector2(176, 176)
+
+[node name="MedalFragment2" parent="Fragments" instance=ExtResource("10_chcob")]
+position = Vector2(208, 176)
+
+[node name="MedalFragment3" parent="Fragments" instance=ExtResource("10_chcob")]
+position = Vector2(-464, 144)
+
+[node name="MedalFragment4" parent="Fragments" instance=ExtResource("10_chcob")]
+position = Vector2(-496, 176)
+
+[node name="MedalFragment5" parent="Fragments" instance=ExtResource("10_chcob")]
+position = Vector2(-496, 272)
+
+[node name="MedalFragment6" parent="Fragments" instance=ExtResource("10_chcob")]
+position = Vector2(-464, 304)
+
+[node name="MedalFragment7" parent="Fragments" instance=ExtResource("10_chcob")]
+position = Vector2(-368, 304)
+
+[node name="MedalFragment8" parent="Fragments" instance=ExtResource("10_chcob")]
+position = Vector2(-336, 272)
+
+[node name="MedalFragment9" parent="Fragments" instance=ExtResource("10_chcob")]
+position = Vector2(-1264, 48)
+
+[node name="MedalFragment10" parent="Fragments" instance=ExtResource("10_chcob")]
+position = Vector2(-1296, 80)
+
+[node name="MedalFragment11" parent="Fragments" instance=ExtResource("10_chcob")]
+position = Vector2(-1232, 80)
+
+[node name="MedalFragment12" parent="Fragments" instance=ExtResource("10_chcob")]
+position = Vector2(-1264, 112)
+
+[node name="MedalFragment13" parent="Fragments" instance=ExtResource("10_chcob")]
+position = Vector2(-1296, 144)
+
+[node name="MedalFragment14" parent="Fragments" instance=ExtResource("10_chcob")]
+position = Vector2(-1232, 144)
+
+[node name="MedalFragment15" parent="Fragments" instance=ExtResource("10_chcob")]
+position = Vector2(-1328, 112)
+
+[node name="MedalFragment16" parent="Fragments" instance=ExtResource("10_chcob")]
+position = Vector2(-1360, 144)
+
+[node name="MedalFragment17" parent="Fragments" instance=ExtResource("10_chcob")]
+position = Vector2(-1360, 80)
+
+[node name="MedalFragment18" parent="Fragments" instance=ExtResource("10_chcob")]
+position = Vector2(-1328, 48)
+
+[node name="MedalFragment19" parent="Fragments" instance=ExtResource("10_chcob")]
+position = Vector2(-1392, 112)
+
+[node name="MedalFragment20" parent="Fragments" instance=ExtResource("10_chcob")]
+position = Vector2(-1392, 48)
+
+[node name="MedalFragment21" parent="Fragments" instance=ExtResource("10_chcob")]
+position = Vector2(-1424, 80)
+
+[node name="MedalFragment22" parent="Fragments" instance=ExtResource("10_chcob")]
+position = Vector2(-1456, 112)
+
+[node name="MedalFragment23" parent="Fragments" instance=ExtResource("10_chcob")]
+position = Vector2(-1456, 48)
 
 [editable path="FallWarp"]
