@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://ex0us7i0pc7f"]
+[gd_scene load_steps=8 format=3 uid="uid://ex0us7i0pc7f"]
 
 [ext_resource type="Script" path="res://Scripts/Utility Scripts/Room.gd" id="1_qemck"]
 [ext_resource type="TileSet" uid="uid://dhwi7i1loa2pd" path="res://Sprites/Tiles/Test Tiles/TestTileSet.tres" id="2_ig34w"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://bgww8jir45ktf" path="res://Scene Objects/Enemies/BlueDragoon.tscn" id="4_pr21r"]
 [ext_resource type="PackedScene" uid="uid://dfkmxoba64spw" path="res://Scene Objects/Objects/MedalFragment.tscn" id="5_owp5s"]
 [ext_resource type="PackedScene" uid="uid://dqbo0wu6hm8lj" path="res://Scene Objects/Objects/WarpTrigger.tscn" id="6_rjcb8"]
+[ext_resource type="PackedScene" uid="uid://b2a0ttqvejk51" path="res://Scene Objects/Objects/TemperDragonFruit.tscn" id="7_sciu4"]
 
 [node name="CH1_LV2_R5" type="Node2D" node_paths=PackedStringArray("tilemap_list", "room_entrances", "enemy_nodes", "medal_fragments")]
 script = ExtResource("1_qemck")
@@ -149,3 +150,10 @@ position = Vector2(272, -560)
 
 [node name="MedalFragment20" parent="Fragments" instance=ExtResource("5_owp5s")]
 position = Vector2(272, -496)
+
+[node name="TemperDragonFruit" parent="." instance=ExtResource("7_sciu4")]
+position = Vector2(416, -160)
+
+[node name="TemperDragonFruit2" parent="." instance=ExtResource("7_sciu4")]
+position = Vector2(96, -480)
+enable_cycling = false

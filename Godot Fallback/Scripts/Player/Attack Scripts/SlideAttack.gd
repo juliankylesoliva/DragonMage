@@ -20,21 +20,23 @@ class_name SlideAttack
 
 @export var slide_effect_slowdown_threshold : float = 0.5
 
-@export var slide_startup_coyote_time : float = 0.1
+@export var slide_hang_time : float = 0.2
 
 var prev_horizontal_velocity : float = 0
+
+var prev_is_grounded : bool = false
 
 var horizontal_result : float = 0
 
 var current_slide_timer : float = 0
 
-var current_slide_coyote_timer : float = 0
+var current_slide_hang_timer : float = 0
 
 var slide_effect_instance : AnimatedSprite2D = null
 
 func can_use_attack():
 	var state_name : String = hub.state_machine.current_state.name
-	return (hub.form.current_mode == PlayerForm.CharacterMode.DRAGON and state_name != "Attacking" and (hub.attacks.current_attack == null or hub.attacks.current_attack.name != self.name) and (!hub.attacks.is_attack_cooldown_active() or hub.jumping.can_fast_fall_slope_boost()) and (hub.movement.is_crouching or hub.jumping.can_fast_fall_slope_boost()) and (state_name == "Standing" or state_name == "Running" or (state_name == "Falling" and hub.jumping.can_fast_fall_slope_boost())) and hub.char_body.is_on_floor() and ((!hub.collisions.is_facing_a_wall() and !hub.collisions.is_near_a_ledge(hub.movement.get_facing_value() and hub.get_input_vector().x == 0)) or (hub.jumping.can_fast_fall_slope_boost() and !hub.collisions.is_near_a_ledge(hub.movement.get_facing_value() and hub.get_input_vector().x == 0))))
+	return (hub.form.current_mode == PlayerForm.CharacterMode.DRAGON and state_name != "Attacking" and (hub.attacks.current_attack == null or hub.attacks.current_attack.name != self.name) and (!hub.attacks.is_attack_cooldown_active() or hub.jumping.can_fast_fall_slope_boost()) and (hub.movement.is_crouching or hub.jumping.can_fast_fall_slope_boost()) and (state_name == "Standing" or state_name == "Running" or (state_name == "Falling" and hub.jumping.can_fast_fall_slope_boost())) and hub.char_body.is_on_floor() and (!hub.collisions.is_facing_a_wall() or (hub.jumping.can_fast_fall_slope_boost() and !hub.collisions.is_near_a_ledge(hub.movement.get_facing_value() and hub.get_input_vector().x == 0))))
 
 func on_attack_state_enter():
 	if (slide_effect_instance != null):
@@ -43,6 +45,9 @@ func on_attack_state_enter():
 	if (!hub.movement.is_crouching):
 		hub.movement.is_crouching = true
 		hub.movement.current_min_crouch_timer = hub.movement.min_crouch_time
+	
+	prev_is_grounded = hub.char_body.is_on_floor()
+	
 	current_attack_state = AttackState.ACTIVE
 	SoundFactory.play_sound_by_name("movement_draelyn_slide", hub.char_body.global_position, 0, 1, "SFX")
 	prev_horizontal_velocity = abs(hub.movement.current_horizontal_velocity)
@@ -51,7 +56,7 @@ func on_attack_state_enter():
 	hub.char_body.velocity = (Vector2.RIGHT * horizontal_result * hub.movement.get_facing_value())
 	hub.movement.current_horizontal_velocity = hub.char_body.velocity.x
 	current_slide_timer = 0
-	current_slide_coyote_timer = slide_startup_coyote_time
+	current_slide_hang_timer = slide_hang_time
 	hub.sprite_trail.activate_trail()
 	
 	var slide_effect_name : String = (slide_effect_fast if horizontal_result > slide_min_horizontal_speed else slide_effect_normal if horizontal_result > (slide_min_horizontal_speed * slide_effect_slowdown_threshold) else slide_effect_slow)
@@ -65,7 +70,7 @@ func attack_state_process(_delta : float):
 		hub.state_machine.current_state.set_next_state(hub.state_machine.get_state_by_name("Standing"))
 	elif (hub.is_deactivated):
 		hub.state_machine.current_state.set_next_state(hub.state_machine.get_state_by_name("Deactivated"))
-	elif (hub.damage.is_player_defeated or hub.damage.is_player_damaged() or hub.collisions.is_facing_a_wall() or (current_slide_coyote_timer <= 0 and (hub.collisions.is_near_a_ledge() or hub.collisions.get_distance_to_ground() > hub.char_body.floor_snap_length))):
+	elif (hub.damage.is_player_defeated or hub.damage.is_player_damaged() or hub.collisions.is_facing_a_wall() or (current_slide_hang_timer <= 0 and (hub.collisions.is_near_a_ledge() or hub.collisions.get_distance_to_ground() > hub.char_body.floor_snap_length))):
 		stop_slide()
 	elif (!hub.collisions.is_in_ceiling_when_uncrouched() and current_slide_timer > slide_uncancelable_time and (hub.get_input_vector().x * hub.char_body.velocity.x) > 0 and hub.buffers.is_jump_buffer_active()):
 		do_jump_cancel()
@@ -107,7 +112,7 @@ func on_attack_state_exit():
 	prev_horizontal_velocity = 0
 	horizontal_result = 0
 	current_slide_timer = 0
-	current_slide_coyote_timer = 0
+	current_slide_hang_timer = 0
 
 func do_jump_cancel():
 	if (current_attack_state != AttackState.ACTIVE):
@@ -161,6 +166,7 @@ func preserve_slide_speed():
 func slide_update(delta : float):
 	if (current_attack_state != AttackState.ACTIVE):
 		return
+	
 	hub.char_body.velocity.x = (horizontal_result * hub.movement.get_facing_value())
 	hub.movement.current_horizontal_velocity = hub.char_body.velocity.x
 	
@@ -169,6 +175,6 @@ func slide_update(delta : float):
 	hub.collisions.upward_slope_correction(intended_velocity)
 	
 	current_slide_timer += delta
-	if (current_slide_coyote_timer > 0):
-		current_slide_coyote_timer = move_toward(current_slide_coyote_timer, 0, delta)
+	if (current_slide_hang_timer > 0):
+		current_slide_hang_timer = move_toward(current_slide_hang_timer, 0, delta)
 	horizontal_result = move_toward(horizontal_result, 0, slide_deceleration_rate * delta)

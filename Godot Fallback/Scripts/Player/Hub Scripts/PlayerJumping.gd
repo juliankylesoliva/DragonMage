@@ -306,7 +306,7 @@ func start_ground_jump():
 	
 	var char_name : String = hub.form.get_current_form_name()
 	var is_throwing : bool = hub.char_sprite.animation.contains("MagliThrow")
-	hub.animation.set_animation("MagliThrowAir" if is_throwing else "{name}Jump".format({"name" : char_name}) if !hub.movement.is_crouching else "MagliCrouchJump")
+	hub.animation.set_animation("MagliThrowAir" if is_throwing else "{name}Jump".format({"name" : char_name}) if !hub.movement.is_crouching else "{name}CrouchJump".format({"name" : char_name}))
 	hub.animation.set_animation_frame(1 if is_throwing else 0)
 	hub.animation.set_animation_speed(1)
 	
@@ -355,7 +355,7 @@ func falling_update(delta : float):
 		hub.char_body.velocity.y = max_fall_speed_to_use
 
 func can_fast_fall():
-	return (enable_fast_falling and !is_fast_falling and hub.buffers.is_fast_fall_buffer_active() and fast_falling_speed > max_fall_speed and !hub.char_body.is_on_floor() and hub.char_body.velocity.y >= fast_fall_threshold and hub.char_body.velocity.y < fast_falling_speed)
+	return (enable_fast_falling and !is_fast_falling and hub.buffers.is_fast_fall_buffer_active() and !Input.is_action_pressed("Jump") and fast_falling_speed > max_fall_speed and !hub.char_body.is_on_floor() and hub.char_body.velocity.y >= fast_fall_threshold and hub.char_body.velocity.y < fast_falling_speed)
 
 func can_fast_fall_slope_boost():
 	return (enable_fast_falling and is_fast_falling and hub.char_body.is_on_floor() and hub.collisions.get_distance_to_ground() <= hub.char_body.floor_snap_length and hub.char_body.get_floor_angle() > fast_fall_slope_boost_threshold)
@@ -406,7 +406,7 @@ func can_midair_jump():
 	return (((hub.state_machine.previous_state.name != "WallVaulting") or hub.char_body.velocity.y >= 0 or current_midair_jumps > 0) and (!hub.char_body.is_on_floor() or hub.state_machine.current_state.name == "Jumping") and current_midair_jumps < max_midair_jumps and hub.buffers.is_jump_buffer_active())
 
 func do_midair_jump():
-	hub.animation.set_animation("DraelynMidairJump")
+	hub.animation.set_animation("DraelynMidairJump" if !hub.movement.is_crouching else "DraelynMidairCrouchJump")
 	hub.animation.set_animation_frame(0)
 	hub.animation.set_animation_speed(1)
 	
@@ -617,6 +617,7 @@ func landing_reset():
 func set_fast_fall():
 	hub.buffers.reset_fast_fall_buffer()
 	is_fast_falling = true
+	hub.movement.is_crouching = false
 	SoundFactory.play_sound_by_name("jump_draelyn_fastfall", hub.char_body.global_position, 0, 1, "SFX")
 
 func reset_fast_fall():

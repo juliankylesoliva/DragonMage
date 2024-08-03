@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://dupmsgfnvlne"]
+[gd_scene load_steps=11 format=3 uid="uid://dupmsgfnvlne"]
 
 [ext_resource type="Script" path="res://Scripts/Utility Scripts/Room.gd" id="1_qemck"]
 [ext_resource type="TileSet" uid="uid://dhwi7i1loa2pd" path="res://Sprites/Tiles/Test Tiles/TestTileSet.tres" id="2_ig34w"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://clfqwsy4byrkf" path="res://Scene Objects/Enemies/GreenDragoon.tscn" id="5_e8fuv"]
 [ext_resource type="PackedScene" uid="uid://curi6w4ex7jou" path="res://Scene Objects/Enemies/YellowDragoon.tscn" id="6_vy0f8"]
 [ext_resource type="PackedScene" uid="uid://dfkmxoba64spw" path="res://Scene Objects/Objects/MedalFragment.tscn" id="8_eh17f"]
+[ext_resource type="PackedScene" uid="uid://b2a0ttqvejk51" path="res://Scene Objects/Objects/TemperDragonFruit.tscn" id="9_8dpvj"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cdlrh"]
 size = Vector2(1472, 32)
@@ -18,7 +19,7 @@ tilemap_list = [NodePath("BoundaryCollisionTilemap"), NodePath("LevelCollisionTi
 left_camera_limit = -1536
 room_entrances = [NodePath("Entrance 0"), NodePath("Entrance 1"), NodePath("Entrance 2")]
 enemy_nodes = [NodePath("Enemies/RedDragoon"), NodePath("Enemies/GreenDragoon"), NodePath("Enemies/RedDragoon2"), NodePath("Enemies/GreenDragoon2"), NodePath("Enemies/YellowDragoon")]
-medal_fragments = [NodePath("Fragments/MedalFragment3"), NodePath("Fragments/MedalFragment4"), NodePath("Fragments/MedalFragment5"), NodePath("Fragments/MedalFragment6"), NodePath("Fragments/MedalFragment8"), NodePath("Fragments/MedalFragment10"), NodePath("Fragments/MedalFragment11"), NodePath("Fragments/MedalFragment13"), NodePath("Fragments/MedalFragment14"), NodePath("Fragments/MedalFragment15"), NodePath("Fragments/MedalFragment16"), NodePath("Fragments/MedalFragment18"), NodePath("Fragments/MedalFragment19"), NodePath("Fragments/MedalFragment20"), NodePath("Fragments/MedalFragment21"), NodePath("Fragments/MedalFragment22"), NodePath("Fragments/MedalFragment23"), NodePath("Fragments/MedalFragment24"), NodePath("Fragments/MedalFragment25"), NodePath("Fragments/MedalFragment26"), NodePath("Fragments/MedalFragment27"), NodePath("Fragments/MedalFragment28"), NodePath("Fragments/MedalFragment29"), NodePath("Fragments/MedalFragment30"), NodePath("Fragments/MedalFragment31"), NodePath("Fragments/MedalFragment32"), NodePath("Fragments/MedalFragment33"), NodePath("Fragments/MedalFragment34"), NodePath("Fragments/MedalFragment35"), NodePath("Fragments/MedalFragment36"), NodePath("Fragments/MedalFragment37"), NodePath("Fragments/MedalFragment38"), NodePath("Fragments/MedalFragment39")]
+medal_fragments = [NodePath("Fragments/MedalFragment3"), NodePath("Fragments/MedalFragment4"), NodePath("Fragments/MedalFragment5"), NodePath("Fragments/MedalFragment6"), NodePath("Fragments/MedalFragment8"), NodePath("Fragments/MedalFragment10"), NodePath("Fragments/MedalFragment11"), NodePath("Fragments/MedalFragment13"), NodePath("Fragments/MedalFragment14"), NodePath("Fragments/MedalFragment15"), NodePath("Fragments/MedalFragment16"), NodePath("Fragments/MedalFragment18"), NodePath("Fragments/MedalFragment19"), NodePath("Fragments/MedalFragment20"), NodePath("Fragments/MedalFragment21"), NodePath("Fragments/MedalFragment22"), NodePath("Fragments/MedalFragment23"), NodePath("Fragments/MedalFragment28"), NodePath("Fragments/MedalFragment29"), NodePath("Fragments/MedalFragment30"), NodePath("Fragments/MedalFragment31"), NodePath("Fragments/MedalFragment32"), NodePath("Fragments/MedalFragment33"), NodePath("Fragments/MedalFragment34"), NodePath("Fragments/MedalFragment35"), NodePath("Fragments/MedalFragment36"), NodePath("Fragments/MedalFragment37"), NodePath("Fragments/MedalFragment38"), NodePath("Fragments/MedalFragment39")]
 
 [node name="BoundaryCollisionTilemap" type="TileMap" parent="."]
 z_index = 4
@@ -99,7 +100,7 @@ position = Vector2(-352, 224)
 position = Vector2(-672, 160)
 
 [node name="GreenDragoon2" parent="Enemies" instance=ExtResource("5_e8fuv")]
-position = Vector2(-992, 224)
+position = Vector2(-1056, 224)
 
 [node name="YellowDragoon" parent="Enemies" instance=ExtResource("6_vy0f8")]
 position = Vector2(-1056, 64)
@@ -157,18 +158,6 @@ position = Vector2(-1424, 112)
 [node name="MedalFragment23" parent="Fragments" instance=ExtResource("8_eh17f")]
 position = Vector2(-1456, 80)
 
-[node name="MedalFragment24" parent="Fragments" instance=ExtResource("8_eh17f")]
-position = Vector2(432, 48)
-
-[node name="MedalFragment25" parent="Fragments" instance=ExtResource("8_eh17f")]
-position = Vector2(432, 80)
-
-[node name="MedalFragment26" parent="Fragments" instance=ExtResource("8_eh17f")]
-position = Vector2(400, 48)
-
-[node name="MedalFragment27" parent="Fragments" instance=ExtResource("8_eh17f")]
-position = Vector2(400, 80)
-
 [node name="MedalFragment28" parent="Fragments" instance=ExtResource("8_eh17f")]
 position = Vector2(368, 48)
 
@@ -207,5 +196,13 @@ position = Vector2(208, 80)
 
 [node name="ReinforcedFireBlock" parent="." instance=ExtResource("4_k1cwv")]
 position = Vector2(160, 64)
+
+[node name="TemperDragonFruit" parent="." instance=ExtResource("9_8dpvj")]
+position = Vector2(416, 64)
+starting_state = 1
+enable_cycling = false
+
+[node name="TemperDragonFruit2" parent="." instance=ExtResource("9_8dpvj")]
+position = Vector2(-992, 192)
 
 [editable path="FallWarp"]

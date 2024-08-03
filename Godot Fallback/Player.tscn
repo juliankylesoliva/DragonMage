@@ -1,4 +1,4 @@
-[gd_scene load_steps=200 format=3 uid="uid://c6qw77ovfwgfs"]
+[gd_scene load_steps=206 format=3 uid="uid://c6qw77ovfwgfs"]
 
 [ext_resource type="Texture2D" uid="uid://d381ahbcwydy8" path="res://Sprites/Player/DraelynCrouch.png" id="1_6b42p"]
 [ext_resource type="Texture2D" uid="uid://dls34a1qa8iy1" path="res://Sprites/Player/DraelynFireTackle.png" id="1_ddrlj"]
@@ -99,9 +99,21 @@ region = Rect2(64, 0, 64, 64)
 atlas = ExtResource("1_6b42p")
 region = Rect2(0, 0, 64, 64)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_7bx44"]
+atlas = ExtResource("1_6b42p")
+region = Rect2(448, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rui2v"]
+atlas = ExtResource("1_6b42p")
+region = Rect2(512, 0, 64, 64)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_4unl2"]
 atlas = ExtResource("1_6b42p")
 region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_abcus"]
+atlas = ExtResource("1_6b42p")
+region = Rect2(320, 0, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_v8j4w"]
 atlas = ExtResource("1_6b42p")
@@ -178,6 +190,14 @@ region = Rect2(64, 0, 64, 64)
 [sub_resource type="AtlasTexture" id="AtlasTexture_j5jx7"]
 atlas = ExtResource("2_p0h7w")
 region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_drutu"]
+atlas = ExtResource("1_6b42p")
+region = Rect2(512, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_26r3d"]
+atlas = ExtResource("1_6b42p")
+region = Rect2(384, 0, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_lycxg"]
 atlas = ExtResource("2_p0h7w")
@@ -531,6 +551,10 @@ region = Rect2(0, 0, 64, 64)
 atlas = ExtResource("1_s7co6")
 region = Rect2(256, 0, 64, 64)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_kl7yn"]
+atlas = ExtResource("1_s7co6")
+region = Rect2(320, 0, 64, 64)
+
 [sub_resource type="SpriteFrames" id="SpriteFrames_5s7e1"]
 animations = [{
 "frames": [{
@@ -556,11 +580,30 @@ animations = [{
 "speed": 60.0
 }, {
 "frames": [{
+"duration": 18.0,
+"texture": SubResource("AtlasTexture_7bx44")
+}, {
+"duration": 18.0,
+"texture": SubResource("AtlasTexture_rui2v")
+}],
+"loop": false,
+"name": &"DraelynCrouchFall",
+"speed": 60.0
+}, {
+"frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_4unl2")
 }],
 "loop": true,
 "name": &"DraelynCrouchHeadbonk",
+"speed": 60.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_abcus")
+}],
+"loop": false,
+"name": &"DraelynCrouchJump",
 "speed": 60.0
 }, {
 "frames": [{
@@ -694,6 +737,17 @@ animations = [{
 }],
 "loop": false,
 "name": &"DraelynJump",
+"speed": 60.0
+}, {
+"frames": [{
+"duration": 3.0,
+"texture": SubResource("AtlasTexture_drutu")
+}, {
+"duration": 12.0,
+"texture": SubResource("AtlasTexture_26r3d")
+}],
+"loop": false,
+"name": &"DraelynMidairCrouchJump",
 "speed": 60.0
 }, {
 "frames": [{
@@ -1247,6 +1301,14 @@ animations = [{
 "loop": true,
 "name": &"MagliWallSlide",
 "speed": 60.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kl7yn")
+}],
+"loop": true,
+"name": &"MagliWallSlideTired",
+"speed": 60.0
 }]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_6k7o1"]
@@ -1490,6 +1552,7 @@ slide_max_horizontal_speed = 512.0
 slide_deceleration_rate = 192.0
 slide_min_duration = 0.3
 slide_uncancelable_time = 0.2
+slide_hang_time = 0.3
 uses_attack_state = true
 
 [node name="Temper" type="Node" parent="Hub" node_paths=PackedStringArray("hub")]
@@ -1623,7 +1686,7 @@ z_index = 4
 texture_filter = 1
 position = Vector2(0, 1)
 sprite_frames = SubResource("SpriteFrames_5s7e1")
-animation = &"MagliStand"
+animation = &"DraelynFall"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 8)

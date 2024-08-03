@@ -27,7 +27,7 @@
 script = ExtResource("1_lbrws")
 level_index = 6
 player_reference = NodePath("Player")
-starting_room = NodePath("CH1_LV2_R9")
+starting_room = NodePath("CH1_LV2_R1")
 room_list = [NodePath("CH1_LV2_R1"), NodePath("CH1_LV2_R2"), NodePath("CH1_LV2_R3"), NodePath("CH1_LV2_R4"), NodePath("CH1_LV2_R5"), NodePath("CH1_LV2_R6"), NodePath("CH1_LV2_R7"), NodePath("CH1_LV2_R8"), NodePath("CH1_LV2_R9")]
 min_fragment_collection_rate = 0.7
 dropped_fragment_scene = ExtResource("2_dc11k")

@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://7stqd0bfphjy"]
+[gd_scene load_steps=12 format=3 uid="uid://7stqd0bfphjy"]
 
 [ext_resource type="Script" path="res://Scripts/Utility Scripts/Room.gd" id="1_v8vs2"]
 [ext_resource type="TileSet" uid="uid://dhwi7i1loa2pd" path="res://Sprites/Tiles/Test Tiles/TestTileSet.tres" id="2_v86ub"]
@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://dfkmxoba64spw" path="res://Scene Objects/Objects/MedalFragment.tscn" id="8_uk2gy"]
 [ext_resource type="PackedScene" uid="uid://cs4s34scsvcfr" path="res://Scene Objects/Objects/BreakableBlock.tscn" id="9_c8msf"]
 [ext_resource type="PackedScene" uid="uid://vtyaphi47lrf" path="res://Scene Objects/Objects/Checkpoint.tscn" id="10_el8w5"]
+[ext_resource type="PackedScene" uid="uid://b2a0ttqvejk51" path="res://Scene Objects/Objects/TemperDragonFruit.tscn" id="10_ua3rn"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ci1uh"]
 size = Vector2(128, 32)
@@ -139,5 +140,8 @@ position = Vector2(1824, 128)
 
 [node name="Checkpoint" parent="." instance=ExtResource("10_el8w5")]
 position = Vector2(128, 224)
+
+[node name="TemperDragonFruit" parent="." instance=ExtResource("10_ua3rn")]
+position = Vector2(304, 208)
 
 [editable path="FallWarp"]

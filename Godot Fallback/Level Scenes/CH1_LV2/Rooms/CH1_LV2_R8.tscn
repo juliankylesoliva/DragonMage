@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://blkavapp0nigt"]
+[gd_scene load_steps=13 format=3 uid="uid://blkavapp0nigt"]
 
 [ext_resource type="Script" path="res://Scripts/Utility Scripts/Room.gd" id="1_xbwwl"]
 [ext_resource type="TileSet" uid="uid://dhwi7i1loa2pd" path="res://Sprites/Tiles/Test Tiles/TestTileSet.tres" id="2_isxfa"]
@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://clfqwsy4byrkf" path="res://Scene Objects/Enemies/GreenDragoon.tscn" id="8_ruwul"]
 [ext_resource type="PackedScene" uid="uid://curi6w4ex7jou" path="res://Scene Objects/Enemies/YellowDragoon.tscn" id="9_v5jd3"]
 [ext_resource type="PackedScene" uid="uid://dfkmxoba64spw" path="res://Scene Objects/Objects/MedalFragment.tscn" id="10_chcob"]
+[ext_resource type="PackedScene" uid="uid://b2a0ttqvejk51" path="res://Scene Objects/Objects/TemperDragonFruit.tscn" id="11_ccjr8"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ekffo"]
 size = Vector2(1536, 32)
@@ -209,5 +210,20 @@ position = Vector2(-1456, 112)
 
 [node name="MedalFragment23" parent="Fragments" instance=ExtResource("10_chcob")]
 position = Vector2(-1456, 48)
+
+[node name="TemperDragonFruit" parent="." instance=ExtResource("11_ccjr8")]
+position = Vector2(-288, 160)
+starting_state = 0
+enable_cycling = false
+
+[node name="TemperDragonFruit2" parent="." instance=ExtResource("11_ccjr8")]
+position = Vector2(-736, 160)
+starting_state = 0
+enable_cycling = false
+
+[node name="TemperDragonFruit3" parent="." instance=ExtResource("11_ccjr8")]
+position = Vector2(-1120, 160)
+starting_state = 0
+enable_cycling = false
 
 [editable path="FallWarp"]

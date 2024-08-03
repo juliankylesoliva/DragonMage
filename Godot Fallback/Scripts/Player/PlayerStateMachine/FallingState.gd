@@ -22,7 +22,7 @@ func state_process(_delta : float):
 		hub.animation.set_animation("{name}Fall".format({"name" : char_name}))
 		hub.animation.set_animation_speed(1)
 	
-	if (hub.jumping.enable_crouch_jumping):
+	if (hub.jumping.enable_crouch_jumping and !hub.jumping.is_fast_falling):
 		if (prev_is_crouching and !hub.movement.is_crouching):
 			hub.animation.set_animation("{name}Fall".format({"name" : char_name}))
 			hub.animation.set_animation_speed(1)
@@ -93,7 +93,7 @@ func on_enter():
 		hub.animation.set_animation("DraelynFastFall")
 		hub.sprite_trail.activate_trail()
 	else:
-		hub.animation.set_animation("MagliThrowAir" if is_throwing else "{name}Fall".format({"name" : hub.form.get_current_form_name()}) if !hub.movement.is_crouching or !hub.jumping.enable_crouch_jumping else "MagliCrouchFall")
+		hub.animation.set_animation("MagliThrowAir" if is_throwing else "{name}Fall".format({"name" : hub.form.get_current_form_name()}) if !hub.movement.is_crouching or !hub.jumping.enable_crouch_jumping else "{name}CrouchFall".format({"name" : hub.form.get_current_form_name()}))
 		hub.animation.set_animation_frame(1 if is_throwing else 0)
 	hub.animation.set_animation_speed(1)
 

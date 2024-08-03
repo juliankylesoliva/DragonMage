@@ -17,7 +17,7 @@ func state_process(_delta):
 	
 	if (!hub.char_sprite.is_playing() and hub.char_sprite.animation == "MagliThrowWall"):
 		is_throwing = false
-		hub.animation.set_animation("MagliWallSlide")
+		hub.animation.set_animation("MagliWallSlide" if hub.jumping.current_wall_jumps < hub.jumping.max_wall_jumps else "MagliWallSlideTired")
 	
 	hub.jumping.update_wall_release_timer(_delta)
 	
@@ -62,7 +62,7 @@ func on_enter():
 		effect_instance.queue_free()
 	
 	hub.jumping.start_wall_slide()
-	hub.animation.set_animation("MagliThrowWall" if is_throwing else "MagliWallSlide")
+	hub.animation.set_animation("MagliThrowWall" if is_throwing else "MagliWallSlide" if hub.jumping.current_wall_jumps < hub.jumping.max_wall_jumps else "MagliWallSlideTired")
 	hub.animation.set_animation_frame(1 if is_throwing else 0)
 	effect_instance = EffectFactory.get_effect("WallSlideDust", hub.raycast_dm.global_position, 1, hub.movement.get_facing_value() < 0)
 
