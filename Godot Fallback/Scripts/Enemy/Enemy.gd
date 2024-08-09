@@ -52,6 +52,8 @@ func check_defeated_camera_distance():
 		if (body.global_position.distance_to(get_viewport().get_camera_2d().global_position) >= defeated_deactivation_camera_distance):
 			set_process(false)
 			get_parent().set_process(false)
+			sprite.set_visible(false)
+			movement.set_process_mode(Node.PROCESS_MODE_DISABLED)
 
 func play_damage_sound():
 	SoundFactory.play_sound_by_name("damage_enemy", body.global_position, 0, 1, "SFX")
