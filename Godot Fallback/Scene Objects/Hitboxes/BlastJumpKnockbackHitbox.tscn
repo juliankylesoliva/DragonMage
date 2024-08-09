@@ -5,7 +5,7 @@
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_p3x7f"]
 radius = 16.0
-height = 48.0
+height = 64.0
 
 [node name="BlastJumpKnockbackHitbox" instance=ExtResource("1_ky8o2")]
 light_mask = 8
