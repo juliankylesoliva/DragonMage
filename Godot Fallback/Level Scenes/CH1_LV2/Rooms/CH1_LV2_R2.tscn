@@ -88,17 +88,17 @@ position = Vector2(480, 160)
 [node name="BlueDragoon" parent="Enemies" instance=ExtResource("5_07t1q")]
 position = Vector2(896, 224)
 
-[node name="RedDragoon" parent="Enemies" instance=ExtResource("6_7vcns")]
-position = Vector2(1056, 128)
-
 [node name="BlueDragoon2" parent="Enemies" instance=ExtResource("5_07t1q")]
 position = Vector2(1216, 224)
 
-[node name="RedDragoon2" parent="Enemies" instance=ExtResource("6_7vcns")]
+[node name="RedDragoon" parent="Enemies" instance=ExtResource("6_7vcns")]
 position = Vector2(1376, 128)
 
 [node name="BlueDragoon3" parent="Enemies" instance=ExtResource("5_07t1q")]
 position = Vector2(1536, 224)
+
+[node name="RedDragoon2" parent="Enemies" instance=ExtResource("6_7vcns")]
+position = Vector2(1696, 128)
 
 [node name="Fragments" type="Node2D" parent="."]
 

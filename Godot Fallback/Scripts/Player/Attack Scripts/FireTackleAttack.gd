@@ -239,6 +239,7 @@ func active_update(delta : float):
 		
 		if (current_vertical_axis <= 0 and (hub.char_body.is_on_floor() or hub.collisions.get_distance_to_ground() <= fire_tackle_floor_snap_distance)):
 			hub.char_body.apply_floor_snap()
+			hub.jumping.landing_reset()
 		
 		if (hub.char_body.is_on_floor() and current_vertical_axis <= 0 and current_trail_spawn_timer >= 0):
 			current_trail_spawn_timer -= (hub.char_body.velocity.length() * delta)
@@ -361,6 +362,7 @@ func endlag_update(delta : float):
 			hub.char_body.velocity.x = (0.0 if hub.collisions.is_facing_a_wall() or hub.collisions.is_near_a_ledge(hub.movement.get_facing_value()) else move_toward(hub.char_body.velocity.x, 0, delta * fire_tackle_endlag_deceleration))
 			hub.collisions.do_ledge_nudge(lerp(hub.collisions.ledge_nudge_easing, fire_tackle_max_ledge_nudge_ease, abs(hub.char_body.velocity.x) / fire_tackle_max_horizontal_speed))
 			hub.char_body.apply_floor_snap()
+			hub.jumping.landing_reset()
 		elif (did_player_bump and hub.char_body.is_on_floor() and current_endlag_timer < fire_tackle_endlag_cancelable_time):
 			hub.movement.reset_current_horizontal_velocity()
 			hub.char_body.velocity.x = 0

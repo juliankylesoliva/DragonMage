@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="LevelInfo" load_steps=2 format=3 uid="uid://bfsd2qk0mqlsl"]
+
+[ext_resource type="Script" path="res://Scripts/Resource Scripts/LevelInfo/LevelInfo.gd" id="1_1j1c3"]
+
+[resource]
+script = ExtResource("1_1j1c3")
+level_scene_path = "res://Level Scenes/CH1_LV2/CH1_LV2.tscn"
+name_header = "Ch. 1-2: Perilous Parking"
+story_description = Array[String](["May 7, 202X - Early Morning
+
+	After another tedious walk, the tunnel that Knigel and I escaped through eventually sloped down into... a parking garage? Hmm... looks abandoned and run-down, yet it was crowded with even more Dragoons! Could this be how they move to the city and back, I wonder? Nevertheless, there's got to be an exit somewhere at the top level! There are quite a concerning amount of holes in the ground, too... I imagine we'll get sent back into the previous floor if we fall down any of them...
+
+~ Magli DRAELYN -"])
+form_changing_enabled = true

@@ -27,7 +27,7 @@
 
 [node name="CH1_LV2" type="Node2D" node_paths=PackedStringArray("player_reference", "starting_room", "room_list", "clear_timer")]
 script = ExtResource("1_lbrws")
-level_index = 6
+level_index = 5
 player_reference = NodePath("Player")
 starting_room = NodePath("CH1_LV2_R1")
 room_list = [NodePath("CH1_LV2_R1"), NodePath("CH1_LV2_R2"), NodePath("CH1_LV2_R3"), NodePath("CH1_LV2_R4"), NodePath("CH1_LV2_R5"), NodePath("CH1_LV2_R6"), NodePath("CH1_LV2_R7"), NodePath("CH1_LV2_R8"), NodePath("CH1_LV2_R9"), NodePath("CH1_LV2_R10"), NodePath("CH1_LV2_R11")]

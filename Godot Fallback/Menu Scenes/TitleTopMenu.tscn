@@ -128,3 +128,15 @@ text = "[center]Made by Kaysun (JKSun22), 2023-2024
 "
 scroll_active = false
 shortcut_keys_enabled = false
+
+[node name="VersionLabel" type="RichTextLabel" parent="."]
+offset_left = 376.0
+offset_top = 8.0
+offset_right = 504.0
+offset_bottom = 16.0
+theme_override_fonts/normal_font = ExtResource("2_mrg07")
+theme_override_font_sizes/normal_font_size = 8
+bbcode_enabled = true
+text = "[right]version 0.5.0"
+scroll_active = false
+shortcut_keys_enabled = false
