@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://cjmi2md4tdxux"]
+[gd_scene load_steps=16 format=3 uid="uid://cjmi2md4tdxux"]
 
 [ext_resource type="Script" path="res://Scripts/Utility Scripts/Room.gd" id="1_pfhji"]
 [ext_resource type="TileSet" uid="uid://dhwi7i1loa2pd" path="res://Sprites/Tiles/Test Tiles/TestTileSet.tres" id="2_urt3r"]
@@ -11,12 +11,16 @@
 [ext_resource type="PackedScene" uid="uid://curi6w4ex7jou" path="res://Scene Objects/Enemies/YellowDragoon.tscn" id="8_0lpuk"]
 [ext_resource type="PackedScene" uid="uid://vtyaphi47lrf" path="res://Scene Objects/Objects/Checkpoint.tscn" id="10_iyfii"]
 [ext_resource type="PackedScene" uid="uid://b2a0ttqvejk51" path="res://Scene Objects/Objects/TemperDragonFruit.tscn" id="11_k8k1b"]
+[ext_resource type="Texture2D" uid="uid://cmwo06a8mrx4e" path="res://Sprites/Backgrounds/1_2_BG/BackWall.png" id="12_p33oy"]
+[ext_resource type="Texture2D" uid="uid://bbfefk0q56hbb" path="res://Sprites/Backgrounds/1_2_BG/Concrete&Pillars.png" id="13_tv0xi"]
+[ext_resource type="Texture2D" uid="uid://cs50p7p6svbcj" path="res://Sprites/Backgrounds/1_2_BG/Pipes.png" id="14_pb1b4"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fkm1w"]
 size = Vector2(1792, 32)
 
-[node name="CH1_LV2_R10" type="Node2D" node_paths=PackedStringArray("tilemap_list", "room_entrances", "enemy_nodes", "medal_fragments")]
+[node name="CH1_LV2_R10" type="Node2D" node_paths=PackedStringArray("parallax_bg", "tilemap_list", "room_entrances", "enemy_nodes", "medal_fragments")]
 script = ExtResource("1_pfhji")
+parallax_bg = NodePath("ParallaxBackground")
 tilemap_list = [NodePath("BoundaryCollisionTilemap"), NodePath("LevelCollisionTilemap")]
 right_camera_limit = 2048
 room_entrances = [NodePath("Entrance 0"), NodePath("Entrance 1")]
@@ -47,7 +51,7 @@ layer_1/modulate = Color(1, 1, 1, 1)
 layer_1/y_sort_enabled = false
 layer_1/y_sort_origin = 0
 layer_1/z_index = -1
-layer_1/tile_data = PackedInt32Array(393216, 589837, 7, 393217, 589837, 7, 458753, 589837, 7, 458752, 589837, 7, 524294, 589837, 7, 589830, 589837, 7, 524295, 589837, 7, 589831, 589837, 7, 524296, 589837, 7, 589832, 589837, 7, 524297, 589837, 7, 589833, 589837, 7, 524298, 589837, 7, 589834, 589837, 7, 524299, 589837, 7, 589835, 589837, 7, 524306, 589837, 7, 589842, 589837, 7, 524307, 589837, 7, 589843, 589837, 7, 524308, 589837, 7, 589844, 589837, 7, 524309, 589837, 7, 589845, 589837, 7, 524310, 589837, 7, 589846, 589837, 7, 524311, 589837, 7, 589847, 589837, 7, 524312, 589837, 7, 589848, 589837, 7, 524313, 589837, 7, 589849, 589837, 7, 524322, 589837, 7, 589858, 589837, 7, 524323, 589837, 7, 589859, 589837, 7, 524324, 589837, 7, 589860, 589837, 7, 524325, 589837, 7, 589861, 589837, 7, 524326, 589837, 7, 589862, 589837, 7, 524327, 589837, 7, 589863, 589837, 7, 524328, 589837, 7, 589864, 589837, 7, 524329, 589837, 7, 589865, 589837, 7, 524336, 589837, 7, 589872, 589837, 7, 524337, 589837, 7, 589873, 589837, 7, 524338, 589837, 7, 589874, 589837, 7, 524339, 589837, 7, 589875, 589837, 7, 524340, 589837, 7, 589876, 589837, 7, 524341, 589837, 7, 589877, 589837, 7, 524342, 589837, 7, 589878, 589837, 7, 524343, 589837, 7, 589879, 589837, 7, 524344, 589837, 7, 589880, 589837, 7, 524345, 589837, 7, 589881, 589837, 7, 524348, 589837, 7, 589884, 589837, 7, 524349, 589837, 7, 589885, 589837, 7, 131134, 589837, 7, 196670, 589837, 7, 131135, 589837, 7, 196671, 589837, 7)
+layer_1/tile_data = PackedInt32Array(393216, 589837, 7, 393217, 589837, 7, 458753, 589837, 7, 458752, 589837, 7, 524294, 589837, 7, 589830, 589837, 7, 524295, 589837, 7, 589831, 589837, 7, 524296, 589837, 7, 589832, 589837, 7, 524297, 589837, 7, 589833, 589837, 7, 524298, 589837, 7, 589834, 589837, 7, 524299, 589837, 7, 589835, 589837, 7, 524306, 589837, 7, 589842, 589837, 7, 524307, 589837, 7, 589843, 589837, 7, 524308, 589837, 7, 589844, 589837, 7, 524309, 589837, 7, 589845, 589837, 7, 524310, 589837, 7, 589846, 589837, 7, 524311, 589837, 7, 589847, 589837, 7, 524312, 589837, 7, 589848, 589837, 7, 524313, 589837, 7, 589849, 589837, 7, 524322, 589837, 7, 589858, 589837, 7, 524323, 589837, 7, 589859, 589837, 7, 524324, 589837, 7, 589860, 589837, 7, 524325, 589837, 7, 589861, 589837, 7, 524326, 589837, 7, 589862, 589837, 7, 524327, 589837, 7, 589863, 589837, 7, 524328, 589837, 7, 589864, 589837, 7, 524329, 589837, 7, 589865, 589837, 7, 524336, 589837, 7, 589872, 589837, 7, 524337, 589837, 7, 589873, 589837, 7, 524338, 589837, 7, 589874, 589837, 7, 524339, 589837, 7, 589875, 589837, 7, 524340, 589837, 7, 589876, 589837, 7, 524341, 589837, 7, 589877, 589837, 7, 524342, 589837, 7, 589878, 589837, 7, 524343, 589837, 7, 589879, 589837, 7, 524344, 589837, 7, 589880, 589837, 7, 524345, 589837, 7, 589881, 589837, 7, 524348, 589837, 7, 589884, 589837, 7, 524349, 589837, 7, 589885, 589837, 7, 131134, 589837, 7, 196670, 589837, 7, 131135, 589837, 7, 196671, 589837, 7, 196666, 589837, 7, 196667, 589837, 7, 196668, 589837, 7, 196669, 589837, 7, 131132, 589837, 7, 262204, 589837, 7, 327740, 589837, 7, 393276, 589837, 7, 458812, 589837, 7, 131133, 589837, 7, 262205, 589837, 7, 327741, 589837, 7, 393277, 589837, 7, 458813, 589837, 7, 65545, 589837, 7, 131082, 589837, 7, 196619, 589837, 7, 262155, 589837, 7, 327691, 589837, 7, 393227, 589837, 7, 458763, 589837, 7, 65544, 589837, 7, 65543, 589837, 7, 65542, 589837, 7, 65541, 589837, 7, 65540, 589837, 7, 65539, 589837, 7, 131074, 589837, 7, 196610, 589837, 7, 262146, 589837, 7, 327682, 589837, 7, 393218, 589837, 7, 458754, 589837, 7, 458755, 589837, 7, 458756, 589837, 7, 458757, 589837, 7, 458758, 589837, 7, 458759, 589837, 7, 458760, 589837, 7, 458761, 589837, 7, 393225, 589837, 7, 393226, 589837, 7, 327690, 589837, 7, 262154, 589837, 7, 196618, 589837, 7, 458762, 589837, 7, 393224, 589837, 7, 393223, 589837, 7, 393222, 589837, 7, 393221, 589837, 7, 393220, 589837, 7, 393219, 589837, 7, 327683, 589837, 7, 262147, 589837, 7, 196611, 589837, 7, 131075, 589837, 7, 131076, 589837, 7, 131077, 589837, 7, 131078, 589837, 7, 131079, 589837, 7, 131080, 589837, 7, 131081, 589837, 7, 196615, 589837, 7, 262151, 589837, 7, 327687, 589837, 7, 327686, 589837, 7, 327685, 589837, 7, 327684, 589837, 7, 262148, 589837, 7, 196612, 589837, 7, 196613, 589837, 7, 196614, 589837, 7, 262150, 589837, 7, 262149, 589837, 7)
 layer_2/name = "Ground"
 layer_2/enabled = true
 layer_2/modulate = Color(0.0745098, 0.113725, 0.301961, 1)
@@ -158,5 +162,57 @@ position = Vector2(128, 224)
 
 [node name="TemperDragonFruit" parent="." instance=ExtResource("11_k8k1b")]
 position = Vector2(128, 160)
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+visible = false
+
+[node name="BackWall" type="ParallaxLayer" parent="ParallaxBackground"]
+modulate = Color(0.533333, 0.48, 0.8, 1)
+motion_scale = Vector2(0.02, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/BackWall"]
+texture_repeat = 2
+texture = ExtResource("12_p33oy")
+centered = false
+offset = Vector2(-512, 0)
+region_enabled = true
+region_rect = Rect2(0, 0, 3072, 320)
+
+[node name="Concrete" type="ParallaxLayer" parent="ParallaxBackground"]
+modulate = Color(0.533333, 0.48, 0.8, 1)
+motion_scale = Vector2(0.02, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/Concrete"]
+texture_repeat = 2
+texture = ExtResource("13_tv0xi")
+centered = false
+offset = Vector2(-512, 0)
+region_enabled = true
+region_rect = Rect2(0, 0, 3072, 320)
+
+[node name="Pipes2" type="ParallaxLayer" parent="ParallaxBackground"]
+modulate = Color(0.488, 0.5296, 0.8, 1)
+position = Vector2(-48, 8)
+motion_scale = Vector2(0.15, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/Pipes2"]
+texture_repeat = 2
+texture = ExtResource("14_pb1b4")
+centered = false
+offset = Vector2(-512, 0)
+region_enabled = true
+region_rect = Rect2(0, 0, 3072, 320)
+
+[node name="Pipes" type="ParallaxLayer" parent="ParallaxBackground"]
+position = Vector2(0, 24)
+motion_scale = Vector2(0.1, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/Pipes"]
+texture_repeat = 2
+texture = ExtResource("14_pb1b4")
+centered = false
+offset = Vector2(-512, 0)
+region_enabled = true
+region_rect = Rect2(0, 0, 3072, 320)
 
 [editable path="FallWarp"]

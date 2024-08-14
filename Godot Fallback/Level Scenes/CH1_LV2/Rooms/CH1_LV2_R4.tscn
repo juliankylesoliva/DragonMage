@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://dupmsgfnvlne"]
+[gd_scene load_steps=14 format=3 uid="uid://dupmsgfnvlne"]
 
 [ext_resource type="Script" path="res://Scripts/Utility Scripts/Room.gd" id="1_qemck"]
 [ext_resource type="TileSet" uid="uid://dhwi7i1loa2pd" path="res://Sprites/Tiles/Test Tiles/TestTileSet.tres" id="2_ig34w"]
@@ -9,12 +9,16 @@
 [ext_resource type="PackedScene" uid="uid://curi6w4ex7jou" path="res://Scene Objects/Enemies/YellowDragoon.tscn" id="6_vy0f8"]
 [ext_resource type="PackedScene" uid="uid://dfkmxoba64spw" path="res://Scene Objects/Objects/MedalFragment.tscn" id="8_eh17f"]
 [ext_resource type="PackedScene" uid="uid://b2a0ttqvejk51" path="res://Scene Objects/Objects/TemperDragonFruit.tscn" id="9_8dpvj"]
+[ext_resource type="Texture2D" uid="uid://cmwo06a8mrx4e" path="res://Sprites/Backgrounds/1_2_BG/BackWall.png" id="10_rll10"]
+[ext_resource type="Texture2D" uid="uid://bbfefk0q56hbb" path="res://Sprites/Backgrounds/1_2_BG/Concrete&Pillars.png" id="11_wxwn4"]
+[ext_resource type="Texture2D" uid="uid://cs50p7p6svbcj" path="res://Sprites/Backgrounds/1_2_BG/Pipes.png" id="12_nyupn"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cdlrh"]
 size = Vector2(1472, 32)
 
-[node name="CH1_LV2_R4" type="Node2D" node_paths=PackedStringArray("tilemap_list", "room_entrances", "enemy_nodes", "medal_fragments")]
+[node name="CH1_LV2_R4" type="Node2D" node_paths=PackedStringArray("parallax_bg", "tilemap_list", "room_entrances", "enemy_nodes", "medal_fragments")]
 script = ExtResource("1_qemck")
+parallax_bg = NodePath("ParallaxBackground")
 tilemap_list = [NodePath("BoundaryCollisionTilemap"), NodePath("LevelCollisionTilemap")]
 left_camera_limit = -1536
 room_entrances = [NodePath("Entrance 0"), NodePath("Entrance 1"), NodePath("Entrance 2")]
@@ -45,7 +49,7 @@ layer_1/modulate = Color(1, 1, 1, 1)
 layer_1/y_sort_enabled = false
 layer_1/y_sort_origin = 0
 layer_1/z_index = -1
-layer_1/tile_data = PackedInt32Array(10, 589837, 7, 11, 589837, 7, 12, 589837, 7, 13, 589837, 7, 65549, 589837, 7, 131085, 589837, 7, 131084, 589837, 7, 131083, 589837, 7, 131082, 589837, 7, 65546, 589837, 7, 65547, 589837, 7, 65548, 589837, 7, 65545, 589837, 7, 65544, 589837, 7, 65543, 589837, 7, 65542, 589837, 7, 65541, 589837, 7, 65540, 589837, 7, 65539, 589837, 7, 131075, 589837, 7, 131074, 589837, 7, 196610, 589837, 7, 196611, 589837, 7, 65538, 589837, 7, 524290, 589837, 7, 524291, 589837, 7, 524292, 589837, 7, 524293, 589837, 7, 589829, 589837, 7, 589828, 589837, 7, 589827, 589837, 7, 589826, 589837, 7, 393232, 589837, 7, 393233, 589837, 7, 393231, 589837, 7, 393230, 589837, 7, 458766, 589837, 7, 458767, 589837, 7, 458768, 589837, 7, 458769, 589837, 7, 589816, 589837, 7, 589817, 589837, 7, 589818, 589837, 7, 589819, 589837, 7, 655355, 589837, 7, 655354, 589837, 7, 655353, 589837, 7, 655352, 589837, 7, 589806, 589837, 7, 589807, 589837, 7, 589808, 589837, 7, 589809, 589837, 7, 655345, 589837, 7, 655344, 589837, 7, 655343, 589837, 7, 655342, 589837, 7, 589796, 589837, 7, 589797, 589837, 7, 589798, 589837, 7, 589799, 589837, 7, 655335, 589837, 7, 655334, 589837, 7, 655333, 589837, 7, 655332, 589837, 7, 589784, 589837, 7, 589785, 589837, 7, 589786, 589837, 7, 589787, 589837, 7, 589788, 589837, 7, 589789, 589837, 7, 655325, 589837, 7, 655324, 589837, 7, 655323, 589837, 7, 655322, 589837, 7, 655321, 589837, 7, 655320, 589837, 7, 196566, 589837, 7, 131030, 589837, 7, 131029, 589837, 7, 131028, 589837, 7, 131027, 589837, 7, 131026, 589837, 7, 196562, 589837, 7, 262098, 589837, 7, 262099, 589837, 7, 262100, 589837, 7, 262101, 589837, 7, 196565, 589837, 7, 196564, 589837, 7, 196563, 589837, 7, 458705, 589837, 7, 458704, 589837, 7, 458703, 589837, 7, 458702, 589837, 7, 524238, 589837, 7, 524239, 589837, 7, 524240, 589837, 7, 524241, 589837, 7, 131076, 589837, 7, 131077, 589837, 7, 131078, 589837, 7, 131079, 589837, 7, 131080, 589837, 7, 131081, 589837, 7)
+layer_1/tile_data = PackedInt32Array(10, 589837, 7, 11, 589837, 7, 12, 589837, 7, 13, 589837, 7, 65549, 589837, 7, 131085, 589837, 7, 131084, 589837, 7, 131083, 589837, 7, 131082, 589837, 7, 65546, 589837, 7, 65547, 589837, 7, 65548, 589837, 7, 65545, 589837, 7, 65544, 589837, 7, 65543, 589837, 7, 65542, 589837, 7, 65541, 589837, 7, 65540, 589837, 7, 65539, 589837, 7, 131075, 589837, 7, 131074, 589837, 7, 196610, 589837, 7, 196611, 589837, 7, 65538, 589837, 7, 524290, 589837, 7, 524291, 589837, 7, 524292, 589837, 7, 524293, 589837, 7, 589829, 589837, 7, 589828, 589837, 7, 589827, 589837, 7, 589826, 589837, 7, 393232, 589837, 7, 393233, 589837, 7, 393231, 589837, 7, 393230, 589837, 7, 458766, 589837, 7, 458767, 589837, 7, 458768, 589837, 7, 458769, 589837, 7, 589816, 589837, 7, 589817, 589837, 7, 589818, 589837, 7, 589819, 589837, 7, 655355, 589837, 7, 655354, 589837, 7, 655353, 589837, 7, 655352, 589837, 7, 589806, 589837, 7, 589807, 589837, 7, 589808, 589837, 7, 589809, 589837, 7, 655345, 589837, 7, 655344, 589837, 7, 655343, 589837, 7, 655342, 589837, 7, 589796, 589837, 7, 589797, 589837, 7, 589798, 589837, 7, 589799, 589837, 7, 655335, 589837, 7, 655334, 589837, 7, 655333, 589837, 7, 655332, 589837, 7, 589784, 589837, 7, 589785, 589837, 7, 589786, 589837, 7, 589787, 589837, 7, 589788, 589837, 7, 589789, 589837, 7, 655325, 589837, 7, 655324, 589837, 7, 655323, 589837, 7, 655322, 589837, 7, 655321, 589837, 7, 655320, 589837, 7, 196566, 589837, 7, 131030, 589837, 7, 131029, 589837, 7, 131028, 589837, 7, 131027, 589837, 7, 131026, 589837, 7, 196562, 589837, 7, 262098, 589837, 7, 262099, 589837, 7, 262100, 589837, 7, 262101, 589837, 7, 196565, 589837, 7, 196564, 589837, 7, 196563, 589837, 7, 458705, 589837, 7, 458704, 589837, 7, 458703, 589837, 7, 458702, 589837, 7, 524238, 589837, 7, 524239, 589837, 7, 524240, 589837, 7, 524241, 589837, 7, 131076, 589837, 7, 131077, 589837, 7, 131078, 589837, 7, 131079, 589837, 7, 131080, 589837, 7, 131081, 589837, 7, 327688, 589837, 7, 393224, 589837, 7, 458760, 589837, 7, 458761, 589837, 7, 393225, 589837, 7, 327689, 589837, 7, 327690, 589837, 7, 327691, 589837, 7, 393227, 589837, 7, 393226, 589837, 7, 327692, 589837, 7, 393228, 589837, 7, 458762, 589837, 7, 458763, 589837, 7, 458764, 589837, 7, 458765, 589837, 7, 393229, 589837, 7, 327693, 589837, 7)
 layer_2/name = "Ground"
 layer_2/enabled = true
 layer_2/modulate = Color(0.0745098, 0.113725, 0.301961, 1)
@@ -205,5 +209,57 @@ enable_cycling = false
 
 [node name="TemperDragonFruit2" parent="." instance=ExtResource("9_8dpvj")]
 position = Vector2(-992, 192)
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+visible = false
+
+[node name="BackWall" type="ParallaxLayer" parent="ParallaxBackground"]
+modulate = Color(0.533333, 0.48, 0.8, 1)
+motion_scale = Vector2(0.02, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/BackWall"]
+texture_repeat = 2
+texture = ExtResource("10_rll10")
+centered = false
+offset = Vector2(-2048, 0)
+region_enabled = true
+region_rect = Rect2(0, 0, 3072, 320)
+
+[node name="Concrete" type="ParallaxLayer" parent="ParallaxBackground"]
+modulate = Color(0.533333, 0.48, 0.8, 1)
+motion_scale = Vector2(0.02, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/Concrete"]
+texture_repeat = 2
+texture = ExtResource("11_wxwn4")
+centered = false
+offset = Vector2(-2048, 0)
+region_enabled = true
+region_rect = Rect2(0, 0, 3072, 320)
+
+[node name="Pipes2" type="ParallaxLayer" parent="ParallaxBackground"]
+modulate = Color(0.488, 0.5296, 0.8, 1)
+position = Vector2(-48, 8)
+motion_scale = Vector2(0.15, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/Pipes2"]
+texture_repeat = 2
+texture = ExtResource("12_nyupn")
+centered = false
+offset = Vector2(-2048, 0)
+region_enabled = true
+region_rect = Rect2(0, 0, 3072, 320)
+
+[node name="Pipes" type="ParallaxLayer" parent="ParallaxBackground"]
+position = Vector2(0, 24)
+motion_scale = Vector2(0.1, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/Pipes"]
+texture_repeat = 2
+texture = ExtResource("12_nyupn")
+centered = false
+offset = Vector2(-2048, 0)
+region_enabled = true
+region_rect = Rect2(0, 0, 3072, 320)
 
 [editable path="FallWarp"]

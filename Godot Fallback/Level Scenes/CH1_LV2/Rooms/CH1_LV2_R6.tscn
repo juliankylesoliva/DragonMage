@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://bh0w6ai2d3ur5"]
+[gd_scene load_steps=16 format=3 uid="uid://bh0w6ai2d3ur5"]
 
 [ext_resource type="Script" path="res://Scripts/Utility Scripts/Room.gd" id="1_qemck"]
 [ext_resource type="TileSet" uid="uid://dhwi7i1loa2pd" path="res://Sprites/Tiles/Test Tiles/TestTileSet.tres" id="2_ig34w"]
@@ -11,12 +11,16 @@
 [ext_resource type="PackedScene" uid="uid://bgww8jir45ktf" path="res://Scene Objects/Enemies/BlueDragoon.tscn" id="9_qxx0p"]
 [ext_resource type="PackedScene" uid="uid://dfkmxoba64spw" path="res://Scene Objects/Objects/MedalFragment.tscn" id="10_3qnlg"]
 [ext_resource type="PackedScene" uid="uid://b2a0ttqvejk51" path="res://Scene Objects/Objects/TemperDragonFruit.tscn" id="11_twc6o"]
+[ext_resource type="Texture2D" uid="uid://cmwo06a8mrx4e" path="res://Sprites/Backgrounds/1_2_BG/BackWall.png" id="12_ggxvx"]
+[ext_resource type="Texture2D" uid="uid://bbfefk0q56hbb" path="res://Sprites/Backgrounds/1_2_BG/Concrete&Pillars.png" id="13_w0onx"]
+[ext_resource type="Texture2D" uid="uid://cs50p7p6svbcj" path="res://Sprites/Backgrounds/1_2_BG/Pipes.png" id="14_1vfu8"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fva5y"]
 size = Vector2(1728, 32)
 
-[node name="CH1_LV2_R6" type="Node2D" node_paths=PackedStringArray("tilemap_list", "room_entrances", "enemy_nodes", "medal_fragments")]
+[node name="CH1_LV2_R6" type="Node2D" node_paths=PackedStringArray("parallax_bg", "tilemap_list", "room_entrances", "enemy_nodes", "medal_fragments")]
 script = ExtResource("1_qemck")
+parallax_bg = NodePath("ParallaxBackground")
 tilemap_list = [NodePath("BoundaryCollisionTilemap"), NodePath("LevelCollisionTilemap")]
 right_camera_limit = 2048
 room_entrances = [NodePath("Entrance 0"), NodePath("Entrance 1"), NodePath("Entrance 2")]
@@ -47,7 +51,7 @@ layer_1/modulate = Color(1, 1, 1, 1)
 layer_1/y_sort_enabled = false
 layer_1/y_sort_origin = 0
 layer_1/z_index = -1
-layer_1/tile_data = PackedInt32Array(393216, 589837, 7, 458752, 589837, 7, 393217, 589837, 7, 458753, 589837, 7, 524296, 589837, 7, 589832, 589837, 7, 524297, 589837, 7, 589833, 589837, 7, 524298, 589837, 7, 589834, 589837, 7, 524299, 589837, 7, 589835, 589837, 7, 524300, 589837, 7, 589836, 589837, 7, 524301, 589837, 7, 589837, 589837, 7, 2, 589837, 7, 3, 589837, 7, 4, 589837, 7, 5, 589837, 7, 524306, 589837, 7, 589842, 589837, 7, 524307, 589837, 7, 589843, 589837, 7, 524308, 589837, 7, 589844, 589837, 7, 524309, 589837, 7, 589845, 589837, 7, 524312, 589837, 7, 589848, 589837, 7, 524313, 589837, 7, 589849, 589837, 7, 524320, 589837, 7, 589856, 589837, 7, 524321, 589837, 7, 589857, 589837, 7, 524322, 589837, 7, 589858, 589837, 7, 524323, 589837, 7, 589859, 589837, 7, 524330, 589837, 7, 589866, 589837, 7, 524331, 589837, 7, 589867, 589837, 7, 524332, 589837, 7, 589868, 589837, 7, 524333, 589837, 7, 589869, 589837, 7, 524340, 589837, 7, 589876, 589837, 7, 524341, 589837, 7, 589877, 589837, 7, 524342, 589837, 7, 589878, 589837, 7, 524343, 589837, 7, 589879, 589837, 7, 524344, 589837, 7, 589880, 589837, 7, 524345, 589837, 7, 589881, 589837, 7, 524346, 589837, 7, 589882, 589837, 7, 524347, 589837, 7, 589883, 589837, 7, 524348, 589837, 7, 589884, 589837, 7, 524349, 589837, 7, 589885, 589837, 7, 196670, 589837, 7, 262206, 589837, 7, 196671, 589837, 7, 262207, 589837, 7)
+layer_1/tile_data = PackedInt32Array(393216, 589837, 7, 458752, 589837, 7, 393217, 589837, 7, 458753, 589837, 7, 524296, 589837, 7, 589832, 589837, 7, 524297, 589837, 7, 589833, 589837, 7, 524298, 589837, 7, 589834, 589837, 7, 524299, 589837, 7, 589835, 589837, 7, 524300, 589837, 7, 589836, 589837, 7, 524301, 589837, 7, 589837, 589837, 7, 2, 589837, 7, 3, 589837, 7, 4, 589837, 7, 5, 589837, 7, 524306, 589837, 7, 589842, 589837, 7, 524307, 589837, 7, 589843, 589837, 7, 524308, 589837, 7, 589844, 589837, 7, 524309, 589837, 7, 589845, 589837, 7, 524312, 589837, 7, 589848, 589837, 7, 524313, 589837, 7, 589849, 589837, 7, 524320, 589837, 7, 589856, 589837, 7, 524321, 589837, 7, 589857, 589837, 7, 524322, 589837, 7, 589858, 589837, 7, 524323, 589837, 7, 589859, 589837, 7, 524330, 589837, 7, 589866, 589837, 7, 524331, 589837, 7, 589867, 589837, 7, 524332, 589837, 7, 589868, 589837, 7, 524333, 589837, 7, 589869, 589837, 7, 524340, 589837, 7, 589876, 589837, 7, 524341, 589837, 7, 589877, 589837, 7, 524342, 589837, 7, 589878, 589837, 7, 524343, 589837, 7, 589879, 589837, 7, 524344, 589837, 7, 589880, 589837, 7, 524345, 589837, 7, 589881, 589837, 7, 524346, 589837, 7, 589882, 589837, 7, 524347, 589837, 7, 589883, 589837, 7, 524348, 589837, 7, 589884, 589837, 7, 524349, 589837, 7, 589885, 589837, 7, 196670, 589837, 7, 262206, 589837, 7, 196671, 589837, 7, 262207, 589837, 7, 196626, 589837, 7, 196627, 589837, 7, 196628, 589837, 7, 196629, 589837, 7, 196630, 589837, 7, 196631, 589837, 7, 196632, 589837, 7, 196633, 589837, 7, 196634, 589837, 7, 196635, 589837, 7, 65560, 589837, 7, 131096, 589837, 7, 65561, 589837, 7, 131097, 589837, 7, 65562, 589837, 7, 131098, 589837, 7, 65563, 589837, 7, 131099, 589837, 7, 131100, 589837, 7, 65565, 589837, 7, 131101, 589837, 7, 196637, 589837, 7, 262173, 589837, 7, 327709, 589837, 7, 65566, 589837, 7, 131102, 589837, 7, 196638, 589837, 7, 262174, 589837, 7, 327710, 589837, 7, 262164, 589837, 7, 262165, 589837, 7, 65541, 589837, 7, 262150, 589837, 7, 327687, 589837, 7, 393223, 589837, 7, 458759, 589837, 7, 458758, 589837, 7, 458757, 589837, 7, 458756, 589837, 7, 458755, 589837, 7, 458754, 589837, 7, 393218, 589837, 7, 327682, 589837, 7, 262146, 589837, 7, 196610, 589837, 7, 131074, 589837, 7, 65538, 589837, 7, 131075, 589837, 7, 196611, 589837, 7, 262147, 589837, 7, 327683, 589837, 7, 393219, 589837, 7, 65539, 589837, 7, 65540, 589837, 7, 131076, 589837, 7, 196612, 589837, 7, 262148, 589837, 7, 327684, 589837, 7, 131077, 589837, 7, 196613, 589837, 7, 262149, 589837, 7, 327685, 589837, 7, 393221, 589837, 7, 327686, 589837, 7, 393222, 589837, 7, 393220, 589837, 7, 196614, 589837, 7, 131078, 589837, 7, 65542, 589837, 7, 262151, 589837, 7, 196664, 589837, 7, 196665, 589837, 7, 196666, 589837, 7, 262202, 589837, 7, 262203, 589837, 7, 327738, 589837, 7, 393274, 589837, 7, 393275, 589837, 7, 458811, 589837, 7, 327739, 589837, 7, 196667, 589837, 7, 458810, 589837, 7, 458813, 589837, 7, 458812, 589837, 7, 458809, 589837, 7, 458808, 589837, 7, 458807, 589837, 7, 458806, 589837, 7, 458805, 589837, 7, 393268, 589837, 7, 393269, 589837, 7, 458804, 589837, 7, 393270, 589837, 7, 393271, 589837, 7, 196654, 589837, 7, 262190, 589837, 7, 196655, 589837, 7, 262191, 589837, 7, 196656, 589837, 7, 262192, 589837, 7, 196657, 589837, 7, 262193, 589837, 7, 196658, 589837, 7, 262194, 589837, 7, 196659, 589837, 7, 262195, 589837, 7, 196660, 589837, 7, 262196, 589837, 7, 196661, 589837, 7, 262197, 589837, 7, 196662, 589837, 7, 262198, 589837, 7, 196663, 589837, 7, 262199, 589837, 7, 131122, 589837, 7, 131123, 589837, 7, 131124, 589837, 7, 131125, 589837, 7, 131126, 589837, 7, 131127, 589837, 7, 65587, 589837, 7, 65588, 589837, 7, 65589, 589837, 7, 65590, 589837, 7, 327732, 589837, 7, 327733, 589837, 7)
 layer_2/name = "Ground"
 layer_2/enabled = true
 layer_2/modulate = Color(0.0745098, 0.113725, 0.301961, 1)
@@ -200,5 +204,57 @@ enable_cycling = false
 
 [node name="TemperDragonFruit3" parent="." instance=ExtResource("11_twc6o")]
 position = Vector2(1696, 64)
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+visible = false
+
+[node name="BackWall" type="ParallaxLayer" parent="ParallaxBackground"]
+modulate = Color(0.533333, 0.48, 0.8, 1)
+motion_scale = Vector2(0.02, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/BackWall"]
+texture_repeat = 2
+texture = ExtResource("12_ggxvx")
+centered = false
+offset = Vector2(-512, 0)
+region_enabled = true
+region_rect = Rect2(0, 0, 3072, 320)
+
+[node name="Concrete" type="ParallaxLayer" parent="ParallaxBackground"]
+modulate = Color(0.533333, 0.48, 0.8, 1)
+motion_scale = Vector2(0.02, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/Concrete"]
+texture_repeat = 2
+texture = ExtResource("13_w0onx")
+centered = false
+offset = Vector2(-512, 0)
+region_enabled = true
+region_rect = Rect2(0, 0, 3072, 320)
+
+[node name="Pipes2" type="ParallaxLayer" parent="ParallaxBackground"]
+modulate = Color(0.488, 0.5296, 0.8, 1)
+position = Vector2(-48, 8)
+motion_scale = Vector2(0.15, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/Pipes2"]
+texture_repeat = 2
+texture = ExtResource("14_1vfu8")
+centered = false
+offset = Vector2(-512, 0)
+region_enabled = true
+region_rect = Rect2(0, 0, 3072, 320)
+
+[node name="Pipes" type="ParallaxLayer" parent="ParallaxBackground"]
+position = Vector2(0, 24)
+motion_scale = Vector2(0.1, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/Pipes"]
+texture_repeat = 2
+texture = ExtResource("14_1vfu8")
+centered = false
+offset = Vector2(-512, 0)
+region_enabled = true
+region_rect = Rect2(0, 0, 3072, 320)
 
 [editable path="FallWarp"]
