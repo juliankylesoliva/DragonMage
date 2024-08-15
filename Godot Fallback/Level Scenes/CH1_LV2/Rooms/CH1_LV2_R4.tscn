@@ -1,8 +1,10 @@
-[gd_scene load_steps=14 format=3 uid="uid://dupmsgfnvlne"]
+[gd_scene load_steps=17 format=3 uid="uid://dupmsgfnvlne"]
 
 [ext_resource type="Script" path="res://Scripts/Utility Scripts/Room.gd" id="1_qemck"]
 [ext_resource type="TileSet" uid="uid://dhwi7i1loa2pd" path="res://Sprites/Tiles/Test Tiles/TestTileSet.tres" id="2_ig34w"]
 [ext_resource type="PackedScene" uid="uid://dqbo0wu6hm8lj" path="res://Scene Objects/Objects/WarpTrigger.tscn" id="3_agsen"]
+[ext_resource type="Texture2D" uid="uid://cf6kvc165rld2" path="res://Sprites/Backgrounds/1_2_BG/GarageGrafitti2.png" id="3_efagj"]
+[ext_resource type="FontFile" uid="uid://blejgst41tdnl" path="res://PressStart2P.ttf" id="3_sieby"]
 [ext_resource type="PackedScene" uid="uid://dwnpgujive352" path="res://Scene Objects/Enemies/RedDragoon.tscn" id="4_4tia6"]
 [ext_resource type="PackedScene" uid="uid://dck0mc2tc82kx" path="res://Scene Objects/Objects/ReinforcedFireBlock.tscn" id="4_k1cwv"]
 [ext_resource type="PackedScene" uid="uid://clfqwsy4byrkf" path="res://Scene Objects/Enemies/GreenDragoon.tscn" id="5_e8fuv"]
@@ -10,6 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://dfkmxoba64spw" path="res://Scene Objects/Objects/MedalFragment.tscn" id="8_eh17f"]
 [ext_resource type="PackedScene" uid="uid://b2a0ttqvejk51" path="res://Scene Objects/Objects/TemperDragonFruit.tscn" id="9_8dpvj"]
 [ext_resource type="Texture2D" uid="uid://cmwo06a8mrx4e" path="res://Sprites/Backgrounds/1_2_BG/BackWall.png" id="10_rll10"]
+[ext_resource type="Script" path="res://Scripts/Object Scripts/HiddenPassage.gd" id="11_gjrmt"]
 [ext_resource type="Texture2D" uid="uid://bbfefk0q56hbb" path="res://Sprites/Backgrounds/1_2_BG/Concrete&Pillars.png" id="11_wxwn4"]
 [ext_resource type="Texture2D" uid="uid://cs50p7p6svbcj" path="res://Sprites/Backgrounds/1_2_BG/Pipes.png" id="12_nyupn"]
 
@@ -19,7 +22,7 @@ size = Vector2(1472, 32)
 [node name="CH1_LV2_R4" type="Node2D" node_paths=PackedStringArray("parallax_bg", "tilemap_list", "room_entrances", "enemy_nodes", "medal_fragments")]
 script = ExtResource("1_qemck")
 parallax_bg = NodePath("ParallaxBackground")
-tilemap_list = [NodePath("BoundaryCollisionTilemap"), NodePath("LevelCollisionTilemap")]
+tilemap_list = [NodePath("BoundaryCollisionTilemap"), NodePath("LevelCollisionTilemap"), NodePath("HiddenTilemap")]
 left_camera_limit = -1536
 room_entrances = [NodePath("Entrance 0"), NodePath("Entrance 1"), NodePath("Entrance 2")]
 enemy_nodes = [NodePath("Enemies/RedDragoon"), NodePath("Enemies/GreenDragoon"), NodePath("Enemies/RedDragoon2"), NodePath("Enemies/GreenDragoon2"), NodePath("Enemies/YellowDragoon")]
@@ -49,7 +52,7 @@ layer_1/modulate = Color(1, 1, 1, 1)
 layer_1/y_sort_enabled = false
 layer_1/y_sort_origin = 0
 layer_1/z_index = -1
-layer_1/tile_data = PackedInt32Array(10, 589837, 7, 11, 589837, 7, 12, 589837, 7, 13, 589837, 7, 65549, 589837, 7, 131085, 589837, 7, 131084, 589837, 7, 131083, 589837, 7, 131082, 589837, 7, 65546, 589837, 7, 65547, 589837, 7, 65548, 589837, 7, 65545, 589837, 7, 65544, 589837, 7, 65543, 589837, 7, 65542, 589837, 7, 65541, 589837, 7, 65540, 589837, 7, 65539, 589837, 7, 131075, 589837, 7, 131074, 589837, 7, 196610, 589837, 7, 196611, 589837, 7, 65538, 589837, 7, 524290, 589837, 7, 524291, 589837, 7, 524292, 589837, 7, 524293, 589837, 7, 589829, 589837, 7, 589828, 589837, 7, 589827, 589837, 7, 589826, 589837, 7, 393232, 589837, 7, 393233, 589837, 7, 393231, 589837, 7, 393230, 589837, 7, 458766, 589837, 7, 458767, 589837, 7, 458768, 589837, 7, 458769, 589837, 7, 589816, 589837, 7, 589817, 589837, 7, 589818, 589837, 7, 589819, 589837, 7, 655355, 589837, 7, 655354, 589837, 7, 655353, 589837, 7, 655352, 589837, 7, 589806, 589837, 7, 589807, 589837, 7, 589808, 589837, 7, 589809, 589837, 7, 655345, 589837, 7, 655344, 589837, 7, 655343, 589837, 7, 655342, 589837, 7, 589796, 589837, 7, 589797, 589837, 7, 589798, 589837, 7, 589799, 589837, 7, 655335, 589837, 7, 655334, 589837, 7, 655333, 589837, 7, 655332, 589837, 7, 589784, 589837, 7, 589785, 589837, 7, 589786, 589837, 7, 589787, 589837, 7, 589788, 589837, 7, 589789, 589837, 7, 655325, 589837, 7, 655324, 589837, 7, 655323, 589837, 7, 655322, 589837, 7, 655321, 589837, 7, 655320, 589837, 7, 196566, 589837, 7, 131030, 589837, 7, 131029, 589837, 7, 131028, 589837, 7, 131027, 589837, 7, 131026, 589837, 7, 196562, 589837, 7, 262098, 589837, 7, 262099, 589837, 7, 262100, 589837, 7, 262101, 589837, 7, 196565, 589837, 7, 196564, 589837, 7, 196563, 589837, 7, 458705, 589837, 7, 458704, 589837, 7, 458703, 589837, 7, 458702, 589837, 7, 524238, 589837, 7, 524239, 589837, 7, 524240, 589837, 7, 524241, 589837, 7, 131076, 589837, 7, 131077, 589837, 7, 131078, 589837, 7, 131079, 589837, 7, 131080, 589837, 7, 131081, 589837, 7, 327688, 589837, 7, 393224, 589837, 7, 458760, 589837, 7, 458761, 589837, 7, 393225, 589837, 7, 327689, 589837, 7, 327690, 589837, 7, 327691, 589837, 7, 393227, 589837, 7, 393226, 589837, 7, 327692, 589837, 7, 393228, 589837, 7, 458762, 589837, 7, 458763, 589837, 7, 458764, 589837, 7, 458765, 589837, 7, 393229, 589837, 7, 327693, 589837, 7)
+layer_1/tile_data = PackedInt32Array(10, 589837, 7, 11, 589837, 7, 12, 589837, 7, 13, 589837, 7, 65549, 589837, 7, 131085, 589837, 7, 131084, 589837, 7, 131083, 589837, 7, 131082, 589837, 7, 65546, 589837, 7, 65547, 589837, 7, 65548, 589837, 7, 65545, 589837, 7, 65544, 589837, 7, 65543, 589837, 7, 65542, 589837, 7, 65541, 589837, 7, 65540, 589837, 7, 65539, 589837, 7, 131075, 589837, 7, 131074, 589837, 7, 196610, 589837, 7, 196611, 589837, 7, 65538, 589837, 7, 524290, 589837, 7, 524291, 589837, 7, 524292, 589837, 7, 524293, 589837, 7, 589829, 589837, 7, 589828, 589837, 7, 589827, 589837, 7, 589826, 589837, 7, 393232, 589837, 7, 393233, 589837, 7, 393231, 589837, 7, 393230, 589837, 7, 458766, 589837, 7, 458767, 589837, 7, 458768, 589837, 7, 458769, 589837, 7, 589816, 589837, 7, 589817, 589837, 7, 589818, 589837, 7, 589819, 589837, 7, 655355, 589837, 7, 655354, 589837, 7, 655353, 589837, 7, 655352, 589837, 7, 589806, 589837, 7, 589807, 589837, 7, 589808, 589837, 7, 589809, 589837, 7, 655345, 589837, 7, 655344, 589837, 7, 655343, 589837, 7, 655342, 589837, 7, 589796, 589837, 7, 589797, 589837, 7, 589798, 589837, 7, 589799, 589837, 7, 655335, 589837, 7, 655334, 589837, 7, 655333, 589837, 7, 655332, 589837, 7, 589784, 589837, 7, 589785, 589837, 7, 589786, 589837, 7, 589787, 589837, 7, 589788, 589837, 7, 589789, 589837, 7, 655325, 589837, 7, 655324, 589837, 7, 655323, 589837, 7, 655322, 589837, 7, 655321, 589837, 7, 655320, 589837, 7, 196566, 589837, 7, 131030, 589837, 7, 131029, 589837, 7, 131028, 589837, 7, 131027, 589837, 7, 131026, 589837, 7, 196562, 589837, 7, 262098, 589837, 7, 262099, 589837, 7, 262100, 589837, 7, 262101, 589837, 7, 196565, 589837, 7, 196564, 589837, 7, 196563, 589837, 7, 458705, 589837, 7, 458704, 589837, 7, 458703, 589837, 7, 458702, 589837, 7, 524238, 589837, 7, 524239, 589837, 7, 524240, 589837, 7, 524241, 589837, 7, 131076, 589837, 7, 131077, 589837, 7, 131078, 589837, 7, 131079, 589837, 7, 131080, 589837, 7, 131081, 589837, 7, 327688, 589837, 7, 393224, 589837, 7, 458760, 589837, 7, 458761, 589837, 7, 393225, 589837, 7, 327689, 589837, 7, 327690, 589837, 7, 327691, 589837, 7, 393227, 589837, 7, 393226, 589837, 7, 327692, 589837, 7, 393228, 589837, 7, 458762, 589837, 7, 458763, 589837, 7, 458764, 589837, 7, 458765, 589837, 7, 393229, 589837, 7, 327693, 589837, 7, 393212, 393229, 7, 327681, 524301, 7, 393213, 458765, 7, 393214, 458765, 7, 393215, 458765, 7, 327680, 458765, 7, 524274, 393229, 7, 524275, 458765, 7, 524276, 458765, 7, 524277, 458765, 7, 524278, 458765, 7, 524279, 524301, 7, 196574, 393229, 7, 196575, 458765, 7, 196576, 458765, 7, 196577, 458765, 7, 196578, 458765, 7, 196579, 524301, 7, 524254, 393229, 7, 524255, 458765, 7, 524256, 458765, 7, 524257, 458765, 7, 524258, 458765, 7, 524259, 524301, 7, 524242, 393229, 7, 524243, 458765, 7, 524244, 458765, 7, 524245, 458765, 7, 524246, 458765, 7, 524247, 524301, 7, 131045, 393229, 6, 131046, 458765, 6, 131047, 458765, 6, 131048, 524301, 6, 131033, 393229, 6, 131034, 458765, 6, 131035, 458765, 6, 131036, 524301, 6, 524265, 458765, 5, 262125, 458765, 5, 393194, 458765, 5, 458758, 393229, 5, 458759, 393229, 4)
 layer_2/name = "Ground"
 layer_2/enabled = true
 layer_2/modulate = Color(0.0745098, 0.113725, 0.301961, 1)
@@ -64,6 +67,25 @@ layer_3/y_sort_enabled = false
 layer_3/y_sort_origin = 0
 layer_3/z_index = -1
 layer_3/tile_data = PackedInt32Array()
+
+[node name="FloorLabel" type="RichTextLabel" parent="."]
+modulate = Color(0.262745, 0.219608, 0.262745, 1)
+z_index = 2
+offset_left = 272.0
+offset_top = 177.0
+offset_right = 424.0
+offset_bottom = 240.0
+theme_override_fonts/normal_font = ExtResource("3_sieby")
+theme_override_font_sizes/normal_font_size = 72
+bbcode_enabled = true
+text = "[center]G
+"
+scroll_active = false
+
+[node name="GarageGrafitti2" type="Sprite2D" parent="."]
+z_index = 2
+position = Vector2(128, 288)
+texture = ExtResource("3_efagj")
 
 [node name="Entrance 0" type="Node2D" parent="."]
 position = Vector2(496, 224)
@@ -202,6 +224,23 @@ position = Vector2(208, 80)
 [node name="ReinforcedFireBlock" parent="." instance=ExtResource("4_k1cwv")]
 position = Vector2(160, 64)
 
+[node name="HiddenTilemap" type="TileMap" parent="."]
+z_as_relative = false
+tile_set = ExtResource("2_ig34w")
+cell_quadrant_size = 32
+format = 2
+layer_0/name = "Hidden"
+layer_0/z_index = 6
+layer_0/tile_data = PackedInt32Array(262102, 196621, 6, 196566, 196621, 1, 131030, 196621, 1, 65494, 196621, 5, 262101, 131085, 1, 196565, 131085, 1, 131029, 131085, 1, 65493, 131085, 1, 262100, 131085, 1, 196564, 131085, 1, 131028, 131085, 1, 65492, 131085, 1, 262099, 131085, 1, 196563, 131085, 1, 131027, 131085, 1, 65491, 131085, 1, 262098, 131085, 1, 196562, 131085, 1, 131026, 131085, 1, 65490, 131085, 1, 262097, 131085, 1, 196561, 131085, 1, 131025, 131085, 1, 65489, 131085, 1, 262096, 131085, 1, 196560, 131085, 1, 131024, 131085, 1, 65488, 131085, 1, 65495, 131085, 2, 327635, 327693, 6, 327636, 131085, 2, 327637, 131085, 2, 327638, 131085, 2, 327634, 131085, 1, 327633, 131085, 1)
+script = ExtResource("11_gjrmt")
+
+[node name="Area2D" type="Area2D" parent="HiddenTilemap"]
+collision_layer = 0
+collision_mask = 4
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="HiddenTilemap/Area2D"]
+polygon = PackedVector2Array(-1472, 32, -1312, 32, -1312, 96, -1344, 96, -1344, 128, -1472, 128)
+
 [node name="TemperDragonFruit" parent="." instance=ExtResource("9_8dpvj")]
 position = Vector2(416, 64)
 starting_state = 1
@@ -261,5 +300,8 @@ centered = false
 offset = Vector2(-2048, 0)
 region_enabled = true
 region_rect = Rect2(0, 0, 3072, 320)
+
+[connection signal="body_entered" from="HiddenTilemap/Area2D" to="HiddenTilemap" method="_on_rigid_body_2d_body_entered"]
+[connection signal="body_exited" from="HiddenTilemap/Area2D" to="HiddenTilemap" method="_on_rigid_body_2d_body_exited"]
 
 [editable path="FallWarp"]

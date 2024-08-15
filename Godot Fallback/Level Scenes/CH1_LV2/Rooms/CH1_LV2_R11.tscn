@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://c6k6v7fefypvo"]
+[gd_scene load_steps=6 format=3 uid="uid://c6k6v7fefypvo"]
 
 [ext_resource type="Script" path="res://Scripts/Utility Scripts/Room.gd" id="1_onbqu"]
 [ext_resource type="TileSet" uid="uid://dhwi7i1loa2pd" path="res://Sprites/Tiles/Test Tiles/TestTileSet.tres" id="2_yvhch"]
+[ext_resource type="Texture2D" uid="uid://d04as50i3anw7" path="res://Sprites/Backgrounds/1_2_BG/ExitDoor.png" id="3_5gks8"]
 [ext_resource type="PackedScene" uid="uid://durwtm4ocfbmv" path="res://Scene Objects/Objects/FinishLine.tscn" id="3_fkdck"]
 [ext_resource type="PackedScene" uid="uid://dqbo0wu6hm8lj" path="res://Scene Objects/Objects/WarpTrigger.tscn" id="4_2akv4"]
 
@@ -50,6 +51,11 @@ layer_3/y_sort_enabled = false
 layer_3/y_sort_origin = 0
 layer_3/z_index = -1
 layer_3/tile_data = PackedInt32Array()
+
+[node name="ExitDoor" type="Sprite2D" parent="."]
+z_index = 2
+position = Vector2(192, -432)
+texture = ExtResource("3_5gks8")
 
 [node name="Entrance 0" type="Node2D" parent="."]
 position = Vector2(16, 224)

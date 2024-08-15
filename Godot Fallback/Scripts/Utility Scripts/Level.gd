@@ -30,6 +30,8 @@ signal player_defeated
 
 @export var collision_tilemap_name : String = "LevelCollisionTilemap"
 
+@export var hidden_tilemap_name : String = "HiddenTilemap"
+
 @export_color_no_alpha var tilemap_color : Color = Color.WHITE
 
 var player_hub : PlayerHub
@@ -87,7 +89,7 @@ func level_startup():
 			fragment_array.append(fragment)
 		
 		for tilemap in room.tilemap_list:
-			if (tilemap.name == collision_tilemap_name):
+			if (tilemap.name == collision_tilemap_name or tilemap.name.contains(hidden_tilemap_name)):
 				tilemap.modulate = tilemap_color
 				continue
 	

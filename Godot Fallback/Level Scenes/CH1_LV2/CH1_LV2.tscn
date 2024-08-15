@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://beihnh55j4qsk"]
+[gd_scene load_steps=26 format=3 uid="uid://beihnh55j4qsk"]
 
 [ext_resource type="Script" path="res://Scripts/Utility Scripts/Level.gd" id="1_lbrws"]
 [ext_resource type="PackedScene" uid="uid://d0ff35cm57xb7" path="res://Scene Objects/Effects/DroppedFragment.tscn" id="2_dc11k"]
@@ -24,6 +24,7 @@
 [ext_resource type="PackedScene" uid="uid://d4k1uyppkebhw" path="res://Level Scenes/CH1_LV2/Rooms/CH1_LV2_R9.tscn" id="12_7wfl6"]
 [ext_resource type="PackedScene" uid="uid://cjmi2md4tdxux" path="res://Level Scenes/CH1_LV2/Rooms/CH1_LV2_R10.tscn" id="13_dsrmw"]
 [ext_resource type="PackedScene" uid="uid://c6k6v7fefypvo" path="res://Level Scenes/CH1_LV2/Rooms/CH1_LV2_R11.tscn" id="24_0f8bc"]
+[ext_resource type="AudioStream" uid="uid://dlkxc1pklejn3" path="res://Music/Chiptune_Downtempo_Funk_Party.wav" id="24_clkf0"]
 
 [node name="CH1_LV2" type="Node2D" node_paths=PackedStringArray("player_reference", "starting_room", "room_list", "clear_timer")]
 script = ExtResource("1_lbrws")
@@ -61,10 +62,10 @@ room_destination = NodePath("../../CH1_LV2_R2")
 [node name="CH1_LV2_R2" parent="." instance=ExtResource("5_qne65")]
 position = Vector2(1504, 352)
 
-[node name="Warp 0" parent="CH1_LV2_R2" index="4" node_paths=PackedStringArray("room_destination")]
+[node name="Warp 0" parent="CH1_LV2_R2" index="6" node_paths=PackedStringArray("room_destination")]
 room_destination = NodePath("../../CH1_LV2_R3")
 
-[node name="Checkpoint" parent="CH1_LV2_R2" index="9" node_paths=PackedStringArray("level_origin")]
+[node name="Checkpoint" parent="CH1_LV2_R2" index="12" node_paths=PackedStringArray("level_origin")]
 level_origin = NodePath("../..")
 
 [node name="CH1_LV2_R3" parent="." instance=ExtResource("6_7f8rd")]
@@ -79,13 +80,13 @@ room_destination = NodePath("../../CH1_LV2_R4")
 [node name="CH1_LV2_R4" parent="." instance=ExtResource("7_00scb")]
 position = Vector2(3040, -320)
 
-[node name="Warp 0" parent="CH1_LV2_R4" index="5" node_paths=PackedStringArray("room_destination")]
+[node name="Warp 0" parent="CH1_LV2_R4" index="7" node_paths=PackedStringArray("room_destination")]
 room_destination = NodePath("../../CH1_LV2_R3")
 
-[node name="Warp 1" parent="CH1_LV2_R4" index="6" node_paths=PackedStringArray("room_destination")]
+[node name="Warp 1" parent="CH1_LV2_R4" index="8" node_paths=PackedStringArray("room_destination")]
 room_destination = NodePath("../../CH1_LV2_R5")
 
-[node name="FallWarp" parent="CH1_LV2_R4" index="7" node_paths=PackedStringArray("room_destination")]
+[node name="FallWarp" parent="CH1_LV2_R4" index="9" node_paths=PackedStringArray("room_destination")]
 room_destination = NodePath("../../CH1_LV2_R2")
 
 [node name="CH1_LV2_R5" parent="." instance=ExtResource("8_peql8")]
@@ -100,16 +101,16 @@ room_destination = NodePath("../../CH1_LV2_R6")
 [node name="CH1_LV2_R6" parent="." instance=ExtResource("9_a81wq")]
 position = Vector2(3776, 256)
 
-[node name="Warp 0" parent="CH1_LV2_R6" index="5" node_paths=PackedStringArray("room_destination")]
+[node name="Warp 0" parent="CH1_LV2_R6" index="6" node_paths=PackedStringArray("room_destination")]
 room_destination = NodePath("../../CH1_LV2_R5")
 
-[node name="Warp 1" parent="CH1_LV2_R6" index="6" node_paths=PackedStringArray("room_destination")]
+[node name="Warp 1" parent="CH1_LV2_R6" index="7" node_paths=PackedStringArray("room_destination")]
 room_destination = NodePath("../../CH1_LV2_R7")
 
-[node name="FallWarp" parent="CH1_LV2_R6" index="7" node_paths=PackedStringArray("room_destination")]
+[node name="FallWarp" parent="CH1_LV2_R6" index="8" node_paths=PackedStringArray("room_destination")]
 room_destination = NodePath("../../CH1_LV2_R4")
 
-[node name="Checkpoint" parent="CH1_LV2_R6" index="8" node_paths=PackedStringArray("level_origin", "subsequent_checkpoints")]
+[node name="Checkpoint" parent="CH1_LV2_R6" index="9" node_paths=PackedStringArray("level_origin", "subsequent_checkpoints")]
 level_origin = NodePath("../..")
 subsequent_checkpoints = [NodePath("../../CH1_LV2_R2/Checkpoint")]
 
@@ -125,13 +126,13 @@ room_destination = NodePath("../../CH1_LV2_R8")
 [node name="CH1_LV2_R8" parent="." instance=ExtResource("11_d04kr")]
 position = Vector2(5312, -320)
 
-[node name="Warp 0" parent="CH1_LV2_R8" index="5" node_paths=PackedStringArray("room_destination")]
+[node name="Warp 0" parent="CH1_LV2_R8" index="6" node_paths=PackedStringArray("room_destination")]
 room_destination = NodePath("../../CH1_LV2_R7")
 
-[node name="Warp 1" parent="CH1_LV2_R8" index="6" node_paths=PackedStringArray("room_destination")]
+[node name="Warp 1" parent="CH1_LV2_R8" index="7" node_paths=PackedStringArray("room_destination")]
 room_destination = NodePath("../../CH1_LV2_R9")
 
-[node name="FallWarp" parent="CH1_LV2_R8" index="7" node_paths=PackedStringArray("room_destination")]
+[node name="FallWarp" parent="CH1_LV2_R8" index="8" node_paths=PackedStringArray("room_destination")]
 room_destination = NodePath("../../CH1_LV2_R6")
 
 [node name="CH1_LV2_R9" parent="." instance=ExtResource("12_7wfl6")]
@@ -146,23 +147,23 @@ room_destination = NodePath("../../CH1_LV2_R10")
 [node name="CH1_LV2_R10" parent="." instance=ExtResource("13_dsrmw")]
 position = Vector2(1504, -992)
 
-[node name="Warp 0" parent="CH1_LV2_R10" index="4" node_paths=PackedStringArray("room_destination")]
+[node name="Warp 0" parent="CH1_LV2_R10" index="5" node_paths=PackedStringArray("room_destination")]
 room_destination = NodePath("../../CH1_LV2_R9")
 
-[node name="Warp 1" parent="CH1_LV2_R10" index="5" node_paths=PackedStringArray("room_destination")]
+[node name="Warp 1" parent="CH1_LV2_R10" index="6" node_paths=PackedStringArray("room_destination")]
 room_destination = NodePath("../../CH1_LV2_R11")
 
-[node name="FallWarp" parent="CH1_LV2_R10" index="6" node_paths=PackedStringArray("room_destination")]
+[node name="FallWarp" parent="CH1_LV2_R10" index="7" node_paths=PackedStringArray("room_destination")]
 room_destination = NodePath("../../CH1_LV2_R8")
 
-[node name="Checkpoint" parent="CH1_LV2_R10" index="10" node_paths=PackedStringArray("level_origin", "subsequent_checkpoints")]
+[node name="Checkpoint" parent="CH1_LV2_R10" index="11" node_paths=PackedStringArray("level_origin", "subsequent_checkpoints")]
 level_origin = NodePath("../..")
 subsequent_checkpoints = [NodePath("../../CH1_LV2_R6/Checkpoint"), NodePath("../../CH1_LV2_R2/Checkpoint")]
 
 [node name="CH1_LV2_R11" parent="." instance=ExtResource("24_0f8bc")]
 position = Vector2(1376, 1568)
 
-[node name="Warp 0" parent="CH1_LV2_R11" index="4" node_paths=PackedStringArray("room_destination")]
+[node name="Warp 0" parent="CH1_LV2_R11" index="5" node_paths=PackedStringArray("room_destination")]
 room_destination = NodePath("../../CH1_LV2_R10")
 
 [node name="UI_Canvas" type="CanvasLayer" parent="."]
@@ -197,6 +198,8 @@ starting_fade_duration = 1.0
 ui_canvas = NodePath("../UI_Canvas")
 
 [node name="LevelMusicPlayer" parent="." instance=ExtResource("11_3tvlw")]
+stream = ExtResource("24_clkf0")
+autoplay = false
 
 [node name="DefeatScreen" parent="." node_paths=PackedStringArray("screen_fade") instance=ExtResource("12_2r72i")]
 screen_fade = NodePath("../UI_Canvas/ScreenFade")
@@ -207,6 +210,7 @@ screen_fade = NodePath("../UI_Canvas/ScreenFade")
 [connection signal="player_defeated" from="." to="Textbox" method="hide_textbox"]
 [connection signal="player_defeated" from="." to="LevelMusicPlayer" method="stop"]
 [connection signal="player_defeated" from="." to="DefeatScreen" method="do_defeat_screen"]
+[connection signal="room_activated" from="CH1_LV2_R2" to="LevelMusicPlayer" method="restart_music"]
 [connection signal="level_finished" from="CH1_LV2_R11/FinishLine" to="." method="level_finish"]
 [connection signal="level_finished" from="CH1_LV2_R11/FinishLine" to="UI_Canvas/TemperMeterUI" method="hide"]
 [connection signal="level_finished" from="CH1_LV2_R11/FinishLine" to="UI_Canvas/MagicMeterUI" method="hide"]
