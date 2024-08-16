@@ -8,7 +8,13 @@ class_name FragmentCounterUI
 
 @export var rich_text_label : RichTextLabel
 
-@export var text_template : String = "[right][font_size=24]{current}[font_size=16]/[color={status}]{min}\n[color=white][[color=#5941a9]{mage}[color=white]:[color=#f09a59]{dragon}[color=white]]"
+@export var text_template : String = "[right][color={medal}][font_size=24]{current}[font_size=16][color=white]/[color={status}]{min}\n[color=white][[color=#5941a9]{mage}[color=white]:[color=#f09a59]{dragon}[color=white]]"
+
+@export var blue_hex : String = "#ffffff"
+
+@export var orange_hex : String = "#ffffff"
+
+@export var gray_hex : String = "#ffffff"
 
 @export var red_hex : String = "#ffffff"
 
@@ -31,7 +37,7 @@ func _ready():
 
 func _process(_delta):
 	if (level_ref != null):
-		rich_text_label.text = text_template.format({"current" : level_ref.get_total_fragments(), "status" : ("white" if level_ref.is_medal_possible() else red_hex), "min" : level_ref.min_fragment_req_for_medal, "mage" : level_ref.mage_fragments, "dragon" : level_ref.dragon_fragments, "deaths" : CheckpointHandler.death_counter})
+		rich_text_label.text = text_template.format({"medal" : (blue_hex if level_ref.can_get_medal() and level_ref.mage_fragments > level_ref.dragon_fragments else orange_hex if level_ref.can_get_medal() and level_ref.dragon_fragments > level_ref.mage_fragments else gray_hex if level_ref.can_get_medal() else "white"), "current" : level_ref.get_total_fragments(), "status" : ("white" if level_ref.is_medal_possible() else red_hex), "min" : level_ref.min_fragment_req_for_medal, "mage" : level_ref.mage_fragments, "dragon" : level_ref.dragon_fragments, "deaths" : CheckpointHandler.death_counter})
 	check_alpha_fade(_delta)
 
 func check_alpha_fade(delta):

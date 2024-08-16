@@ -10,12 +10,18 @@ class_name MagicBlastKnockbackHitbox
 
 var rid_list : Array[RID]
 
+var can_activate_blast_jump : bool = true
+
+func _physics_process(delta):
+	if (can_activate_blast_jump):
+		can_activate_blast_jump = false
+
 func _on_body_entered(body):
 	var temp_ray_mask = ray.collision_mask
 	if (body is Boss):
 		do_damage_boss(body)
 	elif (body is CharacterBody2D):
-		if (body.has_meta("Tag") and body.get_meta("Tag") == "Player"):
+		if (body.has_meta("Tag") and body.get_meta("Tag") == "Player" and can_activate_blast_jump):
 			do_magic_blast_knockback(body)
 		elif (body.has_meta("Tag") and body.get_meta("Tag") == "Enemy"):
 			defeat_enemy(body)
