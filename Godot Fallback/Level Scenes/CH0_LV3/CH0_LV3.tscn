@@ -180,8 +180,9 @@ starting_fade_duration = 1.0
 
 [node name="ClearTimer" parent="." instance=ExtResource("18_el865")]
 
-[node name="Textbox" parent="." instance=ExtResource("19_3e3bj")]
+[node name="Textbox" parent="." node_paths=PackedStringArray("ui_canvas") instance=ExtResource("19_3e3bj")]
 accept_input_events = false
+ui_canvas = NodePath("../UI_Canvas")
 
 [node name="LevelMusicPlayer" parent="." instance=ExtResource("23_c6dlv")]
 stream = ExtResource("24_ar4bd")

@@ -71,9 +71,9 @@ animations = [{
 [node name="FragmentCounterUI" type="Node2D" node_paths=PackedStringArray("rich_text_label")]
 script = ExtResource("1_aybfr")
 rich_text_label = NodePath("RichTextLabel")
-blue_hex = "#443482"
-orange_hex = "#cf7a30"
-gray_hex = "#949494"
+blue_hex = "#5941a9"
+orange_hex = "#f09a59"
+gray_hex = "#d6d6d6"
 red_hex = "#a62929"
 
 [node name="RichTextLabel" type="RichTextLabel" parent="."]

@@ -37,7 +37,7 @@ func _ready():
 
 func _process(_delta):
 	if (level_ref != null):
-		rich_text_label.text = text_template.format({"medal" : (blue_hex if level_ref.can_get_medal() and level_ref.mage_fragments > level_ref.dragon_fragments else orange_hex if level_ref.can_get_medal() and level_ref.dragon_fragments > level_ref.mage_fragments else gray_hex if level_ref.can_get_medal() else "white"), "current" : level_ref.get_total_fragments(), "status" : ("white" if level_ref.is_medal_possible() else red_hex), "min" : level_ref.min_fragment_req_for_medal, "mage" : level_ref.mage_fragments, "dragon" : level_ref.dragon_fragments, "deaths" : CheckpointHandler.death_counter})
+		rich_text_label.text = text_template.format({"medal" : (blue_hex if level_ref.get_medal_type() == "MAGIC" else orange_hex if level_ref.get_medal_type() == "DRAGON" else gray_hex if level_ref.get_medal_type() == "BALANCE" else "white"), "current" : level_ref.get_total_fragments(), "status" : ("white" if level_ref.is_medal_possible() else red_hex), "min" : level_ref.min_fragment_req_for_medal, "mage" : level_ref.mage_fragments, "dragon" : level_ref.dragon_fragments, "deaths" : CheckpointHandler.death_counter})
 	check_alpha_fade(_delta)
 
 func check_alpha_fade(delta):

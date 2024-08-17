@@ -4,6 +4,8 @@ class_name Room
 
 signal room_activated
 
+signal room_deactivated
+
 @export var parallax_bg : ParallaxBackground
 
 @export var tilemap_list : Array[TileMap]
@@ -50,6 +52,7 @@ func deactivate_room():
 	if (parallax_bg != null):
 		parallax_bg.visible = false
 	is_room_active = false
+	room_deactivated.emit()
 	deactivate_enemies()
 
 func activate_enemies():

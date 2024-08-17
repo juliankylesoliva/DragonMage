@@ -210,7 +210,7 @@ screen_fade = NodePath("../UI_Canvas/ScreenFade")
 [connection signal="player_defeated" from="." to="Textbox" method="hide_textbox"]
 [connection signal="player_defeated" from="." to="LevelMusicPlayer" method="stop"]
 [connection signal="player_defeated" from="." to="DefeatScreen" method="do_defeat_screen"]
-[connection signal="room_activated" from="CH1_LV2_R2" to="LevelMusicPlayer" method="restart_music"]
+[connection signal="room_deactivated" from="CH1_LV2_R1" to="LevelMusicPlayer" method="restart_music"]
 [connection signal="level_finished" from="CH1_LV2_R11/FinishLine" to="." method="level_finish"]
 [connection signal="level_finished" from="CH1_LV2_R11/FinishLine" to="UI_Canvas/TemperMeterUI" method="hide"]
 [connection signal="level_finished" from="CH1_LV2_R11/FinishLine" to="UI_Canvas/MagicMeterUI" method="hide"]

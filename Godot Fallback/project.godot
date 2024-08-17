@@ -35,6 +35,10 @@ NextLevelHelper="*res://Misc Scenes/NextLevelHelper.tscn"
 OptionsHelper="*res://Misc Scenes/OptionsHelper.tscn"
 GlobalSignals="*res://Misc Scenes/GlobalSignals.tscn"
 
+[debug]
+
+gdscript/warnings/integer_division=0
+
 [display]
 
 window/size/viewport_width=512

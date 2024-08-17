@@ -12,7 +12,7 @@ var rid_list : Array[RID]
 
 var can_activate_blast_jump : bool = true
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	if (can_activate_blast_jump):
 		can_activate_blast_jump = false
 
