@@ -49,7 +49,7 @@ window/stretch/mode="viewport"
 
 [dotnet]
 
-project/assembly_name="Godot Fallback"
+project/assembly_name="Dragon Mage"
 
 [editor]
 
