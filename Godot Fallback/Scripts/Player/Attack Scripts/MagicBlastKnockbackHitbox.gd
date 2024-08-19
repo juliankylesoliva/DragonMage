@@ -15,6 +15,7 @@ var can_activate_blast_jump : bool = true
 func _physics_process(_delta):
 	if (can_activate_blast_jump):
 		can_activate_blast_jump = false
+	super._physics_process(_delta)
 
 func _on_body_entered(body):
 	var temp_ray_mask = ray.collision_mask
