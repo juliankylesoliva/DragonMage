@@ -7,6 +7,7 @@ class_name GlidingState
 var is_throwing : bool = false
 
 func state_process(_delta : float):
+	hub.movement.check_crouch_state()
 	hub.movement.do_movement(_delta)
 	hub.jumping.glide_update(_delta)
 	
@@ -15,9 +16,12 @@ func state_process(_delta : float):
 	if (hub.form.cannot_change_form()):
 		hub.form.form_change_failed()
 	
-	if (!hub.char_sprite.is_playing() and hub.char_sprite.animation == "MagliThrowAir"):
+	if (hub.char_sprite.animation == "MagliThrowAir" and (!hub.char_sprite.is_playing() or hub.movement.is_crouching)):
 		is_throwing = false
-		hub.animation.set_animation("MagliGlide")
+		hub.animation.set_animation("MagliCrouchGlide" if hub.movement.is_crouching else "MagliGlide")
+	else:
+		if (!is_throwing):
+			hub.animation.set_animation("MagliCrouchGlide" if hub.movement.is_crouching else "MagliGlide")
 	
 	if (hub.is_deactivated):
 		set_next_state(state_machine.get_state_by_name("Deactivated"))
@@ -48,7 +52,7 @@ func state_process(_delta : float):
 func on_enter():
 	is_throwing = hub.char_sprite.animation.contains("MagliThrow")
 	hub.jumping.start_glide()
-	hub.animation.set_animation("MagliThrowAir" if is_throwing else "MagliGlide")
+	hub.animation.set_animation("MagliThrowAir" if is_throwing and !hub.movement.is_crouching else "MagliCrouchGlide" if hub.movement.is_crouching else "MagliGlide")
 	hub.animation.set_animation_frame(1 if is_throwing else 0)
 	glide_particles.emitting = true
 

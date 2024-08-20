@@ -1,4 +1,4 @@
-[gd_scene load_steps=206 format=3 uid="uid://c6qw77ovfwgfs"]
+[gd_scene load_steps=207 format=3 uid="uid://c6qw77ovfwgfs"]
 
 [ext_resource type="Texture2D" uid="uid://d381ahbcwydy8" path="res://Sprites/Player/DraelynCrouch.png" id="1_6b42p"]
 [ext_resource type="Texture2D" uid="uid://dls34a1qa8iy1" path="res://Sprites/Player/DraelynFireTackle.png" id="1_ddrlj"]
@@ -334,6 +334,10 @@ region = Rect2(320, 0, 64, 64)
 [sub_resource type="AtlasTexture" id="AtlasTexture_kpond"]
 atlas = ExtResource("1_m21y2")
 region = Rect2(384, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8hr4o"]
+atlas = ExtResource("1_m21y2")
+region = Rect2(512, 0, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_0fcja"]
 atlas = ExtResource("1_m21y2")
@@ -982,6 +986,14 @@ animations = [{
 }],
 "loop": false,
 "name": &"MagliCrouchFall",
+"speed": 60.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8hr4o")
+}],
+"loop": true,
+"name": &"MagliCrouchGlide",
 "speed": 60.0
 }, {
 "frames": [{

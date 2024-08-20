@@ -382,11 +382,10 @@ func do_speed_hop_slope_boost():
 		hub.char_body.velocity.x = hub.movement.current_horizontal_velocity
 
 func can_glide():
-	return (enable_gliding and !hub.movement.is_crouching and !hub.buffers.is_coyote_time_active() and (hub.char_body.velocity.y >= 0 or Input.is_action_pressed("Technical")) and current_glide_time <= hub.buffers.early_glide_buffer_time and hub.collisions.get_distance_to_ground() >= min_glide_height and (hub.buffers.is_glide_buffer_active() or (Input.is_action_pressed("Technical") and Input.is_action_pressed("Glide"))))
+	return (enable_gliding and !hub.buffers.is_coyote_time_active() and (hub.char_body.velocity.y >= 0 or Input.is_action_pressed("Technical")) and current_glide_time <= hub.buffers.early_glide_buffer_time and hub.collisions.get_distance_to_ground() >= min_glide_height and (hub.buffers.is_glide_buffer_active() or (Input.is_action_pressed("Technical") and Input.is_action_pressed("Glide"))))
 
 func start_glide():
 	hub.buffers.reset_glide_buffer()
-	hub.movement.reset_crouch_state()
 	hub.audio.play_sound("jump_magli_glide")
 	switch_to_zero_gravity()
 	hub.char_body.velocity.y = glide_fall_speed
@@ -396,10 +395,10 @@ func glide_update(delta : float):
 	current_glide_time = move_toward(current_glide_time, max_glide_time, delta)
 
 func is_glide_canceled():
-	return (Input.is_action_pressed("Crouch") or (!enable_glide_toggle and !Input.is_action_pressed("Glide")) or (enable_glide_toggle and Input.is_action_just_pressed("Glide")) or hub.char_body.is_on_floor() or hub.jumping.current_glide_time >= hub.jumping.max_glide_time)
+	return ((!enable_glide_toggle and !Input.is_action_pressed("Glide")) or (enable_glide_toggle and Input.is_action_just_pressed("Glide")) or hub.char_body.is_on_floor() or hub.jumping.current_glide_time >= hub.jumping.max_glide_time)
 
 func cancel_glide():
-	if (current_glide_time > hub.buffers.early_glide_buffer_time or (!enable_glide_toggle and !Input.is_action_pressed("Glide")) or (enable_glide_toggle and Input.is_action_just_pressed("Glide")) or Input.is_action_pressed("Crouch")):
+	if (current_glide_time > hub.buffers.early_glide_buffer_time or (!enable_glide_toggle and !Input.is_action_pressed("Glide")) or (enable_glide_toggle and Input.is_action_just_pressed("Glide"))):
 		current_glide_time = max_glide_time
 
 func can_midair_jump():
