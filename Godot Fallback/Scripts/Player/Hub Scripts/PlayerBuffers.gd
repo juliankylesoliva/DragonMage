@@ -49,7 +49,7 @@ func _input(event):
 		refresh_jump_buffer()
 	if (event.is_action_pressed("Glide")):
 		refresh_glide_buffer()
-	if (event.is_action_pressed("Crouch") and !hub.char_body.is_on_floor()):
+	if (Input.is_action_just_pressed("Attack") and hub.movement.is_crouching and !hub.char_body.is_on_floor()):
 		refresh_fast_fall_buffer()
 	if (event.is_action_pressed("Fairy Ability")):
 		refresh_fairy_ability_buffer()
@@ -107,7 +107,7 @@ func refresh_glide_buffer():
 	glide_buffer_time_left = glide_buffer_time
 
 func check_fast_fall_buffer(delta : float):
-	if (is_fast_fall_buffer_active() and !hub.char_body.is_on_floor() and hub.state_machine.current_state.name != "WallClimbing" and !Input.is_action_pressed("Jump") and !hub.movement.is_crouching):
+	if (is_fast_fall_buffer_active() and !hub.char_body.is_on_floor()):
 		fast_fall_buffer_time_left = move_toward(fast_fall_buffer_time_left, 0, delta)
 	else:
 		if (fast_fall_buffer_time_left > 0):

@@ -355,7 +355,7 @@ func falling_update(delta : float):
 		hub.char_body.velocity.y = max_fall_speed_to_use
 
 func can_fast_fall():
-	return (enable_fast_falling and !is_fast_falling and hub.buffers.is_fast_fall_buffer_active() and !Input.is_action_pressed("Jump") and fast_falling_speed > max_fall_speed and !hub.char_body.is_on_floor() and hub.char_body.velocity.y >= fast_fall_threshold and hub.char_body.velocity.y < fast_falling_speed)
+	return (enable_fast_falling and !is_fast_falling and hub.buffers.is_fast_fall_buffer_active() and fast_falling_speed > max_fall_speed and !hub.char_body.is_on_floor() and hub.char_body.velocity.y >= fast_fall_threshold and hub.char_body.velocity.y < fast_falling_speed)
 
 func can_fast_fall_slope_boost():
 	return (enable_fast_falling and is_fast_falling and hub.char_body.is_on_floor() and hub.collisions.get_distance_to_ground() <= hub.char_body.floor_snap_length and hub.char_body.get_floor_angle() > fast_fall_slope_boost_threshold)
@@ -615,6 +615,7 @@ func landing_reset():
 
 func set_fast_fall():
 	hub.buffers.reset_fast_fall_buffer()
+	hub.buffers.reset_attack_buffer()
 	is_fast_falling = true
 	hub.movement.is_crouching = false
 	SoundFactory.play_sound_by_name("jump_draelyn_fastfall", hub.char_body.global_position, 0, 1, "SFX")
