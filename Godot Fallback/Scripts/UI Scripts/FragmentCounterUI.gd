@@ -8,15 +8,15 @@ class_name FragmentCounterUI
 
 @export var rich_text_label : RichTextLabel
 
-@export var text_template : String = "[right][color={medal}][font_size=24]{current}[font_size=16][color=white]/[color={status}]{min}\n[color=white][[color=#5941a9]{mage}[color=white]:[color=#f09a59]{dragon}[color=white]]"
+@export var text_template : String = "[right][color={medal}][font_size=24]{current}[font_size=16][color=white]/[color={status}]{min}\n[color=white][[color=#443482]{mage}[color=white]:[color=#cf7a30]{dragon}[color=white]]"
 
-@export var blue_hex : String = "#ffffff"
+@export var blue_hex : String = "#443482"
 
-@export var orange_hex : String = "#ffffff"
+@export var orange_hex : String = "#cf7a30"
 
-@export var gray_hex : String = "#ffffff"
+@export var gray_hex : String = "#949494"
 
-@export var red_hex : String = "#ffffff"
+@export var red_hex : String = "#a62929"
 
 @export var y_fade_offset_from_center : float = -96
 
