@@ -10,7 +10,11 @@ func state_process(_delta : float):
 	var char_name : String = hub.form.get_current_form_name()
 	prev_is_crouching = hub.movement.is_crouching
 	if (!hub.force_stand):
-		hub.movement.check_crouch_state()
+		if (hub.jumping.is_fast_falling):
+			if (hub.movement.is_crouching and !hub.collisions.is_in_ceiling_when_uncrouched()):
+				hub.movement.is_crouching = false
+		else:
+			hub.movement.check_crouch_state()
 		hub.movement.do_movement(_delta)
 		hub.movement.update_facing_direction()
 	else:
