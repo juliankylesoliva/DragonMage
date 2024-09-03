@@ -13,7 +13,7 @@ script = ExtResource("1_3cs8j")
 tilemap_list = [NodePath("BoundaryCollisionTilemap"), NodePath("LevelCollisionTilemap")]
 top_camera_limit = -640
 room_entrances = [NodePath("Entrance 0"), NodePath("Entrance 1")]
-enemy_nodes = [NodePath("Enemies/RedDragoon"), NodePath("Enemies/BlueDragoon"), NodePath("Enemies/BlueDragoon2"), NodePath("Enemies/BlueDragoon3"), NodePath("Enemies/RedDragoon2"), NodePath("Enemies/RedDragoon3")]
+enemy_nodes = [NodePath("Enemies/RedDragoon"), NodePath("Enemies/BlueDragoon"), NodePath("Enemies/BlueDragoon2"), NodePath("Enemies/RedDragoon2"), NodePath("Enemies/RedDragoon3")]
 medal_fragments = [NodePath("Fragments/MedalFragment"), NodePath("Fragments/MedalFragment2"), NodePath("Fragments/MedalFragment3"), NodePath("Fragments/MedalFragment4"), NodePath("Fragments/MedalFragment5"), NodePath("Fragments/MedalFragment6"), NodePath("Fragments/MedalFragment7"), NodePath("Fragments/MedalFragment8"), NodePath("Fragments/MedalFragment9"), NodePath("Fragments/MedalFragment10"), NodePath("Fragments/MedalFragment11"), NodePath("Fragments/MedalFragment12")]
 
 [node name="BoundaryCollisionTilemap" type="TileMap" parent="."]
@@ -83,9 +83,6 @@ position = Vector2(224, 32)
 
 [node name="BlueDragoon2" parent="Enemies" instance=ExtResource("5_p34tg")]
 position = Vector2(224, -160)
-
-[node name="BlueDragoon3" parent="Enemies" instance=ExtResource("5_p34tg")]
-position = Vector2(288, -224)
 
 [node name="RedDragoon2" parent="Enemies" instance=ExtResource("4_6682r")]
 position = Vector2(352, -128)

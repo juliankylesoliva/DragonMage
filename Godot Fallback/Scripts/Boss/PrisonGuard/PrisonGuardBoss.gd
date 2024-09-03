@@ -90,7 +90,7 @@ func damage_boss(_damage_type : StringName, _damage_strength : int, _knockback_v
 		current_armor -= 1
 		SoundFactory.play_sound_by_name("damage_enemy", body.global_position, 0, 1, "SFX")
 		if (current_armor <= 0):
-			SoundFactory.play_sound_by_name("object_block_breakable" if (current_health % 2) == 0 else "object_block_reinforced", body.global_position, 0, 1, "SFX")
+			SoundFactory.play_sound_by_name("object_block_breakable" if current_health > 2 else "object_block_reinforced", body.global_position, 0, 1, "SFX")
 		do_post_hit_invulnerability()
 		return true
 	else:

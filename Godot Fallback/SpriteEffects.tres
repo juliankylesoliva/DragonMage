@@ -1,4 +1,4 @@
-[gd_resource type="SpriteFrames" load_steps=111 format=3 uid="uid://cxb5mjrw5mrd4"]
+[gd_resource type="SpriteFrames" load_steps=121 format=3 uid="uid://cxb5mjrw5mrd4"]
 
 [ext_resource type="Texture2D" uid="uid://dox4bkppa7wvs" path="res://Sprites/Effects/DragoonProjectileImpact.png" id="1_1qdun"]
 [ext_resource type="Texture2D" uid="uid://du8qhvwbopk0k" path="res://Sprites/Effects/EnemyContactImpact.png" id="1_n3i0w"]
@@ -13,6 +13,7 @@
 [ext_resource type="Texture2D" uid="uid://bftd30fd4fw1d" path="res://Sprites/Effects/NormalWallJump.png" id="5_jvcee"]
 [ext_resource type="Texture2D" uid="uid://c3bhavybq1b0v" path="res://Sprites/Effects/GuardShieldImpact.png" id="5_k522v"]
 [ext_resource type="Texture2D" uid="uid://blbvlao1in035" path="res://Sprites/Effects/SuperJumpSpark.png" id="5_nlh8e"]
+[ext_resource type="Texture2D" uid="uid://bfm2deul8x48a" path="res://Sprites/Effects/FireTackleArrows.png" id="5_oawdu"]
 [ext_resource type="Texture2D" uid="uid://5n03s2bcxmak" path="res://Sprites/Effects/TurnaroundSpark.png" id="6_hgyfw"]
 [ext_resource type="Texture2D" uid="uid://dt50w1ffl6ev6" path="res://Sprites/Effects/SlideDust.png" id="7_fgprp"]
 [ext_resource type="Texture2D" uid="uid://blfclq7b3u1kd" path="res://Sprites/Effects/InvincibilityShieldImpact.png" id="7_wi08o"]
@@ -75,6 +76,42 @@ region = Rect2(48, 0, 48, 48)
 [sub_resource type="AtlasTexture" id="AtlasTexture_6t8a3"]
 atlas = ExtResource("3_caqym")
 region = Rect2(96, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0t67w"]
+atlas = ExtResource("5_oawdu")
+region = Rect2(0, 128, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7lc4p"]
+atlas = ExtResource("5_oawdu")
+region = Rect2(64, 128, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j71wk"]
+atlas = ExtResource("5_oawdu")
+region = Rect2(128, 128, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yiq11"]
+atlas = ExtResource("5_oawdu")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ydpyk"]
+atlas = ExtResource("5_oawdu")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jgyg8"]
+atlas = ExtResource("5_oawdu")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jxruu"]
+atlas = ExtResource("5_oawdu")
+region = Rect2(0, 64, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_66bhy"]
+atlas = ExtResource("5_oawdu")
+region = Rect2(64, 64, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y8mly"]
+atlas = ExtResource("5_oawdu")
+region = Rect2(128, 64, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_smtwt"]
 atlas = ExtResource("5_k522v")
@@ -443,6 +480,48 @@ animations = [{
 }],
 "loop": false,
 "name": &"FireImpact",
+"speed": 60.0
+}, {
+"frames": [{
+"duration": 6.0,
+"texture": SubResource("AtlasTexture_0t67w")
+}, {
+"duration": 6.0,
+"texture": SubResource("AtlasTexture_7lc4p")
+}, {
+"duration": 6.0,
+"texture": SubResource("AtlasTexture_j71wk")
+}],
+"loop": true,
+"name": &"FireTackleArrowsDown",
+"speed": 60.0
+}, {
+"frames": [{
+"duration": 6.0,
+"texture": SubResource("AtlasTexture_yiq11")
+}, {
+"duration": 6.0,
+"texture": SubResource("AtlasTexture_ydpyk")
+}, {
+"duration": 6.0,
+"texture": SubResource("AtlasTexture_jgyg8")
+}],
+"loop": true,
+"name": &"FireTackleArrowsForward",
+"speed": 60.0
+}, {
+"frames": [{
+"duration": 6.0,
+"texture": SubResource("AtlasTexture_jxruu")
+}, {
+"duration": 6.0,
+"texture": SubResource("AtlasTexture_66bhy")
+}, {
+"duration": 6.0,
+"texture": SubResource("AtlasTexture_y8mly")
+}],
+"loop": true,
+"name": &"FireTackleArrowsUp",
 "speed": 60.0
 }, {
 "frames": [{

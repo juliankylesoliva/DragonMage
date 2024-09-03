@@ -7,6 +7,9 @@
 script = ExtResource("1_6675l")
 offset_dictonary = {
 "FastWallJump": Vector2(-8, -16),
+"FireTackleArrowsDown": Vector2(64, 0),
+"FireTackleArrowsForward": Vector2(64, 0),
+"FireTackleArrowsUp": Vector2(64, 0),
 "HeadbonkFX": Vector2(0, -7.5),
 "JumpSpark": Vector2(0, -8),
 "LandingDust": Vector2(0, -8),

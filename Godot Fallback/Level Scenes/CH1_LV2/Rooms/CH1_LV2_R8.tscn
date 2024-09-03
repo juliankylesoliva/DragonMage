@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://blkavapp0nigt"]
+[gd_scene load_steps=19 format=3 uid="uid://blkavapp0nigt"]
 
 [ext_resource type="Script" path="res://Scripts/Utility Scripts/Room.gd" id="1_xbwwl"]
 [ext_resource type="TileSet" uid="uid://dhwi7i1loa2pd" path="res://Sprites/Tiles/Test Tiles/TestTileSet.tres" id="2_isxfa"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://dck0mc2tc82kx" path="res://Scene Objects/Objects/ReinforcedFireBlock.tscn" id="5_xk7rw"]
 [ext_resource type="PackedScene" uid="uid://bgww8jir45ktf" path="res://Scene Objects/Enemies/BlueDragoon.tscn" id="6_2sd51"]
 [ext_resource type="PackedScene" uid="uid://dwnpgujive352" path="res://Scene Objects/Enemies/RedDragoon.tscn" id="7_5fgae"]
+[ext_resource type="PackedScene" uid="uid://dcs7w117uukcd" path="res://Scene Objects/Objects/BreakableMagicBlock.tscn" id="7_rf1gr"]
 [ext_resource type="PackedScene" uid="uid://clfqwsy4byrkf" path="res://Scene Objects/Enemies/GreenDragoon.tscn" id="8_ruwul"]
 [ext_resource type="PackedScene" uid="uid://curi6w4ex7jou" path="res://Scene Objects/Enemies/YellowDragoon.tscn" id="9_v5jd3"]
 [ext_resource type="PackedScene" uid="uid://dfkmxoba64spw" path="res://Scene Objects/Objects/MedalFragment.tscn" id="10_chcob"]
@@ -113,20 +114,14 @@ shape = SubResource("RectangleShape2D_ekffo")
 
 [node name="Blocks" type="Node2D" parent="."]
 
-[node name="ReinforcedMagicBlock" parent="Blocks" instance=ExtResource("4_rp51i")]
-position = Vector2(-416, 96)
-
 [node name="ReinforcedFireBlock" parent="Blocks" instance=ExtResource("5_xk7rw")]
 position = Vector2(-608, 160)
 
-[node name="ReinforcedMagicBlock2" parent="Blocks" instance=ExtResource("4_rp51i")]
+[node name="ReinforcedMagicBlock1" parent="Blocks" instance=ExtResource("4_rp51i")]
 position = Vector2(-864, 64)
 
-[node name="ReinforcedMagicBlock3" parent="Blocks" instance=ExtResource("4_rp51i")]
+[node name="ReinforcedMagicBlock2" parent="Blocks" instance=ExtResource("4_rp51i")]
 position = Vector2(-864, 128)
-
-[node name="ReinforcedMagicBlock4" parent="Blocks" instance=ExtResource("4_rp51i")]
-position = Vector2(-1248, 224)
 
 [node name="ReinforcedFireBlock2" parent="Blocks" instance=ExtResource("5_xk7rw")]
 position = Vector2(-1312, 224)
@@ -136,6 +131,12 @@ position = Vector2(416, 64)
 
 [node name="ReinforcedFireBlock4" parent="Blocks" instance=ExtResource("5_xk7rw")]
 position = Vector2(-1440, 160)
+
+[node name="BreakableMagicBlock" parent="Blocks" instance=ExtResource("7_rf1gr")]
+position = Vector2(-416, 96)
+
+[node name="BreakableMagicBlock2" parent="Blocks" instance=ExtResource("7_rf1gr")]
+position = Vector2(-1248, 224)
 
 [node name="Enemies" type="Node2D" parent="."]
 

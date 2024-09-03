@@ -165,9 +165,6 @@ position = Vector2(352, -192)
 [node name="BreakableMagicBlock2" parent="Blocks" instance=ExtResource("3_f54r3")]
 position = Vector2(224, -320)
 
-[node name="ReinforcedMagicBlock" parent="Blocks" instance=ExtResource("6_u8i12")]
-position = Vector2(416, -352)
-
 [node name="ReinforcedMagicBlock2" parent="Blocks" instance=ExtResource("6_u8i12")]
 position = Vector2(288, -416)
 

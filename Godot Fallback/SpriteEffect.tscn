@@ -4,7 +4,6 @@
 
 [node name="SpriteEffect" type="AnimatedSprite2D"]
 sprite_frames = ExtResource("1_hggh7")
-animation = &"ReflectImpact"
+animation = &"FireTackleArrowsUp"
 autoplay = "default"
-frame = 5
-frame_progress = 1.0
+frame_progress = 0.356864

@@ -72,7 +72,15 @@ class_name FireTackleAttack
 
 @export var fire_tackle_startup_hold_temper_drain_interval : float = 0.8
 
+@export var arrow_fwd_effect_name : String = "FireTackleArrowsForward"
+
+@export var arrow_up_effect_name : String = "FireTackleArrowsUp"
+
+@export var arrow_down_effect_name : String = "FireTackleArrowsDown"
+
 var fire_tackle_hitbox_instance : Node = null
+
+var fire_tackle_arrow_effect_instance : AnimatedSprite2D = null
 
 var saved_floor_snap_distance : float = 0
 
@@ -158,6 +166,9 @@ func startup_init():
 	current_vertical_axis = hub.get_input_vector().y
 	was_interacting_with_wall = (hub.state_machine.previous_state.name == "WallVaulting" or hub.state_machine.previous_state.name == "WallClimbing")
 	horizontal_result = min(((hub.jumping.stored_wall_climb_speed if was_interacting_with_wall else previous_horizontal_velocity) + fire_tackle_min_horizontal_speed), fire_tackle_max_horizontal_speed)
+	
+	var arrow_effect_name : String = (arrow_up_effect_name if current_vertical_axis > 0 else arrow_down_effect_name if current_vertical_axis < 0 else arrow_fwd_effect_name)
+	fire_tackle_arrow_effect_instance = EffectFactory.get_effect(arrow_effect_name, hub.char_body.global_position, 1, hub.movement.get_facing_value() < 0)
 
 func startup_update(delta : float):
 	hub.buffers.refresh_speed_preservation_buffer()
@@ -177,6 +188,12 @@ func startup_update(delta : float):
 				current_startup_hold_timer += fire_tackle_startup_hold_temper_drain_interval
 				if (hub.temper.current_temper_level < hub.temper.hot_threshold):
 					hub.temper.neutralize_temper_by(fire_tackle_hold_temper_decrease)
+		
+		if (fire_tackle_arrow_effect_instance != null):
+			fire_tackle_arrow_effect_instance.set_animation(arrow_up_effect_name if current_vertical_axis > 0 else arrow_down_effect_name if current_vertical_axis < 0 else arrow_fwd_effect_name)
+			fire_tackle_arrow_effect_instance.set_flip_h(hub.movement.get_facing_value() < 0)
+			if ((fire_tackle_arrow_effect_instance.offset.x * hub.movement.get_facing_value()) < 0):
+				fire_tackle_arrow_effect_instance.offset.x *= -1
 	elif (hub.damage.is_player_defeated or hub.damage.is_player_damaged()):
 		end_fire_tackle()
 	else:
@@ -184,6 +201,8 @@ func startup_update(delta : float):
 
 func active_init():
 	current_attack_state = AttackState.ACTIVE
+	if (fire_tackle_arrow_effect_instance != null):
+		fire_tackle_arrow_effect_instance.queue_free()
 	hub.audio.play_sound("attack_draelyn_tackle")
 	fire_tackle_particles.emitting = true
 	hub.char_sprite.modulate = fire_tackle_active_color
@@ -397,6 +416,9 @@ func end_fire_tackle():
 	
 	if (fire_tackle_hitbox_instance != null):
 		fire_tackle_hitbox_instance.queue_free()
+	
+	if (fire_tackle_arrow_effect_instance != null):
+		fire_tackle_arrow_effect_instance.queue_free()
 	
 	hub.char_body.floor_snap_length = saved_floor_snap_distance
 	
