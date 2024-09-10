@@ -475,12 +475,13 @@ func start_wall_jump():
 	
 	reset_min_jump_hold_timer()
 	
-	var did_player_speed_kick = (enable_speed_hopping and hub.buffers.highest_speed > hub.movement.top_speed and hub.buffers.is_speed_preservation_buffer_active())
+	var did_player_speed_kick = (enable_speed_hopping and current_wall_jumps < max_wall_jumps and hub.buffers.highest_speed > hub.movement.top_speed and hub.buffers.is_speed_preservation_buffer_active())
 	var horizontal_result = (maxf(hub.buffers.highest_speed, abs(horizontal_wall_jump_velocity)) if did_player_speed_kick else abs(horizontal_wall_jump_velocity))
 	hub.movement.current_horizontal_velocity = (-horizontal_result if hub.movement.is_facing_right else horizontal_result)
 	hub.movement.set_facing_direction(-hub.movement.get_facing_value())
 	hub.char_body.velocity.x = hub.movement.current_horizontal_velocity
-	hub.char_body.velocity.y = (-max(vertical_wall_jump_velocity * pow(wall_jump_height_decay_rate, current_wall_jumps), min_vertical_wall_jump_velocity) if current_wall_jumps < max_wall_jumps else -min_vertical_wall_jump_velocity)
+	hub.char_body.velocity.y = (-max(vertical_wall_jump_velocity * pow(wall_jump_height_decay_rate, 0 if did_player_speed_kick else current_wall_jumps), min_vertical_wall_jump_velocity) if current_wall_jumps < max_wall_jumps else -min_vertical_wall_jump_velocity)
+	
 	if (current_wall_jumps < max_wall_jumps):
 		if (current_wall_jumps == 0):
 			current_glide_time = 0

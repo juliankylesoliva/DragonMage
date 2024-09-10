@@ -168,7 +168,7 @@ func check_speed_preservation_buffer(delta):
 		speed_preservation_particles.initial_velocity_max = highest_speed
 
 func is_speed_preservation_buffer_active():
-	return speed_preservation_buffer_time_left > 0
+	return (speed_preservation_buffer_time_left > 0 or hub.jumping.stored_wall_climb_speed > 0)
 
 func reset_speed_preservation_buffer():
 	speed_preservation_buffer_time_left = 0
