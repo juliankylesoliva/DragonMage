@@ -10,6 +10,10 @@ extends Enemy
 
 @export var dropped_shades_scene : PackedScene
 
+@export var enable_wings : bool = false
+
+@export var did_player_land : bool = false
+
 var base_gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
 func _ready():
@@ -50,8 +54,22 @@ func jump():
 func jump_update():
 	if (!body.is_on_floor()):
 		var current_fall_speed : float = body.velocity.y
+		
+		if (enable_wings and !did_player_land and !player_detection.is_player_in_midair and !did_player_land):
+			did_player_land = true
+		
+		if (enable_wings and current_fall_speed >= 0 and player_detection.is_player_in_midair and !did_player_land):
+			body.velocity.y = 0
+			sprite.play("WingedFloat")
+		elif (enable_wings and current_fall_speed >= 0 and !player_detection.is_player_in_midair and did_player_land):
+			sprite.play("WingedFall")
+		else:
+			pass
+		
 		if (current_fall_speed > max_fall_speed):
 			body.velocity.y = max_fall_speed
+	else:
+		did_player_land = false
 
 func activate_enemy():
 	movement.set_process_mode(Node.PROCESS_MODE_INHERIT)
@@ -59,17 +77,17 @@ func activate_enemy():
 	movement.set_process(true)
 	movement.reset_to_initial_position()
 	movement.reset_to_initial_move_vector()
-	sprite.play("Idle")
+	sprite.play("WingedIdle" if enable_wings else "Idle")
 
 func deactivate_enemy():
 	movement.set_physics_process(false)
 	movement.set_process(false)
-	sprite.play("Idle")
+	sprite.play("WingedIdle" if enable_wings else "Idle")
 	movement.set_process_mode(Node.PROCESS_MODE_DISABLED)
 
 func on_defeat():
 	play_damage_sound()
-	sprite.play("Defeat")
+	sprite.play("WingedDefeat" if enable_wings else "Defeat")
 
 func on_player_approach():
 	if (!is_defeated):
@@ -81,7 +99,7 @@ func on_player_retreat():
 	if (!is_defeated):
 		movement.set_physics_process(false)
 		movement.set_process(false)
-		sprite.play("Idle")
+		sprite.play("WingedIdle" if enable_wings else "Idle")
 		movement.set_process_mode(Node.PROCESS_MODE_DISABLED)
 
 func on_player_jump():
@@ -98,9 +116,9 @@ func on_player_collision():
 			pass
 
 func on_leaving_ground():
-	if (!is_defeated):
-		sprite.play("Jump")
+	if (!is_defeated and body.velocity.y < 0):
+		sprite.play("WingedJump" if enable_wings else "Jump")
 
 func on_touching_ground():
 	if (!is_defeated):
-		sprite.play("Idle")
+		sprite.play("WingedIdle" if enable_wings else "Idle")

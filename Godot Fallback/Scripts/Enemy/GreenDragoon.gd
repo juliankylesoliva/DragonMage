@@ -2,6 +2,10 @@ extends Enemy
 
 @export var dropped_shades_scene : PackedScene
 
+@export var enable_wings : bool = false
+
+@export var winged_turnaround_speed : float = 128
+
 var base_gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
 func _ready():
@@ -11,7 +15,9 @@ func _ready():
 
 func _physics_process(delta):
 	check_defeated_camera_distance()
-	body.velocity.y += (base_gravity * gravity_scale * delta)
+	if (!enable_wings or is_defeated):
+		body.velocity.y += (base_gravity * gravity_scale * delta)
+	
 	if (is_defeated):
 		if (!shape.disabled):
 			shape.disabled = true
@@ -36,18 +42,22 @@ func activate_enemy():
 	movement.reset_to_initial_position()
 	movement.reset_to_initial_move_vector()
 	sprite.set_visible(true)
-	sprite.play("Walk")
+	sprite.play("Fly" if enable_wings else "Walk")
 
 func deactivate_enemy():
 	movement.set_physics_process(false)
 	movement.set_process(false)
-	sprite.play("Idle")
+	sprite.play("WingedIdle" if enable_wings else "Idle")
 	sprite.set_visible(false)
 	movement.set_process_mode(Node.PROCESS_MODE_DISABLED)
 
 func on_defeat():
 	play_damage_sound()
-	sprite.play("Defeat")
+	sprite.play("WingedDefeat" if enable_wings else "Defeat")
+
+func on_far_from_home():
+	if (!is_defeated and enable_wings):
+		movement.turn_movement(winged_turnaround_speed)
 
 func on_player_approach():
 	if (!is_defeated):
@@ -55,13 +65,13 @@ func on_player_approach():
 		movement.set_physics_process(true)
 		movement.set_process(true)
 		sprite.set_visible(true)
-		sprite.play("Walk")
+		sprite.play("Fly" if enable_wings else "Walk")
 
 func on_player_retreat():
 	if (!is_defeated):
 		movement.set_physics_process(false)
 		movement.set_process(false)
-		sprite.play("Idle")
+		sprite.play("WingedIdle" if enable_wings else "Idle")
 		sprite.set_visible(false)
 		movement.set_process_mode(Node.PROCESS_MODE_DISABLED)
 

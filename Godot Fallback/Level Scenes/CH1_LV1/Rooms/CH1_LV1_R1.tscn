@@ -94,7 +94,7 @@ position = Vector2(752, 48)
 position = Vector2(784, 80)
 
 [node name="GreenDragoon" parent="." instance=ExtResource("5_80gu6")]
-position = Vector2(784, 224)
+position = Vector2(816, 224)
 
 [node name="GreenDragoon2" parent="." instance=ExtResource("5_80gu6")]
 position = Vector2(1104, 128)

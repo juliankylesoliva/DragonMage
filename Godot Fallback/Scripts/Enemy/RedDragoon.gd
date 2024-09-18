@@ -17,20 +17,35 @@ enum EnemyProjectileState
 
 @export var dropped_shades_scene : PackedScene
 
+@export var enable_wings : bool = false
+
+@export var winged_turnaround_speed : float = 128
+
+@export var winged_speed : float = 128
+
 var base_gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
 var current_projectile_state : EnemyProjectileState = EnemyProjectileState.STANDBY
 
 var current_projectile_state_timer : float = 0
 
+var saved_winged_speed : Vector2 = Vector2.ZERO
+
+var saved_turn_speed : float = 0
+
 func _ready():
+	if (enable_wings):
+		movement.ignore_y_value = false
+		movement.set_move_vector(Vector2(0, -winged_speed))
 	movement.set_physics_process(false)
 	movement.set_process(false)
 	movement.set_process_mode(Node.PROCESS_MODE_DISABLED)
 
 func _physics_process(delta):
 	check_defeated_camera_distance()
-	body.velocity.y += (base_gravity * gravity_scale * delta)
+	if (!enable_wings or is_defeated):
+		body.velocity.y += (base_gravity * gravity_scale * delta)
+	
 	if (is_defeated):
 		if (!shape.disabled):
 			shape.disabled = true
@@ -55,7 +70,7 @@ func launch_projectile():
 		return
 	current_projectile_state = EnemyProjectileState.WINDUP
 	current_projectile_state_timer = pre_fire_windup
-	sprite.play("AttackWindup")
+	sprite.play("WingedAttackWindup" if enable_wings else "AttackWindup")
 
 func reset_timer_and_state():
 	current_projectile_state = EnemyProjectileState.STANDBY
@@ -65,6 +80,9 @@ func update_state_timer(delta : float):
 	if (current_projectile_state == EnemyProjectileState.WINDUP or current_projectile_state == EnemyProjectileState.COOLDOWN):
 		if (current_projectile_state_timer > 0):
 			current_projectile_state_timer = move_toward(current_projectile_state_timer, 0, delta)
+			if (enable_wings and current_projectile_state == EnemyProjectileState.COOLDOWN):
+				if (sprite.animation == "WingedAttackLaunch" and !sprite.is_playing()):
+					sprite.play("WingedAttackCooldown")
 		
 		if (current_projectile_state_timer <= 0):
 			if (current_projectile_state == EnemyProjectileState.WINDUP):
@@ -76,11 +94,11 @@ func update_state_timer(delta : float):
 				
 				current_projectile_state = EnemyProjectileState.COOLDOWN
 				current_projectile_state_timer = post_fire_cooldown
-				sprite.play("AttackLaunch")
+				sprite.play("WingedAttackLaunch" if enable_wings else "AttackLaunch")
 			else:
 				current_projectile_state = EnemyProjectileState.STANDBY
 				current_projectile_state_timer = 0
-				sprite.play("Idle")
+				sprite.play("WingedIdle" if enable_wings else "Idle")
 
 func activate_enemy():
 	movement.set_process_mode(Node.PROCESS_MODE_INHERIT)
@@ -92,12 +110,16 @@ func activate_enemy():
 func deactivate_enemy():
 	movement.set_physics_process(false)
 	movement.set_process(false)
-	sprite.play("Idle")
+	sprite.play("WingedIdle" if enable_wings else "Idle")
 	movement.set_process_mode(Node.PROCESS_MODE_DISABLED)
 
 func on_defeat():
 	play_damage_sound()
-	sprite.play("Defeat")
+	sprite.play("WingedDefeat" if enable_wings else "Defeat")
+
+func on_far_from_home():
+	if (!is_defeated and enable_wings):
+		movement.turn_movement(winged_turnaround_speed)
 
 func on_player_approach():
 	if (!is_defeated):
@@ -105,13 +127,13 @@ func on_player_approach():
 		movement.set_physics_process(true)
 		movement.set_process(true)
 		movement.face_towards_player()
-		sprite.play("Idle")
+		sprite.play("WingedIdle" if enable_wings else "Idle")
 
 func on_player_retreat():
 	if (!is_defeated):
 		movement.set_physics_process(false)
 		movement.set_process(false)
-		sprite.play("Idle")
+		sprite.play("WingedIdle" if enable_wings else "Idle")
 		movement.set_process_mode(Node.PROCESS_MODE_DISABLED)
 
 func on_player_enter_sightline():

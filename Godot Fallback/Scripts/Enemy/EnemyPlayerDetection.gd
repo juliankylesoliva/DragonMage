@@ -40,10 +40,13 @@ var is_player_in_sightline : bool = false
 
 var did_player_jump : bool = false
 
+var is_player_in_midair : bool = false
+
 func _physics_process(_delta):
 	check_player_detection_radius()
 	check_enemy_sightline()
 	check_player_jump()
+	check_player_midair()
 
 func get_player_position():
 	return player_ref.char_body.global_position
@@ -119,3 +122,9 @@ func check_player_jump():
 			did_player_jump = true
 		else:
 			did_player_jump = false
+
+func check_player_midair():
+	if (enemy.visibility_notifier.is_on_screen() and player_ref != null):
+		is_player_in_midair = !player_ref.char_body.is_on_floor()
+		return
+	is_player_in_midair = false

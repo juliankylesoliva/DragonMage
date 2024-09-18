@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://dwnpgujive352"]
+[gd_scene load_steps=25 format=3 uid="uid://dwnpgujive352"]
 
 [ext_resource type="Script" path="res://Scripts/Enemy/RedDragoon.gd" id="1_33vrd"]
 [ext_resource type="Script" path="res://Scripts/Enemy/EnemyMovement.gd" id="2_sot6e"]
@@ -31,6 +31,42 @@ region = Rect2(64, 0, 64, 64)
 [sub_resource type="AtlasTexture" id="AtlasTexture_dwwqg"]
 atlas = ExtResource("5_up84d")
 region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_080xs"]
+atlas = ExtResource("5_up84d")
+region = Rect2(768, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7d40y"]
+atlas = ExtResource("5_up84d")
+region = Rect2(832, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gv78h"]
+atlas = ExtResource("5_up84d")
+region = Rect2(896, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ydsh8"]
+atlas = ExtResource("5_up84d")
+region = Rect2(704, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0t60a"]
+atlas = ExtResource("5_up84d")
+region = Rect2(640, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jl7m6"]
+atlas = ExtResource("5_up84d")
+region = Rect2(576, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ei57q"]
+atlas = ExtResource("5_up84d")
+region = Rect2(384, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_04fym"]
+atlas = ExtResource("5_up84d")
+region = Rect2(448, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vjvqp"]
+atlas = ExtResource("5_up84d")
+region = Rect2(512, 0, 64, 64)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_q7jna"]
 animations = [{
@@ -68,6 +104,58 @@ animations = [{
 "loop": true,
 "name": &"Idle",
 "speed": 60.0
+}, {
+"frames": [{
+"duration": 10.0,
+"texture": SubResource("AtlasTexture_080xs")
+}, {
+"duration": 10.0,
+"texture": SubResource("AtlasTexture_7d40y")
+}, {
+"duration": 10.0,
+"texture": SubResource("AtlasTexture_gv78h")
+}],
+"loop": true,
+"name": &"WingedAttackCooldown",
+"speed": 60.0
+}, {
+"frames": [{
+"duration": 24.0,
+"texture": SubResource("AtlasTexture_ydsh8")
+}],
+"loop": false,
+"name": &"WingedAttackLaunch",
+"speed": 60.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0t60a")
+}],
+"loop": false,
+"name": &"WingedAttackWindup",
+"speed": 60.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jl7m6")
+}],
+"loop": true,
+"name": &"WingedDefeat",
+"speed": 60.0
+}, {
+"frames": [{
+"duration": 10.0,
+"texture": SubResource("AtlasTexture_ei57q")
+}, {
+"duration": 10.0,
+"texture": SubResource("AtlasTexture_04fym")
+}, {
+"duration": 10.0,
+"texture": SubResource("AtlasTexture_vjvqp")
+}],
+"loop": true,
+"name": &"WingedIdle",
+"speed": 60.0
 }]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_a0j8l"]
@@ -94,6 +182,7 @@ script = ExtResource("1_33vrd")
 red_dragoon_projectile_scene = ExtResource("2_t01wj")
 projectile_spawn_point = NodePath("../PlayerRayCastFront")
 dropped_shades_scene = ExtResource("3_uicur")
+winged_speed = 32.0
 movement = NodePath("Movement")
 collision_detection = NodePath("CollisionDetection")
 player_detection = NodePath("PlayerDetection")
@@ -107,6 +196,7 @@ z_index_on_defeat = 8
 [node name="Movement" type="Node" parent="Enemy" node_paths=PackedStringArray("enemy")]
 script = ExtResource("2_sot6e")
 enemy = NodePath("..")
+max_distance_from_init_pos = 48.0
 
 [node name="PlayerDetection" type="Node" parent="Enemy" node_paths=PackedStringArray("enemy", "front_sightline_raycast", "back_sightline_raycast")]
 script = ExtResource("3_d4ci6")
@@ -224,6 +314,7 @@ collision_mask = 11
 hit_from_inside = true
 collide_with_areas = true
 
+[connection signal="far_from_home" from="Enemy/Movement" to="Enemy" method="on_far_from_home"]
 [connection signal="player_approach" from="Enemy/PlayerDetection" to="Enemy" method="on_player_approach"]
 [connection signal="player_enter_sightline" from="Enemy/PlayerDetection" to="Enemy" method="on_player_enter_sightline"]
 [connection signal="player_retreat" from="Enemy/PlayerDetection" to="Enemy" method="on_player_retreat"]

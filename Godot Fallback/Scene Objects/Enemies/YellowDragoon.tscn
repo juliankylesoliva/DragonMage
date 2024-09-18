@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://curi6w4ex7jou"]
+[gd_scene load_steps=23 format=3 uid="uid://curi6w4ex7jou"]
 
 [ext_resource type="Script" path="res://Scripts/Enemy/YellowDragoon.gd" id="1_5fo06"]
 [ext_resource type="PackedScene" uid="uid://c7rofcxvqilp6" path="res://Scene Objects/Effects/DragoonShades.tscn" id="2_jarmg"]
@@ -35,6 +35,34 @@ region = Rect2(256, 0, 64, 64)
 atlas = ExtResource("5_fts2l")
 region = Rect2(64, 0, 64, 64)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_0i85m"]
+atlas = ExtResource("5_fts2l")
+region = Rect2(704, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fvb02"]
+atlas = ExtResource("5_fts2l")
+region = Rect2(768, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uk2up"]
+atlas = ExtResource("5_fts2l")
+region = Rect2(832, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w5pfu"]
+atlas = ExtResource("5_fts2l")
+region = Rect2(640, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d7642"]
+atlas = ExtResource("5_fts2l")
+region = Rect2(448, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_x2ddc"]
+atlas = ExtResource("5_fts2l")
+region = Rect2(512, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tndsi"]
+atlas = ExtResource("5_fts2l")
+region = Rect2(576, 0, 64, 64)
+
 [sub_resource type="SpriteFrames" id="SpriteFrames_q7jna"]
 animations = [{
 "frames": [{
@@ -54,7 +82,7 @@ animations = [{
 "speed": 60.0
 }, {
 "frames": [{
-"duration": 5.0,
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_ole6t")
 }, {
 "duration": 10.0,
@@ -68,6 +96,42 @@ animations = [{
 }],
 "loop": true,
 "name": &"Walk",
+"speed": 60.0
+}, {
+"frames": [{
+"duration": 5.0,
+"texture": SubResource("AtlasTexture_0i85m")
+}, {
+"duration": 5.0,
+"texture": SubResource("AtlasTexture_fvb02")
+}, {
+"duration": 5.0,
+"texture": SubResource("AtlasTexture_uk2up")
+}],
+"loop": true,
+"name": &"WingedChase",
+"speed": 60.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_w5pfu")
+}],
+"loop": true,
+"name": &"WingedDefeat",
+"speed": 60.0
+}, {
+"frames": [{
+"duration": 10.0,
+"texture": SubResource("AtlasTexture_d7642")
+}, {
+"duration": 10.0,
+"texture": SubResource("AtlasTexture_x2ddc")
+}, {
+"duration": 10.0,
+"texture": SubResource("AtlasTexture_tndsi")
+}],
+"loop": true,
+"name": &"WingedIdle",
 "speed": 60.0
 }]
 
@@ -108,6 +172,7 @@ z_index_on_defeat = 8
 script = ExtResource("2_o8r77")
 enemy = NodePath("..")
 is_always_facing_player = false
+max_distance_from_init_pos = 96.0
 
 [node name="PlayerDetection" type="Node" parent="Enemy" node_paths=PackedStringArray("enemy", "front_sightline_raycast", "back_sightline_raycast")]
 script = ExtResource("3_us44s")
@@ -132,6 +197,7 @@ raycast_ledge_l = NodePath("../../LedgeRayCastL")
 raycast_ledge_r = NodePath("../../LedgeRayCastR")
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+rect = Rect2(-16, -32, 32, 64)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 z_index = 3
@@ -145,7 +211,6 @@ z_index = 3
 sprite_frames = SubResource("SpriteFrames_q7jna")
 animation = &"Idle"
 autoplay = "Idle"
-frame_progress = 0.416667
 flip_h = true
 
 [node name="ContactHitbox" type="Area2D" parent="."]
@@ -226,6 +291,7 @@ collision_mask = 11
 hit_from_inside = true
 collide_with_areas = true
 
+[connection signal="far_from_home" from="Enemy/Movement" to="Enemy" method="on_far_from_home"]
 [connection signal="player_approach" from="Enemy/PlayerDetection" to="Enemy" method="on_player_approach"]
 [connection signal="player_enter_sightline" from="Enemy/PlayerDetection" to="Enemy" method="on_enter_sightline"]
 [connection signal="player_retreat" from="Enemy/PlayerDetection" to="Enemy" method="on_player_retreat"]

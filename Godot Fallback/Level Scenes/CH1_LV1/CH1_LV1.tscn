@@ -30,7 +30,7 @@
 script = ExtResource("1_3mmw4")
 level_index = 4
 player_reference = NodePath("Player")
-starting_room = NodePath("CH1_LV1_R1")
+starting_room = NodePath("CH1_LV1_R8")
 room_list = [NodePath("CH1_LV1_R1"), NodePath("CH1_LV1_R2"), NodePath("CH1_LV1_R3"), NodePath("CH1_LV1_R4"), NodePath("CH1_LV1_R5"), NodePath("CH1_LV1_R6"), NodePath("CH1_LV1_R7"), NodePath("CH1_LV1_R8"), NodePath("CH1_LV1_R9"), NodePath("CH1_LV1_R10"), NodePath("CH1_LV1_R11")]
 min_fragment_collection_rate = 0.64
 dropped_fragment_scene = ExtResource("2_gdxu6")
@@ -228,13 +228,17 @@ screen_fade = NodePath("../UI_Canvas/ScreenFade")
 
 [editable path="Player"]
 [editable path="CH1_LV1_R1"]
+[editable path="CH1_LV1_R1/GreenDragoon"]
 [editable path="CH1_LV1_R2"]
+[editable path="CH1_LV1_R2/RedDragoon"]
 [editable path="CH1_LV1_R3"]
 [editable path="CH1_LV1_R4"]
+[editable path="CH1_LV1_R4/BlueDragoon"]
 [editable path="CH1_LV1_R5"]
 [editable path="CH1_LV1_R6"]
 [editable path="CH1_LV1_R7"]
 [editable path="CH1_LV1_R8"]
+[editable path="CH1_LV1_R8/YellowDragoon3"]
 [editable path="CH1_LV1_R9"]
 [editable path="CH1_LV1_R9/Warp 1"]
 [editable path="CH1_LV1_R10"]
