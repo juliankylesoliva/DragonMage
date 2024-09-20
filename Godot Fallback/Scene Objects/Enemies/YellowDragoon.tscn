@@ -291,7 +291,6 @@ collision_mask = 11
 hit_from_inside = true
 collide_with_areas = true
 
-[connection signal="far_from_home" from="Enemy/Movement" to="Enemy" method="on_far_from_home"]
 [connection signal="player_approach" from="Enemy/PlayerDetection" to="Enemy" method="on_player_approach"]
 [connection signal="player_enter_sightline" from="Enemy/PlayerDetection" to="Enemy" method="on_enter_sightline"]
 [connection signal="player_retreat" from="Enemy/PlayerDetection" to="Enemy" method="on_player_retreat"]

@@ -56,10 +56,6 @@ func on_defeat():
 	play_damage_sound()
 	sprite.play("WingedDefeat" if enable_wings else "Defeat")
 
-func on_far_from_home():
-	if (!is_defeated and enable_wings):
-		movement.turn_movement(winged_turnaround_speed)
-
 func on_player_approach():
 	if (!is_defeated):
 		movement.set_process_mode(Node.PROCESS_MODE_INHERIT)

@@ -12,7 +12,7 @@ extends Enemy
 
 @export var enable_wings : bool = false
 
-@export var did_player_land : bool = false
+var did_player_land : bool = false
 
 var base_gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 

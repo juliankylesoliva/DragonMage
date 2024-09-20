@@ -1407,7 +1407,6 @@ script = ExtResource("2_yj5hr")
 hub = NodePath("..")
 ledge_nudge_easing = 0.5
 wall_raycast_collision_threshold = 1
-intangible_wall_raycast_collision_threshold = 3
 max_upward_slope_correction_iterations = 8.0
 
 [node name="Buffers" type="Node" parent="Hub" node_paths=PackedStringArray("hub", "speed_preservation_particles")]

@@ -17,7 +17,7 @@ class_name PlayerCollisions
 @export var max_nudge_distance : float = 8
 
 @export var wall_raycast_collision_threshold : int = 2
-@export var intangible_wall_raycast_collision_threshold : int = 2
+@export var intangible_wall_raycast_collision_threshold : int = 1
 @export var capsule_curve_offset : float = 6
 
 @export var max_upward_slope_correction_iterations : float = 16

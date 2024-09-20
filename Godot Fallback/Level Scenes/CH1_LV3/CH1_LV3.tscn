@@ -1,0 +1,89 @@
+[gd_scene load_steps=15 format=3 uid="uid://f744pfiogil1"]
+
+[ext_resource type="Script" path="res://Scripts/Utility Scripts/Level.gd" id="1_c2c1a"]
+[ext_resource type="PackedScene" uid="uid://d0ff35cm57xb7" path="res://Scene Objects/Effects/DroppedFragment.tscn" id="2_gaufr"]
+[ext_resource type="PackedScene" uid="uid://c6qw77ovfwgfs" path="res://Player.tscn" id="2_iofq8"]
+[ext_resource type="PackedScene" uid="uid://cgnpy1l3wc3ll" path="res://Level Scenes/CH1_LV3/Rooms/CH1_LV3_R1.tscn" id="3_a63fm"]
+[ext_resource type="PackedScene" uid="uid://bdypi7w73c6kq" path="res://Scene Objects/UI/TemperMeterUI.tscn" id="3_k3gph"]
+[ext_resource type="PackedScene" uid="uid://cg3dhm1wv5w67" path="res://Scene Objects/UI/MagicMeterUI.tscn" id="5_3bxal"]
+[ext_resource type="PackedScene" uid="uid://d1eef1xjuwf3b" path="res://Menu Scenes/PauseMenu.tscn" id="6_oqtw6"]
+[ext_resource type="PackedScene" uid="uid://vmiu4klr3ywc" path="res://Scene Objects/UI/FragmentCounterUI.tscn" id="7_5vw5e"]
+[ext_resource type="PackedScene" uid="uid://buykytsdrlnsg" path="res://Scene Objects/Misc/ResultsScreen.tscn" id="7_28fis"]
+[ext_resource type="PackedScene" uid="uid://8beel2odcuky" path="res://Scene Objects/Effects/ScreenFade.tscn" id="8_oq5l3"]
+[ext_resource type="PackedScene" uid="uid://b5wwivjk8sl7b" path="res://Scene Objects/Misc/ClearTimer.tscn" id="9_s1oxl"]
+[ext_resource type="PackedScene" uid="uid://brhoroc2w6jwi" path="res://Scene Objects/UI/Textbox.tscn" id="11_k27u7"]
+[ext_resource type="PackedScene" uid="uid://btq4qla5fyq0n" path="res://Scene Objects/Misc/LevelMusicPlayer.tscn" id="12_sh5q1"]
+[ext_resource type="PackedScene" uid="uid://bjeiexqfc7oht" path="res://Scene Objects/Misc/DefeatScreen.tscn" id="13_opbm0"]
+
+[node name="CH1_LV3" type="Node2D" node_paths=PackedStringArray("player_reference", "starting_room", "room_list", "clear_timer")]
+script = ExtResource("1_c2c1a")
+player_reference = NodePath("Player")
+starting_room = NodePath("CH1_LV3_R1")
+room_list = [NodePath("CH1_LV3_R1")]
+min_fragment_collection_rate = 1.0
+dropped_fragment_scene = ExtResource("2_gaufr")
+clear_timer = NodePath("ClearTimer")
+
+[node name="Player" parent="." instance=ExtResource("2_iofq8")]
+position = Vector2(96, 224)
+
+[node name="Fairy" parent="Player/Hub" index="4"]
+is_using_fairy = true
+
+[node name="Camera" parent="Player/Hub" index="11" node_paths=PackedStringArray("player_cam")]
+player_cam = NodePath("../../../Camera2D")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+process_callback = 0
+drag_left_margin = 0.0
+drag_top_margin = 0.6
+drag_right_margin = 0.0
+editor_draw_limits = true
+editor_draw_drag_margin = true
+
+[node name="CH1_LV3_R1" parent="." instance=ExtResource("3_a63fm")]
+
+[node name="UI_Canvas" type="CanvasLayer" parent="."]
+
+[node name="TemperMeterUI" parent="UI_Canvas" node_paths=PackedStringArray("player_node") instance=ExtResource("3_k3gph")]
+position = Vector2(1, 8)
+player_node = NodePath("../../Player")
+
+[node name="MagicMeterUI" parent="UI_Canvas" node_paths=PackedStringArray("player_node") instance=ExtResource("5_3bxal")]
+position = Vector2(88, 40)
+player_node = NodePath("../../Player")
+
+[node name="FragmentCounterUI" parent="UI_Canvas" node_paths=PackedStringArray("player_node", "level_ref") instance=ExtResource("7_5vw5e")]
+position = Vector2(512, 0)
+player_node = NodePath("../../Player")
+level_ref = NodePath("../..")
+
+[node name="PauseMenu" parent="UI_Canvas" node_paths=PackedStringArray("screen_fade") instance=ExtResource("6_oqtw6")]
+screen_fade = NodePath("../ScreenFade")
+
+[node name="ResultsScreen" parent="UI_Canvas" node_paths=PackedStringArray("screen_fade", "level") instance=ExtResource("7_28fis")]
+screen_fade = NodePath("../ScreenFade")
+level = NodePath("../..")
+
+[node name="ScreenFade" parent="UI_Canvas" instance=ExtResource("8_oq5l3")]
+starting_fade_duration = 1.0
+
+[node name="ClearTimer" parent="." instance=ExtResource("9_s1oxl")]
+
+[node name="Textbox" parent="." node_paths=PackedStringArray("ui_canvas") instance=ExtResource("11_k27u7")]
+ui_canvas = NodePath("../UI_Canvas")
+
+[node name="LevelMusicPlayer" parent="." instance=ExtResource("12_sh5q1")]
+autoplay = false
+
+[node name="DefeatScreen" parent="." node_paths=PackedStringArray("screen_fade") instance=ExtResource("13_opbm0")]
+screen_fade = NodePath("../UI_Canvas/ScreenFade")
+
+[connection signal="player_defeated" from="." to="UI_Canvas/TemperMeterUI" method="hide"]
+[connection signal="player_defeated" from="." to="UI_Canvas/MagicMeterUI" method="hide"]
+[connection signal="player_defeated" from="." to="UI_Canvas/FragmentCounterUI" method="hide"]
+[connection signal="player_defeated" from="." to="Textbox" method="hide"]
+[connection signal="player_defeated" from="." to="LevelMusicPlayer" method="stop"]
+[connection signal="player_defeated" from="." to="DefeatScreen" method="do_defeat_screen"]
+
+[editable path="Player"]
