@@ -44,9 +44,11 @@ func activate_enemy():
 	movement.set_facing_direction(-1)
 	movement.reset_to_initial_position()
 	movement.reset_to_initial_move_vector()
+	movement.is_always_facing_player = true
 	sprite.play("WingedIdle" if enable_wings else "Idle")
 
 func deactivate_enemy():
+	movement.is_always_facing_player = true
 	movement.set_physics_process(false)
 	movement.set_process(false)
 	sprite.play("WingedIdle" if enable_wings else "Idle")
@@ -62,9 +64,11 @@ func on_player_approach():
 		movement.set_physics_process(true)
 		movement.set_process(true)
 		movement.reset_to_initial_move_vector()
+		movement.is_always_facing_player = true
 
 func on_player_retreat():
 	if (!is_defeated):
+		movement.is_always_facing_player = true
 		movement.set_facing_direction(-1)
 		movement.reset_to_initial_move_vector()
 		movement.set_physics_process(false)
@@ -74,12 +78,14 @@ func on_player_retreat():
 
 func on_enter_sightline():
 	if (!is_defeated and visibility_notifier.is_on_screen() and movement.current_move_vector.x == 0):
+		movement.is_always_facing_player = false
 		movement.face_towards_player()
 		movement.set_move_vector(Vector2.RIGHT * movement.get_facing_value() * move_speed)
 		sprite.play("WingedChase" if enable_wings else "Walk")
 
 func on_stay_sightline():
 	if (!is_defeated and visibility_notifier.is_on_screen() and movement.current_move_vector.x == 0):
+		movement.is_always_facing_player = false
 		movement.set_move_vector(Vector2.RIGHT * movement.get_facing_value() * move_speed)
 		sprite.play("WingedChase" if enable_wings else "Walk")
 
