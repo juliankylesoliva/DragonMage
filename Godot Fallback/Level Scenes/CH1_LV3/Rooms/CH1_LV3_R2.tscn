@@ -118,7 +118,7 @@ position = Vector2(608, -32)
 enable_wings = true
 
 [node name="RedDragoon" parent="Enemies" instance=ExtResource("7_oxpru")]
-position = Vector2(544, -224)
+position = Vector2(512, -128)
 
 [node name="Enemy" parent="Enemies/RedDragoon" index="0"]
 enable_wings = true
