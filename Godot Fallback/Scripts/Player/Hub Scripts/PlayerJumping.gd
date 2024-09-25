@@ -367,6 +367,7 @@ func do_fast_fall_slope_boost():
 		hub.movement.set_facing_direction(-hub.movement.get_facing_value())
 	hub.movement.current_horizontal_velocity += (fast_fall_slope_boost_multiplier * hub.jumping.fast_falling_speed * hub.char_body.get_floor_normal().x)
 	hub.char_body.velocity.x = hub.movement.current_horizontal_velocity
+	landing_reset()
 
 func can_speed_hop_slope_boost():
 	return (enable_speed_hopping and !hub.movement.is_crouching and hub.char_body.is_on_floor() and hub.collisions.get_distance_to_ground() <= hub.char_body.floor_snap_length and hub.char_body.get_floor_angle() > speed_hop_slope_boost_threshold)
