@@ -124,7 +124,7 @@ func check_player_jump():
 			did_player_jump = false
 
 func check_player_midair():
-	if (enemy.visibility_notifier.is_on_screen() and player_ref != null):
+	if (player_ref != null):
 		is_player_in_midair = !player_ref.char_body.is_on_floor()
 		return
 	is_player_in_midair = false

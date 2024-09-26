@@ -156,6 +156,7 @@ sprite = NodePath("../AnimatedSprite2D")
 shape = NodePath("../CollisionShape2D")
 visibility_notifier = NodePath("../VisibleOnScreenNotifier2D")
 defeated_deactivation_camera_distance = 800.0
+gravity_scale = 2.0
 z_index_on_defeat = 8
 
 [node name="Movement" type="Node" parent="Enemy" node_paths=PackedStringArray("enemy")]

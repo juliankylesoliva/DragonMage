@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://f744pfiogil1"]
+[gd_scene load_steps=19 format=3 uid="uid://f744pfiogil1"]
 
 [ext_resource type="Script" path="res://Scripts/Utility Scripts/Level.gd" id="1_c2c1a"]
 [ext_resource type="PackedScene" uid="uid://d0ff35cm57xb7" path="res://Scene Objects/Effects/DroppedFragment.tscn" id="2_gaufr"]
@@ -17,12 +17,13 @@
 [ext_resource type="PackedScene" uid="uid://brhoroc2w6jwi" path="res://Scene Objects/UI/Textbox.tscn" id="11_k27u7"]
 [ext_resource type="PackedScene" uid="uid://btq4qla5fyq0n" path="res://Scene Objects/Misc/LevelMusicPlayer.tscn" id="12_sh5q1"]
 [ext_resource type="PackedScene" uid="uid://bjeiexqfc7oht" path="res://Scene Objects/Misc/DefeatScreen.tscn" id="13_opbm0"]
+[ext_resource type="PackedScene" uid="uid://bl1jwsgqfev8p" path="res://Level Scenes/CH1_LV3/Rooms/CH1_LV3_R5.tscn" id="18_c8jkb"]
 
 [node name="CH1_LV3" type="Node2D" node_paths=PackedStringArray("player_reference", "starting_room", "room_list", "clear_timer")]
 script = ExtResource("1_c2c1a")
 player_reference = NodePath("Player")
 starting_room = NodePath("CH1_LV3_R1")
-room_list = [NodePath("CH1_LV3_R1"), NodePath("CH1_LV3_R2"), NodePath("CH1_LV3_R3"), NodePath("CH1_LV3_R4")]
+room_list = [NodePath("CH1_LV3_R1"), NodePath("CH1_LV3_R2"), NodePath("CH1_LV3_R3"), NodePath("CH1_LV3_R4"), NodePath("CH1_LV3_R5")]
 min_fragment_collection_rate = 1.0
 dropped_fragment_scene = ExtResource("2_gaufr")
 clear_timer = NodePath("ClearTimer")
@@ -72,6 +73,18 @@ position = Vector2(-576, -896)
 
 [node name="Warp 0" parent="CH1_LV3_R4" index="6" node_paths=PackedStringArray("room_destination")]
 room_destination = NodePath("../../CH1_LV3_R3")
+
+[node name="Warp 1" parent="CH1_LV3_R4" index="7" node_paths=PackedStringArray("room_destination")]
+room_destination = NodePath("../../CH1_LV3_R5")
+
+[node name="CH1_LV3_R5" parent="." instance=ExtResource("18_c8jkb")]
+position = Vector2(3648, -1216)
+
+[node name="Warp 0" parent="CH1_LV3_R5" index="5" node_paths=PackedStringArray("room_destination")]
+room_destination = NodePath("../../CH1_LV3_R4")
+
+[node name="Checkpoint" parent="CH1_LV3_R5" index="8" node_paths=PackedStringArray("level_origin")]
+level_origin = NodePath("../..")
 
 [node name="UI_Canvas" type="CanvasLayer" parent="."]
 
@@ -161,3 +174,21 @@ screen_fade = NodePath("../UI_Canvas/ScreenFade")
 [editable path="CH1_LV3_R4/Enemies/YellowDragoon"]
 [editable path="CH1_LV3_R4/Enemies/BlueDragoon3"]
 [editable path="CH1_LV3_R4/Enemies/RedDragoon3"]
+[editable path="CH1_LV3_R5"]
+[editable path="CH1_LV3_R5/FallWarp"]
+[editable path="CH1_LV3_R5/Enemies/GreenDragoon"]
+[editable path="CH1_LV3_R5/Enemies/RedDragoon"]
+[editable path="CH1_LV3_R5/Enemies/GreenDragoon2"]
+[editable path="CH1_LV3_R5/Enemies/RedDragoon2"]
+[editable path="CH1_LV3_R5/Enemies/RedDragoon3"]
+[editable path="CH1_LV3_R5/Enemies/BlueDragoon"]
+[editable path="CH1_LV3_R5/Enemies/BlueDragoon2"]
+[editable path="CH1_LV3_R5/Enemies/YellowDragoon"]
+[editable path="CH1_LV3_R5/Enemies/YellowDragoon2"]
+[editable path="CH1_LV3_R5/Enemies/RedDragoon4"]
+[editable path="CH1_LV3_R5/Enemies/YellowDragoon3"]
+[editable path="CH1_LV3_R5/Enemies/BlueDragoon3"]
+[editable path="CH1_LV3_R5/Enemies/YellowDragoon4"]
+[editable path="CH1_LV3_R5/Enemies/RedDragoon5"]
+[editable path="CH1_LV3_R5/Enemies/GreenDragoon3"]
+[editable path="CH1_LV3_R5/Enemies/YellowDragoon5"]
