@@ -20,7 +20,7 @@ tilemap_list = [NodePath("BoundaryCollisionTilemap"), NodePath("LevelCollisionTi
 top_camera_limit = -320
 right_camera_limit = 1024
 room_entrances = [NodePath("Entrance 0"), NodePath("Entrance 1"), NodePath("FallReentry")]
-enemy_nodes = [NodePath("Enemies/GreenDragoon"), NodePath("Enemies/YellowDragoon"), NodePath("Enemies/BlueDragoon"), NodePath("Enemies/BlueDragoon2"), NodePath("Enemies/RedDragoon"), NodePath("Enemies/YellowDragoon2")]
+enemy_nodes = [NodePath("Enemies/GreenDragoon"), NodePath("Enemies/YellowDragoon"), NodePath("Enemies/BlueDragoon"), NodePath("Enemies/RedDragoon"), NodePath("Enemies/YellowDragoon2")]
 medal_fragments = [NodePath("Fragments/MedalFragment"), NodePath("Fragments/MedalFragment2"), NodePath("Fragments/MedalFragment3"), NodePath("Fragments/MedalFragment4"), NodePath("Fragments/MedalFragment5"), NodePath("Fragments/MedalFragment6"), NodePath("Fragments/MedalFragment7"), NodePath("Fragments/MedalFragment8"), NodePath("Fragments/MedalFragment9"), NodePath("Fragments/MedalFragment10"), NodePath("Fragments/MedalFragment11"), NodePath("Fragments/MedalFragment12"), NodePath("Fragments/MedalFragment13"), NodePath("Fragments/MedalFragment14"), NodePath("Fragments/MedalFragment15"), NodePath("Fragments/MedalFragment16")]
 
 [node name="BoundaryCollisionTilemap" type="TileMap" parent="."]
@@ -106,15 +106,9 @@ position = Vector2(960, 160)
 enable_wings = true
 
 [node name="BlueDragoon" parent="Enemies" instance=ExtResource("6_i60ii")]
-position = Vector2(416, 32)
-
-[node name="Enemy" parent="Enemies/BlueDragoon" index="0"]
-enable_wings = true
-
-[node name="BlueDragoon2" parent="Enemies" instance=ExtResource("6_i60ii")]
 position = Vector2(608, -32)
 
-[node name="Enemy" parent="Enemies/BlueDragoon2" index="0"]
+[node name="Enemy" parent="Enemies/BlueDragoon" index="0"]
 enable_wings = true
 
 [node name="RedDragoon" parent="Enemies" instance=ExtResource("7_oxpru")]
@@ -189,6 +183,5 @@ position = Vector2(64, -96)
 [editable path="Enemies/GreenDragoon"]
 [editable path="Enemies/YellowDragoon"]
 [editable path="Enemies/BlueDragoon"]
-[editable path="Enemies/BlueDragoon2"]
 [editable path="Enemies/RedDragoon"]
 [editable path="Enemies/YellowDragoon2"]
