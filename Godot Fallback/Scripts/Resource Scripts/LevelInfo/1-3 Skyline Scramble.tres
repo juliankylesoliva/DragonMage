@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="LevelInfo" load_steps=2 format=3 uid="uid://bmctym68ygks0"]
+
+[ext_resource type="Script" path="res://Scripts/Resource Scripts/LevelInfo/LevelInfo.gd" id="1_8i85r"]
+
+[resource]
+script = ExtResource("1_8i85r")
+level_scene_path = "res://Level Scenes/CH1_LV3/CH1_LV3.tscn"
+name_header = "Ch. 1-3:  Skyline Scramble"
+story_description = Array[String](["TBD"])
+form_changing_enabled = true

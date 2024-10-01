@@ -378,8 +378,10 @@ func endlag_update(delta : float):
 			return
 		elif (!did_player_bump and hub.char_body.is_on_floor() and hub.char_body.velocity.x != 0):
 			saved_endlag_velocity = hub.char_body.velocity.x
-			hub.char_body.velocity.x = (0.0 if hub.collisions.is_facing_a_wall() or hub.collisions.is_near_a_ledge(hub.movement.get_facing_value()) else move_toward(hub.char_body.velocity.x, 0, delta * fire_tackle_endlag_deceleration))
-			hub.collisions.do_ledge_nudge(lerp(hub.collisions.ledge_nudge_easing, fire_tackle_max_ledge_nudge_ease, abs(hub.char_body.velocity.x) / fire_tackle_max_horizontal_speed))
+			var is_holding_forward : bool = ((hub.get_input_vector().x * hub.movement.get_facing_value()) > 0)
+			hub.char_body.velocity.x = (0.0 if hub.collisions.is_facing_a_wall() or (hub.collisions.is_near_a_ledge(hub.movement.get_facing_value()) and !is_holding_forward) else move_toward(hub.char_body.velocity.x, 0, delta * fire_tackle_endlag_deceleration))
+			if (!is_holding_forward):
+				hub.collisions.do_ledge_nudge(lerp(hub.collisions.ledge_nudge_easing, fire_tackle_max_ledge_nudge_ease, abs(hub.char_body.velocity.x) / fire_tackle_max_horizontal_speed))
 			hub.char_body.apply_floor_snap()
 			hub.jumping.landing_reset()
 		elif (did_player_bump and hub.char_body.is_on_floor() and current_endlag_timer < fire_tackle_endlag_cancelable_time):
