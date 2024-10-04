@@ -28,7 +28,7 @@ level_index = 6
 player_reference = NodePath("Player")
 starting_room = NodePath("CH1_LV3_R1")
 room_list = [NodePath("CH1_LV3_R1"), NodePath("CH1_LV3_R2"), NodePath("CH1_LV3_R3"), NodePath("CH1_LV3_R4"), NodePath("CH1_LV3_R5"), NodePath("CH1_LV3_R6"), NodePath("CH1_LV3_R7")]
-min_fragment_collection_rate = 0.621
+min_fragment_collection_rate = 0.543
 dropped_fragment_scene = ExtResource("2_gaufr")
 clear_timer = NodePath("ClearTimer")
 

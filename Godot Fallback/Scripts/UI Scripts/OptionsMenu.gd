@@ -17,6 +17,7 @@ class_name OptionsMenu
 func on_menu_activation():
 	max_selections = option_labels.size()
 	update_text()
+	update_description_text()
 
 func on_selection_reset():
 	update_cursor()

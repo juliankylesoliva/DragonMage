@@ -39,28 +39,33 @@ func state_process(_delta):
 		set_next_state(state_machine.get_state_by_name("Attacking"))
 	elif (hub.attacks.is_using_attack_state() and hub.attacks.current_attack != null):
 		set_next_state(state_machine.get_state_by_name("Attacking"))
-	elif (hub.jumping.can_start_wall_popup() and (Input.is_action_pressed("Technical") or Input.is_action_pressed("Crouch"))):
-		hub.jumping.do_ledge_snap()
-		if (Input.is_action_pressed("Crouch")):
-			var selected_attack : Attack = hub.attacks.get_attack_by_name(hub.attacks.crouching_attack_name)
-			if (selected_attack != null):
-				hub.attacks.current_attack = selected_attack
-				set_next_state(state_machine.get_state_by_name("Attacking"))
-		else:
-			set_next_state(state_machine.get_state_by_name("Running"))
 	elif (hub.jumping.can_start_wall_popup()):
-		hub.jumping.start_wall_popup()
-		set_next_state(state_machine.get_state_by_name("WallVaulting"))
+		if (Input.is_action_pressed("Jump")):
+			hub.buffers.reset_jump_buffer()
+			hub.jumping.start_wall_popup()
+			set_next_state(state_machine.get_state_by_name("WallVaulting"))
+		else:
+			hub.jumping.do_ledge_snap()
+			if (Input.is_action_pressed("Crouch")):
+				var selected_attack : Attack = hub.attacks.get_attack_by_name(hub.attacks.crouching_attack_name)
+				if (selected_attack != null):
+					hub.attacks.current_attack = selected_attack
+					set_next_state(state_machine.get_state_by_name("Attacking"))
+			else:
+				set_next_state(state_machine.get_state_by_name("Running"))
 	elif (hub.jumping.is_wall_climb_canceled()):
-		hub.jumping.cancel_wall_climb()
-		
-		if (hub.char_body.is_on_ceiling()):
-			var effect_instance = EffectFactory.get_effect("HeadbonkFX", hub.collisions.get_ceiling_point())
-			effect_instance.rotation = hub.char_body.up_direction.angle_to(hub.collisions.get_ceiling_normal())
-			SoundFactory.play_sound_by_name("jump_draelyn_headbonk", hub.char_body.global_position, -2)
-		
-		hub.buffers.reset_speed_preservation_buffer()
-		set_next_state(state_machine.get_state_by_name("Falling"))
+		if (Input.is_action_pressed("Jump") and (hub.jumping.current_wall_climb_time <= 0 or hub.char_body.velocity.y >= 0) and !hub.char_body.is_on_ceiling()):
+			hub.buffers.reset_jump_buffer()
+			hub.jumping.start_wall_popup()
+			set_next_state(state_machine.get_state_by_name("WallVaulting"))
+		else:
+			hub.jumping.cancel_wall_climb()
+			if (hub.char_body.is_on_ceiling()):
+				var effect_instance = EffectFactory.get_effect("HeadbonkFX", hub.collisions.get_ceiling_point())
+				effect_instance.rotation = hub.char_body.up_direction.angle_to(hub.collisions.get_ceiling_normal())
+				SoundFactory.play_sound_by_name("jump_draelyn_headbonk", hub.char_body.global_position, -2)
+			hub.buffers.reset_speed_preservation_buffer()
+			set_next_state(state_machine.get_state_by_name("Falling"))
 	elif (hub.damage.is_player_defeated):
 		set_next_state(state_machine.get_state_by_name("Defeated"))
 	elif (hub.damage.is_player_damaged()):

@@ -383,7 +383,7 @@ func do_speed_hop_slope_boost():
 		hub.char_body.velocity.x = hub.movement.current_horizontal_velocity
 
 func can_glide():
-	return (enable_gliding and !hub.buffers.is_coyote_time_active() and (hub.char_body.velocity.y >= 0 or Input.is_action_pressed("Technical")) and current_glide_time <= hub.buffers.early_glide_buffer_time and hub.collisions.get_distance_to_ground() >= min_glide_height and (hub.buffers.is_glide_buffer_active() or (Input.is_action_pressed("Technical") and Input.is_action_pressed("Glide"))))
+	return (enable_gliding and !hub.buffers.is_coyote_time_active() and hub.char_body.velocity.y >= 0 and current_glide_time <= hub.buffers.early_glide_buffer_time and hub.collisions.get_distance_to_ground() >= min_glide_height and (hub.buffers.is_glide_buffer_active() or Input.is_action_just_pressed("Glide")))
 
 func start_glide():
 	hub.buffers.reset_glide_buffer()
@@ -559,7 +559,7 @@ func start_wall_popup():
 	hub.char_body.velocity = (Vector2.UP * vertical_result)
 
 func can_wall_vault():
-	return (wall_popup_time_left > 0 and hub.char_body.velocity.y < 0 and !hub.movement.is_crouching and !hub.collisions.is_moving_against_a_wall() and (hub.get_input_vector().x * hub.movement.get_facing_value()) > 0 and Input.is_action_pressed("Jump"))
+	return (wall_popup_time_left > 0 and hub.char_body.velocity.y < 0 and !hub.movement.is_crouching and !hub.collisions.is_moving_against_a_wall() and (hub.get_input_vector().x * hub.movement.get_facing_value()) > 0 and hub.buffers.is_jump_buffer_active())
 
 func wall_popup_update(delta : float):
 	hub.char_body.velocity.x = 0

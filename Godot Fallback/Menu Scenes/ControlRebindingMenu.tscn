@@ -8,14 +8,13 @@
 script = ExtResource("1_h43jn")
 bindings_display = NodePath("BindingsDisplay")
 action_description_label = NodePath("ActionDescriptionLabel")
-rebindable_action_names = Array[StringName]([&"Move Left", &"Move Right", &"Move Up", &"Move Down", &"Jump", &"Glide", &"Attack", &"Change Form", &"Crouch", &"Technical", &"Fairy Ability", &"Interact", &"Move Left (Pad)", &"Move Right (Pad)", &"Move Up (Pad)", &"Move Down (Pad)"])
+rebindable_action_names = Array[StringName]([&"Move Left", &"Move Right", &"Move Up", &"Move Down", &"Jump", &"Glide", &"Attack", &"Change Form", &"Crouch", &"Fairy Ability", &"Interact", &"Move Left (Pad)", &"Move Right (Pad)", &"Move Up (Pad)", &"Move Down (Pad)"])
 action_descriptions = {
 "Glide": "You may assign buttons that differ from the Jump action.",
 "Move Down (Pad)": "Standalone controller directional pad input action used as a failsafe.",
 "Move Left (Pad)": "Standalone controller directional pad input action used as a failsafe.",
 "Move Right (Pad)": "Standalone controller directional pad input action used as a failsafe.",
-"Move Up (Pad)": "Standalone controller directional pad input action used as a failsafe.",
-"Technical": "Used for Magli's Short Glide and Draelyn's Ledge Snap."
+"Move Up (Pad)": "Standalone controller directional pad input action used as a failsafe."
 }
 max_selections = 16
 

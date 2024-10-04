@@ -100,7 +100,7 @@ position = Vector2(1056, 96)
 enable_wings = true
 
 [node name="GreenDragoon" parent="Enemies" instance=ExtResource("5_0pfic")]
-position = Vector2(1472, 32)
+position = Vector2(1472, 96)
 
 [node name="Enemy" parent="Enemies/GreenDragoon" index="0"]
 enable_wings = true
