@@ -1,4 +1,4 @@
-[gd_scene load_steps=207 format=3 uid="uid://c6qw77ovfwgfs"]
+[gd_scene load_steps=211 format=3 uid="uid://c6qw77ovfwgfs"]
 
 [ext_resource type="Texture2D" uid="uid://d381ahbcwydy8" path="res://Sprites/Player/DraelynCrouch.png" id="1_6b42p"]
 [ext_resource type="Texture2D" uid="uid://dls34a1qa8iy1" path="res://Sprites/Player/DraelynFireTackle.png" id="1_ddrlj"]
@@ -267,14 +267,6 @@ region = Rect2(0, 0, 64, 64)
 atlas = ExtResource("19_lfkpo")
 region = Rect2(192, 0, 64, 64)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_8wjjn"]
-atlas = ExtResource("4_gxmp5")
-region = Rect2(384, 0, 64, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_pjba6"]
-atlas = ExtResource("4_gxmp5")
-region = Rect2(448, 0, 64, 64)
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_np3pq"]
 atlas = ExtResource("4_gxmp5")
 region = Rect2(512, 0, 64, 64)
@@ -282,6 +274,22 @@ region = Rect2(512, 0, 64, 64)
 [sub_resource type="AtlasTexture" id="AtlasTexture_jpvbd"]
 atlas = ExtResource("4_gxmp5")
 region = Rect2(576, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_16j5n"]
+atlas = ExtResource("4_gxmp5")
+region = Rect2(640, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_67di1"]
+atlas = ExtResource("4_gxmp5")
+region = Rect2(704, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_g2pbt"]
+atlas = ExtResource("4_gxmp5")
+region = Rect2(768, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hhbom"]
+atlas = ExtResource("4_gxmp5")
+region = Rect2(832, 0, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_6uptb"]
 atlas = ExtResource("2_p0h7w")
@@ -538,6 +546,14 @@ region = Rect2(192, 0, 64, 64)
 [sub_resource type="AtlasTexture" id="AtlasTexture_4e7j2"]
 atlas = ExtResource("4_gxmp5")
 region = Rect2(256, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1mrb4"]
+atlas = ExtResource("4_gxmp5")
+region = Rect2(320, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_k3jyr"]
+atlas = ExtResource("4_gxmp5")
+region = Rect2(384, 0, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_6olhl"]
 atlas = ExtResource("72_o22w0")
@@ -894,17 +910,23 @@ animations = [{
 "speed": 60.0
 }, {
 "frames": [{
-"duration": 16.0,
-"texture": SubResource("AtlasTexture_8wjjn")
-}, {
-"duration": 4.0,
-"texture": SubResource("AtlasTexture_pjba6")
-}, {
-"duration": 4.0,
+"duration": 24.0,
 "texture": SubResource("AtlasTexture_np3pq")
 }, {
-"duration": 16.0,
+"duration": 9.0,
 "texture": SubResource("AtlasTexture_jpvbd")
+}, {
+"duration": 9.0,
+"texture": SubResource("AtlasTexture_16j5n")
+}, {
+"duration": 9.0,
+"texture": SubResource("AtlasTexture_67di1")
+}, {
+"duration": 9.0,
+"texture": SubResource("AtlasTexture_g2pbt")
+}, {
+"duration": 24.0,
+"texture": SubResource("AtlasTexture_hhbom")
 }],
 "loop": false,
 "name": &"DraelynToMagli",
@@ -1273,17 +1295,23 @@ animations = [{
 "speed": 60.0
 }, {
 "frames": [{
-"duration": 16.0,
+"duration": 24.0,
 "texture": SubResource("AtlasTexture_g13l3")
 }, {
-"duration": 4.0,
+"duration": 9.0,
 "texture": SubResource("AtlasTexture_2ekn8")
 }, {
-"duration": 4.0,
+"duration": 9.0,
 "texture": SubResource("AtlasTexture_ti80s")
 }, {
-"duration": 16.0,
+"duration": 9.0,
 "texture": SubResource("AtlasTexture_4e7j2")
+}, {
+"duration": 9.0,
+"texture": SubResource("AtlasTexture_1mrb4")
+}, {
+"duration": 24.0,
+"texture": SubResource("AtlasTexture_k3jyr")
 }],
 "loop": false,
 "name": &"MagliToDraelyn",
@@ -1575,6 +1603,7 @@ hub = NodePath("..")
 mage_properties = ExtResource("14_8gg24")
 dragon_properties = ExtResource("15_356k0")
 form_change_cooldown_time = 0.4
+form_change_animation_time = 1.4
 
 [node name="Damage" type="Node" parent="Hub" node_paths=PackedStringArray("hub", "fairy_guard_attack")]
 script = ExtResource("24_45h1i")
