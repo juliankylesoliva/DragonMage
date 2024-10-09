@@ -123,7 +123,7 @@ offset_bottom = 286.0
 theme_override_fonts/normal_font = ExtResource("8_yxgg2")
 theme_override_font_sizes/normal_font_size = 8
 bbcode_enabled = true
-text = "[center][Jump] (hold at top of climb): Pop-Up
+text = "[center][Jump]/[Move Up] (hold at top of climb): Pop-Up
 [Move Right]+[Jump] (during pop-up): Vault"
 scroll_active = false
 shortcut_keys_enabled = false
