@@ -4,6 +4,8 @@ class_name MagicBlastKnockbackHitbox
 
 @export var enemy_defeat_knockback_multiplier : float = 1.5
 
+@export var knockback_falloff_threshold : float = 32
+
 @export_flags_2d_physics var player_layer
 
 @export_flags_2d_physics var ground_layer
@@ -68,7 +70,7 @@ func do_magic_blast_knockback(body):
 		
 		if (state_name != "Standing" and state_name != "WallSliding" and state_name != "Attacking" and state_name != "FormChanging"):
 			var launch_direction : Vector2 = collision_shape.global_position.direction_to(hub.collision_shape.global_position)
-			var launch_power : float = (knockback_strength / (1 + (distance_to_projectile / pixels_per_unit)))
+			var launch_power : float = (knockback_strength / (1 + (((distance_to_projectile - knockback_falloff_threshold) / pixels_per_unit) if distance_to_projectile > knockback_falloff_threshold else 0.0)))
 			var launch_velocity = (launch_direction * launch_power)
 			if (hub.char_body.is_on_floor() or state_name == "Gliding"):
 				launch_velocity.y = 0

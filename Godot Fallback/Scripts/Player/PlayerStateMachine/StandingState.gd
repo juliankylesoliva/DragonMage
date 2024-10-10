@@ -34,6 +34,9 @@ func state_process(_delta):
 		hub.buffers.reset_speed_preservation_buffer()
 	hub.collisions.do_ledge_nudge()
 	
+	if (hub.char_sprite.animation.contains("Vulnerable") and !hub.temper.is_form_locked()):
+		hub.animation.set_animation("{name}Stand".format({"name" : char_name}))
+	
 	if (hub.movement.is_crouching):
 		is_throwing = false
 		if (!Input.is_action_pressed("Crouch") and hub.collisions.is_in_ceiling_when_uncrouched()):
@@ -102,13 +105,12 @@ func state_process(_delta):
 			pass
 
 func on_enter():
-	is_throwing = hub.char_sprite.animation.contains("MagliThrow")
 	is_headbonking = false
 	var char_name : String = hub.form.get_current_form_name()
 	var anim_name : String = ("{name}Vulnerable" if hub.temper.is_form_locked() and !hub.movement.is_crouching else "{name}Stand" if !hub.movement.is_crouching else "{name}Crouch")
 	hub.jumping.landing_reset()
-	hub.animation.set_animation("MagliThrowGround" if is_throwing else anim_name.format({"name" : char_name}))
-	hub.animation.set_animation_frame(1 if is_throwing else 0)
+	hub.animation.set_animation(anim_name.format({"name" : char_name}))
+	hub.animation.set_animation_frame(0)
 	hub.animation.set_animation_speed(1)
 
 func set_blink_timer():

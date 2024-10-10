@@ -33,7 +33,7 @@ func state_process(_delta):
 			did_turn_spark_appear = true
 			SoundFactory.play_sound_by_name(sound_name, hub.char_body.global_position, 0, 1, "SFX")
 	else:
-		hub.animation.set_animation_speed(hub.movement.get_speed_portion())
+		hub.animation.set_animation_speed(hub.movement.get_speed_portion() if !is_throwing else 1.0)
 		did_turn_spark_appear = false
 	
 	if (hub.form.cannot_change_form()):

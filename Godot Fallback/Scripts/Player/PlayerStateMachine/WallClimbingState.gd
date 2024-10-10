@@ -40,7 +40,7 @@ func state_process(_delta):
 	elif (hub.attacks.is_using_attack_state() and hub.attacks.current_attack != null):
 		set_next_state(state_machine.get_state_by_name("Attacking"))
 	elif (hub.jumping.can_start_wall_popup()):
-		if (Input.is_action_pressed("Jump") or hub.get_input_vector().y > 0):
+		if ((Input.is_action_pressed("Jump") and !Input.is_action_pressed("Crouch")) or hub.get_input_vector().y > 0):
 			hub.buffers.reset_jump_buffer()
 			hub.jumping.start_wall_popup()
 			set_next_state(state_machine.get_state_by_name("WallVaulting"))
