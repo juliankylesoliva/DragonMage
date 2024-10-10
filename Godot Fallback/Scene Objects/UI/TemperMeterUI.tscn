@@ -99,7 +99,7 @@ meter_end = NodePath("MeterEnd")
 cold_segment_color = Color(0.34902, 0.254902, 0.662745, 1)
 neutral_segment_color = Color(0.254902, 0.662745, 0.34902, 1)
 hot_segment_color = Color(0.811765, 0.478431, 0.188235, 1)
-segment_list = [NodePath("Segments/Segment1"), NodePath("Segments/Segment2"), NodePath("Segments/Segment3"), NodePath("Segments/Segment4"), NodePath("Segments/Segment5"), NodePath("Segments/Segment6"), NodePath("Segments/Segment7"), NodePath("Segments/Segment8"), NodePath("Segments/Segment9"), NodePath("Segments/Segment10"), NodePath("Segments/Segment11"), NodePath("Segments/Segment12")]
+segment_list = [NodePath("Segments/Segment1"), NodePath("Segments/Segment2"), NodePath("Segments/Segment3"), NodePath("Segments/Segment4"), NodePath("Segments/Segment5"), NodePath("Segments/Segment6"), NodePath("Segments/Segment7"), NodePath("Segments/Segment8"), NodePath("Segments/Segment9"), NodePath("Segments/Segment10"), NodePath("Segments/Segment11"), NodePath("Segments/Segment12"), NodePath("Segments/Segment13")]
 
 [node name="MeterStart" type="Sprite2D" parent="."]
 texture = ExtResource("1_w743b")
@@ -107,14 +107,14 @@ centered = false
 
 [node name="MeterMiddle" type="Sprite2D" parent="."]
 position = Vector2(16, 8)
-scale = Vector2(12, 1)
+scale = Vector2(13, 1)
 texture = ExtResource("2_ho0jr")
 offset = Vector2(8, 0)
 
 [node name="MeterEnd" type="Sprite2D" parent="."]
 texture = ExtResource("3_x72yt")
 centered = false
-offset = Vector2(208, 0)
+offset = Vector2(224, 0)
 
 [node name="Segments" type="Node2D" parent="."]
 
@@ -208,6 +208,14 @@ frame_progress = 0.5
 [node name="Segment12" type="AnimatedSprite2D" parent="Segments"]
 visibility_layer = 64
 position = Vector2(200, 8)
+sprite_frames = SubResource("SpriteFrames_e708d")
+animation = &"Off"
+autoplay = "Off"
+frame_progress = 0.5
+
+[node name="Segment13" type="AnimatedSprite2D" parent="Segments"]
+visibility_layer = 64
+position = Vector2(216, 8)
 sprite_frames = SubResource("SpriteFrames_e708d")
 animation = &"Off"
 autoplay = "Off"

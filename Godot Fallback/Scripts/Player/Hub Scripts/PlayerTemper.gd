@@ -4,11 +4,11 @@ class_name PlayerTemper
 
 @export var hub : PlayerHub
 
-@export_range(3, 12) var total_segments : int = 12
+@export_range(3, 13) var total_segments : int = 13
 
 @export var min_segments : int = 3
 
-@export var max_segments : int = 12
+@export var max_segments : int = 13
 
 @export var cold_segments : int = 3
 

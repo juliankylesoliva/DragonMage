@@ -559,7 +559,7 @@ func start_wall_popup():
 	hub.char_body.velocity = (Vector2.UP * vertical_result)
 
 func can_wall_vault():
-	return (wall_popup_time_left > 0 and hub.char_body.velocity.y < 0 and !hub.movement.is_crouching and !hub.collisions.is_moving_against_a_wall() and (hub.get_input_vector().x * hub.movement.get_facing_value()) > 0 and hub.buffers.is_jump_buffer_active())
+	return (wall_popup_time_left > 0 and hub.char_body.velocity.y < 0 and !hub.movement.is_crouching and !hub.collisions.is_moving_against_a_wall() and (hub.get_input_vector().x * hub.movement.get_facing_value()) > 0 and (hub.buffers.is_jump_buffer_active() or (Input.is_action_pressed("Jump") and hub.get_input_vector().y > 0)))
 
 func wall_popup_update(delta : float):
 	hub.char_body.velocity.x = 0
