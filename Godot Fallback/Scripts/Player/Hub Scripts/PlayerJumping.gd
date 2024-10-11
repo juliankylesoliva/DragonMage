@@ -603,10 +603,11 @@ func do_ledge_snap():
 	EffectFactory.get_effect("WallVaultSpark", hub.collisions.get_ground_point(), result_scale, hub.movement.get_facing_value() < 0)
 	
 	hub.audio.play_sound("jump_draelyn_wallpopup", 0, 1.5)
-	hub.char_body.position.x += (hub.movement.get_facing_value() * ledge_snap_distance)
+	hub.char_body.velocity.x += (hub.movement.get_facing_value() * ledge_snap_distance)
+	hub.char_body.move_and_slide()
 	hub.char_body.apply_floor_snap()
 	switch_to_falling_gravity()
-	hub.char_body.velocity = Vector2(stored_wall_climb_speed * hub.movement.get_facing_value() if hub.get_input_vector().x * hub.movement.get_facing_value() > 0 else 0, 0)
+	hub.char_body.velocity = Vector2(stored_wall_climb_speed * hub.movement.get_facing_value(), 0)
 	hub.movement.current_horizontal_velocity = hub.char_body.velocity.x
 
 func landing_reset():

@@ -164,6 +164,8 @@ func startup_init():
 	current_startup_hold_timer = fire_tackle_startup_hold_temper_drain_interval
 	previous_horizontal_velocity = abs(hub.char_body.velocity.x)
 	current_vertical_axis = hub.get_input_vector().y
+	if (current_vertical_axis < 0 and hub.char_body.is_on_floor()):
+		current_vertical_axis = 0
 	was_interacting_with_wall = (hub.state_machine.previous_state.name == "WallVaulting" or hub.state_machine.previous_state.name == "WallClimbing")
 	horizontal_result = min(((hub.jumping.stored_wall_climb_speed if was_interacting_with_wall else previous_horizontal_velocity) + fire_tackle_min_horizontal_speed), fire_tackle_max_horizontal_speed)
 	

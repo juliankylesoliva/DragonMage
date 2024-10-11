@@ -52,7 +52,7 @@ func state_process(_delta):
 					hub.attacks.current_attack = selected_attack
 					set_next_state(state_machine.get_state_by_name("Attacking"))
 			else:
-				set_next_state(state_machine.get_state_by_name("Running"))
+				set_next_state(state_machine.get_state_by_name("Running" if hub.char_body.is_on_floor() else "Falling"))
 	elif (hub.jumping.is_wall_climb_canceled()):
 		if ((Input.is_action_pressed("Jump") or hub.get_input_vector().y > 0) and (hub.jumping.current_wall_climb_time <= 0 or hub.char_body.velocity.y >= 0) and !hub.char_body.is_on_ceiling()):
 			hub.buffers.reset_jump_buffer()
