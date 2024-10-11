@@ -490,6 +490,8 @@ func start_wall_jump():
 			wall_popup_time_left = 0
 			current_wall_climb_time = 0
 		current_wall_jumps += 1
+	else:
+		hub.buffers.reset_speed_preservation_buffer()
 	
 	var is_throwing : bool = hub.char_sprite.animation.contains("MagliThrow")
 	hub.animation.set_animation("MagliThrowAir" if is_throwing else "MagliJump")
