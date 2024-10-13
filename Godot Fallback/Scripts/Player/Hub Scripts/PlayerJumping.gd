@@ -604,7 +604,8 @@ func do_ledge_snap():
 	
 	hub.audio.play_sound("jump_draelyn_wallpopup", 0, 1.5)
 	hub.char_body.velocity = Vector2(hub.movement.get_facing_value() * ledge_snap_distance, 0)
-	hub.char_body.move_and_slide()
+	var intended_velocity = hub.char_body.velocity
+	hub.collisions.upward_slope_correction(intended_velocity)
 	hub.char_body.apply_floor_snap()
 	switch_to_falling_gravity()
 	hub.char_body.velocity = Vector2(stored_wall_climb_speed * hub.movement.get_facing_value(), 0)

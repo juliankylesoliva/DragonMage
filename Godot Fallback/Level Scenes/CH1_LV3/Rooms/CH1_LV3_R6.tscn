@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://ndoigw8d36q0"]
+[gd_scene load_steps=19 format=3 uid="uid://ndoigw8d36q0"]
 
 [ext_resource type="Script" path="res://Scripts/Utility Scripts/Room.gd" id="1_c04yv"]
 [ext_resource type="TileSet" uid="uid://dhwi7i1loa2pd" path="res://Sprites/Tiles/Test Tiles/TestTileSet.tres" id="2_mm7mi"]
@@ -11,12 +11,19 @@
 [ext_resource type="PackedScene" uid="uid://curi6w4ex7jou" path="res://Scene Objects/Enemies/YellowDragoon.tscn" id="9_1gs2q"]
 [ext_resource type="PackedScene" uid="uid://dfkmxoba64spw" path="res://Scene Objects/Objects/MedalFragment.tscn" id="10_ltskc"]
 [ext_resource type="PackedScene" uid="uid://b2a0ttqvejk51" path="res://Scene Objects/Objects/TemperDragonFruit.tscn" id="11_tyi4k"]
+[ext_resource type="Texture2D" uid="uid://bkhjt30ligib0" path="res://Sprites/Backgrounds/1_3_BG/CitySkylineSky.png" id="12_jxs3e"]
+[ext_resource type="Texture2D" uid="uid://dojb67qrn7oft" path="res://Sprites/Backgrounds/1_3_BG/CitySkylineBuildingsBack.png" id="13_j4h35"]
+[ext_resource type="Texture2D" uid="uid://wfg8o4nr2pm5" path="res://Sprites/Backgrounds/1_3_BG/CitySkylineBuildingsMiddle.png" id="14_tpkdp"]
+[ext_resource type="Texture2D" uid="uid://dt1igvnvn7viy" path="res://Sprites/Backgrounds/1_3_BG/CitySkylineBuildingsFront.png" id="15_a5iqu"]
+[ext_resource type="Texture2D" uid="uid://846fkr8chd1l" path="res://Sprites/Backgrounds/1_3_BG/CitySkylineSmog.png" id="16_cgr5k"]
+[ext_resource type="Script" path="res://Scripts/Utility Scripts/BGRegionScroll.gd" id="17_2ugnu"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8ogl2"]
 size = Vector2(3712, 32)
 
-[node name="CH1_LV3_R6" type="Node2D" node_paths=PackedStringArray("tilemap_list", "room_entrances", "enemy_nodes", "medal_fragments")]
+[node name="CH1_LV3_R6" type="Node2D" node_paths=PackedStringArray("parallax_bg", "tilemap_list", "room_entrances", "enemy_nodes", "medal_fragments")]
 script = ExtResource("1_c04yv")
+parallax_bg = NodePath("ParallaxBackground")
 tilemap_list = [NodePath("BoundaryCollisionTilemap"), NodePath("LevelCollisionTilemap")]
 top_camera_limit = -640
 right_camera_limit = 4096
@@ -331,6 +338,68 @@ position = Vector2(2048, -192)
 
 [node name="TemperDragonFruit3" parent="." instance=ExtResource("11_tyi4k")]
 position = Vector2(2016, -512)
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+visible = false
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2(0.04, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
+texture_repeat = 2
+texture = ExtResource("12_jxs3e")
+centered = false
+offset = Vector2(-2048, 0)
+region_enabled = true
+region_rect = Rect2(0, 0, 8192, 320)
+
+[node name="ParallaxLayer2" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2(0.06, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer2"]
+texture_repeat = 2
+texture = ExtResource("13_j4h35")
+centered = false
+offset = Vector2(-2048, 0)
+region_enabled = true
+region_rect = Rect2(0, 0, 8192, 320)
+
+[node name="ParallaxLayer3" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2(0.08, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer3"]
+texture_repeat = 2
+texture = ExtResource("14_tpkdp")
+centered = false
+offset = Vector2(-2048, 0)
+region_enabled = true
+region_rect = Rect2(0, 0, 8192, 320)
+
+[node name="ParallaxLayer4" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2(0.1, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer4"]
+texture_repeat = 2
+texture = ExtResource("15_a5iqu")
+centered = false
+offset = Vector2(-2048, 0)
+region_enabled = true
+region_rect = Rect2(0, 0, 8192, 320)
+
+[node name="ParallaxLayer5" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2(0.12, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer5"]
+modulate = Color(1, 1, 1, 0.4)
+texture_repeat = 3
+texture = ExtResource("16_cgr5k")
+centered = false
+offset = Vector2(-2048, 0)
+region_enabled = true
+region_rect = Rect2(0, 0, 8192, 320)
+script = ExtResource("17_2ugnu")
+scroll_speed = 16.0
+loop_value = 1024.0
 
 [editable path="FallWarp"]
 [editable path="Enemies/RedDragoon"]

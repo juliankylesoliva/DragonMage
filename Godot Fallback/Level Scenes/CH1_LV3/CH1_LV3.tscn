@@ -82,7 +82,7 @@ room_destination = NodePath("../../CH1_LV3_R3")
 room_destination = NodePath("../../CH1_LV3_R5")
 
 [node name="CH1_LV3_R5" parent="." instance=ExtResource("18_c8jkb")]
-position = Vector2(3648, -1216)
+position = Vector2(-672, -2016)
 
 [node name="Warp 0" parent="CH1_LV3_R5" index="5" node_paths=PackedStringArray("room_destination")]
 room_destination = NodePath("../../CH1_LV3_R4")

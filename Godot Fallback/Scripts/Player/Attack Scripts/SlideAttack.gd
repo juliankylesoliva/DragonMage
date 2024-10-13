@@ -147,7 +147,7 @@ func stop_slide():
 		hub.state_machine.current_state.set_next_state(hub.state_machine.get_state_by_name("Running"))
 	elif (hub.char_body.velocity.y >= 0 and !hub.char_body.is_on_floor()):
 		preserve_slide_speed()
-		if (!hub.collisions.is_in_ceiling_when_uncrouched()):
+		if (!hub.collisions.is_in_ceiling_when_uncrouched() and !Input.is_action_pressed("Crouch")):
 			hub.movement.reset_crouch_state()
 		hub.state_machine.current_state.set_next_state(hub.state_machine.get_state_by_name("Falling"))
 	else:
