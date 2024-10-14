@@ -1,7 +1,8 @@
-[gd_scene load_steps=17 format=3 uid="uid://cgnpy1l3wc3ll"]
+[gd_scene load_steps=18 format=3 uid="uid://cgnpy1l3wc3ll"]
 
 [ext_resource type="Script" path="res://Scripts/Utility Scripts/Room.gd" id="1_efb8l"]
 [ext_resource type="TileSet" uid="uid://dhwi7i1loa2pd" path="res://Sprites/Tiles/Test Tiles/TestTileSet.tres" id="2_34i5d"]
+[ext_resource type="Texture2D" uid="uid://cgs4qb3anauws" path="res://Sprites/Backgrounds/1_3_BG/Signs.png" id="3_dkn3r"]
 [ext_resource type="PackedScene" uid="uid://dfkmxoba64spw" path="res://Scene Objects/Objects/MedalFragment.tscn" id="3_tsbww"]
 [ext_resource type="PackedScene" uid="uid://clfqwsy4byrkf" path="res://Scene Objects/Enemies/GreenDragoon.tscn" id="4_7bxta"]
 [ext_resource type="PackedScene" uid="uid://dwnpgujive352" path="res://Scene Objects/Enemies/RedDragoon.tscn" id="4_e7ptb"]
@@ -75,6 +76,13 @@ layer_1/y_sort_origin = 0
 layer_1/z_index = -1
 layer_1/tile_data = PackedInt32Array(327694, 16, 2, 393230, 16, 2, 262158, 16, 1, 458766, 16, 3, 327695, 65552, 2, 393231, 65552, 2, 262159, 65552, 1, 458767, 65552, 3, 131096, 16, 1, 196632, 16, 3, 131099, 65552, 1, 196635, 65552, 3, 196644, 16, 1, 458788, 16, 3, 262180, 16, 2, 327716, 16, 2, 393252, 16, 2, 393262, 16, 2, 327726, 16, 1, 458798, 16, 3, 131118, 16, 1, 196654, 16, 3, 458802, 16, 3, 393266, 16, 2, 327730, 16, 1, 327727, 65552, 1, 393263, 65552, 2, 458799, 65552, 3, 131123, 65552, 1, 196659, 65552, 3, 327731, 65552, 1, 393267, 65552, 2, 458803, 65552, 3, 131146, 16, 1, 196682, 16, 2, 262218, 16, 2, 327754, 16, 2, 393290, 16, 2, 458826, 16, 3, 589908, 131086, 1)
 metadata/Tag = "IntangibleWall"
+
+[node name="Sign" type="Sprite2D" parent="."]
+z_index = 2
+position = Vector2(416, 216)
+texture = ExtResource("3_dkn3r")
+region_enabled = true
+region_rect = Rect2(0, 0, 64, 80)
 
 [node name="Entrance 0" type="Node2D" parent="."]
 position = Vector2(96, 224)

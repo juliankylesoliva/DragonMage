@@ -66,6 +66,7 @@ ability_icon = NodePath("AbilityIcon")
 percent_label = NodePath("PercentLabel")
 normal_fill_color = Color(0.85098, 0.298039, 0.74902, 1)
 maxed_fill_color = Color(0.568627, 0.619608, 0.788235, 1)
+target_alpha = 0.35
 
 [node name="MeterBacking" type="Sprite2D" parent="."]
 texture = ExtResource("1_l2no4")

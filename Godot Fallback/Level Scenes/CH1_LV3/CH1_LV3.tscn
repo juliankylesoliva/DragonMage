@@ -51,7 +51,7 @@ editor_draw_drag_margin = true
 
 [node name="CH1_LV3_R1" parent="." instance=ExtResource("3_a63fm")]
 
-[node name="Warp 0" parent="CH1_LV3_R1" index="4" node_paths=PackedStringArray("room_destination")]
+[node name="Warp 0" parent="CH1_LV3_R1" index="5" node_paths=PackedStringArray("room_destination")]
 room_destination = NodePath("../../CH1_LV3_R2")
 
 [node name="CH1_LV3_R2" parent="." instance=ExtResource("5_ghgpv")]
@@ -66,49 +66,49 @@ room_destination = NodePath("../../CH1_LV3_R3")
 [node name="CH1_LV3_R3" parent="." instance=ExtResource("6_m3gwy")]
 position = Vector2(0, 1120)
 
-[node name="Warp 0" parent="CH1_LV3_R3" index="5" node_paths=PackedStringArray("room_destination")]
+[node name="Warp 0" parent="CH1_LV3_R3" index="8" node_paths=PackedStringArray("room_destination")]
 room_destination = NodePath("../../CH1_LV3_R2")
 
-[node name="Warp 1" parent="CH1_LV3_R3" index="6" node_paths=PackedStringArray("room_destination")]
+[node name="Warp 1" parent="CH1_LV3_R3" index="9" node_paths=PackedStringArray("room_destination")]
 room_destination = NodePath("../../CH1_LV3_R4")
 
 [node name="CH1_LV3_R4" parent="." instance=ExtResource("7_2eiyo")]
 position = Vector2(-576, -896)
 
-[node name="Warp 0" parent="CH1_LV3_R4" index="6" node_paths=PackedStringArray("room_destination")]
+[node name="Warp 0" parent="CH1_LV3_R4" index="8" node_paths=PackedStringArray("room_destination")]
 room_destination = NodePath("../../CH1_LV3_R3")
 
-[node name="Warp 1" parent="CH1_LV3_R4" index="7" node_paths=PackedStringArray("room_destination")]
+[node name="Warp 1" parent="CH1_LV3_R4" index="9" node_paths=PackedStringArray("room_destination")]
 room_destination = NodePath("../../CH1_LV3_R5")
 
 [node name="CH1_LV3_R5" parent="." instance=ExtResource("18_c8jkb")]
 position = Vector2(-672, -2016)
 
-[node name="Warp 0" parent="CH1_LV3_R5" index="5" node_paths=PackedStringArray("room_destination")]
+[node name="Warp 0" parent="CH1_LV3_R5" index="9" node_paths=PackedStringArray("room_destination")]
 room_destination = NodePath("../../CH1_LV3_R4")
 
-[node name="Warp 1" parent="CH1_LV3_R5" index="6" node_paths=PackedStringArray("room_destination")]
+[node name="Warp 1" parent="CH1_LV3_R5" index="10" node_paths=PackedStringArray("room_destination")]
 room_destination = NodePath("../../CH1_LV3_R6")
 
-[node name="Checkpoint" parent="CH1_LV3_R5" index="8" node_paths=PackedStringArray("level_origin")]
+[node name="Checkpoint" parent="CH1_LV3_R5" index="12" node_paths=PackedStringArray("level_origin")]
 level_origin = NodePath("../..")
 
 [node name="CH1_LV3_R6" parent="." instance=ExtResource("9_c0y5n")]
 position = Vector2(-4224, 320)
 
-[node name="Warp 0" parent="CH1_LV3_R6" index="5" node_paths=PackedStringArray("room_destination")]
+[node name="Warp 0" parent="CH1_LV3_R6" index="7" node_paths=PackedStringArray("room_destination")]
 room_destination = NodePath("../../CH1_LV3_R5")
 
-[node name="Warp 1" parent="CH1_LV3_R6" index="6" node_paths=PackedStringArray("room_destination")]
+[node name="Warp 1" parent="CH1_LV3_R6" index="8" node_paths=PackedStringArray("room_destination")]
 room_destination = NodePath("../../CH1_LV3_R7")
 
 [node name="CH1_LV3_R7" parent="." instance=ExtResource("10_e3sn4")]
 position = Vector2(-2336, -3456)
 
-[node name="Warp 0" parent="CH1_LV3_R7" index="4" node_paths=PackedStringArray("room_destination")]
+[node name="Warp 0" parent="CH1_LV3_R7" index="7" node_paths=PackedStringArray("room_destination")]
 room_destination = NodePath("../../CH1_LV3_R6")
 
-[node name="Warp 1" parent="CH1_LV3_R7" index="5" node_paths=PackedStringArray("room_destination")]
+[node name="Warp 1" parent="CH1_LV3_R7" index="8" node_paths=PackedStringArray("room_destination")]
 room_destination = NodePath("../../CH1_LV3_R8")
 
 [node name="CH1_LV3_R8" parent="." instance=ExtResource("21_jpnph")]

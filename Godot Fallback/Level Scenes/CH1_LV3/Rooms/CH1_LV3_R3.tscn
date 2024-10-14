@@ -1,9 +1,11 @@
-[gd_scene load_steps=18 format=3 uid="uid://dqon5y7w7ay46"]
+[gd_scene load_steps=20 format=3 uid="uid://dqon5y7w7ay46"]
 
 [ext_resource type="Script" path="res://Scripts/Utility Scripts/Room.gd" id="1_hxy3m"]
 [ext_resource type="TileSet" uid="uid://dhwi7i1loa2pd" path="res://Sprites/Tiles/Test Tiles/TestTileSet.tres" id="2_stivo"]
 [ext_resource type="PackedScene" uid="uid://dqbo0wu6hm8lj" path="res://Scene Objects/Objects/WarpTrigger.tscn" id="3_ga3u0"]
+[ext_resource type="Texture2D" uid="uid://dqi2rci3chvl3" path="res://Sprites/Backgrounds/1_3_BG/WallJumpGraffiti.png" id="3_rh1qw"]
 [ext_resource type="PackedScene" uid="uid://bgww8jir45ktf" path="res://Scene Objects/Enemies/BlueDragoon.tscn" id="4_o5gir"]
+[ext_resource type="Texture2D" uid="uid://cgs4qb3anauws" path="res://Sprites/Backgrounds/1_3_BG/Signs.png" id="4_qcqeg"]
 [ext_resource type="PackedScene" uid="uid://clfqwsy4byrkf" path="res://Scene Objects/Enemies/GreenDragoon.tscn" id="5_0pfic"]
 [ext_resource type="PackedScene" uid="uid://dwnpgujive352" path="res://Scene Objects/Enemies/RedDragoon.tscn" id="6_gnid0"]
 [ext_resource type="PackedScene" uid="uid://curi6w4ex7jou" path="res://Scene Objects/Enemies/YellowDragoon.tscn" id="7_bfpl5"]
@@ -77,6 +79,25 @@ layer_1/y_sort_origin = 0
 layer_1/z_index = -1
 layer_1/tile_data = PackedInt32Array(-262142, 65552, 1, -196606, 65552, 2, -131070, 65552, 2, -65534, 65552, 2, 2, 65552, 2, 65538, 65552, 2, 131074, 65552, 2, 196610, 65552, 2, 262146, 65552, 2, 327682, 65552, 3, -393213, 65552, 0, 65592, 16, 2, 131128, 16, 2, 196664, 16, 3, 56, 16, 1, -196557, 65552, 3, -393165, 65552, 1, -327629, 65552, 2, -262093, 65552, 2, 196716, 65552, 2, 131180, 65552, 2, 65644, 65552, 2, 108, 65552, 2, -65428, 65552, 2, -130964, 65552, 2, -196500, 65552, 1, 262252, 65552, 3, 196729, 16, 2, 131193, 16, 2, 65657, 16, 2, 121, 16, 2, -65415, 16, 2, -130951, 16, 2, -196487, 16, 2, -262023, 16, 1, 262265, 16, 3)
 metadata/Tag = "IntangibleWall"
+
+[node name="WallJumpGraffiti" type="Sprite2D" parent="."]
+z_index = 2
+position = Vector2(1728, -32)
+texture = ExtResource("3_rh1qw")
+
+[node name="Sign" type="Sprite2D" parent="."]
+z_index = 2
+position = Vector2(224, 216)
+texture = ExtResource("4_qcqeg")
+region_enabled = true
+region_rect = Rect2(64, 0, 64, 80)
+
+[node name="Sign2" type="Sprite2D" parent="."]
+z_index = 2
+position = Vector2(672, 152)
+texture = ExtResource("4_qcqeg")
+region_enabled = true
+region_rect = Rect2(128, 0, 64, 80)
 
 [node name="Entrance 0" type="Node2D" parent="."]
 position = Vector2(16, 224)
@@ -226,13 +247,13 @@ position = Vector2(816, 176)
 position = Vector2(848, 144)
 
 [node name="MedalFragment7" parent="Fragments" instance=ExtResource("8_n0jkj")]
-position = Vector2(1776, -48)
-
-[node name="MedalFragment8" parent="Fragments" instance=ExtResource("8_n0jkj")]
 position = Vector2(1776, -112)
 
-[node name="MedalFragment9" parent="Fragments" instance=ExtResource("8_n0jkj")]
+[node name="MedalFragment8" parent="Fragments" instance=ExtResource("8_n0jkj")]
 position = Vector2(1776, -176)
+
+[node name="MedalFragment9" parent="Fragments" instance=ExtResource("8_n0jkj")]
+position = Vector2(1776, -240)
 
 [node name="MedalFragment10" parent="Fragments" instance=ExtResource("8_n0jkj")]
 position = Vector2(1488, -241)

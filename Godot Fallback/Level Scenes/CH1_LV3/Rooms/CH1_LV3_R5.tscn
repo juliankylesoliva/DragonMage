@@ -1,9 +1,10 @@
-[gd_scene load_steps=20 format=3 uid="uid://bl1jwsgqfev8p"]
+[gd_scene load_steps=21 format=3 uid="uid://bl1jwsgqfev8p"]
 
 [ext_resource type="Script" path="res://Scripts/Utility Scripts/Room.gd" id="1_1ucju"]
 [ext_resource type="TileSet" uid="uid://dhwi7i1loa2pd" path="res://Sprites/Tiles/Test Tiles/TestTileSet.tres" id="2_c8l0p"]
 [ext_resource type="PackedScene" uid="uid://vtyaphi47lrf" path="res://Scene Objects/Objects/Checkpoint.tscn" id="3_3j0gp"]
 [ext_resource type="PackedScene" uid="uid://dqbo0wu6hm8lj" path="res://Scene Objects/Objects/WarpTrigger.tscn" id="3_8xkxk"]
+[ext_resource type="Texture2D" uid="uid://cgs4qb3anauws" path="res://Sprites/Backgrounds/1_3_BG/Signs.png" id="3_cdg6f"]
 [ext_resource type="PackedScene" uid="uid://clfqwsy4byrkf" path="res://Scene Objects/Enemies/GreenDragoon.tscn" id="5_fwgyv"]
 [ext_resource type="PackedScene" uid="uid://dwnpgujive352" path="res://Scene Objects/Enemies/RedDragoon.tscn" id="6_1ktvi"]
 [ext_resource type="PackedScene" uid="uid://bgww8jir45ktf" path="res://Scene Objects/Enemies/BlueDragoon.tscn" id="7_eq3ki"]
@@ -71,6 +72,34 @@ layer_3/y_sort_enabled = false
 layer_3/y_sort_origin = 0
 layer_3/z_index = -1
 layer_3/tile_data = PackedInt32Array(-1310699, 131072, 2, -1310698, 196608, 2, -1310695, 0, 2, -1310694, 65536, 2, 65562, 0, 2, 65563, 65536, 2, 65556, 131072, 2, 65557, 196608, 2)
+
+[node name="Sign" type="Sprite2D" parent="."]
+z_index = 2
+position = Vector2(1248, 88)
+texture = ExtResource("3_cdg6f")
+region_enabled = true
+region_rect = Rect2(384, 0, 64, 80)
+
+[node name="Sign2" type="Sprite2D" parent="."]
+z_index = 2
+position = Vector2(224, -136)
+texture = ExtResource("3_cdg6f")
+region_enabled = true
+region_rect = Rect2(320, 0, 64, 80)
+
+[node name="Sign3" type="Sprite2D" parent="."]
+z_index = 2
+position = Vector2(1280, -360)
+texture = ExtResource("3_cdg6f")
+region_enabled = true
+region_rect = Rect2(384, 0, 64, 80)
+
+[node name="Sign4" type="Sprite2D" parent="."]
+z_index = 2
+position = Vector2(256, -584)
+texture = ExtResource("3_cdg6f")
+region_enabled = true
+region_rect = Rect2(320, 0, 64, 80)
 
 [node name="Entrance 0" type="Node2D" parent="."]
 position = Vector2(16, 224)

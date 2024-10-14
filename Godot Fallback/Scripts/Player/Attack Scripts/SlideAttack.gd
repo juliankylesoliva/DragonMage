@@ -174,6 +174,12 @@ func slide_update(delta : float):
 	hub.char_body.move_and_slide()
 	hub.collisions.upward_slope_correction(intended_velocity)
 	
+	var distance_to_ground : float = hub.collisions.get_distance_to_ground()
+	if (distance_to_ground > 0 and distance_to_ground < hub.char_body.floor_snap_length):
+		hub.char_body.apply_floor_snap()
+		if (hub.char_body.is_on_floor()):
+			hub.jumping.landing_reset()
+	
 	current_slide_timer += delta
 	if (current_slide_hang_timer > 0):
 		current_slide_hang_timer = move_toward(current_slide_hang_timer, 0, delta)

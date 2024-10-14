@@ -1,7 +1,8 @@
-[gd_scene load_steps=19 format=3 uid="uid://ndoigw8d36q0"]
+[gd_scene load_steps=20 format=3 uid="uid://ndoigw8d36q0"]
 
 [ext_resource type="Script" path="res://Scripts/Utility Scripts/Room.gd" id="1_c04yv"]
 [ext_resource type="TileSet" uid="uid://dhwi7i1loa2pd" path="res://Sprites/Tiles/Test Tiles/TestTileSet.tres" id="2_mm7mi"]
+[ext_resource type="Texture2D" uid="uid://cgs4qb3anauws" path="res://Sprites/Backgrounds/1_3_BG/Signs.png" id="3_dti1k"]
 [ext_resource type="PackedScene" uid="uid://dqbo0wu6hm8lj" path="res://Scene Objects/Objects/WarpTrigger.tscn" id="3_fq0gm"]
 [ext_resource type="PackedScene" uid="uid://dgtmsbsmeieyh" path="res://Scene Objects/Objects/ReinforcedMagicBlock.tscn" id="4_jjcs6"]
 [ext_resource type="PackedScene" uid="uid://dck0mc2tc82kx" path="res://Scene Objects/Objects/ReinforcedFireBlock.tscn" id="5_s03dm"]
@@ -78,6 +79,20 @@ layer_1/y_sort_origin = 0
 layer_1/z_index = -1
 layer_1/tile_data = PackedInt32Array(-720856, 16, 2, -655320, 16, 2, -589784, 16, 2, -524248, 16, 2, -786392, 16, 1, -458712, 16, 3, 65539, 65552, 3, -786429, 65552, 1, -720893, 65552, 2, -655357, 65552, 2, -589821, 65552, 2, -524285, 65552, 2, -458749, 65552, 2, -393213, 65552, 2, -327677, 65552, 2, -262141, 65552, 2, -196605, 65552, 2, -131069, 65552, 2, -65533, 65552, 2, 3, 65552, 2, 196648, 16, 3, -131032, 16, 1, 131112, 16, 2, 65576, 16, 2, 40, 16, 2, -65496, 16, 2, 49, 65552, 2, -65487, 65552, 2, 65585, 65552, 3, -131023, 65552, 1, 65590, 16, 3, 54, 16, 2, -65482, 16, 2, -131018, 16, 2, -786376, 16, 2, -720840, 16, 2, -655304, 16, 2, -589768, 16, 3, -786363, 65552, 1, -720827, 65552, 2, -655291, 65552, 2, -589755, 65552, 3, -1114046, 16, 1, -1048510, 16, 2, -982974, 16, 3, -589746, 16, 3, -917426, 16, 1, -851890, 16, 2, -786354, 16, 2, -720818, 16, 2, -655282, 16, 2, -786345, 65552, 1, -458665, 65552, 3, -524201, 65552, 2, -589737, 65552, 2, -655273, 65552, 2, -720809, 65552, 2, 196695, 65552, 3, -130985, 65552, 1, 131159, 65552, 2, 65623, 65552, 2, 87, 65552, 2, -65449, 65552, 2, 65660, 16, 3, -786308, 16, 1, 124, 16, 2, -65412, 16, 2, -130948, 16, 2, -196484, 16, 2, -262020, 16, 2, -327556, 16, 2, -393092, 16, 2, -458628, 16, 2, -524164, 16, 2, -589700, 16, 2, -655236, 16, 2, -720772, 16, 2)
 metadata/Tag = "IntangibleWall"
+
+[node name="Sign" type="Sprite2D" parent="."]
+z_index = 2
+position = Vector2(3232, -488)
+texture = ExtResource("3_dti1k")
+region_enabled = true
+region_rect = Rect2(192, 0, 64, 80)
+
+[node name="Sign2" type="Sprite2D" parent="."]
+z_index = 2
+position = Vector2(3392, -136)
+texture = ExtResource("3_dti1k")
+region_enabled = true
+region_rect = Rect2(192, 0, 64, 80)
 
 [node name="Entrance 0" type="Node2D" parent="."]
 position = Vector2(16, 224)
