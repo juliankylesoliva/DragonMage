@@ -2,6 +2,8 @@ extends Node2D
 
 class_name MenuTemplate
 
+enum MenuDirection {NONE, UP, DOWN, RIGHT, LEFT}
+
 @export var menu_cursor : MenuCursor
 
 @export var max_selections : int = 3
@@ -11,6 +13,10 @@ class_name MenuTemplate
 @export var enable_wraparound : bool = true
 
 @export var enable_secondary_wraparound : bool = false
+
+@export var direction_hold_time : float = 0.25
+
+@export var direction_hold_repeat_interval : float = 0.10
 
 var current_selection : int = 0
 
@@ -22,12 +28,48 @@ var previous_menu : MenuTemplate
 
 var was_menu_just_activated : bool = false
 
+var current_direction_hold_time : float = 0
+
+var is_holding_a_direction : bool = false
+
+var last_direction_pressed : MenuDirection = MenuDirection.NONE
+
 func _process(_delta):
 	if (self.visible and enable_input and !was_menu_just_activated):
 		var left_pressed : bool = Input.is_action_just_pressed("Menu Left")
 		var right_pressed : bool = Input.is_action_just_pressed("Menu Right")
 		var up_pressed : bool = Input.is_action_just_pressed("Menu Up")
 		var down_pressed : bool = Input.is_action_just_pressed("Menu Down")
+		
+		var left_held : bool = Input.is_action_pressed("Menu Left")
+		var right_held : bool = Input.is_action_pressed("Menu Right")
+		var up_held : bool = Input.is_action_pressed("Menu Up")
+		var down_held : bool = Input.is_action_pressed("Menu Down")
+		
+		if (up_pressed or down_pressed or left_pressed or right_pressed):
+			current_direction_hold_time = 0
+			is_holding_a_direction = false
+		
+		var directions_pressed : int = 0
+		directions_pressed += (1 if left_held else 0)
+		directions_pressed += (1 if right_held else 0)
+		directions_pressed += (1 if up_held else 0)
+		directions_pressed += (1 if down_held else 0)
+		
+		if (directions_pressed == 1):
+			var target_hold_time : float = (direction_hold_repeat_interval if is_holding_a_direction else direction_hold_time)
+			current_direction_hold_time = move_toward(current_direction_hold_time, target_hold_time, _delta)
+			if (current_direction_hold_time >= target_hold_time):
+				current_direction_hold_time = 0
+				is_holding_a_direction = true
+				left_pressed = left_held
+				right_pressed = right_held
+				up_pressed = up_held
+				down_pressed = down_held
+		else:
+			current_direction_hold_time = 0
+			is_holding_a_direction = false
+		
 		if (Input.is_action_just_pressed("Menu Confirm")):
 			on_selection_confirm()
 		elif(Input.is_action_just_pressed("Menu Cancel")):

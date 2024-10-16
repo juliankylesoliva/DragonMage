@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://d1eef1xjuwf3b"]
+[gd_scene load_steps=10 format=3 uid="uid://d1eef1xjuwf3b"]
 
 [ext_resource type="Texture2D" uid="uid://xqtpj7gtmg3o" path="res://Sprites/Backgrounds/Misc/PauseBG.png" id="1_giym7"]
 [ext_resource type="Script" path="res://Scripts/UI Scripts/PauseMenu.gd" id="1_iiemp"]
@@ -7,6 +7,8 @@
 [ext_resource type="PackedScene" uid="uid://dqer84f2unm5v" path="res://Scene Objects/Misc/MenuCursor.tscn" id="3_d0ijs"]
 [ext_resource type="Script" path="res://Scripts/Utility Scripts/ButtonPromptTextLabel.gd" id="4_ragny"]
 [ext_resource type="PackedScene" uid="uid://css77oibjn4bk" path="res://Menu Scenes/ControlRebindingMenu.tscn" id="6_3qd72"]
+[ext_resource type="PackedScene" uid="uid://coyrlwandaajn" path="res://Menu Scenes/AudioOptionsMenu.tscn" id="7_ocpij"]
+[ext_resource type="PackedScene" uid="uid://c44iq7d3yw2ho" path="res://Menu Scenes/GameplayOptionsMenu.tscn" id="8_g73xt"]
 
 [node name="PauseMenu" type="Node2D" node_paths=PackedStringArray("pause_top_node", "selection_labels", "form_select_prompt_label", "options_subscreen", "menu_cursor")]
 process_mode = 3
@@ -17,14 +19,13 @@ z_index = 20
 position = Vector2(256, 160)
 script = ExtResource("1_iiemp")
 pause_top_node = NodePath("PauseTop")
-selection_labels = [NodePath("PauseTop/OptionsLabel"), NodePath("PauseTop/RestartLabel"), NodePath("PauseTop/ExitLabel"), NodePath("PauseTop/QuitLabel")]
+selection_labels = [NodePath("PauseTop/ResumeLabel"), NodePath("PauseTop/OptionsLabel"), NodePath("PauseTop/RestartLabel"), NodePath("PauseTop/ExitLabel"), NodePath("PauseTop/QuitLabel")]
 form_select_prompt_label = NodePath("PauseTop/FormSelectLabel")
-default_prompt_text = "[center][Pause] Resume | [Menu Confirm] Confirm"
-form_restart_text = "[center][Pause] Resume | [Menu Confirm] Confirm | [Change Form] Restart As: [img]{file}[/img]"
+default_prompt_text = "[center][Pause]/[Menu Cancel] Resume | [Menu Confirm] Confirm"
+form_restart_text = "[center][Pause]/[Menu Cancel] Resume | [Menu Confirm] Confirm | [Change Form] Restart As: [img]{file}[/img]"
 options_subscreen = NodePath("OptionsMenu")
 title_scene_path = "res://Misc Scenes/TitleScreen.tscn"
 menu_cursor = NodePath("MenuCursor")
-max_secondary_selections = 0
 
 [node name="Background" type="Sprite2D" parent="."]
 modulate = Color(1, 1, 1, 0.8)
@@ -46,7 +47,7 @@ bbcode_enabled = true
 text = "[center]~ PAUSED -"
 scroll_active = false
 
-[node name="OptionsLabel" type="RichTextLabel" parent="PauseTop"]
+[node name="ResumeLabel" type="RichTextLabel" parent="PauseTop"]
 light_mask = 64
 visibility_layer = 64
 z_index = 7
@@ -54,6 +55,21 @@ offset_left = -118.0
 offset_top = -55.0
 offset_right = 118.0
 offset_bottom = -41.0
+pivot_offset = Vector2(118, 7)
+theme_override_fonts/normal_font = ExtResource("3_4cfu1")
+theme_override_font_sizes/normal_font_size = 16
+bbcode_enabled = true
+text = "[center]RESUME"
+scroll_active = false
+
+[node name="OptionsLabel" type="RichTextLabel" parent="PauseTop"]
+light_mask = 64
+visibility_layer = 64
+z_index = 7
+offset_left = -118.0
+offset_top = -23.0
+offset_right = 118.0
+offset_bottom = -9.0
 pivot_offset = Vector2(118, 7)
 theme_override_fonts/normal_font = ExtResource("3_4cfu1")
 theme_override_font_sizes/normal_font_size = 16
@@ -66,9 +82,9 @@ light_mask = 64
 visibility_layer = 64
 z_index = 7
 offset_left = -118.0
-offset_top = -23.0
+offset_top = 9.0
 offset_right = 118.0
-offset_bottom = -9.0
+offset_bottom = 23.0
 pivot_offset = Vector2(118, 7)
 theme_override_fonts/normal_font = ExtResource("3_4cfu1")
 theme_override_font_sizes/normal_font_size = 16
@@ -81,9 +97,9 @@ light_mask = 64
 visibility_layer = 64
 z_index = 7
 offset_left = -118.0
-offset_top = 9.0
+offset_top = 41.0
 offset_right = 118.0
-offset_bottom = 23.0
+offset_bottom = 55.0
 pivot_offset = Vector2(118, 7)
 theme_override_fonts/normal_font = ExtResource("3_4cfu1")
 theme_override_font_sizes/normal_font_size = 16
@@ -96,9 +112,9 @@ light_mask = 64
 visibility_layer = 64
 z_index = 7
 offset_left = -118.0
-offset_top = 41.0
+offset_top = 73.0
 offset_right = 118.0
-offset_bottom = 55.0
+offset_bottom = 87.0
 pivot_offset = Vector2(118, 7)
 theme_override_fonts/normal_font = ExtResource("3_4cfu1")
 theme_override_font_sizes/normal_font_size = 16
@@ -118,14 +134,26 @@ pivot_offset = Vector2(250, 7)
 theme_override_fonts/normal_font = ExtResource("3_4cfu1")
 theme_override_font_sizes/normal_font_size = 8
 bbcode_enabled = true
-text = "[center][Pause] Resume | [Menu Confirm] Confirm | [Change Form] Restart As: "
+text = "[center][Pause]/[Menu Cancel] Resume | [Menu Confirm] Confirm | [Change Form] Restart As: "
 scroll_active = false
 script = ExtResource("4_ragny")
 
-[node name="OptionsMenu" parent="." node_paths=PackedStringArray("bindings_subscreen", "menu_cursor") instance=ExtResource("2_qi3mg")]
+[node name="OptionsMenu" parent="." node_paths=PackedStringArray("gameplay_options_subscreen", "audio_options_subscreen", "bindings_subscreen", "menu_cursor") instance=ExtResource("2_qi3mg")]
 visible = false
 position = Vector2(-256, -160)
+gameplay_options_subscreen = NodePath("../GameplayOptionsMenu")
+audio_options_subscreen = NodePath("../AudioOptionsMenu")
 bindings_subscreen = NodePath("../ControlRebindingMenu")
+menu_cursor = NodePath("../MenuCursor")
+
+[node name="GameplayOptionsMenu" parent="." node_paths=PackedStringArray("menu_cursor") instance=ExtResource("8_g73xt")]
+visible = false
+position = Vector2(-256, -160)
+menu_cursor = NodePath("../MenuCursor")
+
+[node name="AudioOptionsMenu" parent="." node_paths=PackedStringArray("menu_cursor") instance=ExtResource("7_ocpij")]
+visible = false
+position = Vector2(-256, -160)
 menu_cursor = NodePath("../MenuCursor")
 
 [node name="ControlRebindingMenu" parent="." node_paths=PackedStringArray("menu_cursor") instance=ExtResource("6_3qd72")]

@@ -34,7 +34,7 @@ starting_room = NodePath("CH1_LV2_R1")
 room_list = [NodePath("CH1_LV2_R1"), NodePath("CH1_LV2_R2"), NodePath("CH1_LV2_R3"), NodePath("CH1_LV2_R4"), NodePath("CH1_LV2_R5"), NodePath("CH1_LV2_R6"), NodePath("CH1_LV2_R7"), NodePath("CH1_LV2_R8"), NodePath("CH1_LV2_R9"), NodePath("CH1_LV2_R10"), NodePath("CH1_LV2_R11")]
 min_fragment_collection_rate = 0.61
 dropped_fragment_scene = ExtResource("2_dc11k")
-clear_timer = NodePath("ClearTimer")
+clear_timer = NodePath("UI_Canvas/ClearTimer")
 tilemap_color = Color(0.721569, 0.788235, 0.901961, 1)
 
 [node name="Player" parent="." instance=ExtResource("2_vxraw")]
@@ -181,18 +181,19 @@ position = Vector2(512, 0)
 player_node = NodePath("../../Player")
 level_ref = NodePath("../..")
 
+[node name="ClearTimer" parent="UI_Canvas" instance=ExtResource("9_6aije")]
+position = Vector2(4, 316)
+
 [node name="PauseMenu" parent="UI_Canvas" node_paths=PackedStringArray("screen_fade") instance=ExtResource("6_xupbp")]
 screen_fade = NodePath("../ScreenFade")
 
 [node name="ResultsScreen" parent="UI_Canvas" node_paths=PackedStringArray("screen_fade", "level", "clear_timer") instance=ExtResource("7_hkfs2")]
 screen_fade = NodePath("../ScreenFade")
 level = NodePath("../..")
-clear_timer = NodePath("../../ClearTimer")
+clear_timer = NodePath("../ClearTimer")
 
 [node name="ScreenFade" parent="UI_Canvas" instance=ExtResource("8_qngh2")]
 starting_fade_duration = 1.0
-
-[node name="ClearTimer" parent="." instance=ExtResource("9_6aije")]
 
 [node name="Textbox" parent="." node_paths=PackedStringArray("ui_canvas") instance=ExtResource("5_hh34f")]
 ui_canvas = NodePath("../UI_Canvas")
@@ -207,6 +208,8 @@ screen_fade = NodePath("../UI_Canvas/ScreenFade")
 [connection signal="player_defeated" from="." to="UI_Canvas/TemperMeterUI" method="hide"]
 [connection signal="player_defeated" from="." to="UI_Canvas/MagicMeterUI" method="hide"]
 [connection signal="player_defeated" from="." to="UI_Canvas/FragmentCounterUI" method="hide"]
+[connection signal="player_defeated" from="." to="UI_Canvas/ClearTimer" method="hide"]
+[connection signal="player_defeated" from="." to="UI_Canvas/ClearTimer" method="stop_timer"]
 [connection signal="player_defeated" from="." to="Textbox" method="hide_textbox"]
 [connection signal="player_defeated" from="." to="LevelMusicPlayer" method="stop"]
 [connection signal="player_defeated" from="." to="DefeatScreen" method="do_defeat_screen"]
@@ -215,8 +218,9 @@ screen_fade = NodePath("../UI_Canvas/ScreenFade")
 [connection signal="level_finished" from="CH1_LV2_R11/FinishLine" to="UI_Canvas/TemperMeterUI" method="hide"]
 [connection signal="level_finished" from="CH1_LV2_R11/FinishLine" to="UI_Canvas/MagicMeterUI" method="hide"]
 [connection signal="level_finished" from="CH1_LV2_R11/FinishLine" to="UI_Canvas/FragmentCounterUI" method="hide"]
+[connection signal="level_finished" from="CH1_LV2_R11/FinishLine" to="UI_Canvas/ClearTimer" method="hide"]
+[connection signal="level_finished" from="CH1_LV2_R11/FinishLine" to="UI_Canvas/ClearTimer" method="stop_timer"]
 [connection signal="level_finished" from="CH1_LV2_R11/FinishLine" to="UI_Canvas/ResultsScreen" method="on_level_complete"]
-[connection signal="level_finished" from="CH1_LV2_R11/FinishLine" to="ClearTimer" method="stop_timer"]
 [connection signal="level_finished" from="CH1_LV2_R11/FinishLine" to="LevelMusicPlayer" method="fade_out"]
 
 [editable path="Player"]

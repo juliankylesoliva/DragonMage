@@ -1,22 +1,24 @@
 extends MenuTemplate
 
-class_name OptionsMenu
+class_name GameplayOptionsMenu
 
 @export var option_labels : Array[RichTextLabel]
+
+@export var glide_toggle_state_label : RichTextLabel
+
+@export var crouch_toggle_state_label : RichTextLabel
+
+@export var quick_restart_toggle_state_label : RichTextLabel
+
+@export var clear_timer_toggle_state_label : RichTextLabel
 
 @export_multiline var option_descriptions : Array[String]
 
 @export var options_description_label : RichTextLabel
 
-@export var gameplay_options_subscreen : MenuTemplate
-
-@export var audio_options_subscreen : MenuTemplate
-
-@export var bindings_subscreen : MenuTemplate
-
 func on_menu_activation():
 	max_selections = option_labels.size()
-	update_cursor()
+	update_text()
 	update_description_text()
 
 func on_selection_reset():
@@ -44,26 +46,17 @@ func on_down_pressed():
 func on_selection_confirm():
 	match current_selection:
 		0:
-			if (gameplay_options_subscreen != null):
-				gameplay_options_subscreen.reset_selection()
-				menu_cursor.play_accept_sound()
-				self.deactivate_menu()
-				gameplay_options_subscreen.set_previous_menu(self)
-				gameplay_options_subscreen.activate_menu()
+			OptionsHelper.switch_glide_toggle()
+			update_text()
 		1:
-			if (audio_options_subscreen != null):
-				audio_options_subscreen.reset_selection()
-				menu_cursor.play_accept_sound()
-				self.deactivate_menu()
-				audio_options_subscreen.set_previous_menu(self)
-				audio_options_subscreen.activate_menu()
+			OptionsHelper.switch_crouch_toggle()
+			update_text()
 		2:
-			if (bindings_subscreen != null):
-				bindings_subscreen.reset_selection()
-				self.deactivate_menu()
-				bindings_subscreen.set_previous_menu(self)
-				bindings_subscreen.activate_menu()
-				menu_cursor.hide()
+			OptionsHelper.switch_quick_restart_toggle()
+			update_text()
+		3:
+			OptionsHelper.switch_clear_timer_toggle()
+			update_text()
 		_:
 			pass
 	menu_cursor.play_accept_sound()
@@ -74,6 +67,12 @@ func on_menu_cancel():
 		previous_menu.activate_menu()
 		previous_menu = null
 		menu_cursor.play_cancel_sound()
+
+func update_text():
+	glide_toggle_state_label.text = ("ON" if OptionsHelper.enable_glide_toggle else "OFF")
+	crouch_toggle_state_label.text = ("ON" if OptionsHelper.enable_crouch_toggle else "OFF")
+	quick_restart_toggle_state_label.text = ("ON" if OptionsHelper.enable_quick_restart_toggle else "OFF")
+	clear_timer_toggle_state_label.text = ("ON" if OptionsHelper.enable_clear_timer_toggle else "OFF")
 
 func get_label_center(label : RichTextLabel):
 	return (label.global_position + label.pivot_offset)

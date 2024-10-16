@@ -56,7 +56,7 @@ func check_defeated_camera_distance():
 			movement.set_process_mode(Node.PROCESS_MODE_DISABLED)
 
 func play_damage_sound():
-	SoundFactory.play_sound_by_name("damage_enemy", body.global_position, 0, 1, "SFX")
+	SoundFactory.play_sound_by_name("damage_enemy", body.global_position, -2, 1, "SFX")
 
 func activate_enemy():
 	pass

@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://bsa6d8rvv2wwr"]
+[gd_scene load_steps=19 format=3 uid="uid://bsa6d8rvv2wwr"]
 
 [ext_resource type="Texture2D" uid="uid://bynovrsyg4ial" path="res://Sprites/Backgrounds/Misc/TitleBG.png" id="1_joivi"]
 [ext_resource type="PackedScene" uid="uid://8beel2odcuky" path="res://Scene Objects/Effects/ScreenFade.tscn" id="2_bptqy"]
@@ -16,6 +16,8 @@
 [ext_resource type="PackedScene" uid="uid://bb20j0e04mrjd" path="res://Menu Scenes/LevelSelectMenu.tscn" id="12_877xe"]
 [ext_resource type="PackedScene" uid="uid://b3khgcpr0ptbf" path="res://Menu Scenes/OptionsMenu.tscn" id="12_luigk"]
 [ext_resource type="PackedScene" uid="uid://cc0ngul1jls0b" path="res://Menu Scenes/CreditsMenu.tscn" id="13_pu0cr"]
+[ext_resource type="PackedScene" uid="uid://c44iq7d3yw2ho" path="res://Menu Scenes/GameplayOptionsMenu.tscn" id="13_skkwq"]
+[ext_resource type="PackedScene" uid="uid://coyrlwandaajn" path="res://Menu Scenes/AudioOptionsMenu.tscn" id="14_qb0hv"]
 
 [node name="TitleScreen" type="Node2D"]
 
@@ -38,16 +40,26 @@ level_info_list = Array[Resource("res://Scripts/Resource Scripts/LevelInfo/Level
 screen_fade = NodePath("../ScreenFade")
 menu_cursor = NodePath("../MenuCursor")
 
-[node name="OptionsMenu" parent="." node_paths=PackedStringArray("bindings_subscreen", "menu_cursor") instance=ExtResource("12_luigk")]
+[node name="OptionsMenu" parent="." node_paths=PackedStringArray("gameplay_options_subscreen", "audio_options_subscreen", "bindings_subscreen", "menu_cursor") instance=ExtResource("12_luigk")]
 visible = false
+gameplay_options_subscreen = NodePath("../GameplayOptionsMenu")
+audio_options_subscreen = NodePath("../AudioOptionsMenu")
 bindings_subscreen = NodePath("../ControlRebindingMenu")
 menu_cursor = NodePath("../MenuCursor")
 
-[node name="CreditsSubscreen" parent="." node_paths=PackedStringArray("menu_cursor") instance=ExtResource("13_pu0cr")]
+[node name="GameplayOptionsMenu" parent="." node_paths=PackedStringArray("menu_cursor") instance=ExtResource("13_skkwq")]
+visible = false
+menu_cursor = NodePath("../MenuCursor")
+
+[node name="AudioOptionsMenu" parent="." node_paths=PackedStringArray("menu_cursor") instance=ExtResource("14_qb0hv")]
 visible = false
 menu_cursor = NodePath("../MenuCursor")
 
 [node name="ControlRebindingMenu" parent="." node_paths=PackedStringArray("menu_cursor") instance=ExtResource("6_xsk2d")]
+visible = false
+menu_cursor = NodePath("../MenuCursor")
+
+[node name="CreditsSubscreen" parent="." node_paths=PackedStringArray("menu_cursor") instance=ExtResource("13_pu0cr")]
 visible = false
 menu_cursor = NodePath("../MenuCursor")
 

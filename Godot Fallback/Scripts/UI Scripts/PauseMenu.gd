@@ -43,6 +43,7 @@ func _physics_process(_delta):
 		pass
 
 func on_pause():
+	reset_selection()
 	self.activate_menu()
 
 func on_unpause():
@@ -60,7 +61,6 @@ func on_menu_activation():
 	PauseHandler.set_unpause_lock(false)
 	pause_top_node.set_visible(true)
 	update_prompt_text()
-	reset_selection()
 	move_cursor()
 
 func on_menu_deactivation():
@@ -84,6 +84,8 @@ func on_selection_change():
 func on_selection_confirm():
 	match current_selection:
 		0:
+			do_pause_button()
+		1:
 			PauseHandler.set_unpause_lock(true)
 			options_subscreen.reset_selection()
 			menu_cursor.play_accept_sound()
@@ -91,14 +93,17 @@ func on_selection_confirm():
 			pause_top_node.set_visible(false)
 			options_subscreen.set_previous_menu(self)
 			options_subscreen.activate_menu()
-		1:
-			do_restart()
 		2:
-			do_title_screen()
+			do_restart()
 		3:
+			do_title_screen()
+		4:
 			get_tree().quit()
 		_:
 			pass
+
+func on_menu_cancel():
+	do_pause_button()
 
 func on_change_form():
 	if (FormSelectionHelper.form_changing_enabled):
@@ -128,10 +133,11 @@ func do_restart():
 	PauseHandler.set_unpause_lock(true)
 	CheckpointHandler.clear_checkpoint()
 	enable_input = false
-	menu_cursor.do_selection_movement()
-	await get_tree().create_timer(1.0).timeout
-	screen_fade.set_fade(1, 1, Color.BLACK)
-	await get_tree().create_timer(2.0).timeout
+	if (!OptionsHelper.enable_quick_restart_toggle):
+		menu_cursor.do_selection_movement()
+		await get_tree().create_timer(1.0).timeout
+		screen_fade.set_fade(1, 1, Color.BLACK)
+		await get_tree().create_timer(2.0).timeout
 	EffectFactory.clear_effects()
 	SoundFactory.clear_sounds()
 	get_tree().reload_current_scene()
@@ -140,10 +146,17 @@ func do_title_screen():
 	PauseHandler.set_unpause_lock(true)
 	CheckpointHandler.clear_checkpoint()
 	enable_input = false
-	menu_cursor.do_selection_movement()
-	await get_tree().create_timer(1.0).timeout
-	screen_fade.set_fade(1, 1, Color.BLACK)
-	await get_tree().create_timer(2.0).timeout
+	if (!OptionsHelper.enable_quick_restart_toggle):
+		menu_cursor.do_selection_movement()
+		await get_tree().create_timer(1.0).timeout
+		screen_fade.set_fade(1, 1, Color.BLACK)
+		await get_tree().create_timer(2.0).timeout
 	EffectFactory.clear_effects()
 	SoundFactory.clear_sounds()
 	get_tree().change_scene_to_file(title_scene_path)
+
+func do_pause_button():
+	var unpause_event : InputEventAction = InputEventAction.new()
+	unpause_event.action = "Pause"
+	unpause_event.pressed = true
+	Input.parse_input_event(unpause_event)

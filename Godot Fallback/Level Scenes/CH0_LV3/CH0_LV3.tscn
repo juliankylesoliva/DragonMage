@@ -32,7 +32,7 @@ starting_room = NodePath("CH0_LV3_R1")
 room_list = [NodePath("CH0_LV3_R1"), NodePath("CH0_LV3_R2"), NodePath("CH0_LV3_R4"), NodePath("CH0_LV3_R11"), NodePath("CH0_LV3_R5"), NodePath("CH0_LV3_R6"), NodePath("CH0_LV3_R12"), NodePath("CH0_LV3_R7"), NodePath("CH0_LV3_R13"), NodePath("CH0_LV3_R9"), NodePath("CH0_LV3_R10"), NodePath("CH0_LV3_R14")]
 min_fragment_collection_rate = 1.0
 dropped_fragment_scene = ExtResource("2_qdijq")
-clear_timer = NodePath("ClearTimer")
+clear_timer = NodePath("UI_Canvas/ClearTimer")
 
 [node name="Player" parent="." instance=ExtResource("2_oq6xx")]
 position = Vector2(224, 223)
@@ -166,19 +166,20 @@ position = Vector2(512, 0)
 player_node = NodePath("../../Player")
 level_ref = NodePath("../..")
 
+[node name="ClearTimer" parent="UI_Canvas" instance=ExtResource("18_el865")]
+position = Vector2(4, 316)
+
 [node name="PauseMenu" parent="UI_Canvas" node_paths=PackedStringArray("screen_fade") instance=ExtResource("18_krh2f")]
 screen_fade = NodePath("../ScreenFade")
 
 [node name="ResultsScreen" parent="UI_Canvas" node_paths=PackedStringArray("screen_fade", "level", "clear_timer") instance=ExtResource("19_d5div")]
 screen_fade = NodePath("../ScreenFade")
 level = NodePath("../..")
-clear_timer = NodePath("../../ClearTimer")
+clear_timer = NodePath("../ClearTimer")
 show_damage_result = false
 
 [node name="ScreenFade" parent="UI_Canvas" instance=ExtResource("17_3vcxg")]
 starting_fade_duration = 1.0
-
-[node name="ClearTimer" parent="." instance=ExtResource("18_el865")]
 
 [node name="Textbox" parent="." node_paths=PackedStringArray("ui_canvas") instance=ExtResource("19_3e3bj")]
 accept_input_events = false
@@ -189,8 +190,9 @@ stream = ExtResource("24_ar4bd")
 
 [connection signal="level_finished" from="CH0_LV3_R14/FinishLine" to="." method="level_finish"]
 [connection signal="level_finished" from="CH0_LV3_R14/FinishLine" to="UI_Canvas/FragmentCounterUI" method="hide"]
+[connection signal="level_finished" from="CH0_LV3_R14/FinishLine" to="UI_Canvas/ClearTimer" method="stop_timer"]
+[connection signal="level_finished" from="CH0_LV3_R14/FinishLine" to="UI_Canvas/ClearTimer" method="hide"]
 [connection signal="level_finished" from="CH0_LV3_R14/FinishLine" to="UI_Canvas/ResultsScreen" method="on_level_complete"]
-[connection signal="level_finished" from="CH0_LV3_R14/FinishLine" to="ClearTimer" method="stop_timer"]
 [connection signal="level_finished" from="CH0_LV3_R14/FinishLine" to="LevelMusicPlayer" method="fade_out"]
 
 [editable path="Player"]

@@ -1,6 +1,19 @@
-[gd_scene load_steps=2 format=3 uid="uid://b5wwivjk8sl7b"]
+[gd_scene load_steps=3 format=3 uid="uid://b5wwivjk8sl7b"]
 
 [ext_resource type="Script" path="res://Scripts/Utility Scripts/ClearTimer.gd" id="1_ln1tx"]
+[ext_resource type="FontFile" uid="uid://blejgst41tdnl" path="res://PressStart2P.ttf" id="2_58rcv"]
 
-[node name="ClearTimer" type="Node"]
+[node name="ClearTimer" type="Node2D" node_paths=PackedStringArray("timer_label")]
 script = ExtResource("1_ln1tx")
+timer_label = NodePath("TimerLabel")
+
+[node name="TimerLabel" type="RichTextLabel" parent="."]
+offset_top = -16.0
+offset_right = 128.0
+pivot_offset = Vector2(0, 16)
+theme_override_fonts/normal_font = ExtResource("2_58rcv")
+theme_override_font_sizes/normal_font_size = 16
+bbcode_enabled = true
+text = "[right]99:59.99"
+scroll_active = false
+shortcut_keys_enabled = false

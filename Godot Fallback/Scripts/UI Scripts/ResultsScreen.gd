@@ -136,20 +136,22 @@ func do_menu():
 
 func do_main_menu():
 	CheckpointHandler.clear_checkpoint()
-	menu_cursor.do_selection_movement()
-	await get_tree().create_timer(1.0).timeout
-	screen_fade.set_fade(1, 1, Color.BLACK)
-	await get_tree().create_timer(2.0).timeout
+	if (!OptionsHelper.enable_quick_restart_toggle):
+		menu_cursor.do_selection_movement()
+		await get_tree().create_timer(1.0).timeout
+		screen_fade.set_fade(1, 1, Color.BLACK)
+		await get_tree().create_timer(2.0).timeout
 	EffectFactory.clear_effects()
 	SoundFactory.clear_sounds()
 	get_tree().change_scene_to_file(title_scene_path)
 
 func do_retry_level():
 	CheckpointHandler.clear_checkpoint()
-	menu_cursor.do_selection_movement()
-	await get_tree().create_timer(1.0).timeout
-	screen_fade.set_fade(1, 1, Color.BLACK)
-	await get_tree().create_timer(2.0).timeout
+	if (!OptionsHelper.enable_quick_restart_toggle):
+		menu_cursor.do_selection_movement()
+		await get_tree().create_timer(1.0).timeout
+		screen_fade.set_fade(1, 1, Color.BLACK)
+		await get_tree().create_timer(2.0).timeout
 	EffectFactory.clear_effects()
 	SoundFactory.clear_sounds()
 	get_tree().reload_current_scene()
