@@ -33,7 +33,7 @@ func play_sound(stream : AudioStream, position : Vector2, volume : float = 0, pi
 	(instance as Node2D).global_position = position
 	instance.play()
 
-func play_sound_by_name(sound_name : String, position : Vector2, volume : float = 0, pitch : float = 1, bus_name : StringName = "Master"):
+func play_sound_by_name(sound_name : String, position : Vector2, volume : float = 0, pitch : float = 1, bus_name : StringName = "SFX"):
 	var selected_sound : AudioStream = get_sound_by_name(sound_name)
 	if (selected_sound != null):
 		play_sound(selected_sound, position, volume, pitch, bus_name)
@@ -45,7 +45,7 @@ func get_sound_by_name(sound_name : String):
 	push_error("Invalid stream name! ({str})".format({"str": sound_name}))
 	return null
 
-func get_sound_instance_by_name(sound_name : String, volume : float = 0, pitch : float = 1, bus_name : StringName = "Master"):
+func get_sound_instance_by_name(sound_name : String, volume : float = 0, pitch : float = 1, bus_name : StringName = "SFX"):
 	var stream : AudioStream = get_sound_by_name(sound_name)
 	if (stream != null):
 		var instance = AudioStreamPlayer2D.new()

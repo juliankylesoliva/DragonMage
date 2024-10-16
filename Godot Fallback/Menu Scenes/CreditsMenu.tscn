@@ -58,7 +58,11 @@ Music (continued):
 \"Chiptune Downtempo Funk Party\" by TeknoAXE is licensed under CC BY 4.0.
 Trimmed off the end to make it loopable.
 License: https://creativecommons.org/licenses/by/4.0/
-Song Link: https://teknoaxe.com/Link_Code_3.php?q=788"])
+Song Link: https://teknoaxe.com/Link_Code_3.php?q=788
+
+\"Electro Swank\" by Qumu
+YouTube Channel: https://www.youtube.com/@qumumusic
+Song Link: https://www.youtube.com/watch?v=uurLuAc2SCQ"])
 max_selections = 4
 
 [node name="HeaderTextLabel" type="RichTextLabel" parent="."]

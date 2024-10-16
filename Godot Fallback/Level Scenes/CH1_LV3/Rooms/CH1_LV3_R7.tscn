@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://dl6t4p11210bn"]
+[gd_scene load_steps=19 format=3 uid="uid://dl6t4p11210bn"]
 
 [ext_resource type="Script" path="res://Scripts/Utility Scripts/Room.gd" id="1_s1bxk"]
 [ext_resource type="TileSet" uid="uid://dhwi7i1loa2pd" path="res://Sprites/Tiles/Test Tiles/TestTileSet.tres" id="2_mck2b"]
@@ -12,6 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://b2a0ttqvejk51" path="res://Scene Objects/Objects/TemperDragonFruit.tscn" id="8_byir1"]
 [ext_resource type="Texture2D" uid="uid://bkhjt30ligib0" path="res://Sprites/Backgrounds/1_3_BG/CitySkylineSky.png" id="9_uilyp"]
 [ext_resource type="Texture2D" uid="uid://dojb67qrn7oft" path="res://Sprites/Backgrounds/1_3_BG/CitySkylineBuildingsBack.png" id="10_3st4d"]
+[ext_resource type="Script" path="res://Scripts/Object Scripts/HiddenPassage.gd" id="11_3gkgb"]
 [ext_resource type="Texture2D" uid="uid://wfg8o4nr2pm5" path="res://Sprites/Backgrounds/1_3_BG/CitySkylineBuildingsMiddle.png" id="11_bhnuh"]
 [ext_resource type="Texture2D" uid="uid://dt1igvnvn7viy" path="res://Sprites/Backgrounds/1_3_BG/CitySkylineBuildingsFront.png" id="12_3277a"]
 [ext_resource type="Texture2D" uid="uid://846fkr8chd1l" path="res://Sprites/Backgrounds/1_3_BG/CitySkylineSmog.png" id="13_mxt7p"]
@@ -377,6 +378,22 @@ position = Vector2(1088, 224)
 [node name="TemperDragonFruit2" parent="." instance=ExtResource("8_byir1")]
 position = Vector2(768, 1760)
 
+[node name="HiddenTilemap" type="TileMap" parent="."]
+z_index = 3
+tile_set = ExtResource("2_mck2b")
+cell_quadrant_size = 32
+format = 2
+layer_0/name = "Hidden"
+layer_0/tile_data = PackedInt32Array(5439529, 262158, 5, 5505065, 65550, 1, 5570601, 65550, 1, 5636137, 65550, 1, 5701673, 65550, 1, 5767209, 262158, 6, 5439530, 131086, 1, 5505066, 131086, 1, 5570602, 131086, 1, 5636138, 131086, 1, 5701674, 131086, 1, 5767210, 131086, 1, 5439531, 131086, 1, 5505067, 131086, 1, 5570603, 131086, 1, 5636139, 131086, 1, 5701675, 131086, 1, 5767211, 131086, 1, 5439532, 131086, 1, 5505068, 131086, 1, 5570604, 131086, 1, 5636140, 131086, 1, 5701676, 131086, 1, 5767212, 131086, 1, 5439533, 131086, 1, 5505069, 131086, 1, 5570605, 131086, 1, 5636141, 131086, 1, 5701677, 131086, 1, 5767213, 131086, 1, 5439534, 131086, 1, 5505070, 131086, 1, 5570606, 131086, 1, 5636142, 131086, 1, 5701678, 131086, 1, 5767214, 131086, 1, 5439535, 131086, 1, 5505071, 131086, 1, 5570607, 131086, 1, 5636143, 131086, 1, 5701679, 131086, 1, 5767215, 131086, 1)
+script = ExtResource("11_3gkgb")
+
+[node name="Area2D" type="Area2D" parent="HiddenTilemap"]
+collision_layer = 0
+collision_mask = 4
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="HiddenTilemap/Area2D"]
+polygon = PackedVector2Array(1280, 2816, 1280, 2688, 1568, 2688, 1568, 2816)
+
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 visible = false
 
@@ -458,6 +475,9 @@ region_rect = Rect2(128, 0, 3072, 3520)
 script = ExtResource("16_g5v10")
 scroll_speed = -16.0
 loop_value = -1024.0
+
+[connection signal="body_entered" from="HiddenTilemap/Area2D" to="HiddenTilemap" method="_on_rigid_body_2d_body_entered"]
+[connection signal="body_exited" from="HiddenTilemap/Area2D" to="HiddenTilemap" method="_on_rigid_body_2d_body_exited"]
 
 [editable path="Enemies/GreenDragoon"]
 [editable path="Enemies/RedDragoon"]
