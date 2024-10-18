@@ -1,4 +1,4 @@
-[gd_scene load_steps=45 format=3 uid="uid://buykytsdrlnsg"]
+[gd_scene load_steps=52 format=3 uid="uid://buykytsdrlnsg"]
 
 [ext_resource type="Script" path="res://Scripts/UI Scripts/ResultsScreen.gd" id="1_1edmg"]
 [ext_resource type="Texture2D" uid="uid://c0ppcrv311x36" path="res://Sprites/Backgrounds/Misc/ResultsBG_Blue.png" id="1_c7qjv"]
@@ -19,6 +19,7 @@
 [ext_resource type="Texture2D" uid="uid://dtpjbh2447tgn" path="res://Sprites/Backgrounds/Misc/FragmentSliderFrame.png" id="7_rk666"]
 [ext_resource type="AudioStream" uid="uid://dkinfw0fgiggr" path="res://Sounds/transformation_magli_locked.wav" id="8_rkpgd"]
 [ext_resource type="PackedScene" uid="uid://dqer84f2unm5v" path="res://Scene Objects/Misc/MenuCursor.tscn" id="9_b2jxb"]
+[ext_resource type="Texture2D" uid="uid://v6ecq4sb5qt3" path="res://Sprites/Objects/TimelessMedallion.png" id="19_rtx1p"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_k340p"]
 atlas = ExtResource("5_5bs41")
@@ -116,6 +117,30 @@ region = Rect2(192, 0, 48, 48)
 atlas = ExtResource("6_1ujg4")
 region = Rect2(240, 0, 48, 48)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_v10w5"]
+atlas = ExtResource("19_rtx1p")
+region = Rect2(0, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b4dqw"]
+atlas = ExtResource("19_rtx1p")
+region = Rect2(48, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8okco"]
+atlas = ExtResource("19_rtx1p")
+region = Rect2(96, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vmx8t"]
+atlas = ExtResource("19_rtx1p")
+region = Rect2(144, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i6opc"]
+atlas = ExtResource("19_rtx1p")
+region = Rect2(192, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4smq3"]
+atlas = ExtResource("19_rtx1p")
+region = Rect2(240, 0, 48, 48)
+
 [sub_resource type="SpriteFrames" id="SpriteFrames_akhko"]
 animations = [{
 "frames": [{
@@ -209,6 +234,29 @@ animations = [{
 "loop": true,
 "name": &"NOTHING",
 "speed": 60.0
+}, {
+"frames": [{
+"duration": 8.0,
+"texture": SubResource("AtlasTexture_v10w5")
+}, {
+"duration": 8.0,
+"texture": SubResource("AtlasTexture_b4dqw")
+}, {
+"duration": 8.0,
+"texture": SubResource("AtlasTexture_8okco")
+}, {
+"duration": 8.0,
+"texture": SubResource("AtlasTexture_vmx8t")
+}, {
+"duration": 8.0,
+"texture": SubResource("AtlasTexture_i6opc")
+}, {
+"duration": 8.0,
+"texture": SubResource("AtlasTexture_4smq3")
+}],
+"loop": true,
+"name": &"TIME",
+"speed": 60.0
 }]
 
 [node name="ResultsScreen" type="Node2D" node_paths=PackedStringArray("results_sfx", "blue_bg", "orange_bg", "text_header_label", "clear_time_label", "damage_taken_label", "fragment_ratio_label", "mage_fragments_label", "dragon_fragments_label", "fragment_slider_back", "mage_fragments_slider", "dragon_fragments_slider", "fragment_slider_front", "min_fragments_label", "medal_message_label", "medal_sprite", "retry_button_label", "menu_button_label", "menu_cursor")]
@@ -222,6 +270,7 @@ fragment_tick_sfx_stream = ExtResource("4_avjeo")
 magic_medal_get_sfx_stream = ExtResource("5_0k012")
 dragon_medal_get_sfx_stream = ExtResource("6_8mhyb")
 balance_medal_get_sfx_stream = ExtResource("7_64yt6")
+time_medal_get_sfx_stream = ExtResource("7_64yt6")
 no_medal_get_sfx_stream = ExtResource("8_rkpgd")
 blue_bg = NodePath("BlueBG")
 orange_bg = NodePath("OrangeBG")
@@ -242,7 +291,8 @@ medal_sprite = NodePath("MedalSprite")
 no_medal_message = "NO MEDALLION EARNED..."
 mage_message_color = Color(0.34902, 0.254902, 0.662745, 1)
 dragon_message_color = Color(0.941176, 0.603922, 0.34902, 1)
-balance_message_color = Color(0.839216, 0.839216, 0.839216, 1)
+balance_message_color = Color(0.337255, 0.658824, 0.258824, 1)
+time_message_color = Color(0.839216, 0.839216, 0.839216, 1)
 retry_button_label = NodePath("RetryLevel")
 menu_button_label = NodePath("ReturnToMenu")
 menu_cursor = NodePath("MenuCursor")
@@ -446,7 +496,7 @@ visibility_layer = 64
 z_index = 7
 position = Vector2(192, 64)
 sprite_frames = SubResource("SpriteFrames_akhko")
-animation = &"NOTHING"
+animation = &"TIME"
 autoplay = "NOTHING"
 
 [node name="ReturnToMenu" type="RichTextLabel" parent="."]

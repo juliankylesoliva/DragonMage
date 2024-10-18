@@ -31,6 +31,7 @@ room_list = [NodePath("CH0_LV4_R1"), NodePath("CH0_LV4_R2"), NodePath("CH0_LV4_R
 min_fragment_collection_rate = 1.0
 dropped_fragment_scene = ExtResource("2_ahodx")
 clear_timer = NodePath("UI_Canvas/ClearTimer")
+time_to_beat = 105.0
 tilemap_color = Color(0.745098, 0.639216, 0.8, 1)
 
 [node name="Player" parent="." instance=ExtResource("2_616c6")]

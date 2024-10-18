@@ -16,6 +16,8 @@ class_name ResultsScreen
 
 @export var balance_medal_get_sfx_stream : AudioStream
 
+@export var time_medal_get_sfx_stream : AudioStream
+
 @export var no_medal_get_sfx_stream : AudioStream
 
 @export var screen_fade : ScreenFade
@@ -85,6 +87,8 @@ class_name ResultsScreen
 @export_color_no_alpha var dragon_message_color : Color
 
 @export_color_no_alpha var balance_message_color : Color
+
+@export_color_no_alpha var time_message_color : Color
 
 @export var retry_button_label : RichTextLabel
 
@@ -278,6 +282,9 @@ func do_results_screen():
 			"BALANCE":
 				results_sfx.stream = balance_medal_get_sfx_stream
 				medal_message_label.modulate = balance_message_color
+			"TIME":
+				results_sfx.stream = balance_medal_get_sfx_stream
+				medal_message_label.modulate = time_message_color
 			_:
 				results_sfx.stream = no_medal_get_sfx_stream
 				medal_message_label.modulate = Color.WHITE

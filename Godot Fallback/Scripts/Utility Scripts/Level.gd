@@ -28,6 +28,8 @@ signal player_defeated
 
 @export var clear_timer : ClearTimer
 
+@export_range(0, 5999.99) var time_to_beat : float = 0
+
 @export var collision_tilemap_name : String = "LevelCollisionTilemap"
 
 @export var hidden_tilemap_name : String = "HiddenTilemap"
@@ -148,13 +150,16 @@ func get_total_uncollected_fragments():
 	return sum
 
 func can_get_medal():
-	return (get_total_fragments() >= min_fragment_req_for_medal)
+	return (get_total_fragments() >= min_fragment_req_for_medal or clear_timer.get_current_time() < time_to_beat)
 
 func is_medal_possible():
 	return ((get_total_fragments() + get_total_uncollected_fragments()) >= min_fragment_req_for_medal)
 
 func get_medal_type():
-	if (can_get_medal()):
+	if (!can_get_medal()):
+		return "NOTHING"
+	
+	if (get_total_fragments() >= min_fragment_req_for_medal):
 		var maximum : float = max(mage_fragments, dragon_fragments)
 		var minimum : float = min(mage_fragments, dragon_fragments)
 		if (minimum == 0 or (maximum / minimum) >= min_fragment_majority_ratio):
@@ -165,7 +170,7 @@ func get_medal_type():
 		else:
 			return "BALANCE"
 	else:
-		return "NOTHING"
+		return "TIME"
 
 func drop_fragments():
 	var dropped_mage_fragments : int = 0
