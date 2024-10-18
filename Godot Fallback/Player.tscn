@@ -1561,6 +1561,7 @@ fire_tackle_min_horizontal_speed = 304.0
 fire_tackle_max_horizontal_speed = 1280.0
 fire_tackle_vertical_acceleration = 704.0
 fire_tackle_bonk_knockback = 192.0
+fire_tackle_bump_immunity_duration = 0.1
 fire_tackle_duration = 0.45
 fire_tackle_slide_cancelable_time = 0.225
 fire_tackle_fireball_recoil_strength = 128.0

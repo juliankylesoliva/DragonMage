@@ -72,7 +72,7 @@ func attack_state_process(_delta : float):
 		hub.state_machine.current_state.set_next_state(hub.state_machine.get_state_by_name("Deactivated"))
 	elif (hub.damage.is_player_defeated or hub.damage.is_player_damaged() or hub.collisions.is_facing_a_wall() or (current_slide_hang_timer <= 0 and (hub.collisions.is_near_a_ledge() or hub.collisions.get_distance_to_ground() > hub.char_body.floor_snap_length))):
 		stop_slide()
-	elif (!hub.collisions.is_in_ceiling_when_uncrouched() and current_slide_timer > slide_uncancelable_time and (hub.get_input_vector().x * hub.char_body.velocity.x) > 0 and hub.buffers.is_jump_buffer_active()):
+	elif (!hub.collisions.is_in_ceiling_when_uncrouched() and current_slide_timer > slide_uncancelable_time and hub.buffers.is_jump_buffer_active()):
 		do_jump_cancel()
 	elif (!hub.collisions.is_in_ceiling_when_uncrouched() and current_slide_timer > slide_uncancelable_time and hub.buffers.is_attack_buffer_active()):
 		do_attack_cancel()
@@ -118,8 +118,10 @@ func do_jump_cancel():
 	if (current_attack_state != AttackState.ACTIVE):
 		return
 	
-	hub.char_body.velocity.x = (hub.get_input_vector().x * horizontal_result)
+	hub.char_body.velocity.x = (hub.get_input_vector().x * horizontal_result if (hub.get_input_vector().x * hub.movement.get_facing_value() > 0) else 0)
 	hub.movement.current_horizontal_velocity = hub.char_body.velocity.x
+	if ((hub.get_input_vector().x * hub.movement.get_facing_value()) <= 0):
+		hub.buffers.reset_speed_preservation_buffer()
 	hub.jumping.start_ground_jump()
 	hub.state_machine.current_state.set_next_state(hub.state_machine.get_state_by_name("Jumping"))
 
@@ -149,6 +151,9 @@ func stop_slide():
 		preserve_slide_speed()
 		if (!hub.collisions.is_in_ceiling_when_uncrouched() and !Input.is_action_pressed("Crouch")):
 			hub.movement.reset_crouch_state()
+		if (Input.is_action_pressed("Crouch")):
+			hub.jumping.set_fast_fall()
+			hub.char_body.velocity.y = hub.jumping.fast_falling_speed
 		hub.state_machine.current_state.set_next_state(hub.state_machine.get_state_by_name("Falling"))
 	else:
 		hub.state_machine.current_state.set_next_state(hub.state_machine.get_state_by_name("Standing"))

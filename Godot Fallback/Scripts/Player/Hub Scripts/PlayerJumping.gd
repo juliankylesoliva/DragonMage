@@ -424,6 +424,7 @@ func do_midair_jump():
 		hub.char_body.velocity += bonus_velocity
 		hub.movement.current_horizontal_velocity += bonus_velocity.x
 	else:
+		hub.buffers.reset_speed_preservation_buffer()
 		if (abs(hub.char_body.velocity.x) > hub.movement.top_speed):
 			var speed_cap : float = (hub.movement.top_speed * hub.get_input_vector().x)
 			hub.char_body.velocity.x = speed_cap
@@ -630,6 +631,7 @@ func set_fast_fall():
 
 func reset_fast_fall():
 	is_fast_falling = false
+	hub.sprite_trail.deactivate_trail()
 
 func get_climbing_animation_speed():
 	return max(-hub.char_body.velocity.y / min_climbing_speed, min_climbing_animation_speed)

@@ -373,6 +373,10 @@ func endlag_update(delta : float):
 			is_fire_tackle_endlag_canceled = true
 			if (hub.buffers.is_jump_buffer_active()):
 				hub.buffers.refresh_jump_buffer()
+				if (hub.get_input_vector().x * hub.movement.get_facing_value() <= 0):
+					hub.buffers.reset_speed_preservation_buffer()
+					hub.char_body.velocity.x = 0
+					hub.movement.reset_current_horizontal_velocity()
 			elif (hub.jumping.can_wall_climb_from_fire_tackle()):
 				hub.char_body.velocity.x = (horizontal_result * hub.movement.get_facing_value())
 			else:
@@ -410,7 +414,7 @@ func endlag_update(delta : float):
 		end_fire_tackle()
 
 func can_cancel_fire_tackle_endlag():
-	return (!hub.temper.is_forcing_form_change() and (hub.jumping.can_wall_climb_from_fire_tackle() or ((hub.get_input_vector().x * hub.movement.get_facing_value()) > 0 and (hub.buffers.is_jump_buffer_active() and (hub.char_body.is_on_floor() or hub.jumping.can_midair_jump())))))
+	return (!hub.temper.is_forcing_form_change() and current_bump_immunity_timer <= 0 and (hub.jumping.can_wall_climb_from_fire_tackle() or ((hub.buffers.is_jump_buffer_active() and (hub.char_body.is_on_floor() or hub.jumping.can_midair_jump())))))
 
 func end_fire_tackle():
 	current_attack_state = AttackState.NOTHING

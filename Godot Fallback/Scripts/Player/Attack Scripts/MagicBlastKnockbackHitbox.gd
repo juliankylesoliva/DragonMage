@@ -71,7 +71,9 @@ func do_magic_blast_knockback(body):
 		if (state_name != "Standing" and state_name != "WallSliding" and state_name != "Attacking" and state_name != "FormChanging"):
 			var launch_direction : Vector2 = collision_shape.global_position.direction_to(hub.collision_shape.global_position)
 			var launch_power : float = (knockback_strength / (1 + (((distance_to_projectile - knockback_falloff_threshold) / pixels_per_unit) if distance_to_projectile > knockback_falloff_threshold else 0.0)))
+			var speed_falloff : float = (abs(hub.movement.top_speed / hub.movement.current_horizontal_velocity) if abs(hub.movement.current_horizontal_velocity) > hub.movement.top_speed else 1.0)
 			var launch_velocity = (launch_direction * launch_power)
+			launch_velocity.x *= speed_falloff
 			if (hub.char_body.is_on_floor() or state_name == "Gliding"):
 				launch_velocity.y = 0
 			hub.char_body.velocity += launch_velocity
