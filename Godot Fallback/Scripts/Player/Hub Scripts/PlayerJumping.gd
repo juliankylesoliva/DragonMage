@@ -630,8 +630,9 @@ func set_fast_fall():
 	SoundFactory.play_sound_by_name("jump_draelyn_fastfall", hub.char_body.global_position, 0, 1, "SFX")
 
 func reset_fast_fall():
+	if (enable_fast_falling):
+		hub.sprite_trail.deactivate_trail()
 	is_fast_falling = false
-	hub.sprite_trail.deactivate_trail()
 
 func get_climbing_animation_speed():
 	return max(-hub.char_body.velocity.y / min_climbing_speed, min_climbing_animation_speed)
