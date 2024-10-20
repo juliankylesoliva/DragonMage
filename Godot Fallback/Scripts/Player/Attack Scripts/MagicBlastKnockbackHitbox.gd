@@ -10,39 +10,64 @@ class_name MagicBlastKnockbackHitbox
 
 @export_flags_2d_physics var ground_layer
 
+@export_flags_2d_physics var enemy_layer
+
+@export_flags_2d_physics var enemy_projectile_layer
+
 var rid_list : Array[RID]
+
+var bodies_entered : Array[Node2D]
 
 var can_activate_blast_jump : bool = true
 
 func _physics_process(_delta):
+	resolve_bodies_entered()
 	if (can_activate_blast_jump):
 		can_activate_blast_jump = false
 	super._physics_process(_delta)
 
 func _on_body_entered(body):
-	var temp_ray_mask = ray.collision_mask
-	if (body is Boss):
-		do_damage_boss(body)
-	elif (body is CharacterBody2D):
-		if (body.has_meta("Tag") and body.get_meta("Tag") == "Player" and can_activate_blast_jump):
-			do_magic_blast_knockback(body)
-		elif (body.has_meta("Tag") and body.get_meta("Tag") == "Enemy"):
-			defeat_enemy(body)
-		elif (body.has_meta("Tag") and body.get_meta("Tag") == "EnemyProjectile"):
-			destroy_enemy_projectile(body)
+	for i in bodies_entered.size():
+		var distance_a : float = ray.global_position.distance_to(body.global_position)
+		var distance_b : float = ray.global_position.distance_to(bodies_entered[i].global_position)
+		if (distance_a < distance_b):
+			bodies_entered.insert(i, body)
+			return
+	bodies_entered.append(body)
+
+func resolve_bodies_entered():
+	ray.clear_exceptions()
+	while (bodies_entered.size() > 0):
+		var body = bodies_entered.pop_front()
+		var temp_ray_mask = ray.collision_mask
+		if (body is Boss):
+			do_damage_boss(body)
+		elif (body is CharacterBody2D):
+			if (body.has_meta("Tag") and body.get_meta("Tag") == "Player" and can_activate_blast_jump):
+				do_magic_blast_knockback(body)
+			elif (body.has_meta("Tag") and body.get_meta("Tag") == "Enemy"):
+				ray.collision_mask = enemy_layer
+				defeat_enemy(body)
+			elif (body.has_meta("Tag") and body.get_meta("Tag") == "EnemyProjectile"):
+				ray.collision_mask = enemy_projectile_layer
+				destroy_enemy_projectile(body)
+			else:
+				pass
+		elif (body is Breakable):
+			ray.collision_mask = ground_layer
+			do_break_object(body)
 		else:
 			pass
-	elif (body is Breakable):
-		ray.collision_mask = ground_layer
-		do_break_object(body)
-	else:
-		pass
-	ray.collision_mask = temp_ray_mask
+		ray.collision_mask = temp_ray_mask
+		if (body is CollisionObject2D):
+			ray.add_exception(body as CollisionObject2D)
+	ray.clear_exceptions()
 
 func do_damage_boss(body):
 	var target_pos : Vector2 = ((body as Node2D).global_position - ray.global_position)
 	if (!is_going_thru_a_wall(target_pos, body.get_rid())):
 		if ((body as Boss).damage_boss(damage_type, damage_strength, calculate_knockback(body))):
+			print_debug(">:^3")
 			hit.emit()
 			EffectFactory.get_effect("MagicImpact", body.global_position)
 

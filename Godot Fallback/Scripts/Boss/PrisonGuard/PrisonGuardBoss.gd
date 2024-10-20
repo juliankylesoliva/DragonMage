@@ -39,6 +39,7 @@ func _physics_process(delta):
 		textbox.update_player_name_format_text(player_hub.form.get_current_form_name())
 
 func on_activation():
+	update_weakness_and_defense()
 	if (player_hub.temper.is_forcing_form_change() or player_hub.temper.is_form_locked()):
 		player_hub.temper.set_boss_courtesy_temper_level()
 	if (textbox != null):
