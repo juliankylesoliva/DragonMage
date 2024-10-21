@@ -40,7 +40,7 @@ func on_attack_state_enter():
 		hub.char_body.apply_floor_snap()
 
 func attack_state_process(_delta : float):
-	if (hub.is_deactivated or hub.force_stand or current_dodge_speed <= 0 or (did_player_leave_ground and hub.char_body.is_on_floor())):
+	if (hub.is_deactivated or hub.force_stand or current_dodge_speed <= 0 or (did_player_leave_ground and (hub.char_body.is_on_floor() or hub.stomp.is_stomping_enemy()))):
 		if (hub.is_deactivated):
 			hub.state_machine.current_state.set_next_state(hub.state_machine.get_state_by_name("Deactivated"))
 		elif (hub.force_stand):

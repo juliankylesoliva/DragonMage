@@ -18,12 +18,14 @@ class_name PlayerStomp
 
 @export var magic_blast_attack : MagicBlastAttack
 
+@export var dodge_attack : DodgeAttack
+
 @export var fire_tackle_attack : FireTackleAttack
 
 var current_stomp_combo : int = 0
 
 func is_stomping_enemy():
-	if (!hub.damage.is_player_damaged() and !hub.char_body.is_on_floor() and !magic_blast_attack.is_blast_jumping and fire_tackle_attack.current_attack_state == Attack.AttackState.NOTHING and valid_stomp_state_names.has(hub.state_machine.current_state.name)):
+	if (!hub.damage.is_player_damaged() and !hub.char_body.is_on_floor() and !magic_blast_attack.is_blast_jumping and (valid_stomp_state_names.has(hub.state_machine.current_state.name) or is_valid_attack_state())):
 		if (stomp_hitbox.enemy_to_stomp != null and hub.raycast_dm.global_position.y < stomp_hitbox.enemy_to_stomp.body.global_position.y):
 			return true
 		elif (stomp_hitbox.boss_to_stomp != null and hub.raycast_dm.global_position.y < stomp_hitbox.boss_to_stomp.body.global_position.y):
@@ -54,6 +56,9 @@ func do_stomp_jump():
 		increase_stomp_combo()
 	else:
 		pass
+
+func is_valid_attack_state():
+	return (fire_tackle_attack.current_attack_state == Attack.AttackState.ENDLAG or dodge_attack.current_attack_state == Attack.AttackState.ACTIVE)
 
 func increase_stomp_combo():
 	if (current_stomp_combo < max_stomp_combo):

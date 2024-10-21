@@ -357,7 +357,7 @@ func endlag_init():
 	current_endlag_timer = (fire_tackle_endlag_cancelable_time if hub.jumping.can_wall_climb_from_fire_tackle() else fire_tackle_endlag_duration)
 
 func endlag_update(delta : float):
-	if (current_endlag_timer > 0 and !is_fire_tackle_endlag_canceled and !hub.damage.is_player_defeated and !hub.damage.is_player_damaged()):
+	if (current_endlag_timer > 0 and !is_fire_tackle_endlag_canceled and !hub.damage.is_player_defeated and !hub.stomp.is_stomping_enemy() and !hub.damage.is_player_damaged()):
 		if (!hub.temper.is_forcing_form_change() and !is_player_firing_projectile and !did_player_bump and hub.char_body.is_on_floor() and Input.is_action_pressed("Crouch")):
 			var selected_attack : Attack = hub.attacks.get_attack_by_name(hub.attacks.crouching_attack_name)
 			if (selected_attack != null):
@@ -458,6 +458,9 @@ func end_fire_tackle():
 		hub.state_machine.current_state.set_next_state(hub.state_machine.get_state_by_name("FormChanging"))
 	elif (hub.jumping.can_wall_climb_from_fire_tackle()):
 		hub.state_machine.current_state.set_next_state(hub.state_machine.get_state_by_name("WallClimbing"))
+	elif (hub.stomp.is_stomping_enemy()):
+		hub.stomp.do_stomp_jump()
+		hub.state_machine.current_state.set_next_state(hub.state_machine.get_state_by_name("Jumping"))
 	elif (is_fire_tackle_endlag_canceled and hub.buffers.is_jump_buffer_active()):
 		if (hub.char_body.is_on_floor()):
 			hub.jumping.start_ground_jump()

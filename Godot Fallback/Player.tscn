@@ -1620,12 +1620,13 @@ invulnerability_alpha = 0.25
 script = ExtResource("25_xbxt7")
 hub = NodePath("..")
 
-[node name="Stomp" type="Node" parent="Hub" node_paths=PackedStringArray("hub", "stomp_hitbox", "magic_blast_attack", "fire_tackle_attack")]
+[node name="Stomp" type="Node" parent="Hub" node_paths=PackedStringArray("hub", "stomp_hitbox", "magic_blast_attack", "dodge_attack", "fire_tackle_attack")]
 script = ExtResource("25_ls0ah")
 hub = NodePath("..")
 stomp_hitbox = NodePath("../../StompKnockbackHitbox")
-valid_stomp_state_names = Array[String](["Falling", "Gliding", "WallSliding"])
+valid_stomp_state_names = Array[String](["Falling", "Gliding", "Jumping", "WallSliding"])
 magic_blast_attack = NodePath("../Attacks/MagicBlast")
+dodge_attack = NodePath("../Attacks/Dodge")
 fire_tackle_attack = NodePath("../Attacks/FireTackle")
 
 [node name="Camera" type="Node" parent="Hub" node_paths=PackedStringArray("hub")]

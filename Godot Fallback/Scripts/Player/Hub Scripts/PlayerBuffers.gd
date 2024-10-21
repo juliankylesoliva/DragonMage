@@ -179,7 +179,7 @@ func refresh_speed_preservation_buffer():
 func check_coyote_time(delta : float):
 	if (!hub.char_body.is_on_floor() and prev_is_on_floor and coyote_time_left <= 0 and hub.char_body.velocity.y >= 0 and !hub.jumping.is_fast_falling):
 		coyote_time_left = coyote_time
-	elif ((hub.char_body.is_on_floor() and !prev_is_on_floor) or (hub.char_body.is_on_floor() and prev_is_on_floor) or hub.jumping.is_fast_falling):
+	elif (hub.char_body.velocity.y < 0 or (hub.char_body.is_on_floor() and !prev_is_on_floor) or (hub.char_body.is_on_floor() and prev_is_on_floor) or hub.jumping.is_fast_falling):
 		coyote_time_left = 0
 	else:
 		pass
