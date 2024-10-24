@@ -67,7 +67,6 @@ func do_damage_boss(body):
 	var target_pos : Vector2 = ((body as Node2D).global_position - ray.global_position)
 	if (!is_going_thru_a_wall(target_pos, body.get_rid())):
 		if ((body as Boss).damage_boss(damage_type, damage_strength, calculate_knockback(body))):
-			print_debug(">:^3")
 			hit.emit()
 			EffectFactory.get_effect("MagicImpact", body.global_position)
 

@@ -19,7 +19,7 @@
 [ext_resource type="PackedScene" uid="uid://brhoroc2w6jwi" path="res://Scene Objects/UI/Textbox.tscn" id="14_54vdq"]
 [ext_resource type="PackedScene" uid="uid://buykytsdrlnsg" path="res://Scene Objects/Misc/ResultsScreen.tscn" id="14_rug2n"]
 [ext_resource type="PackedScene" uid="uid://btq4qla5fyq0n" path="res://Scene Objects/Misc/LevelMusicPlayer.tscn" id="18_seqrb"]
-[ext_resource type="AudioStream" uid="uid://cknfggv1ublsj" path="res://Music/02 Underclocked (underunderclocked mix).wav" id="19_k0bib"]
+[ext_resource type="AudioStream" uid="uid://cknfggv1ublsj" path="res://Music/CH0/02 Underclocked (underunderclocked mix).wav" id="19_k0bib"]
 [ext_resource type="PackedScene" uid="uid://bjeiexqfc7oht" path="res://Scene Objects/Misc/DefeatScreen.tscn" id="20_7hxk8"]
 
 [node name="CH0_LV4" type="Node2D" node_paths=PackedStringArray("player_reference", "starting_room", "room_list", "clear_timer")]
