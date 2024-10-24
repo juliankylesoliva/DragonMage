@@ -3,12 +3,12 @@
 importer="wav"
 type="AudioStreamWAV"
 uid="uid://bs4yog04kmdd6"
-path="res://.godot/imported/Eight_Bit_Dungeon_Monster_Stomp.wav-242684ea28190f76050da98c54faadaa.sample"
+path="res://.godot/imported/Eight_Bit_Dungeon_Monster_Stomp.wav-cc0c569e74008a0b12ef0c11fd52608d.sample"
 
 [deps]
 
-source_file="res://Music/Eight_Bit_Dungeon_Monster_Stomp.wav"
-dest_files=["res://.godot/imported/Eight_Bit_Dungeon_Monster_Stomp.wav-242684ea28190f76050da98c54faadaa.sample"]
+source_file="res://Music/CH0/Eight_Bit_Dungeon_Monster_Stomp.wav"
+dest_files=["res://.godot/imported/Eight_Bit_Dungeon_Monster_Stomp.wav-cc0c569e74008a0b12ef0c11fd52608d.sample"]
 
 [params]
 

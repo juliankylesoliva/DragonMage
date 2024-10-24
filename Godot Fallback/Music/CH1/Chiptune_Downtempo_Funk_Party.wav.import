@@ -3,12 +3,12 @@
 importer="wav"
 type="AudioStreamWAV"
 uid="uid://dlkxc1pklejn3"
-path="res://.godot/imported/Chiptune_Downtempo_Funk_Party.wav-0b161993b74b1402ad147b1624986b67.sample"
+path="res://.godot/imported/Chiptune_Downtempo_Funk_Party.wav-468d77ae7923fa77c3b3aeee6a340d3b.sample"
 
 [deps]
 
-source_file="res://Music/Chiptune_Downtempo_Funk_Party.wav"
-dest_files=["res://.godot/imported/Chiptune_Downtempo_Funk_Party.wav-0b161993b74b1402ad147b1624986b67.sample"]
+source_file="res://Music/CH1/Chiptune_Downtempo_Funk_Party.wav"
+dest_files=["res://.godot/imported/Chiptune_Downtempo_Funk_Party.wav-468d77ae7923fa77c3b3aeee6a340d3b.sample"]
 
 [params]
 

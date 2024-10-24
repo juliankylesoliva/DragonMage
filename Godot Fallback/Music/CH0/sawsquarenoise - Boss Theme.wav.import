@@ -3,12 +3,12 @@
 importer="wav"
 type="AudioStreamWAV"
 uid="uid://bp3471su81u8g"
-path="res://.godot/imported/sawsquarenoise - Boss Theme.wav-4a73243588203676f49d6a0891c20b7f.sample"
+path="res://.godot/imported/sawsquarenoise - Boss Theme.wav-2d35fea81d01c47dc4e80569d77d63cc.sample"
 
 [deps]
 
-source_file="res://Music/sawsquarenoise - Boss Theme.wav"
-dest_files=["res://.godot/imported/sawsquarenoise - Boss Theme.wav-4a73243588203676f49d6a0891c20b7f.sample"]
+source_file="res://Music/CH0/sawsquarenoise - Boss Theme.wav"
+dest_files=["res://.godot/imported/sawsquarenoise - Boss Theme.wav-2d35fea81d01c47dc4e80569d77d63cc.sample"]
 
 [params]
 

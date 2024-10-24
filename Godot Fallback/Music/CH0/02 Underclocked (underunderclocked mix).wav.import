@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://cknfggv1ublsj"
+path="res://.godot/imported/02 Underclocked (underunderclocked mix).wav-77b1f08d8e83bc90ffef846b9786de33.sample"
+
+[deps]
+
+source_file="res://Music/CH0/02 Underclocked (underunderclocked mix).wav"
+dest_files=["res://.godot/imported/02 Underclocked (underunderclocked mix).wav-77b1f08d8e83bc90ffef846b9786de33.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=true
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=true
+edit/loop_mode=2
+edit/loop_begin=1186492
+edit/loop_end=7341725
+compress/mode=0

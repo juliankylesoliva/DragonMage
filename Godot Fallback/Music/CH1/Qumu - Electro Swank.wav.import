@@ -3,12 +3,12 @@
 importer="wav"
 type="AudioStreamWAV"
 uid="uid://c3wkpsq8ppcgv"
-path="res://.godot/imported/Qumu - Electro Swank.wav-9f2791f4acd61e1713ddb605384cbbc6.sample"
+path="res://.godot/imported/Qumu - Electro Swank.wav-478245d882af442cf2aaf5189052ff63.sample"
 
 [deps]
 
-source_file="res://Music/Qumu - Electro Swank.wav"
-dest_files=["res://.godot/imported/Qumu - Electro Swank.wav-9f2791f4acd61e1713ddb605384cbbc6.sample"]
+source_file="res://Music/CH1/Qumu - Electro Swank.wav"
+dest_files=["res://.godot/imported/Qumu - Electro Swank.wav-478245d882af442cf2aaf5189052ff63.sample"]
 
 [params]
 
