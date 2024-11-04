@@ -78,9 +78,6 @@ grow_vertical = 2
 theme_override_fonts/normal_font = ExtResource("1_q7joa")
 theme_override_font_sizes/normal_font_size = 8
 bbcode_enabled = true
-text = "[center][Move Left]/[Move Right] Change Level | [Move Up]/[Move Down] Read Diary Entry
-
-[Jump] Start! | [Attack] Back | [Change Form] Starting Form: [img]res://Sprites/UI/DraelynNameSprite.png[/img]"
 scroll_active = false
 shortcut_keys_enabled = false
 

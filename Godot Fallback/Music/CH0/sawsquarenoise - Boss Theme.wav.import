@@ -21,4 +21,4 @@ edit/normalize=true
 edit/loop_mode=2
 edit/loop_begin=515935
 edit/loop_end=2055566
-compress/mode=0
+compress/mode=1

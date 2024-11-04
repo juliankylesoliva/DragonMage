@@ -14,7 +14,7 @@ dest_files=["res://.godot/imported/ability_guard_activate.wav-0c8de62f137d1426ec
 
 force/8_bit=false
 force/mono=false
-force/max_rate=false
+force/max_rate=true
 force/max_rate_hz=44100
 edit/trim=false
 edit/normalize=false
