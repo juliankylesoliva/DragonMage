@@ -230,7 +230,7 @@ func active_init():
 
 func active_update(delta : float):
 	hub.buffers.refresh_speed_preservation_buffer()
-	if (current_attack_timer > 0 and ((current_bump_immunity_timer > 0 and (!can_cancel_fire_tackle_endlag() or hub.temper.is_form_locked())) or (!hub.collisions.is_facing_a_wall() and !(hub.char_body.is_on_ceiling() and !hub.char_body.is_on_floor())))):
+	if (current_attack_timer > 0 and !hub.damage.is_player_defeated and !hub.damage.is_player_damaged() and ((current_bump_immunity_timer > 0 and (!can_cancel_fire_tackle_endlag() or hub.temper.is_form_locked())) or (!hub.collisions.is_facing_a_wall() and !(hub.char_body.is_on_ceiling() and !hub.char_body.is_on_floor())))):
 		if (!hub.temper.is_forcing_form_change() and current_attack_timer <= fire_tackle_slide_cancelable_time and hub.char_body.is_on_floor() and Input.is_action_pressed("Crouch")):
 			var selected_attack : Attack = hub.attacks.get_attack_by_name(hub.attacks.crouching_attack_name)
 			if (selected_attack != null):
@@ -287,6 +287,8 @@ func active_update(delta : float):
 		
 		current_attack_timer = move_toward(current_attack_timer, 0, delta)
 		current_bump_immunity_timer = move_toward(current_bump_immunity_timer, 0, delta)
+	elif(hub.damage.is_player_damaged()):
+		end_fire_tackle()
 	else:
 		endlag_init()
 

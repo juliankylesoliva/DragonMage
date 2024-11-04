@@ -163,6 +163,15 @@ func snap_camera_to_player():
 	player_cam.global_position.y = (hub.collisions.get_ground_point().y - camera_height_from_ground)
 	player_cam.global_position.y = clamp_y_target(player_cam.global_position.y)
 
+func snap_camera_to_position(position : Vector2):
+	player_cam.global_position.x = position.x
+	player_cam.global_position.x = clamp_x_target(player_cam.global_position.x)
+	player_cam.global_position.y = (position.y - camera_height_from_ground)
+	player_cam.global_position.y = clamp_y_target(player_cam.global_position.y)
+
+func reset_x_lookahead():
+	current_x_lookahead = (hub.movement.get_facing_value() * base_x_lookahead)
+
 func is_above_upper_threshold():
 	return (hub.char_body.global_position.y < (player_cam.get_screen_center_position().y - upper_camera_threshold))
 

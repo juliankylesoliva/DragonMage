@@ -1711,6 +1711,7 @@ script = ExtResource("42_yhbki")
 
 [node name="Damaged" type="Node" parent="StateMachine"]
 script = ExtResource("41_7pdlp")
+damage_warp_falling_offscreen_offset = 384.0
 can_update_camera_x_pos = false
 
 [node name="Defeated" type="Node" parent="StateMachine"]

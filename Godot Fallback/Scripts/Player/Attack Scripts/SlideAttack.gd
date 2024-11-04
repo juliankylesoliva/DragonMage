@@ -36,7 +36,7 @@ var slide_effect_instance : AnimatedSprite2D = null
 
 func can_use_attack():
 	var state_name : String = hub.state_machine.current_state.name
-	return (hub.form.current_mode == PlayerForm.CharacterMode.DRAGON and state_name != "Attacking" and (hub.attacks.current_attack == null or hub.attacks.current_attack.name != self.name) and (!hub.attacks.is_attack_cooldown_active() or hub.jumping.can_fast_fall_slope_boost()) and (hub.movement.is_crouching or hub.jumping.can_fast_fall_slope_boost()) and (state_name == "Standing" or state_name == "Running" or (state_name == "Falling" and hub.jumping.can_fast_fall_slope_boost())) and hub.char_body.is_on_floor() and (!hub.collisions.is_facing_a_wall() or (hub.jumping.can_fast_fall_slope_boost() and !hub.collisions.is_near_a_ledge(hub.movement.get_facing_value() and hub.get_input_vector().x == 0))))
+	return (hub.form.current_mode == PlayerForm.CharacterMode.DRAGON and state_name != "Attacking" and (hub.attacks.current_attack == null or hub.attacks.current_attack.name != self.name) and (!hub.attacks.is_attack_cooldown_active() or hub.jumping.can_fast_fall_slope_boost()) and (hub.movement.is_crouching or hub.jumping.can_fast_fall_slope_boost()) and (state_name == "Standing" or state_name == "Running" or (state_name == "Falling" and hub.jumping.can_fast_fall_slope_boost())) and hub.char_body.is_on_floor())
 
 func on_attack_state_enter():
 	if (slide_effect_instance != null):

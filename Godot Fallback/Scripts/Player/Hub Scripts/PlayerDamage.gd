@@ -34,6 +34,8 @@ var knockback_direction : int = 0
 
 var current_hitstun_timer : float = 0
 
+var is_damage_warping : bool = false
+
 var current_iframe_timer : float = 0
 
 var is_damage_invulnerability_flickering : bool = false
@@ -55,7 +57,7 @@ func is_player_parrying():
 	return (fairy_guard_attack.can_parry() or fairy_guard_attack.did_player_parry)
 
 func is_player_damaged():
-	return (current_hitstun_timer > 0)
+	return (current_hitstun_timer > 0 or is_damage_warping)
 
 func is_damage_invulnerability_active():
 	return (current_iframe_timer > 0)
@@ -77,6 +79,26 @@ func take_damage(knockback : int = 0):
 		else:
 			knockback_direction = knockback
 			current_hitstun_timer = hitstun_time
+			hub.fairy.cut_magic_in_half()
+			hub.stomp.reset_stomp_combo()
+			hub.jumping.landing_reset()
+			took_damage.emit()
+		return true
+
+func do_damage_warp():
+	if (is_player_damaged()):
+		return false
+	else:
+		if (is_damage_invulnerability_active()):
+			is_damage_invulnerability_flickering = false
+			current_iframe_timer = 0
+		
+		damage_taken += 1
+		if (hub.temper.is_form_locked()):
+			is_player_defeated = true
+			defeated.emit()
+		else:
+			is_damage_warping = true
 			hub.fairy.cut_magic_in_half()
 			hub.stomp.reset_stomp_combo()
 			hub.jumping.landing_reset()
@@ -129,6 +151,9 @@ func update_hitstun_timer(delta : float):
 
 func reset_hitstun_timer():
 	current_hitstun_timer = 0
+
+func reset_damage_warp():
+	is_damage_warping = false
 
 func update_iframe_timer(delta : float):
 	if (is_damage_invulnerability_active()):
