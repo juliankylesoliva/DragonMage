@@ -67,6 +67,11 @@ func damage_player():
 		return player_ref.damage.take_damage(get_direction_to_player())
 	return false
 
+func damage_warp_player():
+	if (player_ref != null):
+		return player_ref.damage.do_damage_warp()
+	return false
+
 func check_player_parry():
 	if (player_ref != null):
 		return player_ref.damage.is_player_parrying()
