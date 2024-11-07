@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://bsyunex10456i"]
+[gd_scene load_steps=16 format=3 uid="uid://bsyunex10456i"]
 
 [ext_resource type="Script" path="res://Scripts/Utility Scripts/Level.gd" id="1_jlbtb"]
 [ext_resource type="PackedScene" uid="uid://d0ff35cm57xb7" path="res://Scene Objects/Effects/DroppedFragment.tscn" id="2_4gqwv"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://cscukufpxq3ku" path="res://Level Scenes/CH1_LV4/Rooms/CH1_LV4_R1.tscn" id="4_3k6nu"]
 [ext_resource type="PackedScene" uid="uid://bdypi7w73c6kq" path="res://Scene Objects/UI/TemperMeterUI.tscn" id="4_vdbcr"]
 [ext_resource type="PackedScene" uid="uid://cg3dhm1wv5w67" path="res://Scene Objects/UI/MagicMeterUI.tscn" id="5_8jgmi"]
+[ext_resource type="PackedScene" uid="uid://batmot2dks5ts" path="res://Level Scenes/CH1_LV4/Rooms/CH1_LV4_R3.tscn" id="5_ikvsp"]
 [ext_resource type="PackedScene" uid="uid://vmiu4klr3ywc" path="res://Scene Objects/UI/FragmentCounterUI.tscn" id="6_0r83b"]
 [ext_resource type="PackedScene" uid="uid://b5wwivjk8sl7b" path="res://Scene Objects/Misc/ClearTimer.tscn" id="7_3ak5y"]
 [ext_resource type="PackedScene" uid="uid://d1eef1xjuwf3b" path="res://Menu Scenes/PauseMenu.tscn" id="8_tiic5"]
@@ -20,7 +21,7 @@ script = ExtResource("1_jlbtb")
 level_index = 4
 player_reference = NodePath("Player")
 starting_room = NodePath("CH1_LV4_R1")
-room_list = [NodePath("CH1_LV4_R1")]
+room_list = [NodePath("CH1_LV4_R1"), NodePath("CH1_LV4_R3")]
 dropped_fragment_scene = ExtResource("2_4gqwv")
 clear_timer = NodePath("UI_Canvas/ClearTimer")
 
@@ -42,6 +43,9 @@ editor_draw_limits = true
 editor_draw_drag_margin = true
 
 [node name="CH1_LV4_R1" parent="." instance=ExtResource("4_3k6nu")]
+
+[node name="CH1_LV4_R3" parent="." instance=ExtResource("5_ikvsp")]
+position = Vector2(0, 352)
 
 [node name="UI_Canvas" type="CanvasLayer" parent="."]
 

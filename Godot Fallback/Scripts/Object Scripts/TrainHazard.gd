@@ -8,11 +8,11 @@ enum TrainHazardState {IDLE, ACTIVE}
 
 @export_enum("Right:1", "Left:-1") var starting_direction : int = 1
 
-@export var idle_interval : float = 5
+@export var idle_interval : float = 3
 
 @export var travel_duration : float = 5
 
-@export var speed_override : float = 0
+@export var speed_override : float = 302.4
 
 @export var left_start_point : Node2D
 

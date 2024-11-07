@@ -21,6 +21,7 @@ position = Vector2(-896, -80)
 shape = SubResource("RectangleShape2D_jqloy")
 
 [node name="ColorRect" type="ColorRect" parent="CollisionShape2D"]
+z_index = 3
 offset_left = -896.0
 offset_top = -80.0
 offset_right = 896.0
