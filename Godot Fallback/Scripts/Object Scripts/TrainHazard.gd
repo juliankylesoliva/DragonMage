@@ -12,6 +12,8 @@ enum TrainHazardState {IDLE, ACTIVE}
 
 @export var travel_duration : float = 5
 
+@export var speed_override : float = 0
+
 @export var left_start_point : Node2D
 
 @export var right_start_point : Node2D
@@ -85,7 +87,7 @@ func calculate_target_x():
 	
 	var current_x_pos = (left_start_point.global_position.x if current_direction > 0 else right_start_point.global_position.x)
 	var distance : float = abs(target_x_pos - current_x_pos)
-	travel_speed = (distance / travel_duration)
+	travel_speed = ((distance / travel_duration) if speed_override <= 0 else speed_override)
 
 func _on_body_entered(body):
 	if (body is CharacterBody2D and body.has_meta("Tag") and body.get_meta("Tag") == "Player"):

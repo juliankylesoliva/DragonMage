@@ -72,7 +72,7 @@ func attack_state_process(_delta : float):
 		hub.state_machine.current_state.set_next_state(hub.state_machine.get_state_by_name("Deactivated"))
 	elif (hub.damage.is_player_defeated or hub.damage.is_player_damaged() or hub.collisions.is_facing_a_wall() or (current_slide_hang_timer <= 0 and (hub.collisions.is_near_a_ledge() or hub.collisions.get_distance_to_ground() > hub.char_body.floor_snap_length)) or (!hub.char_body.is_on_floor() and Input.is_action_just_pressed("Crouch"))):
 		stop_slide()
-	elif (!hub.collisions.is_in_ceiling_when_uncrouched() and current_slide_timer > slide_uncancelable_time and hub.buffers.is_jump_buffer_active()):
+	elif (current_slide_timer > slide_uncancelable_time and hub.buffers.is_jump_buffer_active()):
 		do_jump_cancel()
 	elif (!hub.collisions.is_in_ceiling_when_uncrouched() and current_slide_timer > slide_uncancelable_time and hub.buffers.is_attack_buffer_active()):
 		do_attack_cancel()

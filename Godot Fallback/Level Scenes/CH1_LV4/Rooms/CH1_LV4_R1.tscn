@@ -75,6 +75,7 @@ position = Vector2(832, 64)
 
 [node name="TrainHazard" parent="." node_paths=PackedStringArray("left_start_point", "right_start_point") instance=ExtResource("5_wy8b6")]
 position = Vector2(-32, 288)
+speed_override = 302.4
 left_start_point = NodePath("../TrainStartPointL")
 right_start_point = NodePath("../TrainStartPointR")
 
