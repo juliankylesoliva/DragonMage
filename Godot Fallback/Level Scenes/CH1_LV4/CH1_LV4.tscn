@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://bsyunex10456i"]
+[gd_scene load_steps=19 format=3 uid="uid://bsyunex10456i"]
 
 [ext_resource type="Script" path="res://Scripts/Utility Scripts/Level.gd" id="1_jlbtb"]
 [ext_resource type="PackedScene" uid="uid://d0ff35cm57xb7" path="res://Scene Objects/Effects/DroppedFragment.tscn" id="2_4gqwv"]
@@ -6,9 +6,12 @@
 [ext_resource type="PackedScene" uid="uid://cscukufpxq3ku" path="res://Level Scenes/CH1_LV4/Rooms/CH1_LV4_R1.tscn" id="4_3k6nu"]
 [ext_resource type="PackedScene" uid="uid://bdypi7w73c6kq" path="res://Scene Objects/UI/TemperMeterUI.tscn" id="4_vdbcr"]
 [ext_resource type="PackedScene" uid="uid://cg3dhm1wv5w67" path="res://Scene Objects/UI/MagicMeterUI.tscn" id="5_8jgmi"]
-[ext_resource type="PackedScene" uid="uid://batmot2dks5ts" path="res://Level Scenes/CH1_LV4/Rooms/CH1_LV4_R3.tscn" id="5_ikvsp"]
+[ext_resource type="PackedScene" uid="uid://2ks3uaj1fmjh" path="res://Level Scenes/CH1_LV4/Rooms/CH1_LV4_R2.tscn" id="5_dsaer"]
+[ext_resource type="PackedScene" uid="uid://brtb2drxdsqje" path="res://Level Scenes/CH1_LV4/Rooms/CH1_LV4_R3.tscn" id="5_ikvsp"]
 [ext_resource type="PackedScene" uid="uid://vmiu4klr3ywc" path="res://Scene Objects/UI/FragmentCounterUI.tscn" id="6_0r83b"]
 [ext_resource type="PackedScene" uid="uid://b5wwivjk8sl7b" path="res://Scene Objects/Misc/ClearTimer.tscn" id="7_3ak5y"]
+[ext_resource type="PackedScene" uid="uid://70yevypkcvnx" path="res://Level Scenes/CH1_LV4/Rooms/CH1_LV4_R4.tscn" id="7_fp8qw"]
+[ext_resource type="PackedScene" uid="uid://batmot2dks5ts" path="res://Level Scenes/CH1_LV4/Rooms/CH1_LV4_R5.tscn" id="7_mkpf8"]
 [ext_resource type="PackedScene" uid="uid://d1eef1xjuwf3b" path="res://Menu Scenes/PauseMenu.tscn" id="8_tiic5"]
 [ext_resource type="PackedScene" uid="uid://buykytsdrlnsg" path="res://Scene Objects/Misc/ResultsScreen.tscn" id="9_7yrvg"]
 [ext_resource type="PackedScene" uid="uid://8beel2odcuky" path="res://Scene Objects/Effects/ScreenFade.tscn" id="10_mbs61"]
@@ -21,7 +24,7 @@ script = ExtResource("1_jlbtb")
 level_index = 4
 player_reference = NodePath("Player")
 starting_room = NodePath("CH1_LV4_R1")
-room_list = [NodePath("CH1_LV4_R1"), NodePath("CH1_LV4_R3")]
+room_list = [NodePath("CH1_LV4_R1"), NodePath("CH1_LV4_R2"), NodePath("CH1_LV4_R3"), NodePath("CH1_LV4_R4"), NodePath("CH1_LV4_R5")]
 dropped_fragment_scene = ExtResource("2_4gqwv")
 clear_timer = NodePath("UI_Canvas/ClearTimer")
 
@@ -44,8 +47,41 @@ editor_draw_drag_margin = true
 
 [node name="CH1_LV4_R1" parent="." instance=ExtResource("4_3k6nu")]
 
+[node name="Warp 0" parent="CH1_LV4_R1" index="4" node_paths=PackedStringArray("room_destination")]
+room_destination = NodePath("../../CH1_LV4_R2")
+
+[node name="CH1_LV4_R2" parent="." instance=ExtResource("5_dsaer")]
+position = Vector2(1760, 0)
+
+[node name="Warp 0" parent="CH1_LV4_R2" index="4" node_paths=PackedStringArray("room_destination")]
+room_destination = NodePath("../../CH1_LV4_R1")
+
+[node name="Warp 1" parent="CH1_LV4_R2" index="5" node_paths=PackedStringArray("room_destination")]
+room_destination = NodePath("../../CH1_LV4_R3")
+
 [node name="CH1_LV4_R3" parent="." instance=ExtResource("5_ikvsp")]
 position = Vector2(0, 352)
+
+[node name="Warp 0" parent="CH1_LV4_R3" index="4" node_paths=PackedStringArray("room_destination")]
+room_destination = NodePath("../../CH1_LV4_R2")
+
+[node name="Warp 1" parent="CH1_LV4_R3" index="5" node_paths=PackedStringArray("room_destination")]
+room_destination = NodePath("../../CH1_LV4_R4")
+
+[node name="CH1_LV4_R4" parent="." instance=ExtResource("7_fp8qw")]
+position = Vector2(1760, 352)
+
+[node name="Warp 0" parent="CH1_LV4_R4" index="4" node_paths=PackedStringArray("room_destination")]
+room_destination = NodePath("../../CH1_LV4_R3")
+
+[node name="Warp 1" parent="CH1_LV4_R4" index="5" node_paths=PackedStringArray("room_destination")]
+room_destination = NodePath("../../CH1_LV4_R5")
+
+[node name="CH1_LV4_R5" parent="." instance=ExtResource("7_mkpf8")]
+position = Vector2(0, 704)
+
+[node name="Warp 0" parent="CH1_LV4_R5" index="4" node_paths=PackedStringArray("room_destination")]
+room_destination = NodePath("../../CH1_LV4_R4")
 
 [node name="UI_Canvas" type="CanvasLayer" parent="."]
 
@@ -95,3 +131,14 @@ screen_fade = NodePath("../UI_Canvas/ScreenFade")
 [connection signal="player_defeated" from="." to="DefeatScreen" method="do_defeat_screen"]
 
 [editable path="Player"]
+[editable path="CH1_LV4_R1"]
+[editable path="CH1_LV4_R2"]
+[editable path="CH1_LV4_R2/Enemies/GreenDragoon2"]
+[editable path="CH1_LV4_R2/Enemies/YellowDragoon2"]
+[editable path="CH1_LV4_R3"]
+[editable path="CH1_LV4_R3/Enemies/YellowDragoon"]
+[editable path="CH1_LV4_R3/Enemies/YellowDragoon2"]
+[editable path="CH1_LV4_R3/Enemies/GreenDragoon"]
+[editable path="CH1_LV4_R4"]
+[editable path="CH1_LV4_R4/RedDragoon3"]
+[editable path="CH1_LV4_R5"]

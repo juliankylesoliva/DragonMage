@@ -1,35 +1,36 @@
-[gd_scene load_steps=8 format=3 uid="uid://batmot2dks5ts"]
+[gd_scene load_steps=9 format=3 uid="uid://brtb2drxdsqje"]
 
-[ext_resource type="Script" path="res://Scripts/Utility Scripts/Room.gd" id="1_u2q5c"]
-[ext_resource type="TileSet" uid="uid://dhwi7i1loa2pd" path="res://Sprites/Tiles/Test Tiles/TestTileSet.tres" id="2_ki1rx"]
-[ext_resource type="PackedScene" uid="uid://dqbo0wu6hm8lj" path="res://Scene Objects/Objects/WarpTrigger.tscn" id="3_7qxd4"]
-[ext_resource type="PackedScene" uid="uid://dwnpgujive352" path="res://Scene Objects/Enemies/RedDragoon.tscn" id="4_22i53"]
-[ext_resource type="PackedScene" uid="uid://bxbwf76suu7jl" path="res://Scene Objects/Obstacles/TrainHazard.tscn" id="5_482ay"]
-[ext_resource type="PackedScene" uid="uid://c4cg3xgbq7eyh" path="res://Scene Objects/Obstacles/FloorSpikes.tscn" id="6_vstpq"]
-[ext_resource type="PackedScene" uid="uid://dfkmxoba64spw" path="res://Scene Objects/Objects/MedalFragment.tscn" id="7_1xyjw"]
+[ext_resource type="Script" path="res://Scripts/Utility Scripts/Room.gd" id="1_hjs8t"]
+[ext_resource type="TileSet" uid="uid://dhwi7i1loa2pd" path="res://Sprites/Tiles/Test Tiles/TestTileSet.tres" id="2_1o4y0"]
+[ext_resource type="PackedScene" uid="uid://dqbo0wu6hm8lj" path="res://Scene Objects/Objects/WarpTrigger.tscn" id="3_cpfkm"]
+[ext_resource type="PackedScene" uid="uid://cs4s34scsvcfr" path="res://Scene Objects/Objects/BreakableBlock.tscn" id="4_6qpf4"]
+[ext_resource type="PackedScene" uid="uid://bxbwf76suu7jl" path="res://Scene Objects/Obstacles/TrainHazard.tscn" id="4_mu640"]
+[ext_resource type="PackedScene" uid="uid://curi6w4ex7jou" path="res://Scene Objects/Enemies/YellowDragoon.tscn" id="6_2hx8y"]
+[ext_resource type="PackedScene" uid="uid://clfqwsy4byrkf" path="res://Scene Objects/Enemies/GreenDragoon.tscn" id="7_2auy1"]
+[ext_resource type="PackedScene" uid="uid://dfkmxoba64spw" path="res://Scene Objects/Objects/MedalFragment.tscn" id="8_facdp"]
 
 [node name="CH1_LV4_R3" type="Node2D" node_paths=PackedStringArray("tilemap_list", "room_entrances", "enemy_nodes", "medal_fragments")]
-script = ExtResource("1_u2q5c")
+script = ExtResource("1_hjs8t")
 tilemap_list = [NodePath("BoundaryCollisionTilemap"), NodePath("LevelCollisionTilemap")]
 right_camera_limit = 1536
 room_entrances = [NodePath("Entrance 0"), NodePath("Entrance 1")]
-enemy_nodes = [NodePath("RedDragoon"), NodePath("RedDragoon2")]
-medal_fragments = [NodePath("Fragments/MedalFragment"), NodePath("Fragments/MedalFragment2"), NodePath("Fragments/MedalFragment3"), NodePath("Fragments/MedalFragment4"), NodePath("Fragments/MedalFragment5"), NodePath("Fragments/MedalFragment6"), NodePath("Fragments/MedalFragment7"), NodePath("Fragments/MedalFragment8"), NodePath("Fragments/MedalFragment9"), NodePath("Fragments/MedalFragment10")]
+enemy_nodes = [NodePath("Enemies/YellowDragoon"), NodePath("Enemies/YellowDragoon2"), NodePath("Enemies/GreenDragoon")]
+medal_fragments = [NodePath("Fragments/MedalFragment"), NodePath("Fragments/MedalFragment2"), NodePath("Fragments/MedalFragment3"), NodePath("Fragments/MedalFragment4"), NodePath("Fragments/MedalFragment5"), NodePath("Fragments/MedalFragment6"), NodePath("Fragments/MedalFragment7"), NodePath("Fragments/MedalFragment8"), NodePath("Fragments/MedalFragment9"), NodePath("Fragments/MedalFragment10"), NodePath("Fragments/MedalFragment11"), NodePath("Fragments/MedalFragment12")]
 
 [node name="BoundaryCollisionTilemap" type="TileMap" parent="."]
 z_index = 4
-tile_set = ExtResource("2_ki1rx")
+tile_set = ExtResource("2_1o4y0")
 cell_quadrant_size = 32
 format = 2
 layer_0/name = "Intangible"
 layer_0/z_index = -1
-layer_0/tile_data = PackedInt32Array(65535, 196608, 0, 65534, 196608, 0, 65533, 196608, 0, 131069, 196608, 0, 196605, 196608, 0, 262141, 196608, 0, 262142, 196608, 0, 262143, 196608, 0, 327679, 196608, 0, 393215, 196608, 0, 458751, 196608, 0, 524287, 196608, 0, 589823, 196608, 0, 655359, 196608, 0, 589872, 196608, 0, 524336, 196608, 0, 458800, 196608, 0, 393264, 196608, 0, 327728, 196608, 0, 262192, 196608, 0, 196656, 196608, 0, 48, 196608, 0, 49, 196608, 0, 50, 196608, 0, 65586, 196608, 0, 131122, 196608, 0, 196658, 196608, 0, 196657, 196608, 0)
+layer_0/tile_data = PackedInt32Array(65533, 196608, 0, 131069, 196608, 0, 196605, 196608, 0, 262141, 196608, 0, 65534, 196608, 0, 262142, 196608, 0, 65535, 196608, 0, 262143, 196608, 0, 327679, 196608, 0, 393215, 196608, 0, 458751, 196608, 0, 524287, 196608, 0, 589823, 196608, 0, 655359, 196608, 0, 196656, 196608, 0, 262192, 196608, 0, 327728, 196608, 0, 393264, 196608, 0, 458800, 196608, 0, 524336, 196608, 0, 589872, 196608, 0, 48, 196608, 0, 49, 196608, 0, 196657, 196608, 0, 50, 196608, 0, 65586, 196608, 0, 131122, 196608, 0, 196658, 196608, 0, 196624, 196608, 0, 196630, 196608, 0, 196633, 196608, 0, 196639, 196608, 0)
 metadata/Tag = "IntangibleWall"
 
 [node name="LevelCollisionTilemap" type="TileMap" parent="."]
 visibility_layer = 4
 z_index = 3
-tile_set = ExtResource("2_ki1rx")
+tile_set = ExtResource("2_1o4y0")
 cell_quadrant_size = 32
 format = 2
 layer_0/name = "Decoration"
@@ -46,7 +47,7 @@ layer_2/modulate = Color(0.0745098, 0.113725, 0.301961, 1)
 layer_2/y_sort_enabled = false
 layer_2/y_sort_origin = 0
 layer_2/z_index = -1
-layer_2/tile_data = PackedInt32Array(589839, 196608, 0, 589838, 196608, 0, 589837, 196608, 0, 589836, 196608, 0, 589835, 196608, 0, 589834, 196608, 0, 589833, 196608, 0, 589832, 196608, 0, 589831, 196608, 0, 589830, 196608, 0, 589829, 196608, 0, 589828, 196608, 0, 589827, 196608, 0, 589826, 196608, 0, 589825, 196608, 0, 589824, 196608, 0, 196608, 196608, 0, 196609, 196608, 0, 196610, 196608, 0, 196611, 196608, 0, 196612, 196608, 0, 196613, 196608, 0, 196614, 196608, 0, 196615, 196608, 0, 196616, 196608, 0, 196622, 196608, 0, 196623, 196608, 0, 0, 196608, 0, 1, 196608, 0, 2, 196608, 0, 3, 196608, 0, 4, 196608, 0, 5, 196608, 0, 6, 196608, 0, 7, 196608, 0, 8, 196608, 0, 9, 196608, 0, 10, 196608, 0, 11, 196608, 0, 12, 196608, 0, 13, 196608, 0, 14, 196608, 0, 196624, 196608, 0, 589840, 196608, 0, 196625, 196608, 0, 589841, 196608, 0, 196626, 196608, 0, 589842, 196608, 0, 196627, 196608, 0, 589843, 196608, 0, 196628, 196608, 0, 589844, 196608, 0, 196629, 196608, 0, 589845, 196608, 0, 196630, 196608, 0, 589846, 196608, 0, 589847, 196608, 0, 589848, 196608, 0, 196633, 196608, 0, 589849, 196608, 0, 196634, 196608, 0, 589850, 196608, 0, 196635, 196608, 0, 589851, 196608, 0, 589852, 196608, 0, 196637, 196608, 0, 589853, 196608, 0, 196638, 196608, 0, 589854, 196608, 0, 196639, 196608, 0, 589855, 196608, 0, 196640, 196608, 0, 589856, 196608, 0, 33, 196608, 0, 196641, 196608, 0, 589857, 196608, 0, 34, 196608, 0, 589858, 196608, 0, 35, 196608, 0, 589859, 196608, 0, 36, 196608, 0, 589860, 196608, 0, 37, 196608, 0, 589861, 196608, 0, 38, 196608, 0, 196646, 196608, 0, 589862, 196608, 0, 39, 196608, 0, 196647, 196608, 0, 589863, 196608, 0, 40, 196608, 0, 196648, 196608, 0, 589864, 196608, 0, 41, 196608, 0, 196649, 196608, 0, 589865, 196608, 0, 42, 196608, 0, 196650, 196608, 0, 589866, 196608, 0, 43, 196608, 0, 196651, 196608, 0, 589867, 196608, 0, 44, 196608, 0, 196652, 196608, 0, 589868, 196608, 0, 45, 196608, 0, 196653, 196608, 0, 589869, 196608, 0, 46, 196608, 0, 196654, 196608, 0, 589870, 196608, 0, 47, 196608, 0, 196655, 196608, 0, 589871, 196608, 0, 131079, 196608, 0, 131078, 196608, 0, 15, 196608, 0, 16, 196608, 0, 17, 196608, 0, 18, 196608, 0, 19, 196608, 0, 20, 196608, 0, 21, 196608, 0, 22, 196608, 0, 23, 196608, 0, 24, 196608, 0, 25, 196608, 0, 26, 196608, 0, 27, 196608, 0, 28, 196608, 0, 29, 196608, 0, 30, 196608, 0, 31, 196608, 0, 32, 196608, 0, 196621, 196608, 0, 131085, 196608, 0, 65549, 196608, 0, 131077, 196608, 0, 196636, 196608, 0, 196617, 196608, 0, 196618, 196608, 0, 196645, 196608, 0, 65570, 196608, 0, 131106, 196608, 0, 196642, 196608, 0, 65567, 196608, 0, 131103, 196608, 0, 131114, 196608, 0, 131112, 196608, 0, 131113, 196608, 0, 131092, 196608, 0, 131090, 196608, 0, 131091, 196608, 0, 131089, 196608, 0, 131088, 196608, 0, 131076, 196608, 0, 131115, 196608, 0)
+layer_2/tile_data = PackedInt32Array(589824, 196608, 0, 589825, 196608, 0, 589826, 196608, 0, 589827, 196608, 0, 589828, 196608, 0, 589829, 196608, 0, 589830, 196608, 0, 589831, 196608, 0, 589832, 196608, 0, 589833, 196608, 0, 589834, 196608, 0, 589835, 196608, 0, 589836, 196608, 0, 589837, 196608, 0, 589838, 196608, 0, 589839, 196608, 0, 0, 196608, 0, 1, 196608, 0, 2, 196608, 0, 3, 196608, 0, 4, 196608, 0, 5, 196608, 0, 6, 196608, 0, 7, 196608, 0, 8, 196608, 0, 9, 196608, 0, 10, 196608, 0, 11, 196608, 0, 12, 196608, 0, 13, 196608, 0, 14, 196608, 0, 15, 196608, 0, 196608, 196608, 0, 196609, 196608, 0, 196610, 196608, 0, 196611, 196608, 0, 196614, 196608, 0, 196615, 196608, 0, 196616, 196608, 0, 196617, 196608, 0, 196618, 196608, 0, 196619, 196608, 0, 196620, 196608, 0, 196621, 196608, 0, 196622, 196608, 0, 196623, 196608, 0, 16, 196608, 0, 589840, 196608, 0, 17, 196608, 0, 589841, 196608, 0, 18, 196608, 0, 589842, 196608, 0, 19, 196608, 0, 589843, 196608, 0, 20, 196608, 0, 589844, 196608, 0, 21, 196608, 0, 589845, 196608, 0, 22, 196608, 0, 589846, 196608, 0, 23, 196608, 0, 589847, 196608, 0, 24, 196608, 0, 589848, 196608, 0, 25, 196608, 0, 589849, 196608, 0, 26, 196608, 0, 589850, 196608, 0, 27, 196608, 0, 589851, 196608, 0, 28, 196608, 0, 589852, 196608, 0, 29, 196608, 0, 589853, 196608, 0, 30, 196608, 0, 589854, 196608, 0, 31, 196608, 0, 589855, 196608, 0, 589856, 196608, 0, 589857, 196608, 0, 589858, 196608, 0, 589859, 196608, 0, 589860, 196608, 0, 589861, 196608, 0, 589862, 196608, 0, 589863, 196608, 0, 589864, 196608, 0, 589865, 196608, 0, 589866, 196608, 0, 589867, 196608, 0, 589868, 196608, 0, 589869, 196608, 0, 589870, 196608, 0, 589871, 196608, 0, 196640, 196608, 0, 196641, 196608, 0, 196642, 196608, 0, 196643, 196608, 0, 196644, 196608, 0, 196645, 196608, 0, 196646, 196608, 0, 196647, 196608, 0, 196648, 196608, 0, 196649, 196608, 0, 196652, 196608, 0, 196653, 196608, 0, 196654, 196608, 0, 196655, 196608, 0, 32, 196608, 0, 33, 196608, 0, 34, 196608, 0, 35, 196608, 0, 36, 196608, 0, 37, 196608, 0, 38, 196608, 0, 39, 196608, 0, 40, 196608, 0, 41, 196608, 0, 42, 196608, 0, 43, 196608, 0, 44, 196608, 0, 45, 196608, 0, 46, 196608, 0, 47, 196608, 0, 65542, 196608, 0, 131078, 196608, 0, 65577, 196608, 0, 131113, 196608, 0, 196631, 196608, 0, 196632, 196608, 0)
 layer_3/name = "Slopes"
 layer_3/enabled = true
 layer_3/modulate = Color(0.701961, 0.215686, 0.105882, 1)
@@ -61,24 +62,18 @@ position = Vector2(16, 64)
 [node name="Entrance 1" type="Node2D" parent="."]
 position = Vector2(1520, 64)
 
-[node name="Warp 0" parent="." node_paths=PackedStringArray("room_origin", "room_destination") instance=ExtResource("3_7qxd4")]
+[node name="Warp 0" parent="." node_paths=PackedStringArray("room_origin", "room_destination") instance=ExtResource("3_cpfkm")]
 position = Vector2(-48, 64)
 room_origin = NodePath("..")
 room_destination = NodePath("..")
 room_entrance_index = 1
 
-[node name="Warp 1" parent="." node_paths=PackedStringArray("room_origin", "room_destination") instance=ExtResource("3_7qxd4")]
+[node name="Warp 1" parent="." node_paths=PackedStringArray("room_origin", "room_destination") instance=ExtResource("3_cpfkm")]
 position = Vector2(1584, 64)
 room_origin = NodePath("..")
 room_destination = NodePath("..")
 
-[node name="RedDragoon" parent="." instance=ExtResource("4_22i53")]
-position = Vector2(480, 64)
-
-[node name="RedDragoon2" parent="." instance=ExtResource("4_22i53")]
-position = Vector2(1056, 64)
-
-[node name="TrainHazard" parent="." node_paths=PackedStringArray("left_start_point", "right_start_point") instance=ExtResource("5_482ay")]
+[node name="TrainHazard" parent="." node_paths=PackedStringArray("left_start_point", "right_start_point") instance=ExtResource("4_mu640")]
 position = Vector2(-32, 288)
 left_start_point = NodePath("../TrainStartPointL")
 right_start_point = NodePath("../TrainStartPointR")
@@ -89,55 +84,81 @@ position = Vector2(-32, 288)
 [node name="TrainStartPointR" type="Node2D" parent="."]
 position = Vector2(1568, 288)
 
-[node name="Spikes" type="Node2D" parent="."]
-
-[node name="FloorSpikes" parent="Spikes" instance=ExtResource("6_vstpq")]
-position = Vector2(192, 48)
-floor_length = 4
-
-[node name="FloorSpikes2" parent="Spikes" instance=ExtResource("6_vstpq")]
-position = Vector2(592, 48)
-floor_length = 5
-
-[node name="FloorSpikes3" parent="Spikes" instance=ExtResource("6_vstpq")]
-position = Vector2(896, 80)
-floor_length = 6
-
-[node name="FloorSpikes4" parent="Spikes" instance=ExtResource("6_vstpq")]
-position = Vector2(1344, 48)
-floor_length = 4
-
 [node name="Fragments" type="Node2D" parent="."]
 
-[node name="MedalFragment" parent="Fragments" instance=ExtResource("7_1xyjw")]
-position = Vector2(752, 208)
+[node name="MedalFragment" parent="Fragments" instance=ExtResource("8_facdp")]
+position = Vector2(400, 80)
 
-[node name="MedalFragment2" parent="Fragments" instance=ExtResource("7_1xyjw")]
-position = Vector2(784, 176)
+[node name="MedalFragment2" parent="Fragments" instance=ExtResource("8_facdp")]
+position = Vector2(368, 48)
 
-[node name="MedalFragment3" parent="Fragments" instance=ExtResource("7_1xyjw")]
-position = Vector2(752, 144)
+[node name="MedalFragment3" parent="Fragments" instance=ExtResource("8_facdp")]
+position = Vector2(336, 80)
 
-[node name="MedalFragment4" parent="Fragments" instance=ExtResource("7_1xyjw")]
-position = Vector2(784, 112)
+[node name="MedalFragment4" parent="Fragments" instance=ExtResource("8_facdp")]
+position = Vector2(304, 48)
 
-[node name="MedalFragment5" parent="Fragments" instance=ExtResource("7_1xyjw")]
-position = Vector2(816, 48)
+[node name="MedalFragment5" parent="Fragments" instance=ExtResource("8_facdp")]
+position = Vector2(272, 80)
 
-[node name="MedalFragment6" parent="Fragments" instance=ExtResource("7_1xyjw")]
-position = Vector2(848, 80)
+[node name="MedalFragment6" parent="Fragments" instance=ExtResource("8_facdp")]
+position = Vector2(240, 48)
 
-[node name="MedalFragment7" parent="Fragments" instance=ExtResource("7_1xyjw")]
-position = Vector2(880, 48)
+[node name="MedalFragment7" parent="Fragments" instance=ExtResource("8_facdp")]
+position = Vector2(1136, 80)
 
-[node name="MedalFragment8" parent="Fragments" instance=ExtResource("7_1xyjw")]
-position = Vector2(912, 80)
+[node name="MedalFragment8" parent="Fragments" instance=ExtResource("8_facdp")]
+position = Vector2(1168, 48)
 
-[node name="MedalFragment9" parent="Fragments" instance=ExtResource("7_1xyjw")]
-position = Vector2(944, 48)
+[node name="MedalFragment9" parent="Fragments" instance=ExtResource("8_facdp")]
+position = Vector2(1200, 80)
 
-[node name="MedalFragment10" parent="Fragments" instance=ExtResource("7_1xyjw")]
-position = Vector2(976, 80)
+[node name="MedalFragment10" parent="Fragments" instance=ExtResource("8_facdp")]
+position = Vector2(1232, 48)
+
+[node name="MedalFragment11" parent="Fragments" instance=ExtResource("8_facdp")]
+position = Vector2(1264, 80)
+
+[node name="MedalFragment12" parent="Fragments" instance=ExtResource("8_facdp")]
+position = Vector2(1296, 48)
+
+[node name="Blocks" type="Node2D" parent="."]
+
+[node name="BreakableBlock" parent="Blocks" instance=ExtResource("4_6qpf4")]
+position = Vector2(160, 64)
+
+[node name="BreakableBlock2" parent="Blocks" instance=ExtResource("4_6qpf4")]
+position = Vector2(512, 64)
+
+[node name="BreakableBlock3" parent="Blocks" instance=ExtResource("4_6qpf4")]
+position = Vector2(1024, 64)
+
+[node name="BreakableBlock4" parent="Blocks" instance=ExtResource("4_6qpf4")]
+position = Vector2(1376, 64)
+
+[node name="Enemies" type="Node2D" parent="."]
+
+[node name="YellowDragoon" parent="Enemies" instance=ExtResource("6_2hx8y")]
+position = Vector2(448, 64)
+
+[node name="Enemy" parent="Enemies/YellowDragoon" index="0"]
+enable_wings = true
+
+[node name="YellowDragoon2" parent="Enemies" instance=ExtResource("6_2hx8y")]
+position = Vector2(1088, 64)
+
+[node name="Enemy" parent="Enemies/YellowDragoon2" index="0"]
+enable_wings = true
+
+[node name="GreenDragoon" parent="Enemies" instance=ExtResource("7_2auy1")]
+position = Vector2(768, 64)
+
+[node name="Enemy" parent="Enemies/GreenDragoon" index="0"]
+enable_wings = true
 
 [connection signal="room_activated" from="." to="TrainHazard" method="initialize_train"]
 [connection signal="room_deactivated" from="." to="TrainHazard" method="disable_train"]
+
+[editable path="Enemies/YellowDragoon"]
+[editable path="Enemies/YellowDragoon2"]
+[editable path="Enemies/GreenDragoon"]
