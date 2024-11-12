@@ -174,6 +174,10 @@ func update_form_change_timer(delta : float):
 	if (current_form_change_timer > 0):
 		current_form_change_timer = move_toward(current_form_change_timer, 0, delta)
 
+func stop_form_change_timer():
+	if (is_changing_form()):
+		current_form_change_timer = 0
+
 func start_form_change_cooldown_timer():
 	if (!is_form_change_cooldown_active()):
 		current_form_change_cooldown_timer = form_change_cooldown_time

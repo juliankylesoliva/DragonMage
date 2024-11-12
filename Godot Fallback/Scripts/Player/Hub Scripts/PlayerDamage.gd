@@ -75,10 +75,12 @@ func take_damage(knockback : int = 0):
 		damage_taken += 1
 		if (hub.temper.is_form_locked()):
 			is_player_defeated = true
+			hub.form.stop_form_change_timer()
 			defeated.emit()
 		else:
 			knockback_direction = knockback
 			current_hitstun_timer = hitstun_time
+			hub.form.stop_form_change_timer()
 			hub.fairy.cut_magic_in_half()
 			hub.stomp.reset_stomp_combo()
 			hub.jumping.landing_reset()
@@ -96,9 +98,11 @@ func do_damage_warp():
 		damage_taken += 1
 		if (hub.temper.is_form_locked()):
 			is_player_defeated = true
+			hub.form.stop_form_change_timer()
 			defeated.emit()
 		else:
 			is_damage_warping = true
+			hub.form.stop_form_change_timer()
 			hub.fairy.cut_magic_in_half()
 			hub.stomp.reset_stomp_combo()
 			hub.jumping.landing_reset()
@@ -141,7 +145,7 @@ func can_take_damage():
 	var magic_blast : MagicBlastAttack = (hub.attacks.get_attack_by_name("MagicBlast") as MagicBlastAttack)
 	var fire_tackle : FireTackleAttack = (hub.attacks.get_attack_by_name("FireTackle") as FireTackleAttack)
 	var dodge : DodgeAttack = (hub.attacks.get_attack_by_name("Dodge") as DodgeAttack)
-	return (!is_damage_invulnerability_active() and !fairy_guard_attack.is_invincibility_active and !fairy_guard_attack.did_player_parry and !magic_blast.is_blast_jumping and fire_tackle.current_attack_state != Attack.AttackState.ACTIVE and dodge.current_attack_state != Attack.AttackState.ACTIVE and state_name != "FormChanging" and state_name != "Damaged")
+	return (!is_damage_invulnerability_active() and !fairy_guard_attack.is_invincibility_active and !fairy_guard_attack.did_player_parry and !magic_blast.is_blast_jumping and fire_tackle.current_attack_state != Attack.AttackState.ACTIVE and dodge.current_attack_state != Attack.AttackState.ACTIVE and state_name != "Damaged")
 
 func update_hitstun_timer(delta : float):
 	if (is_player_damaged()):

@@ -5,7 +5,7 @@ class_name FormChangingState
 var prev_velocity : Vector2 = Vector2.ZERO
 
 func state_process(_delta):
-	if (!hub.form.is_changing_form()):
+	if (!hub.damage.is_player_damaged() and !hub.form.is_changing_form()):
 		var prev_state : String = state_machine.previous_state.name
 		match prev_state:
 			"Gliding":
@@ -39,6 +39,10 @@ func state_process(_delta):
 					set_next_state(state_machine.get_state_by_name("Standing"))
 			_:
 				set_next_state(state_machine.get_state_by_name(prev_state))
+	elif (hub.damage.is_player_defeated):
+		set_next_state(state_machine.get_state_by_name("Defeated"))
+	elif (hub.damage.is_player_damaged()):
+		set_next_state(state_machine.get_state_by_name("Damaged"))
 	else:
 		hub.char_body.velocity = Vector2.ZERO
 
@@ -51,15 +55,16 @@ func on_enter():
 	hub.form.start_form_change_timer()
 
 func on_exit():
-	if (prev_velocity.y < 0):
-		hub.jumping.switch_to_rising_gravity()
-	else:
-		hub.jumping.switch_to_falling_gravity()
-	
-	if (-prev_velocity.y > hub.jumping.initial_jump_velocity):
-		prev_velocity.y = -hub.jumping.initial_jump_velocity
-	
-	hub.char_body.velocity = prev_velocity
+	if (!hub.damage.is_player_damaged() and !hub.damage.is_player_defeated):
+		if (prev_velocity.y < 0):
+			hub.jumping.switch_to_rising_gravity()
+		else:
+			hub.jumping.switch_to_falling_gravity()
+		
+		if (-prev_velocity.y > hub.jumping.initial_jump_velocity):
+			prev_velocity.y = -hub.jumping.initial_jump_velocity
+		
+		hub.char_body.velocity = prev_velocity
 	hub.form.start_form_change_cooldown_timer()
 	if (hub.temper.is_form_locked()):
 		hub.temper.activate_temper_rebound_timer()

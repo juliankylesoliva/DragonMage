@@ -27,7 +27,7 @@ func on_enter():
 	if (hub.movement.is_crouching and !hub.collisions.is_in_ceiling_when_uncrouched()):
 		hub.movement.reset_crouch_state()
 	if (!hub.temper.is_form_locked()):
-		hub.temper.change_temper_by(hub.damage.mage_temper_damage if hub.form.current_mode == PlayerForm.CharacterMode.MAGE else hub.damage.dragon_temper_damage)
+		hub.temper.change_temper_by((hub.damage.mage_temper_damage if hub.form.current_mode == PlayerForm.CharacterMode.MAGE else hub.damage.dragon_temper_damage) * (1 if state_machine.previous_state.name != "FormChanging" else hub.temper.total_segments))
 	hub.movement.reset_current_horizontal_velocity()
 	hub.buffers.reset_speed_preservation_buffer()
 	hub.jumping.reset_super_jump_timers()

@@ -45,7 +45,7 @@ func do_stomp_jump():
 		hub.jumping.start_ground_jump()
 		hub.fairy.change_current_magic_by(base_magic_gain * pow(stomp_combo_multiplier, current_stomp_combo))
 		increase_stomp_combo()
-	elif (can_do_rising_stomp() and stomp_hitbox.enemy_to_stomp.defeat_enemy(stomp_hitbox.damage_type)):
+	elif (stomp_hitbox.enemy_to_stomp.defeat_enemy(stomp_hitbox.damage_type)):
 		EffectFactory.get_effect("StompImpact", hub.raycast_dm.global_position)
 		if (hub.jumping.is_fast_falling):
 			hub.sprite_trail.deactivate_trail()

@@ -109,16 +109,16 @@ position = Vector2(240, -208)
 position = Vector2(272, -208)
 
 [node name="MedalFragment9" parent="Fragments" instance=ExtResource("14_0v18l")]
-position = Vector2(144, -336)
+position = Vector2(112, -336)
 
 [node name="MedalFragment10" parent="Fragments" instance=ExtResource("14_0v18l")]
-position = Vector2(144, -368)
+position = Vector2(112, -368)
 
 [node name="MedalFragment11" parent="Fragments" instance=ExtResource("14_0v18l")]
-position = Vector2(144, -400)
+position = Vector2(112, -400)
 
 [node name="MedalFragment12" parent="Fragments" instance=ExtResource("14_0v18l")]
-position = Vector2(144, -432)
+position = Vector2(112, -432)
 
 [node name="ReinforcedMagicBlock" parent="." instance=ExtResource("3_8xsje")]
 position = Vector2(256, 32)

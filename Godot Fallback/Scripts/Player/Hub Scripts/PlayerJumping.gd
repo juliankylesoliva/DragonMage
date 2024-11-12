@@ -184,7 +184,7 @@ var current_super_jump_retention_timer : float = 0
 
 @export var fast_fall_slope_boost_multiplier : float = 0
 
-var is_fast_falling : float = false
+var is_fast_falling : bool = false
 
 var base_gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 var current_gravity_scale : float = 1
