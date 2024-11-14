@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://brtb2drxdsqje"]
+[gd_scene load_steps=10 format=3 uid="uid://brtb2drxdsqje"]
 
 [ext_resource type="Script" path="res://Scripts/Utility Scripts/Room.gd" id="1_hjs8t"]
 [ext_resource type="TileSet" uid="uid://dhwi7i1loa2pd" path="res://Sprites/Tiles/Test Tiles/TestTileSet.tres" id="2_1o4y0"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://curi6w4ex7jou" path="res://Scene Objects/Enemies/YellowDragoon.tscn" id="6_2hx8y"]
 [ext_resource type="PackedScene" uid="uid://clfqwsy4byrkf" path="res://Scene Objects/Enemies/GreenDragoon.tscn" id="7_2auy1"]
 [ext_resource type="PackedScene" uid="uid://dfkmxoba64spw" path="res://Scene Objects/Objects/MedalFragment.tscn" id="8_facdp"]
+[ext_resource type="PackedScene" uid="uid://b2a0ttqvejk51" path="res://Scene Objects/Objects/TemperDragonFruit.tscn" id="9_3evig"]
 
 [node name="CH1_LV4_R3" type="Node2D" node_paths=PackedStringArray("tilemap_list", "room_entrances", "enemy_nodes", "medal_fragments")]
 script = ExtResource("1_hjs8t")
@@ -155,6 +156,9 @@ position = Vector2(768, 64)
 
 [node name="Enemy" parent="Enemies/GreenDragoon" index="0"]
 enable_wings = true
+
+[node name="TemperDragonFruit" parent="." instance=ExtResource("9_3evig")]
+position = Vector2(768, 64)
 
 [connection signal="room_activated" from="." to="TrainHazard" method="initialize_train"]
 [connection signal="room_deactivated" from="." to="TrainHazard" method="disable_train"]

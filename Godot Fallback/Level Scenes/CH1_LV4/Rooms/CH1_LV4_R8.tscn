@@ -1,0 +1,170 @@
+[gd_scene load_steps=11 format=3 uid="uid://b58wu02fltsa0"]
+
+[ext_resource type="Script" path="res://Scripts/Utility Scripts/Room.gd" id="1_jruwx"]
+[ext_resource type="TileSet" uid="uid://dhwi7i1loa2pd" path="res://Sprites/Tiles/Test Tiles/TestTileSet.tres" id="2_xkqdg"]
+[ext_resource type="PackedScene" uid="uid://dqbo0wu6hm8lj" path="res://Scene Objects/Objects/WarpTrigger.tscn" id="3_8i6yl"]
+[ext_resource type="PackedScene" uid="uid://dcs7w117uukcd" path="res://Scene Objects/Objects/BreakableMagicBlock.tscn" id="4_vsdln"]
+[ext_resource type="PackedScene" uid="uid://dgtmsbsmeieyh" path="res://Scene Objects/Objects/ReinforcedMagicBlock.tscn" id="5_qwhxo"]
+[ext_resource type="PackedScene" uid="uid://cokv5pygwyda" path="res://Scene Objects/Objects/BreakableFireBlock.tscn" id="6_h343a"]
+[ext_resource type="PackedScene" uid="uid://dck0mc2tc82kx" path="res://Scene Objects/Objects/ReinforcedFireBlock.tscn" id="7_prhpw"]
+[ext_resource type="PackedScene" uid="uid://c4cg3xgbq7eyh" path="res://Scene Objects/Obstacles/FloorSpikes.tscn" id="8_fw5ux"]
+[ext_resource type="PackedScene" uid="uid://dfkmxoba64spw" path="res://Scene Objects/Objects/MedalFragment.tscn" id="9_rlllp"]
+[ext_resource type="PackedScene" uid="uid://b2a0ttqvejk51" path="res://Scene Objects/Objects/TemperDragonFruit.tscn" id="10_roxt0"]
+
+[node name="CH1_LV4_R8" type="Node2D" node_paths=PackedStringArray("tilemap_list", "room_entrances", "medal_fragments")]
+script = ExtResource("1_jruwx")
+tilemap_list = [NodePath("BoundaryCollisionTilemap"), NodePath("LevelCollisionTilemap")]
+right_camera_limit = 1536
+room_entrances = [NodePath("Entrance 0"), NodePath("Entrance 1")]
+medal_fragments = [NodePath("Fragments/MedalFragment"), NodePath("Fragments/MedalFragment2"), NodePath("Fragments/MedalFragment3"), NodePath("Fragments/MedalFragment4"), NodePath("Fragments/MedalFragment5"), NodePath("Fragments/MedalFragment6"), NodePath("Fragments/MedalFragment7"), NodePath("Fragments/MedalFragment8"), NodePath("Fragments/MedalFragment9"), NodePath("Fragments/MedalFragment10"), NodePath("Fragments/MedalFragment11"), NodePath("Fragments/MedalFragment12")]
+
+[node name="BoundaryCollisionTilemap" type="TileMap" parent="."]
+z_index = 4
+tile_set = ExtResource("2_xkqdg")
+cell_quadrant_size = 32
+format = 2
+layer_0/name = "Intangible"
+layer_0/z_index = -1
+layer_0/tile_data = PackedInt32Array(65533, 196608, 0, 131069, 196608, 0, 196605, 196608, 0, 262141, 196608, 0, 65534, 196608, 0, 262142, 196608, 0, 65535, 196608, 0, 262143, 196608, 0, 48, 196608, 0, 196656, 196608, 0, 49, 196608, 0, 196657, 196608, 0, 50, 196608, 0, 65586, 196608, 0, 131122, 196608, 0, 196658, 196608, 0)
+metadata/Tag = "IntangibleWall"
+
+[node name="LevelCollisionTilemap" type="TileMap" parent="."]
+visibility_layer = 4
+z_index = 3
+tile_set = ExtResource("2_xkqdg")
+cell_quadrant_size = 32
+format = 2
+layer_0/name = "Decoration"
+layer_1/name = "Background"
+layer_1/enabled = true
+layer_1/modulate = Color(1, 1, 1, 1)
+layer_1/y_sort_enabled = false
+layer_1/y_sort_origin = 0
+layer_1/z_index = -1
+layer_1/tile_data = PackedInt32Array()
+layer_2/name = "Ground"
+layer_2/enabled = true
+layer_2/modulate = Color(0.0745098, 0.113725, 0.301961, 1)
+layer_2/y_sort_enabled = false
+layer_2/y_sort_origin = 0
+layer_2/z_index = -1
+layer_2/tile_data = PackedInt32Array(524288, 196608, 0, 589824, 196608, 0, 524289, 196608, 0, 589825, 196608, 0, 524290, 196608, 0, 589826, 196608, 0, 524291, 196608, 0, 589827, 196608, 0, 524292, 196608, 0, 589828, 196608, 0, 524293, 196608, 0, 589829, 196608, 0, 524294, 196608, 0, 589830, 196608, 0, 524295, 196608, 0, 589831, 196608, 0, 524296, 196608, 0, 589832, 196608, 0, 524297, 196608, 0, 589833, 196608, 0, 524298, 196608, 0, 589834, 196608, 0, 524299, 196608, 0, 589835, 196608, 0, 524300, 196608, 0, 589836, 196608, 0, 524301, 196608, 0, 589837, 196608, 0, 524302, 196608, 0, 589838, 196608, 0, 524303, 196608, 0, 589839, 196608, 0, 0, 196608, 0, 1, 196608, 0, 2, 196608, 0, 3, 196608, 0, 4, 196608, 0, 5, 196608, 0, 6, 196608, 0, 7, 196608, 0, 8, 196608, 0, 9, 196608, 0, 10, 196608, 0, 11, 196608, 0, 12, 196608, 0, 13, 196608, 0, 14, 196608, 0, 15, 196608, 0, 196608, 196608, 0, 262144, 196608, 0, 327680, 196608, 0, 393216, 196608, 0, 458752, 196608, 0, 196609, 196608, 0, 262145, 196608, 0, 327681, 196608, 0, 393217, 196608, 0, 458753, 196608, 0, 16, 196608, 0, 524304, 196608, 0, 589840, 196608, 0, 17, 196608, 0, 524305, 196608, 0, 589841, 196608, 0, 18, 196608, 0, 524306, 196608, 0, 589842, 196608, 0, 19, 196608, 0, 524307, 196608, 0, 589843, 196608, 0, 20, 196608, 0, 524308, 196608, 0, 589844, 196608, 0, 21, 196608, 0, 524309, 196608, 0, 589845, 196608, 0, 22, 196608, 0, 524310, 196608, 0, 589846, 196608, 0, 23, 196608, 0, 524311, 196608, 0, 589847, 196608, 0, 24, 196608, 0, 524312, 196608, 0, 589848, 196608, 0, 25, 196608, 0, 524313, 196608, 0, 589849, 196608, 0, 26, 196608, 0, 524314, 196608, 0, 589850, 196608, 0, 27, 196608, 0, 524315, 196608, 0, 589851, 196608, 0, 28, 196608, 0, 524316, 196608, 0, 589852, 196608, 0, 29, 196608, 0, 524317, 196608, 0, 589853, 196608, 0, 30, 196608, 0, 524318, 196608, 0, 589854, 196608, 0, 31, 196608, 0, 524319, 196608, 0, 589855, 196608, 0, 33, 196608, 0, 34, 196608, 0, 35, 196608, 0, 36, 196608, 0, 37, 196608, 0, 38, 196608, 0, 39, 196608, 0, 40, 196608, 0, 41, 196608, 0, 42, 196608, 0, 43, 196608, 0, 44, 196608, 0, 45, 196608, 0, 46, 196608, 0, 47, 196608, 0, 524320, 196608, 0, 589856, 196608, 0, 524321, 196608, 0, 589857, 196608, 0, 524322, 196608, 0, 589858, 196608, 0, 524323, 196608, 0, 589859, 196608, 0, 524324, 196608, 0, 589860, 196608, 0, 524325, 196608, 0, 589861, 196608, 0, 524326, 196608, 0, 589862, 196608, 0, 524327, 196608, 0, 589863, 196608, 0, 524328, 196608, 0, 589864, 196608, 0, 524329, 196608, 0, 589865, 196608, 0, 524330, 196608, 0, 589866, 196608, 0, 524331, 196608, 0, 589867, 196608, 0, 524332, 196608, 0, 589868, 196608, 0, 524333, 196608, 0, 589869, 196608, 0, 524334, 196608, 0, 589870, 196608, 0, 524335, 196608, 0, 589871, 196608, 0, 196654, 196608, 0, 262190, 196608, 0, 327726, 196608, 0, 393262, 196608, 0, 458798, 196608, 0, 196655, 196608, 0, 262191, 196608, 0, 327727, 196608, 0, 393263, 196608, 0, 458799, 196608, 0, 393232, 196608, 0, 458768, 196608, 0, 393233, 196608, 0, 458769, 196608, 0, 65552, 196608, 0, 65553, 196608, 0, 327682, 196608, 0, 393218, 196608, 0, 458754, 196608, 0, 327683, 196608, 0, 393219, 196608, 0, 458755, 196608, 0, 262146, 196608, 0, 327684, 196608, 0, 393220, 196608, 0, 458756, 196608, 0, 65550, 196608, 0, 65551, 196608, 0, 65554, 196608, 0, 327712, 196608, 0, 196632, 196608, 0, 65558, 196608, 0, 262168, 196608, 0, 327704, 196608, 0, 262172, 196608, 0, 327708, 196608, 0, 196636, 196608, 0, 196630, 196608, 0, 196631, 196608, 0, 262167, 196608, 0, 262166, 196608, 0, 327703, 65536, 3, 131094, 196608, 0, 327713, 196608, 0, 196637, 196608, 0, 327714, 196608, 0, 327715, 196608, 0, 196638, 196608, 0, 196639, 196608, 0, 262175, 196608, 0, 327716, 196608, 0, 327717, 196608, 0, 262176, 196608, 0, 262177, 196608, 0, 65559, 196608, 0, 131095, 196608, 0, 196633, 196608, 0, 262169, 196608, 0, 327705, 196608, 0, 327711, 196608, 0, 262173, 196608, 0, 327709, 196608, 0, 262174, 196608, 0, 327710, 196608, 0, 262147, 196608, 0, 327685, 196608, 0, 393221, 196608, 0, 458757, 196608, 0, 327724, 196608, 0, 393260, 196608, 0, 458796, 196608, 0, 327725, 196608, 0, 393261, 196608, 0, 458797, 196608, 0, 262188, 196608, 0, 262189, 196608, 0, 327722, 196608, 0, 393258, 196608, 0, 458794, 196608, 0, 327723, 196608, 0, 393259, 196608, 0, 458795, 196608, 0, 32, 196608, 0, 327718, 196608, 0, 327719, 196608, 0, 262183, 196608, 0, 196647, 196608, 0, 131111, 196608, 0, 65575, 196608, 0, 131104, 196608, 0, 131105, 196608, 0, 196641, 196608, 0, 196640, 196608, 0, 327688, 196608, 0, 262152, 196608, 0, 196616, 196608, 0, 131080, 196608, 0, 65544, 196608, 0, 65545, 196608, 0, 131081, 196608, 0, 196617, 196608, 0, 262153, 196608, 0, 327689, 196608, 0, 65549, 196608, 0, 65548, 196608, 0, 196619, 196608, 0, 262154, 196608, 0, 196618, 196608, 0, 131082, 196608, 0, 65546, 196608, 0, 65547, 196608, 0, 131083, 196608, 0, 65557, 196608, 0, 131084, 65536, 1, 327690, 196608, 0, 327691, 196608, 0, 262155, 196608, 0, 65543, 0, 1, 65555, 196608, 0, 65556, 196608, 0, 131093, 0, 1, 327702, 0, 3, 393254, 196608, 0, 393255, 196608, 0, 393252, 196608, 0, 393253, 196608, 0)
+layer_3/name = "Slopes"
+layer_3/enabled = true
+layer_3/modulate = Color(0.701961, 0.215686, 0.105882, 1)
+layer_3/y_sort_enabled = false
+layer_3/y_sort_origin = 0
+layer_3/z_index = -1
+layer_3/tile_data = PackedInt32Array()
+
+[node name="Entrance 0" type="Node2D" parent="."]
+position = Vector2(16, 64)
+
+[node name="Entrance 1" type="Node2D" parent="."]
+position = Vector2(1520, 64)
+
+[node name="Warp 0" parent="." node_paths=PackedStringArray("room_origin", "room_destination") instance=ExtResource("3_8i6yl")]
+position = Vector2(-48, 64)
+room_origin = NodePath("..")
+room_destination = NodePath("..")
+room_entrance_index = 1
+
+[node name="Warp 1" parent="." node_paths=PackedStringArray("room_origin", "room_destination") instance=ExtResource("3_8i6yl")]
+position = Vector2(1584, 64)
+room_origin = NodePath("..")
+room_destination = NodePath("..")
+
+[node name="Blocks" type="Node2D" parent="."]
+
+[node name="BreakableMagicBlock" parent="Blocks" instance=ExtResource("4_vsdln")]
+position = Vector2(352, 224)
+
+[node name="ReinforcedMagicBlock" parent="Blocks" instance=ExtResource("5_qwhxo")]
+position = Vector2(544, 96)
+
+[node name="ReinforcedMagicBlock2" parent="Blocks" instance=ExtResource("5_qwhxo")]
+position = Vector2(544, 160)
+
+[node name="BreakableFireBlock" parent="Blocks" instance=ExtResource("6_h343a")]
+position = Vector2(928, 224)
+
+[node name="ReinforcedFireBlock" parent="Blocks" instance=ExtResource("7_prhpw")]
+position = Vector2(1056, 224)
+
+[node name="ReinforcedFireBlock2" parent="Blocks" instance=ExtResource("7_prhpw")]
+position = Vector2(1120, 224)
+
+[node name="ReinforcedMagicBlock3" parent="Blocks" instance=ExtResource("5_qwhxo")]
+position = Vector2(864, 128)
+
+[node name="ReinforcedFireBlock3" parent="Blocks" instance=ExtResource("7_prhpw")]
+position = Vector2(992, 64)
+
+[node name="Spikes" type="Node2D" parent="."]
+
+[node name="FloorSpikes" parent="Spikes" instance=ExtResource("8_fw5ux")]
+position = Vector2(352, 240)
+floor_length = 10
+
+[node name="FloorSpikes2" parent="Spikes" instance=ExtResource("8_fw5ux")]
+position = Vector2(768, 240)
+floor_length = 12
+
+[node name="FloorSpikes3" parent="Spikes" instance=ExtResource("8_fw5ux")]
+position = Vector2(1184, 240)
+floor_length = 10
+
+[node name="FloorSpikes4" parent="Spikes" instance=ExtResource("8_fw5ux")]
+position = Vector2(800, 80)
+floor_length = 2
+
+[node name="FloorSpikes5" parent="Spikes" instance=ExtResource("8_fw5ux")]
+position = Vector2(1168, 144)
+floor_length = 5
+
+[node name="Fragments" type="Node2D" parent="."]
+
+[node name="MedalFragment" parent="Fragments" instance=ExtResource("9_rlllp")]
+position = Vector2(784, 80)
+
+[node name="MedalFragment2" parent="Fragments" instance=ExtResource("9_rlllp")]
+position = Vector2(816, 80)
+
+[node name="MedalFragment3" parent="Fragments" instance=ExtResource("9_rlllp")]
+position = Vector2(912, 80)
+
+[node name="MedalFragment4" parent="Fragments" instance=ExtResource("9_rlllp")]
+position = Vector2(944, 80)
+
+[node name="MedalFragment5" parent="Fragments" instance=ExtResource("9_rlllp")]
+position = Vector2(1104, 80)
+
+[node name="MedalFragment6" parent="Fragments" instance=ExtResource("9_rlllp")]
+position = Vector2(1136, 112)
+
+[node name="MedalFragment7" parent="Fragments" instance=ExtResource("9_rlllp")]
+position = Vector2(1104, 144)
+
+[node name="MedalFragment8" parent="Fragments" instance=ExtResource("9_rlllp")]
+position = Vector2(1168, 80)
+
+[node name="MedalFragment9" parent="Fragments" instance=ExtResource("9_rlllp")]
+position = Vector2(1200, 112)
+
+[node name="MedalFragment10" parent="Fragments" instance=ExtResource("9_rlllp")]
+position = Vector2(1168, 144)
+
+[node name="MedalFragment11" parent="Fragments" instance=ExtResource("9_rlllp")]
+position = Vector2(1232, 80)
+
+[node name="MedalFragment12" parent="Fragments" instance=ExtResource("9_rlllp")]
+position = Vector2(1232, 144)
+
+[node name="TemperDragonFruit" parent="." instance=ExtResource("10_roxt0")]
+position = Vector2(224, 96)
+enable_cycling = false
+
+[node name="TemperDragonFruit2" parent="." instance=ExtResource("10_roxt0")]
+position = Vector2(672, 128)
+starting_state = 1
+enable_cycling = false
