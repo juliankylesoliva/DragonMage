@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://bsyunex10456i"]
+[gd_scene load_steps=25 format=3 uid="uid://bsyunex10456i"]
 
 [ext_resource type="Script" path="res://Scripts/Utility Scripts/Level.gd" id="1_jlbtb"]
 [ext_resource type="PackedScene" uid="uid://d0ff35cm57xb7" path="res://Scene Objects/Effects/DroppedFragment.tscn" id="2_4gqwv"]
@@ -20,6 +20,8 @@
 [ext_resource type="PackedScene" uid="uid://b58wu02fltsa0" path="res://Level Scenes/CH1_LV4/Rooms/CH1_LV4_R8.tscn" id="11_hignw"]
 [ext_resource type="PackedScene" uid="uid://qechskr774vw" path="res://Level Scenes/CH1_LV4/Rooms/CH1_LV4_R9.tscn" id="11_p0p2b"]
 [ext_resource type="PackedScene" uid="uid://btq4qla5fyq0n" path="res://Scene Objects/Misc/LevelMusicPlayer.tscn" id="12_17q7d"]
+[ext_resource type="PackedScene" uid="uid://bexfy4ahg75dr" path="res://Level Scenes/CH1_LV4/Rooms/CH1_LV4_R11.tscn" id="13_63d4u"]
+[ext_resource type="PackedScene" uid="uid://bao6ruf6mbfuo" path="res://Level Scenes/CH1_LV4/Rooms/CH1_LV4_R10.tscn" id="13_sr7q6"]
 [ext_resource type="PackedScene" uid="uid://bjeiexqfc7oht" path="res://Scene Objects/Misc/DefeatScreen.tscn" id="13_uipql"]
 [ext_resource type="PackedScene" uid="uid://br3j4rryr8gxm" path="res://Level Scenes/CH1_LV4/Rooms/CH1_LV4_R6.tscn" id="20_xdlir"]
 
@@ -28,7 +30,7 @@ script = ExtResource("1_jlbtb")
 level_index = 7
 player_reference = NodePath("Player")
 starting_room = NodePath("CH1_LV4_R1")
-room_list = [NodePath("CH1_LV4_R1"), NodePath("CH1_LV4_R2"), NodePath("CH1_LV4_R3"), NodePath("CH1_LV4_R4"), NodePath("CH1_LV4_R5"), NodePath("CH1_LV4_R6"), NodePath("CH1_LV4_R7"), NodePath("CH1_LV4_R8"), NodePath("CH1_LV4_R9")]
+room_list = [NodePath("CH1_LV4_R1"), NodePath("CH1_LV4_R2"), NodePath("CH1_LV4_R3"), NodePath("CH1_LV4_R4"), NodePath("CH1_LV4_R5"), NodePath("CH1_LV4_R6"), NodePath("CH1_LV4_R7"), NodePath("CH1_LV4_R8"), NodePath("CH1_LV4_R9"), NodePath("CH1_LV4_R10"), NodePath("CH1_LV4_R11")]
 dropped_fragment_scene = ExtResource("2_4gqwv")
 clear_timer = NodePath("UI_Canvas/ClearTimer")
 
@@ -117,11 +119,32 @@ room_destination = NodePath("../../CH1_LV4_R7")
 [node name="Warp 1" parent="CH1_LV4_R8" index="5" node_paths=PackedStringArray("room_destination")]
 room_destination = NodePath("../../CH1_LV4_R9")
 
+[node name="Checkpoint" parent="CH1_LV4_R8" index="11" node_paths=PackedStringArray("level_origin")]
+level_origin = NodePath("../..")
+
 [node name="CH1_LV4_R9" parent="." instance=ExtResource("11_p0p2b")]
 position = Vector2(0, 1536)
 
 [node name="Warp 0" parent="CH1_LV4_R9" index="4" node_paths=PackedStringArray("room_destination")]
 room_destination = NodePath("../../CH1_LV4_R8")
+
+[node name="Warp 1" parent="CH1_LV4_R9" index="5" node_paths=PackedStringArray("room_destination")]
+room_destination = NodePath("../../CH1_LV4_R10")
+
+[node name="CH1_LV4_R10" parent="." instance=ExtResource("13_sr7q6")]
+position = Vector2(-1760, -352)
+
+[node name="Warp 0" parent="CH1_LV4_R10" index="4" node_paths=PackedStringArray("room_destination")]
+room_destination = NodePath("../../CH1_LV4_R9")
+
+[node name="Warp 1" parent="CH1_LV4_R10" index="5" node_paths=PackedStringArray("room_destination")]
+room_destination = NodePath("../../CH1_LV4_R11")
+
+[node name="CH1_LV4_R11" parent="." instance=ExtResource("13_63d4u")]
+position = Vector2(-1728, -832)
+
+[node name="Warp 0" parent="CH1_LV4_R11" index="4" node_paths=PackedStringArray("room_destination")]
+room_destination = NodePath("../../CH1_LV4_R10")
 
 [node name="UI_Canvas" type="CanvasLayer" parent="."]
 
@@ -164,8 +187,8 @@ screen_fade = NodePath("../UI_Canvas/ScreenFade")
 [connection signal="player_defeated" from="." to="UI_Canvas/TemperMeterUI" method="hide"]
 [connection signal="player_defeated" from="." to="UI_Canvas/MagicMeterUI" method="hide"]
 [connection signal="player_defeated" from="." to="UI_Canvas/FragmentCounterUI" method="hide"]
-[connection signal="player_defeated" from="." to="UI_Canvas/ClearTimer" method="stop_timer"]
 [connection signal="player_defeated" from="." to="UI_Canvas/ClearTimer" method="hide"]
+[connection signal="player_defeated" from="." to="UI_Canvas/ClearTimer" method="stop_timer"]
 [connection signal="player_defeated" from="." to="Textbox" method="hide_textbox"]
 [connection signal="player_defeated" from="." to="LevelMusicPlayer" method="stop"]
 [connection signal="player_defeated" from="." to="DefeatScreen" method="do_defeat_screen"]
@@ -192,3 +215,16 @@ screen_fade = NodePath("../UI_Canvas/ScreenFade")
 [editable path="CH1_LV4_R7/GreenDragoon2"]
 [editable path="CH1_LV4_R8"]
 [editable path="CH1_LV4_R9"]
+[editable path="CH1_LV4_R10"]
+[editable path="CH1_LV4_R10/Enemies/YellowDragoon"]
+[editable path="CH1_LV4_R10/Enemies/RedDragoon2"]
+[editable path="CH1_LV4_R10/Enemies/GreenDragoon"]
+[editable path="CH1_LV4_R10/Enemies/GreenDragoon2"]
+[editable path="CH1_LV4_R10/Enemies/RedDragoon3"]
+[editable path="CH1_LV4_R10/Enemies/GreenDragoon3"]
+[editable path="CH1_LV4_R10/Enemies/RedDragoon4"]
+[editable path="CH1_LV4_R11"]
+[editable path="CH1_LV4_R11/Enemies/GreenDragoon"]
+[editable path="CH1_LV4_R11/Enemies/GreenDragoon2"]
+[editable path="CH1_LV4_R11/Enemies/YellowDragoon"]
+[editable path="CH1_LV4_R11/Enemies/YellowDragoon2"]

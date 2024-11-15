@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://b58wu02fltsa0"]
+[gd_scene load_steps=12 format=3 uid="uid://b58wu02fltsa0"]
 
 [ext_resource type="Script" path="res://Scripts/Utility Scripts/Room.gd" id="1_jruwx"]
 [ext_resource type="TileSet" uid="uid://dhwi7i1loa2pd" path="res://Sprites/Tiles/Test Tiles/TestTileSet.tres" id="2_xkqdg"]
@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://c4cg3xgbq7eyh" path="res://Scene Objects/Obstacles/FloorSpikes.tscn" id="8_fw5ux"]
 [ext_resource type="PackedScene" uid="uid://dfkmxoba64spw" path="res://Scene Objects/Objects/MedalFragment.tscn" id="9_rlllp"]
 [ext_resource type="PackedScene" uid="uid://b2a0ttqvejk51" path="res://Scene Objects/Objects/TemperDragonFruit.tscn" id="10_roxt0"]
+[ext_resource type="PackedScene" uid="uid://vtyaphi47lrf" path="res://Scene Objects/Objects/Checkpoint.tscn" id="11_s7sep"]
 
 [node name="CH1_LV4_R8" type="Node2D" node_paths=PackedStringArray("tilemap_list", "room_entrances", "medal_fragments")]
 script = ExtResource("1_jruwx")
@@ -168,3 +169,6 @@ enable_cycling = false
 position = Vector2(672, 128)
 starting_state = 1
 enable_cycling = false
+
+[node name="Checkpoint" parent="." instance=ExtResource("11_s7sep")]
+position = Vector2(160, 128)
