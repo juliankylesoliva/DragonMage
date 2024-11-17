@@ -9,7 +9,7 @@
 [ext_resource type="Script" path="res://Scripts/Utility Scripts/Trigger.gd" id="6_x4fn3"]
 [ext_resource type="PackedScene" uid="uid://b2a0ttqvejk51" path="res://Scene Objects/Objects/TemperDragonFruit.tscn" id="7_bqbgw"]
 [ext_resource type="PackedScene" uid="uid://btq4qla5fyq0n" path="res://Scene Objects/Misc/LevelMusicPlayer.tscn" id="8_xla2b"]
-[ext_resource type="AudioStream" uid="uid://bp3471su81u8g" path="res://Music/sawsquarenoise - Boss Theme.wav" id="9_y8e2d"]
+[ext_resource type="AudioStream" uid="uid://bp3471su81u8g" path="res://Music/CH0/sawsquarenoise - Boss Theme.wav" id="9_y8e2d"]
 [ext_resource type="Texture2D" uid="uid://fkdlrh3b7i7e" path="res://Sprites/Backgrounds/0_4_BG/PrisonSecurityBossRoom.png" id="11_41a0q"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_flkat"]
