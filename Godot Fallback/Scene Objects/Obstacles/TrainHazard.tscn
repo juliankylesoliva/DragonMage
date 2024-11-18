@@ -1,32 +1,62 @@
-[gd_scene load_steps=3 format=3 uid="uid://bxbwf76suu7jl"]
+[gd_scene load_steps=4 format=3 uid="uid://bxbwf76suu7jl"]
 
 [ext_resource type="Script" path="res://Scripts/Object Scripts/TrainHazard.gd" id="1_q676f"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_jqloy"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bos6u"]
 size = Vector2(1792, 160)
 
-[node name="TrainHazard" type="Area2D" node_paths=PackedStringArray("collision_shape")]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jqloy"]
+size = Vector2(256, 160)
+
+[node name="TrainHazard" type="StaticBody2D" node_paths=PackedStringArray("hurtbox_collision_shape", "contact_collision_shape", "contact_area", "node_2d")]
 process_mode = 4
 visible = false
-collision_layer = 0
-collision_mask = 4
+collision_layer = 8
+collision_mask = 0
 script = ExtResource("1_q676f")
-collision_shape = NodePath("CollisionShape2D")
+hurtbox_collision_layers = 8
+hurtbox_collision_shape = NodePath("Hurtbox")
+contact_collision_shape = NodePath("ContactHitbox/ContactHitbox")
+contact_area = NodePath("ContactHitbox")
+damage_speed_modifier = 0.125
+speed_recovery_time = 8.0
+node_2d = NodePath("Hurtbox")
+break_durablility = 1
+break_sound = "damage_enemy"
 metadata/Tag = "IntangibleWall"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="ContactHitbox" type="Area2D" parent="."]
+position = Vector2(0, 80)
+collision_layer = 0
+collision_mask = 4
+
+[node name="ContactHitbox" type="CollisionShape2D" parent="ContactHitbox"]
 light_mask = 2
 visibility_layer = 2
 position = Vector2(-896, -80)
-shape = SubResource("RectangleShape2D_jqloy")
+shape = SubResource("RectangleShape2D_bos6u")
 
-[node name="ColorRect" type="ColorRect" parent="CollisionShape2D"]
+[node name="ColorRect" type="ColorRect" parent="ContactHitbox/ContactHitbox"]
 z_index = 3
 offset_left = -896.0
 offset_top = -80.0
 offset_right = 896.0
 offset_bottom = 80.0
-color = Color(1, 0, 0, 1)
+color = Color(0.45098, 0.180392, 0.180392, 1)
 
-[connection signal="body_entered" from="." to="." method="_on_body_entered"]
-[connection signal="body_exited" from="." to="." method="_on_body_exited"]
+[node name="Hurtbox" type="CollisionShape2D" parent="."]
+light_mask = 2
+visibility_layer = 2
+position = Vector2(-128, 0)
+shape = SubResource("RectangleShape2D_jqloy")
+
+[node name="ColorRect" type="ColorRect" parent="Hurtbox"]
+z_index = 3
+offset_left = -128.0
+offset_top = -80.0
+offset_right = 128.0
+offset_bottom = 80.0
+color = Color(0.180392, 0.180392, 0.45098, 1)
+
+[connection signal="body_entered" from="ContactHitbox" to="." method="_on_body_entered"]
+[connection signal="body_exited" from="ContactHitbox" to="." method="_on_body_exited"]

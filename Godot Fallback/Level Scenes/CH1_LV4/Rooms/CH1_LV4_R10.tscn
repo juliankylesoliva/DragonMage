@@ -18,7 +18,7 @@ script = ExtResource("1_6ndgb")
 tilemap_list = [NodePath("BoundaryCollisionTilemap"), NodePath("LevelCollisionTilemap")]
 right_camera_limit = 3584
 room_entrances = [NodePath("Entrance 0"), NodePath("Entrance 1")]
-enemy_nodes = [NodePath("Enemies/RedDragoon"), NodePath("Enemies/YellowDragoon"), NodePath("Enemies/RedDragoon2"), NodePath("Enemies/GreenDragoon"), NodePath("Enemies/GreenDragoon2"), NodePath("Enemies/RedDragoon3"), NodePath("Enemies/GreenDragoon3"), NodePath("Enemies/RedDragoon4")]
+enemy_nodes = [NodePath("Enemies/RedDragoon"), NodePath("Enemies/YellowDragoon"), NodePath("Enemies/GreenDragoon"), NodePath("Enemies/GreenDragoon2"), NodePath("Enemies/RedDragoon2"), NodePath("Enemies/GreenDragoon3"), NodePath("Enemies/RedDragoon3")]
 medal_fragments = [NodePath("Fragments/MedalFragment"), NodePath("Fragments/MedalFragment2"), NodePath("Fragments/MedalFragment3"), NodePath("Fragments/MedalFragment4"), NodePath("Fragments/MedalFragment5"), NodePath("Fragments/MedalFragment6"), NodePath("Fragments/MedalFragment7"), NodePath("Fragments/MedalFragment8"), NodePath("Fragments/MedalFragment9"), NodePath("Fragments/MedalFragment10"), NodePath("Fragments/MedalFragment11"), NodePath("Fragments/MedalFragment12"), NodePath("Fragments/MedalFragment13"), NodePath("Fragments/MedalFragment14"), NodePath("Fragments/MedalFragment15"), NodePath("Fragments/MedalFragment16"), NodePath("Fragments/MedalFragment17"), NodePath("Fragments/MedalFragment18"), NodePath("Fragments/MedalFragment19"), NodePath("Fragments/MedalFragment20"), NodePath("Fragments/MedalFragment21"), NodePath("Fragments/MedalFragment22"), NodePath("Fragments/MedalFragment23"), NodePath("Fragments/MedalFragment24"), NodePath("Fragments/MedalFragment25"), NodePath("Fragments/MedalFragment26"), NodePath("Fragments/MedalFragment27"), NodePath("Fragments/MedalFragment28")]
 
 [node name="BoundaryCollisionTilemap" type="TileMap" parent="."]
@@ -258,12 +258,6 @@ position = Vector2(480, 64)
 [node name="Enemy" parent="Enemies/YellowDragoon" index="0"]
 enable_wings = true
 
-[node name="RedDragoon2" parent="Enemies" instance=ExtResource("9_8pjri")]
-position = Vector2(672, 128)
-
-[node name="Enemy" parent="Enemies/RedDragoon2" index="0"]
-enable_wings = true
-
 [node name="GreenDragoon" parent="Enemies" instance=ExtResource("11_qpwl7")]
 position = Vector2(768, 128)
 
@@ -276,10 +270,10 @@ position = Vector2(896, 128)
 [node name="Enemy" parent="Enemies/GreenDragoon2" index="0"]
 enable_wings = true
 
-[node name="RedDragoon3" parent="Enemies" instance=ExtResource("9_8pjri")]
+[node name="RedDragoon2" parent="Enemies" instance=ExtResource("9_8pjri")]
 position = Vector2(992, 128)
 
-[node name="Enemy" parent="Enemies/RedDragoon3" index="0"]
+[node name="Enemy" parent="Enemies/RedDragoon2" index="0"]
 enable_wings = true
 
 [node name="GreenDragoon3" parent="Enemies" instance=ExtResource("11_qpwl7")]
@@ -288,16 +282,15 @@ position = Vector2(1632, 64)
 [node name="Enemy" parent="Enemies/GreenDragoon3" index="0"]
 enable_wings = true
 
-[node name="RedDragoon4" parent="Enemies" instance=ExtResource("9_8pjri")]
+[node name="RedDragoon3" parent="Enemies" instance=ExtResource("9_8pjri")]
 position = Vector2(2144, 128)
 
-[node name="Enemy" parent="Enemies/RedDragoon4" index="0"]
+[node name="Enemy" parent="Enemies/RedDragoon3" index="0"]
 enable_wings = true
 
 [editable path="Enemies/YellowDragoon"]
-[editable path="Enemies/RedDragoon2"]
 [editable path="Enemies/GreenDragoon"]
 [editable path="Enemies/GreenDragoon2"]
-[editable path="Enemies/RedDragoon3"]
+[editable path="Enemies/RedDragoon2"]
 [editable path="Enemies/GreenDragoon3"]
-[editable path="Enemies/RedDragoon4"]
+[editable path="Enemies/RedDragoon3"]

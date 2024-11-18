@@ -80,15 +80,15 @@ position = Vector2(480, 64)
 position = Vector2(1056, 64)
 
 [node name="TrainHazard" parent="." node_paths=PackedStringArray("left_start_point", "right_start_point") instance=ExtResource("5_482ay")]
-position = Vector2(-32, 288)
+position = Vector2(-32, 208)
 left_start_point = NodePath("../TrainStartPointL")
 right_start_point = NodePath("../TrainStartPointR")
 
 [node name="TrainStartPointL" type="Node2D" parent="."]
-position = Vector2(-32, 288)
+position = Vector2(-32, 208)
 
 [node name="TrainStartPointR" type="Node2D" parent="."]
-position = Vector2(1568, 288)
+position = Vector2(1568, 208)
 
 [node name="Spikes" type="Node2D" parent="."]
 

@@ -75,16 +75,16 @@ position = Vector2(1584, 64)
 room_origin = NodePath("..")
 room_destination = NodePath("..")
 
-[node name="TrainStartPointL" type="Node2D" parent="."]
-position = Vector2(-32, 288)
-
-[node name="TrainStartPointR" type="Node2D" parent="."]
-position = Vector2(1568, 288)
-
 [node name="TrainHazard" parent="." node_paths=PackedStringArray("left_start_point", "right_start_point") instance=ExtResource("4_3edpn")]
-position = Vector2(-32, 288)
+position = Vector2(-32, 208)
 left_start_point = NodePath("../TrainStartPointL")
 right_start_point = NodePath("../TrainStartPointR")
+
+[node name="TrainStartPointL" type="Node2D" parent="."]
+position = Vector2(-32, 208)
+
+[node name="TrainStartPointR" type="Node2D" parent="."]
+position = Vector2(1568, 208)
 
 [node name="Spikes" type="Node2D" parent="."]
 

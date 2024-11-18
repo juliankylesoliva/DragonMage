@@ -1,10 +1,16 @@
-extends Node2D
+extends Breakable
 
 class_name TrainHazard
 
 enum TrainHazardState {IDLE, ACTIVE}
 
-@export var collision_shape : CollisionShape2D
+@export_flags_2d_physics var hurtbox_collision_layers
+
+@export var hurtbox_collision_shape : CollisionShape2D
+
+@export var contact_collision_shape : CollisionShape2D
+
+@export var contact_area : Area2D
 
 @export_enum("Right:1", "Left:-1") var starting_direction : int = 1
 
@@ -17,6 +23,12 @@ enum TrainHazardState {IDLE, ACTIVE}
 @export var left_start_point : Node2D
 
 @export var right_start_point : Node2D
+
+@export var damage_speed_modifier : float = 0.25
+
+@export var speed_recovery_time : float = 5
+
+@export_range(0, 1) var damage_flicker_alpha : float = 0.25
 
 var is_train_disabled : bool = true
 
@@ -32,7 +44,11 @@ var target_x_pos : float = 0
 
 var travel_speed : float = 0
 
+var current_speed_modifier : float = 1
+
 var current_idle_timer : float = 0
+
+var is_flickering : bool = false
 
 func _process(_delta):
 	if (current_state == TrainHazardState.IDLE and current_idle_timer > 0):
@@ -48,11 +64,18 @@ func _process(_delta):
 
 func _physics_process(_delta):
 	if (current_state == TrainHazardState.ACTIVE):
-		self.global_position.x = move_toward(self.global_position.x, target_x_pos, travel_speed * _delta)
+		contact_area.monitoring = !is_slowed_down()
+		self.collision_layer = (0 if is_slowed_down() else hurtbox_collision_layers)
+		is_flickering = (!is_flickering if is_slowed_down() else false)
+		self.modulate.a = (damage_flicker_alpha if is_flickering else 1.0)
+		
+		self.global_position.x = move_toward(self.global_position.x, target_x_pos, travel_speed * current_speed_modifier * _delta)
+		current_speed_modifier = move_toward(current_speed_modifier, 1.0, ((1.0 - damage_speed_modifier) / speed_recovery_time) * _delta)
 		if (self.global_position.x == target_x_pos):
 			current_state = TrainHazardState.IDLE
 			current_direction *= -1
-			collision_shape.position.x *= -1
+			hurtbox_collision_shape.position.x *= -1
+			contact_collision_shape.position.x *= -1
 			self.global_position = (left_start_point.global_position if current_direction > 0 else right_start_point.global_position)
 			calculate_target_x()
 			current_idle_timer = idle_interval
@@ -67,8 +90,10 @@ func initialize_train():
 		current_state = TrainHazardState.IDLE
 		current_direction = starting_direction
 		self.global_position = (left_start_point.global_position if current_direction > 0 else right_start_point.global_position)
-		if (collision_shape.position.x * current_direction > 0):
-			collision_shape.position.x *= -1
+		if (hurtbox_collision_shape.position.x * current_direction > 0):
+			hurtbox_collision_shape.position.x *= -1
+		if (contact_collision_shape.position.x * current_direction > 0):
+			contact_collision_shape.position.x *= -1
 		calculate_target_x()
 		current_idle_timer = idle_interval
 
@@ -82,12 +107,32 @@ func disable_train():
 
 func calculate_target_x():
 	var target_point = (right_start_point.global_position.x if current_direction > 0 else left_start_point.global_position.x)
-	var target_offset = (collision_shape.shape.size.x if current_direction > 0 else -collision_shape.shape.size.x)
+	var target_offset = (contact_collision_shape.shape.size.x if current_direction > 0 else -contact_collision_shape.shape.size.x)
 	target_x_pos = (target_point + target_offset)
 	
 	var current_x_pos = (left_start_point.global_position.x if current_direction > 0 else right_start_point.global_position.x)
 	var distance : float = abs(target_x_pos - current_x_pos)
 	travel_speed = ((distance / travel_duration) if speed_override <= 0 else speed_override)
+	restore_train_speed()
+
+func is_slowed_down():
+	return (current_speed_modifier < 1.0)
+
+func restore_train_speed():
+	current_speed_modifier = 1.0
+
+func slow_down_train():
+	current_speed_modifier = damage_speed_modifier
+
+func break_object(other : Object):
+	if ((other is KnockbackHitbox)):
+		var hitbox_temp : KnockbackHitbox = (other as KnockbackHitbox)
+		if (hitbox_temp.damage_strength >= break_durablility):
+			if (breakable_by == "ANY" or hitbox_temp.damage_type == breakable_by):
+				SoundFactory.play_sound_by_name(break_sound, hitbox_temp.global_position, -4)
+				slow_down_train()
+				return true
+	return false
 
 func _on_body_entered(body):
 	if (body is CharacterBody2D and body.has_meta("Tag") and body.get_meta("Tag") == "Player"):
