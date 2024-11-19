@@ -80,8 +80,9 @@ var is_applying_invulnerability_alpha : bool = false
 
 func _ready():
 	boss_trigger.trigger_entered.connect(on_activation_trigger_entered)
-	player_contact_hitbox.body_entered.connect(on_player_contact_enter)
-	player_contact_hitbox.body_exited.connect(on_player_contact_exit)
+	if (player_contact_hitbox != null):
+		player_contact_hitbox.body_entered.connect(on_player_contact_enter)
+		player_contact_hitbox.body_exited.connect(on_player_contact_exit)
 	current_health = total_health
 	current_armor = armor
 
@@ -122,13 +123,17 @@ func do_post_hit_invulnerability():
 func do_post_damage_invulnerability():
 	current_invulnerability_duration = post_damage_invulnerability_duration
 
+func reset_post_damage_invulnerability():
+	current_invulnerability_duration = 0
+
 func update_invulnerability_duration(delta : float):
 	if (current_invulnerability_duration > 0):
 		current_invulnerability_duration = move_toward(current_invulnerability_duration, 0, delta)
-		if (current_invulnerability_duration > 0 and is_applying_invulnerability_alpha):
-			sprite.modulate.a = invulnerability_alpha
-		else:
-			sprite.modulate.a = 1.0
+		if (sprite != null):
+			if (current_invulnerability_duration > 0 and is_applying_invulnerability_alpha):
+				sprite.modulate.a = invulnerability_alpha
+			else:
+				sprite.modulate.a = 1.0
 		is_applying_invulnerability_alpha = !is_applying_invulnerability_alpha
 
 func set_knockback_velocity(vec : Vector2):

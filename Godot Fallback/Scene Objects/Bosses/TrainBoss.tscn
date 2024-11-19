@@ -1,5 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://b21st3ctsljbd"]
 
+[ext_resource type="Script" path="res://Scripts/Boss/Train/TrainBoss.gd" id="1_mk8o2"]
 [ext_resource type="PackedScene" uid="uid://dqbo0wu6hm8lj" path="res://Scene Objects/Objects/WarpTrigger.tscn" id="2_s1w6o"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_r2t8j"]
@@ -8,29 +9,38 @@ size = Vector2(1792, 160)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_613r5"]
 size = Vector2(256, 160)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_htwkf"]
-size = Vector2(64, 32)
-
-[node name="TrainBoss" type="StaticBody2D"]
+[node name="TrainBoss" type="StaticBody2D" node_paths=PackedStringArray("warp", "hurtbox_collision_shape", "contact_collision_shape", "contact_area", "node_2d")]
+visible = false
 collision_mask = 0
+script = ExtResource("1_mk8o2")
+warp = NodePath("InsideWarp")
+hurtbox_collision_layers = 8
+hurtbox_collision_shape = NodePath("BossHurtbox")
+contact_collision_shape = NodePath("ContactHitboxArea/ContactHitbox")
+contact_area = NodePath("ContactHitboxArea")
+damage_speed_modifier = 0.75
+speed_recovery_time = 8.0
+node_2d = NodePath("BossHurtbox")
+break_durablility = 1
+break_sound = "damage_enemy"
 
-[node name="ContactHitbox" type="Area2D" parent="."]
-position = Vector2(-896, -80)
+[node name="ContactHitboxArea" type="Area2D" parent="."]
 collision_layer = 0
 collision_mask = 4
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="ContactHitbox"]
+[node name="ContactHitbox" type="CollisionShape2D" parent="ContactHitboxArea"]
+position = Vector2(-896, 0)
 shape = SubResource("RectangleShape2D_r2t8j")
 
-[node name="ColorRect" type="ColorRect" parent="ContactHitbox"]
+[node name="ColorRect" type="ColorRect" parent="ContactHitboxArea/ContactHitbox"]
 offset_left = -896.0
 offset_top = -80.0
 offset_right = 896.0
 offset_bottom = 80.0
-color = Color(1, 0, 0, 1)
+color = Color(0.4, 0.16, 0.16, 1)
 
 [node name="BossHurtbox" type="CollisionShape2D" parent="."]
-position = Vector2(-128, -80)
+position = Vector2(-128, 0)
 shape = SubResource("RectangleShape2D_613r5")
 
 [node name="ColorRect" type="ColorRect" parent="BossHurtbox"]
@@ -38,19 +48,18 @@ offset_left = -128.0
 offset_top = -80.0
 offset_right = 128.0
 offset_bottom = 80.0
-color = Color(0, 0, 1, 1)
+color = Color(0.16, 0.16, 0.4, 1)
 
 [node name="InsideWarp" parent="." instance=ExtResource("2_s1w6o")]
-process_mode = 4
-position = Vector2(-1696, -112)
+position = Vector2(-1728, 16)
 
-[node name="CollisionShape2D" parent="InsideWarp" index="0"]
-shape = SubResource("RectangleShape2D_htwkf")
+[node name="ColorRect" type="ColorRect" parent="InsideWarp"]
+offset_left = -24.0
+offset_top = -32.0
+offset_right = 24.0
+offset_bottom = 32.0
 
-[node name="WarpTriggerLocationL" type="Node2D" parent="."]
-position = Vector2(-1696, -112)
-
-[node name="WarpTriggerLocationR" type="Node2D" parent="."]
-position = Vector2(1696, -112)
+[connection signal="body_entered" from="ContactHitboxArea" to="." method="_on_body_entered"]
+[connection signal="body_exited" from="ContactHitboxArea" to="." method="_on_body_exited"]
 
 [editable path="InsideWarp"]

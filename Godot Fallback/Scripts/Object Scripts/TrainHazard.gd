@@ -103,7 +103,7 @@ func disable_train():
 		set_visible(false)
 		set_process(false)
 		set_physics_process(false)
-		set_process_mode(PROCESS_MODE_DISABLED)
+		call_deferred("set_process_mode", PROCESS_MODE_DISABLED)
 
 func calculate_target_x():
 	var target_point = (right_start_point.global_position.x if current_direction > 0 else left_start_point.global_position.x)

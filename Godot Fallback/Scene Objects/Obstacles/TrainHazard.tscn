@@ -16,8 +16,8 @@ collision_mask = 0
 script = ExtResource("1_q676f")
 hurtbox_collision_layers = 8
 hurtbox_collision_shape = NodePath("Hurtbox")
-contact_collision_shape = NodePath("ContactHitbox/ContactHitbox")
-contact_area = NodePath("ContactHitbox")
+contact_collision_shape = NodePath("ContactHitboxArea/ContactHitbox")
+contact_area = NodePath("ContactHitboxArea")
 damage_speed_modifier = 0.125
 speed_recovery_time = 8.0
 node_2d = NodePath("Hurtbox")
@@ -25,18 +25,18 @@ break_durablility = 1
 break_sound = "damage_enemy"
 metadata/Tag = "IntangibleWall"
 
-[node name="ContactHitbox" type="Area2D" parent="."]
+[node name="ContactHitboxArea" type="Area2D" parent="."]
 position = Vector2(0, 80)
 collision_layer = 0
 collision_mask = 4
 
-[node name="ContactHitbox" type="CollisionShape2D" parent="ContactHitbox"]
+[node name="ContactHitbox" type="CollisionShape2D" parent="ContactHitboxArea"]
 light_mask = 2
 visibility_layer = 2
 position = Vector2(-896, -80)
 shape = SubResource("RectangleShape2D_bos6u")
 
-[node name="ColorRect" type="ColorRect" parent="ContactHitbox/ContactHitbox"]
+[node name="ColorRect" type="ColorRect" parent="ContactHitboxArea/ContactHitbox"]
 z_index = 3
 offset_left = -896.0
 offset_top = -80.0
@@ -58,5 +58,5 @@ offset_right = 128.0
 offset_bottom = 80.0
 color = Color(0.180392, 0.180392, 0.45098, 1)
 
-[connection signal="body_entered" from="ContactHitbox" to="." method="_on_body_entered"]
-[connection signal="body_exited" from="ContactHitbox" to="." method="_on_body_exited"]
+[connection signal="body_entered" from="ContactHitboxArea" to="." method="_on_body_entered"]
+[connection signal="body_exited" from="ContactHitboxArea" to="." method="_on_body_exited"]
