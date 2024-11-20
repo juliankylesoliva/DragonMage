@@ -11,6 +11,7 @@ size = Vector2(256, 160)
 
 [node name="TrainBoss" type="StaticBody2D" node_paths=PackedStringArray("warp", "hurtbox_collision_shape", "contact_collision_shape", "contact_area", "node_2d")]
 visible = false
+collision_layer = 8
 collision_mask = 0
 script = ExtResource("1_mk8o2")
 warp = NodePath("InsideWarp")
@@ -52,6 +53,7 @@ color = Color(0.16, 0.16, 0.4, 1)
 
 [node name="InsideWarp" parent="." instance=ExtResource("2_s1w6o")]
 position = Vector2(-1728, 16)
+monitoring = false
 
 [node name="ColorRect" type="ColorRect" parent="InsideWarp"]
 offset_left = -24.0

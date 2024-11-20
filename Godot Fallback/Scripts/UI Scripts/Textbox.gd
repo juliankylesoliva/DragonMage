@@ -92,6 +92,8 @@ func hide_textbox():
 			child.show()
 			if (child is PauseMenu):
 				child.hide()
+			if (child is ClearTimer):
+				child.visible = OptionsHelper.enable_clear_timer_toggle
 	change_state(TextboxState.READY)
 
 func set_characters_per_second(cps : float):

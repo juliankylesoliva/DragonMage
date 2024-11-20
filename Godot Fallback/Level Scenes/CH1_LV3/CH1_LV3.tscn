@@ -21,7 +21,7 @@
 [ext_resource type="PackedScene" uid="uid://bjeiexqfc7oht" path="res://Scene Objects/Misc/DefeatScreen.tscn" id="13_opbm0"]
 [ext_resource type="PackedScene" uid="uid://bl1jwsgqfev8p" path="res://Level Scenes/CH1_LV3/Rooms/CH1_LV3_R5.tscn" id="18_c8jkb"]
 [ext_resource type="PackedScene" uid="uid://8b3e6doobrd" path="res://Level Scenes/CH1_LV3/Rooms/CH1_LV3_R8.tscn" id="21_jpnph"]
-[ext_resource type="AudioStream" uid="uid://c3wkpsq8ppcgv" path="res://Music/Qumu - Electro Swank.wav" id="21_wxj2g"]
+[ext_resource type="AudioStream" uid="uid://c3wkpsq8ppcgv" path="res://Music/CH1/Qumu - Electro Swank.wav" id="21_wxj2g"]
 
 [node name="CH1_LV3" type="Node2D" node_paths=PackedStringArray("player_reference", "starting_room", "room_list", "clear_timer")]
 script = ExtResource("1_c2c1a")

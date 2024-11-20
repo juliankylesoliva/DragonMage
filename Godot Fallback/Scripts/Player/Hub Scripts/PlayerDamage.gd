@@ -88,7 +88,7 @@ func take_damage(knockback : int = 0):
 		return true
 
 func do_damage_warp():
-	if (is_player_damaged()):
+	if (is_player_damaged() or is_damage_invulnerability_active()):
 		return false
 	else:
 		if (is_damage_invulnerability_active()):

@@ -131,6 +131,7 @@ func break_object(other : Object):
 			if (breakable_by == "ANY" or hitbox_temp.damage_type == breakable_by):
 				SoundFactory.play_sound_by_name(break_sound, hitbox_temp.global_position, -4)
 				slow_down_train()
+				on_break.emit()
 				return true
 	return false
 

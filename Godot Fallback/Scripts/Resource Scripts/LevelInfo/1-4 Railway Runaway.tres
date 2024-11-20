@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="LevelInfo" load_steps=2 format=3 uid="uid://de3800aynkjm7"]
+
+[ext_resource type="Script" path="res://Scripts/Resource Scripts/LevelInfo/LevelInfo.gd" id="1_csk8a"]
+
+[resource]
+script = ExtResource("1_csk8a")
+level_scene_path = "res://Level Scenes/CH1_LV4/CH1_LV4.tscn"
+name_header = "Ch. 1-4:  Railway Runaway"
+story_description = Array[String](["TBD"])
+form_changing_enabled = true

@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://bsyunex10456i"]
+[gd_scene load_steps=34 format=3 uid="uid://bsyunex10456i"]
 
 [ext_resource type="Script" path="res://Scripts/Utility Scripts/Level.gd" id="1_jlbtb"]
 [ext_resource type="PackedScene" uid="uid://d0ff35cm57xb7" path="res://Scene Objects/Effects/DroppedFragment.tscn" id="2_4gqwv"]
@@ -24,7 +24,12 @@
 [ext_resource type="PackedScene" uid="uid://bao6ruf6mbfuo" path="res://Level Scenes/CH1_LV4/Rooms/CH1_LV4_R10.tscn" id="13_sr7q6"]
 [ext_resource type="PackedScene" uid="uid://bjeiexqfc7oht" path="res://Scene Objects/Misc/DefeatScreen.tscn" id="13_uipql"]
 [ext_resource type="PackedScene" uid="uid://o7vpo6ujq6jf" path="res://Level Scenes/CH1_LV4/Rooms/CH1_LV4_R12A.tscn" id="15_l2sfq"]
+[ext_resource type="PackedScene" uid="uid://cognb03fchfgs" path="res://Level Scenes/CH1_LV4/Rooms/CH1_LV4_R12C.tscn" id="17_i1ife"]
+[ext_resource type="PackedScene" uid="uid://dp2g6poooq075" path="res://Level Scenes/CH1_LV4/Rooms/CH1_LV4_R12D.tscn" id="18_ayv8w"]
+[ext_resource type="PackedScene" uid="uid://pdm1ynsqudl4" path="res://Level Scenes/CH1_LV4/Rooms/CH1_LV4_R12E.tscn" id="19_ku8uu"]
+[ext_resource type="PackedScene" uid="uid://bvht0ifmkosvo" path="res://Level Scenes/CH1_LV4/Rooms/CH1_LV4_R12F.tscn" id="20_7ch5c"]
 [ext_resource type="PackedScene" uid="uid://br3j4rryr8gxm" path="res://Level Scenes/CH1_LV4/Rooms/CH1_LV4_R6.tscn" id="20_xdlir"]
+[ext_resource type="PackedScene" uid="uid://cr1ooel34bv5k" path="res://Level Scenes/CH1_LV4/Rooms/CH1_LV4_R13.tscn" id="21_dyjpq"]
 [ext_resource type="AudioStream" uid="uid://bp3471su81u8g" path="res://Music/CH0/sawsquarenoise - Boss Theme.wav" id="25_psnh3"]
 [ext_resource type="Script" path="res://Scripts/Boss/Train/TrainBossHandler.gd" id="26_5ooub"]
 [ext_resource type="PackedScene" uid="uid://btrc5e3rd18ua" path="res://Level Scenes/CH1_LV4/Rooms/CH1_LV4_R12B.tscn" id="28_88mam"]
@@ -33,11 +38,12 @@
 script = ExtResource("1_jlbtb")
 level_index = 7
 player_reference = NodePath("Player")
-starting_room = NodePath("CH1_LV4_R12A")
-room_list = [NodePath("CH1_LV4_R1"), NodePath("CH1_LV4_R2"), NodePath("CH1_LV4_R3"), NodePath("CH1_LV4_R4"), NodePath("CH1_LV4_R5"), NodePath("CH1_LV4_R6"), NodePath("CH1_LV4_R7"), NodePath("CH1_LV4_R8"), NodePath("CH1_LV4_R9"), NodePath("CH1_LV4_R10"), NodePath("CH1_LV4_R11"), NodePath("CH1_LV4_R12A"), NodePath("CH1_LV4_R12B")]
+starting_room = NodePath("CH1_LV4_R1")
+room_list = [NodePath("CH1_LV4_R1"), NodePath("CH1_LV4_R2"), NodePath("CH1_LV4_R3"), NodePath("CH1_LV4_R4"), NodePath("CH1_LV4_R5"), NodePath("CH1_LV4_R6"), NodePath("CH1_LV4_R7"), NodePath("CH1_LV4_R8"), NodePath("CH1_LV4_R9"), NodePath("CH1_LV4_R10"), NodePath("CH1_LV4_R11"), NodePath("CH1_LV4_R12A"), NodePath("CH1_LV4_R12B"), NodePath("CH1_LV4_R12C"), NodePath("CH1_LV4_R12D"), NodePath("CH1_LV4_R12E"), NodePath("CH1_LV4_R12F"), NodePath("CH1_LV4_R13")]
 min_fragment_collection_rate = 0.658
 dropped_fragment_scene = ExtResource("2_4gqwv")
 clear_timer = NodePath("UI_Canvas/ClearTimer")
+time_to_beat = 225.0
 
 [node name="Player" parent="." instance=ExtResource("3_j61tg")]
 position = Vector2(96, 63)
@@ -167,8 +173,68 @@ boss = NodePath("../../TrainBossHandler")
 [node name="InsideWarp" parent="CH1_LV4_R12A/TrainBoss" index="2" node_paths=PackedStringArray("room_destination")]
 room_destination = NodePath("../../../CH1_LV4_R12B")
 
+[node name="BossDragonFruitSpawner" parent="CH1_LV4_R12A" index="12" node_paths=PackedStringArray("boss", "player")]
+boss = NodePath("../../TrainBossHandler")
+player = NodePath("../../Player/Hub")
+
 [node name="CH1_LV4_R12B" parent="." instance=ExtResource("28_88mam")]
 position = Vector2(-1728, -1760)
+
+[node name="DummyWarp" parent="CH1_LV4_R12B" index="3" node_paths=PackedStringArray("room_destination")]
+room_destination = NodePath("../../CH1_LV4_R12C")
+
+[node name="TrainBossConductor" parent="CH1_LV4_R12B" index="4" node_paths=PackedStringArray("boss")]
+boss = NodePath("../../TrainBossHandler")
+
+[node name="CH1_LV4_R12C" parent="." instance=ExtResource("17_i1ife")]
+position = Vector2(256, -1312)
+
+[node name="TrainBoss" parent="CH1_LV4_R12C" index="4" node_paths=PackedStringArray("boss")]
+boss = NodePath("../../TrainBossHandler")
+
+[node name="InsideWarp" parent="CH1_LV4_R12C/TrainBoss" index="2" node_paths=PackedStringArray("room_destination")]
+room_destination = NodePath("../../../CH1_LV4_R12D")
+
+[node name="BossDragonFruitSpawner" parent="CH1_LV4_R12C" index="14" node_paths=PackedStringArray("boss", "player")]
+boss = NodePath("../../TrainBossHandler")
+player = NodePath("../../Player/Hub")
+
+[node name="CH1_LV4_R12D" parent="." instance=ExtResource("18_ayv8w")]
+position = Vector2(256, -1760)
+
+[node name="DummyWarp" parent="CH1_LV4_R12D" index="3" node_paths=PackedStringArray("room_destination")]
+room_destination = NodePath("../../CH1_LV4_R12E")
+
+[node name="TrainBossConductor" parent="CH1_LV4_R12D" index="4" node_paths=PackedStringArray("boss")]
+boss = NodePath("../../TrainBossHandler")
+
+[node name="CH1_LV4_R12E" parent="." instance=ExtResource("19_ku8uu")]
+position = Vector2(2240, -1312)
+
+[node name="TrainBoss" parent="CH1_LV4_R12E" index="4" node_paths=PackedStringArray("boss")]
+boss = NodePath("../../TrainBossHandler")
+
+[node name="InsideWarp" parent="CH1_LV4_R12E/TrainBoss" index="2" node_paths=PackedStringArray("room_destination")]
+room_destination = NodePath("../../../CH1_LV4_R12F")
+
+[node name="BossDragonFruitSpawner" parent="CH1_LV4_R12E" index="14" node_paths=PackedStringArray("boss", "player")]
+boss = NodePath("../../TrainBossHandler")
+player = NodePath("../../Player/Hub")
+
+[node name="CH1_LV4_R12F" parent="." instance=ExtResource("20_7ch5c")]
+position = Vector2(2240, -1760)
+
+[node name="DummyWarp" parent="CH1_LV4_R12F" index="3" node_paths=PackedStringArray("room_destination")]
+room_destination = NodePath("../../CH1_LV4_R13")
+
+[node name="TrainBossConductor" parent="CH1_LV4_R12F" index="4" node_paths=PackedStringArray("boss")]
+boss = NodePath("../../TrainBossHandler")
+
+[node name="CH1_LV4_R13" parent="." instance=ExtResource("21_dyjpq")]
+position = Vector2(1696, 224)
+
+[node name="TrainBoss" parent="CH1_LV4_R13" index="4" node_paths=PackedStringArray("boss")]
+boss = NodePath("../../TrainBossHandler")
 
 [node name="UI_Canvas" type="CanvasLayer" parent="."]
 
@@ -209,9 +275,15 @@ ui_canvas = NodePath("../UI_Canvas")
 stream = ExtResource("25_psnh3")
 autoplay = false
 
-[node name="TrainBossHandler" type="Node2D" parent="." node_paths=PackedStringArray("starting_train", "player_hub", "boss_room", "boss_trigger", "clear_timer", "boss_room_boundary_tilemap", "boss_music_player", "normal_level_music_player", "textbox")]
+[node name="TrainBossHandler" type="Node2D" parent="." node_paths=PackedStringArray("starting_train", "dummy_warps", "phase_2_room", "phase_3_room", "player_hub", "boss_room", "boss_trigger", "clear_timer", "boss_room_boundary_tilemap", "boss_music_player", "normal_level_music_player", "textbox")]
 script = ExtResource("26_5ooub")
 starting_train = NodePath("../CH1_LV4_R12A/TrainBoss")
+dummy_warps = [NodePath("../CH1_LV4_R12B/DummyWarp"), NodePath("../CH1_LV4_R12D/DummyWarp"), NodePath("../CH1_LV4_R12F/DummyWarp")]
+phase_2_room = NodePath("../CH1_LV4_R12C")
+phase_3_room = NodePath("../CH1_LV4_R12E")
+mid_battle_text_1 = Array[String](["Mid-Battle Dialogue Test A 1/3", "Mid-Battle Dialogue Test A 2/3", "Mid-Battle Dialogue Test A 3/3"])
+mid_battle_text_2 = Array[String](["Mid-Battle Dialogue Test B 1/3", "Mid-Battle Dialogue Test B 2/3", "Mid-Battle Dialogue Test B 3/3"])
+pre_defeat_text = Array[String](["Pre-Defeat Dialogue Test 1/3", "Pre-Defeat Dialogue Test 2/3", "Pre-Defeat Dialogue Test 3/3"])
 player_hub = NodePath("../Player/Hub")
 boss_room = NodePath("../CH1_LV4_R12A")
 boss_trigger = NodePath("../CH1_LV4_R12A/BossTrigger")
@@ -220,6 +292,7 @@ boss_room_boundary_tilemap = NodePath("../CH1_LV4_R12A/BossRoomBoundaryTilemap")
 boss_music_player = NodePath("../BossMusicPlayer")
 normal_level_music_player = NodePath("../LevelMusicPlayer")
 introduction_text = Array[String](["Testing...", "Testing...", "123..."])
+defeat_text = Array[String](["Defeat Dialogue Test 1/3", "Defeat Dialogue Test 2/3", "Defeat Dialogue Test 3/3"])
 textbox = NodePath("../Textbox")
 post_hit_invulnerability_duration = 3.0
 knockback_gravity_scale = 0.0
@@ -240,6 +313,14 @@ screen_fade = NodePath("../UI_Canvas/ScreenFade")
 [connection signal="player_defeated" from="." to="BossMusicPlayer" method="stop"]
 [connection signal="player_defeated" from="." to="DefeatScreen" method="do_defeat_screen"]
 [connection signal="room_activated" from="CH1_LV4_R12A" to="LevelMusicPlayer" method="fade_out"]
+[connection signal="level_finished" from="CH1_LV4_R13/FinishLine" to="." method="level_finish"]
+[connection signal="level_finished" from="CH1_LV4_R13/FinishLine" to="UI_Canvas/TemperMeterUI" method="hide"]
+[connection signal="level_finished" from="CH1_LV4_R13/FinishLine" to="UI_Canvas/MagicMeterUI" method="hide"]
+[connection signal="level_finished" from="CH1_LV4_R13/FinishLine" to="UI_Canvas/FragmentCounterUI" method="hide"]
+[connection signal="level_finished" from="CH1_LV4_R13/FinishLine" to="UI_Canvas/ClearTimer" method="hide"]
+[connection signal="level_finished" from="CH1_LV4_R13/FinishLine" to="UI_Canvas/ClearTimer" method="stop_timer"]
+[connection signal="level_finished" from="CH1_LV4_R13/FinishLine" to="UI_Canvas/ResultsScreen" method="on_level_complete"]
+[connection signal="level_finished" from="CH1_LV4_R13/FinishLine" to="LevelMusicPlayer" method="fade_out"]
 
 [editable path="Player"]
 [editable path="CH1_LV4_R1"]
@@ -279,3 +360,20 @@ screen_fade = NodePath("../UI_Canvas/ScreenFade")
 [editable path="CH1_LV4_R12A/TrainBoss"]
 [editable path="CH1_LV4_R12A/TrainBoss/InsideWarp"]
 [editable path="CH1_LV4_R12B"]
+[editable path="CH1_LV4_R12C"]
+[editable path="CH1_LV4_R12C/TrainBoss"]
+[editable path="CH1_LV4_R12C/TrainBoss/InsideWarp"]
+[editable path="CH1_LV4_R12C/GreenDragoon"]
+[editable path="CH1_LV4_R12C/GreenDragoon2"]
+[editable path="CH1_LV4_R12D"]
+[editable path="CH1_LV4_R12E"]
+[editable path="CH1_LV4_R12E/TrainBoss"]
+[editable path="CH1_LV4_R12E/TrainBoss/InsideWarp"]
+[editable path="CH1_LV4_R12E/RedDragoon"]
+[editable path="CH1_LV4_R12E/RedDragoon2"]
+[editable path="CH1_LV4_R12E/YellowDragoon"]
+[editable path="CH1_LV4_R12E/YellowDragoon2"]
+[editable path="CH1_LV4_R12F"]
+[editable path="CH1_LV4_R13"]
+[editable path="CH1_LV4_R13/TrainBoss"]
+[editable path="CH1_LV4_R13/TrainBoss/InsideWarp"]

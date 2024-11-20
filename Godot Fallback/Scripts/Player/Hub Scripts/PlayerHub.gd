@@ -56,6 +56,9 @@ func _process(_delta):
 func get_input_vector():
 	var input_vector = Vector2.ZERO
 	
+	if (force_stand):
+		return input_vector
+	
 	input_vector.x = ((1 if Input.is_action_pressed("Move Right") or Input.is_action_pressed("Move Right (Pad)") else 0) - (1 if Input.is_action_pressed("Move Left") or Input.is_action_pressed("Move Left (Pad)") else 0))
 	input_vector.y = ((1 if Input.is_action_pressed("Move Up") or Input.is_action_pressed("Move Up (Pad)") else 0) - (1 if Input.is_action_pressed("Move Down") or Input.is_action_pressed("Move Down (Pad)") else 0))
 	return input_vector

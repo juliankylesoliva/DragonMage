@@ -2,6 +2,14 @@ extends TrainHazard
 
 class_name TrainBoss
 
+@export var drop_off_player : bool = false
+
+@export var drop_off_location : Node2D
+
+@export var drop_off_offset : float = 64
+
+@export var is_one_shot : bool = false
+
 @export var boss : Boss
 
 @export var warp : WarpTrigger
@@ -16,6 +24,11 @@ func _physics_process(_delta):
 		
 		self.global_position.x = move_toward(self.global_position.x, target_x_pos, travel_speed * current_speed_modifier * _delta)
 		if (self.global_position.x == target_x_pos):
+			if (is_one_shot):
+				if (boss.current_health <= 0):
+					boss.on_defeat()
+				disable_train()
+				return
 			current_state = TrainHazardState.IDLE
 			current_direction *= -1
 			hurtbox_collision_shape.position.x *= -1
@@ -32,6 +45,7 @@ func _physics_process(_delta):
 
 func initialize_train():
 	if (is_train_disabled):
+		var is_dropping_off : bool = (drop_off_player and drop_off_location != null)
 		is_train_disabled = false
 		set_process_mode(PROCESS_MODE_INHERIT)
 		set_process(true)
@@ -47,9 +61,13 @@ func initialize_train():
 		if (warp.position.x * current_direction > 0):
 			warp.position.x *= -1
 		calculate_target_x()
-		current_idle_timer = idle_interval
+		current_idle_timer = (0.0 if is_dropping_off else idle_interval)
 		boss.reset_post_damage_invulnerability()
 		restore_train_speed()
+		if (is_dropping_off):
+			boss.do_post_damage_invulnerability()
+			self.global_position.x = (drop_off_location.global_position.x + ((contact_collision_shape.shape.size.x - drop_off_offset) * current_direction))
+			current_state = TrainHazardState.ACTIVE
 
 func calculate_target_x():
 	var target_point = (right_start_point.global_position.x if current_direction > 0 else left_start_point.global_position.x)

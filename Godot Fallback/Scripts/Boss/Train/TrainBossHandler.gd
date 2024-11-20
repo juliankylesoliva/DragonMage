@@ -4,6 +4,18 @@ class_name TrainBossHandler
 
 @export var starting_train : TrainHazard
 
+@export var dummy_warps : Array[WarpTrigger]
+
+@export var phase_2_room : Room
+
+@export var phase_3_room : Room
+
+@export_multiline var mid_battle_text_1 : Array[String]
+
+@export_multiline var mid_battle_text_2 : Array[String]
+
+@export_multiline var pre_defeat_text : Array[String]
+
 func _ready():
 	super._ready()
 	if (textbox != null):
@@ -30,6 +42,23 @@ func on_activation():
 		else:
 			on_dialogue_intro_finished()
 
+func on_defeat():
+	is_activated = false
+	if (clear_timer != null):
+		clear_timer.stop_timer()
+	if (boss_music_player != null):
+		boss_music_player.fade_out()
+	if (textbox != null):
+		if (defeat_text.size() > 0):
+			PauseHandler.enable_pausing(false)
+			player_hub.set_force_stand(true)
+			textbox.accept_input_events = true
+			textbox.textbox_finished.connect(on_dialogue_defeat_finished)
+			for text in defeat_text:
+				textbox.queue_text(text)
+		else:
+			on_dialogue_defeat_finished()
+
 func damage_boss(_damage_type : StringName, _damage_strength : int, _knockback_vector : Vector2):
 	if (current_invulnerability_duration > 0 or current_health <= 0):
 		return false
@@ -40,7 +69,10 @@ func damage_boss(_damage_type : StringName, _damage_strength : int, _knockback_v
 		return true
 	elif (current_health > 0):
 		current_health -= 1
-		# trigger some dialogue + transition
+		if (current_health > 0):
+			do_mid_battle_dialogue()
+		else:
+			do_pre_defeat_dialogue()
 		return true
 	else:
 		return false
@@ -58,3 +90,74 @@ func on_dialogue_intro_finished():
 		await get_tree().process_frame # prevents pausing on the same frame
 		PauseHandler.enable_pausing(true)
 		textbox.textbox_finished.disconnect(on_dialogue_intro_finished)
+
+func on_dialogue_defeat_finished():
+	player_hub.set_force_stand(false)
+	if (state_machine != null):
+		state_machine.set_process_mode(PROCESS_MODE_DISABLED)
+	if (clear_timer != null):
+		clear_timer.start_timer()
+	await get_tree().process_frame # prevents pausing on the same frame
+	PauseHandler.enable_pausing(true)
+	textbox.textbox_finished.disconnect(on_dialogue_defeat_finished)
+
+func do_mid_battle_dialogue():
+	if (clear_timer != null):
+		clear_timer.stop_timer()
+	if (player_hub.temper.is_forcing_form_change() or player_hub.temper.is_form_locked()):
+		player_hub.temper.set_boss_courtesy_temper_level()
+	if (textbox != null):
+		var mid_battle_text : Array[String] = (mid_battle_text_1 if current_health >= 2 else mid_battle_text_2)
+		if (mid_battle_text.size() > 0):
+			PauseHandler.enable_pausing(false)
+			player_hub.set_force_stand(true)
+			textbox.accept_input_events = true
+			textbox.textbox_finished.connect(on_mid_battle_dialogue_finished)
+			for text in mid_battle_text:
+				textbox.queue_text(text)
+		else:
+			on_mid_battle_dialogue_finished()
+
+func on_mid_battle_dialogue_finished():
+	player_hub.set_force_stand(false)
+	if (clear_timer != null):
+		clear_timer.start_timer()
+	
+	var warp : WarpTrigger = dummy_warps[dummy_warps.size() - current_health - 1]
+	warp._on_body_entered(player_hub.char_body as Node)
+	
+	var room : Room = (phase_2_room if current_health >= 2 else phase_3_room)
+	player_hub.set_respawn_position(room.get_room_entrance_coordinates(1))
+	
+	current_armor = armor
+	
+	await get_tree().process_frame # prevents pausing on the same frame
+	PauseHandler.enable_pausing(true)
+	textbox.textbox_finished.disconnect(on_mid_battle_dialogue_finished)
+
+func do_pre_defeat_dialogue():
+	if (clear_timer != null):
+		clear_timer.stop_timer()
+	if (boss_music_player != null):
+		boss_music_player.fade_out()
+	if (player_hub.temper.is_forcing_form_change() or player_hub.temper.is_form_locked()):
+		player_hub.temper.set_boss_courtesy_temper_level()
+	if (textbox != null):
+		if (pre_defeat_text.size() > 0):
+			PauseHandler.enable_pausing(false)
+			player_hub.set_force_stand(true)
+			textbox.accept_input_events = true
+			textbox.textbox_finished.connect(on_pre_defeat_dialogue_finished)
+			for text in pre_defeat_text:
+				textbox.queue_text(text)
+		else:
+			on_mid_battle_dialogue_finished()
+
+func on_pre_defeat_dialogue_finished():
+	var warp : WarpTrigger = dummy_warps[dummy_warps.size() - current_health - 1]
+	warp._on_body_entered(player_hub.char_body as Node)
+	if (player_hub.form.is_a_mage()):
+		player_hub.form.change_mode(PlayerForm.CharacterMode.DRAGON)
+	player_hub.temper.change_temper_by(player_hub.temper.max_segments)
+	player_hub.temper.disable_temper_rebound = true
+	textbox.textbox_finished.disconnect(on_pre_defeat_dialogue_finished)

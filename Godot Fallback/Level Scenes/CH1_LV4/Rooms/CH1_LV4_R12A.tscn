@@ -1,10 +1,12 @@
-[gd_scene load_steps=7 format=3 uid="uid://o7vpo6ujq6jf"]
+[gd_scene load_steps=9 format=3 uid="uid://o7vpo6ujq6jf"]
 
 [ext_resource type="Script" path="res://Scripts/Utility Scripts/Room.gd" id="1_c0kqm"]
 [ext_resource type="TileSet" uid="uid://dhwi7i1loa2pd" path="res://Sprites/Tiles/Test Tiles/TestTileSet.tres" id="2_yuf0h"]
 [ext_resource type="PackedScene" uid="uid://vtyaphi47lrf" path="res://Scene Objects/Objects/Checkpoint.tscn" id="3_g1h8b"]
 [ext_resource type="Script" path="res://Scripts/Utility Scripts/Trigger.gd" id="4_uhl8g"]
 [ext_resource type="PackedScene" uid="uid://b21st3ctsljbd" path="res://Scene Objects/Bosses/TrainBoss.tscn" id="5_hhicy"]
+[ext_resource type="PackedScene" uid="uid://b2a0ttqvejk51" path="res://Scene Objects/Objects/TemperDragonFruit.tscn" id="6_7bmlx"]
+[ext_resource type="PackedScene" uid="uid://u5nios6kfqhs" path="res://Scene Objects/Objects/BossDragonFruitSpawner.tscn" id="7_gquf8"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8txwp"]
 size = Vector2(32, 384)
@@ -105,6 +107,7 @@ shape = SubResource("RectangleShape2D_8txwp")
 
 [node name="TrainBoss" parent="." node_paths=PackedStringArray("left_start_point", "right_start_point") instance=ExtResource("5_hhicy")]
 position = Vector2(480, 208)
+speed_override = 378.0
 left_start_point = NodePath("../TrainStartPointL")
 right_start_point = NodePath("../TrainStartPointR")
 
@@ -117,6 +120,21 @@ position = Vector2(480, 208)
 
 [node name="TrainStartPointR" type="Node2D" parent="."]
 position = Vector2(1312, 208)
+
+[node name="TemperDragonFruit" parent="." instance=ExtResource("6_7bmlx")]
+position = Vector2(672, 64)
+enable_respawning = false
+start_despawned = true
+
+[node name="TemperDragonFruit2" parent="." instance=ExtResource("6_7bmlx")]
+position = Vector2(1120, 64)
+enable_respawning = false
+start_despawned = true
+
+[node name="BossDragonFruitSpawner" parent="." node_paths=PackedStringArray("dragonfruits", "room_origin") instance=ExtResource("7_gquf8")]
+dragonfruits = [NodePath("../TemperDragonFruit"), NodePath("../TemperDragonFruit2")]
+room_origin = NodePath("..")
+selection_type = 2
 
 [connection signal="room_deactivated" from="." to="TrainBoss" method="disable_train"]
 

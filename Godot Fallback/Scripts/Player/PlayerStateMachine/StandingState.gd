@@ -28,10 +28,11 @@ func state_process(_delta):
 		hub.movement.do_movement(_delta)
 		hub.movement.update_facing_direction()
 	else:
-		hub.char_body.velocity = Vector2.ZERO
+		hub.char_body.velocity.x = 0
 		hub.movement.reset_current_horizontal_velocity()
 		hub.movement.reset_crouch_state()
 		hub.buffers.reset_speed_preservation_buffer()
+		hub.movement.do_movement(_delta)
 	hub.collisions.do_ledge_nudge()
 	
 	if (hub.char_sprite.animation.contains("Vulnerable") and !hub.temper.is_form_locked()):
@@ -103,6 +104,13 @@ func state_process(_delta):
 			set_next_state(state_machine.get_state_by_name("Running"))
 		else:
 			pass
+	else:
+		if (!hub.char_body.is_on_floor()):
+			set_next_state((state_machine.get_state_by_name("Falling")))
+		elif (!hub.char_body.is_on_floor() and hub.char_body.velocity.y < 0):
+			set_next_state(state_machine.get_state_by_name("Jumping"))
+		elif (!hub.char_body.is_on_floor() and hub.char_body.velocity.y >= 0):
+			set_next_state((state_machine.get_state_by_name("Falling")))
 
 func on_enter():
 	is_headbonking = false

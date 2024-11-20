@@ -16,6 +16,8 @@ class_name PlayerTemper
 
 @export var temper_rebound_interval : float = 3
 
+@export var disable_temper_rebound : bool = false
+
 var current_temper_level : int = 0
 
 var cold_threshold : int = 0
@@ -33,6 +35,9 @@ func _process(delta):
 	check_temper_rebound(delta)
 
 func check_temper_rebound(delta : float):
+	if (disable_temper_rebound):
+		return
+	
 	if (current_temper_rebound_timer > 0 and is_form_locked()):
 		current_temper_rebound_timer = move_toward(current_temper_rebound_timer, 0, delta)
 		if (current_temper_rebound_timer <= 0):

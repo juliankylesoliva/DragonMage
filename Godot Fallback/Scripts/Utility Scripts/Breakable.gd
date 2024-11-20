@@ -2,6 +2,8 @@ extends Node2D
 
 class_name Breakable
 
+signal on_break
+
 @export var node_2d : Node2D
 
 @export var fragments_scene : PackedScene = null
@@ -23,6 +25,7 @@ func break_object(other : Object):
 					add_sibling(instance)
 					(instance as Node2D).global_position = node_2d.global_position
 					(instance as CPUParticles2D).emitting = true
+				on_break.emit()
 				queue_free()
 				return true
 	return false
