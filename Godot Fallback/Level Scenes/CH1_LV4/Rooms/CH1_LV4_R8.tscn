@@ -96,7 +96,7 @@ position = Vector2(1056, 224)
 position = Vector2(1120, 224)
 
 [node name="ReinforcedMagicBlock3" parent="Blocks" instance=ExtResource("5_qwhxo")]
-position = Vector2(864, 128)
+position = Vector2(928, 64)
 
 [node name="ReinforcedFireBlock3" parent="Blocks" instance=ExtResource("7_prhpw")]
 position = Vector2(992, 64)
@@ -108,8 +108,8 @@ position = Vector2(352, 240)
 floor_length = 10
 
 [node name="FloorSpikes2" parent="Spikes" instance=ExtResource("8_fw5ux")]
-position = Vector2(768, 240)
-floor_length = 12
+position = Vector2(736, 240)
+floor_length = 10
 
 [node name="FloorSpikes3" parent="Spikes" instance=ExtResource("8_fw5ux")]
 position = Vector2(1184, 240)
@@ -132,10 +132,10 @@ position = Vector2(784, 80)
 position = Vector2(816, 80)
 
 [node name="MedalFragment3" parent="Fragments" instance=ExtResource("9_rlllp")]
-position = Vector2(912, 80)
+position = Vector2(1136, 48)
 
 [node name="MedalFragment4" parent="Fragments" instance=ExtResource("9_rlllp")]
-position = Vector2(944, 80)
+position = Vector2(1200, 48)
 
 [node name="MedalFragment5" parent="Fragments" instance=ExtResource("9_rlllp")]
 position = Vector2(1104, 80)

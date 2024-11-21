@@ -58,7 +58,6 @@ position = Vector2(768, 224)
 
 [node name="TrainBoss" parent="." node_paths=PackedStringArray("drop_off_location", "left_start_point", "right_start_point") instance=ExtResource("4_ursc0")]
 position = Vector2(-32, 208)
-collision_layer = 0
 drop_off_player = true
 drop_off_location = NodePath("../Entrance 0")
 is_one_shot = true

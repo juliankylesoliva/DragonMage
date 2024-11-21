@@ -22,6 +22,8 @@ class_name PlayerStomp
 
 @export var fire_tackle_attack : FireTackleAttack
 
+@export var slide_attack : SlideAttack
+
 var current_stomp_combo : int = 0
 
 func is_stomping_enemy():
@@ -58,7 +60,7 @@ func do_stomp_jump():
 		pass
 
 func is_valid_attack_state():
-	return (fire_tackle_attack.current_attack_state == Attack.AttackState.ENDLAG or dodge_attack.current_attack_state == Attack.AttackState.ACTIVE)
+	return (fire_tackle_attack.current_attack_state == Attack.AttackState.ENDLAG or dodge_attack.current_attack_state == Attack.AttackState.ACTIVE or slide_attack.current_attack_state == Attack.AttackState.ACTIVE)
 
 func can_do_rising_stomp():
 	return (hub.state_machine.current_state.name == "Jumping")

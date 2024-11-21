@@ -87,6 +87,7 @@ func initialize_train():
 		set_process(true)
 		set_physics_process(true)
 		set_visible(true)
+		self.collision_layer = hurtbox_collision_layers
 		current_state = TrainHazardState.IDLE
 		current_direction = starting_direction
 		self.global_position = (left_start_point.global_position if current_direction > 0 else right_start_point.global_position)
@@ -100,6 +101,7 @@ func initialize_train():
 func disable_train():
 	if (!is_train_disabled):
 		is_train_disabled = true
+		self.collision_layer = 0
 		set_visible(false)
 		set_process(false)
 		set_physics_process(false)

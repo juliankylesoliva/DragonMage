@@ -135,7 +135,7 @@ position = Vector2(512, 64)
 position = Vector2(1024, 64)
 
 [node name="BreakableBlock4" parent="Blocks" instance=ExtResource("4_6qpf4")]
-position = Vector2(1376, 64)
+position = Vector2(1376, 96)
 
 [node name="Enemies" type="Node2D" parent="."]
 

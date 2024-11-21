@@ -6,5 +6,7 @@
 script = ExtResource("1_csk8a")
 level_scene_path = "res://Level Scenes/CH1_LV4/CH1_LV4.tscn"
 name_header = "Ch. 1-4:  Railway Runaway"
-story_description = Array[String](["TBD"])
+story_description = Array[String](["May 7, 202X - Afternoon
+
+	TBD"])
 form_changing_enabled = true

@@ -11,7 +11,7 @@ size = Vector2(256, 160)
 [node name="TrainHazard" type="StaticBody2D" node_paths=PackedStringArray("hurtbox_collision_shape", "contact_collision_shape", "contact_area", "node_2d")]
 process_mode = 4
 visible = false
-collision_layer = 8
+collision_layer = 0
 collision_mask = 0
 script = ExtResource("1_q676f")
 hurtbox_collision_layers = 8

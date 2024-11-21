@@ -38,9 +38,12 @@ signal leaving_ground
 
 signal touching_ground
 
+signal touching_ceiling
+
 func _physics_process(_delta):
 	ground_check()
 	wall_check()
+	ceiling_check()
 	ledge_check()
 	player_check()
 
@@ -67,6 +70,10 @@ func wall_check():
 	
 	if (enemy.body.is_on_wall() and (top_check.is_colliding() or mid_check.is_colliding() or bot_check.is_colliding()) and (top_check.get_collision_normal().y == 0 or mid_check.get_collision_normal().y == 0 or bot_check.get_collision_normal().y == 0)):
 		touching_wall.emit()
+
+func ceiling_check():
+	if (enemy.body.is_on_ceiling()):
+		touching_ceiling.emit()
 
 func ledge_check():
 	if (enemy.body.is_on_floor()):
