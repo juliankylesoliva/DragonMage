@@ -14,6 +14,19 @@ class_name TrainBoss
 
 @export var warp : WarpTrigger
 
+func _process(_delta):
+	if (current_state == TrainHazardState.IDLE and current_idle_timer > 0):
+		current_idle_timer = move_toward(current_idle_timer, 0, _delta)
+		if (current_idle_timer <= 0):
+			current_state = TrainHazardState.ACTIVE
+			breakable_by = ("MAGIC" if current_direction > 0 else "FIRE")
+	elif (current_state == TrainHazardState.ACTIVE and player_ref != null and is_player_detected):
+		if (player_ref.damage.do_damage_warp()):
+			EffectFactory.get_effect("EnemyContactImpact", player_ref.char_body.global_position)
+			SoundFactory.play_sound_by_name("enemy_contact_impact", player_ref.char_body.global_position, 0, 1, "SFX")
+	else:
+		pass
+
 func _physics_process(_delta):
 	if (current_state == TrainHazardState.ACTIVE):
 		contact_area.monitoring = (!is_slowed_down() and !took_damage())
