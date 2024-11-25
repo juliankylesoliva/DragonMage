@@ -78,6 +78,10 @@ class_name FireTackleAttack
 
 @export var arrow_down_effect_name : String = "FireTackleArrowsDown"
 
+@export var fireball_inactive_effect_name : String = "FireballInactive"
+
+@export var fireball_active_effect_name : String = "FireballActive"
+
 var fire_tackle_hitbox_instance : Node = null
 
 var fire_tackle_arrow_effect_instance : AnimatedSprite2D = null
@@ -203,8 +207,7 @@ func startup_update(delta : float):
 
 func active_init():
 	current_attack_state = AttackState.ACTIVE
-	if (fire_tackle_arrow_effect_instance != null):
-		fire_tackle_arrow_effect_instance.queue_free()
+	is_attack_button_held = false
 	hub.audio.play_sound("attack_draelyn_tackle")
 	fire_tackle_particles.emitting = true
 	hub.char_sprite.modulate = fire_tackle_active_color
@@ -244,6 +247,17 @@ func active_update(delta : float):
 		
 		if (current_attack_timer <= hub.buffers.jump_buffer_time):
 			hub.char_sprite.modulate = fire_tackle_jump_cancel_buffer_color
+		
+		if (hub.buffers.is_attack_buffer_active()):
+			hub.buffers.reset_attack_buffer()
+			is_attack_button_held = !is_attack_button_held
+		
+		if (fire_tackle_arrow_effect_instance != null):
+			fire_tackle_arrow_effect_instance.set_animation(fireball_active_effect_name if is_attack_button_held else fireball_inactive_effect_name)
+			fire_tackle_arrow_effect_instance.global_position = hub.char_body.global_position
+			fire_tackle_arrow_effect_instance.set_flip_h(hub.movement.get_facing_value() < 0)
+			if ((fire_tackle_arrow_effect_instance.offset.x * hub.movement.get_facing_value()) < 0):
+				fire_tackle_arrow_effect_instance.offset.x *= -1
 		
 		hub.char_body.velocity.x = (horizontal_result * hub.movement.get_facing_value() if !hub.collisions.is_facing_a_wall() else 0.0)
 		if (current_vertical_axis > 0):
@@ -295,7 +309,8 @@ func active_update(delta : float):
 func endlag_init():
 	if (fire_tackle_hitbox_instance != null):
 		fire_tackle_hitbox_instance.queue_free()
-	
+	if (fire_tackle_arrow_effect_instance != null):
+		fire_tackle_arrow_effect_instance.queue_free()
 	current_attack_state = AttackState.ENDLAG
 	fire_tackle_particles.emitting = false
 	hub.char_sprite.modulate = fire_tackle_endlag_color
@@ -315,7 +330,7 @@ func endlag_init():
 		hub.animation.set_animation_speed(1)
 		hub.char_body.velocity = ((Vector2.UP + (Vector2.RIGHT * -hub.movement.get_facing_value())).normalized() * fire_tackle_bonk_knockback)
 	else:
-		if (!hub.jumping.can_wall_climb_from_fire_tackle() and (hub.buffers.is_attack_buffer_active() or Input.is_action_pressed("Attack"))):
+		if (!hub.jumping.can_wall_climb_from_fire_tackle() and is_attack_button_held):
 			hub.buffers.reset_attack_buffer()
 			hub.buffers.reset_speed_preservation_buffer()
 			
