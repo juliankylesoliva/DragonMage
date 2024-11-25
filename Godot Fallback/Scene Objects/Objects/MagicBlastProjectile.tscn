@@ -49,6 +49,7 @@ script = ExtResource("1_jkuo4")
 hitbox_scene = ExtResource("2_2lgif")
 sprite = NodePath("AnimatedSprite2D")
 pulse_color = Color(0.0941176, 0.0627451, 0.290196, 1)
+fuse_time = 3.0
 max_lerp_change = 0.125
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

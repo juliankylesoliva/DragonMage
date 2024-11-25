@@ -8,6 +8,8 @@ signal magic_blast_thrown
 
 @export var projectile_trail : LineTrail
 
+@export var guide_arrows : Sprite2D
+
 @export var projectile_scene : PackedScene
 
 @export var blast_jump_hitbox_scene : PackedScene
@@ -39,6 +41,12 @@ signal magic_blast_thrown
 @export var blast_jump_max_velocity_magnitude_offset : float = 24
 
 @export_color_no_alpha var blast_jump_active_color : Color
+
+@export var blast_jump_guide_distance : float = 36
+
+@export var blast_jump_max_guide_distance : float = 57.6
+
+@export var blast_jump_guide_arrow_offset : float = 32
 
 @export_group("Throw Velocities")
 @export var forward_throw_strength : float = 5
@@ -72,6 +80,7 @@ var blast_jump_current_temper_interval_time : float = 0
 
 func _process(delta):
 	check_despawn_distance()
+	update_blast_jump_guide()
 	blast_jump_update(delta)
 
 func can_use_attack():
@@ -132,6 +141,24 @@ func do_detonation():
 	if (projectile_instance != null):
 		var projectile_script = (projectile_instance as MagicBlastProjectile)
 		projectile_script.detonate()
+
+func update_blast_jump_guide():
+	if (projectile_instance != null):
+		var vec : Vector2 = (hub.char_body.global_position - (projectile_instance as Node2D).global_position)
+		var distance : float = vec.length()
+		if (distance <= blast_jump_max_guide_distance):
+			guide_arrows.set_visible(true)
+			var normalized_vec : Vector2 = vec.normalized()
+			guide_arrows.global_position = (hub.char_body.global_position + (blast_jump_guide_arrow_offset * normalized_vec))
+			guide_arrows.rotation = Vector2.UP.angle_to(normalized_vec)
+			var lerp_val : float = min(1.0, (1.0 - inverse_lerp(blast_jump_guide_distance, blast_jump_max_guide_distance, distance)))
+			print_debug(lerp_val)
+			guide_arrows.scale.x = 1
+			guide_arrows.scale.y = lerp_val
+		else:
+			guide_arrows.set_visible(false)
+	else:
+		guide_arrows.set_visible(false)
 
 func activate_blast_jump():
 	SoundFactory.play_sound_by_name("attack_magli_blastjump", hub.char_body.global_position, 0, 1, "SFX")
