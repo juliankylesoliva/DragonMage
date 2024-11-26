@@ -152,7 +152,6 @@ func update_blast_jump_guide():
 			guide_arrows.global_position = (hub.char_body.global_position + (blast_jump_guide_arrow_offset * normalized_vec))
 			guide_arrows.rotation = Vector2.UP.angle_to(normalized_vec)
 			var lerp_val : float = min(1.0, (1.0 - inverse_lerp(blast_jump_guide_distance, blast_jump_max_guide_distance, distance)))
-			print_debug(lerp_val)
 			guide_arrows.scale.x = 1
 			guide_arrows.scale.y = lerp_val
 		else:

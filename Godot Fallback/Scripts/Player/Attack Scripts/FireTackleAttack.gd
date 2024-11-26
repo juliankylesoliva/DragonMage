@@ -38,7 +38,7 @@ class_name FireTackleAttack
 
 @export var fire_tackle_duration : float = 0.5
 
-@export var fire_tackle_slide_cancelable_time : float = 0.35
+@export var fire_tackle_slide_cancelable_distance : float = 48
 
 @export var fire_tackle_fireball_recoil_strength : float = 4
 
@@ -60,11 +60,13 @@ class_name FireTackleAttack
 
 @export var fire_tackle_max_velocity_magnitude_offset : float = 24
 
+@export var fireball_min_tackle_distance : float = 136.8
+
 @export_color_no_alpha var fire_tackle_startup_color : Color = Color.WHITE
 
 @export_color_no_alpha var fire_tackle_active_color : Color = Color.WHITE
 
-@export_color_no_alpha var fire_tackle_jump_cancel_buffer_color : Color = Color.WHITE
+@export_color_no_alpha var fire_tackle_fireball_ready_color : Color = Color.WHITE
 
 @export_color_no_alpha var fire_tackle_endlag_color : Color = Color.WHITE
 
@@ -107,6 +109,8 @@ var is_player_firing_projectile : bool = false
 var current_endlag_timer : float = 0
 var is_fire_tackle_endlag_canceled : bool = false
 var saved_endlag_velocity : float = 0
+
+var distance_traveled : float = 0
 
 func can_use_attack():
 	var state_name : String = hub.state_machine.current_state.name
@@ -157,6 +161,8 @@ func on_attack_state_exit():
 	current_endlag_timer = 0
 	is_fire_tackle_endlag_canceled = false
 	saved_endlag_velocity = 0
+	
+	distance_traveled = 0
 
 func startup_init():
 	current_attack_state = AttackState.STARTUP
@@ -233,8 +239,8 @@ func active_init():
 
 func active_update(delta : float):
 	hub.buffers.refresh_speed_preservation_buffer()
-	if (current_attack_timer > 0 and !hub.damage.is_player_defeated and !hub.damage.is_player_damaged() and ((current_bump_immunity_timer > 0 and (!can_cancel_fire_tackle_endlag() or hub.temper.is_form_locked())) or (!hub.collisions.is_facing_a_wall() and !(hub.char_body.is_on_ceiling() and !hub.char_body.is_on_floor())))):
-		if (!hub.temper.is_forcing_form_change() and current_attack_timer <= fire_tackle_slide_cancelable_time and hub.char_body.is_on_floor() and Input.is_action_pressed("Crouch")):
+	if (current_attack_timer > 0 and !hub.damage.is_player_defeated and !hub.damage.is_player_damaged() and (!is_attack_button_held or distance_traveled < fireball_min_tackle_distance) and ((current_bump_immunity_timer > 0 and (!can_cancel_fire_tackle_endlag() or hub.temper.is_form_locked())) or (!hub.collisions.is_facing_a_wall() and !(hub.char_body.is_on_ceiling() and !hub.char_body.is_on_floor())))):
+		if (!hub.temper.is_forcing_form_change() and distance_traveled >= fire_tackle_slide_cancelable_distance and hub.char_body.is_on_floor() and Input.is_action_pressed("Crouch")):
 			var selected_attack : Attack = hub.attacks.get_attack_by_name(hub.attacks.crouching_attack_name)
 			if (selected_attack != null):
 				hub.buffers.reset_attack_buffer()
@@ -245,8 +251,10 @@ func active_update(delta : float):
 				end_fire_tackle()
 				return
 		
-		if (current_attack_timer <= hub.buffers.jump_buffer_time):
-			hub.char_sprite.modulate = fire_tackle_jump_cancel_buffer_color
+		var prev_x : float = hub.char_body.global_position.x
+		
+		if (distance_traveled >= fireball_min_tackle_distance):
+			hub.char_sprite.modulate = fire_tackle_fireball_ready_color
 		
 		if (hub.buffers.is_attack_buffer_active()):
 			hub.buffers.reset_attack_buffer()
@@ -301,6 +309,8 @@ func active_update(delta : float):
 		
 		current_attack_timer = move_toward(current_attack_timer, 0, delta)
 		current_bump_immunity_timer = move_toward(current_bump_immunity_timer, 0, delta)
+		if (hub.char_body.global_position.x != prev_x):
+			distance_traveled += abs(horizontal_result * delta)
 	elif(hub.damage.is_player_damaged()):
 		end_fire_tackle()
 	else:
@@ -370,7 +380,10 @@ func endlag_init():
 			hub.animation.set_animation("DraelynFireTackleEndlag")
 			hub.animation.set_animation_speed(1)
 	
-	hub.jumping.switch_to_falling_gravity()
+	if ((is_player_firing_projectile or did_player_bump) and !hub.char_body.is_on_floor()):
+		hub.jumping.switch_to_rising_gravity()
+	else:
+		hub.jumping.switch_to_falling_gravity()
 	current_endlag_timer = (fire_tackle_endlag_cancelable_time if hub.jumping.can_wall_climb_from_fire_tackle() else fire_tackle_endlag_duration)
 
 func endlag_update(delta : float):
@@ -459,6 +472,8 @@ func end_fire_tackle():
 	
 	if (!is_fire_tackle_endlag_canceled and !hub.damage.is_player_damaged()):
 		hub.form.start_form_change_cooldown_timer()
+	
+	hub.jumping.switch_to_falling_gravity()
 	
 	if (hub.is_deactivated):
 		hub.state_machine.current_state.set_next_state(hub.state_machine.get_state_by_name("Deactivated"))

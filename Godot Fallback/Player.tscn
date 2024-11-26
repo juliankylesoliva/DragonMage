@@ -1552,6 +1552,10 @@ gradient = SubResource("Gradient_veqdj")
 script = ExtResource("10_rgamg")
 
 [node name="BlastJumpGuideArrows" type="Sprite2D" parent="Hub/Attacks/MagicBlast"]
+visible = false
+light_mask = 32
+visibility_layer = 32
+z_index = 6
 texture = ExtResource("18_4dqq4")
 offset = Vector2(0, -24)
 
@@ -1569,16 +1573,16 @@ fire_tackle_vertical_acceleration = 704.0
 fire_tackle_bonk_knockback = 192.0
 fire_tackle_bump_immunity_duration = 0.1
 fire_tackle_duration = 0.45
-fire_tackle_slide_cancelable_time = 0.225
-fire_tackle_fireball_recoil_strength = 128.0
+fire_tackle_fireball_recoil_strength = 160.0
 fire_tackle_fireball_base_launch_speed = 128.0
 fire_tackle_endlag_duration = 0.4
 fire_tackle_endlag_deceleration = 640.0
 fire_tackle_endlag_cancelable_time = 0.35
 fire_tackle_slide_cancel_penalty = 0.25
+fireball_min_tackle_distance = 96.0
 fire_tackle_startup_color = Color(0.901961, 0.858824, 0.458824, 1)
 fire_tackle_active_color = Color(0.980392, 0.568627, 0.317647, 1)
-fire_tackle_jump_cancel_buffer_color = Color(0.831373, 0.219608, 0.0666667, 1)
+fire_tackle_fireball_ready_color = Color(0.639216, 0.168627, 0.0509804, 1)
 fire_tackle_endlag_color = Color(0.8, 0.8, 0.8, 1)
 fire_tackle_trail_spawn_interval = 0.333
 uses_attack_state = true

@@ -49,11 +49,11 @@ func _input(event):
 		refresh_jump_buffer()
 	if (event.is_action_pressed("Glide")):
 		refresh_glide_buffer()
-	if (Input.is_action_just_pressed("Attack") and hub.movement.is_crouching and !hub.char_body.is_on_floor()):
+	if (hub.jumping.enable_fast_falling and hub.state_machine.current_state.name != "Attacking" and Input.is_action_just_pressed("Attack") and hub.movement.is_crouching and !hub.char_body.is_on_floor()):
 		refresh_fast_fall_buffer()
 	if (event.is_action_pressed("Fairy Ability")):
 		refresh_fairy_ability_buffer()
-	if (event.is_action_pressed("Attack")):
+	if (event.is_action_pressed("Attack") and !is_fast_fall_buffer_active()):
 		refresh_attack_buffer()
 	if (event.is_action_pressed("Change Form")):
 		refresh_form_change_buffer()

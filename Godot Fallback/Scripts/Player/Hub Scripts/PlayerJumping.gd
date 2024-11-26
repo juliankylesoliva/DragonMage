@@ -355,7 +355,7 @@ func falling_update(delta : float):
 		hub.char_body.velocity.y = max_fall_speed_to_use
 
 func can_fast_fall():
-	return (enable_fast_falling and !is_fast_falling and hub.buffers.is_fast_fall_buffer_active() and fast_falling_speed > max_fall_speed and !hub.char_body.is_on_floor() and hub.char_body.velocity.y >= fast_fall_threshold and hub.char_body.velocity.y < fast_falling_speed)
+	return (enable_fast_falling and !is_fast_falling and hub.movement.is_crouching and hub.buffers.is_fast_fall_buffer_active() and fast_falling_speed > max_fall_speed and !hub.char_body.is_on_floor() and hub.char_body.velocity.y >= fast_fall_threshold and hub.char_body.velocity.y < fast_falling_speed)
 
 func can_fast_fall_slope_boost():
 	return (enable_fast_falling and is_fast_falling and hub.char_body.is_on_floor() and hub.collisions.get_distance_to_ground() <= hub.char_body.floor_snap_length and hub.char_body.get_floor_angle() > fast_fall_slope_boost_threshold)
@@ -508,7 +508,7 @@ func start_wall_jump():
 	activate_wall_jump_lock_timer()
 
 func can_wall_climb():
-	return (enable_wall_climbing and !hub.movement.is_crouching and !hub.char_body.is_on_ceiling() and hub.collisions.get_distance_to_ground() >= min_wall_climb_height and current_wall_climb_time <= 0 and hub.collisions.is_moving_against_a_wall() and !hub.collisions.is_moving_against_an_intangible_wall() and (hub.get_input_vector().x * hub.movement.get_facing_value()) > 0)
+	return (enable_wall_climbing and !hub.movement.is_crouching and !is_fast_falling and !hub.char_body.is_on_ceiling() and hub.collisions.get_distance_to_ground() >= min_wall_climb_height and current_wall_climb_time <= 0 and hub.collisions.is_moving_against_a_wall() and !hub.collisions.is_moving_against_an_intangible_wall() and (hub.get_input_vector().x * hub.movement.get_facing_value()) > 0)
 
 func can_wall_climb_from_wall_slide():
 	return (enable_wall_climbing and current_wall_climb_time <= 0 and !hub.char_body.is_on_ceiling() and !hub.char_body.is_on_floor() and hub.collisions.is_facing_a_wall() and !hub.collisions.is_facing_an_intangible_wall() and (hub.get_input_vector().x == hub.movement.get_facing_value() or current_wall_release_timer < wall_release_time))
