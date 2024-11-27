@@ -125,7 +125,7 @@ offset_bottom = 96.0
 theme_override_fonts/normal_font = ExtResource("5_jqmas")
 theme_override_font_sizes/normal_font_size = 8
 bbcode_enabled = true
-text = "[center]You must be at least *this* far back to spit a fireball!
+text = "[center]You must have at least *this* much space to spit a fireball!
 
 
 
