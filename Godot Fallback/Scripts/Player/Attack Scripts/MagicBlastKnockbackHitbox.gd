@@ -6,6 +6,8 @@ class_name MagicBlastKnockbackHitbox
 
 @export var knockback_falloff_threshold : float = 32
 
+@export var active_blast_jump_frames : int = 2
+
 @export_flags_2d_physics var player_layer
 
 @export_flags_2d_physics var ground_layer
@@ -18,12 +20,16 @@ var rid_list : Array[RID]
 
 var bodies_entered : Array[Node2D]
 
-var can_activate_blast_jump : bool = true
+var current_blast_jump_frames : int = 0
+
+func _ready():
+	super._ready()
+	current_blast_jump_frames = active_blast_jump_frames
 
 func _physics_process(_delta):
 	resolve_bodies_entered()
-	if (can_activate_blast_jump):
-		can_activate_blast_jump = false
+	if (current_blast_jump_frames > 0):
+		current_blast_jump_frames -= 1
 	super._physics_process(_delta)
 
 func _on_body_entered(body):
@@ -43,7 +49,7 @@ func resolve_bodies_entered():
 		if (body is Boss):
 			do_damage_boss(body)
 		elif (body is CharacterBody2D):
-			if (body.has_meta("Tag") and body.get_meta("Tag") == "Player" and can_activate_blast_jump):
+			if (body.has_meta("Tag") and body.get_meta("Tag") == "Player" and current_blast_jump_frames > 0):
 				do_magic_blast_knockback(body)
 			elif (body.has_meta("Tag") and body.get_meta("Tag") == "Enemy"):
 				ray.collision_mask = enemy_layer
@@ -104,6 +110,7 @@ func do_magic_blast_knockback(body):
 			hub.movement.current_horizontal_velocity = hub.char_body.velocity.x
 		
 		hub.attacks.get_attack_by_name(hub.attacks.standing_attack_name).activate_blast_jump()
+		active_blast_jump_frames = 0
 
 func defeat_enemy(body):
 	var target_pos : Vector2 = ((body as Node2D).global_position - ray.global_position)
