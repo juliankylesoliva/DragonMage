@@ -24,7 +24,7 @@
 [ext_resource type="PackedScene" uid="uid://d4k1uyppkebhw" path="res://Level Scenes/CH1_LV2/Rooms/CH1_LV2_R9.tscn" id="12_7wfl6"]
 [ext_resource type="PackedScene" uid="uid://cjmi2md4tdxux" path="res://Level Scenes/CH1_LV2/Rooms/CH1_LV2_R10.tscn" id="13_dsrmw"]
 [ext_resource type="PackedScene" uid="uid://c6k6v7fefypvo" path="res://Level Scenes/CH1_LV2/Rooms/CH1_LV2_R11.tscn" id="24_0f8bc"]
-[ext_resource type="AudioStream" uid="uid://dlkxc1pklejn3" path="res://Music/Chiptune_Downtempo_Funk_Party.wav" id="24_clkf0"]
+[ext_resource type="AudioStream" uid="uid://dlkxc1pklejn3" path="res://Music/CH1/Chiptune_Downtempo_Funk_Party.wav" id="24_clkf0"]
 
 [node name="CH1_LV2" type="Node2D" node_paths=PackedStringArray("player_reference", "starting_room", "room_list", "clear_timer")]
 script = ExtResource("1_lbrws")
