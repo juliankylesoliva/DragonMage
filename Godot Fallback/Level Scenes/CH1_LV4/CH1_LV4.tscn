@@ -231,7 +231,7 @@ room_destination = NodePath("../../CH1_LV4_R13")
 boss = NodePath("../../TrainBossHandler")
 
 [node name="CH1_LV4_R13" parent="." instance=ExtResource("21_dyjpq")]
-position = Vector2(1696, 224)
+position = Vector2(1696, 704)
 
 [node name="TrainBoss" parent="CH1_LV4_R13" index="4" node_paths=PackedStringArray("boss")]
 boss = NodePath("../../TrainBossHandler")
