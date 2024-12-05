@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://btrc5e3rd18ua"]
+[gd_scene load_steps=10 format=3 uid="uid://btrc5e3rd18ua"]
 
 [ext_resource type="Script" path="res://Scripts/Utility Scripts/Room.gd" id="1_c0kqm"]
 [ext_resource type="TileSet" uid="uid://dhwi7i1loa2pd" path="res://Sprites/Tiles/Test Tiles/TestTileSet.tres" id="2_yuf0h"]
@@ -7,9 +7,12 @@
 [ext_resource type="PackedScene" uid="uid://clfqwsy4byrkf" path="res://Scene Objects/Enemies/GreenDragoon.tscn" id="5_cxxp5"]
 [ext_resource type="PackedScene" uid="uid://dwnpgujive352" path="res://Scene Objects/Enemies/RedDragoon.tscn" id="6_7hkt1"]
 [ext_resource type="PackedScene" uid="uid://curi6w4ex7jou" path="res://Scene Objects/Enemies/YellowDragoon.tscn" id="7_wag2q"]
+[ext_resource type="Texture2D" uid="uid://e1r1app11lii" path="res://Sprites/Backgrounds/1_4_BG/TrainBossTunnelBG_1.png" id="8_lfh8i"]
+[ext_resource type="Script" path="res://Scripts/Utility Scripts/BGRegionScroll.gd" id="9_fteyl"]
 
-[node name="CH1_LV4_R12B" type="Node2D" node_paths=PackedStringArray("tilemap_list", "room_entrances", "enemy_nodes")]
+[node name="CH1_LV4_R12B" type="Node2D" node_paths=PackedStringArray("parallax_bg", "tilemap_list", "room_entrances", "enemy_nodes")]
 script = ExtResource("1_c0kqm")
+parallax_bg = NodePath("ParallaxBackground")
 tilemap_list = [NodePath("BoundaryCollisionTilemap"), NodePath("LevelCollisionTilemap")]
 right_camera_limit = 2048
 room_entrances = [NodePath("Entrance 0")]
@@ -72,3 +75,18 @@ position = Vector2(1088, 224)
 
 [node name="YellowDragoon" parent="." instance=ExtResource("7_wag2q")]
 position = Vector2(1536, 192)
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+visible = false
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2(0, 0)
+
+[node name="TrainBossTunnelBGs" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
+texture_repeat = 2
+texture = ExtResource("8_lfh8i")
+centered = false
+region_enabled = true
+region_rect = Rect2(0, 0, 512, 320)
+script = ExtResource("9_fteyl")
+scroll_speed = 378.0

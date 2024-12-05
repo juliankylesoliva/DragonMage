@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://cognb03fchfgs"]
+[gd_scene load_steps=11 format=3 uid="uid://cognb03fchfgs"]
 
 [ext_resource type="Script" path="res://Scripts/Utility Scripts/Room.gd" id="1_c0kqm"]
 [ext_resource type="TileSet" uid="uid://dhwi7i1loa2pd" path="res://Sprites/Tiles/Test Tiles/TestTileSet.tres" id="2_yuf0h"]
@@ -7,9 +7,13 @@
 [ext_resource type="PackedScene" uid="uid://clfqwsy4byrkf" path="res://Scene Objects/Enemies/GreenDragoon.tscn" id="5_m2pso"]
 [ext_resource type="PackedScene" uid="uid://u5nios6kfqhs" path="res://Scene Objects/Objects/BossDragonFruitSpawner.tscn" id="6_agfcl"]
 [ext_resource type="PackedScene" uid="uid://b2a0ttqvejk51" path="res://Scene Objects/Objects/TemperDragonFruit.tscn" id="7_6o3jv"]
+[ext_resource type="Texture2D" uid="uid://d0bbhi1k118mg" path="res://Sprites/Backgrounds/0_1_BG/ForestSkyGradientBG.png" id="8_rvriq"]
+[ext_resource type="Texture2D" uid="uid://0uuhxw1dnvqw" path="res://Sprites/Backgrounds/0_2_BG/MountainsBack.png" id="9_p6lq2"]
+[ext_resource type="Texture2D" uid="uid://cqdxwg0yhese4" path="res://Sprites/Backgrounds/0_2_BG/MountainsFront.png" id="10_kep0r"]
 
-[node name="CH1_LV4_R12C" type="Node2D" node_paths=PackedStringArray("tilemap_list", "room_entrances", "enemy_nodes")]
+[node name="CH1_LV4_R12C" type="Node2D" node_paths=PackedStringArray("parallax_bg", "tilemap_list", "room_entrances", "enemy_nodes")]
 script = ExtResource("1_c0kqm")
+parallax_bg = NodePath("ParallaxBackground")
 tilemap_list = [NodePath("BoundaryCollisionTilemap"), NodePath("LevelCollisionTilemap")]
 right_camera_limit = 768
 room_entrances = [NodePath("Entrance 0"), NodePath("Entrance 1")]
@@ -124,6 +128,42 @@ start_despawned = true
 [node name="BossDragonFruitSpawner" parent="." node_paths=PackedStringArray("dragonfruits", "room_origin") instance=ExtResource("6_agfcl")]
 dragonfruits = [NodePath("../TemperDragonFruit"), NodePath("../TemperDragonFruit2")]
 room_origin = NodePath("..")
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+visible = false
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2(0.01, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
+texture_repeat = 2
+texture = ExtResource("8_rvriq")
+centered = false
+offset = Vector2(-512, 0)
+region_enabled = true
+region_rect = Rect2(0, 0, 1280, 320)
+
+[node name="ParallaxLayer2" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2(0.02, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer2"]
+texture_repeat = 2
+texture = ExtResource("9_p6lq2")
+centered = false
+offset = Vector2(-512, 0)
+region_enabled = true
+region_rect = Rect2(0, 0, 1280, 320)
+
+[node name="ParallaxLayer3" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2(0.04, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer3"]
+texture_repeat = 2
+texture = ExtResource("10_kep0r")
+centered = false
+offset = Vector2(-512, 0)
+region_enabled = true
+region_rect = Rect2(0, 0, 1280, 320)
 
 [connection signal="room_activated" from="." to="TrainBoss" method="initialize_train"]
 [connection signal="room_deactivated" from="." to="TrainBoss" method="disable_train"]

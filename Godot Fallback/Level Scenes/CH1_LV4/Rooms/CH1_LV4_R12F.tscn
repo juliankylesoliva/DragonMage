@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://bvht0ifmkosvo"]
+[gd_scene load_steps=14 format=3 uid="uid://bvht0ifmkosvo"]
 
 [ext_resource type="Script" path="res://Scripts/Utility Scripts/Room.gd" id="1_km8jc"]
 [ext_resource type="TileSet" uid="uid://dhwi7i1loa2pd" path="res://Sprites/Tiles/Test Tiles/TestTileSet.tres" id="2_8vb88"]
@@ -11,9 +11,12 @@
 [ext_resource type="PackedScene" uid="uid://bajk0w7eoh6o8" path="res://Scene Objects/Objects/ReinforcedBlock.tscn" id="8_sum03"]
 [ext_resource type="PackedScene" uid="uid://dgtmsbsmeieyh" path="res://Scene Objects/Objects/ReinforcedMagicBlock.tscn" id="9_nmwu3"]
 [ext_resource type="PackedScene" uid="uid://dck0mc2tc82kx" path="res://Scene Objects/Objects/ReinforcedFireBlock.tscn" id="10_20fy2"]
+[ext_resource type="Texture2D" uid="uid://cgs1ysjx61xg" path="res://Sprites/Backgrounds/1_4_BG/TrainBossTunnelBG_3.png" id="12_fik7l"]
+[ext_resource type="Script" path="res://Scripts/Utility Scripts/BGRegionScroll.gd" id="13_ucasv"]
 
-[node name="CH1_LV4_R12F" type="Node2D" node_paths=PackedStringArray("tilemap_list", "room_entrances", "enemy_nodes")]
+[node name="CH1_LV4_R12F" type="Node2D" node_paths=PackedStringArray("parallax_bg", "tilemap_list", "room_entrances", "enemy_nodes")]
 script = ExtResource("1_km8jc")
+parallax_bg = NodePath("ParallaxBackground")
 tilemap_list = [NodePath("BoundaryCollisionTilemap"), NodePath("LevelCollisionTilemap")]
 right_camera_limit = 2048
 room_entrances = [NodePath("Entrance 0")]
@@ -97,6 +100,21 @@ position = Vector2(896, 192)
 
 [node name="ReinforcedFireBlock" parent="." instance=ExtResource("10_20fy2")]
 position = Vector2(1600, 224)
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+visible = false
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2(0, 0)
+
+[node name="TrainBossTunnelBGs" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
+texture_repeat = 2
+texture = ExtResource("12_fik7l")
+centered = false
+region_enabled = true
+region_rect = Rect2(0, 0, 512, 320)
+script = ExtResource("13_ucasv")
+scroll_speed = 604.8
 
 [editable path="GreenDragoon"]
 [editable path="YellowDragoon"]
