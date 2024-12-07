@@ -109,7 +109,7 @@ position = Vector2(1024, 80)
 floor_length = 2
 
 [node name="FloorSpikes4" parent="Spikes" instance=ExtResource("9_b3u16")]
-position = Vector2(1408, 80)
+position = Vector2(1344, 80)
 floor_length = 4
 
 [node name="Fragments" type="Node2D" parent="."]
@@ -168,10 +168,10 @@ position = Vector2(608, 64)
 position = Vector2(1088, 96)
 
 [node name="ReinforcedFireBlock" parent="Blocks" instance=ExtResource("8_uopbt")]
-position = Vector2(1376, 64)
+position = Vector2(1312, 64)
 
 [node name="ReinforcedFireBlock2" parent="Blocks" instance=ExtResource("8_uopbt")]
-position = Vector2(1440, 64)
+position = Vector2(1376, 64)
 
 [node name="TemperDragonFruit" parent="." instance=ExtResource("11_ggjfs")]
 position = Vector2(960, 192)

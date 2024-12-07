@@ -69,7 +69,7 @@ layer_1/enabled = true
 layer_1/modulate = Color(1, 1, 1, 1)
 layer_1/y_sort_enabled = false
 layer_1/y_sort_origin = 0
-layer_1/z_index = 0
+layer_1/z_index = -1
 layer_1/tile_data = PackedInt32Array(196624, 65552, 0, 196633, 65552, 0, 196639, 16, 0, 196630, 16, 0)
 metadata/Tag = "IntangibleWall"
 

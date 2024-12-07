@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://70yevypkcvnx"]
+[gd_scene load_steps=11 format=3 uid="uid://70yevypkcvnx"]
 
 [ext_resource type="Script" path="res://Scripts/Utility Scripts/Room.gd" id="1_hjs8t"]
 [ext_resource type="TileSet" uid="uid://dhwi7i1loa2pd" path="res://Sprites/Tiles/Test Tiles/TestTileSet.tres" id="2_1o4y0"]
@@ -7,9 +7,13 @@
 [ext_resource type="PackedScene" uid="uid://dwnpgujive352" path="res://Scene Objects/Enemies/RedDragoon.tscn" id="5_43lwf"]
 [ext_resource type="PackedScene" uid="uid://dfkmxoba64spw" path="res://Scene Objects/Objects/MedalFragment.tscn" id="6_4pmhc"]
 [ext_resource type="PackedScene" uid="uid://b2a0ttqvejk51" path="res://Scene Objects/Objects/TemperDragonFruit.tscn" id="7_b8we7"]
+[ext_resource type="Texture2D" uid="uid://pcas0ojllbno" path="res://Sprites/Backgrounds/1_4_BG/RailwayPlatformTileBG.png" id="8_8q45x"]
+[ext_resource type="Texture2D" uid="uid://by6t3qkbhxycd" path="res://Sprites/Backgrounds/1_4_BG/RailwayGroundPlatformBG.png" id="9_cq2k6"]
+[ext_resource type="Texture2D" uid="uid://ceuckv2a4fjqq" path="res://Sprites/Backgrounds/1_4_BG/RailwayDividerBG.png" id="10_8usvb"]
 
-[node name="CH1_LV4_R4" type="Node2D" node_paths=PackedStringArray("tilemap_list", "room_entrances", "enemy_nodes", "medal_fragments")]
+[node name="CH1_LV4_R4" type="Node2D" node_paths=PackedStringArray("parallax_bg", "tilemap_list", "room_entrances", "enemy_nodes", "medal_fragments")]
 script = ExtResource("1_hjs8t")
+parallax_bg = NodePath("ParallaxBackground")
 tilemap_list = [NodePath("BoundaryCollisionTilemap"), NodePath("LevelCollisionTilemap")]
 right_camera_limit = 1536
 room_entrances = [NodePath("Entrance 0"), NodePath("Entrance 1")]
@@ -163,5 +167,41 @@ enable_wings = true
 
 [node name="TemperDragonFruit" parent="." instance=ExtResource("7_b8we7")]
 position = Vector2(1120, 128)
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+visible = false
+
+[node name="TileWall" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2(0.75, 0)
+
+[node name="RailwayPlatformTileBg" type="Sprite2D" parent="ParallaxBackground/TileWall"]
+texture_repeat = 2
+texture = ExtResource("8_8q45x")
+centered = false
+offset = Vector2(-512, 0)
+region_enabled = true
+region_rect = Rect2(0, 0, 2048, 320)
+
+[node name="Platform" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2(0.8, 0)
+
+[node name="RailwayGroundPlatformBg" type="Sprite2D" parent="ParallaxBackground/Platform"]
+texture_repeat = 2
+texture = ExtResource("9_cq2k6")
+centered = false
+offset = Vector2(-512, 0)
+region_enabled = true
+region_rect = Rect2(0, 0, 2048, 320)
+
+[node name="Divider" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2(0.9, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/Divider"]
+texture_repeat = 2
+texture = ExtResource("10_8usvb")
+centered = false
+offset = Vector2(-512, 0)
+region_enabled = true
+region_rect = Rect2(0, 0, 2048, 320)
 
 [editable path="RedDragoon3"]
