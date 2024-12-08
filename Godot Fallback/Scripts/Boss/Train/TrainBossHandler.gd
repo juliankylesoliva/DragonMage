@@ -2,6 +2,8 @@ extends Boss
 
 class_name TrainBossHandler
 
+@export var exit_gate_sprite : Sprite2D
+
 @export var starting_train : TrainHazard
 
 @export var dummy_warps : Array[WarpTrigger]
@@ -27,6 +29,7 @@ func _physics_process(delta):
 		textbox.update_player_name_format_text(player_hub.form.get_current_form_name())
 
 func on_activation():
+	exit_gate_sprite.set_visible(true)
 	player_hub.set_respawn_position(boss_room.get_room_entrance_coordinates(1))
 	if (player_hub.temper.is_forcing_form_change() or player_hub.temper.is_form_locked()):
 		player_hub.temper.set_boss_courtesy_temper_level()
