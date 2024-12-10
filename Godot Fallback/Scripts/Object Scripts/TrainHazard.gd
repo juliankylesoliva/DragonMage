@@ -30,6 +30,8 @@ enum TrainHazardState {IDLE, ACTIVE}
 
 @export_range(0, 1) var damage_flicker_alpha : float = 0.25
 
+@export var train_sprites : Array[Sprite2D]
+
 var is_train_disabled : bool = true
 
 var is_player_detected : bool = false
@@ -76,6 +78,9 @@ func _physics_process(_delta):
 			current_direction *= -1
 			hurtbox_collision_shape.position.x *= -1
 			contact_collision_shape.position.x *= -1
+			for sprite in train_sprites:
+				sprite.position.x *= -1
+				sprite.flip_h = !sprite.flip_h
 			self.global_position = (left_start_point.global_position if current_direction > 0 else right_start_point.global_position)
 			calculate_target_x()
 			current_idle_timer = idle_interval
@@ -95,6 +100,10 @@ func initialize_train():
 			hurtbox_collision_shape.position.x *= -1
 		if (contact_collision_shape.position.x * current_direction > 0):
 			contact_collision_shape.position.x *= -1
+		for sprite in train_sprites:
+			if (sprite.position.x * current_direction > 0):
+				sprite.position.x *= -1
+				sprite.flip_h = (sprite.position.x > 0)
 		calculate_target_x()
 		current_idle_timer = idle_interval
 

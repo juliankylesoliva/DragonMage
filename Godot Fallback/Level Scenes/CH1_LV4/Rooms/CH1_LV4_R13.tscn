@@ -84,17 +84,29 @@ right_start_point = NodePath("../TrainStartPointR")
 [node name="ContactHitboxArea" parent="TrainBoss" index="0"]
 monitoring = false
 
-[node name="ColorRect" parent="TrainBoss/ContactHitboxArea/ContactHitbox" index="0"]
-z_index = 0
-
-[node name="ColorRect" parent="TrainBoss/BossHurtbox" index="0"]
-z_index = 0
-
 [node name="InsideWarp" parent="TrainBoss" index="2" node_paths=PackedStringArray("room_origin", "room_destination")]
 room_origin = NodePath("../..")
 room_destination = NodePath("../..")
 
-[node name="ColorRect" parent="TrainBoss/InsideWarp" index="1"]
+[node name="TrainExteriorFront" parent="TrainBoss" index="3"]
+z_index = 0
+
+[node name="TrainExterior" parent="TrainBoss" index="4"]
+z_index = 0
+
+[node name="TrainExterior2" parent="TrainBoss" index="5"]
+z_index = 0
+
+[node name="TrainExterior3" parent="TrainBoss" index="6"]
+z_index = 0
+
+[node name="TrainDoorOpen" parent="TrainBoss" index="7"]
+z_index = 0
+
+[node name="TrainMagicSign" parent="TrainBoss" index="8"]
+z_index = 0
+
+[node name="TrainFireSign" parent="TrainBoss" index="9"]
 z_index = 0
 
 [node name="TrainStartPointL" type="Node2D" parent="."]

@@ -5,12 +5,12 @@
 [ext_resource type="Texture2D" uid="uid://mc06i4t6o7nc" path="res://Sprites/Backgrounds/1_4_BG/TrainExterior.png" id="3_lsxcq"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bos6u"]
-size = Vector2(1760, 144)
+size = Vector2(1792, 144)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jqloy"]
 size = Vector2(256, 160)
 
-[node name="TrainHazard" type="StaticBody2D" node_paths=PackedStringArray("hurtbox_collision_shape", "contact_collision_shape", "contact_area", "node_2d")]
+[node name="TrainHazard" type="StaticBody2D" node_paths=PackedStringArray("hurtbox_collision_shape", "contact_collision_shape", "contact_area", "train_sprites", "node_2d")]
 process_mode = 4
 visible = false
 collision_layer = 0
@@ -22,6 +22,7 @@ contact_collision_shape = NodePath("ContactHitboxArea/ContactHitbox")
 contact_area = NodePath("ContactHitboxArea")
 damage_speed_modifier = 0.125
 speed_recovery_time = 8.0
+train_sprites = [NodePath("TrainExteriorFront"), NodePath("TrainExterior"), NodePath("TrainExterior2"), NodePath("TrainExterior3")]
 node_2d = NodePath("Hurtbox")
 break_durablility = 1
 break_sound = "damage_enemy"

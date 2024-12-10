@@ -9,12 +9,12 @@
 [ext_resource type="Texture2D" uid="uid://bxl78mm7vvx2d" path="res://Sprites/Backgrounds/1_4_BG/TrainFireSign.png" id="7_ofdcj"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_r2t8j"]
-size = Vector2(1760, 144)
+size = Vector2(1792, 144)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_613r5"]
 size = Vector2(256, 160)
 
-[node name="TrainBoss" type="StaticBody2D" node_paths=PackedStringArray("warp", "warp_sprite", "magic_sign_sprite", "fire_sign_sprite", "hurtbox_collision_shape", "contact_collision_shape", "contact_area", "node_2d")]
+[node name="TrainBoss" type="StaticBody2D" node_paths=PackedStringArray("warp", "warp_sprite", "magic_sign_sprite", "fire_sign_sprite", "hurtbox_collision_shape", "contact_collision_shape", "contact_area", "train_sprites", "node_2d")]
 visible = false
 collision_layer = 0
 collision_mask = 0
@@ -29,6 +29,7 @@ contact_collision_shape = NodePath("ContactHitboxArea/ContactHitbox")
 contact_area = NodePath("ContactHitboxArea")
 damage_speed_modifier = 0.75
 speed_recovery_time = 8.0
+train_sprites = [NodePath("TrainExteriorFront"), NodePath("TrainExterior"), NodePath("TrainExterior2"), NodePath("TrainExterior3"), NodePath("TrainDoorOpen"), NodePath("TrainMagicSign"), NodePath("TrainFireSign")]
 node_2d = NodePath("BossHurtbox")
 break_durablility = 1
 break_sound = "damage_enemy"

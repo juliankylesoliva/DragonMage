@@ -26,6 +26,16 @@ func _process(_delta):
 		if (current_idle_timer <= 0):
 			current_state = TrainHazardState.ACTIVE
 			breakable_by = ("MAGIC" if current_direction > 0 else "FIRE")
+			match breakable_by:
+				"MAGIC":
+					magic_sign_sprite.set_visible(true)
+					fire_sign_sprite.set_visible(false)
+				"FIRE":
+					magic_sign_sprite.set_visible(false)
+					fire_sign_sprite.set_visible(true)
+				_:
+					magic_sign_sprite.set_visible(false)
+					fire_sign_sprite.set_visible(false)
 	elif (current_state == TrainHazardState.ACTIVE and player_ref != null and is_player_detected):
 		if (player_ref.damage.do_damage_warp()):
 			EffectFactory.get_effect("EnemyContactImpact", player_ref.char_body.global_position)
@@ -37,6 +47,7 @@ func _physics_process(_delta):
 	if (current_state == TrainHazardState.ACTIVE):
 		contact_area.monitoring = (!is_slowed_down() and !took_damage())
 		warp.monitoring = is_slowed_down()
+		warp_sprite.set_visible(warp.monitoring)
 		self.collision_layer = (0 if is_slowed_down() or took_damage() else hurtbox_collision_layers)
 		is_flickering = (!is_flickering if is_slowed_down() or took_damage() else false)
 		self.modulate.a = (damage_flicker_alpha if is_flickering else 1.0)
@@ -53,6 +64,9 @@ func _physics_process(_delta):
 			hurtbox_collision_shape.position.x *= -1
 			contact_collision_shape.position.x *= -1
 			warp.position.x *= -1
+			for sprite in train_sprites:
+				sprite.position.x *= -1
+				sprite.flip_h = !sprite.flip_h
 			self.global_position = (left_start_point.global_position if current_direction > 0 else right_start_point.global_position)
 			calculate_target_x()
 			current_idle_timer = idle_interval
@@ -80,6 +94,10 @@ func initialize_train():
 			contact_collision_shape.position.x *= -1
 		if (warp.position.x * current_direction > 0):
 			warp.position.x *= -1
+		for sprite in train_sprites:
+			if (sprite.position.x * current_direction > 0):
+				sprite.position.x *= -1
+				sprite.flip_h = (sprite.position.x > 0)
 		calculate_target_x()
 		current_idle_timer = (0.0 if is_dropping_off else idle_interval)
 		boss.reset_post_damage_invulnerability()
