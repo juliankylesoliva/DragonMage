@@ -14,6 +14,12 @@ class_name TrainBoss
 
 @export var warp : WarpTrigger
 
+@export var warp_sprite : Sprite2D
+
+@export var magic_sign_sprite : Sprite2D
+
+@export var fire_sign_sprite : Sprite2D
+
 func _process(_delta):
 	if (current_state == TrainHazardState.IDLE and current_idle_timer > 0):
 		current_idle_timer = move_toward(current_idle_timer, 0, _delta)

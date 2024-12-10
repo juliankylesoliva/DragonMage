@@ -1,9 +1,11 @@
-[gd_scene load_steps=4 format=3 uid="uid://bxbwf76suu7jl"]
+[gd_scene load_steps=6 format=3 uid="uid://bxbwf76suu7jl"]
 
 [ext_resource type="Script" path="res://Scripts/Object Scripts/TrainHazard.gd" id="1_q676f"]
+[ext_resource type="Texture2D" uid="uid://ydrm8rhqxay6" path="res://Sprites/Backgrounds/1_4_BG/TrainExteriorFront.png" id="2_aca5r"]
+[ext_resource type="Texture2D" uid="uid://mc06i4t6o7nc" path="res://Sprites/Backgrounds/1_4_BG/TrainExterior.png" id="3_lsxcq"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bos6u"]
-size = Vector2(1792, 160)
+size = Vector2(1760, 144)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jqloy"]
 size = Vector2(256, 160)
@@ -33,16 +35,8 @@ collision_mask = 4
 [node name="ContactHitbox" type="CollisionShape2D" parent="ContactHitboxArea"]
 light_mask = 2
 visibility_layer = 2
-position = Vector2(-896, -80)
+position = Vector2(-896, -72)
 shape = SubResource("RectangleShape2D_bos6u")
-
-[node name="ColorRect" type="ColorRect" parent="ContactHitboxArea/ContactHitbox"]
-z_index = 3
-offset_left = -896.0
-offset_top = -80.0
-offset_right = 896.0
-offset_bottom = 80.0
-color = Color(0.45098, 0.180392, 0.180392, 1)
 
 [node name="Hurtbox" type="CollisionShape2D" parent="."]
 light_mask = 2
@@ -50,13 +44,25 @@ visibility_layer = 2
 position = Vector2(-128, 0)
 shape = SubResource("RectangleShape2D_jqloy")
 
-[node name="ColorRect" type="ColorRect" parent="Hurtbox"]
+[node name="TrainExteriorFront" type="Sprite2D" parent="."]
 z_index = 3
-offset_left = -128.0
-offset_top = -80.0
-offset_right = 128.0
-offset_bottom = 80.0
-color = Color(0.180392, 0.180392, 0.45098, 1)
+position = Vector2(-128, 0)
+texture = ExtResource("2_aca5r")
+
+[node name="TrainExterior" type="Sprite2D" parent="."]
+z_index = 3
+position = Vector2(-512, 0)
+texture = ExtResource("3_lsxcq")
+
+[node name="TrainExterior2" type="Sprite2D" parent="."]
+z_index = 3
+position = Vector2(-1024, 0)
+texture = ExtResource("3_lsxcq")
+
+[node name="TrainExterior3" type="Sprite2D" parent="."]
+z_index = 3
+position = Vector2(-1536, 0)
+texture = ExtResource("3_lsxcq")
 
 [connection signal="body_entered" from="ContactHitboxArea" to="." method="_on_body_entered"]
 [connection signal="body_exited" from="ContactHitboxArea" to="." method="_on_body_exited"]

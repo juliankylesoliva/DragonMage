@@ -1,20 +1,28 @@
-[gd_scene load_steps=5 format=3 uid="uid://b21st3ctsljbd"]
+[gd_scene load_steps=10 format=3 uid="uid://b21st3ctsljbd"]
 
 [ext_resource type="Script" path="res://Scripts/Boss/Train/TrainBoss.gd" id="1_mk8o2"]
 [ext_resource type="PackedScene" uid="uid://dqbo0wu6hm8lj" path="res://Scene Objects/Objects/WarpTrigger.tscn" id="2_s1w6o"]
+[ext_resource type="Texture2D" uid="uid://ydrm8rhqxay6" path="res://Sprites/Backgrounds/1_4_BG/TrainExteriorFront.png" id="3_kn2mc"]
+[ext_resource type="Texture2D" uid="uid://mc06i4t6o7nc" path="res://Sprites/Backgrounds/1_4_BG/TrainExterior.png" id="4_pehg3"]
+[ext_resource type="Texture2D" uid="uid://bjk6btjbbb740" path="res://Sprites/Backgrounds/1_4_BG/TrainDoorOpen.png" id="5_exfsi"]
+[ext_resource type="Texture2D" uid="uid://cpxijc0ee8n5q" path="res://Sprites/Backgrounds/1_4_BG/TrainMagicSign.png" id="6_ajfy4"]
+[ext_resource type="Texture2D" uid="uid://bxl78mm7vvx2d" path="res://Sprites/Backgrounds/1_4_BG/TrainFireSign.png" id="7_ofdcj"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_r2t8j"]
-size = Vector2(1792, 160)
+size = Vector2(1760, 144)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_613r5"]
 size = Vector2(256, 160)
 
-[node name="TrainBoss" type="StaticBody2D" node_paths=PackedStringArray("warp", "hurtbox_collision_shape", "contact_collision_shape", "contact_area", "node_2d")]
+[node name="TrainBoss" type="StaticBody2D" node_paths=PackedStringArray("warp", "warp_sprite", "magic_sign_sprite", "fire_sign_sprite", "hurtbox_collision_shape", "contact_collision_shape", "contact_area", "node_2d")]
 visible = false
 collision_layer = 0
 collision_mask = 0
 script = ExtResource("1_mk8o2")
 warp = NodePath("InsideWarp")
+warp_sprite = NodePath("TrainDoorOpen")
+magic_sign_sprite = NodePath("TrainMagicSign")
+fire_sign_sprite = NodePath("TrainFireSign")
 hurtbox_collision_layers = 8
 hurtbox_collision_shape = NodePath("BossHurtbox")
 contact_collision_shape = NodePath("ContactHitboxArea/ContactHitbox")
@@ -30,39 +38,54 @@ collision_layer = 0
 collision_mask = 4
 
 [node name="ContactHitbox" type="CollisionShape2D" parent="ContactHitboxArea"]
-position = Vector2(-896, 0)
+position = Vector2(-896, 8)
 shape = SubResource("RectangleShape2D_r2t8j")
-
-[node name="ColorRect" type="ColorRect" parent="ContactHitboxArea/ContactHitbox"]
-z_index = 3
-offset_left = -896.0
-offset_top = -80.0
-offset_right = 896.0
-offset_bottom = 80.0
-color = Color(0.4, 0.16, 0.16, 1)
 
 [node name="BossHurtbox" type="CollisionShape2D" parent="."]
 position = Vector2(-128, 0)
 shape = SubResource("RectangleShape2D_613r5")
 
-[node name="ColorRect" type="ColorRect" parent="BossHurtbox"]
-z_index = 3
-offset_left = -128.0
-offset_top = -80.0
-offset_right = 128.0
-offset_bottom = 80.0
-color = Color(0.16, 0.16, 0.4, 1)
-
 [node name="InsideWarp" parent="." instance=ExtResource("2_s1w6o")]
 position = Vector2(-1728, 16)
 monitoring = false
 
-[node name="ColorRect" type="ColorRect" parent="InsideWarp"]
+[node name="TrainExteriorFront" type="Sprite2D" parent="."]
 z_index = 3
-offset_left = -24.0
-offset_top = -32.0
-offset_right = 24.0
-offset_bottom = 32.0
+position = Vector2(-128, 0)
+texture = ExtResource("3_kn2mc")
+
+[node name="TrainExterior" type="Sprite2D" parent="."]
+z_index = 3
+position = Vector2(-512, 0)
+texture = ExtResource("4_pehg3")
+
+[node name="TrainExterior2" type="Sprite2D" parent="."]
+z_index = 3
+position = Vector2(-1024, 0)
+texture = ExtResource("4_pehg3")
+
+[node name="TrainExterior3" type="Sprite2D" parent="."]
+z_index = 3
+position = Vector2(-1536, 0)
+texture = ExtResource("4_pehg3")
+
+[node name="TrainDoorOpen" type="Sprite2D" parent="."]
+visible = false
+z_index = 3
+position = Vector2(-1728, 12)
+texture = ExtResource("5_exfsi")
+
+[node name="TrainMagicSign" type="Sprite2D" parent="."]
+visible = false
+z_index = 3
+position = Vector2(-190, -8)
+texture = ExtResource("6_ajfy4")
+
+[node name="TrainFireSign" type="Sprite2D" parent="."]
+visible = false
+z_index = 3
+position = Vector2(-190, -8)
+texture = ExtResource("7_ofdcj")
 
 [connection signal="body_entered" from="ContactHitboxArea" to="." method="_on_body_entered"]
 [connection signal="body_exited" from="ContactHitboxArea" to="." method="_on_body_exited"]
