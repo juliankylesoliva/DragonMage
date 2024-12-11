@@ -71,23 +71,23 @@ layer_3/tile_data = PackedInt32Array()
 [node name="TrainInterior" type="Node2D" parent="."]
 
 [node name="TrainInteriorWindowsFront" type="Sprite2D" parent="TrainInterior"]
-modulate = Color(1, 1, 1, 0.7)
+modulate = Color(1, 1, 1, 0.5)
 z_index = 2
 position = Vector2(1792, 208)
 texture = ExtResource("14_xs4kd")
 
 [node name="TrainInteriorWindows" type="Sprite2D" parent="TrainInterior"]
-modulate = Color(1, 1, 1, 0.7)
+modulate = Color(1, 1, 1, 0.5)
 position = Vector2(1408, 208)
 texture = ExtResource("15_nmsxv")
 
 [node name="TrainInteriorWindows2" type="Sprite2D" parent="TrainInterior"]
-modulate = Color(1, 1, 1, 0.7)
+modulate = Color(1, 1, 1, 0.5)
 position = Vector2(896, 208)
 texture = ExtResource("15_nmsxv")
 
 [node name="TrainInteriorWindows3" type="Sprite2D" parent="TrainInterior"]
-modulate = Color(1, 1, 1, 0.7)
+modulate = Color(1, 1, 1, 0.5)
 position = Vector2(384, 208)
 texture = ExtResource("15_nmsxv")
 
