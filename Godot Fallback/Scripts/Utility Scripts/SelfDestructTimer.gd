@@ -14,3 +14,6 @@ func _process(delta):
 		current_lifetime_left = move_toward(current_lifetime_left, 0, delta)
 	else:
 		queue_free()
+
+func set_active():
+	set_process_mode(Node.PROCESS_MODE_INHERIT)

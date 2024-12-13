@@ -140,7 +140,7 @@ room_origin = NodePath("..")
 room_destination = NodePath("..")
 
 [node name="TrainBossConductor" parent="." instance=ExtResource("4_jky6q")]
-position = Vector2(1848, 216)
+position = Vector2(1834, 208)
 
 [node name="TemperDragonFruit" parent="." instance=ExtResource("5_wa2k4")]
 position = Vector2(512, 224)

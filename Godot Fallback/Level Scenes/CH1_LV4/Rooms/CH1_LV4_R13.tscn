@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://cr1ooel34bv5k"]
+[gd_scene load_steps=12 format=3 uid="uid://cr1ooel34bv5k"]
 
 [ext_resource type="Script" path="res://Scripts/Utility Scripts/Room.gd" id="1_c0kqm"]
 [ext_resource type="TileSet" uid="uid://dhwi7i1loa2pd" path="res://Sprites/Tiles/Test Tiles/TestTileSet.tres" id="2_yuf0h"]
@@ -10,6 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://bqjgsis2ebgdf" path="res://Sprites/Backgrounds/0_1_BG/LeavesBackBG.png" id="8_ahmgk"]
 [ext_resource type="Texture2D" uid="uid://wvc78b7rcsop" path="res://Sprites/Backgrounds/0_1_BG/LeavesBG.png" id="9_3mn8i"]
 [ext_resource type="Script" path="res://Scripts/Object Scripts/HiddenPassage.gd" id="10_fmtcq"]
+[ext_resource type="PackedScene" uid="uid://cogaa5gjg6ip7" path="res://Scene Objects/Bosses/TrainBossFlying.tscn" id="11_i778m"]
 
 [node name="CH1_LV4_R13" type="Node2D" node_paths=PackedStringArray("parallax_bg", "tilemap_list", "room_entrances")]
 script = ExtResource("1_c0kqm")
@@ -191,6 +192,7 @@ region_enabled = true
 region_rect = Rect2(0, 0, 1536, 32)
 
 [node name="HiddenTilemap" type="TileMap" parent="."]
+visible = false
 z_index = 4
 tile_set = ExtResource("2_yuf0h")
 cell_quadrant_size = 32
@@ -206,7 +208,11 @@ collision_mask = 4
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="HiddenTilemap/Area2D"]
 polygon = PackedVector2Array(448, 256, 448, 64, 1056, 64, 1056, 256)
 
+[node name="TrainBossFlying" parent="." instance=ExtResource("11_i778m")]
+position = Vector2(608, 48)
+
 [connection signal="room_activated" from="." to="TrainBoss" method="initialize_train"]
+[connection signal="room_activated" from="." to="TrainBossFlying" method="set_active"]
 [connection signal="room_deactivated" from="." to="TrainBoss" method="disable_train"]
 [connection signal="body_entered" from="HiddenTilemap/Area2D" to="HiddenTilemap" method="_on_rigid_body_2d_body_entered"]
 [connection signal="body_exited" from="HiddenTilemap/Area2D" to="HiddenTilemap" method="_on_rigid_body_2d_body_exited"]
