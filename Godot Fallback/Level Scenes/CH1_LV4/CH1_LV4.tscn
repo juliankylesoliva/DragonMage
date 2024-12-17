@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=3 uid="uid://bsyunex10456i"]
+[gd_scene load_steps=35 format=3 uid="uid://bsyunex10456i"]
 
 [ext_resource type="Script" path="res://Scripts/Utility Scripts/Level.gd" id="1_jlbtb"]
 [ext_resource type="PackedScene" uid="uid://d0ff35cm57xb7" path="res://Scene Objects/Effects/DroppedFragment.tscn" id="2_4gqwv"]
@@ -31,6 +31,7 @@
 [ext_resource type="PackedScene" uid="uid://br3j4rryr8gxm" path="res://Level Scenes/CH1_LV4/Rooms/CH1_LV4_R6.tscn" id="20_xdlir"]
 [ext_resource type="PackedScene" uid="uid://cr1ooel34bv5k" path="res://Level Scenes/CH1_LV4/Rooms/CH1_LV4_R13.tscn" id="21_dyjpq"]
 [ext_resource type="AudioStream" uid="uid://bp3471su81u8g" path="res://Music/CH0/sawsquarenoise - Boss Theme.wav" id="25_psnh3"]
+[ext_resource type="PackedScene" uid="uid://bsxxorj36tmfu" path="res://Scene Objects/UI/TrainArrivalSignUI.tscn" id="25_t85ls"]
 [ext_resource type="Script" path="res://Scripts/Boss/Train/TrainBossHandler.gd" id="26_5ooub"]
 [ext_resource type="PackedScene" uid="uid://btrc5e3rd18ua" path="res://Level Scenes/CH1_LV4/Rooms/CH1_LV4_R12B.tscn" id="28_88mam"]
 
@@ -250,6 +251,11 @@ player_node = NodePath("../../Player")
 position = Vector2(512, 0)
 player_node = NodePath("../../Player")
 level_ref = NodePath("../..")
+
+[node name="TrainArrivalSignUI" parent="UI_Canvas" node_paths=PackedStringArray("train_list") instance=ExtResource("25_t85ls")]
+visible = false
+position = Vector2(256, 300)
+train_list = [NodePath("../../CH1_LV4_R1/TrainHazard"), NodePath("../../CH1_LV4_R3/TrainHazard"), NodePath("../../CH1_LV4_R5/TrainHazard"), NodePath("../../CH1_LV4_R7/TrainHazard"), NodePath("../../CH1_LV4_R9/TrainHazard"), NodePath("../../CH1_LV4_R11/TrainHazard"), NodePath("../../CH1_LV4_R12A/TrainBoss"), NodePath("../../CH1_LV4_R12C/TrainBoss"), NodePath("../../CH1_LV4_R12E/TrainBoss")]
 
 [node name="ClearTimer" parent="UI_Canvas" instance=ExtResource("7_3ak5y")]
 position = Vector2(4, 316)

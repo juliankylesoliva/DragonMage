@@ -25,17 +25,7 @@ func _process(_delta):
 		current_idle_timer = move_toward(current_idle_timer, 0, _delta)
 		if (current_idle_timer <= 0):
 			current_state = TrainHazardState.ACTIVE
-			breakable_by = ("MAGIC" if current_direction > 0 else "FIRE")
-			match breakable_by:
-				"MAGIC":
-					magic_sign_sprite.set_visible(true)
-					fire_sign_sprite.set_visible(false)
-				"FIRE":
-					magic_sign_sprite.set_visible(false)
-					fire_sign_sprite.set_visible(true)
-				_:
-					magic_sign_sprite.set_visible(false)
-					fire_sign_sprite.set_visible(false)
+			
 	elif (current_state == TrainHazardState.ACTIVE and player_ref != null and is_player_detected):
 		if (player_ref.damage.do_damage_warp()):
 			EffectFactory.get_effect("EnemyContactImpact", player_ref.char_body.global_position)
@@ -70,6 +60,7 @@ func _physics_process(_delta):
 			self.global_position = (left_start_point.global_position if current_direction > 0 else right_start_point.global_position)
 			calculate_target_x()
 			current_idle_timer = idle_interval
+			set_weakness()
 			if (boss.current_armor > 0):
 				boss.reset_post_damage_invulnerability()
 			else:
@@ -102,6 +93,7 @@ func initialize_train():
 		current_idle_timer = (0.0 if is_dropping_off else idle_interval)
 		boss.reset_post_damage_invulnerability()
 		restore_train_speed()
+		set_weakness()
 		if (is_dropping_off):
 			boss.do_post_damage_invulnerability()
 			self.global_position.x = (drop_off_location.global_position.x + ((contact_collision_shape.shape.size.x - drop_off_offset) * current_direction))
@@ -130,3 +122,22 @@ func break_object(other : Object):
 
 func took_damage():
 	return (boss.current_invulnerability_duration > 0 or boss.current_armor <= 0)
+
+func get_damage_duration_display():
+	if (boss.current_armor > 0):
+		return boss.current_invulnerability_duration
+	else:
+		return calculate_remaining_travel_time()
+
+func set_weakness():
+	breakable_by = ("MAGIC" if current_direction > 0 else "FIRE")
+	match breakable_by:
+		"MAGIC":
+			magic_sign_sprite.set_visible(true)
+			fire_sign_sprite.set_visible(false)
+		"FIRE":
+			magic_sign_sprite.set_visible(false)
+			fire_sign_sprite.set_visible(true)
+		_:
+			magic_sign_sprite.set_visible(false)
+			fire_sign_sprite.set_visible(false)

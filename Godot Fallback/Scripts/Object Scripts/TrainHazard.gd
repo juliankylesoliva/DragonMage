@@ -135,6 +135,12 @@ func restore_train_speed():
 func slow_down_train():
 	current_speed_modifier = damage_speed_modifier
 
+func calculate_remaining_recovery_time():
+	return ((1.0 - inverse_lerp(damage_speed_modifier, 1.0, current_speed_modifier)) * speed_recovery_time)
+
+func calculate_remaining_travel_time():
+	return (abs(target_x_pos - self.global_position.x) / abs(travel_speed * current_speed_modifier))
+
 func break_object(other : Object):
 	if ((other is KnockbackHitbox)):
 		var hitbox_temp : KnockbackHitbox = (other as KnockbackHitbox)
