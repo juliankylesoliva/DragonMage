@@ -99,6 +99,7 @@ collision_mask = 4
 script = ExtResource("1_li6qd")
 sprite = NodePath("AnimatedSprite2D")
 react_trigger = NodePath("ReactionTrigger")
+damage_animation_time = 0.75
 node_2d = NodePath(".")
 break_durablility = 1
 break_sound = "damage_enemy"

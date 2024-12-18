@@ -7,19 +7,22 @@
 [node name="TrainArrivalSignUI" type="Node2D" node_paths=PackedStringArray("bg_rect", "status_text", "time_text")]
 z_index = 7
 script = ExtResource("1_ciwxn")
+y_fade_offset_from_center = 80.0
+alpha_fade_time = 0.35
 bg_rect = NodePath("ColorBG")
 status_text = NodePath("StatusText")
 time_text = NodePath("TimeText")
 neutral_weakness_color = Color(0.172549, 0.490196, 0.313726, 1)
 magic_weakness_color = Color(0.34902, 0.254902, 0.662745, 1)
 fire_weakness_color = Color(0.941176, 0.603922, 0.34902, 1)
+delayed_color = Color(0.25098, 0.25098, 0.25098, 1)
 
 [node name="ColorBG" type="ColorRect" parent="."]
 offset_left = -88.0
 offset_top = -8.0
 offset_right = 88.0
 offset_bottom = 8.0
-color = Color(0.172549, 0.490196, 0.313726, 1)
+color = Color(0.25098, 0.25098, 0.25098, 1)
 
 [node name="StatusText" type="RichTextLabel" parent="."]
 offset_left = -84.0

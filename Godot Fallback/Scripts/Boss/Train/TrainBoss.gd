@@ -20,6 +20,8 @@ class_name TrainBoss
 
 @export var fire_sign_sprite : Sprite2D
 
+var show_drop_off_display : bool = false
+
 func _process(_delta):
 	if (current_state == TrainHazardState.IDLE and current_idle_timer > 0):
 		current_idle_timer = move_toward(current_idle_timer, 0, _delta)
@@ -44,6 +46,7 @@ func _physics_process(_delta):
 		
 		self.global_position.x = move_toward(self.global_position.x, target_x_pos, travel_speed * current_speed_modifier * _delta)
 		if (self.global_position.x == target_x_pos):
+			show_drop_off_display = false
 			if (is_one_shot):
 				if (boss.current_health <= 0):
 					boss.on_defeat()
@@ -78,6 +81,7 @@ func initialize_train():
 		self.collision_layer = hurtbox_collision_layers
 		current_state = TrainHazardState.IDLE
 		current_direction = starting_direction
+		show_drop_off_display = is_dropping_off
 		self.global_position = (left_start_point.global_position if current_direction > 0 else right_start_point.global_position)
 		if (hurtbox_collision_shape.position.x * current_direction > 0):
 			hurtbox_collision_shape.position.x *= -1
@@ -125,7 +129,7 @@ func took_damage():
 
 func get_damage_duration_display():
 	if (boss.current_armor > 0):
-		return boss.current_invulnerability_duration
+		return (calculate_remaining_travel_time() if show_drop_off_display else boss.current_invulnerability_duration)
 	else:
 		return calculate_remaining_travel_time()
 
