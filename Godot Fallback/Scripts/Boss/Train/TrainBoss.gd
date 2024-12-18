@@ -43,6 +43,7 @@ func _physics_process(_delta):
 		self.collision_layer = (0 if is_slowed_down() or took_damage() else hurtbox_collision_layers)
 		is_flickering = (!is_flickering if is_slowed_down() or took_damage() else false)
 		self.modulate.a = (damage_flicker_alpha if is_flickering else 1.0)
+		sparks.set_visible(is_slowed_down())
 		
 		self.global_position.x = move_toward(self.global_position.x, target_x_pos, travel_speed * current_speed_modifier * _delta)
 		if (self.global_position.x == target_x_pos):

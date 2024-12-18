@@ -30,7 +30,9 @@ enum TrainHazardState {IDLE, ACTIVE}
 
 @export_range(0, 1) var damage_flicker_alpha : float = 0.25
 
-@export var train_sprites : Array[Sprite2D]
+@export var train_sprites : Array[Node2D]
+
+@export var sparks : Node2D
 
 var is_train_disabled : bool = true
 
@@ -70,6 +72,7 @@ func _physics_process(_delta):
 		self.collision_layer = (0 if is_slowed_down() else hurtbox_collision_layers)
 		is_flickering = (!is_flickering if is_slowed_down() else false)
 		self.modulate.a = (damage_flicker_alpha if is_flickering else 1.0)
+		sparks.set_visible(is_slowed_down())
 		
 		self.global_position.x = move_toward(self.global_position.x, target_x_pos, travel_speed * current_speed_modifier * _delta)
 		current_speed_modifier = move_toward(current_speed_modifier, 1.0, ((1.0 - damage_speed_modifier) / speed_recovery_time) * _delta)
@@ -80,7 +83,12 @@ func _physics_process(_delta):
 			contact_collision_shape.position.x *= -1
 			for sprite in train_sprites:
 				sprite.position.x *= -1
-				sprite.flip_h = !sprite.flip_h
+				if (sprite is Sprite2D):
+					(sprite as Sprite2D).flip_h = !sprite.flip_h
+				elif (sprite is AnimatedSprite2D):
+					(sprite as AnimatedSprite2D).flip_h = !sprite.flip_h
+				else:
+					pass
 			self.global_position = (left_start_point.global_position if current_direction > 0 else right_start_point.global_position)
 			calculate_target_x()
 			current_idle_timer = idle_interval
@@ -103,7 +111,12 @@ func initialize_train():
 		for sprite in train_sprites:
 			if (sprite.position.x * current_direction > 0):
 				sprite.position.x *= -1
-				sprite.flip_h = (sprite.position.x > 0)
+				if (sprite is Sprite2D):
+					(sprite as Sprite2D).flip_h = !sprite.flip_h
+				elif (sprite is AnimatedSprite2D):
+					(sprite as AnimatedSprite2D).flip_h = !sprite.flip_h
+				else:
+					pass
 		calculate_target_x()
 		current_idle_timer = idle_interval
 

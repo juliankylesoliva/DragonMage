@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://b21st3ctsljbd"]
+[gd_scene load_steps=14 format=3 uid="uid://b21st3ctsljbd"]
 
 [ext_resource type="Script" path="res://Scripts/Boss/Train/TrainBoss.gd" id="1_mk8o2"]
 [ext_resource type="PackedScene" uid="uid://dqbo0wu6hm8lj" path="res://Scene Objects/Objects/WarpTrigger.tscn" id="2_s1w6o"]
@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://bjk6btjbbb740" path="res://Sprites/Backgrounds/1_4_BG/TrainDoorOpen.png" id="5_exfsi"]
 [ext_resource type="Texture2D" uid="uid://cpxijc0ee8n5q" path="res://Sprites/Backgrounds/1_4_BG/TrainMagicSign.png" id="6_ajfy4"]
 [ext_resource type="Texture2D" uid="uid://bxl78mm7vvx2d" path="res://Sprites/Backgrounds/1_4_BG/TrainFireSign.png" id="7_ofdcj"]
+[ext_resource type="Texture2D" uid="uid://cufr4wgh64817" path="res://Sprites/Bosses/TrainConductor/TrainSparks.png" id="8_3iits"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_r2t8j"]
 size = Vector2(1792, 144)
@@ -14,7 +15,29 @@ size = Vector2(1792, 144)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_613r5"]
 size = Vector2(256, 160)
 
-[node name="TrainBoss" type="StaticBody2D" node_paths=PackedStringArray("warp", "warp_sprite", "magic_sign_sprite", "fire_sign_sprite", "hurtbox_collision_shape", "contact_collision_shape", "contact_area", "train_sprites", "node_2d")]
+[sub_resource type="AtlasTexture" id="AtlasTexture_ffaew"]
+atlas = ExtResource("8_3iits")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hlnqs"]
+atlas = ExtResource("8_3iits")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ff45y"]
+animations = [{
+"frames": [{
+"duration": 8.0,
+"texture": SubResource("AtlasTexture_ffaew")
+}, {
+"duration": 8.0,
+"texture": SubResource("AtlasTexture_hlnqs")
+}],
+"loop": true,
+"name": &"default",
+"speed": 60.0
+}]
+
+[node name="TrainBoss" type="StaticBody2D" node_paths=PackedStringArray("warp", "warp_sprite", "magic_sign_sprite", "fire_sign_sprite", "hurtbox_collision_shape", "contact_collision_shape", "contact_area", "train_sprites", "sparks", "node_2d")]
 visible = false
 collision_layer = 0
 collision_mask = 0
@@ -29,7 +52,8 @@ contact_collision_shape = NodePath("ContactHitboxArea/ContactHitbox")
 contact_area = NodePath("ContactHitboxArea")
 damage_speed_modifier = 0.75
 speed_recovery_time = 8.0
-train_sprites = [NodePath("TrainExteriorFront"), NodePath("TrainExterior"), NodePath("TrainExterior2"), NodePath("TrainExterior3"), NodePath("TrainDoorOpen"), NodePath("TrainMagicSign"), NodePath("TrainFireSign")]
+train_sprites = [NodePath("TrainExteriorFront"), NodePath("TrainExterior"), NodePath("TrainExterior2"), NodePath("TrainExterior3"), NodePath("TrainDoorOpen"), NodePath("TrainMagicSign"), NodePath("TrainFireSign"), NodePath("Sparks/TrainSpark"), NodePath("Sparks/TrainSpark2"), NodePath("Sparks/TrainSpark3"), NodePath("Sparks/TrainSpark4"), NodePath("Sparks/TrainSpark5"), NodePath("Sparks/TrainSpark6"), NodePath("Sparks/TrainSpark7"), NodePath("Sparks/TrainSpark8"), NodePath("Sparks/TrainSpark9"), NodePath("Sparks/TrainSpark10"), NodePath("Sparks/TrainSpark11"), NodePath("Sparks/TrainSpark12"), NodePath("Sparks/TrainSpark13"), NodePath("Sparks/TrainSpark14"), NodePath("Sparks/TrainSpark15"), NodePath("Sparks/TrainSpark16")]
+sparks = NodePath("Sparks")
 node_2d = NodePath("BossHurtbox")
 break_durablility = 1
 break_sound = "damage_enemy"
@@ -87,6 +111,113 @@ visible = false
 z_index = 3
 position = Vector2(-190, -8)
 texture = ExtResource("7_ofdcj")
+
+[node name="Sparks" type="Node2D" parent="."]
+visible = false
+
+[node name="TrainSpark" type="AnimatedSprite2D" parent="Sparks"]
+z_index = 6
+position = Vector2(-48, 64)
+sprite_frames = SubResource("SpriteFrames_ff45y")
+autoplay = "default"
+
+[node name="TrainSpark2" type="AnimatedSprite2D" parent="Sparks"]
+z_index = 6
+position = Vector2(-96, 64)
+sprite_frames = SubResource("SpriteFrames_ff45y")
+autoplay = "default"
+frame = 1
+
+[node name="TrainSpark3" type="AnimatedSprite2D" parent="Sparks"]
+z_index = 6
+position = Vector2(-192, 64)
+sprite_frames = SubResource("SpriteFrames_ff45y")
+autoplay = "default"
+
+[node name="TrainSpark4" type="AnimatedSprite2D" parent="Sparks"]
+z_index = 6
+position = Vector2(-240, 64)
+sprite_frames = SubResource("SpriteFrames_ff45y")
+autoplay = "default"
+frame = 1
+
+[node name="TrainSpark5" type="AnimatedSprite2D" parent="Sparks"]
+z_index = 6
+position = Vector2(-304, 64)
+sprite_frames = SubResource("SpriteFrames_ff45y")
+autoplay = "default"
+
+[node name="TrainSpark6" type="AnimatedSprite2D" parent="Sparks"]
+z_index = 6
+position = Vector2(-368, 64)
+sprite_frames = SubResource("SpriteFrames_ff45y")
+autoplay = "default"
+frame = 1
+
+[node name="TrainSpark7" type="AnimatedSprite2D" parent="Sparks"]
+z_index = 6
+position = Vector2(-688, 64)
+sprite_frames = SubResource("SpriteFrames_ff45y")
+autoplay = "default"
+
+[node name="TrainSpark8" type="AnimatedSprite2D" parent="Sparks"]
+z_index = 6
+position = Vector2(-752, 64)
+sprite_frames = SubResource("SpriteFrames_ff45y")
+autoplay = "default"
+frame = 1
+
+[node name="TrainSpark9" type="AnimatedSprite2D" parent="Sparks"]
+z_index = 6
+position = Vector2(-816, 64)
+sprite_frames = SubResource("SpriteFrames_ff45y")
+autoplay = "default"
+
+[node name="TrainSpark10" type="AnimatedSprite2D" parent="Sparks"]
+z_index = 6
+position = Vector2(-880, 64)
+sprite_frames = SubResource("SpriteFrames_ff45y")
+autoplay = "default"
+frame = 1
+
+[node name="TrainSpark11" type="AnimatedSprite2D" parent="Sparks"]
+z_index = 6
+position = Vector2(-1200, 64)
+sprite_frames = SubResource("SpriteFrames_ff45y")
+autoplay = "default"
+
+[node name="TrainSpark12" type="AnimatedSprite2D" parent="Sparks"]
+z_index = 6
+position = Vector2(-1264, 64)
+sprite_frames = SubResource("SpriteFrames_ff45y")
+autoplay = "default"
+frame = 1
+
+[node name="TrainSpark13" type="AnimatedSprite2D" parent="Sparks"]
+z_index = 6
+position = Vector2(-1328, 64)
+sprite_frames = SubResource("SpriteFrames_ff45y")
+autoplay = "default"
+
+[node name="TrainSpark14" type="AnimatedSprite2D" parent="Sparks"]
+z_index = 6
+position = Vector2(-1392, 64)
+sprite_frames = SubResource("SpriteFrames_ff45y")
+autoplay = "default"
+frame = 1
+
+[node name="TrainSpark15" type="AnimatedSprite2D" parent="Sparks"]
+z_index = 6
+position = Vector2(-1712, 64)
+sprite_frames = SubResource("SpriteFrames_ff45y")
+autoplay = "default"
+
+[node name="TrainSpark16" type="AnimatedSprite2D" parent="Sparks"]
+z_index = 6
+position = Vector2(-1776, 64)
+sprite_frames = SubResource("SpriteFrames_ff45y")
+autoplay = "default"
+frame = 1
 
 [connection signal="body_entered" from="ContactHitboxArea" to="." method="_on_body_entered"]
 [connection signal="body_exited" from="ContactHitboxArea" to="." method="_on_body_exited"]
