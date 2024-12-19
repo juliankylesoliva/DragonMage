@@ -2,7 +2,7 @@
 
 importer="wav"
 type="AudioStreamWAV"
-uid="uid://d4jmawyrjryd0"
+uid="uid://xmq65s07y7j5"
 path="res://.godot/imported/train_track_clicks.wav-daaa64459cb5a3a89821364eb04c2bb8.sample"
 
 [deps]
@@ -18,7 +18,7 @@ force/max_rate=false
 force/max_rate_hz=44100
 edit/trim=false
 edit/normalize=false
-edit/loop_mode=0
+edit/loop_mode=2
 edit/loop_begin=0
 edit/loop_end=-1
 compress/mode=0

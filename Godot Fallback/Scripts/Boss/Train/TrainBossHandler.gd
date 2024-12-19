@@ -12,6 +12,8 @@ class_name TrainBossHandler
 
 @export var phase_3_room : Room
 
+@export var invulnerability_time_decrease_per_phase : float = 0.5
+
 @export_multiline var mid_battle_text_1 : Array[String]
 
 @export_multiline var mid_battle_text_2 : Array[String]
@@ -73,6 +75,7 @@ func damage_boss(_damage_type : StringName, _damage_strength : int, _knockback_v
 	elif (current_health > 0):
 		current_health -= 1
 		if (current_health > 0):
+			post_hit_invulnerability_duration -= invulnerability_time_decrease_per_phase 
 			do_mid_battle_dialogue()
 		else:
 			do_pre_defeat_dialogue()
@@ -163,4 +166,5 @@ func on_pre_defeat_dialogue_finished():
 		player_hub.form.change_mode(PlayerForm.CharacterMode.DRAGON)
 	player_hub.temper.change_temper_by(player_hub.temper.max_segments)
 	player_hub.temper.disable_temper_rebound = true
+	player_hub.fairy.set_current_magic(0)
 	textbox.textbox_finished.disconnect(on_pre_defeat_dialogue_finished)

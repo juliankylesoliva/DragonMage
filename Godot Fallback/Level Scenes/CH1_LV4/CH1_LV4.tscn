@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=3 uid="uid://bsyunex10456i"]
+[gd_scene load_steps=36 format=3 uid="uid://bsyunex10456i"]
 
 [ext_resource type="Script" path="res://Scripts/Utility Scripts/Level.gd" id="1_jlbtb"]
 [ext_resource type="PackedScene" uid="uid://d0ff35cm57xb7" path="res://Scene Objects/Effects/DroppedFragment.tscn" id="2_4gqwv"]
@@ -34,6 +34,7 @@
 [ext_resource type="PackedScene" uid="uid://bsxxorj36tmfu" path="res://Scene Objects/UI/TrainArrivalSignUI.tscn" id="25_t85ls"]
 [ext_resource type="Script" path="res://Scripts/Boss/Train/TrainBossHandler.gd" id="26_5ooub"]
 [ext_resource type="PackedScene" uid="uid://btrc5e3rd18ua" path="res://Level Scenes/CH1_LV4/Rooms/CH1_LV4_R12B.tscn" id="28_88mam"]
+[ext_resource type="AudioStream" uid="uid://84fafic5uhsg" path="res://Music/CH1/RoccoW - Messeah.wav" id="32_k65wg"]
 
 [node name="CH1_LV4" type="Node2D" node_paths=PackedStringArray("player_reference", "starting_room", "room_list", "clear_timer")]
 script = ExtResource("1_jlbtb")
@@ -44,7 +45,7 @@ room_list = [NodePath("CH1_LV4_R1"), NodePath("CH1_LV4_R2"), NodePath("CH1_LV4_R
 min_fragment_collection_rate = 0.658
 dropped_fragment_scene = ExtResource("2_4gqwv")
 clear_timer = NodePath("UI_Canvas/ClearTimer")
-time_to_beat = 225.0
+time_to_beat = 240.0
 
 [node name="Player" parent="." instance=ExtResource("3_j61tg")]
 position = Vector2(96, 63)
@@ -277,6 +278,8 @@ accept_input_events = false
 ui_canvas = NodePath("../UI_Canvas")
 
 [node name="LevelMusicPlayer" parent="." instance=ExtResource("12_17q7d")]
+stream = ExtResource("32_k65wg")
+starting_volume = -8.0
 
 [node name="BossMusicPlayer" parent="." instance=ExtResource("12_17q7d")]
 stream = ExtResource("25_psnh3")

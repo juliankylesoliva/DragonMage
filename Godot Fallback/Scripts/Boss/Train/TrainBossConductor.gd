@@ -2,6 +2,8 @@ extends Breakable
 
 @export var boss : Boss
 
+@export var player_cutscene_position : Node2D
+
 @export var sprite : AnimatedSprite2D
 
 @export var react_trigger : Trigger
@@ -34,6 +36,10 @@ func break_object(other : Object):
 				on_break.emit()
 				hit_taken = true
 				boss.damage_boss(hitbox_temp.damage_type, hitbox_temp.damage_strength, Vector2.ZERO)
+				if (player_cutscene_position != null):
+					boss.player_hub.char_body.global_position = player_cutscene_position.global_position
+					boss.player_hub.movement.set_facing_direction(1.0)
+					boss.player_hub.fairy.fairy_ref.snap_to_target_node()
 				sprite.play("Damage")
 				set_damage_anim_timer()
 				return true

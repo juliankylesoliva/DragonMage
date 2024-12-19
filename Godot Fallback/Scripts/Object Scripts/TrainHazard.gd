@@ -34,6 +34,16 @@ enum TrainHazardState {IDLE, ACTIVE}
 
 @export var sparks : Node2D
 
+@export var train_horn : AudioStreamPlayer2D
+
+@export var train_chugging : AudioStreamPlayer2D
+
+@export var train_track_clicking : AudioStreamPlayer2D
+
+@export var train_horn_sfx_streams : Array[AudioStream]
+
+@export var train_horn_stun_sfx_stream : AudioStream
+
 var is_train_disabled : bool = true
 
 var is_player_detected : bool = false
@@ -59,6 +69,10 @@ func _process(_delta):
 		current_idle_timer = move_toward(current_idle_timer, 0, _delta)
 		if (current_idle_timer <= 0):
 			current_state = TrainHazardState.ACTIVE
+			train_horn.set_stream(train_horn_sfx_streams.pick_random())
+			train_horn.play()
+			train_chugging.play()
+			train_track_clicking.play()
 	elif (current_state == TrainHazardState.ACTIVE and player_ref != null and is_player_detected):
 		if (player_ref.damage.do_damage_warp()):
 			EffectFactory.get_effect("EnemyContactImpact", player_ref.char_body.global_position)
@@ -75,9 +89,18 @@ func _physics_process(_delta):
 		sparks.set_visible(is_slowed_down())
 		
 		self.global_position.x = move_toward(self.global_position.x, target_x_pos, travel_speed * current_speed_modifier * _delta)
-		current_speed_modifier = move_toward(current_speed_modifier, 1.0, ((1.0 - damage_speed_modifier) / speed_recovery_time) * _delta)
+		if (current_speed_modifier < 1.0):
+			current_speed_modifier = move_toward(current_speed_modifier, 1.0, ((1.0 - damage_speed_modifier) / speed_recovery_time) * _delta)
+			if (current_speed_modifier >= 1.0):
+				train_horn.stop()
+				train_chugging.play()
+				train_track_clicking.play()
+		
 		if (self.global_position.x == target_x_pos):
 			current_state = TrainHazardState.IDLE
+			train_horn.stop()
+			train_chugging.stop()
+			train_track_clicking.stop()
 			current_direction *= -1
 			hurtbox_collision_shape.position.x *= -1
 			contact_collision_shape.position.x *= -1
@@ -124,6 +147,9 @@ func disable_train():
 	if (!is_train_disabled):
 		is_train_disabled = true
 		self.collision_layer = 0
+		train_horn.stop()
+		train_chugging.stop()
+		train_track_clicking.stop()
 		set_visible(false)
 		set_process(false)
 		set_physics_process(false)
@@ -161,6 +187,10 @@ func break_object(other : Object):
 			if (breakable_by == "ANY" or hitbox_temp.damage_type == breakable_by):
 				SoundFactory.play_sound_by_name(break_sound, hitbox_temp.global_position, -4)
 				slow_down_train()
+				train_horn.set_stream(train_horn_stun_sfx_stream)
+				train_horn.play()
+				train_chugging.stop()
+				train_track_clicking.stop()
 				on_break.emit()
 				return true
 	return false

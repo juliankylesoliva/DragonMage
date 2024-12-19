@@ -27,6 +27,10 @@ func _process(_delta):
 		current_idle_timer = move_toward(current_idle_timer, 0, _delta)
 		if (current_idle_timer <= 0):
 			current_state = TrainHazardState.ACTIVE
+			train_horn.set_stream(train_horn_sfx_streams.pick_random())
+			train_horn.play()
+			train_chugging.play()
+			train_track_clicking.play()
 			
 	elif (current_state == TrainHazardState.ACTIVE and player_ref != null and is_player_detected):
 		if (player_ref.damage.do_damage_warp()):
@@ -47,6 +51,9 @@ func _physics_process(_delta):
 		
 		self.global_position.x = move_toward(self.global_position.x, target_x_pos, travel_speed * current_speed_modifier * _delta)
 		if (self.global_position.x == target_x_pos):
+			train_horn.stop()
+			train_chugging.stop()
+			train_track_clicking.stop()
 			show_drop_off_display = false
 			if (is_one_shot):
 				if (boss.current_health <= 0):
@@ -103,6 +110,10 @@ func initialize_train():
 			boss.do_post_damage_invulnerability()
 			self.global_position.x = (drop_off_location.global_position.x + ((contact_collision_shape.shape.size.x - drop_off_offset) * current_direction))
 			current_state = TrainHazardState.ACTIVE
+			train_horn.set_stream(train_horn_sfx_streams.pick_random())
+			train_horn.play()
+			train_chugging.play()
+			train_track_clicking.play()
 
 func calculate_target_x():
 	var target_point = (right_start_point.global_position.x if current_direction > 0 else left_start_point.global_position.x)
@@ -121,6 +132,10 @@ func break_object(other : Object):
 				SoundFactory.play_sound_by_name(break_sound, hitbox_temp.global_position, -4)
 				boss.damage_boss(hitbox_temp.damage_type, hitbox_temp.damage_strength, Vector2.ZERO)
 				if (boss.current_armor <= 0):
+					train_horn.set_stream(train_horn_stun_sfx_stream)
+					train_horn.play()
+					train_chugging.stop()
+					train_track_clicking.stop()
 					slow_down_train()
 				return true
 	return false

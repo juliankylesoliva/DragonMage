@@ -99,16 +99,10 @@ position = Vector2(384, 48)
 floor_length = 2
 
 [node name="RedDragoon" parent="." instance=ExtResource("5_0ee00")]
-position = Vector2(64, 0)
-
-[node name="Enemy" parent="RedDragoon" index="0"]
-enable_wings = true
+position = Vector2(64, 64)
 
 [node name="RedDragoon2" parent="." instance=ExtResource("5_0ee00")]
-position = Vector2(704, 0)
-
-[node name="Enemy" parent="RedDragoon2" index="0"]
-enable_wings = true
+position = Vector2(704, 64)
 
 [node name="YellowDragoon" parent="." instance=ExtResource("6_5uckl")]
 position = Vector2(160, 64)
@@ -217,7 +211,5 @@ region_rect = Rect2(0, 0, 1280, 32)
 
 [editable path="TrainBoss"]
 [editable path="TrainBoss/InsideWarp"]
-[editable path="RedDragoon"]
-[editable path="RedDragoon2"]
 [editable path="YellowDragoon"]
 [editable path="YellowDragoon2"]
