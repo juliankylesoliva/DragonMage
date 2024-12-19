@@ -22,7 +22,7 @@
 [ext_resource type="PackedScene" uid="uid://brhoroc2w6jwi" path="res://Scene Objects/UI/Textbox.tscn" id="19_3e3bj"]
 [ext_resource type="PackedScene" uid="uid://buykytsdrlnsg" path="res://Scene Objects/Misc/ResultsScreen.tscn" id="19_d5div"]
 [ext_resource type="PackedScene" uid="uid://btq4qla5fyq0n" path="res://Scene Objects/Misc/LevelMusicPlayer.tscn" id="23_c6dlv"]
-[ext_resource type="AudioStream" uid="uid://bs4yog04kmdd6" path="res://Music/Eight_Bit_Dungeon_Monster_Stomp.wav" id="24_ar4bd"]
+[ext_resource type="AudioStream" uid="uid://bs4yog04kmdd6" path="res://Music/CH0/Eight_Bit_Dungeon_Monster_Stomp.wav" id="24_ar4bd"]
 
 [node name="CH0_LV3" type="Node2D" node_paths=PackedStringArray("player_reference", "starting_room", "room_list", "clear_timer")]
 script = ExtResource("1_2pe2a")
@@ -62,6 +62,9 @@ editor_draw_drag_margin = true
 
 [node name="Warp 0" parent="CH0_LV3_R1" index="4" node_paths=PackedStringArray("room_destination")]
 room_destination = NodePath("../../CH0_LV3_R2")
+
+[node name="HintBubble" parent="CH0_LV3_R1" index="9" node_paths=PackedStringArray("textbox")]
+textbox = NodePath("../../Textbox")
 
 [node name="CH0_LV3_R2" parent="." instance=ExtResource("4_iag7b")]
 position = Vector2(736, -224)

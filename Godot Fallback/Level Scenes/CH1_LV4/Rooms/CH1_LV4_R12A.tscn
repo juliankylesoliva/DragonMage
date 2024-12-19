@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://o7vpo6ujq6jf"]
+[gd_scene load_steps=12 format=3 uid="uid://o7vpo6ujq6jf"]
 
 [ext_resource type="Script" path="res://Scripts/Utility Scripts/Room.gd" id="1_c0kqm"]
 [ext_resource type="TileSet" uid="uid://dhwi7i1loa2pd" path="res://Sprites/Tiles/Test Tiles/TestTileSet.tres" id="2_yuf0h"]
@@ -6,6 +6,7 @@
 [ext_resource type="Script" path="res://Scripts/Utility Scripts/Trigger.gd" id="4_uhl8g"]
 [ext_resource type="PackedScene" uid="uid://b21st3ctsljbd" path="res://Scene Objects/Bosses/TrainBoss.tscn" id="5_hhicy"]
 [ext_resource type="PackedScene" uid="uid://b2a0ttqvejk51" path="res://Scene Objects/Objects/TemperDragonFruit.tscn" id="6_7bmlx"]
+[ext_resource type="FontFile" uid="uid://blejgst41tdnl" path="res://PressStart2P.ttf" id="6_7jnoj"]
 [ext_resource type="PackedScene" uid="uid://u5nios6kfqhs" path="res://Scene Objects/Objects/BossDragonFruitSpawner.tscn" id="7_gquf8"]
 [ext_resource type="Texture2D" uid="uid://bnhmoys22ry7w" path="res://Sprites/Backgrounds/1_4_BG/RailwayBossRoomBG.png" id="8_hmofl"]
 [ext_resource type="Texture2D" uid="uid://l308rgc0ckd3" path="res://Sprites/Backgrounds/1_4_BG/RailwayBossRoomGate.png" id="9_gv0rf"]
@@ -125,6 +126,20 @@ right_start_point = NodePath("../TrainStartPointR")
 [node name="InsideWarp" parent="TrainBoss" index="2" node_paths=PackedStringArray("room_origin", "room_destination")]
 room_origin = NodePath("../..")
 room_destination = NodePath("../..")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="TrainBoss/TrainDoorOpen" index="0"]
+clip_contents = false
+offset_left = -64.0
+offset_top = -56.0
+offset_right = 64.0
+offset_bottom = -40.0
+theme_override_fonts/normal_font = ExtResource("6_7jnoj")
+theme_override_font_sizes/normal_font_size = 16
+bbcode_enabled = true
+text = "[center]GET IN!"
+scroll_active = false
+shortcut_keys_enabled = false
+deselect_on_focus_loss_enabled = false
 
 [node name="TrainStartPointL" type="Node2D" parent="."]
 position = Vector2(480, 208)

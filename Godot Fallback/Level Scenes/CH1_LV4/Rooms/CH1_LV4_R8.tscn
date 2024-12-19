@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://b58wu02fltsa0"]
+[gd_scene load_steps=13 format=3 uid="uid://b58wu02fltsa0"]
 
 [ext_resource type="Script" path="res://Scripts/Utility Scripts/Room.gd" id="1_jruwx"]
 [ext_resource type="TileSet" uid="uid://dhwi7i1loa2pd" path="res://Sprites/Tiles/Test Tiles/TestTileSet.tres" id="2_xkqdg"]
@@ -11,6 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://dfkmxoba64spw" path="res://Scene Objects/Objects/MedalFragment.tscn" id="9_rlllp"]
 [ext_resource type="PackedScene" uid="uid://b2a0ttqvejk51" path="res://Scene Objects/Objects/TemperDragonFruit.tscn" id="10_roxt0"]
 [ext_resource type="PackedScene" uid="uid://vtyaphi47lrf" path="res://Scene Objects/Objects/Checkpoint.tscn" id="11_s7sep"]
+[ext_resource type="Script" path="res://Scripts/Object Scripts/HiddenPassage.gd" id="12_tpadi"]
 
 [node name="CH1_LV4_R8" type="Node2D" node_paths=PackedStringArray("tilemap_list", "room_entrances", "medal_fragments")]
 script = ExtResource("1_jruwx")
@@ -173,3 +174,22 @@ enable_cycling = false
 
 [node name="Checkpoint" parent="." instance=ExtResource("11_s7sep")]
 position = Vector2(160, 128)
+
+[node name="HiddenTilemap" type="TileMap" parent="."]
+z_index = 3
+tile_set = ExtResource("2_xkqdg")
+cell_quadrant_size = 32
+format = 2
+layer_0/name = "Hidden"
+layer_0/tile_data = PackedInt32Array(65570, 65550, 1, 131106, 262158, 6, 34, 262158, 5, 35, 131086, 1, 36, 131086, 1, 37, 131086, 1, 38, 131086, 1, 39, 196622, 5, 65575, 196622, 1, 131111, 196622, 1, 196647, 196622, 1, 262183, 196622, 1, 327719, 196622, 2, 327718, 131086, 2, 327717, 196622, 5, 327716, 262158, 5, 327715, 131086, 2, 327714, 131086, 2, 327713, 131086, 2, 262177, 131086, 1, 196641, 131086, 1, 131105, 131086, 0, 65571, 131086, 1, 65572, 131086, 1, 65573, 131086, 1, 65574, 131086, 1, 131110, 131086, 1, 196646, 131086, 1, 131109, 131086, 1, 131108, 131086, 1, 131107, 131086, 1, 196643, 131086, 1, 196644, 131086, 1, 196645, 131086, 1, 262181, 131086, 1, 262182, 131086, 1, 262180, 131086, 1, 262179, 131086, 1, 262178, 131086, 1, 196642, 131086, 1)
+script = ExtResource("12_tpadi")
+
+[node name="Area2D" type="Area2D" parent="HiddenTilemap"]
+collision_layer = 0
+collision_mask = 4
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="HiddenTilemap/Area2D"]
+polygon = PackedVector2Array(1088, 162, 1088, 32, 1248, 33, 1248, 162)
+
+[connection signal="body_entered" from="HiddenTilemap/Area2D" to="HiddenTilemap" method="_on_rigid_body_2d_body_entered"]
+[connection signal="body_exited" from="HiddenTilemap/Area2D" to="HiddenTilemap" method="_on_rigid_body_2d_body_exited"]

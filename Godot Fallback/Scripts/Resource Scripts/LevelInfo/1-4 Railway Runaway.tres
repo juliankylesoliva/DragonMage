@@ -8,5 +8,9 @@ level_scene_path = "res://Level Scenes/CH1_LV4/CH1_LV4.tscn"
 name_header = "Ch. 1-4:  Railway Runaway"
 story_description = Array[String](["May 7, 202X - Afternoon
 
-	TBD"])
+	The Dragoons have led me and Knigel off the rooftops and down into what seems to be their own underground railway system; or rather, from what I remember hearing, it was originally the city of Drakageau's before being taken over by the Dragon Syndicate--just how much influence do these guys have around here?! Strangely enough, we found ourselves on an abandoned train line that just so happens to lead right back to our hometown, Areltun... but why lead us here of all places? Something about all this feels off, but at this point I just want to go home already and I don't have the energy to think about these things! Hopefully being in an abandoned train tunnel means there won't be any trains trying to hit us, right?
+
+P.S.: I spoke too soon...
+
+~ Magli DRAELYN -"])
 form_changing_enabled = true

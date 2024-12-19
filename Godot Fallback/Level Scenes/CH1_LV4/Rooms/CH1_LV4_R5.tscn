@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://batmot2dks5ts"]
+[gd_scene load_steps=10 format=3 uid="uid://batmot2dks5ts"]
 
 [ext_resource type="Script" path="res://Scripts/Utility Scripts/Room.gd" id="1_u2q5c"]
 [ext_resource type="TileSet" uid="uid://dhwi7i1loa2pd" path="res://Sprites/Tiles/Test Tiles/TestTileSet.tres" id="2_ki1rx"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://c4cg3xgbq7eyh" path="res://Scene Objects/Obstacles/FloorSpikes.tscn" id="6_vstpq"]
 [ext_resource type="PackedScene" uid="uid://dfkmxoba64spw" path="res://Scene Objects/Objects/MedalFragment.tscn" id="7_1xyjw"]
 [ext_resource type="PackedScene" uid="uid://b2a0ttqvejk51" path="res://Scene Objects/Objects/TemperDragonFruit.tscn" id="8_3g52a"]
+[ext_resource type="Texture2D" uid="uid://duppq0y5cogsf" path="res://Sprites/Backgrounds/1_4_BG/DNEGraffiti.png" id="9_6kovn"]
 
 [node name="CH1_LV4_R5" type="Node2D" node_paths=PackedStringArray("tilemap_list", "room_entrances", "enemy_nodes", "medal_fragments")]
 script = ExtResource("1_u2q5c")
@@ -150,6 +151,16 @@ position = Vector2(976, 80)
 
 [node name="TemperDragonFruit" parent="." instance=ExtResource("8_3g52a")]
 position = Vector2(768, 64)
+
+[node name="DneGraffiti" type="Sprite2D" parent="."]
+z_index = 2
+position = Vector2(32, 240)
+texture = ExtResource("9_6kovn")
+
+[node name="DneGraffiti2" type="Sprite2D" parent="."]
+z_index = 2
+position = Vector2(1504, 240)
+texture = ExtResource("9_6kovn")
 
 [connection signal="room_activated" from="." to="TrainHazard" method="initialize_train"]
 [connection signal="room_deactivated" from="." to="TrainHazard" method="disable_train"]

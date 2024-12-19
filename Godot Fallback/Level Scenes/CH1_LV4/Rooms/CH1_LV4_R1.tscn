@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://cscukufpxq3ku"]
+[gd_scene load_steps=9 format=3 uid="uid://cscukufpxq3ku"]
 
 [ext_resource type="Script" path="res://Scripts/Utility Scripts/Room.gd" id="1_3o4xu"]
 [ext_resource type="TileSet" uid="uid://dhwi7i1loa2pd" path="res://Sprites/Tiles/Test Tiles/TestTileSet.tres" id="2_0d84j"]
@@ -6,6 +6,8 @@
 [ext_resource type="PackedScene" uid="uid://cs4s34scsvcfr" path="res://Scene Objects/Objects/BreakableBlock.tscn" id="4_shk7a"]
 [ext_resource type="PackedScene" uid="uid://bxbwf76suu7jl" path="res://Scene Objects/Obstacles/TrainHazard.tscn" id="5_wy8b6"]
 [ext_resource type="PackedScene" uid="uid://dfkmxoba64spw" path="res://Scene Objects/Objects/MedalFragment.tscn" id="6_isdyd"]
+[ext_resource type="Texture2D" uid="uid://duppq0y5cogsf" path="res://Sprites/Backgrounds/1_4_BG/DNEGraffiti.png" id="7_4q0el"]
+[ext_resource type="Texture2D" uid="uid://cvs7koehaie1g" path="res://Sprites/Backgrounds/1_4_BG/TrainHintGraffiti.png" id="8_bi4ys"]
 
 [node name="CH1_LV4_R1" type="Node2D" node_paths=PackedStringArray("tilemap_list", "room_entrances", "medal_fragments")]
 script = ExtResource("1_3o4xu")
@@ -123,6 +125,21 @@ position = Vector2(880, 240)
 
 [node name="MedalFragment10" parent="Fragments" instance=ExtResource("6_isdyd")]
 position = Vector2(912, 272)
+
+[node name="DneGraffiti" type="Sprite2D" parent="."]
+z_index = 2
+position = Vector2(32, 240)
+texture = ExtResource("7_4q0el")
+
+[node name="DneGraffiti2" type="Sprite2D" parent="."]
+z_index = 2
+position = Vector2(1504, 240)
+texture = ExtResource("7_4q0el")
+
+[node name="TrainHintGraffiti" type="Sprite2D" parent="."]
+z_index = 2
+position = Vector2(768, 224)
+texture = ExtResource("8_bi4ys")
 
 [connection signal="room_activated" from="." to="TrainHazard" method="initialize_train"]
 [connection signal="room_deactivated" from="." to="TrainHazard" method="disable_train"]

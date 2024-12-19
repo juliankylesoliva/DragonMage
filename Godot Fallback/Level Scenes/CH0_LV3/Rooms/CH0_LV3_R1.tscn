@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://dvceloslxxn28"]
+[gd_scene load_steps=10 format=3 uid="uid://dvceloslxxn28"]
 
 [ext_resource type="Script" path="res://Scripts/Utility Scripts/Room.gd" id="1_6o4g6"]
 [ext_resource type="TileSet" uid="uid://dhwi7i1loa2pd" path="res://Sprites/Tiles/Test Tiles/TestTileSet.tres" id="2_f37q7"]
@@ -8,6 +8,7 @@
 [ext_resource type="Script" path="res://Scripts/Object Scripts/HiddenPassage.gd" id="5_uewm5"]
 [ext_resource type="FontFile" uid="uid://blejgst41tdnl" path="res://PressStart2P.ttf" id="6_cguo1"]
 [ext_resource type="Script" path="res://Scripts/Utility Scripts/ButtonPromptTextLabel.gd" id="7_y4sps"]
+[ext_resource type="PackedScene" uid="uid://cp3kaarqt7vdo" path="res://Scene Objects/Objects/HintBubble.tscn" id="9_p3v0a"]
 
 [node name="CH0_LV3_R1" type="Node2D" node_paths=PackedStringArray("tilemap_list", "room_entrances", "medal_fragments")]
 script = ExtResource("1_6o4g6")
@@ -115,6 +116,10 @@ text = "[center][Change Form]: Change"
 scroll_active = false
 shortcut_keys_enabled = false
 script = ExtResource("7_y4sps")
+
+[node name="HintBubble" parent="." instance=ExtResource("9_p3v0a")]
+position = Vector2(320, 232)
+textbox_strings = Array[String](["Knigel: I'm sorry, Magli. It's all my fault that we're stuck here...", "Magli: That's not true! If it weren't for you, I wouldn't have had any magic to fight back against those Dragoons!", "Knigel: I thought I could fight them on my own, but they saw right through me at who I really was, and look where it got us. I failed to protect you, Magli...", "Magli: Knigel, what are you saying? This isn't like you to--", "Knigel: I don't even deserve to be called that anymore! Not in this state. My fairy name was Faeson, but I had it changed to Knigel when I began training to become a knight.", "Knigel: A magic spell was used on me when I was young to make myself more human-sized, but now that my magic had been siphoned by those Dragoons, I've reverted back to this small, weak, and useless fairy form...", "Knigel: I never thought that you'd find out this way, but here we are... You must think I'm a total fraud now after all these years, huh? I was never your strong and brave knight in shining armor after all... *sob*", "Magli: Knigel... Remember what you said to me when we first met as kids? When you protected me from those bullies?", "Knigel: That... *sniff* I believed you're still a good person despite you being a dragon?", "Magli: I didn't know it then, but over the years, your belief gave me hope that I can use my dragon powers for good instead of seeing them as a curse! Now it's my turn...", "Magli: Knigel, I believe you're still a strong and brave knight despite you being a fairy! I swear on my life that I will use everything you taught me to help us escape and get home safely!", "Knigel: Magli... Thank you. You're right, I can still be useful regardless of my size! I'm glad you don't see me any differently than before!", "Magli: There's the knight in shining armor I love so much! So what's our move?", "Knigel: Hmm... the upper part of this back wall looks awfully suspicious... See if you can mess with it a bit."])
 
 [connection signal="body_entered" from="HiddenTilemap/Area2D" to="HiddenTilemap" method="_on_rigid_body_2d_body_entered"]
 [connection signal="body_exited" from="HiddenTilemap/Area2D" to="HiddenTilemap" method="_on_rigid_body_2d_body_exited"]

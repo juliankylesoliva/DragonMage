@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://ctxh42fx7wpw8"]
+[gd_scene load_steps=9 format=3 uid="uid://ctxh42fx7wpw8"]
 
 [ext_resource type="Script" path="res://Scripts/Utility Scripts/Room.gd" id="1_1in0g"]
 [ext_resource type="TileSet" uid="uid://dhwi7i1loa2pd" path="res://Sprites/Tiles/Test Tiles/TestTileSet.tres" id="2_wf6uo"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://dfkmxoba64spw" path="res://Scene Objects/Objects/MedalFragment.tscn" id="5_1vliq"]
 [ext_resource type="PackedScene" uid="uid://clfqwsy4byrkf" path="res://Scene Objects/Enemies/GreenDragoon.tscn" id="6_pnkpk"]
 [ext_resource type="PackedScene" uid="uid://b2a0ttqvejk51" path="res://Scene Objects/Objects/TemperDragonFruit.tscn" id="7_gtxoh"]
+[ext_resource type="Texture2D" uid="uid://duppq0y5cogsf" path="res://Sprites/Backgrounds/1_4_BG/DNEGraffiti.png" id="8_r0nib"]
 
 [node name="CH1_LV4_R7" type="Node2D" node_paths=PackedStringArray("tilemap_list", "room_entrances", "enemy_nodes", "medal_fragments")]
 script = ExtResource("1_1in0g")
@@ -153,6 +154,16 @@ enable_wings = true
 position = Vector2(768, 160)
 starting_state = 0
 enable_cycling = false
+
+[node name="DneGraffiti" type="Sprite2D" parent="."]
+z_index = 2
+position = Vector2(32, 240)
+texture = ExtResource("8_r0nib")
+
+[node name="DneGraffiti2" type="Sprite2D" parent="."]
+z_index = 2
+position = Vector2(1504, 240)
+texture = ExtResource("8_r0nib")
 
 [connection signal="room_activated" from="." to="TrainHazard" method="initialize_train"]
 [connection signal="room_deactivated" from="." to="TrainHazard" method="disable_train"]
