@@ -265,10 +265,16 @@ position = Vector2(4, 316)
 [node name="PauseMenu" parent="UI_Canvas" node_paths=PackedStringArray("screen_fade") instance=ExtResource("8_tiic5")]
 screen_fade = NodePath("../ScreenFade")
 
-[node name="ResultsScreen" parent="UI_Canvas" node_paths=PackedStringArray("screen_fade", "level", "clear_timer") instance=ExtResource("9_7yrvg")]
+[node name="ResultsScreen" parent="UI_Canvas" node_paths=PackedStringArray("screen_fade", "level", "clear_timer", "textbox") instance=ExtResource("9_7yrvg")]
 screen_fade = NodePath("../ScreenFade")
 level = NodePath("../..")
 clear_timer = NodePath("../ClearTimer")
+textbox = NodePath("../../Textbox")
+post_level_text = Array[String](["Test 1", "Test 2", "[center]
+
+-- END OF CHAPTER 1 --
+
+-- TO BE CONTINUED --"])
 
 [node name="ScreenFade" parent="UI_Canvas" instance=ExtResource("10_mbs61")]
 starting_fade_duration = 1.0
@@ -292,9 +298,9 @@ starting_train = NodePath("../CH1_LV4_R12A/TrainBoss")
 dummy_warps = [NodePath("../CH1_LV4_R12B/DummyWarp"), NodePath("../CH1_LV4_R12D/DummyWarp"), NodePath("../CH1_LV4_R12F/DummyWarp")]
 phase_2_room = NodePath("../CH1_LV4_R12C")
 phase_3_room = NodePath("../CH1_LV4_R12E")
-mid_battle_text_1 = Array[String](["Mid-Battle Dialogue Test A 1/3", "Mid-Battle Dialogue Test A 2/3", "Mid-Battle Dialogue Test A 3/3"])
-mid_battle_text_2 = Array[String](["Mid-Battle Dialogue Test B 1/3", "Mid-Battle Dialogue Test B 2/3", "Mid-Battle Dialogue Test B 3/3"])
-pre_defeat_text = Array[String](["Pre-Defeat Dialogue Test 1/3", "Pre-Defeat Dialogue Test 2/3", "Pre-Defeat Dialogue Test 3/3"])
+mid_battle_text_1 = Array[String](["???: Argh! What in the heck was that for, li'l missy?!", "{player_name}: Don't act like you haven't been trying to run us over this whole time! Who do you think you are?!", "???: The name's Drackson, and Ah've been given orders from the boss to flush y'all outta this here railway one way er another!", "Knigel: And I order you to stop this train and step aside so that we can go home in peace!", "Drackson: Gonna need t'be a lot more convincin' that that, fairy boy! This oughta get y'all outta mah hair--speed 'er up!", "{player_name}: Woah! We're falling out!"])
+mid_battle_text_2 = Array[String](["Drackson: Gah! Ah'm gettin' real tired o' ya mages with yer fancy spells an' all that!", "Knigel: Hey! What do you have against mages?", "Drackson: They're keepin' the all magic away from us dragons! So we have ta steal it! Simple as that!", "Drackson: But Ah can see why the boss wants ya captured--ya got both dragon *and* mage powers...", "Drackson: We could fergit about this whole scuffle 'ere if yer willin' ta join us!", "{player_name}: I'd never join the likes of you! Not after what Knigel and I both went through because of your group!", "Drackson: Then that there tears it! FULL SPEED AHEAD!", "{player_name}: Ahhh! Not agaaain!"])
+pre_defeat_text = Array[String](["Drackson: Grr! Darn... y'all are tougher than ya look... Ah give up!", "Knigel: Now stop this train at once! We're going back home whether your boss likes it or not!", "Drackson: Can't exactly help ya with all o' that, fairy boy...", "{player_name}: And why not?", "Drackson: Well shucks... guess Ah shoulda let y'all know that Ah've been takin' y'guys home this entire time, heh heh heh... All accordin' to the boss' plan...", "Knigel: Shoot! That's Areltun Station up ahead! We're going too fast! LET'S GET OUT OF HERE, EMDEE!"])
 player_hub = NodePath("../Player/Hub")
 boss_room = NodePath("../CH1_LV4_R12A")
 boss_trigger = NodePath("../CH1_LV4_R12A/BossTrigger")
@@ -302,8 +308,11 @@ clear_timer = NodePath("../UI_Canvas/ClearTimer")
 boss_room_boundary_tilemap = NodePath("../CH1_LV4_R12A/BossRoomBoundaryTilemap")
 boss_music_player = NodePath("../BossMusicPlayer")
 normal_level_music_player = NodePath("../LevelMusicPlayer")
-introduction_text = Array[String](["{player_name}: What the--?! The exit--", "[center]*BING* *BONG*", "???: Attention trespassers who appear to be disrupting our railway, this train will now be going express. Your next stop will be... YOUR ETERNAL SILENCE.", "Knigel: Shoot! Stay above the tunnels, EmDee!"])
-defeat_text = Array[String](["Knigel: *phew* Geez, that was way too close! You alright, EmDee?", "{player_name}: Haha... yeah! We... We made it back home! We did it! I knew we could do it!", "{player_name}: Ha... h-ha...", "Knigel: ...EmDee? You're shaking a lot...", "{player_name}: Oh, who am I kidding, Knigel?! I thought for sure we were going to die back there!", "{player_name}: I was just trying to be brave through all this like you would be, but the train, the heights, the dark, being chased--"])
+introduction_text = Array[String](["{player_name}: What the--?! The exit--", "[center]
+*BING* *BONG*
+
+*DING* *DONG*", "???: Attention, passengers--or should I say trespassers... Ah'm afraid this next stop will be the end o' the line. FOR BOTH O' Y'ALL!", "Knigel: Shoot! Get above the tunnels, EmDee!"])
+defeat_text = Array[String](["Knigel: *phew* Geez, that was way too close! You alright, EmDee?", "{player_name}: Haha... yeah! We... We made it back home! We did it! I knew we could do it!", "{player_name}: H-ha... ha...", "Knigel: ...EmDee? You're shaking a lot...", "{player_name}: Oh, who am I kidding, Knigel?! I thought for sure we were going to die back there!", "{player_name}: I was trying to be brave through all of this just like you would be, but the train, the heights, being captured and chased by those guys...", "Knigel: It's okay, EmDee... We're safe now and practically back home just like you promised, right?", "{player_name}: But what about the train crashing? What about changing you back? What about our families? I don't even know how we're going to explain our wherabouts to everyone! What do we do now?!", "Knigel: Look, we'll figure those things out together later, but right now, EmDee, I need you to calm down. Believe me, I'm just as shaken up by all of this as you are...", "Knigel: Why don't we just take a rest for now in that small cave up ahead? Then we'll see where to take it from there afterwards.", "{player_name}: *sigh* I suppose you're right, Knigel... I'm getting too far ahead of myself here, I need to lie down...", "{player_name}: I just hope no one else saw what just transpired here..."])
 textbox = NodePath("../Textbox")
 post_hit_invulnerability_duration = 3.0
 knockback_gravity_scale = 0.0

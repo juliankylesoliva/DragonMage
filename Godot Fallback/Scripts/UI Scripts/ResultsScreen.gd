@@ -98,6 +98,10 @@ class_name ResultsScreen
 
 @export var title_scene_path : String
 
+@export var textbox : Textbox
+
+@export_multiline var post_level_text : Array[String]
+
 var are_menu_options_selectable : bool = false
 
 var current_menu_selection : int = 0
@@ -145,6 +149,12 @@ func do_main_menu():
 		await get_tree().create_timer(1.0).timeout
 		screen_fade.set_fade(1, 1, Color.BLACK)
 		await get_tree().create_timer(2.0).timeout
+		if (textbox != null and post_level_text.size() > 0):
+			textbox.accept_input_events = true
+			for text in post_level_text:
+				textbox.queue_text(text)
+			await textbox.textbox_finished
+			await get_tree().create_timer(0.25).timeout
 	EffectFactory.clear_effects()
 	SoundFactory.clear_sounds()
 	get_tree().change_scene_to_file(title_scene_path)

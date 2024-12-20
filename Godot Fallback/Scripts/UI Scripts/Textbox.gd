@@ -117,7 +117,7 @@ func display_text():
 	show_textbox()
 	if (ui_canvas != null):
 		for child in ui_canvas.get_children():
-			if (!(child is PauseMenu)):
+			if (!(child is PauseMenu) and !(child is ScreenFade)):
 				child.hide()
 	do_text_scrolling()
 
