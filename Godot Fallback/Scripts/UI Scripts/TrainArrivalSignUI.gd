@@ -22,7 +22,7 @@ extends Node2D
 
 @export var delayed_text : String = "Delayed"
 
-@export var time_display_format : String = "[right]%3.1f"
+@export var time_display_format : String = "[right]%3.1f sec"
 
 @export var time_display_active : String = "[right]Due"
 
