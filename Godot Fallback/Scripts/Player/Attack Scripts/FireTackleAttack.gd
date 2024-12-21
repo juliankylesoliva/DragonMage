@@ -258,7 +258,7 @@ func active_update(delta : float):
 		
 		if (hub.buffers.is_attack_buffer_active()):
 			hub.buffers.reset_attack_buffer()
-			is_attack_button_held = !is_attack_button_held
+			is_attack_button_held = true
 		
 		if (fire_tackle_arrow_effect_instance != null):
 			fire_tackle_arrow_effect_instance.set_animation(fireball_active_effect_name if is_attack_button_held else fireball_inactive_effect_name)

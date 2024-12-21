@@ -127,18 +127,12 @@ position = Vector2(256, 32)
 position = Vector2(320, -32)
 
 [node name="BreakableMagicBlock2" parent="." instance=ExtResource("4_lxu2g")]
-position = Vector2(384, -32)
-
-[node name="BreakableMagicBlock3" parent="." instance=ExtResource("4_lxu2g")]
 position = Vector2(384, -96)
 
 [node name="ReinforcedMagicBlock2" parent="." instance=ExtResource("3_8xsje")]
 position = Vector2(384, -160)
 
 [node name="ReinforcedMagicBlock3" parent="." instance=ExtResource("3_8xsje")]
-position = Vector2(320, -160)
-
-[node name="ReinforcedMagicBlock4" parent="." instance=ExtResource("3_8xsje")]
 position = Vector2(256, -160)
 
 [node name="BreakableFireBlock" parent="." instance=ExtResource("5_mnkjm")]
@@ -152,9 +146,6 @@ position = Vector2(192, -416)
 
 [node name="BreakableFireBlock4" parent="." instance=ExtResource("5_mnkjm")]
 position = Vector2(256, -416)
-
-[node name="BreakableFireBlock5" parent="." instance=ExtResource("5_mnkjm")]
-position = Vector2(320, -416)
 
 [node name="ReinforcedFireBlock" parent="." instance=ExtResource("6_3lrqq")]
 position = Vector2(448, -416)
@@ -176,8 +167,8 @@ position = Vector2(160, -272)
 floor_length = 4
 
 [node name="FloorSpikes5" parent="." instance=ExtResource("7_76dwj")]
-position = Vector2(256, -400)
-floor_length = 6
+position = Vector2(224, -400)
+floor_length = 4
 
 [node name="TemperDragonFruit" parent="." instance=ExtResource("9_5t1ol")]
 position = Vector2(384, 192)

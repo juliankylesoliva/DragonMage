@@ -276,7 +276,7 @@ post_level_text = Array[String](["[center]
 
 \"This just in: A Dragon Syndicate train had just derailed and crashed near Areltun Station!\"", "[center]\"The crash occured a fair distance away from the station where Dragon Syndicate members previously stole large sections of track the other day, fortunately causing minimal damage to the station itself.\"", "[center]\"Authorities are currently unsure whether these two incidents were planned. Upon investigation, there was strangely no one to be found inside the train by the time it crashed.\"", "[center]\"However, authorities have also received an anonymous tip shortly after from an eyewitness who claimed to have seen an orange, red-haired female dragon abandoning the runaway train before fleeing into the forest near the station--though this report has yet to be confirmed.\"", "[center]
 
-*click*", "Drackson: As ya can see, the job's been done, boss! That ends mah status report.", "???: Excellent work, Drackson... Now that all of the necessary pieces are in position, we can begin to execute our attack.", "Drackson: So what do we start with first?", "???: Let's just say that diminutive fairy boy won't have to worry about being absent from work today; he left behind his clothes after all when his magic was siphoned, and so we've already prepared a \"temp\" to cover his shift. Let's have him clock in, shall we?", "???: *click* We're ready... get to work, \"Knigel\"!", "Knigel(?): Hmhmhmhm... Yessss, bosssss...", "[center]
+*click*", "Drackson: As ya can see, the job's been done, boss! That ends mah status report.", "?????: Excellent work, Drackson... Now that all of the necessary pieces are in position, we can begin to execute our attack.", "Drackson: So what do we start with first?", "?????: Let's just say that diminutive fairy boy won't have to worry about being absent from work today; he left behind his clothes after all when his magic was siphoned, and so we've already prepared a \"temp\" to cover his shift. Let's have him clock in, shall we?", "?????: *click* We're ready... get to work, \"Knigel\"!", "Knigel(?): Hmhmhmhm... Yessss, bosssss...", "[center]
 
 -- END OF CHAPTER 1 --
 
@@ -304,9 +304,9 @@ starting_train = NodePath("../CH1_LV4_R12A/TrainBoss")
 dummy_warps = [NodePath("../CH1_LV4_R12B/DummyWarp"), NodePath("../CH1_LV4_R12D/DummyWarp"), NodePath("../CH1_LV4_R12F/DummyWarp")]
 phase_2_room = NodePath("../CH1_LV4_R12C")
 phase_3_room = NodePath("../CH1_LV4_R12E")
-mid_battle_text_1 = Array[String](["???: Argh! What in the heck was that for, li'l missy?!", "{player_name}: Don't act like you haven't been trying to run us over this whole time! Who do you think you are?!", "???: The name's Drackson, and Ah've been given orders from the boss to flush y'all outta this here railway one way er another!", "Knigel: And I order you to stop this train and step aside so that we can go home in peace!", "Drackson: Gonna need t'be a lot more convincin' that that, fairy boy! This oughta get y'all outta mah hair--speed 'er up!", "{player_name}: Woah! We're falling out!"])
+mid_battle_text_1 = Array[String](["?????: Argh! What in the heck was that for, li'l missy?!", "{player_name}: Don't act like you haven't been trying to run us over this whole time! Who do you think you are?!", "?????: Mah name's Drackson, and Ah've been given orders from the boss to flush y'all outta this here railway one way er another!", "Knigel: And I order you to stop this train and step aside so that we can go home in peace!", "Drackson: Gonna need t'be a lot more convincin' that that, fairy boy! This oughta get y'all outta mah hair--speed 'er up!", "{player_name}: Woah! We're falling out!"])
 mid_battle_text_2 = Array[String](["Drackson: Gah! Ah'm gettin' real tired o' ya mages with yer fancy spells an' all that!", "Knigel: Hey! What do you have against mages?", "Drackson: They're keepin' the all magic away from us dragons! So we have ta steal it! Simple as that!", "Drackson: But Ah can see why the boss wants ya captured--ya got both dragon *and* mage powers...", "Drackson: We could fergit about this whole scuffle 'ere if yer willin' ta join us!", "{player_name}: I'd never join the likes of you! Not after what Knigel and I both went through because of your group!", "Drackson: Then that there tears it! FULL SPEED AHEAD!", "{player_name}: Ahhh! Not agaaain!"])
-pre_defeat_text = Array[String](["Drackson: Grr! Darn... y'all are tougher than ya look... Ah give up!", "Knigel: Now stop this train at once! We're going back home whether your boss likes it or not!", "Drackson: Can't exactly help ya with all o' that, fairy boy...", "{player_name}: And why not?", "Drackson: Well shucks... guess Ah shoulda let y'all know that Ah've been takin' y'guys home this entire time, heh heh heh... All accordin' to the boss' plan...", "Knigel: Shoot! That's Areltun Station up ahead! We're going too fast! LET'S GET OUT OF HERE, EMDEE!"])
+pre_defeat_text = Array[String](["Drackson: Grr! Darn... y'all are tougher than ya look... Ah give up!", "Knigel: Now stop this train at once! We're going back home whether your boss likes it or not!", "Drackson: Can't exactly help ya with all o' that, fairy boy...", "{player_name}: And why not?", "Drackson: Well shucks... guess Ah shoulda let y'all know that Ah've been takin' y'guys home this entire time, heh heh heh... All accordin' to the boss' plan...", "{player_name}: Huh? What do you me--? *gasp* I-Is that..?!", "Knigel: Shoot! That's Areltun Station up ahead! We're going too fast! LET'S GET OUT OF HERE, EMDEE!"])
 player_hub = NodePath("../Player/Hub")
 boss_room = NodePath("../CH1_LV4_R12A")
 boss_trigger = NodePath("../CH1_LV4_R12A/BossTrigger")
@@ -317,7 +317,7 @@ normal_level_music_player = NodePath("../LevelMusicPlayer")
 introduction_text = Array[String](["{player_name}: What the--?! The exit--", "[center]
 *BING* *BONG*
 
-*DING* *DONG*", "???: Attention, passengers--or should I say trespassers... Ah'm afraid this next stop will be the end o' the line. FOR BOTH O' Y'ALL!", "Knigel: Shoot! Get above the tunnels, EmDee!"])
+*DING* *DONG*", "?????: Attention, passengers--or should I say trespassers... Ah'm afraid this next stop will be the end o' the line. FOR BOTH O' Y'ALL!", "Knigel: Shoot! Get above the tunnels, EmDee!"])
 defeat_text = Array[String](["Knigel: *phew* Geez, that was way too close! You alright, EmDee?", "{player_name}: Haha... yeah! We... We made it back home! We did it! I knew we could do it!", "{player_name}: H-ha... ha...", "Knigel: ...EmDee? You're shaking a lot...", "{player_name}: Oh, who am I kidding, Knigel?! I thought for sure we were going to die back there!", "{player_name}: I was trying to be brave through all of this just like you would be, but the train, the heights, being captured and chased by those guys...", "Knigel: It's okay, EmDee... We're safe now and practically back home just like you promised, right?", "{player_name}: But what about the train crashing? What about changing you back? What about our families? I don't even know how we're going to explain our wherabouts to everyone! What do we do now?!", "Knigel: Look, we'll figure those things out together later, but right now, EmDee, I need you to calm down. Believe me, I'm just as shaken up by all of this as you are...", "Knigel: Why don't we just take a rest for now in that small cave up ahead? Then we'll see where to take it from there afterwards.", "{player_name}: *sigh* I suppose you're right, Knigel... I'm getting too far ahead of myself here, I need to lie down...", "{player_name}: I just hope no one else saw what just transpired here..."])
 textbox = NodePath("../Textbox")
 post_hit_invulnerability_duration = 3.0
@@ -333,8 +333,8 @@ screen_fade = NodePath("../UI_Canvas/ScreenFade")
 [connection signal="player_defeated" from="." to="UI_Canvas/MagicMeterUI" method="hide"]
 [connection signal="player_defeated" from="." to="UI_Canvas/FragmentCounterUI" method="hide"]
 [connection signal="player_defeated" from="." to="UI_Canvas/TrainArrivalSignUI" method="hide"]
-[connection signal="player_defeated" from="." to="UI_Canvas/ClearTimer" method="hide"]
 [connection signal="player_defeated" from="." to="UI_Canvas/ClearTimer" method="stop_timer"]
+[connection signal="player_defeated" from="." to="UI_Canvas/ClearTimer" method="hide"]
 [connection signal="player_defeated" from="." to="Textbox" method="hide_textbox"]
 [connection signal="player_defeated" from="." to="LevelMusicPlayer" method="stop"]
 [connection signal="player_defeated" from="." to="BossMusicPlayer" method="stop"]
@@ -345,8 +345,8 @@ screen_fade = NodePath("../UI_Canvas/ScreenFade")
 [connection signal="level_finished" from="CH1_LV4_R13/FinishLine" to="UI_Canvas/MagicMeterUI" method="hide"]
 [connection signal="level_finished" from="CH1_LV4_R13/FinishLine" to="UI_Canvas/FragmentCounterUI" method="hide"]
 [connection signal="level_finished" from="CH1_LV4_R13/FinishLine" to="UI_Canvas/TrainArrivalSignUI" method="hide"]
-[connection signal="level_finished" from="CH1_LV4_R13/FinishLine" to="UI_Canvas/ClearTimer" method="hide"]
 [connection signal="level_finished" from="CH1_LV4_R13/FinishLine" to="UI_Canvas/ClearTimer" method="stop_timer"]
+[connection signal="level_finished" from="CH1_LV4_R13/FinishLine" to="UI_Canvas/ClearTimer" method="hide"]
 [connection signal="level_finished" from="CH1_LV4_R13/FinishLine" to="UI_Canvas/ResultsScreen" method="on_level_complete"]
 [connection signal="level_finished" from="CH1_LV4_R13/FinishLine" to="LevelMusicPlayer" method="fade_out"]
 

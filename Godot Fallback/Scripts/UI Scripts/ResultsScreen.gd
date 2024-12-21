@@ -144,7 +144,7 @@ func do_menu():
 
 func do_main_menu():
 	CheckpointHandler.clear_checkpoint()
-	if (!OptionsHelper.enable_quick_restart_toggle):
+	if (!OptionsHelper.enable_quick_restart_toggle or (textbox != null and post_level_text.size() > 0)):
 		menu_cursor.do_selection_movement()
 		await get_tree().create_timer(1.0).timeout
 		screen_fade.set_fade(1, 1, Color.BLACK)
