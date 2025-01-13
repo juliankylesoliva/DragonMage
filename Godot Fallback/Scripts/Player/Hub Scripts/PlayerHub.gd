@@ -2,6 +2,7 @@ extends Node
 
 class_name PlayerHub
 
+@export var debug_enable_input_recording : bool = false
 @export var auto_sequence : AutoPlayerInputSequence = null
 
 @export var state_machine : PlayerStateMachine
@@ -64,6 +65,10 @@ var prev_auto_input_dictionary : Dictionary = {"Move Left": false, "Move Right":
 
 var current_auto_input_dictionary : Dictionary = {"Move Left": false, "Move Right": false, "Move Up": false, "Move Down": false, "Jump": false, "Glide": false, "Attack": false, "Change Form": false, "Crouch": false, "Fairy Ability": false, "Interact": false}
 
+var is_recording_inputs : bool = false
+
+var current_recording : AutoPlayerInputSequence
+
 func _ready():
 	if (auto_sequence != null):
 		is_auto_mode_active = true
@@ -71,6 +76,12 @@ func _ready():
 func _process(_delta):
 	OptionsHelper.update_control_options(self)
 	read_auto_sequence()
+	if (debug_enable_input_recording and Input.is_action_just_pressed("Record Inputs")):
+		if (!is_recording_inputs):
+			start_recording_inputs()
+		else:
+			stop_recording_inputs()
+	record_auto_sequence()
 
 func get_input_vector():
 	var input_vector = Vector2.ZERO
@@ -161,6 +172,39 @@ func read_auto_sequence():
 			current_auto_input_dictionary["Crouch"] = new_frame.crouch
 			current_auto_input_dictionary["Fairy Ability"] = new_frame.fairy
 			current_auto_input_dictionary["Interact"] = new_frame.interact
+
+func record_auto_sequence():
+	if (!is_recording_inputs):
+		return
+	
+	var new_frame : AutoPlayerInputFrame = AutoPlayerInputFrame.new()
+	new_frame.duration = 1
+	new_frame.left = (self.get_input_vector().x < 0)
+	new_frame.right = (self.get_input_vector().x > 0)
+	new_frame.up = (self.get_input_vector().y > 0)
+	new_frame.down = (self.get_input_vector().y < 0)
+	new_frame.jump = Input.is_action_pressed("Jump")
+	new_frame.glide = Input.is_action_pressed("Glide")
+	new_frame.attack = Input.is_action_pressed("Attack")
+	new_frame.change = Input.is_action_pressed("Change Form")
+	new_frame.crouch = Input.is_action_pressed("Crouch")
+	new_frame.fairy = Input.is_action_pressed("Fairy Ability")
+	new_frame.interact = Input.is_action_pressed("Interact")
+	
+	if (!current_recording.frames.is_empty() and current_recording.frames.back().is_equal_to(new_frame)):
+		current_recording.frames.back().duration += 1
+	else:
+		current_recording.frames.push_back(new_frame)
+
+func start_recording_inputs():
+	current_recording = AutoPlayerInputSequence.new()
+	is_recording_inputs = true
+
+func stop_recording_inputs():
+	is_recording_inputs = false
+	var save_result = ResourceSaver.save(current_recording, "res://Scripts/Resource Scripts/AutoPlayerInput/demo_sample.tres")
+	if (save_result != OK):
+		print_debug(save_result)
 
 func reset_player():
 	movement.reset_crouch_state()

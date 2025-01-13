@@ -14,3 +14,16 @@ class_name AutoPlayerInputFrame
 @export var crouch : bool = false
 @export var fairy : bool = false
 @export var interact : bool = false
+
+func is_equal_to(other : AutoPlayerInputFrame):
+	return (self.left == other.left
+	and self.right == other.right
+	and self.up == other.up
+	and self.down == other.down
+	and self.jump == other.jump
+	and self.glide == other.glide
+	and self.attack == other.attack
+	and self.change == other.change
+	and self.crouch == other.crouch
+	and self.fairy == other.fairy
+	and self.interact == other.interact)
