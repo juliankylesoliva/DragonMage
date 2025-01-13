@@ -83,11 +83,11 @@ func check_crouch_state():
 		return
 	
 	if (!is_crouching):
-		is_crouching = (!is_crouch_cooldown_active() and Input.is_action_pressed("Crouch") and (hub.jumping.enable_crouch_jumping or hub.char_body.is_on_floor()))
+		is_crouching = (!is_crouch_cooldown_active() and hub.is_action_pressed("Crouch") and (hub.jumping.enable_crouch_jumping or hub.char_body.is_on_floor()))
 		if (is_crouching):
 			current_min_crouch_timer = min_crouch_time
 	else:
-		is_crouching = (current_min_crouch_timer > 0 or hub.collisions.is_in_ceiling_when_uncrouched() or (((!enable_crouch_toggle and Input.is_action_pressed("Crouch")) or (enable_crouch_toggle and !Input.is_action_just_pressed("Crouch"))) and (hub.char_body.is_on_floor() or hub.jumping.enable_crouch_jumping)))
+		is_crouching = (current_min_crouch_timer > 0 or hub.collisions.is_in_ceiling_when_uncrouched() or (((!enable_crouch_toggle and hub.is_action_pressed("Crouch")) or (enable_crouch_toggle and !hub.is_action_just_pressed("Crouch"))) and (hub.char_body.is_on_floor() or hub.jumping.enable_crouch_jumping)))
 		if (!is_crouching and state_name == "Jumping" and !hub.jumping.enable_crouch_jumping):
 			hub.animation.set_animation("{name}Jump".format({"name" : hub.form.get_current_form_name()}))
 			hub.animation.set_animation_frame(0)

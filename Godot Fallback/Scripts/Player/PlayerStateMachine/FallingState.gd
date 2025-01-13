@@ -61,7 +61,7 @@ func state_process(_delta : float):
 	elif (hub.char_body.is_on_floor()):
 		if (hub.jumping.can_fast_fall_slope_boost()):
 			var selected_attack : Attack = (null if !hub.jumping.can_fast_fall_slope_boost() else hub.attacks.get_attack_by_name(hub.attacks.crouching_attack_name))
-			if (selected_attack != null and selected_attack.can_use_attack() and (Input.is_action_pressed("Crouch") or hub.get_input_vector().y < 0)):
+			if (selected_attack != null and selected_attack.can_use_attack() and (hub.is_action_pressed("Crouch") or hub.get_input_vector().y < 0)):
 				hub.attacks.current_attack = selected_attack
 				set_next_state(state_machine.get_state_by_name("Attacking"))
 			else:

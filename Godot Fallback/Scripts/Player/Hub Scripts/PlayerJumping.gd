@@ -243,7 +243,7 @@ func is_super_jump_ready():
 	return (current_super_jump_retention_timer > 0)
 
 func update_super_jump_charge_timer(delta : float):
-	if (hub.movement.is_crouching and hub.get_input_vector().x == 0 and ((!hub.movement.enable_crouch_toggle and Input.is_action_pressed("Crouch")) or hub.movement.enable_crouch_toggle) and hub.char_body.is_on_floor() and hub.state_machine.current_state.name == "Standing"):
+	if (hub.movement.is_crouching and hub.get_input_vector().x == 0 and ((!hub.movement.enable_crouch_toggle and hub.is_action_pressed("Crouch")) or hub.movement.enable_crouch_toggle) and hub.char_body.is_on_floor() and hub.state_machine.current_state.name == "Standing"):
 		if (current_super_jump_charge_timer < super_jump_charge_time and current_super_jump_retention_timer <= 0):
 			current_super_jump_charge_timer = move_toward(current_super_jump_charge_timer, super_jump_charge_time, delta)
 			if (current_super_jump_charge_timer >= super_jump_charge_time):
@@ -257,7 +257,7 @@ func update_super_jump_charge_timer(delta : float):
 
 func update_super_jump_retention_timer(delta : float):
 	if (current_super_jump_retention_timer > 0):
-		if (current_super_jump_retention_timer >= super_jump_retention_time and hub.movement.is_crouching and ((!hub.movement.enable_crouch_toggle and Input.is_action_pressed("Crouch")) or hub.movement.enable_crouch_toggle) and hub.char_body.is_on_floor() and (hub.state_machine.current_state.name == "Standing" or hub.state_machine.current_state.name == "Running")):
+		if (current_super_jump_retention_timer >= super_jump_retention_time and hub.movement.is_crouching and ((!hub.movement.enable_crouch_toggle and hub.is_action_pressed("Crouch")) or hub.movement.enable_crouch_toggle) and hub.char_body.is_on_floor() and (hub.state_machine.current_state.name == "Standing" or hub.state_machine.current_state.name == "Running")):
 			current_super_jump_retention_timer = super_jump_retention_time
 		else:
 			current_super_jump_retention_timer = move_toward(current_super_jump_retention_timer, 0, delta)
@@ -328,7 +328,7 @@ func ground_jump_update(delta : float):
 		else:
 			hub.char_body.velocity.y += get_gravity_delta(delta)
 		
-		if (current_min_jump_hold_timer >= min_jump_hold_time and is_jump_held and !Input.is_action_pressed("Jump")):
+		if (current_min_jump_hold_timer >= min_jump_hold_time and is_jump_held and !hub.is_action_pressed("Jump")):
 			unset_is_jump_held()
 		
 		if ((is_jump_held or current_min_jump_hold_timer < min_jump_hold_time) and hub.char_body.is_on_ceiling()):
@@ -363,7 +363,7 @@ func can_fast_fall_slope_boost():
 func do_fast_fall_slope_boost():
 	var flip : bool = ((hub.char_body.get_floor_normal().x * hub.movement.get_facing_value()) <= 0)
 	if (flip):
-		hub.movement.current_horizontal_velocity *= (-1 if Input.is_action_pressed("Crouch") else 0)
+		hub.movement.current_horizontal_velocity *= (-1 if hub.is_action_pressed("Crouch") else 0)
 		hub.movement.set_facing_direction(-hub.movement.get_facing_value())
 	hub.movement.current_horizontal_velocity += (fast_fall_slope_boost_multiplier * hub.jumping.fast_falling_speed * hub.char_body.get_floor_normal().x)
 	hub.char_body.velocity.x = hub.movement.current_horizontal_velocity
@@ -383,7 +383,7 @@ func do_speed_hop_slope_boost():
 		hub.char_body.velocity.x = hub.movement.current_horizontal_velocity
 
 func can_glide():
-	return (enable_gliding and !hub.buffers.is_coyote_time_active() and hub.char_body.velocity.y >= 0 and current_glide_time <= hub.buffers.early_glide_buffer_time and hub.collisions.get_distance_to_ground() >= min_glide_height and (hub.buffers.is_glide_buffer_active() or Input.is_action_just_pressed("Glide")))
+	return (enable_gliding and !hub.buffers.is_coyote_time_active() and hub.char_body.velocity.y >= 0 and current_glide_time <= hub.buffers.early_glide_buffer_time and hub.collisions.get_distance_to_ground() >= min_glide_height and (hub.buffers.is_glide_buffer_active() or hub.is_action_just_pressed("Glide")))
 
 func start_glide():
 	hub.buffers.reset_glide_buffer()
@@ -396,10 +396,10 @@ func glide_update(delta : float):
 	current_glide_time = move_toward(current_glide_time, max_glide_time, delta)
 
 func is_glide_canceled():
-	return ((!enable_glide_toggle and !Input.is_action_pressed("Glide")) or (enable_glide_toggle and Input.is_action_just_pressed("Glide")) or hub.char_body.is_on_floor() or hub.jumping.current_glide_time >= hub.jumping.max_glide_time)
+	return ((!enable_glide_toggle and !hub.is_action_pressed("Glide")) or (enable_glide_toggle and hub.is_action_just_pressed("Glide")) or hub.char_body.is_on_floor() or hub.jumping.current_glide_time >= hub.jumping.max_glide_time)
 
 func cancel_glide():
-	if (current_glide_time > hub.buffers.early_glide_buffer_time or (!enable_glide_toggle and !Input.is_action_pressed("Glide")) or (enable_glide_toggle and Input.is_action_just_pressed("Glide"))):
+	if (current_glide_time > hub.buffers.early_glide_buffer_time or (!enable_glide_toggle and !hub.is_action_pressed("Glide")) or (enable_glide_toggle and hub.is_action_just_pressed("Glide"))):
 		current_glide_time = max_glide_time
 
 func can_midair_jump():
@@ -442,7 +442,7 @@ func do_midair_jump():
 	current_midair_jumps += 1
 
 func can_wall_slide():
-	return (enable_wall_jumping and !hub.movement.is_crouching and hub.collisions.get_distance_to_ground() >= min_wall_jump_height and hub.collisions.is_facing_a_wall() and hub.collisions.is_moving_against_a_wall() and !hub.collisions.is_facing_an_intangible_wall() and !hub.collisions.is_moving_against_an_intangible_wall() and (!Input.is_action_pressed("Jump") or !is_jump_held or hub.char_body.velocity.y >= 0))
+	return (enable_wall_jumping and !hub.movement.is_crouching and hub.collisions.get_distance_to_ground() >= min_wall_jump_height and hub.collisions.is_facing_a_wall() and hub.collisions.is_moving_against_a_wall() and !hub.collisions.is_facing_an_intangible_wall() and !hub.collisions.is_moving_against_an_intangible_wall() and (!hub.is_action_pressed("Jump") or !is_jump_held or hub.char_body.velocity.y >= 0))
 
 func can_wall_slide_from_wall_climb():
 	return (enable_wall_jumping and hub.collisions.is_facing_a_wall() and !hub.collisions.is_facing_an_intangible_wall() and !hub.char_body.is_on_floor() and (hub.get_input_vector().x == hub.movement.get_facing_value() or current_wall_release_timer < wall_release_time))
@@ -463,7 +463,7 @@ func wall_slide_update(delta):
 	hub.char_body.move_and_slide()
 
 func is_wall_slide_canceled():
-	return (!hub.collisions.is_facing_a_wall() or hub.collisions.is_facing_an_intangible_wall() or hub.char_body.velocity.y == 0 or (hub.get_input_vector().x == -hub.movement.get_facing_value() and current_wall_release_timer >= wall_release_time) or (hub.jumping.enable_crouch_jumping and !hub.movement.is_crouch_cooldown_active() and Input.is_action_pressed("Crouch")))
+	return (!hub.collisions.is_facing_a_wall() or hub.collisions.is_facing_an_intangible_wall() or hub.char_body.velocity.y == 0 or (hub.get_input_vector().x == -hub.movement.get_facing_value() and current_wall_release_timer >= wall_release_time) or (hub.jumping.enable_crouch_jumping and !hub.movement.is_crouch_cooldown_active() and hub.is_action_pressed("Crouch")))
 
 func can_wall_jump():
 	return (hub.state_machine.current_state.name == "WallSliding" and !is_wall_jump_lock_timer_active() and hub.buffers.is_jump_buffer_active())
@@ -562,7 +562,7 @@ func start_wall_popup():
 	hub.char_body.velocity = (Vector2.UP * vertical_result)
 
 func can_wall_vault():
-	return (wall_popup_time_left > 0 and hub.char_body.velocity.y < 0 and !hub.movement.is_crouching and !hub.collisions.is_moving_against_a_wall() and (hub.get_input_vector().x * hub.movement.get_facing_value()) > 0 and (hub.buffers.is_jump_buffer_active() or (Input.is_action_pressed("Jump") and hub.get_input_vector().y > 0)))
+	return (wall_popup_time_left > 0 and hub.char_body.velocity.y < 0 and !hub.movement.is_crouching and !hub.collisions.is_moving_against_a_wall() and (hub.get_input_vector().x * hub.movement.get_facing_value()) > 0 and (hub.buffers.is_jump_buffer_active() or (hub.is_action_pressed("Jump") and hub.get_input_vector().y > 0)))
 
 func wall_popup_update(delta : float):
 	hub.char_body.velocity.x = 0

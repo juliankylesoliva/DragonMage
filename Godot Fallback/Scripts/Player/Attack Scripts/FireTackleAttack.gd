@@ -185,7 +185,7 @@ func startup_init():
 func startup_update(delta : float):
 	hub.buffers.refresh_speed_preservation_buffer()
 	if ((current_windup_timer > 0 or is_attack_button_held) and !hub.damage.is_player_defeated and !hub.damage.is_player_damaged()):
-		if (!Input.is_action_pressed("Attack")):
+		if (!hub.is_action_pressed("Attack")):
 			is_attack_button_held = false
 		hub.char_body.velocity = Vector2.ZERO
 		hub.movement.set_facing_direction(hub.get_input_vector().x)
@@ -240,7 +240,7 @@ func active_init():
 func active_update(delta : float):
 	hub.buffers.refresh_speed_preservation_buffer()
 	if (current_attack_timer > 0 and !hub.damage.is_player_defeated and !hub.damage.is_player_damaged() and (!is_attack_button_held or distance_traveled < fireball_min_tackle_distance) and ((current_bump_immunity_timer > 0 and (!can_cancel_fire_tackle_endlag() or hub.temper.is_form_locked())) or (!hub.collisions.is_facing_a_wall() and !(hub.char_body.is_on_ceiling() and !hub.char_body.is_on_floor())))):
-		if (!hub.temper.is_forcing_form_change() and distance_traveled >= fire_tackle_slide_cancelable_distance and hub.char_body.is_on_floor() and Input.is_action_pressed("Crouch")):
+		if (!hub.temper.is_forcing_form_change() and distance_traveled >= fire_tackle_slide_cancelable_distance and hub.char_body.is_on_floor() and hub.is_action_pressed("Crouch")):
 			var selected_attack : Attack = hub.attacks.get_attack_by_name(hub.attacks.crouching_attack_name)
 			if (selected_attack != null):
 				hub.buffers.reset_attack_buffer()
@@ -365,7 +365,7 @@ func endlag_init():
 				hub.temper.neutralize_temper_by(fireball_launch_temper_decrease)
 			hub.movement.reset_current_horizontal_velocity()
 			hub.char_body.velocity = (((Vector2.UP if !hub.char_body.is_on_floor() else Vector2.ZERO) + (Vector2.RIGHT * -hub.movement.get_facing_value())).normalized() * fire_tackle_fireball_recoil_strength)
-		elif (!hub.temper.is_forcing_form_change() and hub.char_body.is_on_floor() and Input.is_action_pressed("Crouch")):
+		elif (!hub.temper.is_forcing_form_change() and hub.char_body.is_on_floor() and hub.is_action_pressed("Crouch")):
 			var selected_attack : Attack = hub.attacks.get_attack_by_name(hub.attacks.crouching_attack_name)
 			if (selected_attack != null):
 				hub.buffers.reset_attack_buffer()
@@ -388,7 +388,7 @@ func endlag_init():
 
 func endlag_update(delta : float):
 	if (current_endlag_timer > 0 and !is_fire_tackle_endlag_canceled and !hub.damage.is_player_defeated and !hub.stomp.is_stomping_enemy() and !hub.damage.is_player_damaged()):
-		if (!hub.temper.is_forcing_form_change() and !is_player_firing_projectile and !did_player_bump and hub.char_body.is_on_floor() and Input.is_action_pressed("Crouch")):
+		if (!hub.temper.is_forcing_form_change() and !is_player_firing_projectile and !did_player_bump and hub.char_body.is_on_floor() and hub.is_action_pressed("Crouch")):
 			var selected_attack : Attack = hub.attacks.get_attack_by_name(hub.attacks.crouching_attack_name)
 			if (selected_attack != null):
 				hub.buffers.reset_attack_buffer()

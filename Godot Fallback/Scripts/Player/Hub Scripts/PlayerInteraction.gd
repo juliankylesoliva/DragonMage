@@ -7,7 +7,7 @@ class_name PlayerInteraction
 var interactable_ref : Interactable = null
 
 func _physics_process(_delta):
-	if (Input.is_action_just_pressed("Interact") and interactable_ref != null):
+	if (hub.is_action_just_pressed("Interact") and interactable_ref != null):
 		interactable_ref.interact(hub)
 
 func set_interactable_ref(interactable : Interactable):

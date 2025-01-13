@@ -40,7 +40,7 @@ func state_process(_delta):
 	
 	if (hub.movement.is_crouching):
 		is_throwing = false
-		if (!Input.is_action_pressed("Crouch") and hub.collisions.is_in_ceiling_when_uncrouched()):
+		if (!hub.is_action_pressed("Crouch") and hub.collisions.is_in_ceiling_when_uncrouched()):
 			hub.animation.set_animation("{name}CrouchHeadbonk".format({"name" : char_name}))
 			if (!is_headbonking):
 				is_headbonking = true
@@ -54,7 +54,7 @@ func state_process(_delta):
 			is_headbonking = false
 			hub.animation.set_animation("{name}Crouch".format({"name" : char_name}))
 	else:
-		if(Input.is_action_just_released("Crouch") or (prev_is_crouching and !hub.movement.is_crouching)):
+		if(hub.is_action_just_released("Crouch") or (prev_is_crouching and !hub.movement.is_crouching)):
 			hub.animation.set_animation("{name}Vulnerable".format({"name" : char_name}) if hub.temper.is_form_locked() else "{name}Stand".format({"name" : char_name}))
 		update_blink_timer(_delta)
 		if (!hub.char_sprite.is_playing()):

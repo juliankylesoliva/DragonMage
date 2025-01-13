@@ -70,13 +70,13 @@ func attack_state_process(_delta : float):
 		hub.state_machine.current_state.set_next_state(hub.state_machine.get_state_by_name("Standing"))
 	elif (hub.is_deactivated):
 		hub.state_machine.current_state.set_next_state(hub.state_machine.get_state_by_name("Deactivated"))
-	elif (hub.damage.is_player_defeated or hub.damage.is_player_damaged() or hub.collisions.is_facing_a_wall() or (current_slide_hang_timer <= 0 and (hub.collisions.is_near_a_ledge() or hub.collisions.get_distance_to_ground() > hub.char_body.floor_snap_length)) or (!hub.char_body.is_on_floor() and Input.is_action_just_pressed("Crouch"))):
+	elif (hub.damage.is_player_defeated or hub.damage.is_player_damaged() or hub.collisions.is_facing_a_wall() or (current_slide_hang_timer <= 0 and (hub.collisions.is_near_a_ledge() or hub.collisions.get_distance_to_ground() > hub.char_body.floor_snap_length)) or (!hub.char_body.is_on_floor() and hub.is_action_just_pressed("Crouch"))):
 		stop_slide()
 	elif (hub.stomp.is_stomping_enemy() or (current_slide_timer > slide_uncancelable_time and hub.buffers.is_jump_buffer_active())):
 		do_jump_cancel()
 	elif (!hub.collisions.is_in_ceiling_when_uncrouched() and current_slide_timer > slide_uncancelable_time and hub.buffers.is_attack_buffer_active()):
 		do_attack_cancel()
-	elif (horizontal_result <= 0 or (current_slide_timer > slide_min_duration and (((!hub.movement.enable_crouch_toggle and !(Input.is_action_pressed("Crouch") or hub.get_input_vector().y < 0)) or (hub.movement.enable_crouch_toggle and Input.is_action_just_pressed("Crouch"))) or (hub.get_input_vector().x * hub.movement.get_facing_value()) < 0))):
+	elif (horizontal_result <= 0 or (current_slide_timer > slide_min_duration and (((!hub.movement.enable_crouch_toggle and !(hub.is_action_pressed("Crouch") or hub.get_input_vector().y < 0)) or (hub.movement.enable_crouch_toggle and hub.is_action_just_pressed("Crouch"))) or (hub.get_input_vector().x * hub.movement.get_facing_value()) < 0))):
 		stop_slide()
 	else:
 		slide_update(_delta)
@@ -154,9 +154,9 @@ func stop_slide():
 		hub.state_machine.current_state.set_next_state(hub.state_machine.get_state_by_name("Running"))
 	elif (hub.char_body.velocity.y >= 0 and !hub.char_body.is_on_floor()):
 		preserve_slide_speed()
-		if (!hub.collisions.is_in_ceiling_when_uncrouched() and !Input.is_action_pressed("Crouch")):
+		if (!hub.collisions.is_in_ceiling_when_uncrouched() and !hub.is_action_pressed("Crouch")):
 			hub.movement.reset_crouch_state()
-		if (Input.is_action_just_pressed("Crouch")):
+		if (hub.is_action_just_pressed("Crouch")):
 			hub.jumping.set_fast_fall()
 			hub.char_body.velocity.y = hub.jumping.fast_falling_speed
 		hub.state_machine.current_state.set_next_state(hub.state_machine.get_state_by_name("Falling"))

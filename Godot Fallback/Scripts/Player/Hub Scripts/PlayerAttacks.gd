@@ -31,7 +31,7 @@ func _process(delta):
 	update_attack_cooldown_timer(delta)
 
 func is_using_attack_state():
-	if (!is_attack_cooldown_active() and (current_attack == null or current_attack.current_attack_state == Attack.AttackState.NOTHING) and (hub.buffers.is_attack_buffer_active() or Input.is_action_pressed("Attack"))):
+	if (!is_attack_cooldown_active() and (current_attack == null or current_attack.current_attack_state == Attack.AttackState.NOTHING) and (hub.buffers.is_attack_buffer_active() or hub.is_action_pressed("Attack"))):
 		var selected_attack = get_attack_by_name(crouching_attack_name if hub.movement.is_crouching else standing_attack_name)
 		if (selected_attack != null and check_input_type(selected_attack) and selected_attack.can_use_attack()):
 			hub.buffers.reset_attack_buffer()
@@ -65,4 +65,4 @@ func get_attack_by_name(attack_name : String):
 	return null
 
 func check_input_type(attack : Attack):
-	return ((attack.input_type == Attack.AttackInputType.PRESS and hub.buffers.is_attack_buffer_active()) or (attack.input_type == Attack.AttackInputType.HOLD and Input.is_action_pressed("Attack")))
+	return ((attack.input_type == Attack.AttackInputType.PRESS and hub.buffers.is_attack_buffer_active()) or (attack.input_type == Attack.AttackInputType.HOLD and hub.is_action_pressed("Attack")))

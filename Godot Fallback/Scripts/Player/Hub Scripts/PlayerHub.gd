@@ -2,6 +2,8 @@ extends Node
 
 class_name PlayerHub
 
+@export var auto_sequence : AutoPlayerInputSequence = null
+
 @export var state_machine : PlayerStateMachine
 @export var collisions : PlayerCollisions
 @export var buffers : PlayerBuffers
@@ -50,8 +52,25 @@ var is_deactivated : bool = false
 
 var force_stand : bool = false
 
+var is_auto_mode_active : bool = false
+
+var current_auto_input_vector : Vector2 = Vector2.ZERO
+
+var current_auto_sequence_index : int = -1
+
+var current_auto_frame_timer : int = 0
+
+var prev_auto_input_dictionary : Dictionary = {"Move Left": false, "Move Right": false, "Move Up": false, "Move Down": false, "Jump": false, "Glide": false, "Attack": false, "Change Form": false, "Crouch": false, "Fairy Ability": false, "Interact": false}
+
+var current_auto_input_dictionary : Dictionary = {"Move Left": false, "Move Right": false, "Move Up": false, "Move Down": false, "Jump": false, "Glide": false, "Attack": false, "Change Form": false, "Crouch": false, "Fairy Ability": false, "Interact": false}
+
+func _ready():
+	if (auto_sequence != null):
+		is_auto_mode_active = true
+
 func _process(_delta):
 	OptionsHelper.update_control_options(self)
+	read_auto_sequence()
 
 func get_input_vector():
 	var input_vector = Vector2.ZERO
@@ -59,9 +78,37 @@ func get_input_vector():
 	if (force_stand):
 		return input_vector
 	
-	input_vector.x = ((1 if Input.is_action_pressed("Move Right") or Input.is_action_pressed("Move Right (Pad)") else 0) - (1 if Input.is_action_pressed("Move Left") or Input.is_action_pressed("Move Left (Pad)") else 0))
-	input_vector.y = ((1 if Input.is_action_pressed("Move Up") or Input.is_action_pressed("Move Up (Pad)") else 0) - (1 if Input.is_action_pressed("Move Down") or Input.is_action_pressed("Move Down (Pad)") else 0))
+	if (!is_auto_mode_active):
+		input_vector.x = ((1 if Input.is_action_pressed("Move Right") or Input.is_action_pressed("Move Right (Pad)") else 0) - (1 if Input.is_action_pressed("Move Left") or Input.is_action_pressed("Move Left (Pad)") else 0))
+		input_vector.y = ((1 if Input.is_action_pressed("Move Up") or Input.is_action_pressed("Move Up (Pad)") else 0) - (1 if Input.is_action_pressed("Move Down") or Input.is_action_pressed("Move Down (Pad)") else 0))
+	else:
+		input_vector.x = ((1 if self.is_action_pressed("Move Right") else 0) - (1 if self.is_action_pressed("Move Left") else 0))
+		input_vector.y = ((1 if self.is_action_pressed("Move Up") else 0) - (1 if self.is_action_pressed("Move Down") else 0))
+	
 	return input_vector
+
+func set_auto_input_vector(v : Vector2):
+	current_auto_input_vector = Vector2.ZERO
+	if (is_auto_mode_active):
+		current_auto_input_vector = v
+
+func is_action_just_pressed(action_name : StringName):
+	if (!is_auto_mode_active):
+		return Input.is_action_just_pressed(action_name)
+	else:
+		return (prev_auto_input_dictionary.has(action_name) and current_auto_input_dictionary.has(action_name) and !prev_auto_input_dictionary[action_name] and current_auto_input_dictionary[action_name])
+
+func is_action_pressed(action_name : StringName):
+	if (!is_auto_mode_active):
+		return Input.is_action_pressed(action_name)
+	else:
+		return (current_auto_input_dictionary.has(action_name) and current_auto_input_dictionary[action_name])
+
+func is_action_just_released(action_name : StringName):
+	if (!is_auto_mode_active):
+		return Input.is_action_just_released(action_name)
+	else:
+		return (prev_auto_input_dictionary.has(action_name) and current_auto_input_dictionary.has(action_name) and prev_auto_input_dictionary[action_name] and !current_auto_input_dictionary[action_name])
 
 func set_respawn_position(pos : Vector2):
 	current_respawn_position = pos
@@ -74,6 +121,46 @@ func set_deactivation(b : bool):
 
 func set_force_stand(b : bool):
 	force_stand = b
+
+func read_auto_sequence():
+	if (auto_sequence != null and is_auto_mode_active):
+		prev_auto_input_dictionary = current_auto_input_dictionary.duplicate(true)
+		
+		if (current_auto_frame_timer > 0):
+			current_auto_frame_timer -= 1
+		else:
+			current_auto_sequence_index += 1
+			if (current_auto_sequence_index >= auto_sequence.frames.size()):
+				if (!auto_sequence.loop):
+					current_auto_input_dictionary["Move Left"] = false
+					current_auto_input_dictionary["Move Right"] = false
+					current_auto_input_dictionary["Move Up"] = false
+					current_auto_input_dictionary["Move Down"] = false
+					current_auto_input_dictionary["Jump"] = false
+					current_auto_input_dictionary["Glide"] = false
+					current_auto_input_dictionary["Attack"] = false
+					current_auto_input_dictionary["Change Form"] = false
+					current_auto_input_dictionary["Crouch"] = false
+					current_auto_input_dictionary["Fairy Ability"] = false
+					current_auto_input_dictionary["Interact"] = false
+					is_auto_mode_active = false
+					return
+				else:
+					current_auto_sequence_index = 0
+			
+			var new_frame : AutoPlayerInputFrame = auto_sequence.frames[current_auto_sequence_index]
+			current_auto_frame_timer = new_frame.duration
+			current_auto_input_dictionary["Move Left"] = new_frame.left
+			current_auto_input_dictionary["Move Right"] = new_frame.right
+			current_auto_input_dictionary["Move Up"] = new_frame.up
+			current_auto_input_dictionary["Move Down"] = new_frame.down
+			current_auto_input_dictionary["Jump"] = new_frame.jump
+			current_auto_input_dictionary["Glide"] = new_frame.glide
+			current_auto_input_dictionary["Attack"] = new_frame.attack
+			current_auto_input_dictionary["Change Form"] = new_frame.change
+			current_auto_input_dictionary["Crouch"] = new_frame.crouch
+			current_auto_input_dictionary["Fairy Ability"] = new_frame.fairy
+			current_auto_input_dictionary["Interact"] = new_frame.interact
 
 func reset_player():
 	movement.reset_crouch_state()

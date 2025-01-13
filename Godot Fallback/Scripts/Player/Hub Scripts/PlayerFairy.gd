@@ -79,7 +79,7 @@ func get_selected_ability():
 	return null
 
 func is_using_fairy_ability():
-	if (is_using_fairy and enable_abilities and !is_fairy_ability_cooldown_active() and (hub.attacks.current_attack == null or hub.attacks.current_attack.current_attack_state == Attack.AttackState.NOTHING) and Input.is_action_pressed("Fairy Ability")):
+	if (is_using_fairy and enable_abilities and !is_fairy_ability_cooldown_active() and (hub.attacks.current_attack == null or hub.attacks.current_attack.current_attack_state == Attack.AttackState.NOTHING) and hub.is_action_pressed("Fairy Ability")):
 		var selected_attack = fairy_ability_list[current_selected_ability_index]
 		if (selected_attack != null and check_input_type(selected_attack) and selected_attack.can_use_attack()):
 			hub.buffers.reset_fairy_ability_buffer()
@@ -133,7 +133,7 @@ func is_fairy_ability_cooldown_active():
 	return current_fairy_ability_cooldown_timer > 0
 
 func check_input_type(attack : Attack):
-	return ((attack.input_type == Attack.AttackInputType.PRESS and hub.buffers.is_fairy_ability_buffer_active()) or (attack.input_type == Attack.AttackInputType.HOLD and Input.is_action_pressed("Fairy Ability")))
+	return ((attack.input_type == Attack.AttackInputType.PRESS and hub.buffers.is_fairy_ability_buffer_active()) or (attack.input_type == Attack.AttackInputType.HOLD and hub.is_action_pressed("Fairy Ability")))
 
 func do_magic_danger_increase(delta : float):
 	if (is_using_fairy and enable_abilities and !hub.damage.is_player_defeated and hub.temper.is_form_locked()):

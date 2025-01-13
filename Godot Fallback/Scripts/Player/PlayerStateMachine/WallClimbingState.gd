@@ -40,13 +40,13 @@ func state_process(_delta):
 	elif (hub.attacks.is_using_attack_state() and hub.attacks.current_attack != null):
 		set_next_state(state_machine.get_state_by_name("Attacking"))
 	elif (hub.jumping.can_start_wall_popup()):
-		if ((Input.is_action_pressed("Jump") and !Input.is_action_pressed("Crouch")) or hub.get_input_vector().y > 0):
+		if ((hub.is_action_pressed("Jump") and !hub.is_action_pressed("Crouch")) or hub.get_input_vector().y > 0):
 			hub.buffers.reset_jump_buffer()
 			hub.jumping.start_wall_popup()
 			set_next_state(state_machine.get_state_by_name("WallVaulting"))
 		else:
 			hub.jumping.do_ledge_snap()
-			if ((Input.is_action_pressed("Crouch") and !Input.is_action_pressed("Jump")) or hub.get_input_vector().y < 0):
+			if ((hub.is_action_pressed("Crouch") and !hub.is_action_pressed("Jump")) or hub.get_input_vector().y < 0):
 				var selected_attack : Attack = hub.attacks.get_attack_by_name(hub.attacks.crouching_attack_name)
 				if (selected_attack != null):
 					hub.attacks.current_attack = selected_attack
@@ -54,7 +54,7 @@ func state_process(_delta):
 			else:
 				set_next_state(state_machine.get_state_by_name("Running" if hub.char_body.is_on_floor() else "Falling"))
 	elif (hub.jumping.is_wall_climb_canceled()):
-		if ((Input.is_action_pressed("Jump") or hub.get_input_vector().y > 0) and (hub.jumping.current_wall_climb_time <= 0 or hub.char_body.velocity.y >= 0) and !hub.char_body.is_on_ceiling()):
+		if ((hub.is_action_pressed("Jump") or hub.get_input_vector().y > 0) and (hub.jumping.current_wall_climb_time <= 0 or hub.char_body.velocity.y >= 0) and !hub.char_body.is_on_ceiling()):
 			hub.buffers.reset_jump_buffer()
 			hub.jumping.start_wall_popup()
 			set_next_state(state_machine.get_state_by_name("WallVaulting"))

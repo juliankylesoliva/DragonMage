@@ -27,7 +27,7 @@ func on_attack_state_enter():
 	var spark_instance = EffectFactory.get_effect("TurnaroundSpark", hub.collisions.get_ground_point(), 1, hub.movement.get_facing_value() < 0)
 	spark_instance.rotation = hub.char_body.up_direction.angle_to(hub.char_body.get_floor_normal())
 	SoundFactory.play_sound_by_name("movement_magli_dodge", hub.char_body.global_position, 0, 1, "SFX")
-	was_jump_input_on_first_frame = (Input.is_action_just_pressed("Jump") or hub.state_machine.previous_state.name == "Jumping" or hub.state_machine.previous_state.name == "Falling")
+	was_jump_input_on_first_frame = (hub.is_action_just_pressed("Jump") or hub.state_machine.previous_state.name == "Jumping" or hub.state_machine.previous_state.name == "Falling")
 	hub.jumping.switch_to_zero_gravity()
 	hub.animation.set_animation("MagliDodge")
 	hub.animation.set_animation_speed(1)

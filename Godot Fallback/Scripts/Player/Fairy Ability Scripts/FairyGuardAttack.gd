@@ -244,7 +244,7 @@ func can_parry():
 
 func check_button_release():
 	if (!is_button_released):
-			is_button_released = !Input.is_action_pressed("Fairy Ability")
+			is_button_released = !hub.is_action_pressed("Fairy Ability")
 
 func update_fairy_position():
 	if (hub.fairy.fairy_ref != null):
