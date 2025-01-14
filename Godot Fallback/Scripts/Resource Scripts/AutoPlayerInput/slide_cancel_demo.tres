@@ -50,6 +50,8 @@ interact = false
 
 [resource]
 script = ExtResource("2_3v02x")
+starting_mode = 1
 loop = true
 loop_from_starting_position = false
+resume_player_control = false
 frames = Array[ExtResource("1_8d38e")]([SubResource("Resource_mesm2"), SubResource("Resource_wcxw1"), SubResource("Resource_kw6qb")])

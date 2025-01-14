@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=3 uid="uid://jbuvidvhkbey"]
+
+[ext_resource type="PackedScene" uid="uid://c6qw77ovfwgfs" path="res://Player.tscn" id="1_thymq"]
+[ext_resource type="Resource" uid="uid://0i78wwdpdunw" path="res://Scripts/Resource Scripts/AutoPlayerInput/blank_input_sequence.tres" id="2_3hs7o"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_teyyk"]
+resource_local_to_scene = true
+radius = 8.0
+height = 48.0
+
+[node name="DemoPlayer" instance=ExtResource("1_thymq")]
+modulate = Color(1, 1, 1, 0.6)
+
+[node name="Hub" parent="." index="0"]
+auto_sequence = ExtResource("2_3hs7o")
+
+[node name="Form" parent="Hub" index="7"]
+ignore_menu_selection = true
+
+[node name="CollisionShape2D" parent="." index="4"]
+shape = SubResource("CapsuleShape2D_teyyk")
+
+[node name="AudioListener2D" parent="." index="6"]
+current = false

@@ -1,0 +1,42 @@
+[gd_resource type="Resource" script_class="AutoPlayerInputSequence" load_steps=5 format=3 uid="uid://h20symr715o6"]
+
+[ext_resource type="Script" path="res://Scripts/Resource Scripts/AutoPlayerInput/AutoPlayerInputFrame.gd" id="1_gwuy4"]
+[ext_resource type="Script" path="res://Scripts/Resource Scripts/AutoPlayerInput/AutoPlayerInputSequence.gd" id="2_aoo25"]
+
+[sub_resource type="Resource" id="Resource_cm2ci"]
+script = ExtResource("1_gwuy4")
+duration = 60
+left = false
+right = true
+up = false
+down = false
+jump = false
+glide = false
+attack = false
+change = false
+crouch = false
+fairy = false
+interact = false
+
+[sub_resource type="Resource" id="Resource_72hk5"]
+script = ExtResource("1_gwuy4")
+duration = 60
+left = true
+right = false
+up = false
+down = false
+jump = false
+glide = false
+attack = false
+change = false
+crouch = false
+fairy = false
+interact = false
+
+[resource]
+script = ExtResource("2_aoo25")
+starting_mode = 0
+loop = true
+loop_from_starting_position = false
+resume_player_control = false
+frames = Array[ExtResource("1_gwuy4")]([SubResource("Resource_cm2ci"), SubResource("Resource_72hk5")])

@@ -1,6 +1,7 @@
-[gd_scene load_steps=11 format=3 uid="uid://ditx5iixwbmbo"]
+[gd_scene load_steps=13 format=3 uid="uid://ditx5iixwbmbo"]
 
 [ext_resource type="Script" path="res://Scripts/Utility Scripts/Level.gd" id="1_kmw2k"]
+[ext_resource type="PackedScene" uid="uid://jbuvidvhkbey" path="res://DemoPlayer.tscn" id="2_k0oau"]
 [ext_resource type="PackedScene" uid="uid://c6qw77ovfwgfs" path="res://Player.tscn" id="2_klk6k"]
 [ext_resource type="PackedScene" uid="uid://q7ww8bbiiqqn" path="res://Level Scenes/TestLevel/room.tscn" id="3_x0qt0"]
 [ext_resource type="PackedScene" uid="uid://bdypi7w73c6kq" path="res://Scene Objects/UI/TemperMeterUI.tscn" id="4_0ir14"]
@@ -9,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://brhoroc2w6jwi" path="res://Scene Objects/UI/Textbox.tscn" id="7_7x7bm"]
 [ext_resource type="PackedScene" uid="uid://btq4qla5fyq0n" path="res://Scene Objects/Misc/LevelMusicPlayer.tscn" id="8_g7p0o"]
 [ext_resource type="PackedScene" uid="uid://bjeiexqfc7oht" path="res://Scene Objects/Misc/DefeatScreen.tscn" id="9_isfmx"]
+[ext_resource type="PackedScene" uid="uid://bcbdr25gsxxfg" path="res://Level Scenes/TestLevel/tr_mage_ground.tscn" id="11_n0kfi"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_wemfi"]
 resource_local_to_scene = true
@@ -20,13 +22,13 @@ script = ExtResource("1_kmw2k")
 level_index = 8
 player_reference = NodePath("Player")
 starting_room = NodePath("Room")
-room_list = [NodePath("Room")]
+room_list = [NodePath("Room"), NodePath("tr_mage_ground")]
+
+[node name="DemoPlayer" parent="." instance=ExtResource("2_k0oau")]
+position = Vector2(256, 192)
 
 [node name="Player" parent="." instance=ExtResource("2_klk6k")]
 position = Vector2(128, 224)
-
-[node name="Hub" parent="Player" index="0"]
-debug_enable_input_recording = true
 
 [node name="Camera" parent="Player/Hub" index="11" node_paths=PackedStringArray("player_cam")]
 player_cam = NodePath("../../../Camera2D")
@@ -44,6 +46,16 @@ editor_draw_drag_margin = true
 
 [node name="Room" parent="." instance=ExtResource("3_x0qt0")]
 visibility_layer = 4
+
+[node name="Warp 1" parent="Room" index="3" node_paths=PackedStringArray("room_destination")]
+room_destination = NodePath("../../tr_mage_ground")
+room_entrance_index = 0
+
+[node name="tr_mage_ground" parent="." instance=ExtResource("11_n0kfi")]
+position = Vector2(1248, -64)
+
+[node name="Warp 0" parent="tr_mage_ground" index="5" node_paths=PackedStringArray("room_destination")]
+room_destination = NodePath("../../Room")
 
 [node name="UI_Canvas" type="CanvasLayer" parent="."]
 
@@ -71,3 +83,5 @@ screen_fade = NodePath("../UI_Canvas/ScreenFade")
 [connection signal="player_defeated" from="." to="DefeatScreen" method="do_defeat_screen"]
 
 [editable path="Player"]
+[editable path="Room"]
+[editable path="tr_mage_ground"]

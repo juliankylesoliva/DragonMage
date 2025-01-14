@@ -3,6 +3,7 @@ extends Node
 class_name PlayerHub
 
 @export var debug_enable_input_recording : bool = false
+@export var debug_recording_name : String = "demo_sample"
 @export var auto_sequence : AutoPlayerInputSequence = null
 
 @export var state_machine : PlayerStateMachine
@@ -71,6 +72,8 @@ var current_recording : AutoPlayerInputSequence
 
 func _ready():
 	if (auto_sequence != null):
+		if (auto_sequence.starting_mode != self.form.current_mode):
+			self.form.change_mode(auto_sequence.starting_mode)
 		is_auto_mode_active = true
 		set_respawn_position(self.char_body.global_position)
 
@@ -134,10 +137,44 @@ func set_deactivation(b : bool):
 func set_force_stand(b : bool):
 	force_stand = b
 
+func play_auto_sequence(s : AutoPlayerInputSequence):
+	current_auto_sequence_index = 0
+	current_auto_input_dictionary["Move Left"] = false
+	current_auto_input_dictionary["Move Right"] = false
+	current_auto_input_dictionary["Move Up"] = false
+	current_auto_input_dictionary["Move Down"] = false
+	current_auto_input_dictionary["Jump"] = false
+	current_auto_input_dictionary["Glide"] = false
+	current_auto_input_dictionary["Attack"] = false
+	current_auto_input_dictionary["Change Form"] = false
+	current_auto_input_dictionary["Crouch"] = false
+	current_auto_input_dictionary["Fairy Ability"] = false
+	current_auto_input_dictionary["Interact"] = false
+	prev_auto_input_dictionary = current_auto_input_dictionary.duplicate(true)
+	auto_sequence = s
+	if (auto_sequence.starting_mode != self.form.current_mode):
+		self.form.change_mode(auto_sequence.starting_mode)
+	is_auto_mode_active = true
+
+func stop_auto_sequence():
+	current_auto_sequence_index = auto_sequence.frames.size()
+	current_auto_input_dictionary["Move Left"] = false
+	current_auto_input_dictionary["Move Right"] = false
+	current_auto_input_dictionary["Move Up"] = false
+	current_auto_input_dictionary["Move Down"] = false
+	current_auto_input_dictionary["Jump"] = false
+	current_auto_input_dictionary["Glide"] = false
+	current_auto_input_dictionary["Attack"] = false
+	current_auto_input_dictionary["Change Form"] = false
+	current_auto_input_dictionary["Crouch"] = false
+	current_auto_input_dictionary["Fairy Ability"] = false
+	current_auto_input_dictionary["Interact"] = false
+	prev_auto_input_dictionary = current_auto_input_dictionary.duplicate(true)
+	do_respawn()
+
 func read_auto_sequence():
-	if (auto_sequence != null and is_auto_mode_active):
+	if (auto_sequence != null and is_auto_mode_active and current_auto_sequence_index < auto_sequence.frames.size()):
 		prev_auto_input_dictionary = current_auto_input_dictionary.duplicate(true)
-		
 		if (current_auto_frame_timer > 0):
 			current_auto_frame_timer -= 1
 		else:
@@ -155,10 +192,12 @@ func read_auto_sequence():
 					current_auto_input_dictionary["Crouch"] = false
 					current_auto_input_dictionary["Fairy Ability"] = false
 					current_auto_input_dictionary["Interact"] = false
-					is_auto_mode_active = false
+					is_auto_mode_active = !auto_sequence.resume_player_control
 					return
 				else:
 					current_auto_sequence_index = 0
+					if (auto_sequence.starting_mode != self.form.current_mode):
+						self.form.change_mode(auto_sequence.starting_mode)
 					if (auto_sequence.loop_from_starting_position):
 						do_respawn()
 			
@@ -201,11 +240,12 @@ func record_auto_sequence():
 
 func start_recording_inputs():
 	current_recording = AutoPlayerInputSequence.new()
+	current_recording.starting_mode = self.form.current_mode
 	is_recording_inputs = true
 
 func stop_recording_inputs():
 	is_recording_inputs = false
-	var save_result = ResourceSaver.save(current_recording, "res://Scripts/Resource Scripts/AutoPlayerInput/demo_sample.tres")
+	var save_result = ResourceSaver.save(current_recording, "res://Scripts/Resource Scripts/AutoPlayerInput/%s.tres" % debug_recording_name)
 	if (save_result != OK):
 		print_debug(save_result)
 

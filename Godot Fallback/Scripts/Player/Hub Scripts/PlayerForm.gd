@@ -7,6 +7,7 @@ enum CharacterMode {MAGE, DRAGON}
 @export var hub : PlayerHub
 
 @export var enable_form_changing : bool = true
+@export var ignore_menu_selection : bool = false
 
 @export var mage_properties : PlayerCtrlProperties
 @export var dragon_properties : PlayerCtrlProperties
@@ -157,7 +158,7 @@ func set_ctrl_properties(p : PlayerCtrlProperties):
 	hub.attacks.crouching_attack_name = p.crouching_attack_name
 
 func change_to_starting_mode():
-	if (!enable_form_changing):
+	if (!enable_form_changing or ignore_menu_selection):
 		change_mode(starting_mode)
 	else:
 		change_mode(CharacterMode.DRAGON if FormSelectionHelper.selected_form == CharacterMode.DRAGON else CharacterMode.MAGE)
@@ -165,6 +166,13 @@ func change_to_starting_mode():
 func change_mode(mode : CharacterMode):
 	set_ctrl_properties(mage_properties if mode == CharacterMode.MAGE else dragon_properties)
 	current_mode = mode
+	if (hub.state_machine.current_state.name != "FormChanging"):
+		var new_animation : String = hub.char_sprite.animation.replace(get_opposite_form_name(), get_current_form_name())
+		if (hub.char_sprite.sprite_frames.has_animation(new_animation)):
+			var temp_frame : int = hub.char_sprite.frame
+			var temp_progress : float = hub.char_sprite.frame_progress
+			hub.char_sprite.set_animation(new_animation)
+			hub.char_sprite.set_frame_and_progress(temp_frame, temp_progress)
 
 func start_form_change_timer():
 	if (!is_changing_form()):

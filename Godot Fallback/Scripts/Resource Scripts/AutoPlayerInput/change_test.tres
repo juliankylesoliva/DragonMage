@@ -1,0 +1,57 @@
+[gd_resource type="Resource" script_class="AutoPlayerInputSequence" load_steps=6 format=3 uid="uid://bg4kpoucl4thi"]
+
+[ext_resource type="Script" path="res://Scripts/Resource Scripts/AutoPlayerInput/AutoPlayerInputFrame.gd" id="1_skdd0"]
+[ext_resource type="Script" path="res://Scripts/Resource Scripts/AutoPlayerInput/AutoPlayerInputSequence.gd" id="1_xmdk6"]
+
+[sub_resource type="Resource" id="Resource_f7vxt"]
+script = ExtResource("1_skdd0")
+duration = 120
+left = false
+right = false
+up = false
+down = false
+jump = false
+glide = false
+attack = false
+change = false
+crouch = false
+fairy = false
+interact = false
+
+[sub_resource type="Resource" id="Resource_84wvh"]
+script = ExtResource("1_skdd0")
+duration = 1
+left = false
+right = false
+up = false
+down = false
+jump = false
+glide = false
+attack = false
+change = true
+crouch = false
+fairy = false
+interact = false
+
+[sub_resource type="Resource" id="Resource_2mrx6"]
+script = ExtResource("1_skdd0")
+duration = 120
+left = false
+right = false
+up = false
+down = false
+jump = false
+glide = false
+attack = false
+change = false
+crouch = false
+fairy = false
+interact = false
+
+[resource]
+script = ExtResource("1_xmdk6")
+starting_mode = 0
+loop = true
+loop_from_starting_position = false
+resume_player_control = false
+frames = Array[ExtResource("1_skdd0")]([SubResource("Resource_f7vxt"), SubResource("Resource_84wvh"), SubResource("Resource_2mrx6")])

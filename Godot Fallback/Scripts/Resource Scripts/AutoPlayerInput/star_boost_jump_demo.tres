@@ -170,6 +170,8 @@ interact = false
 
 [resource]
 script = ExtResource("2_yteay")
+starting_mode = 0
 loop = true
 loop_from_starting_position = true
+resume_player_control = false
 frames = Array[ExtResource("1_f68eg")]([SubResource("Resource_suuv8"), SubResource("Resource_c1fda"), SubResource("Resource_a7lqt"), SubResource("Resource_eil1d"), SubResource("Resource_skm66"), SubResource("Resource_fkkqu"), SubResource("Resource_rs862"), SubResource("Resource_pil4u"), SubResource("Resource_2tnh3"), SubResource("Resource_bb3nu"), SubResource("Resource_nmovu")])

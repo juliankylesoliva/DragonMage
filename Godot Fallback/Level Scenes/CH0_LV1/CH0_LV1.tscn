@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://dgi7me5crgi8q"]
+[gd_scene load_steps=19 format=3 uid="uid://dgi7me5crgi8q"]
 
 [ext_resource type="Script" path="res://Scripts/Utility Scripts/Level.gd" id="1_6mws2"]
 [ext_resource type="PackedScene" uid="uid://cevmm5dwm345v" path="res://Level Scenes/CH0_LV1/Rooms/CH0_LV1_R1.tscn" id="2_7b35j"]
@@ -17,6 +17,11 @@
 [ext_resource type="PackedScene" uid="uid://brhoroc2w6jwi" path="res://Scene Objects/UI/Textbox.tscn" id="18_itco1"]
 [ext_resource type="PackedScene" uid="uid://btq4qla5fyq0n" path="res://Scene Objects/Misc/LevelMusicPlayer.tscn" id="19_l87bk"]
 [ext_resource type="AudioStream" uid="uid://c4w62ivppptim" path="res://Music/CH0/RoccoW - A Bed of Snakes - 05 17092017.wav" id="20_oukke"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_8g1jr"]
+resource_local_to_scene = true
+radius = 8.0
+height = 48.0
 
 [node name="CH0_LV1" type="Node" node_paths=PackedStringArray("player_reference", "starting_room", "room_list", "clear_timer")]
 script = ExtResource("1_6mws2")
@@ -41,6 +46,9 @@ enable_form_changing = false
 
 [node name="Camera" parent="Player/Hub" index="11" node_paths=PackedStringArray("player_cam")]
 player_cam = NodePath("../../../Camera2D")
+
+[node name="CollisionShape2D" parent="Player" index="4"]
+shape = SubResource("CapsuleShape2D_8g1jr")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 process_callback = 0
