@@ -1,0 +1,25 @@
+[gd_resource type="Resource" script_class="AutoPlayerInputSequence" load_steps=4 format=3 uid="uid://0i78wwdpdunw"]
+
+[ext_resource type="Script" path="res://Scripts/Resource Scripts/AutoPlayerInput/AutoPlayerInputFrame.gd" id="1_5mpp3"]
+[ext_resource type="Script" path="res://Scripts/Resource Scripts/AutoPlayerInput/AutoPlayerInputSequence.gd" id="1_ygpj4"]
+
+[sub_resource type="Resource" id="Resource_pyurh"]
+script = ExtResource("1_5mpp3")
+duration = 60
+left = false
+right = false
+up = false
+down = false
+jump = false
+glide = false
+attack = false
+change = false
+crouch = false
+fairy = false
+interact = false
+
+[resource]
+script = ExtResource("1_ygpj4")
+loop = true
+loop_from_starting_position = true
+frames = Array[ExtResource("1_5mpp3")]([SubResource("Resource_pyurh")])

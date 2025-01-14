@@ -24,6 +24,10 @@ var current_fuse_time_left : float = 0
 
 var current_lerp_weight : float = 0
 
+var source_rid : RID
+
+var affect_source_player_only : bool = false
+
 func _ready():
 	current_fuse_time_left = fuse_time
 
@@ -35,12 +39,19 @@ func _process(delta):
 	if (current_fuse_time_left <= 0):
 		detonate()
 
+func set_source_rid(rid : RID):
+	affect_source_player_only = true
+	source_rid = rid
+
 func detonate():
 	var hitbox_instance = hitbox_scene.instantiate()
 	add_sibling(hitbox_instance)
 	(hitbox_instance as Node2D).global_position = sprite.global_position
 	
 	(hitbox_instance as KnockbackHitbox).hit.connect(attack_ref._on_magic_blast_hit)
+	
+	if (affect_source_player_only):
+		(hitbox_instance as MagicBlastKnockbackHitbox).set_source_rid(source_rid)
 	
 	SoundFactory.play_sound_by_name("attack_magli_explosion", sprite.global_position, -6, 1, "SFX")
 	EffectFactory.get_effect("MagicBlastExplosion", sprite.global_position, blast_radius / base_radius)

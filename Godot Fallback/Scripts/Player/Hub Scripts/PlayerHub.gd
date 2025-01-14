@@ -72,6 +72,7 @@ var current_recording : AutoPlayerInputSequence
 func _ready():
 	if (auto_sequence != null):
 		is_auto_mode_active = true
+		set_respawn_position(self.char_body.global_position)
 
 func _process(_delta):
 	OptionsHelper.update_control_options(self)
@@ -158,6 +159,8 @@ func read_auto_sequence():
 					return
 				else:
 					current_auto_sequence_index = 0
+					if (auto_sequence.loop_from_starting_position):
+						do_respawn()
 			
 			var new_frame : AutoPlayerInputFrame = auto_sequence.frames[current_auto_sequence_index]
 			current_auto_frame_timer = new_frame.duration

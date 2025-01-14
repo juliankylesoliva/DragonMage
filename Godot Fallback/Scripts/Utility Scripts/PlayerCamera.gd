@@ -61,6 +61,8 @@ func _physics_process(delta):
 		move_locked_camera(delta)
 
 func update_x_lookahead(delta : float):
+	if (player_cam == null):
+		return
 	if (is_camera_locked):
 		return
 	
@@ -73,6 +75,8 @@ func update_x_lookahead(delta : float):
 	player_cam.global_position.x = target_x
 
 func update_y_lookahead(delta : float):
+	if (player_cam == null):
+		return
 	if (is_camera_locked):
 		return
 	
@@ -98,6 +102,8 @@ func update_y_lookahead(delta : float):
 	player_cam.global_position.y = (move_toward(player_cam.global_position.y, target_y, (abs(target_y - player_cam.global_position.y) / time_to_update_y) * delta) if !hub.char_body.is_on_floor() or player_cam.global_position.y != target_y else target_y)
 
 func fairy_guard_camera_update(delta : float):
+	if (player_cam == null):
+		return
 	if (is_camera_locked):
 		return
 	
@@ -108,6 +114,8 @@ func fairy_guard_camera_update(delta : float):
 	player_cam.global_position.x = target_x
 
 func fire_tackle_camera_update(delta : float, prev_x_velocity : float, vertical_axis : float):
+	if (player_cam == null):
+		return
 	if (is_camera_locked):
 		return
 	
@@ -122,6 +130,8 @@ func fire_tackle_camera_update(delta : float, prev_x_velocity : float, vertical_
 	player_cam.global_position.y = (move_toward(player_cam.global_position.y, target_y, (abs(target_y - player_cam.global_position.y) / time_to_update_y) * delta))
 
 func wall_climb_horizontal_camera_update(delta : float, stored_speed : float, use_max_lookahead):
+	if (player_cam == null):
+		return
 	if (is_camera_locked):
 		return
 	
@@ -132,6 +142,8 @@ func wall_climb_horizontal_camera_update(delta : float, stored_speed : float, us
 	player_cam.global_position.x = target_x
 
 func damaged_horizontal_camera_update(delta : float):
+	if (player_cam == null):
+		return
 	if (is_camera_locked):
 		return
 	
@@ -142,6 +154,9 @@ func damaged_horizontal_camera_update(delta : float):
 	player_cam.global_position.x = target_x
 
 func clamp_x_target(x_pos : float):
+	if (player_cam == null):
+		return x_pos
+	
 	if (x_pos < (player_cam.limit_left + (screen_width / 2))):
 		return (player_cam.limit_left + (screen_width / 2))
 	elif (x_pos > (player_cam.limit_right - (screen_width / 2))):
@@ -150,6 +165,9 @@ func clamp_x_target(x_pos : float):
 		return x_pos
 
 func clamp_y_target(y_pos : float):
+	if (player_cam == null):
+		return y_pos
+	
 	if (y_pos < (player_cam.limit_top + (screen_height / 2))):
 		return (player_cam.limit_top + (screen_height / 2))
 	elif (y_pos > (player_cam.limit_bottom - (screen_height / 2))):
@@ -158,12 +176,18 @@ func clamp_y_target(y_pos : float):
 		return y_pos
 
 func snap_camera_to_player():
+	if (player_cam == null):
+		return
+	
 	player_cam.global_position.x = hub.char_body.global_position.x
 	player_cam.global_position.x = clamp_x_target(player_cam.global_position.x)
 	player_cam.global_position.y = (hub.collisions.get_ground_point().y - camera_height_from_ground)
 	player_cam.global_position.y = clamp_y_target(player_cam.global_position.y)
 
 func snap_camera_to_position(position : Vector2):
+	if (player_cam == null):
+		return
+	
 	player_cam.global_position.x = position.x
 	player_cam.global_position.x = clamp_x_target(player_cam.global_position.x)
 	player_cam.global_position.y = (position.y - camera_height_from_ground)
@@ -173,9 +197,13 @@ func reset_x_lookahead():
 	current_x_lookahead = (hub.movement.get_facing_value() * base_x_lookahead)
 
 func is_above_upper_threshold():
+	if (player_cam == null):
+		return false
 	return (hub.char_body.global_position.y < (player_cam.get_screen_center_position().y - upper_camera_threshold))
 
 func is_below_lower_threshold():
+	if (player_cam == null):
+		return false
 	return (hub.char_body.global_position.y > (player_cam.get_screen_center_position().y + lower_camera_threshold))
 
 func is_between_thresholds():

@@ -4,6 +4,8 @@ class_name MagicBlastAttack
 
 signal magic_blast_thrown
 
+@export var affect_source_player_only : bool = false
+
 @export var blast_jump_particles : CPUParticles2D
 
 @export var projectile_trail : LineTrail
@@ -123,6 +125,9 @@ func throw_projectile():
 		projectile_rb.apply_torque_impulse(throw_rotation * hub.movement.get_facing_value())
 		
 		(projectile_instance as MagicBlastProjectile).attack_ref = self
+		
+		if (affect_source_player_only):
+			(projectile_instance as MagicBlastProjectile).set_source_rid(hub.char_body.get_rid())
 		
 		magic_blast_thrown.emit()
 

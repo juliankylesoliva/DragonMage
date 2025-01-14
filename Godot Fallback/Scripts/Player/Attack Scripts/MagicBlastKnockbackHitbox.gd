@@ -22,6 +22,10 @@ var bodies_entered : Array[Node2D]
 
 var current_blast_jump_frames : int = 0
 
+var source_rid : RID
+
+var affect_source_player_only : bool = false
+
 func _ready():
 	super._ready()
 	current_blast_jump_frames = active_blast_jump_frames
@@ -41,6 +45,10 @@ func _on_body_entered(body):
 			return
 	bodies_entered.append(body)
 
+func set_source_rid(rid : RID):
+	affect_source_player_only = true
+	source_rid = rid
+
 func resolve_bodies_entered():
 	ray.clear_exceptions()
 	while (bodies_entered.size() > 0):
@@ -49,7 +57,7 @@ func resolve_bodies_entered():
 		if (body is Boss):
 			do_damage_boss(body)
 		elif (body is CharacterBody2D):
-			if (body.has_meta("Tag") and body.get_meta("Tag") == "Player" and current_blast_jump_frames > 0):
+			if (body.has_meta("Tag") and body.get_meta("Tag") == "Player" and current_blast_jump_frames > 0 and (body.get_rid() == source_rid or !affect_source_player_only)):
 				do_magic_blast_knockback(body)
 			elif (body.has_meta("Tag") and body.get_meta("Tag") == "Enemy"):
 				ray.collision_mask = enemy_layer

@@ -1353,6 +1353,7 @@ animations = [{
 }]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_6k7o1"]
+resource_local_to_scene = true
 radius = 8.0
 height = 48.0
 
@@ -1519,6 +1520,7 @@ hub = NodePath("..")
 
 [node name="MagicBlast" type="Node" parent="Hub/Attacks" node_paths=PackedStringArray("blast_jump_particles", "projectile_trail", "guide_arrows")]
 script = ExtResource("7_e0q0e")
+affect_source_player_only = true
 blast_jump_particles = NodePath("../../../BlastJumpParticles")
 projectile_trail = NodePath("ProjectileTrail")
 guide_arrows = NodePath("BlastJumpGuideArrows")

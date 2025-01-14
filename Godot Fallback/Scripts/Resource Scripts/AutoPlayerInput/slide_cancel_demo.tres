@@ -1,0 +1,55 @@
+[gd_resource type="Resource" script_class="AutoPlayerInputSequence" load_steps=6 format=3 uid="uid://dh8a5t1tqykay"]
+
+[ext_resource type="Script" path="res://Scripts/Resource Scripts/AutoPlayerInput/AutoPlayerInputFrame.gd" id="1_8d38e"]
+[ext_resource type="Script" path="res://Scripts/Resource Scripts/AutoPlayerInput/AutoPlayerInputSequence.gd" id="2_3v02x"]
+
+[sub_resource type="Resource" id="Resource_mesm2"]
+script = ExtResource("1_8d38e")
+duration = 9
+left = false
+right = false
+up = false
+down = false
+jump = false
+glide = false
+attack = true
+change = false
+crouch = false
+fairy = false
+interact = false
+
+[sub_resource type="Resource" id="Resource_wcxw1"]
+script = ExtResource("1_8d38e")
+duration = 34
+left = false
+right = false
+up = false
+down = false
+jump = false
+glide = false
+attack = false
+change = false
+crouch = false
+fairy = false
+interact = false
+
+[sub_resource type="Resource" id="Resource_kw6qb"]
+script = ExtResource("1_8d38e")
+duration = 15
+left = false
+right = false
+up = false
+down = false
+jump = false
+glide = false
+attack = false
+change = false
+crouch = true
+fairy = false
+interact = false
+
+[resource]
+script = ExtResource("2_3v02x")
+loop = true
+loop_from_starting_position = false
+frames = Array[ExtResource("1_8d38e")]([SubResource("Resource_mesm2"), SubResource("Resource_wcxw1"), SubResource("Resource_kw6qb")])
