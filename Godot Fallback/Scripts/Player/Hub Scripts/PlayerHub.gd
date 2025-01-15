@@ -3,6 +3,7 @@ extends Node
 class_name PlayerHub
 
 @export var debug_enable_input_recording : bool = false
+@export var debug_enable_position_recording : bool = false
 @export var debug_recording_name : String = "demo_sample"
 @export var auto_sequence : AutoPlayerInputSequence = null
 
@@ -138,39 +139,24 @@ func set_force_stand(b : bool):
 	force_stand = b
 
 func play_auto_sequence(s : AutoPlayerInputSequence):
-	current_auto_sequence_index = 0
-	current_auto_input_dictionary["Move Left"] = false
-	current_auto_input_dictionary["Move Right"] = false
-	current_auto_input_dictionary["Move Up"] = false
-	current_auto_input_dictionary["Move Down"] = false
-	current_auto_input_dictionary["Jump"] = false
-	current_auto_input_dictionary["Glide"] = false
-	current_auto_input_dictionary["Attack"] = false
-	current_auto_input_dictionary["Change Form"] = false
-	current_auto_input_dictionary["Crouch"] = false
-	current_auto_input_dictionary["Fairy Ability"] = false
-	current_auto_input_dictionary["Interact"] = false
+	reset_auto_input_dictionary()
 	prev_auto_input_dictionary = current_auto_input_dictionary.duplicate(true)
 	auto_sequence = s
+	current_auto_sequence_index = 0
+	set_auto_input_dictionary(auto_sequence.frames[0])
 	if (auto_sequence.starting_mode != self.form.current_mode):
 		self.form.change_mode(auto_sequence.starting_mode)
 	is_auto_mode_active = true
 
 func stop_auto_sequence():
-	current_auto_sequence_index = auto_sequence.frames.size()
-	current_auto_input_dictionary["Move Left"] = false
-	current_auto_input_dictionary["Move Right"] = false
-	current_auto_input_dictionary["Move Up"] = false
-	current_auto_input_dictionary["Move Down"] = false
-	current_auto_input_dictionary["Jump"] = false
-	current_auto_input_dictionary["Glide"] = false
-	current_auto_input_dictionary["Attack"] = false
-	current_auto_input_dictionary["Change Form"] = false
-	current_auto_input_dictionary["Crouch"] = false
-	current_auto_input_dictionary["Fairy Ability"] = false
-	current_auto_input_dictionary["Interact"] = false
+	reset_auto_input_dictionary()
 	prev_auto_input_dictionary = current_auto_input_dictionary.duplicate(true)
 	do_respawn()
+
+func turn_off_auto_mode():
+	reset_auto_input_dictionary()
+	prev_auto_input_dictionary = current_auto_input_dictionary.duplicate(true)
+	is_auto_mode_active = false
 
 func read_auto_sequence():
 	if (auto_sequence != null and is_auto_mode_active and current_auto_sequence_index < auto_sequence.frames.size()):
@@ -181,17 +167,7 @@ func read_auto_sequence():
 			current_auto_sequence_index += 1
 			if (current_auto_sequence_index >= auto_sequence.frames.size()):
 				if (!auto_sequence.loop):
-					current_auto_input_dictionary["Move Left"] = false
-					current_auto_input_dictionary["Move Right"] = false
-					current_auto_input_dictionary["Move Up"] = false
-					current_auto_input_dictionary["Move Down"] = false
-					current_auto_input_dictionary["Jump"] = false
-					current_auto_input_dictionary["Glide"] = false
-					current_auto_input_dictionary["Attack"] = false
-					current_auto_input_dictionary["Change Form"] = false
-					current_auto_input_dictionary["Crouch"] = false
-					current_auto_input_dictionary["Fairy Ability"] = false
-					current_auto_input_dictionary["Interact"] = false
+					reset_auto_input_dictionary()
 					is_auto_mode_active = !auto_sequence.resume_player_control
 					return
 				else:
@@ -200,20 +176,10 @@ func read_auto_sequence():
 						self.form.change_mode(auto_sequence.starting_mode)
 					if (auto_sequence.loop_from_starting_position):
 						do_respawn()
-			
-			var new_frame : AutoPlayerInputFrame = auto_sequence.frames[current_auto_sequence_index]
-			current_auto_frame_timer = new_frame.duration
-			current_auto_input_dictionary["Move Left"] = new_frame.left
-			current_auto_input_dictionary["Move Right"] = new_frame.right
-			current_auto_input_dictionary["Move Up"] = new_frame.up
-			current_auto_input_dictionary["Move Down"] = new_frame.down
-			current_auto_input_dictionary["Jump"] = new_frame.jump
-			current_auto_input_dictionary["Glide"] = new_frame.glide
-			current_auto_input_dictionary["Attack"] = new_frame.attack
-			current_auto_input_dictionary["Change Form"] = new_frame.change
-			current_auto_input_dictionary["Crouch"] = new_frame.crouch
-			current_auto_input_dictionary["Fairy Ability"] = new_frame.fairy
-			current_auto_input_dictionary["Interact"] = new_frame.interact
+			set_auto_input_dictionary(auto_sequence.frames[current_auto_sequence_index])
+		var position_list_index : int = auto_sequence.get_position_list_index(current_auto_sequence_index, current_auto_frame_timer)
+		if (position_list_index >= 0):
+			self.char_body.global_position = auto_sequence.position_list[position_list_index]
 
 func record_auto_sequence():
 	if (!is_recording_inputs):
@@ -237,6 +203,9 @@ func record_auto_sequence():
 		current_recording.frames.back().duration += 1
 	else:
 		current_recording.frames.push_back(new_frame)
+	
+	if (debug_enable_position_recording):
+		current_recording.position_list.push_back(self.char_body.global_position)
 
 func start_recording_inputs():
 	current_recording = AutoPlayerInputSequence.new()
@@ -248,6 +217,34 @@ func stop_recording_inputs():
 	var save_result = ResourceSaver.save(current_recording, "res://Scripts/Resource Scripts/AutoPlayerInput/%s.tres" % debug_recording_name)
 	if (save_result != OK):
 		print_debug(save_result)
+
+func reset_auto_input_dictionary():
+	current_auto_sequence_index = auto_sequence.frames.size()
+	current_auto_input_dictionary["Move Left"] = false
+	current_auto_input_dictionary["Move Right"] = false
+	current_auto_input_dictionary["Move Up"] = false
+	current_auto_input_dictionary["Move Down"] = false
+	current_auto_input_dictionary["Jump"] = false
+	current_auto_input_dictionary["Glide"] = false
+	current_auto_input_dictionary["Attack"] = false
+	current_auto_input_dictionary["Change Form"] = false
+	current_auto_input_dictionary["Crouch"] = false
+	current_auto_input_dictionary["Fairy Ability"] = false
+	current_auto_input_dictionary["Interact"] = false
+
+func set_auto_input_dictionary(new_frame : AutoPlayerInputFrame):
+	current_auto_frame_timer = new_frame.duration
+	current_auto_input_dictionary["Move Left"] = new_frame.left
+	current_auto_input_dictionary["Move Right"] = new_frame.right
+	current_auto_input_dictionary["Move Up"] = new_frame.up
+	current_auto_input_dictionary["Move Down"] = new_frame.down
+	current_auto_input_dictionary["Jump"] = new_frame.jump
+	current_auto_input_dictionary["Glide"] = new_frame.glide
+	current_auto_input_dictionary["Attack"] = new_frame.attack
+	current_auto_input_dictionary["Change Form"] = new_frame.change
+	current_auto_input_dictionary["Crouch"] = new_frame.crouch
+	current_auto_input_dictionary["Fairy Ability"] = new_frame.fairy
+	current_auto_input_dictionary["Interact"] = new_frame.interact
 
 func reset_player():
 	movement.reset_crouch_state()

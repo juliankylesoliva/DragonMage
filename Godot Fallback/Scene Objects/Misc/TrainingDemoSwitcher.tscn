@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://bwiahvgc87332"]
+
+[ext_resource type="Script" path="res://Scripts/Utility Scripts/TrainingDemoSwitcher.gd" id="1_ds1cd"]
+
+[node name="TrainingDemoSwitcher" type="Node"]
+script = ExtResource("1_ds1cd")

@@ -191,7 +191,7 @@ func blast_jump_update(delta : float):
 		(blast_jump_hitbox_instance as Node2D).global_position = (hub.collision_shape.global_position + (normalized_velocity * velocity_offset))
 		
 		if (hub.damage.is_player_defeated or hub.damage.is_player_damaged() or blast_jump_current_active_time <= 0 or hub.state_machine.current_state.name == "FormChanging"):
-			if (((!hub.buffers.is_speed_preservation_buffer_active() or hub.movement.is_crouching or hub.movement.is_turning()) and hub.char_body.is_on_floor()) or state_name == "FormChanging" or state_name == "Gliding" or state_name == "WallSliding" or state_name == "Deactivated" or hub.attacks.get_attack_by_name("Dodge").current_attack_state == AttackState.ACTIVE or hub.form.current_mode != PlayerForm.CharacterMode.MAGE):
+			if (((!hub.buffers.is_speed_preservation_buffer_active() or hub.movement.is_crouching or hub.movement.is_turning()) and hub.char_body.is_on_floor()) or state_name == "Damaged" or state_name == "FormChanging" or state_name == "Gliding" or state_name == "WallSliding" or state_name == "Deactivated" or hub.attacks.get_attack_by_name("Dodge").current_attack_state == AttackState.ACTIVE or hub.form.current_mode != PlayerForm.CharacterMode.MAGE):
 				is_blast_jumping = false
 				blast_jump_particles.emitting = false
 				if (hub.attacks.get_attack_by_name("Dodge").current_attack_state == AttackState.NOTHING):

@@ -40,3 +40,4 @@ loop = true
 loop_from_starting_position = false
 resume_player_control = false
 frames = Array[ExtResource("1_gwuy4")]([SubResource("Resource_cm2ci"), SubResource("Resource_72hk5")])
+position_list = Array[Vector2]([])

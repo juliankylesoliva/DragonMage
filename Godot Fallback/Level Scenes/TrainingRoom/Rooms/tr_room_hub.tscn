@@ -9,7 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://cqdxwg0yhese4" path="res://Sprites/Backgrounds/0_2_BG/MountainsFront.png" id="6_aj5fo"]
 [ext_resource type="PackedScene" uid="uid://c4cg3xgbq7eyh" path="res://Scene Objects/Obstacles/FloorSpikes.tscn" id="7_uegjw"]
 
-[node name="Room" type="Node2D" node_paths=PackedStringArray("parallax_bg", "tilemap_list", "room_entrances")]
+[node name="tr_room_hub" type="Node2D" node_paths=PackedStringArray("parallax_bg", "tilemap_list", "room_entrances")]
 script = ExtResource("1_0b65y")
 parallax_bg = NodePath("ParallaxBackground")
 tilemap_list = [NodePath("BoundaryCollisionTilemap"), NodePath("LevelCollisionTilemap")]
@@ -75,6 +75,9 @@ position = Vector2(16, 160)
 
 [node name="Entrance 2" type="Node2D" parent="."]
 position = Vector2(1008, 160)
+
+[node name="DemoEntrance" type="Node2D" parent="."]
+position = Vector2(512, -576)
 
 [node name="TemperDragonFruit" parent="." instance=ExtResource("4_f1apo")]
 position = Vector2(512, 96)
