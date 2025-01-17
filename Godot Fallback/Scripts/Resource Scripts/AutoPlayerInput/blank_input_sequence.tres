@@ -21,7 +21,8 @@ interact = false
 [resource]
 script = ExtResource("1_ygpj4")
 starting_mode = 0
-loop = true
-loop_from_starting_position = true
+loop = false
+loop_from_starting_position = false
 resume_player_control = false
 frames = Array[ExtResource("1_5mpp3")]([SubResource("Resource_pyurh")])
+position_list = Array[Vector2]([])

@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://ditx5iixwbmbo"]
+[gd_scene load_steps=15 format=3 uid="uid://ditx5iixwbmbo"]
 
 [ext_resource type="Script" path="res://Scripts/Utility Scripts/Level.gd" id="1_kmw2k"]
 [ext_resource type="PackedScene" uid="uid://jbuvidvhkbey" path="res://DemoPlayer.tscn" id="2_k0oau"]
@@ -6,16 +6,12 @@
 [ext_resource type="PackedScene" uid="uid://q7ww8bbiiqqn" path="res://Level Scenes/TrainingRoom/Rooms/tr_room_hub.tscn" id="3_x0qt0"]
 [ext_resource type="PackedScene" uid="uid://bdypi7w73c6kq" path="res://Scene Objects/UI/TemperMeterUI.tscn" id="4_0ir14"]
 [ext_resource type="PackedScene" uid="uid://d1eef1xjuwf3b" path="res://Menu Scenes/PauseMenu.tscn" id="5_1ndfl"]
-[ext_resource type="Resource" uid="uid://ckq6i8c8iibh1" path="res://Scripts/Resource Scripts/AutoPlayerInput/tr_mage_air_demo.tres" id="5_vkrs8"]
 [ext_resource type="PackedScene" uid="uid://8beel2odcuky" path="res://Scene Objects/Effects/ScreenFade.tscn" id="6_fgimi"]
 [ext_resource type="PackedScene" uid="uid://brhoroc2w6jwi" path="res://Scene Objects/UI/Textbox.tscn" id="7_7x7bm"]
 [ext_resource type="PackedScene" uid="uid://btq4qla5fyq0n" path="res://Scene Objects/Misc/LevelMusicPlayer.tscn" id="8_g7p0o"]
 [ext_resource type="PackedScene" uid="uid://bjeiexqfc7oht" path="res://Scene Objects/Misc/DefeatScreen.tscn" id="9_isfmx"]
-[ext_resource type="PackedScene" uid="uid://bcbdr25gsxxfg" path="res://Level Scenes/TrainingRoom/Rooms/tr_mage_ground.tscn" id="11_n0kfi"]
 [ext_resource type="PackedScene" uid="uid://bwiahvgc87332" path="res://Scene Objects/Misc/TrainingDemoSwitcher.tscn" id="12_glwla"]
 [ext_resource type="Resource" uid="uid://0i78wwdpdunw" path="res://Scripts/Resource Scripts/AutoPlayerInput/blank_input_sequence.tres" id="13_hs16r"]
-[ext_resource type="Resource" uid="uid://h20symr715o6" path="res://Scripts/Resource Scripts/AutoPlayerInput/tr_mage_ground_demo.tres" id="14_1sqme"]
-[ext_resource type="PackedScene" uid="uid://dnin2qlwqewgo" path="res://Level Scenes/TrainingRoom/Rooms/tr_mage_air.tscn" id="15_lhymg"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_2yeym"]
 resource_local_to_scene = true
@@ -32,13 +28,13 @@ script = ExtResource("1_kmw2k")
 level_index = 8
 player_reference = NodePath("Player")
 starting_room = NodePath("tr_room_hub")
-room_list = [NodePath("tr_room_hub"), NodePath("tr_mage_ground"), NodePath("tr_mage_air")]
+room_list = [NodePath("tr_room_hub")]
 
 [node name="TrainingDemoSwitcher" parent="." node_paths=PackedStringArray("level_ref", "demo_player", "starting_locations") instance=ExtResource("12_glwla")]
 level_ref = NodePath("..")
 demo_player = NodePath("../DemoPlayer/Hub")
-demo_list = Array[Resource("res://Scripts/Resource Scripts/AutoPlayerInput/AutoPlayerInputSequence.gd")]([ExtResource("13_hs16r"), ExtResource("14_1sqme"), ExtResource("5_vkrs8")])
-starting_locations = [NodePath("../tr_room_hub/DemoEntrance"), NodePath("../tr_mage_ground/DemoEntrance"), NodePath("../tr_mage_air/DemoEntrance")]
+demo_list = Array[Resource("res://Scripts/Resource Scripts/AutoPlayerInput/AutoPlayerInputSequence.gd")]([ExtResource("13_hs16r")])
+starting_locations = [NodePath("../tr_room_hub/DemoEntrance")]
 
 [node name="DemoPlayer" parent="." instance=ExtResource("2_k0oau")]
 position = Vector2(512, -576)
@@ -65,18 +61,6 @@ editor_draw_limits = true
 editor_draw_drag_margin = true
 
 [node name="tr_room_hub" parent="." instance=ExtResource("3_x0qt0")]
-
-[node name="tr_mage_ground" parent="." instance=ExtResource("11_n0kfi")]
-position = Vector2(1248, -64)
-
-[node name="Warp 1" parent="tr_mage_ground" index="6" node_paths=PackedStringArray("room_destination")]
-room_destination = NodePath("../../tr_mage_air")
-
-[node name="tr_mage_air" parent="." instance=ExtResource("15_lhymg")]
-position = Vector2(1984, -64)
-
-[node name="Warp 0" parent="tr_mage_air" index="5" node_paths=PackedStringArray("room_destination")]
-room_destination = NodePath("../../tr_mage_ground")
 
 [node name="UI_Canvas" type="CanvasLayer" parent="."]
 
@@ -106,5 +90,3 @@ screen_fade = NodePath("../UI_Canvas/ScreenFade")
 [editable path="DemoPlayer"]
 [editable path="Player"]
 [editable path="tr_room_hub"]
-[editable path="tr_mage_ground"]
-[editable path="tr_mage_air"]

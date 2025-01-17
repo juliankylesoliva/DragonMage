@@ -1,0 +1,87 @@
+[gd_scene load_steps=3 format=3 uid="uid://cxium7gn4agkw"]
+
+[ext_resource type="FontFile" uid="uid://blejgst41tdnl" path="res://PressStart2P.ttf" id="1_tct2h"]
+[ext_resource type="Script" path="res://Scripts/Utility Scripts/ButtonPromptTextLabel.gd" id="2_icfsh"]
+
+[node name="TipSubscreenMenu" type="Node2D"]
+
+[node name="HeaderTextLabel" type="RichTextLabel" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 16.0
+offset_top = 16.0
+offset_right = 496.0
+offset_bottom = 52.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/normal_font = ExtResource("1_tct2h")
+theme_override_font_sizes/normal_font_size = 40
+bbcode_enabled = true
+text = "TIPS"
+scroll_active = false
+shortcut_keys_enabled = false
+
+[node name="TipTitleTextLabel" type="RichTextLabel" parent="."]
+clip_contents = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 32.0
+offset_top = 73.0
+offset_right = 480.0
+offset_bottom = 87.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(224, 7)
+theme_override_fonts/normal_font = ExtResource("1_tct2h")
+theme_override_font_sizes/normal_font_size = 16
+bbcode_enabled = true
+text = "[left]#. Tip Title Here"
+scroll_active = false
+shortcut_keys_enabled = false
+
+[node name="TipDescTextLabel" type="RichTextLabel" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 32.0
+offset_top = 96.0
+offset_right = 480.0
+offset_bottom = 256.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/normal_font = ExtResource("1_tct2h")
+theme_override_font_sizes/normal_font_size = 8
+bbcode_enabled = true
+text = "Tip description here"
+scroll_active = false
+shortcut_keys_enabled = false
+
+[node name="ControlPromptLabel" type="RichTextLabel" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 32.0
+offset_top = 276.0
+offset_right = 480.0
+offset_bottom = 316.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/normal_font = ExtResource("1_tct2h")
+theme_override_font_sizes/normal_font_size = 8
+bbcode_enabled = true
+text = "[center][Menu Up]/[Menu Down] Change Page | [Menu Left]/[Menu Right] Change Tip
+
+[Menu Cancel] Back"
+scroll_active = false
+shortcut_keys_enabled = false
+script = ExtResource("2_icfsh")

@@ -80,7 +80,7 @@ position = Vector2(1008, 160)
 position = Vector2(512, -576)
 
 [node name="TemperDragonFruit" parent="." instance=ExtResource("4_f1apo")]
-position = Vector2(512, 96)
+position = Vector2(512, 32)
 
 [node name="FloorSpikes" parent="." instance=ExtResource("7_uegjw")]
 position = Vector2(512, 240)
