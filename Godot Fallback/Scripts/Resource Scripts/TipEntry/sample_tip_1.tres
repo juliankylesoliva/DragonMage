@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="TipEntry" load_steps=2 format=3 uid="uid://dq1t4vfslrlwc"]
+
+[ext_resource type="Script" path="res://Scripts/Resource Scripts/TipEntry/TipEntry.gd" id="1_8x0ug"]
+
+[resource]
+script = ExtResource("1_8x0ug")
+tip_title = "Title 1"
+tip_description = Array[String](["Description 1"])

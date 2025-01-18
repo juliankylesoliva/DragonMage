@@ -18,6 +18,8 @@ class_name PauseMenu
 
 @export var options_subscreen : MenuTemplate
 
+@export var tips_menu : MenuTemplate
+
 @export var screen_fade : ScreenFade
 
 @export var title_scene_path : String
@@ -94,11 +96,17 @@ func on_selection_confirm():
 			options_subscreen.set_previous_menu(self)
 			options_subscreen.activate_menu()
 		2:
-			do_restart()
+			PauseHandler.set_unpause_lock(true)
+			tips_menu.reset_selection()
+			menu_cursor.play_accept_sound()
+			enable_input = false
+			pause_top_node.set_visible(false)
+			tips_menu.set_previous_menu(self)
+			tips_menu.activate_menu()
 		3:
-			do_title_screen()
+			do_restart()
 		4:
-			get_tree().quit()
+			do_title_screen()
 		_:
 			pass
 

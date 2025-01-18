@@ -143,11 +143,18 @@ func on_left_pressed():
 func on_right_pressed():
 	pass
 
+func on_selection_wraparound(_increment : bool = false):
+	pass
+
+func on_secondary_selection_wraparound(_increment : bool = false):
+	pass
+
 func increment_selection():
 	if (current_selection < (max_selections - 1) or enable_wraparound):
 		current_selection += 1
 		if (current_selection >= max_selections):
 			current_selection = 0
+			on_selection_wraparound(true)
 		on_selection_change()
 
 func decrement_selection():
@@ -155,6 +162,7 @@ func decrement_selection():
 		current_selection -= 1
 		if (current_selection < 0):
 			current_selection = (max_selections - 1)
+			on_selection_wraparound(false)
 		on_selection_change()
 
 func increment_secondary_selection():
@@ -162,6 +170,7 @@ func increment_secondary_selection():
 		current_secondary_selection += 1
 		if (current_secondary_selection >= max_secondary_selections):
 			current_secondary_selection = 0
+			on_secondary_selection_wraparound(true)
 		on_secondary_selection_change()
 
 func decrement_secondary_selection():
@@ -169,6 +178,7 @@ func decrement_secondary_selection():
 		current_secondary_selection -= 1
 		if (current_secondary_selection < 0):
 			current_secondary_selection = (max_secondary_selections - 1)
+			on_secondary_selection_wraparound(false)
 		on_secondary_selection_change()
 
 func on_selection_reset():

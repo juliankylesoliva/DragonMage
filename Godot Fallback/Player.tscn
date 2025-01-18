@@ -1,4 +1,4 @@
-[gd_scene load_steps=212 format=3 uid="uid://c6qw77ovfwgfs"]
+[gd_scene load_steps=213 format=3 uid="uid://c6qw77ovfwgfs"]
 
 [ext_resource type="Texture2D" uid="uid://d381ahbcwydy8" path="res://Sprites/Player/DraelynCrouch.png" id="1_6b42p"]
 [ext_resource type="Texture2D" uid="uid://dls34a1qa8iy1" path="res://Sprites/Player/DraelynFireTackle.png" id="1_ddrlj"]
@@ -10,6 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://bsyops5506ptd" path="res://Sprites/Player/DraelynHurt.png" id="2_h2opi"]
 [ext_resource type="Texture2D" uid="uid://bbkhtwnncuc7r" path="res://Sprites/Player/DraelynJumps.png" id="2_p0h7w"]
 [ext_resource type="Texture2D" uid="uid://qrayeurpifu" path="res://Sprites/Player/MagliHurt.png" id="2_ptbuf"]
+[ext_resource type="Resource" uid="uid://s4twjyn1pwn" path="res://Scripts/Resource Scripts/AutoPlayerInput/anti_buffer.tres" id="2_ta4cb"]
 [ext_resource type="Script" path="res://Scripts/Player/PlayerStateMachine/StandingState.gd" id="2_w87d3"]
 [ext_resource type="Script" path="res://Scripts/Player/Hub Scripts/PlayerCollisions.gd" id="2_yj5hr"]
 [ext_resource type="Script" path="res://Scripts/Player/Hub Scripts/PlayerBuffers.gd" id="3_37ht5"]
@@ -1394,6 +1395,7 @@ metadata/Tag = "Player"
 
 [node name="Hub" type="Node" parent="." node_paths=PackedStringArray("state_machine", "collisions", "buffers", "movement", "jumping", "fairy", "attacks", "temper", "form", "damage", "interaction", "stomp", "animation", "sprite_trail", "camera", "audio", "char_body", "char_sprite", "collision_shape", "stream_player", "visibility", "raycast_dl", "raycast_dm", "raycast_dr", "raycast_ledge_l", "raycast_ledge_r", "raycast_ul", "raycast_um", "raycast_ur", "raycast_ceiling_l", "raycast_ceiling_r", "raycast_wall_top_l", "raycast_wall_mid_l", "raycast_wall_bot_l", "raycast_wall_top_r", "raycast_wall_mid_r", "raycast_wall_bot_r")]
 script = ExtResource("1_vr0jy")
+auto_sequence = ExtResource("2_ta4cb")
 state_machine = NodePath("../StateMachine")
 collisions = NodePath("Collisions")
 buffers = NodePath("Buffers")

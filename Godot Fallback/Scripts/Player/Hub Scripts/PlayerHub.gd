@@ -57,8 +57,6 @@ var force_stand : bool = false
 
 var is_auto_mode_active : bool = false
 
-var current_auto_input_vector : Vector2 = Vector2.ZERO
-
 var current_auto_sequence_index : int = -1
 
 var current_auto_frame_timer : int = 0
@@ -73,7 +71,7 @@ var current_recording : AutoPlayerInputSequence
 
 func _ready():
 	if (auto_sequence != null):
-		if (auto_sequence.starting_mode != self.form.current_mode):
+		if (!auto_sequence.ignore_starting_mode and auto_sequence.starting_mode != self.form.current_mode):
 			self.form.change_mode(auto_sequence.starting_mode)
 		is_auto_mode_active = true
 		set_respawn_position(self.char_body.global_position)
@@ -102,11 +100,6 @@ func get_input_vector():
 		input_vector.y = ((1 if self.is_action_pressed("Move Up") else 0) - (1 if self.is_action_pressed("Move Down") else 0))
 	
 	return input_vector
-
-func set_auto_input_vector(v : Vector2):
-	current_auto_input_vector = Vector2.ZERO
-	if (is_auto_mode_active):
-		current_auto_input_vector = v
 
 func is_action_just_pressed(action_name : StringName):
 	if (!is_auto_mode_active):
@@ -144,7 +137,7 @@ func play_auto_sequence(s : AutoPlayerInputSequence):
 	auto_sequence = s
 	current_auto_sequence_index = 0
 	set_auto_input_dictionary(auto_sequence.frames[0])
-	if (auto_sequence.starting_mode != self.form.current_mode):
+	if (!auto_sequence.ignore_starting_mode and auto_sequence.starting_mode != self.form.current_mode):
 		self.form.change_mode(auto_sequence.starting_mode)
 	is_auto_mode_active = true
 

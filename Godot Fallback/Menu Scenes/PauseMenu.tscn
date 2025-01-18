@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://d1eef1xjuwf3b"]
+[gd_scene load_steps=11 format=3 uid="uid://d1eef1xjuwf3b"]
 
 [ext_resource type="Texture2D" uid="uid://xqtpj7gtmg3o" path="res://Sprites/Backgrounds/Misc/PauseBG.png" id="1_giym7"]
 [ext_resource type="Script" path="res://Scripts/UI Scripts/PauseMenu.gd" id="1_iiemp"]
@@ -9,21 +9,22 @@
 [ext_resource type="PackedScene" uid="uid://css77oibjn4bk" path="res://Menu Scenes/ControlRebindingMenu.tscn" id="6_3qd72"]
 [ext_resource type="PackedScene" uid="uid://coyrlwandaajn" path="res://Menu Scenes/AudioOptionsMenu.tscn" id="7_ocpij"]
 [ext_resource type="PackedScene" uid="uid://c44iq7d3yw2ho" path="res://Menu Scenes/GameplayOptionsMenu.tscn" id="8_g73xt"]
+[ext_resource type="PackedScene" uid="uid://dsnxfjbl38ytd" path="res://Menu Scenes/TipsMenu.tscn" id="9_igaqc"]
 
-[node name="PauseMenu" type="Node2D" node_paths=PackedStringArray("pause_top_node", "selection_labels", "form_select_prompt_label", "options_subscreen", "menu_cursor")]
+[node name="PauseMenu" type="Node2D" node_paths=PackedStringArray("pause_top_node", "selection_labels", "form_select_prompt_label", "options_subscreen", "tips_menu", "menu_cursor")]
 process_mode = 3
-visible = false
 light_mask = 64
 visibility_layer = 64
 z_index = 20
 position = Vector2(256, 160)
 script = ExtResource("1_iiemp")
 pause_top_node = NodePath("PauseTop")
-selection_labels = [NodePath("PauseTop/ResumeLabel"), NodePath("PauseTop/OptionsLabel"), NodePath("PauseTop/RestartLabel"), NodePath("PauseTop/ExitLabel"), NodePath("PauseTop/QuitLabel")]
+selection_labels = [NodePath("PauseTop/ResumeLabel"), NodePath("PauseTop/OptionsLabel"), NodePath("PauseTop/TipsLabel"), NodePath("PauseTop/RestartLabel"), NodePath("PauseTop/ExitLabel")]
 form_select_prompt_label = NodePath("PauseTop/FormSelectLabel")
 default_prompt_text = "[center][Pause]/[Menu Cancel] Resume | [Menu Confirm] Confirm"
 form_restart_text = "[center][Pause]/[Menu Cancel] Resume | [Menu Confirm] Confirm | [Change Form] Restart As: [img]{file}[/img]"
 options_subscreen = NodePath("OptionsMenu")
+tips_menu = NodePath("TipsMenu")
 title_scene_path = "res://Misc Scenes/TitleScreen.tscn"
 menu_cursor = NodePath("MenuCursor")
 
@@ -77,7 +78,7 @@ bbcode_enabled = true
 text = "[center]OPTIONS"
 scroll_active = false
 
-[node name="RestartLabel" type="RichTextLabel" parent="PauseTop"]
+[node name="TipsLabel" type="RichTextLabel" parent="PauseTop"]
 light_mask = 64
 visibility_layer = 64
 z_index = 7
@@ -85,6 +86,21 @@ offset_left = -118.0
 offset_top = 9.0
 offset_right = 118.0
 offset_bottom = 23.0
+pivot_offset = Vector2(118, 7)
+theme_override_fonts/normal_font = ExtResource("3_4cfu1")
+theme_override_font_sizes/normal_font_size = 16
+bbcode_enabled = true
+text = "[center]TIPS"
+scroll_active = false
+
+[node name="RestartLabel" type="RichTextLabel" parent="PauseTop"]
+light_mask = 64
+visibility_layer = 64
+z_index = 7
+offset_left = -118.0
+offset_top = 41.0
+offset_right = 118.0
+offset_bottom = 55.0
 pivot_offset = Vector2(118, 7)
 theme_override_fonts/normal_font = ExtResource("3_4cfu1")
 theme_override_font_sizes/normal_font_size = 16
@@ -97,21 +113,6 @@ light_mask = 64
 visibility_layer = 64
 z_index = 7
 offset_left = -118.0
-offset_top = 41.0
-offset_right = 118.0
-offset_bottom = 55.0
-pivot_offset = Vector2(118, 7)
-theme_override_fonts/normal_font = ExtResource("3_4cfu1")
-theme_override_font_sizes/normal_font_size = 16
-bbcode_enabled = true
-text = "[center]EXIT LEVEL"
-scroll_active = false
-
-[node name="QuitLabel" type="RichTextLabel" parent="PauseTop"]
-light_mask = 64
-visibility_layer = 64
-z_index = 7
-offset_left = -118.0
 offset_top = 73.0
 offset_right = 118.0
 offset_bottom = 87.0
@@ -119,7 +120,7 @@ pivot_offset = Vector2(118, 7)
 theme_override_fonts/normal_font = ExtResource("3_4cfu1")
 theme_override_font_sizes/normal_font_size = 16
 bbcode_enabled = true
-text = "[center]QUIT GAME"
+text = "[center]EXIT LEVEL"
 scroll_active = false
 
 [node name="FormSelectLabel" type="RichTextLabel" parent="PauseTop"]
@@ -160,6 +161,12 @@ menu_cursor = NodePath("../MenuCursor")
 visible = false
 position = Vector2(-256, -160)
 menu_cursor = NodePath("../MenuCursor")
+
+[node name="TipsMenu" parent="." node_paths=PackedStringArray("menu_cursor") instance=ExtResource("9_igaqc")]
+visible = false
+position = Vector2(-256, -160)
+menu_cursor = NodePath("../MenuCursor")
+enable_secondary_wraparound = true
 
 [node name="MenuCursor" parent="." instance=ExtResource("3_d0ijs")]
 position = Vector2(0, -224)
