@@ -166,7 +166,6 @@ menu_cursor = NodePath("../MenuCursor")
 visible = false
 position = Vector2(-256, -160)
 menu_cursor = NodePath("../MenuCursor")
-enable_secondary_wraparound = true
 
 [node name="MenuCursor" parent="." instance=ExtResource("3_d0ijs")]
 position = Vector2(0, -224)
