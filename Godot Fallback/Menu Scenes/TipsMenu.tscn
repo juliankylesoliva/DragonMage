@@ -1,12 +1,16 @@
-[gd_scene load_steps=8 format=3 uid="uid://dsnxfjbl38ytd"]
+[gd_scene load_steps=12 format=3 uid="uid://dsnxfjbl38ytd"]
 
 [ext_resource type="Script" path="res://Scripts/UI Scripts/TipsMenu.gd" id="1_br7dr"]
 [ext_resource type="FontFile" uid="uid://blejgst41tdnl" path="res://PressStart2P.ttf" id="1_rtn30"]
 [ext_resource type="Script" path="res://Scripts/Utility Scripts/ButtonPromptTextLabel.gd" id="2_m5gei"]
 [ext_resource type="Resource" uid="uid://dq1t4vfslrlwc" path="res://Scripts/Resource Scripts/TipEntry/sample_tip_1.tres" id="2_sqbrl"]
-[ext_resource type="Resource" uid="uid://c50y71eas0y36" path="res://Scripts/Resource Scripts/TipEntry/sample_tip_2.tres" id="3_ns43o"]
-[ext_resource type="Resource" uid="uid://biqocgyy3d56f" path="res://Scripts/Resource Scripts/TipEntry/sample_tip_3.tres" id="4_11fhb"]
+[ext_resource type="Resource" uid="uid://f7ueluc7t27g" path="res://Scripts/Resource Scripts/TipEntry/Mage/tip_mage_jump.tres" id="3_xnomb"]
+[ext_resource type="Resource" uid="uid://bcnd2u3hhl3qe" path="res://Scripts/Resource Scripts/TipEntry/Mage/tip_mage_glide.tres" id="4_ncx85"]
+[ext_resource type="Resource" uid="uid://g5r8j2uij0dj" path="res://Scripts/Resource Scripts/TipEntry/Mage/tip_mage_walljump.tres" id="5_4nvvv"]
 [ext_resource type="Resource" uid="uid://dr2d8xvedrgp4" path="res://Scripts/Resource Scripts/TipEntry/sample_tip_4.tres" id="5_rlyon"]
+[ext_resource type="Resource" uid="uid://b1kxyyh2ypgps" path="res://Scripts/Resource Scripts/TipEntry/Dragon/tip_dragon_jump.tres" id="6_jhhg0"]
+[ext_resource type="Resource" uid="uid://bo1xy4fufn68f" path="res://Scripts/Resource Scripts/TipEntry/Dragon/tip_dragon_wings.tres" id="7_fktk4"]
+[ext_resource type="Resource" uid="uid://bhsonam0fljfa" path="res://Scripts/Resource Scripts/TipEntry/Dragon/tip_dragon_pivot.tres" id="8_g63tk"]
 
 [node name="TipsMenu" type="Node2D" node_paths=PackedStringArray("category_text_label", "option_labels")]
 script = ExtResource("1_br7dr")
@@ -14,8 +18,8 @@ category_text_label = NodePath("CategoryTextLabel")
 option_labels = [NodePath("TipTitleTextLabel1"), NodePath("TipTitleTextLabel2"), NodePath("TipTitleTextLabel3"), NodePath("TipTitleTextLabel4"), NodePath("TipTitleTextLabel5")]
 category_names = Array[String](["~ General Guidance -", "~ Mage Mastery ~", "- Dragon Drills -", "* Fun Facts *"])
 general_tips = Array[Resource("res://Scripts/Resource Scripts/TipEntry/TipEntry.gd")]([ExtResource("2_sqbrl")])
-mage_tips = Array[Resource("res://Scripts/Resource Scripts/TipEntry/TipEntry.gd")]([ExtResource("3_ns43o")])
-dragon_tips = Array[Resource("res://Scripts/Resource Scripts/TipEntry/TipEntry.gd")]([ExtResource("4_11fhb")])
+mage_tips = Array[Resource("res://Scripts/Resource Scripts/TipEntry/TipEntry.gd")]([ExtResource("3_xnomb"), ExtResource("4_ncx85"), ExtResource("5_4nvvv")])
+dragon_tips = Array[Resource("res://Scripts/Resource Scripts/TipEntry/TipEntry.gd")]([ExtResource("6_jhhg0"), ExtResource("7_fktk4"), ExtResource("8_g63tk")])
 fun_tips = Array[Resource("res://Scripts/Resource Scripts/TipEntry/TipEntry.gd")]([ExtResource("5_rlyon")])
 max_secondary_selections = 4
 enable_secondary_wraparound = true

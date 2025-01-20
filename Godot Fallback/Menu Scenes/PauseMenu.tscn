@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://d1eef1xjuwf3b"]
+[gd_scene load_steps=12 format=3 uid="uid://d1eef1xjuwf3b"]
 
 [ext_resource type="Texture2D" uid="uid://xqtpj7gtmg3o" path="res://Sprites/Backgrounds/Misc/PauseBG.png" id="1_giym7"]
 [ext_resource type="Script" path="res://Scripts/UI Scripts/PauseMenu.gd" id="1_iiemp"]
@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://coyrlwandaajn" path="res://Menu Scenes/AudioOptionsMenu.tscn" id="7_ocpij"]
 [ext_resource type="PackedScene" uid="uid://c44iq7d3yw2ho" path="res://Menu Scenes/GameplayOptionsMenu.tscn" id="8_g73xt"]
 [ext_resource type="PackedScene" uid="uid://dsnxfjbl38ytd" path="res://Menu Scenes/TipsMenu.tscn" id="9_igaqc"]
+[ext_resource type="PackedScene" uid="uid://cxium7gn4agkw" path="res://Menu Scenes/TipSubscreenMenu.tscn" id="10_t71fq"]
 
 [node name="PauseMenu" type="Node2D" node_paths=PackedStringArray("pause_top_node", "selection_labels", "form_select_prompt_label", "options_subscreen", "tips_menu", "menu_cursor")]
 process_mode = 3
@@ -162,9 +163,16 @@ visible = false
 position = Vector2(-256, -160)
 menu_cursor = NodePath("../MenuCursor")
 
-[node name="TipsMenu" parent="." node_paths=PackedStringArray("menu_cursor") instance=ExtResource("9_igaqc")]
+[node name="TipsMenu" parent="." node_paths=PackedStringArray("tip_subscreen", "menu_cursor") instance=ExtResource("9_igaqc")]
 visible = false
 position = Vector2(-256, -160)
+tip_subscreen = NodePath("../TipSubscreenMenu")
+menu_cursor = NodePath("../MenuCursor")
+
+[node name="TipSubscreenMenu" parent="." node_paths=PackedStringArray("tips_top_menu", "menu_cursor") instance=ExtResource("10_t71fq")]
+visible = false
+position = Vector2(-256, -160)
+tips_top_menu = NodePath("../TipsMenu")
 menu_cursor = NodePath("../MenuCursor")
 
 [node name="MenuCursor" parent="." instance=ExtResource("3_d0ijs")]

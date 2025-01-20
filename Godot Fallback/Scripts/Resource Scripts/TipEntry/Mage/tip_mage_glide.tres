@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="TipEntry" load_steps=2 format=3 uid="uid://bcnd2u3hhl3qe"]
+
+[ext_resource type="Script" path="res://Scripts/Resource Scripts/TipEntry/TipEntry.gd" id="1_eepim"]
+
+[resource]
+script = ExtResource("1_eepim")
+tip_title = "You Only Glide Once"
+tip_description = Array[String](["As a mage, press [Glide] to slow your midair descent for up to three seconds. If the glide ends or you release [Glide] early, you cannot glide again until you land on the ground."])

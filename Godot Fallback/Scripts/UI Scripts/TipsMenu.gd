@@ -16,14 +16,13 @@ class_name TipsMenu
 
 @export var fun_tips : Array[TipEntry]
 
+@export var tip_subscreen : TipSubscreenMenu
+
 var current_page_index : int = 0
 
 var max_pages : int = 0
 
 func on_menu_activation():
-	current_page_index = 0
-	current_selection = 0
-	current_secondary_selection = 0
 	max_secondary_selections = category_names.size()
 	max_pages = (ceilf((get_current_category_entries().size() as float) / option_labels.size()) as int)
 	update_page_selections()
@@ -54,7 +53,7 @@ func on_right_pressed():
 	increment_secondary_selection()
 
 func on_left_pressed():
-	increment_secondary_selection()
+	decrement_secondary_selection()
 
 func on_selection_wraparound(increment : bool = false):
 	if (max_pages < 2):
@@ -74,8 +73,19 @@ func on_selection_wraparound(increment : bool = false):
 	if (!increment):
 		current_selection = (max_selections - 1)
 
+func on_selection_confirm():
+	tip_subscreen.reset_selection()
+	menu_cursor.play_accept_sound()
+	self.deactivate_menu()
+	tip_subscreen.set_previous_menu(self)
+	tip_subscreen.activate_menu()
+	menu_cursor.hide()
+
 func on_menu_cancel():
 	if (previous_menu != null):
+		current_page_index = 0
+		reset_selection()
+		reset_secondary_selection()
 		self.deactivate_menu()
 		previous_menu.activate_menu()
 		previous_menu = null
@@ -115,3 +125,6 @@ func update_page_selections():
 			option_labels[i].set_visible(false)
 	if (current_selection >= max_selections):
 		current_selection = (max_selections - 1)
+
+func get_selected_tip():
+	return get_current_category_entries()[current_selection + (current_page_index * option_labels.size())]

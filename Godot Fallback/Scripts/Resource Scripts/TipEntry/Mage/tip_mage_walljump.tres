@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="TipEntry" load_steps=2 format=3 uid="uid://g5r8j2uij0dj"]
+
+[ext_resource type="Script" path="res://Scripts/Resource Scripts/TipEntry/TipEntry.gd" id="1_ayu1t"]
+
+[resource]
+script = ExtResource("1_ayu1t")
+tip_title = "Wall Jump Stamina"
+tip_description = Array[String](["As a mage, consecutive wall jumps will reduce your wall jump height, but this can be counteracted if you have an active slipstream; however, you always have a hard limit of five wall jumps before tiring out regardless of having a slipstream or not."])

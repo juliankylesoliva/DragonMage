@@ -1,9 +1,15 @@
-[gd_scene load_steps=3 format=3 uid="uid://cxium7gn4agkw"]
+[gd_scene load_steps=4 format=3 uid="uid://cxium7gn4agkw"]
 
+[ext_resource type="Script" path="res://Scripts/UI Scripts/TipSubscreenMenu.gd" id="1_h2w02"]
 [ext_resource type="FontFile" uid="uid://blejgst41tdnl" path="res://PressStart2P.ttf" id="1_tct2h"]
 [ext_resource type="Script" path="res://Scripts/Utility Scripts/ButtonPromptTextLabel.gd" id="2_icfsh"]
 
-[node name="TipSubscreenMenu" type="Node2D"]
+[node name="TipSubscreenMenu" type="Node2D" node_paths=PackedStringArray("tip_title_label", "tip_desc_label")]
+script = ExtResource("1_h2w02")
+tip_title_label = NodePath("TipTitleTextLabel")
+tip_desc_label = NodePath("TipDescTextLabel")
+max_selections = 1
+enable_wraparound = false
 
 [node name="HeaderTextLabel" type="RichTextLabel" parent="."]
 anchors_preset = 8
@@ -41,7 +47,7 @@ pivot_offset = Vector2(224, 7)
 theme_override_fonts/normal_font = ExtResource("1_tct2h")
 theme_override_font_sizes/normal_font_size = 16
 bbcode_enabled = true
-text = "[left]#. Tip Title Here"
+text = "[left]Tip Title Here"
 scroll_active = false
 shortcut_keys_enabled = false
 
@@ -63,6 +69,7 @@ bbcode_enabled = true
 text = "Tip description here"
 scroll_active = false
 shortcut_keys_enabled = false
+script = ExtResource("2_icfsh")
 
 [node name="ControlPromptLabel" type="RichTextLabel" parent="."]
 anchors_preset = 8
@@ -79,7 +86,7 @@ grow_vertical = 2
 theme_override_fonts/normal_font = ExtResource("1_tct2h")
 theme_override_font_sizes/normal_font_size = 8
 bbcode_enabled = true
-text = "[center][Menu Up]/[Menu Down] Change Page | [Menu Left]/[Menu Right] Change Tip
+text = "[center][Menu Left]/[Menu Right] Turn Page
 
 [Menu Cancel] Back"
 scroll_active = false

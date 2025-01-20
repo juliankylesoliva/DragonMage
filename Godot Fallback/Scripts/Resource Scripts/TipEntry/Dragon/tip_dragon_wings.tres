@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="TipEntry" load_steps=2 format=3 uid="uid://bo1xy4fufn68f"]
+
+[ext_resource type="Script" path="res://Scripts/Resource Scripts/TipEntry/TipEntry.gd" id="1_awfy3"]
+
+[resource]
+script = ExtResource("1_awfy3")
+tip_title = "Pace Your Wing Jumps!"
+tip_description = Array[String](["As a dragon, mashing [Jump] in midair while holding forward can be a quick and easy way to gain some speed, but in some cases, you'll want to maximize your distance or height by pressing [Jump] with rhythmic timing."])
