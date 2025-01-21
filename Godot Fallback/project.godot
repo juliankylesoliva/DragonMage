@@ -34,6 +34,7 @@ FormSelectionHelper="*res://Misc Scenes/FormSelectionHelper.tscn"
 NextLevelHelper="*res://Misc Scenes/NextLevelHelper.tscn"
 OptionsHelper="*res://Misc Scenes/OptionsHelper.tscn"
 GlobalSignals="*res://Misc Scenes/GlobalSignals.tscn"
+CutsceneCamera="*res://Misc Scenes/CutsceneCamera.tscn"
 
 [debug]
 

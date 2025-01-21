@@ -1755,6 +1755,7 @@ bus = &"SFX"
 current = true
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+position = Vector2(0, 1)
 rect = Rect2(-32, -32, 64, 64)
 
 [node name="RayCastDL" type="RayCast2D" parent="."]

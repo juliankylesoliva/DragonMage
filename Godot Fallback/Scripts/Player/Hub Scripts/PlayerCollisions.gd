@@ -186,10 +186,10 @@ func do_ledge_nudge(custom_ease : float = 0):
 		var is_right_grounded : bool = (get_distance_to_ground(1) <= hub.char_body.floor_snap_length)
 		
 		if (!is_middle_grounded and (is_left_grounded or is_right_grounded) and (!is_left_grounded or !is_right_grounded)):
-			if (!is_left_grounded and is_right_grounded):
+			if (!is_left_grounded and is_right_grounded and hub.get_input_vector().x >= 0):
 				var calculated_nudge_distance : float = (((hub.raycast_ledge_r.get_collision_point().x if hub.raycast_ledge_r.is_colliding() else hub.raycast_ledge_r.target_position.x) - hub.raycast_ledge_r.global_position.x) * (ledge_nudge_easing if custom_ease <= 0 else abs(custom_ease)))
 				hub.char_body.position.x += (calculated_nudge_distance if calculated_nudge_distance > 0 and calculated_nudge_distance <= max_nudge_distance else max_nudge_distance)
-			elif (is_left_grounded and !is_right_grounded):
+			elif (is_left_grounded and !is_right_grounded and hub.get_input_vector().x <= 0):
 				var calculated_nudge_distance = (((hub.raycast_ledge_l.get_collision_point().x if hub.raycast_ledge_l.is_colliding() else hub.raycast_ledge_l.target_position.x) - hub.raycast_ledge_l.global_position.x) * (ledge_nudge_easing if custom_ease <= 0 else abs(custom_ease)))
 				hub.char_body.position.x += (calculated_nudge_distance if calculated_nudge_distance < 0 and calculated_nudge_distance >= -max_nudge_distance else -max_nudge_distance)
 			else:
