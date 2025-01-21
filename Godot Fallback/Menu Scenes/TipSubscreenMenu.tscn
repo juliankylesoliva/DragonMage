@@ -5,6 +5,7 @@
 [ext_resource type="Script" path="res://Scripts/Utility Scripts/ButtonPromptTextLabel.gd" id="2_icfsh"]
 
 [node name="TipSubscreenMenu" type="Node2D" node_paths=PackedStringArray("tip_title_label", "tip_desc_label")]
+visible = false
 script = ExtResource("1_h2w02")
 tip_title_label = NodePath("TipTitleTextLabel")
 tip_desc_label = NodePath("TipDescTextLabel")

@@ -13,6 +13,7 @@
 [ext_resource type="Resource" uid="uid://bhsonam0fljfa" path="res://Scripts/Resource Scripts/TipEntry/Dragon/tip_dragon_pivot.tres" id="8_g63tk"]
 
 [node name="TipsMenu" type="Node2D" node_paths=PackedStringArray("category_text_label", "option_labels")]
+visible = false
 script = ExtResource("1_br7dr")
 category_text_label = NodePath("CategoryTextLabel")
 option_labels = [NodePath("TipTitleTextLabel1"), NodePath("TipTitleTextLabel2"), NodePath("TipTitleTextLabel3"), NodePath("TipTitleTextLabel4"), NodePath("TipTitleTextLabel5")]

@@ -14,6 +14,7 @@
 
 [node name="PauseMenu" type="Node2D" node_paths=PackedStringArray("pause_top_node", "selection_labels", "form_select_prompt_label", "options_subscreen", "tips_menu", "menu_cursor")]
 process_mode = 3
+visible = false
 light_mask = 64
 visibility_layer = 64
 z_index = 20
