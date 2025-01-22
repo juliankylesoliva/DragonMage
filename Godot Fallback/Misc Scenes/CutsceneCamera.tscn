@@ -21,8 +21,6 @@ position_smoothing_speed = 24.0
 curve = SubResource("Curve2D_11a56")
 
 [node name="PathFollow2D" type="PathFollow2D" parent="Path2D"]
-position = Vector2(-32, 32)
-rotation = 2.84368
 rotates = false
 loop = false
 
