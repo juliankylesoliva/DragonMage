@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://xgybmv8avqjs"]
+[gd_scene load_steps=12 format=3 uid="uid://xgybmv8avqjs"]
 
 [ext_resource type="Script" path="res://Scripts/Utility Scripts/Room.gd" id="1_1iywr"]
 [ext_resource type="TileSet" uid="uid://dhwi7i1loa2pd" path="res://Sprites/Tiles/Test Tiles/TestTileSet.tres" id="2_27p7d"]
@@ -10,6 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://miqcvhqk5etv" path="res://Sprites/Backgrounds/0_4_BG/Catwalks.png" id="8_qjofd"]
 [ext_resource type="Texture2D" uid="uid://bsykoqgrumq5c" path="res://Sprites/Backgrounds/0_4_BG/BackFloor.png" id="9_43llv"]
 [ext_resource type="PackedScene" uid="uid://dfkmxoba64spw" path="res://Scene Objects/Objects/MedalFragment.tscn" id="10_nkfsd"]
+[ext_resource type="PackedScene" uid="uid://db6i3rmu8i44r" path="res://Scene Objects/Objects/CollectableScale.tscn" id="11_0ph4f"]
 
 [node name="CH0_LV4_R5" type="Node2D" node_paths=PackedStringArray("parallax_bg", "tilemap_list", "room_entrances", "medal_fragments")]
 script = ExtResource("1_1iywr")
@@ -124,7 +125,12 @@ position = Vector2(352, 128)
 position = Vector2(416, 128)
 
 [node name="TemperDragonFruit" parent="." instance=ExtResource("6_osal1")]
-position = Vector2(160, 96)
+position = Vector2(160, 112)
+
+[node name="CollectableScale" parent="." instance=ExtResource("11_0ph4f")]
+position = Vector2(160, 64)
+collectable_type = "DRACONIC"
+dragon_fragments_needed = 20
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 visible = false

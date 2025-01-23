@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://k7ndi0emu4fk"]
+[gd_scene load_steps=10 format=3 uid="uid://k7ndi0emu4fk"]
 
 [ext_resource type="Script" path="res://Scripts/Utility Scripts/Room.gd" id="1_6o4g6"]
 [ext_resource type="TileSet" uid="uid://dhwi7i1loa2pd" path="res://Sprites/Tiles/Test Tiles/TestTileSet.tres" id="2_f37q7"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://dcs7w117uukcd" path="res://Scene Objects/Objects/BreakableMagicBlock.tscn" id="6_33ua2"]
 [ext_resource type="PackedScene" uid="uid://bajk0w7eoh6o8" path="res://Scene Objects/Objects/ReinforcedBlock.tscn" id="7_0vs46"]
 [ext_resource type="PackedScene" uid="uid://durwtm4ocfbmv" path="res://Scene Objects/Objects/FinishLine.tscn" id="8_oelis"]
+[ext_resource type="PackedScene" uid="uid://db6i3rmu8i44r" path="res://Scene Objects/Objects/CollectableScale.tscn" id="9_y5m6a"]
 
 [node name="CH0_LV3_R14" type="Node2D" node_paths=PackedStringArray("tilemap_list", "room_entrances")]
 script = ExtResource("1_6o4g6")
@@ -86,3 +87,8 @@ position = Vector2(1184, -352)
 
 [node name="FinishLine" parent="." instance=ExtResource("8_oelis")]
 position = Vector2(1184, -320)
+
+[node name="CollectableScale" parent="." instance=ExtResource("9_y5m6a")]
+position = Vector2(880, -288)
+mage_fragments_needed = 25
+dragon_fragments_needed = 25

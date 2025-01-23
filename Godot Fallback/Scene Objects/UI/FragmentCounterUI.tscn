@@ -71,6 +71,12 @@ animations = [{
 [node name="FragmentCounterUI" type="Node2D" node_paths=PackedStringArray("rich_text_label")]
 script = ExtResource("1_aybfr")
 rich_text_label = NodePath("RichTextLabel")
+magical_scale_hud_blank = "[img=16x16]res://Sprites/UI/ScalesHUD1.png[/img]"
+magical_scale_hud_collected = "[img=16x16]res://Sprites/UI/ScalesHUD2.png[/img]"
+draconic_scale_hud_blank = "[img=16x16]res://Sprites/UI/ScalesHUD3.png[/img]"
+draconic_scale_hud_collected = "[img=16x16]res://Sprites/UI/ScalesHUD4.png[/img]"
+balanced_scale_hud_blank = "[img=16x16]res://Sprites/UI/ScalesHUD5.png[/img]"
+balanced_scale_hud_collected = "[img=16x16]res://Sprites/UI/ScalesHUD6.png[/img]"
 target_alpha = 0.35
 
 [node name="RichTextLabel" type="RichTextLabel" parent="."]
@@ -80,10 +86,10 @@ z_index = 7
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -202.0
+offset_left = -266.0
 offset_top = 8.0
 offset_right = -42.0
-offset_bottom = 48.0
+offset_bottom = 56.0
 grow_horizontal = 0
 size_flags_horizontal = 8
 auto_translate = false
@@ -91,8 +97,8 @@ mouse_filter = 2
 mouse_force_pass_scroll_events = false
 theme_override_fonts/normal_font = ExtResource("1_lq62u")
 bbcode_enabled = true
-text = "[right][font_size=24]###[font_size=16]/###
-[[color=#5941a9]##[color=white]:[color=#f09a59]##[color=white]]"
+text = "[right][font_size=24]~[color=#5941a9]###[color=white]:[color=#f09a59]###[color=white]-
+[font_size=16][---]"
 fit_content = true
 scroll_active = false
 shortcut_keys_enabled = false

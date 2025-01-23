@@ -14,6 +14,12 @@ signal player_defeated
 
 @export var room_list : Array[Room]
 
+@export var magical_scale : CollectableScale = null
+
+@export var draconic_scale : CollectableScale = null
+
+@export var balanced_scale : CollectableScale = null
+
 @export_range(0, 1) var min_fragment_collection_rate : float = 0.5
 
 @export_range(1, 9) var min_fragment_majority_ratio : float = 2
@@ -108,6 +114,15 @@ func level_startup():
 		for i in CheckpointHandler.saved_fragment_status_array.size():
 			if (CheckpointHandler.saved_fragment_status_array[i]):
 				fragment_array[i].mark_as_collected()
+	
+	if (magical_scale != null):
+		magical_scale.set_level_ref(self)
+	
+	if (draconic_scale != null):
+		draconic_scale.set_level_ref(self)
+	
+	if (balanced_scale != null):
+		balanced_scale.set_level_ref(self)
 	
 	room_to_use.activate_room()
 	

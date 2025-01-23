@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://bsdn7w7f8yil8"]
+[gd_scene load_steps=16 format=3 uid="uid://bsdn7w7f8yil8"]
 
 [ext_resource type="Script" path="res://Scripts/Utility Scripts/Room.gd" id="1_e4gek"]
 [ext_resource type="TileSet" uid="uid://dhwi7i1loa2pd" path="res://Sprites/Tiles/Test Tiles/TestTileSet.tres" id="2_n0mpe"]
@@ -11,6 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://dgtmsbsmeieyh" path="res://Scene Objects/Objects/ReinforcedMagicBlock.tscn" id="9_qlp8j"]
 [ext_resource type="PackedScene" uid="uid://bajk0w7eoh6o8" path="res://Scene Objects/Objects/ReinforcedBlock.tscn" id="10_nmdcr"]
 [ext_resource type="Texture2D" uid="uid://bv65yl4nt5gs4" path="res://Sprites/Backgrounds/0_4_BG/BackWall.png" id="11_widii"]
+[ext_resource type="PackedScene" uid="uid://db6i3rmu8i44r" path="res://Scene Objects/Objects/CollectableScale.tscn" id="12_ixb0n"]
 [ext_resource type="Texture2D" uid="uid://miqcvhqk5etv" path="res://Sprites/Backgrounds/0_4_BG/Catwalks.png" id="12_xhflh"]
 [ext_resource type="Texture2D" uid="uid://bsykoqgrumq5c" path="res://Sprites/Backgrounds/0_4_BG/BackFloor.png" id="13_4q7yx"]
 [ext_resource type="PackedScene" uid="uid://dfkmxoba64spw" path="res://Scene Objects/Objects/MedalFragment.tscn" id="14_q7xoj"]
@@ -126,7 +127,7 @@ starting_state = 0
 enable_cycling = false
 
 [node name="TemperDragonFruit5" parent="." instance=ExtResource("4_p2lmv")]
-position = Vector2(192, 640)
+position = Vector2(192, 656)
 starting_state = 0
 enable_cycling = false
 
@@ -188,6 +189,11 @@ position = Vector2(352, 608)
 
 [node name="ReinforcedBlock2" parent="." instance=ExtResource("10_nmdcr")]
 position = Vector2(352, 672)
+
+[node name="CollectableScale" parent="." instance=ExtResource("12_ixb0n")]
+position = Vector2(192, 608)
+mage_fragments_needed = 25
+dragon_fragments_needed = 25
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 visible = false

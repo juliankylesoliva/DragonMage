@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://b0t45tk6kgt57"]
+[gd_scene load_steps=12 format=3 uid="uid://b0t45tk6kgt57"]
 
 [ext_resource type="Script" path="res://Scripts/Utility Scripts/Room.gd" id="1_l2bk6"]
 [ext_resource type="TileSet" uid="uid://dhwi7i1loa2pd" path="res://Sprites/Tiles/Test Tiles/TestTileSet.tres" id="2_1fie0"]
@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://cqdxwg0yhese4" path="res://Sprites/Backgrounds/0_2_BG/MountainsFront.png" id="8_4salp"]
 [ext_resource type="Script" path="res://Scripts/Utility Scripts/ButtonPromptTextLabel.gd" id="8_16veb"]
 [ext_resource type="PackedScene" uid="uid://dfkmxoba64spw" path="res://Scene Objects/Objects/MedalFragment.tscn" id="9_2xysr"]
+[ext_resource type="PackedScene" uid="uid://db6i3rmu8i44r" path="res://Scene Objects/Objects/CollectableScale.tscn" id="10_n5i3b"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_u81gb"]
 size = Vector2(864, 32)
@@ -192,5 +193,10 @@ position = Vector2(944, -208)
 
 [node name="MedalFragment10" parent="Fragments" instance=ExtResource("9_2xysr")]
 position = Vector2(976, -176)
+
+[node name="CollectableScale" parent="." instance=ExtResource("10_n5i3b")]
+position = Vector2(928, 192)
+collectable_type = "DRACONIC"
+dragon_fragments_needed = 45
 
 [editable path="FallWarp"]

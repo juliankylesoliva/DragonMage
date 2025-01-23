@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://bee26tq601smv"]
+[gd_scene load_steps=25 format=3 uid="uid://bee26tq601smv"]
 
 [ext_resource type="Script" path="res://Scripts/Utility Scripts/Level.gd" id="1_2pe2a"]
 [ext_resource type="PackedScene" uid="uid://c6qw77ovfwgfs" path="res://Player.tscn" id="2_oq6xx"]
@@ -24,12 +24,18 @@
 [ext_resource type="PackedScene" uid="uid://btq4qla5fyq0n" path="res://Scene Objects/Misc/LevelMusicPlayer.tscn" id="23_c6dlv"]
 [ext_resource type="AudioStream" uid="uid://bs4yog04kmdd6" path="res://Music/CH0/Eight_Bit_Dungeon_Monster_Stomp.wav" id="24_ar4bd"]
 
-[node name="CH0_LV3" type="Node2D" node_paths=PackedStringArray("player_reference", "starting_room", "room_list", "clear_timer")]
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_nsxyw"]
+resource_local_to_scene = true
+radius = 8.0
+height = 48.0
+
+[node name="CH0_LV3" type="Node2D" node_paths=PackedStringArray("player_reference", "starting_room", "room_list", "balanced_scale", "clear_timer")]
 script = ExtResource("1_2pe2a")
 level_index = 2
 player_reference = NodePath("Player")
 starting_room = NodePath("CH0_LV3_R1")
 room_list = [NodePath("CH0_LV3_R1"), NodePath("CH0_LV3_R2"), NodePath("CH0_LV3_R4"), NodePath("CH0_LV3_R11"), NodePath("CH0_LV3_R5"), NodePath("CH0_LV3_R6"), NodePath("CH0_LV3_R12"), NodePath("CH0_LV3_R7"), NodePath("CH0_LV3_R13"), NodePath("CH0_LV3_R9"), NodePath("CH0_LV3_R10"), NodePath("CH0_LV3_R14")]
+balanced_scale = NodePath("CH0_LV3_R14/CollectableScale")
 min_fragment_collection_rate = 1.0
 dropped_fragment_scene = ExtResource("2_qdijq")
 clear_timer = NodePath("UI_Canvas/ClearTimer")
@@ -48,6 +54,9 @@ hot_segments = 0
 
 [node name="Camera" parent="Player/Hub" index="11" node_paths=PackedStringArray("player_cam")]
 player_cam = NodePath("../../../Camera2D")
+
+[node name="CollisionShape2D" parent="Player" index="4"]
+shape = SubResource("CapsuleShape2D_nsxyw")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(256, 160)

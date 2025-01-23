@@ -23,12 +23,13 @@ resource_local_to_scene = true
 radius = 8.0
 height = 48.0
 
-[node name="CH0_LV1" type="Node" node_paths=PackedStringArray("player_reference", "starting_room", "room_list", "clear_timer")]
+[node name="CH0_LV1" type="Node" node_paths=PackedStringArray("player_reference", "starting_room", "room_list", "magical_scale", "clear_timer")]
 script = ExtResource("1_6mws2")
 level_index = 0
 player_reference = NodePath("Player")
 starting_room = NodePath("CH0_LV1_R1")
 room_list = [NodePath("CH0_LV1_R1"), NodePath("CH0_LV1_R2"), NodePath("CH0_LV1_R3"), NodePath("CH0_LV1_R5"), NodePath("CH0_LV1_R6"), NodePath("CH0_LV1_R10")]
+magical_scale = NodePath("CH0_LV1_R6/CollectableScale")
 min_fragment_collection_rate = 1.0
 dropped_fragment_scene = ExtResource("2_wgkbh")
 clear_timer = NodePath("UI_Canvas/ClearTimer")

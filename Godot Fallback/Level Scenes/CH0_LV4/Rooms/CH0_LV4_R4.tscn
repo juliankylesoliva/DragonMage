@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://b2c658ex7s65i"]
+[gd_scene load_steps=13 format=3 uid="uid://b2c658ex7s65i"]
 
 [ext_resource type="Script" path="res://Scripts/Utility Scripts/Room.gd" id="1_2xpe0"]
 [ext_resource type="TileSet" uid="uid://dhwi7i1loa2pd" path="res://Sprites/Tiles/Test Tiles/TestTileSet.tres" id="2_kmjyc"]
@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://miqcvhqk5etv" path="res://Sprites/Backgrounds/0_4_BG/Catwalks.png" id="7_crw32"]
 [ext_resource type="Texture2D" uid="uid://bsykoqgrumq5c" path="res://Sprites/Backgrounds/0_4_BG/BackFloor.png" id="8_skxdu"]
 [ext_resource type="PackedScene" uid="uid://dfkmxoba64spw" path="res://Scene Objects/Objects/MedalFragment.tscn" id="9_570kp"]
+[ext_resource type="PackedScene" uid="uid://db6i3rmu8i44r" path="res://Scene Objects/Objects/CollectableScale.tscn" id="10_lygq1"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_nfqvy"]
 size = Vector2(896, 32)
@@ -211,6 +212,11 @@ enable_cycling = false
 position = Vector2(1312, 128)
 starting_state = 1
 enable_cycling = false
+
+[node name="CollectableScale" parent="." instance=ExtResource("10_lygq1")]
+position = Vector2(768, 256)
+collectable_type = "MAGICAL"
+mage_fragments_needed = 20
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 visible = false

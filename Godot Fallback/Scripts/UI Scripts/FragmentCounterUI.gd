@@ -8,15 +8,19 @@ class_name FragmentCounterUI
 
 @export var rich_text_label : RichTextLabel
 
-@export var text_template : String = "[right][color={medal}][font_size=24]{current}[font_size=16][color=white]/[color={status}]{min}\n[color=white][[color=#443482]{mage}[color=white]:[color=#cf7a30]{dragon}[color=white]]"
+@export var text_template : String = "[right][font_size=24]~[color=#443482]{mage}[color=white]:[color=#cf7a30]{dragon}[color=white]-\n[font_size=16][{magical_scale}{draconic_scale}{balanced_scale}]"
 
-@export var blue_hex : String = "#443482"
+@export var magical_scale_hud_blank : String
 
-@export var orange_hex : String = "#cf7a30"
+@export var magical_scale_hud_collected : String
 
-@export var green_hex : String = "#2a852a"
+@export var draconic_scale_hud_blank : String
 
-@export var red_hex : String = "#a62929"
+@export var draconic_scale_hud_collected : String
+
+@export var balanced_scale_hud_blank : String
+
+@export var balanced_scale_hud_collected : String
 
 @export var y_fade_offset_from_center : float = -96
 
@@ -37,7 +41,10 @@ func _ready():
 
 func _process(_delta):
 	if (level_ref != null):
-		rich_text_label.text = text_template.format({"medal" : (blue_hex if level_ref.get_medal_type() == "MAGIC" else orange_hex if level_ref.get_medal_type() == "DRAGON" else green_hex if level_ref.get_medal_type() == "BALANCE" else "white"), "current" : level_ref.get_total_fragments(), "status" : ("white" if level_ref.is_medal_possible() else red_hex), "min" : level_ref.min_fragment_req_for_medal, "mage" : level_ref.mage_fragments, "dragon" : level_ref.dragon_fragments, "deaths" : CheckpointHandler.death_counter})
+		var magical_scale_result : String = ("-" if level_ref.magical_scale == null else magical_scale_hud_collected if level_ref.magical_scale.is_collected else magical_scale_hud_blank)
+		var draconic_scale_result : String = ("-" if level_ref.draconic_scale == null else draconic_scale_hud_collected if level_ref.draconic_scale.is_collected else draconic_scale_hud_blank)
+		var balanced_scale_result : String = ("-" if level_ref.balanced_scale == null else balanced_scale_hud_collected if level_ref.balanced_scale.is_collected else balanced_scale_hud_blank)
+		rich_text_label.text = text_template.format({"mage" : level_ref.mage_fragments, "dragon" : level_ref.dragon_fragments, "magical_scale" : magical_scale_result, "draconic_scale" : draconic_scale_result, "balanced_scale" : balanced_scale_result})
 	check_alpha_fade(_delta)
 
 func check_alpha_fade(delta):
