@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://bexfy4ahg75dr"]
+[gd_scene load_steps=14 format=3 uid="uid://bexfy4ahg75dr"]
 
 [ext_resource type="Script" path="res://Scripts/Utility Scripts/Room.gd" id="1_6ndgb"]
 [ext_resource type="TileSet" uid="uid://dhwi7i1loa2pd" path="res://Sprites/Tiles/Test Tiles/TestTileSet.tres" id="2_p0qvm"]
@@ -11,6 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://cokv5pygwyda" path="res://Scene Objects/Objects/BreakableFireBlock.tscn" id="9_6k2me"]
 [ext_resource type="PackedScene" uid="uid://dcs7w117uukcd" path="res://Scene Objects/Objects/BreakableMagicBlock.tscn" id="10_4efol"]
 [ext_resource type="PackedScene" uid="uid://dfkmxoba64spw" path="res://Scene Objects/Objects/MedalFragment.tscn" id="10_hgmpw"]
+[ext_resource type="PackedScene" uid="uid://db6i3rmu8i44r" path="res://Scene Objects/Objects/CollectableScale.tscn" id="12_4687m"]
 [ext_resource type="Texture2D" uid="uid://duppq0y5cogsf" path="res://Sprites/Backgrounds/1_4_BG/DNEGraffiti.png" id="12_jnb7n"]
 
 [node name="CH1_LV4_R11" type="Node2D" node_paths=PackedStringArray("tilemap_list", "room_entrances", "enemy_nodes", "medal_fragments")]
@@ -190,22 +191,22 @@ position = Vector2(624, 48)
 position = Vector2(656, 80)
 
 [node name="MedalFragment6" parent="Fragments" instance=ExtResource("10_hgmpw")]
-position = Vector2(1712, 80)
+position = Vector2(1712, 112)
 
 [node name="MedalFragment7" parent="Fragments" instance=ExtResource("10_hgmpw")]
-position = Vector2(1744, 48)
+position = Vector2(1712, 80)
 
 [node name="MedalFragment8" parent="Fragments" instance=ExtResource("10_hgmpw")]
-position = Vector2(1776, 48)
+position = Vector2(1744, 48)
 
 [node name="MedalFragment9" parent="Fragments" instance=ExtResource("10_hgmpw")]
-position = Vector2(1808, 48)
-
-[node name="MedalFragment10" parent="Fragments" instance=ExtResource("10_hgmpw")]
 position = Vector2(1840, 48)
 
-[node name="MedalFragment11" parent="Fragments" instance=ExtResource("10_hgmpw")]
+[node name="MedalFragment10" parent="Fragments" instance=ExtResource("10_hgmpw")]
 position = Vector2(1872, 80)
+
+[node name="MedalFragment11" parent="Fragments" instance=ExtResource("10_hgmpw")]
+position = Vector2(1872, 112)
 
 [node name="MedalFragment12" parent="Fragments" instance=ExtResource("10_hgmpw")]
 position = Vector2(2928, 80)
@@ -233,6 +234,11 @@ position = Vector2(2544, 80)
 
 [node name="MedalFragment20" parent="Fragments" instance=ExtResource("10_hgmpw")]
 position = Vector2(2576, 80)
+
+[node name="CollectableScale" parent="." instance=ExtResource("12_4687m")]
+position = Vector2(1792, 64)
+mage_fragments_needed = 60
+dragon_fragments_needed = 60
 
 [node name="DneGraffiti" type="Sprite2D" parent="."]
 z_index = 2

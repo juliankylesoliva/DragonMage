@@ -26,5 +26,5 @@ func _on_body_entered(body):
 			is_activated = true
 			sprite.play("Activation")
 			audio.play()
-			CheckpointHandler.save_checkpoint(level_origin.get_current_room_index(), self.global_position, level_origin.mage_fragments, level_origin.dragon_fragments, level_origin.fragment_array)
+			CheckpointHandler.save_checkpoint(level_origin.get_current_room_index(), self.global_position, level_origin.mage_fragments, level_origin.dragon_fragments, level_origin.fragment_array, level_origin.get_magical_scale_status(), level_origin.get_draconic_scale_status(), level_origin.get_balanced_scale_status())
 			activate_subsequent_checkpoints()

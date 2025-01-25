@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://blkavapp0nigt"]
+[gd_scene load_steps=20 format=3 uid="uid://blkavapp0nigt"]
 
 [ext_resource type="Script" path="res://Scripts/Utility Scripts/Room.gd" id="1_xbwwl"]
 [ext_resource type="TileSet" uid="uid://dhwi7i1loa2pd" path="res://Sprites/Tiles/Test Tiles/TestTileSet.tres" id="2_isxfa"]
@@ -15,6 +15,7 @@
 [ext_resource type="PackedScene" uid="uid://b2a0ttqvejk51" path="res://Scene Objects/Objects/TemperDragonFruit.tscn" id="11_ccjr8"]
 [ext_resource type="Texture2D" uid="uid://cmwo06a8mrx4e" path="res://Sprites/Backgrounds/1_2_BG/BackWall.png" id="12_j02r4"]
 [ext_resource type="Texture2D" uid="uid://bbfefk0q56hbb" path="res://Sprites/Backgrounds/1_2_BG/Concrete&Pillars.png" id="13_c1uqc"]
+[ext_resource type="PackedScene" uid="uid://db6i3rmu8i44r" path="res://Scene Objects/Objects/CollectableScale.tscn" id="13_e6dfl"]
 [ext_resource type="Texture2D" uid="uid://cs50p7p6svbcj" path="res://Sprites/Backgrounds/1_2_BG/Pipes.png" id="14_ed301"]
 [ext_resource type="Script" path="res://Scripts/Object Scripts/HiddenPassage.gd" id="16_qhbyg"]
 
@@ -231,6 +232,11 @@ position = Vector2(-1456, 112)
 
 [node name="MedalFragment23" parent="Fragments" instance=ExtResource("10_chcob")]
 position = Vector2(-1456, 48)
+
+[node name="CollectableScale" parent="." instance=ExtResource("13_e6dfl")]
+position = Vector2(288, 64)
+collectable_type = "DRACONIC"
+dragon_fragments_needed = 50
 
 [node name="HiddenTilemap" type="TileMap" parent="."]
 z_index = 3

@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://beihnh55j4qsk"]
+[gd_scene load_steps=27 format=3 uid="uid://beihnh55j4qsk"]
 
 [ext_resource type="Script" path="res://Scripts/Utility Scripts/Level.gd" id="1_lbrws"]
 [ext_resource type="PackedScene" uid="uid://d0ff35cm57xb7" path="res://Scene Objects/Effects/DroppedFragment.tscn" id="2_dc11k"]
@@ -26,12 +26,20 @@
 [ext_resource type="PackedScene" uid="uid://c6k6v7fefypvo" path="res://Level Scenes/CH1_LV2/Rooms/CH1_LV2_R11.tscn" id="24_0f8bc"]
 [ext_resource type="AudioStream" uid="uid://dlkxc1pklejn3" path="res://Music/CH1/Chiptune_Downtempo_Funk_Party.wav" id="24_clkf0"]
 
-[node name="CH1_LV2" type="Node2D" node_paths=PackedStringArray("player_reference", "starting_room", "room_list", "clear_timer")]
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_40xn5"]
+resource_local_to_scene = true
+radius = 8.0
+height = 48.0
+
+[node name="CH1_LV2" type="Node2D" node_paths=PackedStringArray("player_reference", "starting_room", "room_list", "magical_scale", "draconic_scale", "balanced_scale", "clear_timer")]
 script = ExtResource("1_lbrws")
 level_index = 5
 player_reference = NodePath("Player")
 starting_room = NodePath("CH1_LV2_R1")
 room_list = [NodePath("CH1_LV2_R1"), NodePath("CH1_LV2_R2"), NodePath("CH1_LV2_R3"), NodePath("CH1_LV2_R4"), NodePath("CH1_LV2_R5"), NodePath("CH1_LV2_R6"), NodePath("CH1_LV2_R7"), NodePath("CH1_LV2_R8"), NodePath("CH1_LV2_R9"), NodePath("CH1_LV2_R10"), NodePath("CH1_LV2_R11")]
+magical_scale = NodePath("CH1_LV2_R5/CollectableScale")
+draconic_scale = NodePath("CH1_LV2_R8/CollectableScale")
+balanced_scale = NodePath("CH1_LV2_R10/CollectableScale")
 min_fragment_collection_rate = 0.61
 dropped_fragment_scene = ExtResource("2_dc11k")
 clear_timer = NodePath("UI_Canvas/ClearTimer")
@@ -46,6 +54,9 @@ is_using_fairy = true
 
 [node name="Camera" parent="Player/Hub" index="11" node_paths=PackedStringArray("player_cam")]
 player_cam = NodePath("../../../Camera2D")
+
+[node name="CollisionShape2D" parent="Player" index="4"]
+shape = SubResource("CapsuleShape2D_40xn5")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 process_callback = 0
@@ -157,7 +168,7 @@ room_destination = NodePath("../../CH1_LV2_R11")
 [node name="FallWarp" parent="CH1_LV2_R10" index="7" node_paths=PackedStringArray("room_destination")]
 room_destination = NodePath("../../CH1_LV2_R8")
 
-[node name="Checkpoint" parent="CH1_LV2_R10" index="11" node_paths=PackedStringArray("level_origin", "subsequent_checkpoints")]
+[node name="Checkpoint" parent="CH1_LV2_R10" index="12" node_paths=PackedStringArray("level_origin", "subsequent_checkpoints")]
 level_origin = NodePath("../..")
 subsequent_checkpoints = [NodePath("../../CH1_LV2_R6/Checkpoint"), NodePath("../../CH1_LV2_R2/Checkpoint")]
 

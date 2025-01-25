@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://dl6t4p11210bn"]
+[gd_scene load_steps=20 format=3 uid="uid://dl6t4p11210bn"]
 
 [ext_resource type="Script" path="res://Scripts/Utility Scripts/Room.gd" id="1_s1bxk"]
 [ext_resource type="TileSet" uid="uid://dhwi7i1loa2pd" path="res://Sprites/Tiles/Test Tiles/TestTileSet.tres" id="2_mck2b"]
@@ -12,6 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://b2a0ttqvejk51" path="res://Scene Objects/Objects/TemperDragonFruit.tscn" id="8_byir1"]
 [ext_resource type="Texture2D" uid="uid://bkhjt30ligib0" path="res://Sprites/Backgrounds/1_3_BG/CitySkylineSky.png" id="9_uilyp"]
 [ext_resource type="Texture2D" uid="uid://dojb67qrn7oft" path="res://Sprites/Backgrounds/1_3_BG/CitySkylineBuildingsBack.png" id="10_3st4d"]
+[ext_resource type="PackedScene" uid="uid://db6i3rmu8i44r" path="res://Scene Objects/Objects/CollectableScale.tscn" id="10_8qr5v"]
 [ext_resource type="Script" path="res://Scripts/Object Scripts/HiddenPassage.gd" id="11_3gkgb"]
 [ext_resource type="Texture2D" uid="uid://wfg8o4nr2pm5" path="res://Sprites/Backgrounds/1_3_BG/CitySkylineBuildingsMiddle.png" id="11_bhnuh"]
 [ext_resource type="Texture2D" uid="uid://dt1igvnvn7viy" path="res://Sprites/Backgrounds/1_3_BG/CitySkylineBuildingsFront.png" id="12_3277a"]
@@ -371,6 +372,11 @@ position = Vector2(816, 2320)
 
 [node name="MedalFragment38" parent="Fragments" instance=ExtResource("7_7k1qj")]
 position = Vector2(848, 2288)
+
+[node name="CollectableScale" parent="." instance=ExtResource("10_8qr5v")]
+position = Vector2(768, 2272)
+mage_fragments_needed = 90
+dragon_fragments_needed = 90
 
 [node name="TemperDragonFruit" parent="." instance=ExtResource("8_byir1")]
 position = Vector2(1088, 224)

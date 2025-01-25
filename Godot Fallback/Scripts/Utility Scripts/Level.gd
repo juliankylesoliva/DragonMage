@@ -111,18 +111,25 @@ func level_startup():
 	if (num_fragments_in_level == CheckpointHandler.saved_fragment_status_array.size()):
 		mage_fragments = CheckpointHandler.saved_mage_fragments
 		dragon_fragments = CheckpointHandler.saved_dragon_fragments
+		drop_fragments()
 		for i in CheckpointHandler.saved_fragment_status_array.size():
 			if (CheckpointHandler.saved_fragment_status_array[i]):
 				fragment_array[i].mark_as_collected()
 	
 	if (magical_scale != null):
 		magical_scale.set_level_ref(self)
+		if (CheckpointHandler.saved_magical_scale):
+			magical_scale.mark_as_collected()
 	
 	if (draconic_scale != null):
 		draconic_scale.set_level_ref(self)
+		if (CheckpointHandler.saved_draconic_scale):
+			draconic_scale.mark_as_collected()
 	
 	if (balanced_scale != null):
 		balanced_scale.set_level_ref(self)
+		if (CheckpointHandler.saved_balanced_scale):
+			balanced_scale.mark_as_collected()
 	
 	room_to_use.activate_room()
 	
@@ -163,6 +170,15 @@ func get_total_uncollected_fragments():
 		if (!fragment.is_collected):
 			sum += 1
 	return sum
+
+func get_magical_scale_status():
+	return (magical_scale != null and magical_scale.is_collected)
+
+func get_draconic_scale_status():
+	return (draconic_scale != null and draconic_scale.is_collected)
+
+func get_balanced_scale_status():
+	return (balanced_scale != null and balanced_scale.is_collected)
 
 func can_get_medal():
 	return (get_total_fragments() >= min_fragment_req_for_medal or clear_timer.get_current_time() < time_to_beat)

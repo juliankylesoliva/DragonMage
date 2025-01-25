@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://dqon5y7w7ay46"]
+[gd_scene load_steps=22 format=3 uid="uid://dqon5y7w7ay46"]
 
 [ext_resource type="Script" path="res://Scripts/Utility Scripts/Room.gd" id="1_hxy3m"]
 [ext_resource type="TileSet" uid="uid://dhwi7i1loa2pd" path="res://Sprites/Tiles/Test Tiles/TestTileSet.tres" id="2_stivo"]
@@ -13,6 +13,7 @@
 [ext_resource type="PackedScene" uid="uid://bajk0w7eoh6o8" path="res://Scene Objects/Objects/ReinforcedBlock.tscn" id="9_qr2n4"]
 [ext_resource type="PackedScene" uid="uid://cs4s34scsvcfr" path="res://Scene Objects/Objects/BreakableBlock.tscn" id="10_3jf5j"]
 [ext_resource type="Texture2D" uid="uid://bkhjt30ligib0" path="res://Sprites/Backgrounds/1_3_BG/CitySkylineSky.png" id="11_16fda"]
+[ext_resource type="PackedScene" uid="uid://db6i3rmu8i44r" path="res://Scene Objects/Objects/CollectableScale.tscn" id="11_c0qe6"]
 [ext_resource type="Texture2D" uid="uid://dojb67qrn7oft" path="res://Sprites/Backgrounds/1_3_BG/CitySkylineBuildingsBack.png" id="12_caipe"]
 [ext_resource type="Texture2D" uid="uid://wfg8o4nr2pm5" path="res://Sprites/Backgrounds/1_3_BG/CitySkylineBuildingsMiddle.png" id="13_p4s01"]
 [ext_resource type="Script" path="res://Scripts/Object Scripts/HiddenPassage.gd" id="13_wxkng"]
@@ -360,6 +361,11 @@ position = Vector2(2704, 48)
 
 [node name="MedalFragment44" parent="Fragments" instance=ExtResource("8_n0jkj")]
 position = Vector2(2736, 48)
+
+[node name="CollectableScale" parent="." instance=ExtResource("11_c0qe6")]
+position = Vector2(2592, 128)
+collectable_type = "MAGICAL"
+mage_fragments_needed = 60
 
 [node name="ReinforcedBlock" parent="." instance=ExtResource("9_qr2n4")]
 position = Vector2(2368, 96)

@@ -21,7 +21,7 @@ func _physics_process(delta):
 	if (!is_timer_stopped):
 		self.visible = OptionsHelper.enable_clear_timer_toggle
 		current_time = move_toward(current_time, MAX_TIME, delta)
-		timer_label.text = time_format.format({"minutes" : "%02d" % (floor(current_time / 60) as int), "seconds" : "%05.2f" % fmod(current_time, 60.0)})
+		timer_label.text = time_format.format({"minutes" : "%02d" % (floor(current_time / 60) as int), "seconds" : "%04.1f" % fmod(current_time, 60.0)})
 
 func start_timer():
 	is_timer_stopped = false

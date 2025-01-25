@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://f744pfiogil1"]
+[gd_scene load_steps=24 format=3 uid="uid://f744pfiogil1"]
 
 [ext_resource type="Script" path="res://Scripts/Utility Scripts/Level.gd" id="1_c2c1a"]
 [ext_resource type="PackedScene" uid="uid://d0ff35cm57xb7" path="res://Scene Objects/Effects/DroppedFragment.tscn" id="2_gaufr"]
@@ -23,12 +23,20 @@
 [ext_resource type="PackedScene" uid="uid://8b3e6doobrd" path="res://Level Scenes/CH1_LV3/Rooms/CH1_LV3_R8.tscn" id="21_jpnph"]
 [ext_resource type="AudioStream" uid="uid://c3wkpsq8ppcgv" path="res://Music/CH1/Qumu - Electro Swank.wav" id="21_wxj2g"]
 
-[node name="CH1_LV3" type="Node2D" node_paths=PackedStringArray("player_reference", "starting_room", "room_list", "clear_timer")]
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_54fwl"]
+resource_local_to_scene = true
+radius = 8.0
+height = 48.0
+
+[node name="CH1_LV3" type="Node2D" node_paths=PackedStringArray("player_reference", "starting_room", "room_list", "magical_scale", "draconic_scale", "balanced_scale", "clear_timer")]
 script = ExtResource("1_c2c1a")
 level_index = 6
 player_reference = NodePath("Player")
 starting_room = NodePath("CH1_LV3_R1")
 room_list = [NodePath("CH1_LV3_R1"), NodePath("CH1_LV3_R2"), NodePath("CH1_LV3_R3"), NodePath("CH1_LV3_R4"), NodePath("CH1_LV3_R5"), NodePath("CH1_LV3_R6"), NodePath("CH1_LV3_R7")]
+magical_scale = NodePath("CH1_LV3_R3/CollectableScale")
+draconic_scale = NodePath("CH1_LV3_R4/CollectableScale")
+balanced_scale = NodePath("CH1_LV3_R7/CollectableScale")
 min_fragment_collection_rate = 0.543
 dropped_fragment_scene = ExtResource("2_gaufr")
 clear_timer = NodePath("UI_Canvas/ClearTimer")
@@ -42,6 +50,9 @@ is_using_fairy = true
 
 [node name="Camera" parent="Player/Hub" index="11" node_paths=PackedStringArray("player_cam")]
 player_cam = NodePath("../../../Camera2D")
+
+[node name="CollisionShape2D" parent="Player" index="4"]
+shape = SubResource("CapsuleShape2D_54fwl")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 process_callback = 0

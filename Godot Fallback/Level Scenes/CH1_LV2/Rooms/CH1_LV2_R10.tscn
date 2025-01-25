@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://cjmi2md4tdxux"]
+[gd_scene load_steps=18 format=3 uid="uid://cjmi2md4tdxux"]
 
 [ext_resource type="Script" path="res://Scripts/Utility Scripts/Room.gd" id="1_pfhji"]
 [ext_resource type="TileSet" uid="uid://dhwi7i1loa2pd" path="res://Sprites/Tiles/Test Tiles/TestTileSet.tres" id="2_urt3r"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://cs4s34scsvcfr" path="res://Scene Objects/Objects/BreakableBlock.tscn" id="4_slo3o"]
 [ext_resource type="PackedScene" uid="uid://dfkmxoba64spw" path="res://Scene Objects/Objects/MedalFragment.tscn" id="4_vf00l"]
 [ext_resource type="PackedScene" uid="uid://dwnpgujive352" path="res://Scene Objects/Enemies/RedDragoon.tscn" id="5_602rw"]
+[ext_resource type="PackedScene" uid="uid://db6i3rmu8i44r" path="res://Scene Objects/Objects/CollectableScale.tscn" id="6_3nxfe"]
 [ext_resource type="PackedScene" uid="uid://clfqwsy4byrkf" path="res://Scene Objects/Enemies/GreenDragoon.tscn" id="6_yoe8g"]
 [ext_resource type="PackedScene" uid="uid://bgww8jir45ktf" path="res://Scene Objects/Enemies/BlueDragoon.tscn" id="7_w63ek"]
 [ext_resource type="PackedScene" uid="uid://curi6w4ex7jou" path="res://Scene Objects/Enemies/YellowDragoon.tscn" id="8_0lpuk"]
@@ -150,6 +151,11 @@ position = Vector2(1232, 272)
 
 [node name="MedalFragment14" parent="Fragments" instance=ExtResource("4_vf00l")]
 position = Vector2(1264, 240)
+
+[node name="CollectableScale" parent="." instance=ExtResource("6_3nxfe")]
+position = Vector2(1952, 256)
+mage_fragments_needed = 60
+dragon_fragments_needed = 60
 
 [node name="BreakableBlock" parent="." instance=ExtResource("4_slo3o")]
 position = Vector2(1952, 96)

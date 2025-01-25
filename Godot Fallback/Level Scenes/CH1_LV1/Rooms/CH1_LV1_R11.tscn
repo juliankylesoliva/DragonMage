@@ -1,8 +1,9 @@
-[gd_scene load_steps=11 format=3 uid="uid://ctjuhf6dkkqy8"]
+[gd_scene load_steps=12 format=3 uid="uid://ctjuhf6dkkqy8"]
 
 [ext_resource type="Script" path="res://Scripts/Utility Scripts/Room.gd" id="1_cvffg"]
 [ext_resource type="TileSet" uid="uid://dhwi7i1loa2pd" path="res://Sprites/Tiles/Test Tiles/TestTileSet.tres" id="2_3gy77"]
 [ext_resource type="PackedScene" uid="uid://durwtm4ocfbmv" path="res://Scene Objects/Objects/FinishLine.tscn" id="3_edfcm"]
+[ext_resource type="PackedScene" uid="uid://db6i3rmu8i44r" path="res://Scene Objects/Objects/CollectableScale.tscn" id="4_b5v3b"]
 [ext_resource type="Texture2D" uid="uid://3q4m4jsumo45" path="res://Sprites/Backgrounds/1_1_BG/Sky.png" id="4_l0fs1"]
 [ext_resource type="Texture2D" uid="uid://b01co44l5evir" path="res://Sprites/Backgrounds/1_1_BG/CityBack.png" id="5_0l4x5"]
 [ext_resource type="Texture2D" uid="uid://b58coqp1miryx" path="res://Sprites/Backgrounds/1_1_BG/CityFront.png" id="6_20rw2"]
@@ -63,6 +64,11 @@ position = Vector2(256, -224)
 
 [node name="FinishLine" parent="." instance=ExtResource("3_edfcm")]
 position = Vector2(704, 224)
+
+[node name="CollectableScale" parent="." instance=ExtResource("4_b5v3b")]
+position = Vector2(256, 128)
+mage_fragments_needed = 40
+dragon_fragments_needed = 40
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 visible = false

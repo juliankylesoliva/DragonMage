@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://b6ourfnqhy0wk"]
+[gd_scene load_steps=27 format=3 uid="uid://b6ourfnqhy0wk"]
 
 [ext_resource type="Script" path="res://Scripts/Utility Scripts/Level.gd" id="1_3mmw4"]
 [ext_resource type="PackedScene" uid="uid://d0ff35cm57xb7" path="res://Scene Objects/Effects/DroppedFragment.tscn" id="2_gdxu6"]
@@ -21,17 +21,25 @@
 [ext_resource type="PackedScene" uid="uid://d1eef1xjuwf3b" path="res://Menu Scenes/PauseMenu.tscn" id="17_5ns53"]
 [ext_resource type="PackedScene" uid="uid://b5wwivjk8sl7b" path="res://Scene Objects/Misc/ClearTimer.tscn" id="17_21jxy"]
 [ext_resource type="PackedScene" uid="uid://buykytsdrlnsg" path="res://Scene Objects/Misc/ResultsScreen.tscn" id="18_wudxn"]
-[ext_resource type="AudioStream" uid="uid://u3a1srjlcm6f" path="res://Music/Kubbi - Up In My Jam (All Of A Sudden).wav" id="21_4frsm"]
+[ext_resource type="AudioStream" uid="uid://u3a1srjlcm6f" path="res://Music/CH1/Kubbi - Up In My Jam (All Of A Sudden).wav" id="21_4frsm"]
 [ext_resource type="PackedScene" uid="uid://btq4qla5fyq0n" path="res://Scene Objects/Misc/LevelMusicPlayer.tscn" id="21_sl55a"]
 [ext_resource type="PackedScene" uid="uid://brhoroc2w6jwi" path="res://Scene Objects/UI/Textbox.tscn" id="24_6d5rm"]
 [ext_resource type="PackedScene" uid="uid://bjeiexqfc7oht" path="res://Scene Objects/Misc/DefeatScreen.tscn" id="25_ho2ji"]
 
-[node name="CH1_LV1" type="Node2D" node_paths=PackedStringArray("player_reference", "starting_room", "room_list", "clear_timer")]
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_68gy7"]
+resource_local_to_scene = true
+radius = 8.0
+height = 48.0
+
+[node name="CH1_LV1" type="Node2D" node_paths=PackedStringArray("player_reference", "starting_room", "room_list", "magical_scale", "draconic_scale", "balanced_scale", "clear_timer")]
 script = ExtResource("1_3mmw4")
 level_index = 4
 player_reference = NodePath("Player")
 starting_room = NodePath("CH1_LV1_R1")
 room_list = [NodePath("CH1_LV1_R1"), NodePath("CH1_LV1_R2"), NodePath("CH1_LV1_R3"), NodePath("CH1_LV1_R4"), NodePath("CH1_LV1_R5"), NodePath("CH1_LV1_R6"), NodePath("CH1_LV1_R7"), NodePath("CH1_LV1_R8"), NodePath("CH1_LV1_R9"), NodePath("CH1_LV1_R10"), NodePath("CH1_LV1_R11")]
+magical_scale = NodePath("CH1_LV1_R5/CollectableScale")
+draconic_scale = NodePath("CH1_LV1_R9/CollectableScale")
+balanced_scale = NodePath("CH1_LV1_R11/CollectableScale")
 min_fragment_collection_rate = 0.64
 dropped_fragment_scene = ExtResource("2_gdxu6")
 clear_timer = NodePath("UI_Canvas/ClearTimer")
@@ -45,6 +53,9 @@ is_using_fairy = true
 
 [node name="Camera" parent="Player/Hub" index="11" node_paths=PackedStringArray("player_cam")]
 player_cam = NodePath("../../../Camera2D")
+
+[node name="CollisionShape2D" parent="Player" index="4"]
+shape = SubResource("CapsuleShape2D_68gy7")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 process_callback = 0
