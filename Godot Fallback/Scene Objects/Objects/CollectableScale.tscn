@@ -550,6 +550,8 @@ script = ExtResource("1_hkc4j")
 sprite = NodePath("AnimatedSprite2D")
 text_label = NodePath("RichTextLabel")
 stream_player = NodePath("AudioStreamPlayer2D")
+blue_hex = "#5941a9"
+orange_hex = "#f09a59"
 collect_spin_rate = 5.0
 collect_jump_velocity = 320.0
 collect_gravity_scale = 4.0
@@ -562,6 +564,8 @@ collision_mask = 4
 shape = SubResource("CircleShape2D_0ianc")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+light_mask = 2
+visibility_layer = 2
 z_index = 2
 sprite_frames = SubResource("SpriteFrames_ei42h")
 animation = &"BalanceScale"

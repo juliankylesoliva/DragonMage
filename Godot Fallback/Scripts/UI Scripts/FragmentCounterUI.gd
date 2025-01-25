@@ -8,7 +8,7 @@ class_name FragmentCounterUI
 
 @export var rich_text_label : RichTextLabel
 
-@export var text_template : String = "[right][font_size=24]~[color=#443482]{mage}[color=white]:[color=#cf7a30]{dragon}[color=white]-\n[font_size=16][{magical_scale}{draconic_scale}{balanced_scale}]"
+@export var text_template : String = "[right][font_size=24]~[color=#5941a9]{mage}[color=white]:[color=#f09a59]{dragon}[color=white]-\n[font_size=16][{magical_scale}{draconic_scale}{balanced_scale}]"
 
 @export var magical_scale_hud_blank : String
 
@@ -44,7 +44,7 @@ func _process(_delta):
 		var magical_scale_result : String = ("-" if level_ref.magical_scale == null else magical_scale_hud_collected if level_ref.magical_scale.is_collected else magical_scale_hud_blank)
 		var draconic_scale_result : String = ("-" if level_ref.draconic_scale == null else draconic_scale_hud_collected if level_ref.draconic_scale.is_collected else draconic_scale_hud_blank)
 		var balanced_scale_result : String = ("-" if level_ref.balanced_scale == null else balanced_scale_hud_collected if level_ref.balanced_scale.is_collected else balanced_scale_hud_blank)
-		rich_text_label.text = text_template.format({"mage" : level_ref.mage_fragments, "dragon" : level_ref.dragon_fragments, "magical_scale" : magical_scale_result, "draconic_scale" : draconic_scale_result, "balanced_scale" : balanced_scale_result})
+		rich_text_label.text = text_template.format({"mage" : level_ref.mage_fragments, "dragon" : level_ref.dragon_fragments, "current" : level_ref.get_total_fragments(), "required" : level_ref.min_fragment_req_for_medal, "magical_scale" : magical_scale_result, "draconic_scale" : draconic_scale_result, "balanced_scale" : balanced_scale_result})
 	check_alpha_fade(_delta)
 
 func check_alpha_fade(delta):

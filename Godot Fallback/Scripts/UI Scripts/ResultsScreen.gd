@@ -2,6 +2,8 @@ extends Node2D
 
 class_name ResultsScreen
 
+@export_group("Sounds")
+
 @export var results_sfx : AudioStreamPlayer
 
 @export var time_tick_sfx_stream : AudioStream
@@ -20,6 +22,8 @@ class_name ResultsScreen
 
 @export var no_medal_get_sfx_stream : AudioStream
 
+@export_group("Effects")
+
 @export var screen_fade : ScreenFade
 
 @export var blue_bg : Sprite2D
@@ -34,13 +38,21 @@ class_name ResultsScreen
 
 @export var bg_combine_duration : float = 1
 
+@export_group("Header")
+
 @export var text_header_label : RichTextLabel
+
+@export_group("Clear Time")
 
 @export var clear_time_label : RichTextLabel
 
 @export var clear_time_format : String = "CLEAR TIME\n{minutes}:{seconds}"
 
 @export var time_count_duration : float = 1
+
+@export var time_medal_sprite : AnimatedSprite2D
+
+@export_group("Damage Taken")
 
 @export var show_damage_result : bool = true
 
@@ -49,6 +61,8 @@ class_name ResultsScreen
 @export var damage_text_format : String = "DAMAGE TAKEN\n{damage}"
 
 @export var damage_count_duration : float = 1
+
+@export_group("Fragments")
 
 @export var show_fragment_result : bool = true
 
@@ -66,7 +80,7 @@ class_name ResultsScreen
 
 @export var fragment_slider_front : Sprite2D
 
-@export var min_fragments_label : RichTextLabel
+@export var total_fragments_label : RichTextLabel
 
 @export var fragment_format : String = "[center]{number}"
 
@@ -74,21 +88,27 @@ class_name ResultsScreen
 
 @export var fragment_count_duration : float = 2
 
-@export var medal_message_label : RichTextLabel
+@export var fragment_rating_label : RichTextLabel
 
-@export var medal_sprite : AnimatedSprite2D
+@export var rating_format : String = "[center]RATING: {rating}"
 
-@export var medal_format : String = "GOT A {medal} MEDALLION!"
+@export var rating_chars: int = 7
 
-@export var no_medal_message : String = "NO MEDAL EARNED..."
+@export var rating_list : Array[String]
 
-@export_color_no_alpha var mage_message_color : Color
+@export_group("Scales")
 
-@export_color_no_alpha var dragon_message_color : Color
+@export var show_scales_result : bool = true
 
-@export_color_no_alpha var balance_message_color : Color
+@export var scales_found_label : RichTextLabel
 
-@export_color_no_alpha var time_message_color : Color
+@export var magical_scale_sprite : AnimatedSprite2D
+
+@export var draconic_scale_sprite : AnimatedSprite2D
+
+@export var balanced_scale_sprite : AnimatedSprite2D
+
+@export_group("Menu")
 
 @export var retry_button_label : RichTextLabel
 
@@ -97,6 +117,8 @@ class_name ResultsScreen
 @export var menu_cursor : MenuCursor
 
 @export var title_scene_path : String
+
+@export_group("Post Level Text")
 
 @export var textbox : Textbox
 
@@ -171,6 +193,8 @@ func do_retry_level():
 	get_tree().reload_current_scene()
 
 func do_results_screen():
+	# BACKGROUND TRANSITION
+	
 	await get_tree().create_timer(1.0).timeout
 	
 	blue_bg.set_visible(true)
@@ -183,8 +207,12 @@ func do_results_screen():
 		await get_tree().process_frame
 	await get_tree().create_timer(0.5).timeout
 	
+	# LEVEL COMPLETE HEADER APPEARS
+	
 	text_header_label.set_visible(true)
 	await get_tree().create_timer(1.0).timeout
+	
+	# CLEAR TIMER
 	
 	var previous_whole_value : int = 0
 	var current_whole_value : int = 0
@@ -203,7 +231,14 @@ func do_results_screen():
 		previous_whole_value = current_whole_value
 		
 		await get_tree().process_frame
+	
+	time_medal_sprite.play("TIME" if level.is_target_time_beaten() else "NOTHING")
+	results_sfx.stream = (time_medal_get_sfx_stream if level.is_target_time_beaten() else no_medal_get_sfx_stream)
+	time_medal_sprite.set_visible(true)
+	results_sfx.play()
 	await get_tree().create_timer(0.5).timeout
+	
+	# DAMAGE TAKEN
 	
 	if (show_damage_result):
 		damage_taken_label.set_visible(true)
@@ -223,13 +258,15 @@ func do_results_screen():
 			await get_tree().process_frame
 		await get_tree().create_timer(0.5).timeout
 	
+	# FRAGMENT TOTALS
+	
 	if (show_fragment_result):
 		fragment_ratio_label.set_visible(true)
 		await get_tree().create_timer(0.5).timeout
 		
 		mage_fragments_label.set_visible(true)
 		dragon_fragments_label.set_visible(true)
-		min_fragments_label.set_visible(true)
+		total_fragments_label.set_visible(true)
 		fragment_slider_back.set_visible(true)
 		mage_fragments_slider.set_visible(true)
 		dragon_fragments_slider.set_visible(true)
@@ -262,7 +299,7 @@ func do_results_screen():
 			dragon_fragments_label.text = fragment_format.format({"number" : (current_dragon_value as int)})
 			
 			current_total_value = move_toward(current_total_value, target_total_value, (target_total_value * delta) / fragment_count_duration)
-			min_fragments_label.text = fragment_total_format.format({"total" : (current_total_value as int), "minimum" : level.min_fragment_req_for_medal})
+			total_fragments_label.text = fragment_total_format.format({"total" : (current_total_value as int), "minimum" : level.min_fragment_req_for_medal})
 			
 			current_mage_slider_value = move_toward(current_mage_slider_value, target_mage_slider_value, (target_mage_slider_value * delta) / fragment_count_duration)
 			mage_fragments_slider.value = current_mage_slider_value
@@ -276,30 +313,59 @@ func do_results_screen():
 			previous_whole_value = current_whole_value
 			
 			await get_tree().process_frame
-		await get_tree().create_timer(1.0).timeout
+		await get_tree().create_timer(0.5).timeout
 		
-		medal_message_label.set_visible(true)
-		medal_sprite.set_visible(true)
 		var medal_type : String = level.get_medal_type()
-		medal_message_label.text = (medal_format.format({"medal" : medal_type}) if level.can_get_medal() else no_medal_message)
+		var rating_index : int = -1
 		match medal_type:
 			"MAGIC":
+				rating_index = 1
 				results_sfx.stream = magic_medal_get_sfx_stream
-				medal_message_label.modulate = mage_message_color
 			"DRAGON":
+				rating_index = 2
 				results_sfx.stream = dragon_medal_get_sfx_stream
-				medal_message_label.modulate = dragon_message_color
 			"BALANCE":
+				rating_index = (4 if level.mage_fragments == level.dragon_fragments else 3)
 				results_sfx.stream = balance_medal_get_sfx_stream
-				medal_message_label.modulate = balance_message_color
-			"TIME":
-				results_sfx.stream = balance_medal_get_sfx_stream
-				medal_message_label.modulate = time_message_color
 			_:
+				rating_index = 0
 				results_sfx.stream = no_medal_get_sfx_stream
-				medal_message_label.modulate = Color.WHITE
+		
+		fragment_rating_label.text = rating_format.format({"rating" : rating_list[rating_index]})
+		fragment_rating_label.visible_characters = rating_chars
+		fragment_rating_label.set_visible(true)
+		await get_tree().create_timer(1.0).timeout
+		
+		fragment_rating_label.visible_characters = -1
 		results_sfx.play()
-		medal_sprite.animation = medal_type
+		await get_tree().create_timer(1.0).timeout
+	
+	# SCALES
+	
+	if (show_scales_result):
+		scales_found_label.set_visible(true)
+		await get_tree().create_timer(0.5).timeout
+		
+		if (level.magical_scale != null):
+			magical_scale_sprite.play("MagicScale" if level.magical_scale.is_collected else "MagicScaleBlank")
+			results_sfx.stream = (magic_medal_get_sfx_stream if level.magical_scale.is_collected else no_medal_get_sfx_stream)
+			magical_scale_sprite.set_visible(true)
+			results_sfx.play()
+			await get_tree().create_timer(0.5).timeout
+		
+		if (level.draconic_scale != null):
+			draconic_scale_sprite.play("DragonScale" if level.draconic_scale.is_collected else "DragonScaleBlank")
+			results_sfx.stream = (dragon_medal_get_sfx_stream if level.draconic_scale.is_collected else no_medal_get_sfx_stream)
+			draconic_scale_sprite.set_visible(true)
+			results_sfx.play()
+			await get_tree().create_timer(0.5).timeout
+		
+		if (level.balanced_scale != null):
+			balanced_scale_sprite.play("BalanceScale" if level.balanced_scale.is_collected else "BalanceScaleBlank")
+			results_sfx.stream = (balance_medal_get_sfx_stream if level.balanced_scale.is_collected else no_medal_get_sfx_stream)
+			balanced_scale_sprite.set_visible(true)
+			results_sfx.play()
+			await get_tree().create_timer(0.5).timeout
 		await get_tree().create_timer(1.0).timeout
 	
 	menu_button_label.set_visible(true)

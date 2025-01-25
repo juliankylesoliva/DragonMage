@@ -76,6 +76,7 @@ text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus eu te
 scroll_active = false
 shortcut_keys_enabled = false
 deselect_on_focus_loss_enabled = false
+visible_characters_behavior = 1
 
 [node name="EndSymbol" type="RichTextLabel" parent="TextboxContainer/TextboxBacking/MarginContainer/HBoxContainer"]
 custom_minimum_size = Vector2(16, 0)
