@@ -237,8 +237,8 @@ position = Vector2(2576, 80)
 
 [node name="CollectableScale" parent="." instance=ExtResource("12_4687m")]
 position = Vector2(1792, 64)
-mage_fragments_needed = 60
-dragon_fragments_needed = 60
+mage_fragments_needed = 40
+dragon_fragments_needed = 40
 
 [node name="DneGraffiti" type="Sprite2D" parent="."]
 z_index = 2

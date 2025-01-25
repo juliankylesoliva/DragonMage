@@ -236,7 +236,7 @@ position = Vector2(-1456, 48)
 [node name="CollectableScale" parent="." instance=ExtResource("13_e6dfl")]
 position = Vector2(288, 64)
 collectable_type = "DRACONIC"
-dragon_fragments_needed = 50
+dragon_fragments_needed = 25
 
 [node name="HiddenTilemap" type="TileMap" parent="."]
 z_index = 3

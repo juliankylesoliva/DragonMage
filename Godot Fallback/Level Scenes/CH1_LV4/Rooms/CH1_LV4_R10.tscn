@@ -240,7 +240,7 @@ position = Vector2(2704, 112)
 [node name="CollectableScale" parent="." instance=ExtResource("6_lara6")]
 position = Vector2(832, 64)
 collectable_type = "DRACONIC"
-dragon_fragments_needed = 40
+dragon_fragments_needed = 25
 
 [node name="Blocks" type="Node2D" parent="."]
 

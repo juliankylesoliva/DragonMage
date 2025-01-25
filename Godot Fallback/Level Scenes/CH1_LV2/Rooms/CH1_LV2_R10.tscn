@@ -154,8 +154,8 @@ position = Vector2(1264, 240)
 
 [node name="CollectableScale" parent="." instance=ExtResource("6_3nxfe")]
 position = Vector2(1952, 256)
-mage_fragments_needed = 60
-dragon_fragments_needed = 60
+mage_fragments_needed = 35
+dragon_fragments_needed = 35
 
 [node name="BreakableBlock" parent="." instance=ExtResource("4_slo3o")]
 position = Vector2(1952, 96)

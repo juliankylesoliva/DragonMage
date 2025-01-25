@@ -153,7 +153,7 @@ position = Vector2(912, 48)
 [node name="CollectableScale" parent="." instance=ExtResource("8_tvt2k")]
 position = Vector2(960, 64)
 collectable_type = "MAGICAL"
-mage_fragments_needed = 40
+mage_fragments_needed = 25
 
 [node name="TemperDragonFruit" parent="." instance=ExtResource("8_3g52a")]
 position = Vector2(704, 64)

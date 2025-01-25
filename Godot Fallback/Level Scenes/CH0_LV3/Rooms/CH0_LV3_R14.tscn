@@ -90,5 +90,5 @@ position = Vector2(1184, -320)
 
 [node name="CollectableScale" parent="." instance=ExtResource("9_y5m6a")]
 position = Vector2(880, -288)
-mage_fragments_needed = 25
-dragon_fragments_needed = 25
+mage_fragments_needed = 22
+dragon_fragments_needed = 22

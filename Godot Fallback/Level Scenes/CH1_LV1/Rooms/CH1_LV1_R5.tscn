@@ -121,7 +121,7 @@ position = Vector2(464, -16)
 [node name="CollectableScale" parent="." instance=ExtResource("5_6u1em")]
 position = Vector2(256, -64)
 collectable_type = "MAGICAL"
-mage_fragments_needed = 30
+mage_fragments_needed = 20
 
 [node name="ReinforcedFireBlock" parent="." instance=ExtResource("4_f0nli")]
 position = Vector2(64, 0)

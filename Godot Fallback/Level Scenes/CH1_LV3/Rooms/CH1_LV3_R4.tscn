@@ -382,7 +382,7 @@ position = Vector2(3152, -144)
 [node name="CollectableScale" parent="." instance=ExtResource("14_odlbm")]
 position = Vector2(3744, 0)
 collectable_type = "DRACONIC"
-dragon_fragments_needed = 60
+dragon_fragments_needed = 30
 
 [node name="TemperDragonFruit" parent="." instance=ExtResource("13_m8xtp")]
 position = Vector2(160, 224)
