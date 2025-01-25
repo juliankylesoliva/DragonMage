@@ -130,7 +130,7 @@ position = Vector2(160, 112)
 [node name="CollectableScale" parent="." instance=ExtResource("11_0ph4f")]
 position = Vector2(160, 64)
 collectable_type = "DRACONIC"
-dragon_fragments_needed = 15
+dragon_fragments_needed = 10
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 visible = false

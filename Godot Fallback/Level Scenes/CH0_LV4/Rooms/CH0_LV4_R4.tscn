@@ -216,7 +216,7 @@ enable_cycling = false
 [node name="CollectableScale" parent="." instance=ExtResource("10_lygq1")]
 position = Vector2(768, 256)
 collectable_type = "MAGICAL"
-mage_fragments_needed = 15
+mage_fragments_needed = 10
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 visible = false

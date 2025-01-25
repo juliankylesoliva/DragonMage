@@ -192,8 +192,8 @@ position = Vector2(352, 672)
 
 [node name="CollectableScale" parent="." instance=ExtResource("12_ixb0n")]
 position = Vector2(192, 608)
-mage_fragments_needed = 25
-dragon_fragments_needed = 25
+mage_fragments_needed = 20
+dragon_fragments_needed = 20
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 visible = false
