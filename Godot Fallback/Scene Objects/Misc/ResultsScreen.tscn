@@ -733,14 +733,15 @@ light_mask = 64
 visibility_layer = 64
 z_index = 7
 offset_left = -240.0
-offset_top = -96.0
-offset_right = -48.0
-offset_bottom = -65.0
+offset_top = -108.0
+offset_right = -64.0
+offset_bottom = -60.0
 theme_override_fonts/normal_font = ExtResource("4_2bog7")
 theme_override_font_sizes/normal_font_size = 16
 bbcode_enabled = true
 text = "[left]CLEAR TIME
-0:00.00"
+0:00.00
+BONUS -999%"
 scroll_active = false
 
 [node name="TimeMedalSprite" type="AnimatedSprite2D" parent="."]
@@ -748,7 +749,7 @@ visible = false
 light_mask = 64
 visibility_layer = 64
 z_index = 7
-position = Vector2(-40, -80)
+position = Vector2(-40, -92)
 sprite_frames = SubResource("SpriteFrames_akhko")
 animation = &"NOTHING"
 autoplay = "NOTHING"
@@ -759,9 +760,9 @@ light_mask = 64
 visibility_layer = 64
 z_index = 7
 offset_left = 48.0
-offset_top = -96.0
+offset_top = -108.0
 offset_right = 240.0
-offset_bottom = -65.0
+offset_bottom = -77.0
 theme_override_fonts/normal_font = ExtResource("4_2bog7")
 theme_override_font_sizes/normal_font_size = 16
 bbcode_enabled = true

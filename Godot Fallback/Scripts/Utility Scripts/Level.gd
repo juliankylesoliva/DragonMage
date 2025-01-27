@@ -182,8 +182,8 @@ func get_balanced_scale_status():
 func can_get_medal():
 	return (get_total_fragments() >= min_fragment_req_for_medal)
 
-func is_target_time_beaten():
-	return (clear_timer.get_current_time() < time_to_beat)
+func is_target_time_beaten(use_reduced_time : bool = false):
+	return ((clear_timer.get_current_time() if !use_reduced_time else clear_timer.get_reduced_time()) < time_to_beat)
 
 func is_medal_possible():
 	return ((get_total_fragments() + get_total_uncollected_fragments()) >= min_fragment_req_for_medal)

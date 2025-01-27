@@ -48,6 +48,8 @@ class_name ResultsScreen
 
 @export var clear_time_format : String = "CLEAR TIME\n{minutes}:{seconds}"
 
+@export var clear_time_format_alt : String = "CLEAR TIME\n{minutes}:{seconds}\n({bonus})"
+
 @export var time_count_duration : float = 1
 
 @export var time_medal_sprite : AnimatedSprite2D
@@ -260,6 +262,7 @@ func do_results_screen():
 	
 	# FRAGMENT TOTALS
 	
+	var saved_rating_index = 0
 	if (show_fragment_result):
 		fragment_ratio_label.set_visible(true)
 		await get_tree().create_timer(0.5).timeout
@@ -313,6 +316,8 @@ func do_results_screen():
 			previous_whole_value = current_whole_value
 			
 			await get_tree().process_frame
+		clear_timer.calculate_time_reduction_bonus(level.mage_fragments, level.dragon_fragments, level.get_total_fragments(), level.min_fragment_req_for_medal)
+		clear_time_label.text = clear_time_format_alt.format({"minutes" : "%02d" % (floor(clear_timer.get_reduced_time() / 60) as int), "seconds" : "%05.2f" % fmod(clear_timer.get_reduced_time(), 60.0), "bonus" : clear_timer.get_time_reduction_string()})
 		await get_tree().create_timer(0.5).timeout
 		
 		var medal_type : String = level.get_medal_type()
@@ -338,6 +343,9 @@ func do_results_screen():
 		
 		fragment_rating_label.visible_characters = -1
 		results_sfx.play()
+		saved_rating_index = rating_index
+		clear_timer.calculate_time_reduction_bonus(level.mage_fragments, level.dragon_fragments, level.get_total_fragments(), level.min_fragment_req_for_medal, saved_rating_index)
+		clear_time_label.text = clear_time_format_alt.format({"minutes" : "%02d" % (floor(clear_timer.get_reduced_time() / 60) as int), "seconds" : "%05.2f" % fmod(clear_timer.get_reduced_time(), 60.0), "bonus" : clear_timer.get_time_reduction_string()})
 		await get_tree().create_timer(1.0).timeout
 	
 	# SCALES
@@ -346,26 +354,45 @@ func do_results_screen():
 		scales_found_label.set_visible(true)
 		await get_tree().create_timer(0.5).timeout
 		
+		var scales_found : int = 0
+		
 		if (level.magical_scale != null):
 			magical_scale_sprite.play("MagicScale" if level.magical_scale.is_collected else "MagicScaleBlank")
 			results_sfx.stream = (magic_medal_get_sfx_stream if level.magical_scale.is_collected else no_medal_get_sfx_stream)
+			scales_found += (1 if level.magical_scale.is_collected else 0)
 			magical_scale_sprite.set_visible(true)
 			results_sfx.play()
+			clear_timer.calculate_time_reduction_bonus(level.mage_fragments, level.dragon_fragments, level.get_total_fragments(), level.min_fragment_req_for_medal, saved_rating_index, scales_found)
+			clear_time_label.text = clear_time_format_alt.format({"minutes" : "%02d" % (floor(clear_timer.get_reduced_time() / 60) as int), "seconds" : "%05.2f" % fmod(clear_timer.get_reduced_time(), 60.0), "bonus" : clear_timer.get_time_reduction_string()})
 			await get_tree().create_timer(0.5).timeout
 		
 		if (level.draconic_scale != null):
 			draconic_scale_sprite.play("DragonScale" if level.draconic_scale.is_collected else "DragonScaleBlank")
 			results_sfx.stream = (dragon_medal_get_sfx_stream if level.draconic_scale.is_collected else no_medal_get_sfx_stream)
+			scales_found += (1 if level.draconic_scale.is_collected else 0)
 			draconic_scale_sprite.set_visible(true)
 			results_sfx.play()
+			clear_timer.calculate_time_reduction_bonus(level.mage_fragments, level.dragon_fragments, level.get_total_fragments(), level.min_fragment_req_for_medal, saved_rating_index, scales_found)
+			clear_time_label.text = clear_time_format_alt.format({"minutes" : "%02d" % (floor(clear_timer.get_reduced_time() / 60) as int), "seconds" : "%05.2f" % fmod(clear_timer.get_reduced_time(), 60.0), "bonus" : clear_timer.get_time_reduction_string()})
 			await get_tree().create_timer(0.5).timeout
 		
 		if (level.balanced_scale != null):
 			balanced_scale_sprite.play("BalanceScale" if level.balanced_scale.is_collected else "BalanceScaleBlank")
 			results_sfx.stream = (balance_medal_get_sfx_stream if level.balanced_scale.is_collected else no_medal_get_sfx_stream)
+			scales_found += (1 if level.balanced_scale.is_collected else 0)
 			balanced_scale_sprite.set_visible(true)
 			results_sfx.play()
+			clear_timer.calculate_time_reduction_bonus(level.mage_fragments, level.dragon_fragments, level.get_total_fragments(), level.min_fragment_req_for_medal, saved_rating_index, scales_found)
+			clear_time_label.text = clear_time_format_alt.format({"minutes" : "%02d" % (floor(clear_timer.get_reduced_time() / 60) as int), "seconds" : "%05.2f" % fmod(clear_timer.get_reduced_time(), 60.0), "bonus" : clear_timer.get_time_reduction_string()})
 			await get_tree().create_timer(0.5).timeout
+		
+		if (!level.is_target_time_beaten() and level.is_target_time_beaten(true)):
+			time_medal_sprite.play("TIME")
+			results_sfx.stream = (time_medal_get_sfx_stream)
+			time_medal_sprite.set_visible(true)
+			results_sfx.play()
+			await get_tree().create_timer(0.5).timeout
+		
 		await get_tree().create_timer(1.0).timeout
 	
 	menu_button_label.set_visible(true)
