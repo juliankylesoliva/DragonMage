@@ -27,6 +27,9 @@ func set_enabled(b : bool):
 	if (b):
 		camera.make_current()
 
+func set_camera_position(pos : Vector2):
+	camera.global_position = pos
+
 func move_camera_from_to(from : Vector2, to : Vector2, time : float, disable_after : bool = false):
 	if (is_moving):
 		return
