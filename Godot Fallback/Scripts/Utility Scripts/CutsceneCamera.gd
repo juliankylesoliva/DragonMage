@@ -1,5 +1,7 @@
 extends Node
 
+signal camera_movement_finished
+
 @export var camera : Camera2D
 
 @export var path : Path2D
@@ -66,3 +68,4 @@ func finish_movement():
 	is_moving = false
 	if (disable_after_movement):
 		self.set_enabled(false)
+	camera_movement_finished.emit()

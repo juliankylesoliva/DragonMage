@@ -21,6 +21,7 @@ interact = false
 [resource]
 script = ExtResource("1_ygpj4")
 starting_mode = 0
+ignore_starting_mode = false
 loop = false
 loop_from_starting_position = false
 resume_player_control = false
