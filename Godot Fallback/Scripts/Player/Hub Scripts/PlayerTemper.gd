@@ -18,6 +18,8 @@ class_name PlayerTemper
 
 @export var disable_temper_rebound : bool = false
 
+@export var fairy_guard_attack : FairyGuardAttack
+
 var current_temper_level : int = 0
 
 var cold_threshold : int = 0
@@ -39,7 +41,7 @@ func check_temper_rebound(delta : float):
 		return
 	
 	if (current_temper_rebound_timer > 0 and is_form_locked()):
-		current_temper_rebound_timer = move_toward(current_temper_rebound_timer, 0, delta)
+		current_temper_rebound_timer = move_toward(current_temper_rebound_timer, 0, delta * (fairy_guard_attack.get_temper_rebound_modifier() if fairy_guard_attack != null else 1.0))
 		if (current_temper_rebound_timer <= 0):
 			if (current_temper_level < cold_threshold):
 				neutralize_temper_by(1)

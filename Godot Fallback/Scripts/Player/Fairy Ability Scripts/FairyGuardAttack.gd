@@ -24,6 +24,8 @@ class_name FairyGuardAttack
 
 @export var parry_magic_reward : float = 30
 
+@export var temper_rebound_speedup_bonus : float = 3
+
 @export var guard_offset_from_char : Vector2 = Vector2.ZERO
 
 @export var fairy_easing : float = 0.5
@@ -279,3 +281,6 @@ func do_parry():
 	hub.animation.set_animation_speed(1)
 	guard_release_time_left = 0
 	parry_pose_time_left = parry_pose_duration
+
+func get_temper_rebound_modifier():
+	return (temper_rebound_speedup_bonus if current_attack_state == AttackState.ACTIVE and min_guard_time_left <= 0 and blockstun_time_left <= 0 else 1.0)

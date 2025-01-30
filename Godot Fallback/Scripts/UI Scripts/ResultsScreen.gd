@@ -316,6 +316,7 @@ func do_results_screen():
 			previous_whole_value = current_whole_value
 			
 			await get_tree().process_frame
+		total_fragments_label.text = fragment_total_format.format({"total" : (current_total_value as int), "minimum" : level.min_fragment_req_for_medal})
 		clear_timer.calculate_time_reduction_bonus(level.mage_fragments, level.dragon_fragments, level.get_total_fragments(), level.min_fragment_req_for_medal)
 		clear_time_label.text = clear_time_format_alt.format({"minutes" : "%02d" % (floor(clear_timer.get_reduced_time() / 60) as int), "seconds" : "%05.2f" % fmod(clear_timer.get_reduced_time(), 60.0), "bonus" : clear_timer.get_time_reduction_string()})
 		await get_tree().create_timer(0.5).timeout

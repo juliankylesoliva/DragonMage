@@ -215,6 +215,7 @@ script = ExtResource("9_56tik")
 hub = NodePath("..")
 fairy_follower_scene = ExtResource("70_s35oi")
 fairy_target_node = NodePath("../../FairyTarget")
+magic_loss_on_damage_taken = 0.25
 
 [node name="Guard" type="Node" parent="Hub/Fairy"]
 script = ExtResource("11_8a08i")
@@ -320,9 +321,10 @@ slide_uncancelable_time = 0.2
 slide_hang_time = 0.3
 uses_attack_state = true
 
-[node name="Temper" type="Node" parent="Hub" node_paths=PackedStringArray("hub")]
+[node name="Temper" type="Node" parent="Hub" node_paths=PackedStringArray("hub", "fairy_guard_attack")]
 script = ExtResource("20_fbl3q")
 hub = NodePath("..")
+fairy_guard_attack = NodePath("../Fairy/Guard")
 
 [node name="Form" type="Node" parent="Hub" node_paths=PackedStringArray("hub")]
 script = ExtResource("21_3xv74")

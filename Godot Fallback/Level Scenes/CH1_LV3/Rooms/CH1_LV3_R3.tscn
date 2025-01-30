@@ -133,7 +133,7 @@ shape = SubResource("RectangleShape2D_dvtwr")
 [node name="Enemies" type="Node2D" parent="."]
 
 [node name="BlueDragoon" parent="Enemies" instance=ExtResource("4_o5gir")]
-position = Vector2(1056, 96)
+position = Vector2(1120, 96)
 
 [node name="Enemy" parent="Enemies/BlueDragoon" index="0"]
 enable_wings = true
@@ -309,10 +309,10 @@ position = Vector2(3536, -240)
 position = Vector2(3568, -240)
 
 [node name="MedalFragment27" parent="Fragments" instance=ExtResource("8_n0jkj")]
-position = Vector2(2288, -80)
+position = Vector2(2192, -16)
 
 [node name="MedalFragment28" parent="Fragments" instance=ExtResource("8_n0jkj")]
-position = Vector2(2288, -48)
+position = Vector2(2224, -16)
 
 [node name="MedalFragment29" parent="Fragments" instance=ExtResource("8_n0jkj")]
 position = Vector2(3760, -112)

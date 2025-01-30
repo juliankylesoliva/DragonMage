@@ -20,6 +20,8 @@ class_name PlayerFairy
 
 @export_range(1, 100) var max_magic : float = 100
 
+@export_range(0, 1) var magic_loss_on_damage_taken : float = 0.5
+
 @export var magic_danger_increase_rate : float = 0.833
 
 @export var starting_magic_consolation_bonus : float = 25
@@ -113,8 +115,8 @@ func get_current_magic_portion():
 func move_magic_toward(to : float, delta : float):
 	current_magic = move_toward(current_magic, to, delta)
 
-func cut_magic_in_half():
-	current_magic *= 0.5
+func cut_magic():
+	current_magic *= (1.0 - magic_loss_on_damage_taken)
 
 func reset_starting_magic():
 	current_magic = starting_magic

@@ -4,6 +4,10 @@ class_name CutsceneActor
 
 signal actor_movement_finished
 
+signal actor_falling
+
+signal actor_landing
+
 @export var actor_name : String = "???"
 
 @export var actor_anim_sprite : AnimatedSprite2D
@@ -49,9 +53,7 @@ func _process(delta):
 	prev_is_on_floor = self.is_on_floor()
 
 func _physics_process(delta):
-	if (!self.is_on_floor()):
-		current_gravity_scale = (current_gravity_scale_override if is_using_gravity_scale_override else rising_gravity_scale if self.velocity.y < 0 else falling_gravity_scale)
-		self.velocity += (Vector2.DOWN * base_gravity * current_gravity_scale * delta)
+	apply_gravity(delta)
 	self.move_and_slide()
 
 func set_blink_timer():
@@ -59,6 +61,14 @@ func set_blink_timer():
 
 func update_blink_timer(delta):
 	current_blink_timer = move_toward(current_blink_timer, 0, delta)
+
+func apply_gravity(delta : float):
+	if (!self.is_on_floor()):
+		var prev_y_velocity : float = self.velocity.y
+		current_gravity_scale = (current_gravity_scale_override if is_using_gravity_scale_override else rising_gravity_scale if self.velocity.y < 0 else falling_gravity_scale)
+		self.velocity += (Vector2.DOWN * base_gravity * current_gravity_scale * delta)
+		if (prev_y_velocity < 0 and self.velocity.y >= 0):
+			actor_falling.emit()
 
 func check_blink_animation():
 	if (!actor_anim_sprite.is_playing()):
@@ -84,6 +94,7 @@ func check_landing():
 		var effect_instance = EffectFactory.get_effect("LandingDust", get_ground_point(), 1, actor_anim_sprite.flip_h)
 		effect_instance.rotation = self.up_direction.angle_to(self.get_floor_normal())
 		SoundFactory.play_sound_by_name(footstep_sound, self.global_position, 0, 1, "SFX")
+		actor_landing.emit()
 
 func set_gravity_scale_override(g : float):
 	current_gravity_scale_override = g

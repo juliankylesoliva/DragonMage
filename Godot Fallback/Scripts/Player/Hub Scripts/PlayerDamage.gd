@@ -81,7 +81,7 @@ func take_damage(knockback : int = 0):
 			knockback_direction = knockback
 			current_hitstun_timer = hitstun_time
 			hub.form.stop_form_change_timer()
-			hub.fairy.cut_magic_in_half()
+			hub.fairy.cut_magic()
 			hub.stomp.reset_stomp_combo()
 			hub.jumping.landing_reset()
 			took_damage.emit()
@@ -103,7 +103,7 @@ func do_damage_warp():
 		else:
 			is_damage_warping = true
 			hub.form.stop_form_change_timer()
-			hub.fairy.cut_magic_in_half()
+			hub.fairy.cut_magic()
 			hub.stomp.reset_stomp_combo()
 			hub.jumping.landing_reset()
 			took_damage.emit()
