@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://f744pfiogil1"]
+[gd_scene load_steps=25 format=3 uid="uid://f744pfiogil1"]
 
 [ext_resource type="Script" path="res://Scripts/Utility Scripts/Level.gd" id="1_c2c1a"]
 [ext_resource type="PackedScene" uid="uid://d0ff35cm57xb7" path="res://Scene Objects/Effects/DroppedFragment.tscn" id="2_gaufr"]
@@ -20,6 +20,7 @@
 [ext_resource type="PackedScene" uid="uid://btq4qla5fyq0n" path="res://Scene Objects/Misc/LevelMusicPlayer.tscn" id="12_sh5q1"]
 [ext_resource type="PackedScene" uid="uid://bjeiexqfc7oht" path="res://Scene Objects/Misc/DefeatScreen.tscn" id="13_opbm0"]
 [ext_resource type="PackedScene" uid="uid://bl1jwsgqfev8p" path="res://Level Scenes/CH1_LV3/Rooms/CH1_LV3_R5.tscn" id="18_c8jkb"]
+[ext_resource type="PackedScene" uid="uid://ca4v88yik2xe" path="res://Scene Objects/Misc/LevelIntroScreen.tscn" id="19_gsxpb"]
 [ext_resource type="PackedScene" uid="uid://8b3e6doobrd" path="res://Level Scenes/CH1_LV3/Rooms/CH1_LV3_R8.tscn" id="21_jpnph"]
 [ext_resource type="AudioStream" uid="uid://c3wkpsq8ppcgv" path="res://Music/CH1/Qumu - Electro Swank.wav" id="21_wxj2g"]
 
@@ -28,7 +29,7 @@ resource_local_to_scene = true
 radius = 8.0
 height = 48.0
 
-[node name="CH1_LV3" type="Node2D" node_paths=PackedStringArray("player_reference", "starting_room", "room_list", "magical_scale", "draconic_scale", "balanced_scale", "clear_timer")]
+[node name="CH1_LV3" type="Node2D" node_paths=PackedStringArray("player_reference", "starting_room", "room_list", "magical_scale", "draconic_scale", "balanced_scale", "screen_fade", "intro_screen", "clear_timer")]
 script = ExtResource("1_c2c1a")
 level_index = 6
 player_reference = NodePath("Player")
@@ -39,6 +40,8 @@ draconic_scale = NodePath("CH1_LV3_R4/CollectableScale")
 balanced_scale = NodePath("CH1_LV3_R7/CollectableScale")
 min_fragment_collection_rate = 0.543
 dropped_fragment_scene = ExtResource("2_gaufr")
+screen_fade = NodePath("UI_Canvas/ScreenFade")
+intro_screen = NodePath("UI_Canvas/LevelIntroScreen")
 clear_timer = NodePath("UI_Canvas/ClearTimer")
 time_to_beat = 95.0
 
@@ -148,16 +151,23 @@ level_ref = NodePath("../..")
 [node name="ClearTimer" parent="UI_Canvas" instance=ExtResource("9_s1oxl")]
 position = Vector2(4, 316)
 
-[node name="PauseMenu" parent="UI_Canvas" node_paths=PackedStringArray("screen_fade") instance=ExtResource("6_oqtw6")]
-screen_fade = NodePath("../ScreenFade")
-
 [node name="ResultsScreen" parent="UI_Canvas" node_paths=PackedStringArray("screen_fade", "level", "clear_timer") instance=ExtResource("7_28fis")]
 screen_fade = NodePath("../ScreenFade")
 level = NodePath("../..")
 clear_timer = NodePath("../ClearTimer")
 
+[node name="PauseMenu" parent="UI_Canvas" node_paths=PackedStringArray("screen_fade") instance=ExtResource("6_oqtw6")]
+screen_fade = NodePath("../ScreenFade")
+
 [node name="ScreenFade" parent="UI_Canvas" instance=ExtResource("8_oq5l3")]
 starting_fade_duration = 1.0
+
+[node name="LevelIntroScreen" parent="UI_Canvas" instance=ExtResource("19_gsxpb")]
+chapter_char = "1"
+section_char = "3"
+level_name_left = "Skyline"
+level_name_right = "Scramble"
+subtitle_text = "Welcome to Drakageau!"
 
 [node name="Textbox" parent="." node_paths=PackedStringArray("ui_canvas") instance=ExtResource("11_k27u7")]
 ui_canvas = NodePath("../UI_Canvas")

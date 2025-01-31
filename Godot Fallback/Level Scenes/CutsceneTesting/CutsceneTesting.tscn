@@ -20,13 +20,14 @@ resource_local_to_scene = true
 radius = 8.0
 height = 48.0
 
-[node name="CutsceneTesting" type="Node2D" node_paths=PackedStringArray("player_reference", "starting_room", "room_list", "clear_timer")]
+[node name="CutsceneTesting" type="Node2D" node_paths=PackedStringArray("player_reference", "starting_room", "room_list", "screen_fade", "clear_timer")]
 script = ExtResource("1_i2g4e")
 level_index = 4
 player_reference = NodePath("Player")
 starting_room = NodePath("CutsceneTestRoom")
 room_list = [NodePath("CutsceneTestRoom")]
 dropped_fragment_scene = ExtResource("2_va8x4")
+screen_fade = NodePath("UI_Canvas/ScreenFade")
 clear_timer = NodePath("UI_Canvas/ClearTimer")
 
 [node name="Player" parent="." instance=ExtResource("3_7c8ot")]
@@ -73,13 +74,13 @@ level_ref = NodePath("../..")
 [node name="ClearTimer" parent="UI_Canvas" instance=ExtResource("7_vs2n7")]
 position = Vector2(4, 316)
 
-[node name="PauseMenu" parent="UI_Canvas" node_paths=PackedStringArray("screen_fade") instance=ExtResource("8_liwba")]
-screen_fade = NodePath("../ScreenFade")
-
 [node name="ResultsScreen" parent="UI_Canvas" node_paths=PackedStringArray("screen_fade", "level", "clear_timer") instance=ExtResource("9_ymjxi")]
 screen_fade = NodePath("../ScreenFade")
 level = NodePath("../..")
 clear_timer = NodePath("../ClearTimer")
+
+[node name="PauseMenu" parent="UI_Canvas" node_paths=PackedStringArray("screen_fade") instance=ExtResource("8_liwba")]
+screen_fade = NodePath("../ScreenFade")
 
 [node name="ScreenFade" parent="UI_Canvas" instance=ExtResource("10_esdhr")]
 starting_fade_duration = 1.0

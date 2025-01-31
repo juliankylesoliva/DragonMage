@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://beihnh55j4qsk"]
+[gd_scene load_steps=28 format=3 uid="uid://beihnh55j4qsk"]
 
 [ext_resource type="Script" path="res://Scripts/Utility Scripts/Level.gd" id="1_lbrws"]
 [ext_resource type="PackedScene" uid="uid://d0ff35cm57xb7" path="res://Scene Objects/Effects/DroppedFragment.tscn" id="2_dc11k"]
@@ -23,6 +23,7 @@
 [ext_resource type="PackedScene" uid="uid://bjeiexqfc7oht" path="res://Scene Objects/Misc/DefeatScreen.tscn" id="12_2r72i"]
 [ext_resource type="PackedScene" uid="uid://d4k1uyppkebhw" path="res://Level Scenes/CH1_LV2/Rooms/CH1_LV2_R9.tscn" id="12_7wfl6"]
 [ext_resource type="PackedScene" uid="uid://cjmi2md4tdxux" path="res://Level Scenes/CH1_LV2/Rooms/CH1_LV2_R10.tscn" id="13_dsrmw"]
+[ext_resource type="PackedScene" uid="uid://ca4v88yik2xe" path="res://Scene Objects/Misc/LevelIntroScreen.tscn" id="22_5re21"]
 [ext_resource type="PackedScene" uid="uid://c6k6v7fefypvo" path="res://Level Scenes/CH1_LV2/Rooms/CH1_LV2_R11.tscn" id="24_0f8bc"]
 [ext_resource type="AudioStream" uid="uid://dlkxc1pklejn3" path="res://Music/CH1/Chiptune_Downtempo_Funk_Party.wav" id="24_clkf0"]
 
@@ -31,7 +32,7 @@ resource_local_to_scene = true
 radius = 8.0
 height = 48.0
 
-[node name="CH1_LV2" type="Node2D" node_paths=PackedStringArray("player_reference", "starting_room", "room_list", "magical_scale", "draconic_scale", "balanced_scale", "clear_timer")]
+[node name="CH1_LV2" type="Node2D" node_paths=PackedStringArray("player_reference", "starting_room", "room_list", "magical_scale", "draconic_scale", "balanced_scale", "screen_fade", "intro_screen", "clear_timer")]
 script = ExtResource("1_lbrws")
 level_index = 5
 player_reference = NodePath("Player")
@@ -42,6 +43,8 @@ draconic_scale = NodePath("CH1_LV2_R8/CollectableScale")
 balanced_scale = NodePath("CH1_LV2_R10/CollectableScale")
 min_fragment_collection_rate = 0.61
 dropped_fragment_scene = ExtResource("2_dc11k")
+screen_fade = NodePath("UI_Canvas/ScreenFade")
+intro_screen = NodePath("UI_Canvas/LevelIntroScreen")
 clear_timer = NodePath("UI_Canvas/ClearTimer")
 time_to_beat = 150.0
 tilemap_color = Color(0.721569, 0.788235, 0.901961, 1)
@@ -196,16 +199,23 @@ level_ref = NodePath("../..")
 [node name="ClearTimer" parent="UI_Canvas" instance=ExtResource("9_6aije")]
 position = Vector2(4, 316)
 
-[node name="PauseMenu" parent="UI_Canvas" node_paths=PackedStringArray("screen_fade") instance=ExtResource("6_xupbp")]
-screen_fade = NodePath("../ScreenFade")
-
 [node name="ResultsScreen" parent="UI_Canvas" node_paths=PackedStringArray("screen_fade", "level", "clear_timer") instance=ExtResource("7_hkfs2")]
 screen_fade = NodePath("../ScreenFade")
 level = NodePath("../..")
 clear_timer = NodePath("../ClearTimer")
 
+[node name="PauseMenu" parent="UI_Canvas" node_paths=PackedStringArray("screen_fade") instance=ExtResource("6_xupbp")]
+screen_fade = NodePath("../ScreenFade")
+
 [node name="ScreenFade" parent="UI_Canvas" instance=ExtResource("8_qngh2")]
 starting_fade_duration = 1.0
+
+[node name="LevelIntroScreen" parent="UI_Canvas" instance=ExtResource("22_5re21")]
+chapter_char = "1"
+section_char = "2"
+level_name_left = "Perilous"
+level_name_right = "Parking"
+subtitle_text = "PLEASE INSERT TICKET"
 
 [node name="Textbox" parent="." node_paths=PackedStringArray("ui_canvas") instance=ExtResource("5_hh34f")]
 ui_canvas = NodePath("../UI_Canvas")

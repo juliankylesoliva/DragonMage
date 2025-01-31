@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=3 uid="uid://bsyunex10456i"]
+[gd_scene load_steps=38 format=3 uid="uid://bsyunex10456i"]
 
 [ext_resource type="Script" path="res://Scripts/Utility Scripts/Level.gd" id="1_jlbtb"]
 [ext_resource type="PackedScene" uid="uid://d0ff35cm57xb7" path="res://Scene Objects/Effects/DroppedFragment.tscn" id="2_4gqwv"]
@@ -34,6 +34,7 @@
 [ext_resource type="PackedScene" uid="uid://bsxxorj36tmfu" path="res://Scene Objects/UI/TrainArrivalSignUI.tscn" id="25_t85ls"]
 [ext_resource type="Script" path="res://Scripts/Boss/Train/TrainBossHandler.gd" id="26_5ooub"]
 [ext_resource type="PackedScene" uid="uid://btrc5e3rd18ua" path="res://Level Scenes/CH1_LV4/Rooms/CH1_LV4_R12B.tscn" id="28_88mam"]
+[ext_resource type="PackedScene" uid="uid://ca4v88yik2xe" path="res://Scene Objects/Misc/LevelIntroScreen.tscn" id="30_l7yxj"]
 [ext_resource type="AudioStream" uid="uid://84fafic5uhsg" path="res://Music/CH1/RoccoW - Messeah.wav" id="32_k65wg"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_jmsqs"]
@@ -41,7 +42,7 @@ resource_local_to_scene = true
 radius = 8.0
 height = 48.0
 
-[node name="CH1_LV4" type="Node2D" node_paths=PackedStringArray("player_reference", "starting_room", "room_list", "magical_scale", "draconic_scale", "balanced_scale", "clear_timer")]
+[node name="CH1_LV4" type="Node2D" node_paths=PackedStringArray("player_reference", "starting_room", "room_list", "magical_scale", "draconic_scale", "balanced_scale", "screen_fade", "intro_screen", "clear_timer")]
 script = ExtResource("1_jlbtb")
 level_index = 7
 player_reference = NodePath("Player")
@@ -52,6 +53,8 @@ draconic_scale = NodePath("CH1_LV4_R10/CollectableScale")
 balanced_scale = NodePath("CH1_LV4_R11/CollectableScale")
 min_fragment_collection_rate = 0.658
 dropped_fragment_scene = ExtResource("2_4gqwv")
+screen_fade = NodePath("UI_Canvas/ScreenFade")
+intro_screen = NodePath("UI_Canvas/LevelIntroScreen")
 clear_timer = NodePath("UI_Canvas/ClearTimer")
 time_to_beat = 240.0
 
@@ -273,9 +276,6 @@ train_list = [NodePath("../../CH1_LV4_R1/TrainHazard"), NodePath("../../CH1_LV4_
 [node name="ClearTimer" parent="UI_Canvas" instance=ExtResource("7_3ak5y")]
 position = Vector2(4, 316)
 
-[node name="PauseMenu" parent="UI_Canvas" node_paths=PackedStringArray("screen_fade") instance=ExtResource("8_tiic5")]
-screen_fade = NodePath("../ScreenFade")
-
 [node name="ResultsScreen" parent="UI_Canvas" node_paths=PackedStringArray("screen_fade", "level", "clear_timer", "textbox") instance=ExtResource("9_7yrvg")]
 screen_fade = NodePath("../ScreenFade")
 level = NodePath("../..")
@@ -293,8 +293,18 @@ post_level_text = Array[String](["[center]
 
 -- TO BE CONTINUED --"])
 
+[node name="PauseMenu" parent="UI_Canvas" node_paths=PackedStringArray("screen_fade") instance=ExtResource("8_tiic5")]
+screen_fade = NodePath("../ScreenFade")
+
 [node name="ScreenFade" parent="UI_Canvas" instance=ExtResource("10_mbs61")]
 starting_fade_duration = 1.0
+
+[node name="LevelIntroScreen" parent="UI_Canvas" instance=ExtResource("30_l7yxj")]
+chapter_char = "1"
+section_char = "4"
+level_name_left = "Railway"
+level_name_right = "Runaway"
+subtitle_text = "End of the Line!"
 
 [node name="Textbox" parent="." node_paths=PackedStringArray("ui_canvas") instance=ExtResource("11_frv85")]
 accept_input_events = false

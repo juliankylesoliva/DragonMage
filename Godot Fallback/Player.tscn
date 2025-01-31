@@ -1,8 +1,7 @@
-[gd_scene load_steps=67 format=3 uid="uid://c6qw77ovfwgfs"]
+[gd_scene load_steps=66 format=3 uid="uid://c6qw77ovfwgfs"]
 
 [ext_resource type="Script" path="res://Scripts/Player/PlayerStateMachine/PlayerStateMachine.gd" id="1_rgc8w"]
 [ext_resource type="Script" path="res://Scripts/Player/Hub Scripts/PlayerHub.gd" id="1_vr0jy"]
-[ext_resource type="Resource" uid="uid://s4twjyn1pwn" path="res://Scripts/Resource Scripts/AutoPlayerInput/anti_buffer.tres" id="2_ta4cb"]
 [ext_resource type="Script" path="res://Scripts/Player/PlayerStateMachine/StandingState.gd" id="2_w87d3"]
 [ext_resource type="Script" path="res://Scripts/Player/Hub Scripts/PlayerCollisions.gd" id="2_yj5hr"]
 [ext_resource type="Script" path="res://Scripts/Player/Hub Scripts/PlayerBuffers.gd" id="3_37ht5"]
@@ -108,7 +107,6 @@ metadata/Tag = "Player"
 
 [node name="Hub" type="Node" parent="." node_paths=PackedStringArray("state_machine", "collisions", "buffers", "movement", "jumping", "fairy", "attacks", "temper", "form", "damage", "interaction", "stomp", "animation", "sprite_trail", "camera", "audio", "char_body", "char_sprite", "collision_shape", "stream_player", "visibility", "raycast_dl", "raycast_dm", "raycast_dr", "raycast_ledge_l", "raycast_ledge_r", "raycast_ul", "raycast_um", "raycast_ur", "raycast_ceiling_l", "raycast_ceiling_r", "raycast_wall_top_l", "raycast_wall_mid_l", "raycast_wall_bot_l", "raycast_wall_top_r", "raycast_wall_mid_r", "raycast_wall_bot_r")]
 script = ExtResource("1_vr0jy")
-auto_sequence = ExtResource("2_ta4cb")
 state_machine = NodePath("../StateMachine")
 collisions = NodePath("Collisions")
 buffers = NodePath("Buffers")

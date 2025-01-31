@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://bee26tq601smv"]
+[gd_scene load_steps=26 format=3 uid="uid://bee26tq601smv"]
 
 [ext_resource type="Script" path="res://Scripts/Utility Scripts/Level.gd" id="1_2pe2a"]
 [ext_resource type="PackedScene" uid="uid://c6qw77ovfwgfs" path="res://Player.tscn" id="2_oq6xx"]
@@ -21,6 +21,7 @@
 [ext_resource type="PackedScene" uid="uid://d1eef1xjuwf3b" path="res://Menu Scenes/PauseMenu.tscn" id="18_krh2f"]
 [ext_resource type="PackedScene" uid="uid://brhoroc2w6jwi" path="res://Scene Objects/UI/Textbox.tscn" id="19_3e3bj"]
 [ext_resource type="PackedScene" uid="uid://buykytsdrlnsg" path="res://Scene Objects/Misc/ResultsScreen.tscn" id="19_d5div"]
+[ext_resource type="PackedScene" uid="uid://ca4v88yik2xe" path="res://Scene Objects/Misc/LevelIntroScreen.tscn" id="21_l2sg4"]
 [ext_resource type="PackedScene" uid="uid://btq4qla5fyq0n" path="res://Scene Objects/Misc/LevelMusicPlayer.tscn" id="23_c6dlv"]
 [ext_resource type="AudioStream" uid="uid://bs4yog04kmdd6" path="res://Music/CH0/Eight_Bit_Dungeon_Monster_Stomp.wav" id="24_ar4bd"]
 
@@ -29,7 +30,7 @@ resource_local_to_scene = true
 radius = 8.0
 height = 48.0
 
-[node name="CH0_LV3" type="Node2D" node_paths=PackedStringArray("player_reference", "starting_room", "room_list", "balanced_scale", "clear_timer")]
+[node name="CH0_LV3" type="Node2D" node_paths=PackedStringArray("player_reference", "starting_room", "room_list", "balanced_scale", "screen_fade", "intro_screen", "clear_timer")]
 script = ExtResource("1_2pe2a")
 level_index = 2
 player_reference = NodePath("Player")
@@ -38,6 +39,8 @@ room_list = [NodePath("CH0_LV3_R1"), NodePath("CH0_LV3_R2"), NodePath("CH0_LV3_R
 balanced_scale = NodePath("CH0_LV3_R14/CollectableScale")
 min_fragment_collection_rate = 1.0
 dropped_fragment_scene = ExtResource("2_qdijq")
+screen_fade = NodePath("UI_Canvas/ScreenFade")
+intro_screen = NodePath("UI_Canvas/LevelIntroScreen")
 clear_timer = NodePath("UI_Canvas/ClearTimer")
 time_to_beat = 70.0
 
@@ -182,17 +185,24 @@ level_ref = NodePath("../..")
 [node name="ClearTimer" parent="UI_Canvas" instance=ExtResource("18_el865")]
 position = Vector2(4, 316)
 
-[node name="PauseMenu" parent="UI_Canvas" node_paths=PackedStringArray("screen_fade") instance=ExtResource("18_krh2f")]
-screen_fade = NodePath("../ScreenFade")
-
 [node name="ResultsScreen" parent="UI_Canvas" node_paths=PackedStringArray("screen_fade", "level", "clear_timer") instance=ExtResource("19_d5div")]
 screen_fade = NodePath("../ScreenFade")
 level = NodePath("../..")
 clear_timer = NodePath("../ClearTimer")
 show_damage_result = false
 
+[node name="PauseMenu" parent="UI_Canvas" node_paths=PackedStringArray("screen_fade") instance=ExtResource("18_krh2f")]
+screen_fade = NodePath("../ScreenFade")
+
 [node name="ScreenFade" parent="UI_Canvas" instance=ExtResource("17_3vcxg")]
 starting_fade_duration = 1.0
+
+[node name="LevelIntroScreen" parent="UI_Canvas" instance=ExtResource("21_l2sg4")]
+chapter_char = "0"
+section_char = "3"
+level_name_left = "Prisoner"
+level_name_right = "Problem"
+subtitle_text = "We'll find a way out!"
 
 [node name="Textbox" parent="." node_paths=PackedStringArray("ui_canvas") instance=ExtResource("19_3e3bj")]
 accept_input_events = false

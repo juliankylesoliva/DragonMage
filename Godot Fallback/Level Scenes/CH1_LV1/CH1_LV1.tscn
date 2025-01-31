@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://b6ourfnqhy0wk"]
+[gd_scene load_steps=28 format=3 uid="uid://b6ourfnqhy0wk"]
 
 [ext_resource type="Script" path="res://Scripts/Utility Scripts/Level.gd" id="1_3mmw4"]
 [ext_resource type="PackedScene" uid="uid://d0ff35cm57xb7" path="res://Scene Objects/Effects/DroppedFragment.tscn" id="2_gdxu6"]
@@ -23,6 +23,7 @@
 [ext_resource type="PackedScene" uid="uid://buykytsdrlnsg" path="res://Scene Objects/Misc/ResultsScreen.tscn" id="18_wudxn"]
 [ext_resource type="AudioStream" uid="uid://u3a1srjlcm6f" path="res://Music/CH1/Kubbi - Up In My Jam (All Of A Sudden).wav" id="21_4frsm"]
 [ext_resource type="PackedScene" uid="uid://btq4qla5fyq0n" path="res://Scene Objects/Misc/LevelMusicPlayer.tscn" id="21_sl55a"]
+[ext_resource type="PackedScene" uid="uid://ca4v88yik2xe" path="res://Scene Objects/Misc/LevelIntroScreen.tscn" id="22_p0dod"]
 [ext_resource type="PackedScene" uid="uid://brhoroc2w6jwi" path="res://Scene Objects/UI/Textbox.tscn" id="24_6d5rm"]
 [ext_resource type="PackedScene" uid="uid://bjeiexqfc7oht" path="res://Scene Objects/Misc/DefeatScreen.tscn" id="25_ho2ji"]
 
@@ -31,7 +32,7 @@ resource_local_to_scene = true
 radius = 8.0
 height = 48.0
 
-[node name="CH1_LV1" type="Node2D" node_paths=PackedStringArray("player_reference", "starting_room", "room_list", "magical_scale", "draconic_scale", "balanced_scale", "clear_timer")]
+[node name="CH1_LV1" type="Node2D" node_paths=PackedStringArray("player_reference", "starting_room", "room_list", "magical_scale", "draconic_scale", "balanced_scale", "screen_fade", "intro_screen", "clear_timer")]
 script = ExtResource("1_3mmw4")
 level_index = 4
 player_reference = NodePath("Player")
@@ -42,6 +43,8 @@ draconic_scale = NodePath("CH1_LV1_R9/CollectableScale")
 balanced_scale = NodePath("CH1_LV1_R11/CollectableScale")
 min_fragment_collection_rate = 0.64
 dropped_fragment_scene = ExtResource("2_gdxu6")
+screen_fade = NodePath("UI_Canvas/ScreenFade")
+intro_screen = NodePath("UI_Canvas/LevelIntroScreen")
 clear_timer = NodePath("UI_Canvas/ClearTimer")
 time_to_beat = 70.0
 
@@ -204,16 +207,23 @@ level_ref = NodePath("../..")
 [node name="ClearTimer" parent="UI_Canvas" instance=ExtResource("17_21jxy")]
 position = Vector2(4, 316)
 
-[node name="PauseMenu" parent="UI_Canvas" node_paths=PackedStringArray("screen_fade") instance=ExtResource("17_5ns53")]
-screen_fade = NodePath("../ScreenFade")
-
 [node name="ResultsScreen" parent="UI_Canvas" node_paths=PackedStringArray("screen_fade", "level", "clear_timer") instance=ExtResource("18_wudxn")]
 screen_fade = NodePath("../ScreenFade")
 level = NodePath("../..")
 clear_timer = NodePath("../ClearTimer")
 
+[node name="PauseMenu" parent="UI_Canvas" node_paths=PackedStringArray("screen_fade") instance=ExtResource("17_5ns53")]
+screen_fade = NodePath("../ScreenFade")
+
 [node name="ScreenFade" parent="UI_Canvas" instance=ExtResource("16_gb8bt")]
 starting_fade_duration = 1.0
+
+[node name="LevelIntroScreen" parent="UI_Canvas" instance=ExtResource("22_p0dod")]
+chapter_char = "1"
+section_char = "1"
+level_name_left = "Dragoons'"
+level_name_right = "Domain"
+subtitle_text = "Fire those hired goons!"
 
 [node name="Textbox" parent="." node_paths=PackedStringArray("ui_canvas") instance=ExtResource("24_6d5rm")]
 accept_input_events = false

@@ -20,7 +20,7 @@ var current_time : float = 0
 
 var current_time_reduction_bonus : float = 1
 
-var is_timer_stopped : bool = false
+var is_timer_stopped : bool = true
 
 func _ready():
 	self.visible = OptionsHelper.enable_clear_timer_toggle

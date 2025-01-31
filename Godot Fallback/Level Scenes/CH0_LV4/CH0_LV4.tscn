@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://qa22n4g30owo"]
+[gd_scene load_steps=24 format=3 uid="uid://qa22n4g30owo"]
 
 [ext_resource type="Script" path="res://Scripts/Utility Scripts/Level.gd" id="1_xccb8"]
 [ext_resource type="PackedScene" uid="uid://c6qw77ovfwgfs" path="res://Player.tscn" id="2_616c6"]
@@ -19,6 +19,7 @@
 [ext_resource type="PackedScene" uid="uid://brhoroc2w6jwi" path="res://Scene Objects/UI/Textbox.tscn" id="14_54vdq"]
 [ext_resource type="PackedScene" uid="uid://buykytsdrlnsg" path="res://Scene Objects/Misc/ResultsScreen.tscn" id="14_rug2n"]
 [ext_resource type="PackedScene" uid="uid://btq4qla5fyq0n" path="res://Scene Objects/Misc/LevelMusicPlayer.tscn" id="18_seqrb"]
+[ext_resource type="PackedScene" uid="uid://ca4v88yik2xe" path="res://Scene Objects/Misc/LevelIntroScreen.tscn" id="18_yqtuk"]
 [ext_resource type="AudioStream" uid="uid://cknfggv1ublsj" path="res://Music/CH0/02 Underclocked (underunderclocked mix).wav" id="19_k0bib"]
 [ext_resource type="PackedScene" uid="uid://bjeiexqfc7oht" path="res://Scene Objects/Misc/DefeatScreen.tscn" id="20_7hxk8"]
 
@@ -27,7 +28,7 @@ resource_local_to_scene = true
 radius = 8.0
 height = 48.0
 
-[node name="CH0_LV4" type="Node2D" node_paths=PackedStringArray("player_reference", "starting_room", "room_list", "magical_scale", "draconic_scale", "balanced_scale", "clear_timer")]
+[node name="CH0_LV4" type="Node2D" node_paths=PackedStringArray("player_reference", "starting_room", "room_list", "magical_scale", "draconic_scale", "balanced_scale", "screen_fade", "intro_screen", "clear_timer")]
 script = ExtResource("1_xccb8")
 level_index = 3
 player_reference = NodePath("Player")
@@ -38,6 +39,8 @@ draconic_scale = NodePath("CH0_LV4_R5/CollectableScale")
 balanced_scale = NodePath("CH0_LV4_R7/CollectableScale")
 min_fragment_collection_rate = 1.0
 dropped_fragment_scene = ExtResource("2_ahodx")
+screen_fade = NodePath("UI_Canvas/ScreenFade")
+intro_screen = NodePath("UI_Canvas/LevelIntroScreen")
 clear_timer = NodePath("UI_Canvas/ClearTimer")
 time_to_beat = 105.0
 tilemap_color = Color(0.745098, 0.639216, 0.8, 1)
@@ -160,9 +163,6 @@ player_node = NodePath("../../Player")
 [node name="ClearTimer" parent="UI_Canvas" instance=ExtResource("13_vkigm")]
 position = Vector2(4, 316)
 
-[node name="PauseMenu" parent="UI_Canvas" node_paths=PackedStringArray("screen_fade") instance=ExtResource("13_6h45c")]
-screen_fade = NodePath("../ScreenFade")
-
 [node name="ResultsScreen" parent="UI_Canvas" node_paths=PackedStringArray("screen_fade", "level", "clear_timer", "textbox") instance=ExtResource("14_rug2n")]
 screen_fade = NodePath("../ScreenFade")
 level = NodePath("../..")
@@ -174,8 +174,18 @@ post_level_text = Array[String](["Dragoon: Boss! Boss! We've got a HUGE problem 
 
 -- TO BE CONTINUED --"])
 
+[node name="PauseMenu" parent="UI_Canvas" node_paths=PackedStringArray("screen_fade") instance=ExtResource("13_6h45c")]
+screen_fade = NodePath("../ScreenFade")
+
 [node name="ScreenFade" parent="UI_Canvas" instance=ExtResource("12_ue1v1")]
 starting_fade_duration = 1.0
+
+[node name="LevelIntroScreen" parent="UI_Canvas" instance=ExtResource("18_yqtuk")]
+chapter_char = "0"
+section_char = "4"
+level_name_left = "Fleeting"
+level_name_right = "Floortraps"
+subtitle_text = "Watch your temper!"
 
 [node name="Textbox" parent="." node_paths=PackedStringArray("ui_canvas") instance=ExtResource("14_54vdq")]
 accept_input_events = false
@@ -189,8 +199,8 @@ screen_fade = NodePath("../UI_Canvas/ScreenFade")
 
 [connection signal="player_defeated" from="." to="UI_Canvas/FragmentCounterUI" method="hide"]
 [connection signal="player_defeated" from="." to="UI_Canvas/TemperMeterUI" method="hide"]
-[connection signal="player_defeated" from="." to="UI_Canvas/ClearTimer" method="stop_timer"]
 [connection signal="player_defeated" from="." to="UI_Canvas/ClearTimer" method="hide"]
+[connection signal="player_defeated" from="." to="UI_Canvas/ClearTimer" method="stop_timer"]
 [connection signal="player_defeated" from="." to="Textbox" method="hide_textbox"]
 [connection signal="player_defeated" from="." to="LevelMusicPlayer" method="stop"]
 [connection signal="player_defeated" from="." to="DefeatScreen" method="do_defeat_screen"]
@@ -198,8 +208,8 @@ screen_fade = NodePath("../UI_Canvas/ScreenFade")
 [connection signal="level_finished" from="CH0_LV4_R9/FinishLine" to="." method="level_finish"]
 [connection signal="level_finished" from="CH0_LV4_R9/FinishLine" to="UI_Canvas/FragmentCounterUI" method="hide"]
 [connection signal="level_finished" from="CH0_LV4_R9/FinishLine" to="UI_Canvas/TemperMeterUI" method="hide"]
-[connection signal="level_finished" from="CH0_LV4_R9/FinishLine" to="UI_Canvas/ClearTimer" method="stop_timer"]
 [connection signal="level_finished" from="CH0_LV4_R9/FinishLine" to="UI_Canvas/ClearTimer" method="hide"]
+[connection signal="level_finished" from="CH0_LV4_R9/FinishLine" to="UI_Canvas/ClearTimer" method="stop_timer"]
 [connection signal="level_finished" from="CH0_LV4_R9/FinishLine" to="UI_Canvas/ResultsScreen" method="on_level_complete"]
 [connection signal="level_finished" from="CH0_LV4_R9/FinishLine" to="LevelMusicPlayer" method="fade_out"]
 

@@ -32,6 +32,10 @@ signal player_defeated
 
 @export var dropped_fragment_scene : PackedScene
 
+@export var screen_fade : ScreenFade
+
+@export var intro_screen : LevelIntroScreen
+
 @export var clear_timer : ClearTimer
 
 @export_range(0, 5999.99) var time_to_beat : float = 0
@@ -130,9 +134,28 @@ func level_startup():
 		if (CheckpointHandler.saved_balanced_scale):
 			balanced_scale.mark_as_collected()
 	
-	room_to_use.activate_room()
 	
-	player_hub.camera.snap_camera_to_player()
+	if (intro_screen != null):
+		PauseHandler.enable_pausing(false)
+		player_hub.set_force_stand(true)
+		screen_fade.set_enable_fading(false)
+		var prev_form_selection : PlayerForm.CharacterMode = FormSelectionHelper.selected_form
+		if (!FormSelectionHelper.form_changing_enabled):
+			FormSelectionHelper.set_selected_form(player_hub.form.current_mode)
+		intro_screen.do_level_intro()
+		await intro_screen.intro_finished
+		FormSelectionHelper.set_selected_form(prev_form_selection)
+		room_to_use.activate_room()
+		player_hub.camera.snap_camera_to_player()
+		screen_fade.set_enable_fading(true)
+		player_hub.set_force_stand(false)
+		PauseHandler.enable_pausing(true)
+	else:
+		room_to_use.activate_room()
+		player_hub.camera.snap_camera_to_player()
+	
+	if (clear_timer != null):
+		clear_timer.start_timer()
 
 func respawn_all_enemies():
 	for room in room_list:

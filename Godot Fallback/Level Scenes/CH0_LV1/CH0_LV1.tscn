@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://dgi7me5crgi8q"]
+[gd_scene load_steps=20 format=3 uid="uid://dgi7me5crgi8q"]
 
 [ext_resource type="Script" path="res://Scripts/Utility Scripts/Level.gd" id="1_6mws2"]
 [ext_resource type="PackedScene" uid="uid://cevmm5dwm345v" path="res://Level Scenes/CH0_LV1/Rooms/CH0_LV1_R1.tscn" id="2_7b35j"]
@@ -14,6 +14,7 @@
 [ext_resource type="PackedScene" uid="uid://8beel2odcuky" path="res://Scene Objects/Effects/ScreenFade.tscn" id="13_ggxcq"]
 [ext_resource type="PackedScene" uid="uid://b5wwivjk8sl7b" path="res://Scene Objects/Misc/ClearTimer.tscn" id="14_dibul"]
 [ext_resource type="PackedScene" uid="uid://buykytsdrlnsg" path="res://Scene Objects/Misc/ResultsScreen.tscn" id="15_g0j50"]
+[ext_resource type="PackedScene" uid="uid://ca4v88yik2xe" path="res://Scene Objects/Misc/LevelIntroScreen.tscn" id="15_i8g6p"]
 [ext_resource type="PackedScene" uid="uid://brhoroc2w6jwi" path="res://Scene Objects/UI/Textbox.tscn" id="18_itco1"]
 [ext_resource type="PackedScene" uid="uid://btq4qla5fyq0n" path="res://Scene Objects/Misc/LevelMusicPlayer.tscn" id="19_l87bk"]
 [ext_resource type="AudioStream" uid="uid://c4w62ivppptim" path="res://Music/CH0/RoccoW - A Bed of Snakes - 05 17092017.wav" id="20_oukke"]
@@ -23,7 +24,7 @@ resource_local_to_scene = true
 radius = 8.0
 height = 48.0
 
-[node name="CH0_LV1" type="Node" node_paths=PackedStringArray("player_reference", "starting_room", "room_list", "magical_scale", "clear_timer")]
+[node name="CH0_LV1" type="Node" node_paths=PackedStringArray("player_reference", "starting_room", "room_list", "magical_scale", "screen_fade", "intro_screen", "clear_timer")]
 script = ExtResource("1_6mws2")
 level_index = 0
 player_reference = NodePath("Player")
@@ -32,6 +33,8 @@ room_list = [NodePath("CH0_LV1_R1"), NodePath("CH0_LV1_R2"), NodePath("CH0_LV1_R
 magical_scale = NodePath("CH0_LV1_R6/CollectableScale")
 min_fragment_collection_rate = 1.0
 dropped_fragment_scene = ExtResource("2_wgkbh")
+screen_fade = NodePath("UI_Canvas/ScreenFade")
+intro_screen = NodePath("UI_Canvas/LevelIntroScreen")
 clear_timer = NodePath("UI_Canvas/ClearTimer")
 time_to_beat = 35.0
 
@@ -115,17 +118,24 @@ level_ref = NodePath("../..")
 [node name="ClearTimer" parent="UI_Canvas" instance=ExtResource("14_dibul")]
 position = Vector2(4, 316)
 
-[node name="PauseMenu" parent="UI_Canvas" node_paths=PackedStringArray("screen_fade") instance=ExtResource("13_1kf77")]
-screen_fade = NodePath("../ScreenFade")
-
 [node name="ResultsScreen" parent="UI_Canvas" node_paths=PackedStringArray("screen_fade", "level", "clear_timer") instance=ExtResource("15_g0j50")]
 screen_fade = NodePath("../ScreenFade")
 level = NodePath("../..")
 clear_timer = NodePath("../ClearTimer")
 show_damage_result = false
 
+[node name="PauseMenu" parent="UI_Canvas" node_paths=PackedStringArray("screen_fade") instance=ExtResource("13_1kf77")]
+screen_fade = NodePath("../ScreenFade")
+
 [node name="ScreenFade" parent="UI_Canvas" instance=ExtResource("13_ggxcq")]
 starting_fade_duration = 1.0
+
+[node name="LevelIntroScreen" parent="UI_Canvas" instance=ExtResource("15_i8g6p")]
+chapter_char = "0"
+section_char = "1"
+level_name_left = "Byway"
+level_name_right = "Backwoods"
+subtitle_text = "I'm gonna be late!"
 
 [node name="Textbox" parent="." node_paths=PackedStringArray("ui_canvas") instance=ExtResource("18_itco1")]
 accept_input_events = false

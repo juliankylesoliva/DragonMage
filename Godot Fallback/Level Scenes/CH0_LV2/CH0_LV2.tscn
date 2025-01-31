@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://bq3ow3qdwirck"]
+[gd_scene load_steps=22 format=3 uid="uid://bq3ow3qdwirck"]
 
 [ext_resource type="Script" path="res://Scripts/Utility Scripts/Level.gd" id="1_3eixt"]
 [ext_resource type="PackedScene" uid="uid://d0ff35cm57xb7" path="res://Scene Objects/Effects/DroppedFragment.tscn" id="2_im3cc"]
@@ -16,6 +16,7 @@
 [ext_resource type="PackedScene" uid="uid://d1eef1xjuwf3b" path="res://Menu Scenes/PauseMenu.tscn" id="14_dx8cr"]
 [ext_resource type="PackedScene" uid="uid://b5wwivjk8sl7b" path="res://Scene Objects/Misc/ClearTimer.tscn" id="14_s76pj"]
 [ext_resource type="PackedScene" uid="uid://buykytsdrlnsg" path="res://Scene Objects/Misc/ResultsScreen.tscn" id="15_nbxo5"]
+[ext_resource type="PackedScene" uid="uid://ca4v88yik2xe" path="res://Scene Objects/Misc/LevelIntroScreen.tscn" id="17_n880q"]
 [ext_resource type="PackedScene" uid="uid://brhoroc2w6jwi" path="res://Scene Objects/UI/Textbox.tscn" id="18_x5lsp"]
 [ext_resource type="PackedScene" uid="uid://btq4qla5fyq0n" path="res://Scene Objects/Misc/LevelMusicPlayer.tscn" id="19_g3rc6"]
 [ext_resource type="AudioStream" uid="uid://du5xuitrf4txr" path="res://Music/CH0/2020_roccow_weeklybeats-2020_17_new-game-minus.wav" id="20_p18n4"]
@@ -25,7 +26,7 @@ resource_local_to_scene = true
 radius = 8.0
 height = 48.0
 
-[node name="CH0_LV2" type="Node2D" node_paths=PackedStringArray("player_reference", "starting_room", "room_list", "draconic_scale", "clear_timer")]
+[node name="CH0_LV2" type="Node2D" node_paths=PackedStringArray("player_reference", "starting_room", "room_list", "draconic_scale", "screen_fade", "intro_screen", "clear_timer")]
 script = ExtResource("1_3eixt")
 level_index = 1
 player_reference = NodePath("Player")
@@ -34,6 +35,8 @@ room_list = [NodePath("CH0_LV2_R1"), NodePath("CH0_LV2_R2"), NodePath("CH0_LV2_R
 draconic_scale = NodePath("CH0_LV2_R8/CollectableScale")
 min_fragment_collection_rate = 1.0
 dropped_fragment_scene = ExtResource("2_im3cc")
+screen_fade = NodePath("UI_Canvas/ScreenFade")
+intro_screen = NodePath("UI_Canvas/LevelIntroScreen")
 clear_timer = NodePath("UI_Canvas/ClearTimer")
 time_to_beat = 50.0
 
@@ -148,17 +151,24 @@ level_ref = NodePath("../..")
 [node name="ClearTimer" parent="UI_Canvas" instance=ExtResource("14_s76pj")]
 position = Vector2(4, 316)
 
-[node name="PauseMenu" parent="UI_Canvas" node_paths=PackedStringArray("screen_fade") instance=ExtResource("14_dx8cr")]
-screen_fade = NodePath("../ScreenFade")
-
 [node name="ResultsScreen" parent="UI_Canvas" node_paths=PackedStringArray("screen_fade", "level", "clear_timer") instance=ExtResource("15_nbxo5")]
 screen_fade = NodePath("../ScreenFade")
 level = NodePath("../..")
 clear_timer = NodePath("../ClearTimer")
 show_damage_result = false
 
+[node name="PauseMenu" parent="UI_Canvas" node_paths=PackedStringArray("screen_fade") instance=ExtResource("14_dx8cr")]
+screen_fade = NodePath("../ScreenFade")
+
 [node name="ScreenFade" parent="UI_Canvas" instance=ExtResource("13_ngewc")]
 starting_fade_duration = 1.0
+
+[node name="LevelIntroScreen" parent="UI_Canvas" instance=ExtResource("17_n880q")]
+chapter_char = "0"
+section_char = "2"
+level_name_left = "Catharsis"
+level_name_right = "Cliffs"
+subtitle_text = "Tame your inner dragon!"
 
 [node name="Textbox" parent="." node_paths=PackedStringArray("ui_canvas") instance=ExtResource("18_x5lsp")]
 accept_input_events = false

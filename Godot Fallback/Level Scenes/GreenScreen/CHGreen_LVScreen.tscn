@@ -1,9 +1,14 @@
-[gd_scene load_steps=5 format=3 uid="uid://b424auf7iyqa0"]
+[gd_scene load_steps=6 format=3 uid="uid://b424auf7iyqa0"]
 
 [ext_resource type="Script" path="res://Scripts/Utility Scripts/Level.gd" id="1_1cc00"]
 [ext_resource type="PackedScene" uid="uid://c6qw77ovfwgfs" path="res://Player.tscn" id="2_eybo8"]
 [ext_resource type="PackedScene" uid="uid://bdypi7w73c6kq" path="res://Scene Objects/UI/TemperMeterUI.tscn" id="3_ot257"]
 [ext_resource type="PackedScene" uid="uid://d0hjhbnsicb1l" path="res://Level Scenes/GreenScreen/Rooms/CHGreen_LVScreen_R1.tscn" id="4_aoer1"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_e7p3j"]
+resource_local_to_scene = true
+radius = 8.0
+height = 48.0
 
 [node name="CH0_LV0" type="Node2D" node_paths=PackedStringArray("player_reference", "starting_room", "room_list")]
 script = ExtResource("1_1cc00")
@@ -16,6 +21,9 @@ position = Vector2(-96, 159)
 
 [node name="Camera" parent="Player/Hub" index="11" node_paths=PackedStringArray("player_cam")]
 player_cam = NodePath("../../../Camera2D")
+
+[node name="CollisionShape2D" parent="Player" index="4"]
+shape = SubResource("CapsuleShape2D_e7p3j")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 process_callback = 0

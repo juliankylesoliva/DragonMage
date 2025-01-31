@@ -165,13 +165,11 @@ position = Vector2(-256, -160)
 menu_cursor = NodePath("../MenuCursor")
 
 [node name="TipsMenu" parent="." node_paths=PackedStringArray("tip_subscreen", "menu_cursor") instance=ExtResource("9_igaqc")]
-visible = false
 position = Vector2(-256, -160)
 tip_subscreen = NodePath("../TipSubscreenMenu")
 menu_cursor = NodePath("../MenuCursor")
 
 [node name="TipSubscreenMenu" parent="." node_paths=PackedStringArray("tips_top_menu", "menu_cursor") instance=ExtResource("10_t71fq")]
-visible = false
 position = Vector2(-256, -160)
 tips_top_menu = NodePath("../TipsMenu")
 menu_cursor = NodePath("../MenuCursor")

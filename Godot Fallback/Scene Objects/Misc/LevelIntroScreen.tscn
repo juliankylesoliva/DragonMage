@@ -1,0 +1,112 @@
+[gd_scene load_steps=5 format=3 uid="uid://ca4v88yik2xe"]
+
+[ext_resource type="Texture2D" uid="uid://c0ppcrv311x36" path="res://Sprites/Backgrounds/Misc/ResultsBG_Blue.png" id="1_5l18n"]
+[ext_resource type="Script" path="res://Scripts/UI Scripts/LevelIntroScreen.gd" id="1_jf062"]
+[ext_resource type="Texture2D" uid="uid://dfe34iptk8wab" path="res://Sprites/Backgrounds/Misc/ResultsBG_Orange.png" id="2_0edad"]
+[ext_resource type="FontFile" uid="uid://blejgst41tdnl" path="res://PressStart2P.ttf" id="3_3u6kc"]
+
+[node name="LevelIntroScreen" type="Node2D" node_paths=PackedStringArray("blue_bg", "orange_bg", "chapter_header_label", "level_name_left_label", "level_name_right_label", "level_subtitle_label", "start_message_label")]
+light_mask = 64
+visibility_layer = 64
+z_index = 100
+position = Vector2(256, 160)
+script = ExtResource("1_jf062")
+blue_bg = NodePath("BlueBG")
+orange_bg = NodePath("OrangeBG")
+chapter_header_label = NodePath("ChapterHeader")
+level_name_left_label = NodePath("LevelNameHeaderLeft")
+level_name_right_label = NodePath("LevelNameHeaderRight")
+level_subtitle_label = NodePath("LevelSubtitle")
+start_message_label = NodePath("StartMessage")
+
+[node name="BlueBG" type="Sprite2D" parent="."]
+visible = false
+light_mask = 64
+visibility_layer = 64
+z_index = 7
+texture = ExtResource("1_5l18n")
+
+[node name="OrangeBG" type="Sprite2D" parent="."]
+visible = false
+light_mask = 64
+visibility_layer = 64
+z_index = 7
+texture = ExtResource("2_0edad")
+
+[node name="ChapterHeader" type="RichTextLabel" parent="."]
+visible = false
+light_mask = 64
+visibility_layer = 64
+z_index = 7
+clip_contents = false
+offset_left = -224.0
+offset_top = -70.0
+offset_right = -32.0
+offset_bottom = -48.0
+theme_override_fonts/normal_font = ExtResource("3_3u6kc")
+theme_override_font_sizes/normal_font_size = 16
+bbcode_enabled = true
+text = "Chapter #-#"
+scroll_active = false
+
+[node name="LevelNameHeaderLeft" type="RichTextLabel" parent="."]
+visible = false
+light_mask = 64
+visibility_layer = 64
+z_index = 7
+clip_contents = false
+offset_left = -224.0
+offset_top = -48.0
+offset_right = 224.0
+theme_override_fonts/normal_font = ExtResource("3_3u6kc")
+theme_override_font_sizes/normal_font_size = 40
+bbcode_enabled = true
+text = "[left][color=#5941a9]T[color=white]itle L"
+scroll_active = false
+
+[node name="LevelNameHeaderRight" type="RichTextLabel" parent="."]
+visible = false
+light_mask = 64
+visibility_layer = 64
+z_index = 7
+clip_contents = false
+offset_left = -224.0
+offset_right = 224.0
+offset_bottom = 48.0
+theme_override_fonts/normal_font = ExtResource("3_3u6kc")
+theme_override_font_sizes/normal_font_size = 40
+bbcode_enabled = true
+text = "[right][color=#f09a59]T[color=white]itle R"
+scroll_active = false
+
+[node name="LevelSubtitle" type="RichTextLabel" parent="."]
+visible = false
+light_mask = 64
+visibility_layer = 64
+z_index = 7
+clip_contents = false
+offset_left = -224.0
+offset_top = 47.0
+offset_right = 224.0
+offset_bottom = 69.0
+theme_override_fonts/normal_font = ExtResource("3_3u6kc")
+theme_override_font_sizes/normal_font_size = 16
+bbcode_enabled = true
+text = "[right]~ Subtitle -"
+scroll_active = false
+
+[node name="StartMessage" type="RichTextLabel" parent="."]
+visible = false
+light_mask = 64
+visibility_layer = 64
+z_index = 7
+clip_contents = false
+offset_left = -224.0
+offset_top = 92.0
+offset_right = 224.0
+offset_bottom = 128.0
+theme_override_fonts/normal_font = ExtResource("3_3u6kc")
+theme_override_font_sizes/normal_font_size = 24
+bbcode_enabled = true
+text = "[center]Go for it, !"
+scroll_active = false
