@@ -72,7 +72,7 @@ func do_level_intro():
 	slide_to_offset(blue_bg, Vector2.LEFT * screen_width, bg_combine_duration)
 	slide_to_offset(orange_bg, Vector2.RIGHT * screen_width, bg_combine_duration)
 	intro_finished.emit()
-	await get_tree().create_timer(1.25).timeout
+	await get_tree().create_timer(0.75).timeout
 	slide_control_to_offset(chapter_header_label, Vector2.LEFT * screen_width, bg_combine_duration)
 	slide_control_to_offset(level_name_left_label, Vector2.LEFT * screen_width, bg_combine_duration)
 	slide_control_to_offset(level_name_right_label, Vector2.RIGHT * screen_width, bg_combine_duration)
