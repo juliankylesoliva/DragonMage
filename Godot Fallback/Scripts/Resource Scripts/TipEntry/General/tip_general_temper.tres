@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="TipEntry" load_steps=2 format=3 uid="uid://ci4wv1dq7gi3j"]
+
+[ext_resource type="Script" path="res://Scripts/Resource Scripts/TipEntry/TipEntry.gd" id="1_e3x1v"]
+
+[resource]
+script = ExtResource("1_e3x1v")
+tip_title = "Watch your Temper Meter!"
+tip_description = Array[String](["Keeping the Temper Meter in the green allows you to switch between forms freely, but taking enough damage to shift the meter into the blue or orange zones will temporarily lock you out of your form-switching ability and leave you vulnerable to a fatal blow!"])

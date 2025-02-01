@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="TipEntry" load_steps=2 format=3 uid="uid://ds6gliphe0e0g"]
+
+[ext_resource type="Script" path="res://Scripts/Resource Scripts/TipEntry/TipEntry.gd" id="1_2fuoe"]
+
+[resource]
+script = ExtResource("1_2fuoe")
+tip_title = "Slipstream"
+tip_description = Array[String](["Any time your current speed is higher than the normal top speed of your current form, white sparkles will start flying past you, visually indicating that the slipstream is active.
+
+The slipstream preserves your highest speed as long as you are holding forward and you are in midair."])

@@ -6,7 +6,7 @@
 script = ExtResource("1_vjg70")
 level_scene_path = "res://Level Scenes/CH1_LV1/CH1_LV1.tscn"
 name_header = "Ch. 1-1: Dragoons' Domain"
-story_description = Array[String](["May 7, 202X - Dawn
+story_description = Array[String](["May 7, 2024 - Dawn
 
 	Knigel and I finally made it out of the prison, but it seems like a bunch of Dragoons have been waiting for us and are standing guard throughout these run-down outskirts. We could see the city of Drakageau itself in the distance, so our best bet would be to try and lose these guys in the city.
 

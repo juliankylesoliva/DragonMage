@@ -6,7 +6,7 @@
 script = ExtResource("1_8i85r")
 level_scene_path = "res://Level Scenes/CH1_LV3/CH1_LV3.tscn"
 name_header = "Ch. 1-3:  Skyline Scramble"
-story_description = Array[String](["May 7, 202X - Morning
+story_description = Array[String](["May 7, 2024 - Morning
 
 	WOW, I didn't think we'd be this high up on the rooftop of a parking garage... Knigel said that we can't risk getting captured on the city streets, so we have to stay on the rooftops. I hate to admit it, and this may seem ironic, but I'm actually afraid of heights. Although... they don't seem all that scary with Knigel by my side. I must be just as brave as him for his sake!
 
