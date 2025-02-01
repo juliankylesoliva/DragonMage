@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://dsnxfjbl38ytd"]
+[gd_scene load_steps=25 format=3 uid="uid://dsnxfjbl38ytd"]
 
 [ext_resource type="Script" path="res://Scripts/UI Scripts/TipsMenu.gd" id="1_br7dr"]
 [ext_resource type="FontFile" uid="uid://blejgst41tdnl" path="res://PressStart2P.ttf" id="1_rtn30"]
@@ -9,12 +9,21 @@
 [ext_resource type="Resource" uid="uid://bcnd2u3hhl3qe" path="res://Scripts/Resource Scripts/TipEntry/Mage/tip_mage_glide.tres" id="4_ncx85"]
 [ext_resource type="Resource" uid="uid://ci4wv1dq7gi3j" path="res://Scripts/Resource Scripts/TipEntry/General/tip_general_temper.tres" id="4_xs212"]
 [ext_resource type="Resource" uid="uid://g5r8j2uij0dj" path="res://Scripts/Resource Scripts/TipEntry/Mage/tip_mage_walljump.tres" id="5_4nvvv"]
+[ext_resource type="Resource" uid="uid://ced3k6yc8oset" path="res://Scripts/Resource Scripts/TipEntry/General/tip_general_switching_safely.tres" id="5_7e2vt"]
 [ext_resource type="Resource" uid="uid://b1kxyyh2ypgps" path="res://Scripts/Resource Scripts/TipEntry/Dragon/tip_dragon_jump.tres" id="6_jhhg0"]
 [ext_resource type="Resource" uid="uid://bo1xy4fufn68f" path="res://Scripts/Resource Scripts/TipEntry/Dragon/tip_dragon_wings.tres" id="7_fktk4"]
+[ext_resource type="Resource" uid="uid://d2eqix0pohkd6" path="res://Scripts/Resource Scripts/TipEntry/Mage/tip_mage_star_inertia.tres" id="8_cm23t"]
 [ext_resource type="Resource" uid="uid://bhsonam0fljfa" path="res://Scripts/Resource Scripts/TipEntry/Dragon/tip_dragon_pivot.tres" id="8_g63tk"]
+[ext_resource type="Resource" uid="uid://mgpwdeif3bsl" path="res://Scripts/Resource Scripts/TipEntry/Mage/tip_mage_star_throw.tres" id="9_mv47w"]
+[ext_resource type="Resource" uid="uid://di1aljvyujhdc" path="res://Scripts/Resource Scripts/TipEntry/Mage/tip_mage_boost.tres" id="10_pehxb"]
 [ext_resource type="Resource" uid="uid://cyiaqutkska2b" path="res://Scripts/Resource Scripts/TipEntry/Fun/tip_fun_name.tres" id="11_pm0cy"]
+[ext_resource type="Resource" uid="uid://c1uvuse2grvua" path="res://Scripts/Resource Scripts/TipEntry/Mage/tip_mage_boost_cancel.tres" id="11_s7737"]
 [ext_resource type="Resource" uid="uid://bxr4sq870o6v7" path="res://Scripts/Resource Scripts/TipEntry/Fun/tip_fun_food.tres" id="11_wol70"]
 [ext_resource type="Resource" uid="uid://drnuriprey6e5" path="res://Scripts/Resource Scripts/TipEntry/Fun/tip_fun_bday.tres" id="12_cf5gc"]
+[ext_resource type="Resource" uid="uid://33lkf7e6pd1l" path="res://Scripts/Resource Scripts/TipEntry/Dragon/tip_dragon_tackle_wall.tres" id="15_vm456"]
+[ext_resource type="Resource" uid="uid://7qdc1v7vkvjv" path="res://Scripts/Resource Scripts/TipEntry/Dragon/tip_dragon_tackle_offwall.tres" id="16_3ewjv"]
+[ext_resource type="Resource" uid="uid://drmayip8a6rj5" path="res://Scripts/Resource Scripts/TipEntry/Dragon/tip_dragon_vault.tres" id="17_grjf7"]
+[ext_resource type="Resource" uid="uid://b5frc1xhso1rm" path="res://Scripts/Resource Scripts/TipEntry/Dragon/tip_dragon_popup.tres" id="18_2lfdk"]
 
 [node name="TipsMenu" type="Node2D" node_paths=PackedStringArray("category_text_label", "option_labels")]
 visible = false
@@ -22,9 +31,9 @@ script = ExtResource("1_br7dr")
 category_text_label = NodePath("CategoryTextLabel")
 option_labels = [NodePath("TipTitleTextLabel1"), NodePath("TipTitleTextLabel2"), NodePath("TipTitleTextLabel3"), NodePath("TipTitleTextLabel4"), NodePath("TipTitleTextLabel5")]
 category_names = Array[String](["~ General Guidance -", "~ Mage Mastery ~", "- Dragon Drills -", "* Fun Facts *"])
-general_tips = Array[Resource("res://Scripts/Resource Scripts/TipEntry/TipEntry.gd")]([ExtResource("2_wvtcj"), ExtResource("3_jgvc7"), ExtResource("4_xs212")])
-mage_tips = Array[Resource("res://Scripts/Resource Scripts/TipEntry/TipEntry.gd")]([ExtResource("3_xnomb"), ExtResource("4_ncx85"), ExtResource("5_4nvvv")])
-dragon_tips = Array[Resource("res://Scripts/Resource Scripts/TipEntry/TipEntry.gd")]([ExtResource("6_jhhg0"), ExtResource("7_fktk4"), ExtResource("8_g63tk")])
+general_tips = Array[Resource("res://Scripts/Resource Scripts/TipEntry/TipEntry.gd")]([ExtResource("4_xs212"), ExtResource("2_wvtcj"), ExtResource("3_jgvc7"), ExtResource("5_7e2vt")])
+mage_tips = Array[Resource("res://Scripts/Resource Scripts/TipEntry/TipEntry.gd")]([ExtResource("3_xnomb"), ExtResource("4_ncx85"), ExtResource("5_4nvvv"), ExtResource("8_cm23t"), ExtResource("9_mv47w"), ExtResource("10_pehxb"), ExtResource("11_s7737")])
+dragon_tips = Array[Resource("res://Scripts/Resource Scripts/TipEntry/TipEntry.gd")]([ExtResource("6_jhhg0"), ExtResource("7_fktk4"), ExtResource("8_g63tk"), ExtResource("15_vm456"), ExtResource("16_3ewjv"), ExtResource("17_grjf7"), ExtResource("18_2lfdk")])
 fun_tips = Array[Resource("res://Scripts/Resource Scripts/TipEntry/TipEntry.gd")]([ExtResource("11_pm0cy"), ExtResource("11_wol70"), ExtResource("12_cf5gc")])
 max_secondary_selections = 4
 enable_secondary_wraparound = true
@@ -77,14 +86,14 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = 48.0
-offset_top = 105.0
+offset_top = 108.0
 offset_right = 464.0
-offset_bottom = 119.0
+offset_bottom = 116.0
 grow_horizontal = 2
 grow_vertical = 2
-pivot_offset = Vector2(208, 7)
+pivot_offset = Vector2(208, 4)
 theme_override_fonts/normal_font = ExtResource("1_rtn30")
-theme_override_font_sizes/normal_font_size = 16
+theme_override_font_sizes/normal_font_size = 8
 bbcode_enabled = true
 text = "[left]1. Tip Title Here"
 scroll_active = false
@@ -98,14 +107,14 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = 48.0
-offset_top = 137.0
+offset_top = 140.0
 offset_right = 464.0
-offset_bottom = 151.0
+offset_bottom = 148.0
 grow_horizontal = 2
 grow_vertical = 2
-pivot_offset = Vector2(208, 7)
+pivot_offset = Vector2(208, 4)
 theme_override_fonts/normal_font = ExtResource("1_rtn30")
-theme_override_font_sizes/normal_font_size = 16
+theme_override_font_sizes/normal_font_size = 8
 bbcode_enabled = true
 text = "[left]2. Tip Title Here"
 scroll_active = false
@@ -119,14 +128,14 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = 48.0
-offset_top = 169.0
+offset_top = 172.0
 offset_right = 464.0
-offset_bottom = 183.0
+offset_bottom = 180.0
 grow_horizontal = 2
 grow_vertical = 2
-pivot_offset = Vector2(208, 7)
+pivot_offset = Vector2(208, 4)
 theme_override_fonts/normal_font = ExtResource("1_rtn30")
-theme_override_font_sizes/normal_font_size = 16
+theme_override_font_sizes/normal_font_size = 8
 bbcode_enabled = true
 text = "[left]3. Tip Title Here"
 scroll_active = false
@@ -140,14 +149,14 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = 48.0
-offset_top = 201.0
+offset_top = 204.0
 offset_right = 464.0
-offset_bottom = 215.0
+offset_bottom = 212.0
 grow_horizontal = 2
 grow_vertical = 2
-pivot_offset = Vector2(208, 7)
+pivot_offset = Vector2(208, 4)
 theme_override_fonts/normal_font = ExtResource("1_rtn30")
-theme_override_font_sizes/normal_font_size = 16
+theme_override_font_sizes/normal_font_size = 8
 bbcode_enabled = true
 text = "[left]4. Tip Title Here"
 scroll_active = false
@@ -161,14 +170,14 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = 48.0
-offset_top = 233.0
+offset_top = 236.0
 offset_right = 464.0
-offset_bottom = 247.0
+offset_bottom = 244.0
 grow_horizontal = 2
 grow_vertical = 2
-pivot_offset = Vector2(208, 7)
+pivot_offset = Vector2(208, 4)
 theme_override_fonts/normal_font = ExtResource("1_rtn30")
-theme_override_font_sizes/normal_font_size = 16
+theme_override_font_sizes/normal_font_size = 8
 bbcode_enabled = true
 text = "[left]5. Tip Title Here"
 scroll_active = false

@@ -7,4 +7,6 @@ script = ExtResource("1_2fuoe")
 tip_title = "Slipstream"
 tip_description = Array[String](["Any time your current speed is higher than the normal top speed of your current form, white sparkles will start flying past you, visually indicating that the slipstream is active.
 
-The slipstream preserves your highest speed as long as you are holding forward and you are in midair."])
+The slipstream preserves your highest speed as long as you are holding forward and you are in midair.
+
+The speed preserved by the slipstream carries into moves like your grounded jump (as a mage), wall jump, wall climb, and wall vault."])

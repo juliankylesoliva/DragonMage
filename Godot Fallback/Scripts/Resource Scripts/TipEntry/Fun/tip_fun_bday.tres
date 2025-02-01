@@ -4,5 +4,5 @@
 
 [resource]
 script = ExtResource("1_lo4x8")
-tip_title = "MD's Birthday"
+tip_title = "Magli Draelyn's Birthday"
 tip_description = Array[String](["Magli Draelyn was born on February 22nd, 2000. There sure are a lot of twos in that date, and during the year of the dragon, at that!"])

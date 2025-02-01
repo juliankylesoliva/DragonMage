@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="TipEntry" load_steps=2 format=3 uid="uid://d2eqix0pohkd6"]
+
+[ext_resource type="Script" path="res://Scripts/Resource Scripts/TipEntry/TipEntry.gd" id="1_gwx2q"]
+
+[resource]
+script = ExtResource("1_gwx2q")
+tip_title = "Magic Star Inertia"
+tip_description = Array[String](["As a mage, the Magic Star carries some of your horizontal momentum when thrown. Gain a little more throwing distance by getting a running start!"])

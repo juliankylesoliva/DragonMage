@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="TipEntry" load_steps=2 format=3 uid="uid://di1aljvyujhdc"]
+
+[ext_resource type="Script" path="res://Scripts/Resource Scripts/TipEntry/TipEntry.gd" id="1_ijomj"]
+
+[resource]
+script = ExtResource("1_ijomj")
+tip_title = "Star Boost Momentum"
+tip_description = Array[String](["As a mage, the Magic Star's explosion only adds additional momentum if you are already moving, so it is best to detonate the star as soon as you run past it or immediately after jumping."])

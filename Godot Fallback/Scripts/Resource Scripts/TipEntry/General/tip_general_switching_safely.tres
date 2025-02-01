@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="TipEntry" load_steps=2 format=3 uid="uid://ced3k6yc8oset"]
+
+[ext_resource type="Script" path="res://Scripts/Resource Scripts/TipEntry/TipEntry.gd" id="1_3n8qe"]
+
+[resource]
+script = ExtResource("1_3n8qe")
+tip_title = "Switch Forms Safely!"
+tip_description = Array[String](["Taking damage while switching forms will force you to switch back and become vulnerable to a fatal blow!"])

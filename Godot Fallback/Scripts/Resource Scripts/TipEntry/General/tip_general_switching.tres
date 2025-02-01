@@ -4,7 +4,7 @@
 
 [resource]
 script = ExtResource("1_nb22t")
-tip_title = "Switch Forms Often!"
+tip_title = "When in Doubt, Switch Forms!"
 tip_description = Array[String](["Switching forms isn't just for clearing specific obstacles; it can also aid your movement! Additionally, your horizontal momentum is preserved between forms.
 
 Try switching forms in midair and use all of your midair and wall abilities to maximize airtime and speed or to recover from mistakes."])

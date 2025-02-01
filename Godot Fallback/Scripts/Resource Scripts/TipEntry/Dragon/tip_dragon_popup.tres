@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="TipEntry" load_steps=2 format=3 uid="uid://b5frc1xhso1rm"]
+
+[ext_resource type="Script" path="res://Scripts/Resource Scripts/TipEntry/TipEntry.gd" id="1_w373t"]
+
+[resource]
+script = ExtResource("1_w373t")
+tip_title = "Last-Ditch Pop-Up"
+tip_description = Array[String](["As a dragon, holding [Jump]/[Up] as you are about to run out of climbing speed allows you to pop-up for a little bit of extra height at the last possible second."])

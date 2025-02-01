@@ -4,5 +4,5 @@
 
 [resource]
 script = ExtResource("1_eb8e4")
-tip_title = "MD's Favorite Food"
+tip_title = "Magli Draelyn's Favorite Food"
 tip_description = Array[String](["Magli Draelyn LOVES eating dragonfruit; she even eats them with the skin still on! That might sound strange, but as a half-dragon, her teeth are sharp enough to chew through thick dragonfruit skin like it's nothing!"])

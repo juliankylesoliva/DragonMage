@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="TipEntry" load_steps=2 format=3 uid="uid://mgpwdeif3bsl"]
+
+[ext_resource type="Script" path="res://Scripts/Resource Scripts/TipEntry/TipEntry.gd" id="1_mboi4"]
+
+[resource]
+script = ExtResource("1_mboi4")
+tip_title = "Throwing the Magic Star"
+tip_description = Array[String](["As a mage, you can throw the Magic Star while doing almost anything (except crouching). Throw it while standing, running, jumping, gliding, or even while wall sliding!"])
