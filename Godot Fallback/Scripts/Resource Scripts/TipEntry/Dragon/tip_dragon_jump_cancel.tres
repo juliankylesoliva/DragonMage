@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="TipEntry" load_steps=2 format=3 uid="uid://fj060s2t6i8p"]
+
+[ext_resource type="Script" path="res://Scripts/Resource Scripts/TipEntry/TipEntry.gd" id="1_eokti"]
+
+[resource]
+script = ExtResource("1_eokti")
+tip_title = "Jumping out of a Tackle/Slide"
+tip_description = Array[String](["As a dragon, hold forward and press [Jump] during the end of your Fire Tackle or while sliding to jump out of these actions without losing too much speed."])

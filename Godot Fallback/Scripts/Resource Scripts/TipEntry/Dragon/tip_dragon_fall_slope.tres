@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="TipEntry" load_steps=2 format=3 uid="uid://dukqrdtlmxe1u"]
+
+[ext_resource type="Script" path="res://Scripts/Resource Scripts/TipEntry/TipEntry.gd" id="1_fp6ow"]
+
+[resource]
+script = ExtResource("1_fp6ow")
+tip_title = "Fast Falling on Slopes"
+tip_description = Array[String](["As a dragon, holding [Crouch] as you land on a slope from a fast fall will allow you to instantly start sliding down the slope."])

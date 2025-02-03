@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="TipEntry" load_steps=2 format=3 uid="uid://ct3lnftbg5uu4"]
+
+[ext_resource type="Script" path="res://Scripts/Resource Scripts/TipEntry/TipEntry.gd" id="1_q3f81"]
+
+[resource]
+script = ExtResource("1_q3f81")
+tip_title = "Fireball Buffering"
+tip_description = Array[String](["As a dragon, you need to have traveled a short distance with the Fire Tackle before you can launch a fireball. Pressing [Attack] before reaching the required distance will allow you to launch the fireball as early as possible.
+
+This is indicated by a small. white fireball outline turning solid."])

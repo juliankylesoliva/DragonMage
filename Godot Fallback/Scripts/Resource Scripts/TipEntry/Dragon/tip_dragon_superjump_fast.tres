@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="TipEntry" load_steps=2 format=3 uid="uid://wkl0iugruc1s"]
+
+[ext_resource type="Script" path="res://Scripts/Resource Scripts/TipEntry/TipEntry.gd" id="1_2l0ya"]
+
+[resource]
+script = ExtResource("1_2l0ya")
+tip_title = "A Faster Way to Super Jump"
+tip_description = Array[String](["As a dragon, landing on flat ground from a fast fall gives you a short window of time to perform a Super Jump."])

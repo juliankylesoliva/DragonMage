@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="TipEntry" load_steps=2 format=3 uid="uid://dii35ynvdbb4g"]
+
+[ext_resource type="Script" path="res://Scripts/Resource Scripts/TipEntry/TipEntry.gd" id="1_4chu4"]
+
+[resource]
+script = ExtResource("1_4chu4")
+tip_title = "Sliding out of a Fire Tackle"
+tip_description = Array[String](["As a dragon, after travelling a short distance with the Fire Tackle, press [Crouch] to start sliding out of it."])

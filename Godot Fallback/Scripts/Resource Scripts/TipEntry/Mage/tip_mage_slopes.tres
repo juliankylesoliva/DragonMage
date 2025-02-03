@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="TipEntry" load_steps=2 format=3 uid="uid://de3tbdqnmg65r"]
+
+[ext_resource type="Script" path="res://Scripts/Resource Scripts/TipEntry/TipEntry.gd" id="1_ntau8"]
+
+[resource]
+script = ExtResource("1_ntau8")
+tip_title = "Landing on Slopes"
+tip_description = Array[String](["As a mage, landing on a slope while moving forward will alter your slipstream speed depending on the slope's steepness and whether you are facing down or up the slope."])
