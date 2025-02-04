@@ -5,6 +5,6 @@
 [resource]
 script = ExtResource("1_nmag6")
 tip_title = "Diminishing Star Boost"
-tip_description = Array[String](["As a mage, it is possible to stack Star Boost momentum while moving by repeatedly pressing [Attack] while holding [Move Down] while in midair, but the amount of horizontal momentum gained from the blast reduced proportionally to how much faster you are traveling compared to your normal speed.
+tip_description = Array[String](["As a mage, it is possible to stack Star Boost momentum while moving by repeatedly pressing [Attack] while holding [Move Down] while in midair, but the amount of horizontal momentum added from the blast reduces proportionally to how much faster you are traveling compared to your normal speed.
 
 For example, moving twice (2x) as fast as your normal speed gives you half (x1/2) as much boost."])

@@ -1,11 +1,113 @@
-[gd_scene load_steps=5 format=3 uid="uid://ca4v88yik2xe"]
+[gd_scene load_steps=21 format=3 uid="uid://ca4v88yik2xe"]
 
 [ext_resource type="Texture2D" uid="uid://c0ppcrv311x36" path="res://Sprites/Backgrounds/Misc/ResultsBG_Blue.png" id="1_5l18n"]
 [ext_resource type="Script" path="res://Scripts/UI Scripts/LevelIntroScreen.gd" id="1_jf062"]
 [ext_resource type="Texture2D" uid="uid://dfe34iptk8wab" path="res://Sprites/Backgrounds/Misc/ResultsBG_Orange.png" id="2_0edad"]
+[ext_resource type="Texture2D" uid="uid://hnslqgfy1emj" path="res://Sprites/UI/MagliRunSilhouette.png" id="3_2quip"]
 [ext_resource type="FontFile" uid="uid://blejgst41tdnl" path="res://PressStart2P.ttf" id="3_3u6kc"]
+[ext_resource type="Texture2D" uid="uid://bkqm6n26bs747" path="res://Sprites/UI/DraelynWalkSilhouette.png" id="5_wvigp"]
 
-[node name="LevelIntroScreen" type="Node2D" node_paths=PackedStringArray("blue_bg", "orange_bg", "chapter_header_label", "level_name_left_label", "level_name_right_label", "level_subtitle_label", "start_message_label")]
+[sub_resource type="AtlasTexture" id="AtlasTexture_glt2r"]
+atlas = ExtResource("3_2quip")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_np0t2"]
+atlas = ExtResource("3_2quip")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_iymlb"]
+atlas = ExtResource("3_2quip")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6ymxy"]
+atlas = ExtResource("3_2quip")
+region = Rect2(192, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_svxk8"]
+atlas = ExtResource("3_2quip")
+region = Rect2(256, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sfval"]
+atlas = ExtResource("3_2quip")
+region = Rect2(320, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_qj3ho"]
+animations = [{
+"frames": [{
+"duration": 6.0,
+"texture": SubResource("AtlasTexture_glt2r")
+}, {
+"duration": 6.0,
+"texture": SubResource("AtlasTexture_np0t2")
+}, {
+"duration": 6.0,
+"texture": SubResource("AtlasTexture_iymlb")
+}, {
+"duration": 6.0,
+"texture": SubResource("AtlasTexture_6ymxy")
+}, {
+"duration": 6.0,
+"texture": SubResource("AtlasTexture_svxk8")
+}, {
+"duration": 6.0,
+"texture": SubResource("AtlasTexture_sfval")
+}],
+"loop": true,
+"name": &"MagliMoveSilhouette",
+"speed": 60.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ji2u4"]
+atlas = ExtResource("5_wvigp")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_216st"]
+atlas = ExtResource("5_wvigp")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fut5d"]
+atlas = ExtResource("5_wvigp")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2ydw2"]
+atlas = ExtResource("5_wvigp")
+region = Rect2(192, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_841ql"]
+atlas = ExtResource("5_wvigp")
+region = Rect2(256, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_trnfx"]
+atlas = ExtResource("5_wvigp")
+region = Rect2(320, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_q0f4c"]
+animations = [{
+"frames": [{
+"duration": 9.0,
+"texture": SubResource("AtlasTexture_ji2u4")
+}, {
+"duration": 9.0,
+"texture": SubResource("AtlasTexture_216st")
+}, {
+"duration": 9.0,
+"texture": SubResource("AtlasTexture_fut5d")
+}, {
+"duration": 9.0,
+"texture": SubResource("AtlasTexture_2ydw2")
+}, {
+"duration": 9.0,
+"texture": SubResource("AtlasTexture_841ql")
+}, {
+"duration": 9.0,
+"texture": SubResource("AtlasTexture_trnfx")
+}],
+"loop": true,
+"name": &"DraelynMoveSilhouette",
+"speed": 60.0
+}]
+
+[node name="LevelIntroScreen" type="Node2D" node_paths=PackedStringArray("blue_bg", "orange_bg", "mage_silhouette", "dragon_silhouette", "chapter_header_label", "level_name_left_label", "level_name_right_label", "level_subtitle_label", "start_message_label")]
 light_mask = 64
 visibility_layer = 64
 z_index = 100
@@ -13,6 +115,9 @@ position = Vector2(256, 160)
 script = ExtResource("1_jf062")
 blue_bg = NodePath("BlueBG")
 orange_bg = NodePath("OrangeBG")
+mage_silhouette = NodePath("BlueBG/MageSilhouette")
+dragon_silhouette = NodePath("OrangeBG/DragonSilhouette")
+start_cheers = Array[String](["Go for it", "Make haste", "Mess em' up", "Go forth", "Get em' good", "It's go time", "Let's move", "Get ready", "You got this", "Stay strong"])
 chapter_header_label = NodePath("ChapterHeader")
 level_name_left_label = NodePath("LevelNameHeaderLeft")
 level_name_right_label = NodePath("LevelNameHeaderRight")
@@ -21,17 +126,36 @@ start_message_label = NodePath("StartMessage")
 
 [node name="BlueBG" type="Sprite2D" parent="."]
 visible = false
+clip_children = 2
 light_mask = 64
 visibility_layer = 64
 z_index = 7
 texture = ExtResource("1_5l18n")
 
+[node name="MageSilhouette" type="AnimatedSprite2D" parent="BlueBG"]
+position = Vector2(-416, 3.8147e-06)
+scale = Vector2(5, 5)
+sprite_frames = SubResource("SpriteFrames_qj3ho")
+animation = &"MagliMoveSilhouette"
+autoplay = "MagliMoveSilhouette"
+frame_progress = 0.603138
+
 [node name="OrangeBG" type="Sprite2D" parent="."]
 visible = false
+clip_children = 2
 light_mask = 64
 visibility_layer = 64
 z_index = 7
 texture = ExtResource("2_0edad")
+
+[node name="DragonSilhouette" type="AnimatedSprite2D" parent="OrangeBG"]
+position = Vector2(-416, 3.8147e-06)
+scale = Vector2(5, 5)
+sprite_frames = SubResource("SpriteFrames_q0f4c")
+animation = &"DraelynMoveSilhouette"
+autoplay = "DraelynMoveSilhouette"
+frame_progress = 0.186661
+offset = Vector2(-2, 0)
 
 [node name="ChapterHeader" type="RichTextLabel" parent="."]
 visible = false
@@ -101,9 +225,9 @@ light_mask = 64
 visibility_layer = 64
 z_index = 7
 clip_contents = false
-offset_left = -224.0
+offset_left = -256.0
 offset_top = 92.0
-offset_right = 224.0
+offset_right = 256.0
 offset_bottom = 128.0
 theme_override_fonts/normal_font = ExtResource("3_3u6kc")
 theme_override_font_sizes/normal_font_size = 24
