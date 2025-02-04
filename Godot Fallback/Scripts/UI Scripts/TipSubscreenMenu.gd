@@ -14,7 +14,7 @@ func on_menu_activation():
 	selected_tip = tips_top_menu.get_selected_tip()
 	max_selections = selected_tip.tip_description.size()
 	tip_title_label.text = ("[left]%s" % selected_tip.tip_title)
-	tip_desc_label.set_raw_text("[left]%s" % selected_tip.tip_description[current_selection])
+	update_description()
 
 func on_selection_change():
 	update_description()
@@ -35,4 +35,4 @@ func on_menu_cancel():
 		menu_cursor.show()
 
 func update_description():
-	tip_desc_label.text = ("[left]%s" % selected_tip.tip_description[current_selection])
+	tip_desc_label.set_raw_text("[left]{tip}\n\n({current}/{max})".format({"tip" : selected_tip.tip_description[current_selection], "current" : (current_selection + 1), "max" : selected_tip.tip_description.size()}))

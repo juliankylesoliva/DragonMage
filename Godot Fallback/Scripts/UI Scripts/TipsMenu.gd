@@ -6,6 +6,8 @@ class_name TipsMenu
 
 @export var option_labels : Array[RichTextLabel]
 
+@export var page_number_footer : RichTextLabel
+
 @export var category_names : Array[String]
 
 @export var general_tips : Array[TipEntry]
@@ -125,6 +127,7 @@ func update_page_selections():
 			option_labels[i].set_visible(false)
 	if (current_selection >= max_selections):
 		current_selection = (max_selections - 1)
+	page_number_footer.text = "[center](Page {current}/{max})".format({"current" : (current_page_index + 1), "max" : max_pages})
 
 func get_selected_tip():
 	return get_current_category_entries()[current_selection + (current_page_index * option_labels.size())]

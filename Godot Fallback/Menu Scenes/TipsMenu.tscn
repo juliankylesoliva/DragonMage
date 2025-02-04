@@ -36,11 +36,12 @@
 [ext_resource type="Resource" uid="uid://dukqrdtlmxe1u" path="res://Scripts/Resource Scripts/TipEntry/Dragon/tip_dragon_fall_slope.tres" id="29_jkvty"]
 [ext_resource type="Resource" uid="uid://wkl0iugruc1s" path="res://Scripts/Resource Scripts/TipEntry/Dragon/tip_dragon_superjump_fast.tres" id="30_x6t0d"]
 
-[node name="TipsMenu" type="Node2D" node_paths=PackedStringArray("category_text_label", "option_labels")]
+[node name="TipsMenu" type="Node2D" node_paths=PackedStringArray("category_text_label", "option_labels", "page_number_footer")]
 visible = false
 script = ExtResource("1_br7dr")
 category_text_label = NodePath("CategoryTextLabel")
 option_labels = [NodePath("TipTitleTextLabel1"), NodePath("TipTitleTextLabel2"), NodePath("TipTitleTextLabel3"), NodePath("TipTitleTextLabel4"), NodePath("TipTitleTextLabel5")]
+page_number_footer = NodePath("PageNumberFooter")
 category_names = Array[String](["~ General Guidance -", "~ Mage Mastery ~", "- Dragon Drills -", "* Fun Facts *"])
 general_tips = Array[Resource("res://Scripts/Resource Scripts/TipEntry/TipEntry.gd")]([ExtResource("4_xs212"), ExtResource("2_wvtcj"), ExtResource("3_jgvc7"), ExtResource("5_7e2vt")])
 mage_tips = Array[Resource("res://Scripts/Resource Scripts/TipEntry/TipEntry.gd")]([ExtResource("3_xnomb"), ExtResource("4_ncx85"), ExtResource("5_4nvvv"), ExtResource("8_cm23t"), ExtResource("9_mv47w"), ExtResource("10_pehxb"), ExtResource("11_s7737"), ExtResource("13_psw3w"), ExtResource("14_nnkjc")])
@@ -191,6 +192,27 @@ theme_override_fonts/normal_font = ExtResource("1_rtn30")
 theme_override_font_sizes/normal_font_size = 8
 bbcode_enabled = true
 text = "[left]5. Tip Title Here"
+scroll_active = false
+shortcut_keys_enabled = false
+
+[node name="PageNumberFooter" type="RichTextLabel" parent="."]
+clip_contents = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 48.0
+offset_top = 256.0
+offset_right = 464.0
+offset_bottom = 264.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(208, 4)
+theme_override_fonts/normal_font = ExtResource("1_rtn30")
+theme_override_font_sizes/normal_font_size = 8
+bbcode_enabled = true
+text = "[center](Page #/#)"
 scroll_active = false
 shortcut_keys_enabled = false
 
