@@ -19,14 +19,17 @@ func state_process(_delta : float):
 		hub.jumping.update_wall_jump_lock_timer(_delta)
 	hub.jumping.ground_jump_update(_delta)
 	
+	if (hub.jumping.magic_blast_attack.is_blast_jumping and !hub.movement.is_crouching):
+		hub.animation.set_animation("MagliBoostJump")
+	
 	if (!hub.char_sprite.is_playing() and hub.char_sprite.animation == "MagliThrowAir"):
 		is_throwing = false
-		hub.animation.set_animation("{name}Jump".format({"name" : hub.form.get_current_form_name()}))
+		hub.animation.set_animation("MagliBoostJump" if hub.jumping.magic_blast_attack.is_blast_jumping and !hub.movement.is_crouching else "{name}Jump".format({"name" : hub.form.get_current_form_name()}))
 		hub.animation.set_animation_speed(0)
 	
 	if (hub.jumping.enable_crouch_jumping):
 		if (prev_is_crouching and !hub.movement.is_crouching):
-			hub.animation.set_animation("{name}Jump".format({"name" : hub.form.get_current_form_name()}))
+			hub.animation.set_animation("MagliBoostJump" if hub.jumping.magic_blast_attack.is_blast_jumping and !hub.movement.is_crouching else "{name}Jump".format({"name" : hub.form.get_current_form_name()}))
 			hub.animation.set_animation_speed(0)
 		elif (!prev_is_crouching and hub.movement.is_crouching):
 			is_throwing = false
@@ -88,7 +91,7 @@ func on_enter():
 	hub.jumping.reset_fast_fall()
 	if (state_machine.previous_state.name == "FormChanging"):
 		var char_name : String = hub.form.get_current_form_name()
-		hub.animation.set_animation("{name}Jump".format({"name" : char_name}) if !hub.movement.is_crouching else "{name}CrouchJump".format({"name" : char_name}))
+		hub.animation.set_animation("MagliBoostJump" if hub.jumping.magic_blast_attack.is_blast_jumping and !hub.movement.is_crouching else "{name}Jump".format({"name" : char_name}) if !hub.movement.is_crouching else "{name}CrouchJump".format({"name" : char_name}))
 	elif (is_throwing):
 		hub.animation.set_animation("MagliThrowAir")
 		hub.animation.set_animation_frame(1)

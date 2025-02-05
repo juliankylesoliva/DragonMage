@@ -23,12 +23,12 @@ func state_process(_delta : float):
 	
 	if (!hub.char_sprite.is_playing() and hub.char_sprite.animation == "MagliThrowAir"):
 		is_throwing = false
-		hub.animation.set_animation("{name}Fall".format({"name" : char_name}))
+		hub.animation.set_animation("MagliBoostFall" if hub.jumping.magic_blast_attack.is_blast_jumping and !hub.movement.is_crouching else "{name}Fall".format({"name" : char_name}))
 		hub.animation.set_animation_speed(1)
 	
 	if (hub.jumping.enable_crouch_jumping and !hub.jumping.is_fast_falling):
 		if (prev_is_crouching and !hub.movement.is_crouching):
-			hub.animation.set_animation("{name}Fall".format({"name" : char_name}))
+			hub.animation.set_animation("MagliBoostFall" if hub.jumping.magic_blast_attack.is_blast_jumping and !hub.movement.is_crouching else "{name}Fall".format({"name" : char_name}))
 			hub.animation.set_animation_speed(1)
 		elif (!prev_is_crouching and hub.movement.is_crouching):
 			hub.animation.set_animation("{name}CrouchFall".format({"name" : char_name}))
@@ -67,7 +67,7 @@ func state_process(_delta : float):
 			else:
 				set_next_state(state_machine.get_state_by_name("Running"))
 		else:
-			set_next_state(state_machine.get_state_by_name("Standing"))
+			set_next_state(state_machine.get_state_by_name("Running" if hub.movement.current_horizontal_velocity != 0 else "Standing"))
 	elif (hub.stomp.is_stomping_enemy()):
 		hub.stomp.do_stomp_jump()
 		set_next_state(state_machine.get_state_by_name("Jumping"))
@@ -97,7 +97,7 @@ func on_enter():
 		hub.animation.set_animation("DraelynFastFall")
 		hub.sprite_trail.activate_trail()
 	else:
-		hub.animation.set_animation("MagliThrowAir" if is_throwing else "{name}Fall".format({"name" : hub.form.get_current_form_name()}) if !hub.movement.is_crouching or !hub.jumping.enable_crouch_jumping else "{name}CrouchFall".format({"name" : hub.form.get_current_form_name()}))
+		hub.animation.set_animation("MagliThrowAir" if is_throwing else "MagliBoostFall" if hub.jumping.magic_blast_attack.is_blast_jumping and !hub.movement.is_crouching else "{name}Fall".format({"name" : hub.form.get_current_form_name()}) if !hub.movement.is_crouching or !hub.jumping.enable_crouch_jumping else "{name}CrouchFall".format({"name" : hub.form.get_current_form_name()}))
 		hub.animation.set_animation_frame(1 if is_throwing else 0)
 	hub.animation.set_animation_speed(1)
 

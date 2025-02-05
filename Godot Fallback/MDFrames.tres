@@ -1,4 +1,4 @@
-[gd_resource type="SpriteFrames" load_steps=147 format=3 uid="uid://ca880xc1l2vjn"]
+[gd_resource type="SpriteFrames" load_steps=154 format=3 uid="uid://ca880xc1l2vjn"]
 
 [ext_resource type="Texture2D" uid="uid://0dwiqviols6t" path="res://Sprites/Player/DraelynChangeFail.png" id="1_c3v0n"]
 [ext_resource type="Texture2D" uid="uid://d381ahbcwydy8" path="res://Sprites/Player/DraelynCrouch.png" id="2_xm040"]
@@ -14,6 +14,7 @@
 [ext_resource type="Texture2D" uid="uid://b8ckwbp7kmd5n" path="res://Sprites/Player/MagliDraelynTransformations.png" id="12_jj8dp"]
 [ext_resource type="Texture2D" uid="uid://db87nkl35d0cg" path="res://Sprites/Player/DraelynIdleVulnerable.png" id="13_oaa1h"]
 [ext_resource type="Texture2D" uid="uid://cka8kg4bes2os" path="res://Sprites/Player/MagliChangeFail.png" id="14_afidf"]
+[ext_resource type="Texture2D" uid="uid://bl2och842e46g" path="res://Sprites/Player/MagliBoost.png" id="14_yd0kk"]
 [ext_resource type="Texture2D" uid="uid://b6iqle47ksrq6" path="res://Sprites/Player/MagliCrouch.png" id="15_hh4ma"]
 [ext_resource type="Texture2D" uid="uid://qrayeurpifu" path="res://Sprites/Player/MagliHurt.png" id="16_vhsnh"]
 [ext_resource type="Texture2D" uid="uid://d2xanhhfkwgqf" path="res://Sprites/Player/MagliDefeat.png" id="17_8iqyc"]
@@ -260,6 +261,30 @@ region = Rect2(256, 0, 64, 64)
 [sub_resource type="AtlasTexture" id="AtlasTexture_ypnyb"]
 atlas = ExtResource("5_xrv5w")
 region = Rect2(320, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_176t7"]
+atlas = ExtResource("14_yd0kk")
+region = Rect2(320, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_u0e6l"]
+atlas = ExtResource("14_yd0kk")
+region = Rect2(256, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_k2gn4"]
+atlas = ExtResource("14_yd0kk")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7b08q"]
+atlas = ExtResource("14_yd0kk")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yap4a"]
+atlas = ExtResource("14_yd0kk")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pqosb"]
+atlas = ExtResource("14_yd0kk")
+region = Rect2(192, 0, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_qx4ik"]
 atlas = ExtResource("14_afidf")
@@ -910,6 +935,39 @@ animations = [{
 }],
 "loop": true,
 "name": &"DraelynWallClimb",
+"speed": 60.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_176t7")
+}],
+"loop": false,
+"name": &"MagliBoostFall",
+"speed": 60.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_u0e6l")
+}],
+"loop": false,
+"name": &"MagliBoostJump",
+"speed": 60.0
+}, {
+"frames": [{
+"duration": 6.0,
+"texture": SubResource("AtlasTexture_k2gn4")
+}, {
+"duration": 6.0,
+"texture": SubResource("AtlasTexture_7b08q")
+}, {
+"duration": 6.0,
+"texture": SubResource("AtlasTexture_yap4a")
+}, {
+"duration": 6.0,
+"texture": SubResource("AtlasTexture_pqosb")
+}],
+"loop": true,
+"name": &"MagliBoostRun",
 "speed": 60.0
 }, {
 "frames": [{

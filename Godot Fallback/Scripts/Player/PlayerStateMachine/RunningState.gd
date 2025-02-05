@@ -2,6 +2,8 @@ extends State
 
 class_name RunningState
 
+@export var footstep_dictionary : Dictionary
+
 @export var dust_frames : Array
 
 var did_turn_spark_appear : bool = false
@@ -14,7 +16,7 @@ func state_process(_delta):
 	
 	var did_a_wavedash : bool = (hub.form.is_a_mage() and hub.state_machine.previous_state.name == "Attacking" and hub.attacks.previous_attack.name == "Dodge" and abs(hub.movement.current_horizontal_velocity) > hub.movement.top_speed)
 	var char_name : String = hub.form.get_current_form_name()
-	var anim_name : String = ("MagliThrowGround" if is_throwing and !hub.movement.is_crouching else "{name}Move" if !hub.movement.is_crouching else "MagliDodge" if did_a_wavedash else "{name}CrouchWalk")
+	var anim_name : String = ("MagliThrowGround" if is_throwing and !hub.movement.is_crouching else "MagliBoostRun" if hub.jumping.magic_blast_attack.is_blast_jumping and !hub.movement.is_crouching else "{name}Move" if !hub.movement.is_crouching else "MagliDodge" if did_a_wavedash else "{name}CrouchWalk")
 	hub.movement.check_crouch_state()
 	hub.movement.do_movement(_delta)
 	hub.movement.update_facing_direction()
@@ -33,7 +35,7 @@ func state_process(_delta):
 			did_turn_spark_appear = true
 			SoundFactory.play_sound_by_name(sound_name, hub.char_body.global_position, 0, 1, "SFX")
 	else:
-		hub.animation.set_animation_speed(hub.movement.get_speed_portion() if !is_throwing else 1.0)
+		hub.animation.set_animation_speed(hub.movement.get_speed_portion(!hub.jumping.magic_blast_attack.is_blast_jumping) if !is_throwing else 1.0)
 		did_turn_spark_appear = false
 	
 	if (hub.form.cannot_change_form()):
@@ -68,7 +70,7 @@ func on_enter():
 	did_turn_spark_appear = false
 	var prev_state_name : String = state_machine.previous_state.name
 	var char_name : String = hub.form.get_current_form_name()
-	var anim_name : String = ("{name}Move" if !hub.movement.is_crouching else "{name}CrouchWalk")
+	var anim_name : String = ("MagliBoostRun" if hub.jumping.magic_blast_attack.is_blast_jumping and !hub.movement.is_crouching else "{name}Move" if !hub.movement.is_crouching else "{name}CrouchWalk")
 	if (hub.char_body.is_on_floor() or prev_state_name == "Falling" or prev_state_name == "Jumping"):
 		hub.jumping.landing_reset()
 	hub.animation.set_animation("MagliThrowGround" if is_throwing else anim_name.format({"name" : char_name}))
@@ -79,15 +81,12 @@ func on_exit():
 
 func dust_check():
 	did_turn_spark_appear = false
-	if (hub.char_sprite.animation.contains("Move") and state_machine.current_state.name == "Running" and !hub.movement.is_crouching):
-		for i in dust_frames:
-			if (i == hub.char_sprite.frame):
-				var effect_instance = EffectFactory.get_effect("WalkingDust", hub.collisions.get_ground_point(), 1, hub.movement.get_facing_value() < 0)
-				effect_instance.rotation = hub.char_body.up_direction.angle_to(hub.char_body.get_floor_normal())
-				
-				var walk_sound : String = ("jump_magli_landing" if hub.form.is_a_mage() else "jump_draelyn_landing")
-				SoundFactory.play_sound_by_name(walk_sound, hub.char_body.global_position, 0, 1, "SFX")
-				return
+	if (hub != null and footstep_dictionary.has(hub.char_sprite.animation) and footstep_dictionary[hub.char_sprite.animation].has(hub.char_sprite.frame)):
+		var effect_instance = EffectFactory.get_effect("WalkingDust", hub.collisions.get_ground_point(), 1, hub.movement.get_facing_value() < 0)
+		effect_instance.rotation = hub.char_body.up_direction.angle_to(hub.char_body.get_floor_normal())
+		
+		var walk_sound : String = ("jump_magli_landing" if hub.form.is_a_mage() else "jump_draelyn_landing")
+		SoundFactory.play_sound_by_name(walk_sound, hub.char_body.global_position, 0, 1, "SFX")
 
 func _on_animated_sprite_2d_frame_changed():
 	dust_check()

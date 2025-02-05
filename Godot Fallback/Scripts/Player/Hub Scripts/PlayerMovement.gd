@@ -148,7 +148,7 @@ func do_movement(delta):
 				current_horizontal_velocity = move_toward(current_horizontal_velocity, target_speed * horizontal_axis, accel_delta * delta)
 			elif (hub.char_body.is_on_floor() and abs(current_horizontal_velocity) > target_speed):
 				if (current_horizontal_velocity != 0):
-					current_horizontal_velocity = move_toward(current_horizontal_velocity, target_speed * horizontal_axis, deceleration * delta)
+					current_horizontal_velocity = move_toward(current_horizontal_velocity, target_speed * horizontal_axis, deceleration * hub.jumping.magic_blast_attack.get_deceleration_modifier() * delta)
 			else:
 				pass
 		else:

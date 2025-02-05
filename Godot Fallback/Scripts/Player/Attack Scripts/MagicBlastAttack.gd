@@ -48,6 +48,8 @@ signal magic_blast_thrown
 
 @export var blast_jump_guide_arrow_offset : float = 32
 
+@export_range(0, 1) var blast_jump_deceleration_modifier : float = 0.5
+
 @export_group("Throw Velocities")
 @export var forward_throw_strength : float = 5
 @export var lob_throw_strength : float = 5
@@ -208,6 +210,9 @@ func blast_jump_update(delta : float):
 			if (blast_jump_current_temper_interval_time <= 0):
 				hub.temper.neutralize_temper_by(blast_jump_continuous_temper_increase)
 				blast_jump_current_temper_interval_time += blast_jump_temper_increase_interval
+
+func get_deceleration_modifier():
+	return (blast_jump_deceleration_modifier if !hub.movement.is_crouching and is_blast_jumping else 1.0)
 
 func _on_magic_blast_hit():
 	hub.fairy.change_current_magic_by(magic_blast_hit_magic_gain)

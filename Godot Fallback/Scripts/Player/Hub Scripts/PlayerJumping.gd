@@ -306,7 +306,7 @@ func start_ground_jump():
 	
 	var char_name : String = hub.form.get_current_form_name()
 	var is_throwing : bool = hub.char_sprite.animation.contains("MagliThrow")
-	hub.animation.set_animation("MagliThrowAir" if is_throwing else "{name}Jump".format({"name" : char_name}) if !hub.movement.is_crouching else "{name}CrouchJump".format({"name" : char_name}))
+	hub.animation.set_animation("MagliThrowAir" if is_throwing else "MagliBoostJump" if hub.jumping.magic_blast_attack.is_blast_jumping and !hub.movement.is_crouching else "{name}Jump".format({"name" : char_name}) if !hub.movement.is_crouching else "{name}CrouchJump".format({"name" : char_name}))
 	hub.animation.set_animation_frame(1 if is_throwing else 0)
 	hub.animation.set_animation_speed(1)
 	

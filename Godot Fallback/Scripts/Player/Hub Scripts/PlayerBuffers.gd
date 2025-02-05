@@ -161,7 +161,7 @@ func check_speed_preservation_buffer(delta):
 		refresh_speed_preservation_buffer()
 	else:
 		if (hub.state_machine.current_state.name != "FormChanging"):
-			if (is_speed_preservation_buffer_active() and (hub.char_body.is_on_floor() or hub.char_body.is_on_wall() or hub.char_body.velocity.x == 0 or hub.state_machine.current_state.name == "WallSliding" or hub.state_machine.current_state.name == "WallClimbing" or hub.state_machine.current_state.name == "WallVaulting")):
+			if (is_speed_preservation_buffer_active() and ((hub.char_body.is_on_floor() and (!hub.jumping.magic_blast_attack.is_blast_jumping or abs(hub.movement.current_horizontal_velocity) <= hub.movement.top_speed)) or hub.char_body.is_on_wall() or hub.char_body.velocity.x == 0 or hub.state_machine.current_state.name == "WallSliding" or hub.state_machine.current_state.name == "WallClimbing" or hub.state_machine.current_state.name == "WallVaulting")):
 				speed_preservation_buffer_time_left = move_toward(speed_preservation_buffer_time_left, 0, delta)
 			if (!is_speed_preservation_buffer_active() or hub.movement.is_turning() or (hub.get_input_vector().x == 0 and hub.state_machine.current_state.name != "WallSliding" and hub.state_machine.current_state.name != "WallClimbing" and hub.state_machine.current_state.name != "WallVaulting" and !hub.jumping.is_wall_jump_lock_timer_active())):
 				highest_speed = current_horizontal_speed
