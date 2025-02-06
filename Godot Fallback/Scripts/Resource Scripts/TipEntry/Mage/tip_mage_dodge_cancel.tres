@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="TipEntry" load_steps=2 format=3 uid="uid://bp7my88ay0o2x"]
+
+[ext_resource type="Script" path="res://Scripts/Resource Scripts/TipEntry/TipEntry.gd" id="1_iw847"]
+
+[resource]
+script = ExtResource("1_iw847")
+tip_title = "Landing While Dodging"
+tip_description = Array[String](["As a mage, dodging in midair will send you diagonally downwards, and touching the ground like this will cancel the invincibility, but the remaining speed from the dodge carries over.
+
+Try doing a midair dodge close to the ground for a quick burst of speed--you might even want to do this repeatedly to move through small spaces faster!"])

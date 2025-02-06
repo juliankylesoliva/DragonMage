@@ -1,4 +1,4 @@
-[gd_resource type="SpriteFrames" load_steps=154 format=3 uid="uid://ca880xc1l2vjn"]
+[gd_resource type="SpriteFrames" load_steps=157 format=3 uid="uid://ca880xc1l2vjn"]
 
 [ext_resource type="Texture2D" uid="uid://0dwiqviols6t" path="res://Sprites/Player/DraelynChangeFail.png" id="1_c3v0n"]
 [ext_resource type="Texture2D" uid="uid://d381ahbcwydy8" path="res://Sprites/Player/DraelynCrouch.png" id="2_xm040"]
@@ -262,9 +262,21 @@ region = Rect2(256, 0, 64, 64)
 atlas = ExtResource("5_xrv5w")
 region = Rect2(320, 0, 64, 64)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_176t7"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_kmaqu"]
 atlas = ExtResource("14_yd0kk")
 region = Rect2(320, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1tba0"]
+atlas = ExtResource("14_yd0kk")
+region = Rect2(384, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_aksxx"]
+atlas = ExtResource("14_yd0kk")
+region = Rect2(448, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ajwci"]
+atlas = ExtResource("14_yd0kk")
+region = Rect2(512, 0, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_u0e6l"]
 atlas = ExtResource("14_yd0kk")
@@ -938,10 +950,19 @@ animations = [{
 "speed": 60.0
 }, {
 "frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_176t7")
+"duration": 9.0,
+"texture": SubResource("AtlasTexture_kmaqu")
+}, {
+"duration": 9.0,
+"texture": SubResource("AtlasTexture_1tba0")
+}, {
+"duration": 9.0,
+"texture": SubResource("AtlasTexture_aksxx")
+}, {
+"duration": 9.0,
+"texture": SubResource("AtlasTexture_ajwci")
 }],
-"loop": false,
+"loop": true,
 "name": &"MagliBoostFall",
 "speed": 60.0
 }, {

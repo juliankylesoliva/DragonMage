@@ -36,6 +36,17 @@ func _process(_delta):
 		if (player_ref.damage.do_damage_warp()):
 			EffectFactory.get_effect("EnemyContactImpact", player_ref.char_body.global_position)
 			SoundFactory.play_sound_by_name("enemy_contact_impact", player_ref.char_body.global_position, 0, 1, "SFX")
+		elif (player_ref.damage.is_player_parrying()):
+			SoundFactory.play_sound_by_name(break_sound, self.global_position, -4)
+			boss.damage_boss("PARRY", 0, Vector2.ZERO)
+			if (boss.current_armor <= 0):
+				train_horn.set_stream(train_horn_stun_sfx_stream)
+				train_horn.play()
+				train_chugging.stop()
+				train_track_clicking.stop()
+				slow_down_train()
+		else:
+			pass
 	else:
 		pass
 

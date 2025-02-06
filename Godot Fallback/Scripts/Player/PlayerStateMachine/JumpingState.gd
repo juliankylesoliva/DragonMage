@@ -21,6 +21,10 @@ func state_process(_delta : float):
 	
 	if (hub.jumping.magic_blast_attack.is_blast_jumping and !hub.movement.is_crouching):
 		hub.animation.set_animation("MagliBoostJump")
+	elif (!hub.jumping.magic_blast_attack.is_blast_jumping):
+		hub.animation.set_animation("{name}CrouchJump".format({"name" : hub.form.get_current_form_name()}) if hub.movement.is_crouching else "{name}Jump".format({"name" : hub.form.get_current_form_name()}))
+	else:
+		pass
 	
 	if (!hub.char_sprite.is_playing() and hub.char_sprite.animation == "MagliThrowAir"):
 		is_throwing = false

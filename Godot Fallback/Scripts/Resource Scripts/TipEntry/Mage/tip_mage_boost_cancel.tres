@@ -5,4 +5,4 @@
 [resource]
 script = ExtResource("1_lsbqs")
 tip_title = "Star Boost Cancelling"
-tip_description = Array[String](["As a mage, you are invincible while the Star Boost is active, but you cannot switch forms. You can instantly negate the Star Boost by gliding, dodging, sliding down a wall, touching the ground without a slipstream, or crouching on the ground."])
+tip_description = Array[String](["As a mage, you are invincible while the Star Boost is active, but you cannot switch forms. You can instantly negate the Star Boost by gliding, dodging, sliding down a wall, touching the ground without a slipstream, turning around on the ground, or crouching on the ground."])

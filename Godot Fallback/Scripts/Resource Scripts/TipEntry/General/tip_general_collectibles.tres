@@ -1,0 +1,61 @@
+[gd_resource type="Resource" script_class="TipEntry" load_steps=2 format=3 uid="uid://cqcl17cfy6yv3"]
+
+[ext_resource type="Script" path="res://Scripts/Resource Scripts/TipEntry/TipEntry.gd" id="1_7dhwv"]
+
+[resource]
+script = ExtResource("1_7dhwv")
+tip_title = "A Guide to Collectibles"
+tip_description = Array[String](["Scale Fragments
+
+These small, ashy fragments can be found scattered all across the land. They are said to have belonged to the scales of an ancient dragon who lived about a thousand years ago...
+
+These fragments react and change color when they are collected by a mage or a dragon; it might help to keep the amount of each color as equal as possible.
+
+If you ever take damage, you will lose up to ten fragments, and cannot recover them. The color you have the most of will usually be the first ones to go.
+
+Collect enough fragments in a level to receive a collection rating.", "Ancient Scales
+
+You can visually sense the presence of these scales, but they will not be tangible unless you first collect the required amount of fragments to reform them first.
+
+There are three types of scales to be found in each level: Magical, Draconic, and Balanced. Magical Scales require blue mage fragments, Draconic Scales require orange dragon fragments, and Balanced Scales require both fragment colors.
+
+Unlike fragments, you cannot drop collected scales no matter how much damage you take.", "Time Medallion
+
+If you manage to clear a stage from start to finish before the target time, you will earn a Time Medallion.
+
+While it is possible to earn every Time Medallion through pure speed alone, collecting fragments and scales may make things a lot easier.", "Time Reduction Bonus - I
+
+When you finish a level with enough fragments collected, you can reduce your clear time by up to 35% or more depending on certain factors.
+
+At least 15% or more for collecting the minimum amount of fragments--higher if more fragments were collected, but you dont need to collect ALL of them.
+
+Up to 10% for keeping the number of blue and orange fragments equal on top of collecting the minimum amount.", "Time Reduction Bonus - II
+
+Up to 10% for five possible collection ratings:
+
+- SORRY, NOTHING... (0%):
+	Less than the minimum fragments collected.
+
+- MAGE MAJORITY! (1%):
+	All or more than 2/3 of your fragments are blue.
+
+- DRAGON DOMINANT! (3%):
+	All or more than 2/3 of your fragments are orange.
+
+- KINDA BALANCED! (5%):
+	Less than 2/3 majority of each color fragment.
+
+- HALF N' HALF! (10%):
+	Amount of blue and orange fragments are equal.", "Time Reduction Bonus - III
+
+The other 15% of the clear time reduction comes from collecting the three scales:
+
+- First scale is worth 2%.
+
+- Second scale is worth 5% (7% total).
+
+- Third scale is worth 8% (15% total).
+
+Unlike the previous bonuses, you do not need to collect the minimum amount of fragments for the whole level to earn these bonuses.", "An Optional Challenge
+
+See if you can earn a HALF N' HALF! rating and get all three scales while still being fast enough to reduce your time for a Time Medallion!"])

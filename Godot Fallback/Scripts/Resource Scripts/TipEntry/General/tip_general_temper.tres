@@ -5,4 +5,4 @@
 [resource]
 script = ExtResource("1_e3x1v")
 tip_title = "Watch your Temper Meter!"
-tip_description = Array[String](["Keeping the Temper Meter in the green allows you to switch between forms freely, but taking enough damage to shift the meter into the blue or orange zones will temporarily lock you out of your form-switching ability and leave you vulnerable to a fatal blow!"])
+tip_description = Array[String](["Keeping the Temper Meter in the green allows you to switch between forms freely, but taking enough damage to shift the meter into the blue or orange critical zones will temporarily lock you out of your form-switching ability and leave you vulnerable to a fatal blow!"])

@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="TipEntry" load_steps=2 format=3 uid="uid://bumyjonl863py"]
+
+[ext_resource type="Script" path="res://Scripts/Resource Scripts/TipEntry/TipEntry.gd" id="1_b52uf"]
+
+[resource]
+script = ExtResource("1_b52uf")
+tip_title = "Knigel's Magic Meter"
+tip_description = Array[String](["Starting from Chapter 1-1, Knigel gains a magic meter that can be used for helpful abilities.
+
+Fill up the magic meter by collecting fragments and defeating enemies.
+
+If you take damage, Knigel loses up to 25% of his magic meter depending on how much magic he had stored."])

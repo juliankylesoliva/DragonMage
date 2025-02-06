@@ -218,9 +218,8 @@ magic_loss_on_damage_taken = 0.25
 [node name="Guard" type="Node" parent="Hub/Fairy"]
 script = ExtResource("11_8a08i")
 blockstun_knockback = 192.0
-parry_window_duration = 0.083
+parry_window_duration = 0.1
 parry_pose_duration = 0.5
-parry_magic_reward = 20.0
 guard_offset_from_char = Vector2(16, 0)
 invincibility_shield_scene = ExtResource("12_n03ih")
 invincibility_fairy_rotation_rate = 6.284

@@ -69,7 +69,10 @@ func damage_boss(_damage_type : StringName, _damage_strength : int, _knockback_v
 		return false
 	
 	if (current_armor > 0):
-		current_armor -= 1
+		if (_damage_type == "PARRY"):
+			current_armor = 0
+		else:
+			current_armor -= 1
 		do_post_hit_invulnerability()
 		return true
 	elif (current_health > 0):

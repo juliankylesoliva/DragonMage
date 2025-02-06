@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="TipEntry" load_steps=2 format=3 uid="uid://bt5o38p80kxks"]
+
+[ext_resource type="Script" path="res://Scripts/Resource Scripts/TipEntry/TipEntry.gd" id="1_evuh7"]
+
+[resource]
+script = ExtResource("1_evuh7")
+tip_title = "Extending Your Magic Boost"
+tip_description = Array[String](["As a mage, if you have a slipstream while being star boosted, you can extend the duration of the boost by holding forward and jumping as soon as you land on the ground.
+
+This will also preserve your speed even if you don't have the star boost, but the timing window is more lenient while star boosted due to the lower deceleration.
+
+If you lost your slipstream in the middle of your star boost, you might be able to eke out what little boost you have left by continuing to jump to stay in the air."])
