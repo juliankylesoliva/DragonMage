@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="TipEntry" load_steps=2 format=3 uid="uid://rowgukv3rnn8"]
+
+[ext_resource type="Script" path="res://Scripts/Resource Scripts/TipEntry/TipEntry.gd" id="1_mcp5b"]
+
+[resource]
+script = ExtResource("1_mcp5b")
+tip_title = "Damage Steering"
+tip_description = Array[String](["Whenever you get knocked back from taking damage, you can slightly adjust the horizontal speed of the knockback by holding [Move Left] or [Move Right]."])

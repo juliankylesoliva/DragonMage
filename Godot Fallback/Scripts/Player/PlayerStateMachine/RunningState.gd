@@ -86,7 +86,7 @@ func dust_check():
 		effect_instance.rotation = hub.char_body.up_direction.angle_to(hub.char_body.get_floor_normal())
 		
 		var walk_sound : String = ("jump_magli_landing" if hub.form.is_a_mage() else "jump_draelyn_landing")
-		SoundFactory.play_sound_by_name(walk_sound, hub.char_body.global_position, 0, 1, "SFX")
+		SoundFactory.play_sound_by_name(walk_sound, hub.char_body.global_position, 0, clampf(hub.movement.get_speed_portion(false), 1.0, 1.5) if hub.char_sprite.animation == "MagliBoostRun" else 1.0, "SFX")
 
 func _on_animated_sprite_2d_frame_changed():
 	dust_check()

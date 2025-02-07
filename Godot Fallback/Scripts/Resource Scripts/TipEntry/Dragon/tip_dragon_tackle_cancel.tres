@@ -4,5 +4,5 @@
 
 [resource]
 script = ExtResource("1_vjrte")
-tip_title = "Fire Tackling out of a Slide"
+tip_title = "Fire Tackling Out Of a Slide"
 tip_description = Array[String](["As a dragon, press [Attack] while sliding to immediately start a Fire Tackle without having to wait for the slide to end."])

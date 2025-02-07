@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="TipEntry" load_steps=2 format=3 uid="uid://8m5cq1bwj461"]
+
+[ext_resource type="Script" path="res://Scripts/Resource Scripts/TipEntry/TipEntry.gd" id="1_p1oo0"]
+
+[resource]
+script = ExtResource("1_p1oo0")
+tip_title = "Temper Dragonfruit"
+tip_description = Array[String](["A magically-cultivated species of dragonfruit that quickly shifts between three distinct colors and flavors as it ripens. Once fully ripened, the dragonfruit settles on one of three possible color-flavor pairings.
+
+The fruit also seem to have an impact on one's mood--or temper, hence the name--when eaten which can vary depending on the color as well as the consumer.
+
+The blue color is sweet and mellowing, orange is sour and enraging, and green has a satisfying combination of the two flavors while balancing out one's mood."])

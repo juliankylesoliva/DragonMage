@@ -13,9 +13,9 @@ These fragments react and change color when they are collected by a mage or a dr
 
 If you ever take damage, you will lose up to ten fragments, and cannot recover them. The color you have the most of will usually be the first ones to go.
 
-Collect enough fragments in a level to receive a collection rating.", "Ancient Scales
+Collect enough fragments in a level to receive a collection rating!", "Ancient Scales
 
-You can visually sense the presence of these scales, but they will not be tangible unless you first collect the required amount of fragments to reform them first.
+You can visually sense the presence of these scales, but they will not be tangible unless you first collect the required amount of fragments to reform them.
 
 There are three types of scales to be found in each level: Magical, Draconic, and Balanced. Magical Scales require blue mage fragments, Draconic Scales require orange dragon fragments, and Balanced Scales require both fragment colors.
 
@@ -27,13 +27,13 @@ While it is possible to earn every Time Medallion through pure speed alone, coll
 
 When you finish a level with enough fragments collected, you can reduce your clear time by up to 35% or more depending on certain factors.
 
-At least 15% or more for collecting the minimum amount of fragments--higher if more fragments were collected, but you dont need to collect ALL of them.
+At least 15% for collecting the minimum amount of fragments--higher if more fragments were collected, but you dont need to collect ALL of them.
 
 Up to 10% for keeping the number of blue and orange fragments equal on top of collecting the minimum amount.", "Time Reduction Bonus - II
 
 Up to 10% for five possible collection ratings:
 
-- SORRY, NOTHING... (0%):
+- NONE... (0%):
 	Less than the minimum fragments collected.
 
 - MAGE MAJORITY! (1%):
@@ -48,13 +48,13 @@ Up to 10% for five possible collection ratings:
 - HALF N' HALF! (10%):
 	Amount of blue and orange fragments are equal.", "Time Reduction Bonus - III
 
-The other 15% of the clear time reduction comes from collecting the three scales:
+The other 15% of the clear time reduction comes from collecting the Magical, Draconic, and Balanced scales:
 
-- First scale is worth 2%.
+- First scale you collect is worth 2%.
 
-- Second scale is worth 5% (7% total).
+- Second scale you collect is worth 5% (7% total).
 
-- Third scale is worth 8% (15% total).
+- Third scale you collect is worth 8% (15% total).
 
 Unlike the previous bonuses, you do not need to collect the minimum amount of fragments for the whole level to earn these bonuses.", "An Optional Challenge
 

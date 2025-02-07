@@ -5,4 +5,4 @@
 [resource]
 script = ExtResource("1_1eau5")
 tip_title = "Wing Jump Speed"
-tip_description = Array[String](["As a dragon, using your wing jumps in midair while holding forward will increase your speed and jump height."])
+tip_description = Array[String](["As a dragon, using your wing jumps in midair while holding forward will slightly increase your speed and jump height."])

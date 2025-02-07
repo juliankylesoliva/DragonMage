@@ -1,4 +1,4 @@
-[gd_scene load_steps=42 format=3 uid="uid://dsnxfjbl38ytd"]
+[gd_scene load_steps=44 format=3 uid="uid://dsnxfjbl38ytd"]
 
 [ext_resource type="Script" path="res://Scripts/UI Scripts/TipsMenu.gd" id="1_br7dr"]
 [ext_resource type="FontFile" uid="uid://blejgst41tdnl" path="res://PressStart2P.ttf" id="1_rtn30"]
@@ -20,6 +20,7 @@
 [ext_resource type="Resource" uid="uid://cqcl17cfy6yv3" path="res://Scripts/Resource Scripts/TipEntry/General/tip_general_collectibles.tres" id="9_awsb3"]
 [ext_resource type="Resource" uid="uid://mgpwdeif3bsl" path="res://Scripts/Resource Scripts/TipEntry/Mage/tip_mage_star_throw.tres" id="9_mv47w"]
 [ext_resource type="Resource" uid="uid://di1aljvyujhdc" path="res://Scripts/Resource Scripts/TipEntry/Mage/tip_mage_boost.tres" id="10_pehxb"]
+[ext_resource type="Resource" uid="uid://rowgukv3rnn8" path="res://Scripts/Resource Scripts/TipEntry/General/tip_general_damage_steering.tres" id="10_syvbi"]
 [ext_resource type="Resource" uid="uid://cyiaqutkska2b" path="res://Scripts/Resource Scripts/TipEntry/Fun/tip_fun_name.tres" id="11_pm0cy"]
 [ext_resource type="Resource" uid="uid://c1uvuse2grvua" path="res://Scripts/Resource Scripts/TipEntry/Mage/tip_mage_boost_cancel.tres" id="11_s7737"]
 [ext_resource type="Resource" uid="uid://bxr4sq870o6v7" path="res://Scripts/Resource Scripts/TipEntry/Fun/tip_fun_food.tres" id="11_wol70"]
@@ -41,6 +42,7 @@
 [ext_resource type="Resource" uid="uid://c22ms1rhndhub" path="res://Scripts/Resource Scripts/TipEntry/Dragon/tip_dragon_fireball_delay.tres" id="28_dr37i"]
 [ext_resource type="Resource" uid="uid://dukqrdtlmxe1u" path="res://Scripts/Resource Scripts/TipEntry/Dragon/tip_dragon_fall_slope.tres" id="29_jkvty"]
 [ext_resource type="Resource" uid="uid://wkl0iugruc1s" path="res://Scripts/Resource Scripts/TipEntry/Dragon/tip_dragon_superjump_fast.tres" id="30_x6t0d"]
+[ext_resource type="Resource" uid="uid://8m5cq1bwj461" path="res://Scripts/Resource Scripts/TipEntry/Fun/tip_fun_temper_dragonfruit.tres" id="41_uhqsk"]
 
 [node name="TipsMenu" type="Node2D" node_paths=PackedStringArray("category_text_label", "option_labels", "page_number_footer")]
 visible = false
@@ -49,10 +51,10 @@ category_text_label = NodePath("CategoryTextLabel")
 option_labels = [NodePath("TipTitleTextLabel1"), NodePath("TipTitleTextLabel2"), NodePath("TipTitleTextLabel3"), NodePath("TipTitleTextLabel4"), NodePath("TipTitleTextLabel5")]
 page_number_footer = NodePath("PageNumberFooter")
 category_names = Array[String](["~ General Guidance -", "~ Mage Mastery ~", "- Dragon Drills -", "* Fun Facts *"])
-general_tips = Array[Resource("res://Scripts/Resource Scripts/TipEntry/TipEntry.gd")]([ExtResource("4_xs212"), ExtResource("2_wvtcj"), ExtResource("3_jgvc7"), ExtResource("5_7e2vt"), ExtResource("6_mvv6b"), ExtResource("7_iydhx"), ExtResource("7_wqo00"), ExtResource("9_awsb3")])
+general_tips = Array[Resource("res://Scripts/Resource Scripts/TipEntry/TipEntry.gd")]([ExtResource("4_xs212"), ExtResource("2_wvtcj"), ExtResource("3_jgvc7"), ExtResource("5_7e2vt"), ExtResource("6_mvv6b"), ExtResource("7_iydhx"), ExtResource("7_wqo00"), ExtResource("9_awsb3"), ExtResource("10_syvbi")])
 mage_tips = Array[Resource("res://Scripts/Resource Scripts/TipEntry/TipEntry.gd")]([ExtResource("3_xnomb"), ExtResource("4_ncx85"), ExtResource("5_4nvvv"), ExtResource("8_cm23t"), ExtResource("9_mv47w"), ExtResource("10_pehxb"), ExtResource("11_s7737"), ExtResource("13_psw3w"), ExtResource("14_nnkjc"), ExtResource("15_mo5ts"), ExtResource("16_a6fqc")])
 dragon_tips = Array[Resource("res://Scripts/Resource Scripts/TipEntry/TipEntry.gd")]([ExtResource("6_jhhg0"), ExtResource("7_fktk4"), ExtResource("8_g63tk"), ExtResource("15_vm456"), ExtResource("16_3ewjv"), ExtResource("17_grjf7"), ExtResource("18_2lfdk"), ExtResource("22_aluwn"), ExtResource("23_8co53"), ExtResource("24_rg8r0"), ExtResource("25_i3m4d"), ExtResource("26_q03ji"), ExtResource("27_jit3g"), ExtResource("28_dr37i"), ExtResource("29_jkvty"), ExtResource("30_x6t0d")])
-fun_tips = Array[Resource("res://Scripts/Resource Scripts/TipEntry/TipEntry.gd")]([ExtResource("11_pm0cy"), ExtResource("12_cf5gc"), ExtResource("11_wol70")])
+fun_tips = Array[Resource("res://Scripts/Resource Scripts/TipEntry/TipEntry.gd")]([ExtResource("11_pm0cy"), ExtResource("12_cf5gc"), ExtResource("11_wol70"), ExtResource("41_uhqsk")])
 max_secondary_selections = 4
 enable_secondary_wraparound = true
 

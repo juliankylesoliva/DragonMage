@@ -4,5 +4,5 @@
 
 [resource]
 script = ExtResource("1_4chu4")
-tip_title = "Sliding out of a Fire Tackle"
+tip_title = "Sliding Out Of a Fire Tackle"
 tip_description = Array[String](["As a dragon, after travelling a short distance with the Fire Tackle, press [Crouch] to start sliding out of it."])

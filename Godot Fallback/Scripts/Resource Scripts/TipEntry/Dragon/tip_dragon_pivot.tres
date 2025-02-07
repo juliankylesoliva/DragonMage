@@ -7,4 +7,6 @@ script = ExtResource("1_tqlgq")
 tip_title = "Fire Tackle Pivoting"
 tip_description = Array[String](["As a dragon, holding [Attack] keeps you in Fire Tackle's wind-up state, giving you more time to change the direction you plan on going with [Move Up], [Move Down], [Move Left], or [Move Right].
 
+This is the only way you can change your facing direction in midair while in dragon form.
+
 Be aware that staying in the wind-up state will gradually lower the Temper Meter, and you are still open to enemy attacks!"])
