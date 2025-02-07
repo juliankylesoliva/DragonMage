@@ -5,4 +5,6 @@
 [resource]
 script = ExtResource("1_ijomj")
 tip_title = "Star Boost Momentum"
-tip_description = Array[String](["As a mage, the Magic Star's explosion only adds additional momentum if you are already moving, so it is best to detonate the star as soon as you run past it or immediately after jumping."])
+tip_description = Array[String](["As a mage, the Magic Star's explosion only adds additional momentum if you are already moving, so it is best to detonate the star as soon as you run past it or immediately after jumping.
+
+Check the guide arrow that appears when you are near the star to see if the added momentum will be more horizontal or vertical."])

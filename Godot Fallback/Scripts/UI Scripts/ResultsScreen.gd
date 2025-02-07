@@ -38,6 +38,8 @@ class_name ResultsScreen
 
 @export var bg_combine_duration : float = 1
 
+@export var perfect_text : String = "[center][shake][color=#56a842]LEVEL [color=#5941a9]M[color=#f09a59]A[color=#5941a9]S[color=#f09a59]T[color=#5941a9]E[color=#f09a59]R[color=#5941a9]E[color=#f09a59]D[color=white]!"
+
 @export_group("Header")
 
 @export var text_header_label : RichTextLabel
@@ -393,6 +395,11 @@ func do_results_screen():
 			time_medal_sprite.set_visible(true)
 			results_sfx.play()
 			await get_tree().create_timer(0.5).timeout
+		
+		if (level.is_level_perfected()):
+			text_header_label.text = perfect_text
+			menu_cursor.play_select_sound()
+			await get_tree().create_timer(1.0).timeout
 		
 		await get_tree().create_timer(1.0).timeout
 	

@@ -682,7 +682,7 @@ dragon_fragments_slider = NodePath("DragonSlider")
 fragment_slider_front = NodePath("FragmentSliderFront")
 total_fragments_label = NodePath("TotalFragments")
 fragment_rating_label = NodePath("FragmentRating")
-rating_list = Array[String](["NONE...", "[color=#5941a9]MAGE MAJORITY!", "[color=#f09a59]DRAGON DOMINANT!", "[color=#56a842]KINDA BALANCED!", "[color=#5941a9]HALF [color=#56a842]N' [color=#f09a59]HALF[color=white]!"])
+rating_list = Array[String](["Not enough...", "[color=#5941a9]MAGE MAJORITY!", "[color=#f09a59]DRAGON DOMINANT!", "[color=#56a842]KINDA BALANCED!", "[color=#5941a9]HALF [color=#56a842]N' [color=#f09a59]HALF[color=white]!"])
 scales_found_label = NodePath("ScalesFound")
 magical_scale_sprite = NodePath("MagicalScale")
 draconic_scale_sprite = NodePath("DraconicScale")
@@ -717,6 +717,7 @@ visible = false
 light_mask = 64
 visibility_layer = 64
 z_index = 7
+clip_contents = false
 offset_left = -248.0
 offset_top = -152.0
 offset_right = 248.0
@@ -726,6 +727,7 @@ theme_override_font_sizes/normal_font_size = 32
 bbcode_enabled = true
 text = "[center]LEVEL COMPLETE!"
 scroll_active = false
+shortcut_keys_enabled = false
 
 [node name="ClearTime" type="RichTextLabel" parent="."]
 visible = false
@@ -782,7 +784,7 @@ offset_bottom = -32.0
 theme_override_fonts/normal_font = ExtResource("4_2bog7")
 theme_override_font_sizes/normal_font_size = 16
 bbcode_enabled = true
-text = "[center]FINAL FRAGMENT SCORE"
+text = "[center]FRAGMENT COLLECTION"
 scroll_active = false
 
 [node name="MageFragments" type="RichTextLabel" parent="."]

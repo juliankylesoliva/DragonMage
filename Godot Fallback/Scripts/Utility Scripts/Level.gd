@@ -225,6 +225,9 @@ func get_medal_type():
 	else:
 		return "NOTHING"
 
+func is_level_perfected():
+	return ((magical_scale == null or magical_scale.is_collected) and (draconic_scale == null or draconic_scale.is_collected) and (balanced_scale == null or balanced_scale.is_collected) and get_total_fragments() >= min_fragment_req_for_medal and (!player_hub.form.enable_form_changing or mage_fragments == dragon_fragments) and is_target_time_beaten(true))
+
 func drop_fragments():
 	var dropped_mage_fragments : int = 0
 	var dropped_dragon_fragments : int = 0
