@@ -1,8 +1,0 @@
-[gd_resource type="Resource" script_class="TipEntry" load_steps=2 format=3 uid="uid://7qdc1v7vkvjv"]
-
-[ext_resource type="Script" path="res://Scripts/Resource Scripts/TipEntry/TipEntry.gd" id="1_w7vme"]
-
-[resource]
-script = ExtResource("1_w7vme")
-tip_title = "Fire Tackling From Walls"
-tip_description = Array[String](["As a dragon, you can transfer the upward momentum of your wall climb into your Fire Tackle by pressing [Attack] while wall climbing. Just be sure to pivot the Fire Tackle before releasing [Attack]."])

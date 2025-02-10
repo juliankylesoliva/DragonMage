@@ -4,7 +4,9 @@
 
 [resource]
 script = ExtResource("1_q3f81")
-tip_title = "Fireball Buffering"
-tip_description = Array[String](["As a dragon, you need to have traveled a short distance with the Fire Tackle before you can launch a fireball. Pressing [Attack] before reaching the required distance will allow you to launch the fireball as early as possible.
+tip_title = "Fireball Timing"
+tip_description = Array[String](["As a dragon, you need to have traveled a short distance with the Fire Tackle before you can launch a fireball.
 
-This is indicated by a small. white fireball outline turning solid."])
+Pressing [Attack] before reaching the required distance will allow you to launch the fireball as soon as possible. This is indicated by a small, white fireball outline turning solid.
+
+You turn dark red after crossing the required distance, and pressing [Attack] at that point will instantly launch the fireball."])

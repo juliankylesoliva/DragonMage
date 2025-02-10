@@ -7,4 +7,6 @@ script = ExtResource("1_sjs7o")
 tip_title = "Dragon Air Control"
 tip_description = Array[String](["As a dragon, you jump at a low, fixed height regardless of how long you hold [Jump]. Your midair wing jumps make up for this, however.
 
-While in the air, you cannot change your facing direction."])
+While in the air, you cannot change your facing direction.
+
+Any mention of \"pressing or holding forward\" means pressing the direction you are currently facing (i.e. pressing right while facing right or pressing left while facing left)."])

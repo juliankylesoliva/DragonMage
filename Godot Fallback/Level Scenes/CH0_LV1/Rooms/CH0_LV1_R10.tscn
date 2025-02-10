@@ -70,7 +70,7 @@ room_destination = NodePath("..")
 
 [node name="KnigelNPC" parent="." instance=ExtResource("4_60xso")]
 position = Vector2(384, 96)
-textbox_strings = Array[String](["Knigel: Hey, EmDee! I got your message about what happened to the trains. That Star Blast spell you created sure came in handy today, didn't it?", "Magli: I guess it did, and still in perfect working order, no less. I might've had to take some extra time to review my notes along the way, though...", "Knigel: Let's not keep everyone waiting, then! The boss has been waiting for a few minutes now, so get in there and knock 'em dead!", "Magli: ...N-Not literally, right?", "Knigel: Of course not! Good luck, EmDee!", "Magli: Hehe... Thank you, Knigel!"])
+textbox_strings = Array[String](["Knigel: Hey, EmDee! I got your message about what happened to the trains. So you just blasted right through those blocks using the star-modelling spell? Wow, that spell you created sure came in handy, huh?", "Magli: I guess, but not in the way I originally intended... I don't exactly have a lot of time to fix this explosion glitch, so I just hope it never comes up during the presentation...", "Knigel: Let's not keep everyone waiting, then! The boss has been waiting for a few minutes now, so get in there and blow 'em away!", "Magli: Uh... N-Not literally, right?!", "Knigel: Oh, sorry! I meant AMAZE them with your spell presentation! Good luck, EmDee!", "Magli: Hehe... Thank you, Knigel!"])
 
 [node name="BreakableBlock" parent="." instance=ExtResource("5_qlkm3")]
 position = Vector2(160, 128)

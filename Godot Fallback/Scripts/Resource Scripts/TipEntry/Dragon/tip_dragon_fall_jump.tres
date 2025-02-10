@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="TipEntry" load_steps=2 format=3 uid="uid://b3g1rxycp63cd"]
+
+[ext_resource type="Script" path="res://Scripts/Resource Scripts/TipEntry/TipEntry.gd" id="1_off0c"]
+
+[resource]
+script = ExtResource("1_off0c")
+tip_title = "Jumping Out Of a Fast Fall"
+tip_description = Array[String](["As a dragon, use a wing jump (if you have any left) to cancel your fast fall. You cannot use attacks while fast falling, so this is useful if you want to Fire Tackle or fly at a certain height after fast falling."])

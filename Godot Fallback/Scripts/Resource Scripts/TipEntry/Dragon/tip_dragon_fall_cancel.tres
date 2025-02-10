@@ -1,8 +1,0 @@
-[gd_resource type="Resource" script_class="TipEntry" load_steps=2 format=3 uid="uid://c2a3rgf83w8vi"]
-
-[ext_resource type="Script" path="res://Scripts/Resource Scripts/TipEntry/TipEntry.gd" id="1_ff753"]
-
-[resource]
-script = ExtResource("1_ff753")
-tip_title = "Fast Falling Out Of a Slide"
-tip_description = Array[String](["As a dragon, starting a slide off a ledge gives you a bit of hang time before falling if you are still in midair. If you release and press [Crouch] again during this hang time, you will instantly start fast falling."])

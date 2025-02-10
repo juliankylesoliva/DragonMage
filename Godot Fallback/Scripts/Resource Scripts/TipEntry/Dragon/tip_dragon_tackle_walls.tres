@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="TipEntry" load_steps=2 format=3 uid="uid://33lkf7e6pd1l"]
+
+[ext_resource type="Script" path="res://Scripts/Resource Scripts/TipEntry/TipEntry.gd" id="1_gvk7q"]
+
+[resource]
+script = ExtResource("1_gvk7q")
+tip_title = "Fire Tackling and Walls"
+tip_description = Array[String](["As a dragon, fire tackling into a wall while holding forward allows you to instantly start climbing (assuming you have not already used up your wall climb since leaving the ground).
+
+Normally, you need to be at least one tile off the ground in order to start wall climbing, but a rising Fire Tackle ([Move Up]+[Attack]) simply checks if you are off the ground regardless of distance.", "You can also transfer the upward momentum of your wall climb into your Fire Tackle by pressing [Attack] while wall climbing. Just be sure to pivot the Fire Tackle before releasing [Attack]."])

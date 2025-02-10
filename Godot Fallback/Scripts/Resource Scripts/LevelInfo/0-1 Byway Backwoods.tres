@@ -8,7 +8,7 @@ level_scene_path = "res://Level Scenes/CH0_LV1/CH0_LV1.tscn"
 name_header = "Ch. 0-1: Byway Backwoods"
 story_description = Array[String](["May 6, 2024 - Early Morning
 
-	Oh, just my luck... The trains at Areltun Station are delayed due to the Dragon Syndicate's latest track-stealing shenanigans and I'm going to be late for my board interview at this rate! Of all days it had to be the day I have to present my star simulation spell to Magi Co.'s CEO who just so happens to also be my potential future boss... The entire board is going to be there judging me, too... Luckily, there's a forest I can take a shortcut through; it may be a slower route, but the star spell I'm presenting has a neat little quirk I can use to my advantage to go faster! I just hope it never comes up during the actual presentation...
+	Oh, just my luck... The trains at Areltun Station are delayed due to the Dragon Syndicate's latest roadblocking shenanigans and I'm going to be late for my board interview at this rate! Of all days it had to be the day I have to present my star-modelling spell to Magi Co.'s CEO who just so happens to also be my potential future boss... The entire board is going to be there judging me, too... Luckily, there's a forest I can take a shortcut through; it may be a slower route, but the star model spell I'm presenting has a strange little quirk I discovered that I can use to my advantage to go faster! I just hope it never comes up during the actual presentation...
 
 ~ Magli DRAELYN -"])
 form_changing_enabled = false

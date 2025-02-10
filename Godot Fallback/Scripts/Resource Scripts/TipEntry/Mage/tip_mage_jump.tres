@@ -7,4 +7,4 @@ script = ExtResource("1_kjfcx")
 tip_title = "Mage Air Control"
 tip_description = Array[String](["As a mage, you have a decently high jump that goes higher the longer you hold [Jump]--even higher if you are already running!
 
-While in the air, you will instantly face whichever direction you are pressing."])
+While in the air, you will instantly face whichever direction you are pressing, but gliding will lock your facing direction while active."])
