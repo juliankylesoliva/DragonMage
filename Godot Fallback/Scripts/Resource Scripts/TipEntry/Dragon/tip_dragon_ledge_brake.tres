@@ -5,4 +5,4 @@
 [resource]
 script = ExtResource("1_ko5nc")
 tip_title = "Ledge Braking"
-tip_description = Array[String](["As a dragon, the end of your Fire Tackle automatically stops you at ledges if no direction is being pressed, but you can hold forward if you want to keep moving during this phase."])
+tip_description = Array[String](["As a dragon, the end of your Fire Tackle automatically stops you at ledges if no direction is being held, but you can hold forward if you want to keep moving past the ledge during this phase."])

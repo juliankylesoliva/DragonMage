@@ -65,6 +65,10 @@ func state_process(_delta):
 				effect_instance.rotation = hub.char_body.up_direction.angle_to(hub.collisions.get_ceiling_normal())
 				SoundFactory.play_sound_by_name("jump_draelyn_headbonk", hub.char_body.global_position, -2)
 			hub.buffers.reset_speed_preservation_buffer()
+			
+			if (hub.jumping.enable_crouch_jumping and hub.is_action_pressed("Crouch")):
+				hub.movement.check_crouch_state()
+			
 			set_next_state(state_machine.get_state_by_name("Falling"))
 	elif (hub.damage.is_player_defeated):
 		set_next_state(state_machine.get_state_by_name("Defeated"))

@@ -5,4 +5,4 @@
 [resource]
 script = ExtResource("1_cf5iv")
 tip_title = "Instant Wall Vault"
-tip_description = Array[String](["As a dragon, hold [Move Up], [Jump], and forward before climbing up to a ledge to immediately vault as soon as you reach the ledge."])
+tip_description = Array[String](["As a dragon, hold [Move Up], [Jump], and forward before climbing up to a ledge to instantly vault as soon as you reach the ledge."])

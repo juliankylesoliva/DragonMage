@@ -541,7 +541,7 @@ func cancel_wall_climb():
 	switch_to_falling_gravity()
 
 func is_wall_climb_canceled():
-	return (current_wall_climb_time <= 0 or hub.char_body.velocity.y >= 0 or hub.char_body.is_on_ceiling() or !hub.collisions.is_facing_a_wall() or hub.collisions.is_facing_an_intangible_wall() or (hub.get_input_vector().x == -hub.movement.get_facing_value() and current_wall_release_timer >= wall_release_time))
+	return (current_wall_climb_time <= 0 or hub.char_body.velocity.y >= 0 or hub.char_body.is_on_ceiling() or !hub.collisions.is_facing_a_wall() or hub.collisions.is_facing_an_intangible_wall() or (hub.get_input_vector().x == -hub.movement.get_facing_value() and (current_wall_release_timer >= wall_release_time or (hub.jumping.enable_crouch_jumping and !hub.movement.is_crouch_cooldown_active() and hub.is_action_pressed("Crouch")))))
 
 func can_start_wall_popup():
 	return (current_wall_climb_time < max_wall_climb_time and hub.char_body.velocity.y < 0 and !hub.collisions.is_facing_a_wall() and !hub.collisions.is_facing_an_intangible_wall() and (hub.get_input_vector().x * hub.movement.get_facing_value()) >= 0)

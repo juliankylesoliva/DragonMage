@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="TipEntry" load_steps=2 format=3 uid="uid://b0ds6bp35rowf"]
+
+[ext_resource type="Script" path="res://Scripts/Resource Scripts/TipEntry/TipEntry.gd" id="1_vaeq8"]
+
+[resource]
+script = ExtResource("1_vaeq8")
+tip_title = "Crouching Out Of A Wall Slide"
+tip_description = Array[String](["As a mage, you can press [Crouch] while sliding down a wall to instantly let go without having to jump off or hold the opposite direction.
+
+Combing this with a dodge can be useful for entering small gaps from above."])

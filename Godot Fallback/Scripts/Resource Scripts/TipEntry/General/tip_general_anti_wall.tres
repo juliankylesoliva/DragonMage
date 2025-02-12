@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="TipEntry" load_steps=2 format=3 uid="uid://qrsenql0ipmo"]
+
+[ext_resource type="Script" path="res://Scripts/Resource Scripts/TipEntry/TipEntry.gd" id="1_y4a0f"]
+
+[resource]
+script = ExtResource("1_y4a0f")
+tip_title = "How To NOT Grab Walls"
+tip_description = Array[String](["In the event that you absolutely do NOT want to grab a wall either by accident or on purpose, you may do one of two things:
+
+1. Have your back against a wall.
+
+2. Stay crouched in midair.
+
+If you desire otherwise, do the complete opposite of the above."])
