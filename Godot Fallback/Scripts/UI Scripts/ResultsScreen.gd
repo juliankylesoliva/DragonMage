@@ -38,7 +38,7 @@ class_name ResultsScreen
 
 @export var bg_combine_duration : float = 1
 
-@export var perfect_text : String = "[center][shake][color=#56a842]LEVEL [color=#5941a9]M[color=#f09a59]A[color=#5941a9]S[color=#f09a59]T[color=#5941a9]E[color=#f09a59]R[color=#5941a9]E[color=#f09a59]D[color=white]!"
+@export var perfect_text : String = "[center][color=#56a842]LEVEL [color=#5941a9]M[color=#f09a59]A[color=#5941a9]S[color=#f09a59]T[color=#5941a9]E[color=#f09a59]R[color=#5941a9]E[color=#f09a59]D[color=white]!"
 
 @export_group("Header")
 
@@ -174,19 +174,20 @@ func do_main_menu():
 		menu_cursor.do_selection_movement()
 		await get_tree().create_timer(1.0).timeout
 		screen_fade.set_fade(1, 1, Color.BLACK)
-		await get_tree().create_timer(2.0).timeout
+		var timer = Timer.new()
+		add_child(timer)
+		timer.timeout.connect(on_menu_load_timer)
 		if (textbox != null and post_level_text.size() > 0):
+			await get_tree().create_timer(2.0).timeout
 			textbox.accept_input_events = true
 			for text in post_level_text:
 				textbox.queue_text(text)
 			await textbox.textbox_finished
 			#await get_tree().create_timer(0.25).timeout
-			var timer = Timer.new()
-			add_child(timer)
-			timer.timeout.connect(on_menu_load_timer)
 			timer.start(0.25)
 		else:
-			on_menu_load_timer()
+			timer.timeout.connect(on_menu_load_timer)
+			timer.start(2.0)
 	else:
 		on_menu_load_timer()
 
