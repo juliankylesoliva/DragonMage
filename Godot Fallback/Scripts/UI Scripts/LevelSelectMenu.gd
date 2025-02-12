@@ -104,6 +104,11 @@ func start_game():
 	
 	screen_fade.set_fade(1, 1, Color.BLACK)
 	
-	await get_tree().create_timer(2.0).timeout
-	
+	#await get_tree().create_timer(2.0).timeout
+	var timer = Timer.new()
+	add_child(timer)
+	timer.timeout.connect(switch_to_selected_level)
+	timer.start(2.0)
+
+func switch_to_selected_level():
 	get_tree().change_scene_to_file(level_info_list[current_selection].level_scene_path)

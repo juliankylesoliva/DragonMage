@@ -145,7 +145,15 @@ func do_restart():
 		menu_cursor.do_selection_movement()
 		await get_tree().create_timer(1.0).timeout
 		screen_fade.set_fade(1, 1, Color.BLACK)
-		await get_tree().create_timer(2.0).timeout
+		#await get_tree().create_timer(2.0).timeout
+		var timer = Timer.new()
+		add_child(timer)
+		timer.timeout.connect(on_reload_timer)
+		timer.start(2.0)
+	else:
+		on_reload_timer()
+
+func on_reload_timer():
 	EffectFactory.clear_effects()
 	SoundFactory.clear_sounds()
 	get_tree().reload_current_scene()
@@ -158,7 +166,15 @@ func do_title_screen():
 		menu_cursor.do_selection_movement()
 		await get_tree().create_timer(1.0).timeout
 		screen_fade.set_fade(1, 1, Color.BLACK)
-		await get_tree().create_timer(2.0).timeout
+		#await get_tree().create_timer(2.0).timeout
+		var timer = Timer.new()
+		add_child(timer)
+		timer.timeout.connect(on_menu_load_timer)
+		timer.start(2.0)
+	else:
+		on_menu_load_timer()
+
+func on_menu_load_timer():
 	EffectFactory.clear_effects()
 	SoundFactory.clear_sounds()
 	get_tree().change_scene_to_file(title_scene_path)

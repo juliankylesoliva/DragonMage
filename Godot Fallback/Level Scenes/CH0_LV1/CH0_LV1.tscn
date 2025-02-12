@@ -59,11 +59,23 @@ process_callback = 0
 
 [node name="CH0_LV1_R1" parent="." instance=ExtResource("2_7b35j")]
 
+[node name="BoundaryCollisionTilemap" parent="CH0_LV1_R1" index="0"]
+rendering_quadrant_size = 32
+
+[node name="LevelCollisionTilemap" parent="CH0_LV1_R1" index="1"]
+rendering_quadrant_size = 32
+
 [node name="WarpTrigger" parent="CH0_LV1_R1" index="4" node_paths=PackedStringArray("room_destination")]
 room_destination = NodePath("../../CH0_LV1_R2")
 
 [node name="CH0_LV1_R2" parent="." instance=ExtResource("3_upqvj")]
 position = Vector2(1440, -480)
+
+[node name="BoundaryCollisionTilemap" parent="CH0_LV1_R2" index="0"]
+rendering_quadrant_size = 32
+
+[node name="LevelCollisionTilemap" parent="CH0_LV1_R2" index="1"]
+rendering_quadrant_size = 32
 
 [node name="Warp 0" parent="CH0_LV1_R2" index="4" node_paths=PackedStringArray("room_destination")]
 room_destination = NodePath("../../CH0_LV1_R1")
@@ -74,6 +86,12 @@ room_destination = NodePath("../../CH0_LV1_R3")
 [node name="CH0_LV1_R3" parent="." instance=ExtResource("5_vfoci")]
 position = Vector2(2080, -192)
 
+[node name="BoundaryCollisionTilemap" parent="CH0_LV1_R3" index="0"]
+rendering_quadrant_size = 32
+
+[node name="LevelCollisionTilemap" parent="CH0_LV1_R3" index="1"]
+rendering_quadrant_size = 32
+
 [node name="Warp 0" parent="CH0_LV1_R3" index="4" node_paths=PackedStringArray("room_destination")]
 room_destination = NodePath("../../CH0_LV1_R2")
 
@@ -82,6 +100,12 @@ room_destination = NodePath("../../CH0_LV1_R5")
 
 [node name="CH0_LV1_R5" parent="." instance=ExtResource("7_xg6ta")]
 position = Vector2(1728, 32)
+
+[node name="BoundaryCollisionTilemap" parent="CH0_LV1_R5" index="0"]
+rendering_quadrant_size = 32
+
+[node name="LevelCollisionTilemap" parent="CH0_LV1_R5" index="1"]
+rendering_quadrant_size = 32
 
 [node name="Warp 0" parent="CH0_LV1_R5" index="4" node_paths=PackedStringArray("room_destination")]
 room_destination = NodePath("../../CH0_LV1_R3")
@@ -92,6 +116,12 @@ room_destination = NodePath("../../CH0_LV1_R6")
 [node name="CH0_LV1_R6" parent="." instance=ExtResource("8_w0yoj")]
 position = Vector2(2368, 480)
 
+[node name="BoundaryCollisionTilemap" parent="CH0_LV1_R6" index="0"]
+rendering_quadrant_size = 32
+
+[node name="LevelCollisionTilemap" parent="CH0_LV1_R6" index="1"]
+rendering_quadrant_size = 32
+
 [node name="Warp 0" parent="CH0_LV1_R6" index="4" node_paths=PackedStringArray("room_destination")]
 room_destination = NodePath("../../CH0_LV1_R5")
 
@@ -100,6 +130,12 @@ room_destination = NodePath("../../CH0_LV1_R10")
 
 [node name="CH0_LV1_R10" parent="." instance=ExtResource("12_ra648")]
 position = Vector2(1056, 960)
+
+[node name="BoundaryCollisionTilemap" parent="CH0_LV1_R10" index="0"]
+rendering_quadrant_size = 32
+
+[node name="LevelCollisionTilemap" parent="CH0_LV1_R10" index="1"]
+rendering_quadrant_size = 32
 
 [node name="Warp 0" parent="CH0_LV1_R10" index="3" node_paths=PackedStringArray("room_destination")]
 room_destination = NodePath("../../CH0_LV1_R6")
@@ -143,7 +179,7 @@ ui_canvas = NodePath("../UI_Canvas")
 
 [node name="LevelMusicPlayer" parent="." instance=ExtResource("19_l87bk")]
 stream = ExtResource("18_sfhvb")
-starting_volume = -4.0
+starting_volume = -2.0
 
 [connection signal="level_finished" from="CH0_LV1_R10/FinishLine" to="." method="level_finish"]
 [connection signal="level_finished" from="CH0_LV1_R10/FinishLine" to="UI_Canvas/FragmentCounterUI" method="hide"]

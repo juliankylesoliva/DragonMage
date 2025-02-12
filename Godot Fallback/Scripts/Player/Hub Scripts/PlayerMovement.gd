@@ -120,16 +120,16 @@ func do_movement(delta):
 		hub.char_body.velocity.x = 0
 		reset_current_horizontal_velocity()
 		
-		var intended_velocity : Vector2 = hub.char_body.velocity
+		var intemp_velocity_1 : Vector2 = hub.char_body.velocity
 		hub.char_body.move_and_slide()
-		hub.collisions.upward_slope_correction(intended_velocity)
+		hub.collisions.upward_slope_correction(intemp_velocity_1)
 		hub.collisions.turnaround_wall_stop_correction()
 		return
 	
 	if (hub.jumping.is_wall_jump_lock_timer_active()):
-		var intended_velocity : Vector2 = hub.char_body.velocity
+		var intemp_velocity_2 : Vector2 = hub.char_body.velocity
 		hub.char_body.move_and_slide()
-		hub.collisions.upward_slope_correction(intended_velocity)
+		hub.collisions.upward_slope_correction(intemp_velocity_2)
 		hub.collisions.turnaround_wall_stop_correction()
 		return
 	

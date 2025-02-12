@@ -77,8 +77,8 @@ func is_solid():
 	return level_ref != null and (is_collected or can_collect())
 
 func get_animation_name():
-	var type_string : String = ("Magic" if collectable_type == "MAGICAL" else "Dragon" if collectable_type == "DRACONIC" else "Balance")
-	return (("%sScale" if is_solid() else "%sScaleBlank") % type_string)
+	var type_str : String = ("Magic" if collectable_type == "MAGICAL" else "Dragon" if collectable_type == "DRACONIC" else "Balance")
+	return (("%sScale" if is_solid() else "%sScaleBlank") % type_str)
 
 func _on_area_2d_body_entered(body):
 	if (is_solid() and !is_collected):
