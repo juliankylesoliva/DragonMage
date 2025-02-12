@@ -30,12 +30,12 @@
 [ext_resource type="PackedScene" uid="uid://bvht0ifmkosvo" path="res://Level Scenes/CH1_LV4/Rooms/CH1_LV4_R12F.tscn" id="20_7ch5c"]
 [ext_resource type="PackedScene" uid="uid://br3j4rryr8gxm" path="res://Level Scenes/CH1_LV4/Rooms/CH1_LV4_R6.tscn" id="20_xdlir"]
 [ext_resource type="PackedScene" uid="uid://cr1ooel34bv5k" path="res://Level Scenes/CH1_LV4/Rooms/CH1_LV4_R13.tscn" id="21_dyjpq"]
-[ext_resource type="AudioStream" uid="uid://bp3471su81u8g" path="res://Music/CH0/sawsquarenoise - Boss Theme.wav" id="25_psnh3"]
 [ext_resource type="PackedScene" uid="uid://bsxxorj36tmfu" path="res://Scene Objects/UI/TrainArrivalSignUI.tscn" id="25_t85ls"]
 [ext_resource type="Script" path="res://Scripts/Boss/Train/TrainBossHandler.gd" id="26_5ooub"]
 [ext_resource type="PackedScene" uid="uid://btrc5e3rd18ua" path="res://Level Scenes/CH1_LV4/Rooms/CH1_LV4_R12B.tscn" id="28_88mam"]
 [ext_resource type="PackedScene" uid="uid://ca4v88yik2xe" path="res://Scene Objects/Misc/LevelIntroScreen.tscn" id="30_l7yxj"]
 [ext_resource type="AudioStream" uid="uid://84fafic5uhsg" path="res://Music/CH1/RoccoW - Messeah.wav" id="32_k65wg"]
+[ext_resource type="AudioStream" uid="uid://oxd2f117h1x2" path="res://Music/CH0/boss_loop.wav" id="34_vyd70"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_jmsqs"]
 resource_local_to_scene = true
@@ -316,8 +316,9 @@ stream = ExtResource("32_k65wg")
 starting_volume = -8.0
 
 [node name="BossMusicPlayer" parent="." instance=ExtResource("12_17q7d")]
-stream = ExtResource("25_psnh3")
+stream = ExtResource("34_vyd70")
 autoplay = false
+starting_volume = -4.0
 
 [node name="TrainBossHandler" type="Node2D" parent="." node_paths=PackedStringArray("exit_gate_sprite", "starting_train", "dummy_warps", "phase_2_room", "phase_3_room", "player_hub", "boss_room", "boss_trigger", "clear_timer", "boss_room_boundary_tilemap", "boss_music_player", "normal_level_music_player", "textbox")]
 script = ExtResource("26_5ooub")
@@ -355,8 +356,8 @@ screen_fade = NodePath("../UI_Canvas/ScreenFade")
 [connection signal="player_defeated" from="." to="UI_Canvas/MagicMeterUI" method="hide"]
 [connection signal="player_defeated" from="." to="UI_Canvas/FragmentCounterUI" method="hide"]
 [connection signal="player_defeated" from="." to="UI_Canvas/TrainArrivalSignUI" method="hide"]
-[connection signal="player_defeated" from="." to="UI_Canvas/ClearTimer" method="stop_timer"]
 [connection signal="player_defeated" from="." to="UI_Canvas/ClearTimer" method="hide"]
+[connection signal="player_defeated" from="." to="UI_Canvas/ClearTimer" method="stop_timer"]
 [connection signal="player_defeated" from="." to="Textbox" method="hide_textbox"]
 [connection signal="player_defeated" from="." to="LevelMusicPlayer" method="stop"]
 [connection signal="player_defeated" from="." to="BossMusicPlayer" method="stop"]
@@ -367,8 +368,8 @@ screen_fade = NodePath("../UI_Canvas/ScreenFade")
 [connection signal="level_finished" from="CH1_LV4_R13/FinishLine" to="UI_Canvas/MagicMeterUI" method="hide"]
 [connection signal="level_finished" from="CH1_LV4_R13/FinishLine" to="UI_Canvas/FragmentCounterUI" method="hide"]
 [connection signal="level_finished" from="CH1_LV4_R13/FinishLine" to="UI_Canvas/TrainArrivalSignUI" method="hide"]
-[connection signal="level_finished" from="CH1_LV4_R13/FinishLine" to="UI_Canvas/ClearTimer" method="stop_timer"]
 [connection signal="level_finished" from="CH1_LV4_R13/FinishLine" to="UI_Canvas/ClearTimer" method="hide"]
+[connection signal="level_finished" from="CH1_LV4_R13/FinishLine" to="UI_Canvas/ClearTimer" method="stop_timer"]
 [connection signal="level_finished" from="CH1_LV4_R13/FinishLine" to="UI_Canvas/ResultsScreen" method="on_level_complete"]
 [connection signal="level_finished" from="CH1_LV4_R13/FinishLine" to="LevelMusicPlayer" method="fade_out"]
 

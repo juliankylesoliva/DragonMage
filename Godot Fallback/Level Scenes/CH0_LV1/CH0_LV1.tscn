@@ -16,8 +16,8 @@
 [ext_resource type="PackedScene" uid="uid://buykytsdrlnsg" path="res://Scene Objects/Misc/ResultsScreen.tscn" id="15_g0j50"]
 [ext_resource type="PackedScene" uid="uid://ca4v88yik2xe" path="res://Scene Objects/Misc/LevelIntroScreen.tscn" id="15_i8g6p"]
 [ext_resource type="PackedScene" uid="uid://brhoroc2w6jwi" path="res://Scene Objects/UI/Textbox.tscn" id="18_itco1"]
+[ext_resource type="AudioStream" uid="uid://bjsiimtswld8p" path="res://Music/CH0/ch_0-1_bgm_loop.wav" id="18_sfhvb"]
 [ext_resource type="PackedScene" uid="uid://btq4qla5fyq0n" path="res://Scene Objects/Misc/LevelMusicPlayer.tscn" id="19_l87bk"]
-[ext_resource type="AudioStream" uid="uid://c4w62ivppptim" path="res://Music/CH0/RoccoW - A Bed of Snakes - 05 17092017.wav" id="20_oukke"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_8g1jr"]
 resource_local_to_scene = true
@@ -142,7 +142,8 @@ accept_input_events = false
 ui_canvas = NodePath("../UI_Canvas")
 
 [node name="LevelMusicPlayer" parent="." instance=ExtResource("19_l87bk")]
-stream = ExtResource("20_oukke")
+stream = ExtResource("18_sfhvb")
+starting_volume = -4.0
 
 [connection signal="level_finished" from="CH0_LV1_R10/FinishLine" to="." method="level_finish"]
 [connection signal="level_finished" from="CH0_LV1_R10/FinishLine" to="UI_Canvas/FragmentCounterUI" method="hide"]

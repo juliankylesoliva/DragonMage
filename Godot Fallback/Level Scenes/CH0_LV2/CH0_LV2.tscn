@@ -19,7 +19,7 @@
 [ext_resource type="PackedScene" uid="uid://ca4v88yik2xe" path="res://Scene Objects/Misc/LevelIntroScreen.tscn" id="17_n880q"]
 [ext_resource type="PackedScene" uid="uid://brhoroc2w6jwi" path="res://Scene Objects/UI/Textbox.tscn" id="18_x5lsp"]
 [ext_resource type="PackedScene" uid="uid://btq4qla5fyq0n" path="res://Scene Objects/Misc/LevelMusicPlayer.tscn" id="19_g3rc6"]
-[ext_resource type="AudioStream" uid="uid://du5xuitrf4txr" path="res://Music/CH0/2020_roccow_weeklybeats-2020_17_new-game-minus.wav" id="20_p18n4"]
+[ext_resource type="AudioStream" uid="uid://bc7lc0kw0clun" path="res://Music/CH0/ch_0-2_bgm_loop.wav" id="20_jdk58"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_kyobb"]
 resource_local_to_scene = true
@@ -177,7 +177,8 @@ accept_input_events = false
 ui_canvas = NodePath("../UI_Canvas")
 
 [node name="LevelMusicPlayer" parent="." instance=ExtResource("19_g3rc6")]
-stream = ExtResource("20_p18n4")
+stream = ExtResource("20_jdk58")
+starting_volume = -4.0
 
 [connection signal="level_finished" from="CH0_LV2_R10/FinishLine" to="." method="level_finish"]
 [connection signal="level_finished" from="CH0_LV2_R10/FinishLine" to="UI_Canvas/FragmentCounterUI" method="hide"]
