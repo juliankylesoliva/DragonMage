@@ -248,6 +248,7 @@ func active_update(delta : float):
 				hub.state_machine.current_state.set_next_state(hub.state_machine.get_state_by_name("Attacking"))
 				hub.char_body.velocity.x *= fire_tackle_slide_cancel_penalty
 				hub.movement.current_horizontal_velocity = hub.char_body.velocity.x
+				hub.buffers.reset_fast_fall_buffer()
 				end_fire_tackle()
 				return
 		

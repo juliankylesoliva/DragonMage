@@ -18,7 +18,7 @@ var glide_buffer_time_left : float = 0
 ## Allows a player to press crouch early while jumping and still have their fast fall input be registered within a small window of time.
 @export var fast_fall_buffer_time : float = 0.1
 var fast_fall_buffer_time_left : float = 0
-
+var fall_buffer_tackle_check : bool = false
 @export var fairy_ability_buffer_time : float = 0.25
 var fairy_ability_buffer_time_left : float = 0
 
@@ -103,14 +103,16 @@ func refresh_glide_buffer():
 	glide_buffer_time_left = glide_buffer_time
 
 func check_fast_fall_buffer(delta : float):
-	if (is_fast_fall_buffer_active() and !hub.char_body.is_on_floor()):
+	if (is_fast_fall_buffer_active()):
 		fast_fall_buffer_time_left = move_toward(fast_fall_buffer_time_left, 0, delta)
-	else:
-		if (fast_fall_buffer_time_left > 0):
-			fast_fall_buffer_time_left = 0
 	
-	if (hub.jumping.enable_fast_falling and hub.state_machine.current_state.name != "Attacking" and hub.is_action_just_pressed("Attack") and hub.movement.is_crouching and !hub.char_body.is_on_floor()):
+	if (!(hub.attacks.previous_attack is FireTackleAttack) or hub.state_machine.current_state.name != "Attacking"):
+		fall_buffer_tackle_check = false
+	
+	if (hub.jumping.enable_fast_falling and ((hub.state_machine.current_state.name != "Attacking" and hub.is_action_just_pressed("Attack") and !hub.char_body.is_on_floor()) or (hub.state_machine.current_state.name == "Attacking" and hub.attacks.current_attack is SlideAttack and (!(hub.attacks.previous_attack is FireTackleAttack) or fall_buffer_tackle_check) and hub.is_action_just_pressed("Crouch"))) and hub.movement.is_crouching):
 		refresh_fast_fall_buffer()
+	elif (hub.attacks.previous_attack is FireTackleAttack):
+		fall_buffer_tackle_check = true
 
 func is_fast_fall_buffer_active():
 	return (!hub.char_body.is_on_floor() and fast_fall_buffer_time_left > 0)
