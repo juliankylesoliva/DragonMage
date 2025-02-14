@@ -16,8 +16,6 @@ class_name TipsMenu
 
 @export var dragon_tips : Array[TipEntry]
 
-@export var fun_tips : Array[TipEntry]
-
 @export var tip_subscreen : TipSubscreenMenu
 
 var current_page_index : int = 0
@@ -101,8 +99,6 @@ func get_current_category_entries():
 			return mage_tips
 		2:
 			return dragon_tips
-		3:
-			return fun_tips
 		_:
 			return general_tips
 
