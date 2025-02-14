@@ -109,7 +109,7 @@ func check_fast_fall_buffer(delta : float):
 	if (!(hub.attacks.previous_attack is FireTackleAttack) or hub.state_machine.current_state.name != "Attacking"):
 		fall_buffer_tackle_check = false
 	
-	if (hub.jumping.enable_fast_falling and ((hub.state_machine.current_state.name != "Attacking" and hub.is_action_just_pressed("Attack") and !hub.char_body.is_on_floor()) or (hub.state_machine.current_state.name == "Attacking" and hub.attacks.current_attack is SlideAttack and (!(hub.attacks.previous_attack is FireTackleAttack) or fall_buffer_tackle_check) and hub.is_action_just_pressed("Crouch"))) and hub.movement.is_crouching):
+	if (hub.jumping.enable_fast_falling and ((hub.state_machine.current_state.name != "Attacking" and hub.is_action_just_pressed("Attack") and !hub.char_body.is_on_floor() and hub.movement.is_crouching) or (hub.state_machine.current_state.name == "Attacking" and hub.attacks.current_attack is SlideAttack and (!(hub.attacks.previous_attack is FireTackleAttack) or fall_buffer_tackle_check) and hub.is_action_just_pressed("Crouch") and hub.movement.is_crouching) or (hub.state_machine.current_state.name == "FormChanging" and hub.is_action_pressed("Crouch") and hub.is_action_just_pressed("Attack") and !hub.char_body.is_on_floor()))):
 		refresh_fast_fall_buffer()
 	elif (hub.attacks.previous_attack is FireTackleAttack):
 		fall_buffer_tackle_check = true
