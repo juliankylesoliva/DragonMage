@@ -70,6 +70,12 @@ func on_attack_state_enter():
 	slide_effect_instance.rotation = hub.char_body.up_direction.angle_to(hub.collisions.get_ground_normal())
 
 func attack_state_process(_delta : float):
+	if (!hub.char_body.is_on_floor() and hub.buffers.is_fast_fall_buffer_active() and fast_fall_lock > 0):
+		hub.buffers.reset_fast_fall_buffer()
+	
+	if (fast_fall_lock > 0):
+		fast_fall_lock -= 1
+	
 	if (hub.force_stand):
 		hub.char_body.velocity = Vector2.ZERO
 		hub.movement.reset_current_horizontal_velocity()
@@ -204,9 +210,3 @@ func slide_update(delta : float):
 		if (current_slide_hang_timer <= 0):
 			hub.buffers.reset_fast_fall_buffer()
 	horizontal_result = move_toward(horizontal_result, 0, slide_deceleration_rate * delta)
-	
-	if (!hub.char_body.is_on_floor() and hub.buffers.is_fast_fall_buffer_active() and fast_fall_lock > 0):
-		hub.buffers.reset_fast_fall_buffer()
-	
-	if (fast_fall_lock > 0):
-		fast_fall_lock -= 1
