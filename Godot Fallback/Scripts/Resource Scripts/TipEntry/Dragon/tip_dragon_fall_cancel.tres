@@ -5,4 +5,4 @@
 [resource]
 script = ExtResource("1_t7cll")
 tip_title = "Fast Falling Out Of a Slide"
-tip_description = Array[String](["As a dragon, starting a slide off a ledge gives you a bit of hang time before falling if you are still in midair. If you release and press [Crouch] again during this hang time, you will instantly start fast falling."])
+tip_description = Array[String](["As a dragon, starting a slide off a ledge gives you a bit of hang time before falling if you are still in midair. If you release then press and hold [Crouch] again during this hang time, you will instantly start fast falling."])

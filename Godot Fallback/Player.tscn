@@ -317,6 +317,7 @@ slide_deceleration_rate = 192.0
 slide_min_duration = 0.3
 slide_uncancelable_time = 0.2
 slide_hang_time = 0.3
+fast_fall_lock_duration = 3
 uses_attack_state = true
 
 [node name="Temper" type="Node" parent="Hub" node_paths=PackedStringArray("hub", "fairy_guard_attack")]

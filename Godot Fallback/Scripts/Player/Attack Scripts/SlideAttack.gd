@@ -22,6 +22,8 @@ class_name SlideAttack
 
 @export var slide_hang_time : float = 0.2
 
+@export var fast_fall_lock_duration : int = 2
+
 var prev_horizontal_velocity : float = 0
 
 var prev_is_grounded : bool = false
@@ -34,7 +36,7 @@ var current_slide_hang_timer : float = 0
 
 var slide_effect_instance : AnimatedSprite2D = null
 
-var fast_fall_frame_one_lock : bool = false
+var fast_fall_lock : int = 0
 
 func can_use_attack():
 	var state_name : String = hub.state_machine.current_state.name
@@ -44,7 +46,7 @@ func on_attack_state_enter():
 	if (slide_effect_instance != null):
 		slide_effect_instance.queue_free()
 	
-	fast_fall_frame_one_lock = true
+	fast_fall_lock = fast_fall_lock_duration
 	
 	if (!hub.movement.is_crouching):
 		hub.movement.is_crouching = true
@@ -74,7 +76,7 @@ func attack_state_process(_delta : float):
 		hub.state_machine.current_state.set_next_state(hub.state_machine.get_state_by_name("Standing"))
 	elif (hub.is_deactivated):
 		hub.state_machine.current_state.set_next_state(hub.state_machine.get_state_by_name("Deactivated"))
-	elif (hub.damage.is_player_defeated or hub.damage.is_player_damaged() or hub.collisions.is_facing_a_wall() or (current_slide_hang_timer <= 0 and (hub.collisions.is_near_a_ledge() or hub.collisions.get_distance_to_ground() > hub.char_body.floor_snap_length)) or (!hub.char_body.is_on_floor() and hub.buffers.is_fast_fall_buffer_active() and !fast_fall_frame_one_lock)):
+	elif (hub.damage.is_player_defeated or hub.damage.is_player_damaged() or hub.collisions.is_facing_a_wall() or (current_slide_hang_timer <= 0 and (hub.collisions.is_near_a_ledge() or hub.collisions.get_distance_to_ground() > hub.char_body.floor_snap_length)) or (!hub.char_body.is_on_floor() and hub.buffers.is_fast_fall_buffer_active() and fast_fall_lock <= 0)):
 		stop_slide()
 	elif (hub.stomp.is_stomping_enemy() or (current_slide_timer > slide_uncancelable_time and hub.buffers.is_jump_buffer_active())):
 		do_jump_cancel()
@@ -118,7 +120,7 @@ func on_attack_state_exit():
 	horizontal_result = 0
 	current_slide_timer = 0
 	current_slide_hang_timer = 0
-	fast_fall_frame_one_lock = false
+	fast_fall_lock = 0
 
 func do_jump_cancel():
 	if (current_attack_state != AttackState.ACTIVE):
@@ -162,7 +164,7 @@ func stop_slide():
 		preserve_slide_speed()
 		if (!hub.collisions.is_in_ceiling_when_uncrouched() and !hub.is_action_pressed("Crouch")):
 			hub.movement.reset_crouch_state()
-		if (hub.buffers.is_fast_fall_buffer_active()):
+		if (hub.buffers.is_fast_fall_buffer_active() and hub.is_action_pressed("Crouch")):
 			hub.jumping.set_fast_fall()
 			hub.char_body.velocity.y = hub.jumping.fast_falling_speed
 		hub.state_machine.current_state.set_next_state(hub.state_machine.get_state_by_name("Falling"))
@@ -203,6 +205,8 @@ func slide_update(delta : float):
 			hub.buffers.reset_fast_fall_buffer()
 	horizontal_result = move_toward(horizontal_result, 0, slide_deceleration_rate * delta)
 	
-	if (!hub.char_body.is_on_floor() and hub.buffers.is_fast_fall_buffer_active() and fast_fall_frame_one_lock):
+	if (!hub.char_body.is_on_floor() and hub.buffers.is_fast_fall_buffer_active() and fast_fall_lock > 0):
 		hub.buffers.reset_fast_fall_buffer()
-	fast_fall_frame_one_lock = false
+	
+	if (fast_fall_lock > 0):
+		fast_fall_lock -= 1
