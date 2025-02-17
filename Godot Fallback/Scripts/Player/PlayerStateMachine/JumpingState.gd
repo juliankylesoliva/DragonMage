@@ -81,6 +81,8 @@ func state_process(_delta : float):
 		hub.jumping.do_midair_jump()
 		set_next_state(state_machine.get_state_by_name("Jumping"))
 	elif (hub.jumping.is_fast_falling || hub.char_body.velocity.y >= 0):
+		if (hub.jumping.is_fast_falling):
+			hub.char_body.velocity.y = hub.jumping.fast_falling_speed
 		set_next_state(state_machine.get_state_by_name("Falling"))
 	elif (hub.damage.is_player_defeated):
 		set_next_state(state_machine.get_state_by_name("Defeated"))

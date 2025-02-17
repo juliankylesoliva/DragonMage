@@ -381,7 +381,7 @@ func endlag_init():
 			hub.animation.set_animation("DraelynFireTackleEndlag")
 			hub.animation.set_animation_speed(1)
 	
-	if ((is_player_firing_projectile or did_player_bump) and !hub.char_body.is_on_floor()):
+	if (is_player_firing_projectile or did_player_bump):
 		hub.jumping.switch_to_rising_gravity()
 	else:
 		hub.jumping.switch_to_falling_gravity()
