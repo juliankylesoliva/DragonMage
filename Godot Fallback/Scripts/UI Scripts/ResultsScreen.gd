@@ -186,7 +186,6 @@ func do_main_menu():
 			#await get_tree().create_timer(0.25).timeout
 			timer.start(0.25)
 		else:
-			timer.timeout.connect(on_menu_load_timer)
 			timer.start(2.0)
 	else:
 		on_menu_load_timer()

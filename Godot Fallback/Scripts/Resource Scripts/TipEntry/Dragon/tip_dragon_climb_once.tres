@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="TipEntry" load_steps=2 format=3 uid="uid://bpbg6gh5vh16r"]
+
+[ext_resource type="Script" path="res://Scripts/Resource Scripts/TipEntry/TipEntry.gd" id="1_1d33q"]
+
+[resource]
+script = ExtResource("1_1d33q")
+tip_title = "You Only Climb Once"
+tip_description = Array[String](["As a dragon, if you are still in the air after coming out of a wall climb (by vaulting, holding backward, Fire Tackling, etc.), you won't be able to climb again until you land on the ground."])

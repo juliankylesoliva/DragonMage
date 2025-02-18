@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="TipEntry" load_steps=2 format=3 uid="uid://b8wijvrbmark4"]
+
+[ext_resource type="Script" path="res://Scripts/Resource Scripts/TipEntry/TipEntry.gd" id="1_pe87a"]
+
+[resource]
+script = ExtResource("1_pe87a")
+tip_title = "Fire Tackle's Speed Limit"
+tip_description = Array[String](["As a dragon, it is possible to stack Fire Tackle momentum by repeatedly jumping out of it and pressing [Attack] while holding [Move Down] immediately after, but the highest speed you can go with a Fire Tackle is capped at around 40 tiles per second!
+
+(That's more than 10 times your normal top speed as a dragon!)"])

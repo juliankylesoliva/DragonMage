@@ -5,4 +5,4 @@
 [resource]
 script = ExtResource("1_3n8qe")
 tip_title = "Switch Forms Safely!"
-tip_description = Array[String](["Taking damage while switching forms will force you to switch back and become vulnerable to a fatal blow!"])
+tip_description = Array[String](["Taking damage while switching forms will force you to switch back and briefly become vulnerable to getting knocked out the next time you take damage!"])

@@ -1,4 +1,4 @@
-[gd_scene load_steps=42 format=3 uid="uid://dsnxfjbl38ytd"]
+[gd_scene load_steps=45 format=3 uid="uid://dsnxfjbl38ytd"]
 
 [ext_resource type="Script" path="res://Scripts/UI Scripts/TipsMenu.gd" id="1_br7dr"]
 [ext_resource type="FontFile" uid="uid://blejgst41tdnl" path="res://PressStart2P.ttf" id="1_rtn30"]
@@ -41,6 +41,9 @@
 [ext_resource type="Resource" uid="uid://dvtgm2kem7b53" path="res://Scripts/Resource Scripts/TipEntry/Dragon/tip_dragon_wall_crouch.tres" id="31_jej0f"]
 [ext_resource type="Resource" uid="uid://bet4m2oo3hn1t" path="res://Scripts/Resource Scripts/TipEntry/Dragon/tip_dragon_fall_cancel.tres" id="36_67pnx"]
 [ext_resource type="Resource" uid="uid://cg807cy5desit" path="res://Scripts/Resource Scripts/TipEntry/Dragon/tip_dragon_ledge_brake.tres" id="38_3d53l"]
+[ext_resource type="Resource" uid="uid://dw320bhwi7rt3" path="res://Scripts/Resource Scripts/TipEntry/Dragon/tip_dragon_attack_distance.tres" id="40_2pi43"]
+[ext_resource type="Resource" uid="uid://b8wijvrbmark4" path="res://Scripts/Resource Scripts/TipEntry/Dragon/tip_dragon_tackle_speedcap.tres" id="41_hg66k"]
+[ext_resource type="Resource" uid="uid://bpbg6gh5vh16r" path="res://Scripts/Resource Scripts/TipEntry/Dragon/tip_dragon_climb_once.tres" id="42_sag5c"]
 
 [node name="TipsMenu" type="Node2D" node_paths=PackedStringArray("category_text_label", "option_labels", "page_number_footer")]
 visible = false
@@ -51,7 +54,7 @@ page_number_footer = NodePath("PageNumberFooter")
 category_names = Array[String](["~ General Guidance -", "~ Mage Mastery ~", "- Dragon Drills -"])
 general_tips = Array[ExtResource("2_3y8lm")]([ExtResource("3_jgvc7"), ExtResource("4_xs212"), ExtResource("5_7e2vt"), ExtResource("6_mvv6b"), ExtResource("11_6llco"), ExtResource("2_wvtcj"), ExtResource("10_syvbi"), ExtResource("7_iydhx"), ExtResource("7_wqo00"), ExtResource("9_awsb3")])
 mage_tips = Array[ExtResource("2_3y8lm")]([ExtResource("3_xnomb"), ExtResource("4_ncx85"), ExtResource("5_4nvvv"), ExtResource("22_fnn3l"), ExtResource("14_nnkjc"), ExtResource("9_mv47w"), ExtResource("8_cm23t"), ExtResource("10_pehxb"), ExtResource("13_psw3w"), ExtResource("15_mo5ts"), ExtResource("11_s7737"), ExtResource("16_a6fqc")])
-dragon_tips = Array[ExtResource("2_3y8lm")]([ExtResource("6_jhhg0"), ExtResource("22_aluwn"), ExtResource("8_g63tk"), ExtResource("17_grjf7"), ExtResource("30_x6t0d"), ExtResource("29_jkvty"), ExtResource("18_2lfdk"), ExtResource("31_jej0f"), ExtResource("38_3d53l"), ExtResource("25_88ji8"), ExtResource("23_8co53"), ExtResource("36_67pnx"), ExtResource("25_i3m4d"), ExtResource("26_q03ji"), ExtResource("27_jit3g")])
+dragon_tips = Array[ExtResource("2_3y8lm")]([ExtResource("6_jhhg0"), ExtResource("22_aluwn"), ExtResource("8_g63tk"), ExtResource("17_grjf7"), ExtResource("30_x6t0d"), ExtResource("29_jkvty"), ExtResource("18_2lfdk"), ExtResource("31_jej0f"), ExtResource("42_sag5c"), ExtResource("38_3d53l"), ExtResource("25_88ji8"), ExtResource("23_8co53"), ExtResource("36_67pnx"), ExtResource("25_i3m4d"), ExtResource("26_q03ji"), ExtResource("27_jit3g"), ExtResource("40_2pi43"), ExtResource("41_hg66k")])
 max_secondary_selections = 4
 enable_secondary_wraparound = true
 

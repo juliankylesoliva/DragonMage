@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="TipEntry" load_steps=2 format=3 uid="uid://dw320bhwi7rt3"]
+
+[ext_resource type="Script" path="res://Scripts/Resource Scripts/TipEntry/TipEntry.gd" id="1_f5xxn"]
+
+[resource]
+script = ExtResource("1_f5xxn")
+tip_title = "Speed Affects Range"
+tip_description = Array[String](["As a dragon, the distance you travel with the Fire Tackle and the distance your Fireball can reach both depend on how fast you are traveling when you start a Fire Tackle.
+
+You might be able to break hard-to-reach blocks with your Fireball if you have enough speed!"])
