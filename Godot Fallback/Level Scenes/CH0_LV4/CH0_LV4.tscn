@@ -20,8 +20,8 @@
 [ext_resource type="PackedScene" uid="uid://buykytsdrlnsg" path="res://Scene Objects/Misc/ResultsScreen.tscn" id="14_rug2n"]
 [ext_resource type="PackedScene" uid="uid://btq4qla5fyq0n" path="res://Scene Objects/Misc/LevelMusicPlayer.tscn" id="18_seqrb"]
 [ext_resource type="PackedScene" uid="uid://ca4v88yik2xe" path="res://Scene Objects/Misc/LevelIntroScreen.tscn" id="18_yqtuk"]
-[ext_resource type="AudioStream" uid="uid://cknfggv1ublsj" path="res://Music/CH0/02 Underclocked (underunderclocked mix).wav" id="19_k0bib"]
 [ext_resource type="PackedScene" uid="uid://bjeiexqfc7oht" path="res://Scene Objects/Misc/DefeatScreen.tscn" id="20_7hxk8"]
+[ext_resource type="AudioStream" uid="uid://mgxprbx7pqk" path="res://Music/CH0/ch_0-4_bgm_loop.wav" id="21_51440"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_njbxm"]
 resource_local_to_scene = true
@@ -185,10 +185,9 @@ position = Vector2(2112, -704)
 level_origin = NodePath("../..")
 subsequent_checkpoints = [NodePath("../../CH0_LV4_R6/Checkpoint"), NodePath("../../CH0_LV4_R3/Checkpoint")]
 
-[node name="PrisonGuard" parent="CH0_LV4_R9" index="7" node_paths=PackedStringArray("player_hub", "clear_timer", "normal_level_music_player", "textbox")]
+[node name="PrisonGuard" parent="CH0_LV4_R9" index="7" node_paths=PackedStringArray("player_hub", "clear_timer", "textbox")]
 player_hub = NodePath("../../Player/Hub")
 clear_timer = NodePath("../../UI_Canvas/ClearTimer")
-normal_level_music_player = NodePath("../../LevelMusicPlayer")
 textbox = NodePath("../../Textbox")
 
 [node name="UI_Canvas" type="CanvasLayer" parent="."]
@@ -234,7 +233,8 @@ accept_input_events = false
 ui_canvas = NodePath("../UI_Canvas")
 
 [node name="LevelMusicPlayer" parent="." instance=ExtResource("18_seqrb")]
-stream = ExtResource("19_k0bib")
+stream = ExtResource("21_51440")
+starting_volume = -2.0
 
 [node name="DefeatScreen" parent="." node_paths=PackedStringArray("screen_fade") instance=ExtResource("20_7hxk8")]
 screen_fade = NodePath("../UI_Canvas/ScreenFade")
