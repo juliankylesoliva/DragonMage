@@ -281,7 +281,7 @@ func active_update(delta : float):
 		else:
 			hub.char_body.velocity = (Vector2.RIGHT * (horizontal_result * hub.movement.get_facing_value() if !hub.collisions.is_facing_a_wall() else 0.0))
 		
-		if (current_vertical_axis <= 0 and (hub.char_body.is_on_floor() or hub.collisions.get_distance_to_ground() <= fire_tackle_floor_snap_distance)):
+		if (current_vertical_axis <= 0 and (hub.char_body.is_on_floor() or hub.collisions.get_distance_to_ground() < fire_tackle_floor_snap_distance)):
 			hub.char_body.apply_floor_snap()
 			if (hub.char_body.is_on_floor()):
 				hub.jumping.landing_reset()

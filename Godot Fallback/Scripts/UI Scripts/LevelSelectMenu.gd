@@ -105,10 +105,14 @@ func start_game():
 	screen_fade.set_fade(1, 1, Color.BLACK)
 	
 	#await get_tree().create_timer(2.0).timeout
+	# awaiting before a scene change creates a gray background flash in Godot 4.3
+	start_level_select_timer(2.0)
+
+func start_level_select_timer(time : float):
 	var timer = Timer.new()
 	add_child(timer)
 	timer.timeout.connect(switch_to_selected_level)
-	timer.start(2.0)
+	timer.start(time)
 
 func switch_to_selected_level():
 	get_tree().change_scene_to_file(level_info_list[current_selection].level_scene_path)

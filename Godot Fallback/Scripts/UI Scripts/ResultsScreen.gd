@@ -183,6 +183,7 @@ func do_main_menu():
 			for text in post_level_text:
 				textbox.queue_text(text)
 			await textbox.textbox_finished
+			# awaiting before a scene change creates a gray background flash in Godot 4.3
 			#await get_tree().create_timer(0.25).timeout
 			timer.start(0.25)
 		else:
@@ -201,13 +202,17 @@ func do_retry_level():
 		menu_cursor.do_selection_movement()
 		await get_tree().create_timer(1.0).timeout
 		screen_fade.set_fade(1, 1, Color.BLACK)
+		# awaiting before a scene change creates a gray background flash in Godot 4.3
 		#await get_tree().create_timer(2.0).timeout
-		var timer = Timer.new()
-		add_child(timer)
-		timer.timeout.connect(on_reload_timer)
-		timer.start(2.0)
+		start_reload_timer(2.0)
 	else:
 		on_reload_timer()
+
+func start_reload_timer(time : float):
+	var timer = Timer.new()
+	add_child(timer)
+	timer.timeout.connect(on_reload_timer)
+	timer.start(time)
 
 func on_reload_timer():
 	EffectFactory.clear_effects()

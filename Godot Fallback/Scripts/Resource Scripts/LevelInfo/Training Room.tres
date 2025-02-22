@@ -8,9 +8,7 @@ level_scene_path = "res://Level Scenes/TrainingRoom/TrainingRoom.tscn"
 name_header = "Extra: Training Room"
 story_description = Array[String](["Thank you for playing!
 
-More levels to be added, uh... eventually!
-
-For now, feel free to replay any of these levels to try for faster clear times or for different medals.
+Feel free to replay any of these levels to try for faster clear times or for finding collectables.
 
 Or you can pick this level to experiment with Magli Draelyn's moveset in this looping training room!
 

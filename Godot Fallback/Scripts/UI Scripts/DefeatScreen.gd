@@ -26,11 +26,15 @@ func do_defeat_screen():
 		header_label.show()
 		await get_tree().create_timer(2).timeout
 		screen_fade.set_fade(1, 0.25, Color.BLACK)
+		# awaiting before a scene change creates a gray background flash in Godot 4.3
 		#await get_tree().create_timer(0.25).timeout
-		var timer = Timer.new()
-		add_child(timer)
-		timer.timeout.connect(on_reload_timer)
-		timer.start(0.25)
+		start_reload_timer(0.25)
+
+func start_reload_timer(time : float):
+	var timer = Timer.new()
+	add_child(timer)
+	timer.timeout.connect(on_reload_timer)
+	timer.start(time)
 
 func on_reload_timer():
 	get_tree().reload_current_scene()
