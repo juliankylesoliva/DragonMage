@@ -436,7 +436,9 @@ ui_canvas = NodePath("../UI_Canvas")
 
 [node name="LevelMusicPlayer" parent="." instance=ExtResource("12_17q7d")]
 stream = ExtResource("32_k65wg")
+autoplay = false
 starting_volume = -8.0
+delay_autoplay = true
 
 [node name="BossMusicPlayer" parent="." instance=ExtResource("12_17q7d")]
 stream = ExtResource("34_vyd70")

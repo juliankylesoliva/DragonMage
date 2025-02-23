@@ -258,7 +258,9 @@ ui_canvas = NodePath("../UI_Canvas")
 
 [node name="LevelMusicPlayer" parent="." instance=ExtResource("12_sh5q1")]
 stream = ExtResource("22_pcpq0")
+autoplay = false
 starting_volume = -2.0
+delay_autoplay = true
 
 [node name="DefeatScreen" parent="." node_paths=PackedStringArray("screen_fade") instance=ExtResource("13_opbm0")]
 screen_fade = NodePath("../UI_Canvas/ScreenFade")

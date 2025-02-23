@@ -179,7 +179,9 @@ ui_canvas = NodePath("../UI_Canvas")
 
 [node name="LevelMusicPlayer" parent="." instance=ExtResource("19_l87bk")]
 stream = ExtResource("18_sfhvb")
+autoplay = false
 starting_volume = -2.0
+delay_autoplay = true
 
 [connection signal="level_finished" from="CH0_LV1_R10/FinishLine" to="." method="level_finish"]
 [connection signal="level_finished" from="CH0_LV1_R10/FinishLine" to="UI_Canvas/FragmentCounterUI" method="hide"]
