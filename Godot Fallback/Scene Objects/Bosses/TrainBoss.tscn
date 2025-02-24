@@ -231,21 +231,21 @@ frame = 1
 
 [node name="TrainHorn" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("9_cnsdc")
-volume_db = 8.0
+volume_db = 4.0
 max_distance = 3584.0
 attenuation = 0.5
 bus = &"SFX"
 
 [node name="TrainChugging" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("10_nyese")
-volume_db = 8.0
+volume_db = 4.0
 max_distance = 3584.0
 attenuation = 0.5
 bus = &"SFX"
 
 [node name="TrainTrackClicking" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("11_jbvud")
-volume_db = 8.0
+volume_db = 4.0
 max_distance = 3584.0
 attenuation = 0.5
 bus = &"SFX"

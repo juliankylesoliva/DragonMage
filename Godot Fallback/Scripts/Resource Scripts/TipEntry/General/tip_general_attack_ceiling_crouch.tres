@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="TipEntry" load_steps=2 format=3 uid="uid://csgvu680ec04u"]
+
+[ext_resource type="Script" path="res://Scripts/Resource Scripts/TipEntry/TipEntry.gd" id="1_1pnbd"]
+
+[resource]
+script = ExtResource("1_1pnbd")
+tip_title = "Watch Your Head When Crouch Attacking!"
+tip_description = Array[String](["If you are crouched while right below a ceiling in midair, you will not be able to uncrouch until there is enough space above you.
+
+Since the midair crouch attacks in both mage and dragon form send you downward, pressing [Attack] by itself will prevent you from using these attacks on accident in the above scenario unless you are holding [Crouch]."])

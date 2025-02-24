@@ -7,4 +7,6 @@ script = ExtResource("1_2am1x")
 tip_title = "Refreshing Midair/Wall Abilities"
 tip_description = Array[String](["The first wall jump performed after leaving the ground as a mage and vaulting after popping up from a wall climb as a dragon both refresh all other midair/wall abilities.
 
-Try alternating between these two moves to stay in the air for as long as you can!"])
+Try alternating between these two moves to stay in the air for as long as you can!", "Stomping enemies refreshes every midair ability at once!
+
+Taking damage also does the same thing so that you can get to safety!"])

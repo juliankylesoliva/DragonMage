@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="TipEntry" load_steps=2 format=3 uid="uid://ck4em5s4bhknk"]
+
+[ext_resource type="Script" path="res://Scripts/Resource Scripts/TipEntry/TipEntry.gd" id="1_maddr"]
+
+[resource]
+script = ExtResource("1_maddr")
+tip_title = "Infinite Lives! But..."
+tip_description = Array[String](["Even if you do get knocked out in a level, don't give up--you can lose as many lives as you want without the fear of getting a game over!
+
+However, the amount of scales needed to receive a rating at the end of a level increases by 10 for each life you lose, and the clear timer does not reset to zero unless you restart the level!"])

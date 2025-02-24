@@ -1,4 +1,4 @@
-[gd_scene load_steps=45 format=3 uid="uid://dsnxfjbl38ytd"]
+[gd_scene load_steps=47 format=3 uid="uid://dsnxfjbl38ytd"]
 
 [ext_resource type="Script" path="res://Scripts/UI Scripts/TipsMenu.gd" id="1_br7dr"]
 [ext_resource type="FontFile" uid="uid://blejgst41tdnl" path="res://PressStart2P.ttf" id="1_rtn30"]
@@ -17,6 +17,7 @@
 [ext_resource type="Resource" uid="uid://dv70e5c2lb4ul" path="res://Scripts/Resource Scripts/TipEntry/General/tip_general_shield.tres" id="7_wqo00"]
 [ext_resource type="Resource" uid="uid://d2eqix0pohkd6" path="res://Scripts/Resource Scripts/TipEntry/Mage/tip_mage_star_inertia.tres" id="8_cm23t"]
 [ext_resource type="Resource" uid="uid://bhsonam0fljfa" path="res://Scripts/Resource Scripts/TipEntry/Dragon/tip_dragon_pivot.tres" id="8_g63tk"]
+[ext_resource type="Resource" uid="uid://csgvu680ec04u" path="res://Scripts/Resource Scripts/TipEntry/General/tip_general_attack_ceiling_crouch.tres" id="9_3tasj"]
 [ext_resource type="Resource" uid="uid://cqcl17cfy6yv3" path="res://Scripts/Resource Scripts/TipEntry/General/tip_general_collectibles.tres" id="9_awsb3"]
 [ext_resource type="Resource" uid="uid://mgpwdeif3bsl" path="res://Scripts/Resource Scripts/TipEntry/Mage/tip_mage_star_throw.tres" id="9_mv47w"]
 [ext_resource type="Resource" uid="uid://di1aljvyujhdc" path="res://Scripts/Resource Scripts/TipEntry/Mage/tip_mage_boost.tres" id="10_pehxb"]
@@ -25,6 +26,7 @@
 [ext_resource type="Resource" uid="uid://c1uvuse2grvua" path="res://Scripts/Resource Scripts/TipEntry/Mage/tip_mage_boost_cancel.tres" id="11_s7737"]
 [ext_resource type="Resource" uid="uid://b11ff6yb3erua" path="res://Scripts/Resource Scripts/TipEntry/Mage/tip_mage_boost_diminishing.tres" id="13_psw3w"]
 [ext_resource type="Resource" uid="uid://de3tbdqnmg65r" path="res://Scripts/Resource Scripts/TipEntry/Mage/tip_mage_slopes.tres" id="14_nnkjc"]
+[ext_resource type="Resource" uid="uid://ck4em5s4bhknk" path="res://Scripts/Resource Scripts/TipEntry/General/tip_general_death_penalty.tres" id="14_s2ot2"]
 [ext_resource type="Resource" uid="uid://bt5o38p80kxks" path="res://Scripts/Resource Scripts/TipEntry/Mage/tip_mage_boost_extend.tres" id="15_mo5ts"]
 [ext_resource type="Resource" uid="uid://bp7my88ay0o2x" path="res://Scripts/Resource Scripts/TipEntry/Mage/tip_mage_dodge_cancel.tres" id="16_a6fqc"]
 [ext_resource type="Resource" uid="uid://drmayip8a6rj5" path="res://Scripts/Resource Scripts/TipEntry/Dragon/tip_dragon_vault.tres" id="17_grjf7"]
@@ -52,7 +54,7 @@ category_text_label = NodePath("CategoryTextLabel")
 option_labels = [NodePath("TipTitleTextLabel1"), NodePath("TipTitleTextLabel2"), NodePath("TipTitleTextLabel3"), NodePath("TipTitleTextLabel4"), NodePath("TipTitleTextLabel5")]
 page_number_footer = NodePath("PageNumberFooter")
 category_names = Array[String](["~ General Guidance -", "~ Mage Mastery ~", "- Dragon Drills -"])
-general_tips = Array[ExtResource("2_3y8lm")]([ExtResource("3_jgvc7"), ExtResource("4_xs212"), ExtResource("5_7e2vt"), ExtResource("6_mvv6b"), ExtResource("11_6llco"), ExtResource("2_wvtcj"), ExtResource("10_syvbi"), ExtResource("7_iydhx"), ExtResource("7_wqo00"), ExtResource("9_awsb3")])
+general_tips = Array[ExtResource("2_3y8lm")]([ExtResource("3_jgvc7"), ExtResource("4_xs212"), ExtResource("5_7e2vt"), ExtResource("6_mvv6b"), ExtResource("2_wvtcj"), ExtResource("11_6llco"), ExtResource("9_3tasj"), ExtResource("10_syvbi"), ExtResource("7_iydhx"), ExtResource("7_wqo00"), ExtResource("9_awsb3"), ExtResource("14_s2ot2")])
 mage_tips = Array[ExtResource("2_3y8lm")]([ExtResource("3_xnomb"), ExtResource("4_ncx85"), ExtResource("5_4nvvv"), ExtResource("22_fnn3l"), ExtResource("14_nnkjc"), ExtResource("9_mv47w"), ExtResource("8_cm23t"), ExtResource("10_pehxb"), ExtResource("13_psw3w"), ExtResource("15_mo5ts"), ExtResource("11_s7737"), ExtResource("16_a6fqc")])
 dragon_tips = Array[ExtResource("2_3y8lm")]([ExtResource("6_jhhg0"), ExtResource("22_aluwn"), ExtResource("8_g63tk"), ExtResource("17_grjf7"), ExtResource("30_x6t0d"), ExtResource("29_jkvty"), ExtResource("18_2lfdk"), ExtResource("31_jej0f"), ExtResource("42_sag5c"), ExtResource("38_3d53l"), ExtResource("25_88ji8"), ExtResource("23_8co53"), ExtResource("36_67pnx"), ExtResource("25_i3m4d"), ExtResource("26_q03ji"), ExtResource("27_jit3g"), ExtResource("40_2pi43"), ExtResource("41_hg66k")])
 max_secondary_selections = 4
