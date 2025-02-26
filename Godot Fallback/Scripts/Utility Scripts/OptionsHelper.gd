@@ -22,9 +22,9 @@ var enable_clear_timer_toggle : bool = false
 
 var master_volume : int = 100
 
-var music_volume : int = 70
+var music_volume : int = 80
 
-var sfx_volume : int = 50
+var sfx_volume : int = 75
 
 func _ready():
 	set_master_volume(master_volume)

@@ -218,23 +218,11 @@ room_destination = NodePath("../../CH1_LV4_R10")
 [node name="CH1_LV4_R10" parent="." instance=ExtResource("13_sr7q6")]
 position = Vector2(-1760, -352)
 
-[node name="LevelCollisionTilemap" parent="CH1_LV4_R10" index="0"]
-rendering_quadrant_size = 32
-
-[node name="BoundaryCollisionTilemap" parent="CH1_LV4_R10" index="1"]
-rendering_quadrant_size = 32
-
 [node name="Warp 0" parent="CH1_LV4_R10" index="4" node_paths=PackedStringArray("room_destination")]
 room_destination = NodePath("../../CH1_LV4_R9")
 
 [node name="Warp 1" parent="CH1_LV4_R10" index="5" node_paths=PackedStringArray("room_destination")]
 room_destination = NodePath("../../CH1_LV4_R11")
-
-[node name="HiddenTilemap" parent="CH1_LV4_R10" index="14"]
-rendering_quadrant_size = 32
-
-[node name="HiddenTilemap2" parent="CH1_LV4_R10" index="15"]
-rendering_quadrant_size = 32
 
 [node name="CH1_LV4_R11" parent="." instance=ExtResource("13_63d4u")]
 position = Vector2(-1728, -832)
@@ -280,12 +268,6 @@ player = NodePath("../../Player/Hub")
 [node name="CH1_LV4_R12B" parent="." instance=ExtResource("28_88mam")]
 position = Vector2(-1728, -1760)
 
-[node name="BoundaryCollisionTilemap" parent="CH1_LV4_R12B" index="0"]
-rendering_quadrant_size = 32
-
-[node name="LevelCollisionTilemap" parent="CH1_LV4_R12B" index="1"]
-rendering_quadrant_size = 32
-
 [node name="DummyWarp" parent="CH1_LV4_R12B" index="4" node_paths=PackedStringArray("room_destination")]
 room_destination = NodePath("../../CH1_LV4_R12C")
 
@@ -314,12 +296,6 @@ player = NodePath("../../Player/Hub")
 [node name="CH1_LV4_R12D" parent="." instance=ExtResource("18_ayv8w")]
 position = Vector2(256, -1760)
 
-[node name="BoundaryCollisionTilemap" parent="CH1_LV4_R12D" index="0"]
-rendering_quadrant_size = 32
-
-[node name="LevelCollisionTilemap" parent="CH1_LV4_R12D" index="1"]
-rendering_quadrant_size = 32
-
 [node name="DummyWarp" parent="CH1_LV4_R12D" index="4" node_paths=PackedStringArray("room_destination")]
 room_destination = NodePath("../../CH1_LV4_R12E")
 
@@ -347,12 +323,6 @@ player = NodePath("../../Player/Hub")
 
 [node name="CH1_LV4_R12F" parent="." instance=ExtResource("20_7ch5c")]
 position = Vector2(2240, -1760)
-
-[node name="BoundaryCollisionTilemap" parent="CH1_LV4_R12F" index="0"]
-rendering_quadrant_size = 32
-
-[node name="LevelCollisionTilemap" parent="CH1_LV4_R12F" index="1"]
-rendering_quadrant_size = 32
 
 [node name="DummyWarp" parent="CH1_LV4_R12F" index="4" node_paths=PackedStringArray("room_destination")]
 room_destination = NodePath("../../CH1_LV4_R13")
@@ -437,13 +407,11 @@ ui_canvas = NodePath("../UI_Canvas")
 [node name="LevelMusicPlayer" parent="." instance=ExtResource("12_17q7d")]
 stream = ExtResource("33_7m2vp")
 autoplay = false
-starting_volume = -2.0
 delay_autoplay = true
 
 [node name="BossMusicPlayer" parent="." instance=ExtResource("12_17q7d")]
 stream = ExtResource("34_vyd70")
 autoplay = false
-starting_volume = -4.0
 
 [node name="TrainBossHandler" type="Node2D" parent="." node_paths=PackedStringArray("exit_gate_sprite", "starting_train", "dummy_warps", "phase_2_room", "phase_3_room", "player_hub", "boss_room", "boss_trigger", "clear_timer", "boss_room_boundary_tilemap", "boss_music_player", "normal_level_music_player", "textbox")]
 script = ExtResource("26_5ooub")
