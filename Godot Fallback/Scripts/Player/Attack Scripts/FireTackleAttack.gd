@@ -94,6 +94,7 @@ var is_attack_button_held : bool = false
 var current_windup_timer : float = 0
 var current_startup_hold_timer : float = 0
 var previous_horizontal_velocity : float = 0
+var initial_vertical_axis : float = 0
 var current_vertical_axis : float = 0
 
 var was_interacting_with_wall : bool = false
@@ -146,6 +147,7 @@ func on_attack_state_exit():
 	current_windup_timer = 0
 	current_startup_hold_timer = 0
 	previous_horizontal_velocity = 0
+	initial_vertical_axis = 0
 	current_vertical_axis = 0
 	
 	was_interacting_with_wall = false
@@ -214,6 +216,7 @@ func startup_update(delta : float):
 func active_init():
 	current_attack_state = AttackState.ACTIVE
 	is_attack_button_held = false
+	initial_vertical_axis = current_vertical_axis
 	hub.audio.play_sound("attack_draelyn_tackle")
 	fire_tackle_particles.emitting = true
 	hub.char_sprite.modulate = fire_tackle_active_color
@@ -240,7 +243,7 @@ func active_init():
 func active_update(delta : float):
 	hub.buffers.refresh_speed_preservation_buffer()
 	if (current_attack_timer > 0 and !hub.damage.is_player_defeated and !hub.damage.is_player_damaged() and (!is_attack_button_held or distance_traveled < fireball_min_tackle_distance) and ((current_bump_immunity_timer > 0 and (!can_cancel_fire_tackle_endlag() or hub.temper.is_form_locked())) or (!hub.collisions.is_facing_a_wall() and !(hub.char_body.is_on_ceiling() and !hub.char_body.is_on_floor())))):
-		if (!hub.temper.is_forcing_form_change() and (distance_traveled >= fire_tackle_slide_cancelable_distance or current_vertical_axis < 0) and hub.char_body.is_on_floor() and hub.is_action_pressed("Crouch")):
+		if (!hub.temper.is_forcing_form_change() and (distance_traveled >= fire_tackle_slide_cancelable_distance or initial_vertical_axis < 0) and hub.char_body.is_on_floor() and hub.is_action_pressed("Crouch")):
 			var selected_attack : Attack = hub.attacks.get_attack_by_name(hub.attacks.crouching_attack_name)
 			if (selected_attack != null):
 				hub.buffers.reset_attack_buffer()

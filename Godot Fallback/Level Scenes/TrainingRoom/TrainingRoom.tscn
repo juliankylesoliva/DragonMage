@@ -1,13 +1,15 @@
-[gd_scene load_steps=15 format=3 uid="uid://ditx5iixwbmbo"]
+[gd_scene load_steps=17 format=3 uid="uid://ditx5iixwbmbo"]
 
 [ext_resource type="Script" path="res://Scripts/Utility Scripts/Level.gd" id="1_kmw2k"]
 [ext_resource type="PackedScene" uid="uid://jbuvidvhkbey" path="res://DemoPlayer.tscn" id="2_k0oau"]
 [ext_resource type="PackedScene" uid="uid://c6qw77ovfwgfs" path="res://Player.tscn" id="2_klk6k"]
 [ext_resource type="PackedScene" uid="uid://q7ww8bbiiqqn" path="res://Level Scenes/TrainingRoom/Rooms/tr_room_hub.tscn" id="3_x0qt0"]
+[ext_resource type="Script" path="res://Scripts/Resource Scripts/AutoPlayerInput/AutoPlayerInputSequence.gd" id="3_xlt8x"]
 [ext_resource type="PackedScene" uid="uid://bdypi7w73c6kq" path="res://Scene Objects/UI/TemperMeterUI.tscn" id="4_0ir14"]
 [ext_resource type="PackedScene" uid="uid://d1eef1xjuwf3b" path="res://Menu Scenes/PauseMenu.tscn" id="5_1ndfl"]
 [ext_resource type="PackedScene" uid="uid://8beel2odcuky" path="res://Scene Objects/Effects/ScreenFade.tscn" id="6_fgimi"]
 [ext_resource type="PackedScene" uid="uid://brhoroc2w6jwi" path="res://Scene Objects/UI/Textbox.tscn" id="7_7x7bm"]
+[ext_resource type="Resource" uid="uid://s4twjyn1pwn" path="res://Scripts/Resource Scripts/AutoPlayerInput/anti_buffer.tres" id="7_odk0i"]
 [ext_resource type="PackedScene" uid="uid://btq4qla5fyq0n" path="res://Scene Objects/Misc/LevelMusicPlayer.tscn" id="8_g7p0o"]
 [ext_resource type="PackedScene" uid="uid://bjeiexqfc7oht" path="res://Scene Objects/Misc/DefeatScreen.tscn" id="9_isfmx"]
 [ext_resource type="PackedScene" uid="uid://bwiahvgc87332" path="res://Scene Objects/Misc/TrainingDemoSwitcher.tscn" id="12_glwla"]
@@ -33,7 +35,7 @@ room_list = [NodePath("tr_room_hub")]
 [node name="TrainingDemoSwitcher" parent="." node_paths=PackedStringArray("level_ref", "demo_player", "starting_locations") instance=ExtResource("12_glwla")]
 level_ref = NodePath("..")
 demo_player = NodePath("../DemoPlayer/Hub")
-demo_list = Array[Resource("res://Scripts/Resource Scripts/AutoPlayerInput/AutoPlayerInputSequence.gd")]([ExtResource("13_hs16r")])
+demo_list = Array[ExtResource("3_xlt8x")]([ExtResource("13_hs16r")])
 starting_locations = [NodePath("../tr_room_hub/DemoEntrance")]
 
 [node name="DemoPlayer" parent="." instance=ExtResource("2_k0oau")]
@@ -44,6 +46,9 @@ shape = SubResource("CapsuleShape2D_2yeym")
 
 [node name="Player" parent="." instance=ExtResource("2_klk6k")]
 position = Vector2(128, 224)
+
+[node name="Hub" parent="Player" index="0"]
+auto_sequence = ExtResource("7_odk0i")
 
 [node name="Camera" parent="Player/Hub" index="11" node_paths=PackedStringArray("player_cam")]
 player_cam = NodePath("../../../Camera2D")
@@ -61,6 +66,9 @@ editor_draw_limits = true
 editor_draw_drag_margin = true
 
 [node name="tr_room_hub" parent="." instance=ExtResource("3_x0qt0")]
+
+[node name="LevelCollisionTilemap" parent="tr_room_hub" index="1"]
+rendering_quadrant_size = 32
 
 [node name="UI_Canvas" type="CanvasLayer" parent="."]
 
