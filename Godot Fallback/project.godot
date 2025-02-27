@@ -21,6 +21,7 @@ boot_splash/minimum_display_time=3000
 
 [audio]
 
+general/default_playback_type.web=0
 driver/mix_rate=48000
 
 [autoload]
@@ -273,5 +274,6 @@ common/physics_jitter_fix=2.0
 textures/canvas_textures/default_texture_filter=0
 renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"
+textures/vram_compression/import_etc2_astc=true
 2d/snap/snap_2d_transforms_to_pixel=true
 2d/snap/snap_2d_vertices_to_pixel=true
