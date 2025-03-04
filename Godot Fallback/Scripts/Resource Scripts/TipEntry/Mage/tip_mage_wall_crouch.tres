@@ -7,4 +7,4 @@ script = ExtResource("1_vaeq8")
 tip_title = "Crouching Out Of A Wall Slide"
 tip_description = Array[String](["As a mage, you can press [Crouch] while sliding down a wall to instantly let go without having to jump off or hold the opposite direction.
 
-Combing this with a dodge can be useful for entering small gaps from above."])
+Combining this with a dodge can be useful for entering small gaps from above."])
