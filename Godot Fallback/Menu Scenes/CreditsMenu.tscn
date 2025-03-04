@@ -26,7 +26,7 @@ Samples:
 \"LP Bongos Hi Slap.wav\" by MrRentAPercussionist is licensed under CC BY 4.0.
 License: https://creativecommons.org/licenses/by/4.0/
 Sound Link: https://freesound.org/s/455506/
-Trimmed off the end."])
+Trimmed off the end and shifted pitch for a low-sounding variant."])
 max_selections = 4
 
 [node name="HeaderTextLabel" type="RichTextLabel" parent="."]
