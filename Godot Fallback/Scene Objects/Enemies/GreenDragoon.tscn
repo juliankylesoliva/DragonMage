@@ -125,7 +125,7 @@ animations = [{
 radius = 12.0
 height = 57.6
 
-[node name="GreenDragoon" type="CharacterBody2D"]
+[node name="GreenDragoon" type="CharacterBody2D" node_paths=PackedStringArray("movement", "collision_detection", "player_detection", "body", "sprite", "shape", "visibility_notifier")]
 process_mode = 4
 light_mask = 8
 visibility_layer = 8
@@ -138,31 +138,31 @@ floor_max_angle = 1.39626
 floor_snap_length = 24.0
 platform_floor_layers = 3
 safe_margin = 0.001
-metadata/Tag = "Enemy"
-
-[node name="Enemy" type="Node" parent="." node_paths=PackedStringArray("movement", "collision_detection", "player_detection", "body", "sprite", "shape", "visibility_notifier")]
 script = ExtResource("1_f1v46")
 dropped_shades_scene = ExtResource("2_heauc")
-movement = NodePath("Movement")
-collision_detection = NodePath("CollisionDetection")
-player_detection = NodePath("PlayerDetection")
-body = NodePath("..")
-sprite = NodePath("../AnimatedSprite2D")
-shape = NodePath("../CollisionShape2D")
-visibility_notifier = NodePath("../VisibleOnScreenNotifier2D")
+movement = NodePath("Enemy/Movement")
+collision_detection = NodePath("Enemy/CollisionDetection")
+player_detection = NodePath("Enemy/PlayerDetection")
+body = NodePath(".")
+sprite = NodePath("AnimatedSprite2D")
+shape = NodePath("CollisionShape2D")
+visibility_notifier = NodePath("VisibleOnScreenNotifier2D")
 defeated_deactivation_camera_distance = 800.0
 z_index_on_defeat = 8
+metadata/Tag = "Enemy"
+
+[node name="Enemy" type="Node" parent="."]
 
 [node name="Movement" type="Node" parent="Enemy" node_paths=PackedStringArray("enemy")]
 script = ExtResource("2_0ndiv")
-enemy = NodePath("..")
+enemy = NodePath("../..")
 initial_move_vector = Vector2(-64, 0)
 is_always_facing_player = false
 max_distance_from_init_pos = 96.0
 
 [node name="PlayerDetection" type="Node" parent="Enemy" node_paths=PackedStringArray("enemy", "front_sightline_raycast", "back_sightline_raycast")]
 script = ExtResource("3_jei6m")
-enemy = NodePath("..")
+enemy = NodePath("../..")
 player_detection_distance = 640.0
 enemy_sightline_distance = 0.0
 enemy_short_sightline_distance = 0.0
@@ -171,7 +171,7 @@ back_sightline_raycast = NodePath("../../PlayerRayCastBack")
 
 [node name="CollisionDetection" type="Node" parent="Enemy" node_paths=PackedStringArray("enemy", "raycast_wall_top_l", "raycast_wall_mid_l", "raycast_wall_bot_l", "raycast_wall_top_r", "raycast_wall_mid_r", "raycast_wall_bot_r", "raycast_ledge_l", "raycast_ledge_r")]
 script = ExtResource("4_tw0i4")
-enemy = NodePath("..")
+enemy = NodePath("../..")
 raycast_wall_top_l = NodePath("../../WallRayCastTopL")
 raycast_wall_mid_l = NodePath("../../WallRayCastMidL")
 raycast_wall_bot_l = NodePath("../../WallRayCastBotL")
@@ -194,7 +194,7 @@ light_mask = 8
 visibility_layer = 8
 z_index = 3
 sprite_frames = SubResource("SpriteFrames_q7jna")
-animation = &"Idle"
+animation = &"Fly"
 autoplay = "Idle"
 flip_h = true
 
@@ -276,11 +276,11 @@ collision_mask = 11
 hit_from_inside = true
 collide_with_areas = true
 
-[connection signal="far_from_home" from="Enemy/Movement" to="Enemy" method="on_far_from_home"]
-[connection signal="player_approach" from="Enemy/PlayerDetection" to="Enemy" method="on_player_approach"]
-[connection signal="player_retreat" from="Enemy/PlayerDetection" to="Enemy" method="on_player_retreat"]
-[connection signal="player_collision" from="Enemy/CollisionDetection" to="Enemy" method="on_player_collision"]
-[connection signal="touching_ledge" from="Enemy/CollisionDetection" to="Enemy" method="on_touching_ledge"]
-[connection signal="touching_wall" from="Enemy/CollisionDetection" to="Enemy" method="on_touching_wall"]
+[connection signal="far_from_home" from="Enemy/Movement" to="." method="on_far_from_home"]
+[connection signal="player_approach" from="Enemy/PlayerDetection" to="." method="on_player_approach"]
+[connection signal="player_retreat" from="Enemy/PlayerDetection" to="." method="on_player_retreat"]
+[connection signal="player_collision" from="Enemy/CollisionDetection" to="." method="on_player_collision"]
+[connection signal="touching_ledge" from="Enemy/CollisionDetection" to="." method="on_touching_ledge"]
+[connection signal="touching_wall" from="Enemy/CollisionDetection" to="." method="on_touching_wall"]
 [connection signal="body_entered" from="ContactHitbox" to="Enemy/CollisionDetection" method="_on_contact_hitbox_body_entered"]
 [connection signal="body_exited" from="ContactHitbox" to="Enemy/CollisionDetection" method="_on_contact_hitbox_body_exited"]

@@ -85,7 +85,5 @@ func set_enemy_player_refs(player : PlayerHub):
 func initialize_enemy_list():
 	if (enemy_list.size() == 0 and enemy_nodes.size() > 0):
 		for node in enemy_nodes:
-			for child in node.get_children():
-				if (child is Enemy):
-					enemy_list.append(child as Enemy)
-					break
+			if (node is Enemy):
+				enemy_list.append(node as Enemy)

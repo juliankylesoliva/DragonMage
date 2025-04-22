@@ -28,14 +28,13 @@ func do_damage_boss(body):
 		EffectFactory.get_effect("FireImpact", body.global_position)
 
 func defeat_enemy(body):
-	for child in body.get_children():
-		if (child is Enemy):
-			var enemy : Enemy = (child as Enemy)
-			if (enemy.defeat_enemy(damage_type)):
-				hit.emit()
-				EffectFactory.get_effect("FireImpact", body.global_position)
-				enemy.body.velocity += (Vector2.RIGHT * player_body.velocity.x * enemy_defeat_knockback_multiplier)
-				return
+	if (body is Enemy):
+		var enemy : Enemy = (body as Enemy)
+		if (enemy.defeat_enemy(damage_type)):
+			hit.emit()
+			EffectFactory.get_effect("FireImpact", body.global_position)
+			enemy.body.velocity += (Vector2.RIGHT * player_body.velocity.x * enemy_defeat_knockback_multiplier)
+			return
 
 func destroy_enemy_projectile(body):
 	if (body is EnemyProjectile and (body as EnemyProjectile).damage_type == "FIRE" and !(body as EnemyProjectile).is_reflected):

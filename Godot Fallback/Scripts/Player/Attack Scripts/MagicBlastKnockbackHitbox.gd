@@ -123,15 +123,13 @@ func do_magic_blast_knockback(body):
 func defeat_enemy(body):
 	var target_pos : Vector2 = ((body as Node2D).global_position - ray.global_position)
 	if (!is_going_thru_a_wall(target_pos, body.get_rid())):
-		for child in body.get_children():
-			if (child is Enemy):
-				var enemy : Enemy = (child as Enemy)
-				if (enemy.defeat_enemy(damage_type)):
-					hit.emit()
-					EffectFactory.get_effect("MagicImpact", body.global_position)
-					var velocity_vector : Vector2 = calculate_knockback(body)
-					enemy.body.velocity += velocity_vector
-					return
+		if (body is Enemy):
+			var enemy : Enemy = (body as Enemy)
+			if (enemy.defeat_enemy(damage_type)):
+				hit.emit()
+				EffectFactory.get_effect("MagicImpact", body.global_position)
+				var velocity_vector : Vector2 = calculate_knockback(body)
+				enemy.body.velocity += velocity_vector
 
 func do_break_object(body):
 	var target_pos : Vector2 = ((body as Node2D).global_position - ray.global_position)

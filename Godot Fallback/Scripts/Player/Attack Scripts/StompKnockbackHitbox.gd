@@ -23,6 +23,5 @@ func _on_body_exited(body):
 		pass
 
 func set_enemy_to_stomp(body):
-	for child in body.get_children():
-			if (child is Enemy):
-				enemy_to_stomp = (child as Enemy)
+		if (body is Enemy):
+			enemy_to_stomp = (body as Enemy)

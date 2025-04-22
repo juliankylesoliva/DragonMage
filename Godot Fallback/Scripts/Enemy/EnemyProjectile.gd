@@ -119,10 +119,8 @@ func hit_check(body):
 	elif (is_reflected and body.has_meta("Tag") and body.get_meta("Tag") == "Enemy"):
 		var enemy_temp : Enemy = null
 		
-		for child in body.get_children():
-			if (child is Enemy):
-				enemy_temp = (child as Enemy)
-				break
+		if (body is Enemy):
+			enemy_temp = (body as Enemy)
 		
 		if (enemy_temp != null):
 			enemy_temp.defeat_enemy("PARRY")

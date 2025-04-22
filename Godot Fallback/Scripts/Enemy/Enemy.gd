@@ -20,7 +20,7 @@ class_name Enemy
 
 @export var defeated_deactivation_camera_distance : float = 25
 
-@export var vertical_launch_velocity_on_defeat : float = -128
+@export var vertical_launch_velocity_on_defeat : float = 128
 
 @export var launch_velocity_on_parry : float = 480
 

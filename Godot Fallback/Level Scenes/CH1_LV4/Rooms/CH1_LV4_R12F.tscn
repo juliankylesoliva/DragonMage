@@ -135,8 +135,6 @@ player_cutscene_position = NodePath("../PlayerCutscenePosition")
 
 [node name="GreenDragoon" parent="." instance=ExtResource("5_6qpoj")]
 position = Vector2(416, 192)
-
-[node name="Enemy" parent="GreenDragoon" index="0"]
 enable_wings = true
 
 [node name="RedDragoon" parent="." instance=ExtResource("6_gifyk")]
@@ -144,8 +142,6 @@ position = Vector2(1088, 224)
 
 [node name="YellowDragoon" parent="." instance=ExtResource("7_hu5sw")]
 position = Vector2(1408, 192)
-
-[node name="Enemy" parent="YellowDragoon" index="0"]
 enable_wings = true
 
 [node name="TemperDragonFruit" parent="." instance=ExtResource("8_av2m4")]
@@ -200,6 +196,3 @@ position = Vector2(1760, 224)
 [connection signal="room_activated" from="." to="TrainTrackClicking" method="play"]
 [connection signal="room_deactivated" from="." to="TrainChugging" method="stop"]
 [connection signal="room_deactivated" from="." to="TrainTrackClicking" method="stop"]
-
-[editable path="GreenDragoon"]
-[editable path="YellowDragoon"]

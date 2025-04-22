@@ -11,8 +11,7 @@
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_q7l5y"]
 
-[node name="EnemyTemplate" type="CharacterBody2D"]
-process_mode = 4
+[node name="EnemyTemplate" type="CharacterBody2D" node_paths=PackedStringArray("movement", "collision_detection", "player_detection", "body", "sprite", "shape", "visibility_notifier")]
 light_mask = 8
 visibility_layer = 8
 disable_mode = 1
@@ -24,27 +23,27 @@ floor_max_angle = 1.39626
 floor_snap_length = 24.0
 platform_floor_layers = 3
 safe_margin = 0.001
-metadata/Tag = "Enemy"
-
-[node name="Enemy" type="Node" parent="." node_paths=PackedStringArray("movement", "collision_detection", "player_detection", "body", "sprite", "shape", "visibility_notifier")]
 script = ExtResource("1_b34y4")
-movement = NodePath("Movement")
-collision_detection = NodePath("CollisionDetection")
-player_detection = NodePath("PlayerDetection")
-body = NodePath("..")
-sprite = NodePath("../AnimatedSprite2D")
-shape = NodePath("../CollisionShape2D")
-visibility_notifier = NodePath("../VisibleOnScreenNotifier2D")
+movement = NodePath("Enemy/Movement")
+collision_detection = NodePath("Enemy/CollisionDetection")
+player_detection = NodePath("Enemy/PlayerDetection")
+body = NodePath(".")
+sprite = NodePath("AnimatedSprite2D")
+shape = NodePath("CollisionShape2D")
+visibility_notifier = NodePath("VisibleOnScreenNotifier2D")
 defeated_deactivation_camera_distance = 800.0
 z_index_on_defeat = 8
+metadata/Tag = "Enemy"
+
+[node name="Enemy" type="Node" parent="."]
 
 [node name="Movement" type="Node" parent="Enemy" node_paths=PackedStringArray("enemy")]
 script = ExtResource("2_dwxft")
-enemy = NodePath("..")
+enemy = NodePath("../..")
 
 [node name="PlayerDetection" type="Node" parent="Enemy" node_paths=PackedStringArray("enemy", "front_sightline_raycast", "back_sightline_raycast")]
 script = ExtResource("3_ppd3f")
-enemy = NodePath("..")
+enemy = NodePath("../..")
 player_detection_distance = 640.0
 enemy_sightline_distance = 448.0
 enemy_short_sightline_distance = 224.0
@@ -53,7 +52,7 @@ back_sightline_raycast = NodePath("../../PlayerRayCastBack")
 
 [node name="CollisionDetection" type="Node" parent="Enemy" node_paths=PackedStringArray("enemy", "raycast_wall_top_l", "raycast_wall_mid_l", "raycast_wall_bot_l", "raycast_wall_top_r", "raycast_wall_mid_r", "raycast_wall_bot_r", "raycast_ledge_l", "raycast_ledge_r")]
 script = ExtResource("4_3uegx")
-enemy = NodePath("..")
+enemy = NodePath("../..")
 raycast_wall_top_l = NodePath("../../WallRayCastTopL")
 raycast_wall_mid_l = NodePath("../../WallRayCastMidL")
 raycast_wall_bot_l = NodePath("../../WallRayCastBotL")

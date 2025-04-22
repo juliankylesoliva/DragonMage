@@ -92,12 +92,6 @@ room_destination = NodePath("../../CH1_LV4_R2")
 [node name="CH1_LV4_R2" parent="." instance=ExtResource("5_dsaer")]
 position = Vector2(-1760, 352)
 
-[node name="LevelCollisionTilemap" parent="CH1_LV4_R2" index="0"]
-rendering_quadrant_size = 32
-
-[node name="BoundaryCollisionTilemap" parent="CH1_LV4_R2" index="1"]
-rendering_quadrant_size = 32
-
 [node name="Warp 0" parent="CH1_LV4_R2" index="4" node_paths=PackedStringArray("room_destination")]
 room_destination = NodePath("../../CH1_LV4_R1")
 
@@ -107,12 +101,6 @@ room_destination = NodePath("../../CH1_LV4_R3")
 [node name="CH1_LV4_R3" parent="." instance=ExtResource("5_ikvsp")]
 position = Vector2(0, 352)
 
-[node name="LevelCollisionTilemap" parent="CH1_LV4_R3" index="0"]
-rendering_quadrant_size = 32
-
-[node name="BoundaryCollisionTilemap" parent="CH1_LV4_R3" index="1"]
-rendering_quadrant_size = 32
-
 [node name="Warp 0" parent="CH1_LV4_R3" index="4" node_paths=PackedStringArray("room_destination")]
 room_destination = NodePath("../../CH1_LV4_R2")
 
@@ -121,12 +109,6 @@ room_destination = NodePath("../../CH1_LV4_R4")
 
 [node name="CH1_LV4_R4" parent="." instance=ExtResource("7_fp8qw")]
 position = Vector2(-1760, 704)
-
-[node name="BoundaryCollisionTilemap" parent="CH1_LV4_R4" index="0"]
-rendering_quadrant_size = 32
-
-[node name="LevelCollisionTilemap" parent="CH1_LV4_R4" index="1"]
-rendering_quadrant_size = 32
 
 [node name="Warp 0" parent="CH1_LV4_R4" index="4" node_paths=PackedStringArray("room_destination")]
 room_destination = NodePath("../../CH1_LV4_R3")
@@ -152,12 +134,6 @@ room_destination = NodePath("../../CH1_LV4_R6")
 [node name="CH1_LV4_R6" parent="." instance=ExtResource("20_xdlir")]
 position = Vector2(-1760, 1184)
 
-[node name="LevelCollisionTilemap" parent="CH1_LV4_R6" index="0"]
-rendering_quadrant_size = 32
-
-[node name="BoundaryCollisionTilemap" parent="CH1_LV4_R6" index="1"]
-rendering_quadrant_size = 32
-
 [node name="Warp 0" parent="CH1_LV4_R6" index="4" node_paths=PackedStringArray("room_destination")]
 room_destination = NodePath("../../CH1_LV4_R5")
 
@@ -166,12 +142,6 @@ room_destination = NodePath("../../CH1_LV4_R7")
 
 [node name="CH1_LV4_R7" parent="." instance=ExtResource("9_f088f")]
 position = Vector2(0, 1184)
-
-[node name="LevelCollisionTilemap" parent="CH1_LV4_R7" index="0"]
-rendering_quadrant_size = 32
-
-[node name="BoundaryCollisionTilemap" parent="CH1_LV4_R7" index="1"]
-rendering_quadrant_size = 32
 
 [node name="Warp 0" parent="CH1_LV4_R7" index="4" node_paths=PackedStringArray("room_destination")]
 room_destination = NodePath("../../CH1_LV4_R6")
@@ -227,12 +197,6 @@ room_destination = NodePath("../../CH1_LV4_R11")
 [node name="CH1_LV4_R11" parent="." instance=ExtResource("13_63d4u")]
 position = Vector2(-1728, -832)
 
-[node name="BoundaryCollisionTilemap" parent="CH1_LV4_R11" index="0"]
-rendering_quadrant_size = 32
-
-[node name="LevelCollisionTilemap" parent="CH1_LV4_R11" index="1"]
-rendering_quadrant_size = 32
-
 [node name="Warp 0" parent="CH1_LV4_R11" index="4" node_paths=PackedStringArray("room_destination")]
 room_destination = NodePath("../../CH1_LV4_R10")
 
@@ -277,12 +241,6 @@ boss = NodePath("../../TrainBossHandler")
 [node name="CH1_LV4_R12C" parent="." instance=ExtResource("17_i1ife")]
 position = Vector2(256, -1312)
 
-[node name="BoundaryCollisionTilemap" parent="CH1_LV4_R12C" index="0"]
-rendering_quadrant_size = 32
-
-[node name="LevelCollisionTilemap" parent="CH1_LV4_R12C" index="1"]
-rendering_quadrant_size = 32
-
 [node name="TrainBoss" parent="CH1_LV4_R12C" index="4" node_paths=PackedStringArray("boss")]
 boss = NodePath("../../TrainBossHandler")
 
@@ -304,12 +262,6 @@ boss = NodePath("../../TrainBossHandler")
 
 [node name="CH1_LV4_R12E" parent="." instance=ExtResource("19_ku8uu")]
 position = Vector2(2240, -1312)
-
-[node name="BoundaryCollisionTilemap" parent="CH1_LV4_R12E" index="0"]
-rendering_quadrant_size = 32
-
-[node name="LevelCollisionTilemap" parent="CH1_LV4_R12E" index="1"]
-rendering_quadrant_size = 32
 
 [node name="TrainBoss" parent="CH1_LV4_R12E" index="4" node_paths=PackedStringArray("boss")]
 boss = NodePath("../../TrainBossHandler")
@@ -449,8 +401,8 @@ screen_fade = NodePath("../UI_Canvas/ScreenFade")
 [connection signal="player_defeated" from="." to="UI_Canvas/MagicMeterUI" method="hide"]
 [connection signal="player_defeated" from="." to="UI_Canvas/FragmentCounterUI" method="hide"]
 [connection signal="player_defeated" from="." to="UI_Canvas/TrainArrivalSignUI" method="hide"]
-[connection signal="player_defeated" from="." to="UI_Canvas/ClearTimer" method="stop_timer"]
 [connection signal="player_defeated" from="." to="UI_Canvas/ClearTimer" method="hide"]
+[connection signal="player_defeated" from="." to="UI_Canvas/ClearTimer" method="stop_timer"]
 [connection signal="player_defeated" from="." to="Textbox" method="hide_textbox"]
 [connection signal="player_defeated" from="." to="LevelMusicPlayer" method="stop"]
 [connection signal="player_defeated" from="." to="BossMusicPlayer" method="stop"]
@@ -461,8 +413,8 @@ screen_fade = NodePath("../UI_Canvas/ScreenFade")
 [connection signal="level_finished" from="CH1_LV4_R13/FinishLine" to="UI_Canvas/MagicMeterUI" method="hide"]
 [connection signal="level_finished" from="CH1_LV4_R13/FinishLine" to="UI_Canvas/FragmentCounterUI" method="hide"]
 [connection signal="level_finished" from="CH1_LV4_R13/FinishLine" to="UI_Canvas/TrainArrivalSignUI" method="hide"]
-[connection signal="level_finished" from="CH1_LV4_R13/FinishLine" to="UI_Canvas/ClearTimer" method="stop_timer"]
 [connection signal="level_finished" from="CH1_LV4_R13/FinishLine" to="UI_Canvas/ClearTimer" method="hide"]
+[connection signal="level_finished" from="CH1_LV4_R13/FinishLine" to="UI_Canvas/ClearTimer" method="stop_timer"]
 [connection signal="level_finished" from="CH1_LV4_R13/FinishLine" to="UI_Canvas/ResultsScreen" method="on_level_complete"]
 [connection signal="level_finished" from="CH1_LV4_R13/FinishLine" to="LevelMusicPlayer" method="fade_out"]
 

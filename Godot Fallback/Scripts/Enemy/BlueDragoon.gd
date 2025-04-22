@@ -103,7 +103,8 @@ func on_player_retreat():
 		movement.set_process_mode(Node.PROCESS_MODE_DISABLED)
 
 func on_player_jump():
-	jump()
+	if (!is_defeated):
+		jump()
 
 func on_player_collision():
 	if (!is_defeated):

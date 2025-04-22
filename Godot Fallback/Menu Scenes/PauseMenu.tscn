@@ -129,6 +129,7 @@ scroll_active = false
 light_mask = 64
 visibility_layer = 64
 z_index = 7
+clip_contents = false
 offset_left = -250.0
 offset_top = 136.0
 offset_right = 250.0
