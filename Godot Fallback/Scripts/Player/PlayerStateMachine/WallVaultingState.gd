@@ -34,6 +34,7 @@ func state_process(_delta):
 		set_next_state(state_machine.get_state_by_name("Damaged"))
 	else:
 		pass
+	hub.stomp.reset_rising_stomp_cooldown()
 
 func on_exit():
 	hub.jumping.end_wall_popup()

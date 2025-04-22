@@ -17,6 +17,8 @@ extends Enemy
 var base_gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
 func _ready():
+	if (enable_helmet):
+		immunity_list.append("STOMP")
 	movement.set_physics_process(false)
 	movement.set_process(false)
 	movement.set_process_mode(Node.PROCESS_MODE_DISABLED)

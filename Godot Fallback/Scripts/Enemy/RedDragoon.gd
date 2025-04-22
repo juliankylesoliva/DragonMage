@@ -45,6 +45,9 @@ func _ready():
 	if (enable_wings):
 		movement.ignore_y_value = false
 		movement.set_move_vector(Vector2(0, winged_speed if flip_initial_winged_movement else -winged_speed))
+		movement.initial_move_vector = movement.current_move_vector
+	if (enable_helmet):
+		immunity_list.append("STOMP")
 	movement.set_physics_process(false)
 	movement.set_process(false)
 	movement.set_process_mode(Node.PROCESS_MODE_DISABLED)
@@ -113,6 +116,8 @@ func activate_enemy():
 	movement.set_physics_process(true)
 	movement.set_process(true)
 	movement.reset_to_initial_position()
+	if (enable_wings):
+		movement.reset_to_initial_move_vector()
 	reset_timer_and_state()
 
 func deactivate_enemy():

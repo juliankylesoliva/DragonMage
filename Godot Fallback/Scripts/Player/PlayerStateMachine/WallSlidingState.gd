@@ -65,6 +65,7 @@ func on_enter():
 	hub.animation.set_animation("MagliThrowWall" if is_throwing else "MagliWallSlide" if hub.jumping.current_wall_jumps < hub.jumping.max_wall_jumps else "MagliWallSlideTired")
 	hub.animation.set_animation_frame(1 if is_throwing else 0)
 	effect_instance = EffectFactory.get_effect("WallSlideDust", hub.raycast_dm.global_position, 1, hub.movement.get_facing_value() < 0)
+	hub.stomp.reset_rising_stomp_cooldown()
 
 func on_exit():
 	if (effect_instance != null):

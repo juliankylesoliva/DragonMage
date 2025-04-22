@@ -12,6 +12,8 @@ class_name EnemyPlayerDetection
 
 @export var player_jumping_threshold : float = -32
 
+@export var contact_damage_cooldown : float = 1
+
 @export var front_sightline_raycast : RayCast2D
 
 @export var back_sightline_raycast : RayCast2D
@@ -42,11 +44,14 @@ var did_player_jump : bool = false
 
 var is_player_in_midair : bool = false
 
+var current_contact_damage_cooldown : float = 0
+
 func _physics_process(_delta):
 	check_player_detection_radius()
 	check_enemy_sightline()
 	check_player_jump()
 	check_player_midair()
+	check_contact_damage_cooldown(_delta)
 
 func get_player_position():
 	return player_ref.char_body.global_position
@@ -63,12 +68,12 @@ func get_direction_to_player():
 	return 0.0
 
 func damage_player():
-	if (player_ref != null):
+	if (player_ref != null and !is_contact_damage_cooldown_active()):
 		return player_ref.damage.take_damage(get_direction_to_player())
 	return false
 
 func damage_warp_player():
-	if (player_ref != null):
+	if (player_ref != null and !is_contact_damage_cooldown_active()):
 		return player_ref.damage.do_damage_warp()
 	return false
 
@@ -80,6 +85,11 @@ func check_player_parry():
 func check_player_guarding():
 	if (player_ref != null):
 		return (player_ref.damage.is_player_guarding() and ((enemy.movement.get_facing_value() * player_ref.movement.get_facing_value()) < 0))
+	return false
+
+func check_player_stomping():
+	if (player_ref != null):
+		return player_ref.stomp.is_stomping_enemy()
 	return false
 
 func check_player_detection_radius():
@@ -133,3 +143,16 @@ func check_player_midair():
 		is_player_in_midair = !player_ref.char_body.is_on_floor()
 		return
 	is_player_in_midair = false
+
+func check_contact_damage_cooldown(delta : float):
+	if (current_contact_damage_cooldown > 0):
+		if (!enemy.collision_detection.is_colliding_with_player):
+			current_contact_damage_cooldown = 0
+		else:
+			current_contact_damage_cooldown = move_toward(current_contact_damage_cooldown, 0, delta)
+
+func set_contact_damage_cooldown():
+	current_contact_damage_cooldown = contact_damage_cooldown
+
+func is_contact_damage_cooldown_active():
+	return current_contact_damage_cooldown > 0

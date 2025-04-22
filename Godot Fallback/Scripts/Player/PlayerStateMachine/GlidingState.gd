@@ -55,6 +55,7 @@ func on_enter():
 	hub.animation.set_animation("MagliThrowAir" if is_throwing and !hub.movement.is_crouching else "MagliCrouchGlide" if hub.movement.is_crouching else "MagliGlide")
 	hub.animation.set_animation_frame(1 if is_throwing else 0)
 	glide_particles.emitting = true
+	hub.stomp.reset_rising_stomp_cooldown()
 
 func on_exit():
 	if (!hub.stomp.is_stomping_enemy()):

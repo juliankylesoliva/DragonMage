@@ -41,7 +41,11 @@ func defeat_enemy(damage_type : StringName):
 		sprite.z_index = z_index_on_defeat
 		on_defeat()
 		return true
-	return false
+	elif (immunity_list.has("STOMP") and damage_type == "STOMP"):
+		player_detection.set_contact_damage_cooldown()
+		return true
+	else:
+		return false
 
 func respawn_enemy():
 	is_defeated = false

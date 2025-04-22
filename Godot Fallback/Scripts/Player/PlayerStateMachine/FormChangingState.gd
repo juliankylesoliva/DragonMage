@@ -53,6 +53,7 @@ func on_enter():
 	hub.jumping.switch_to_zero_gravity()
 	hub.char_body.velocity = Vector2.ZERO
 	hub.form.start_form_change_timer()
+	hub.stomp.reset_rising_stomp_cooldown()
 
 func on_exit():
 	if (!hub.damage.is_player_damaged() and !hub.damage.is_player_defeated):

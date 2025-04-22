@@ -117,6 +117,7 @@ func on_enter():
 	var char_name : String = hub.form.get_current_form_name()
 	var anim_name : String = ("{name}Vulnerable" if hub.temper.is_form_locked() and !hub.movement.is_crouching else "{name}Stand" if !hub.movement.is_crouching else "{name}Crouch")
 	hub.jumping.landing_reset()
+	hub.stomp.reset_rising_stomp_cooldown()
 	hub.animation.set_animation(anim_name.format({"name" : char_name}))
 	hub.animation.set_animation_frame(0)
 	hub.animation.set_animation_speed(1)

@@ -19,6 +19,8 @@ var base_gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 func _ready():
 	if (flip_initial_movement):
 		movement.initial_move_vector *= -1
+	if (enable_helmet):
+		immunity_list.append("STOMP")
 	movement.set_physics_process(false)
 	movement.set_process(false)
 	movement.set_process_mode(Node.PROCESS_MODE_DISABLED)
@@ -87,7 +89,9 @@ func on_player_retreat():
 
 func on_player_collision():
 	if (!is_defeated):
-		if (player_detection.check_player_parry()):
+		if (player_detection.check_player_stomping()):
+			pass
+		elif (player_detection.check_player_parry()):
 			defeat_enemy("PARRY")
 		elif (player_detection.check_player_guarding()):
 			movement.face_away_from_player()

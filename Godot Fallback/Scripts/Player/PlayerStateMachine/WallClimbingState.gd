@@ -94,6 +94,7 @@ func on_enter():
 	
 	var effect_name = (effect_name_fast if -hub.char_body.velocity.y > hub.jumping.min_climbing_speed else effect_name_normal)
 	spark_effect_instance = EffectFactory.get_effect(effect_name, hub.raycast_dm.global_position, 1, hub.movement.get_facing_value() < 0)
+	hub.stomp.reset_rising_stomp_cooldown()
 
 func on_exit():
 	if (spark_effect_instance != null):

@@ -73,6 +73,7 @@ func on_enter():
 	var anim_name : String = ("MagliBoostRun" if hub.jumping.magic_blast_attack.is_blast_jumping and !hub.movement.is_crouching else "{name}Move" if !hub.movement.is_crouching else "{name}CrouchWalk")
 	if (hub.char_body.is_on_floor() or prev_state_name == "Falling" or prev_state_name == "Jumping"):
 		hub.jumping.landing_reset()
+		hub.stomp.reset_rising_stomp_cooldown()
 	hub.animation.set_animation("MagliThrowGround" if is_throwing else anim_name.format({"name" : char_name}))
 	hub.animation.set_animation_frame(1 if is_throwing else 0)
 
