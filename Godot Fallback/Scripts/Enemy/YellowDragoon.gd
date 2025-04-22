@@ -8,6 +8,12 @@ extends Enemy
 
 @export var winged_turnaround_speed : float = 128
 
+@export var enable_helmet : bool = false
+
+@export var enable_reflector : bool = false
+
+@export var enable_magic : bool = false
+
 var base_gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
 func _ready():

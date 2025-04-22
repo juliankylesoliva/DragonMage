@@ -23,6 +23,14 @@ enum EnemyProjectileState
 
 @export var winged_speed : float = 128
 
+@export var flip_initial_winged_movement : bool = false
+
+@export var enable_helmet : bool = false
+
+@export var enable_reflector : bool = false
+
+@export var enable_magic : bool = false
+
 var base_gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
 var current_projectile_state : EnemyProjectileState = EnemyProjectileState.STANDBY
@@ -36,7 +44,7 @@ var saved_turn_speed : float = 0
 func _ready():
 	if (enable_wings):
 		movement.ignore_y_value = false
-		movement.set_move_vector(Vector2(0, -winged_speed))
+		movement.set_move_vector(Vector2(0, winged_speed if flip_initial_winged_movement else -winged_speed))
 	movement.set_physics_process(false)
 	movement.set_process(false)
 	movement.set_process_mode(Node.PROCESS_MODE_DISABLED)

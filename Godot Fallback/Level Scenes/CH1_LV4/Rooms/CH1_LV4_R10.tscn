@@ -269,9 +269,11 @@ enable_wings = true
 [node name="RedDragoon2" parent="Enemies" instance=ExtResource("9_8pjri")]
 position = Vector2(992, 128)
 enable_wings = true
+flip_initial_winged_movement = true
 
 [node name="GreenDragoon2" parent="Enemies" instance=ExtResource("11_qpwl7")]
 position = Vector2(1632, 64)
+flip_initial_movement = true
 enable_wings = true
 
 [node name="RedDragoon3" parent="Enemies" instance=ExtResource("9_8pjri")]

@@ -105,6 +105,7 @@ position = Vector2(928, 192)
 
 [node name="GreenDragoon3" parent="Enemies" instance=ExtResource("4_7bxta")]
 position = Vector2(1024, 128)
+flip_initial_movement = true
 enable_wings = true
 
 [node name="RedDragoon" parent="Enemies" instance=ExtResource("4_e7ptb")]

@@ -67,23 +67,11 @@ editor_draw_drag_margin = true
 
 [node name="CH1_LV3_R1" parent="." instance=ExtResource("3_a63fm")]
 
-[node name="LevelCollisionTilemap" parent="CH1_LV3_R1" index="0"]
-rendering_quadrant_size = 32
-
-[node name="BoundaryCollisionTilemap" parent="CH1_LV3_R1" index="1"]
-rendering_quadrant_size = 32
-
 [node name="Warp 0" parent="CH1_LV3_R1" index="6" node_paths=PackedStringArray("room_destination")]
 room_destination = NodePath("../../CH1_LV3_R2")
 
 [node name="CH1_LV3_R2" parent="." instance=ExtResource("5_ghgpv")]
 position = Vector2(3040, 0)
-
-[node name="LevelCollisionTilemap" parent="CH1_LV3_R2" index="0"]
-rendering_quadrant_size = 32
-
-[node name="BoundaryCollisionTilemap" parent="CH1_LV3_R2" index="1"]
-rendering_quadrant_size = 32
 
 [node name="Warp 0" parent="CH1_LV3_R2" index="5" node_paths=PackedStringArray("room_destination")]
 room_destination = NodePath("../../CH1_LV3_R1")
@@ -91,20 +79,8 @@ room_destination = NodePath("../../CH1_LV3_R1")
 [node name="Warp 1" parent="CH1_LV3_R2" index="6" node_paths=PackedStringArray("room_destination")]
 room_destination = NodePath("../../CH1_LV3_R3")
 
-[node name="HiddenTilemap" parent="CH1_LV3_R2" index="13"]
-rendering_quadrant_size = 32
-
-[node name="HiddenTilemap2" parent="CH1_LV3_R2" index="14"]
-rendering_quadrant_size = 32
-
 [node name="CH1_LV3_R3" parent="." instance=ExtResource("6_m3gwy")]
 position = Vector2(0, 1120)
-
-[node name="LevelCollisionTilemap" parent="CH1_LV3_R3" index="0"]
-rendering_quadrant_size = 32
-
-[node name="BoundaryCollisionTilemap" parent="CH1_LV3_R3" index="1"]
-rendering_quadrant_size = 32
 
 [node name="Warp 0" parent="CH1_LV3_R3" index="8" node_paths=PackedStringArray("room_destination")]
 room_destination = NodePath("../../CH1_LV3_R2")
@@ -112,23 +88,8 @@ room_destination = NodePath("../../CH1_LV3_R2")
 [node name="Warp 1" parent="CH1_LV3_R3" index="9" node_paths=PackedStringArray("room_destination")]
 room_destination = NodePath("../../CH1_LV3_R4")
 
-[node name="HiddenTilemap" parent="CH1_LV3_R3" index="18"]
-rendering_quadrant_size = 32
-
-[node name="HiddenTilemap2" parent="CH1_LV3_R3" index="19"]
-rendering_quadrant_size = 32
-
-[node name="HiddenTilemap3" parent="CH1_LV3_R3" index="20"]
-rendering_quadrant_size = 32
-
 [node name="CH1_LV3_R4" parent="." instance=ExtResource("7_2eiyo")]
 position = Vector2(-576, -896)
-
-[node name="LevelCollisionTilemap" parent="CH1_LV3_R4" index="0"]
-rendering_quadrant_size = 32
-
-[node name="BoundaryCollisionTilemap" parent="CH1_LV3_R4" index="1"]
-rendering_quadrant_size = 32
 
 [node name="Warp 0" parent="CH1_LV3_R4" index="7" node_paths=PackedStringArray("room_destination")]
 room_destination = NodePath("../../CH1_LV3_R3")
@@ -136,26 +97,8 @@ room_destination = NodePath("../../CH1_LV3_R3")
 [node name="Warp 1" parent="CH1_LV3_R4" index="8" node_paths=PackedStringArray("room_destination")]
 room_destination = NodePath("../../CH1_LV3_R5")
 
-[node name="HiddenTilemap" parent="CH1_LV3_R4" index="17"]
-rendering_quadrant_size = 32
-
-[node name="HiddenTilemap2" parent="CH1_LV3_R4" index="18"]
-rendering_quadrant_size = 32
-
-[node name="HiddenTilemap3" parent="CH1_LV3_R4" index="19"]
-rendering_quadrant_size = 32
-
-[node name="HiddenTilemap4" parent="CH1_LV3_R4" index="20"]
-rendering_quadrant_size = 32
-
 [node name="CH1_LV3_R5" parent="." instance=ExtResource("18_c8jkb")]
 position = Vector2(-672, -2016)
-
-[node name="BoundaryCollisionTilemap" parent="CH1_LV3_R5" index="0"]
-rendering_quadrant_size = 32
-
-[node name="LevelCollisionTilemap" parent="CH1_LV3_R5" index="1"]
-rendering_quadrant_size = 32
 
 [node name="Warp 0" parent="CH1_LV3_R5" index="9" node_paths=PackedStringArray("room_destination")]
 room_destination = NodePath("../../CH1_LV3_R4")
@@ -166,20 +109,8 @@ room_destination = NodePath("../../CH1_LV3_R6")
 [node name="Checkpoint" parent="CH1_LV3_R5" index="12" node_paths=PackedStringArray("level_origin")]
 level_origin = NodePath("../..")
 
-[node name="HiddenTilemap" parent="CH1_LV3_R5" index="18"]
-rendering_quadrant_size = 32
-
-[node name="HiddenTilemap2" parent="CH1_LV3_R5" index="19"]
-rendering_quadrant_size = 32
-
 [node name="CH1_LV3_R6" parent="." instance=ExtResource("9_c0y5n")]
 position = Vector2(-4224, 320)
-
-[node name="LevelCollisionTilemap" parent="CH1_LV3_R6" index="0"]
-rendering_quadrant_size = 32
-
-[node name="BoundaryCollisionTilemap" parent="CH1_LV3_R6" index="1"]
-rendering_quadrant_size = 32
 
 [node name="Warp 0" parent="CH1_LV3_R6" index="7" node_paths=PackedStringArray("room_destination")]
 room_destination = NodePath("../../CH1_LV3_R5")
@@ -190,20 +121,11 @@ room_destination = NodePath("../../CH1_LV3_R7")
 [node name="CH1_LV3_R7" parent="." instance=ExtResource("10_e3sn4")]
 position = Vector2(-2336, -3456)
 
-[node name="LevelCollisionTilemap" parent="CH1_LV3_R7" index="0"]
-rendering_quadrant_size = 32
-
-[node name="BoundaryCollisionTilemap" parent="CH1_LV3_R7" index="1"]
-rendering_quadrant_size = 32
-
 [node name="Warp 0" parent="CH1_LV3_R7" index="7" node_paths=PackedStringArray("room_destination")]
 room_destination = NodePath("../../CH1_LV3_R6")
 
 [node name="Warp 1" parent="CH1_LV3_R7" index="8" node_paths=PackedStringArray("room_destination")]
 room_destination = NodePath("../../CH1_LV3_R8")
-
-[node name="HiddenTilemap" parent="CH1_LV3_R7" index="16"]
-rendering_quadrant_size = 32
 
 [node name="CH1_LV3_R8" parent="." instance=ExtResource("21_jpnph")]
 position = Vector2(-1088, 896)

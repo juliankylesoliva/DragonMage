@@ -133,6 +133,7 @@ enable_wings = true
 [node name="RedDragoon" parent="Enemies" instance=ExtResource("6_gnid0")]
 position = Vector2(864, -160)
 enable_wings = true
+flip_initial_winged_movement = true
 
 [node name="BlueDragoon3" parent="Enemies" instance=ExtResource("4_o5gir")]
 position = Vector2(608, -192)
@@ -144,6 +145,7 @@ enable_wings = true
 
 [node name="GreenDragoon2" parent="Enemies" instance=ExtResource("5_0pfic")]
 position = Vector2(2080, -224)
+flip_initial_movement = true
 enable_wings = true
 
 [node name="BlueDragoon4" parent="Enemies" instance=ExtResource("4_o5gir")]
@@ -177,9 +179,11 @@ enable_wings = true
 [node name="RedDragoon5" parent="Enemies" instance=ExtResource("6_gnid0")]
 position = Vector2(3616, -192)
 enable_wings = true
+flip_initial_winged_movement = true
 
 [node name="GreenDragoon4" parent="Enemies" instance=ExtResource("5_0pfic")]
 position = Vector2(3296, -160)
+flip_initial_movement = true
 enable_wings = true
 
 [node name="Fragments" type="Node2D" parent="."]

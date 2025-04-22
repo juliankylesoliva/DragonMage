@@ -80,6 +80,7 @@ enable_wings = true
 
 [node name="GreenDragoon3" parent="." instance=ExtResource("4_5uylb")]
 position = Vector2(1088, 160)
+flip_initial_movement = true
 enable_wings = true
 
 [node name="Fragments" type="Node2D" parent="."]

@@ -144,6 +144,7 @@ position = Vector2(1056, 224)
 
 [node name="GreenDragoon3" parent="Enemies" instance=ExtResource("6_5w7r5")]
 position = Vector2(1376, 128)
+flip_initial_movement = true
 enable_wings = true
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]

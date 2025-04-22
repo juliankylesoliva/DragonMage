@@ -151,6 +151,7 @@ position = Vector2(832, 224)
 [node name="RedDragoon3" parent="." instance=ExtResource("5_43lwf")]
 position = Vector2(1408, 160)
 enable_wings = true
+flip_initial_winged_movement = true
 
 [node name="TemperDragonFruit" parent="." instance=ExtResource("7_b8we7")]
 position = Vector2(1120, 128)

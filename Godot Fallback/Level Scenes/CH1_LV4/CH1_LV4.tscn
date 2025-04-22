@@ -119,12 +119,6 @@ room_destination = NodePath("../../CH1_LV4_R5")
 [node name="CH1_LV4_R5" parent="." instance=ExtResource("7_mkpf8")]
 position = Vector2(0, 704)
 
-[node name="BoundaryCollisionTilemap" parent="CH1_LV4_R5" index="0"]
-rendering_quadrant_size = 32
-
-[node name="LevelCollisionTilemap" parent="CH1_LV4_R5" index="1"]
-rendering_quadrant_size = 32
-
 [node name="Warp 0" parent="CH1_LV4_R5" index="4" node_paths=PackedStringArray("room_destination")]
 room_destination = NodePath("../../CH1_LV4_R4")
 
