@@ -7,6 +7,8 @@ func _on_body_entered(body):
 		defeat_enemy(body)
 	elif (body.has_meta("Tag") and body.get_meta("Tag") == "EnemyProjectile"):
 		destroy_enemy_projectile(body)
+	elif (body.has_meta("Tag") and body.get_meta("Tag") == "PlayerProjectile"):
+		reflect_player_projectile(body)
 	else:
 		pass
 
@@ -21,3 +23,11 @@ func defeat_enemy(body):
 func destroy_enemy_projectile(body):
 	if (body is EnemyProjectile and !(body as EnemyProjectile).is_reflected):
 		(body as EnemyProjectile).reflect_projectile()
+
+func reflect_player_projectile(body):
+	for child in body.get_children():
+			if (child is FireballKnockbackHitbox):
+				var temp_fireball : FireballKnockbackHitbox = (child as FireballKnockbackHitbox)
+				if (temp_fireball.is_reflected):
+					temp_fireball.reflect_projectile()
+				break

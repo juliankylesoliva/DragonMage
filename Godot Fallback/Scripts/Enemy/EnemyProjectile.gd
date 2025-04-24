@@ -20,6 +20,8 @@ class_name EnemyProjectile
 
 @export var reflected_speed_boost : float = 2
 
+@export var max_reflects : int = 3
+
 @export_enum("MAGIC", "FIRE") var damage_type : String = "FIRE"
 
 @export var impact_effect_name : String = "DragoonProjectileImpact"
@@ -39,6 +41,8 @@ var is_reflected = false
 var saved_velocity : Vector2
 
 var bounce_count : int = 0
+
+var current_reflects : int = 0
 
 func _physics_process(_delta):
 	if ((is_on_floor() or is_on_ceiling()) and saved_velocity.y != 0):
@@ -82,12 +86,18 @@ func destroy_projectile():
 	queue_free()
 
 func reflect_projectile():
-	is_reflected = true
-	EffectFactory.get_effect(reflect_impact_effect_name, global_position)
-	velocity.x *= -abs(reflected_speed_boost)
-	is_moving_right = !is_moving_right
-	projectile_sprite.flip_h = !is_moving_right
-	SoundFactory.play_sound_by_name(reflect_sound_name, global_position, 0, 1, "SFX")
+	if (current_reflects < max_reflects):
+		is_reflected = !is_reflected
+		EffectFactory.get_effect(reflect_impact_effect_name, global_position)
+		velocity.x *= -abs(reflected_speed_boost)
+		is_moving_right = !is_moving_right
+		projectile_sprite.flip_h = !is_moving_right
+		SoundFactory.play_sound_by_name(reflect_sound_name, global_position, 0, 1, "SFX")
+		current_reflects += 1
+	else:
+		EffectFactory.get_effect(reflect_impact_effect_name, global_position)
+		SoundFactory.play_sound_by_name(reflect_sound_name, global_position, 0, 1, "SFX")
+		destroy_projectile()
 
 func get_gravity_delta(delta : float):
 	return (base_gravity * gravity_scale * delta)
@@ -112,7 +122,7 @@ func hit_check(body):
 			direction = (1.0 if direction >= 0 else -1.0)
 			if (player_temp.damage.take_damage(direction) or player_temp.damage.is_player_guarding()):
 				destroy_projectile()
-			elif (!is_reflected and player_temp.damage.is_player_parrying()):
+			elif (!is_reflected and player_temp.damage.is_player_parrying() and current_reflects < max_reflects):
 				reflect_projectile()
 			else:
 				pass
@@ -123,8 +133,12 @@ func hit_check(body):
 			enemy_temp = (body as Enemy)
 		
 		if (enemy_temp != null):
-			enemy_temp.defeat_enemy("PARRY")
-			destroy_projectile()
+			if (enemy_temp.defeat_enemy("PARRY", true)):
+				destroy_projectile()
+			elif (enemy_temp.can_reflect_projectiles):
+				reflect_projectile()
+			else:
+				destroy_projectile()
 	elif (is_reflected and body.has_meta("Tag") and body.get_meta("Tag") == "EnemyProjectile"):
 		if (body is EnemyProjectile and !(body as EnemyProjectile).is_reflected):
 			(body as EnemyProjectile).destroy_projectile()

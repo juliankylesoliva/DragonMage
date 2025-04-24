@@ -4,7 +4,7 @@
 [ext_resource type="Script" path="res://Scripts/Player/Fairy Ability Scripts/InvincibilityShieldHitbox.gd" id="2_e4iju"]
 
 [node name="InvincibilityShieldHitbox" instance=ExtResource("1_ttu4k")]
-collision_mask = 192
+collision_mask = 208
 script = ExtResource("2_e4iju")
 damage_type = &"INVINCIBILITY"
 pixels_per_unit = 32.0

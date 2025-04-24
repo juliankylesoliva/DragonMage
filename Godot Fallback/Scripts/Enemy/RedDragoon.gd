@@ -48,6 +48,7 @@ func _ready():
 		movement.initial_move_vector = movement.current_move_vector
 	if (enable_helmet):
 		immunity_list.append("STOMP")
+	can_reflect_projectiles = enable_reflector
 	movement.set_physics_process(false)
 	movement.set_process(false)
 	movement.set_process_mode(Node.PROCESS_MODE_DISABLED)

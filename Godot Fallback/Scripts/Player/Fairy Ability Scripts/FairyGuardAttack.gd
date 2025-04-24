@@ -225,7 +225,8 @@ func end_guard():
 	hub.fairy.fairy_ref.sprite.set_animation("FaesonIdle")
 	hub.fairy.fairy_ref.sigil_sprite.set_visible(false)
 	
-	hub.fairy.set_fairy_ability_cooldown_timer()
+	if (!did_player_parry):
+		hub.fairy.set_fairy_ability_cooldown_timer()
 	
 	if (hub.is_deactivated):
 		hub.state_machine.current_state.set_next_state(hub.state_machine.get_state_by_name("Deactivated"))

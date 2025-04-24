@@ -10,6 +10,8 @@ class_name Enemy
 
 @export var immunity_list : Array[StringName]
 
+@export var can_reflect_projectiles : bool = false
+
 @export var body : CharacterBody2D
 
 @export var sprite : AnimatedSprite2D
@@ -34,8 +36,10 @@ var is_defeated : bool = false
 
 var home_position : Vector2 = Vector2.ZERO
 
-func defeat_enemy(damage_type : StringName):
-	if (!is_defeated and !immunity_list.has(damage_type)):
+func defeat_enemy(damage_type : StringName, is_projectile : bool = false):
+	if (!is_defeated and is_projectile and can_reflect_projectiles):
+		return false
+	elif (!is_defeated and !immunity_list.has(damage_type)):
 		is_defeated = true
 		body.velocity = (vertical_launch_velocity_on_defeat * Vector2.UP if damage_type != "PARRY" and damage_type != "INVINCIBILITY" else launch_velocity_on_parry * Vector2(-movement.get_facing_value(), -1))
 		sprite.z_index = z_index_on_defeat

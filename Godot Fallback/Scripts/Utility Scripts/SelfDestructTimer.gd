@@ -7,13 +7,16 @@ class_name SelfDestructTimer
 var current_lifetime_left : float = 0
 
 func _ready():
-	current_lifetime_left = lifetime
+	refresh_lifetime()
 
 func _process(delta):
 	if (current_lifetime_left > 0):
 		current_lifetime_left = move_toward(current_lifetime_left, 0, delta)
 	else:
 		queue_free()
+
+func refresh_lifetime():
+	current_lifetime_left = lifetime
 
 func set_active():
 	set_process_mode(Node.PROCESS_MODE_INHERIT)

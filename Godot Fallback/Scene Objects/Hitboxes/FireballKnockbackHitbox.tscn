@@ -4,9 +4,11 @@
 [ext_resource type="Script" path="res://Scripts/Player/Attack Scripts/FireballKnockbackHitbox.gd" id="2_at8cf"]
 
 [node name="FireballKnockbackHitbox" instance=ExtResource("1_0f0lt")]
-collision_mask = 233
+collision_mask = 237
 script = ExtResource("2_at8cf")
 enemy_defeat_knockback_multiplier = 1.5
+reflected_speed_boost = 1.25
+max_reflects = 2
 damage_type = &"FIRE"
 damage_strength = 2
 pixels_per_unit = 32.0

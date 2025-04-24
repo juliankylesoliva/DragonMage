@@ -125,11 +125,16 @@ func defeat_enemy(body):
 	if (!is_going_thru_a_wall(target_pos, body.get_rid())):
 		if (body is Enemy):
 			var enemy : Enemy = (body as Enemy)
-			if (enemy.defeat_enemy(damage_type)):
+			if (enemy.defeat_enemy(damage_type, true)):
 				hit.emit()
 				EffectFactory.get_effect("MagicImpact", body.global_position)
 				var velocity_vector : Vector2 = calculate_knockback(body)
 				enemy.body.velocity += velocity_vector
+			elif (enemy.can_reflect_projectiles):
+				EffectFactory.get_effect("ReflectImpact", global_position)
+				SoundFactory.play_sound_by_name("attack_reflect", global_position, 0, 1, "SFX")
+			else:
+				pass
 
 func do_break_object(body):
 	var target_pos : Vector2 = ((body as Node2D).global_position - ray.global_position)
