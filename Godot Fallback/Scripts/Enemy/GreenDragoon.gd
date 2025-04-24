@@ -14,6 +14,8 @@ extends Enemy
 
 @export var enable_magic : bool = false
 
+@export var magic_speed_modifier : float = 2
+
 var base_gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
 func _ready():
@@ -22,6 +24,11 @@ func _ready():
 	if (enable_helmet):
 		immunity_list.append("STOMP")
 	can_reflect_projectiles = enable_reflector
+	if (enable_magic):
+		movement.initial_move_vector *= magic_speed_modifier
+		if (enable_wings):
+			winged_turnaround_speed *= (magic_speed_modifier * magic_speed_modifier)
+		sprite.set_speed_scale(magic_speed_modifier)
 	movement.set_physics_process(false)
 	movement.set_process(false)
 	movement.set_process_mode(Node.PROCESS_MODE_DISABLED)

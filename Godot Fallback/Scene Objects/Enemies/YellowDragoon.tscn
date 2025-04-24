@@ -82,7 +82,7 @@ animations = [{
 "speed": 60.0
 }, {
 "frames": [{
-"duration": 1.0,
+"duration": 5.0,
 "texture": SubResource("AtlasTexture_ole6t")
 }, {
 "duration": 10.0,
@@ -209,7 +209,7 @@ light_mask = 8
 visibility_layer = 8
 z_index = 3
 sprite_frames = SubResource("SpriteFrames_q7jna")
-animation = &"Idle"
+animation = &"Walk"
 autoplay = "Idle"
 flip_h = true
 

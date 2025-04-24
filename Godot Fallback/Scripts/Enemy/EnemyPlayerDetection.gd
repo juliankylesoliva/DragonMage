@@ -67,6 +67,9 @@ func get_direction_to_player():
 			return (1.0 if x_diff > 0 else -1.0)
 	return 0.0
 
+func is_facing_player():
+	return ((get_direction_to_player() * enemy.movement.get_facing_value()) > 0)
+
 func damage_player():
 	if (player_ref != null and !is_contact_damage_cooldown_active()):
 		return player_ref.damage.take_damage(get_direction_to_player())
@@ -146,13 +149,16 @@ func check_player_midair():
 
 func check_contact_damage_cooldown(delta : float):
 	if (current_contact_damage_cooldown > 0):
-		if (!enemy.collision_detection.is_colliding_with_player):
-			current_contact_damage_cooldown = 0
+		if (!is_player_in_midair):
+			reset_contact_damage_cooldown()
 		else:
 			current_contact_damage_cooldown = move_toward(current_contact_damage_cooldown, 0, delta)
 
 func set_contact_damage_cooldown():
 	current_contact_damage_cooldown = contact_damage_cooldown
+
+func reset_contact_damage_cooldown():
+	current_contact_damage_cooldown = 0
 
 func is_contact_damage_cooldown_active():
 	return current_contact_damage_cooldown > 0

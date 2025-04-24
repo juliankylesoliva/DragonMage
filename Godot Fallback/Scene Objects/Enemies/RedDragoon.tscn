@@ -232,7 +232,7 @@ light_mask = 8
 visibility_layer = 8
 z_index = 3
 sprite_frames = SubResource("SpriteFrames_q7jna")
-animation = &"Idle"
+animation = &"AttackLaunch"
 autoplay = "Idle"
 flip_h = true
 

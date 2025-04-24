@@ -26,6 +26,8 @@ class_name EnemyCollisionDetection
 
 var is_touching_ledge : bool = false
 
+var is_touching_wall : bool = false
+
 var is_colliding_with_player : bool = false
 
 signal touching_wall
@@ -69,7 +71,10 @@ func wall_check():
 	bot_check.force_raycast_update()
 	
 	if (enemy.body.is_on_wall() and (top_check.is_colliding() or mid_check.is_colliding() or bot_check.is_colliding()) and (top_check.get_collision_normal().y == 0 or mid_check.get_collision_normal().y == 0 or bot_check.get_collision_normal().y == 0)):
+		is_touching_wall = true
 		touching_wall.emit()
+	else:
+		is_touching_wall = false
 
 func ceiling_check():
 	if (enemy.body.is_on_ceiling()):

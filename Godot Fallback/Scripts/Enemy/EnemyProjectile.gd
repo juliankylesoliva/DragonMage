@@ -2,6 +2,8 @@ extends CharacterBody2D
 
 class_name EnemyProjectile
 
+@export var audio : AudioStreamPlayer2D
+
 @export var projectile_sprite : AnimatedSprite2D
 
 @export var move_speed : float = 3
@@ -81,8 +83,8 @@ func setup(enemy_source : Enemy):
 	projectile_sprite.flip_h = !is_moving_right
 
 func destroy_projectile():
-	EffectFactory.get_effect(impact_effect_name, global_position)
-	SoundFactory.play_sound_by_name(destroy_sound_name, global_position, 0, 1, "SFX")
+	EffectFactory.get_effect(impact_effect_name, global_position, scale.x)
+	SoundFactory.play_sound_by_name(destroy_sound_name, global_position, 0, audio.pitch_scale if audio != null else 1.0, "SFX")
 	queue_free()
 
 func reflect_projectile():

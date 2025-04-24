@@ -31,6 +31,16 @@ enum EnemyProjectileState
 
 @export var enable_magic : bool = false
 
+@export var magic_projectile_scale_modifier : float = 3.25
+
+@export var magic_projectile_speed_modifier : float = 0.85
+
+@export var magic_windup_modifier : float = 2
+
+@export var magic_cooldown_modifier : float = 1.5
+
+@export var magic_sound_pitch_modifer : float = 0.75
+
 var base_gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
 var current_projectile_state : EnemyProjectileState = EnemyProjectileState.STANDBY
@@ -49,6 +59,9 @@ func _ready():
 	if (enable_helmet):
 		immunity_list.append("STOMP")
 	can_reflect_projectiles = enable_reflector
+	if (enable_magic):
+		pre_fire_windup *= magic_windup_modifier
+		post_fire_cooldown *= magic_cooldown_modifier
 	movement.set_physics_process(false)
 	movement.set_process(false)
 	movement.set_process_mode(Node.PROCESS_MODE_DISABLED)
@@ -103,6 +116,9 @@ func update_state_timer(delta : float):
 				(proj_temp as Node2D).global_position = projectile_spawn_point.global_position
 				
 				(proj_temp as EnemyProjectile).setup(self)
+				(proj_temp as EnemyProjectile).velocity *= (magic_projectile_speed_modifier if enable_magic else 1.0)
+				(proj_temp as CharacterBody2D).scale *= (magic_projectile_scale_modifier if enable_magic else 1.0)
+				(proj_temp as EnemyProjectile).audio.pitch_scale *= (magic_sound_pitch_modifer if enable_magic else 1.0)
 				
 				current_projectile_state = EnemyProjectileState.COOLDOWN
 				current_projectile_state_timer = post_fire_cooldown

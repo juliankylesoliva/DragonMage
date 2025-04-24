@@ -14,12 +14,19 @@ extends Enemy
 
 @export var enable_magic : bool = false
 
+@export var magic_speed_modifier : float = 2
+
 var base_gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
 func _ready():
 	if (enable_helmet):
 		immunity_list.append("STOMP")
 	can_reflect_projectiles = enable_reflector
+	if (enable_magic):
+		move_speed *= magic_speed_modifier
+		if (enable_wings):
+			winged_turnaround_speed *= (magic_speed_modifier * magic_speed_modifier)
+		sprite.set_speed_scale(magic_speed_modifier)
 	movement.set_physics_process(false)
 	movement.set_process(false)
 	movement.set_process_mode(Node.PROCESS_MODE_DISABLED)
@@ -99,7 +106,12 @@ func on_stay_sightline():
 		sprite.play("WingedChase" if enable_wings else "Walk")
 
 func on_touching_wall():
-	movement.flip_movement(true)
+	if (player_detection.is_player_in_sightline):
+		movement.flip_movement()
+	else:
+		movement.set_move_vector(Vector2.ZERO)
+		movement.is_always_facing_player = true
+		sprite.play("WingedIdle" if enable_wings else "Idle")
 
 func on_touching_ledge():
 	movement.flip_movement(true)

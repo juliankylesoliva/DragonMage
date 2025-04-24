@@ -624,6 +624,7 @@ func landing_reset():
 func set_fast_fall():
 	hub.buffers.reset_fast_fall_buffer()
 	hub.buffers.reset_attack_buffer()
+	hub.stomp.reset_rising_stomp_cooldown()
 	is_fast_falling = true
 	if (!hub.collisions.is_in_ceiling_when_uncrouched()):
 		hub.movement.is_crouching = false
