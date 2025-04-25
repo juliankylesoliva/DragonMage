@@ -109,12 +109,6 @@ rendering_quadrant_size = 32
 [node name="CH1_LV1_R4" parent="." instance=ExtResource("7_vo2pd")]
 position = Vector2(3392, -64)
 
-[node name="BoundaryCollisionTilemap" parent="CH1_LV1_R4" index="0"]
-rendering_quadrant_size = 32
-
-[node name="LevelCollisionTilemap" parent="CH1_LV1_R4" index="1"]
-rendering_quadrant_size = 32
-
 [node name="Warp 0" parent="CH1_LV1_R4" index="4" node_paths=PackedStringArray("room_destination")]
 room_destination = NodePath("../../CH1_LV1_R3")
 

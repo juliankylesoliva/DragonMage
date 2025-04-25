@@ -202,11 +202,11 @@ autoplay = "Idle"
 flip_h = true
 
 [node name="ContactHitbox" type="Area2D" parent="."]
+position = Vector2(0, 3)
 collision_layer = 32
 collision_mask = 36
 
 [node name="ContactHitboxShape" type="CollisionShape2D" parent="ContactHitbox"]
-position = Vector2(0, 3)
 shape = SubResource("CapsuleShape2D_q7l5y")
 
 [node name="PlayerRayCastFront" type="RayCast2D" parent="."]
@@ -276,6 +276,7 @@ collision_mask = 11
 [connection signal="player_retreat" from="Enemy/PlayerDetection" to="." method="on_player_retreat"]
 [connection signal="leaving_ground" from="Enemy/CollisionDetection" to="." method="on_leaving_ground"]
 [connection signal="player_collision" from="Enemy/CollisionDetection" to="." method="on_player_collision"]
+[connection signal="touching_ceiling" from="Enemy/CollisionDetection" to="." method="on_touching_ceiling"]
 [connection signal="touching_ground" from="Enemy/CollisionDetection" to="." method="on_touching_ground"]
 [connection signal="body_entered" from="ContactHitbox" to="Enemy/CollisionDetection" method="_on_contact_hitbox_body_entered"]
 [connection signal="body_exited" from="ContactHitbox" to="Enemy/CollisionDetection" method="_on_contact_hitbox_body_exited"]
