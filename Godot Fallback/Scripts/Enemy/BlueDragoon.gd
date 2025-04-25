@@ -14,6 +14,8 @@ extends Enemy
 
 @export var reflector_sprite : AnimatedSprite2D
 
+@export var magic_particles : CPUParticles2D
+
 @export var enable_wings : bool = false
 
 @export var enable_helmet : bool = false
@@ -48,6 +50,7 @@ func _ready():
 		flip()
 	if (enable_magic and enable_helmet):
 		allow_upside_down_stomp = true
+	magic_particles.set_emitting(enable_magic)
 	movement.set_physics_process(false)
 	movement.set_process(false)
 	movement.set_process_mode(Node.PROCESS_MODE_DISABLED)
@@ -112,6 +115,7 @@ func jump_update():
 func flip():
 	sprite.flip_v = !sprite.flip_v
 	body.up_direction.y *= -1
+	magic_particles.direction.y *= -1
 	collision_detection.raycast_ledge_l.target_position *= -1
 	collision_detection.raycast_ledge_r.target_position *= -1
 	for child in self.get_children():
@@ -144,6 +148,7 @@ func on_defeat():
 	reflector_sprite.set_visible(false)
 	if (enable_magic and body.up_direction.y > 0):
 		flip()
+	magic_particles.set_emitting(false)
 
 func on_player_approach():
 	if (!is_defeated):

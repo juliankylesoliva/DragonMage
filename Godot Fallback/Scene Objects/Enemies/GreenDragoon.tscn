@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://clfqwsy4byrkf"]
+[gd_scene load_steps=33 format=3 uid="uid://clfqwsy4byrkf"]
 
 [ext_resource type="Script" path="res://Scripts/Enemy/GreenDragoon.gd" id="1_f1v46"]
 [ext_resource type="Script" path="res://Scripts/Enemy/EnemyMovement.gd" id="2_0ndiv"]
@@ -8,6 +8,7 @@
 [ext_resource type="Script" path="res://Scripts/Enemy/EnemyCollisionDetection.gd" id="4_tw0i4"]
 [ext_resource type="Texture2D" uid="uid://pk7g70ysmn6" path="res://Sprites/Enemies/GreenDragoon.png" id="5_kq8td"]
 [ext_resource type="PackedScene" uid="uid://cve2fw8d2yj8j" path="res://Scene Objects/Effects/ProjectileReflector.tscn" id="8_pwsds"]
+[ext_resource type="PackedScene" uid="uid://ce2kqx88sgobh" path="res://Scene Objects/Effects/MagicPowerParticles.tscn" id="9_m6ftx"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_f1n2w"]
 radius = 12.0
@@ -210,7 +211,7 @@ animations = [{
 radius = 12.0
 height = 57.6
 
-[node name="GreenDragoon" type="CharacterBody2D" node_paths=PackedStringArray("reflector_sprite", "movement", "collision_detection", "player_detection", "body", "sprite", "shape", "visibility_notifier")]
+[node name="GreenDragoon" type="CharacterBody2D" node_paths=PackedStringArray("reflector_sprite", "magic_particles", "movement", "collision_detection", "player_detection", "body", "sprite", "shape", "visibility_notifier")]
 process_mode = 4
 light_mask = 8
 visibility_layer = 8
@@ -227,6 +228,7 @@ script = ExtResource("1_f1v46")
 dropped_shades_scene = ExtResource("2_heauc")
 dropped_helmet_scene = ExtResource("3_jpe0v")
 reflector_sprite = NodePath("ProjectileReflector")
+magic_particles = NodePath("MagicPowerParticles")
 movement = NodePath("Enemy/Movement")
 collision_detection = NodePath("Enemy/CollisionDetection")
 player_detection = NodePath("Enemy/PlayerDetection")
@@ -287,6 +289,9 @@ flip_h = true
 
 [node name="ProjectileReflector" parent="." instance=ExtResource("8_pwsds")]
 visible = false
+
+[node name="MagicPowerParticles" parent="." instance=ExtResource("9_m6ftx")]
+color = Color(0.0352941, 0.611765, 0.207843, 1)
 
 [node name="ContactHitbox" type="Area2D" parent="."]
 collision_layer = 32

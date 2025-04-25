@@ -1,0 +1,24 @@
+[gd_scene load_steps=3 format=3 uid="uid://ce2kqx88sgobh"]
+
+[ext_resource type="Texture2D" uid="uid://bk0g1er4fknus" path="res://Sprites/Effects/MagicPowerParticle.png" id="1_udmhi"]
+
+[sub_resource type="Curve" id="Curve_uex8d"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.162162, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[node name="MagicPowerParticles" type="CPUParticles2D"]
+z_index = 6
+emitting = false
+amount = 6
+lifetime = 0.5
+fixed_fps = 60
+draw_order = 1
+texture = ExtResource("1_udmhi")
+emission_shape = 3
+emission_rect_extents = Vector2(48, 48)
+direction = Vector2(0, -1)
+spread = 0.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 64.0
+initial_velocity_max = 64.0
+scale_amount_curve = SubResource("Curve_uex8d")

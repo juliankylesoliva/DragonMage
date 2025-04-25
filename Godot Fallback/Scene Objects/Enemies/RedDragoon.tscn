@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=3 uid="uid://dwnpgujive352"]
+[gd_scene load_steps=40 format=3 uid="uid://dwnpgujive352"]
 
 [ext_resource type="Script" path="res://Scripts/Enemy/RedDragoon.gd" id="1_33vrd"]
 [ext_resource type="Script" path="res://Scripts/Enemy/EnemyMovement.gd" id="2_sot6e"]
@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://dh03766kpeux" path="res://Scene Objects/Effects/RedDragoonHelmet.tscn" id="4_perd6"]
 [ext_resource type="Texture2D" uid="uid://csqde18tv4wya" path="res://Sprites/Enemies/RedDragoon.png" id="5_up84d"]
 [ext_resource type="PackedScene" uid="uid://cve2fw8d2yj8j" path="res://Scene Objects/Effects/ProjectileReflector.tscn" id="9_xt26p"]
+[ext_resource type="PackedScene" uid="uid://ce2kqx88sgobh" path="res://Scene Objects/Effects/MagicPowerParticles.tscn" id="10_pnp2t"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_f1n2w"]
 radius = 12.0
@@ -283,7 +284,7 @@ animations = [{
 radius = 12.0
 height = 57.6
 
-[node name="RedDragoon" type="CharacterBody2D" node_paths=PackedStringArray("projectile_spawn_point", "reflector_sprite", "movement", "collision_detection", "player_detection", "body", "sprite", "shape", "visibility_notifier")]
+[node name="RedDragoon" type="CharacterBody2D" node_paths=PackedStringArray("projectile_spawn_point", "reflector_sprite", "magic_particles", "movement", "collision_detection", "player_detection", "body", "sprite", "shape", "visibility_notifier")]
 process_mode = 4
 light_mask = 8
 visibility_layer = 8
@@ -302,6 +303,7 @@ projectile_spawn_point = NodePath("PlayerRayCastFront")
 dropped_shades_scene = ExtResource("3_uicur")
 dropped_helmet_scene = ExtResource("4_perd6")
 reflector_sprite = NodePath("ProjectileReflector")
+magic_particles = NodePath("MagicPowerParticles")
 winged_speed = 32.0
 movement = NodePath("Enemy/Movement")
 collision_detection = NodePath("Enemy/CollisionDetection")
@@ -361,6 +363,9 @@ flip_h = true
 
 [node name="ProjectileReflector" parent="." instance=ExtResource("9_xt26p")]
 visible = false
+
+[node name="MagicPowerParticles" parent="." instance=ExtResource("10_pnp2t")]
+color = Color(0.560784, 0.192157, 0.0666667, 1)
 
 [node name="ContactHitbox" type="Area2D" parent="."]
 collision_layer = 32

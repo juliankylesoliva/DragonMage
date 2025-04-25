@@ -8,6 +8,8 @@ extends Enemy
 
 @export var reflector_sprite : AnimatedSprite2D
 
+@export var magic_particles : CPUParticles2D
+
 @export var enable_wings : bool = false
 
 @export var winged_turnaround_speed : float = 128
@@ -32,6 +34,7 @@ func _ready():
 		if (enable_wings):
 			winged_turnaround_speed *= (magic_speed_modifier * magic_speed_modifier)
 		sprite.set_speed_scale(magic_speed_modifier)
+	magic_particles.set_emitting(enable_magic)
 	movement.set_physics_process(false)
 	movement.set_process(false)
 	movement.set_process_mode(Node.PROCESS_MODE_DISABLED)
@@ -93,6 +96,7 @@ func on_defeat():
 	play_damage_sound()
 	sprite.play("WingedDefeat" if enable_wings else "Defeat")
 	reflector_sprite.set_visible(false)
+	magic_particles.set_emitting(false)
 
 func on_player_approach():
 	if (!is_defeated):

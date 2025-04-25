@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://bgww8jir45ktf"]
+[gd_scene load_steps=31 format=3 uid="uid://bgww8jir45ktf"]
 
 [ext_resource type="Script" path="res://Scripts/Enemy/BlueDragoon.gd" id="1_l21kt"]
 [ext_resource type="Script" path="res://Scripts/Enemy/EnemyMovement.gd" id="2_hl7h0"]
@@ -8,6 +8,7 @@
 [ext_resource type="Script" path="res://Scripts/Enemy/EnemyCollisionDetection.gd" id="4_jvyhu"]
 [ext_resource type="Texture2D" uid="uid://bd7ilcb71gc0x" path="res://Sprites/Enemies/BlueDragoon.png" id="5_u74qk"]
 [ext_resource type="PackedScene" uid="uid://cve2fw8d2yj8j" path="res://Scene Objects/Effects/ProjectileReflector.tscn" id="8_t8jwq"]
+[ext_resource type="PackedScene" uid="uid://ce2kqx88sgobh" path="res://Scene Objects/Effects/MagicPowerParticles.tscn" id="9_vyrkr"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_f1n2w"]
 radius = 12.0
@@ -216,7 +217,7 @@ animations = [{
 radius = 12.0
 height = 57.6
 
-[node name="BlueDragoon" type="CharacterBody2D" node_paths=PackedStringArray("reflector_sprite", "movement", "collision_detection", "player_detection", "body", "sprite", "shape", "visibility_notifier")]
+[node name="BlueDragoon" type="CharacterBody2D" node_paths=PackedStringArray("reflector_sprite", "magic_particles", "movement", "collision_detection", "player_detection", "body", "sprite", "shape", "visibility_notifier")]
 process_mode = 4
 light_mask = 8
 visibility_layer = 8
@@ -235,6 +236,7 @@ max_fall_speed = 256.0
 dropped_shades_scene = ExtResource("2_l5ub2")
 dropped_helmet_scene = ExtResource("3_a6lc0")
 reflector_sprite = NodePath("ProjectileReflector")
+magic_particles = NodePath("MagicPowerParticles")
 movement = NodePath("Enemy/Movement")
 collision_detection = NodePath("Enemy/CollisionDetection")
 player_detection = NodePath("Enemy/PlayerDetection")
@@ -293,6 +295,9 @@ flip_h = true
 
 [node name="ProjectileReflector" parent="." instance=ExtResource("8_t8jwq")]
 visible = false
+
+[node name="MagicPowerParticles" parent="." instance=ExtResource("9_vyrkr")]
+color = Color(0.14902, 0.32549, 0.741176, 1)
 
 [node name="ContactHitbox" type="Area2D" parent="."]
 position = Vector2(0, 3)
