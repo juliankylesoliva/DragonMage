@@ -12,4 +12,5 @@ func _physics_process(_delta):
 
 func setup(enemy_ref : Enemy):
 	sprite.flip_h = enemy_ref.sprite.flip_h
+	linear_velocity.x *= -enemy_ref.movement.get_facing_value()
 	constant_torque *= enemy_ref.movement.get_facing_value()

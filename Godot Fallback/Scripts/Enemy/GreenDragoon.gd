@@ -2,6 +2,8 @@ extends Enemy
 
 @export var dropped_shades_scene : PackedScene
 
+@export var dropped_helmet_scene : PackedScene
+
 @export var flip_initial_movement : bool = false
 
 @export var enable_wings : bool = false
@@ -42,6 +44,8 @@ func _physics_process(delta):
 		if (!shape.disabled):
 			shape.disabled = true
 			spawn_shades()
+			if (enable_helmet):
+				spawn_helmet()
 		else:
 			body.move_and_slide()
 
@@ -55,6 +59,12 @@ func spawn_shades():
 	(temp_shades as Node2D).global_position = player_detection.front_sightline_raycast.global_position
 	(temp_shades as DragoonShades).setup(self)
 
+func spawn_helmet():
+	var temp_helmet = dropped_helmet_scene.instantiate()
+	body.add_sibling(temp_helmet)
+	(temp_helmet as Node2D).global_position = player_detection.front_sightline_raycast.global_position
+	(temp_helmet as DragoonShades).setup(self)
+
 func activate_enemy():
 	movement.set_process_mode(Node.PROCESS_MODE_INHERIT)
 	movement.set_physics_process(true)
@@ -62,12 +72,18 @@ func activate_enemy():
 	movement.reset_to_initial_position()
 	movement.reset_to_initial_move_vector()
 	sprite.set_visible(true)
-	sprite.play("Fly" if enable_wings else "Walk")
+	if (enable_helmet):
+		sprite.play("FlyHelmet" if enable_wings else "WalkHelmet")
+	else:
+		sprite.play("Fly" if enable_wings else "Walk")
 
 func deactivate_enemy():
 	movement.set_physics_process(false)
 	movement.set_process(false)
-	sprite.play("WingedIdle" if enable_wings else "Idle")
+	if (enable_helmet):
+		sprite.play("WingedIdleHelmet" if enable_wings else "IdleHelmet")
+	else:
+		sprite.play("WingedIdle" if enable_wings else "Idle")
 	sprite.set_visible(false)
 	movement.set_process_mode(Node.PROCESS_MODE_DISABLED)
 
@@ -85,13 +101,19 @@ func on_player_approach():
 		movement.set_physics_process(true)
 		movement.set_process(true)
 		sprite.set_visible(true)
-		sprite.play("Fly" if enable_wings else "Walk")
+		if (enable_helmet):
+			sprite.play("FlyHelmet" if enable_wings else "WalkHelmet")
+		else:
+			sprite.play("Fly" if enable_wings else "Walk")
 
 func on_player_retreat():
 	if (!is_defeated):
 		movement.set_physics_process(false)
 		movement.set_process(false)
-		sprite.play("WingedIdle" if enable_wings else "Idle")
+		if (enable_helmet):
+			sprite.play("WingedIdleHelmet" if enable_wings else "IdleHelmet")
+		else:
+			sprite.play("WingedIdle" if enable_wings else "Idle")
 		sprite.set_visible(false)
 		movement.set_process_mode(Node.PROCESS_MODE_DISABLED)
 

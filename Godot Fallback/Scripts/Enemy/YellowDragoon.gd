@@ -4,6 +4,8 @@ extends Enemy
 
 @export var dropped_shades_scene : PackedScene
 
+@export var dropped_helmet_scene : PackedScene
+
 @export var enable_wings : bool = false
 
 @export var winged_turnaround_speed : float = 128
@@ -40,6 +42,8 @@ func _physics_process(delta):
 		if (!shape.disabled):
 			shape.disabled = true
 			spawn_shades()
+			if (enable_helmet):
+				spawn_helmet()
 		else:
 			body.move_and_slide()
 
@@ -53,6 +57,12 @@ func spawn_shades():
 	(temp_shades as Node2D).global_position = player_detection.front_sightline_raycast.global_position
 	(temp_shades as DragoonShades).setup(self)
 
+func spawn_helmet():
+	var temp_helmet : Node = dropped_helmet_scene.instantiate()
+	body.add_sibling(temp_helmet)
+	(temp_helmet as Node2D).global_position = player_detection.front_sightline_raycast.global_position
+	(temp_helmet as DragoonShades).setup(self)
+
 func activate_enemy():
 	movement.set_process_mode(Node.PROCESS_MODE_INHERIT)
 	movement.set_physics_process(true)
@@ -61,13 +71,19 @@ func activate_enemy():
 	movement.reset_to_initial_position()
 	movement.reset_to_initial_move_vector()
 	movement.is_always_facing_player = true
-	sprite.play("WingedIdle" if enable_wings else "Idle")
+	if (enable_helmet):
+		sprite.play("WingedIdleHelmet" if enable_wings else "IdleHelmet")
+	else:
+		sprite.play("WingedIdle" if enable_wings else "Idle")
 
 func deactivate_enemy():
 	movement.is_always_facing_player = true
 	movement.set_physics_process(false)
 	movement.set_process(false)
-	sprite.play("WingedIdle" if enable_wings else "Idle")
+	if (enable_helmet):
+		sprite.play("WingedIdleHelmet" if enable_wings else "IdleHelmet")
+	else:
+		sprite.play("WingedIdle" if enable_wings else "Idle")
 	movement.set_process_mode(Node.PROCESS_MODE_DISABLED)
 
 func on_defeat():
@@ -89,7 +105,10 @@ func on_player_retreat():
 		movement.reset_to_initial_move_vector()
 		movement.set_physics_process(false)
 		movement.set_process(false)
-		sprite.play("WingedIdle" if enable_wings else "Idle")
+		if (enable_helmet):
+			sprite.play("WingedIdleHelmet" if enable_wings else "IdleHelmet")
+		else:
+			sprite.play("WingedIdle" if enable_wings else "Idle")
 		movement.set_process_mode(Node.PROCESS_MODE_DISABLED)
 
 func on_enter_sightline():
@@ -97,13 +116,19 @@ func on_enter_sightline():
 		movement.is_always_facing_player = false
 		movement.face_towards_player()
 		movement.set_move_vector(Vector2.RIGHT * movement.get_facing_value() * move_speed)
-		sprite.play("WingedChase" if enable_wings else "Walk")
+		if (enable_helmet):
+			sprite.play("WingedChaseHelmet" if enable_wings else "WalkHelmet")
+		else:
+			sprite.play("WingedChase" if enable_wings else "Walk")
 
 func on_stay_sightline():
 	if (!is_defeated and visibility_notifier.is_on_screen() and movement.current_move_vector.x == 0):
 		movement.is_always_facing_player = false
 		movement.set_move_vector(Vector2.RIGHT * movement.get_facing_value() * move_speed)
-		sprite.play("WingedChase" if enable_wings else "Walk")
+		if (enable_helmet):
+			sprite.play("WingedChaseHelmet" if enable_wings else "WalkHelmet")
+		else:
+			sprite.play("WingedChase" if enable_wings else "Walk")
 
 func on_touching_wall():
 	if (player_detection.is_player_in_sightline):
@@ -111,7 +136,10 @@ func on_touching_wall():
 	else:
 		movement.set_move_vector(Vector2.ZERO)
 		movement.is_always_facing_player = true
-		sprite.play("WingedIdle" if enable_wings else "Idle")
+		if (enable_helmet):
+			sprite.play("WingedIdleHelmet" if enable_wings else "IdleHelmet")
+		else:
+			sprite.play("WingedIdle" if enable_wings else "Idle")
 
 func on_touching_ledge():
 	movement.flip_movement(true)

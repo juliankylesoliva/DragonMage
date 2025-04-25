@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://dwnpgujive352"]
+[gd_scene load_steps=38 format=3 uid="uid://dwnpgujive352"]
 
 [ext_resource type="Script" path="res://Scripts/Enemy/RedDragoon.gd" id="1_33vrd"]
 [ext_resource type="Script" path="res://Scripts/Enemy/EnemyMovement.gd" id="2_sot6e"]
@@ -6,6 +6,7 @@
 [ext_resource type="Script" path="res://Scripts/Enemy/EnemyPlayerDetection.gd" id="3_d4ci6"]
 [ext_resource type="PackedScene" uid="uid://c7rofcxvqilp6" path="res://Scene Objects/Effects/DragoonShades.tscn" id="3_uicur"]
 [ext_resource type="Script" path="res://Scripts/Enemy/EnemyCollisionDetection.gd" id="4_nup22"]
+[ext_resource type="PackedScene" uid="uid://dh03766kpeux" path="res://Scene Objects/Effects/RedDragoonHelmet.tscn" id="4_perd6"]
 [ext_resource type="Texture2D" uid="uid://csqde18tv4wya" path="res://Sprites/Enemies/RedDragoon.png" id="5_up84d"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_f1n2w"]
@@ -20,9 +21,21 @@ region = Rect2(192, 0, 64, 64)
 atlas = ExtResource("5_up84d")
 region = Rect2(256, 0, 64, 64)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_j8fbg"]
+atlas = ExtResource("5_up84d")
+region = Rect2(192, 64, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qqih4"]
+atlas = ExtResource("5_up84d")
+region = Rect2(256, 64, 64, 64)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_w215i"]
 atlas = ExtResource("5_up84d")
 region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o0mf3"]
+atlas = ExtResource("5_up84d")
+region = Rect2(128, 64, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_j0yfp"]
 atlas = ExtResource("5_up84d")
@@ -31,6 +44,10 @@ region = Rect2(64, 0, 64, 64)
 [sub_resource type="AtlasTexture" id="AtlasTexture_dwwqg"]
 atlas = ExtResource("5_up84d")
 region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dkbno"]
+atlas = ExtResource("5_up84d")
+region = Rect2(0, 64, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_080xs"]
 atlas = ExtResource("5_up84d")
@@ -44,13 +61,33 @@ region = Rect2(832, 0, 64, 64)
 atlas = ExtResource("5_up84d")
 region = Rect2(896, 0, 64, 64)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_qy8c4"]
+atlas = ExtResource("5_up84d")
+region = Rect2(768, 64, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r1eq6"]
+atlas = ExtResource("5_up84d")
+region = Rect2(832, 64, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_iwl5t"]
+atlas = ExtResource("5_up84d")
+region = Rect2(896, 64, 64, 64)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_ydsh8"]
 atlas = ExtResource("5_up84d")
 region = Rect2(704, 0, 64, 64)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_sofwt"]
+atlas = ExtResource("5_up84d")
+region = Rect2(704, 64, 64, 64)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_0t60a"]
 atlas = ExtResource("5_up84d")
 region = Rect2(640, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xiy1m"]
+atlas = ExtResource("5_up84d")
+region = Rect2(640, 64, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_jl7m6"]
 atlas = ExtResource("5_up84d")
@@ -68,6 +105,18 @@ region = Rect2(448, 0, 64, 64)
 atlas = ExtResource("5_up84d")
 region = Rect2(512, 0, 64, 64)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_sgkxu"]
+atlas = ExtResource("5_up84d")
+region = Rect2(384, 64, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jek6n"]
+atlas = ExtResource("5_up84d")
+region = Rect2(448, 64, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_isbhy"]
+atlas = ExtResource("5_up84d")
+region = Rect2(512, 64, 64, 64)
+
 [sub_resource type="SpriteFrames" id="SpriteFrames_q7jna"]
 animations = [{
 "frames": [{
@@ -82,11 +131,30 @@ animations = [{
 "speed": 60.0
 }, {
 "frames": [{
+"duration": 24.0,
+"texture": SubResource("AtlasTexture_j8fbg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qqih4")
+}],
+"loop": false,
+"name": &"AttackLaunchHelmet",
+"speed": 60.0
+}, {
+"frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_w215i")
 }],
 "loop": false,
 "name": &"AttackWindup",
+"speed": 60.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_o0mf3")
+}],
+"loop": false,
+"name": &"AttackWindupHelmet",
 "speed": 60.0
 }, {
 "frames": [{
@@ -106,6 +174,14 @@ animations = [{
 "speed": 60.0
 }, {
 "frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dkbno")
+}],
+"loop": true,
+"name": &"IdleHelmet",
+"speed": 60.0
+}, {
+"frames": [{
 "duration": 10.0,
 "texture": SubResource("AtlasTexture_080xs")
 }, {
@@ -120,6 +196,20 @@ animations = [{
 "speed": 60.0
 }, {
 "frames": [{
+"duration": 10.0,
+"texture": SubResource("AtlasTexture_qy8c4")
+}, {
+"duration": 10.0,
+"texture": SubResource("AtlasTexture_r1eq6")
+}, {
+"duration": 10.0,
+"texture": SubResource("AtlasTexture_iwl5t")
+}],
+"loop": true,
+"name": &"WingedAttackCooldownHelmet",
+"speed": 60.0
+}, {
+"frames": [{
 "duration": 24.0,
 "texture": SubResource("AtlasTexture_ydsh8")
 }],
@@ -128,11 +218,27 @@ animations = [{
 "speed": 60.0
 }, {
 "frames": [{
+"duration": 24.0,
+"texture": SubResource("AtlasTexture_sofwt")
+}],
+"loop": false,
+"name": &"WingedAttackLaunchHelmet",
+"speed": 60.0
+}, {
+"frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_0t60a")
 }],
 "loop": false,
 "name": &"WingedAttackWindup",
+"speed": 60.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xiy1m")
+}],
+"loop": false,
+"name": &"WingedAttackWindupHelmet",
 "speed": 60.0
 }, {
 "frames": [{
@@ -155,6 +261,20 @@ animations = [{
 }],
 "loop": true,
 "name": &"WingedIdle",
+"speed": 60.0
+}, {
+"frames": [{
+"duration": 10.0,
+"texture": SubResource("AtlasTexture_sgkxu")
+}, {
+"duration": 10.0,
+"texture": SubResource("AtlasTexture_jek6n")
+}, {
+"duration": 10.0,
+"texture": SubResource("AtlasTexture_isbhy")
+}],
+"loop": true,
+"name": &"WingedIdleHelmet",
 "speed": 60.0
 }]
 
@@ -179,6 +299,7 @@ script = ExtResource("1_33vrd")
 red_dragoon_projectile_scene = ExtResource("2_t01wj")
 projectile_spawn_point = NodePath("PlayerRayCastFront")
 dropped_shades_scene = ExtResource("3_uicur")
+dropped_helmet_scene = ExtResource("4_perd6")
 winged_speed = 32.0
 movement = NodePath("Enemy/Movement")
 collision_detection = NodePath("Enemy/CollisionDetection")
@@ -232,7 +353,7 @@ light_mask = 8
 visibility_layer = 8
 z_index = 3
 sprite_frames = SubResource("SpriteFrames_q7jna")
-animation = &"AttackLaunch"
+animation = &"Idle"
 autoplay = "Idle"
 flip_h = true
 

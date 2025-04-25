@@ -1,9 +1,10 @@
-[gd_scene load_steps=20 format=3 uid="uid://bgww8jir45ktf"]
+[gd_scene load_steps=29 format=3 uid="uid://bgww8jir45ktf"]
 
 [ext_resource type="Script" path="res://Scripts/Enemy/BlueDragoon.gd" id="1_l21kt"]
 [ext_resource type="Script" path="res://Scripts/Enemy/EnemyMovement.gd" id="2_hl7h0"]
 [ext_resource type="PackedScene" uid="uid://c7rofcxvqilp6" path="res://Scene Objects/Effects/DragoonShades.tscn" id="2_l5ub2"]
 [ext_resource type="Script" path="res://Scripts/Enemy/EnemyPlayerDetection.gd" id="3_7a55a"]
+[ext_resource type="PackedScene" uid="uid://jo11axgiuvb5" path="res://Scene Objects/Effects/BlueDragoonHelmet.tscn" id="3_a6lc0"]
 [ext_resource type="Script" path="res://Scripts/Enemy/EnemyCollisionDetection.gd" id="4_jvyhu"]
 [ext_resource type="Texture2D" uid="uid://bd7ilcb71gc0x" path="res://Sprites/Enemies/BlueDragoon.png" id="5_u74qk"]
 
@@ -19,9 +20,17 @@ region = Rect2(64, 0, 64, 64)
 atlas = ExtResource("5_u74qk")
 region = Rect2(0, 0, 64, 64)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_tlwq5"]
+atlas = ExtResource("5_u74qk")
+region = Rect2(0, 64, 64, 64)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_nawej"]
 atlas = ExtResource("5_u74qk")
 region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o1qo1"]
+atlas = ExtResource("5_u74qk")
+region = Rect2(128, 64, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_wae16"]
 atlas = ExtResource("5_u74qk")
@@ -30,6 +39,10 @@ region = Rect2(448, 0, 64, 64)
 [sub_resource type="AtlasTexture" id="AtlasTexture_m7wlr"]
 atlas = ExtResource("5_u74qk")
 region = Rect2(384, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sh1qo"]
+atlas = ExtResource("5_u74qk")
+region = Rect2(384, 64, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_goof3"]
 atlas = ExtResource("5_u74qk")
@@ -43,13 +56,33 @@ region = Rect2(320, 0, 64, 64)
 atlas = ExtResource("5_u74qk")
 region = Rect2(384, 0, 64, 64)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_wpt62"]
+atlas = ExtResource("5_u74qk")
+region = Rect2(256, 64, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qkwgb"]
+atlas = ExtResource("5_u74qk")
+region = Rect2(320, 64, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ajfe8"]
+atlas = ExtResource("5_u74qk")
+region = Rect2(384, 64, 64, 64)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_hfxdx"]
 atlas = ExtResource("5_u74qk")
 region = Rect2(192, 0, 64, 64)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_0r4ty"]
+atlas = ExtResource("5_u74qk")
+region = Rect2(192, 64, 64, 64)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_bq1pv"]
 atlas = ExtResource("5_u74qk")
 region = Rect2(512, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6wuke"]
+atlas = ExtResource("5_u74qk")
+region = Rect2(512, 64, 64, 64)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_q7jna"]
 animations = [{
@@ -71,10 +104,26 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_tlwq5")
+}],
+"loop": true,
+"name": &"IdleHelmet",
+"speed": 60.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_nawej")
 }],
 "loop": false,
 "name": &"Jump",
+"speed": 60.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_o1qo1")
+}],
+"loop": false,
+"name": &"JumpHelmet",
 "speed": 60.0
 }, {
 "frames": [{
@@ -95,6 +144,14 @@ animations = [{
 }, {
 "frames": [{
 "duration": 10.0,
+"texture": SubResource("AtlasTexture_sh1qo")
+}],
+"loop": false,
+"name": &"WingedFallHelmet",
+"speed": 60.0
+}, {
+"frames": [{
+"duration": 10.0,
 "texture": SubResource("AtlasTexture_goof3")
 }, {
 "duration": 10.0,
@@ -108,6 +165,20 @@ animations = [{
 "speed": 60.0
 }, {
 "frames": [{
+"duration": 10.0,
+"texture": SubResource("AtlasTexture_wpt62")
+}, {
+"duration": 10.0,
+"texture": SubResource("AtlasTexture_qkwgb")
+}, {
+"duration": 10.0,
+"texture": SubResource("AtlasTexture_ajfe8")
+}],
+"loop": true,
+"name": &"WingedFloatHelmet",
+"speed": 60.0
+}, {
+"frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_hfxdx")
 }],
@@ -117,10 +188,26 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_0r4ty")
+}],
+"loop": true,
+"name": &"WingedIdleHelmet",
+"speed": 60.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_bq1pv")
 }],
 "loop": true,
 "name": &"WingedJump",
+"speed": 60.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6wuke")
+}],
+"loop": true,
+"name": &"WingedJumpHelmet",
 "speed": 60.0
 }]
 
@@ -145,6 +232,7 @@ script = ExtResource("1_l21kt")
 jump_speed = 320.0
 max_fall_speed = 256.0
 dropped_shades_scene = ExtResource("2_l5ub2")
+dropped_helmet_scene = ExtResource("3_a6lc0")
 movement = NodePath("Enemy/Movement")
 collision_detection = NodePath("Enemy/CollisionDetection")
 player_detection = NodePath("Enemy/PlayerDetection")
@@ -197,7 +285,7 @@ light_mask = 8
 visibility_layer = 8
 z_index = 3
 sprite_frames = SubResource("SpriteFrames_q7jna")
-animation = &"Idle"
+animation = &"WingedJumpHelmet"
 autoplay = "Idle"
 flip_h = true
 
