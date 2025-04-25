@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=3 uid="uid://dwnpgujive352"]
+[gd_scene load_steps=39 format=3 uid="uid://dwnpgujive352"]
 
 [ext_resource type="Script" path="res://Scripts/Enemy/RedDragoon.gd" id="1_33vrd"]
 [ext_resource type="Script" path="res://Scripts/Enemy/EnemyMovement.gd" id="2_sot6e"]
@@ -8,6 +8,7 @@
 [ext_resource type="Script" path="res://Scripts/Enemy/EnemyCollisionDetection.gd" id="4_nup22"]
 [ext_resource type="PackedScene" uid="uid://dh03766kpeux" path="res://Scene Objects/Effects/RedDragoonHelmet.tscn" id="4_perd6"]
 [ext_resource type="Texture2D" uid="uid://csqde18tv4wya" path="res://Sprites/Enemies/RedDragoon.png" id="5_up84d"]
+[ext_resource type="PackedScene" uid="uid://cve2fw8d2yj8j" path="res://Scene Objects/Effects/ProjectileReflector.tscn" id="9_xt26p"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_f1n2w"]
 radius = 12.0
@@ -282,7 +283,7 @@ animations = [{
 radius = 12.0
 height = 57.6
 
-[node name="RedDragoon" type="CharacterBody2D" node_paths=PackedStringArray("projectile_spawn_point", "movement", "collision_detection", "player_detection", "body", "sprite", "shape", "visibility_notifier")]
+[node name="RedDragoon" type="CharacterBody2D" node_paths=PackedStringArray("projectile_spawn_point", "reflector_sprite", "movement", "collision_detection", "player_detection", "body", "sprite", "shape", "visibility_notifier")]
 process_mode = 4
 light_mask = 8
 visibility_layer = 8
@@ -300,6 +301,7 @@ red_dragoon_projectile_scene = ExtResource("2_t01wj")
 projectile_spawn_point = NodePath("PlayerRayCastFront")
 dropped_shades_scene = ExtResource("3_uicur")
 dropped_helmet_scene = ExtResource("4_perd6")
+reflector_sprite = NodePath("ProjectileReflector")
 winged_speed = 32.0
 movement = NodePath("Enemy/Movement")
 collision_detection = NodePath("Enemy/CollisionDetection")
@@ -356,6 +358,9 @@ sprite_frames = SubResource("SpriteFrames_q7jna")
 animation = &"Idle"
 autoplay = "Idle"
 flip_h = true
+
+[node name="ProjectileReflector" parent="." instance=ExtResource("9_xt26p")]
+visible = false
 
 [node name="ContactHitbox" type="Area2D" parent="."]
 collision_layer = 32

@@ -19,6 +19,8 @@ enum EnemyProjectileState
 
 @export var dropped_helmet_scene : PackedScene
 
+@export var reflector_sprite : AnimatedSprite2D
+
 @export var enable_wings : bool = false
 
 @export var winged_turnaround_speed : float = 128
@@ -61,6 +63,7 @@ func _ready():
 	if (enable_helmet):
 		immunity_list.append("STOMP")
 	can_reflect_projectiles = enable_reflector
+	reflector_sprite.set_visible(enable_reflector)
 	if (enable_magic):
 		pre_fire_windup *= magic_windup_modifier
 		post_fire_cooldown *= magic_cooldown_modifier
@@ -172,6 +175,7 @@ func deactivate_enemy():
 func on_defeat():
 	play_damage_sound()
 	sprite.play("WingedDefeat" if enable_wings else "Defeat")
+	reflector_sprite.set_visible(false)
 
 func on_far_from_home():
 	if (!is_defeated and enable_wings):

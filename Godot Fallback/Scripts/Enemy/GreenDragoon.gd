@@ -4,6 +4,8 @@ extends Enemy
 
 @export var dropped_helmet_scene : PackedScene
 
+@export var reflector_sprite : AnimatedSprite2D
+
 @export var flip_initial_movement : bool = false
 
 @export var enable_wings : bool = false
@@ -26,6 +28,7 @@ func _ready():
 	if (enable_helmet):
 		immunity_list.append("STOMP")
 	can_reflect_projectiles = enable_reflector
+	reflector_sprite.set_visible(enable_reflector)
 	if (enable_magic):
 		movement.initial_move_vector *= magic_speed_modifier
 		if (enable_wings):
@@ -90,6 +93,7 @@ func deactivate_enemy():
 func on_defeat():
 	play_damage_sound()
 	sprite.play("WingedDefeat" if enable_wings else "Defeat")
+	reflector_sprite.set_visible(false)
 
 func on_far_from_home():
 	if (!is_defeated and enable_wings):

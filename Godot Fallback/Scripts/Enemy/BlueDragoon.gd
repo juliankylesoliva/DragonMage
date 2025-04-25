@@ -12,6 +12,8 @@ extends Enemy
 
 @export var dropped_helmet_scene : PackedScene
 
+@export var reflector_sprite : AnimatedSprite2D
+
 @export var enable_wings : bool = false
 
 @export var enable_helmet : bool = false
@@ -38,6 +40,7 @@ func _ready():
 	if (enable_helmet):
 		immunity_list.append("STOMP")
 	can_reflect_projectiles = enable_reflector
+	reflector_sprite.set_visible(enable_reflector)
 	jump_speed *= (magic_jump_modifier if enable_magic else 1.0)
 	gravity_scale *= (magic_falling_gravity_modifier if enable_magic else 1.0)
 	max_fall_speed *= (magic_fall_speed_modifier if enable_magic else 1.0)
@@ -59,7 +62,7 @@ func _physics_process(delta):
 		if (!shape.disabled):
 			shape.disabled = true
 			spawn_shades()
-			if (spawn_helmet()):
+			if (enable_helmet):
 				spawn_helmet()
 		else:
 			body.move_and_slide()
@@ -138,6 +141,7 @@ func deactivate_enemy():
 func on_defeat():
 	play_damage_sound()
 	sprite.play("WingedDefeat" if enable_wings else "Defeat")
+	reflector_sprite.set_visible(false)
 	if (enable_magic and body.up_direction.y > 0):
 		flip()
 
