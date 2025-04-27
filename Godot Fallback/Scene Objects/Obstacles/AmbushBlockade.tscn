@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://7hpfpsyk75xy"]
+
+[ext_resource type="TileSet" uid="uid://dhwi7i1loa2pd" path="res://Sprites/Tiles/Test Tiles/TestTileSet.tres" id="1_v1pdq"]
+[ext_resource type="Script" path="res://Scripts/Object Scripts/AmbushBlockade.gd" id="2_372an"]
+
+[node name="AmbushBlockade" type="TileMap" node_paths=PackedStringArray("blockade_tilemap")]
+visibility_layer = 4
+z_index = 3
+tile_set = ExtResource("1_v1pdq")
+rendering_quadrant_size = 32
+format = 2
+layer_0/name = "Decoration"
+layer_1/name = "Blockade"
+layer_1/modulate = Color(0.717237, 0.435391, 0.118056, 1)
+layer_1/z_index = -1
+script = ExtResource("2_372an")
+blockade_tilemap = NodePath(".")

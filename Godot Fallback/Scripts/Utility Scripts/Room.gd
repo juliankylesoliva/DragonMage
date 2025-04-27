@@ -87,3 +87,10 @@ func initialize_enemy_list():
 		for node in enemy_nodes:
 			if (node is Enemy):
 				enemy_list.append(node as Enemy)
+
+func get_undefeated_enemies():
+	var sum : int = 0
+	for enemy in enemy_list:
+		if (!enemy.is_defeated):
+			sum += 1
+	return sum

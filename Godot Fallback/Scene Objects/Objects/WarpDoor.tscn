@@ -1,0 +1,45 @@
+[gd_scene load_steps=6 format=3 uid="uid://d3ahci60rs8ef"]
+
+[ext_resource type="Script" path="res://Scripts/Object Scripts/WarpDoor.gd" id="1_0os77"]
+[ext_resource type="FontFile" uid="uid://blejgst41tdnl" path="res://PressStart2P.ttf" id="2_88myy"]
+[ext_resource type="PackedScene" uid="uid://dqbo0wu6hm8lj" path="res://Scene Objects/Objects/WarpTrigger.tscn" id="2_mjgd4"]
+[ext_resource type="Script" path="res://Scripts/Utility Scripts/ButtonPromptTextLabel.gd" id="3_wiqty"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cs7e6"]
+size = Vector2(56, 76)
+
+[node name="WarpDoor" type="Area2D" node_paths=PackedStringArray("warp_dummy", "button_prompt")]
+collision_layer = 0
+collision_mask = 4
+script = ExtResource("1_0os77")
+warp_dummy = NodePath("WarpDummy")
+button_prompt = NodePath("ButtonPrompt")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -6)
+shape = SubResource("RectangleShape2D_cs7e6")
+
+[node name="WarpDummy" parent="." instance=ExtResource("2_mjgd4")]
+collision_mask = 0
+
+[node name="ButtonPrompt" type="RichTextLabel" parent="."]
+visible = false
+light_mask = 64
+visibility_layer = 64
+z_index = 7
+clip_contents = false
+offset_left = -64.0
+offset_top = -60.0
+offset_right = 64.0
+offset_bottom = -44.0
+pivot_offset = Vector2(64, 8)
+theme_override_fonts/normal_font = ExtResource("2_88myy")
+theme_override_font_sizes/normal_font_size = 8
+bbcode_enabled = true
+text = "[center][Interact] Enter"
+scroll_active = false
+shortcut_keys_enabled = false
+script = ExtResource("3_wiqty")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]
