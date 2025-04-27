@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://jhtcdnyje6hg"]
+[gd_scene load_steps=7 format=3 uid="uid://jhtcdnyje6hg"]
 
 [ext_resource type="Script" path="res://Scripts/Utility Scripts/Room.gd" id="1_d7u6h"]
 [ext_resource type="TileSet" uid="uid://dhwi7i1loa2pd" path="res://Sprites/Tiles/Test Tiles/TestTileSet.tres" id="2_jvcj2"]
 [ext_resource type="PackedScene" uid="uid://7hpfpsyk75xy" path="res://Scene Objects/Obstacles/AmbushBlockade.tscn" id="3_gc71k"]
 [ext_resource type="PackedScene" uid="uid://d3ahci60rs8ef" path="res://Scene Objects/Objects/WarpDoor.tscn" id="3_k226m"]
 [ext_resource type="PackedScene" uid="uid://clfqwsy4byrkf" path="res://Scene Objects/Enemies/GreenDragoon.tscn" id="5_4vs4e"]
+[ext_resource type="PackedScene" uid="uid://d0yrt438jc3k7" path="res://Scene Objects/Objects/DoorKey.tscn" id="6_cf3we"]
 
 [node name="CH2_LV1_R1" type="Node2D" node_paths=PackedStringArray("tilemap_list", "room_entrances", "enemy_nodes")]
 script = ExtResource("1_d7u6h")
@@ -39,6 +40,8 @@ layer_3/modulate = Color(0.701961, 0.215686, 0.105882, 1)
 layer_3/z_index = -1
 
 [node name="AmbushBlockade" parent="." node_paths=PackedStringArray("room_ref") instance=ExtResource("3_gc71k")]
+layer_0/tile_data = PackedInt32Array(458762, 18, 0, 393226, 18, 0, 327690, 18, 0, 262154, 18, 0, 262155, 18, 0, 262156, 18, 0, 262157, 18, 0, 262158, 18, 0)
+layer_1/modulate = Color(0.717, 0.435, 0.118, 0)
 layer_1/tile_data = PackedInt32Array(458762, 196608, 0, 393226, 196608, 0, 327690, 196608, 0, 262154, 196608, 0, 262155, 196608, 0, 262156, 196608, 0, 262157, 196608, 0, 262158, 196608, 0)
 room_ref = NodePath("..")
 
@@ -52,12 +55,7 @@ position = Vector2(416, 224)
 position = Vector2(416, 224)
 room_origin = NodePath("..")
 room_destination = NodePath("..")
-
-[node name="WarpDoor2" parent="." node_paths=PackedStringArray("room_origin", "room_destination") instance=ExtResource("3_k226m")]
-position = Vector2(96, 224)
-room_origin = NodePath("..")
-room_destination = NodePath("..")
-room_entrance_index = 1
+is_locked = true
 
 [node name="GreenDragoon" parent="." instance=ExtResource("5_4vs4e")]
 position = Vector2(192, 96)
@@ -65,3 +63,6 @@ enable_wings = true
 enable_helmet = true
 enable_reflector = true
 enable_magic = true
+
+[node name="DoorKey" parent="." instance=ExtResource("6_cf3we")]
+position = Vector2(256, 224)

@@ -18,6 +18,7 @@ class_name PlayerHub
 @export var form : PlayerForm
 @export var damage : PlayerDamage
 @export var interaction : PlayerInteraction
+@export var inventory : PlayerInventory
 @export var stomp : PlayerStomp
 @export var animation : PlayerAnimation
 @export var sprite_trail : PlayerSpriteTrail

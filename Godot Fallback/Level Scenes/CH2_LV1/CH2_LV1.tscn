@@ -38,7 +38,7 @@ position = Vector2(96, 223)
 [node name="Fairy" parent="Player/Hub" index="4"]
 is_using_fairy = true
 
-[node name="Camera" parent="Player/Hub" index="11" node_paths=PackedStringArray("player_cam")]
+[node name="Camera" parent="Player/Hub" index="12" node_paths=PackedStringArray("player_cam")]
 player_cam = NodePath("../../../Camera2D")
 
 [node name="CollisionShape2D" parent="Player" index="4"]

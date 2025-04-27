@@ -1,4 +1,4 @@
-[gd_scene load_steps=66 format=3 uid="uid://c6qw77ovfwgfs"]
+[gd_scene load_steps=67 format=3 uid="uid://c6qw77ovfwgfs"]
 
 [ext_resource type="Script" path="res://Scripts/Player/PlayerStateMachine/PlayerStateMachine.gd" id="1_rgc8w"]
 [ext_resource type="Script" path="res://Scripts/Player/Hub Scripts/PlayerHub.gd" id="1_vr0jy"]
@@ -45,6 +45,7 @@
 [ext_resource type="Script" path="res://Scripts/Player/Hub Scripts/PlayerStomp.gd" id="25_ls0ah"]
 [ext_resource type="Script" path="res://Scripts/Player/Hub Scripts/PlayerInteraction.gd" id="25_xbxt7"]
 [ext_resource type="PackedScene" uid="uid://bwf8fyp043kh4" path="res://Scene Objects/Hitboxes/StompKnockbackHitbox.tscn" id="26_36k6y"]
+[ext_resource type="Script" path="res://Scripts/Player/Hub Scripts/PlayerInventory.gd" id="31_cc3ab"]
 [ext_resource type="Script" path="res://Scripts/Player/PlayerStateMachine/DamagedState.gd" id="41_7pdlp"]
 [ext_resource type="Script" path="res://Scripts/Player/PlayerStateMachine/DeactivatedState.gd" id="42_yhbki"]
 [ext_resource type="Texture2D" uid="uid://b8o0u22mxyifu" path="res://Sprites/Effects/BlastJumpParticle.png" id="47_v16qd"]
@@ -105,7 +106,7 @@ platform_floor_layers = 3
 safe_margin = 0.001
 metadata/Tag = "Player"
 
-[node name="Hub" type="Node" parent="." node_paths=PackedStringArray("state_machine", "collisions", "buffers", "movement", "jumping", "fairy", "attacks", "temper", "form", "damage", "interaction", "stomp", "animation", "sprite_trail", "camera", "audio", "char_body", "char_sprite", "collision_shape", "stream_player", "visibility", "raycast_dl", "raycast_dm", "raycast_dr", "raycast_ledge_l", "raycast_ledge_r", "raycast_ul", "raycast_um", "raycast_ur", "raycast_ceiling_l", "raycast_ceiling_r", "raycast_wall_top_l", "raycast_wall_mid_l", "raycast_wall_bot_l", "raycast_wall_top_r", "raycast_wall_mid_r", "raycast_wall_bot_r")]
+[node name="Hub" type="Node" parent="." node_paths=PackedStringArray("state_machine", "collisions", "buffers", "movement", "jumping", "fairy", "attacks", "temper", "form", "damage", "interaction", "inventory", "stomp", "animation", "sprite_trail", "camera", "audio", "char_body", "char_sprite", "collision_shape", "stream_player", "visibility", "raycast_dl", "raycast_dm", "raycast_dr", "raycast_ledge_l", "raycast_ledge_r", "raycast_ul", "raycast_um", "raycast_ur", "raycast_ceiling_l", "raycast_ceiling_r", "raycast_wall_top_l", "raycast_wall_mid_l", "raycast_wall_bot_l", "raycast_wall_top_r", "raycast_wall_mid_r", "raycast_wall_bot_r")]
 script = ExtResource("1_vr0jy")
 state_machine = NodePath("../StateMachine")
 collisions = NodePath("Collisions")
@@ -118,6 +119,7 @@ temper = NodePath("Temper")
 form = NodePath("Form")
 damage = NodePath("Damage")
 interaction = NodePath("Interaction")
+inventory = NodePath("Inventory")
 stomp = NodePath("Stomp")
 animation = NodePath("Animation")
 sprite_trail = NodePath("SpriteTrail")
@@ -344,6 +346,10 @@ invulnerability_alpha = 0.25
 
 [node name="Interaction" type="Node" parent="Hub" node_paths=PackedStringArray("hub")]
 script = ExtResource("25_xbxt7")
+hub = NodePath("..")
+
+[node name="Inventory" type="Node" parent="Hub" node_paths=PackedStringArray("hub")]
+script = ExtResource("31_cc3ab")
 hub = NodePath("..")
 
 [node name="Stomp" type="Node" parent="Hub" node_paths=PackedStringArray("hub", "stomp_hitbox", "magic_blast_attack", "dodge_attack", "fire_tackle_attack", "slide_attack")]

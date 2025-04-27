@@ -1,4 +1,4 @@
-[gd_resource type="TileSet" load_steps=39 format=3 uid="uid://dhwi7i1loa2pd"]
+[gd_resource type="TileSet" load_steps=41 format=3 uid="uid://dhwi7i1loa2pd"]
 
 [ext_resource type="Texture2D" uid="uid://dq7fuvy215h0w" path="res://Sprites/Tiles/Test Tiles/TestTiles.png" id="1_qds5d"]
 [ext_resource type="Texture2D" uid="uid://bfogey04fo28c" path="res://Sprites/Tiles/0_1_Tiles/ForestGroundTiles.png" id="2_uly4v"]
@@ -16,6 +16,7 @@
 [ext_resource type="Texture2D" uid="uid://dsiu4fy51mifx" path="res://Sprites/Tiles/0_3_Tiles/IronBarsTile.png" id="8_fxyto"]
 [ext_resource type="Texture2D" uid="uid://diwydocmov3vt" path="res://Sprites/Tiles/SlickWallTiles.png" id="9_ydmn8"]
 [ext_resource type="Texture2D" uid="uid://csbs66picler3" path="res://Sprites/Tiles/1_4_Tiles/RailwayBackgroundTiles.png" id="10_a80b0"]
+[ext_resource type="Texture2D" uid="uid://bh1d43kd4xnyr" path="res://Sprites/Tiles/AmbushBlockadeTile.png" id="11_ch5d7"]
 [ext_resource type="Texture2D" uid="uid://cjmpxk81ddxip" path="res://Sprites/Tiles/1_4_Tiles/GroundAndRail.png" id="11_r81kw"]
 [ext_resource type="Texture2D" uid="uid://bu1p264guqtxy" path="res://Sprites/Tiles/1_1_Tiles/FenceTiles.png" id="11_ydox7"]
 [ext_resource type="Texture2D" uid="uid://cu01elc6ae2ef" path="res://Sprites/Tiles/1_1_Tiles/SlumBuildingBrickVariants.png" id="12_nncuv"]
@@ -1934,6 +1935,11 @@ texture_region_size = Vector2i(32, 32)
 2:3/0 = 0
 3:3/0 = 0
 
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_olnwb"]
+texture = ExtResource("11_ch5d7")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_to8b7"]
 texture = ExtResource("11_r81kw")
 texture_region_size = Vector2i(32, 32)
@@ -3098,3 +3104,4 @@ sources/15 = SubResource("TileSetAtlasSource_xvs6d")
 sources/16 = SubResource("TileSetAtlasSource_83x52")
 sources/17 = SubResource("TileSetAtlasSource_2pnr1")
 sources/19 = SubResource("TileSetAtlasSource_to8b7")
+sources/18 = SubResource("TileSetAtlasSource_olnwb")
