@@ -1,4 +1,4 @@
-extends TileMap
+extends TileMapLayer
 
 class_name HiddenPassage
 
@@ -18,7 +18,7 @@ func _process(delta):
 	else:
 		current_alpha = move_toward(current_alpha, 1, delta * alpha_change_rate)
 	
-	set_layer_modulate(0, Color(1, 1, 1, current_alpha))
+	self.modulate.a = current_alpha
 
 func _on_rigid_body_2d_body_entered(body):
 	if (body is CharacterBody2D and body.has_meta("Tag") and body.get_meta("Tag") == "Player"):

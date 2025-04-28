@@ -64,7 +64,7 @@ position = Vector2(96, 63)
 [node name="Fairy" parent="Player/Hub" index="4"]
 is_using_fairy = true
 
-[node name="Camera" parent="Player/Hub" index="11" node_paths=PackedStringArray("player_cam")]
+[node name="Camera" parent="Player/Hub" index="12" node_paths=PackedStringArray("player_cam")]
 player_cam = NodePath("../../../Camera2D")
 
 [node name="CollisionShape2D" parent="Player" index="4"]
@@ -146,12 +146,6 @@ room_destination = NodePath("../../CH1_LV4_R8")
 [node name="CH1_LV4_R8" parent="." instance=ExtResource("11_hignw")]
 position = Vector2(-1760, 1536)
 
-[node name="BoundaryCollisionTilemap" parent="CH1_LV4_R8" index="0"]
-rendering_quadrant_size = 32
-
-[node name="LevelCollisionTilemap" parent="CH1_LV4_R8" index="1"]
-rendering_quadrant_size = 32
-
 [node name="Warp 0" parent="CH1_LV4_R8" index="4" node_paths=PackedStringArray("room_destination")]
 room_destination = NodePath("../../CH1_LV4_R7")
 
@@ -160,9 +154,6 @@ room_destination = NodePath("../../CH1_LV4_R9")
 
 [node name="Checkpoint" parent="CH1_LV4_R8" index="11" node_paths=PackedStringArray("level_origin")]
 level_origin = NodePath("../..")
-
-[node name="HiddenTilemap" parent="CH1_LV4_R8" index="12"]
-rendering_quadrant_size = 32
 
 [node name="CH1_LV4_R9" parent="." instance=ExtResource("11_p0p2b")]
 position = Vector2(0, 1536)
@@ -199,15 +190,6 @@ room_destination = NodePath("../../CH1_LV4_R12A")
 
 [node name="CH1_LV4_R12A" parent="." instance=ExtResource("15_l2sfq")]
 position = Vector2(-1728, -1312)
-
-[node name="BoundaryCollisionTilemap" parent="CH1_LV4_R12A" index="0"]
-rendering_quadrant_size = 32
-
-[node name="LevelCollisionTilemap" parent="CH1_LV4_R12A" index="1"]
-rendering_quadrant_size = 32
-
-[node name="BossRoomBoundaryTilemap" parent="CH1_LV4_R12A" index="2"]
-rendering_quadrant_size = 32
 
 [node name="Checkpoint" parent="CH1_LV4_R12A" index="5" node_paths=PackedStringArray("level_origin", "subsequent_checkpoints")]
 level_origin = NodePath("../..")
@@ -279,17 +261,8 @@ boss = NodePath("../../TrainBossHandler")
 [node name="CH1_LV4_R13" parent="." instance=ExtResource("21_dyjpq")]
 position = Vector2(1696, 704)
 
-[node name="BoundaryCollisionTilemap" parent="CH1_LV4_R13" index="0"]
-rendering_quadrant_size = 32
-
-[node name="LevelCollisionTilemap" parent="CH1_LV4_R13" index="1"]
-rendering_quadrant_size = 32
-
 [node name="TrainBoss" parent="CH1_LV4_R13" index="4" node_paths=PackedStringArray("boss")]
 boss = NodePath("../../TrainBossHandler")
-
-[node name="HiddenTilemap" parent="CH1_LV4_R13" index="8"]
-rendering_quadrant_size = 32
 
 [node name="UI_Canvas" type="CanvasLayer" parent="."]
 
@@ -433,6 +406,7 @@ screen_fade = NodePath("../UI_Canvas/ScreenFade")
 [editable path="CH1_LV4_R7/GreenDragoon"]
 [editable path="CH1_LV4_R7/GreenDragoon2"]
 [editable path="CH1_LV4_R8"]
+[editable path="CH1_LV4_R8/HiddenTilemap"]
 [editable path="CH1_LV4_R9"]
 [editable path="CH1_LV4_R10"]
 [editable path="CH1_LV4_R10/Enemies/YellowDragoon"]
@@ -440,6 +414,8 @@ screen_fade = NodePath("../UI_Canvas/ScreenFade")
 [editable path="CH1_LV4_R10/Enemies/RedDragoon2"]
 [editable path="CH1_LV4_R10/Enemies/GreenDragoon2"]
 [editable path="CH1_LV4_R10/Enemies/RedDragoon3"]
+[editable path="CH1_LV4_R10/HiddenTilemap"]
+[editable path="CH1_LV4_R10/HiddenTilemap2"]
 [editable path="CH1_LV4_R11"]
 [editable path="CH1_LV4_R11/Enemies/GreenDragoon"]
 [editable path="CH1_LV4_R11/Enemies/GreenDragoon2"]
@@ -469,3 +445,4 @@ screen_fade = NodePath("../UI_Canvas/ScreenFade")
 [editable path="CH1_LV4_R13"]
 [editable path="CH1_LV4_R13/TrainBoss"]
 [editable path="CH1_LV4_R13/TrainBoss/InsideWarp"]
+[editable path="CH1_LV4_R13/HiddenTilemap"]

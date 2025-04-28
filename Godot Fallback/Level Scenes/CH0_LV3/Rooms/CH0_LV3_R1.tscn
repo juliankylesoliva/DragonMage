@@ -1,12 +1,12 @@
-[gd_scene load_steps=10 format=3 uid="uid://dvceloslxxn28"]
+[gd_scene load_steps=10 format=4 uid="uid://dvceloslxxn28"]
 
 [ext_resource type="Script" path="res://Scripts/Utility Scripts/Room.gd" id="1_6o4g6"]
 [ext_resource type="TileSet" uid="uid://dhwi7i1loa2pd" path="res://Sprites/Tiles/Test Tiles/TestTileSet.tres" id="2_f37q7"]
 [ext_resource type="PackedScene" uid="uid://dqbo0wu6hm8lj" path="res://Scene Objects/Objects/WarpTrigger.tscn" id="3_m6kmu"]
 [ext_resource type="PackedScene" uid="uid://dfkmxoba64spw" path="res://Scene Objects/Objects/MedalFragment.tscn" id="4_qxnc2"]
 [ext_resource type="PackedScene" uid="uid://cs4s34scsvcfr" path="res://Scene Objects/Objects/BreakableBlock.tscn" id="4_ybgg8"]
-[ext_resource type="Script" path="res://Scripts/Object Scripts/HiddenPassage.gd" id="5_uewm5"]
 [ext_resource type="FontFile" uid="uid://blejgst41tdnl" path="res://PressStart2P.ttf" id="6_cguo1"]
+[ext_resource type="PackedScene" uid="uid://cjsjtabfbr3lu" path="res://Scene Objects/Objects/HiddenTilemap.tscn" id="6_j1efh"]
 [ext_resource type="Script" path="res://Scripts/Utility Scripts/ButtonPromptTextLabel.gd" id="7_y4sps"]
 [ext_resource type="PackedScene" uid="uid://cp3kaarqt7vdo" path="res://Scene Objects/Objects/HintBubble.tscn" id="9_p3v0a"]
 
@@ -17,44 +17,44 @@ top_camera_limit = -128
 room_entrances = [NodePath("Entrance 0"), NodePath("Entrance 1")]
 medal_fragments = [NodePath("Fragments/MedalFragment"), NodePath("Fragments/MedalFragment2"), NodePath("Fragments/MedalFragment3"), NodePath("Fragments/MedalFragment4")]
 
-[node name="BoundaryCollisionTilemap" type="TileMap" parent="."]
+[node name="BoundaryCollisionTilemap" type="Node2D" parent="."]
 z_index = 4
+
+[node name="Intangible" type="TileMapLayer" parent="BoundaryCollisionTilemap"]
+use_parent_material = true
+tile_map_data = PackedByteArray("AAASAP//AAADAAAAAAASAAAAAAADAAAAAAASAAEAAAADAAAAAAA=")
 tile_set = ExtResource("2_f37q7")
-cell_quadrant_size = 32
-format = 2
-layer_0/name = "Intangible"
-layer_0/tile_data = PackedInt32Array(-65518, 196608, 0, 18, 196608, 0, 65554, 196608, 0)
+rendering_quadrant_size = 32
 metadata/Tag = "IntangibleWall"
 
-[node name="LevelCollisionTilemap" type="TileMap" parent="."]
+[node name="LevelCollisionTilemap" type="Node2D" parent="."]
 visibility_layer = 4
 z_index = 3
+
+[node name="Decoration" type="TileMapLayer" parent="LevelCollisionTilemap"]
+use_parent_material = true
+tile_map_data = PackedByteArray("AAAAAAgAAwACAAAAAAABAAgAAwACAAAAAAACAAgAAwACAAAAAAADAAgAAwACAAAAAAAEAAgAAwACAAAAAAAFAAgAAwACAAAAAAAGAAgAAwACAAAAAAAHAAgAAwACAAAAAAAIAAgAAwACAAAAAAAJAAgAAwACAAAAAAAKAAgAAwACAAAAAAALAAgAAwAEAAYAAAALAAkAAwACAAEAAAAKAAkAAwACAAEAAAAJAAkAAwACAAEAAAAIAAkAAwACAAEAAAAHAAkAAwACAAEAAAAGAAkAAwACAAEAAAAFAAkAAwACAAEAAAAEAAkAAwACAAEAAAADAAkAAwACAAEAAAACAAkAAwACAAEAAAABAAkAAwACAAEAAAAAAAkAAwACAAEAAAAMAAkAAwACAAEAAAAAAAUAAwACAAIAAAABAAUAAwACAAIAAAABAAQAAwACAAAAAAACAAQAAwACAAAAAAADAAQAAwADAAAAAAAAAAQAAwADAAYAAAAAAAMAAwADAAEAAAAAAAIAAwADAAEAAAAAAAEAAwADAAEAAAAAAAAAAwADAAEAAAAAAP//AwADAAEAAAAAAP7/AwADAAEAAAAAAP3/AwABAAYAAAAAAPz/AwACAAEAAAABAPz/AwABAAYAAAACAPz/AwACAAIAAAADAPz/AwACAAIAAAAEAPz/AwACAAIAAAAFAPz/AwACAAIAAAAGAPz/AwACAAIAAAAHAPz/AwACAAIAAAAIAPz/AwACAAIAAAAJAPz/AwACAAIAAAAKAPz/AwAAAAYAAAALAPz/AwACAAEAAAALAP3/AwAAAAYAAAAMAP3/AwACAAEAAAANAP3/AwACAAEAAAANAP7/AwAEAAUAAAAMAP7/AwACAAIAAAALAP7/AwABAAIAAAANAP//AwABAAIAAAAOAP//AwACAAIAAAAPAP//AwACAAIAAAAPAP7/AwACAAEAAAAPAP3/AwACAAEAAAAPAPz/AwACAAEAAAAMAPz/AwACAAEAAAANAPz/AwACAAEAAAAOAPz/AwACAAEAAAAOAP3/AwACAAEAAAAOAP7/AwACAAEAAAAPAAEAAwACAAAAAAAOAAEAAwACAAAAAAANAAEAAwACAAAAAAAMAAEAAwACAAAAAAALAAEAAwABAAAAAAALAAIAAwABAAEAAAALAAMAAwABAAEAAAALAAQAAwABAAEAAAALAAUAAwABAAEAAAALAAYAAwABAAEAAAALAAcAAwABAAEAAAAPAAkAAwACAAEAAAAPAAgAAwACAAEAAAAPAAcAAwACAAEAAAAPAAYAAwACAAEAAAAPAAUAAwACAAEAAAAPAAQAAwACAAEAAAAPAAMAAwACAAEAAAAPAAIAAwACAAEAAAAOAAkAAwACAAEAAAAOAAgAAwACAAEAAAAOAAcAAwACAAEAAAAOAAYAAwACAAEAAAAOAAUAAwACAAEAAAAOAAQAAwACAAEAAAAOAAMAAwACAAEAAAAOAAIAAwACAAEAAAANAAkAAwACAAEAAAANAAgAAwACAAEAAAANAAcAAwACAAEAAAANAAYAAwACAAEAAAANAAUAAwACAAEAAAANAAQAAwACAAEAAAANAAMAAwACAAEAAAANAAIAAwACAAEAAAAMAAgAAwACAAEAAAAMAAcAAwACAAEAAAAMAAYAAwACAAEAAAAMAAUAAwACAAEAAAAMAAQAAwACAAEAAAAMAAMAAwACAAEAAAAMAAIAAwACAAEAAAABAP3/AwABAAcAAAAKAP3/AwAAAAcAAAACAAUAAwAEAAcAAAADAAUAAwAFAAcAAAAAAAYABwAAAAAAAAAAAAcABwAAAAAAAAA=")
 tile_set = ExtResource("2_f37q7")
-cell_quadrant_size = 32
-format = 2
-layer_0/name = "Decoration"
-layer_0/tile_data = PackedInt32Array(524288, 131075, 0, 524289, 131075, 0, 524290, 131075, 0, 524291, 131075, 0, 524292, 131075, 0, 524293, 131075, 0, 524294, 131075, 0, 524295, 131075, 0, 524296, 131075, 0, 524297, 131075, 0, 524298, 131075, 0, 524299, 262147, 6, 589835, 131075, 1, 589834, 131075, 1, 589833, 131075, 1, 589832, 131075, 1, 589831, 131075, 1, 589830, 131075, 1, 589829, 131075, 1, 589828, 131075, 1, 589827, 131075, 1, 589826, 131075, 1, 589825, 131075, 1, 589824, 131075, 1, 589836, 131075, 1, 327680, 131075, 2, 327681, 131075, 2, 262145, 131075, 0, 262146, 131075, 0, 262147, 196611, 0, 262144, 196611, 6, 196608, 196611, 1, 131072, 196611, 1, 65536, 196611, 1, 0, 196611, 1, -65536, 196611, 1, -131072, 196611, 1, -196608, 65539, 6, -262144, 131075, 1, -262143, 65539, 6, -262142, 131075, 2, -262141, 131075, 2, -262140, 131075, 2, -262139, 131075, 2, -262138, 131075, 2, -262137, 131075, 2, -262136, 131075, 2, -262135, 131075, 2, -262134, 3, 6, -262133, 131075, 1, -196597, 3, 6, -196596, 131075, 1, -196595, 131075, 1, -131059, 262147, 5, -131060, 131075, 2, -131061, 65539, 2, -65523, 65539, 2, -65522, 131075, 2, -65521, 131075, 2, -131057, 131075, 1, -196593, 131075, 1, -262129, 131075, 1, -262132, 131075, 1, -262131, 131075, 1, -262130, 131075, 1, -196594, 131075, 1, -131058, 131075, 1, 65551, 131075, 0, 65550, 131075, 0, 65549, 131075, 0, 65548, 131075, 0, 65547, 65539, 0, 131083, 65539, 1, 196619, 65539, 1, 262155, 65539, 1, 327691, 65539, 1, 393227, 65539, 1, 458763, 65539, 1, 589839, 131075, 1, 524303, 131075, 1, 458767, 131075, 1, 393231, 131075, 1, 327695, 131075, 1, 262159, 131075, 1, 196623, 131075, 1, 131087, 131075, 1, 589838, 131075, 1, 524302, 131075, 1, 458766, 131075, 1, 393230, 131075, 1, 327694, 131075, 1, 262158, 131075, 1, 196622, 131075, 1, 131086, 131075, 1, 589837, 131075, 1, 524301, 131075, 1, 458765, 131075, 1, 393229, 131075, 1, 327693, 131075, 1, 262157, 131075, 1, 196621, 131075, 1, 131085, 131075, 1, 524300, 131075, 1, 458764, 131075, 1, 393228, 131075, 1, 327692, 131075, 1, 262156, 131075, 1, 196620, 131075, 1, 131084, 131075, 1, -196607, 65539, 7, -196598, 3, 7, 327682, 262147, 7, 327683, 327683, 7, 393216, 7, 0, 458752, 7, 0)
-layer_1/name = "Background"
-layer_1/enabled = true
-layer_1/modulate = Color(1, 1, 1, 1)
-layer_1/y_sort_enabled = false
-layer_1/y_sort_origin = 0
-layer_1/z_index = -1
-layer_1/tile_data = PackedInt32Array(458752, 6, 0, 393216, 6, 0, 393217, 6, 0, 393218, 6, 0, 327682, 6, 0, 327683, 6, 0, 393219, 6, 0, 458753, 6, 0, 458754, 6, 0, 458755, 6, 0, 458756, 6, 0, 458757, 6, 0, 458758, 6, 0, 458759, 6, 0, 458760, 6, 0, 458761, 6, 0, 458762, 6, 0, 15, 6, 0, 14, 6, 0, 13, 6, 0, 12, 6, 0, 11, 6, 0, -65525, 6, 0, -65524, 6, 0, -131062, 6, 0, -196598, 6, 0, -196599, 6, 0, -196600, 6, 0, -196601, 6, 0, -196602, 6, 0, -196603, 6, 0, -196604, 6, 0, -196605, 6, 0, -196606, 6, 0, -196607, 6, 0, -131071, 6, 0, -65535, 6, 0, 1, 6, 0, 65537, 6, 0, 131073, 6, 0, 196609, 6, 0, 196610, 6, 0, 196611, 6, 0, 196612, 6, 0, 196613, 6, 0, 196614, 6, 0, 196615, 6, 0, 196616, 6, 0, 196617, 6, 0, 196618, 6, 0, 131082, 6, 0, 65546, 6, 0, 10, 6, 0, -65526, 6, 0, -131063, 6, 0, -131064, 6, 0, -131065, 6, 0, -131066, 6, 0, -131067, 6, 0, -131068, 6, 0, -131069, 6, 0, -131070, 6, 0, -65534, 6, 0, 2, 6, 0, 65538, 6, 0, 131074, 6, 0, 131075, 6, 0, 131078, 6, 0, 131079, 6, 0, 131080, 6, 0, 131081, 6, 0, -65527, 6, 0, -65528, 6, 0, -65529, 6, 0, -65530, 6, 0, -65531, 6, 0, -65532, 6, 0, -65533, 6, 0, 3, 6, 0, 65539, 6, 0, 131076, 6, 0, 131077, 6, 0, 65544, 6, 0, 65545, 6, 0, 9, 6, 0, 8, 6, 0, 7, 6, 0, 6, 6, 0, 5, 6, 0, 4, 6, 0, 65540, 6, 0, 65541, 6, 0, 65542, 6, 0, 65543, 6, 0, 262148, 6, 0, 327684, 6, 0, 393220, 6, 0, 393221, 6, 0, 393222, 6, 0, 393223, 6, 0, 393224, 6, 0, 393225, 6, 0, 393226, 6, 0, 327690, 6, 0, 262154, 6, 0, 262153, 6, 0, 262152, 6, 0, 262151, 6, 0, 262150, 6, 0, 262149, 6, 0, 327685, 6, 0, 327686, 6, 0, 327687, 6, 0, 327688, 6, 0, 327689, 6, 0)
-layer_2/name = "Ground"
-layer_2/enabled = true
-layer_2/modulate = Color(0.0745098, 0.113725, 0.301961, 0)
-layer_2/y_sort_enabled = false
-layer_2/y_sort_origin = 0
-layer_2/z_index = -1
-layer_2/tile_data = PackedInt32Array(524288, 196608, 0, 589824, 196608, 0, 524289, 196608, 0, 589825, 196608, 0, 524290, 196608, 0, 589826, 196608, 0, 524291, 196608, 0, 589827, 196608, 0, 524292, 196608, 0, 589828, 196608, 0, 524293, 196608, 0, 589829, 196608, 0, 524294, 196608, 0, 589830, 196608, 0, 524295, 196608, 0, 589831, 196608, 0, 524296, 196608, 0, 589832, 196608, 0, 524297, 196608, 0, 589833, 196608, 0, 524298, 196608, 0, 589834, 196608, 0, 524299, 196608, 0, 589835, 196608, 0, 458763, 196608, 0, 458752, 196608, 0, 393216, 196608, 0, 262144, 196608, 0, 327680, 196608, 0, 262145, 196608, 0, 327681, 196608, 0, 262146, 196608, 0, 262147, 196608, 0, 327682, 131072, 3, 327683, 196608, 3, -196608, 196608, 0, -131072, 196608, 0, -65536, 196608, 0, 0, 196608, 0, 65536, 196608, 0, 131072, 196608, 0, 196608, 196608, 0, 65547, 196608, 0, 131083, 196608, 0, 196619, 196608, 0, 262155, 196608, 0, 327691, 196608, 0, 393227, 196608, 0, 65548, 196608, 0, 65549, 196608, 0, 65550, 196608, 0, 65551, 196608, 0, -65523, 196608, 0, -65522, 196608, 0, -65521, 196608, 0, -65520, 196608, 0, 65552, 196608, 0, -65519, 196608, 0, 65553, 196608, 0, -65518, 196608, 0, 18, 196608, 0, 65554, 196608, 0, -131061, 196608, 0, -131060, 196608, 0, -131059, 196608, 0, -196597, 196608, 0, -262143, 196608, 0, -262142, 196608, 0, -262141, 196608, 0, -262140, 196608, 0, -262139, 196608, 0, -262138, 196608, 0, -262137, 196608, 0, -262136, 196608, 0, -262135, 196608, 0, -262134, 196608, 0, -196607, 65536, 1, -196598, 0, 1)
-layer_3/name = "Slopes"
-layer_3/enabled = true
-layer_3/modulate = Color(0.701961, 0.215686, 0.105882, 1)
-layer_3/y_sort_enabled = false
-layer_3/y_sort_origin = 0
-layer_3/z_index = -1
-layer_3/tile_data = PackedInt32Array()
+rendering_quadrant_size = 32
+
+[node name="Background" type="TileMapLayer" parent="LevelCollisionTilemap"]
+z_index = -1
+use_parent_material = true
+tile_map_data = PackedByteArray("AAAAAAcABgAAAAAAAAAAAAYABgAAAAAAAAABAAYABgAAAAAAAAACAAYABgAAAAAAAAACAAUABgAAAAAAAAADAAUABgAAAAAAAAADAAYABgAAAAAAAAABAAcABgAAAAAAAAACAAcABgAAAAAAAAADAAcABgAAAAAAAAAEAAcABgAAAAAAAAAFAAcABgAAAAAAAAAGAAcABgAAAAAAAAAHAAcABgAAAAAAAAAIAAcABgAAAAAAAAAJAAcABgAAAAAAAAAKAAcABgAAAAAAAAAPAAAABgAAAAAAAAAOAAAABgAAAAAAAAANAAAABgAAAAAAAAAMAAAABgAAAAAAAAALAAAABgAAAAAAAAALAP//BgAAAAAAAAAMAP//BgAAAAAAAAAKAP7/BgAAAAAAAAAKAP3/BgAAAAAAAAAJAP3/BgAAAAAAAAAIAP3/BgAAAAAAAAAHAP3/BgAAAAAAAAAGAP3/BgAAAAAAAAAFAP3/BgAAAAAAAAAEAP3/BgAAAAAAAAADAP3/BgAAAAAAAAACAP3/BgAAAAAAAAABAP3/BgAAAAAAAAABAP7/BgAAAAAAAAABAP//BgAAAAAAAAABAAAABgAAAAAAAAABAAEABgAAAAAAAAABAAIABgAAAAAAAAABAAMABgAAAAAAAAACAAMABgAAAAAAAAADAAMABgAAAAAAAAAEAAMABgAAAAAAAAAFAAMABgAAAAAAAAAGAAMABgAAAAAAAAAHAAMABgAAAAAAAAAIAAMABgAAAAAAAAAJAAMABgAAAAAAAAAKAAMABgAAAAAAAAAKAAIABgAAAAAAAAAKAAEABgAAAAAAAAAKAAAABgAAAAAAAAAKAP//BgAAAAAAAAAJAP7/BgAAAAAAAAAIAP7/BgAAAAAAAAAHAP7/BgAAAAAAAAAGAP7/BgAAAAAAAAAFAP7/BgAAAAAAAAAEAP7/BgAAAAAAAAADAP7/BgAAAAAAAAACAP7/BgAAAAAAAAACAP//BgAAAAAAAAACAAAABgAAAAAAAAACAAEABgAAAAAAAAACAAIABgAAAAAAAAADAAIABgAAAAAAAAAGAAIABgAAAAAAAAAHAAIABgAAAAAAAAAIAAIABgAAAAAAAAAJAAIABgAAAAAAAAAJAP//BgAAAAAAAAAIAP//BgAAAAAAAAAHAP//BgAAAAAAAAAGAP//BgAAAAAAAAAFAP//BgAAAAAAAAAEAP//BgAAAAAAAAADAP//BgAAAAAAAAADAAAABgAAAAAAAAADAAEABgAAAAAAAAAEAAIABgAAAAAAAAAFAAIABgAAAAAAAAAIAAEABgAAAAAAAAAJAAEABgAAAAAAAAAJAAAABgAAAAAAAAAIAAAABgAAAAAAAAAHAAAABgAAAAAAAAAGAAAABgAAAAAAAAAFAAAABgAAAAAAAAAEAAAABgAAAAAAAAAEAAEABgAAAAAAAAAFAAEABgAAAAAAAAAGAAEABgAAAAAAAAAHAAEABgAAAAAAAAAEAAQABgAAAAAAAAAEAAUABgAAAAAAAAAEAAYABgAAAAAAAAAFAAYABgAAAAAAAAAGAAYABgAAAAAAAAAHAAYABgAAAAAAAAAIAAYABgAAAAAAAAAJAAYABgAAAAAAAAAKAAYABgAAAAAAAAAKAAUABgAAAAAAAAAKAAQABgAAAAAAAAAJAAQABgAAAAAAAAAIAAQABgAAAAAAAAAHAAQABgAAAAAAAAAGAAQABgAAAAAAAAAFAAQABgAAAAAAAAAFAAUABgAAAAAAAAAGAAUABgAAAAAAAAAHAAUABgAAAAAAAAAIAAUABgAAAAAAAAAJAAUABgAAAAAAAAA=")
+tile_set = ExtResource("2_f37q7")
+
+[node name="Ground" type="TileMapLayer" parent="LevelCollisionTilemap"]
+modulate = Color(0.0745098, 0.113725, 0.301961, 0)
+z_index = -1
+use_parent_material = true
+tile_map_data = PackedByteArray("AAAAAAgAAAADAAAAAAAAAAkAAAADAAAAAAABAAgAAAADAAAAAAABAAkAAAADAAAAAAACAAgAAAADAAAAAAACAAkAAAADAAAAAAADAAgAAAADAAAAAAADAAkAAAADAAAAAAAEAAgAAAADAAAAAAAEAAkAAAADAAAAAAAFAAgAAAADAAAAAAAFAAkAAAADAAAAAAAGAAgAAAADAAAAAAAGAAkAAAADAAAAAAAHAAgAAAADAAAAAAAHAAkAAAADAAAAAAAIAAgAAAADAAAAAAAIAAkAAAADAAAAAAAJAAgAAAADAAAAAAAJAAkAAAADAAAAAAAKAAgAAAADAAAAAAAKAAkAAAADAAAAAAALAAgAAAADAAAAAAALAAkAAAADAAAAAAALAAcAAAADAAAAAAAAAAcAAAADAAAAAAAAAAYAAAADAAAAAAAAAAQAAAADAAAAAAAAAAUAAAADAAAAAAABAAQAAAADAAAAAAABAAUAAAADAAAAAAACAAQAAAADAAAAAAADAAQAAAADAAAAAAACAAUAAAACAAMAAAADAAUAAAADAAMAAAAAAP3/AAADAAAAAAAAAP7/AAADAAAAAAAAAP//AAADAAAAAAAAAAAAAAADAAAAAAAAAAEAAAADAAAAAAAAAAIAAAADAAAAAAAAAAMAAAADAAAAAAALAAEAAAADAAAAAAALAAIAAAADAAAAAAALAAMAAAADAAAAAAALAAQAAAADAAAAAAALAAUAAAADAAAAAAALAAYAAAADAAAAAAAMAAEAAAADAAAAAAANAAEAAAADAAAAAAAOAAEAAAADAAAAAAAPAAEAAAADAAAAAAANAP//AAADAAAAAAAOAP//AAADAAAAAAAPAP//AAADAAAAAAAQAP//AAADAAAAAAAQAAEAAAADAAAAAAARAP//AAADAAAAAAARAAEAAAADAAAAAAASAP//AAADAAAAAAASAAAAAAADAAAAAAASAAEAAAADAAAAAAALAP7/AAADAAAAAAAMAP7/AAADAAAAAAANAP7/AAADAAAAAAALAP3/AAADAAAAAAABAPz/AAADAAAAAAACAPz/AAADAAAAAAADAPz/AAADAAAAAAAEAPz/AAADAAAAAAAFAPz/AAADAAAAAAAGAPz/AAADAAAAAAAHAPz/AAADAAAAAAAIAPz/AAADAAAAAAAJAPz/AAADAAAAAAAKAPz/AAADAAAAAAABAP3/AAABAAEAAAAKAP3/AAAAAAEAAAA=")
+tile_set = ExtResource("2_f37q7")
+
+[node name="Slopes" type="TileMapLayer" parent="LevelCollisionTilemap"]
+modulate = Color(0.701961, 0.215686, 0.105882, 1)
+z_index = -1
+use_parent_material = true
+tile_set = ExtResource("2_f37q7")
 
 [node name="Entrance 0" type="Node2D" parent="."]
 position = Vector2(224, 224)
@@ -84,21 +84,11 @@ position = Vector2(400, 16)
 [node name="BreakableBlock" parent="." instance=ExtResource("4_ybgg8")]
 position = Vector2(384, 0)
 
-[node name="HiddenTilemap" type="TileMap" parent="."]
-z_index = 3
-tile_set = ExtResource("2_f37q7")
-cell_quadrant_size = 32
-format = 2
-layer_0/name = "Hidden"
-layer_0/tile_data = PackedInt32Array(-65524, 65539, 1, 12, 65539, 1, 65548, 262147, 6, -131060, 262147, 5, 65549, 131075, 1, 65550, 131075, 1, 65551, 131075, 1, 15, 131075, 1, 14, 131075, 1, 13, 131075, 1, -65523, 131075, 1, -65522, 131075, 1, -65521, 131075, 1, -131057, 131075, 1, -131058, 131075, 1, -131059, 131075, 1)
-script = ExtResource("5_uewm5")
+[node name="HiddenTilemap" parent="." instance=ExtResource("6_j1efh")]
+tile_map_data = PackedByteArray("AAAMAP//AwABAAEAAAAMAAAAAwABAAEAAAAMAP7/AwAEAAUAAAANAP//AwACAAEAAAANAP7/AwACAAEAAAAOAP//AwACAAEAAAAPAP//AwACAAEAAAANAAAAAwACAAEAAAAOAAAAAwACAAEAAAAPAAAAAwACAAEAAAANAAEAAwACAAEAAAAOAAEAAwACAAEAAAAPAAEAAwACAAEAAAAMAAEAAwAEAAYAAAA=")
 
-[node name="Area2D" type="Area2D" parent="HiddenTilemap"]
-collision_layer = 0
-collision_mask = 4
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="HiddenTilemap/Area2D"]
-polygon = PackedVector2Array(352, -32, 384, -32, 384, 0, 576, 0, 576, 32, 352, 32)
+[node name="CollisionPolygon2D" parent="HiddenTilemap/Area2D" index="0"]
+polygon = PackedVector2Array(352, -32, 416, -32, 416, 0.0233803, 576, 0, 576, 32, 352, 32)
 
 [node name="ChangeLabel" type="RichTextLabel" parent="."]
 light_mask = 4
@@ -121,5 +111,4 @@ script = ExtResource("7_y4sps")
 position = Vector2(320, 232)
 textbox_strings = Array[String](["Knigel: I'm sorry, Magli. It's all my fault that we're stuck here...", "Magli: That's not true! If it weren't for you, I wouldn't have had any magic to fight back against those Dragoons!", "Knigel: I thought I could fight them on my own, but they saw right through me at who I really was, and look where it got us. I failed to protect you, Magli...", "Magli: Knigel, what are you saying? This isn't like you to--", "Knigel: I don't even deserve to be called that anymore! Not in this state. My fairy name was Faeson, but I had it changed to Knigel when I began training to become a knight.", "Knigel: A magic spell was used on me when I was young to make myself more human-sized, but now that my magic had been siphoned by those Dragoons, I've reverted back to this small, weak, and useless fairy form...", "Knigel: I never thought that you'd find out this way, but here we are... You must think I'm a total fraud now after all these years, huh? I was never your strong and brave knight in shining armor after all... *sob*", "Magli: Knigel... Remember what you said to me when we first met as kids? When you protected me from those bullies?", "Knigel: That... *sniff* I believed you're still a good person despite you being a dragon?", "Magli: I didn't know it then, but over the years, your belief gave me hope that I can use my dragon powers for good instead of seeing them as a curse! Now it's my turn...", "Magli: Knigel, I believe you're still a strong and brave knight despite you being a fairy! I swear on my life that I will use everything you taught me to help us escape and get home safely!", "Knigel: Magli... Thank you. You're right, I can still be useful regardless of my size! I'm glad you don't see me any differently than before!", "Magli: There's the knight in shining armor I love so much! So what's our move?", "Knigel: Hmm... the upper part of this back wall looks awfully suspicious... See if you can mess with it a bit."])
 
-[connection signal="body_entered" from="HiddenTilemap/Area2D" to="HiddenTilemap" method="_on_rigid_body_2d_body_entered"]
-[connection signal="body_exited" from="HiddenTilemap/Area2D" to="HiddenTilemap" method="_on_rigid_body_2d_body_exited"]
+[editable path="HiddenTilemap"]

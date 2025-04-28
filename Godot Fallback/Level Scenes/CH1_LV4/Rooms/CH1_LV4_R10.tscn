@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://bao6ruf6mbfuo"]
+[gd_scene load_steps=19 format=4 uid="uid://bao6ruf6mbfuo"]
 
 [ext_resource type="Script" path="res://Scripts/Utility Scripts/Room.gd" id="1_6ndgb"]
 [ext_resource type="TileSet" uid="uid://dhwi7i1loa2pd" path="res://Sprites/Tiles/Test Tiles/TestTileSet.tres" id="2_p0qvm"]
@@ -14,9 +14,9 @@
 [ext_resource type="PackedScene" uid="uid://clfqwsy4byrkf" path="res://Scene Objects/Enemies/GreenDragoon.tscn" id="11_qpwl7"]
 [ext_resource type="PackedScene" uid="uid://dfkmxoba64spw" path="res://Scene Objects/Objects/MedalFragment.tscn" id="12_3fmos"]
 [ext_resource type="PackedScene" uid="uid://b2a0ttqvejk51" path="res://Scene Objects/Objects/TemperDragonFruit.tscn" id="13_p5ml4"]
-[ext_resource type="Script" path="res://Scripts/Object Scripts/HiddenPassage.gd" id="14_7qgb5"]
 [ext_resource type="Texture2D" uid="uid://pcas0ojllbno" path="res://Sprites/Backgrounds/1_4_BG/RailwayPlatformTileBG.png" id="14_015cp"]
 [ext_resource type="Texture2D" uid="uid://by6t3qkbhxycd" path="res://Sprites/Backgrounds/1_4_BG/RailwayGroundPlatformBG.png" id="15_36xne"]
+[ext_resource type="PackedScene" uid="uid://cjsjtabfbr3lu" path="res://Scene Objects/Objects/HiddenTilemap.tscn" id="16_mfcc1"]
 [ext_resource type="Texture2D" uid="uid://ceuckv2a4fjqq" path="res://Sprites/Backgrounds/1_4_BG/RailwayDividerBG.png" id="16_ogo5l"]
 
 [node name="CH1_LV4_R10" type="Node2D" node_paths=PackedStringArray("parallax_bg", "tilemap_list", "room_entrances", "enemy_nodes", "medal_fragments")]
@@ -291,36 +291,16 @@ enable_cycling = false
 [node name="TemperDragonFruit3" parent="." instance=ExtResource("13_p5ml4")]
 position = Vector2(672, 64)
 
-[node name="HiddenTilemap" type="TileMap" parent="."]
-z_index = 3
-tile_set = ExtResource("2_p0qvm")
-rendering_quadrant_size = 32
-format = 2
-layer_0/name = "Hidden"
-layer_0/tile_data = PackedInt32Array(131105, 131086, 1, 196641, 131086, 1, 262177, 131086, 1, 131106, 131086, 1, 196642, 131086, 1, 262178, 131086, 1, 131107, 131086, 1, 196643, 131086, 1, 262179, 131086, 1, 131108, 131086, 1, 196644, 131086, 1, 262180, 131086, 1, 131109, 196622, 1, 196645, 196622, 6, 262181, 131086, 1, 196646, 131086, 0, 262182, 131086, 1, 65573, 196622, 5, 65572, 131086, 1, 65571, 131086, 1, 65570, 131086, 1, 65569, 131086, 1, 65568, 65550, 1, 131104, 65550, 1, 196640, 65550, 1, 262176, 65550, 1, 327712, 65550, 2, 327713, 131086, 2, 327714, 131086, 2, 327715, 131086, 2, 327716, 262158, 5, 327717, 196622, 5, 327718, 131086, 2)
-script = ExtResource("14_7qgb5")
+[node name="HiddenTilemap" parent="." instance=ExtResource("16_mfcc1")]
+tile_map_data = PackedByteArray("AAAgAAEADgABAAEAAAAgAAIADgABAAEAAAAgAAMADgABAAEAAAAgAAQADgABAAEAAAAgAAUADgABAAIAAAAhAAEADgACAAEAAAAhAAIADgACAAEAAAAhAAMADgACAAEAAAAhAAQADgACAAEAAAAhAAUADgACAAIAAAAiAAEADgACAAEAAAAiAAIADgACAAEAAAAiAAMADgACAAEAAAAiAAQADgACAAEAAAAiAAUADgACAAIAAAAjAAEADgACAAEAAAAjAAIADgACAAEAAAAjAAMADgACAAEAAAAjAAQADgACAAEAAAAjAAUADgACAAIAAAAkAAEADgACAAEAAAAkAAIADgACAAEAAAAkAAMADgACAAEAAAAkAAQADgACAAEAAAAkAAUADgAEAAUAAAAlAAEADgADAAUAAAAlAAIADgADAAEAAAAlAAMADgADAAYAAAAlAAQADgACAAEAAAAlAAUADgADAAUAAAAmAAMADgACAAAAAAAmAAQADgACAAEAAAAmAAUADgACAAIAAAA=")
 
-[node name="Area2D" type="Area2D" parent="HiddenTilemap"]
-collision_layer = 0
-collision_mask = 4
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="HiddenTilemap/Area2D"]
+[node name="CollisionPolygon2D" parent="HiddenTilemap/Area2D" index="0"]
 polygon = PackedVector2Array(1056, 160, 1056, 64, 1216, 64, 1216, 161)
 
-[node name="HiddenTilemap2" type="TileMap" parent="."]
-z_index = 3
-tile_set = ExtResource("2_p0qvm")
-rendering_quadrant_size = 32
-format = 2
-layer_0/name = "Hidden"
-layer_0/tile_data = PackedInt32Array(65616, 131086, 1, 131152, 262158, 5, 65617, 131086, 1, 131153, 131086, 1, 65618, 131086, 1, 131154, 131086, 1, 196690, 131086, 1, 65619, 131086, 1, 131155, 131086, 1, 196691, 131086, 1, 65620, 131086, 1, 131156, 131086, 1, 196692, 131086, 1, 262224, 65550, 1, 262225, 131086, 1, 262226, 131086, 1, 262227, 131086, 1, 262228, 131086, 1, 262229, 131086, 1, 196693, 131086, 1, 131157, 131086, 1, 65621, 131086, 1, 85, 131086, 1, 84, 131086, 1, 83, 131086, 1, 82, 131086, 1, 81, 131086, 1, 80, 131086, 1, 79, 131086, 1, 65615, 131086, 1, 131151, 131086, 2, 196689, 131086, 1, 196688, 65550, 1)
-script = ExtResource("14_7qgb5")
+[node name="HiddenTilemap2" parent="." instance=ExtResource("16_mfcc1")]
+tile_map_data = PackedByteArray("AABPAAAADgACAAEAAABPAAEADgACAAEAAABPAAIADgACAAIAAABQAAAADgACAAEAAABQAAEADgACAAEAAABQAAIADgAEAAUAAABQAAMADgABAAEAAABQAAQADgABAAEAAABRAAAADgACAAEAAABRAAEADgACAAEAAABRAAIADgACAAEAAABRAAMADgACAAEAAABRAAQADgACAAEAAABSAAAADgACAAEAAABSAAEADgACAAEAAABSAAIADgACAAEAAABSAAMADgACAAEAAABSAAQADgACAAEAAABTAAAADgACAAEAAABTAAEADgACAAEAAABTAAIADgACAAEAAABTAAMADgACAAEAAABTAAQADgACAAEAAABUAAAADgACAAEAAABUAAEADgACAAEAAABUAAIADgACAAEAAABUAAMADgACAAEAAABUAAQADgACAAEAAABVAAAADgACAAEAAABVAAEADgACAAEAAABVAAIADgACAAEAAABVAAMADgACAAEAAABVAAQADgACAAEAAAA=")
 
-[node name="Area2D" type="Area2D" parent="HiddenTilemap2"]
-collision_layer = 0
-collision_mask = 4
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="HiddenTilemap2/Area2D"]
+[node name="CollisionPolygon2D" parent="HiddenTilemap2/Area2D" index="0"]
 polygon = PackedVector2Array(2560, 128, 2560, 33, 2720, 33, 2720, 128)
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
@@ -359,7 +339,5 @@ offset = Vector2(-512, 0)
 region_enabled = true
 region_rect = Rect2(0, 0, 4096, 320)
 
-[connection signal="body_entered" from="HiddenTilemap/Area2D" to="HiddenTilemap" method="_on_rigid_body_2d_body_entered"]
-[connection signal="body_exited" from="HiddenTilemap/Area2D" to="HiddenTilemap" method="_on_rigid_body_2d_body_exited"]
-[connection signal="body_entered" from="HiddenTilemap2/Area2D" to="HiddenTilemap2" method="_on_rigid_body_2d_body_entered"]
-[connection signal="body_exited" from="HiddenTilemap2/Area2D" to="HiddenTilemap2" method="_on_rigid_body_2d_body_exited"]
+[editable path="HiddenTilemap"]
+[editable path="HiddenTilemap2"]

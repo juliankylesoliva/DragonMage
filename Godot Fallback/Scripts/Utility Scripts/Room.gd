@@ -8,7 +8,7 @@ signal room_deactivated
 
 @export var parallax_bg : ParallaxBackground
 
-@export var tilemap_list : Array[TileMap]
+@export var tilemap_list : Array[Node2D]
 
 @export var left_camera_limit : int = 0
 

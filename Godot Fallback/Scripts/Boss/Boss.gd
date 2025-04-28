@@ -12,7 +12,7 @@ class_name Boss
 
 @export var clear_timer : ClearTimer
 
-@export var boss_room_boundary_tilemap : TileMap
+@export var boss_room_boundary_tilemap : Node2D
 
 @export var boss_music_player : LevelMusicPlayer
 
@@ -163,6 +163,7 @@ func on_activation_trigger_entered():
 		on_activation()
 		boss_trigger.shape.call_deferred("set_disabled", true)
 		if (boss_room_boundary_tilemap != null):
-			for i in boss_room_boundary_tilemap.get_layers_count():
-				boss_room_boundary_tilemap.set_layer_enabled(i, true)
+			for child in boss_room_boundary_tilemap.get_children():
+				if (child is TileMapLayer):
+					(child as TileMapLayer).enabled = true
 		lock_camera_to_boss_room()

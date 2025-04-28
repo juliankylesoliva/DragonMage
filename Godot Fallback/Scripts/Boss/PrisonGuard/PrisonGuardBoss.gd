@@ -170,8 +170,8 @@ func on_dialogue_intro_finished():
 func on_dialogue_defeat_finished():
 	player_hub.set_force_stand(false)
 	release_camera_past_boss_room()
-	boss_room_boundary_tilemap.set_layer_enabled(1, false)
-	boss_room_boundary_tilemap.set_layer_enabled(3, false)
+	(boss_room_boundary_tilemap.get_child(1) as TileMapLayer).enabled = false
+	(boss_room_boundary_tilemap.get_child(3) as TileMapLayer).enabled = false
 	state_machine.set_process_mode(PROCESS_MODE_DISABLED)
 	if (normal_level_music_player != null):
 		normal_level_music_player.restart_music()
