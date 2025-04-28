@@ -69,12 +69,6 @@ editor_draw_drag_margin = true
 
 [node name="CH0_LV4_R1" parent="." instance=ExtResource("4_gh53s")]
 
-[node name="BoundaryCollisionTilemap" parent="CH0_LV4_R1" index="0"]
-rendering_quadrant_size = 32
-
-[node name="LevelCollisionTilemap" parent="CH0_LV4_R1" index="1"]
-rendering_quadrant_size = 32
-
 [node name="Warp 0" parent="CH0_LV4_R1" index="5" node_paths=PackedStringArray("room_destination")]
 room_destination = NodePath("../../CH0_LV4_R2")
 
@@ -84,12 +78,6 @@ textbox = NodePath("../../Textbox")
 [node name="CH0_LV4_R2" parent="." instance=ExtResource("5_q0riv")]
 position = Vector2(1248, -96)
 
-[node name="BoundaryCollisionTilemap" parent="CH0_LV4_R2" index="0"]
-rendering_quadrant_size = 32
-
-[node name="LevelCollisionTilemap" parent="CH0_LV4_R2" index="1"]
-rendering_quadrant_size = 32
-
 [node name="Warp 0" parent="CH0_LV4_R2" index="5" node_paths=PackedStringArray("room_destination")]
 room_destination = NodePath("../../CH0_LV4_R1")
 
@@ -98,12 +86,6 @@ room_destination = NodePath("../../CH0_LV4_R3")
 
 [node name="CH0_LV4_R3" parent="." instance=ExtResource("6_1s4e1")]
 position = Vector2(2944, -160)
-
-[node name="BoundaryCollisionTilemap" parent="CH0_LV4_R3" index="0"]
-rendering_quadrant_size = 32
-
-[node name="LevelCollisionTilemap" parent="CH0_LV4_R3" index="1"]
-rendering_quadrant_size = 32
 
 [node name="Warp 0" parent="CH0_LV4_R3" index="5" node_paths=PackedStringArray("room_destination")]
 room_destination = NodePath("../../CH0_LV4_R2")
@@ -117,12 +99,6 @@ level_origin = NodePath("../..")
 [node name="CH0_LV4_R4" parent="." instance=ExtResource("7_lrfd6")]
 position = Vector2(0, 576)
 
-[node name="BoundaryCollisionTilemap" parent="CH0_LV4_R4" index="0"]
-rendering_quadrant_size = 32
-
-[node name="LevelCollisionTilemap" parent="CH0_LV4_R4" index="1"]
-rendering_quadrant_size = 32
-
 [node name="Warp 0" parent="CH0_LV4_R4" index="6" node_paths=PackedStringArray("room_destination")]
 room_destination = NodePath("../../CH0_LV4_R3")
 
@@ -132,12 +108,6 @@ room_destination = NodePath("../../CH0_LV4_R5")
 [node name="CH0_LV4_R5" parent="." instance=ExtResource("8_m1bih")]
 position = Vector2(64, -352)
 
-[node name="BoundaryCollisionTilemap" parent="CH0_LV4_R5" index="0"]
-rendering_quadrant_size = 32
-
-[node name="LevelCollisionTilemap" parent="CH0_LV4_R5" index="1"]
-rendering_quadrant_size = 32
-
 [node name="Warp 0" parent="CH0_LV4_R5" index="4" node_paths=PackedStringArray("room_destination")]
 room_destination = NodePath("../../CH0_LV4_R4")
 
@@ -146,12 +116,6 @@ room_destination = NodePath("../../CH0_LV4_R6")
 
 [node name="CH0_LV4_R6" parent="." instance=ExtResource("9_fgydk")]
 position = Vector2(800, -448)
-
-[node name="BoundaryCollisionTilemap" parent="CH0_LV4_R6" index="0"]
-rendering_quadrant_size = 32
-
-[node name="LevelCollisionTilemap" parent="CH0_LV4_R6" index="1"]
-rendering_quadrant_size = 32
 
 [node name="Warp 0" parent="CH0_LV4_R6" index="4" node_paths=PackedStringArray("room_destination")]
 room_destination = NodePath("../../CH0_LV4_R5")
@@ -165,12 +129,6 @@ subsequent_checkpoints = [NodePath("../../CH0_LV4_R3/Checkpoint")]
 
 [node name="CH0_LV4_R7" parent="." instance=ExtResource("10_ggfgt")]
 position = Vector2(1536, -960)
-
-[node name="BoundaryCollisionTilemap" parent="CH0_LV4_R7" index="0"]
-rendering_quadrant_size = 32
-
-[node name="LevelCollisionTilemap" parent="CH0_LV4_R7" index="1"]
-rendering_quadrant_size = 32
 
 [node name="Warp 0" parent="CH0_LV4_R7" index="4" node_paths=PackedStringArray("room_destination")]
 room_destination = NodePath("../../CH0_LV4_R6")

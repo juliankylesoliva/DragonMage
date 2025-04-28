@@ -80,12 +80,6 @@ editor_draw_drag_margin = true
 
 [node name="CH1_LV4_R1" parent="." instance=ExtResource("4_3k6nu")]
 
-[node name="BoundaryCollisionTilemap" parent="CH1_LV4_R1" index="0"]
-rendering_quadrant_size = 32
-
-[node name="LevelCollisionTilemap" parent="CH1_LV4_R1" index="1"]
-rendering_quadrant_size = 32
-
 [node name="Warp 0" parent="CH1_LV4_R1" index="4" node_paths=PackedStringArray("room_destination")]
 room_destination = NodePath("../../CH1_LV4_R2")
 
@@ -157,12 +151,6 @@ level_origin = NodePath("../..")
 
 [node name="CH1_LV4_R9" parent="." instance=ExtResource("11_p0p2b")]
 position = Vector2(0, 1536)
-
-[node name="BoundaryCollisionTilemap" parent="CH1_LV4_R9" index="0"]
-rendering_quadrant_size = 32
-
-[node name="LevelCollisionTilemap" parent="CH1_LV4_R9" index="1"]
-rendering_quadrant_size = 32
 
 [node name="Warp 0" parent="CH1_LV4_R9" index="4" node_paths=PackedStringArray("room_destination")]
 room_destination = NodePath("../../CH1_LV4_R8")

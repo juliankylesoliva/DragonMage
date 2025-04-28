@@ -51,7 +51,7 @@ position = Vector2(96, 224)
 [node name="Fairy" parent="Player/Hub" index="4"]
 is_using_fairy = true
 
-[node name="Camera" parent="Player/Hub" index="11" node_paths=PackedStringArray("player_cam")]
+[node name="Camera" parent="Player/Hub" index="12" node_paths=PackedStringArray("player_cam")]
 player_cam = NodePath("../../../Camera2D")
 
 [node name="CollisionShape2D" parent="Player" index="4"]
@@ -129,12 +129,6 @@ room_destination = NodePath("../../CH1_LV3_R8")
 
 [node name="CH1_LV3_R8" parent="." instance=ExtResource("21_jpnph")]
 position = Vector2(-1088, 896)
-
-[node name="LevelCollisionTilemap" parent="CH1_LV3_R8" index="0"]
-rendering_quadrant_size = 32
-
-[node name="BoundaryCollisionTilemap" parent="CH1_LV3_R8" index="1"]
-rendering_quadrant_size = 32
 
 [node name="Warp 0" parent="CH1_LV3_R8" index="3" node_paths=PackedStringArray("room_destination")]
 room_destination = NodePath("../../CH1_LV3_R7")
@@ -218,6 +212,8 @@ screen_fade = NodePath("../UI_Canvas/ScreenFade")
 [editable path="CH1_LV3_R2/Enemies/BlueDragoon"]
 [editable path="CH1_LV3_R2/Enemies/RedDragoon"]
 [editable path="CH1_LV3_R2/Enemies/YellowDragoon2"]
+[editable path="CH1_LV3_R2/HiddenTilemap"]
+[editable path="CH1_LV3_R2/HiddenTilemap2"]
 [editable path="CH1_LV3_R3"]
 [editable path="CH1_LV3_R3/FallWarp"]
 [editable path="CH1_LV3_R3/Enemies/BlueDragoon"]
@@ -236,6 +232,9 @@ screen_fade = NodePath("../UI_Canvas/ScreenFade")
 [editable path="CH1_LV3_R3/Enemies/YellowDragoon2"]
 [editable path="CH1_LV3_R3/Enemies/RedDragoon5"]
 [editable path="CH1_LV3_R3/Enemies/GreenDragoon4"]
+[editable path="CH1_LV3_R3/HiddenTilemap"]
+[editable path="CH1_LV3_R3/HiddenTilemap2"]
+[editable path="CH1_LV3_R3/HiddenTilemap3"]
 [editable path="CH1_LV3_R4"]
 [editable path="CH1_LV3_R4/FallWarp 0"]
 [editable path="CH1_LV3_R4/FallWarp 1"]
@@ -247,6 +246,10 @@ screen_fade = NodePath("../UI_Canvas/ScreenFade")
 [editable path="CH1_LV3_R4/Enemies/YellowDragoon"]
 [editable path="CH1_LV3_R4/Enemies/BlueDragoon3"]
 [editable path="CH1_LV3_R4/Enemies/RedDragoon3"]
+[editable path="CH1_LV3_R4/HiddenTilemap"]
+[editable path="CH1_LV3_R4/HiddenTilemap2"]
+[editable path="CH1_LV3_R4/HiddenTilemap3"]
+[editable path="CH1_LV3_R4/HiddenTilemap4"]
 [editable path="CH1_LV3_R5"]
 [editable path="CH1_LV3_R5/FallWarp"]
 [editable path="CH1_LV3_R5/Enemies/GreenDragoon"]
@@ -265,6 +268,8 @@ screen_fade = NodePath("../UI_Canvas/ScreenFade")
 [editable path="CH1_LV3_R5/Enemies/RedDragoon5"]
 [editable path="CH1_LV3_R5/Enemies/GreenDragoon3"]
 [editable path="CH1_LV3_R5/Enemies/YellowDragoon5"]
+[editable path="CH1_LV3_R5/HiddenTilemap"]
+[editable path="CH1_LV3_R5/HiddenTilemap2"]
 [editable path="CH1_LV3_R6"]
 [editable path="CH1_LV3_R6/FallWarp"]
 [editable path="CH1_LV3_R6/Enemies/RedDragoon"]
@@ -299,4 +304,5 @@ screen_fade = NodePath("../UI_Canvas/ScreenFade")
 [editable path="CH1_LV3_R7/Enemies/GreenDragoon7"]
 [editable path="CH1_LV3_R7/Enemies/GreenDragoon8"]
 [editable path="CH1_LV3_R7/Enemies/GreenDragoon9"]
+[editable path="CH1_LV3_R7/HiddenTilemap"]
 [editable path="CH1_LV3_R8"]
