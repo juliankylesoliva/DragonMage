@@ -4,6 +4,12 @@ class_name WarpDoor
 
 @export var warp_dummy : WarpTrigger
 
+@export var door_texture_override : Texture2D = null
+
+@export var door_sprite : Sprite2D
+
+@export var lock_sprite : Sprite2D
+
 @export var room_origin : Room
 
 @export var room_destination : Room
@@ -26,12 +32,17 @@ func _ready():
 		warp_dummy.room_destination = self.room_destination
 		warp_dummy.room_entrance_index = self.room_entrance_index
 	
+	if (door_texture_override != null):
+		door_sprite.texture = door_texture_override
+	
 	if (button_prompt is ButtonPromptTextLabel):
 		button_prompt_label = (button_prompt as ButtonPromptTextLabel)
 	
 	if (is_locked):
+		lock_sprite.set_visible(true)
 		button_prompt_label.set_raw_text(locked_prompt)
 	else:
+		lock_sprite.set_visible(false)
 		button_prompt_label.set_raw_text(enter_prompt)
 
 func on_player_entered():
@@ -50,6 +61,7 @@ func interact(hub : PlayerHub):
 			if (hub.inventory.has_key()):
 				hub.inventory.remove_key()
 				is_locked = false
+				lock_sprite.set_visible(false)
 				button_prompt_label.set_raw_text(enter_prompt)
 				SoundFactory.play_sound_by_name("object_block_breakable", self.global_position, 0, 1)
 			else:
