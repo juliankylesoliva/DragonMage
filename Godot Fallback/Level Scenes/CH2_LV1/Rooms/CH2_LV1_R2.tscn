@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=4 uid="uid://sh5tjbrvgfi6"]
+[gd_scene load_steps=11 format=4 uid="uid://sh5tjbrvgfi6"]
 
 [ext_resource type="Script" path="res://Scripts/Utility Scripts/Room.gd" id="1_41t0p"]
 [ext_resource type="TileSet" uid="uid://dhwi7i1loa2pd" path="res://Sprites/Tiles/Test Tiles/TestTileSet.tres" id="2_kyqbj"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://dqbo0wu6hm8lj" path="res://Scene Objects/Objects/WarpTrigger.tscn" id="5_hb1t4"]
 [ext_resource type="PackedScene" uid="uid://curi6w4ex7jou" path="res://Scene Objects/Enemies/YellowDragoon.tscn" id="6_rj2bn"]
 [ext_resource type="PackedScene" uid="uid://dwnpgujive352" path="res://Scene Objects/Enemies/RedDragoon.tscn" id="7_byuwb"]
+[ext_resource type="PackedScene" uid="uid://b2a0ttqvejk51" path="res://Scene Objects/Objects/TemperDragonFruit.tscn" id="9_uwrhs"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qu06a"]
 size = Vector2(128, 32)
@@ -128,5 +129,10 @@ enable_helmet = true
 position = Vector2(688, 160)
 enable_wings = true
 enable_helmet = true
+
+[node name="TemperDragonFruit" parent="." instance=ExtResource("9_uwrhs")]
+position = Vector2(512, 96)
+starting_state = 0
+enable_cycling = false
 
 [editable path="Warp 2"]

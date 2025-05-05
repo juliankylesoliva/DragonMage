@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=4 uid="uid://dsddhw2ng264h"]
+[gd_scene load_steps=10 format=4 uid="uid://dsddhw2ng264h"]
 
 [ext_resource type="Script" path="res://Scripts/Utility Scripts/Room.gd" id="1_41t0p"]
 [ext_resource type="TileSet" uid="uid://dhwi7i1loa2pd" path="res://Sprites/Tiles/Test Tiles/TestTileSet.tres" id="2_kyqbj"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://dwnpgujive352" path="res://Scene Objects/Enemies/RedDragoon.tscn" id="6_4vs55"]
 [ext_resource type="PackedScene" uid="uid://curi6w4ex7jou" path="res://Scene Objects/Enemies/YellowDragoon.tscn" id="7_c27pk"]
 [ext_resource type="PackedScene" uid="uid://bgww8jir45ktf" path="res://Scene Objects/Enemies/BlueDragoon.tscn" id="8_3swqu"]
+[ext_resource type="PackedScene" uid="uid://b2a0ttqvejk51" path="res://Scene Objects/Objects/TemperDragonFruit.tscn" id="9_s11u5"]
 
 [node name="CH2_LV1_R3" type="Node2D" node_paths=PackedStringArray("tilemap_list", "room_entrances", "enemy_nodes")]
 script = ExtResource("1_41t0p")
@@ -96,3 +97,6 @@ position = Vector2(224, 32)
 enable_wings = true
 enable_magic = true
 magic_start_flipped = true
+
+[node name="TemperDragonFruit" parent="." instance=ExtResource("9_s11u5")]
+position = Vector2(416, 224)

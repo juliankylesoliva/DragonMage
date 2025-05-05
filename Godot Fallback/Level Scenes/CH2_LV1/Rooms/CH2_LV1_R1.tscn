@@ -52,11 +52,11 @@ use_parent_material = true
 tile_set = ExtResource("2_jvcj2")
 
 [node name="AmbushBlockade" parent="." node_paths=PackedStringArray("room_ref") instance=ExtResource("3_gc71k")]
-tile_map_data = PackedByteArray("AAAPAAYAEgAAAAAAAAAOAAYAEgAAAAAAAAANAAYAEgAAAAAAAAANAAcAEgAAAAAAAAAOAAcAEgAAAAAAAAAPAAcAEgAAAAAAAAAMAAYAEgAAAAAAAAAMAAcAEgAAAAAAAAA=")
+tile_map_data = PackedByteArray("AAAPAAYAEgAAAAAAAAAOAAYAEgAAAAAAAAANAAYAEgAAAAAAAAANAAcAEgAAAAAAAAAOAAcAEgAAAAAAAAAPAAcAEgAAAAAAAAAMAAYAEgAAAAAAAAAMAAcAEgAAAAAAAAAFAAcAEgAAAAAAAAAFAAYAEgAAAAAAAAAFAAUAEgAAAAAAAAAFAAQAEgAAAAAAAAAGAAUAEgAAAAAAAAAGAAYAEgAAAAAAAAAGAAQAEgAAAAAAAAAGAAcAEgAAAAAAAAA=")
 room_ref = NodePath("..")
 
 [node name="Entrance 0" type="Node2D" parent="."]
-position = Vector2(96, 224)
+position = Vector2(64, 224)
 
 [node name="Entrance 1" type="Node2D" parent="."]
 position = Vector2(480, 224)
@@ -67,7 +67,6 @@ room_origin = NodePath("..")
 room_destination = NodePath("..")
 
 [node name="GreenDragoon" parent="." instance=ExtResource("5_4vs4e")]
-position = Vector2(288, 160)
-flip_initial_movement = true
+position = Vector2(352, 160)
 enable_wings = true
 enable_helmet = true
