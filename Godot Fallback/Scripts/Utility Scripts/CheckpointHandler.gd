@@ -16,13 +16,15 @@ var saved_draconic_scale : bool = false
 
 var saved_balanced_scale : bool = false
 
+var saved_enemy_status_array : Array[bool]
+
 var saved_clear_time : float = -1
 
 var saved_damage_taken : int = -1
 
 var death_counter : int = 0
 
-func save_checkpoint(room_index : int, destination_coords : Vector2, mage_frags : int, dragon_frags : int, frag_array : Array[MedalFragment], magical_scale : bool, draconic_scale : bool, balanced_scale : bool):
+func save_checkpoint(room_index : int, destination_coords : Vector2, mage_frags : int, dragon_frags : int, frag_array : Array[MedalFragment], magical_scale : bool, draconic_scale : bool, balanced_scale : bool, en_array : Array[Enemy]):
 	saved_room_index = room_index
 	saved_destination_coords = destination_coords
 	saved_mage_fragments = mage_frags
@@ -33,6 +35,8 @@ func save_checkpoint(room_index : int, destination_coords : Vector2, mage_frags 
 	saved_magical_scale = magical_scale
 	saved_draconic_scale = draconic_scale
 	saved_balanced_scale = balanced_scale
+	for enemy in en_array:
+		saved_enemy_status_array.append(enemy.is_defeated)
 
 func save_clear_time(clear_time : float):
 	if (clear_time >= saved_clear_time):

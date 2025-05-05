@@ -71,6 +71,10 @@ func spawn_helmet():
 	(temp_helmet as Node2D).global_position = player_detection.front_sightline_raycast.global_position
 	(temp_helmet as DragoonShades).setup(self)
 
+func mark_as_defeated():
+	super.mark_as_defeated()
+	shape.disabled = true
+
 func activate_enemy():
 	movement.set_process_mode(Node.PROCESS_MODE_INHERIT)
 	movement.set_physics_process(true)

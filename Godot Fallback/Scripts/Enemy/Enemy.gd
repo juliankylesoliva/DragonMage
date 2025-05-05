@@ -74,6 +74,14 @@ func check_defeated_camera_distance():
 func play_damage_sound():
 	SoundFactory.play_sound_by_name("damage_enemy", body.global_position, -2, 1, "SFX")
 
+func mark_as_defeated():
+	is_defeated = true
+	sprite.z_index = z_index_on_defeat
+	set_process(false)
+	get_parent().set_process(false)
+	sprite.set_visible(false)
+	movement.set_process_mode(Node.PROCESS_MODE_DISABLED)
+
 func activate_enemy():
 	pass
 

@@ -28,6 +28,8 @@ var enemy_list : Array[Enemy]
 
 var is_room_active : bool = true
 
+var level_ref : Level = null
+
 func get_room_entrance_coordinates(i : int):
 	if (i >= 0 and i < room_entrances.size()):
 		return room_entrances[i].global_position
@@ -87,6 +89,12 @@ func initialize_enemy_list():
 		for node in enemy_nodes:
 			if (node is Enemy):
 				enemy_list.append(node as Enemy)
+
+func set_level_ref(lv : Level):
+	level_ref = lv
+
+func get_level_ref():
+	return level_ref
 
 func get_undefeated_enemies():
 	var sum : int = 0

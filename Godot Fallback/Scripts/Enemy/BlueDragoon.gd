@@ -122,6 +122,10 @@ func flip():
 		if (child is Node2D):
 			(child as Node2D).position.y *= -1
 
+func mark_as_defeated():
+	super.mark_as_defeated()
+	shape.disabled = true
+
 func activate_enemy():
 	movement.set_process_mode(Node.PROCESS_MODE_INHERIT)
 	movement.set_physics_process(true)

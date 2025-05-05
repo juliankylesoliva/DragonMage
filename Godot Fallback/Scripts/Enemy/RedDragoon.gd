@@ -157,6 +157,10 @@ func update_state_timer(delta : float):
 				else:
 					sprite.play("WingedIdle" if enable_wings else "Idle")
 
+func mark_as_defeated():
+	super.mark_as_defeated()
+	shape.disabled = true
+
 func activate_enemy():
 	movement.set_process_mode(Node.PROCESS_MODE_INHERIT)
 	movement.set_physics_process(true)
