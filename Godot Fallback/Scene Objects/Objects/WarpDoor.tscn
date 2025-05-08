@@ -20,7 +20,6 @@ warp_dummy = NodePath("WarpDummy")
 lock_textures = Array[Texture2D]([ExtResource("4_trldp"), ExtResource("5_k14ch")])
 door_sprite = NodePath("DoorSprite")
 lock_sprite = NodePath("LockSprite")
-enemy_locked_prompt = "[center]Defeat {amount} more!"
 button_prompt = NodePath("ButtonPrompt")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

@@ -33,3 +33,9 @@ func _on_body_entered(body):
 					is_collected = true
 					set_deferred("monitoring", false)
 				break
+
+func force_collect():
+	if (!is_collected):
+		sprite.visible = false
+		is_collected = true
+		set_deferred("monitoring", false)

@@ -45,6 +45,9 @@ func break_object(other : Object):
 				return true
 	return false
 
+func do_break():
+	pass
+
 func set_damage_anim_timer():
 	damage_anim_time_left = damage_animation_time
 

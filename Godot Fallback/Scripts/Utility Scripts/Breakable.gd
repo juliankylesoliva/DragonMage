@@ -19,13 +19,16 @@ func break_object(other : Object):
 		var hitbox_temp : KnockbackHitbox = (other as KnockbackHitbox)
 		if (hitbox_temp.damage_strength >= break_durablility):
 			if (breakable_by == "ANY" or hitbox_temp.damage_type == breakable_by):
-				SoundFactory.play_sound_by_name(break_sound, node_2d.global_position, -4)
-				if (fragments_scene != null):
-					var instance = fragments_scene.instantiate()
-					add_sibling(instance)
-					(instance as Node2D).global_position = node_2d.global_position
-					(instance as CPUParticles2D).emitting = true
-				on_break.emit()
-				queue_free()
+				do_break()
 				return true
 	return false
+
+func do_break():
+	SoundFactory.play_sound_by_name(break_sound, node_2d.global_position, -4)
+	if (fragments_scene != null):
+		var instance = fragments_scene.instantiate()
+		add_sibling(instance)
+		(instance as Node2D).global_position = node_2d.global_position
+		(instance as CPUParticles2D).emitting = true
+	on_break.emit()
+	queue_free()

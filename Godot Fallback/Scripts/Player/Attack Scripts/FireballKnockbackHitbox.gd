@@ -6,6 +6,8 @@ class_name FireballKnockbackHitbox
 
 @export var reflected_speed_boost : float = 1.25
 
+@export var reflected_knockback_effect_radius : float = 20
+
 @export var max_reflects : int = 2
 
 var is_reflected : bool = false
@@ -75,6 +77,7 @@ func reflect_projectile():
 				break
 		SoundFactory.play_sound_by_name("attack_reflect", global_position, 0, 1, "SFX")
 		current_reflects += 1
+		collision_shape.shape.radius = (reflected_knockback_effect_radius if is_reflected else knockback_effect_radius)
 	else:
 		EffectFactory.get_effect("ReflectImpact", global_position)
 		SoundFactory.play_sound_by_name("attack_reflect", global_position, 0, 1, "SFX")

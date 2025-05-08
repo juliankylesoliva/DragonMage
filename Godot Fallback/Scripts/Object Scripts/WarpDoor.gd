@@ -28,7 +28,7 @@ class_name WarpDoor
 
 @export var locked_prompt : String = "[center]Locked!"
 
-@export var enemy_locked_prompt : String = "Defeat {amount} more!"
+@export var enemy_locked_prompt : String = "[center]Defeat {amount} more!"
 
 @export var unlock_prompt : String = "[center][Interact] Unlock"
 
@@ -85,3 +85,9 @@ func interact(hub : PlayerHub):
 
 func can_unlock():
 	return ((player.inventory.has_key() and lock_type == 0) or (room_origin.level_ref.get_total_enemies_defeated() >= enemies_to_defeat and lock_type == 1))
+
+func force_unlock():
+	if (is_locked):
+		is_locked = false
+		lock_sprite.set_visible(false)
+		button_prompt_label.set_raw_text(enter_prompt)
