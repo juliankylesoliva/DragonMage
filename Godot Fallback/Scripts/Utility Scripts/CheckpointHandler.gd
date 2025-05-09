@@ -35,6 +35,7 @@ func save_checkpoint(room_index : int, destination_coords : Vector2, mage_frags 
 	saved_magical_scale = magical_scale
 	saved_draconic_scale = draconic_scale
 	saved_balanced_scale = balanced_scale
+	saved_enemy_status_array.clear()
 	for enemy in en_array:
 		saved_enemy_status_array.append(enemy.is_defeated)
 
@@ -58,6 +59,7 @@ func clear_checkpoint():
 	saved_magical_scale = false
 	saved_draconic_scale = false
 	saved_balanced_scale = false
+	saved_enemy_status_array.clear()
 	saved_clear_time = 0
 	saved_damage_taken = 0
 	death_counter = 0

@@ -67,7 +67,7 @@ room_destination = NodePath("..")
 room_entrance_index = 3
 is_locked = true
 lock_type = 1
-enemies_to_defeat = 28
+enemies_to_defeat = 26
 
 [node name="Door 2" parent="." node_paths=PackedStringArray("room_origin", "room_destination") instance=ExtResource("3_iuvqa")]
 position = Vector2(128, 224)
@@ -90,7 +90,8 @@ room_origin = NodePath("..")
 room_destination = NodePath("..")
 room_entrance_index = 1
 
-[node name="Checkpoint" parent="." instance=ExtResource("5_sf04e")]
+[node name="Checkpoint" parent="." node_paths=PackedStringArray("room_origin") instance=ExtResource("5_sf04e")]
 position = Vector2(192, 224)
+room_origin = NodePath("..")
 
 [connection signal="room_activated" from="." to="Checkpoint" method="activate"]

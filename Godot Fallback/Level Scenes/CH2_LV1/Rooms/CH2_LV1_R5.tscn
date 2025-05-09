@@ -55,9 +55,10 @@ z_index = -1
 use_parent_material = true
 tile_set = ExtResource("2_v5wpg")
 
-[node name="AmbushBlockade" parent="." node_paths=PackedStringArray("room_ref") instance=ExtResource("3_d0ukw")]
+[node name="AmbushBlockade" parent="." node_paths=PackedStringArray("room_ref", "blocks_to_break") instance=ExtResource("3_d0ukw")]
 tile_map_data = PackedByteArray("AAAAAAYAEgAAAAAAAAAAAAcAEgAAAAAAAAACAAEAEgAAAAAAAAACAAIAEgAAAAAAAAACAAMAEgAAAAAAAAAFAAcAEgAAAAAAAAAFAAYAEgAAAAAAAAAFAAUAEgAAAAAAAAAFAAQAEgAAAAAAAAAFAAMAEgAAAAAAAAAKAAMAEgAAAAAAAAAGAAMAEgAAAAAAAAABAAMAEgAAAAAAAAALAAMAEgAAAAAAAAAMAAMAEgAAAAAAAAAHAAMAEgAAAAAAAAAMAAQAEgAAAAAAAAAMAAUAEgAAAAAAAAALAAUAEgAAAAAAAAALAAQAEgAAAAAAAAAGAAQAEgAAAAAAAAAGAAUAEgAAAAAAAAAGAAYAEgAAAAAAAAAGAAcAEgAAAAAAAAABAAIAEgAAAAAAAAAMAAIAEgAAAAAAAAAMAAEAEgAAAAAAAAA=")
 room_ref = NodePath("..")
+blocks_to_break = [NodePath("../ReinforcedBlock")]
 
 [node name="Entrance 0" type="Node2D" parent="."]
 position = Vector2(48, 224)

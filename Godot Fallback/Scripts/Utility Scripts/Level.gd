@@ -187,6 +187,12 @@ func get_current_room_index():
 			return i
 	return -1
 
+func get_given_room_index(r : Room):
+	for i in room_list.size():
+		if (r == room_list[i]):
+			return i
+	return -1
+
 func increment_fragments(is_mage : bool):
 	if (is_mage):
 		mage_fragments += 1

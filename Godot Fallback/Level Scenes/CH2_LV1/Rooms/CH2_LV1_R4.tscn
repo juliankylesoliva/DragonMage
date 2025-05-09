@@ -63,9 +63,10 @@ use_parent_material = true
 tile_map_data = PackedByteArray("AAD8/wgAAAACAAIAAAD9/wgAAAADAAIAAAACAAgAAAAAAAIAAAADAAgAAAABAAIAAAA=")
 tile_set = ExtResource("2_y5qhd")
 
-[node name="AmbushBlockade" parent="." node_paths=PackedStringArray("room_ref") instance=ExtResource("3_1ii20")]
+[node name="AmbushBlockade" parent="." node_paths=PackedStringArray("room_ref", "blocks_to_break") instance=ExtResource("3_1ii20")]
 tile_map_data = PackedByteArray("AAAOAAYAEgAAAAAAAAAOAAcAEgAAAAAAAAD7/wUAEgAAAAAAAAAAAAUAEgAAAAAAAAABAAUAEgAAAAAAAAACAAUAEgAAAAAAAAADAAUAEgAAAAAAAAAEAAUAEgAAAAAAAAAFAAUAEgAAAAAAAAAGAAUAEgAAAAAAAAAHAAUAEgAAAAAAAAAIAAUAEgAAAAAAAAD6/wUAEgAAAAAAAAD5/wUAEgAAAAAAAAD4/wUAEgAAAAAAAAD3/wUAEgAAAAAAAAD7/wYAEgAAAAAAAAD7/wcAEgAAAAAAAAAIAAQAEgAAAAAAAAD3/wQAEgAAAAAAAAD4/wQAEgAAAAAAAAD5/wQAEgAAAAAAAAAAAAEAEgAAAAAAAAAAAAQAEgAAAAAAAAABAAQAEgAAAAAAAAABAAEAEgAAAAAAAAD8/wUAEgAAAAAAAAD9/wUAEgAAAAAAAAD+/wUAEgAAAAAAAAD//wUAEgAAAAAAAAAJAAUAEgAAAAAAAAAJAAQAEgAAAAAAAAD2/wQAEgAAAAAAAAD2/wUAEgAAAAAAAAD6/wYAEgAAAAAAAAD6/wcAEgAAAAAAAAD4/wEAEgAAAAAAAAD5/wEAEgAAAAAAAAD0/wQAEgAAAAAAAAD1/wQAEgAAAAAAAAD1/wUAEgAAAAAAAAD0/wUAEgAAAAAAAAA=")
 room_ref = NodePath("..")
+blocks_to_break = [NodePath("../Blocks/BreakableMagicBlock"), NodePath("../Blocks/ReinforcedFireBlock"), NodePath("../Blocks/ReinforcedMagicBlock"), NodePath("../Blocks/BreakableFireBlock")]
 
 [node name="Entrance 0" type="Node2D" parent="."]
 position = Vector2(0, 288)

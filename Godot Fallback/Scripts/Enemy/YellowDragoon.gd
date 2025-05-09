@@ -71,6 +71,8 @@ func spawn_helmet():
 
 func mark_as_defeated():
 	super.mark_as_defeated()
+	reflector_sprite.set_visible(false)
+	magic_particles.set_emitting(false)
 	shape.disabled = true
 
 func activate_enemy():
