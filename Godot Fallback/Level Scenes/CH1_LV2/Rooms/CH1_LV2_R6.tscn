@@ -110,8 +110,9 @@ room_entrance_index = 2
 [node name="CollisionShape2D" parent="FallWarp" index="0"]
 shape = SubResource("RectangleShape2D_fva5y")
 
-[node name="Checkpoint" parent="." instance=ExtResource("4_kpw7y")]
+[node name="Checkpoint" parent="." node_paths=PackedStringArray("room_origin") instance=ExtResource("4_kpw7y")]
 position = Vector2(128, 224)
+room_origin = NodePath("..")
 
 [node name="BreakableMagicBlock" parent="." instance=ExtResource("5_r404d")]
 position = Vector2(672, 128)

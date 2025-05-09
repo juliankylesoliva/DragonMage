@@ -178,8 +178,9 @@ position = Vector2(1440, 96)
 [node name="YellowDragoon" parent="Enemies" instance=ExtResource("8_0lpuk")]
 position = Vector2(1696, 160)
 
-[node name="Checkpoint" parent="." instance=ExtResource("10_iyfii")]
+[node name="Checkpoint" parent="." node_paths=PackedStringArray("room_origin") instance=ExtResource("10_iyfii")]
 position = Vector2(128, 224)
+room_origin = NodePath("..")
 
 [node name="TemperDragonFruit" parent="." instance=ExtResource("11_k8k1b")]
 position = Vector2(128, 160)

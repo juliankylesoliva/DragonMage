@@ -96,8 +96,9 @@ tile_set = ExtResource("2_hqynv")
 [node name="Entrance 0" type="Node2D" parent="."]
 position = Vector2(16, 224)
 
-[node name="Checkpoint" parent="." instance=ExtResource("3_iqch3")]
+[node name="Checkpoint" parent="." node_paths=PackedStringArray("room_origin") instance=ExtResource("3_iqch3")]
 position = Vector2(96, 224)
+room_origin = NodePath("..")
 
 [node name="FloorSpikes" parent="." instance=ExtResource("3_b7gfi")]
 process_mode = 4

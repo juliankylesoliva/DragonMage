@@ -81,8 +81,9 @@ position = Vector2(1392, 128)
 room_origin = NodePath("..")
 room_destination = NodePath("..")
 
-[node name="Checkpoint" parent="." instance=ExtResource("4_l6cpo")]
+[node name="Checkpoint" parent="." node_paths=PackedStringArray("room_origin") instance=ExtResource("4_l6cpo")]
 position = Vector2(96, 224)
+room_origin = NodePath("..")
 
 [node name="FallWarp" parent="." node_paths=PackedStringArray("room_origin", "room_destination") instance=ExtResource("3_6w122")]
 position = Vector2(1056, 496)

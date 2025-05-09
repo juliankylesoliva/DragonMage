@@ -102,8 +102,9 @@ position = Vector2(16, 64)
 [node name="Entrance 1" type="Node2D" parent="."]
 position = Vector2(896, 32)
 
-[node name="Checkpoint" parent="." instance=ExtResource("3_g1h8b")]
+[node name="Checkpoint" parent="." node_paths=PackedStringArray("room_origin") instance=ExtResource("3_g1h8b")]
 position = Vector2(96, 64)
+room_origin = NodePath("..")
 
 [node name="BossTrigger" type="Area2D" parent="." node_paths=PackedStringArray("shape")]
 position = Vector2(916, 96)

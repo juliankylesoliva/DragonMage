@@ -168,8 +168,9 @@ position = Vector2(1824, 128)
 [node name="ReinforcedFireBlock" parent="." instance=ExtResource("11_k6qh8")]
 position = Vector2(1888, 128)
 
-[node name="Checkpoint" parent="." instance=ExtResource("10_el8w5")]
+[node name="Checkpoint" parent="." node_paths=PackedStringArray("room_origin") instance=ExtResource("10_el8w5")]
 position = Vector2(128, 224)
+room_origin = NodePath("..")
 
 [node name="TemperDragonFruit" parent="." instance=ExtResource("10_ua3rn")]
 position = Vector2(304, 208)
