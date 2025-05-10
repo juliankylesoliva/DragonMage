@@ -68,5 +68,6 @@ room_destination = NodePath("..")
 
 [node name="GreenDragoon" parent="." instance=ExtResource("5_4vs4e")]
 position = Vector2(352, 160)
+flip_initial_movement = true
 enable_wings = true
 enable_helmet = true
