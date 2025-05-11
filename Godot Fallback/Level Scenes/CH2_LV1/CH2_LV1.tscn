@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://b3xydwwisx5df"]
+[gd_scene load_steps=30 format=3 uid="uid://b3xydwwisx5df"]
 
 [ext_resource type="Script" path="res://Scripts/Utility Scripts/Level.gd" id="1_cfapw"]
 [ext_resource type="PackedScene" uid="uid://d0ff35cm57xb7" path="res://Scene Objects/Effects/DroppedFragment.tscn" id="2_kw5gh"]
@@ -27,6 +27,7 @@
 [ext_resource type="PackedScene" uid="uid://bgl2wr5iy54sg" path="res://Level Scenes/CH2_LV1/Rooms/CH2_LV1_R6.tscn" id="20_bjbny"]
 [ext_resource type="PackedScene" uid="uid://pdikfxw1km32" path="res://Level Scenes/CH2_LV1/Rooms/CH2_LV1_R12.tscn" id="26_n7xnr"]
 [ext_resource type="PackedScene" uid="uid://bw32ithamxecl" path="res://Level Scenes/CH2_LV1/Rooms/CH2_LV1_R13.tscn" id="27_xd7vc"]
+[ext_resource type="PackedScene" uid="uid://cfvtw7uo22mje" path="res://Level Scenes/CH2_LV1/Rooms/CH2_LV1_R14.tscn" id="28_mnt2m"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_k23s2"]
 resource_local_to_scene = true
@@ -39,7 +40,7 @@ script = ExtResource("1_cfapw")
 level_index = 8
 player_reference = NodePath("Player")
 starting_room = NodePath("CH2_LV1_R1")
-room_list = [NodePath("CH2_LV1_R1"), NodePath("CH2_LV1_R2"), NodePath("CH2_LV1_R3"), NodePath("CH2_LV1_R4"), NodePath("CH2_LV1_R5"), NodePath("CH2_LV1_R6"), NodePath("CH2_LV1_R7"), NodePath("CH2_LV1_R8"), NodePath("CH2_LV1_R9"), NodePath("CH2_LV1_R10"), NodePath("CH2_LV1_R11"), NodePath("CH2_LV1_R12"), NodePath("CH2_LV1_R13")]
+room_list = [NodePath("CH2_LV1_R1"), NodePath("CH2_LV1_R2"), NodePath("CH2_LV1_R3"), NodePath("CH2_LV1_R4"), NodePath("CH2_LV1_R5"), NodePath("CH2_LV1_R6"), NodePath("CH2_LV1_R7"), NodePath("CH2_LV1_R8"), NodePath("CH2_LV1_R9"), NodePath("CH2_LV1_R10"), NodePath("CH2_LV1_R11"), NodePath("CH2_LV1_R12"), NodePath("CH2_LV1_R13"), NodePath("CH2_LV1_R14")]
 magical_scale = NodePath("CH2_LV1_R3/CollectableScale")
 draconic_scale = NodePath("CH2_LV1_R10/CollectableScale")
 balanced_scale = NodePath("CH2_LV1_R8/CollectableScale")
@@ -122,14 +123,14 @@ room_destination = NodePath("../../CH2_LV1_R3")
 room_entrance_index = 1
 
 [node name="CH2_LV1_R5" parent="." instance=ExtResource("8_awkx0")]
-position = Vector2(1887, -704)
+position = Vector2(191, -704)
 
 [node name="Warp 0" parent="CH2_LV1_R5" index="4" node_paths=PackedStringArray("room_destination")]
 room_destination = NodePath("../../CH2_LV1_R2")
 room_entrance_index = 4
 
 [node name="CH2_LV1_R6" parent="." instance=ExtResource("20_bjbny")]
-position = Vector2(95, -704)
+position = Vector2(95, -352)
 
 [node name="Warp 0" parent="CH2_LV1_R6" index="4" node_paths=PackedStringArray("room_destination")]
 room_destination = NodePath("../../CH2_LV1_R2")
@@ -194,14 +195,14 @@ room_destination = NodePath("../../CH2_LV1_R9")
 room_entrance_index = 1
 
 [node name="CH2_LV1_R11" parent="." instance=ExtResource("14_n6hoo")]
-position = Vector2(1887, -1056)
+position = Vector2(2623, 0)
 
 [node name="Warp 0" parent="CH2_LV1_R11" index="4" node_paths=PackedStringArray("room_destination")]
 room_destination = NodePath("../../CH2_LV1_R7")
 room_entrance_index = 3
 
 [node name="CH2_LV1_R12" parent="." instance=ExtResource("26_n7xnr")]
-position = Vector2(95, -1056)
+position = Vector2(2527, 352)
 
 [node name="Warp 0" parent="CH2_LV1_R12" index="4" node_paths=PackedStringArray("room_destination")]
 room_destination = NodePath("../../CH2_LV1_R7")
@@ -218,9 +219,20 @@ room_entrance_index = 2
 room_destination = NodePath("../../CH2_LV1_R8")
 room_entrance_index = 1
 
+[node name="Door 2" parent="CH2_LV1_R13" index="7" node_paths=PackedStringArray("room_destination")]
+room_destination = NodePath("../../CH2_LV1_R14")
+room_entrance_index = 0
+
 [node name="Checkpoint" parent="CH2_LV1_R13" index="11" node_paths=PackedStringArray("level_origin", "subsequent_checkpoints")]
 level_origin = NodePath("../..")
 subsequent_checkpoints = [NodePath("../../CH2_LV1_R7/Checkpoint")]
+
+[node name="CH2_LV1_R14" parent="." instance=ExtResource("28_mnt2m")]
+position = Vector2(2463, 800)
+
+[node name="Warp 0" parent="CH2_LV1_R14" index="4" node_paths=PackedStringArray("room_destination")]
+room_destination = NodePath("../../CH2_LV1_R13")
+room_entrance_index = 3
 
 [node name="UI_Canvas" type="CanvasLayer" parent="."]
 
@@ -303,3 +315,4 @@ screen_fade = NodePath("../UI_Canvas/ScreenFade")
 [editable path="CH2_LV1_R12"]
 [editable path="CH2_LV1_R13"]
 [editable path="CH2_LV1_R13/Warp 0"]
+[editable path="CH2_LV1_R14"]
