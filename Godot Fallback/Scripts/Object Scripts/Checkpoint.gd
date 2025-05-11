@@ -21,9 +21,10 @@ func _process(_delta):
 		sprite.play("ActiveLoop")
 
 func activate_subsequent_checkpoints():
-	for checkpoint in subsequent_checkpoints:
-		checkpoint.is_activated = true
-		checkpoint.checkpoint_activated.emit()
+	if (!is_activated):
+		for checkpoint in subsequent_checkpoints:
+			checkpoint.is_activated = true
+			checkpoint.checkpoint_activated.emit()
 
 func _on_body_entered(body):
 	if (body is CharacterBody2D and body.has_meta("Tag") and body.get_meta("Tag") == "Player"):

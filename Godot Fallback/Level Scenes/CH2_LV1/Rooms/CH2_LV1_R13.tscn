@@ -1,0 +1,167 @@
+[gd_scene load_steps=14 format=4 uid="uid://bw32ithamxecl"]
+
+[ext_resource type="Script" path="res://Scripts/Utility Scripts/Room.gd" id="1_rn06e"]
+[ext_resource type="TileSet" uid="uid://dhwi7i1loa2pd" path="res://Sprites/Tiles/Test Tiles/TestTileSet.tres" id="2_x2wpf"]
+[ext_resource type="PackedScene" uid="uid://d3ahci60rs8ef" path="res://Scene Objects/Objects/WarpDoor.tscn" id="3_g63rd"]
+[ext_resource type="PackedScene" uid="uid://7hpfpsyk75xy" path="res://Scene Objects/Obstacles/AmbushBlockade.tscn" id="3_p2t5v"]
+[ext_resource type="PackedScene" uid="uid://dqbo0wu6hm8lj" path="res://Scene Objects/Objects/WarpTrigger.tscn" id="4_x175i"]
+[ext_resource type="PackedScene" uid="uid://clfqwsy4byrkf" path="res://Scene Objects/Enemies/GreenDragoon.tscn" id="6_ahe3d"]
+[ext_resource type="PackedScene" uid="uid://curi6w4ex7jou" path="res://Scene Objects/Enemies/YellowDragoon.tscn" id="6_aif4n"]
+[ext_resource type="PackedScene" uid="uid://dwnpgujive352" path="res://Scene Objects/Enemies/RedDragoon.tscn" id="8_238hx"]
+[ext_resource type="PackedScene" uid="uid://bgww8jir45ktf" path="res://Scene Objects/Enemies/BlueDragoon.tscn" id="9_bxlhc"]
+[ext_resource type="PackedScene" uid="uid://dgtmsbsmeieyh" path="res://Scene Objects/Objects/ReinforcedMagicBlock.tscn" id="10_sgvvv"]
+[ext_resource type="PackedScene" uid="uid://vtyaphi47lrf" path="res://Scene Objects/Objects/Checkpoint.tscn" id="11_2743e"]
+[ext_resource type="PackedScene" uid="uid://b2a0ttqvejk51" path="res://Scene Objects/Objects/TemperDragonFruit.tscn" id="12_2y73b"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6cf4d"]
+size = Vector2(64, 32)
+
+[node name="CH2_LV1_R13" type="Node2D" node_paths=PackedStringArray("tilemap_list", "room_entrances", "enemy_nodes")]
+script = ExtResource("1_rn06e")
+tilemap_list = [NodePath("BoundaryCollisionTilemap"), NodePath("LevelCollisionTilemap")]
+right_camera_limit = 2048
+room_entrances = [NodePath("Door 0"), NodePath("Entrance 0"), NodePath("Door 1"), NodePath("Door 2"), NodePath("Door 3")]
+enemy_nodes = [NodePath("Enemies/GreenDragoon"), NodePath("Enemies/YellowDragoon"), NodePath("Enemies/RedDragoon"), NodePath("Enemies/YellowDragoon2"), NodePath("Enemies/RedDragoon2"), NodePath("Enemies/BlueDragoon"), NodePath("Enemies/GreenDragoon2"), NodePath("Enemies/BlueDragoon2")]
+
+[node name="BoundaryCollisionTilemap" type="Node2D" parent="."]
+z_index = 4
+
+[node name="Intangible" type="TileMapLayer" parent="BoundaryCollisionTilemap"]
+z_index = -1
+use_parent_material = true
+tile_map_data = PackedByteArray("AAAyAP3/AAADAAAAAAAyAP7/AAADAAAAAAAyAP//AAADAAAAAAAzAP3/AAADAAAAAAA0AP3/AAADAAAAAAA1AP3/AAADAAAAAAA1AP7/AAADAAAAAAA1AP//AAADAAAAAAA=")
+tile_set = ExtResource("2_x2wpf")
+rendering_quadrant_size = 32
+metadata/Tag = "IntangibleWall"
+
+[node name="LevelCollisionTilemap" type="Node2D" parent="."]
+visibility_layer = 4
+z_index = 3
+
+[node name="Decoration" type="TileMapLayer" parent="LevelCollisionTilemap"]
+use_parent_material = true
+tile_set = ExtResource("2_x2wpf")
+rendering_quadrant_size = 32
+
+[node name="Background" type="TileMapLayer" parent="LevelCollisionTilemap"]
+z_index = -1
+use_parent_material = true
+tile_set = ExtResource("2_x2wpf")
+
+[node name="Ground" type="TileMapLayer" parent="LevelCollisionTilemap"]
+modulate = Color(0.0745098, 0.113725, 0.301961, 1)
+z_index = -1
+use_parent_material = true
+tile_map_data = PackedByteArray("AAAAAAgAAAADAAAAAAAAAAkAAAADAAAAAAABAAgAAAADAAAAAAABAAkAAAADAAAAAAACAAgAAAADAAAAAAACAAkAAAADAAAAAAADAAgAAAADAAAAAAADAAkAAAADAAAAAAAEAAgAAAADAAAAAAAEAAkAAAADAAAAAAAFAAgAAAADAAAAAAAFAAkAAAADAAAAAAAGAAgAAAADAAAAAAAGAAkAAAADAAAAAAAHAAgAAAADAAAAAAAHAAkAAAADAAAAAAAIAAgAAAADAAAAAAAIAAkAAAADAAAAAAAJAAgAAAADAAAAAAAJAAkAAAADAAAAAAAKAAgAAAADAAAAAAAKAAkAAAADAAAAAAALAAgAAAADAAAAAAALAAkAAAADAAAAAAAMAAgAAAADAAAAAAAMAAkAAAADAAAAAAANAAgAAAADAAAAAAANAAkAAAADAAAAAAAOAAgAAAADAAAAAAAOAAkAAAADAAAAAAAPAAgAAAADAAAAAAAPAAkAAAADAAAAAAAAAAAAAAADAAAAAAAAAAEAAAADAAAAAAABAAAAAAADAAAAAAABAAEAAAADAAAAAAACAAAAAAADAAAAAAACAAEAAAADAAAAAAADAAAAAAADAAAAAAADAAEAAAADAAAAAAAEAAAAAAADAAAAAAAEAAEAAAADAAAAAAAFAAAAAAADAAAAAAAFAAEAAAADAAAAAAAGAAAAAAADAAAAAAAGAAEAAAADAAAAAAAHAAAAAAADAAAAAAAHAAEAAAADAAAAAAAIAAAAAAADAAAAAAAIAAEAAAADAAAAAAAJAAAAAAADAAAAAAAJAAEAAAADAAAAAAAKAAAAAAADAAAAAAAKAAEAAAADAAAAAAALAAAAAAADAAAAAAALAAEAAAADAAAAAAAMAAAAAAADAAAAAAAMAAEAAAADAAAAAAANAAAAAAADAAAAAAANAAEAAAADAAAAAAAOAAAAAAADAAAAAAAOAAEAAAADAAAAAAAPAAAAAAADAAAAAAAPAAEAAAADAAAAAAAAAAIAAAADAAAAAAAAAAMAAAADAAAAAAAAAAQAAAADAAAAAAAAAAUAAAADAAAAAAAAAAYAAAADAAAAAAAAAAcAAAADAAAAAAAQAAAAAAADAAAAAAAQAAEAAAADAAAAAAAQAAgAAAADAAAAAAAQAAkAAAADAAAAAAARAAAAAAADAAAAAAARAAEAAAADAAAAAAARAAgAAAADAAAAAAARAAkAAAADAAAAAAASAAAAAAADAAAAAAASAAEAAAADAAAAAAASAAgAAAADAAAAAAASAAkAAAADAAAAAAATAAAAAAADAAAAAAATAAEAAAADAAAAAAATAAgAAAADAAAAAAATAAkAAAADAAAAAAAUAAAAAAADAAAAAAAUAAEAAAADAAAAAAAUAAgAAAADAAAAAAAUAAkAAAADAAAAAAAVAAAAAAADAAAAAAAVAAEAAAADAAAAAAAVAAgAAAADAAAAAAAVAAkAAAADAAAAAAAWAAAAAAADAAAAAAAWAAEAAAADAAAAAAAWAAgAAAADAAAAAAAWAAkAAAADAAAAAAAXAAAAAAADAAAAAAAXAAEAAAADAAAAAAAXAAgAAAADAAAAAAAXAAkAAAADAAAAAAAYAAAAAAADAAAAAAAYAAEAAAADAAAAAAAYAAgAAAADAAAAAAAYAAkAAAADAAAAAAAZAAAAAAADAAAAAAAZAAEAAAADAAAAAAAZAAgAAAADAAAAAAAZAAkAAAADAAAAAAAaAAAAAAADAAAAAAAaAAEAAAADAAAAAAAaAAgAAAADAAAAAAAaAAkAAAADAAAAAAAbAAAAAAADAAAAAAAbAAgAAAADAAAAAAAbAAkAAAADAAAAAAAcAAAAAAADAAAAAAAcAAgAAAADAAAAAAAcAAkAAAADAAAAAAAdAAAAAAADAAAAAAAdAAgAAAADAAAAAAAdAAkAAAADAAAAAAAeAAAAAAADAAAAAAAeAAgAAAADAAAAAAAeAAkAAAADAAAAAAAfAAAAAAADAAAAAAAfAAgAAAADAAAAAAAfAAkAAAADAAAAAAAgAAAAAAADAAAAAAAgAAgAAAADAAAAAAAgAAkAAAADAAAAAAAhAAAAAAADAAAAAAAhAAgAAAADAAAAAAAhAAkAAAADAAAAAAAiAAAAAAADAAAAAAAiAAgAAAADAAAAAAAiAAkAAAADAAAAAAAjAAAAAAADAAAAAAAjAAgAAAADAAAAAAAjAAkAAAADAAAAAAAkAAAAAAADAAAAAAAkAAgAAAADAAAAAAAkAAkAAAADAAAAAAAlAAAAAAADAAAAAAAlAAEAAAADAAAAAAAlAAgAAAADAAAAAAAlAAkAAAADAAAAAAAmAAAAAAADAAAAAAAmAAEAAAADAAAAAAAmAAgAAAADAAAAAAAmAAkAAAADAAAAAAAnAAAAAAADAAAAAAAnAAEAAAADAAAAAAAnAAgAAAADAAAAAAAnAAkAAAADAAAAAAAoAAAAAAADAAAAAAAoAAEAAAADAAAAAAAoAAgAAAADAAAAAAAoAAkAAAADAAAAAAApAAAAAAADAAAAAAApAAEAAAADAAAAAAApAAgAAAADAAAAAAApAAkAAAADAAAAAAAqAAAAAAADAAAAAAAqAAEAAAADAAAAAAAqAAgAAAADAAAAAAAqAAkAAAADAAAAAAArAAAAAAADAAAAAAArAAEAAAADAAAAAAArAAgAAAADAAAAAAArAAkAAAADAAAAAAAsAAAAAAADAAAAAAAsAAEAAAADAAAAAAAsAAgAAAADAAAAAAAsAAkAAAADAAAAAAAtAAAAAAADAAAAAAAtAAEAAAADAAAAAAAtAAgAAAADAAAAAAAtAAkAAAADAAAAAAAuAAAAAAADAAAAAAAuAAEAAAADAAAAAAAuAAgAAAADAAAAAAAuAAkAAAADAAAAAAAvAAAAAAADAAAAAAAvAAEAAAADAAAAAAAvAAgAAAADAAAAAAAvAAkAAAADAAAAAAAwAAAAAAADAAAAAAAwAAEAAAADAAAAAAAwAAgAAAADAAAAAAAwAAkAAAADAAAAAAAxAAAAAAADAAAAAAAxAAgAAAADAAAAAAAxAAkAAAADAAAAAAAyAAAAAAADAAAAAAAyAAgAAAADAAAAAAAyAAkAAAADAAAAAAAzAAgAAAADAAAAAAAzAAkAAAADAAAAAAA0AAgAAAADAAAAAAA0AAkAAAADAAAAAAA1AAAAAAADAAAAAAA1AAgAAAADAAAAAAA1AAkAAAADAAAAAAA2AAAAAAADAAAAAAA2AAgAAAADAAAAAAA2AAkAAAADAAAAAAA3AAgAAAADAAAAAAA3AAkAAAADAAAAAAA4AAgAAAADAAAAAAA4AAkAAAADAAAAAAA5AAAAAAADAAAAAAA5AAEAAAADAAAAAAA5AAgAAAADAAAAAAA5AAkAAAADAAAAAAA6AAAAAAADAAAAAAA6AAEAAAADAAAAAAA6AAgAAAADAAAAAAA6AAkAAAADAAAAAAA7AAAAAAADAAAAAAA7AAEAAAADAAAAAAA7AAgAAAADAAAAAAA7AAkAAAADAAAAAAA8AAAAAAADAAAAAAA8AAEAAAADAAAAAAA8AAgAAAADAAAAAAA8AAkAAAADAAAAAAA9AAAAAAADAAAAAAA9AAEAAAADAAAAAAA9AAgAAAADAAAAAAA9AAkAAAADAAAAAAA+AAAAAAADAAAAAAA+AAEAAAADAAAAAAA+AAgAAAADAAAAAAA+AAkAAAADAAAAAAA/AAAAAAADAAAAAAA/AAEAAAADAAAAAAA/AAIAAAADAAAAAAA/AAMAAAADAAAAAAA/AAQAAAADAAAAAAA/AAUAAAADAAAAAAA/AAYAAAADAAAAAAA/AAcAAAADAAAAAAA/AAgAAAADAAAAAAA/AAkAAAADAAAAAAABAAMAAAABAAEAAAACAAIAAAADAAAAAAABAAIAAAADAAAAAAA9AAIAAAADAAAAAAA+AAMAAAAAAAEAAAA+AAIAAAADAAAAAAA3AAAAAAADAAAAAAA3AAEAAAADAAAAAAA4AAAAAAADAAAAAAA4AAEAAAADAAAAAAAVAAIAAAADAAAAAAAWAAIAAAADAAAAAAAXAAIAAAADAAAAAAAXAAMAAAADAAAAAAApAAIAAAADAAAAAAAqAAIAAAADAAAAAAApAAMAAAABAAEAAAAoAAIAAAADAAAAAAAoAAMAAAADAAAAAAAZAAIAAAADAAAAAAAaAAIAAAADAAAAAAAZAAMAAAADAAAAAAAlAAIAAAADAAAAAAAmAAIAAAADAAAAAAAmAAMAAAADAAAAAAAYAAIAAAADAAAAAAAYAAMAAAADAAAAAAAnAAIAAAADAAAAAAAnAAMAAAADAAAAAAA1AAEAAAADAAAAAAA2AAEAAAADAAAAAAAyAAEAAAADAAAAAAAxAAEAAAADAAAAAAAyAAIAAAADAAAAAAAxAAIAAAADAAAAAAAwAAIAAAADAAAAAAAvAAIAAAADAAAAAAAuAAIAAAADAAAAAAAtAAIAAAADAAAAAAAsAAIAAAADAAAAAAArAAIAAAADAAAAAAA1AAIAAAADAAAAAAA2AAIAAAADAAAAAAA3AAIAAAADAAAAAAA4AAIAAAADAAAAAAA5AAIAAAADAAAAAAA6AAIAAAADAAAAAAA7AAIAAAADAAAAAAA8AAIAAAADAAAAAAAaAAMAAAADAAAAAAAlAAMAAAADAAAAAAAUAAIAAAADAAAAAAATAAIAAAADAAAAAAASAAIAAAADAAAAAAARAAIAAAADAAAAAAAQAAIAAAADAAAAAAAPAAIAAAADAAAAAAAOAAIAAAADAAAAAAANAAIAAAADAAAAAAAMAAIAAAADAAAAAAALAAIAAAADAAAAAAAKAAIAAAADAAAAAAAJAAIAAAADAAAAAAAIAAIAAAADAAAAAAAHAAIAAAADAAAAAAAGAAIAAAADAAAAAAAFAAIAAAADAAAAAAAEAAIAAAADAAAAAAADAAIAAAADAAAAAAAyAAcAAAADAAAAAAAzAAcAAAADAAAAAAA0AAcAAAADAAAAAAA1AAcAAAADAAAAAAAxAAcAAAADAAAAAAA2AAcAAAADAAAAAAAWAAMAAAAAAAEAAAAbAAIAAAABAAEAAAAkAAIAAAAAAAEAAAAbAAEAAAADAAAAAAAcAAEAAAADAAAAAAAdAAEAAAADAAAAAAAeAAEAAAADAAAAAAAfAAEAAAADAAAAAAAgAAEAAAADAAAAAAAhAAEAAAADAAAAAAAiAAEAAAADAAAAAAAjAAEAAAADAAAAAAAkAAEAAAADAAAAAAA=")
+tile_set = ExtResource("2_x2wpf")
+
+[node name="Slopes" type="TileMapLayer" parent="LevelCollisionTilemap"]
+modulate = Color(0.701961, 0.215686, 0.105882, 1)
+z_index = -1
+use_parent_material = true
+tile_set = ExtResource("2_x2wpf")
+
+[node name="AmbushBlockade" parent="." node_paths=PackedStringArray("room_ref") instance=ExtResource("3_p2t5v")]
+tile_map_data = PackedByteArray("AAAzAAIAEgAAAAAAAAA0AAIAEgAAAAAAAAAfAAUAEgAAAAAAAAAgAAUAEgAAAAAAAAAwAAcAEgAAAAAAAAAxAAYAEgAAAAAAAAAyAAYAEgAAAAAAAAAzAAYAEgAAAAAAAAA0AAYAEgAAAAAAAAA1AAYAEgAAAAAAAAA2AAYAEgAAAAAAAAA3AAcAEgAAAAAAAAAvAAcAEgAAAAAAAAA4AAcAEgAAAAAAAAAnAAYAEgAAAAAAAAAmAAYAEgAAAAAAAAAlAAYAEgAAAAAAAAAlAAUAEgAAAAAAAAAlAAQAEgAAAAAAAAAYAAYAEgAAAAAAAAAZAAYAEgAAAAAAAAAXAAYAEgAAAAAAAAAXAAUAEgAAAAAAAAAXAAQAEgAAAAAAAAAHAAUAEgAAAAAAAAAIAAUAEgAAAAAAAAAIAAYAEgAAAAAAAAAIAAcAEgAAAAAAAAAPAAUAEgAAAAAAAAAQAAUAEgAAAAAAAAAPAAYAEgAAAAAAAAAPAAcAEgAAAAAAAAAeAAYAEgAAAAAAAAAdAAcAEgAAAAAAAAAhAAYAEgAAAAAAAAAiAAcAEgAAAAAAAAAFAAcAEgAAAAAAAAAGAAYAEgAAAAAAAAARAAYAEgAAAAAAAAASAAcAEgAAAAAAAAAuAAcAEgAAAAAAAAAtAAcAEgAAAAAAAAA5AAcAEgAAAAAAAAA6AAcAEgAAAAAAAAAoAAYAEgAAAAAAAAAaAAYAEgAAAAAAAAA=")
+room_ref = NodePath("..")
+
+[node name="Door 0" parent="." node_paths=PackedStringArray("room_origin", "room_destination") instance=ExtResource("3_g63rd")]
+position = Vector2(64, 224)
+room_origin = NodePath("..")
+room_destination = NodePath("..")
+
+[node name="Entrance 0" type="Node2D" parent="."]
+position = Vector2(1664, 32)
+
+[node name="Warp 0" parent="." node_paths=PackedStringArray("room_origin", "room_destination") instance=ExtResource("4_x175i")]
+position = Vector2(1664, -48)
+room_origin = NodePath("..")
+room_destination = NodePath("..")
+
+[node name="CollisionShape2D" parent="Warp 0" index="0"]
+shape = SubResource("RectangleShape2D_6cf4d")
+
+[node name="Door 1" parent="." node_paths=PackedStringArray("room_origin", "room_destination") instance=ExtResource("3_g63rd")]
+position = Vector2(256, 224)
+room_origin = NodePath("..")
+room_destination = NodePath("..")
+room_entrance_index = 2
+is_locked = true
+
+[node name="Door 2" parent="." node_paths=PackedStringArray("room_origin", "room_destination") instance=ExtResource("3_g63rd")]
+position = Vector2(512, 224)
+room_origin = NodePath("..")
+room_destination = NodePath("..")
+room_entrance_index = 3
+is_locked = true
+lock_type = 1
+enemies_to_defeat = 44
+
+[node name="Door 3" parent="." node_paths=PackedStringArray("room_origin", "room_destination") instance=ExtResource("3_g63rd")]
+position = Vector2(1024, 224)
+room_origin = NodePath("..")
+room_destination = NodePath("..")
+room_entrance_index = 4
+is_locked = true
+lock_type = 1
+enemies_to_defeat = 52
+
+[node name="Enemies" type="Node2D" parent="."]
+
+[node name="GreenDragoon" parent="Enemies" instance=ExtResource("6_ahe3d")]
+position = Vector2(384, 128)
+enable_wings = true
+enable_reflector = true
+enable_magic = true
+
+[node name="YellowDragoon" parent="Enemies" instance=ExtResource("6_aif4n")]
+position = Vector2(448, 224)
+enable_helmet = true
+enable_reflector = true
+enable_magic = true
+
+[node name="RedDragoon" parent="Enemies" instance=ExtResource("8_238hx")]
+position = Vector2(800, 160)
+enable_reflector = true
+enable_magic = true
+
+[node name="YellowDragoon2" parent="Enemies" instance=ExtResource("6_aif4n")]
+position = Vector2(1152, 128)
+enable_wings = true
+enable_helmet = true
+enable_magic = true
+
+[node name="RedDragoon2" parent="Enemies" instance=ExtResource("8_238hx")]
+position = Vector2(1248, 160)
+enable_reflector = true
+enable_magic = true
+
+[node name="BlueDragoon" parent="Enemies" instance=ExtResource("9_bxlhc")]
+position = Vector2(1504, 128)
+enable_helmet = true
+enable_magic = true
+magic_start_flipped = true
+
+[node name="GreenDragoon2" parent="Enemies" instance=ExtResource("6_ahe3d")]
+position = Vector2(1664, 160)
+enable_reflector = true
+enable_magic = true
+
+[node name="BlueDragoon2" parent="Enemies" instance=ExtResource("9_bxlhc")]
+position = Vector2(1824, 192)
+enable_helmet = true
+enable_magic = true
+
+[node name="ReinforcedMagicBlock" parent="." instance=ExtResource("10_sgvvv")]
+position = Vector2(1664, 32)
+
+[node name="Checkpoint" parent="." node_paths=PackedStringArray("room_origin") instance=ExtResource("11_2743e")]
+position = Vector2(128, 224)
+room_origin = NodePath("..")
+
+[node name="TemperDragonFruit" parent="." instance=ExtResource("12_2y73b")]
+position = Vector2(672, 160)
+
+[connection signal="room_activated" from="." to="Checkpoint" method="activate"]
+
+[editable path="Warp 0"]

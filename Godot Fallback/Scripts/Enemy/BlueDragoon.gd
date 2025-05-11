@@ -140,6 +140,7 @@ func activate_enemy():
 		sprite.play("WingedIdle" if enable_wings else "Idle")
 
 func deactivate_enemy():
+	player_detection.is_player_in_midair = false
 	movement.set_physics_process(false)
 	movement.set_process(false)
 	if (enable_helmet):
