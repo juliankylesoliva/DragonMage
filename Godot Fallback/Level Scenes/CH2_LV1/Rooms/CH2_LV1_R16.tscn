@@ -1,0 +1,82 @@
+[gd_scene load_steps=8 format=4 uid="uid://ueu6cymswxum"]
+
+[ext_resource type="Script" path="res://Scripts/Utility Scripts/Room.gd" id="1_epnxd"]
+[ext_resource type="TileSet" uid="uid://dhwi7i1loa2pd" path="res://Sprites/Tiles/Test Tiles/TestTileSet.tres" id="2_jteb7"]
+[ext_resource type="PackedScene" uid="uid://7hpfpsyk75xy" path="res://Scene Objects/Obstacles/AmbushBlockade.tscn" id="3_6qcx0"]
+[ext_resource type="PackedScene" uid="uid://durwtm4ocfbmv" path="res://Scene Objects/Objects/FinishLine.tscn" id="3_l8q4w"]
+[ext_resource type="PackedScene" uid="uid://dqbo0wu6hm8lj" path="res://Scene Objects/Objects/WarpTrigger.tscn" id="4_8huya"]
+[ext_resource type="PackedScene" uid="uid://bgww8jir45ktf" path="res://Scene Objects/Enemies/BlueDragoon.tscn" id="5_qqbae"]
+[ext_resource type="PackedScene" uid="uid://cp3kaarqt7vdo" path="res://Scene Objects/Objects/HintBubble.tscn" id="7_ejiyr"]
+
+[node name="CH2_LV1_R16" type="Node2D" node_paths=PackedStringArray("tilemap_list", "room_entrances", "enemy_nodes")]
+script = ExtResource("1_epnxd")
+tilemap_list = [NodePath("BoundaryCollisionTilemap"), NodePath("LevelCollisionTilemap")]
+bottom_camera_limit = 800
+room_entrances = [NodePath("Entrance 0")]
+enemy_nodes = [NodePath("BlueDragoon")]
+
+[node name="BoundaryCollisionTilemap" type="Node2D" parent="."]
+z_index = 4
+
+[node name="Intangible" type="TileMapLayer" parent="BoundaryCollisionTilemap"]
+z_index = -1
+use_parent_material = true
+tile_map_data = PackedByteArray("AAAQABIAAAADAAAAAAAQABMAAAADAAAAAAAQABQAAAADAAAAAAAQABUAAAADAAAAAAAQABYAAAADAAAAAAAQABcAAAADAAAAAAD9/wUAAAADAAAAAAD9/wYAAAADAAAAAAD9/wcAAAADAAAAAAD9/wgAAAADAAAAAAD+/wUAAAADAAAAAAD+/wgAAAADAAAAAAD//wUAAAADAAAAAAD//wgAAAADAAAAAAA=")
+tile_set = ExtResource("2_jteb7")
+rendering_quadrant_size = 32
+metadata/Tag = "IntangibleWall"
+
+[node name="LevelCollisionTilemap" type="Node2D" parent="."]
+visibility_layer = 4
+z_index = 3
+
+[node name="Decoration" type="TileMapLayer" parent="LevelCollisionTilemap"]
+use_parent_material = true
+tile_set = ExtResource("2_jteb7")
+rendering_quadrant_size = 32
+
+[node name="Background" type="TileMapLayer" parent="LevelCollisionTilemap"]
+z_index = -1
+use_parent_material = true
+tile_set = ExtResource("2_jteb7")
+
+[node name="Ground" type="TileMapLayer" parent="LevelCollisionTilemap"]
+modulate = Color(0.0745098, 0.113725, 0.301961, 1)
+z_index = -1
+use_parent_material = true
+tile_map_data = PackedByteArray("AAAAAAgAAAADAAAAAAAAAAkAAAADAAAAAAABAAgAAAADAAAAAAABAAkAAAADAAAAAAACAAgAAAADAAAAAAACAAkAAAADAAAAAAADAAgAAAADAAAAAAADAAkAAAADAAAAAAAEAAgAAAADAAAAAAAEAAkAAAADAAAAAAAFAAgAAAADAAAAAAAFAAkAAAADAAAAAAAGAAgAAAADAAAAAAAGAAkAAAADAAAAAAAKAAgAAAADAAAAAAAKAAkAAAADAAAAAAAAAAMAAAADAAAAAAABAAMAAAADAAAAAAACAAMAAAADAAAAAAADAAMAAAADAAAAAAAEAAMAAAADAAAAAAAFAAMAAAADAAAAAAAGAAMAAAADAAAAAAAHAAMAAAADAAAAAAAIAAMAAAADAAAAAAAJAAMAAAADAAAAAAAKAAMAAAADAAAAAAAAAAQAAAADAAAAAAAAAAUAAAADAAAAAAABAAQAAAADAAAAAAABAAUAAAADAAAAAAAKAAQAAAADAAAAAAAKAAUAAAADAAAAAAAKAAYAAAADAAAAAAAKAAcAAAADAAAAAAAHAAoAAAADAAAAAAAHAAsAAAADAAAAAAAHAAwAAAADAAAAAAAHAA0AAAADAAAAAAAHAA4AAAADAAAAAAAJAAoAAAADAAAAAAAJAAsAAAADAAAAAAAJAAwAAAADAAAAAAAJAA0AAAADAAAAAAAJAA4AAAADAAAAAAAGAA8AAAADAAAAAAAGABAAAAADAAAAAAAGABEAAAADAAAAAAAGABIAAAADAAAAAAAGABcAAAADAAAAAAAGABgAAAADAAAAAAAHAA8AAAADAAAAAAAHABAAAAADAAAAAAAHABcAAAADAAAAAAAHABgAAAADAAAAAAAIABcAAAADAAAAAAAIABgAAAADAAAAAAAJAA8AAAADAAAAAAAJABAAAAADAAAAAAAJABcAAAADAAAAAAAJABgAAAADAAAAAAAKAA8AAAADAAAAAAAKABAAAAADAAAAAAAKABEAAAADAAAAAAAKABIAAAADAAAAAAAKABcAAAADAAAAAAAKABgAAAADAAAAAAALABIAAAADAAAAAAALABcAAAADAAAAAAALABgAAAADAAAAAAAMABIAAAADAAAAAAAMABcAAAADAAAAAAAMABgAAAADAAAAAAANABIAAAADAAAAAAANABcAAAADAAAAAAANABgAAAADAAAAAAAOABIAAAADAAAAAAAOABcAAAADAAAAAAAOABgAAAADAAAAAAAPABIAAAADAAAAAAAPABcAAAADAAAAAAAPABgAAAADAAAAAAAGAAoAAAADAAAAAAAGAAsAAAADAAAAAAAGAAwAAAADAAAAAAAGAA0AAAADAAAAAAAGAA4AAAADAAAAAAAKAAoAAAADAAAAAAAKAAsAAAADAAAAAAAKAAwAAAADAAAAAAAKAA0AAAADAAAAAAAKAA4AAAADAAAAAAAHABEAAAABAAEAAAAJABEAAAAAAAEAAAAGABMAAAADAAAAAAAGABQAAAADAAAAAAAGABUAAAADAAAAAAAGABYAAAADAAAAAAAJAAQAAAADAAAAAAACAAQAAAABAAEAAAAHABYAAAADAAAAAAAIAAQAAAADAAAAAAAIAAUAAAADAAAAAAAIAAYAAAADAAAAAAAJAAUAAAADAAAAAAAJAAYAAAADAAAAAAAHAAQAAAADAAAAAAAHAAUAAAADAAAAAAAHAAYAAAADAAAAAAA=")
+tile_set = ExtResource("2_jteb7")
+
+[node name="Slopes" type="TileMapLayer" parent="LevelCollisionTilemap"]
+modulate = Color(0.701961, 0.215686, 0.105882, 1)
+z_index = -1
+use_parent_material = true
+tile_map_data = PackedByteArray("AAAHAAkAAAABAAAAAAAJAAkAAAAAAAAAAAAHABUAAAABAAAAAAAIABYAAAABAAAAAAA=")
+tile_set = ExtResource("2_jteb7")
+
+[node name="AmbushBlockade" parent="." node_paths=PackedStringArray("room_ref") instance=ExtResource("3_6qcx0")]
+tile_map_data = PackedByteArray("AAAHAAgAEgAAAAAAAAAIAAgAEgAAAAAAAAAJAAgAEgAAAAAAAAA=")
+room_ref = NodePath("..")
+
+[node name="Entrance 0" type="Node2D" parent="."]
+position = Vector2(16, 224)
+
+[node name="Warp 0" parent="." node_paths=PackedStringArray("room_origin", "room_destination") instance=ExtResource("4_8huya")]
+position = Vector2(-48, 224)
+room_origin = NodePath("..")
+room_destination = NodePath("..")
+
+[node name="FinishLine" parent="." instance=ExtResource("3_l8q4w")]
+position = Vector2(416, 736)
+
+[node name="BlueDragoon" parent="." instance=ExtResource("5_qqbae")]
+position = Vector2(192, 224)
+
+[node name="HintBubble" parent="." instance=ExtResource("7_ejiyr")]
+position = Vector2(192, 232)
+textbox_strings = Array[String](["To the pesky Dragon Mage and Fairy Knight,
+
+	Thought you've seen the last of us just 'cuz youse got lucky and escaped? THINK AGAIN!!! We've kidnapped your beloved parents!", "	If you want to see them again, meet us at the Magi Co. building! Don't worry, we'll keep 'em niiice and cozy 'til then...! Since we've boarded up your house n' all, we've also provided a generously quick shortcut just behind this wall!", "	Hope you don't mind a little bit of odor on your way there... heh heh.
+
+Sincerely,
+	The Dragoons of the Dragon Syndicate"])
