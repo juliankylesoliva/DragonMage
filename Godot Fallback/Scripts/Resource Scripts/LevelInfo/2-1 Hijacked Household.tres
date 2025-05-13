@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="LevelInfo" load_steps=2 format=3 uid="uid://dfvjqu6kn6c1v"]
+
+[ext_resource type="Script" path="res://Scripts/Resource Scripts/LevelInfo/LevelInfo.gd" id="1_ykdm4"]
+
+[resource]
+script = ExtResource("1_ykdm4")
+level_scene_path = "res://Level Scenes/CH2_LV1/CH2_LV1.tscn"
+name_header = "Ch. 2-1: Hijacked Household"
+story_description = Array[String](["TBD"])
+form_changing_enabled = true

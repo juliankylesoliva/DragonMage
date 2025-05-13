@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=4 uid="uid://pdikfxw1km32"]
+[gd_scene load_steps=11 format=4 uid="uid://pdikfxw1km32"]
 
 [ext_resource type="Script" path="res://Scripts/Utility Scripts/Room.gd" id="1_6hnrk"]
 [ext_resource type="TileSet" uid="uid://dhwi7i1loa2pd" path="res://Sprites/Tiles/Test Tiles/TestTileSet.tres" id="2_no0qa"]
@@ -7,14 +7,16 @@
 [ext_resource type="PackedScene" uid="uid://bgww8jir45ktf" path="res://Scene Objects/Enemies/BlueDragoon.tscn" id="4_ws4wb"]
 [ext_resource type="PackedScene" uid="uid://dwnpgujive352" path="res://Scene Objects/Enemies/RedDragoon.tscn" id="5_uqgb5"]
 [ext_resource type="PackedScene" uid="uid://dck0mc2tc82kx" path="res://Scene Objects/Objects/ReinforcedFireBlock.tscn" id="6_xl2wc"]
+[ext_resource type="PackedScene" uid="uid://dfkmxoba64spw" path="res://Scene Objects/Objects/MedalFragment.tscn" id="7_1hjsp"]
 [ext_resource type="PackedScene" uid="uid://d0yrt438jc3k7" path="res://Scene Objects/Objects/DoorKey.tscn" id="7_atql2"]
 [ext_resource type="PackedScene" uid="uid://b2a0ttqvejk51" path="res://Scene Objects/Objects/TemperDragonFruit.tscn" id="8_htnqp"]
 
-[node name="CH2_LV1_R12" type="Node2D" node_paths=PackedStringArray("tilemap_list", "room_entrances", "enemy_nodes")]
+[node name="CH2_LV1_R12" type="Node2D" node_paths=PackedStringArray("tilemap_list", "room_entrances", "enemy_nodes", "medal_fragments")]
 script = ExtResource("1_6hnrk")
 tilemap_list = [NodePath("BoundaryCollisionTilemap"), NodePath("LevelCollisionTilemap")]
 room_entrances = [NodePath("Entrance 0")]
 enemy_nodes = [NodePath("BlueDragoon"), NodePath("RedDragoon")]
+medal_fragments = [NodePath("Fragments/MedalFragment"), NodePath("Fragments/MedalFragment2"), NodePath("Fragments/MedalFragment3"), NodePath("Fragments/MedalFragment4"), NodePath("Fragments/MedalFragment5"), NodePath("Fragments/MedalFragment6"), NodePath("Fragments/MedalFragment7"), NodePath("Fragments/MedalFragment8")]
 
 [node name="BoundaryCollisionTilemap" type="Node2D" parent="."]
 z_index = 4
@@ -81,8 +83,31 @@ flip_initial_winged_movement = true
 enable_reflector = true
 enable_magic = true
 
-[node name="ReinforcedFireBlock" parent="." instance=ExtResource("6_xl2wc")]
-position = Vector2(128, 64)
+[node name="Fragments" type="Node2D" parent="."]
+
+[node name="MedalFragment" parent="Fragments" instance=ExtResource("7_1hjsp")]
+position = Vector2(464, 80)
+
+[node name="MedalFragment2" parent="Fragments" instance=ExtResource("7_1hjsp")]
+position = Vector2(432, 48)
+
+[node name="MedalFragment3" parent="Fragments" instance=ExtResource("7_1hjsp")]
+position = Vector2(400, 80)
+
+[node name="MedalFragment4" parent="Fragments" instance=ExtResource("7_1hjsp")]
+position = Vector2(368, 48)
+
+[node name="MedalFragment5" parent="Fragments" instance=ExtResource("7_1hjsp")]
+position = Vector2(112, 48)
+
+[node name="MedalFragment6" parent="Fragments" instance=ExtResource("7_1hjsp")]
+position = Vector2(144, 48)
+
+[node name="MedalFragment7" parent="Fragments" instance=ExtResource("7_1hjsp")]
+position = Vector2(112, 80)
+
+[node name="MedalFragment8" parent="Fragments" instance=ExtResource("7_1hjsp")]
+position = Vector2(144, 80)
 
 [node name="DoorKey" parent="." instance=ExtResource("7_atql2")]
 position = Vector2(288, 192)
@@ -91,3 +116,6 @@ position = Vector2(288, 192)
 position = Vector2(384, 128)
 starting_state = 1
 enable_cycling = false
+
+[node name="ReinforcedFireBlock" parent="." instance=ExtResource("6_xl2wc")]
+position = Vector2(128, 64)

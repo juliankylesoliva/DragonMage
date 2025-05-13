@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=4 uid="uid://c52ld2bu585yu"]
+[gd_scene load_steps=11 format=4 uid="uid://c52ld2bu585yu"]
 
 [ext_resource type="Script" path="res://Scripts/Utility Scripts/Room.gd" id="1_u7jfe"]
 [ext_resource type="TileSet" uid="uid://dhwi7i1loa2pd" path="res://Sprites/Tiles/Test Tiles/TestTileSet.tres" id="2_351to"]
@@ -9,13 +9,15 @@
 [ext_resource type="PackedScene" uid="uid://clfqwsy4byrkf" path="res://Scene Objects/Enemies/GreenDragoon.tscn" id="7_smeft"]
 [ext_resource type="PackedScene" uid="uid://curi6w4ex7jou" path="res://Scene Objects/Enemies/YellowDragoon.tscn" id="8_4hili"]
 [ext_resource type="PackedScene" uid="uid://b2a0ttqvejk51" path="res://Scene Objects/Objects/TemperDragonFruit.tscn" id="9_muala"]
+[ext_resource type="PackedScene" uid="uid://dfkmxoba64spw" path="res://Scene Objects/Objects/MedalFragment.tscn" id="10_1o5bs"]
 
-[node name="CH2_LV1_R9" type="Node2D" node_paths=PackedStringArray("tilemap_list", "room_entrances", "enemy_nodes")]
+[node name="CH2_LV1_R9" type="Node2D" node_paths=PackedStringArray("tilemap_list", "room_entrances", "enemy_nodes", "medal_fragments")]
 script = ExtResource("1_u7jfe")
 tilemap_list = [NodePath("BoundaryCollisionTilemap"), NodePath("LevelCollisionTilemap")]
 left_camera_limit = -256
 room_entrances = [NodePath("Entrance 0"), NodePath("Entrance 1"), NodePath("Door 0")]
 enemy_nodes = [NodePath("Enemies/BlueDragoon"), NodePath("Enemies/RedDragoon"), NodePath("Enemies/GreenDragoon"), NodePath("Enemies/YellowDragoon")]
+medal_fragments = [NodePath("Fragments/MedalFragment"), NodePath("Fragments/MedalFragment2"), NodePath("Fragments/MedalFragment3"), NodePath("Fragments/MedalFragment4"), NodePath("Fragments/MedalFragment5"), NodePath("Fragments/MedalFragment6"), NodePath("Fragments/MedalFragment7"), NodePath("Fragments/MedalFragment8"), NodePath("Fragments/MedalFragment9"), NodePath("Fragments/MedalFragment10")]
 
 [node name="BoundaryCollisionTilemap" type="Node2D" parent="."]
 z_index = 4
@@ -109,3 +111,35 @@ enable_magic = true
 
 [node name="TemperDragonFruit" parent="." instance=ExtResource("9_muala")]
 position = Vector2(128, 176)
+
+[node name="Fragments" type="Node2D" parent="."]
+
+[node name="MedalFragment" parent="Fragments" instance=ExtResource("10_1o5bs")]
+position = Vector2(304, 144)
+
+[node name="MedalFragment2" parent="Fragments" instance=ExtResource("10_1o5bs")]
+position = Vector2(272, 112)
+
+[node name="MedalFragment3" parent="Fragments" instance=ExtResource("10_1o5bs")]
+position = Vector2(240, 144)
+
+[node name="MedalFragment4" parent="Fragments" instance=ExtResource("10_1o5bs")]
+position = Vector2(208, 112)
+
+[node name="MedalFragment5" parent="Fragments" instance=ExtResource("10_1o5bs")]
+position = Vector2(176, 144)
+
+[node name="MedalFragment6" parent="Fragments" instance=ExtResource("10_1o5bs")]
+position = Vector2(80, 112)
+
+[node name="MedalFragment7" parent="Fragments" instance=ExtResource("10_1o5bs")]
+position = Vector2(48, 144)
+
+[node name="MedalFragment8" parent="Fragments" instance=ExtResource("10_1o5bs")]
+position = Vector2(16, 112)
+
+[node name="MedalFragment9" parent="Fragments" instance=ExtResource("10_1o5bs")]
+position = Vector2(-16, 144)
+
+[node name="MedalFragment10" parent="Fragments" instance=ExtResource("10_1o5bs")]
+position = Vector2(-48, 112)
