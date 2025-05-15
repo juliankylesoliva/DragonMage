@@ -72,7 +72,7 @@ room_destination = NodePath("../../CH0_LV1_R1")
 room_destination = NodePath("../../CH0_LV1_R3")
 
 [node name="CH0_LV1_R3" parent="." instance=ExtResource("5_vfoci")]
-position = Vector2(2080, -192)
+position = Vector2(2176, -480)
 
 [node name="Warp 0" parent="CH0_LV1_R3" index="4" node_paths=PackedStringArray("room_destination")]
 room_destination = NodePath("../../CH0_LV1_R2")
@@ -90,7 +90,7 @@ room_destination = NodePath("../../CH0_LV1_R3")
 room_destination = NodePath("../../CH0_LV1_R6")
 
 [node name="CH0_LV1_R6" parent="." instance=ExtResource("8_w0yoj")]
-position = Vector2(2368, 480)
+position = Vector2(64, 576)
 
 [node name="Warp 0" parent="CH0_LV1_R6" index="4" node_paths=PackedStringArray("room_destination")]
 room_destination = NodePath("../../CH0_LV1_R5")
@@ -99,7 +99,7 @@ room_destination = NodePath("../../CH0_LV1_R5")
 room_destination = NodePath("../../CH0_LV1_R10")
 
 [node name="CH0_LV1_R10" parent="." instance=ExtResource("12_ra648")]
-position = Vector2(1056, 960)
+position = Vector2(-32, -576)
 
 [node name="Warp 0" parent="CH0_LV1_R10" index="3" node_paths=PackedStringArray("room_destination")]
 room_destination = NodePath("../../CH0_LV1_R6")

@@ -4,7 +4,7 @@
 
 [resource]
 script = ExtResource("1_evuh7")
-tip_title = "Extending Your Magic Boost"
+tip_title = "Extending Your Star Boost"
 tip_description = Array[String](["As a mage, if you have a slipstream while being star boosted, you can extend the duration of the boost by holding forward and jumping as soon as you land on the ground.
 
 This will also preserve your speed even if you don't have the star boost, but the timing window is more lenient while star boosted due to the lower deceleration.
