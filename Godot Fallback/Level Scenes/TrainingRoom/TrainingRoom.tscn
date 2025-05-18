@@ -27,7 +27,7 @@ height = 48.0
 
 [node name="TestLevel" type="Node2D" node_paths=PackedStringArray("player_reference", "starting_room", "room_list")]
 script = ExtResource("1_kmw2k")
-level_index = 9
+level_index = 8
 player_reference = NodePath("Player")
 starting_room = NodePath("tr_room_hub")
 room_list = [NodePath("tr_room_hub")]
