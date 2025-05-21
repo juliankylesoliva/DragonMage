@@ -118,7 +118,7 @@ tile_set = ExtResource("2_f37q7")
 position = Vector2(16, 224)
 
 [node name="Entrance 1" type="Node2D" parent="."]
-position = Vector2(496, -224)
+position = Vector2(496, -384)
 
 [node name="FallReentry" type="Node2D" parent="."]
 position = Vector2(64, 224)
