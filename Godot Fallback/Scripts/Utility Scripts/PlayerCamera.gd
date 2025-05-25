@@ -91,7 +91,7 @@ func update_y_lookahead(delta : float):
 	elif (!hub.jumping.is_fast_falling and is_above_upper_threshold() and hub.char_body.velocity.y <= 0 and !was_upper_threshold_crossed and !was_lower_threshold_crossed):
 		saved_y_position = (hub.collisions.get_ground_point().y - max_y_lookahead)
 		was_upper_threshold_crossed = true
-	elif (!hub.jumping.is_fast_falling and ((hub.char_body.is_on_floor() and (abs(hub.collisions.get_ground_point().y - saved_y_position) >= ground_level_update_height_threshold or (hub.collisions.get_ground_point().y > saved_y_position))) or (is_above_upper_threshold() and (was_upper_threshold_crossed or was_lower_threshold_crossed)))):
+	elif (!hub.jumping.is_fast_falling and ((hub.char_body.is_on_floor() and (abs(hub.collisions.get_ground_point().y - saved_y_position) >= ground_level_update_height_threshold or (hub.collisions.get_ground_point().y > saved_y_position))) or (is_above_upper_threshold() and (was_upper_threshold_crossed or was_lower_threshold_crossed)) or hub.collisions.get_ground_normal().x != 0)):
 		saved_y_position = hub.collisions.get_ground_point().y
 	else:
 		pass

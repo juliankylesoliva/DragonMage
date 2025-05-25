@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=3 uid="uid://dopdmj4qfj6sx"]
+
+[ext_resource type="Script" path="res://Scripts/Object Scripts/WaterHazard.gd" id="1_btlyr"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_w4e4b"]
+resource_local_to_scene = true
+size = Vector2(32, 0)
+
+[node name="WaterHazard" type="Area2D" node_paths=PackedStringArray("collision_shape")]
+collision_layer = 0
+collision_mask = 20
+monitorable = false
+script = ExtResource("1_btlyr")
+collision_shape = NodePath("CollisionShape2D")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_w4e4b")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]
