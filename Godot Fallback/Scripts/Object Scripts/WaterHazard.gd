@@ -8,6 +8,16 @@ const HITBOX_HEIGHT_OFFSET : float = 16
 
 @export var collision_shape : CollisionShape2D
 
+@export var sprites_parent : Node2D
+
+@export var sprite_back : Sprite2D
+
+@export var sprite_front : Sprite2D
+
+@export var sprite_fill : Sprite2D
+
+@export var particles : CPUParticles2D
+
 @export var tile_width : int = 2
 
 @export var water_tile_height_offsets : Array[float] = [1]
@@ -39,6 +49,8 @@ func _ready():
 	collision_shape.shape.size.x = (tile_width * PIXELS_PER_TILE)
 	collision_shape.shape.size.y = get_target_height(current_height_index)
 	update_y_offset()
+	update_sprites()
+	particles.emitting = true
 	if (cycle_type > 0):
 		current_timer = cycle_interval
 
@@ -53,6 +65,7 @@ func _physics_process(delta: float):
 		if (is_changing_height):
 			collision_shape.shape.size.y = move_toward(collision_shape.shape.size.y, get_target_height(current_height_index), get_height_change_rate(current_height_index, previous_height_index) * delta)
 			update_y_offset()
+			update_sprites()
 			if (current_timer == 0):
 				is_changing_height = !is_changing_height
 				current_timer = cycle_interval
@@ -81,6 +94,14 @@ func get_target_height(index):
 
 func update_y_offset():
 	collision_shape.position.y = -(collision_shape.shape.size.y / 2)
+
+func update_sprites():
+	sprites_parent.global_position = (self.global_position + (2 * collision_shape.position))
+	sprite_fill.scale.x = tile_width
+	sprite_fill.scale.y = collision_shape.shape.size.y
+	sprite_back.region_rect.size.x = collision_shape.shape.size.x
+	sprite_front.region_rect.size.x = collision_shape.shape.size.x
+	particles.emission_rect_extents.x = (collision_shape.shape.size.x / 2)
 
 func get_height_change_rate(target : int, previous : int):
 	return abs((get_target_height(target) - get_target_height(previous)) / height_change_time)

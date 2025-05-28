@@ -7,5 +7,5 @@ extends Sprite2D
 func _process(delta):
 	if (self.visible and self.region_enabled):
 		self.region_rect.position.x += (scroll_speed * delta)
-		if (self.region_rect.position.x >= loop_value):
+		if ((self.region_rect.position.x >= loop_value and scroll_speed > 0) or (self.region_rect.position.x <= loop_value and scroll_speed < 0)):
 			self.region_rect.position.x -= loop_value
