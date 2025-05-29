@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://bid1ngpd6fm80"]
+[gd_scene load_steps=18 format=3 uid="uid://bid1ngpd6fm80"]
 
 [ext_resource type="Script" path="res://Scripts/Utility Scripts/Level.gd" id="1_36h7d"]
 [ext_resource type="PackedScene" uid="uid://d0ff35cm57xb7" path="res://Scene Objects/Effects/DroppedFragment.tscn" id="2_bdmbh"]
@@ -15,6 +15,7 @@
 [ext_resource type="PackedScene" uid="uid://ca4v88yik2xe" path="res://Scene Objects/Misc/LevelIntroScreen.tscn" id="12_vyycx"]
 [ext_resource type="PackedScene" uid="uid://bjeiexqfc7oht" path="res://Scene Objects/Misc/DefeatScreen.tscn" id="13_0xd2q"]
 [ext_resource type="PackedScene" uid="uid://bth8i161g1eoq" path="res://Level Scenes/CH2_LV2/Rooms/CH2_LV2_R1.tscn" id="14_cwpjk"]
+[ext_resource type="PackedScene" uid="uid://08vlaru525wu" path="res://Level Scenes/CH2_LV2/Rooms/CH2_LV2_R2.tscn" id="16_4bu2w"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_k23s2"]
 resource_local_to_scene = true
@@ -25,7 +26,7 @@ height = 48.0
 script = ExtResource("1_36h7d")
 player_reference = NodePath("Player")
 starting_room = NodePath("CH2_LV2_R1")
-room_list = [NodePath("CH2_LV2_R1")]
+room_list = [NodePath("CH2_LV2_R1"), NodePath("CH2_LV2_R2")]
 dropped_fragment_scene = ExtResource("2_bdmbh")
 screen_fade = NodePath("UI_Canvas/ScreenFade")
 intro_screen = NodePath("UI_Canvas/LevelIntroScreen")
@@ -52,6 +53,15 @@ editor_draw_limits = true
 editor_draw_drag_margin = true
 
 [node name="CH2_LV2_R1" parent="." instance=ExtResource("14_cwpjk")]
+
+[node name="Warp 0" parent="CH2_LV2_R1" index="4" node_paths=PackedStringArray("room_destination")]
+room_destination = NodePath("../../CH2_LV2_R2")
+
+[node name="CH2_LV2_R2" parent="." instance=ExtResource("16_4bu2w")]
+position = Vector2(2976, 480)
+
+[node name="Warp 0" parent="CH2_LV2_R2" index="4" node_paths=PackedStringArray("room_destination")]
+room_destination = NodePath("../../CH2_LV2_R1")
 
 [node name="UI_Canvas" type="CanvasLayer" parent="."]
 
@@ -108,3 +118,5 @@ screen_fade = NodePath("../UI_Canvas/ScreenFade")
 [connection signal="player_defeated" from="." to="DefeatScreen" method="do_defeat_screen"]
 
 [editable path="Player"]
+[editable path="CH2_LV2_R1"]
+[editable path="CH2_LV2_R2"]

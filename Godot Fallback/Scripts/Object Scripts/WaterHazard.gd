@@ -6,6 +6,8 @@ const PIXELS_PER_TILE : float = 32
 
 const HITBOX_HEIGHT_OFFSET : float = 16
 
+@export var room_ref : Room
+
 @export var collision_shape : CollisionShape2D
 
 @export var sprites_parent : Node2D
@@ -28,9 +30,9 @@ const HITBOX_HEIGHT_OFFSET : float = 16
 
 @export_enum("FORWARD:1", "BACKWARD:-1") var cycle_direction : int = 1
 
-@export var cycle_interval : float = 3
+@export var cycle_interval : float = 5
 
-@export var height_change_time : float = 3
+@export var height_change_time : float = 5
 
 var is_player_detected : bool = false
 
@@ -45,14 +47,9 @@ var current_height_index : int = 0
 var previous_height_index : int = 0
 
 func _ready():
-	current_height_index = clampi(initial_height_index, 0, water_tile_height_offsets.size() - 1)
-	collision_shape.shape.size.x = (tile_width * PIXELS_PER_TILE)
-	collision_shape.shape.size.y = get_target_height(current_height_index)
-	update_y_offset()
-	update_sprites()
-	particles.emitting = true
-	if (cycle_type > 0):
-		current_timer = cycle_interval
+	initialize()
+	if (room_ref != null):
+		room_ref.room_activated.connect(initialize)
 
 func _process(_delta: float):
 	if (player_ref != null and is_player_detected and !player_ref.damage.is_damage_warping):
@@ -61,7 +58,7 @@ func _process(_delta: float):
 			SoundFactory.play_sound_by_name("enemy_contact_impact", player_ref.char_body.global_position, 0, 1, "SFX")
 
 func _physics_process(delta: float):
-	if (cycle_type > 0):
+	if (cycle_type > 0 and room_ref != null and room_ref.is_room_active):
 		if (is_changing_height):
 			collision_shape.shape.size.y = move_toward(collision_shape.shape.size.y, get_target_height(current_height_index), get_height_change_rate(current_height_index, previous_height_index) * delta)
 			update_y_offset()
@@ -88,6 +85,17 @@ func _physics_process(delta: float):
 				is_changing_height = !is_changing_height
 				current_timer = cycle_interval
 		current_timer = move_toward(current_timer, 0, delta)
+
+func initialize():
+	current_height_index = clampi(initial_height_index, 0, water_tile_height_offsets.size() - 1)
+	collision_shape.shape.size.x = (tile_width * PIXELS_PER_TILE)
+	collision_shape.shape.size.y = get_target_height(current_height_index)
+	update_y_offset()
+	update_sprites()
+	particles.emitting = true
+	is_changing_height = false
+	if (cycle_type > 0):
+		current_timer = cycle_interval
 
 func get_target_height(index):
 	return ((water_tile_height_offsets[index] * PIXELS_PER_TILE) - HITBOX_HEIGHT_OFFSET) 
