@@ -30,7 +30,7 @@ const HITBOX_HEIGHT_OFFSET : float = 16
 
 @export_enum("FORWARD:1", "BACKWARD:-1") var cycle_direction : int = 1
 
-@export var cycle_interval : float = 5
+@export var cycle_interval : float = 3
 
 @export var height_change_time : float = 5
 
@@ -83,7 +83,7 @@ func _physics_process(delta: float):
 						_:
 							current_height_index = clampi(initial_height_index, 0, water_tile_height_offsets.size() - 1)
 				is_changing_height = !is_changing_height
-				current_timer = cycle_interval
+				current_timer = height_change_time
 		current_timer = move_toward(current_timer, 0, delta)
 
 func initialize():
@@ -92,6 +92,7 @@ func initialize():
 	collision_shape.shape.size.y = get_target_height(current_height_index)
 	update_y_offset()
 	update_sprites()
+	particles.amount = tile_width
 	particles.emitting = true
 	is_changing_height = false
 	if (cycle_type > 0):
