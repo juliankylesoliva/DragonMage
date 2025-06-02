@@ -111,6 +111,7 @@ enable_helmet = true
 position = Vector2(448, 576)
 enable_wings = true
 enable_helmet = true
+enable_magic = true
 
 [node name="BlueDragoon2" parent="Enemies" instance=ExtResource("6_slwhu")]
 position = Vector2(288, 416)
