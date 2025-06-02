@@ -87,11 +87,11 @@ func take_damage(knockback : int = 0):
 			took_damage.emit()
 		return true
 
-func do_damage_warp(bypass_invulnerability : bool = false):
-	if (!bypass_invulnerability and is_player_parrying()):
+func do_damage_warp():
+	if (is_player_parrying()):
 		on_parry()
 		return false
-	elif (!bypass_invulnerability and (is_player_damaged() or fairy_guard_attack.is_invincibility_active or is_damage_invulnerability_active())):
+	elif (is_player_damaged() or fairy_guard_attack.is_invincibility_active or is_damage_invulnerability_active()):
 		return false
 	else:
 		if (is_damage_invulnerability_active()):

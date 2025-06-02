@@ -367,12 +367,13 @@ script = ExtResource("54_k03tc")
 hub = NodePath("..")
 max_x_lookahead = 128.0
 max_y_lookahead = 160.0
+camera_height_from_ground = 64.0
 ground_level_update_height_threshold = 96.0
 fast_fall_y_lookahead = 320.0
 fast_fall_ground_distance_threshold = 256.0
 fire_tackle_y_lookahead = 64.0
-upper_camera_threshold = 160.0
-lower_camera_threshold = 160.0
+upper_camera_threshold = 112.0
+lower_camera_threshold = 112.0
 time_to_update_y = 0.2
 
 [node name="Animation" type="Node" parent="Hub" node_paths=PackedStringArray("hub")]
@@ -443,6 +444,7 @@ can_update_camera_y_pos = false
 [node name="FormChanging" type="Node" parent="StateMachine"]
 script = ExtResource("17_1yv22")
 can_update_camera_x_pos = false
+can_update_camera_y_pos = false
 
 [node name="Deactivated" type="Node" parent="StateMachine"]
 script = ExtResource("42_yhbki")

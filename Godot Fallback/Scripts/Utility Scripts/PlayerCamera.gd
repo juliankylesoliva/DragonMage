@@ -68,7 +68,7 @@ func update_x_lookahead(delta : float):
 	
 	var target_direction : float = (hub.movement.get_facing_value() if hub.state_machine.current_state.name != "Gliding" else hub.get_input_vector().x)
 	var max_lookahead : float = (max_x_lookahead if abs(hub.char_body.velocity.x) > hub.movement.top_speed else base_x_lookahead)
-	current_x_lookahead = move_toward(current_x_lookahead, target_direction * max_lookahead, max(hub.movement.top_speed, abs(hub.char_body.velocity.x)) * delta)
+	current_x_lookahead = move_toward(current_x_lookahead, target_direction * max_lookahead, abs(hub.char_body.velocity.x) * delta)
 	var target_x : float = (hub.char_body.global_position.x + current_x_lookahead)
 	target_x = clamp_x_target(target_x)
 	
@@ -81,20 +81,23 @@ func update_y_lookahead(delta : float):
 		return
 	
 	var state_name : String = hub.state_machine.current_state.name
-	if (hub.char_body.is_on_floor() or state_name == "WallSliding" or state_name == "WallClimbing" or state_name == "WallVaulting"):
+	if (hub.char_body.is_on_floor()):
 		was_upper_threshold_crossed = false
 		was_lower_threshold_crossed = false
 	
 	if ((hub.jumping.is_fast_falling and hub.collisions.get_distance_to_ground() > fast_fall_ground_distance_threshold) or (is_below_lower_threshold() and hub.char_body.velocity.y >= 0)):
-		saved_y_position = (hub.collisions.get_ground_point().y + (fast_fall_y_lookahead if hub.jumping.is_fast_falling else max_y_lookahead))
+		#saved_y_position = (hub.collisions.get_ground_point().y + (fast_fall_y_lookahead if hub.jumping.is_fast_falling else max_y_lookahead))
 		was_lower_threshold_crossed = true
 	elif (!hub.jumping.is_fast_falling and is_above_upper_threshold() and hub.char_body.velocity.y <= 0 and !was_upper_threshold_crossed and !was_lower_threshold_crossed):
-		saved_y_position = (hub.collisions.get_ground_point().y - max_y_lookahead)
+		#saved_y_position = (hub.collisions.get_ground_point().y - max_y_lookahead)
 		was_upper_threshold_crossed = true
 	elif (!hub.jumping.is_fast_falling and ((hub.char_body.is_on_floor() and (abs(hub.collisions.get_ground_point().y - saved_y_position) >= ground_level_update_height_threshold or (hub.collisions.get_ground_point().y > saved_y_position))) or (is_above_upper_threshold() and (was_upper_threshold_crossed or was_lower_threshold_crossed)) or hub.collisions.get_ground_normal().x != 0)):
 		saved_y_position = hub.collisions.get_ground_point().y
 	else:
 		pass
+	
+	if (was_upper_threshold_crossed or was_lower_threshold_crossed or state_name == "WallSliding" or state_name == "WallClimbing" or state_name == "WallVaulting"):
+		saved_y_position = (hub.collisions.get_ground_point().y + clampf(hub.char_body.velocity.y, 0, min(hub.collisions.get_distance_to_ground() if state_name == "Falling" or state_name == "WallSliding" else fast_fall_y_lookahead if hub.jumping.is_fast_falling else max_y_lookahead, fast_fall_y_lookahead if hub.jumping.is_fast_falling else max_y_lookahead)))
 	
 	var target_y : float = (saved_y_position - camera_height_from_ground)
 	target_y = clamp_y_target(target_y)

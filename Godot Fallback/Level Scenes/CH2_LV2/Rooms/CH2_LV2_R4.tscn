@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=4 uid="uid://d1keqs70mn7j1"]
+[gd_scene load_steps=11 format=4 uid="uid://d1keqs70mn7j1"]
 
 [ext_resource type="Script" path="res://Scripts/Utility Scripts/Room.gd" id="1_gcpjp"]
 [ext_resource type="TileSet" uid="uid://dhwi7i1loa2pd" path="res://Sprites/Tiles/Test Tiles/TestTileSet.tres" id="2_58r5n"]
@@ -8,6 +8,8 @@
 [ext_resource type="PackedScene" uid="uid://dwnpgujive352" path="res://Scene Objects/Enemies/RedDragoon.tscn" id="6_yu74j"]
 [ext_resource type="PackedScene" uid="uid://bgww8jir45ktf" path="res://Scene Objects/Enemies/BlueDragoon.tscn" id="7_jxs0r"]
 [ext_resource type="PackedScene" uid="uid://dopdmj4qfj6sx" path="res://Scene Objects/Obstacles/WaterHazard.tscn" id="8_1gr4i"]
+[ext_resource type="PackedScene" uid="uid://cs4s34scsvcfr" path="res://Scene Objects/Objects/BreakableBlock.tscn" id="8_njns6"]
+[ext_resource type="PackedScene" uid="uid://bajk0w7eoh6o8" path="res://Scene Objects/Objects/ReinforcedBlock.tscn" id="9_jc4gk"]
 
 [node name="CH2_LV2_R4" type="Node2D" node_paths=PackedStringArray("tilemap_list", "room_entrances", "enemy_nodes")]
 script = ExtResource("1_gcpjp")
@@ -96,8 +98,22 @@ enable_helmet = true
 
 [node name="BlueDragoon" parent="Enemies" instance=ExtResource("7_jxs0r")]
 position = Vector2(1888, 160)
+enable_wings = true
 enable_helmet = true
-enable_magic = true
+
+[node name="Blocks" type="Node2D" parent="."]
+
+[node name="BreakableBlock" parent="Blocks" instance=ExtResource("8_njns6")]
+position = Vector2(672, 224)
+
+[node name="BreakableBlock2" parent="Blocks" instance=ExtResource("8_njns6")]
+position = Vector2(864, 224)
+
+[node name="ReinforcedBlock" parent="Blocks" instance=ExtResource("9_jc4gk")]
+position = Vector2(1600, 128)
+
+[node name="ReinforcedBlock2" parent="Blocks" instance=ExtResource("9_jc4gk")]
+position = Vector2(1664, 128)
 
 [node name="WaterHazard" parent="." node_paths=PackedStringArray("room_ref") instance=ExtResource("8_1gr4i")]
 position = Vector2(1024, 320)

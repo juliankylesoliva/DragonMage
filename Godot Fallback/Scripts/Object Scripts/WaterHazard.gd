@@ -52,8 +52,8 @@ func _ready():
 		room_ref.room_activated.connect(initialize)
 
 func _process(_delta: float):
-	if (player_ref != null and is_player_detected and !player_ref.damage.is_damage_warping):
-		if (player_ref.damage.do_damage_warp(true)):
+	if (player_ref != null and is_player_detected):
+		if (player_ref.damage.do_damage_warp() and player_ref.damage.is_player_damaged()):
 			EffectFactory.get_effect("EnemyContactImpact", player_ref.char_body.global_position)
 			SoundFactory.play_sound_by_name("enemy_contact_impact", player_ref.char_body.global_position, 0, 1, "SFX")
 
