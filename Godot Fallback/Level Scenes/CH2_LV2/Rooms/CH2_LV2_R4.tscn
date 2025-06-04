@@ -1,8 +1,9 @@
-[gd_scene load_steps=11 format=4 uid="uid://d1keqs70mn7j1"]
+[gd_scene load_steps=12 format=4 uid="uid://d1keqs70mn7j1"]
 
 [ext_resource type="Script" path="res://Scripts/Utility Scripts/Room.gd" id="1_gcpjp"]
 [ext_resource type="TileSet" uid="uid://dhwi7i1loa2pd" path="res://Sprites/Tiles/Test Tiles/TestTileSet.tres" id="2_58r5n"]
 [ext_resource type="PackedScene" uid="uid://dqbo0wu6hm8lj" path="res://Scene Objects/Objects/WarpTrigger.tscn" id="3_fya18"]
+[ext_resource type="PackedScene" uid="uid://db6i3rmu8i44r" path="res://Scene Objects/Objects/CollectableScale.tscn" id="4_02tne"]
 [ext_resource type="PackedScene" uid="uid://clfqwsy4byrkf" path="res://Scene Objects/Enemies/GreenDragoon.tscn" id="4_q0trf"]
 [ext_resource type="PackedScene" uid="uid://curi6w4ex7jou" path="res://Scene Objects/Enemies/YellowDragoon.tscn" id="5_flvhq"]
 [ext_resource type="PackedScene" uid="uid://dwnpgujive352" path="res://Scene Objects/Enemies/RedDragoon.tscn" id="6_yu74j"]
@@ -73,6 +74,31 @@ position = Vector2(2096, 224)
 room_origin = NodePath("..")
 room_destination = NodePath("..")
 
+[node name="CollectableScale" parent="." instance=ExtResource("4_02tne")]
+position = Vector2(1632, 128)
+collectable_type = "MAGICAL"
+
+[node name="Blocks" type="Node2D" parent="."]
+
+[node name="BreakableBlock" parent="Blocks" instance=ExtResource("8_njns6")]
+position = Vector2(672, 224)
+
+[node name="BreakableBlock2" parent="Blocks" instance=ExtResource("8_njns6")]
+position = Vector2(864, 224)
+
+[node name="ReinforcedBlock" parent="Blocks" instance=ExtResource("9_jc4gk")]
+position = Vector2(1600, 128)
+
+[node name="ReinforcedBlock2" parent="Blocks" instance=ExtResource("9_jc4gk")]
+position = Vector2(1664, 128)
+
+[node name="WaterHazard" parent="." node_paths=PackedStringArray("room_ref") instance=ExtResource("8_1gr4i")]
+position = Vector2(1024, 320)
+room_ref = NodePath("..")
+tile_width = 52
+water_tile_height_offsets = Array[float]([4.0, 1.0])
+cycle_type = 1
+
 [node name="Enemies" type="Node2D" parent="."]
 
 [node name="GreenDragoon" parent="Enemies" instance=ExtResource("4_q0trf")]
@@ -100,24 +126,3 @@ enable_helmet = true
 position = Vector2(1888, 160)
 enable_wings = true
 enable_helmet = true
-
-[node name="Blocks" type="Node2D" parent="."]
-
-[node name="BreakableBlock" parent="Blocks" instance=ExtResource("8_njns6")]
-position = Vector2(672, 224)
-
-[node name="BreakableBlock2" parent="Blocks" instance=ExtResource("8_njns6")]
-position = Vector2(864, 224)
-
-[node name="ReinforcedBlock" parent="Blocks" instance=ExtResource("9_jc4gk")]
-position = Vector2(1600, 128)
-
-[node name="ReinforcedBlock2" parent="Blocks" instance=ExtResource("9_jc4gk")]
-position = Vector2(1664, 128)
-
-[node name="WaterHazard" parent="." node_paths=PackedStringArray("room_ref") instance=ExtResource("8_1gr4i")]
-position = Vector2(1024, 320)
-room_ref = NodePath("..")
-tile_width = 52
-water_tile_height_offsets = Array[float]([4.0, 1.0])
-cycle_type = 1

@@ -1,16 +1,19 @@
-[gd_scene load_steps=5 format=4 uid="uid://bth8i161g1eoq"]
+[gd_scene load_steps=7 format=4 uid="uid://bth8i161g1eoq"]
 
 [ext_resource type="Script" path="res://Scripts/Utility Scripts/Room.gd" id="1_qldfj"]
 [ext_resource type="TileSet" uid="uid://dhwi7i1loa2pd" path="res://Sprites/Tiles/Test Tiles/TestTileSet.tres" id="2_fvuse"]
 [ext_resource type="PackedScene" uid="uid://dqbo0wu6hm8lj" path="res://Scene Objects/Objects/WarpTrigger.tscn" id="3_6taqj"]
 [ext_resource type="PackedScene" uid="uid://dopdmj4qfj6sx" path="res://Scene Objects/Obstacles/WaterHazard.tscn" id="4_s7qwv"]
+[ext_resource type="PackedScene" uid="uid://clfqwsy4byrkf" path="res://Scene Objects/Enemies/GreenDragoon.tscn" id="4_vbohb"]
+[ext_resource type="PackedScene" uid="uid://dwnpgujive352" path="res://Scene Objects/Enemies/RedDragoon.tscn" id="5_1jfjc"]
 
-[node name="CH2_LV2_R1" type="Node2D" node_paths=PackedStringArray("tilemap_list", "room_entrances")]
+[node name="CH2_LV2_R1" type="Node2D" node_paths=PackedStringArray("tilemap_list", "room_entrances", "enemy_nodes")]
 script = ExtResource("1_qldfj")
 tilemap_list = [NodePath("BoundaryCollisionTilemap"), NodePath("LevelCollisionTilemap")]
 right_camera_limit = 2752
 bottom_camera_limit = 640
 room_entrances = [NodePath("Entrance 0"), NodePath("Entrance 1")]
+enemy_nodes = [NodePath("Enemies/GreenDragoon"), NodePath("Enemies/RedDragoon")]
 
 [node name="BoundaryCollisionTilemap" type="Node2D" parent="."]
 z_index = 4
@@ -81,3 +84,13 @@ water_tile_height_offsets = Array[float]([2.0])
 position = Vector2(2336, 608)
 tile_width = 8
 water_tile_height_offsets = Array[float]([2.0])
+
+[node name="Enemies" type="Node2D" parent="."]
+
+[node name="GreenDragoon" parent="Enemies" instance=ExtResource("4_vbohb")]
+position = Vector2(1728, 352)
+enable_wings = true
+
+[node name="RedDragoon" parent="Enemies" instance=ExtResource("5_1jfjc")]
+position = Vector2(2336, 448)
+enable_wings = true
