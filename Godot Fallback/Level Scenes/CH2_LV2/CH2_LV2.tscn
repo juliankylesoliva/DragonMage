@@ -12,9 +12,9 @@
 [ext_resource type="PackedScene" uid="uid://tm41ml6brwri" path="res://Level Scenes/CH2_LV2/Rooms/CH2_LV2_R5.tscn" id="8_agrb6"]
 [ext_resource type="PackedScene" uid="uid://buykytsdrlnsg" path="res://Scene Objects/Misc/ResultsScreen.tscn" id="8_mg4x5"]
 [ext_resource type="PackedScene" uid="uid://d1eef1xjuwf3b" path="res://Menu Scenes/PauseMenu.tscn" id="9_nktgv"]
-[ext_resource type="PackedScene" uid="uid://bd3bijirjnv4g" path="res://Level Scenes/CH2_LV2/Rooms/CH2_LV2_R6.tscn" id="9_upmt3"]
+[ext_resource type="PackedScene" uid="uid://bd3bijirjnv4g" path="res://Level Scenes/CH2_LV2/Rooms/CH2_LV2_R7.tscn" id="9_upmt3"]
 [ext_resource type="PackedScene" uid="uid://8beel2odcuky" path="res://Scene Objects/Effects/ScreenFade.tscn" id="10_igs57"]
-[ext_resource type="PackedScene" uid="uid://dd5xsco4mbk36" path="res://Level Scenes/CH2_LV2/Rooms/CH2_LV2_R7.tscn" id="10_uh4pw"]
+[ext_resource type="PackedScene" uid="uid://dd5xsco4mbk36" path="res://Level Scenes/CH2_LV2/Rooms/CH2_LV2_R6.tscn" id="10_uh4pw"]
 [ext_resource type="PackedScene" uid="uid://brhoroc2w6jwi" path="res://Scene Objects/UI/Textbox.tscn" id="11_t37kq"]
 [ext_resource type="PackedScene" uid="uid://btq4qla5fyq0n" path="res://Scene Objects/Misc/LevelMusicPlayer.tscn" id="12_tljqs"]
 [ext_resource type="PackedScene" uid="uid://ca4v88yik2xe" path="res://Scene Objects/Misc/LevelIntroScreen.tscn" id="12_vyycx"]
@@ -27,20 +27,19 @@ resource_local_to_scene = true
 radius = 8.0
 height = 48.0
 
-[node name="CH2_LV2" type="Node2D" node_paths=PackedStringArray("player_reference", "starting_room", "room_list", "magical_scale", "draconic_scale", "screen_fade", "intro_screen", "clear_timer")]
+[node name="CH2_LV2" type="Node2D" node_paths=PackedStringArray("player_reference", "starting_room", "room_list", "magical_scale", "screen_fade", "intro_screen", "clear_timer")]
 script = ExtResource("1_36h7d")
 player_reference = NodePath("Player")
 starting_room = NodePath("CH2_LV2_R1")
 room_list = [NodePath("CH2_LV2_R1"), NodePath("CH2_LV2_R2"), NodePath("CH2_LV2_R3"), NodePath("CH2_LV2_R4"), NodePath("CH2_LV2_R5"), NodePath("CH2_LV2_R6"), NodePath("CH2_LV2_R7")]
 magical_scale = NodePath("CH2_LV2_R4/CollectableScale")
-draconic_scale = NodePath("CH2_LV2_R6/CollectableScale")
 dropped_fragment_scene = ExtResource("2_bdmbh")
 screen_fade = NodePath("UI_Canvas/ScreenFade")
 intro_screen = NodePath("UI_Canvas/LevelIntroScreen")
 clear_timer = NodePath("UI_Canvas/ClearTimer")
 
 [node name="Player" parent="." instance=ExtResource("3_408fr")]
-position = Vector2(96, 223)
+position = Vector2(96, 160)
 
 [node name="Fairy" parent="Player/Hub" index="4"]
 is_using_fairy = true
@@ -60,6 +59,7 @@ editor_draw_limits = true
 editor_draw_drag_margin = true
 
 [node name="CH2_LV2_R1" parent="." instance=ExtResource("14_cwpjk")]
+position = Vector2(32, 0)
 
 [node name="Warp 0" parent="CH2_LV2_R1" index="4" node_paths=PackedStringArray("room_destination")]
 room_destination = NodePath("../../CH2_LV2_R2")
@@ -100,22 +100,19 @@ room_destination = NodePath("../../CH2_LV2_R4")
 [node name="Warp 1" parent="CH2_LV2_R5" index="5" node_paths=PackedStringArray("room_destination")]
 room_destination = NodePath("../../CH2_LV2_R6")
 
-[node name="CH2_LV2_R6" parent="." instance=ExtResource("9_upmt3")]
-position = Vector2(32, -1696)
+[node name="CH2_LV2_R6" parent="." instance=ExtResource("10_uh4pw")]
+position = Vector2(128, -576)
 
-[node name="Warp 0" parent="CH2_LV2_R6" index="5" node_paths=PackedStringArray("room_destination")]
+[node name="Warp 0" parent="CH2_LV2_R6" index="4" node_paths=PackedStringArray("room_destination")]
 room_destination = NodePath("../../CH2_LV2_R5")
 
-[node name="Warp 1" parent="CH2_LV2_R6" index="6" node_paths=PackedStringArray("room_destination")]
+[node name="Warp 1" parent="CH2_LV2_R6" index="5" node_paths=PackedStringArray("room_destination")]
 room_destination = NodePath("../../CH2_LV2_R7")
 
-[node name="Checkpoint" parent="CH2_LV2_R6" index="14" node_paths=PackedStringArray("level_origin")]
-level_origin = NodePath("../..")
+[node name="CH2_LV2_R7" parent="." instance=ExtResource("9_upmt3")]
+position = Vector2(32, -1568)
 
-[node name="CH2_LV2_R7" parent="." instance=ExtResource("10_uh4pw")]
-position = Vector2(128, -704)
-
-[node name="Warp 0" parent="CH2_LV2_R7" index="4" node_paths=PackedStringArray("room_destination")]
+[node name="Warp 0" parent="CH2_LV2_R7" index="5" node_paths=PackedStringArray("room_destination")]
 room_destination = NodePath("../../CH2_LV2_R6")
 
 [node name="UI_Canvas" type="CanvasLayer" parent="."]
