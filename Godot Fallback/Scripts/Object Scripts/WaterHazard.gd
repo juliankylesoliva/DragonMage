@@ -53,7 +53,7 @@ func _ready():
 
 func _process(_delta: float):
 	if (player_ref != null and is_player_detected):
-		if (player_ref.damage.do_damage_warp() and player_ref.damage.is_player_damaged()):
+		if ((player_ref.state_machine.current_state.name != "Damaged" or !player_ref.damage.is_damage_warping) and player_ref.damage.do_damage_warp(true)):
 			EffectFactory.get_effect("EnemyContactImpact", player_ref.char_body.global_position)
 			SoundFactory.play_sound_by_name("enemy_contact_impact", player_ref.char_body.global_position, 0, 1, "SFX")
 

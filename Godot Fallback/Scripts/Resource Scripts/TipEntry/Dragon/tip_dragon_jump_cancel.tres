@@ -5,4 +5,4 @@
 [resource]
 script = ExtResource("1_eokti")
 tip_title = "Jumping Out Of Actions"
-tip_description = Array[String](["As a dragon, hold forward and press [Jump] during the end of your Fire Tackle or Slide or during a Fast Fall to jump out of these actions without losing too much speed."])
+tip_description = Array[String](["As a dragon, hold forward and press [Jump] during the end of your Fire Tackle or during a Slide or during a Fast Fall to jump out of these actions without losing too much speed."])

@@ -16,10 +16,15 @@ var saved_collision_layer : int = 0
 
 var saved_collision_mask : int = 0
 
+var was_damage_warping : bool = false
+
 func state_process(_delta):
 	if (hub.damage.current_hitstun_timer > 0 and !hub.damage.is_damage_warping):
 		knockback_damage_process(_delta)
 	else:
+		if (hub.damage.current_hitstun_timer < hub.damage.hitstun_time and !was_damage_warping and hub.damage.is_damage_warping and current_damage_warp_state == DamageWarpState.NONE):
+			hub.damage.reset_hitstun_timer()
+			on_enter()
 		damage_warp_process(_delta)
 
 func on_enter():
@@ -53,9 +58,10 @@ func on_enter():
 	hub.animation.set_animation_speed(1)
 
 func on_exit():
-	if (!hub.char_body.is_on_floor()):
+	if (!hub.char_body.is_on_floor() and !was_damage_warping):
 		hub.movement.current_horizontal_velocity = hub.char_body.velocity.x
 	hub.damage.do_iframes()
+	was_damage_warping = false
 
 func knockback_damage_process(_delta):
 	hub.damage.update_knockback(_delta)
@@ -94,6 +100,7 @@ func damage_warp_process(_delta):
 				hub.char_body.velocity = Vector2.ZERO
 				hub.jumping.landing_reset()
 				current_damage_warp_state = DamageWarpState.NONE
+				was_damage_warping = true
 				hub.damage.reset_damage_warp()
 				
 				var effect_instance : AnimatedSprite2D = EffectFactory.get_effect("LandingDust", hub.collisions.get_ground_point())

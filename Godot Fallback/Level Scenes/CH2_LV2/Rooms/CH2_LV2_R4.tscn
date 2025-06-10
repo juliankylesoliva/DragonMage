@@ -102,11 +102,10 @@ cycle_type = 1
 [node name="Enemies" type="Node2D" parent="."]
 
 [node name="GreenDragoon" parent="Enemies" instance=ExtResource("4_q0trf")]
-position = Vector2(416, 64)
+position = Vector2(480, 64)
 
 [node name="YellowDragoon" parent="Enemies" instance=ExtResource("5_flvhq")]
-position = Vector2(800, 64)
-enable_reflector = true
+position = Vector2(736, 64)
 
 [node name="RedDragoon" parent="Enemies" instance=ExtResource("6_yu74j")]
 position = Vector2(992, 128)
@@ -126,4 +125,3 @@ enable_helmet = true
 [node name="BlueDragoon" parent="Enemies" instance=ExtResource("7_jxs0r")]
 position = Vector2(1888, 160)
 enable_wings = true
-enable_helmet = true
