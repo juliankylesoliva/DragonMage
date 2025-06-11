@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://bid1ngpd6fm80"]
+[gd_scene load_steps=25 format=3 uid="uid://bid1ngpd6fm80"]
 
 [ext_resource type="Script" path="res://Scripts/Utility Scripts/Level.gd" id="1_36h7d"]
 [ext_resource type="PackedScene" uid="uid://d0ff35cm57xb7" path="res://Scene Objects/Effects/DroppedFragment.tscn" id="2_bdmbh"]
@@ -17,6 +17,7 @@
 [ext_resource type="PackedScene" uid="uid://dd5xsco4mbk36" path="res://Level Scenes/CH2_LV2/Rooms/CH2_LV2_R6.tscn" id="10_uh4pw"]
 [ext_resource type="PackedScene" uid="uid://lyjhlffgg2w" path="res://Level Scenes/CH2_LV2/Rooms/CH2_LV2_R8.tscn" id="11_qr1xm"]
 [ext_resource type="PackedScene" uid="uid://brhoroc2w6jwi" path="res://Scene Objects/UI/Textbox.tscn" id="11_t37kq"]
+[ext_resource type="PackedScene" uid="uid://bvsr3k7wemlyf" path="res://Level Scenes/CH2_LV2/Rooms/CH2_LV2_R9.tscn" id="12_pdu23"]
 [ext_resource type="PackedScene" uid="uid://btq4qla5fyq0n" path="res://Scene Objects/Misc/LevelMusicPlayer.tscn" id="12_tljqs"]
 [ext_resource type="PackedScene" uid="uid://ca4v88yik2xe" path="res://Scene Objects/Misc/LevelIntroScreen.tscn" id="12_vyycx"]
 [ext_resource type="PackedScene" uid="uid://bjeiexqfc7oht" path="res://Scene Objects/Misc/DefeatScreen.tscn" id="13_0xd2q"]
@@ -28,13 +29,14 @@ resource_local_to_scene = true
 radius = 8.0
 height = 48.0
 
-[node name="CH2_LV2" type="Node2D" node_paths=PackedStringArray("player_reference", "starting_room", "room_list", "magical_scale", "draconic_scale", "screen_fade", "intro_screen", "clear_timer")]
+[node name="CH2_LV2" type="Node2D" node_paths=PackedStringArray("player_reference", "starting_room", "room_list", "magical_scale", "draconic_scale", "balanced_scale", "screen_fade", "intro_screen", "clear_timer")]
 script = ExtResource("1_36h7d")
 player_reference = NodePath("Player")
-starting_room = NodePath("CH2_LV2_R1")
-room_list = [NodePath("CH2_LV2_R1"), NodePath("CH2_LV2_R2"), NodePath("CH2_LV2_R3"), NodePath("CH2_LV2_R4"), NodePath("CH2_LV2_R5"), NodePath("CH2_LV2_R6"), NodePath("CH2_LV2_R7"), NodePath("CH2_LV2_R8")]
+starting_room = NodePath("CH2_LV2_R9")
+room_list = [NodePath("CH2_LV2_R1"), NodePath("CH2_LV2_R2"), NodePath("CH2_LV2_R3"), NodePath("CH2_LV2_R4"), NodePath("CH2_LV2_R5"), NodePath("CH2_LV2_R6"), NodePath("CH2_LV2_R7"), NodePath("CH2_LV2_R8"), NodePath("CH2_LV2_R9")]
 magical_scale = NodePath("CH2_LV2_R4/CollectableScale")
 draconic_scale = NodePath("CH2_LV2_R7/CollectableScale")
+balanced_scale = NodePath("CH2_LV2_R9/CollectableScale")
 dropped_fragment_scene = ExtResource("2_bdmbh")
 screen_fade = NodePath("UI_Canvas/ScreenFade")
 intro_screen = NodePath("UI_Canvas/LevelIntroScreen")
@@ -126,8 +128,17 @@ position = Vector2(-2912, -1984)
 [node name="Warp 0" parent="CH2_LV2_R8" index="4" node_paths=PackedStringArray("room_destination")]
 room_destination = NodePath("../../CH2_LV2_R7")
 
+[node name="Warp 1" parent="CH2_LV2_R8" index="5" node_paths=PackedStringArray("room_destination")]
+room_destination = NodePath("../../CH2_LV2_R9")
+
 [node name="Checkpoint" parent="CH2_LV2_R8" index="17" node_paths=PackedStringArray("level_origin")]
 level_origin = NodePath("../..")
+
+[node name="CH2_LV2_R9" parent="." instance=ExtResource("12_pdu23")]
+position = Vector2(-2880, 0)
+
+[node name="Warp 0" parent="CH2_LV2_R9" index="4" node_paths=PackedStringArray("room_destination")]
+room_destination = NodePath("../../CH2_LV2_R8")
 
 [node name="UI_Canvas" type="CanvasLayer" parent="."]
 
@@ -192,3 +203,4 @@ screen_fade = NodePath("../UI_Canvas/ScreenFade")
 [editable path="CH2_LV2_R6"]
 [editable path="CH2_LV2_R7"]
 [editable path="CH2_LV2_R8"]
+[editable path="CH2_LV2_R9"]

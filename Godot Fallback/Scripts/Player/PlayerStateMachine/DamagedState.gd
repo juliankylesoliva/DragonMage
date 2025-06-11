@@ -22,12 +22,12 @@ func state_process(_delta):
 	if (hub.damage.current_hitstun_timer > 0 and !hub.damage.is_damage_warping):
 		knockback_damage_process(_delta)
 	else:
-		if (hub.damage.current_hitstun_timer < hub.damage.hitstun_time and !was_damage_warping and hub.damage.is_damage_warping and current_damage_warp_state == DamageWarpState.NONE):
-			hub.damage.reset_hitstun_timer()
-			on_enter()
 		damage_warp_process(_delta)
 
 func on_enter():
+	if (hub.char_body.collision_layer != 0 and hub.char_body.collision_mask != 0):
+		saved_collision_layer = hub.char_body.collision_layer
+		saved_collision_mask = hub.char_body.collision_mask
 	hub.jumping.landing_reset()
 	if (hub.movement.is_crouching and !hub.collisions.is_in_ceiling_when_uncrouched()):
 		hub.movement.reset_crouch_state()
@@ -48,8 +48,6 @@ func on_enter():
 		can_update_camera_y_pos = false
 		hub.jumping.switch_to_zero_gravity()
 		current_damage_warp_state = DamageWarpState.RISING
-		saved_collision_layer = hub.char_body.collision_layer
-		saved_collision_mask = hub.char_body.collision_mask
 		hub.char_body.collision_layer = 0
 		hub.char_body.collision_mask = 0
 		hub.char_body.velocity = (Vector2.UP * damage_warp_launch_speed)
@@ -60,6 +58,11 @@ func on_enter():
 func on_exit():
 	if (!hub.char_body.is_on_floor() and !was_damage_warping):
 		hub.movement.current_horizontal_velocity = hub.char_body.velocity.x
+	
+	if (was_damage_warping):
+		hub.char_body.collision_layer = saved_collision_layer
+		hub.char_body.collision_mask = saved_collision_mask
+	
 	hub.damage.do_iframes()
 	was_damage_warping = false
 
@@ -78,10 +81,18 @@ func knockback_damage_process(_delta):
 			set_next_state(state_machine.get_state_by_name("Falling"))
 
 func damage_warp_process(_delta):
+	hub.damage.reset_hitstun_timer()
+	can_update_camera_x_pos = false
+	can_update_camera_y_pos = false
+	hub.jumping.switch_to_zero_gravity()
+	
 	hub.char_body.move_and_slide()
 	
 	match current_damage_warp_state:
 		DamageWarpState.RISING:
+			hub.char_body.collision_layer = 0
+			hub.char_body.collision_mask = 0
+			hub.char_body.velocity = (Vector2.UP * damage_warp_launch_speed)
 			if (!hub.visibility.is_on_screen()):
 				hub.char_body.velocity *= -1
 				hub.camera.snap_camera_to_position(hub.current_respawn_position + (Vector2.RIGHT * hub.camera.base_x_lookahead * hub.movement.get_facing_value()) + (Vector2.DOWN * damage_warp_camera_vertical_offset))
@@ -91,6 +102,9 @@ func damage_warp_process(_delta):
 					hub.fairy.fairy_ref.snap_to_target_node()
 				current_damage_warp_state = DamageWarpState.FALLING
 		DamageWarpState.FALLING:
+			hub.char_body.collision_layer = 0
+			hub.char_body.collision_mask = 0
+			hub.char_body.velocity = (Vector2.DOWN * damage_warp_launch_speed)
 			if (hub.char_body.global_position.y >= hub.current_respawn_position.y):
 				hub.char_body.global_position.y = hub.current_respawn_position.y
 				hub.camera.reset_x_lookahead()
@@ -116,4 +130,4 @@ func damage_warp_process(_delta):
 				else:
 					set_next_state(state_machine.get_state_by_name("Falling"))
 		_:
-			pass
+			current_damage_warp_state = DamageWarpState.RISING
