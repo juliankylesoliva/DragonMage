@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=4 uid="uid://bvsr3k7wemlyf"]
+[gd_scene load_steps=11 format=4 uid="uid://bvsr3k7wemlyf"]
 
 [ext_resource type="Script" path="res://Scripts/Utility Scripts/Room.gd" id="1_hsscg"]
 [ext_resource type="TileSet" uid="uid://dhwi7i1loa2pd" path="res://Sprites/Tiles/Test Tiles/TestTileSet.tres" id="2_l02su"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://dopdmj4qfj6sx" path="res://Scene Objects/Obstacles/WaterHazard.tscn" id="4_l64ko"]
 [ext_resource type="PackedScene" uid="uid://db6i3rmu8i44r" path="res://Scene Objects/Objects/CollectableScale.tscn" id="5_hupcr"]
 [ext_resource type="PackedScene" uid="uid://cs4s34scsvcfr" path="res://Scene Objects/Objects/BreakableBlock.tscn" id="6_po6ga"]
+[ext_resource type="PackedScene" uid="uid://bgww8jir45ktf" path="res://Scene Objects/Enemies/BlueDragoon.tscn" id="7_56sty"]
 [ext_resource type="PackedScene" uid="uid://curi6w4ex7jou" path="res://Scene Objects/Enemies/YellowDragoon.tscn" id="8_bqfi4"]
 [ext_resource type="PackedScene" uid="uid://dwnpgujive352" path="res://Scene Objects/Enemies/RedDragoon.tscn" id="9_8f5y6"]
 [ext_resource type="PackedScene" uid="uid://clfqwsy4byrkf" path="res://Scene Objects/Enemies/GreenDragoon.tscn" id="10_sln0x"]
@@ -16,7 +17,7 @@ tilemap_list = [NodePath("BoundaryCollisionTilemap"), NodePath("LevelCollisionTi
 right_camera_limit = 2048
 bottom_camera_limit = 2368
 room_entrances = [NodePath("Entrance 0"), NodePath("Entrance 1")]
-enemy_nodes = [NodePath("Enemies/YellowDragoon"), NodePath("Enemies/YellowDragoon2"), NodePath("Enemies/RedDragoon"), NodePath("Enemies/GreenDragoon"), NodePath("Enemies/RedDragoon2"), NodePath("Enemies/GreenDragoon2"), NodePath("Enemies/RedDragoon3"), NodePath("Enemies/YellowDragoon3")]
+enemy_nodes = [NodePath("Enemies/BlueDragoon"), NodePath("Enemies/YellowDragoon"), NodePath("Enemies/RedDragoon"), NodePath("Enemies/GreenDragoon"), NodePath("Enemies/RedDragoon2"), NodePath("Enemies/GreenDragoon2"), NodePath("Enemies/RedDragoon3"), NodePath("Enemies/YellowDragoon2")]
 
 [node name="BoundaryCollisionTilemap" type="Node2D" parent="."]
 z_index = 4
@@ -157,11 +158,11 @@ position = Vector2(1952, 2144)
 
 [node name="Enemies" type="Node2D" parent="."]
 
-[node name="YellowDragoon" parent="Enemies" instance=ExtResource("8_bqfi4")]
-position = Vector2(1056, 224)
+[node name="BlueDragoon" parent="Enemies" instance=ExtResource("7_56sty")]
+position = Vector2(992, 224)
 enable_wings = true
 
-[node name="YellowDragoon2" parent="Enemies" instance=ExtResource("8_bqfi4")]
+[node name="YellowDragoon" parent="Enemies" instance=ExtResource("8_bqfi4")]
 position = Vector2(1920, 192)
 enable_wings = true
 enable_reflector = true
@@ -194,7 +195,7 @@ enable_wings = true
 enable_reflector = true
 enable_magic = true
 
-[node name="YellowDragoon3" parent="Enemies" instance=ExtResource("8_bqfi4")]
+[node name="YellowDragoon2" parent="Enemies" instance=ExtResource("8_bqfi4")]
 position = Vector2(1952, 1472)
 enable_wings = true
 enable_reflector = true
