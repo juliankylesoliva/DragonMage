@@ -27,7 +27,7 @@ func state_process(_delta):
 	if (hub.form.cannot_change_form()):
 		hub.form.form_change_failed()
 	
-	hub.camera.wall_climb_horizontal_camera_update(_delta, hub.jumping.stored_wall_climb_speed, hub.jumping.stored_wall_climb_speed > hub.jumping.min_climbing_speed)
+	#hub.camera.wall_climb_horizontal_camera_update(_delta, hub.jumping.stored_wall_climb_speed, hub.jumping.stored_wall_climb_speed > hub.jumping.min_climbing_speed)
 	
 	hub.jumping.update_wall_release_timer(_delta)
 	
