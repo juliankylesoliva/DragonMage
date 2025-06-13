@@ -34,6 +34,8 @@ const HITBOX_HEIGHT_OFFSET : float = 16
 
 @export var height_change_time : float = 5
 
+@export var reset_on_hit : bool = false
+
 var is_player_detected : bool = false
 
 var player_ref : PlayerHub = null
@@ -56,6 +58,8 @@ func _process(_delta: float):
 		if ((player_ref.state_machine.current_state.name != "Damaged" or !player_ref.damage.is_damage_warping) and player_ref.damage.do_damage_warp(true)):
 			EffectFactory.get_effect("EnemyContactImpact", player_ref.char_body.global_position)
 			SoundFactory.play_sound_by_name("enemy_contact_impact", player_ref.char_body.global_position, 0, 1, "SFX")
+			if (reset_on_hit):
+				initialize()
 
 func _physics_process(delta: float):
 	if (cycle_type > 0 and room_ref != null and room_ref.is_room_active):
