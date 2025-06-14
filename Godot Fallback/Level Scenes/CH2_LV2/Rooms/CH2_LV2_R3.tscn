@@ -1,17 +1,19 @@
-[gd_scene load_steps=6 format=4 uid="uid://bcgef8vp622bu"]
+[gd_scene load_steps=7 format=4 uid="uid://bcgef8vp622bu"]
 
 [ext_resource type="Script" path="res://Scripts/Utility Scripts/Room.gd" id="1_yci2q"]
 [ext_resource type="TileSet" uid="uid://dhwi7i1loa2pd" path="res://Sprites/Tiles/Test Tiles/TestTileSet.tres" id="2_4vtdh"]
 [ext_resource type="PackedScene" uid="uid://dqbo0wu6hm8lj" path="res://Scene Objects/Objects/WarpTrigger.tscn" id="3_n77c8"]
+[ext_resource type="PackedScene" uid="uid://dfkmxoba64spw" path="res://Scene Objects/Objects/MedalFragment.tscn" id="4_hm626"]
 [ext_resource type="PackedScene" uid="uid://cs4s34scsvcfr" path="res://Scene Objects/Objects/BreakableBlock.tscn" id="4_sbo0r"]
 [ext_resource type="PackedScene" uid="uid://dopdmj4qfj6sx" path="res://Scene Objects/Obstacles/WaterHazard.tscn" id="5_mjtjx"]
 
-[node name="CH2_LV2_R3" type="Node2D" node_paths=PackedStringArray("tilemap_list", "room_entrances")]
+[node name="CH2_LV2_R3" type="Node2D" node_paths=PackedStringArray("tilemap_list", "room_entrances", "medal_fragments")]
 script = ExtResource("1_yci2q")
 tilemap_list = [NodePath("BoundaryCollisionTilemap"), NodePath("LevelCollisionTilemap")]
 right_camera_limit = 1024
 bottom_camera_limit = 960
 room_entrances = [NodePath("Entrance 0"), NodePath("Entrance 1")]
+medal_fragments = [NodePath("Fragments/MedalFragment"), NodePath("Fragments/MedalFragment2"), NodePath("Fragments/MedalFragment3"), NodePath("Fragments/MedalFragment4"), NodePath("Fragments/MedalFragment5"), NodePath("Fragments/MedalFragment6"), NodePath("Fragments/MedalFragment7"), NodePath("Fragments/MedalFragment8"), NodePath("Fragments/MedalFragment9"), NodePath("Fragments/MedalFragment10"), NodePath("Fragments/MedalFragment11"), NodePath("Fragments/MedalFragment12"), NodePath("Fragments/MedalFragment13"), NodePath("Fragments/MedalFragment14"), NodePath("Fragments/MedalFragment15"), NodePath("Fragments/MedalFragment16"), NodePath("Fragments/MedalFragment17"), NodePath("Fragments/MedalFragment18"), NodePath("Fragments/MedalFragment19"), NodePath("Fragments/MedalFragment20"), NodePath("Fragments/MedalFragment21"), NodePath("Fragments/MedalFragment22"), NodePath("Fragments/MedalFragment23"), NodePath("Fragments/MedalFragment24"), NodePath("Fragments/MedalFragment25"), NodePath("Fragments/MedalFragment26"), NodePath("Fragments/MedalFragment27"), NodePath("Fragments/MedalFragment28")]
 
 [node name="BoundaryCollisionTilemap" type="Node2D" parent="."]
 z_index = 4
@@ -68,6 +70,92 @@ room_entrance_index = 1
 position = Vector2(1072, 864)
 room_origin = NodePath("..")
 room_destination = NodePath("..")
+
+[node name="Fragments" type="Node2D" parent="."]
+
+[node name="MedalFragment" parent="Fragments" instance=ExtResource("4_hm626")]
+position = Vector2(400, 176)
+
+[node name="MedalFragment2" parent="Fragments" instance=ExtResource("4_hm626")]
+position = Vector2(432, 144)
+
+[node name="MedalFragment3" parent="Fragments" instance=ExtResource("4_hm626")]
+position = Vector2(400, 112)
+
+[node name="MedalFragment4" parent="Fragments" instance=ExtResource("4_hm626")]
+position = Vector2(432, 80)
+
+[node name="MedalFragment5" parent="Fragments" instance=ExtResource("4_hm626")]
+position = Vector2(592, 240)
+
+[node name="MedalFragment6" parent="Fragments" instance=ExtResource("4_hm626")]
+position = Vector2(624, 208)
+
+[node name="MedalFragment7" parent="Fragments" instance=ExtResource("4_hm626")]
+position = Vector2(656, 240)
+
+[node name="MedalFragment8" parent="Fragments" instance=ExtResource("4_hm626")]
+position = Vector2(688, 208)
+
+[node name="MedalFragment9" parent="Fragments" instance=ExtResource("4_hm626")]
+position = Vector2(720, 240)
+
+[node name="MedalFragment10" parent="Fragments" instance=ExtResource("4_hm626")]
+position = Vector2(752, 208)
+
+[node name="MedalFragment11" parent="Fragments" instance=ExtResource("4_hm626")]
+position = Vector2(496, 496)
+
+[node name="MedalFragment12" parent="Fragments" instance=ExtResource("4_hm626")]
+position = Vector2(464, 464)
+
+[node name="MedalFragment13" parent="Fragments" instance=ExtResource("4_hm626")]
+position = Vector2(496, 432)
+
+[node name="MedalFragment14" parent="Fragments" instance=ExtResource("4_hm626")]
+position = Vector2(464, 400)
+
+[node name="MedalFragment15" parent="Fragments" instance=ExtResource("4_hm626")]
+position = Vector2(272, 560)
+
+[node name="MedalFragment16" parent="Fragments" instance=ExtResource("4_hm626")]
+position = Vector2(240, 560)
+
+[node name="MedalFragment17" parent="Fragments" instance=ExtResource("4_hm626")]
+position = Vector2(208, 560)
+
+[node name="MedalFragment18" parent="Fragments" instance=ExtResource("4_hm626")]
+position = Vector2(208, 528)
+
+[node name="MedalFragment19" parent="Fragments" instance=ExtResource("4_hm626")]
+position = Vector2(176, 528)
+
+[node name="MedalFragment20" parent="Fragments" instance=ExtResource("4_hm626")]
+position = Vector2(176, 560)
+
+[node name="MedalFragment21" parent="Fragments" instance=ExtResource("4_hm626")]
+position = Vector2(272, 784)
+
+[node name="MedalFragment22" parent="Fragments" instance=ExtResource("4_hm626")]
+position = Vector2(304, 784)
+
+[node name="MedalFragment23" parent="Fragments" instance=ExtResource("4_hm626")]
+position = Vector2(400, 752)
+
+[node name="MedalFragment24" parent="Fragments" instance=ExtResource("4_hm626")]
+position = Vector2(432, 752)
+
+[node name="MedalFragment25" parent="Fragments" instance=ExtResource("4_hm626")]
+position = Vector2(592, 720)
+
+[node name="MedalFragment26" parent="Fragments" instance=ExtResource("4_hm626")]
+position = Vector2(624, 720)
+
+[node name="MedalFragment27" parent="Fragments" instance=ExtResource("4_hm626")]
+position = Vector2(720, 720)
+
+[node name="MedalFragment28" parent="Fragments" instance=ExtResource("4_hm626")]
+position = Vector2(752, 720)
 
 [node name="BreakableBlock" parent="." instance=ExtResource("4_sbo0r")]
 position = Vector2(512, 224)

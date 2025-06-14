@@ -72,7 +72,9 @@ func take_damage(knockback : int = 0):
 		fairy_guard_attack.do_blockstun()
 		return false
 	else:
-		damage_taken += 1
+		if (!is_player_damaged()):
+			damage_taken += 1
+		
 		if (hub.temper.is_form_locked()):
 			is_player_defeated = true
 			hub.form.stop_form_change_timer()
@@ -98,7 +100,9 @@ func do_damage_warp(bypass_invulnerability : bool = false):
 			is_damage_invulnerability_flickering = false
 			current_iframe_timer = 0
 		
-		damage_taken += 1
+		if (!is_player_damaged()):
+			damage_taken += 1
+		
 		if (hub.temper.is_form_locked()):
 			is_player_defeated = true
 			hub.form.stop_form_change_timer()

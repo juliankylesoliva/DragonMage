@@ -172,14 +172,6 @@ position = Vector2(416, -3872)
 [node name="ReinforcedMagicBlock4" parent="Blocks" instance=ExtResource("5_yxdef")]
 position = Vector2(256, -4128)
 
-[node name="WaterHazard" parent="." node_paths=PackedStringArray("room_ref") instance=ExtResource("8_qu8cv")]
-position = Vector2(256, 320)
-room_ref = NodePath("..")
-tile_width = 16
-water_tile_height_offsets = Array[float]([1.0, 8.0, 16.0, 24.0, 32.0, 36.0, 44.0, 50.0, 56.0, 66.0, 70.0, 74.0, 78.0, 86.0, 94.0, 102.0, 110.0, 114.0, 118.0, 122.0, 132.0, 140.0])
-cycle_type = 2
-reset_on_hit = true
-
 [node name="TemperDragonFruit" parent="." instance=ExtResource("9_ovr8p")]
 position = Vector2(416, -640)
 enable_cycling = false
@@ -196,5 +188,13 @@ enable_cycling = false
 
 [node name="TemperDragonFruit4" parent="." instance=ExtResource("9_ovr8p")]
 position = Vector2(256, -3872)
+
+[node name="WaterHazard" parent="." node_paths=PackedStringArray("room_ref") instance=ExtResource("8_qu8cv")]
+position = Vector2(256, 320)
+room_ref = NodePath("..")
+tile_width = 16
+water_tile_height_offsets = Array[float]([1.0, 8.0, 16.0, 24.0, 32.0, 36.0, 44.0, 50.0, 56.0, 66.0, 70.0, 74.0, 78.0, 86.0, 94.0, 102.0, 110.0, 114.0, 118.0, 122.0, 132.0, 140.0])
+cycle_type = 2
+reset_on_hit = true
 
 [editable path="Warp 1"]

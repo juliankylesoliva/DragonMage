@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://bid1ngpd6fm80"]
+[gd_scene load_steps=27 format=3 uid="uid://bid1ngpd6fm80"]
 
 [ext_resource type="Script" path="res://Scripts/Utility Scripts/Level.gd" id="1_36h7d"]
 [ext_resource type="PackedScene" uid="uid://d0ff35cm57xb7" path="res://Scene Objects/Effects/DroppedFragment.tscn" id="2_bdmbh"]
@@ -23,6 +23,7 @@
 [ext_resource type="PackedScene" uid="uid://bjeiexqfc7oht" path="res://Scene Objects/Misc/DefeatScreen.tscn" id="13_0xd2q"]
 [ext_resource type="PackedScene" uid="uid://d2gwylbdhltk3" path="res://Level Scenes/CH2_LV2/Rooms/CH2_LV2_R10.tscn" id="13_j36dr"]
 [ext_resource type="PackedScene" uid="uid://bth8i161g1eoq" path="res://Level Scenes/CH2_LV2/Rooms/CH2_LV2_R1.tscn" id="14_cwpjk"]
+[ext_resource type="PackedScene" uid="uid://dxggmmiafkaq0" path="res://Level Scenes/CH2_LV2/Rooms/CH2_LV2_R11.tscn" id="14_pq67n"]
 [ext_resource type="PackedScene" uid="uid://08vlaru525wu" path="res://Level Scenes/CH2_LV2/Rooms/CH2_LV2_R2.tscn" id="16_4bu2w"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_k23s2"]
@@ -33,15 +34,17 @@ height = 48.0
 [node name="CH2_LV2" type="Node2D" node_paths=PackedStringArray("player_reference", "starting_room", "room_list", "magical_scale", "draconic_scale", "balanced_scale", "screen_fade", "intro_screen", "clear_timer")]
 script = ExtResource("1_36h7d")
 player_reference = NodePath("Player")
-starting_room = NodePath("CH2_LV2_R10")
-room_list = [NodePath("CH2_LV2_R1"), NodePath("CH2_LV2_R2"), NodePath("CH2_LV2_R3"), NodePath("CH2_LV2_R4"), NodePath("CH2_LV2_R5"), NodePath("CH2_LV2_R6"), NodePath("CH2_LV2_R7"), NodePath("CH2_LV2_R8"), NodePath("CH2_LV2_R9"), NodePath("CH2_LV2_R10")]
+starting_room = NodePath("CH2_LV2_R1")
+room_list = [NodePath("CH2_LV2_R1"), NodePath("CH2_LV2_R2"), NodePath("CH2_LV2_R3"), NodePath("CH2_LV2_R4"), NodePath("CH2_LV2_R5"), NodePath("CH2_LV2_R6"), NodePath("CH2_LV2_R7"), NodePath("CH2_LV2_R8"), NodePath("CH2_LV2_R9"), NodePath("CH2_LV2_R10"), NodePath("CH2_LV2_R11")]
 magical_scale = NodePath("CH2_LV2_R4/CollectableScale")
 draconic_scale = NodePath("CH2_LV2_R7/CollectableScale")
 balanced_scale = NodePath("CH2_LV2_R9/CollectableScale")
+min_fragment_collection_rate = 0.605
 dropped_fragment_scene = ExtResource("2_bdmbh")
 screen_fade = NodePath("UI_Canvas/ScreenFade")
 intro_screen = NodePath("UI_Canvas/LevelIntroScreen")
 clear_timer = NodePath("UI_Canvas/ClearTimer")
+time_to_beat = 240.0
 
 [node name="Player" parent="." instance=ExtResource("3_408fr")]
 position = Vector2(96, 160)
@@ -72,10 +75,10 @@ room_destination = NodePath("../../CH2_LV2_R2")
 [node name="CH2_LV2_R2" parent="." instance=ExtResource("16_4bu2w")]
 position = Vector2(448, 608)
 
-[node name="Warp 0" parent="CH2_LV2_R2" index="4" node_paths=PackedStringArray("room_destination")]
+[node name="Warp 0" parent="CH2_LV2_R2" index="5" node_paths=PackedStringArray("room_destination")]
 room_destination = NodePath("../../CH2_LV2_R1")
 
-[node name="Warp 1" parent="CH2_LV2_R2" index="5" node_paths=PackedStringArray("room_destination")]
+[node name="Warp 1" parent="CH2_LV2_R2" index="6" node_paths=PackedStringArray("room_destination")]
 room_destination = NodePath("../../CH2_LV2_R3")
 
 [node name="CH2_LV2_R3" parent="." instance=ExtResource("6_brjxh")]
@@ -95,6 +98,9 @@ room_destination = NodePath("../../CH2_LV2_R3")
 
 [node name="Warp 1" parent="CH2_LV2_R4" index="5" node_paths=PackedStringArray("room_destination")]
 room_destination = NodePath("../../CH2_LV2_R5")
+
+[node name="CollectableScale" parent="CH2_LV2_R4" index="7"]
+mage_fragments_needed = 40
 
 [node name="CH2_LV2_R5" parent="." instance=ExtResource("8_agrb6")]
 position = Vector2(-1632, -1280)
@@ -123,6 +129,9 @@ room_destination = NodePath("../../CH2_LV2_R6")
 [node name="Warp 1" parent="CH2_LV2_R7" index="6" node_paths=PackedStringArray("room_destination")]
 room_destination = NodePath("../../CH2_LV2_R8")
 
+[node name="CollectableScale" parent="CH2_LV2_R7" index="8"]
+dragon_fragments_needed = 40
+
 [node name="CH2_LV2_R8" parent="." instance=ExtResource("11_qr1xm")]
 position = Vector2(-2912, -1984)
 
@@ -132,7 +141,7 @@ room_destination = NodePath("../../CH2_LV2_R7")
 [node name="Warp 1" parent="CH2_LV2_R8" index="5" node_paths=PackedStringArray("room_destination")]
 room_destination = NodePath("../../CH2_LV2_R9")
 
-[node name="Checkpoint" parent="CH2_LV2_R8" index="17" node_paths=PackedStringArray("level_origin")]
+[node name="Checkpoint" parent="CH2_LV2_R8" index="18" node_paths=PackedStringArray("level_origin")]
 level_origin = NodePath("../..")
 
 [node name="CH2_LV2_R9" parent="." instance=ExtResource("12_pdu23")]
@@ -144,12 +153,22 @@ room_destination = NodePath("../../CH2_LV2_R8")
 [node name="Warp 1" parent="CH2_LV2_R9" index="5" node_paths=PackedStringArray("room_destination")]
 room_destination = NodePath("../../CH2_LV2_R10")
 
+[node name="CollectableScale" parent="CH2_LV2_R9" index="7"]
+mage_fragments_needed = 60
+dragon_fragments_needed = 60
+
 [node name="CH2_LV2_R10" parent="." node_paths=PackedStringArray("room_entrances") instance=ExtResource("13_j36dr")]
 position = Vector2(3328, 1696)
 room_entrances = [NodePath("Entrance 0"), null]
 
 [node name="Warp 0" parent="CH2_LV2_R10" index="3" node_paths=PackedStringArray("room_destination")]
 room_destination = NodePath("../../CH2_LV2_R9")
+
+[node name="Warp 1" parent="CH2_LV2_R10" index="4" node_paths=PackedStringArray("room_destination")]
+room_destination = NodePath("../../CH2_LV2_R11")
+
+[node name="CH2_LV2_R11" parent="." instance=ExtResource("14_pq67n")]
+position = Vector2(-800, 0)
 
 [node name="UI_Canvas" type="CanvasLayer" parent="."]
 
@@ -204,6 +223,14 @@ screen_fade = NodePath("../UI_Canvas/ScreenFade")
 [connection signal="player_defeated" from="." to="Textbox" method="hide_textbox"]
 [connection signal="player_defeated" from="." to="LevelMusicPlayer" method="stop"]
 [connection signal="player_defeated" from="." to="DefeatScreen" method="do_defeat_screen"]
+[connection signal="level_finished" from="CH2_LV2_R11/FinishLine" to="." method="level_finish"]
+[connection signal="level_finished" from="CH2_LV2_R11/FinishLine" to="UI_Canvas/TemperMeterUI" method="hide"]
+[connection signal="level_finished" from="CH2_LV2_R11/FinishLine" to="UI_Canvas/MagicMeterUI" method="hide"]
+[connection signal="level_finished" from="CH2_LV2_R11/FinishLine" to="UI_Canvas/FragmentCounterUI" method="hide"]
+[connection signal="level_finished" from="CH2_LV2_R11/FinishLine" to="UI_Canvas/ClearTimer" method="hide"]
+[connection signal="level_finished" from="CH2_LV2_R11/FinishLine" to="UI_Canvas/ClearTimer" method="stop_timer"]
+[connection signal="level_finished" from="CH2_LV2_R11/FinishLine" to="UI_Canvas/ResultsScreen" method="on_level_complete"]
+[connection signal="level_finished" from="CH2_LV2_R11/FinishLine" to="LevelMusicPlayer" method="fade_out"]
 
 [editable path="Player"]
 [editable path="CH2_LV2_R1"]
@@ -217,3 +244,4 @@ screen_fade = NodePath("../UI_Canvas/ScreenFade")
 [editable path="CH2_LV2_R9"]
 [editable path="CH2_LV2_R10"]
 [editable path="CH2_LV2_R10/Warp 1"]
+[editable path="CH2_LV2_R11"]
