@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=4 uid="uid://tm41ml6brwri"]
+[gd_scene load_steps=12 format=4 uid="uid://tm41ml6brwri"]
 
 [ext_resource type="Script" path="res://Scripts/Utility Scripts/Room.gd" id="1_hfggf"]
 [ext_resource type="TileSet" uid="uid://dhwi7i1loa2pd" path="res://Sprites/Tiles/Test Tiles/TestTileSet.tres" id="2_m4ecd"]
@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://bgww8jir45ktf" path="res://Scene Objects/Enemies/BlueDragoon.tscn" id="6_slwhu"]
 [ext_resource type="PackedScene" uid="uid://curi6w4ex7jou" path="res://Scene Objects/Enemies/YellowDragoon.tscn" id="7_3hcoy"]
 [ext_resource type="PackedScene" uid="uid://bajk0w7eoh6o8" path="res://Scene Objects/Objects/ReinforcedBlock.tscn" id="9_xoypf"]
+[ext_resource type="PackedScene" uid="uid://b2a0ttqvejk51" path="res://Scene Objects/Objects/TemperDragonFruit.tscn" id="10_rhm1y"]
 
 [node name="CH2_LV2_R5" type="Node2D" node_paths=PackedStringArray("tilemap_list", "room_entrances", "enemy_nodes", "medal_fragments")]
 script = ExtResource("1_hfggf")
@@ -291,6 +292,11 @@ enable_reflector = true
 position = Vector2(1248, 864)
 enable_wings = true
 enable_helmet = true
+
+[node name="TemperDragonFruit" parent="." instance=ExtResource("10_rhm1y")]
+position = Vector2(160, 224)
+starting_state = 0
+enable_cycling = false
 
 [node name="ReinforcedBlock" parent="." instance=ExtResource("9_xoypf")]
 position = Vector2(416, 160)

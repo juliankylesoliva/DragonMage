@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=4 uid="uid://d1keqs70mn7j1"]
+[gd_scene load_steps=14 format=4 uid="uid://d1keqs70mn7j1"]
 
 [ext_resource type="Script" path="res://Scripts/Utility Scripts/Room.gd" id="1_gcpjp"]
 [ext_resource type="TileSet" uid="uid://dhwi7i1loa2pd" path="res://Sprites/Tiles/Test Tiles/TestTileSet.tres" id="2_58r5n"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://dfkmxoba64spw" path="res://Scene Objects/Objects/MedalFragment.tscn" id="4_c3jnh"]
 [ext_resource type="PackedScene" uid="uid://clfqwsy4byrkf" path="res://Scene Objects/Enemies/GreenDragoon.tscn" id="4_q0trf"]
 [ext_resource type="PackedScene" uid="uid://curi6w4ex7jou" path="res://Scene Objects/Enemies/YellowDragoon.tscn" id="5_flvhq"]
+[ext_resource type="PackedScene" uid="uid://b2a0ttqvejk51" path="res://Scene Objects/Objects/TemperDragonFruit.tscn" id="6_uc6y6"]
 [ext_resource type="PackedScene" uid="uid://dwnpgujive352" path="res://Scene Objects/Enemies/RedDragoon.tscn" id="6_yu74j"]
 [ext_resource type="PackedScene" uid="uid://bgww8jir45ktf" path="res://Scene Objects/Enemies/BlueDragoon.tscn" id="7_jxs0r"]
 [ext_resource type="PackedScene" uid="uid://dopdmj4qfj6sx" path="res://Scene Objects/Obstacles/WaterHazard.tscn" id="8_1gr4i"]
@@ -147,6 +148,11 @@ position = Vector2(1264, 208)
 [node name="CollectableScale" parent="." instance=ExtResource("4_02tne")]
 position = Vector2(1632, 128)
 collectable_type = "MAGICAL"
+
+[node name="TemperDragonFruit" parent="." instance=ExtResource("6_uc6y6")]
+position = Vector2(256, 64)
+starting_state = 0
+enable_cycling = false
 
 [node name="Blocks" type="Node2D" parent="."]
 
