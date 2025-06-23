@@ -1,0 +1,242 @@
+[gd_scene load_steps=36 format=3 uid="uid://b157weul8inp0"]
+
+[ext_resource type="Script" path="res://Scripts/Utility Scripts/BreakableCycle.gd" id="1_48ch2"]
+[ext_resource type="PackedScene" uid="uid://dnqfo4knpej54" path="res://Scene Objects/Effects/BlockFragments.tscn" id="2_0cpmw"]
+[ext_resource type="PackedScene" uid="uid://bxbdfrhfx0jga" path="res://Scene Objects/Effects/MagicBlockFragments.tscn" id="2_kagfs"]
+[ext_resource type="Texture2D" uid="uid://caahvt434hqkt" path="res://Sprites/Objects/BreakableNormalBlock.png" id="3_5edyl"]
+[ext_resource type="PackedScene" uid="uid://ch67081hapyej" path="res://Scene Objects/Effects/FireBlockFragments.tscn" id="3_bel0q"]
+[ext_resource type="Texture2D" uid="uid://dq2qp6rx22ylg" path="res://Sprites/Objects/BreakableFireBlock.png" id="6_0h200"]
+[ext_resource type="Texture2D" uid="uid://i5yqnb7mmdyb" path="res://Sprites/Objects/ReinforcedNormalBlock.png" id="6_vuueh"]
+[ext_resource type="Texture2D" uid="uid://bedgi2aeqjoeh" path="res://Sprites/Objects/BreakableMagicBlock.png" id="7_283x2"]
+[ext_resource type="Texture2D" uid="uid://2d83wc7pkqyy" path="res://Sprites/Objects/CycleBlocks.png" id="7_t5enw"]
+[ext_resource type="Texture2D" uid="uid://c4ujd37hv5mpl" path="res://Sprites/Objects/ReinforcedFireBlock.png" id="10_56my0"]
+[ext_resource type="Texture2D" uid="uid://drg1pffjtd6m2" path="res://Sprites/Objects/ReinforcedMagicBlock.png" id="11_yithm"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7grs1"]
+atlas = ExtResource("3_5edyl")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hyt1n"]
+atlas = ExtResource("6_0h200")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kt14u"]
+atlas = ExtResource("7_t5enw")
+region = Rect2(192, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cjprb"]
+atlas = ExtResource("7_t5enw")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vwxjd"]
+atlas = ExtResource("7_t5enw")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_udibu"]
+atlas = ExtResource("7_t5enw")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n0d5u"]
+atlas = ExtResource("7_283x2")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qsh6f"]
+atlas = ExtResource("7_t5enw")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_u1mb7"]
+atlas = ExtResource("7_t5enw")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lsp15"]
+atlas = ExtResource("7_t5enw")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ww4tn"]
+atlas = ExtResource("7_t5enw")
+region = Rect2(192, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kkefm"]
+atlas = ExtResource("6_vuueh")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_oxxkg"]
+atlas = ExtResource("10_56my0")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_636yg"]
+atlas = ExtResource("7_t5enw")
+region = Rect2(320, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_okbvn"]
+atlas = ExtResource("7_t5enw")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7aecc"]
+atlas = ExtResource("7_t5enw")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fal1t"]
+atlas = ExtResource("7_t5enw")
+region = Rect2(256, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hetju"]
+atlas = ExtResource("11_yithm")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_x4jij"]
+atlas = ExtResource("7_t5enw")
+region = Rect2(256, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_30kht"]
+atlas = ExtResource("7_t5enw")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qbb57"]
+atlas = ExtResource("7_t5enw")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c5lpn"]
+atlas = ExtResource("7_t5enw")
+region = Rect2(320, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_f6hhh"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7grs1")
+}],
+"loop": false,
+"name": &"Breakable",
+"speed": 60.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hyt1n")
+}],
+"loop": false,
+"name": &"BreakableFire",
+"speed": 60.0
+}, {
+"frames": [{
+"duration": 3.0,
+"texture": SubResource("AtlasTexture_kt14u")
+}, {
+"duration": 3.0,
+"texture": SubResource("AtlasTexture_cjprb")
+}, {
+"duration": 3.0,
+"texture": SubResource("AtlasTexture_vwxjd")
+}, {
+"duration": 3.0,
+"texture": SubResource("AtlasTexture_udibu")
+}],
+"loop": false,
+"name": &"BreakableFireToMagic",
+"speed": 60.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_n0d5u")
+}],
+"loop": false,
+"name": &"BreakableMagic",
+"speed": 60.0
+}, {
+"frames": [{
+"duration": 3.0,
+"texture": SubResource("AtlasTexture_qsh6f")
+}, {
+"duration": 3.0,
+"texture": SubResource("AtlasTexture_u1mb7")
+}, {
+"duration": 3.0,
+"texture": SubResource("AtlasTexture_lsp15")
+}, {
+"duration": 3.0,
+"texture": SubResource("AtlasTexture_ww4tn")
+}],
+"loop": false,
+"name": &"BreakableMagicToFire",
+"speed": 60.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kkefm")
+}],
+"loop": false,
+"name": &"Reinforced",
+"speed": 60.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_oxxkg")
+}],
+"loop": false,
+"name": &"ReinforcedFire",
+"speed": 60.0
+}, {
+"frames": [{
+"duration": 3.0,
+"texture": SubResource("AtlasTexture_636yg")
+}, {
+"duration": 3.0,
+"texture": SubResource("AtlasTexture_okbvn")
+}, {
+"duration": 3.0,
+"texture": SubResource("AtlasTexture_7aecc")
+}, {
+"duration": 3.0,
+"texture": SubResource("AtlasTexture_fal1t")
+}],
+"loop": false,
+"name": &"ReinforcedFireToMagic",
+"speed": 60.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hetju")
+}],
+"loop": false,
+"name": &"ReinforcedMagic",
+"speed": 60.0
+}, {
+"frames": [{
+"duration": 3.0,
+"texture": SubResource("AtlasTexture_x4jij")
+}, {
+"duration": 3.0,
+"texture": SubResource("AtlasTexture_30kht")
+}, {
+"duration": 3.0,
+"texture": SubResource("AtlasTexture_qbb57")
+}, {
+"duration": 3.0,
+"texture": SubResource("AtlasTexture_c5lpn")
+}],
+"loop": false,
+"name": &"ReinforcedMagicToFire",
+"speed": 60.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ry55m"]
+size = Vector2(64, 64)
+
+[node name="BreakableCycleBlock" type="StaticBody2D" node_paths=PackedStringArray("anim_sprite", "node_2d")]
+visibility_layer = 2
+z_index = 2
+collision_mask = 36
+script = ExtResource("1_48ch2")
+fragments_scene_magic = ExtResource("2_kagfs")
+fragments_scene_fire = ExtResource("3_bel0q")
+anim_sprite = NodePath("AnimatedSprite2D")
+node_2d = NodePath(".")
+fragments_scene = ExtResource("2_0cpmw")
+break_durablility = 1
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_f6hhh")
+animation = &"Breakable"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_ry55m")
