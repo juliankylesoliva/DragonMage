@@ -1,0 +1,32 @@
+[gd_scene load_steps=4 format=3 uid="uid://b78mf3ykyid5a"]
+
+[ext_resource type="Texture2D" uid="uid://lulugmkktics" path="res://Sprites/Objects/MovingPlatformSolo.png" id="1_26cir"]
+
+[sub_resource type="Curve2D" id="Curve2D_int6r"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 0, 0)
+}
+point_count = 1
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_635us"]
+resource_local_to_scene = true
+size = Vector2(32, 16)
+
+[node name="MovingPlatform" type="Path2D"]
+curve = SubResource("Curve2D_int6r")
+
+[node name="PathFollow2D" type="PathFollow2D" parent="."]
+rotates = false
+
+[node name="PlatformBody" type="StaticBody2D" parent="PathFollow2D"]
+collision_mask = 4
+metadata/Tag = "IntangibleWall"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PathFollow2D/PlatformBody"]
+position = Vector2(0, 8)
+shape = SubResource("RectangleShape2D_635us")
+
+[node name="SoloSprite" type="Sprite2D" parent="PathFollow2D/PlatformBody/CollisionShape2D"]
+position = Vector2(0, -8)
+texture = ExtResource("1_26cir")
+offset = Vector2(0, 8)

@@ -169,7 +169,6 @@ func do_movement(delta):
 	hub.collisions.upward_slope_correction(intended_velocity)
 	hub.collisions.turnaround_wall_stop_correction()
 
-
 func get_speed_portion(clamped : bool = true):
 	var ret_val = abs(hub.char_body.velocity.x / (top_speed if !is_crouching else crouching_top_speed))
 	return (min(1, ret_val) if clamped else ret_val)
