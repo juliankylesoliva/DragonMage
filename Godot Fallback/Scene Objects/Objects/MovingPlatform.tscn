@@ -1,8 +1,13 @@
-[gd_scene load_steps=4 format=3 uid="uid://b78mf3ykyid5a"]
+[gd_scene load_steps=8 format=3 uid="uid://b78mf3ykyid5a"]
 
 [ext_resource type="Texture2D" uid="uid://lulugmkktics" path="res://Sprites/Objects/MovingPlatformSolo.png" id="1_26cir"]
+[ext_resource type="Script" path="res://Scripts/Object Scripts/MovingPlatform.gd" id="1_76jaw"]
+[ext_resource type="Texture2D" uid="uid://b8rq2qdoavwgy" path="res://Sprites/Objects/MovingPlatformLeft.png" id="2_wrwem"]
+[ext_resource type="Texture2D" uid="uid://l66peb5tqo1o" path="res://Sprites/Objects/MovingPlatformMiddle.png" id="3_yh7h0"]
+[ext_resource type="Texture2D" uid="uid://c85v8be71j427" path="res://Sprites/Objects/MovingPlatformRight.png" id="4_vtcs7"]
 
-[sub_resource type="Curve2D" id="Curve2D_int6r"]
+[sub_resource type="Curve2D" id="Curve2D_joioc"]
+resource_local_to_scene = true
 _data = {
 "points": PackedVector2Array(0, 0, 0, 0, 0, 0)
 }
@@ -12,21 +17,56 @@ point_count = 1
 resource_local_to_scene = true
 size = Vector2(32, 16)
 
-[node name="MovingPlatform" type="Path2D"]
-curve = SubResource("Curve2D_int6r")
+[node name="MovingPlatform" type="Path2D" node_paths=PackedStringArray("line_2d", "path_follow", "collision_shape", "solo_sprite", "left_sprite", "middle_sprite", "right_sprite")]
+light_mask = 4
+visibility_layer = 4
+z_index = 3
+curve = SubResource("Curve2D_joioc")
+script = ExtResource("1_76jaw")
+line_2d = NodePath("Line2D")
+path_follow = NodePath("PathFollow2D")
+collision_shape = NodePath("PathFollow2D/PlatformBody/CollisionShape2D")
+solo_sprite = NodePath("PathFollow2D/PlatformBody/SoloSprite")
+left_sprite = NodePath("PathFollow2D/PlatformBody/LeftSprite")
+middle_sprite = NodePath("PathFollow2D/PlatformBody/MiddleSprite")
+right_sprite = NodePath("PathFollow2D/PlatformBody/RightSprite")
+
+[node name="Line2D" type="Line2D" parent="."]
+width = 2.0
+default_color = Color(0.266667, 0.203922, 0.509804, 1)
 
 [node name="PathFollow2D" type="PathFollow2D" parent="."]
 rotates = false
 
-[node name="PlatformBody" type="StaticBody2D" parent="PathFollow2D"]
+[node name="PlatformBody" type="AnimatableBody2D" parent="PathFollow2D"]
 collision_mask = 4
+sync_to_physics = false
 metadata/Tag = "IntangibleWall"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PathFollow2D/PlatformBody"]
 position = Vector2(0, 8)
 shape = SubResource("RectangleShape2D_635us")
+one_way_collision = true
+one_way_collision_margin = 16.0
 
-[node name="SoloSprite" type="Sprite2D" parent="PathFollow2D/PlatformBody/CollisionShape2D"]
-position = Vector2(0, -8)
+[node name="SoloSprite" type="Sprite2D" parent="PathFollow2D/PlatformBody"]
 texture = ExtResource("1_26cir")
 offset = Vector2(0, 8)
+
+[node name="LeftSprite" type="Sprite2D" parent="PathFollow2D/PlatformBody"]
+visible = false
+texture = ExtResource("2_wrwem")
+offset = Vector2(-16, 8)
+
+[node name="MiddleSprite" type="Sprite2D" parent="PathFollow2D/PlatformBody"]
+visible = false
+texture_repeat = 2
+texture = ExtResource("3_yh7h0")
+offset = Vector2(0, 8)
+region_enabled = true
+region_rect = Rect2(0, 0, 32, 16)
+
+[node name="RightSprite" type="Sprite2D" parent="PathFollow2D/PlatformBody"]
+visible = false
+texture = ExtResource("4_vtcs7")
+offset = Vector2(16, 8)

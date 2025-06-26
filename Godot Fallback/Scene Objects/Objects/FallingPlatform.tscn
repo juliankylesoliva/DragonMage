@@ -1,0 +1,79 @@
+[gd_scene load_steps=8 format=3 uid="uid://duqf3giujjj3r"]
+
+[ext_resource type="Texture2D" uid="uid://bmdva8pkumk1v" path="res://Sprites/Objects/FallingPlatformSolo.png" id="1_u27qu"]
+[ext_resource type="Script" path="res://Scripts/Object Scripts/FallingPlatform.gd" id="1_ys4up"]
+[ext_resource type="Texture2D" uid="uid://bfw8avhgjo1fa" path="res://Sprites/Objects/FallingPlatformLeft.png" id="2_qjasn"]
+[ext_resource type="Texture2D" uid="uid://ce3rgyy24fhvj" path="res://Sprites/Objects/FallingPlatformMiddle.png" id="3_5mr78"]
+[ext_resource type="Texture2D" uid="uid://ds3cygtoytwjb" path="res://Sprites/Objects/FallingPlatformRight.png" id="4_vvso7"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_uxnio"]
+resource_local_to_scene = true
+size = Vector2(32, 16)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_635us"]
+resource_local_to_scene = true
+size = Vector2(32, 16)
+
+[node name="FallingPlatform" type="Node2D" node_paths=PackedStringArray("platform_body", "area_2d", "platform_collision_shape", "area_collision_shape", "solo_sprite", "left_sprite", "middle_sprite", "right_sprite", "on_screen_notifier")]
+light_mask = 4
+visibility_layer = 4
+z_index = 3
+script = ExtResource("1_ys4up")
+platform_body = NodePath("PlatformBody")
+area_2d = NodePath("PlatformBody/Area2D")
+platform_collision_shape = NodePath("PlatformBody/CollisionShape2D")
+area_collision_shape = NodePath("PlatformBody/Area2D/CollisionShape2D")
+solo_sprite = NodePath("PlatformBody/SoloSprite")
+left_sprite = NodePath("PlatformBody/LeftSprite")
+middle_sprite = NodePath("PlatformBody/MiddleSprite")
+right_sprite = NodePath("PlatformBody/RightSprite")
+on_screen_notifier = NodePath("PlatformBody/VisibleOnScreenNotifier2D")
+unstable_color = Color(0.639216, 0.168627, 0.0509804, 1)
+
+[node name="PlatformBody" type="AnimatableBody2D" parent="."]
+collision_mask = 4
+sync_to_physics = false
+metadata/Tag = "IntangibleWall"
+
+[node name="Area2D" type="Area2D" parent="PlatformBody"]
+position = Vector2(0, -8)
+collision_layer = 0
+collision_mask = 4
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlatformBody/Area2D"]
+shape = SubResource("RectangleShape2D_uxnio")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlatformBody"]
+position = Vector2(0, 8)
+shape = SubResource("RectangleShape2D_635us")
+one_way_collision = true
+one_way_collision_margin = 16.0
+
+[node name="SoloSprite" type="Sprite2D" parent="PlatformBody"]
+texture = ExtResource("1_u27qu")
+offset = Vector2(0, 8)
+
+[node name="LeftSprite" type="Sprite2D" parent="PlatformBody"]
+visible = false
+texture = ExtResource("2_qjasn")
+offset = Vector2(-16, 8)
+
+[node name="MiddleSprite" type="Sprite2D" parent="PlatformBody"]
+visible = false
+texture_repeat = 2
+texture = ExtResource("3_5mr78")
+offset = Vector2(0, 8)
+region_enabled = true
+region_rect = Rect2(0, 0, 32, 16)
+
+[node name="RightSprite" type="Sprite2D" parent="PlatformBody"]
+visible = false
+texture = ExtResource("4_vvso7")
+offset = Vector2(16, 8)
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="PlatformBody"]
+rect = Rect2(-16, 0, 32, 16)
+
+[connection signal="body_entered" from="PlatformBody/Area2D" to="." method="_on_body_entered"]
+[connection signal="body_exited" from="PlatformBody/Area2D" to="." method="_on_body_exited"]

@@ -39,6 +39,8 @@ class_name PlayerMovement
 
 @export var crouch_cooldown_time : float = 0.167
 
+@export var auto_crouch_threshold : float = 2
+
 @export var enable_crouch_toggle : bool = false
 
 var is_facing_right : bool = true
@@ -83,7 +85,7 @@ func check_crouch_state():
 		return
 	
 	if (!is_crouching):
-		is_crouching = (!is_crouch_cooldown_active() and hub.is_action_pressed("Crouch") and (hub.jumping.enable_crouch_jumping or hub.char_body.is_on_floor()))
+		is_crouching = ((!is_crouch_cooldown_active() and hub.is_action_pressed("Crouch") and (hub.jumping.enable_crouch_jumping or hub.char_body.is_on_floor())) or (hub.char_body.is_on_floor() and hub.char_body.get_platform_velocity().y < 0 and hub.collisions.get_distance_to_ceiling() <= auto_crouch_threshold))
 		if (is_crouching):
 			current_min_crouch_timer = min_crouch_time
 	else:

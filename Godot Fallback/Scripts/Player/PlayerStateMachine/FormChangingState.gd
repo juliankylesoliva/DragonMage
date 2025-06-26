@@ -45,6 +45,10 @@ func state_process(_delta):
 		set_next_state(state_machine.get_state_by_name("Damaged"))
 	else:
 		hub.char_body.velocity = Vector2.ZERO
+		can_update_camera_x_pos = hub.collisions.is_on_a_moving_platform()
+		can_update_camera_y_pos = hub.collisions.is_on_a_moving_platform()
+		if (hub.collisions.is_on_a_moving_platform() or hub.char_body.is_on_floor()):
+			hub.char_body.move_and_slide()
 
 func on_enter():
 	hub.form.do_form_change()

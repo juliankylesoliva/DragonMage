@@ -208,6 +208,11 @@ func startup_update(delta : float):
 			fire_tackle_arrow_effect_instance.set_flip_h(hub.movement.get_facing_value() < 0)
 			if ((fire_tackle_arrow_effect_instance.offset.x * hub.movement.get_facing_value()) < 0):
 				fire_tackle_arrow_effect_instance.offset.x *= -1
+		
+		if (hub.collisions.is_on_a_moving_platform() or hub.char_body.is_on_floor()):
+			hub.char_body.move_and_slide()
+			if (fire_tackle_arrow_effect_instance != null):
+				fire_tackle_arrow_effect_instance.global_position = hub.char_body.global_position
 	elif (hub.damage.is_player_defeated or hub.damage.is_player_damaged()):
 		end_fire_tackle()
 	else:

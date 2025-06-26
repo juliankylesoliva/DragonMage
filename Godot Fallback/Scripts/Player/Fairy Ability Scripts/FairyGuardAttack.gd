@@ -121,6 +121,8 @@ func attack_state_process(_delta : float):
 		pass
 	else:
 		pass
+	if (hub.collisions.is_on_a_moving_platform() or hub.char_body.is_on_floor()):
+		hub.char_body.move_and_slide()
 
 func on_attack_state_exit():
 	is_button_released = false

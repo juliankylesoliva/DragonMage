@@ -34,17 +34,17 @@ func is_moving_against_a_wall():
 		hub.raycast_wall_mid_r.force_raycast_update()
 		hub.raycast_wall_bot_r.force_raycast_update()
 		
-		total_collisions += (1 if hub.raycast_wall_top_r.is_colliding() and hub.raycast_wall_top_r.get_collision_normal().y == 0 else 0)
-		total_collisions += (1 if hub.raycast_wall_mid_r.is_colliding() and hub.raycast_wall_mid_r.get_collision_normal().y == 0 else 0)
-		total_collisions += (1 if !hub.char_body.is_on_floor() and hub.raycast_wall_bot_r.is_colliding() and hub.raycast_wall_bot_r.get_collision_normal().y == 0 else 0)
+		total_collisions += (1 if hub.raycast_wall_top_r.is_colliding() and !is_raycast_in_semisolid(hub.raycast_wall_top_r) and hub.raycast_wall_top_r.get_collision_normal().y == 0 else 0)
+		total_collisions += (1 if hub.raycast_wall_mid_r.is_colliding() and !is_raycast_in_semisolid(hub.raycast_wall_mid_r) and hub.raycast_wall_mid_r.get_collision_normal().y == 0 else 0)
+		total_collisions += (1 if !hub.char_body.is_on_floor() and hub.raycast_wall_bot_r.is_colliding() and !is_raycast_in_semisolid(hub.raycast_wall_bot_r) and hub.raycast_wall_bot_r.get_collision_normal().y == 0 else 0)
 	elif (direction < 0):
 		hub.raycast_wall_top_l.force_raycast_update()
 		hub.raycast_wall_mid_l.force_raycast_update()
 		hub.raycast_wall_bot_l.force_raycast_update()
 		
-		total_collisions += (1 if hub.raycast_wall_top_l.is_colliding() and hub.raycast_wall_top_l.get_collision_normal().y == 0 else 0)
-		total_collisions += (1 if hub.raycast_wall_mid_l.is_colliding() and hub.raycast_wall_mid_l.get_collision_normal().y == 0 else 0)
-		total_collisions += (1 if !hub.char_body.is_on_floor() and hub.raycast_wall_bot_l.is_colliding() and hub.raycast_wall_bot_l.get_collision_normal().y == 0 else 0)
+		total_collisions += (1 if hub.raycast_wall_top_l.is_colliding() and !is_raycast_in_semisolid(hub.raycast_wall_top_l) and hub.raycast_wall_top_l.get_collision_normal().y == 0 else 0)
+		total_collisions += (1 if hub.raycast_wall_mid_l.is_colliding() and !is_raycast_in_semisolid(hub.raycast_wall_mid_l) and hub.raycast_wall_mid_l.get_collision_normal().y == 0 else 0)
+		total_collisions += (1 if !hub.char_body.is_on_floor() and hub.raycast_wall_bot_l.is_colliding() and !is_raycast_in_semisolid(hub.raycast_wall_bot_l) and hub.raycast_wall_bot_l.get_collision_normal().y == 0 else 0)
 	else:
 		pass
 	
@@ -58,17 +58,17 @@ func is_facing_a_wall():
 		hub.raycast_wall_mid_r.force_raycast_update()
 		hub.raycast_wall_bot_r.force_raycast_update()
 		
-		total_collisions += (1 if hub.raycast_wall_top_r.is_colliding() and hub.raycast_wall_top_r.get_collision_normal().y == 0 else 0)
-		total_collisions += (1 if hub.raycast_wall_mid_r.is_colliding() and hub.raycast_wall_mid_r.get_collision_normal().y == 0 else 0)
-		total_collisions += (1 if !hub.char_body.is_on_floor() and hub.raycast_wall_bot_r.is_colliding() and hub.raycast_wall_bot_r.get_collision_normal().y == 0 else 0)
+		total_collisions += (1 if hub.raycast_wall_top_r.is_colliding() and !is_raycast_in_semisolid(hub.raycast_wall_top_r) and hub.raycast_wall_top_r.get_collision_normal().y == 0 else 0)
+		total_collisions += (1 if hub.raycast_wall_mid_r.is_colliding() and !is_raycast_in_semisolid(hub.raycast_wall_mid_r) and hub.raycast_wall_mid_r.get_collision_normal().y == 0 else 0)
+		total_collisions += (1 if !hub.char_body.is_on_floor() and hub.raycast_wall_bot_r.is_colliding() and !is_raycast_in_semisolid(hub.raycast_wall_bot_r) and hub.raycast_wall_bot_r.get_collision_normal().y == 0 else 0)
 	elif (hub.movement.get_facing_value() < 0):
 		hub.raycast_wall_top_l.force_raycast_update()
 		hub.raycast_wall_mid_l.force_raycast_update()
 		hub.raycast_wall_bot_l.force_raycast_update()
 		
-		total_collisions += (1 if hub.raycast_wall_top_l.is_colliding() and hub.raycast_wall_top_l.get_collision_normal().y == 0 else 0)
-		total_collisions += (1 if hub.raycast_wall_mid_l.is_colliding() and hub.raycast_wall_mid_l.get_collision_normal().y == 0 else 0)
-		total_collisions += (1 if !hub.char_body.is_on_floor() and hub.raycast_wall_bot_l.is_colliding() and hub.raycast_wall_bot_l.get_collision_normal().y == 0 else 0)
+		total_collisions += (1 if hub.raycast_wall_top_l.is_colliding() and !is_raycast_in_semisolid(hub.raycast_wall_top_l) and hub.raycast_wall_top_l.get_collision_normal().y == 0 else 0)
+		total_collisions += (1 if hub.raycast_wall_mid_l.is_colliding() and !is_raycast_in_semisolid(hub.raycast_wall_mid_l) and hub.raycast_wall_mid_l.get_collision_normal().y == 0 else 0)
+		total_collisions += (1 if !hub.char_body.is_on_floor() and hub.raycast_wall_bot_l.is_colliding() and !is_raycast_in_semisolid(hub.raycast_wall_bot_l) and hub.raycast_wall_bot_l.get_collision_normal().y == 0 else 0)
 	else:
 		pass
 	
@@ -123,13 +123,26 @@ func is_facing_an_intangible_wall():
 	
 	return (total_collisions >= intangible_wall_raycast_collision_threshold)
 
+func is_raycast_in_semisolid(ray : RayCast2D):
+	if (ray.is_colliding()):
+		var target = ray.get_collider()
+		if (target.has_method("shape_find_owner")):
+			var shape_id = ray.get_collider_shape()
+			var owner_id = target.shape_find_owner(shape_id)
+			var shape = target.shape_owner_get_owner(owner_id)
+			return shape.one_way_collision
+	return false
+
+func is_on_a_moving_platform():
+	return (hub.char_body.is_on_floor() and hub.char_body.get_platform_velocity() != Vector2.ZERO)
+
 func is_near_a_ledge(ray_num : int = 0):
 	return (hub.char_body.is_on_floor() and get_distance_to_ground(ray_num) > hub.char_body.floor_snap_length)
 
 func is_in_ceiling_when_uncrouched():
 	if (!hub.movement.is_crouching):
 		return false
-	return (get_distance_to_ceiling() <= (uncrouched_height - crouched_height))
+	return (get_distance_to_ceiling() <= (uncrouched_height - crouched_height) and !is_raycast_in_semisolid(hub.raycast_um))
 
 func get_distance_to_ground(ray_num : int = 0):
 	var raycast_to_use : RayCast2D = (hub.raycast_dm if ray_num == 0 else hub.raycast_dl if ray_num < 0 else hub.raycast_dr)
@@ -213,7 +226,7 @@ func do_ceiling_nudge():
 		else:
 			return
 		
-		if (raycast_to_use != null and sign_multiplier != 0 and raycast_to_use.is_colliding()):
+		if (raycast_to_use != null and sign_multiplier != 0 and raycast_to_use.is_colliding() and !is_raycast_in_semisolid(raycast_to_use)):
 			var total_magnitude : float = raycast_to_use.target_position.length()
 			var partial_magnitude : float = (raycast_to_use.global_position.distance_to(raycast_to_use.get_collision_point()) if raycast_to_use.is_colliding() else total_magnitude)
 			if (partial_magnitude < total_magnitude):
