@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://c3el80dbnmcws"]
+
+[ext_resource type="Script" path="res://Scripts/Object Scripts/ConveyorBelt.gd" id="1_dfqmn"]
+[ext_resource type="PackedScene" uid="uid://clxcwdcnr32di" path="res://Scene Objects/Objects/ConveyorBeltSegment.tscn" id="2_12be1"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rbrwi"]
+resource_local_to_scene = true
+size = Vector2(32, 32)
+
+[node name="ConveyorBelt" type="StaticBody2D" node_paths=PackedStringArray("collision_shape")]
+script = ExtResource("1_dfqmn")
+conveyor_segment = ExtResource("2_12be1")
+collision_shape = NodePath("CollisionShape2D")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_rbrwi")
+metadata/Tag = "IntangibleWall"

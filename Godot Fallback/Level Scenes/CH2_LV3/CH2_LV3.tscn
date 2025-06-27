@@ -1,0 +1,110 @@
+[gd_scene load_steps=17 format=3 uid="uid://dittc4eifec6w"]
+
+[ext_resource type="Script" path="res://Scripts/Utility Scripts/Level.gd" id="1_13gf8"]
+[ext_resource type="PackedScene" uid="uid://d0ff35cm57xb7" path="res://Scene Objects/Effects/DroppedFragment.tscn" id="2_6ibby"]
+[ext_resource type="PackedScene" uid="uid://c6qw77ovfwgfs" path="res://Player.tscn" id="3_xe4pj"]
+[ext_resource type="PackedScene" uid="uid://bdypi7w73c6kq" path="res://Scene Objects/UI/TemperMeterUI.tscn" id="4_dtwdr"]
+[ext_resource type="PackedScene" uid="uid://cg3dhm1wv5w67" path="res://Scene Objects/UI/MagicMeterUI.tscn" id="5_aamjr"]
+[ext_resource type="PackedScene" uid="uid://vmiu4klr3ywc" path="res://Scene Objects/UI/FragmentCounterUI.tscn" id="6_mhsti"]
+[ext_resource type="PackedScene" uid="uid://b5wwivjk8sl7b" path="res://Scene Objects/Misc/ClearTimer.tscn" id="7_n4e8n"]
+[ext_resource type="PackedScene" uid="uid://buykytsdrlnsg" path="res://Scene Objects/Misc/ResultsScreen.tscn" id="8_u735p"]
+[ext_resource type="PackedScene" uid="uid://d1eef1xjuwf3b" path="res://Menu Scenes/PauseMenu.tscn" id="9_req0l"]
+[ext_resource type="PackedScene" uid="uid://8beel2odcuky" path="res://Scene Objects/Effects/ScreenFade.tscn" id="10_v2elo"]
+[ext_resource type="PackedScene" uid="uid://brhoroc2w6jwi" path="res://Scene Objects/UI/Textbox.tscn" id="11_6hykn"]
+[ext_resource type="PackedScene" uid="uid://ca4v88yik2xe" path="res://Scene Objects/Misc/LevelIntroScreen.tscn" id="11_lycuj"]
+[ext_resource type="PackedScene" uid="uid://btq4qla5fyq0n" path="res://Scene Objects/Misc/LevelMusicPlayer.tscn" id="12_f04gt"]
+[ext_resource type="PackedScene" uid="uid://bjeiexqfc7oht" path="res://Scene Objects/Misc/DefeatScreen.tscn" id="13_vfsv1"]
+[ext_resource type="PackedScene" uid="uid://cawcebumcenpi" path="res://Level Scenes/CH2_LV3/Rooms/CH2_LV3_R1.tscn" id="14_2pbtd"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_k23s2"]
+resource_local_to_scene = true
+radius = 8.0
+height = 48.0
+
+[node name="CH2_LV3" type="Node2D" node_paths=PackedStringArray("player_reference", "starting_room", "room_list", "screen_fade", "intro_screen", "clear_timer")]
+script = ExtResource("1_13gf8")
+player_reference = NodePath("Player")
+starting_room = NodePath("CH2_LV3_R1")
+room_list = [NodePath("CH2_LV3_R1")]
+dropped_fragment_scene = ExtResource("2_6ibby")
+screen_fade = NodePath("UI_Canvas/ScreenFade")
+intro_screen = NodePath("UI_Canvas/LevelIntroScreen")
+clear_timer = NodePath("UI_Canvas/ClearTimer")
+
+[node name="Player" parent="." instance=ExtResource("3_xe4pj")]
+position = Vector2(96, 223)
+
+[node name="Fairy" parent="Player/Hub" index="4"]
+is_using_fairy = true
+
+[node name="Camera" parent="Player/Hub" index="12" node_paths=PackedStringArray("player_cam")]
+player_cam = NodePath("../../../Camera2D")
+
+[node name="CollisionShape2D" parent="Player" index="4"]
+shape = SubResource("CapsuleShape2D_k23s2")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+process_callback = 0
+drag_left_margin = 0.0
+drag_top_margin = 0.6
+drag_right_margin = 0.0
+editor_draw_limits = true
+editor_draw_drag_margin = true
+
+[node name="UI_Canvas" type="CanvasLayer" parent="."]
+
+[node name="TemperMeterUI" parent="UI_Canvas" node_paths=PackedStringArray("player_node") instance=ExtResource("4_dtwdr")]
+position = Vector2(1, 8)
+player_node = NodePath("../../Player")
+
+[node name="MagicMeterUI" parent="UI_Canvas" node_paths=PackedStringArray("player_node") instance=ExtResource("5_aamjr")]
+position = Vector2(88, 40)
+player_node = NodePath("../../Player")
+
+[node name="FragmentCounterUI" parent="UI_Canvas" node_paths=PackedStringArray("player_node", "level_ref") instance=ExtResource("6_mhsti")]
+position = Vector2(512, 0)
+player_node = NodePath("../../Player")
+level_ref = NodePath("../..")
+
+[node name="ClearTimer" parent="UI_Canvas" instance=ExtResource("7_n4e8n")]
+position = Vector2(4, 316)
+
+[node name="ResultsScreen" parent="UI_Canvas" node_paths=PackedStringArray("screen_fade", "level", "clear_timer") instance=ExtResource("8_u735p")]
+screen_fade = NodePath("../ScreenFade")
+level = NodePath("../..")
+clear_timer = NodePath("../ClearTimer")
+
+[node name="PauseMenu" parent="UI_Canvas" node_paths=PackedStringArray("screen_fade") instance=ExtResource("9_req0l")]
+screen_fade = NodePath("../ScreenFade")
+
+[node name="ScreenFade" parent="UI_Canvas" instance=ExtResource("10_v2elo")]
+starting_fade_duration = 1.0
+
+[node name="LevelIntroScreen" parent="UI_Canvas" instance=ExtResource("11_lycuj")]
+chapter_char = "2"
+section_char = "3"
+level_name_left = "Magi Co."
+level_name_right = "Mayhem"
+subtitle_text = "Time to clock 'em out!"
+
+[node name="Textbox" parent="." node_paths=PackedStringArray("ui_canvas") instance=ExtResource("11_6hykn")]
+accept_input_events = false
+ui_canvas = NodePath("../UI_Canvas")
+
+[node name="LevelMusicPlayer" parent="." instance=ExtResource("12_f04gt")]
+
+[node name="DefeatScreen" parent="." node_paths=PackedStringArray("screen_fade") instance=ExtResource("13_vfsv1")]
+screen_fade = NodePath("../UI_Canvas/ScreenFade")
+
+[node name="CH2_LV3_R1" parent="." instance=ExtResource("14_2pbtd")]
+
+[connection signal="player_defeated" from="." to="UI_Canvas/TemperMeterUI" method="hide"]
+[connection signal="player_defeated" from="." to="UI_Canvas/MagicMeterUI" method="hide"]
+[connection signal="player_defeated" from="." to="UI_Canvas/FragmentCounterUI" method="hide"]
+[connection signal="player_defeated" from="." to="UI_Canvas/ClearTimer" method="hide"]
+[connection signal="player_defeated" from="." to="UI_Canvas/ClearTimer" method="stop_timer"]
+[connection signal="player_defeated" from="." to="Textbox" method="hide_textbox"]
+[connection signal="player_defeated" from="." to="LevelMusicPlayer" method="stop"]
+[connection signal="player_defeated" from="." to="DefeatScreen" method="do_defeat_screen"]
+
+[editable path="Player"]

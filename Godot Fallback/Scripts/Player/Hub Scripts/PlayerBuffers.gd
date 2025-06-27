@@ -157,6 +157,8 @@ func refresh_fairy_ability_buffer():
 
 func check_speed_preservation_buffer(delta):
 	var current_horizontal_speed = abs(hub.movement.current_horizontal_velocity)
+	if (hub.collisions.is_on_a_moving_platform() and (hub.char_body.velocity.x * hub.char_body.get_platform_velocity().x) > 0):
+		current_horizontal_speed += (abs(hub.char_body.get_platform_velocity().x) * ((hub.movement.top_speed / current_horizontal_speed if current_horizontal_speed > hub.movement.top_speed else 1.0)))
 	
 	if (current_horizontal_speed >= highest_speed and current_horizontal_speed > hub.movement.top_speed):
 		highest_speed = current_horizontal_speed
