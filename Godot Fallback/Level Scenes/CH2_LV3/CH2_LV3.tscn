@@ -25,6 +25,7 @@ height = 48.0
 script = ExtResource("1_13gf8")
 player_reference = NodePath("Player")
 starting_room = NodePath("CH2_LV3_R1")
+starting_room_entrance_index = 1
 room_list = [NodePath("CH2_LV3_R1")]
 dropped_fragment_scene = ExtResource("2_6ibby")
 screen_fade = NodePath("UI_Canvas/ScreenFade")
@@ -50,6 +51,8 @@ drag_top_margin = 0.6
 drag_right_margin = 0.0
 editor_draw_limits = true
 editor_draw_drag_margin = true
+
+[node name="CH2_LV3_R1" parent="." instance=ExtResource("14_2pbtd")]
 
 [node name="UI_Canvas" type="CanvasLayer" parent="."]
 
@@ -95,8 +98,6 @@ ui_canvas = NodePath("../UI_Canvas")
 
 [node name="DefeatScreen" parent="." node_paths=PackedStringArray("screen_fade") instance=ExtResource("13_vfsv1")]
 screen_fade = NodePath("../UI_Canvas/ScreenFade")
-
-[node name="CH2_LV3_R1" parent="." instance=ExtResource("14_2pbtd")]
 
 [connection signal="player_defeated" from="." to="UI_Canvas/TemperMeterUI" method="hide"]
 [connection signal="player_defeated" from="." to="UI_Canvas/MagicMeterUI" method="hide"]
