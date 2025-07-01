@@ -1,21 +1,26 @@
-[gd_scene load_steps=5 format=3 uid="uid://bkkxc1em4mqaq"]
+[gd_scene load_steps=6 format=3 uid="uid://bkkxc1em4mqaq"]
 
 [ext_resource type="Script" path="res://Scripts/Object Scripts/SignalButton.gd" id="1_fh2ot"]
 [ext_resource type="FontFile" uid="uid://blejgst41tdnl" path="res://PressStart2P.ttf" id="2_5reb2"]
+[ext_resource type="Texture2D" uid="uid://dvhgc4rm8hx64" path="res://Sprites/Objects/TempButton.png" id="2_k6t28"]
 [ext_resource type="Script" path="res://Scripts/Utility Scripts/ButtonPromptTextLabel.gd" id="3_kpvpq"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_s6xeh"]
 size = Vector2(32, 32)
 
-[node name="SignalButton" type="Area2D" node_paths=PackedStringArray("button_prompt")]
+[node name="SignalButton" type="Area2D" node_paths=PackedStringArray("button_sprite", "button_prompt")]
 collision_layer = 0
 collision_mask = 4
 monitorable = false
 script = ExtResource("1_fh2ot")
+button_sprite = NodePath("ButtonSprite")
 button_prompt = NodePath("ButtonPrompt")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_s6xeh")
+
+[node name="ButtonSprite" type="Sprite2D" parent="."]
+texture = ExtResource("2_k6t28")
 
 [node name="ButtonPrompt" type="RichTextLabel" parent="."]
 visible = false
@@ -24,9 +29,9 @@ visibility_layer = 64
 z_index = 7
 clip_contents = false
 offset_left = -64.0
-offset_top = -60.0
+offset_top = -48.0
 offset_right = 64.0
-offset_bottom = -44.0
+offset_bottom = -32.0
 pivot_offset = Vector2(64, 8)
 theme_override_fonts/normal_font = ExtResource("2_5reb2")
 theme_override_font_sizes/normal_font_size = 8
@@ -35,3 +40,6 @@ text = "[center][Interact]"
 scroll_active = false
 shortcut_keys_enabled = false
 script = ExtResource("3_kpvpq")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]

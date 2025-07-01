@@ -12,7 +12,7 @@
 script = ExtResource("1_whmkp")
 tilemap_list = [NodePath("BoundaryCollisionTilemap"), NodePath("LevelCollisionTilemap")]
 right_camera_limit = 3584
-room_entrances = [NodePath("WarpDoor"), NodePath("Entrance 0"), NodePath("Entrance 1")]
+room_entrances = [NodePath("WarpDoor"), NodePath("Entrance 0"), NodePath("FallReentry")]
 
 [node name="BoundaryCollisionTilemap" type="Node2D" parent="."]
 z_index = 4
@@ -62,7 +62,7 @@ is_locked = true
 [node name="Entrance 0" type="Node2D" parent="."]
 position = Vector2(128, 224)
 
-[node name="Entrance 1" type="Node2D" parent="."]
+[node name="FallReentry" type="Node2D" parent="."]
 position = Vector2(1792, -32)
 
 [node name="DoorKey" parent="." instance=ExtResource("5_2bdqe")]

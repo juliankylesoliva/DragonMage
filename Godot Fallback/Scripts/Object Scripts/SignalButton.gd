@@ -10,6 +10,10 @@ signal button_pressed
 
 @export var one_shot : bool = false
 
+@export var button_texture_override : Texture2D = null
+
+@export var button_sprite : Sprite2D
+
 var prompt_template : String = "[center][Interact] %s"
 
 var button_prompt_label : ButtonPromptTextLabel

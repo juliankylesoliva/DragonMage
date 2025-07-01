@@ -14,4 +14,3 @@ collision_shape = NodePath("CollisionShape2D")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_rbrwi")
-metadata/Tag = "IntangibleWall"

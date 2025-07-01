@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://dittc4eifec6w"]
+[gd_scene load_steps=19 format=3 uid="uid://dittc4eifec6w"]
 
 [ext_resource type="Script" path="res://Scripts/Utility Scripts/Level.gd" id="1_13gf8"]
 [ext_resource type="PackedScene" uid="uid://d0ff35cm57xb7" path="res://Scene Objects/Effects/DroppedFragment.tscn" id="2_6ibby"]
@@ -15,6 +15,8 @@
 [ext_resource type="PackedScene" uid="uid://btq4qla5fyq0n" path="res://Scene Objects/Misc/LevelMusicPlayer.tscn" id="12_f04gt"]
 [ext_resource type="PackedScene" uid="uid://bjeiexqfc7oht" path="res://Scene Objects/Misc/DefeatScreen.tscn" id="13_vfsv1"]
 [ext_resource type="PackedScene" uid="uid://cawcebumcenpi" path="res://Level Scenes/CH2_LV3/Rooms/CH2_LV3_R1.tscn" id="14_2pbtd"]
+[ext_resource type="PackedScene" uid="uid://u8e1fwrtc1mm" path="res://Level Scenes/CH2_LV3/Rooms/CH2_LV3_R2.tscn" id="16_2c4qm"]
+[ext_resource type="PackedScene" uid="uid://bgwmmnhqig3g2" path="res://Level Scenes/CH2_LV3/Rooms/CH2_LV3_R3.tscn" id="17_cvotr"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_k23s2"]
 resource_local_to_scene = true
@@ -26,7 +28,7 @@ script = ExtResource("1_13gf8")
 player_reference = NodePath("Player")
 starting_room = NodePath("CH2_LV3_R1")
 starting_room_entrance_index = 1
-room_list = [NodePath("CH2_LV3_R1")]
+room_list = [NodePath("CH2_LV3_R1"), NodePath("CH2_LV3_R2"), NodePath("CH2_LV3_R3")]
 dropped_fragment_scene = ExtResource("2_6ibby")
 screen_fade = NodePath("UI_Canvas/ScreenFade")
 intro_screen = NodePath("UI_Canvas/LevelIntroScreen")
@@ -53,6 +55,28 @@ editor_draw_limits = true
 editor_draw_drag_margin = true
 
 [node name="CH2_LV3_R1" parent="." instance=ExtResource("14_2pbtd")]
+
+[node name="WarpDoor" parent="CH2_LV3_R1" index="2" node_paths=PackedStringArray("room_destination")]
+room_destination = NodePath("../../CH2_LV3_R2")
+
+[node name="CH2_LV3_R2" parent="." instance=ExtResource("16_2c4qm")]
+position = Vector2(1536, 352)
+
+[node name="WarpDoor" parent="CH2_LV3_R2" index="2" node_paths=PackedStringArray("room_destination")]
+room_destination = NodePath("../../CH2_LV3_R1")
+
+[node name="ElevatorSelector" parent="CH2_LV3_R2" index="5" node_paths=PackedStringArray("room_destinations")]
+room_destinations = [NodePath("../../CH2_LV3_R1"), NodePath("../../CH2_LV3_R3")]
+
+[node name="CH2_LV3_R3" parent="." instance=ExtResource("17_cvotr")]
+position = Vector2(1536, -608)
+
+[node name="WarpDoor" parent="CH2_LV3_R3" index="3" node_paths=PackedStringArray("room_destination")]
+room_destination = NodePath("../../CH2_LV3_R2")
+
+[node name="FallWarp" parent="CH2_LV3_R3" index="6" node_paths=PackedStringArray("room_destination")]
+room_destination = NodePath("../../CH2_LV3_R1")
+room_entrance_index = 2
 
 [node name="UI_Canvas" type="CanvasLayer" parent="."]
 
@@ -109,3 +133,7 @@ screen_fade = NodePath("../UI_Canvas/ScreenFade")
 [connection signal="player_defeated" from="." to="DefeatScreen" method="do_defeat_screen"]
 
 [editable path="Player"]
+[editable path="CH2_LV3_R1"]
+[editable path="CH2_LV3_R2"]
+[editable path="CH2_LV3_R3"]
+[editable path="CH2_LV3_R3/FallWarp"]

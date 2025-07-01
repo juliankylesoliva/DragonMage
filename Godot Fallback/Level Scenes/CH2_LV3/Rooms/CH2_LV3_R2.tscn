@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=4 uid="uid://u8e1fwrtc1mm"]
+[gd_scene load_steps=6 format=4 uid="uid://u8e1fwrtc1mm"]
 
 [ext_resource type="Script" path="res://Scripts/Utility Scripts/Room.gd" id="1_hkc7q"]
 [ext_resource type="TileSet" uid="uid://dhwi7i1loa2pd" path="res://Sprites/Tiles/Test Tiles/TestTileSet.tres" id="2_l0qfb"]
 [ext_resource type="PackedScene" uid="uid://d3ahci60rs8ef" path="res://Scene Objects/Objects/WarpDoor.tscn" id="3_1fa0u"]
 [ext_resource type="PackedScene" uid="uid://bkkxc1em4mqaq" path="res://Scene Objects/Objects/SignalButton.tscn" id="4_5542e"]
+[ext_resource type="Script" path="res://Scripts/Object Scripts/ElevatorSelector.gd" id="5_qm3my"]
 
 [node name="CH2_LV3_R2" type="Node2D" node_paths=PackedStringArray("tilemap_list", "room_entrances")]
 script = ExtResource("1_hkc7q")
@@ -59,3 +60,11 @@ custom_prompt = "Up"
 [node name="SignalButton2" parent="." instance=ExtResource("4_5542e")]
 position = Vector2(192, 224)
 custom_prompt = "Down"
+
+[node name="ElevatorSelector" type="Node2D" parent="." node_paths=PackedStringArray("door_destination_to_modify", "up_button", "down_button")]
+position = Vector2(256, 112)
+script = ExtResource("5_qm3my")
+door_destination_to_modify = NodePath("../WarpDoor")
+up_button = NodePath("../SignalButton")
+down_button = NodePath("../SignalButton2")
+initial_locked_rooms = 0
