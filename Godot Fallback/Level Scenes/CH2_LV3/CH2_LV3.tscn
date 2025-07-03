@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://dittc4eifec6w"]
+[gd_scene load_steps=34 format=3 uid="uid://dittc4eifec6w"]
 
 [ext_resource type="Script" path="res://Scripts/Utility Scripts/Level.gd" id="1_13gf8"]
 [ext_resource type="PackedScene" uid="uid://d0ff35cm57xb7" path="res://Scene Objects/Effects/DroppedFragment.tscn" id="2_6ibby"]
@@ -12,6 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://buykytsdrlnsg" path="res://Scene Objects/Misc/ResultsScreen.tscn" id="8_u735p"]
 [ext_resource type="PackedScene" uid="uid://d1eef1xjuwf3b" path="res://Menu Scenes/PauseMenu.tscn" id="9_req0l"]
 [ext_resource type="PackedScene" uid="uid://dpbcs4ynf8pba" path="res://Level Scenes/CH2_LV3/Rooms/CH2_LV3_R6.tscn" id="9_vrj57"]
+[ext_resource type="PackedScene" uid="uid://dkrriec303682" path="res://Level Scenes/CH2_LV3/Rooms/CH2_LV3_R7.tscn" id="10_7wxhu"]
 [ext_resource type="PackedScene" uid="uid://8beel2odcuky" path="res://Scene Objects/Effects/ScreenFade.tscn" id="10_v2elo"]
 [ext_resource type="PackedScene" uid="uid://brhoroc2w6jwi" path="res://Scene Objects/UI/Textbox.tscn" id="11_6hykn"]
 [ext_resource type="PackedScene" uid="uid://ca4v88yik2xe" path="res://Scene Objects/Misc/LevelIntroScreen.tscn" id="11_lycuj"]
@@ -20,6 +21,7 @@
 [ext_resource type="PackedScene" uid="uid://cawcebumcenpi" path="res://Level Scenes/CH2_LV3/Rooms/CH2_LV3_R1.tscn" id="14_2pbtd"]
 [ext_resource type="PackedScene" uid="uid://u8e1fwrtc1mm" path="res://Level Scenes/CH2_LV3/Rooms/CH2_LV3_R2.tscn" id="16_2c4qm"]
 [ext_resource type="PackedScene" uid="uid://bgwmmnhqig3g2" path="res://Level Scenes/CH2_LV3/Rooms/CH2_LV3_R3.tscn" id="17_cvotr"]
+[ext_resource type="PackedScene" uid="uid://btqjqkpg02mic" path="res://Level Scenes/CH2_LV3/Rooms/CH2_LV3_R8.tscn" id="22_4hlsg"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_k23s2"]
 resource_local_to_scene = true
@@ -54,12 +56,54 @@ _data = {
 }
 point_count = 5
 
+[sub_resource type="Curve2D" id="Curve2D_qde6x"]
+resource_local_to_scene = true
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -128, 0)
+}
+point_count = 2
+
+[sub_resource type="Curve2D" id="Curve2D_dj7bb"]
+resource_local_to_scene = true
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -128, 0, 0, 0, 0, -128, -128, 0, 0, 0, 0, -128, 0, 0, 0, 0, 0, 0, 0)
+}
+point_count = 5
+
+[sub_resource type="Curve2D" id="Curve2D_8kyjn"]
+resource_local_to_scene = true
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -64, 0, 0, 0, 0, 0, -64, -128, 0, 0, 0, 0, 64, -128, 0, 0, 0, 0, 64, 0, 0, 0, 0, 0, 0, 0)
+}
+point_count = 6
+
+[sub_resource type="Curve2D" id="Curve2D_eex0g"]
+resource_local_to_scene = true
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -128, 0)
+}
+point_count = 2
+
+[sub_resource type="Curve2D" id="Curve2D_hpoix"]
+resource_local_to_scene = true
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 128, 0, 0, 0, 0, 0, 128, -64, 0, 0, 0, 0, 0, -64, 0, 0, 0, 0, 0, 0)
+}
+point_count = 5
+
+[sub_resource type="Curve2D" id="Curve2D_cqeig"]
+resource_local_to_scene = true
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 64, 0)
+}
+point_count = 2
+
 [node name="CH2_LV3" type="Node2D" node_paths=PackedStringArray("player_reference", "starting_room", "room_list", "magical_scale", "screen_fade", "intro_screen", "clear_timer")]
 script = ExtResource("1_13gf8")
 player_reference = NodePath("Player")
 starting_room = NodePath("CH2_LV3_R1")
 starting_room_entrance_index = 1
-room_list = [NodePath("CH2_LV3_R1"), NodePath("CH2_LV3_R2"), NodePath("CH2_LV3_R3"), NodePath("CH2_LV3_R4"), NodePath("CH2_LV3_R5"), NodePath("CH2_LV3_R6")]
+room_list = [NodePath("CH2_LV3_R1"), NodePath("CH2_LV3_R2"), NodePath("CH2_LV3_R3"), NodePath("CH2_LV3_R4"), NodePath("CH2_LV3_R5"), NodePath("CH2_LV3_R6"), NodePath("CH2_LV3_R7"), NodePath("CH2_LV3_R8")]
 magical_scale = NodePath("CH2_LV3_R5/CollectableScale")
 dropped_fragment_scene = ExtResource("2_6ibby")
 screen_fade = NodePath("UI_Canvas/ScreenFade")
@@ -99,6 +143,7 @@ room_destination = NodePath("../../CH2_LV3_R1")
 
 [node name="ElevatorSelector" parent="CH2_LV3_R2" index="5" node_paths=PackedStringArray("room_destinations")]
 room_destinations = [NodePath("../../CH2_LV3_R1"), NodePath("../../CH2_LV3_R3"), NodePath("../../CH2_LV3_R6")]
+initial_locked_rooms = 1
 
 [node name="CH2_LV3_R3" parent="." instance=ExtResource("17_cvotr")]
 position = Vector2(1536, -576)
@@ -142,6 +187,14 @@ position = Vector2(1536, -1168)
 [node name="WarpDoor" parent="CH2_LV3_R6" index="3" node_paths=PackedStringArray("room_destination")]
 room_destination = NodePath("../../CH2_LV3_R2")
 
+[node name="WarpDoor2" parent="CH2_LV3_R6" index="4" node_paths=PackedStringArray("room_destination")]
+room_destination = NodePath("../../CH2_LV3_R8")
+room_entrance_index = 0
+
+[node name="WarpDoor3" parent="CH2_LV3_R6" index="5" node_paths=PackedStringArray("room_destination")]
+room_destination = NodePath("../../CH2_LV3_R7")
+room_entrance_index = 0
+
 [node name="FallWarp" parent="CH2_LV3_R6" index="6" node_paths=PackedStringArray("room_destination")]
 room_destination = NodePath("../../CH2_LV3_R1")
 room_entrance_index = 2
@@ -157,6 +210,42 @@ curve = SubResource("Curve2D_yy40b")
 
 [node name="MovingPlatform4" parent="CH2_LV3_R6/Platforms" index="3"]
 curve = SubResource("Curve2D_cq4gk")
+
+[node name="CH2_LV3_R7" parent="." instance=ExtResource("10_7wxhu")]
+position = Vector2(-1152, -1168)
+
+[node name="Warp 0" parent="CH2_LV3_R7" index="4" node_paths=PackedStringArray("room_destination")]
+room_destination = NodePath("../../CH2_LV3_R6")
+room_entrance_index = 2
+
+[node name="MovingPlatform" parent="CH2_LV3_R7/Platforms" index="1"]
+curve = SubResource("Curve2D_qde6x")
+
+[node name="MovingPlatform2" parent="CH2_LV3_R7/Platforms" index="3"]
+curve = SubResource("Curve2D_dj7bb")
+
+[node name="MovingPlatform3" parent="CH2_LV3_R7/Platforms" index="7"]
+curve = SubResource("Curve2D_8kyjn")
+
+[node name="CH2_LV3_R8" parent="." instance=ExtResource("22_4hlsg")]
+position = Vector2(4224, -1168)
+
+[node name="Warp 0" parent="CH2_LV3_R8" index="3" node_paths=PackedStringArray("room_destination")]
+room_destination = NodePath("../../CH2_LV3_R6")
+room_entrance_index = 1
+
+[node name="FallWarp" parent="CH2_LV3_R8" index="4" node_paths=PackedStringArray("room_destination")]
+room_destination = NodePath("../../CH2_LV3_R1")
+room_entrance_index = 2
+
+[node name="MovingPlatform" parent="CH2_LV3_R8/Platforms" index="0"]
+curve = SubResource("Curve2D_eex0g")
+
+[node name="MovingPlatform2" parent="CH2_LV3_R8/Platforms" index="2"]
+curve = SubResource("Curve2D_hpoix")
+
+[node name="MovingPlatform3" parent="CH2_LV3_R8/Platforms" index="4"]
+curve = SubResource("Curve2D_cqeig")
 
 [node name="UI_Canvas" type="CanvasLayer" parent="."]
 
@@ -212,6 +301,7 @@ screen_fade = NodePath("../UI_Canvas/ScreenFade")
 [connection signal="player_defeated" from="." to="LevelMusicPlayer" method="stop"]
 [connection signal="player_defeated" from="." to="DefeatScreen" method="do_defeat_screen"]
 [connection signal="button_pressed" from="CH2_LV3_R5/SignalButton" to="CH2_LV3_R2/ElevatorSelector" method="unlock_next_room"]
+[connection signal="button_pressed" from="CH2_LV3_R8/SignalButton" to="CH2_LV3_R2/ElevatorSelector" method="unlock_next_room"]
 
 [editable path="Player"]
 [editable path="CH2_LV3_R1"]
@@ -223,3 +313,6 @@ screen_fade = NodePath("../UI_Canvas/ScreenFade")
 [editable path="CH2_LV3_R5/FallWarp"]
 [editable path="CH2_LV3_R6"]
 [editable path="CH2_LV3_R6/FallWarp"]
+[editable path="CH2_LV3_R7"]
+[editable path="CH2_LV3_R8"]
+[editable path="CH2_LV3_R8/FallWarp"]
