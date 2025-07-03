@@ -10,6 +10,8 @@ class_name BreakableCycle
 
 @export var anim_sprite : AnimatedSprite2D
 
+@export var on_screen : VisibleOnScreenNotifier2D
+
 @export_enum("MAGIC", "FIRE") var starting_type : String = "MAGIC"
 
 @export var cycle_interval : float = 1
@@ -29,11 +31,13 @@ func _physics_process(delta):
 			if (current_cycle_time <= 0):
 				if (breakable_by == "MAGIC"):
 					anim_sprite.play("ReinforcedMagicToFire" if break_durablility > 1 else "BreakableMagicToFire")
-					SoundFactory.play_sound_by_name("transformation_draelyn", node_2d.global_position, -6, 2)
+					if (on_screen.is_on_screen()):
+						SoundFactory.play_sound_by_name("transformation_draelyn", node_2d.global_position, -6, 2)
 					breakable_by = "FIRE"
 				else:
 					anim_sprite.play("ReinforcedFireToMagic" if break_durablility > 1 else "BreakableFireToMagic")
-					SoundFactory.play_sound_by_name("transformation_magli", node_2d.global_position, -6, 2)
+					if (on_screen.is_on_screen()):
+						SoundFactory.play_sound_by_name("transformation_magli", node_2d.global_position, -6, 2)
 					breakable_by = "MAGIC"
 
 func do_break():
