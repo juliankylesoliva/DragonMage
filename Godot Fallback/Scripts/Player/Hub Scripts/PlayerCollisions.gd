@@ -193,7 +193,7 @@ func collider_crouch_update():
 	hub.raycast_wall_mid_r.position.y = hub.collision_shape.position.y
 
 func do_ledge_nudge(custom_ease : float = 0):
-	if (is_near_a_ledge() and get_ground_normal().x == 0):
+	if (is_near_a_ledge() and !is_on_a_moving_platform() and get_ground_normal().x == 0):
 		var is_left_grounded : bool = (get_distance_to_ground(-1) <= hub.char_body.floor_snap_length)
 		var is_middle_grounded : bool = (get_distance_to_ground(0) <= hub.char_body.floor_snap_length)
 		var is_right_grounded : bool = (get_distance_to_ground(1) <= hub.char_body.floor_snap_length)

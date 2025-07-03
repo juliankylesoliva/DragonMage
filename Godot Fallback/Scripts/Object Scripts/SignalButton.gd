@@ -28,10 +28,14 @@ func interact(hub : PlayerHub):
 	if (player != null and hub == player and is_pressing_enabled):
 		button_pressed.emit()
 		if (one_shot):
-			is_pressing_enabled = false
+			disable_pressing()
 
 func enable_pressing():
 	is_pressing_enabled = true
+	self.set_visible(true)
+	button_prompt_label.set_raw_text(prompt_template % custom_prompt)
 
 func disable_pressing():
 	is_pressing_enabled = false
+	self.set_visible(false)
+	button_prompt_label.set_raw_text("")
