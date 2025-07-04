@@ -32,12 +32,12 @@ func _physics_process(delta):
 				if (breakable_by == "MAGIC"):
 					anim_sprite.play("ReinforcedMagicToFire" if break_durablility > 1 else "BreakableMagicToFire")
 					if (on_screen.is_on_screen()):
-						SoundFactory.play_sound_by_name("transformation_draelyn", node_2d.global_position, -6, 2)
+						SoundFactory.play_sound_by_name("transformation_draelyn", node_2d.global_position, -12, 2)
 					breakable_by = "FIRE"
 				else:
 					anim_sprite.play("ReinforcedFireToMagic" if break_durablility > 1 else "BreakableFireToMagic")
 					if (on_screen.is_on_screen()):
-						SoundFactory.play_sound_by_name("transformation_magli", node_2d.global_position, -6, 2)
+						SoundFactory.play_sound_by_name("transformation_magli", node_2d.global_position, -12, 2)
 					breakable_by = "MAGIC"
 
 func do_break():

@@ -1,0 +1,241 @@
+[gd_scene load_steps=14 format=4 uid="uid://xdm532qnjk22"]
+
+[ext_resource type="Script" path="res://Scripts/Utility Scripts/Room.gd" id="1_s78sg"]
+[ext_resource type="TileSet" uid="uid://dhwi7i1loa2pd" path="res://Sprites/Tiles/Test Tiles/TestTileSet.tres" id="2_58mmx"]
+[ext_resource type="PackedScene" uid="uid://7hpfpsyk75xy" path="res://Scene Objects/Obstacles/AmbushBlockade.tscn" id="3_b8b5j"]
+[ext_resource type="PackedScene" uid="uid://dqbo0wu6hm8lj" path="res://Scene Objects/Objects/WarpTrigger.tscn" id="4_1m3ei"]
+[ext_resource type="PackedScene" uid="uid://d0yrt438jc3k7" path="res://Scene Objects/Objects/DoorKey.tscn" id="5_e7kfp"]
+[ext_resource type="PackedScene" uid="uid://b2a0ttqvejk51" path="res://Scene Objects/Objects/TemperDragonFruit.tscn" id="5_k1hp4"]
+[ext_resource type="PackedScene" uid="uid://b157weul8inp0" path="res://Scene Objects/Objects/BreakableCycleBlock.tscn" id="6_n2yvs"]
+[ext_resource type="PackedScene" uid="uid://cn5fv6nf7hnwr" path="res://Scene Objects/Objects/ReinforcedCycleBlock.tscn" id="7_in2c4"]
+[ext_resource type="PackedScene" uid="uid://dwnpgujive352" path="res://Scene Objects/Enemies/RedDragoon.tscn" id="7_vqffb"]
+[ext_resource type="PackedScene" uid="uid://clfqwsy4byrkf" path="res://Scene Objects/Enemies/GreenDragoon.tscn" id="9_6ujme"]
+[ext_resource type="PackedScene" uid="uid://bgww8jir45ktf" path="res://Scene Objects/Enemies/BlueDragoon.tscn" id="10_78kt0"]
+[ext_resource type="PackedScene" uid="uid://curi6w4ex7jou" path="res://Scene Objects/Enemies/YellowDragoon.tscn" id="11_gragw"]
+[ext_resource type="PackedScene" uid="uid://dopdmj4qfj6sx" path="res://Scene Objects/Obstacles/WaterHazard.tscn" id="13_0mdnw"]
+
+[node name="CH2_LV3_R10" type="Node2D" node_paths=PackedStringArray("tilemap_list", "room_entrances", "enemy_nodes")]
+script = ExtResource("1_s78sg")
+tilemap_list = [NodePath("BoundaryCollisionTilemap"), NodePath("LevelCollisionTilemap")]
+left_camera_limit = -2048
+room_entrances = [NodePath("Entrance 0")]
+enemy_nodes = [NodePath("Enemies/RedDragoon"), NodePath("Enemies/GreenDragoon"), NodePath("Enemies/GreenDragoon2"), NodePath("Enemies/RedDragoon2"), NodePath("Enemies/BlueDragoon"), NodePath("Enemies/BlueDragoon2"), NodePath("Enemies/YellowDragoon"), NodePath("Enemies/RedDragoon3"), NodePath("Enemies/GreenDragoon3")]
+
+[node name="BoundaryCollisionTilemap" type="Node2D" parent="."]
+z_index = 4
+
+[node name="Intangible" type="TileMapLayer" parent="BoundaryCollisionTilemap"]
+z_index = -1
+use_parent_material = true
+tile_map_data = PackedByteArray("AAABAAoAAAADAAAAAAACAAoAAAADAAAAAAADAAoAAAADAAAAAAAEAAoAAAADAAAAAAAFAAoAAAADAAAAAAAGAAoAAAADAAAAAAAHAAoAAAADAAAAAAAIAAoAAAADAAAAAAAJAAoAAAADAAAAAAAKAAoAAAADAAAAAAAQAAUAAAADAAAAAAAQAAgAAAADAAAAAAARAAUAAAADAAAAAAARAAgAAAADAAAAAAASAAUAAAADAAAAAAASAAYAAAADAAAAAAASAAcAAAADAAAAAAASAAgAAAADAAAAAADz/woAAAADAAAAAAD0/woAAAADAAAAAAD1/woAAAADAAAAAAD2/woAAAADAAAAAAD3/woAAAADAAAAAAD4/woAAAADAAAAAAD5/woAAAADAAAAAAD6/woAAAADAAAAAAD7/woAAAADAAAAAAD8/woAAAADAAAAAADb/woAAAADAAAAAADc/woAAAADAAAAAADd/woAAAADAAAAAADe/woAAAADAAAAAADf/woAAAADAAAAAADg/woAAAADAAAAAADh/woAAAADAAAAAADi/woAAAADAAAAAADj/woAAAADAAAAAADk/woAAAADAAAAAADl/woAAAADAAAAAADm/woAAAADAAAAAADn/woAAAADAAAAAADo/woAAAADAAAAAADp/woAAAADAAAAAADq/woAAAADAAAAAADr/woAAAADAAAAAADs/woAAAADAAAAAADB/woAAAADAAAAAADC/woAAAADAAAAAADD/woAAAADAAAAAADE/woAAAADAAAAAADF/woAAAADAAAAAADG/woAAAADAAAAAADH/woAAAADAAAAAADI/woAAAADAAAAAADJ/woAAAADAAAAAADK/woAAAADAAAAAADN/woAAAADAAAAAADO/woAAAADAAAAAADP/woAAAADAAAAAADQ/woAAAADAAAAAADR/woAAAADAAAAAADS/woAAAADAAAAAADT/woAAAADAAAAAADU/woAAAADAAAAAADV/woAAAADAAAAAADW/woAAAADAAAAAAA=")
+tile_set = ExtResource("2_58mmx")
+rendering_quadrant_size = 32
+metadata/Tag = "IntangibleWall"
+
+[node name="LevelCollisionTilemap" type="Node2D" parent="."]
+visibility_layer = 4
+z_index = 3
+
+[node name="Decoration" type="TileMapLayer" parent="LevelCollisionTilemap"]
+use_parent_material = true
+tile_set = ExtResource("2_58mmx")
+rendering_quadrant_size = 32
+
+[node name="Background" type="TileMapLayer" parent="LevelCollisionTilemap"]
+z_index = -1
+use_parent_material = true
+tile_set = ExtResource("2_58mmx")
+
+[node name="Ground" type="TileMapLayer" parent="LevelCollisionTilemap"]
+modulate = Color(0.0745098, 0.113725, 0.301961, 1)
+z_index = -1
+use_parent_material = true
+tile_map_data = PackedByteArray("AAAKAAkAAAADAAAAAAALAAkAAAADAAAAAAAMAAgAAAADAAAAAAAMAAkAAAADAAAAAAANAAgAAAADAAAAAAANAAkAAAADAAAAAAAOAAgAAAADAAAAAAAOAAkAAAADAAAAAAAPAAgAAAADAAAAAAAPAAkAAAADAAAAAAAOAAAAAAADAAAAAAAOAAEAAAADAAAAAAAOAAIAAAADAAAAAAAOAAMAAAADAAAAAAAOAAQAAAADAAAAAAAOAAUAAAADAAAAAAAPAAAAAAADAAAAAAAPAAEAAAADAAAAAAAPAAIAAAADAAAAAAAPAAMAAAADAAAAAAAPAAQAAAADAAAAAAAPAAUAAAADAAAAAAAAAAAAAAADAAAAAAAAAAEAAAADAAAAAAABAAAAAAADAAAAAAABAAEAAAADAAAAAAACAAAAAAADAAAAAAACAAEAAAADAAAAAAADAAAAAAADAAAAAAADAAEAAAADAAAAAAAEAAAAAAADAAAAAAAEAAEAAAADAAAAAAAFAAAAAAADAAAAAAAFAAEAAAADAAAAAAAGAAAAAAADAAAAAAAGAAEAAAADAAAAAAAHAAAAAAADAAAAAAAHAAEAAAADAAAAAAAIAAAAAAADAAAAAAAIAAEAAAADAAAAAAAJAAAAAAADAAAAAAAJAAEAAAADAAAAAADA/wAAAAADAAAAAADA/wEAAAADAAAAAADA/wIAAAADAAAAAADA/wMAAAADAAAAAADA/wQAAAADAAAAAADA/wUAAAADAAAAAADA/wYAAAADAAAAAADA/wcAAAADAAAAAADA/wgAAAADAAAAAADA/wkAAAADAAAAAADB/wAAAAADAAAAAADB/wEAAAADAAAAAADB/wIAAAADAAAAAADB/wMAAAADAAAAAADB/wQAAAADAAAAAADB/wUAAAADAAAAAADB/wYAAAADAAAAAADB/wcAAAADAAAAAADB/wgAAAADAAAAAADB/wkAAAADAAAAAADC/wAAAAADAAAAAADD/wAAAAADAAAAAADE/wAAAAADAAAAAADF/wAAAAADAAAAAADG/wAAAAADAAAAAADH/wAAAAADAAAAAADI/wAAAAADAAAAAADJ/wAAAAADAAAAAADK/wAAAAADAAAAAADL/wAAAAADAAAAAADM/wAAAAADAAAAAADN/wAAAAADAAAAAADO/wAAAAADAAAAAADP/wAAAAADAAAAAADQ/wAAAAADAAAAAADR/wAAAAADAAAAAADS/wAAAAADAAAAAADT/wAAAAADAAAAAADU/wAAAAADAAAAAADV/wAAAAADAAAAAADW/wAAAAADAAAAAADW/wEAAAADAAAAAADW/wIAAAADAAAAAADW/wMAAAADAAAAAADW/wYAAAADAAAAAADW/wcAAAADAAAAAADW/wgAAAADAAAAAADW/wkAAAADAAAAAADX/wAAAAADAAAAAADX/wEAAAADAAAAAADX/wIAAAADAAAAAADX/wMAAAADAAAAAADX/wYAAAADAAAAAADX/wcAAAADAAAAAADX/wgAAAADAAAAAADX/wkAAAADAAAAAADY/wAAAAADAAAAAADY/wYAAAADAAAAAADY/wcAAAADAAAAAADY/wgAAAADAAAAAADY/wkAAAADAAAAAADZ/wAAAAADAAAAAADZ/wYAAAADAAAAAADZ/wcAAAADAAAAAADZ/wgAAAADAAAAAADZ/wkAAAADAAAAAADa/wAAAAADAAAAAADa/wYAAAADAAAAAADa/wcAAAADAAAAAADa/wgAAAADAAAAAADa/wkAAAADAAAAAADb/wAAAAADAAAAAADb/wMAAAADAAAAAADb/wYAAAADAAAAAADb/wcAAAADAAAAAADb/wgAAAADAAAAAADb/wkAAAADAAAAAADc/wAAAAADAAAAAADd/wAAAAADAAAAAADe/wAAAAADAAAAAADf/wAAAAADAAAAAADg/wAAAAADAAAAAADh/wAAAAADAAAAAADi/wAAAAADAAAAAADj/wAAAAADAAAAAADk/wAAAAADAAAAAADl/wAAAAADAAAAAADm/wAAAAADAAAAAADn/wAAAAADAAAAAADo/wAAAAADAAAAAADp/wAAAAADAAAAAADq/wAAAAADAAAAAADr/wAAAAADAAAAAADs/wAAAAADAAAAAADs/wEAAAADAAAAAADs/wIAAAADAAAAAADs/wMAAAADAAAAAADs/wYAAAADAAAAAADs/wcAAAADAAAAAADs/wgAAAADAAAAAADs/wkAAAADAAAAAADt/wAAAAADAAAAAADt/wEAAAADAAAAAADt/wIAAAADAAAAAADt/wMAAAADAAAAAADt/wYAAAADAAAAAADt/wcAAAADAAAAAADt/wgAAAADAAAAAADt/wkAAAADAAAAAADu/wAAAAADAAAAAADu/wEAAAADAAAAAADu/wYAAAADAAAAAADu/wcAAAADAAAAAADu/wgAAAADAAAAAADu/wkAAAADAAAAAADv/wAAAAADAAAAAADv/wEAAAADAAAAAADv/wYAAAADAAAAAADv/wcAAAADAAAAAADv/wgAAAADAAAAAADv/wkAAAADAAAAAADw/wAAAAADAAAAAADw/wEAAAADAAAAAADw/wYAAAADAAAAAADw/wcAAAADAAAAAADw/wgAAAADAAAAAADw/wkAAAADAAAAAADx/wAAAAADAAAAAADx/wEAAAADAAAAAADx/wYAAAADAAAAAADx/wcAAAADAAAAAADx/wgAAAADAAAAAADx/wkAAAADAAAAAADy/wAAAAADAAAAAADy/wEAAAADAAAAAADz/wAAAAADAAAAAADz/wEAAAADAAAAAAD0/wAAAAADAAAAAAD0/wEAAAADAAAAAAD1/wAAAAADAAAAAAD1/wEAAAADAAAAAAD2/wAAAAADAAAAAAD2/wEAAAADAAAAAAD3/wAAAAADAAAAAAD3/wEAAAADAAAAAAD4/wAAAAADAAAAAAD4/wEAAAADAAAAAAD5/wAAAAADAAAAAAD5/wEAAAADAAAAAAD6/wAAAAADAAAAAAD6/wEAAAADAAAAAAD7/wAAAAADAAAAAAD7/wEAAAADAAAAAAD8/wAAAAADAAAAAAD8/wEAAAADAAAAAAD9/wAAAAADAAAAAAD9/wEAAAADAAAAAAD+/wAAAAADAAAAAAD+/wEAAAADAAAAAAD//wAAAAADAAAAAAD//wEAAAADAAAAAAAKAAgAAAADAAAAAAALAAgAAAADAAAAAAAAAAYAAAADAAAAAAAAAAcAAAADAAAAAAAAAAgAAAADAAAAAAAAAAkAAAADAAAAAAABAAYAAAADAAAAAAABAAcAAAADAAAAAAABAAgAAAADAAAAAAABAAkAAAADAAAAAAACAAIAAAADAAAAAAACAAMAAAADAAAAAAADAAIAAAADAAAAAAADAAMAAAADAAAAAAAEAAIAAAADAAAAAAAEAAMAAAADAAAAAAAFAAIAAAADAAAAAAAFAAMAAAADAAAAAAAGAAIAAAADAAAAAAAGAAMAAAADAAAAAAAHAAIAAAADAAAAAAAHAAMAAAADAAAAAAAIAAIAAAADAAAAAAAIAAMAAAADAAAAAAAJAAIAAAADAAAAAAAJAAMAAAADAAAAAAAAAAIAAAAAAAEAAAABAAMAAAAAAAEAAAABAAIAAAADAAAAAAAKAAAAAAADAAAAAAAKAAEAAAADAAAAAAALAAAAAAADAAAAAAALAAEAAAADAAAAAAAMAAAAAAADAAAAAAAMAAEAAAADAAAAAAANAAAAAAADAAAAAAANAAEAAAADAAAAAAAGAAYAAAADAAAAAAAGAAcAAAADAAAAAAAGAAgAAAADAAAAAAAGAAkAAAADAAAAAAAHAAYAAAADAAAAAAAHAAcAAAADAAAAAAAHAAgAAAADAAAAAAAHAAkAAAADAAAAAAAIAAgAAAADAAAAAAAIAAkAAAADAAAAAAAJAAgAAAADAAAAAAAJAAkAAAADAAAAAADy/wYAAAADAAAAAADy/wcAAAADAAAAAADy/wgAAAADAAAAAADy/wkAAAADAAAAAADz/wYAAAADAAAAAADz/wcAAAADAAAAAADz/wgAAAADAAAAAADz/wkAAAADAAAAAAD+/wYAAAADAAAAAAD+/wcAAAADAAAAAAD+/wgAAAADAAAAAAD+/wkAAAADAAAAAAD//wYAAAADAAAAAAD//wcAAAADAAAAAAD//wgAAAADAAAAAAD//wkAAAADAAAAAADu/wMAAAABAAEAAADv/wIAAAABAAEAAADu/wIAAAADAAAAAAD8/wYAAAADAAAAAAD8/wcAAAADAAAAAAD8/wgAAAADAAAAAAD8/wkAAAADAAAAAAD9/wYAAAADAAAAAAD9/wcAAAADAAAAAAD9/wgAAAADAAAAAAD9/wkAAAADAAAAAAD8/wQAAAADAAAAAAD8/wUAAAADAAAAAAD9/wQAAAADAAAAAAD9/wUAAAADAAAAAADy/wQAAAADAAAAAADy/wUAAAADAAAAAADz/wQAAAADAAAAAADz/wUAAAADAAAAAADb/wQAAAADAAAAAADb/wUAAAADAAAAAADa/wMAAAADAAAAAADa/wQAAAADAAAAAADa/wUAAAADAAAAAADY/wEAAAADAAAAAADZ/wEAAAADAAAAAADa/wEAAAADAAAAAADb/wEAAAADAAAAAADi/wMAAAADAAAAAADi/wQAAAADAAAAAADi/wUAAAADAAAAAADi/wYAAAADAAAAAADi/wcAAAADAAAAAADi/wgAAAADAAAAAADi/wkAAAADAAAAAADj/wMAAAADAAAAAADj/wQAAAADAAAAAADj/wUAAAADAAAAAADj/wYAAAADAAAAAADj/wcAAAADAAAAAADj/wgAAAADAAAAAADj/wkAAAADAAAAAADK/wEAAAADAAAAAADK/wIAAAADAAAAAADK/wUAAAADAAAAAADK/wYAAAADAAAAAADK/wcAAAADAAAAAADK/wgAAAADAAAAAADK/wkAAAADAAAAAADL/wEAAAADAAAAAADL/wIAAAADAAAAAADL/wUAAAADAAAAAADL/wYAAAADAAAAAADL/wcAAAADAAAAAADL/wgAAAADAAAAAADL/wkAAAADAAAAAADM/wEAAAADAAAAAADM/wIAAAADAAAAAADM/wUAAAADAAAAAADM/wYAAAADAAAAAADM/wcAAAADAAAAAADM/wgAAAADAAAAAADM/wkAAAADAAAAAADN/wEAAAADAAAAAADN/wIAAAADAAAAAADN/wUAAAADAAAAAADN/wYAAAADAAAAAADN/wcAAAADAAAAAADN/wgAAAADAAAAAADN/wkAAAADAAAAAAA=")
+tile_set = ExtResource("2_58mmx")
+
+[node name="Slopes" type="TileMapLayer" parent="LevelCollisionTilemap"]
+modulate = Color(0.701961, 0.215686, 0.105882, 1)
+z_index = -1
+use_parent_material = true
+tile_set = ExtResource("2_58mmx")
+
+[node name="AmbushBlockade" parent="." node_paths=PackedStringArray("room_ref") instance=ExtResource("3_b8b5j")]
+tile_map_data = PackedByteArray("AAAPAAYAEgAAAAAAAAAPAAcAEgAAAAAAAAAKAAIAEgAAAAAAAAAKAAMAEgAAAAAAAAAKAAQAEgAAAAAAAAAKAAUAEgAAAAAAAAALAAIAEgAAAAAAAAALAAUAEgAAAAAAAAAMAAIAEgAAAAAAAAAMAAUAEgAAAAAAAAANAAIAEgAAAAAAAAANAAMAEgAAAAAAAAANAAQAEgAAAAAAAAANAAUAEgAAAAAAAAA=")
+room_ref = NodePath("..")
+
+[node name="Entrance 0" type="Node2D" parent="."]
+position = Vector2(464, 224)
+
+[node name="Warp 0" parent="." node_paths=PackedStringArray("room_origin", "room_destination") instance=ExtResource("4_1m3ei")]
+position = Vector2(560, 224)
+room_origin = NodePath("..")
+room_destination = NodePath("..")
+
+[node name="TemperDragonFruit" parent="." instance=ExtResource("5_k1hp4")]
+position = Vector2(-480, 160)
+
+[node name="DoorKey" parent="." instance=ExtResource("5_e7kfp")]
+position = Vector2(384, 128)
+
+[node name="Blocks" type="Node2D" parent="."]
+
+[node name="BreakableCycleBlock" parent="Blocks" node_paths=PackedStringArray("room_ref") instance=ExtResource("6_n2yvs")]
+position = Vector2(96, 224)
+room_ref = NodePath("../..")
+
+[node name="BreakableCycleBlock2" parent="Blocks" node_paths=PackedStringArray("room_ref") instance=ExtResource("6_n2yvs")]
+position = Vector2(160, 224)
+room_ref = NodePath("../..")
+
+[node name="BreakableCycleBlock3" parent="Blocks" node_paths=PackedStringArray("room_ref") instance=ExtResource("6_n2yvs")]
+position = Vector2(-160, 224)
+room_ref = NodePath("../..")
+
+[node name="BreakableCycleBlock4" parent="Blocks" node_paths=PackedStringArray("room_ref") instance=ExtResource("6_n2yvs")]
+position = Vector2(-224, 224)
+room_ref = NodePath("../..")
+
+[node name="BreakableCycleBlock5" parent="Blocks" node_paths=PackedStringArray("room_ref") instance=ExtResource("6_n2yvs")]
+position = Vector2(-288, 224)
+room_ref = NodePath("../..")
+
+[node name="BreakableCycleBlock6" parent="Blocks" node_paths=PackedStringArray("room_ref") instance=ExtResource("6_n2yvs")]
+position = Vector2(-352, 224)
+room_ref = NodePath("../..")
+
+[node name="BreakableCycleBlock7" parent="Blocks" node_paths=PackedStringArray("room_ref") instance=ExtResource("6_n2yvs")]
+position = Vector2(-416, 96)
+room_ref = NodePath("../..")
+starting_type = "FIRE"
+
+[node name="BreakableCycleBlock8" parent="Blocks" node_paths=PackedStringArray("room_ref") instance=ExtResource("6_n2yvs")]
+position = Vector2(-672, 256)
+room_ref = NodePath("../..")
+
+[node name="BreakableCycleBlock9" parent="Blocks" node_paths=PackedStringArray("room_ref") instance=ExtResource("6_n2yvs")]
+position = Vector2(-736, 256)
+room_ref = NodePath("../..")
+
+[node name="BreakableCycleBlock10" parent="Blocks" node_paths=PackedStringArray("room_ref") instance=ExtResource("6_n2yvs")]
+position = Vector2(-800, 256)
+room_ref = NodePath("../..")
+
+[node name="BreakableCycleBlock11" parent="Blocks" node_paths=PackedStringArray("room_ref") instance=ExtResource("6_n2yvs")]
+position = Vector2(-864, 256)
+room_ref = NodePath("../..")
+
+[node name="ReinforcedCycleBlock" parent="Blocks" node_paths=PackedStringArray("room_ref") instance=ExtResource("7_in2c4")]
+position = Vector2(-928, 64)
+room_ref = NodePath("../..")
+starting_type = "FIRE"
+
+[node name="BreakableCycleBlock12" parent="Blocks" node_paths=PackedStringArray("room_ref") instance=ExtResource("6_n2yvs")]
+position = Vector2(-992, 256)
+room_ref = NodePath("../..")
+
+[node name="BreakableCycleBlock13" parent="Blocks" node_paths=PackedStringArray("room_ref") instance=ExtResource("6_n2yvs")]
+position = Vector2(-1056, 256)
+room_ref = NodePath("../..")
+
+[node name="BreakableCycleBlock14" parent="Blocks" node_paths=PackedStringArray("room_ref") instance=ExtResource("6_n2yvs")]
+position = Vector2(-1120, 256)
+room_ref = NodePath("../..")
+
+[node name="BreakableCycleBlock15" parent="Blocks" node_paths=PackedStringArray("room_ref") instance=ExtResource("6_n2yvs")]
+position = Vector2(-1248, 96)
+room_ref = NodePath("../..")
+
+[node name="BreakableCycleBlock16" parent="Blocks" node_paths=PackedStringArray("room_ref") instance=ExtResource("6_n2yvs")]
+position = Vector2(-1376, 256)
+room_ref = NodePath("../..")
+
+[node name="BreakableCycleBlock17" parent="Blocks" node_paths=PackedStringArray("room_ref") instance=ExtResource("6_n2yvs")]
+position = Vector2(-1440, 256)
+room_ref = NodePath("../..")
+
+[node name="BreakableCycleBlock18" parent="Blocks" node_paths=PackedStringArray("room_ref") instance=ExtResource("6_n2yvs")]
+position = Vector2(-1504, 256)
+room_ref = NodePath("../..")
+
+[node name="BreakableCycleBlock19" parent="Blocks" node_paths=PackedStringArray("room_ref") instance=ExtResource("6_n2yvs")]
+position = Vector2(-1568, 256)
+room_ref = NodePath("../..")
+
+[node name="ReinforcedCycleBlock2" parent="Blocks" node_paths=PackedStringArray("room_ref") instance=ExtResource("7_in2c4")]
+position = Vector2(-1632, 128)
+room_ref = NodePath("../..")
+starting_type = "FIRE"
+
+[node name="BreakableCycleBlock20" parent="Blocks" node_paths=PackedStringArray("room_ref") instance=ExtResource("6_n2yvs")]
+position = Vector2(-1760, 256)
+room_ref = NodePath("../..")
+
+[node name="BreakableCycleBlock21" parent="Blocks" node_paths=PackedStringArray("room_ref") instance=ExtResource("6_n2yvs")]
+position = Vector2(-1824, 256)
+room_ref = NodePath("../..")
+
+[node name="BreakableCycleBlock22" parent="Blocks" node_paths=PackedStringArray("room_ref") instance=ExtResource("6_n2yvs")]
+position = Vector2(-1888, 256)
+room_ref = NodePath("../..")
+
+[node name="BreakableCycleBlock23" parent="Blocks" node_paths=PackedStringArray("room_ref") instance=ExtResource("6_n2yvs")]
+position = Vector2(-1952, 256)
+room_ref = NodePath("../..")
+
+[node name="Enemies" type="Node2D" parent="."]
+
+[node name="RedDragoon" parent="Enemies" instance=ExtResource("7_vqffb")]
+position = Vector2(32, 160)
+
+[node name="GreenDragoon" parent="Enemies" instance=ExtResource("9_6ujme")]
+position = Vector2(-256, 160)
+enable_wings = true
+enable_helmet = true
+
+[node name="GreenDragoon2" parent="Enemies" instance=ExtResource("9_6ujme")]
+position = Vector2(-768, 96)
+enable_wings = true
+enable_helmet = true
+enable_reflector = true
+
+[node name="RedDragoon2" parent="Enemies" instance=ExtResource("7_vqffb")]
+position = Vector2(-992, 128)
+enable_wings = true
+enable_helmet = true
+
+[node name="BlueDragoon" parent="Enemies" instance=ExtResource("10_78kt0")]
+position = Vector2(-1120, 64)
+enable_reflector = true
+enable_magic = true
+magic_start_flipped = true
+
+[node name="BlueDragoon2" parent="Enemies" instance=ExtResource("10_78kt0")]
+position = Vector2(-1504, 64)
+enable_wings = true
+enable_reflector = true
+enable_magic = true
+magic_start_flipped = true
+
+[node name="YellowDragoon" parent="Enemies" instance=ExtResource("11_gragw")]
+position = Vector2(-1696, 128)
+enable_wings = true
+enable_helmet = true
+enable_reflector = true
+
+[node name="RedDragoon3" parent="Enemies" instance=ExtResource("7_vqffb")]
+position = Vector2(-1824, 128)
+enable_wings = true
+enable_helmet = true
+enable_magic = true
+
+[node name="GreenDragoon3" parent="Enemies" instance=ExtResource("9_6ujme")]
+position = Vector2(-1856, 64)
+enable_wings = true
+enable_helmet = true
+enable_reflector = true
+enable_magic = true
+
+[node name="WaterHazard" parent="." instance=ExtResource("13_0mdnw")]
+position = Vector2(-768, 320)
+tile_width = 80
+water_tile_height_offsets = Array[float]([2.0])
