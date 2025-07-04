@@ -28,6 +28,8 @@ left_sprite = NodePath("PlatformBody/LeftSprite")
 middle_sprite = NodePath("PlatformBody/MiddleSprite")
 right_sprite = NodePath("PlatformBody/RightSprite")
 on_screen_notifier = NodePath("PlatformBody/VisibleOnScreenNotifier2D")
+max_fall_speed = 256.0
+respawn_time = 1.0
 unstable_color = Color(0.639216, 0.168627, 0.0509804, 1)
 
 [node name="PlatformBody" type="AnimatableBody2D" parent="."]
