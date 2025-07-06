@@ -7,7 +7,7 @@
 collision_mask = 237
 script = ExtResource("2_at8cf")
 enemy_defeat_knockback_multiplier = 1.5
-reflected_speed_boost = 1.25
+reflected_speed_boost = 1.125
 reflected_knockback_effect_radius = 20.0
 max_reflects = 2
 damage_type = &"FIRE"

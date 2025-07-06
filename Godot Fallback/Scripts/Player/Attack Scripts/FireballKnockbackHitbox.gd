@@ -69,7 +69,7 @@ func reflect_projectile():
 		is_reflected = !is_reflected
 		EffectFactory.get_effect("ReflectImpact", global_position)
 		(self.get_parent() as RigidBody2D).linear_velocity.x *= -abs(reflected_speed_boost)
-		(self.get_parent() as SelfDestructTimer).refresh_lifetime()
+		#(self.get_parent() as SelfDestructTimer).refresh_lifetime()
 		for child in self.get_parent().get_children():
 			if (child is AnimatedSprite2D):
 				var temp_parent_sprite : AnimatedSprite2D = (child as AnimatedSprite2D)

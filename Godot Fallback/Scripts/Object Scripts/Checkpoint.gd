@@ -24,6 +24,7 @@ func activate_subsequent_checkpoints():
 	if (!is_activated):
 		for checkpoint in subsequent_checkpoints:
 			checkpoint.is_activated = true
+			checkpoint.sprite.play("Activation")
 			checkpoint.checkpoint_activated.emit()
 
 func _on_body_entered(body):
@@ -32,9 +33,9 @@ func _on_body_entered(body):
 
 func activate():
 	if (!is_activated):
-		is_activated = true
 		sprite.play("Activation")
 		audio.play()
 		CheckpointHandler.save_checkpoint(level_origin.get_given_room_index(room_origin), self.global_position, level_origin.mage_fragments, level_origin.dragon_fragments, level_origin.fragment_array, level_origin.get_magical_scale_status(), level_origin.get_draconic_scale_status(), level_origin.get_balanced_scale_status(), level_origin.enemy_array)
 		self.checkpoint_activated.emit()
 		activate_subsequent_checkpoints()
+		is_activated = true

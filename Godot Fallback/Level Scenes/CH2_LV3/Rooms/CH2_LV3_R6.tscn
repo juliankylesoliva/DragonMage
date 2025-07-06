@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=4 uid="uid://dpbcs4ynf8pba"]
+[gd_scene load_steps=18 format=4 uid="uid://dpbcs4ynf8pba"]
 
 [ext_resource type="Script" path="res://Scripts/Utility Scripts/Room.gd" id="1_0pdw7"]
 [ext_resource type="TileSet" uid="uid://dhwi7i1loa2pd" path="res://Sprites/Tiles/Test Tiles/TestTileSet.tres" id="2_v6pjq"]
@@ -11,6 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://clfqwsy4byrkf" path="res://Scene Objects/Enemies/GreenDragoon.tscn" id="9_3unfu"]
 [ext_resource type="PackedScene" uid="uid://curi6w4ex7jou" path="res://Scene Objects/Enemies/YellowDragoon.tscn" id="10_cq5o6"]
 [ext_resource type="PackedScene" uid="uid://bgww8jir45ktf" path="res://Scene Objects/Enemies/BlueDragoon.tscn" id="11_ljnd3"]
+[ext_resource type="PackedScene" uid="uid://vtyaphi47lrf" path="res://Scene Objects/Objects/Checkpoint.tscn" id="12_ttitj"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jwjsa"]
 size = Vector2(3584, 32)
@@ -200,5 +201,11 @@ position = Vector2(-1056, 96)
 enable_wings = true
 enable_magic = true
 magic_start_flipped = true
+
+[node name="Checkpoint" parent="." node_paths=PackedStringArray("room_origin") instance=ExtResource("12_ttitj")]
+position = Vector2(336, 224)
+room_origin = NodePath("..")
+
+[connection signal="room_activated" from="." to="Checkpoint" method="activate"]
 
 [editable path="FallWarp"]

@@ -26,6 +26,10 @@ func _ready():
 
 func interact(hub : PlayerHub):
 	if (player != null and hub == player and is_pressing_enabled):
+		press()
+
+func press():
+	if (is_pressing_enabled):
 		button_pressed.emit()
 		if (one_shot):
 			disable_pressing()

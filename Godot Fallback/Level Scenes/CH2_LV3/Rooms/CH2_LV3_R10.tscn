@@ -223,13 +223,13 @@ enable_helmet = true
 enable_reflector = true
 
 [node name="RedDragoon3" parent="Enemies" instance=ExtResource("7_vqffb")]
-position = Vector2(-1824, 128)
+position = Vector2(-1952, 128)
 enable_wings = true
 enable_helmet = true
 enable_magic = true
 
 [node name="GreenDragoon3" parent="Enemies" instance=ExtResource("9_6ujme")]
-position = Vector2(-1856, 64)
+position = Vector2(-1856, 192)
 enable_wings = true
 enable_helmet = true
 enable_reflector = true

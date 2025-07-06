@@ -1,4 +1,4 @@
-[gd_scene load_steps=42 format=3 uid="uid://dittc4eifec6w"]
+[gd_scene load_steps=44 format=3 uid="uid://dittc4eifec6w"]
 
 [ext_resource type="Script" path="res://Scripts/Utility Scripts/Level.gd" id="1_13gf8"]
 [ext_resource type="PackedScene" uid="uid://d0ff35cm57xb7" path="res://Scene Objects/Effects/DroppedFragment.tscn" id="2_6ibby"]
@@ -23,6 +23,7 @@
 [ext_resource type="PackedScene" uid="uid://cawcebumcenpi" path="res://Level Scenes/CH2_LV3/Rooms/CH2_LV3_R1.tscn" id="14_2pbtd"]
 [ext_resource type="PackedScene" uid="uid://dfmtu675qfob5" path="res://Level Scenes/CH2_LV3/Rooms/CH2_LV3_R11.tscn" id="14_d4kmv"]
 [ext_resource type="PackedScene" uid="uid://u8e1fwrtc1mm" path="res://Level Scenes/CH2_LV3/Rooms/CH2_LV3_R2.tscn" id="16_2c4qm"]
+[ext_resource type="PackedScene" uid="uid://dgtkwfetbmg1g" path="res://Level Scenes/CH2_LV3/Rooms/CH2_LV3_R13.tscn" id="16_l2dnv"]
 [ext_resource type="PackedScene" uid="uid://bgwmmnhqig3g2" path="res://Level Scenes/CH2_LV3/Rooms/CH2_LV3_R3.tscn" id="17_cvotr"]
 [ext_resource type="PackedScene" uid="uid://btqjqkpg02mic" path="res://Level Scenes/CH2_LV3/Rooms/CH2_LV3_R8.tscn" id="22_4hlsg"]
 [ext_resource type="PackedScene" uid="uid://px1d1uajurq2" path="res://Level Scenes/CH2_LV3/Rooms/CH2_LV3_R12.tscn" id="26_b07ya"]
@@ -105,9 +106,9 @@ point_count = 2
 [sub_resource type="Curve2D" id="Curve2D_cvf1n"]
 resource_local_to_scene = true
 _data = {
-"points": PackedVector2Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 96, 0, 0, 0, 0, 256, 96, 0, 0, 0, 0, 256, 0, 0, 0, 0, 0, 0, 0)
+"points": PackedVector2Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 96, 0, 0, 0, 0, 256, 96, 0, 0, 0, 0, 256, 0)
 }
-point_count = 5
+point_count = 4
 
 [sub_resource type="Curve2D" id="Curve2D_mh3dg"]
 resource_local_to_scene = true
@@ -130,14 +131,22 @@ _data = {
 }
 point_count = 2
 
-[node name="CH2_LV3" type="Node2D" node_paths=PackedStringArray("player_reference", "starting_room", "room_list", "magical_scale", "draconic_scale", "screen_fade", "intro_screen", "clear_timer")]
+[sub_resource type="Curve2D" id="Curve2D_8drkn"]
+resource_local_to_scene = true
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -192)
+}
+point_count = 2
+
+[node name="CH2_LV3" type="Node2D" node_paths=PackedStringArray("player_reference", "starting_room", "room_list", "magical_scale", "draconic_scale", "balanced_scale", "screen_fade", "intro_screen", "clear_timer")]
 script = ExtResource("1_13gf8")
 player_reference = NodePath("Player")
 starting_room = NodePath("CH2_LV3_R1")
 starting_room_entrance_index = 1
-room_list = [NodePath("CH2_LV3_R1"), NodePath("CH2_LV3_R2"), NodePath("CH2_LV3_R3"), NodePath("CH2_LV3_R4"), NodePath("CH2_LV3_R5"), NodePath("CH2_LV3_R6"), NodePath("CH2_LV3_R7"), NodePath("CH2_LV3_R8"), NodePath("CH2_LV3_R9"), NodePath("CH2_LV3_R10"), NodePath("CH2_LV3_R11"), NodePath("CH2_LV3_R12")]
+room_list = [NodePath("CH2_LV3_R1"), NodePath("CH2_LV3_R2"), NodePath("CH2_LV3_R3"), NodePath("CH2_LV3_R4"), NodePath("CH2_LV3_R5"), NodePath("CH2_LV3_R6"), NodePath("CH2_LV3_R7"), NodePath("CH2_LV3_R8"), NodePath("CH2_LV3_R9"), NodePath("CH2_LV3_R10"), NodePath("CH2_LV3_R11"), NodePath("CH2_LV3_R12"), NodePath("CH2_LV3_R13")]
 magical_scale = NodePath("CH2_LV3_R5/CollectableScale")
 draconic_scale = NodePath("CH2_LV3_R11/CollectableScale")
+balanced_scale = NodePath("CH2_LV3_R12/CollectableScale")
 dropped_fragment_scene = ExtResource("2_6ibby")
 screen_fade = NodePath("UI_Canvas/ScreenFade")
 intro_screen = NodePath("UI_Canvas/LevelIntroScreen")
@@ -176,6 +185,7 @@ room_destination = NodePath("../../CH2_LV3_R1")
 
 [node name="ElevatorSelector" parent="CH2_LV3_R2" index="5" node_paths=PackedStringArray("room_destinations")]
 room_destinations = [NodePath("../../CH2_LV3_R1"), NodePath("../../CH2_LV3_R3"), NodePath("../../CH2_LV3_R6"), NodePath("../../CH2_LV3_R9"), NodePath("../../CH2_LV3_R12")]
+initial_locked_rooms = 3
 
 [node name="CH2_LV3_R3" parent="." instance=ExtResource("17_cvotr")]
 position = Vector2(1536, -672)
@@ -194,6 +204,9 @@ room_entrance_index = 0
 [node name="FallWarp" parent="CH2_LV3_R3" index="6" node_paths=PackedStringArray("room_destination")]
 room_destination = NodePath("../../CH2_LV3_R1")
 room_entrance_index = 2
+
+[node name="Checkpoint" parent="CH2_LV3_R3" index="9" node_paths=PackedStringArray("level_origin")]
+level_origin = NodePath("../..")
 
 [node name="CH2_LV3_R4" parent="." instance=ExtResource("7_vdrf6")]
 position = Vector2(-1152, -672)
@@ -242,6 +255,10 @@ curve = SubResource("Curve2D_yy40b")
 
 [node name="MovingPlatform4" parent="CH2_LV3_R6/Platforms" index="3"]
 curve = SubResource("Curve2D_cq4gk")
+
+[node name="Checkpoint" parent="CH2_LV3_R6" index="9" node_paths=PackedStringArray("level_origin", "subsequent_checkpoints")]
+level_origin = NodePath("../..")
+subsequent_checkpoints = [NodePath("../../CH2_LV3_R3/Checkpoint")]
 
 [node name="CH2_LV3_R7" parent="." instance=ExtResource("10_7wxhu")]
 position = Vector2(-1152, -1264)
@@ -297,6 +314,10 @@ room_entrance_index = 0
 room_destination = NodePath("../../CH2_LV3_R1")
 room_entrance_index = 2
 
+[node name="Checkpoint" parent="CH2_LV3_R9" index="9" node_paths=PackedStringArray("level_origin", "subsequent_checkpoints")]
+level_origin = NodePath("../..")
+subsequent_checkpoints = [NodePath("../../CH2_LV3_R6/Checkpoint"), NodePath("../../CH2_LV3_R3/Checkpoint")]
+
 [node name="CH2_LV3_R10" parent="." instance=ExtResource("13_2omdn")]
 position = Vector2(-1152, -1776)
 
@@ -321,6 +342,9 @@ position = Vector2(-512, 352)
 [node name="WarpDoor" parent="CH2_LV3_R12" index="2" node_paths=PackedStringArray("room_destination")]
 room_destination = NodePath("../../CH2_LV3_R2")
 
+[node name="Warp 0" parent="CH2_LV3_R12" index="3" node_paths=PackedStringArray("room_destination")]
+room_destination = NodePath("../../CH2_LV3_R13")
+
 [node name="MovingPlatform" parent="CH2_LV3_R12/Platforms" index="1"]
 curve = SubResource("Curve2D_cvf1n")
 
@@ -332,6 +356,16 @@ curve = SubResource("Curve2D_6r2hp")
 
 [node name="MovingPlatform4" parent="CH2_LV3_R12/Platforms" index="7"]
 curve = SubResource("Curve2D_07wdy")
+
+[node name="Checkpoint" parent="CH2_LV3_R12" index="12" node_paths=PackedStringArray("level_origin", "subsequent_checkpoints")]
+level_origin = NodePath("../..")
+subsequent_checkpoints = [NodePath("../../CH2_LV3_R9/Checkpoint"), NodePath("../../CH2_LV3_R6/Checkpoint"), NodePath("../../CH2_LV3_R3/Checkpoint")]
+
+[node name="CH2_LV3_R13" parent="." instance=ExtResource("16_l2dnv")]
+position = Vector2(4416, 896)
+
+[node name="MovingPlatform" parent="CH2_LV3_R13" index="9"]
+curve = SubResource("Curve2D_8drkn")
 
 [node name="UI_Canvas" type="CanvasLayer" parent="."]
 
@@ -381,14 +415,33 @@ screen_fade = NodePath("../UI_Canvas/ScreenFade")
 [connection signal="player_defeated" from="." to="UI_Canvas/TemperMeterUI" method="hide"]
 [connection signal="player_defeated" from="." to="UI_Canvas/MagicMeterUI" method="hide"]
 [connection signal="player_defeated" from="." to="UI_Canvas/FragmentCounterUI" method="hide"]
-[connection signal="player_defeated" from="." to="UI_Canvas/ClearTimer" method="stop_timer"]
 [connection signal="player_defeated" from="." to="UI_Canvas/ClearTimer" method="hide"]
+[connection signal="player_defeated" from="." to="UI_Canvas/ClearTimer" method="stop_timer"]
 [connection signal="player_defeated" from="." to="Textbox" method="hide_textbox"]
 [connection signal="player_defeated" from="." to="LevelMusicPlayer" method="stop"]
 [connection signal="player_defeated" from="." to="DefeatScreen" method="do_defeat_screen"]
+[connection signal="checkpoint_activated" from="CH2_LV3_R3/Checkpoint" to="CH2_LV3_R1/WarpDoor" method="force_unlock"]
+[connection signal="checkpoint_activated" from="CH2_LV3_R3/Checkpoint" to="CH2_LV3_R1/DoorKey" method="force_collect"]
 [connection signal="button_pressed" from="CH2_LV3_R5/SignalButton" to="CH2_LV3_R2/ElevatorSelector" method="unlock_next_room"]
+[connection signal="checkpoint_activated" from="CH2_LV3_R6/Checkpoint" to="CH2_LV3_R3/WarpDoor2" method="force_unlock"]
+[connection signal="checkpoint_activated" from="CH2_LV3_R6/Checkpoint" to="CH2_LV3_R4/DoorKey" method="force_collect"]
+[connection signal="checkpoint_activated" from="CH2_LV3_R6/Checkpoint" to="CH2_LV3_R5/SignalButton" method="press"]
 [connection signal="button_pressed" from="CH2_LV3_R8/SignalButton" to="CH2_LV3_R2/ElevatorSelector" method="unlock_next_room"]
+[connection signal="checkpoint_activated" from="CH2_LV3_R9/Checkpoint" to="CH2_LV3_R6/WarpDoor2" method="force_unlock"]
+[connection signal="checkpoint_activated" from="CH2_LV3_R9/Checkpoint" to="CH2_LV3_R7/DoorKey" method="force_collect"]
+[connection signal="checkpoint_activated" from="CH2_LV3_R9/Checkpoint" to="CH2_LV3_R8/SignalButton" method="press"]
 [connection signal="button_pressed" from="CH2_LV3_R11/SignalButton" to="CH2_LV3_R2/ElevatorSelector" method="unlock_next_room"]
+[connection signal="checkpoint_activated" from="CH2_LV3_R12/Checkpoint" to="CH2_LV3_R9/WarpDoor2" method="force_unlock"]
+[connection signal="checkpoint_activated" from="CH2_LV3_R12/Checkpoint" to="CH2_LV3_R10/DoorKey" method="force_collect"]
+[connection signal="checkpoint_activated" from="CH2_LV3_R12/Checkpoint" to="CH2_LV3_R11/SignalButton" method="press"]
+[connection signal="level_finished" from="CH2_LV3_R13/FinishLine" to="." method="level_finish"]
+[connection signal="level_finished" from="CH2_LV3_R13/FinishLine" to="UI_Canvas/TemperMeterUI" method="hide"]
+[connection signal="level_finished" from="CH2_LV3_R13/FinishLine" to="UI_Canvas/MagicMeterUI" method="hide"]
+[connection signal="level_finished" from="CH2_LV3_R13/FinishLine" to="UI_Canvas/FragmentCounterUI" method="hide"]
+[connection signal="level_finished" from="CH2_LV3_R13/FinishLine" to="UI_Canvas/ClearTimer" method="hide"]
+[connection signal="level_finished" from="CH2_LV3_R13/FinishLine" to="UI_Canvas/ClearTimer" method="stop_timer"]
+[connection signal="level_finished" from="CH2_LV3_R13/FinishLine" to="UI_Canvas/ResultsScreen" method="on_level_complete"]
+[connection signal="level_finished" from="CH2_LV3_R13/FinishLine" to="LevelMusicPlayer" method="fade_out"]
 
 [editable path="Player"]
 [editable path="CH2_LV3_R1"]
@@ -410,3 +463,4 @@ screen_fade = NodePath("../UI_Canvas/ScreenFade")
 [editable path="CH2_LV3_R11/FallWarp"]
 [editable path="CH2_LV3_R12"]
 [editable path="CH2_LV3_R12/Warp 0"]
+[editable path="CH2_LV3_R13"]
