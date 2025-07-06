@@ -1,9 +1,10 @@
-[gd_scene load_steps=12 format=4 uid="uid://btqjqkpg02mic"]
+[gd_scene load_steps=13 format=4 uid="uid://btqjqkpg02mic"]
 
 [ext_resource type="Script" path="res://Scripts/Utility Scripts/Room.gd" id="1_egmyu"]
 [ext_resource type="TileSet" uid="uid://dhwi7i1loa2pd" path="res://Sprites/Tiles/Test Tiles/TestTileSet.tres" id="2_isfbs"]
 [ext_resource type="PackedScene" uid="uid://dqbo0wu6hm8lj" path="res://Scene Objects/Objects/WarpTrigger.tscn" id="3_coa4o"]
 [ext_resource type="PackedScene" uid="uid://b78mf3ykyid5a" path="res://Scene Objects/Objects/MovingPlatform.tscn" id="4_4mlsn"]
+[ext_resource type="PackedScene" uid="uid://db6i3rmu8i44r" path="res://Scene Objects/Objects/CollectableScale.tscn" id="5_fjuhp"]
 [ext_resource type="PackedScene" uid="uid://duqf3giujjj3r" path="res://Scene Objects/Objects/FallingPlatform.tscn" id="5_vguht"]
 [ext_resource type="PackedScene" uid="uid://dopdmj4qfj6sx" path="res://Scene Objects/Obstacles/WaterHazard.tscn" id="6_03fgj"]
 [ext_resource type="PackedScene" uid="uid://bkkxc1em4mqaq" path="res://Scene Objects/Objects/SignalButton.tscn" id="7_h6kyl"]
@@ -96,6 +97,10 @@ shape = SubResource("RectangleShape2D_stv22")
 position = Vector2(320, 160)
 tile_width = 16
 
+[node name="CollectableScale" parent="." instance=ExtResource("5_fjuhp")]
+position = Vector2(128, 64)
+collectable_type = "DRACONIC"
+
 [node name="Platforms" type="Node2D" parent="."]
 
 [node name="MovingPlatform" parent="Platforms" node_paths=PackedStringArray("room_ref") instance=ExtResource("4_4mlsn")]
@@ -127,7 +132,7 @@ platform_length = 4
 position = Vector2(288, 96)
 curve = SubResource("Curve2D_cqeig")
 room_ref = NodePath("../..")
-platform_length = 2
+platform_length = 4
 cycle_time = 1.0
 ping_pong = true
 

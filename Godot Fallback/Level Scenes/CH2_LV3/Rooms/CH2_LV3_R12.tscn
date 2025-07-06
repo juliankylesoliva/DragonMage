@@ -1,10 +1,9 @@
-[gd_scene load_steps=23 format=4 uid="uid://px1d1uajurq2"]
+[gd_scene load_steps=22 format=4 uid="uid://px1d1uajurq2"]
 
 [ext_resource type="Script" path="res://Scripts/Utility Scripts/Room.gd" id="1_s78sg"]
 [ext_resource type="TileSet" uid="uid://dhwi7i1loa2pd" path="res://Sprites/Tiles/Test Tiles/TestTileSet.tres" id="2_58mmx"]
 [ext_resource type="PackedScene" uid="uid://d3ahci60rs8ef" path="res://Scene Objects/Objects/WarpDoor.tscn" id="3_do2co"]
 [ext_resource type="PackedScene" uid="uid://c3el80dbnmcws" path="res://Scene Objects/Objects/ConveyorBelt.tscn" id="4_2d0n1"]
-[ext_resource type="PackedScene" uid="uid://db6i3rmu8i44r" path="res://Scene Objects/Objects/CollectableScale.tscn" id="4_7t6w3"]
 [ext_resource type="PackedScene" uid="uid://dopdmj4qfj6sx" path="res://Scene Objects/Obstacles/WaterHazard.tscn" id="4_jqcdg"]
 [ext_resource type="PackedScene" uid="uid://dqbo0wu6hm8lj" path="res://Scene Objects/Objects/WarpTrigger.tscn" id="4_u6dbw"]
 [ext_resource type="PackedScene" uid="uid://b157weul8inp0" path="res://Scene Objects/Objects/BreakableCycleBlock.tscn" id="5_k2jey"]
@@ -111,9 +110,6 @@ shape = SubResource("RectangleShape2D_0bvmo")
 position = Vector2(2752, 320)
 tile_width = 132
 water_tile_height_offsets = Array[float]([2.0])
-
-[node name="CollectableScale" parent="." instance=ExtResource("4_7t6w3")]
-position = Vector2(1760, 224)
 
 [node name="TemperDragonFruit" parent="." instance=ExtResource("7_8yh6m")]
 position = Vector2(864, 96)

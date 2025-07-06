@@ -145,8 +145,8 @@ starting_room = NodePath("CH2_LV3_R1")
 starting_room_entrance_index = 1
 room_list = [NodePath("CH2_LV3_R1"), NodePath("CH2_LV3_R2"), NodePath("CH2_LV3_R3"), NodePath("CH2_LV3_R4"), NodePath("CH2_LV3_R5"), NodePath("CH2_LV3_R6"), NodePath("CH2_LV3_R7"), NodePath("CH2_LV3_R8"), NodePath("CH2_LV3_R9"), NodePath("CH2_LV3_R10"), NodePath("CH2_LV3_R11"), NodePath("CH2_LV3_R12"), NodePath("CH2_LV3_R13")]
 magical_scale = NodePath("CH2_LV3_R5/CollectableScale")
-draconic_scale = NodePath("CH2_LV3_R11/CollectableScale")
-balanced_scale = NodePath("CH2_LV3_R12/CollectableScale")
+draconic_scale = NodePath("CH2_LV3_R8/CollectableScale")
+balanced_scale = NodePath("CH2_LV3_R11/CollectableScale")
 dropped_fragment_scene = ExtResource("2_6ibby")
 screen_fade = NodePath("UI_Canvas/ScreenFade")
 intro_screen = NodePath("UI_Canvas/LevelIntroScreen")
@@ -205,7 +205,7 @@ room_entrance_index = 0
 room_destination = NodePath("../../CH2_LV3_R1")
 room_entrance_index = 2
 
-[node name="Checkpoint" parent="CH2_LV3_R3" index="9" node_paths=PackedStringArray("level_origin")]
+[node name="Checkpoint" parent="CH2_LV3_R3" index="10" node_paths=PackedStringArray("level_origin")]
 level_origin = NodePath("../..")
 
 [node name="CH2_LV3_R4" parent="." instance=ExtResource("7_vdrf6")]
@@ -357,7 +357,7 @@ curve = SubResource("Curve2D_6r2hp")
 [node name="MovingPlatform4" parent="CH2_LV3_R12/Platforms" index="7"]
 curve = SubResource("Curve2D_07wdy")
 
-[node name="Checkpoint" parent="CH2_LV3_R12" index="12" node_paths=PackedStringArray("level_origin", "subsequent_checkpoints")]
+[node name="Checkpoint" parent="CH2_LV3_R12" index="11" node_paths=PackedStringArray("level_origin", "subsequent_checkpoints")]
 level_origin = NodePath("../..")
 subsequent_checkpoints = [NodePath("../../CH2_LV3_R9/Checkpoint"), NodePath("../../CH2_LV3_R6/Checkpoint"), NodePath("../../CH2_LV3_R3/Checkpoint")]
 
