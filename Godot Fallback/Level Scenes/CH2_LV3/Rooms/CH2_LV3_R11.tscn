@@ -75,6 +75,8 @@ shape = SubResource("RectangleShape2D_70axw")
 
 [node name="CollectableScale" parent="." instance=ExtResource("4_g1uc3")]
 position = Vector2(96, 96)
+mage_fragments_needed = 50
+dragon_fragments_needed = 50
 
 [node name="SignalButton" parent="." instance=ExtResource("8_pwkcf")]
 position = Vector2(896, 224)

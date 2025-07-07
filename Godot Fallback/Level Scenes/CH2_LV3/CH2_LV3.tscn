@@ -147,10 +147,12 @@ room_list = [NodePath("CH2_LV3_R1"), NodePath("CH2_LV3_R2"), NodePath("CH2_LV3_R
 magical_scale = NodePath("CH2_LV3_R5/CollectableScale")
 draconic_scale = NodePath("CH2_LV3_R8/CollectableScale")
 balanced_scale = NodePath("CH2_LV3_R11/CollectableScale")
+min_fragment_collection_rate = 0.722
 dropped_fragment_scene = ExtResource("2_6ibby")
 screen_fade = NodePath("UI_Canvas/ScreenFade")
 intro_screen = NodePath("UI_Canvas/LevelIntroScreen")
 clear_timer = NodePath("UI_Canvas/ClearTimer")
+time_to_beat = 360.0
 
 [node name="Player" parent="." instance=ExtResource("3_xe4pj")]
 position = Vector2(96, 223)
@@ -256,7 +258,7 @@ curve = SubResource("Curve2D_yy40b")
 [node name="MovingPlatform4" parent="CH2_LV3_R6/Platforms" index="3"]
 curve = SubResource("Curve2D_cq4gk")
 
-[node name="Checkpoint" parent="CH2_LV3_R6" index="9" node_paths=PackedStringArray("level_origin", "subsequent_checkpoints")]
+[node name="Checkpoint" parent="CH2_LV3_R6" index="10" node_paths=PackedStringArray("level_origin", "subsequent_checkpoints")]
 level_origin = NodePath("../..")
 subsequent_checkpoints = [NodePath("../../CH2_LV3_R3/Checkpoint")]
 
@@ -299,22 +301,22 @@ curve = SubResource("Curve2D_cqeig")
 [node name="CH2_LV3_R9" parent="." instance=ExtResource("12_vtno5")]
 position = Vector2(1536, -1776)
 
-[node name="WarpDoor" parent="CH2_LV3_R9" index="4" node_paths=PackedStringArray("room_destination")]
+[node name="WarpDoor" parent="CH2_LV3_R9" index="3" node_paths=PackedStringArray("room_destination")]
 room_destination = NodePath("../../CH2_LV3_R2")
 
-[node name="WarpDoor2" parent="CH2_LV3_R9" index="5" node_paths=PackedStringArray("room_destination")]
+[node name="WarpDoor2" parent="CH2_LV3_R9" index="4" node_paths=PackedStringArray("room_destination")]
 room_destination = NodePath("../../CH2_LV3_R11")
 room_entrance_index = 0
 
-[node name="WarpDoor3" parent="CH2_LV3_R9" index="6" node_paths=PackedStringArray("room_destination")]
+[node name="WarpDoor3" parent="CH2_LV3_R9" index="5" node_paths=PackedStringArray("room_destination")]
 room_destination = NodePath("../../CH2_LV3_R10")
 room_entrance_index = 0
 
-[node name="FallWarp" parent="CH2_LV3_R9" index="7" node_paths=PackedStringArray("room_destination")]
+[node name="FallWarp" parent="CH2_LV3_R9" index="6" node_paths=PackedStringArray("room_destination")]
 room_destination = NodePath("../../CH2_LV3_R1")
 room_entrance_index = 2
 
-[node name="Checkpoint" parent="CH2_LV3_R9" index="9" node_paths=PackedStringArray("level_origin", "subsequent_checkpoints")]
+[node name="Checkpoint" parent="CH2_LV3_R9" index="10" node_paths=PackedStringArray("level_origin", "subsequent_checkpoints")]
 level_origin = NodePath("../..")
 subsequent_checkpoints = [NodePath("../../CH2_LV3_R6/Checkpoint"), NodePath("../../CH2_LV3_R3/Checkpoint")]
 
@@ -357,7 +359,7 @@ curve = SubResource("Curve2D_6r2hp")
 [node name="MovingPlatform4" parent="CH2_LV3_R12/Platforms" index="7"]
 curve = SubResource("Curve2D_07wdy")
 
-[node name="Checkpoint" parent="CH2_LV3_R12" index="11" node_paths=PackedStringArray("level_origin", "subsequent_checkpoints")]
+[node name="Checkpoint" parent="CH2_LV3_R12" index="12" node_paths=PackedStringArray("level_origin", "subsequent_checkpoints")]
 level_origin = NodePath("../..")
 subsequent_checkpoints = [NodePath("../../CH2_LV3_R9/Checkpoint"), NodePath("../../CH2_LV3_R6/Checkpoint"), NodePath("../../CH2_LV3_R3/Checkpoint")]
 
@@ -415,8 +417,8 @@ screen_fade = NodePath("../UI_Canvas/ScreenFade")
 [connection signal="player_defeated" from="." to="UI_Canvas/TemperMeterUI" method="hide"]
 [connection signal="player_defeated" from="." to="UI_Canvas/MagicMeterUI" method="hide"]
 [connection signal="player_defeated" from="." to="UI_Canvas/FragmentCounterUI" method="hide"]
-[connection signal="player_defeated" from="." to="UI_Canvas/ClearTimer" method="hide"]
 [connection signal="player_defeated" from="." to="UI_Canvas/ClearTimer" method="stop_timer"]
+[connection signal="player_defeated" from="." to="UI_Canvas/ClearTimer" method="hide"]
 [connection signal="player_defeated" from="." to="Textbox" method="hide_textbox"]
 [connection signal="player_defeated" from="." to="LevelMusicPlayer" method="stop"]
 [connection signal="player_defeated" from="." to="DefeatScreen" method="do_defeat_screen"]
@@ -438,8 +440,8 @@ screen_fade = NodePath("../UI_Canvas/ScreenFade")
 [connection signal="level_finished" from="CH2_LV3_R13/FinishLine" to="UI_Canvas/TemperMeterUI" method="hide"]
 [connection signal="level_finished" from="CH2_LV3_R13/FinishLine" to="UI_Canvas/MagicMeterUI" method="hide"]
 [connection signal="level_finished" from="CH2_LV3_R13/FinishLine" to="UI_Canvas/FragmentCounterUI" method="hide"]
-[connection signal="level_finished" from="CH2_LV3_R13/FinishLine" to="UI_Canvas/ClearTimer" method="hide"]
 [connection signal="level_finished" from="CH2_LV3_R13/FinishLine" to="UI_Canvas/ClearTimer" method="stop_timer"]
+[connection signal="level_finished" from="CH2_LV3_R13/FinishLine" to="UI_Canvas/ClearTimer" method="hide"]
 [connection signal="level_finished" from="CH2_LV3_R13/FinishLine" to="UI_Canvas/ResultsScreen" method="on_level_complete"]
 [connection signal="level_finished" from="CH2_LV3_R13/FinishLine" to="LevelMusicPlayer" method="fade_out"]
 
