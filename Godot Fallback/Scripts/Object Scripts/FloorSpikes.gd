@@ -37,7 +37,7 @@ func _ready():
 
 func _process(delta):
 	if (spike_state == 2 and player_ref != null and is_player_detected and player_ref.char_body.is_on_floor() and player_ref.damage.can_take_damage()):
-		if (player_ref.damage.take_damage()):
+		if (player_ref.damage.take_damage(0, true)):
 			EffectFactory.get_effect("EnemyContactImpact", player_ref.char_body.global_position)
 			SoundFactory.play_sound_by_name("enemy_contact_impact", player_ref.char_body.global_position, 0, 1, "SFX")
 		elif (player_ref.damage.is_player_parrying()):

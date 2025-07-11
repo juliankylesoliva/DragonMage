@@ -8,6 +8,8 @@ signal on_break
 
 @export var fragments_scene : PackedScene = null
 
+@export var can_enemy_projectiles_hit : bool = false
+
 @export_enum("ANY", "MAGIC", "FIRE") var breakable_by : String = "ANY"
 
 @export var break_durablility : int = 0
@@ -21,7 +23,13 @@ func break_object(other : Object):
 			if (breakable_by == "ANY" or hitbox_temp.damage_type == breakable_by):
 				do_break()
 				return true
-	return false
+	elif (can_enemy_projectiles_hit and (other is EnemyProjectile)):
+		var proj_temp : EnemyProjectile = (other as EnemyProjectile)
+		if (breakable_by == "ANY" or proj_temp.damage_type == breakable_by):
+			do_break()
+			return true
+	else:
+		return false
 
 func do_break():
 	SoundFactory.play_sound_by_name(break_sound, node_2d.global_position, -4)

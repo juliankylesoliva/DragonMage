@@ -62,13 +62,13 @@ func is_player_damaged():
 func is_damage_invulnerability_active():
 	return (current_iframe_timer > 0)
 
-func take_damage(knockback : int = 0):
+func take_damage(knockback : int = 0, pierces_guard : bool = false):
 	if (is_player_parrying()):
 		on_parry()
 		return false
 	elif (is_player_damaged() or !can_take_damage()):
 		return false
-	elif (is_player_guarding() and (knockback * hub.movement.get_facing_value() < 0)):
+	elif (is_player_guarding() and (knockback * hub.movement.get_facing_value() < 0) and !pierces_guard):
 		fairy_guard_attack.do_blockstun()
 		return false
 	else:

@@ -144,5 +144,11 @@ func hit_check(body):
 	elif (is_reflected and body.has_meta("Tag") and body.get_meta("Tag") == "EnemyProjectile"):
 		if (body is EnemyProjectile and !(body as EnemyProjectile).is_reflected):
 			(body as EnemyProjectile).destroy_projectile()
+	elif (body is Breakable):
+		do_break_object(body)
 	else:
 		pass
+
+func do_break_object(body):
+	if ((body as Breakable).break_object(self)):
+		destroy_projectile()

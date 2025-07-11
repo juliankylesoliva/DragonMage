@@ -68,7 +68,7 @@ bus = &"SFX"
 
 [node name="Area2D" type="Area2D" parent="."]
 collision_layer = 0
-collision_mask = 196
+collision_mask = 205
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 rotation = 1.5708
