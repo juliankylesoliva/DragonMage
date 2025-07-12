@@ -140,6 +140,7 @@ point_count = 2
 
 [node name="CH2_LV3" type="Node2D" node_paths=PackedStringArray("player_reference", "starting_room", "room_list", "magical_scale", "draconic_scale", "balanced_scale", "screen_fade", "intro_screen", "clear_timer")]
 script = ExtResource("1_13gf8")
+level_index = 10
 player_reference = NodePath("Player")
 starting_room = NodePath("CH2_LV3_R1")
 starting_room_entrance_index = 1

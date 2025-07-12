@@ -1,0 +1,93 @@
+[gd_scene load_steps=6 format=4 uid="uid://r73mfltetrqo"]
+
+[ext_resource type="Script" path="res://Scripts/Utility Scripts/Room.gd" id="1_o7ifv"]
+[ext_resource type="TileSet" uid="uid://dhwi7i1loa2pd" path="res://Sprites/Tiles/Test Tiles/TestTileSet.tres" id="2_vh00l"]
+[ext_resource type="PackedScene" uid="uid://b03ie1oct07e3" path="res://Scene Objects/Obstacles/Fyerlarm.tscn" id="3_ca4cg"]
+[ext_resource type="PackedScene" uid="uid://dqbo0wu6hm8lj" path="res://Scene Objects/Objects/WarpTrigger.tscn" id="3_ukx6f"]
+[ext_resource type="PackedScene" uid="uid://cokv5pygwyda" path="res://Scene Objects/Objects/BreakableFireBlock.tscn" id="4_dwt27"]
+
+[node name="CH2_LV4_R2" type="Node2D" node_paths=PackedStringArray("tilemap_list", "room_entrances")]
+script = ExtResource("1_o7ifv")
+tilemap_list = [NodePath("BoundaryCollisionTilemap"), NodePath("LevelCollisionTilemap")]
+bottom_camera_limit = 448
+room_entrances = [NodePath("Entrance 0"), NodePath("Entrance 1")]
+
+[node name="BoundaryCollisionTilemap" type="Node2D" parent="."]
+z_index = 4
+
+[node name="Intangible" type="TileMapLayer" parent="BoundaryCollisionTilemap"]
+z_index = -1
+use_parent_material = true
+tile_map_data = PackedByteArray("AAD9/wEAAAADAAAAAAD9/wIAAAADAAAAAAD9/wMAAAADAAAAAAD9/wQAAAADAAAAAAD+/wEAAAADAAAAAAD+/wQAAAADAAAAAAD//wEAAAADAAAAAAD//wQAAAADAAAAAAAQAAkAAAADAAAAAAAQAAwAAAADAAAAAAARAAkAAAADAAAAAAARAAwAAAADAAAAAAASAAkAAAADAAAAAAASAAoAAAADAAAAAAASAAsAAAADAAAAAAASAAwAAAADAAAAAAA=")
+tile_set = ExtResource("2_vh00l")
+rendering_quadrant_size = 32
+metadata/Tag = "IntangibleWall"
+
+[node name="LevelCollisionTilemap" type="Node2D" parent="."]
+visibility_layer = 4
+z_index = 3
+
+[node name="Decoration" type="TileMapLayer" parent="LevelCollisionTilemap"]
+use_parent_material = true
+tile_set = ExtResource("2_vh00l")
+rendering_quadrant_size = 32
+
+[node name="Background" type="TileMapLayer" parent="LevelCollisionTilemap"]
+z_index = -1
+use_parent_material = true
+tile_set = ExtResource("2_vh00l")
+
+[node name="Ground" type="TileMapLayer" parent="LevelCollisionTilemap"]
+modulate = Color(0.0745098, 0.113725, 0.301961, 1)
+z_index = -1
+use_parent_material = true
+tile_map_data = PackedByteArray("AAAAAAAAAAADAAAAAAAAAAEAAAADAAAAAAAAAAQAAAADAAAAAAAAAAUAAAADAAAAAAAAAAgAAAADAAAAAAAAAAkAAAADAAAAAAAAAAoAAAADAAAAAAAAAAsAAAADAAAAAAAAAAwAAAADAAAAAAAAAA0AAAADAAAAAAABAAAAAAADAAAAAAABAAEAAAADAAAAAAABAAQAAAADAAAAAAABAAUAAAADAAAAAAABAAgAAAADAAAAAAABAAkAAAADAAAAAAABAAoAAAADAAAAAAABAAsAAAADAAAAAAABAAwAAAADAAAAAAABAA0AAAADAAAAAAACAAAAAAADAAAAAAACAAEAAAADAAAAAAADAAAAAAADAAAAAAADAAEAAAADAAAAAAAEAAAAAAADAAAAAAAEAAEAAAADAAAAAAAFAAAAAAADAAAAAAAFAAEAAAADAAAAAAAGAAAAAAADAAAAAAAGAAEAAAADAAAAAAAHAAAAAAADAAAAAAAHAAEAAAADAAAAAAAIAAAAAAADAAAAAAAIAAEAAAADAAAAAAAJAAAAAAADAAAAAAAJAAEAAAADAAAAAAAKAAAAAAADAAAAAAAKAAEAAAADAAAAAAALAAAAAAADAAAAAAALAAEAAAADAAAAAAAMAAAAAAADAAAAAAAMAAEAAAADAAAAAAANAAAAAAADAAAAAAANAAEAAAADAAAAAAAOAAAAAAADAAAAAAAOAAEAAAADAAAAAAAOAAIAAAADAAAAAAAOAAMAAAADAAAAAAAOAAQAAAADAAAAAAAOAAUAAAADAAAAAAAOAAYAAAADAAAAAAAOAAcAAAADAAAAAAAOAAgAAAADAAAAAAAOAAkAAAADAAAAAAAOAAwAAAADAAAAAAAOAA0AAAADAAAAAAAPAAAAAAADAAAAAAAPAAEAAAADAAAAAAAPAAIAAAADAAAAAAAPAAMAAAADAAAAAAAPAAQAAAADAAAAAAAPAAUAAAADAAAAAAAPAAYAAAADAAAAAAAPAAcAAAADAAAAAAAPAAgAAAADAAAAAAAPAAkAAAADAAAAAAAPAAwAAAADAAAAAAAPAA0AAAADAAAAAAAAAAYAAAADAAAAAAAAAAcAAAADAAAAAAABAAYAAAADAAAAAAABAAcAAAADAAAAAAACAAQAAAADAAAAAAACAAUAAAADAAAAAAADAAQAAAADAAAAAAADAAUAAAADAAAAAAAEAAQAAAADAAAAAAAEAAUAAAADAAAAAAAFAAQAAAADAAAAAAAFAAUAAAADAAAAAAAGAAQAAAADAAAAAAAGAAUAAAADAAAAAAAHAAQAAAADAAAAAAAHAAUAAAADAAAAAAAIAAQAAAADAAAAAAAIAAUAAAADAAAAAAAJAAQAAAADAAAAAAAJAAUAAAADAAAAAAAKAAQAAAADAAAAAAAKAAUAAAADAAAAAAALAAQAAAADAAAAAAALAAUAAAADAAAAAAAKAAIAAAADAAAAAAALAAIAAAADAAAAAAAEAAgAAAADAAAAAAAEAAkAAAADAAAAAAAFAAgAAAADAAAAAAAFAAkAAAADAAAAAAAGAAgAAAADAAAAAAAGAAkAAAADAAAAAAAHAAgAAAADAAAAAAAHAAkAAAADAAAAAAAIAAgAAAADAAAAAAAIAAkAAAADAAAAAAAJAAgAAAADAAAAAAAJAAkAAAADAAAAAAAKAAgAAAADAAAAAAAKAAkAAAADAAAAAAALAAgAAAADAAAAAAALAAkAAAADAAAAAAAMAAgAAAADAAAAAAAMAAkAAAADAAAAAAANAAgAAAADAAAAAAANAAkAAAADAAAAAAACAAwAAAADAAAAAAACAA0AAAADAAAAAAADAAwAAAADAAAAAAADAA0AAAADAAAAAAAEAAwAAAADAAAAAAAEAA0AAAADAAAAAAAFAAwAAAADAAAAAAAFAA0AAAADAAAAAAAGAAwAAAADAAAAAAAGAA0AAAADAAAAAAAHAAwAAAADAAAAAAAHAA0AAAADAAAAAAAIAAwAAAADAAAAAAAIAA0AAAADAAAAAAAJAAwAAAADAAAAAAAJAA0AAAADAAAAAAAKAAwAAAADAAAAAAAKAA0AAAADAAAAAAALAAwAAAADAAAAAAALAA0AAAADAAAAAAAGAAYAAAADAAAAAAAHAAYAAAADAAAAAAAMAAwAAAADAAAAAAAMAA0AAAADAAAAAAANAAwAAAADAAAAAAANAA0AAAADAAAAAAAIAAoAAAADAAAAAAAJAAoAAAADAAAAAAA=")
+tile_set = ExtResource("2_vh00l")
+
+[node name="Slopes" type="TileMapLayer" parent="LevelCollisionTilemap"]
+modulate = Color(0.701961, 0.215686, 0.105882, 1)
+z_index = -1
+use_parent_material = true
+tile_set = ExtResource("2_vh00l")
+
+[node name="Entrance 0" type="Node2D" parent="."]
+position = Vector2(16, 96)
+
+[node name="Entrance 1" type="Node2D" parent="."]
+position = Vector2(496, 352)
+
+[node name="Warp 0" parent="." node_paths=PackedStringArray("room_origin", "room_destination") instance=ExtResource("3_ukx6f")]
+position = Vector2(-48, 96)
+room_origin = NodePath("..")
+room_destination = NodePath("..")
+room_entrance_index = 1
+
+[node name="Warp 1" parent="." node_paths=PackedStringArray("room_origin", "room_destination") instance=ExtResource("3_ukx6f")]
+position = Vector2(560, 352)
+room_origin = NodePath("..")
+room_destination = NodePath("..")
+
+[node name="Blocks" type="Node2D" parent="."]
+
+[node name="BreakableFireBlock" parent="Blocks" instance=ExtResource("4_dwt27")]
+position = Vector2(288, 96)
+
+[node name="BreakableFireBlock2" parent="Blocks" instance=ExtResource("4_dwt27")]
+position = Vector2(160, 224)
+
+[node name="BreakableFireBlock3" parent="Blocks" instance=ExtResource("4_dwt27")]
+position = Vector2(224, 352)
+
+[node name="BreakableFireBlock4" parent="Blocks" instance=ExtResource("4_dwt27")]
+position = Vector2(352, 352)
+
+[node name="Obstacles" type="Node2D" parent="."]
+
+[node name="Fyerlarm" parent="Obstacles" instance=ExtResource("3_ca4cg")]
+position = Vector2(224, 96)
+
+[node name="Fyerlarm2" parent="Obstacles" instance=ExtResource("3_ca4cg")]
+position = Vector2(352, 224)
+
+[node name="Fyerlarm3" parent="Obstacles" instance=ExtResource("3_ca4cg")]
+position = Vector2(160, 352)

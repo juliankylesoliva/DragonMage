@@ -33,6 +33,7 @@ height = 48.0
 
 [node name="CH2_LV2" type="Node2D" node_paths=PackedStringArray("player_reference", "starting_room", "room_list", "magical_scale", "draconic_scale", "balanced_scale", "screen_fade", "intro_screen", "clear_timer")]
 script = ExtResource("1_36h7d")
+level_index = 9
 player_reference = NodePath("Player")
 starting_room = NodePath("CH2_LV2_R1")
 room_list = [NodePath("CH2_LV2_R1"), NodePath("CH2_LV2_R2"), NodePath("CH2_LV2_R3"), NodePath("CH2_LV2_R4"), NodePath("CH2_LV2_R5"), NodePath("CH2_LV2_R6"), NodePath("CH2_LV2_R7"), NodePath("CH2_LV2_R8"), NodePath("CH2_LV2_R9"), NodePath("CH2_LV2_R10"), NodePath("CH2_LV2_R11")]
@@ -218,8 +219,8 @@ screen_fade = NodePath("../UI_Canvas/ScreenFade")
 [connection signal="player_defeated" from="." to="UI_Canvas/TemperMeterUI" method="hide"]
 [connection signal="player_defeated" from="." to="UI_Canvas/MagicMeterUI" method="hide"]
 [connection signal="player_defeated" from="." to="UI_Canvas/FragmentCounterUI" method="hide"]
-[connection signal="player_defeated" from="." to="UI_Canvas/ClearTimer" method="stop_timer"]
 [connection signal="player_defeated" from="." to="UI_Canvas/ClearTimer" method="hide"]
+[connection signal="player_defeated" from="." to="UI_Canvas/ClearTimer" method="stop_timer"]
 [connection signal="player_defeated" from="." to="Textbox" method="hide_textbox"]
 [connection signal="player_defeated" from="." to="LevelMusicPlayer" method="stop"]
 [connection signal="player_defeated" from="." to="DefeatScreen" method="do_defeat_screen"]
@@ -227,8 +228,8 @@ screen_fade = NodePath("../UI_Canvas/ScreenFade")
 [connection signal="level_finished" from="CH2_LV2_R11/FinishLine" to="UI_Canvas/TemperMeterUI" method="hide"]
 [connection signal="level_finished" from="CH2_LV2_R11/FinishLine" to="UI_Canvas/MagicMeterUI" method="hide"]
 [connection signal="level_finished" from="CH2_LV2_R11/FinishLine" to="UI_Canvas/FragmentCounterUI" method="hide"]
-[connection signal="level_finished" from="CH2_LV2_R11/FinishLine" to="UI_Canvas/ClearTimer" method="stop_timer"]
 [connection signal="level_finished" from="CH2_LV2_R11/FinishLine" to="UI_Canvas/ClearTimer" method="hide"]
+[connection signal="level_finished" from="CH2_LV2_R11/FinishLine" to="UI_Canvas/ClearTimer" method="stop_timer"]
 [connection signal="level_finished" from="CH2_LV2_R11/FinishLine" to="UI_Canvas/ResultsScreen" method="on_level_complete"]
 [connection signal="level_finished" from="CH2_LV2_R11/FinishLine" to="LevelMusicPlayer" method="fade_out"]
 
