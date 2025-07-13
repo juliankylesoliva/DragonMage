@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=4 uid="uid://r73mfltetrqo"]
+[gd_scene load_steps=7 format=4 uid="uid://r73mfltetrqo"]
 
 [ext_resource type="Script" path="res://Scripts/Utility Scripts/Room.gd" id="1_o7ifv"]
 [ext_resource type="TileSet" uid="uid://dhwi7i1loa2pd" path="res://Sprites/Tiles/Test Tiles/TestTileSet.tres" id="2_vh00l"]
 [ext_resource type="PackedScene" uid="uid://b03ie1oct07e3" path="res://Scene Objects/Obstacles/Fyerlarm.tscn" id="3_ca4cg"]
 [ext_resource type="PackedScene" uid="uid://dqbo0wu6hm8lj" path="res://Scene Objects/Objects/WarpTrigger.tscn" id="3_ukx6f"]
 [ext_resource type="PackedScene" uid="uid://cokv5pygwyda" path="res://Scene Objects/Objects/BreakableFireBlock.tscn" id="4_dwt27"]
+[ext_resource type="PackedScene" uid="uid://b2a0ttqvejk51" path="res://Scene Objects/Objects/TemperDragonFruit.tscn" id="6_lhfjo"]
 
 [node name="CH2_LV4_R2" type="Node2D" node_paths=PackedStringArray("tilemap_list", "room_entrances")]
 script = ExtResource("1_o7ifv")
@@ -66,6 +67,16 @@ room_entrance_index = 1
 position = Vector2(560, 352)
 room_origin = NodePath("..")
 room_destination = NodePath("..")
+
+[node name="TemperDragonFruit" parent="." instance=ExtResource("6_lhfjo")]
+position = Vector2(416, 96)
+starting_state = 1
+enable_cycling = false
+
+[node name="TemperDragonFruit2" parent="." instance=ExtResource("6_lhfjo")]
+position = Vector2(96, 224)
+starting_state = 1
+enable_cycling = false
 
 [node name="Blocks" type="Node2D" parent="."]
 
