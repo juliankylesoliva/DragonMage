@@ -376,7 +376,6 @@ fire_tackle_y_lookahead = 64.0
 upper_camera_threshold = 112.0
 lower_camera_threshold = 112.0
 time_to_update_y = 0.2
-enable_camera_lock = true
 
 [node name="Animation" type="Node" parent="Hub" node_paths=PackedStringArray("hub")]
 script = ExtResource("25_c4dam")
