@@ -1,0 +1,215 @@
+[gd_scene load_steps=16 format=4 uid="uid://dk5xj7ga1htid"]
+
+[ext_resource type="Script" path="res://Scripts/Utility Scripts/Room.gd" id="1_3sm5i"]
+[ext_resource type="TileSet" uid="uid://dhwi7i1loa2pd" path="res://Sprites/Tiles/Test Tiles/TestTileSet.tres" id="2_ml8ig"]
+[ext_resource type="PackedScene" uid="uid://dqbo0wu6hm8lj" path="res://Scene Objects/Objects/WarpTrigger.tscn" id="3_pkg18"]
+[ext_resource type="PackedScene" uid="uid://b2a0ttqvejk51" path="res://Scene Objects/Objects/TemperDragonFruit.tscn" id="4_gf6ec"]
+[ext_resource type="PackedScene" uid="uid://dgtmsbsmeieyh" path="res://Scene Objects/Objects/ReinforcedMagicBlock.tscn" id="4_p3c15"]
+[ext_resource type="PackedScene" uid="uid://db6i3rmu8i44r" path="res://Scene Objects/Objects/CollectableScale.tscn" id="4_wf5ni"]
+[ext_resource type="PackedScene" uid="uid://dck0mc2tc82kx" path="res://Scene Objects/Objects/ReinforcedFireBlock.tscn" id="5_fyphq"]
+[ext_resource type="PackedScene" uid="uid://dcs7w117uukcd" path="res://Scene Objects/Objects/BreakableMagicBlock.tscn" id="6_3d2k6"]
+[ext_resource type="PackedScene" uid="uid://b03ie1oct07e3" path="res://Scene Objects/Obstacles/Fyerlarm.tscn" id="6_4nyur"]
+[ext_resource type="PackedScene" uid="uid://dwnpgujive352" path="res://Scene Objects/Enemies/RedDragoon.tscn" id="7_dm17e"]
+[ext_resource type="PackedScene" uid="uid://c4cg3xgbq7eyh" path="res://Scene Objects/Obstacles/FloorSpikes.tscn" id="8_6jimw"]
+[ext_resource type="PackedScene" uid="uid://clfqwsy4byrkf" path="res://Scene Objects/Enemies/GreenDragoon.tscn" id="8_hg67k"]
+[ext_resource type="PackedScene" uid="uid://curi6w4ex7jou" path="res://Scene Objects/Enemies/YellowDragoon.tscn" id="11_jg0yh"]
+[ext_resource type="PackedScene" uid="uid://cokv5pygwyda" path="res://Scene Objects/Objects/BreakableFireBlock.tscn" id="12_tupul"]
+[ext_resource type="PackedScene" uid="uid://bgww8jir45ktf" path="res://Scene Objects/Enemies/BlueDragoon.tscn" id="14_6wpj8"]
+
+[node name="CH2_LV4_R6" type="Node2D" node_paths=PackedStringArray("tilemap_list", "room_entrances", "enemy_nodes")]
+script = ExtResource("1_3sm5i")
+tilemap_list = [NodePath("BoundaryCollisionTilemap"), NodePath("LevelCollisionTilemap")]
+right_camera_limit = 2048
+room_entrances = [NodePath("Entrance 0"), NodePath("Entrance 1")]
+enemy_nodes = [NodePath("Enemies/RedDragoon"), NodePath("Enemies/RedDragoon2"), NodePath("Enemies/GreenDragoon"), NodePath("Enemies/RedDragoon3"), NodePath("Enemies/YellowDragoon"), NodePath("Enemies/BlueDragoon"), NodePath("Enemies/RedDragoon4"), NodePath("Enemies/YellowDragoon2"), NodePath("Enemies/RedDragoon5")]
+
+[node name="BoundaryCollisionTilemap" type="Node2D" parent="."]
+z_index = 4
+
+[node name="Intangible" type="TileMapLayer" parent="BoundaryCollisionTilemap"]
+z_index = -1
+use_parent_material = true
+tile_map_data = PackedByteArray("AAD9/wUAAAADAAAAAAD9/wYAAAADAAAAAAD9/wcAAAADAAAAAAD9/wgAAAADAAAAAAD+/wUAAAADAAAAAAD+/wgAAAADAAAAAAD//wUAAAADAAAAAAD//wgAAAADAAAAAABAAAUAAAADAAAAAABAAAgAAAADAAAAAABBAAUAAAADAAAAAABBAAgAAAADAAAAAABCAAUAAAADAAAAAABCAAYAAAADAAAAAABCAAcAAAADAAAAAABCAAgAAAADAAAAAAA=")
+tile_set = ExtResource("2_ml8ig")
+rendering_quadrant_size = 32
+metadata/Tag = "IntangibleWall"
+
+[node name="LevelCollisionTilemap" type="Node2D" parent="."]
+visibility_layer = 4
+z_index = 3
+
+[node name="Decoration" type="TileMapLayer" parent="LevelCollisionTilemap"]
+use_parent_material = true
+tile_set = ExtResource("2_ml8ig")
+rendering_quadrant_size = 32
+
+[node name="Background" type="TileMapLayer" parent="LevelCollisionTilemap"]
+z_index = -1
+use_parent_material = true
+tile_set = ExtResource("2_ml8ig")
+
+[node name="Ground" type="TileMapLayer" parent="LevelCollisionTilemap"]
+modulate = Color(0.0745098, 0.113725, 0.301961, 1)
+z_index = -1
+use_parent_material = true
+tile_map_data = PackedByteArray("AAAAAAAAAAADAAAAAAAAAAEAAAADAAAAAAAAAAIAAAADAAAAAAAAAAMAAAADAAAAAAAAAAQAAAADAAAAAAAAAAUAAAADAAAAAAAAAAgAAAADAAAAAAAAAAkAAAADAAAAAAABAAAAAAADAAAAAAABAAEAAAADAAAAAAABAAIAAAADAAAAAAABAAMAAAADAAAAAAABAAQAAAADAAAAAAABAAUAAAADAAAAAAABAAgAAAADAAAAAAABAAkAAAADAAAAAAACAAAAAAADAAAAAAACAAEAAAADAAAAAAACAAgAAAADAAAAAAACAAkAAAADAAAAAAADAAAAAAADAAAAAAADAAEAAAADAAAAAAADAAgAAAADAAAAAAADAAkAAAADAAAAAAAEAAAAAAADAAAAAAAEAAEAAAADAAAAAAAEAAgAAAADAAAAAAAEAAkAAAADAAAAAAAFAAAAAAADAAAAAAAFAAEAAAADAAAAAAAFAAgAAAADAAAAAAAFAAkAAAADAAAAAAAGAAAAAAADAAAAAAAGAAEAAAADAAAAAAAGAAgAAAADAAAAAAAGAAkAAAADAAAAAAAHAAAAAAADAAAAAAAHAAEAAAADAAAAAAAHAAgAAAADAAAAAAAHAAkAAAADAAAAAAAIAAAAAAADAAAAAAAIAAEAAAADAAAAAAAIAAgAAAADAAAAAAAIAAkAAAADAAAAAAAJAAAAAAADAAAAAAAJAAEAAAADAAAAAAAJAAgAAAADAAAAAAAJAAkAAAADAAAAAAAKAAAAAAADAAAAAAAKAAEAAAADAAAAAAAKAAgAAAADAAAAAAAKAAkAAAADAAAAAAALAAAAAAADAAAAAAALAAEAAAADAAAAAAALAAgAAAADAAAAAAALAAkAAAADAAAAAAAMAAAAAAADAAAAAAAMAAEAAAADAAAAAAAMAAgAAAADAAAAAAAMAAkAAAADAAAAAAANAAAAAAADAAAAAAANAAEAAAADAAAAAAANAAgAAAADAAAAAAANAAkAAAADAAAAAAAOAAAAAAADAAAAAAAOAAEAAAADAAAAAAAOAAgAAAADAAAAAAAOAAkAAAADAAAAAAAPAAAAAAADAAAAAAAPAAEAAAADAAAAAAAPAAgAAAADAAAAAAAPAAkAAAADAAAAAAAQAAAAAAADAAAAAAAQAAEAAAADAAAAAAAQAAgAAAADAAAAAAAQAAkAAAADAAAAAAARAAAAAAADAAAAAAARAAEAAAADAAAAAAARAAgAAAADAAAAAAARAAkAAAADAAAAAAASAAAAAAADAAAAAAASAAEAAAADAAAAAAASAAgAAAADAAAAAAASAAkAAAADAAAAAAATAAAAAAADAAAAAAATAAEAAAADAAAAAAATAAgAAAADAAAAAAATAAkAAAADAAAAAAAUAAAAAAADAAAAAAAUAAEAAAADAAAAAAAVAAAAAAADAAAAAAAVAAEAAAADAAAAAAAWAAAAAAADAAAAAAAWAAEAAAADAAAAAAAXAAAAAAADAAAAAAAXAAEAAAADAAAAAAAYAAAAAAADAAAAAAAYAAEAAAADAAAAAAAZAAAAAAADAAAAAAAZAAEAAAADAAAAAAAaAAAAAAADAAAAAAAaAAEAAAADAAAAAAAbAAAAAAADAAAAAAAbAAEAAAADAAAAAAAcAAAAAAADAAAAAAAcAAEAAAADAAAAAAAdAAAAAAADAAAAAAAdAAEAAAADAAAAAAAdAAgAAAADAAAAAAAdAAkAAAADAAAAAAAeAAAAAAADAAAAAAAeAAEAAAADAAAAAAAeAAgAAAADAAAAAAAeAAkAAAADAAAAAAAfAAAAAAADAAAAAAAfAAEAAAADAAAAAAAfAAgAAAADAAAAAAAfAAkAAAADAAAAAAAgAAAAAAADAAAAAAAgAAEAAAADAAAAAAAgAAgAAAADAAAAAAAgAAkAAAADAAAAAAAhAAAAAAADAAAAAAAhAAEAAAADAAAAAAAhAAgAAAADAAAAAAAhAAkAAAADAAAAAAAiAAAAAAADAAAAAAAiAAEAAAADAAAAAAAiAAgAAAADAAAAAAAiAAkAAAADAAAAAAAjAAAAAAADAAAAAAAjAAEAAAADAAAAAAAjAAgAAAADAAAAAAAjAAkAAAADAAAAAAAkAAAAAAADAAAAAAAkAAEAAAADAAAAAAAkAAgAAAADAAAAAAAkAAkAAAADAAAAAAAlAAAAAAADAAAAAAAlAAEAAAADAAAAAAAlAAgAAAADAAAAAAAlAAkAAAADAAAAAAAmAAAAAAADAAAAAAAmAAEAAAADAAAAAAAmAAgAAAADAAAAAAAmAAkAAAADAAAAAAAnAAAAAAADAAAAAAAnAAEAAAADAAAAAAAnAAgAAAADAAAAAAAnAAkAAAADAAAAAAAoAAAAAAADAAAAAAAoAAEAAAADAAAAAAAoAAgAAAADAAAAAAAoAAkAAAADAAAAAAApAAAAAAADAAAAAAApAAEAAAADAAAAAAApAAgAAAADAAAAAAApAAkAAAADAAAAAAAqAAAAAAADAAAAAAAqAAEAAAADAAAAAAAqAAgAAAADAAAAAAAqAAkAAAADAAAAAAArAAAAAAADAAAAAAArAAEAAAADAAAAAAArAAgAAAADAAAAAAArAAkAAAADAAAAAAAsAAAAAAADAAAAAAAsAAEAAAADAAAAAAAsAAgAAAADAAAAAAAsAAkAAAADAAAAAAAtAAAAAAADAAAAAAAtAAEAAAADAAAAAAAtAAgAAAADAAAAAAAtAAkAAAADAAAAAAAuAAAAAAADAAAAAAAuAAEAAAADAAAAAAAuAAgAAAADAAAAAAAuAAkAAAADAAAAAAAvAAAAAAADAAAAAAAvAAEAAAADAAAAAAAvAAgAAAADAAAAAAAvAAkAAAADAAAAAAAwAAAAAAADAAAAAAAwAAEAAAADAAAAAAAwAAgAAAADAAAAAAAwAAkAAAADAAAAAAAxAAAAAAADAAAAAAAxAAEAAAADAAAAAAAxAAgAAAADAAAAAAAxAAkAAAADAAAAAAAyAAAAAAADAAAAAAAyAAEAAAADAAAAAAAyAAgAAAADAAAAAAAyAAkAAAADAAAAAAAzAAAAAAADAAAAAAAzAAEAAAADAAAAAAAzAAgAAAADAAAAAAAzAAkAAAADAAAAAAA0AAAAAAADAAAAAAA0AAEAAAADAAAAAAA0AAgAAAADAAAAAAA0AAkAAAADAAAAAAA1AAAAAAADAAAAAAA1AAEAAAADAAAAAAA1AAgAAAADAAAAAAA1AAkAAAADAAAAAAA2AAAAAAADAAAAAAA2AAEAAAADAAAAAAA2AAgAAAADAAAAAAA2AAkAAAADAAAAAAA3AAAAAAADAAAAAAA3AAEAAAADAAAAAAA3AAgAAAADAAAAAAA3AAkAAAADAAAAAAA4AAAAAAADAAAAAAA4AAEAAAADAAAAAAA4AAgAAAADAAAAAAA4AAkAAAADAAAAAAA5AAAAAAADAAAAAAA5AAEAAAADAAAAAAA5AAgAAAADAAAAAAA5AAkAAAADAAAAAAA6AAAAAAADAAAAAAA6AAgAAAADAAAAAAA6AAkAAAADAAAAAAA7AAAAAAADAAAAAAA7AAgAAAADAAAAAAA7AAkAAAADAAAAAAA8AAAAAAADAAAAAAA8AAgAAAADAAAAAAA8AAkAAAADAAAAAAA9AAAAAAADAAAAAAA9AAgAAAADAAAAAAA9AAkAAAADAAAAAAA+AAAAAAADAAAAAAA+AAUAAAADAAAAAAA+AAgAAAADAAAAAAA+AAkAAAADAAAAAAA/AAAAAAADAAAAAAA/AAEAAAADAAAAAAA/AAIAAAADAAAAAAA/AAMAAAADAAAAAAA/AAQAAAADAAAAAAA/AAUAAAADAAAAAAA/AAgAAAADAAAAAAA/AAkAAAADAAAAAAACAAQAAAADAAAAAAACAAUAAAADAAAAAAADAAQAAAADAAAAAAADAAUAAAADAAAAAAAEAAQAAAADAAAAAAAEAAUAAAADAAAAAAAFAAQAAAADAAAAAAAFAAUAAAADAAAAAAAMAAYAAAADAAAAAAAMAAcAAAADAAAAAAANAAYAAAADAAAAAAANAAcAAAADAAAAAAAMAAQAAAADAAAAAAAMAAUAAAADAAAAAAANAAQAAAADAAAAAAANAAUAAAADAAAAAAAQAAQAAAADAAAAAAAQAAUAAAADAAAAAAARAAQAAAADAAAAAAARAAUAAAADAAAAAAAUAAQAAAADAAAAAAAUAAUAAAADAAAAAAAVAAQAAAADAAAAAAAVAAUAAAADAAAAAAAWAAQAAAADAAAAAAAWAAUAAAADAAAAAAAXAAQAAAADAAAAAAAXAAUAAAADAAAAAAAYAAQAAAADAAAAAAAYAAUAAAADAAAAAAAZAAQAAAADAAAAAAAZAAUAAAADAAAAAAAaAAQAAAADAAAAAAAaAAUAAAADAAAAAAAbAAQAAAADAAAAAAAbAAUAAAADAAAAAAAcAAQAAAADAAAAAAAcAAUAAAADAAAAAAAdAAQAAAADAAAAAAAdAAUAAAADAAAAAAAiAAQAAAADAAAAAAAiAAUAAAADAAAAAAAjAAQAAAADAAAAAAAjAAUAAAADAAAAAAAkAAQAAAADAAAAAAAkAAUAAAADAAAAAAAlAAQAAAADAAAAAAAlAAUAAAADAAAAAAAmAAQAAAADAAAAAAAmAAUAAAADAAAAAAAnAAQAAAADAAAAAAAnAAUAAAADAAAAAAAoAAQAAAADAAAAAAAoAAUAAAADAAAAAAApAAQAAAADAAAAAAApAAUAAAADAAAAAAAuAAQAAAADAAAAAAAuAAUAAAADAAAAAAAvAAQAAAADAAAAAAAvAAUAAAADAAAAAAAqAAQAAAADAAAAAAAqAAUAAAADAAAAAAArAAQAAAADAAAAAAArAAUAAAADAAAAAAAQAAYAAAADAAAAAAAQAAcAAAADAAAAAAASAAQAAAADAAAAAAASAAUAAAADAAAAAAATAAQAAAADAAAAAAATAAUAAAADAAAAAAAuAAYAAAADAAAAAAAuAAcAAAADAAAAAAAvAAYAAAADAAAAAAAvAAcAAAADAAAAAAAsAAQAAAADAAAAAAAsAAUAAAADAAAAAAAtAAQAAAADAAAAAAAtAAUAAAADAAAAAAAUAAgAAAADAAAAAAAUAAkAAAADAAAAAAAVAAgAAAADAAAAAAAVAAkAAAADAAAAAAAWAAgAAAADAAAAAAAWAAkAAAADAAAAAAAXAAgAAAADAAAAAAAXAAkAAAADAAAAAAAYAAgAAAADAAAAAAAYAAkAAAADAAAAAAAZAAgAAAADAAAAAAAZAAkAAAADAAAAAAAaAAgAAAADAAAAAAAaAAkAAAADAAAAAAAbAAgAAAADAAAAAAAbAAkAAAADAAAAAAAcAAgAAAADAAAAAAAcAAkAAAADAAAAAAARAAYAAAADAAAAAAARAAcAAAADAAAAAAAaAAcAAAADAAAAAAAbAAcAAAADAAAAAAAkAAcAAAADAAAAAAAlAAcAAAADAAAAAAA0AAQAAAADAAAAAAA0AAUAAAADAAAAAAA1AAQAAAADAAAAAAA1AAUAAAADAAAAAAA2AAQAAAADAAAAAAA2AAUAAAADAAAAAAA3AAQAAAADAAAAAAA3AAUAAAADAAAAAAA4AAQAAAADAAAAAAA4AAUAAAADAAAAAAA5AAQAAAADAAAAAAA5AAUAAAADAAAAAAA6AAQAAAADAAAAAAA6AAUAAAADAAAAAAA7AAUAAAADAAAAAAA8AAUAAAADAAAAAAA9AAUAAAADAAAAAAA9AAQAAAADAAAAAAA+AAQAAAADAAAAAAA7AAQAAAADAAAAAAA8AAQAAAADAAAAAAA+AAEAAAADAAAAAAA+AAIAAAADAAAAAAA+AAMAAAADAAAAAAA6AAEAAAADAAAAAAA7AAEAAAADAAAAAAA8AAEAAAADAAAAAAA9AAEAAAADAAAAAAA=")
+tile_set = ExtResource("2_ml8ig")
+
+[node name="Slopes" type="TileMapLayer" parent="LevelCollisionTilemap"]
+modulate = Color(0.701961, 0.215686, 0.105882, 1)
+z_index = -1
+use_parent_material = true
+tile_set = ExtResource("2_ml8ig")
+
+[node name="Entrance 0" type="Node2D" parent="."]
+position = Vector2(48, 224)
+
+[node name="Entrance 1" type="Node2D" parent="."]
+position = Vector2(2032, 224)
+
+[node name="Warp 0" parent="." node_paths=PackedStringArray("room_origin", "room_destination") instance=ExtResource("3_pkg18")]
+position = Vector2(-48, 224)
+room_origin = NodePath("..")
+room_destination = NodePath("..")
+room_entrance_index = 1
+
+[node name="Warp 1" parent="." node_paths=PackedStringArray("room_origin", "room_destination") instance=ExtResource("3_pkg18")]
+position = Vector2(2096, 224)
+room_origin = NodePath("..")
+room_destination = NodePath("..")
+
+[node name="TemperDragonFruit" parent="." instance=ExtResource("4_gf6ec")]
+position = Vector2(1024, 96)
+
+[node name="CollectableScale" parent="." instance=ExtResource("4_wf5ni")]
+position = Vector2(1952, 96)
+collectable_type = "MAGICAL"
+
+[node name="Blocks" type="Node2D" parent="."]
+
+[node name="ReinforcedMagicBlock" parent="Blocks" instance=ExtResource("4_p3c15")]
+position = Vector2(160, 96)
+
+[node name="ReinforcedFireBlock" parent="Blocks" instance=ExtResource("5_fyphq")]
+position = Vector2(416, 96)
+
+[node name="BreakableMagicBlock" parent="Blocks" instance=ExtResource("6_3d2k6")]
+position = Vector2(800, 224)
+
+[node name="BreakableMagicBlock2" parent="Blocks" instance=ExtResource("6_3d2k6")]
+position = Vector2(1248, 224)
+
+[node name="BreakableMagicBlock3" parent="Blocks" instance=ExtResource("6_3d2k6")]
+position = Vector2(608, 96)
+
+[node name="BreakableMagicBlock4" parent="Blocks" instance=ExtResource("6_3d2k6")]
+position = Vector2(672, 96)
+
+[node name="BreakableMagicBlock5" parent="Blocks" instance=ExtResource("6_3d2k6")]
+position = Vector2(736, 96)
+
+[node name="BreakableMagicBlock6" parent="Blocks" instance=ExtResource("6_3d2k6")]
+position = Vector2(800, 96)
+
+[node name="BreakableFireBlock" parent="Blocks" instance=ExtResource("12_tupul")]
+position = Vector2(1184, 96)
+
+[node name="BreakableFireBlock2" parent="Blocks" instance=ExtResource("12_tupul")]
+position = Vector2(1248, 96)
+
+[node name="BreakableFireBlock3" parent="Blocks" instance=ExtResource("12_tupul")]
+position = Vector2(1312, 96)
+
+[node name="BreakableFireBlock4" parent="Blocks" instance=ExtResource("12_tupul")]
+position = Vector2(1376, 96)
+
+[node name="ReinforcedFireBlock2" parent="Blocks" instance=ExtResource("5_fyphq")]
+position = Vector2(1696, 96)
+
+[node name="ReinforcedFireBlock3" parent="Blocks" instance=ExtResource("5_fyphq")]
+position = Vector2(1760, 96)
+
+[node name="ReinforcedFireBlock4" parent="Blocks" instance=ExtResource("5_fyphq")]
+position = Vector2(1696, 224)
+
+[node name="ReinforcedFireBlock5" parent="Blocks" instance=ExtResource("5_fyphq")]
+position = Vector2(1824, 224)
+
+[node name="ReinforcedMagicBlock2" parent="Blocks" instance=ExtResource("4_p3c15")]
+position = Vector2(1952, 224)
+
+[node name="Obstacles" type="Node2D" parent="."]
+
+[node name="Fyerlarm" parent="Obstacles" instance=ExtResource("6_4nyur")]
+position = Vector2(288, 224)
+
+[node name="Fyerlarm2" parent="Obstacles" instance=ExtResource("6_4nyur")]
+position = Vector2(288, 96)
+
+[node name="Fyerlarm3" parent="Obstacles" instance=ExtResource("6_4nyur")]
+position = Vector2(928, 224)
+
+[node name="Fyerlarm4" parent="Obstacles" instance=ExtResource("6_4nyur")]
+position = Vector2(1120, 224)
+
+[node name="FloorSpikes" parent="Obstacles" instance=ExtResource("8_6jimw")]
+position = Vector2(640, 240)
+floor_length = 4
+
+[node name="FloorSpikes2" parent="Obstacles" instance=ExtResource("8_6jimw")]
+position = Vector2(1408, 240)
+floor_length = 4
+
+[node name="FloorSpikes3" parent="Obstacles" instance=ExtResource("8_6jimw")]
+position = Vector2(1728, 112)
+floor_length = 4
+
+[node name="Fyerlarm5" parent="Obstacles" instance=ExtResource("6_4nyur")]
+position = Vector2(1568, 96)
+
+[node name="Fyerlarm6" parent="Obstacles" instance=ExtResource("6_4nyur")]
+position = Vector2(1888, 96)
+
+[node name="Fyerlarm7" parent="Obstacles" instance=ExtResource("6_4nyur")]
+position = Vector2(1760, 224)
+
+[node name="Fyerlarm8" parent="Obstacles" instance=ExtResource("6_4nyur")]
+position = Vector2(1888, 224)
+
+[node name="Enemies" type="Node2D" parent="."]
+
+[node name="RedDragoon" parent="Enemies" instance=ExtResource("7_dm17e")]
+position = Vector2(96, 96)
+enable_reflector = true
+
+[node name="RedDragoon2" parent="Enemies" instance=ExtResource("7_dm17e")]
+position = Vector2(480, 160)
+enable_wings = true
+enable_reflector = true
+
+[node name="GreenDragoon" parent="Enemies" instance=ExtResource("8_hg67k")]
+position = Vector2(288, 160)
+enable_wings = true
+
+[node name="RedDragoon3" parent="Enemies" instance=ExtResource("7_dm17e")]
+position = Vector2(736, 224)
+
+[node name="YellowDragoon" parent="Enemies" instance=ExtResource("11_jg0yh")]
+position = Vector2(864, 96)
+enable_reflector = true
+
+[node name="BlueDragoon" parent="Enemies" instance=ExtResource("14_6wpj8")]
+position = Vector2(1024, 224)
+enable_wings = true
+
+[node name="RedDragoon4" parent="Enemies" instance=ExtResource("7_dm17e")]
+position = Vector2(1312, 224)
+
+[node name="YellowDragoon2" parent="Enemies" instance=ExtResource("11_jg0yh")]
+position = Vector2(1440, 96)
+enable_reflector = true
+
+[node name="RedDragoon5" parent="Enemies" instance=ExtResource("7_dm17e")]
+position = Vector2(1824, 96)
+enable_reflector = true
+enable_magic = true

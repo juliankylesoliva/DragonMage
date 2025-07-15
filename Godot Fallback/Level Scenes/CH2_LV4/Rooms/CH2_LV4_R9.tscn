@@ -1,0 +1,220 @@
+[gd_scene load_steps=18 format=4 uid="uid://bres6fuhnqslh"]
+
+[ext_resource type="Script" path="res://Scripts/Utility Scripts/Room.gd" id="1_3sm5i"]
+[ext_resource type="TileSet" uid="uid://dhwi7i1loa2pd" path="res://Sprites/Tiles/Test Tiles/TestTileSet.tres" id="2_ml8ig"]
+[ext_resource type="PackedScene" uid="uid://dqbo0wu6hm8lj" path="res://Scene Objects/Objects/WarpTrigger.tscn" id="3_qeyjx"]
+[ext_resource type="PackedScene" uid="uid://b2a0ttqvejk51" path="res://Scene Objects/Objects/TemperDragonFruit.tscn" id="4_8odng"]
+[ext_resource type="PackedScene" uid="uid://c4cg3xgbq7eyh" path="res://Scene Objects/Obstacles/FloorSpikes.tscn" id="4_aqwc4"]
+[ext_resource type="PackedScene" uid="uid://dck0mc2tc82kx" path="res://Scene Objects/Objects/ReinforcedFireBlock.tscn" id="5_3lrqc"]
+[ext_resource type="PackedScene" uid="uid://db6i3rmu8i44r" path="res://Scene Objects/Objects/CollectableScale.tscn" id="5_fiowb"]
+[ext_resource type="PackedScene" uid="uid://b03ie1oct07e3" path="res://Scene Objects/Obstacles/Fyerlarm.tscn" id="5_h5nlo"]
+[ext_resource type="PackedScene" uid="uid://dgtmsbsmeieyh" path="res://Scene Objects/Objects/ReinforcedMagicBlock.tscn" id="6_oeg5j"]
+[ext_resource type="PackedScene" uid="uid://dwnpgujive352" path="res://Scene Objects/Enemies/RedDragoon.tscn" id="7_0p433"]
+[ext_resource type="PackedScene" uid="uid://b157weul8inp0" path="res://Scene Objects/Objects/BreakableCycleBlock.tscn" id="7_6r3iq"]
+[ext_resource type="PackedScene" uid="uid://cn5fv6nf7hnwr" path="res://Scene Objects/Objects/ReinforcedCycleBlock.tscn" id="8_fqypb"]
+[ext_resource type="PackedScene" uid="uid://bgww8jir45ktf" path="res://Scene Objects/Enemies/BlueDragoon.tscn" id="8_qvj8q"]
+[ext_resource type="PackedScene" uid="uid://cokv5pygwyda" path="res://Scene Objects/Objects/BreakableFireBlock.tscn" id="10_a14b0"]
+[ext_resource type="PackedScene" uid="uid://dcs7w117uukcd" path="res://Scene Objects/Objects/BreakableMagicBlock.tscn" id="11_jrfkc"]
+[ext_resource type="PackedScene" uid="uid://curi6w4ex7jou" path="res://Scene Objects/Enemies/YellowDragoon.tscn" id="14_vb7i8"]
+[ext_resource type="PackedScene" uid="uid://clfqwsy4byrkf" path="res://Scene Objects/Enemies/GreenDragoon.tscn" id="15_paldx"]
+
+[node name="CH2_LV4_R9" type="Node2D" node_paths=PackedStringArray("tilemap_list", "room_entrances", "enemy_nodes")]
+script = ExtResource("1_3sm5i")
+tilemap_list = [NodePath("BoundaryCollisionTilemap"), NodePath("LevelCollisionTilemap")]
+right_camera_limit = 2048
+room_entrances = [NodePath("Entrance 0"), NodePath("Entrance 1")]
+enemy_nodes = [NodePath("Enemies/RedDragoon"), NodePath("Enemies/BlueDragoon"), NodePath("Enemies/RedDragoon2"), NodePath("Enemies/RedDragoon3"), NodePath("Enemies/BlueDragoon2"), NodePath("Enemies/YellowDragoon"), NodePath("Enemies/GreenDragoon")]
+
+[node name="BoundaryCollisionTilemap" type="Node2D" parent="."]
+z_index = 4
+
+[node name="Intangible" type="TileMapLayer" parent="BoundaryCollisionTilemap"]
+z_index = -1
+use_parent_material = true
+tile_map_data = PackedByteArray("AAD9/wUAAAADAAAAAAD9/wYAAAADAAAAAAD9/wcAAAADAAAAAAD9/wgAAAADAAAAAAD+/wUAAAADAAAAAAD+/wgAAAADAAAAAAD//wUAAAADAAAAAAD//wgAAAADAAAAAABAAAUAAAADAAAAAABAAAgAAAADAAAAAABBAAUAAAADAAAAAABBAAgAAAADAAAAAABCAAUAAAADAAAAAABCAAYAAAADAAAAAABCAAcAAAADAAAAAABCAAgAAAADAAAAAAA=")
+tile_set = ExtResource("2_ml8ig")
+rendering_quadrant_size = 32
+metadata/Tag = "IntangibleWall"
+
+[node name="LevelCollisionTilemap" type="Node2D" parent="."]
+visibility_layer = 4
+z_index = 3
+
+[node name="Decoration" type="TileMapLayer" parent="LevelCollisionTilemap"]
+use_parent_material = true
+tile_set = ExtResource("2_ml8ig")
+rendering_quadrant_size = 32
+
+[node name="Background" type="TileMapLayer" parent="LevelCollisionTilemap"]
+z_index = -1
+use_parent_material = true
+tile_set = ExtResource("2_ml8ig")
+
+[node name="Ground" type="TileMapLayer" parent="LevelCollisionTilemap"]
+modulate = Color(0.0745098, 0.113725, 0.301961, 1)
+z_index = -1
+use_parent_material = true
+tile_map_data = PackedByteArray("AAAAAAAAAAADAAAAAAAAAAEAAAADAAAAAAAAAAIAAAADAAAAAAAAAAMAAAADAAAAAAAAAAQAAAADAAAAAAAAAAUAAAADAAAAAAAAAAgAAAADAAAAAAAAAAkAAAADAAAAAAABAAAAAAADAAAAAAABAAEAAAADAAAAAAABAAIAAAADAAAAAAABAAMAAAADAAAAAAABAAQAAAADAAAAAAABAAUAAAADAAAAAAABAAgAAAADAAAAAAABAAkAAAADAAAAAAACAAAAAAADAAAAAAACAAEAAAADAAAAAAACAAkAAAADAAAAAAADAAAAAAADAAAAAAADAAEAAAADAAAAAAADAAkAAAADAAAAAAAEAAAAAAADAAAAAAAEAAEAAAADAAAAAAAEAAkAAAADAAAAAAAFAAAAAAADAAAAAAAFAAEAAAADAAAAAAAFAAkAAAADAAAAAAAGAAAAAAADAAAAAAAGAAEAAAADAAAAAAAGAAkAAAADAAAAAAAHAAAAAAADAAAAAAAHAAEAAAADAAAAAAAHAAkAAAADAAAAAAAIAAAAAAADAAAAAAAIAAEAAAADAAAAAAAIAAkAAAADAAAAAAAJAAAAAAADAAAAAAAJAAEAAAADAAAAAAAJAAkAAAADAAAAAAAKAAAAAAADAAAAAAAKAAEAAAADAAAAAAAKAAkAAAADAAAAAAALAAAAAAADAAAAAAALAAEAAAADAAAAAAALAAkAAAADAAAAAAAMAAAAAAADAAAAAAAMAAEAAAADAAAAAAAMAAkAAAADAAAAAAANAAAAAAADAAAAAAANAAEAAAADAAAAAAANAAkAAAADAAAAAAAOAAAAAAADAAAAAAAOAAEAAAADAAAAAAAOAAkAAAADAAAAAAAPAAAAAAADAAAAAAAPAAEAAAADAAAAAAAPAAkAAAADAAAAAAAQAAAAAAADAAAAAAAQAAEAAAADAAAAAAAQAAkAAAADAAAAAAARAAAAAAADAAAAAAARAAEAAAADAAAAAAARAAkAAAADAAAAAAASAAAAAAADAAAAAAASAAEAAAADAAAAAAASAAkAAAADAAAAAAATAAAAAAADAAAAAAATAAEAAAADAAAAAAATAAkAAAADAAAAAAAUAAAAAAADAAAAAAAUAAEAAAADAAAAAAAUAAkAAAADAAAAAAAVAAAAAAADAAAAAAAVAAEAAAADAAAAAAAVAAkAAAADAAAAAAAWAAAAAAADAAAAAAAWAAEAAAADAAAAAAAWAAkAAAADAAAAAAAXAAAAAAADAAAAAAAXAAEAAAADAAAAAAAXAAkAAAADAAAAAAAYAAAAAAADAAAAAAAYAAEAAAADAAAAAAAYAAkAAAADAAAAAAAZAAAAAAADAAAAAAAZAAEAAAADAAAAAAAZAAkAAAADAAAAAAAaAAAAAAADAAAAAAAaAAEAAAADAAAAAAAaAAkAAAADAAAAAAAbAAAAAAADAAAAAAAbAAEAAAADAAAAAAAbAAkAAAADAAAAAAAcAAAAAAADAAAAAAAcAAEAAAADAAAAAAAcAAkAAAADAAAAAAAdAAAAAAADAAAAAAAdAAEAAAADAAAAAAAdAAkAAAADAAAAAAAeAAAAAAADAAAAAAAeAAkAAAADAAAAAAAfAAAAAAADAAAAAAAfAAkAAAADAAAAAAAgAAAAAAADAAAAAAAgAAkAAAADAAAAAAAhAAAAAAADAAAAAAAhAAkAAAADAAAAAAAiAAAAAAADAAAAAAAiAAEAAAADAAAAAAAiAAkAAAADAAAAAAAjAAAAAAADAAAAAAAjAAEAAAADAAAAAAAjAAkAAAADAAAAAAAkAAAAAAADAAAAAAAkAAEAAAADAAAAAAAkAAkAAAADAAAAAAAlAAAAAAADAAAAAAAlAAEAAAADAAAAAAAlAAkAAAADAAAAAAAmAAAAAAADAAAAAAAmAAEAAAADAAAAAAAmAAkAAAADAAAAAAAnAAAAAAADAAAAAAAnAAEAAAADAAAAAAAnAAkAAAADAAAAAAAoAAAAAAADAAAAAAAoAAEAAAADAAAAAAAoAAkAAAADAAAAAAApAAAAAAADAAAAAAApAAEAAAADAAAAAAApAAkAAAADAAAAAAAqAAAAAAADAAAAAAAqAAEAAAADAAAAAAAqAAkAAAADAAAAAAArAAAAAAADAAAAAAArAAEAAAADAAAAAAArAAkAAAADAAAAAAAsAAAAAAADAAAAAAAsAAEAAAADAAAAAAAsAAkAAAADAAAAAAAtAAAAAAADAAAAAAAtAAEAAAADAAAAAAAtAAkAAAADAAAAAAAuAAAAAAADAAAAAAAuAAEAAAADAAAAAAAuAAkAAAADAAAAAAAvAAAAAAADAAAAAAAvAAEAAAADAAAAAAAvAAkAAAADAAAAAAAwAAAAAAADAAAAAAAwAAEAAAADAAAAAAAwAAkAAAADAAAAAAAxAAAAAAADAAAAAAAxAAEAAAADAAAAAAAxAAkAAAADAAAAAAAyAAAAAAADAAAAAAAyAAEAAAADAAAAAAAyAAkAAAADAAAAAAAzAAAAAAADAAAAAAAzAAEAAAADAAAAAAAzAAkAAAADAAAAAAA0AAAAAAADAAAAAAA0AAEAAAADAAAAAAA0AAkAAAADAAAAAAA1AAAAAAADAAAAAAA1AAEAAAADAAAAAAA1AAkAAAADAAAAAAA2AAAAAAADAAAAAAA2AAEAAAADAAAAAAA2AAkAAAADAAAAAAA3AAAAAAADAAAAAAA3AAEAAAADAAAAAAA3AAkAAAADAAAAAAA4AAAAAAADAAAAAAA4AAEAAAADAAAAAAA4AAkAAAADAAAAAAA5AAAAAAADAAAAAAA5AAEAAAADAAAAAAA5AAkAAAADAAAAAAA6AAAAAAADAAAAAAA6AAEAAAADAAAAAAA6AAkAAAADAAAAAAA7AAAAAAADAAAAAAA7AAEAAAADAAAAAAA7AAkAAAADAAAAAAA8AAAAAAADAAAAAAA8AAEAAAADAAAAAAA8AAkAAAADAAAAAAA9AAAAAAADAAAAAAA9AAEAAAADAAAAAAA9AAkAAAADAAAAAAA+AAAAAAADAAAAAAA+AAEAAAADAAAAAAA+AAIAAAADAAAAAAA+AAMAAAADAAAAAAA+AAQAAAADAAAAAAA+AAUAAAADAAAAAAA+AAgAAAADAAAAAAA+AAkAAAADAAAAAAA/AAAAAAADAAAAAAA/AAEAAAADAAAAAAA/AAIAAAADAAAAAAA/AAMAAAADAAAAAAA/AAQAAAADAAAAAAA/AAUAAAADAAAAAAA/AAgAAAADAAAAAAA/AAkAAAADAAAAAAACAAgAAAADAAAAAAADAAgAAAADAAAAAAAEAAgAAAADAAAAAAAFAAgAAAADAAAAAAAGAAgAAAADAAAAAAAHAAgAAAADAAAAAAAIAAgAAAADAAAAAAAJAAgAAAADAAAAAAAKAAgAAAADAAAAAAALAAgAAAADAAAAAAAMAAgAAAADAAAAAAANAAgAAAADAAAAAAAOAAgAAAADAAAAAAAPAAgAAAADAAAAAAAQAAgAAAADAAAAAAARAAgAAAADAAAAAAASAAgAAAADAAAA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")
+tile_set = ExtResource("2_ml8ig")
+
+[node name="Slopes" type="TileMapLayer" parent="LevelCollisionTilemap"]
+modulate = Color(0.701961, 0.215686, 0.105882, 1)
+z_index = -1
+use_parent_material = true
+tile_set = ExtResource("2_ml8ig")
+
+[node name="Entrance 0" type="Node2D" parent="."]
+position = Vector2(16, 224)
+
+[node name="Entrance 1" type="Node2D" parent="."]
+position = Vector2(2032, 224)
+
+[node name="Warp 0" parent="." node_paths=PackedStringArray("room_origin", "room_destination") instance=ExtResource("3_qeyjx")]
+position = Vector2(-48, 224)
+room_origin = NodePath("..")
+room_destination = NodePath("..")
+room_entrance_index = 1
+
+[node name="Warp 1" parent="." node_paths=PackedStringArray("room_origin", "room_destination") instance=ExtResource("3_qeyjx")]
+position = Vector2(2096, 224)
+room_origin = NodePath("..")
+room_destination = NodePath("..")
+
+[node name="TemperDragonFruit" parent="." instance=ExtResource("4_8odng")]
+position = Vector2(288, 224)
+
+[node name="TemperDragonFruit2" parent="." instance=ExtResource("4_8odng")]
+position = Vector2(1632, 224)
+
+[node name="CollectableScale" parent="." instance=ExtResource("5_fiowb")]
+position = Vector2(1568, 96)
+collectable_type = "DRACONIC"
+
+[node name="Blocks" type="Node2D" parent="."]
+
+[node name="ReinforcedFireBlock" parent="Blocks" instance=ExtResource("5_3lrqc")]
+position = Vector2(352, 96)
+
+[node name="ReinforcedMagicBlock" parent="Blocks" instance=ExtResource("6_oeg5j")]
+position = Vector2(96, 96)
+
+[node name="BreakableCycleBlock" parent="Blocks" node_paths=PackedStringArray("room_ref") instance=ExtResource("7_6r3iq")]
+position = Vector2(800, 96)
+room_ref = NodePath("../..")
+
+[node name="BreakableCycleBlock2" parent="Blocks" node_paths=PackedStringArray("room_ref") instance=ExtResource("7_6r3iq")]
+position = Vector2(1248, 96)
+room_ref = NodePath("../..")
+
+[node name="ReinforcedCycleBlock" parent="Blocks" node_paths=PackedStringArray("room_ref") instance=ExtResource("8_fqypb")]
+position = Vector2(1696, 96)
+room_ref = NodePath("../..")
+
+[node name="BreakableFireBlock" parent="Blocks" instance=ExtResource("10_a14b0")]
+position = Vector2(1440, 224)
+
+[node name="BreakableMagicBlock" parent="Blocks" instance=ExtResource("11_jrfkc")]
+position = Vector2(992, 160)
+
+[node name="ReinforcedMagicBlock2" parent="Blocks" instance=ExtResource("6_oeg5j")]
+position = Vector2(1888, 96)
+
+[node name="ReinforcedFireBlock2" parent="Blocks" instance=ExtResource("5_3lrqc")]
+position = Vector2(1952, 224)
+
+[node name="BreakableMagicBlock2" parent="Blocks" instance=ExtResource("11_jrfkc")]
+position = Vector2(1056, 160)
+
+[node name="BreakableFireBlock2" parent="Blocks" instance=ExtResource("10_a14b0")]
+position = Vector2(608, 224)
+
+[node name="Enemies" type="Node2D" parent="."]
+
+[node name="RedDragoon" parent="Enemies" instance=ExtResource("7_0p433")]
+position = Vector2(480, 96)
+enable_reflector = true
+
+[node name="BlueDragoon" parent="Enemies" instance=ExtResource("8_qvj8q")]
+position = Vector2(416, 96)
+enable_wings = true
+enable_reflector = true
+enable_magic = true
+magic_start_flipped = true
+
+[node name="RedDragoon2" parent="Enemies" instance=ExtResource("7_0p433")]
+position = Vector2(864, 96)
+enable_magic = true
+
+[node name="RedDragoon3" parent="Enemies" instance=ExtResource("7_0p433")]
+position = Vector2(1184, 96)
+enable_magic = true
+
+[node name="BlueDragoon2" parent="Enemies" instance=ExtResource("8_qvj8q")]
+position = Vector2(1888, 224)
+enable_reflector = true
+enable_magic = true
+
+[node name="YellowDragoon" parent="Enemies" instance=ExtResource("14_vb7i8")]
+position = Vector2(1952, 96)
+enable_wings = true
+enable_reflector = true
+enable_magic = true
+
+[node name="GreenDragoon" parent="Enemies" instance=ExtResource("15_paldx")]
+position = Vector2(224, 160)
+enable_wings = true
+enable_helmet = true
+enable_reflector = true
+enable_magic = true
+
+[node name="Obstacles" type="Node2D" parent="."]
+
+[node name="FloorSpikes" parent="Obstacles" instance=ExtResource("4_aqwc4")]
+position = Vector2(224, 240)
+floor_length = 6
+
+[node name="Fyerlarm" parent="Obstacles" instance=ExtResource("5_h5nlo")]
+position = Vector2(224, 96)
+
+[node name="Fyerlarm2" parent="Obstacles" instance=ExtResource("5_h5nlo")]
+position = Vector2(672, 96)
+
+[node name="Fyerlarm3" parent="Obstacles" instance=ExtResource("5_h5nlo")]
+position = Vector2(1376, 96)
+
+[node name="Fyerlarm4" parent="Obstacles" instance=ExtResource("5_h5nlo")]
+position = Vector2(1024, 96)
+
+[node name="FloorSpikes2" parent="Obstacles" instance=ExtResource("4_aqwc4")]
+position = Vector2(736, 80)
+floor_length = 2
+
+[node name="FloorSpikes3" parent="Obstacles" instance=ExtResource("4_aqwc4")]
+position = Vector2(1312, 80)
+floor_length = 2
+
+[node name="FloorSpikes4" parent="Obstacles" instance=ExtResource("4_aqwc4")]
+position = Vector2(1024, 240)
+floor_length = 8
+
+[node name="FloorSpikes5" parent="Obstacles" instance=ExtResource("4_aqwc4")]
+position = Vector2(608, 240)
+floor_length = 6
+
+[node name="FloorSpikes6" parent="Obstacles" instance=ExtResource("4_aqwc4")]
+position = Vector2(1440, 240)
+floor_length = 6
+
+[node name="FloorSpikes7" parent="Obstacles" instance=ExtResource("4_aqwc4")]
+position = Vector2(1792, 240)
+floor_length = 4
+
+[node name="Fyerlarm5" parent="Obstacles" instance=ExtResource("5_h5nlo")]
+position = Vector2(1760, 96)
+
+[node name="FloorSpikes8" parent="Obstacles" instance=ExtResource("4_aqwc4")]
+position = Vector2(1728, 112)
+floor_length = 8
+
+[node name="Fyerlarm6" parent="Obstacles" instance=ExtResource("5_h5nlo")]
+position = Vector2(1824, 224)

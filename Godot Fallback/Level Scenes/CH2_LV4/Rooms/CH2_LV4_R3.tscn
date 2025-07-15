@@ -164,7 +164,6 @@ enable_reflector = true
 [node name="GreenDragoon" parent="Enemies" instance=ExtResource("11_by01j")]
 position = Vector2(1024, 160)
 enable_wings = true
-enable_magic = true
 
 [node name="BlueDragoon" parent="Enemies" instance=ExtResource("13_1fdqv")]
 position = Vector2(1568, 96)

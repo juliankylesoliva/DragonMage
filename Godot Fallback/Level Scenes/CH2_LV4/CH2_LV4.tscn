@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://t2kj13lewrl"]
+[gd_scene load_steps=25 format=3 uid="uid://t2kj13lewrl"]
 
 [ext_resource type="Script" path="res://Scripts/Utility Scripts/Level.gd" id="1_yggyj"]
 [ext_resource type="PackedScene" uid="uid://d0ff35cm57xb7" path="res://Scene Objects/Effects/DroppedFragment.tscn" id="2_myit7"]
@@ -14,11 +14,13 @@
 [ext_resource type="PackedScene" uid="uid://di5fs0jb3ua07" path="res://Level Scenes/CH2_LV4/Rooms/CH2_LV4_R7.tscn" id="8_7lx3v"]
 [ext_resource type="PackedScene" uid="uid://buykytsdrlnsg" path="res://Scene Objects/Misc/ResultsScreen.tscn" id="8_7u3u6"]
 [ext_resource type="PackedScene" uid="uid://ctu613c2h4c2b" path="res://Level Scenes/CH2_LV4/Rooms/CH2_LV4_R8.tscn" id="9_a73yn"]
+[ext_resource type="PackedScene" uid="uid://dk5xj7ga1htid" path="res://Level Scenes/CH2_LV4/Rooms/CH2_LV4_R6.tscn" id="9_ofxth"]
 [ext_resource type="PackedScene" uid="uid://d1eef1xjuwf3b" path="res://Menu Scenes/PauseMenu.tscn" id="9_xlu3u"]
 [ext_resource type="PackedScene" uid="uid://8beel2odcuky" path="res://Scene Objects/Effects/ScreenFade.tscn" id="10_8ca3c"]
 [ext_resource type="PackedScene" uid="uid://brhoroc2w6jwi" path="res://Scene Objects/UI/Textbox.tscn" id="11_nx3kn"]
 [ext_resource type="PackedScene" uid="uid://ca4v88yik2xe" path="res://Scene Objects/Misc/LevelIntroScreen.tscn" id="11_ttojs"]
 [ext_resource type="PackedScene" uid="uid://btq4qla5fyq0n" path="res://Scene Objects/Misc/LevelMusicPlayer.tscn" id="12_o50ci"]
+[ext_resource type="PackedScene" uid="uid://bres6fuhnqslh" path="res://Level Scenes/CH2_LV4/Rooms/CH2_LV4_R9.tscn" id="12_un3l5"]
 [ext_resource type="PackedScene" uid="uid://bjeiexqfc7oht" path="res://Scene Objects/Misc/DefeatScreen.tscn" id="13_w4xvx"]
 [ext_resource type="PackedScene" uid="uid://r73mfltetrqo" path="res://Level Scenes/CH2_LV4/Rooms/CH2_LV4_R2.tscn" id="16_3ugfk"]
 
@@ -27,12 +29,14 @@ resource_local_to_scene = true
 radius = 8.0
 height = 48.0
 
-[node name="CH2_LV4" type="Node2D" node_paths=PackedStringArray("player_reference", "starting_room", "room_list", "screen_fade", "intro_screen", "clear_timer")]
+[node name="CH2_LV4" type="Node2D" node_paths=PackedStringArray("player_reference", "starting_room", "room_list", "magical_scale", "draconic_scale", "screen_fade", "intro_screen", "clear_timer")]
 script = ExtResource("1_yggyj")
 level_index = 11
 player_reference = NodePath("Player")
-starting_room = NodePath("CH2_LV4_R1")
-room_list = [NodePath("CH2_LV4_R1"), NodePath("CH2_LV4_R2"), NodePath("CH2_LV4_R3"), NodePath("CH2_LV4_R4"), NodePath("CH2_LV4_R5"), NodePath("CH2_LV4_R7"), NodePath("CH2_LV4_R8")]
+starting_room = NodePath("CH2_LV4_R9")
+room_list = [NodePath("CH2_LV4_R1"), NodePath("CH2_LV4_R2"), NodePath("CH2_LV4_R3"), NodePath("CH2_LV4_R4"), NodePath("CH2_LV4_R5"), NodePath("CH2_LV4_R6"), NodePath("CH2_LV4_R7"), NodePath("CH2_LV4_R8"), NodePath("CH2_LV4_R9")]
+magical_scale = NodePath("CH2_LV4_R6/CollectableScale")
+draconic_scale = NodePath("CH2_LV4_R9/CollectableScale")
 dropped_fragment_scene = ExtResource("2_myit7")
 screen_fade = NodePath("UI_Canvas/ScreenFade")
 intro_screen = NodePath("UI_Canvas/LevelIntroScreen")
@@ -78,17 +82,59 @@ position = Vector2(1792, -64)
 [node name="Warp 0" parent="CH2_LV4_R3" index="4" node_paths=PackedStringArray("room_destination")]
 room_destination = NodePath("../../CH2_LV4_R2")
 
+[node name="Warp 1" parent="CH2_LV4_R3" index="5" node_paths=PackedStringArray("room_destination")]
+room_destination = NodePath("../../CH2_LV4_R4")
+
 [node name="CH2_LV4_R4" parent="." instance=ExtResource("7_obspq")]
 position = Vector2(0, 480)
+
+[node name="Warp 0" parent="CH2_LV4_R4" index="5" node_paths=PackedStringArray("room_destination")]
+room_destination = NodePath("../../CH2_LV4_R3")
+
+[node name="Warp 1" parent="CH2_LV4_R4" index="6" node_paths=PackedStringArray("room_destination")]
+room_destination = NodePath("../../CH2_LV4_R5")
 
 [node name="CH2_LV4_R5" parent="." instance=ExtResource("8_7g06i")]
 position = Vector2(1152, 448)
 
+[node name="Warp 0" parent="CH2_LV4_R5" index="4" node_paths=PackedStringArray("room_destination")]
+room_destination = NodePath("../../CH2_LV4_R4")
+
+[node name="Warp 1" parent="CH2_LV4_R5" index="5" node_paths=PackedStringArray("room_destination")]
+room_destination = NodePath("../../CH2_LV4_R6")
+
+[node name="CH2_LV4_R6" parent="." instance=ExtResource("9_ofxth")]
+position = Vector2(1792, 416)
+
+[node name="Warp 0" parent="CH2_LV4_R6" index="4" node_paths=PackedStringArray("room_destination")]
+room_destination = NodePath("../../CH2_LV4_R5")
+
+[node name="Warp 1" parent="CH2_LV4_R6" index="5" node_paths=PackedStringArray("room_destination")]
+room_destination = NodePath("../../CH2_LV4_R7")
+
 [node name="CH2_LV4_R7" parent="." instance=ExtResource("8_7lx3v")]
 position = Vector2(0, 960)
 
+[node name="Warp 0" parent="CH2_LV4_R7" index="5" node_paths=PackedStringArray("room_destination")]
+room_destination = NodePath("../../CH2_LV4_R6")
+
+[node name="Warp 1" parent="CH2_LV4_R7" index="6" node_paths=PackedStringArray("room_destination")]
+room_destination = NodePath("../../CH2_LV4_R8")
+
 [node name="CH2_LV4_R8" parent="." instance=ExtResource("9_a73yn")]
 position = Vector2(1152, 928)
+
+[node name="Warp 0" parent="CH2_LV4_R8" index="4" node_paths=PackedStringArray("room_destination")]
+room_destination = NodePath("../../CH2_LV4_R7")
+
+[node name="Warp 1" parent="CH2_LV4_R8" index="5" node_paths=PackedStringArray("room_destination")]
+room_destination = NodePath("../../CH2_LV4_R9")
+
+[node name="CH2_LV4_R9" parent="." instance=ExtResource("12_un3l5")]
+position = Vector2(1792, 896)
+
+[node name="Warp 0" parent="CH2_LV4_R9" index="4" node_paths=PackedStringArray("room_destination")]
+room_destination = NodePath("../../CH2_LV4_R8")
 
 [node name="UI_Canvas" type="CanvasLayer" parent="."]
 
@@ -148,3 +194,9 @@ screen_fade = NodePath("../UI_Canvas/ScreenFade")
 [editable path="CH2_LV4_R1"]
 [editable path="CH2_LV4_R2"]
 [editable path="CH2_LV4_R3"]
+[editable path="CH2_LV4_R4"]
+[editable path="CH2_LV4_R5"]
+[editable path="CH2_LV4_R6"]
+[editable path="CH2_LV4_R7"]
+[editable path="CH2_LV4_R8"]
+[editable path="CH2_LV4_R9"]
