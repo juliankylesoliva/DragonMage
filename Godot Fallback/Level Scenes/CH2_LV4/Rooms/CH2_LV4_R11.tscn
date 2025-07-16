@@ -1,0 +1,154 @@
+[gd_scene load_steps=9 format=4 uid="uid://cod85ofc4eq8g"]
+
+[ext_resource type="Script" path="res://Scripts/Utility Scripts/Room.gd" id="1_rele6"]
+[ext_resource type="TileSet" uid="uid://dhwi7i1loa2pd" path="res://Sprites/Tiles/Test Tiles/TestTileSet.tres" id="2_copig"]
+[ext_resource type="PackedScene" uid="uid://dqbo0wu6hm8lj" path="res://Scene Objects/Objects/WarpTrigger.tscn" id="3_01j67"]
+[ext_resource type="PackedScene" uid="uid://b2a0ttqvejk51" path="res://Scene Objects/Objects/TemperDragonFruit.tscn" id="4_06hoq"]
+[ext_resource type="PackedScene" uid="uid://b157weul8inp0" path="res://Scene Objects/Objects/BreakableCycleBlock.tscn" id="4_famtr"]
+[ext_resource type="PackedScene" uid="uid://cn5fv6nf7hnwr" path="res://Scene Objects/Objects/ReinforcedCycleBlock.tscn" id="5_rogj1"]
+[ext_resource type="PackedScene" uid="uid://b03ie1oct07e3" path="res://Scene Objects/Obstacles/Fyerlarm.tscn" id="5_w6osh"]
+[ext_resource type="PackedScene" uid="uid://c3el80dbnmcws" path="res://Scene Objects/Objects/ConveyorBelt.tscn" id="6_3ikc1"]
+
+[node name="CH2_LV4_R11" type="Node2D" node_paths=PackedStringArray("tilemap_list", "room_entrances")]
+script = ExtResource("1_rele6")
+tilemap_list = [NodePath("BoundaryCollisionTilemap"), NodePath("LevelCollisionTilemap")]
+bottom_camera_limit = 448
+room_entrances = [NodePath("Entrance 0"), NodePath("Entrance 1")]
+
+[node name="BoundaryCollisionTilemap" type="Node2D" parent="."]
+z_index = 4
+
+[node name="Intangible" type="TileMapLayer" parent="BoundaryCollisionTilemap"]
+z_index = -1
+use_parent_material = true
+tile_map_data = PackedByteArray("AAD9/wEAAAADAAAAAAD9/wIAAAADAAAAAAD9/wMAAAADAAAAAAD9/wQAAAADAAAAAAD+/wEAAAADAAAAAAD+/wQAAAADAAAAAAD//wEAAAADAAAAAAD//wQAAAADAAAAAAAQAAkAAAADAAAAAAAQAAwAAAADAAAAAAARAAkAAAADAAAAAAARAAwAAAADAAAAAAASAAkAAAADAAAAAAASAAoAAAADAAAAAAASAAsAAAADAAAAAAASAAwAAAADAAAAAAA=")
+tile_set = ExtResource("2_copig")
+rendering_quadrant_size = 32
+metadata/Tag = "IntangibleWall"
+
+[node name="LevelCollisionTilemap" type="Node2D" parent="."]
+visibility_layer = 4
+z_index = 3
+
+[node name="Decoration" type="TileMapLayer" parent="LevelCollisionTilemap"]
+use_parent_material = true
+tile_set = ExtResource("2_copig")
+rendering_quadrant_size = 32
+
+[node name="Background" type="TileMapLayer" parent="LevelCollisionTilemap"]
+z_index = -1
+use_parent_material = true
+tile_set = ExtResource("2_copig")
+
+[node name="Ground" type="TileMapLayer" parent="LevelCollisionTilemap"]
+modulate = Color(0.0745098, 0.113725, 0.301961, 1)
+z_index = -1
+use_parent_material = true
+tile_map_data = PackedByteArray("AAAAAAAAAAADAAAAAAAAAAEAAAADAAAAAAAAAAQAAAADAAAAAAAAAAUAAAADAAAAAAAAAAYAAAADAAAAAAAAAAcAAAADAAAAAAAAAAgAAAADAAAAAAAAAAkAAAADAAAAAAABAAAAAAADAAAAAAABAAEAAAADAAAAAAABAAQAAAADAAAAAAABAAUAAAADAAAAAAABAAYAAAADAAAAAAABAAcAAAADAAAAAAABAAgAAAADAAAAAAABAAkAAAADAAAAAAACAAAAAAADAAAAAAACAAEAAAADAAAAAAACAAUAAAADAAAAAAADAAAAAAADAAAAAAADAAEAAAADAAAAAAADAAUAAAADAAAAAAAEAAAAAAADAAAAAAAEAAEAAAADAAAAAAAEAAUAAAADAAAAAAAEAAgAAAADAAAAAAAEAAkAAAADAAAAAAAFAAAAAAADAAAAAAAFAAEAAAADAAAAAAAFAAUAAAADAAAAAAAFAAgAAAADAAAAAAAFAAkAAAADAAAAAAAGAAAAAAADAAAAAAAGAAEAAAADAAAAAAAGAAUAAAADAAAAAAAGAAkAAAADAAAAAAAHAAAAAAADAAAAAAAHAAEAAAADAAAAAAAHAAUAAAADAAAAAAAHAAkAAAADAAAAAAAIAAAAAAADAAAAAAAIAAEAAAADAAAAAAAIAAUAAAADAAAAAAAIAAkAAAADAAAAAAAJAAAAAAADAAAAAAAJAAEAAAADAAAAAAAJAAUAAAADAAAAAAAJAAkAAAADAAAAAAAKAAAAAAADAAAAAAAKAAEAAAADAAAAAAAKAAQAAAADAAAAAAAKAAUAAAADAAAAAAAKAAkAAAADAAAAAAALAAAAAAADAAAAAAALAAEAAAADAAAAAAALAAQAAAADAAAAAAALAAUAAAADAAAAAAALAAkAAAADAAAAAAAMAAAAAAADAAAAAAAMAAEAAAADAAAAAAAMAAkAAAADAAAAAAANAAAAAAADAAAAAAANAAEAAAADAAAAAAANAAkAAAADAAAAAAAOAAAAAAADAAAAAAAOAAEAAAADAAAAAAAOAAIAAAADAAAAAAAOAAMAAAADAAAAAAAOAAQAAAADAAAAAAAOAAUAAAADAAAAAAAOAAYAAAADAAAAAAAOAAcAAAADAAAAAAAOAAgAAAADAAAAAAAOAAkAAAADAAAAAAAPAAAAAAADAAAAAAAPAAEAAAADAAAAAAAPAAIAAAADAAAAAAAPAAMAAAADAAAAAAAPAAQAAAADAAAAAAAPAAUAAAADAAAAAAAPAAYAAAADAAAAAAAPAAcAAAADAAAAAAAPAAgAAAADAAAAAAAPAAkAAAADAAAAAAAAAAwAAAADAAAAAAAAAA0AAAADAAAAAAABAAwAAAADAAAAAAABAA0AAAADAAAAAAACAA0AAAADAAAAAAADAA0AAAADAAAAAAAEAA0AAAADAAAAAAAFAA0AAAADAAAAAAAGAA0AAAADAAAAAAAHAA0AAAADAAAAAAAIAA0AAAADAAAAAAAJAA0AAAADAAAAAAAKAAwAAAADAAAAAAAKAA0AAAADAAAAAAALAAwAAAADAAAAAAALAA0AAAADAAAAAAAMAAwAAAADAAAAAAAMAA0AAAADAAAAAAANAAwAAAADAAAAAAANAA0AAAADAAAAAAAOAAwAAAADAAAAAAAOAA0AAAADAAAAAAAPAAwAAAADAAAAAAAPAA0AAAADAAAAAAAAAAoAAAADAAAAAAAAAAsAAAADAAAAAAABAAoAAAADAAAAAAABAAsAAAADAAAAAAAKAAIAAAADAAAAAAALAAIAAAADAAAAAAACAAQAAAADAAAAAAADAAQAAAADAAAAAAAEAAYAAAADAAAAAAAFAAYAAAADAAAAAAA=")
+tile_set = ExtResource("2_copig")
+
+[node name="Slopes" type="TileMapLayer" parent="LevelCollisionTilemap"]
+modulate = Color(0.701961, 0.215686, 0.105882, 1)
+z_index = -1
+use_parent_material = true
+tile_set = ExtResource("2_copig")
+
+[node name="Entrance 0" type="Node2D" parent="."]
+position = Vector2(16, 96)
+
+[node name="Entrance 1" type="Node2D" parent="."]
+position = Vector2(496, 352)
+
+[node name="Warp 0" parent="." node_paths=PackedStringArray("room_origin", "room_destination") instance=ExtResource("3_01j67")]
+position = Vector2(-48, 96)
+room_origin = NodePath("..")
+room_destination = NodePath("..")
+room_entrance_index = 1
+
+[node name="Warp 1" parent="." node_paths=PackedStringArray("room_origin", "room_destination") instance=ExtResource("3_01j67")]
+position = Vector2(560, 352)
+room_origin = NodePath("..")
+room_destination = NodePath("..")
+
+[node name="Items" type="Node2D" parent="."]
+
+[node name="TemperDragonFruit" parent="Items" instance=ExtResource("4_06hoq")]
+position = Vector2(416, 96)
+starting_state = 0
+enable_cycling = false
+
+[node name="TemperDragonFruit2" parent="Items" instance=ExtResource("4_06hoq")]
+position = Vector2(96, 224)
+starting_state = 0
+enable_cycling = false
+
+[node name="Blocks" type="Node2D" parent="."]
+
+[node name="BreakableCycleBlock" parent="Blocks" node_paths=PackedStringArray("room_ref") instance=ExtResource("4_famtr")]
+position = Vector2(160, 96)
+room_ref = NodePath("../..")
+starting_type = "FIRE"
+
+[node name="BreakableCycleBlock2" parent="Blocks" node_paths=PackedStringArray("room_ref") instance=ExtResource("4_famtr")]
+position = Vector2(288, 96)
+room_ref = NodePath("../..")
+starting_type = "FIRE"
+
+[node name="ReinforcedCycleBlock" parent="Blocks" node_paths=PackedStringArray("room_ref") instance=ExtResource("5_rogj1")]
+position = Vector2(288, 224)
+room_ref = NodePath("../..")
+starting_type = "FIRE"
+
+[node name="ReinforcedCycleBlock2" parent="Blocks" node_paths=PackedStringArray("room_ref") instance=ExtResource("5_rogj1")]
+position = Vector2(224, 224)
+room_ref = NodePath("../..")
+starting_type = "FIRE"
+
+[node name="BreakableCycleBlock3" parent="Blocks" node_paths=PackedStringArray("room_ref") instance=ExtResource("4_famtr")]
+position = Vector2(96, 224)
+room_ref = NodePath("../..")
+starting_type = "FIRE"
+
+[node name="BreakableCycleBlock4" parent="Blocks" node_paths=PackedStringArray("room_ref") instance=ExtResource("4_famtr")]
+position = Vector2(224, 352)
+room_ref = NodePath("../..")
+
+[node name="BreakableCycleBlock5" parent="Blocks" node_paths=PackedStringArray("room_ref") instance=ExtResource("4_famtr")]
+position = Vector2(288, 352)
+room_ref = NodePath("../..")
+starting_type = "FIRE"
+
+[node name="ReinforcedCycleBlock3" parent="Blocks" node_paths=PackedStringArray("room_ref") instance=ExtResource("5_rogj1")]
+position = Vector2(352, 352)
+room_ref = NodePath("../..")
+
+[node name="ReinforcedCycleBlock4" parent="Blocks" node_paths=PackedStringArray("room_ref") instance=ExtResource("5_rogj1")]
+position = Vector2(416, 352)
+room_ref = NodePath("../..")
+starting_type = "FIRE"
+
+[node name="Obstacles" type="Node2D" parent="."]
+
+[node name="Fyerlarm" parent="Obstacles" instance=ExtResource("5_w6osh")]
+position = Vector2(224, 96)
+
+[node name="ConveyorBelt" parent="Obstacles" instance=ExtResource("6_3ikc1")]
+position = Vector2(224, 144)
+conveyor_velocity = -100.0
+conveyor_length = 6
+
+[node name="Fyerlarm2" parent="Obstacles" instance=ExtResource("5_w6osh")]
+position = Vector2(352, 224)
+
+[node name="ConveyorBelt2" parent="Obstacles" instance=ExtResource("6_3ikc1")]
+position = Vector2(320, 272)
+conveyor_velocity = 100.0
+conveyor_length = 8
+
+[node name="Fyerlarm3" parent="Obstacles" instance=ExtResource("5_w6osh")]
+position = Vector2(160, 352)
+
+[node name="ConveyorBelt3" parent="Obstacles" instance=ExtResource("6_3ikc1")]
+position = Vector2(192, 400)
+conveyor_velocity = -100.0
+conveyor_length = 8
