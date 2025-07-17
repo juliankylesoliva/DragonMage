@@ -96,24 +96,25 @@ func do_damage_warp(bypass_invulnerability : bool = false):
 	elif (!bypass_invulnerability and (is_player_damaged() or fairy_guard_attack.is_invincibility_active or is_damage_invulnerability_active())):
 		return false
 	else:
-		if (is_damage_invulnerability_active()):
+		if (is_damage_invulnerability_active() and !hub.temper.is_form_locked()):
 			is_damage_invulnerability_flickering = false
 			current_iframe_timer = 0
 		
 		if (!is_player_damaged()):
 			damage_taken += 1
 		
-		if (hub.temper.is_form_locked()):
+		if (hub.temper.is_form_locked() and !is_damage_invulnerability_active()):
 			is_player_defeated = true
 			hub.form.stop_form_change_timer()
 			defeated.emit()
 		else:
-			is_damage_warping = true
 			hub.form.stop_form_change_timer()
-			hub.fairy.cut_magic()
 			hub.stomp.reset_stomp_combo()
 			hub.jumping.landing_reset()
-			took_damage.emit()
+			if (!is_player_damaged()):
+				hub.fairy.cut_magic()
+				took_damage.emit()
+			is_damage_warping = true
 		return true
 
 func on_parry():

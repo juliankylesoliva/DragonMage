@@ -163,7 +163,6 @@ enable_magic = true
 [node name="GreenDragoon" parent="Enemies" instance=ExtResource("15_paldx")]
 position = Vector2(224, 160)
 enable_wings = true
-enable_helmet = true
 enable_reflector = true
 enable_magic = true
 

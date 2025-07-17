@@ -210,7 +210,7 @@ autoplay = "Idle"
 frame_progress = 0.853527
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
-volume_db = 4.0
+volume_db = 2.0
 max_distance = 1024.0
 bus = &"SFX"
 

@@ -114,6 +114,7 @@ enable_reflector = true
 
 [node name="BlueDragoon" parent="Enemies" instance=ExtResource("9_fpy4s")]
 position = Vector2(864, 96)
+enable_wings = true
 enable_reflector = true
 enable_magic = true
 magic_start_flipped = true
@@ -124,15 +125,15 @@ magic_start_flipped = true
 position = Vector2(160, 160)
 
 [node name="FloorSpikes" parent="Obstacles" instance=ExtResource("5_rqwcc")]
-position = Vector2(160, 240)
-floor_length = 6
+position = Vector2(192, 240)
+floor_length = 4
 
 [node name="Fyerlarm2" parent="Obstacles" instance=ExtResource("4_r80aq")]
 position = Vector2(608, 96)
 
 [node name="FloorSpikes2" parent="Obstacles" instance=ExtResource("5_rqwcc")]
-position = Vector2(608, 240)
-floor_length = 6
+position = Vector2(640, 240)
+floor_length = 4
 
 [node name="Fyerlarm3" parent="Obstacles" instance=ExtResource("4_r80aq")]
 position = Vector2(800, 224)
