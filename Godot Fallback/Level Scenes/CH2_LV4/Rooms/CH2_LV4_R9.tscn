@@ -169,8 +169,8 @@ enable_magic = true
 [node name="Obstacles" type="Node2D" parent="."]
 
 [node name="FloorSpikes" parent="Obstacles" instance=ExtResource("4_aqwc4")]
-position = Vector2(224, 240)
-floor_length = 6
+position = Vector2(256, 240)
+floor_length = 4
 
 [node name="Fyerlarm" parent="Obstacles" instance=ExtResource("5_h5nlo")]
 position = Vector2(224, 96)

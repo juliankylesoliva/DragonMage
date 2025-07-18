@@ -11,7 +11,7 @@ animations = [{
 "speed": 60.0
 }]
 
-[node name="BossRoomBarricade" type="Area2D"]
+[node name="BossRoomBarricade" type="StaticBody2D"]
 collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
