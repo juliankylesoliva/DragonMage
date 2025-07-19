@@ -321,7 +321,7 @@ metadata/Tag = "Enemy"
 [node name="Movement" type="Node" parent="Enemy" node_paths=PackedStringArray("enemy")]
 script = ExtResource("2_sot6e")
 enemy = NodePath("../..")
-max_distance_from_init_pos = 48.0
+max_distance_from_init_pos = 64.0
 
 [node name="PlayerDetection" type="Node" parent="Enemy" node_paths=PackedStringArray("enemy", "front_sightline_raycast", "back_sightline_raycast")]
 script = ExtResource("3_d4ci6")

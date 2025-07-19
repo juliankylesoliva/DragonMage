@@ -108,7 +108,6 @@ enable_reflector = true
 
 [node name="GreenDragoon" parent="Enemies" instance=ExtResource("8_2xhfp")]
 position = Vector2(864, 224)
-flip_initial_movement = true
 enable_wings = true
 enable_reflector = true
 
@@ -132,8 +131,8 @@ floor_length = 4
 position = Vector2(608, 96)
 
 [node name="FloorSpikes2" parent="Obstacles" instance=ExtResource("5_rqwcc")]
-position = Vector2(640, 240)
-floor_length = 4
+position = Vector2(608, 240)
+floor_length = 6
 
 [node name="Fyerlarm3" parent="Obstacles" instance=ExtResource("4_r80aq")]
 position = Vector2(800, 224)

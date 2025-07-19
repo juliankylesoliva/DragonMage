@@ -106,22 +106,22 @@ position = Vector2(608, 96)
 position = Vector2(672, 96)
 
 [node name="BreakableMagicBlock5" parent="Blocks" instance=ExtResource("6_3d2k6")]
-position = Vector2(736, 96)
-
-[node name="BreakableMagicBlock6" parent="Blocks" instance=ExtResource("6_3d2k6")]
-position = Vector2(800, 96)
-
-[node name="BreakableFireBlock" parent="Blocks" instance=ExtResource("12_tupul")]
 position = Vector2(1184, 96)
 
-[node name="BreakableFireBlock2" parent="Blocks" instance=ExtResource("12_tupul")]
+[node name="BreakableMagicBlock6" parent="Blocks" instance=ExtResource("6_3d2k6")]
 position = Vector2(1248, 96)
 
-[node name="BreakableFireBlock3" parent="Blocks" instance=ExtResource("12_tupul")]
+[node name="BreakableFireBlock" parent="Blocks" instance=ExtResource("12_tupul")]
 position = Vector2(1312, 96)
 
-[node name="BreakableFireBlock4" parent="Blocks" instance=ExtResource("12_tupul")]
+[node name="BreakableFireBlock2" parent="Blocks" instance=ExtResource("12_tupul")]
 position = Vector2(1376, 96)
+
+[node name="BreakableFireBlock3" parent="Blocks" instance=ExtResource("12_tupul")]
+position = Vector2(736, 96)
+
+[node name="BreakableFireBlock4" parent="Blocks" instance=ExtResource("12_tupul")]
+position = Vector2(800, 96)
 
 [node name="ReinforcedFireBlock2" parent="Blocks" instance=ExtResource("5_fyphq")]
 position = Vector2(1696, 96)
@@ -196,13 +196,10 @@ position = Vector2(736, 224)
 
 [node name="YellowDragoon" parent="Enemies" instance=ExtResource("11_jg0yh")]
 position = Vector2(864, 96)
-enable_reflector = true
 
 [node name="BlueDragoon" parent="Enemies" instance=ExtResource("14_6wpj8")]
-position = Vector2(1024, 96)
+position = Vector2(1024, 224)
 enable_wings = true
-enable_magic = true
-magic_start_flipped = true
 
 [node name="RedDragoon4" parent="Enemies" instance=ExtResource("7_dm17e")]
 position = Vector2(1312, 224)

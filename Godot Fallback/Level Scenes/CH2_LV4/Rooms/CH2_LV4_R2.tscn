@@ -70,25 +70,25 @@ room_origin = NodePath("..")
 room_destination = NodePath("..")
 
 [node name="TemperDragonFruit" parent="." instance=ExtResource("6_lhfjo")]
-position = Vector2(416, 96)
+position = Vector2(96, 96)
 starting_state = 1
 enable_cycling = false
 
 [node name="TemperDragonFruit2" parent="." instance=ExtResource("6_lhfjo")]
-position = Vector2(96, 224)
+position = Vector2(96, 288)
 starting_state = 1
 enable_cycling = false
 
 [node name="Blocks" type="Node2D" parent="."]
 
 [node name="BreakableFireBlock" parent="Blocks" instance=ExtResource("4_dwt27")]
-position = Vector2(288, 96)
+position = Vector2(224, 96)
 
 [node name="BreakableFireBlock2" parent="Blocks" instance=ExtResource("4_dwt27")]
 position = Vector2(160, 224)
 
 [node name="BreakableFireBlock3" parent="Blocks" instance=ExtResource("4_dwt27")]
-position = Vector2(224, 352)
+position = Vector2(160, 352)
 
 [node name="BreakableFireBlock4" parent="Blocks" instance=ExtResource("4_dwt27")]
 position = Vector2(352, 352)
@@ -105,10 +105,10 @@ position = Vector2(352, 288)
 position = Vector2(160, 416)
 
 [node name="Fyerlarm" parent="Obstacles" instance=ExtResource("3_ca4cg")]
-position = Vector2(224, 96)
+position = Vector2(288, 96)
 
 [node name="Fyerlarm2" parent="Obstacles" instance=ExtResource("3_ca4cg")]
 position = Vector2(352, 224)
 
 [node name="Fyerlarm3" parent="Obstacles" instance=ExtResource("3_ca4cg")]
-position = Vector2(160, 352)
+position = Vector2(224, 352)

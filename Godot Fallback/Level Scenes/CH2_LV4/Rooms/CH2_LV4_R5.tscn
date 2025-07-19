@@ -77,12 +77,12 @@ starting_state = 0
 enable_cycling = false
 
 [node name="TemperDragonFruit2" parent="." instance=ExtResource("4_p82br")]
-position = Vector2(352, 224)
+position = Vector2(416, 160)
 starting_state = 0
 enable_cycling = false
 
 [node name="TemperDragonFruit3" parent="." instance=ExtResource("4_p82br")]
-position = Vector2(160, 352)
+position = Vector2(96, 288)
 starting_state = 0
 enable_cycling = false
 
