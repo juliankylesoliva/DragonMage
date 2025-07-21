@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=4 uid="uid://c4y5lq7mb6bqh"]
+[gd_scene load_steps=10 format=4 uid="uid://c4y5lq7mb6bqh"]
 
 [ext_resource type="Script" path="res://Scripts/Utility Scripts/Room.gd" id="1_o7ifv"]
 [ext_resource type="TileSet" uid="uid://dhwi7i1loa2pd" path="res://Sprites/Tiles/Test Tiles/TestTileSet.tres" id="2_vh00l"]
@@ -7,14 +7,16 @@
 [ext_resource type="PackedScene" uid="uid://dqbo0wu6hm8lj" path="res://Scene Objects/Objects/WarpTrigger.tscn" id="3_ukx6f"]
 [ext_resource type="PackedScene" uid="uid://dck0mc2tc82kx" path="res://Scene Objects/Objects/ReinforcedFireBlock.tscn" id="4_cuciw"]
 [ext_resource type="PackedScene" uid="uid://dwnpgujive352" path="res://Scene Objects/Enemies/RedDragoon.tscn" id="5_m0bww"]
+[ext_resource type="PackedScene" uid="uid://dfkmxoba64spw" path="res://Scene Objects/Objects/MedalFragment.tscn" id="6_np75a"]
 [ext_resource type="PackedScene" uid="uid://b2a0ttqvejk51" path="res://Scene Objects/Objects/TemperDragonFruit.tscn" id="8_q8gv3"]
 
-[node name="CH2_LV4_R4" type="Node2D" node_paths=PackedStringArray("tilemap_list", "room_entrances", "enemy_nodes")]
+[node name="CH2_LV4_R4" type="Node2D" node_paths=PackedStringArray("tilemap_list", "room_entrances", "enemy_nodes", "medal_fragments")]
 script = ExtResource("1_o7ifv")
 tilemap_list = [NodePath("BoundaryCollisionTilemap"), NodePath("LevelCollisionTilemap")]
 right_camera_limit = 1024
 room_entrances = [NodePath("Entrance 0"), NodePath("Entrance 1")]
 enemy_nodes = [NodePath("Enemies/RedDragoon"), NodePath("Enemies/RedDragoon2")]
+medal_fragments = [NodePath("Fragments/MedalFragment"), NodePath("Fragments/MedalFragment2"), NodePath("Fragments/MedalFragment3"), NodePath("Fragments/MedalFragment4"), NodePath("Fragments/MedalFragment5"), NodePath("Fragments/MedalFragment6"), NodePath("Fragments/MedalFragment7"), NodePath("Fragments/MedalFragment8")]
 
 [node name="BoundaryCollisionTilemap" type="Node2D" parent="."]
 z_index = 4
@@ -79,6 +81,32 @@ room_destination = NodePath("..")
 position = Vector2(480, 160)
 starting_state = 1
 enable_cycling = false
+
+[node name="Fragments" type="Node2D" parent="."]
+
+[node name="MedalFragment" parent="Fragments" instance=ExtResource("6_np75a")]
+position = Vector2(176, 112)
+
+[node name="MedalFragment2" parent="Fragments" instance=ExtResource("6_np75a")]
+position = Vector2(208, 80)
+
+[node name="MedalFragment3" parent="Fragments" instance=ExtResource("6_np75a")]
+position = Vector2(240, 112)
+
+[node name="MedalFragment4" parent="Fragments" instance=ExtResource("6_np75a")]
+position = Vector2(272, 80)
+
+[node name="MedalFragment5" parent="Fragments" instance=ExtResource("6_np75a")]
+position = Vector2(624, 112)
+
+[node name="MedalFragment6" parent="Fragments" instance=ExtResource("6_np75a")]
+position = Vector2(656, 80)
+
+[node name="MedalFragment7" parent="Fragments" instance=ExtResource("6_np75a")]
+position = Vector2(688, 112)
+
+[node name="MedalFragment8" parent="Fragments" instance=ExtResource("6_np75a")]
+position = Vector2(720, 80)
 
 [node name="Blocks" type="Node2D" parent="."]
 

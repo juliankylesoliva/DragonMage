@@ -1,20 +1,22 @@
-[gd_scene load_steps=10 format=4 uid="uid://ctu613c2h4c2b"]
+[gd_scene load_steps=11 format=4 uid="uid://ctu613c2h4c2b"]
 
 [ext_resource type="Script" path="res://Scripts/Utility Scripts/Room.gd" id="1_3ya0p"]
 [ext_resource type="TileSet" uid="uid://dhwi7i1loa2pd" path="res://Sprites/Tiles/Test Tiles/TestTileSet.tres" id="2_qdn5r"]
 [ext_resource type="PackedScene" uid="uid://dqbo0wu6hm8lj" path="res://Scene Objects/Objects/WarpTrigger.tscn" id="3_ff7g6"]
 [ext_resource type="PackedScene" uid="uid://b2a0ttqvejk51" path="res://Scene Objects/Objects/TemperDragonFruit.tscn" id="4_xlaou"]
+[ext_resource type="PackedScene" uid="uid://dfkmxoba64spw" path="res://Scene Objects/Objects/MedalFragment.tscn" id="5_2qr6k"]
 [ext_resource type="PackedScene" uid="uid://cokv5pygwyda" path="res://Scene Objects/Objects/BreakableFireBlock.tscn" id="5_ebqbj"]
 [ext_resource type="PackedScene" uid="uid://dck0mc2tc82kx" path="res://Scene Objects/Objects/ReinforcedFireBlock.tscn" id="6_05hgu"]
 [ext_resource type="PackedScene" uid="uid://dgtmsbsmeieyh" path="res://Scene Objects/Objects/ReinforcedMagicBlock.tscn" id="7_q6y60"]
 [ext_resource type="PackedScene" uid="uid://b03ie1oct07e3" path="res://Scene Objects/Obstacles/Fyerlarm.tscn" id="8_bswek"]
 [ext_resource type="PackedScene" uid="uid://c4cg3xgbq7eyh" path="res://Scene Objects/Obstacles/FloorSpikes.tscn" id="9_qqdfc"]
 
-[node name="CH2_LV4_R8" type="Node2D" node_paths=PackedStringArray("tilemap_list", "room_entrances")]
+[node name="CH2_LV4_R8" type="Node2D" node_paths=PackedStringArray("tilemap_list", "room_entrances", "medal_fragments")]
 script = ExtResource("1_3ya0p")
 tilemap_list = [NodePath("BoundaryCollisionTilemap"), NodePath("LevelCollisionTilemap")]
 bottom_camera_limit = 448
 room_entrances = [NodePath("Entrance 0"), NodePath("Entrance 1")]
+medal_fragments = [NodePath("Fragments/MedalFragment"), NodePath("Fragments/MedalFragment2"), NodePath("Fragments/MedalFragment3"), NodePath("Fragments/MedalFragment4"), NodePath("Fragments/MedalFragment5"), NodePath("Fragments/MedalFragment6"), NodePath("Fragments/MedalFragment7"), NodePath("Fragments/MedalFragment8"), NodePath("Fragments/MedalFragment9"), NodePath("Fragments/MedalFragment10"), NodePath("Fragments/MedalFragment11"), NodePath("Fragments/MedalFragment12")]
 
 [node name="BoundaryCollisionTilemap" type="Node2D" parent="."]
 z_index = 4
@@ -80,6 +82,44 @@ enable_cycling = false
 position = Vector2(96, 224)
 starting_state = 0
 enable_cycling = false
+
+[node name="Fragments" type="Node2D" parent="."]
+
+[node name="MedalFragment" parent="Fragments" instance=ExtResource("5_2qr6k")]
+position = Vector2(144, 112)
+
+[node name="MedalFragment2" parent="Fragments" instance=ExtResource("5_2qr6k")]
+position = Vector2(176, 112)
+
+[node name="MedalFragment3" parent="Fragments" instance=ExtResource("5_2qr6k")]
+position = Vector2(272, 112)
+
+[node name="MedalFragment4" parent="Fragments" instance=ExtResource("5_2qr6k")]
+position = Vector2(304, 112)
+
+[node name="MedalFragment5" parent="Fragments" instance=ExtResource("5_2qr6k")]
+position = Vector2(80, 208)
+
+[node name="MedalFragment6" parent="Fragments" instance=ExtResource("5_2qr6k")]
+position = Vector2(112, 208)
+
+[node name="MedalFragment7" parent="Fragments" instance=ExtResource("5_2qr6k")]
+position = Vector2(80, 240)
+
+[node name="MedalFragment8" parent="Fragments" instance=ExtResource("5_2qr6k")]
+position = Vector2(112, 240)
+
+[node name="MedalFragment9" parent="Fragments" instance=ExtResource("5_2qr6k")]
+position = Vector2(336, 368)
+
+[node name="MedalFragment10" parent="Fragments" instance=ExtResource("5_2qr6k")]
+position = Vector2(368, 336)
+
+[node name="MedalFragment11" parent="Fragments" instance=ExtResource("5_2qr6k")]
+position = Vector2(400, 368)
+
+[node name="MedalFragment12" parent="Fragments" instance=ExtResource("5_2qr6k")]
+position = Vector2(432, 336)
 
 [node name="Blocks" type="Node2D" parent="."]
 

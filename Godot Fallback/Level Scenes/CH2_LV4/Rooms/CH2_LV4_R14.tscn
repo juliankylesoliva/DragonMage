@@ -1,14 +1,16 @@
-[gd_scene load_steps=4 format=4 uid="uid://c8g75jsc1ng17"]
+[gd_scene load_steps=5 format=4 uid="uid://c8g75jsc1ng17"]
 
 [ext_resource type="Script" path="res://Scripts/Utility Scripts/Room.gd" id="1_mwuon"]
 [ext_resource type="TileSet" uid="uid://dhwi7i1loa2pd" path="res://Sprites/Tiles/Test Tiles/TestTileSet.tres" id="2_nrtay"]
 [ext_resource type="PackedScene" uid="uid://d3ahci60rs8ef" path="res://Scene Objects/Objects/WarpDoor.tscn" id="3_667id"]
+[ext_resource type="PackedScene" uid="uid://dfkmxoba64spw" path="res://Scene Objects/Objects/MedalFragment.tscn" id="4_8y1yy"]
 
-[node name="CH2_LV4_R14" type="Node2D" node_paths=PackedStringArray("tilemap_list", "room_entrances")]
+[node name="CH2_LV4_R14" type="Node2D" node_paths=PackedStringArray("tilemap_list", "room_entrances", "medal_fragments")]
 script = ExtResource("1_mwuon")
 tilemap_list = [NodePath("BoundaryCollisionTilemap"), NodePath("LevelCollisionTilemap")]
 top_camera_limit = -128
 room_entrances = [NodePath("WarpDoor")]
+medal_fragments = [NodePath("Fragments/MedalFragment"), NodePath("Fragments/MedalFragment2"), NodePath("Fragments/MedalFragment3"), NodePath("Fragments/MedalFragment4"), NodePath("Fragments/MedalFragment5"), NodePath("Fragments/MedalFragment6"), NodePath("Fragments/MedalFragment7"), NodePath("Fragments/MedalFragment8"), NodePath("Fragments/MedalFragment9"), NodePath("Fragments/MedalFragment10"), NodePath("Fragments/MedalFragment11"), NodePath("Fragments/MedalFragment12"), NodePath("Fragments/MedalFragment13"), NodePath("Fragments/MedalFragment14"), NodePath("Fragments/MedalFragment15"), NodePath("Fragments/MedalFragment16"), NodePath("Fragments/MedalFragment17"), NodePath("Fragments/MedalFragment18"), NodePath("Fragments/MedalFragment19"), NodePath("Fragments/MedalFragment20"), NodePath("Fragments/MedalFragment21"), NodePath("Fragments/MedalFragment22"), NodePath("Fragments/MedalFragment23"), NodePath("Fragments/MedalFragment24"), NodePath("Fragments/MedalFragment25"), NodePath("Fragments/MedalFragment26"), NodePath("Fragments/MedalFragment27"), NodePath("Fragments/MedalFragment28"), NodePath("Fragments/MedalFragment29"), NodePath("Fragments/MedalFragment30"), NodePath("Fragments/MedalFragment31"), NodePath("Fragments/MedalFragment32")]
 
 [node name="BoundaryCollisionTilemap" type="Node2D" parent="."]
 z_index = 4
@@ -51,3 +53,101 @@ tile_set = ExtResource("2_nrtay")
 position = Vector2(256, 160)
 room_origin = NodePath("..")
 room_destination = NodePath("..")
+
+[node name="Fragments" type="Node2D" parent="."]
+
+[node name="MedalFragment" parent="Fragments" instance=ExtResource("4_8y1yy")]
+position = Vector2(176, 48)
+
+[node name="MedalFragment2" parent="Fragments" instance=ExtResource("4_8y1yy")]
+position = Vector2(144, 16)
+
+[node name="MedalFragment3" parent="Fragments" instance=ExtResource("4_8y1yy")]
+position = Vector2(112, 48)
+
+[node name="MedalFragment4" parent="Fragments" instance=ExtResource("4_8y1yy")]
+position = Vector2(80, 16)
+
+[node name="MedalFragment5" parent="Fragments" instance=ExtResource("4_8y1yy")]
+position = Vector2(176, -16)
+
+[node name="MedalFragment6" parent="Fragments" instance=ExtResource("4_8y1yy")]
+position = Vector2(144, -48)
+
+[node name="MedalFragment7" parent="Fragments" instance=ExtResource("4_8y1yy")]
+position = Vector2(112, -16)
+
+[node name="MedalFragment8" parent="Fragments" instance=ExtResource("4_8y1yy")]
+position = Vector2(80, -48)
+
+[node name="MedalFragment9" parent="Fragments" instance=ExtResource("4_8y1yy")]
+position = Vector2(336, 48)
+
+[node name="MedalFragment10" parent="Fragments" instance=ExtResource("4_8y1yy")]
+position = Vector2(368, 16)
+
+[node name="MedalFragment11" parent="Fragments" instance=ExtResource("4_8y1yy")]
+position = Vector2(400, 48)
+
+[node name="MedalFragment12" parent="Fragments" instance=ExtResource("4_8y1yy")]
+position = Vector2(432, 16)
+
+[node name="MedalFragment13" parent="Fragments" instance=ExtResource("4_8y1yy")]
+position = Vector2(336, -16)
+
+[node name="MedalFragment14" parent="Fragments" instance=ExtResource("4_8y1yy")]
+position = Vector2(368, -48)
+
+[node name="MedalFragment15" parent="Fragments" instance=ExtResource("4_8y1yy")]
+position = Vector2(400, -16)
+
+[node name="MedalFragment16" parent="Fragments" instance=ExtResource("4_8y1yy")]
+position = Vector2(432, -48)
+
+[node name="MedalFragment17" parent="Fragments" instance=ExtResource("4_8y1yy")]
+position = Vector2(176, 144)
+
+[node name="MedalFragment18" parent="Fragments" instance=ExtResource("4_8y1yy")]
+position = Vector2(112, 144)
+
+[node name="MedalFragment19" parent="Fragments" instance=ExtResource("4_8y1yy")]
+position = Vector2(144, 176)
+
+[node name="MedalFragment20" parent="Fragments" instance=ExtResource("4_8y1yy")]
+position = Vector2(80, 176)
+
+[node name="MedalFragment21" parent="Fragments" instance=ExtResource("4_8y1yy")]
+position = Vector2(176, 208)
+
+[node name="MedalFragment22" parent="Fragments" instance=ExtResource("4_8y1yy")]
+position = Vector2(112, 208)
+
+[node name="MedalFragment23" parent="Fragments" instance=ExtResource("4_8y1yy")]
+position = Vector2(144, 240)
+
+[node name="MedalFragment24" parent="Fragments" instance=ExtResource("4_8y1yy")]
+position = Vector2(80, 240)
+
+[node name="MedalFragment25" parent="Fragments" instance=ExtResource("4_8y1yy")]
+position = Vector2(368, 144)
+
+[node name="MedalFragment26" parent="Fragments" instance=ExtResource("4_8y1yy")]
+position = Vector2(432, 144)
+
+[node name="MedalFragment27" parent="Fragments" instance=ExtResource("4_8y1yy")]
+position = Vector2(336, 176)
+
+[node name="MedalFragment28" parent="Fragments" instance=ExtResource("4_8y1yy")]
+position = Vector2(400, 176)
+
+[node name="MedalFragment29" parent="Fragments" instance=ExtResource("4_8y1yy")]
+position = Vector2(368, 208)
+
+[node name="MedalFragment30" parent="Fragments" instance=ExtResource("4_8y1yy")]
+position = Vector2(432, 208)
+
+[node name="MedalFragment31" parent="Fragments" instance=ExtResource("4_8y1yy")]
+position = Vector2(336, 240)
+
+[node name="MedalFragment32" parent="Fragments" instance=ExtResource("4_8y1yy")]
+position = Vector2(400, 240)

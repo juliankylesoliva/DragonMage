@@ -72,6 +72,7 @@ room_list = [NodePath("CH2_LV4_R1"), NodePath("CH2_LV4_R2"), NodePath("CH2_LV4_R
 magical_scale = NodePath("CH2_LV4_R6/CollectableScale")
 draconic_scale = NodePath("CH2_LV4_R9/CollectableScale")
 balanced_scale = NodePath("CH2_LV4_R12/Items/CollectableScale")
+min_fragment_collection_rate = 0.68
 dropped_fragment_scene = ExtResource("2_myit7")
 screen_fade = NodePath("UI_Canvas/ScreenFade")
 intro_screen = NodePath("UI_Canvas/LevelIntroScreen")
@@ -183,7 +184,7 @@ room_destination = NodePath("../../CH2_LV4_R9")
 [node name="Warp 1" parent="CH2_LV4_R10" index="6" node_paths=PackedStringArray("room_destination")]
 room_destination = NodePath("../../CH2_LV4_R11")
 
-[node name="Checkpoint" parent="CH2_LV4_R10" index="11" node_paths=PackedStringArray("level_origin")]
+[node name="Checkpoint" parent="CH2_LV4_R10" index="12" node_paths=PackedStringArray("level_origin")]
 level_origin = NodePath("../..")
 
 [node name="CH2_LV4_R11" parent="." instance=ExtResource("14_eaof6")]
@@ -291,8 +292,8 @@ screen_fade = NodePath("../UI_Canvas/ScreenFade")
 [connection signal="player_defeated" from="." to="UI_Canvas/TemperMeterUI" method="hide"]
 [connection signal="player_defeated" from="." to="UI_Canvas/MagicMeterUI" method="hide"]
 [connection signal="player_defeated" from="." to="UI_Canvas/FragmentCounterUI" method="hide"]
-[connection signal="player_defeated" from="." to="UI_Canvas/ClearTimer" method="stop_timer"]
 [connection signal="player_defeated" from="." to="UI_Canvas/ClearTimer" method="hide"]
+[connection signal="player_defeated" from="." to="UI_Canvas/ClearTimer" method="stop_timer"]
 [connection signal="player_defeated" from="." to="Textbox" method="hide_textbox"]
 [connection signal="player_defeated" from="." to="LevelMusicPlayer" method="stop"]
 [connection signal="player_defeated" from="." to="DefeatScreen" method="do_defeat_screen"]
