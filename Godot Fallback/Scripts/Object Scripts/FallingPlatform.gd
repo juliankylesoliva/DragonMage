@@ -61,6 +61,7 @@ func _physics_process(delta):
 	if (room_ref != null and room_ref.is_room_active):
 		match current_platform_state:
 			0:
+				platform_body.position.y = 0
 				if (is_player_detected and player_ref != null and player_ref.char_body.is_on_floor() and player_ref.raycast_dm.global_position.y <= (self.global_position.y + y_pos_stand_threshold) and player_ref.raycast_dm.global_position.y >= (self.global_position.y - y_pos_stand_threshold)):
 					current_stand_time = move_toward(current_stand_time, stand_time_limit, delta)
 					self.modulate = lerp(Color.WHITE, unstable_color, current_stand_time / stand_time_limit)

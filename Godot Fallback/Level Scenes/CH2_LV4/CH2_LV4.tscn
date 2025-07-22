@@ -231,7 +231,7 @@ curve = SubResource("Curve2D_06dn5")
 curve = SubResource("Curve2D_83rjt")
 
 [node name="CH2_LV4_R14" parent="." instance=ExtResource("17_5ejir")]
-position = Vector2(3072, 2400)
+position = Vector2(3968, 1440)
 
 [node name="WarpDoor" parent="CH2_LV4_R14" index="2" node_paths=PackedStringArray("room_destination")]
 room_destination = NodePath("../../CH2_LV4_R13")
