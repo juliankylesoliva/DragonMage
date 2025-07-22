@@ -233,7 +233,6 @@ position = Vector2(1824, 96)
 [node name="RedDragoon" parent="Enemies" instance=ExtResource("5_m0bww")]
 position = Vector2(416, 160)
 enable_wings = true
-enable_reflector = true
 
 [node name="YellowDragoon" parent="Enemies" instance=ExtResource("7_gp0yj")]
 position = Vector2(480, 96)
@@ -242,11 +241,9 @@ enable_reflector = true
 
 [node name="RedDragoon2" parent="Enemies" instance=ExtResource("5_m0bww")]
 position = Vector2(800, 96)
-enable_reflector = true
 
 [node name="RedDragoon3" parent="Enemies" instance=ExtResource("5_m0bww")]
 position = Vector2(1248, 96)
-enable_reflector = true
 
 [node name="GreenDragoon" parent="Enemies" instance=ExtResource("11_by01j")]
 position = Vector2(1024, 160)

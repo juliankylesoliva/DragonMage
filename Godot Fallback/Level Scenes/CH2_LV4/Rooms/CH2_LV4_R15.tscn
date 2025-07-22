@@ -9,7 +9,7 @@
 [node name="CH2_LV4_R15" type="Node2D" node_paths=PackedStringArray("tilemap_list", "room_entrances")]
 script = ExtResource("1_mwuon")
 tilemap_list = [NodePath("BoundaryCollisionTilemap"), NodePath("LevelCollisionTilemap")]
-right_camera_limit = 1024
+right_camera_limit = 2048
 room_entrances = [NodePath("Entrance 0")]
 
 [node name="BoundaryCollisionTilemap" type="Node2D" parent="."]

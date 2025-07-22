@@ -191,7 +191,6 @@ position = Vector2(608, 224)
 
 [node name="RedDragoon" parent="Enemies" instance=ExtResource("7_0p433")]
 position = Vector2(480, 96)
-enable_reflector = true
 
 [node name="BlueDragoon" parent="Enemies" instance=ExtResource("8_qvj8q")]
 position = Vector2(416, 96)
