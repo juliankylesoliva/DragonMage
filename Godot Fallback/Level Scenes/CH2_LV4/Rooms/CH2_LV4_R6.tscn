@@ -136,6 +136,7 @@ position = Vector2(1024, 160)
 [node name="CollectableScale" parent="." instance=ExtResource("4_wf5ni")]
 position = Vector2(1952, 96)
 collectable_type = "MAGICAL"
+mage_fragments_needed = 40
 
 [node name="Blocks" type="Node2D" parent="."]
 

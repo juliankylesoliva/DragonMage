@@ -72,7 +72,7 @@ room_list = [NodePath("CH2_LV4_R1"), NodePath("CH2_LV4_R2"), NodePath("CH2_LV4_R
 magical_scale = NodePath("CH2_LV4_R6/CollectableScale")
 draconic_scale = NodePath("CH2_LV4_R9/CollectableScale")
 balanced_scale = NodePath("CH2_LV4_R12/Items/CollectableScale")
-min_fragment_collection_rate = 0.68
+min_fragment_collection_rate = 0.64
 dropped_fragment_scene = ExtResource("2_myit7")
 screen_fade = NodePath("UI_Canvas/ScreenFade")
 intro_screen = NodePath("UI_Canvas/LevelIntroScreen")
@@ -227,7 +227,7 @@ curve = SubResource("Curve2D_qughq")
 [node name="MovingPlatform3" parent="CH2_LV4_R13/Obstacles" index="14"]
 curve = SubResource("Curve2D_06dn5")
 
-[node name="MovingPlatform4" parent="CH2_LV4_R13/Obstacles" index="25"]
+[node name="MovingPlatform4" parent="CH2_LV4_R13/Obstacles" index="24"]
 curve = SubResource("Curve2D_83rjt")
 
 [node name="CH2_LV4_R14" parent="." instance=ExtResource("17_5ejir")]
