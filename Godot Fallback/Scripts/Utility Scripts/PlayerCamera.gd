@@ -68,7 +68,7 @@ func update_x_lookahead(delta : float):
 	
 	var target_direction : float = (hub.movement.get_facing_value() if hub.state_machine.current_state.name != "Gliding" else hub.get_input_vector().x)
 	var max_lookahead : float = (max_x_lookahead if abs(hub.char_body.velocity.x) > hub.movement.top_speed else base_x_lookahead)
-	current_x_lookahead = move_toward(current_x_lookahead, target_direction * max_lookahead, abs(hub.char_body.velocity.x) * delta)
+	current_x_lookahead = move_toward(current_x_lookahead, target_direction * max_lookahead, abs(hub.movement.top_speed * hub.movement.get_facing_value() if hub.state_machine.current_state.name == "Standing" else hub.char_body.velocity.x) * delta)
 	var target_x : float = (hub.char_body.global_position.x + current_x_lookahead)
 	target_x = clamp_x_target(target_x)
 	
