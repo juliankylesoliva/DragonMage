@@ -1,10 +1,19 @@
-[gd_scene load_steps=6 format=4 uid="uid://brjl4odjo71u6"]
+[gd_scene load_steps=13 format=4 uid="uid://brjl4odjo71u6"]
 
 [ext_resource type="Script" path="res://Scripts/Utility Scripts/Room.gd" id="1_mwuon"]
 [ext_resource type="TileSet" uid="uid://dhwi7i1loa2pd" path="res://Sprites/Tiles/Test Tiles/TestTileSet.tres" id="2_nrtay"]
 [ext_resource type="PackedScene" uid="uid://vtyaphi47lrf" path="res://Scene Objects/Objects/Checkpoint.tscn" id="3_t6xyg"]
+[ext_resource type="PackedScene" uid="uid://u5nios6kfqhs" path="res://Scene Objects/Objects/BossDragonFruitSpawner.tscn" id="4_br342"]
 [ext_resource type="PackedScene" uid="uid://b03ie1oct07e3" path="res://Scene Objects/Obstacles/Fyerlarm.tscn" id="4_giqi4"]
 [ext_resource type="PackedScene" uid="uid://durwtm4ocfbmv" path="res://Scene Objects/Objects/FinishLine.tscn" id="5_anfy1"]
+[ext_resource type="PackedScene" uid="uid://bdnkqwt5cfajc" path="res://Scene Objects/Bosses/Impostor.tscn" id="6_imrbl"]
+[ext_resource type="Script" path="res://Scripts/Utility Scripts/Trigger.gd" id="7_lh11b"]
+[ext_resource type="PackedScene" uid="uid://btq4qla5fyq0n" path="res://Scene Objects/Misc/LevelMusicPlayer.tscn" id="8_iyawa"]
+[ext_resource type="AudioStream" uid="uid://oxd2f117h1x2" path="res://Music/CH0/boss_loop.wav" id="9_365aa"]
+[ext_resource type="PackedScene" uid="uid://b2a0ttqvejk51" path="res://Scene Objects/Objects/TemperDragonFruit.tscn" id="10_7t4pi"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_btani"]
+size = Vector2(16, 320)
 
 [node name="CH2_LV4_R15" type="Node2D" node_paths=PackedStringArray("tilemap_list", "room_entrances")]
 script = ExtResource("1_mwuon")
@@ -50,12 +59,55 @@ z_index = -1
 use_parent_material = true
 tile_set = ExtResource("2_nrtay")
 
+[node name="BossRoomBoundaryTilemap" type="Node2D" parent="."]
+z_index = 3
+
+[node name="DecorationL" type="TileMapLayer" parent="BossRoomBoundaryTilemap"]
+use_parent_material = true
+tile_map_data = PackedByteArray("AAAQAAYABwAAAAAAAAAQAAcABwAAAAAAAAA=")
+enabled = false
+tile_set = ExtResource("2_nrtay")
+rendering_quadrant_size = 32
+
+[node name="DecorationR" type="TileMapLayer" parent="BossRoomBoundaryTilemap"]
+use_parent_material = true
+tile_map_data = PackedByteArray("AAAfAAYABwAAAAAAAAAfAAcABwAAAAAAAAA=")
+enabled = false
+tile_set = ExtResource("2_nrtay")
+
+[node name="CollisionL" type="TileMapLayer" parent="BossRoomBoundaryTilemap"]
+modulate = Color(1, 1, 1, 0)
+z_index = -1
+use_parent_material = true
+tile_map_data = PackedByteArray("AAAQAAYAAAADAAAAAAAQAAcAAAADAAAAAAA=")
+enabled = false
+tile_set = ExtResource("2_nrtay")
+
+[node name="CollisionR" type="TileMapLayer" parent="BossRoomBoundaryTilemap"]
+modulate = Color(1, 1, 1, 0)
+use_parent_material = true
+tile_map_data = PackedByteArray("AAAfAAYAAAADAAAAAAAfAAcAAAADAAAAAAA=")
+enabled = false
+tile_set = ExtResource("2_nrtay")
+
 [node name="Entrance 0" type="Node2D" parent="."]
 position = Vector2(16, 224)
 
 [node name="Checkpoint" parent="." node_paths=PackedStringArray("room_origin") instance=ExtResource("3_t6xyg")]
 position = Vector2(80, 224)
 room_origin = NodePath("..")
+
+[node name="BossDragonFruitSpawner" parent="." node_paths=PackedStringArray("dragonfruits", "boss", "room_origin") instance=ExtResource("4_br342")]
+dragonfruits = [NodePath("../TemperDragonFruit")]
+boss = NodePath("../Impostor")
+room_origin = NodePath("..")
+
+[node name="TemperDragonFruit" parent="." instance=ExtResource("10_7t4pi")]
+position = Vector2(768, 32)
+starting_state = 1
+enable_cycling = false
+enable_respawning = false
+start_despawned = true
 
 [node name="Obstacles" type="Node2D" parent="."]
 
@@ -65,5 +117,26 @@ position = Vector2(640, 160)
 [node name="Fyerlarm2" parent="Obstacles" instance=ExtResource("4_giqi4")]
 position = Vector2(896, 160)
 
+[node name="BossActivationTrigger" type="Area2D" parent="." node_paths=PackedStringArray("shape")]
+position = Vector2(700, 96)
+collision_layer = 0
+collision_mask = 4
+script = ExtResource("7_lh11b")
+shape = NodePath("CollisionShape2D")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BossActivationTrigger"]
+shape = SubResource("RectangleShape2D_btani")
+
 [node name="FinishLine" parent="." instance=ExtResource("5_anfy1")]
 position = Vector2(1792, 256)
+
+[node name="Impostor" parent="." node_paths=PackedStringArray("boss_room", "boss_trigger", "boss_room_boundary_tilemap", "boss_music_player") instance=ExtResource("6_imrbl")]
+position = Vector2(896, 208)
+boss_room = NodePath("..")
+boss_trigger = NodePath("../BossActivationTrigger")
+boss_room_boundary_tilemap = NodePath("../BossRoomBoundaryTilemap")
+boss_music_player = NodePath("../BossMusicPlayer")
+
+[node name="BossMusicPlayer" parent="." instance=ExtResource("8_iyawa")]
+stream = ExtResource("9_365aa")
+autoplay = false

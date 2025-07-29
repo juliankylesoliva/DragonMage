@@ -240,9 +240,18 @@ room_entrance_index = 2
 [node name="CH2_LV4_R15" parent="." instance=ExtResource("18_lxpqh")]
 position = Vector2(3744, 1888)
 
-[node name="Checkpoint" parent="CH2_LV4_R15" index="3" node_paths=PackedStringArray("level_origin", "subsequent_checkpoints")]
+[node name="Checkpoint" parent="CH2_LV4_R15" index="4" node_paths=PackedStringArray("level_origin", "subsequent_checkpoints")]
 level_origin = NodePath("../..")
 subsequent_checkpoints = [NodePath("../../CH2_LV4_R10/Checkpoint")]
+
+[node name="BossDragonFruitSpawner" parent="CH2_LV4_R15" index="5" node_paths=PackedStringArray("player")]
+player = NodePath("../../Player/Hub")
+
+[node name="Impostor" parent="CH2_LV4_R15" index="10" node_paths=PackedStringArray("player_hub", "clear_timer", "normal_level_music_player", "textbox")]
+player_hub = NodePath("../../Player/Hub")
+clear_timer = NodePath("../../UI_Canvas/ClearTimer")
+normal_level_music_player = NodePath("../../LevelMusicPlayer")
+textbox = NodePath("../../Textbox")
 
 [node name="UI_Canvas" type="CanvasLayer" parent="."]
 
@@ -262,10 +271,12 @@ level_ref = NodePath("../..")
 [node name="ClearTimer" parent="UI_Canvas" instance=ExtResource("7_41jhx")]
 position = Vector2(4, 316)
 
-[node name="ResultsScreen" parent="UI_Canvas" node_paths=PackedStringArray("screen_fade", "level", "clear_timer") instance=ExtResource("8_7u3u6")]
+[node name="ResultsScreen" parent="UI_Canvas" node_paths=PackedStringArray("screen_fade", "level", "clear_timer", "textbox") instance=ExtResource("8_7u3u6")]
 screen_fade = NodePath("../ScreenFade")
 level = NodePath("../..")
 clear_timer = NodePath("../ClearTimer")
+textbox = NodePath("../../Textbox")
+post_level_text = Array[String](["post level placeholder 1/3", "post level placeholder 2/3", "post level placeholder 3/3"])
 
 [node name="PauseMenu" parent="UI_Canvas" node_paths=PackedStringArray("screen_fade") instance=ExtResource("9_xlu3u")]
 screen_fade = NodePath("../ScreenFade")
@@ -297,6 +308,14 @@ screen_fade = NodePath("../UI_Canvas/ScreenFade")
 [connection signal="player_defeated" from="." to="Textbox" method="hide_textbox"]
 [connection signal="player_defeated" from="." to="LevelMusicPlayer" method="stop"]
 [connection signal="player_defeated" from="." to="DefeatScreen" method="do_defeat_screen"]
+[connection signal="room_activated" from="CH2_LV4_R15" to="LevelMusicPlayer" method="fade_out"]
+[connection signal="level_finished" from="CH2_LV4_R15/FinishLine" to="UI_Canvas/TemperMeterUI" method="hide"]
+[connection signal="level_finished" from="CH2_LV4_R15/FinishLine" to="UI_Canvas/MagicMeterUI" method="hide"]
+[connection signal="level_finished" from="CH2_LV4_R15/FinishLine" to="UI_Canvas/FragmentCounterUI" method="hide"]
+[connection signal="level_finished" from="CH2_LV4_R15/FinishLine" to="UI_Canvas/ClearTimer" method="hide"]
+[connection signal="level_finished" from="CH2_LV4_R15/FinishLine" to="UI_Canvas/ClearTimer" method="stop_timer"]
+[connection signal="level_finished" from="CH2_LV4_R15/FinishLine" to="LevelMusicPlayer" method="fade_out"]
+[connection signal="level_finished" from="CH2_LV4_R15/FinishLine" to="Player/Hub" method="set_force_stand" binds= [true]]
 
 [editable path="Player"]
 [editable path="CH2_LV4_R1"]

@@ -16,6 +16,8 @@ class_name Fyerlarm
 
 @export var enemy_knockback_strength : float = 512
 
+@export var boss_damage_strength : int = 5
+
 @export var soundwave_scale_curve : Curve
 
 @export var windup_sound : AudioStream
@@ -29,6 +31,8 @@ class_name Fyerlarm
 @export_color_no_alpha var windup_color : Color = Color.WHITE
 
 @export_color_no_alpha var cooldown_color : Color = Color.WHITE
+
+@export var damage_type : String = "HAZARD"
 
 var bodies_in_hitbox : Array
 
@@ -102,8 +106,11 @@ func resolve_hitbox_bodies():
 	for body in bodies_in_hitbox:
 		if (body.has_meta("Tag") and body.get_meta("Tag") == "Enemy" and (body is Enemy)):
 			var temp_enemy : Enemy = (body as Enemy)
-			if(temp_enemy.defeat_enemy("HAZARD")):
+			if(temp_enemy.defeat_enemy(damage_type)):
 				temp_enemy.body.velocity += (enemy_knockback_strength * (temp_enemy.body.global_position - self.global_position).normalized())
+		elif (body is Boss):
+			if ((body as Boss).damage_boss(damage_type, boss_damage_strength, (body.global_position - self.global_position).normalized())):
+				pass
 		elif (body.has_meta("Tag") and body.get_meta("Tag") == "Player"):
 			var player_temp : PlayerHub = null
 		
