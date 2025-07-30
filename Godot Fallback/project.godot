@@ -262,6 +262,7 @@ Pause={
 2d_physics/layer_6="Hitboxes"
 2d_physics/layer_7="Enemy"
 2d_physics/layer_8="EnemyProjectile"
+2d_physics/layer_9="Breakable"
 2d_physics/layer_32="Actor"
 
 [physics]

@@ -39,7 +39,7 @@ func is_stomping_enemy():
 	return false
 
 func do_stomp_jump():
-	if (stomp_hitbox.boss_to_stomp != null):
+	if (stomp_hitbox.boss_to_stomp != null and stomp_hitbox.boss_to_stomp.can_be_stomped):
 		var stomp_result : bool = stomp_hitbox.boss_to_stomp.damage_boss(stomp_hitbox.damage_type, stomp_damage, Vector2.RIGHT * hub.movement.get_facing_value() * abs(hub.char_body.velocity.y))
 		if (stomp_result):
 			EffectFactory.get_effect("StompImpact", hub.raycast_dm.global_position)

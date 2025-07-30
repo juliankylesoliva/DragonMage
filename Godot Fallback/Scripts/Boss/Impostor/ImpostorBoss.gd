@@ -12,6 +12,7 @@ func _ready():
 		textbox.textbox_finished.connect(on_dialogue_intro_finished)
 
 func _physics_process(delta):
+	can_be_stomped = !is_invisible
 	update_invulnerability_duration(delta)
 	if (textbox.current_state != Textbox.TextboxState.READY and textbox.unformatted_text.contains("{player_name}")):
 		textbox.update_player_name_format_text(player_hub.form.get_current_form_name())

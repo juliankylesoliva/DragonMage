@@ -36,6 +36,8 @@ class_name Boss
 
 @export var textbox : Textbox
 
+@export var can_be_stomped : bool = true
+
 @export var post_hit_invulnerability_duration : float = 1
 
 @export var post_damage_invulnerability_duration : float = 3
