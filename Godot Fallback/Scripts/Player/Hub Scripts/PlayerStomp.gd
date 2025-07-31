@@ -55,7 +55,7 @@ func do_stomp_jump():
 		hub.jumping.start_ground_jump()
 		#hub.fairy.change_current_magic_by(base_magic_gain * pow(stomp_combo_multiplier, current_stomp_combo))
 		#increase_stomp_combo()
-	elif (stomp_hitbox.enemy_to_stomp.defeat_enemy(stomp_hitbox.damage_type) and !is_rising_stomp_on_cooldown):
+	elif (stomp_hitbox.enemy_to_stomp != null and stomp_hitbox.enemy_to_stomp.defeat_enemy(stomp_hitbox.damage_type) and !is_rising_stomp_on_cooldown):
 		if (hub.jumping.is_fast_falling):
 			hub.sprite_trail.deactivate_trail()
 			hub.jumping.reset_fast_fall()

@@ -20,6 +20,8 @@ signal hit
 
 @export var lifetime : float = -1
 
+@export var is_projectile : bool = false
+
 var current_lifetime_left : float = 0
 
 func _ready():

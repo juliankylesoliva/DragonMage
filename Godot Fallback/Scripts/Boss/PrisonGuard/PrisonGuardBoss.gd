@@ -79,7 +79,7 @@ func on_defeat():
 	floor_spikes_l.call_deferred("set_process_mode", PROCESS_MODE_DISABLED)
 	floor_spikes_r.call_deferred("set_process_mode", PROCESS_MODE_DISABLED)
 
-func damage_boss(_damage_type : StringName, _damage_strength : int, _knockback_vector : Vector2):
+func damage_boss(_damage_type : StringName, _damage_strength : int, _knockback_vector : Vector2, _is_projectile : bool = false):
 	if (current_invulnerability_duration > 0 or current_health <= 0):
 		return false
 	

@@ -64,7 +64,7 @@ func on_defeat():
 		else:
 			on_dialogue_defeat_finished()
 
-func damage_boss(_damage_type : StringName, _damage_strength : int, _knockback_vector : Vector2):
+func damage_boss(_damage_type : StringName, _damage_strength : int, _knockback_vector : Vector2, _is_projectile : bool = false):
 	if (current_invulnerability_duration > 0 or current_health <= 0):
 		return false
 	

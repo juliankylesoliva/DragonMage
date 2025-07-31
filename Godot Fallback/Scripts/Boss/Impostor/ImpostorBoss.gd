@@ -1,8 +1,14 @@
 extends Boss
 
+class_name ImpostorBoss
+
+@export var sword_projectile_scene : PackedScene
+
 @export_multiline var introduction_text_2 : Array[String]
 
 var first_fyerlarm_hit : bool = false
+
+var second_intro_finished : bool = false
 
 var is_invisible : bool = false
 
@@ -12,7 +18,6 @@ func _ready():
 		textbox.textbox_finished.connect(on_dialogue_intro_finished)
 
 func _physics_process(delta):
-	can_be_stomped = !is_invisible
 	update_invulnerability_duration(delta)
 	if (textbox.current_state != Textbox.TextboxState.READY and textbox.unformatted_text.contains("{player_name}")):
 		textbox.update_player_name_format_text(player_hub.form.get_current_form_name())
@@ -46,7 +51,7 @@ func on_first_fyerlarm_hit():
 			for text in introduction_text_2:
 				textbox.queue_text(text)
 		else:
-			on_dialogue_intro_finished()
+			on_second_dialogue_intro_finished()
 
 func on_defeat():
 	is_activated = false
@@ -67,7 +72,7 @@ func on_defeat():
 		else:
 			on_dialogue_defeat_finished()
 
-func damage_boss(_damage_type : StringName, _damage_strength : int, _knockback_vector : Vector2):
+func damage_boss(_damage_type : StringName, _damage_strength : int, _knockback_vector : Vector2, _is_projectile : bool = false):
 	if (current_invulnerability_duration > 0 or current_health <= 0):
 		return false
 	
@@ -93,6 +98,21 @@ func damage_boss(_damage_type : StringName, _damage_strength : int, _knockback_v
 			return true
 	return false
 
+func spawn_sword_projectile(path : Path2D, is_reverse : bool):
+	var temp_node : Node = sword_projectile_scene.instantiate()
+	path.add_child(temp_node)
+	
+	var temp_proj : ImpostorSwordProjectile = (temp_node as ImpostorSwordProjectile)
+	temp_proj.start_moving(is_reverse)
+	
+	return temp_proj
+
+func check_player_collision():
+	if (is_activated and is_player_in_collider and current_invulnerability_duration <= 0):
+		if (player_hub.damage.take_damage(1 if body.global_position.x < player_hub.char_body.global_position.x else -1)):
+			EffectFactory.get_effect("EnemyContactImpact", player_hub.char_body.global_position)
+			SoundFactory.play_sound_by_name("enemy_contact_impact", player_hub.char_body.global_position, 0, 1, "SFX")
+
 func on_dialogue_intro_finished():
 	if (is_activated):
 		player_hub.set_force_stand(false)
@@ -111,6 +131,7 @@ func on_second_dialogue_intro_finished():
 		await get_tree().process_frame # prevents pausing on the same frame
 		PauseHandler.enable_pausing(true)
 		textbox.textbox_finished.disconnect(on_second_dialogue_intro_finished)
+		second_intro_finished = true
 
 func on_dialogue_defeat_finished():
 	player_hub.set_force_stand(false)

@@ -34,7 +34,7 @@ animations = [{
 radius = 6.0
 height = 26.0
 
-[node name="RedDragoonProjectile" type="CharacterBody2D" node_paths=PackedStringArray("audio", "projectile_sprite")]
+[node name="RedDragoonProjectile" type="CharacterBody2D" node_paths=PackedStringArray("audio", "projectile_sprite", "visible_on_screen_notifier")]
 light_mask = 16
 visibility_layer = 16
 collision_layer = 128
@@ -42,6 +42,7 @@ collision_mask = 0
 script = ExtResource("1_pbxlj")
 audio = NodePath("AudioStreamPlayer2D")
 projectile_sprite = NodePath("AnimatedSprite2D")
+visible_on_screen_notifier = NodePath("VisibleOnScreenNotifier2D")
 move_speed = 160.0
 metadata/Tag = "EnemyProjectile"
 
@@ -55,10 +56,10 @@ visibility_layer = 16
 z_index = 5
 sprite_frames = SubResource("SpriteFrames_b5ptf")
 autoplay = "default"
-frame_progress = 0.378142
+frame_progress = 0.458744
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
-rect = Rect2(-16, -7, 32, 13)
+rect = Rect2(-15, -6, 31, 13)
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("3_csidy")
@@ -74,5 +75,4 @@ collision_mask = 461
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_x8f7j")
 
-[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]
 [connection signal="body_entered" from="Area2D" to="." method="_on_body_entered"]

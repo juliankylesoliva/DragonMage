@@ -6,6 +6,8 @@ class_name EnemyProjectile
 
 @export var projectile_sprite : AnimatedSprite2D
 
+@export var visible_on_screen_notifier : VisibleOnScreenNotifier2D
+
 @export var move_speed : float = 3
 
 @export var jump_speed : float = 0
@@ -45,6 +47,10 @@ var saved_velocity : Vector2
 var bounce_count : int = 0
 
 var current_reflects : int = 0
+
+func _process(_delta):
+	if (!visible_on_screen_notifier.is_on_screen()):
+		queue_free()
 
 func _physics_process(_delta):
 	if ((is_on_floor() or is_on_ceiling()) and saved_velocity.y != 0):
@@ -103,9 +109,6 @@ func reflect_projectile():
 
 func get_gravity_delta(delta : float):
 	return (base_gravity * gravity_scale * delta)
-
-func _on_visible_on_screen_notifier_2d_screen_exited():
-	queue_free()
 
 func _on_body_entered(body):
 	hit_check(body)

@@ -442,7 +442,7 @@ light_mask = 8
 visibility_layer = 8
 z_index = 3
 sprite_frames = SubResource("SpriteFrames_nlt6b")
-animation = &"Phase1Attack"
+animation = &"IntroIdle"
 autoplay = "IntroIdle"
 flip_h = true
 

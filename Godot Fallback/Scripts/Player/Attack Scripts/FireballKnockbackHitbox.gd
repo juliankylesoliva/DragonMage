@@ -48,14 +48,21 @@ func do_break_object(body):
 		hit.emit()
 
 func do_damage_boss(body):
-	if ((body as Boss).damage_boss(damage_type, damage_strength, (get_parent() as RigidBody2D).linear_velocity * enemy_defeat_knockback_multiplier)):
+	var boss_temp : Boss = (body as Boss)
+	var temp_knockback_vector : Vector2 = ((get_parent() as RigidBody2D).linear_velocity * enemy_defeat_knockback_multiplier)
+	
+	if (boss_temp.damage_boss(damage_type, damage_strength, temp_knockback_vector, is_projectile)):
 		hit.emit()
 		EffectFactory.get_effect("FireImpact", body.global_position)
+	elif (boss_temp.can_reflect_projectiles):
+		reflect_projectile()
+	else:
+		pass
 
 func defeat_enemy(body):
 	if (body is Enemy):
 		var enemy : Enemy = (body as Enemy)
-		if (enemy.defeat_enemy(damage_type, true)):
+		if (enemy.defeat_enemy(damage_type, is_projectile)):
 			hit.emit()
 			EffectFactory.get_effect("FireImpact", body.global_position)
 			enemy.body.velocity += (Vector2.RIGHT * (get_parent() as RigidBody2D).linear_velocity.x * enemy_defeat_knockback_multiplier)
@@ -69,7 +76,6 @@ func reflect_projectile():
 		is_reflected = !is_reflected
 		EffectFactory.get_effect("ReflectImpact", global_position)
 		(self.get_parent() as RigidBody2D).linear_velocity.x *= -abs(reflected_speed_boost)
-		#(self.get_parent() as SelfDestructTimer).refresh_lifetime()
 		for child in self.get_parent().get_children():
 			if (child is AnimatedSprite2D):
 				var temp_parent_sprite : AnimatedSprite2D = (child as AnimatedSprite2D)

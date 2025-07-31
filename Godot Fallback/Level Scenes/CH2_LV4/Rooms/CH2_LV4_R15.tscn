@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=4 uid="uid://brjl4odjo71u6"]
+[gd_scene load_steps=15 format=4 uid="uid://brjl4odjo71u6"]
 
 [ext_resource type="Script" path="res://Scripts/Utility Scripts/Room.gd" id="1_mwuon"]
 [ext_resource type="TileSet" uid="uid://dhwi7i1loa2pd" path="res://Sprites/Tiles/Test Tiles/TestTileSet.tres" id="2_nrtay"]
@@ -14,6 +14,18 @@
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_btani"]
 size = Vector2(16, 320)
+
+[sub_resource type="Curve2D" id="Curve2D_xdmkr"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 592, 80, 0, 0, 0, 0, 592, 0, 0, 0, 0, 0, 976, 0, 0, 0, 0, 0, 976, 112, 0, 0, 0, 0, 624, 112)
+}
+point_count = 5
+
+[sub_resource type="Curve2D" id="Curve2D_mqu4i"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 976, 80, 0, 0, 0, 0, 976, 0, 0, 0, 0, 0, 592, 0, 0, 0, 0, 0, 592, 112, 0, 0, 0, 0, 944, 112)
+}
+point_count = 5
 
 [node name="CH2_LV4_R15" type="Node2D" node_paths=PackedStringArray("tilemap_list", "room_entrances")]
 script = ExtResource("1_mwuon")
@@ -137,6 +149,31 @@ boss_trigger = NodePath("../BossActivationTrigger")
 boss_room_boundary_tilemap = NodePath("../BossRoomBoundaryTilemap")
 boss_music_player = NodePath("../BossMusicPlayer")
 
+[node name="Phase1Knigel" parent="Impostor/StateMachine" index="2" node_paths=PackedStringArray("sword_throw_position_left", "sword_throw_position_right", "sword_throw_path_left", "sword_throw_path_right", "fyerlarm_left", "fyerlarm_right")]
+sword_throw_position_left = NodePath("../../../BossPathing/SwordThrowL")
+sword_throw_position_right = NodePath("../../../BossPathing/SwordThrowR")
+sword_throw_path_left = NodePath("../../../BossPathing/SwordPathL")
+sword_throw_path_right = NodePath("../../../BossPathing/SwordPathR")
+fyerlarm_left = NodePath("../../../Obstacles/Fyerlarm")
+fyerlarm_right = NodePath("../../../Obstacles/Fyerlarm2")
+
 [node name="BossMusicPlayer" parent="." instance=ExtResource("8_iyawa")]
 stream = ExtResource("9_365aa")
 autoplay = false
+
+[node name="BossPathing" type="Node2D" parent="."]
+position = Vector2(-16, 112)
+
+[node name="SwordThrowL" type="Node2D" parent="BossPathing"]
+position = Vector2(592, 96)
+
+[node name="SwordThrowR" type="Node2D" parent="BossPathing"]
+position = Vector2(976, 96)
+
+[node name="SwordPathL" type="Path2D" parent="BossPathing"]
+curve = SubResource("Curve2D_xdmkr")
+
+[node name="SwordPathR" type="Path2D" parent="BossPathing"]
+curve = SubResource("Curve2D_mqu4i")
+
+[editable path="Impostor"]

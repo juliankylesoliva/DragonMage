@@ -142,6 +142,9 @@ func do_break():
 		set_to_state(1)
 		on_break.emit()
 
+func is_attack_active():
+	return (current_state == 1 or current_state == 2)
+
 func _on_attack_area_body_entered(body):
 	if (!bodies_in_hitbox.has(body)):
 		bodies_in_hitbox.append(body)

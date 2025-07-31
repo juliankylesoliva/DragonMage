@@ -79,10 +79,18 @@ func resolve_bodies_entered():
 
 func do_damage_boss(body):
 	var target_pos : Vector2 = ((body as Node2D).global_position - ray.global_position)
-	if (!is_going_thru_a_wall(target_pos, body.get_rid())):
-		if ((body as Boss).damage_boss(damage_type, damage_strength, calculate_knockback(body))):
-			hit.emit()
-			EffectFactory.get_effect("MagicImpact", body.global_position)
+	if (is_going_thru_a_wall(target_pos, body.get_rid())):
+		return
+	
+	var boss_temp : Boss = (body as Boss)
+	if (boss_temp.damage_boss(damage_type, damage_strength, calculate_knockback(body), is_projectile)):
+		hit.emit()
+		EffectFactory.get_effect("MagicImpact", body.global_position)
+	elif (boss_temp.can_reflect_projectiles):
+		EffectFactory.get_effect("ReflectImpact", global_position)
+		SoundFactory.play_sound_by_name("attack_reflect", global_position, 0, 1, "SFX")
+	else:
+		pass
 
 func do_magic_blast_knockback(body):
 	var hub : PlayerHub = null
@@ -122,19 +130,21 @@ func do_magic_blast_knockback(body):
 
 func defeat_enemy(body):
 	var target_pos : Vector2 = ((body as Node2D).global_position - ray.global_position)
-	if (!is_going_thru_a_wall(target_pos, body.get_rid())):
-		if (body is Enemy):
-			var enemy : Enemy = (body as Enemy)
-			if (enemy.defeat_enemy(damage_type, true)):
-				hit.emit()
-				EffectFactory.get_effect("MagicImpact", body.global_position)
-				var velocity_vector : Vector2 = calculate_knockback(body)
-				enemy.body.velocity += velocity_vector
-			elif (enemy.can_reflect_projectiles):
-				EffectFactory.get_effect("ReflectImpact", global_position)
-				SoundFactory.play_sound_by_name("attack_reflect", global_position, 0, 1, "SFX")
-			else:
-				pass
+	if (is_going_thru_a_wall(target_pos, body.get_rid())):
+		return
+	
+	if (body is Enemy):
+		var enemy : Enemy = (body as Enemy)
+		if (enemy.defeat_enemy(damage_type, true)):
+			hit.emit()
+			EffectFactory.get_effect("MagicImpact", body.global_position)
+			var velocity_vector : Vector2 = calculate_knockback(body)
+			enemy.body.velocity += velocity_vector
+		elif (enemy.can_reflect_projectiles):
+			EffectFactory.get_effect("ReflectImpact", global_position)
+			SoundFactory.play_sound_by_name("attack_reflect", global_position, 0, 1, "SFX")
+		else:
+			pass
 
 func do_break_object(body):
 	var target_pos : Vector2 = ((body as Node2D).global_position - ray.global_position)
