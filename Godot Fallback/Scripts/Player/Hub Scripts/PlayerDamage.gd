@@ -56,6 +56,9 @@ func is_player_guarding():
 func is_player_parrying():
 	return (fairy_guard_attack.can_parry() or fairy_guard_attack.did_player_parry)
 
+func is_invincibility_shield_active():
+	return fairy_guard_attack.is_invincibility_active
+
 func is_player_damaged():
 	return (current_hitstun_timer > 0 or is_damage_warping)
 
@@ -68,7 +71,7 @@ func take_damage(knockback : int = 0, pierces_guard : bool = false):
 		return false
 	elif (is_player_damaged() or !can_take_damage()):
 		return false
-	elif (is_player_guarding() and (knockback * hub.movement.get_facing_value() < 0) and !pierces_guard):
+	elif (is_player_guarding() and ((knockback * hub.movement.get_facing_value() < 0) or fairy_guard_attack.is_in_blockstun()) and !pierces_guard):
 		fairy_guard_attack.do_blockstun()
 		return false
 	else:

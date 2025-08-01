@@ -153,6 +153,9 @@ func get_gravity_delta(delta : float):
 func get_facing_value():
 	return (1.0 if !sprite.flip_h else -1.0)
 
+func restore_armor():
+	current_armor = armor
+
 func activate_post_hit_invulnerability():
 	if (current_invulnerability_duration <= 0):
 		is_applying_invulnerability_alpha = true

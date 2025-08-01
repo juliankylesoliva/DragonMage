@@ -4,6 +4,8 @@ class_name ImpostorBoss
 
 @export var sword_projectile_scene : PackedScene
 
+@export var parry_damage : int = 3
+
 @export_multiline var introduction_text_2 : Array[String]
 
 var first_fyerlarm_hit : bool = false
@@ -72,7 +74,7 @@ func on_defeat():
 		else:
 			on_dialogue_defeat_finished()
 
-func damage_boss(_damage_type : StringName, _damage_strength : int, _knockback_vector : Vector2, _is_projectile : bool = false):
+func damage_boss(_damage_type : StringName, _damage_strength : int = 0, _knockback_vector : Vector2 = Vector2.ZERO, _is_projectile : bool = false):
 	if (current_invulnerability_duration > 0 or current_health <= 0):
 		return false
 	
@@ -82,28 +84,26 @@ func damage_boss(_damage_type : StringName, _damage_strength : int, _knockback_v
 				current_armor -= 1
 			else:
 				first_fyerlarm_hit = true
-				on_first_fyerlarm_hit()
 			SoundFactory.play_sound_by_name("damage_enemy", body.global_position, 0, 1, "SFX")
 			do_post_hit_invulnerability()
 			return true
 	else:
 		if (!is_invisible):
-			current_health -= 1
-			if (current_health > 0):
-				current_armor = armor
-			else:
+			current_health -= (parry_damage if _damage_type == "PARRY" else 1)
+			if (current_health <= 0):
+				current_health = 0
 				on_defeat()
 			SoundFactory.play_sound_by_name("damage_enemy", body.global_position, 0, 1, "SFX")
 			do_post_hit_invulnerability()
 			return true
 	return false
 
-func spawn_sword_projectile(path : Path2D, is_reverse : bool):
+func spawn_sword_projectile(path : Path2D, is_reverse : bool, is_facing_right : bool):
 	var temp_node : Node = sword_projectile_scene.instantiate()
 	path.add_child(temp_node)
 	
 	var temp_proj : ImpostorSwordProjectile = (temp_node as ImpostorSwordProjectile)
-	temp_proj.start_moving(is_reverse)
+	temp_proj.start_moving(is_reverse, is_facing_right)
 	
 	return temp_proj
 
@@ -112,6 +112,8 @@ func check_player_collision():
 		if (player_hub.damage.take_damage(1 if body.global_position.x < player_hub.char_body.global_position.x else -1)):
 			EffectFactory.get_effect("EnemyContactImpact", player_hub.char_body.global_position)
 			SoundFactory.play_sound_by_name("enemy_contact_impact", player_hub.char_body.global_position, 0, 1, "SFX")
+		elif (player_hub.damage.is_player_parrying()):
+			self.damage_boss("PARRY")
 
 func on_dialogue_intro_finished():
 	if (is_activated):

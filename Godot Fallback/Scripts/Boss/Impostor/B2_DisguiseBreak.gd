@@ -16,6 +16,7 @@ var current_break_timer : float = 0
 
 func on_enter():
 	impostor_boss.can_be_stomped = false
+	impostor_boss.can_reflect_projectiles = false
 	impostor_boss.sprite.play("DrickeryIdle")
 	current_break_timer = break_duration
 
@@ -29,11 +30,11 @@ func state_process(_delta):
 		return
 	
 	match impostor_boss.current_health:
-		3:
+		9:
 			set_next_state(drickery_phase1_state)
-		2:
+		6:
 			set_next_state(drickery_phase2_state)
-		1:
+		3:
 			set_next_state(drickery_phase3_state)
 		_:
 			pass

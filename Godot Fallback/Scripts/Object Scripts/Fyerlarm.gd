@@ -8,6 +8,8 @@ class_name Fyerlarm
 
 @export var audio_stream_player : AudioStreamPlayer2D
 
+@export var is_disabled : bool = false
+
 @export var windup_duration : float = 2
 
 @export var attack_duration : float = 1
@@ -39,6 +41,10 @@ var bodies_in_hitbox : Array
 var current_state : int = 0
 
 var state_timer : float = 0
+
+func _ready():
+	if (is_disabled):
+		set_to_state(3)
 
 func _process(delta):
 	do_state_process(delta)
@@ -97,7 +103,7 @@ func do_state_process(delta : float):
 			if (state_timer <= 0):
 				set_to_state(3)
 		3:
-			if (state_timer <= 0):
+			if (!is_disabled and state_timer <= 0):
 				set_to_state(0)
 		_:
 			set_to_state(0)
@@ -144,6 +150,11 @@ func do_break():
 
 func is_attack_active():
 	return (current_state == 1 or current_state == 2)
+
+func set_disable(b : bool):
+	is_disabled = b
+	if (is_disabled and current_state != 3):
+		set_to_state(3)
 
 func _on_attack_area_body_entered(body):
 	if (!bodies_in_hitbox.has(body)):

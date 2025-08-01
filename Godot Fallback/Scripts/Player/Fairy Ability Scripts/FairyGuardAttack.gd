@@ -267,6 +267,8 @@ func update_fairy_invincibility_rotation(delta : float):
 			current_invincibility_rotation -= TAU
 
 func do_blockstun():
+	if (blockstun_time_left > 0):
+		return
 	hub.fairy.change_current_magic_by(-blockstun_magic_cost)
 	hub.audio.play_sound("damage_player_guarding")
 	EffectFactory.get_effect("GuardShieldImpact", (hub.collision_shape.global_position + (guard_offset_from_char * hub.movement.get_facing_value())))
@@ -276,6 +278,9 @@ func do_blockstun():
 	blockstun_time_left = blockstun_duration
 
 func do_parry():
+	if (parry_pose_time_left > 0):
+		return
+	
 	did_player_parry = true
 	hub.fairy.change_current_magic_by(parry_magic_reward)
 	hub.audio.play_sound("attack_parry")
@@ -284,6 +289,9 @@ func do_parry():
 	hub.animation.set_animation_speed(1)
 	guard_release_time_left = 0
 	parry_pose_time_left = parry_pose_duration
+
+func is_in_blockstun():
+	return (blockstun_time_left > 0)
 
 func get_temper_rebound_modifier():
 	return (temper_rebound_speedup_bonus if current_attack_state == AttackState.ACTIVE and min_guard_time_left <= 0 and blockstun_time_left <= 0 else 1.0)

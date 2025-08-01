@@ -115,7 +115,7 @@ boss = NodePath("../Impostor")
 room_origin = NodePath("..")
 
 [node name="TemperDragonFruit" parent="." instance=ExtResource("10_7t4pi")]
-position = Vector2(768, 32)
+position = Vector2(768, 64)
 starting_state = 1
 enable_cycling = false
 enable_respawning = false
@@ -143,7 +143,7 @@ shape = SubResource("RectangleShape2D_btani")
 position = Vector2(1792, 256)
 
 [node name="Impostor" parent="." node_paths=PackedStringArray("boss_room", "boss_trigger", "boss_room_boundary_tilemap", "boss_music_player") instance=ExtResource("6_imrbl")]
-position = Vector2(896, 208)
+position = Vector2(832, 208)
 boss_room = NodePath("..")
 boss_trigger = NodePath("../BossActivationTrigger")
 boss_room_boundary_tilemap = NodePath("../BossRoomBoundaryTilemap")

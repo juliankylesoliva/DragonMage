@@ -5,7 +5,9 @@ extends BossState
 @export var disguise_break_state : BossState
 
 func on_enter():
+	impostor_boss.restore_armor()
 	impostor_boss.can_be_stomped = false
+	impostor_boss.can_reflect_projectiles = true
 	impostor_boss.sprite.play("ImpKnigelIdle")
 
 func state_process(_delta):
