@@ -29,12 +29,11 @@ func state_process(_delta):
 		set_next_state(drickery_phase0_state)
 		return
 	
-	match impostor_boss.current_health:
-		9:
-			set_next_state(drickery_phase1_state)
-		6:
-			set_next_state(drickery_phase2_state)
-		3:
-			set_next_state(drickery_phase3_state)
-		_:
-			pass
+	if (impostor_boss.current_health >= 7):
+		set_next_state(drickery_phase1_state)
+	elif (impostor_boss.current_health >= 4):
+		set_next_state(drickery_phase2_state)
+	elif (impostor_boss.current_health >= 1):
+		set_next_state(drickery_phase3_state)
+	else:
+		pass
