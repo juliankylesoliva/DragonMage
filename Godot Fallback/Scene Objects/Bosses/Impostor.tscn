@@ -146,17 +146,19 @@ script = ExtResource("12_m3gjn")
 impostor_boss = NodePath("../..")
 damaged_state = NodePath("../Damaged")
 
-[node name="DisguiseBreak" type="Node" parent="StateMachine" node_paths=PackedStringArray("impostor_boss", "drickery_phase0_state", "drickery_phase1_state", "drickery_phase2_state", "drickery_phase3_state")]
+[node name="DisguiseBreak" type="Node" parent="StateMachine" node_paths=PackedStringArray("impostor_boss", "drickery_phase0_state", "drickery_phase1_state", "drickery_phase2_state", "drickery_phase3_state", "defeat_state")]
 script = ExtResource("13_tubth")
 impostor_boss = NodePath("../..")
 drickery_phase0_state = NodePath("../Phase0Drickery")
 drickery_phase1_state = NodePath("../Phase1Drickery")
 drickery_phase2_state = NodePath("../Phase2Drickery")
 drickery_phase3_state = NodePath("../Phase3Drickery")
+defeat_state = NodePath("../Defeated")
 
-[node name="Damaged" type="Node" parent="StateMachine" node_paths=PackedStringArray("impostor_boss", "knigel_phase2_state", "knigel_phase3_state", "defeat_state")]
+[node name="Damaged" type="Node" parent="StateMachine" node_paths=PackedStringArray("impostor_boss", "knigel_phase1_state", "knigel_phase2_state", "knigel_phase3_state", "defeat_state")]
 script = ExtResource("14_ar2lu")
 impostor_boss = NodePath("../..")
+knigel_phase1_state = NodePath("../Phase1Knigel")
 knigel_phase2_state = NodePath("../Phase2Knigel")
 knigel_phase3_state = NodePath("../Phase3Knigel")
 defeat_state = NodePath("../Defeated")

@@ -10,6 +10,8 @@ extends BossState
 
 @export var drickery_phase3_state : BossState
 
+@export var defeat_state : BossState
+
 @export var break_duration : float = 1.0
 
 var current_break_timer : float = 0
@@ -36,4 +38,4 @@ func state_process(_delta):
 	elif (impostor_boss.current_health >= 1):
 		set_next_state(drickery_phase3_state)
 	else:
-		pass
+		set_next_state(defeat_state)
