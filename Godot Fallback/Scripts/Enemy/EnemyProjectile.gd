@@ -38,6 +38,8 @@ class_name EnemyProjectile
 
 var base_gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
+var is_setup : bool = false
+
 var is_moving_right : bool = false
 
 var is_reflected = false
@@ -47,10 +49,6 @@ var saved_velocity : Vector2
 var bounce_count : int = 0
 
 var current_reflects : int = 0
-
-func _process(_delta):
-	if (!visible_on_screen_notifier.is_on_screen()):
-		queue_free()
 
 func _physics_process(_delta):
 	if ((is_on_floor() or is_on_ceiling()) and saved_velocity.y != 0):
@@ -77,16 +75,21 @@ func _physics_process(_delta):
 	saved_velocity = velocity
 	move_and_slide()
 	velocity += (Vector2.DOWN * get_gravity_delta(_delta))
+	
+	if (is_setup and !visible_on_screen_notifier.is_on_screen()):
+		queue_free()
 
 func boss_setup(boss_source : Boss):
 	velocity = Vector2(boss_source.get_facing_value() * move_speed, -jump_speed)
 	is_moving_right = (boss_source.get_facing_value() >= 0)
 	projectile_sprite.flip_h = !is_moving_right
+	is_setup = true
 
 func setup(enemy_source : Enemy):
 	velocity = (Vector2.RIGHT * enemy_source.movement.get_facing_value() * move_speed)
 	is_moving_right = (enemy_source.movement.get_facing_value() >= 0)
 	projectile_sprite.flip_h = !is_moving_right
+	is_setup = true
 
 func destroy_projectile():
 	EffectFactory.get_effect(impact_effect_name, global_position, scale.x)
