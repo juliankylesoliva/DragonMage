@@ -129,6 +129,7 @@ damaged_state = NodePath("../Damaged")
 [node name="Phase2Knigel" type="Node" parent="StateMachine" node_paths=PackedStringArray("impostor_boss", "disguise_break_state")]
 script = ExtResource("9_h5wqk")
 impostor_boss = NodePath("../..")
+move_speed = 115.2
 disguise_break_state = NodePath("../DisguiseBreak")
 
 [node name="Phase2Drickery" type="Node" parent="StateMachine" node_paths=PackedStringArray("impostor_boss", "damaged_state")]

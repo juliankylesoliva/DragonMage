@@ -157,6 +157,12 @@ sword_throw_path_right = NodePath("../../../BossPathing/SwordPathR")
 fyerlarm_left = NodePath("../../../Obstacles/Fyerlarm")
 fyerlarm_right = NodePath("../../../Obstacles/Fyerlarm2")
 
+[node name="Phase2Knigel" parent="Impostor/StateMachine" index="4" node_paths=PackedStringArray("arena_boundary_left", "arena_boundary_right", "fyerlarm_left", "fyerlarm_right")]
+arena_boundary_left = NodePath("../../../BossPathing/ArenaBoundaryPointL")
+arena_boundary_right = NodePath("../../../BossPathing/ArenaBoundaryPointR")
+fyerlarm_left = NodePath("../../../Obstacles/Fyerlarm")
+fyerlarm_right = NodePath("../../../Obstacles/Fyerlarm2")
+
 [node name="BossMusicPlayer" parent="." instance=ExtResource("8_iyawa")]
 stream = ExtResource("9_365aa")
 autoplay = false
@@ -175,5 +181,9 @@ curve = SubResource("Curve2D_xdmkr")
 
 [node name="SwordPathR" type="Path2D" parent="BossPathing"]
 curve = SubResource("Curve2D_mqu4i")
+
+[node name="ArenaBoundaryPointL" type="Node2D" parent="BossPathing"]
+
+[node name="ArenaBoundaryPointR" type="Node2D" parent="BossPathing"]
 
 [editable path="Impostor"]
