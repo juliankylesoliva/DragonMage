@@ -10,6 +10,8 @@ class_name EnemyProjectile
 
 @export var move_speed : float = 3
 
+@export var enable_rotation : bool = false
+
 @export var jump_speed : float = 0
 
 @export var gravity_scale : float = 0
@@ -73,16 +75,20 @@ func _physics_process(_delta):
 			return
 	
 	saved_velocity = velocity
+	if (enable_rotation):
+		rotation_degrees = rad_to_deg(Vector2.RIGHT.angle_to(saved_velocity.normalized()))
 	move_and_slide()
 	velocity += (Vector2.DOWN * get_gravity_delta(_delta))
 	
 	if (is_setup and !visible_on_screen_notifier.is_on_screen()):
 		queue_free()
 
-func boss_setup(boss_source : Boss):
-	velocity = Vector2(boss_source.get_facing_value() * move_speed, -jump_speed)
-	is_moving_right = (boss_source.get_facing_value() >= 0)
-	projectile_sprite.flip_h = !is_moving_right
+func boss_setup(boss_source : Boss, custom_direction : Vector2 = Vector2.INF):
+	velocity = (custom_direction * move_speed if custom_direction != Vector2.INF else Vector2(boss_source.get_facing_value() * move_speed, -jump_speed))
+	is_moving_right = (boss_source.get_facing_value() >= 0 if custom_direction == Vector2.INF else custom_direction.x >= 0)
+	projectile_sprite.flip_h = (!is_moving_right and !enable_rotation)
+	if (enable_rotation):
+		rotation_degrees = rad_to_deg(Vector2.RIGHT.angle_to(velocity.normalized()))
 	is_setup = true
 
 func setup(enemy_source : Enemy):
@@ -100,9 +106,9 @@ func reflect_projectile():
 	if (current_reflects < max_reflects):
 		is_reflected = !is_reflected
 		EffectFactory.get_effect(reflect_impact_effect_name, global_position)
-		velocity.x *= -abs(reflected_speed_boost)
+		velocity *= -abs(reflected_speed_boost)
 		is_moving_right = !is_moving_right
-		projectile_sprite.flip_h = !is_moving_right
+		projectile_sprite.flip_h = (!is_moving_right and !enable_rotation)
 		SoundFactory.play_sound_by_name(reflect_sound_name, global_position, 0, 1, "SFX")
 		current_reflects += 1
 	else:
@@ -147,6 +153,14 @@ func hit_check(body):
 				reflect_projectile()
 			else:
 				destroy_projectile()
+	elif (is_reflected and (body is Boss)):
+		var boss_temp : Boss = (body as Boss)
+		if (boss_temp.damage_boss("PARRY", 0, Vector2.ZERO, true)):
+			destroy_projectile()
+		elif (boss_temp.can_reflect_projectiles):
+			reflect_projectile()
+		else:
+			destroy_projectile()
 	elif (is_reflected and body.has_meta("Tag") and body.get_meta("Tag") == "EnemyProjectile"):
 		if (body is EnemyProjectile and !(body as EnemyProjectile).is_reflected):
 			(body as EnemyProjectile).destroy_projectile()

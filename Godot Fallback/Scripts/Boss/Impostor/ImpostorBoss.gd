@@ -4,6 +4,10 @@ class_name ImpostorBoss
 
 @export var sword_projectile_scene : PackedScene
 
+@export var fire_bullet_projectile_scene : PackedScene
+
+@export var projectile_launch_offset : float = 48
+
 @export var parry_damage : int = 3
 
 @export_multiline var introduction_text_2 : Array[String]
@@ -106,6 +110,14 @@ func spawn_sword_projectile(path : Path2D, is_reverse : bool, is_facing_right : 
 	temp_proj.start_moving(is_reverse, is_facing_right)
 	
 	return temp_proj
+
+func spawn_fire_bullet(direction : Vector2):
+	var temp_node : Node = fire_bullet_projectile_scene.instantiate()
+	add_sibling(temp_node)
+	(temp_node as Node2D).global_position = (global_position + (direction.normalized() * projectile_launch_offset))
+	if (temp_node is EnemyProjectile):
+		var temp_proj : EnemyProjectile = (temp_node as EnemyProjectile)
+		temp_proj.boss_setup(self, direction.normalized())
 
 func check_player_collision():
 	if (is_activated and is_player_in_collider and current_invulnerability_duration <= 0):

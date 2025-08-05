@@ -2,6 +2,8 @@ extends BossState
 
 @export var impostor_boss : ImpostorBoss
 
+@export var falling_gravity : float = 3
+
 @export var knigel_phase1_state : BossState
 
 @export var knigel_phase2_state : BossState
@@ -15,12 +17,18 @@ extends BossState
 var current_damage_timer : float = 0
 
 func on_enter():
+	impostor_boss.set_gravity_scale(falling_gravity)
 	impostor_boss.can_be_stomped = false
 	impostor_boss.can_reflect_projectiles = false
 	impostor_boss.sprite.play("DrickeryIdle")
 	current_damage_timer = damage_duration
 
 func state_process(_delta):
+	if (!impostor_boss.body.is_on_floor()):
+		impostor_boss.body.velocity += (Vector2.DOWN * impostor_boss.get_gravity_delta(_delta))
+		impostor_boss.body.move_and_slide()
+		return
+	
 	current_damage_timer = move_toward(current_damage_timer, 0, _delta)
 	if (current_damage_timer > 0):
 		return

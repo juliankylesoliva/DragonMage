@@ -1,8 +1,9 @@
-[gd_scene load_steps=21 format=3 uid="uid://bdnkqwt5cfajc"]
+[gd_scene load_steps=22 format=3 uid="uid://bdnkqwt5cfajc"]
 
 [ext_resource type="Script" path="res://Scripts/Boss/Impostor/ImpostorBoss.gd" id="1_l3g66"]
 [ext_resource type="Texture2D" uid="uid://bimaa1lhua3lw" path="res://Sprites/Bosses/Impostor/DrickeryPlaceholder.png" id="2_csvu3"]
 [ext_resource type="PackedScene" uid="uid://cewmk0ej2jmbk" path="res://Scene Objects/Bosses/ImpostorSwordProjectile.tscn" id="2_ragfd"]
+[ext_resource type="PackedScene" uid="uid://cxf452ivgojru" path="res://Scene Objects/Bosses/ImpostorProjectile.tscn" id="3_tnfb3"]
 [ext_resource type="Texture2D" uid="uid://bhj7ecs4imcdw" path="res://Sprites/Bosses/Impostor/ImpostorKnigelPlaceholder.png" id="3_uwaci"]
 [ext_resource type="Script" path="res://Scripts/Boss/BossStateMachine.gd" id="4_2bcs0"]
 [ext_resource type="Script" path="res://Scripts/Boss/Impostor/B2_P0_Knigel.gd" id="5_kcf3y"]
@@ -51,8 +52,10 @@ animations = [{
 [node name="Impostor" type="CharacterBody2D" node_paths=PackedStringArray("state_machine", "body", "sprite", "visibility", "player_contact_hitbox")]
 collision_layer = 64
 collision_mask = 3
+platform_floor_layers = 4278190083
 script = ExtResource("1_l3g66")
 sword_projectile_scene = ExtResource("2_ragfd")
+fire_bullet_projectile_scene = ExtResource("3_tnfb3")
 introduction_text_2 = Array[String](["2nd placeholder 1/3", "2nd placeholder 2/3", "2nd placeholder 3/3"])
 state_machine = NodePath("StateMachine")
 total_health = 9
@@ -63,6 +66,7 @@ visibility = NodePath("VisibleOnScreenNotifier2D")
 player_contact_hitbox = NodePath("ContactHitbox")
 introduction_text = Array[String](["placeholder 1/3", "placeholder 2/3", "placeholder 3/3"])
 defeat_text = Array[String](["defeat placeholder 1/3", "defeat placeholder 2/3", "defeat placeholder 3/3"])
+can_be_stomped = false
 can_reflect_projectiles = true
 knockback_gravity_scale = 0.0
 battle_left_camera_limit = 512
@@ -130,11 +134,20 @@ damaged_state = NodePath("../Damaged")
 script = ExtResource("9_h5wqk")
 impostor_boss = NodePath("../..")
 move_speed = 115.2
+cooldown_duration = 0.85
+jump_speed = 488.0
+windup_duration = 0.65
+attack_speed = 512.0
+endlag_duration = 0.85
 disguise_break_state = NodePath("../DisguiseBreak")
 
 [node name="Phase2Drickery" type="Node" parent="StateMachine" node_paths=PackedStringArray("impostor_boss", "damaged_state")]
 script = ExtResource("10_jy7fv")
 impostor_boss = NodePath("../..")
+move_speed = 102.4
+cooldown_duration = 2.5
+attack_distance = 200.0
+firing_end_duration = 1.5
 damaged_state = NodePath("../Damaged")
 
 [node name="Phase3Knigel" type="Node" parent="StateMachine" node_paths=PackedStringArray("impostor_boss", "disguise_break_state")]
