@@ -29,9 +29,9 @@ var attack_direction : float = 1
 var current_phase_state_timer : float = 0
 
 func on_enter():
-	impostor_boss.is_invisible = true
-	impostor_boss.can_be_stomped = true
-	current_phase_state = PhaseState.TRAVEL
+	init_phase_state(PhaseState.TRAVEL)
+	impostor_boss.fyerlarm_l.set_disable(true)
+	impostor_boss.fyerlarm_r.set_disable(true)
 	impostor_boss.sprite.play("DrickeryIdle")
 
 func state_process(_delta):
@@ -46,6 +46,7 @@ func init_phase_state(phase : PhaseState):
 	current_phase_state = phase
 	match current_phase_state:
 		PhaseState.TRAVEL:
+			impostor_boss.reset_post_damage_invulnerability()
 			impostor_boss.body.velocity = Vector2.ZERO
 			impostor_boss.is_invisible = true
 			impostor_boss.can_be_stomped = false

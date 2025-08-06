@@ -39,12 +39,11 @@ var current_phase_state_timer : float = 0
 func on_enter():
 	impostor_boss.restore_armor()
 	impostor_boss.can_be_stomped = false
-	impostor_boss.can_reflect_projectiles = true
+	impostor_boss.can_reflect_projectiles = false
 	init_phase_state(PhaseState.TRAVEL)
 	impostor_boss.sprite.play("ImpKnigelIdle")
 
 func state_process(_delta):
-	impostor_boss.check_player_collision()
 	phase_state_process(_delta)
 	if (impostor_boss.current_armor <= 0):
 		set_next_state(disguise_break_state)
@@ -93,19 +92,21 @@ func do_travel_state(_delta):
 		impostor_boss.body.velocity.x = (abs(move_speed) * get_direction_to_player())
 		impostor_boss.sprite.flip_h = (impostor_boss.body.velocity.x < 0)
 		
-		if (!is_near_player() or impostor_boss.player_hub.char_body.is_on_floor()):
+		if (!is_near_player() or (impostor_boss.player_hub.char_body.is_on_floor() and !impostor_boss.is_player_in_collider)):
 			impostor_boss.body.move_and_slide()
 		
 		if (impostor_boss.body.is_on_wall()):
 			current_phase_state_timer = 0
 
 func do_jump_state(_delta):
+	impostor_boss.check_player_collision()
 	impostor_boss.body.velocity.y += impostor_boss.get_gravity_delta(_delta)
 	impostor_boss.body.move_and_slide()
 	if (impostor_boss.body.velocity.y >= 0):
 		init_phase_state(PhaseState.WINDUP)
 
 func do_windup_state(_delta):
+	impostor_boss.check_player_collision()
 	impostor_boss.body.velocity.y = (-windup_rising_speed * (current_phase_state_timer / windup_duration))
 	impostor_boss.body.move_and_slide()
 	current_phase_state_timer = move_toward(current_phase_state_timer, 0, _delta)
@@ -113,6 +114,7 @@ func do_windup_state(_delta):
 		init_phase_state(PhaseState.ATTACK)
 
 func do_attack_state(_delta):
+	impostor_boss.check_player_collision()
 	impostor_boss.body.velocity = (Vector2.DOWN * abs(attack_speed))
 	impostor_boss.body.move_and_slide()
 	if (impostor_boss.body.is_on_floor()):

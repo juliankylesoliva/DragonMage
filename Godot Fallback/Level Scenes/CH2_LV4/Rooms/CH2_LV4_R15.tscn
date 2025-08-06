@@ -115,9 +115,8 @@ boss = NodePath("../Impostor")
 room_origin = NodePath("..")
 
 [node name="TemperDragonFruit" parent="." instance=ExtResource("10_7t4pi")]
-position = Vector2(768, 64)
-starting_state = 1
-enable_cycling = false
+position = Vector2(768, 96)
+starting_state = 0
 enable_respawning = false
 start_despawned = true
 
@@ -142,26 +141,29 @@ shape = SubResource("RectangleShape2D_btani")
 [node name="FinishLine" parent="." instance=ExtResource("5_anfy1")]
 position = Vector2(1792, 256)
 
-[node name="Impostor" parent="." node_paths=PackedStringArray("boss_room", "boss_trigger", "boss_room_boundary_tilemap", "boss_music_player") instance=ExtResource("6_imrbl")]
+[node name="Impostor" parent="." node_paths=PackedStringArray("fyerlarm_l", "fyerlarm_r", "boss_room", "boss_trigger", "boss_room_boundary_tilemap", "boss_music_player") instance=ExtResource("6_imrbl")]
 position = Vector2(832, 208)
+fyerlarm_l = NodePath("../Obstacles/Fyerlarm")
+fyerlarm_r = NodePath("../Obstacles/Fyerlarm2")
 boss_room = NodePath("..")
 boss_trigger = NodePath("../BossActivationTrigger")
 boss_room_boundary_tilemap = NodePath("../BossRoomBoundaryTilemap")
 boss_music_player = NodePath("../BossMusicPlayer")
 
-[node name="Phase1Knigel" parent="Impostor/StateMachine" index="2" node_paths=PackedStringArray("sword_throw_position_left", "sword_throw_position_right", "sword_throw_path_left", "sword_throw_path_right", "fyerlarm_left", "fyerlarm_right")]
+[node name="Phase1Knigel" parent="Impostor/StateMachine" index="2" node_paths=PackedStringArray("sword_throw_position_left", "sword_throw_position_right", "sword_throw_path_left", "sword_throw_path_right")]
 sword_throw_position_left = NodePath("../../../BossPathing/SwordThrowL")
 sword_throw_position_right = NodePath("../../../BossPathing/SwordThrowR")
 sword_throw_path_left = NodePath("../../../BossPathing/SwordPathL")
 sword_throw_path_right = NodePath("../../../BossPathing/SwordPathR")
-fyerlarm_left = NodePath("../../../Obstacles/Fyerlarm")
-fyerlarm_right = NodePath("../../../Obstacles/Fyerlarm2")
 
 [node name="Phase2Knigel" parent="Impostor/StateMachine" index="4" node_paths=PackedStringArray("arena_boundary_left", "arena_boundary_right", "fyerlarm_left", "fyerlarm_right")]
 arena_boundary_left = NodePath("../../../BossPathing/ArenaBoundaryPointL")
 arena_boundary_right = NodePath("../../../BossPathing/ArenaBoundaryPointR")
 fyerlarm_left = NodePath("../../../Obstacles/Fyerlarm")
 fyerlarm_right = NodePath("../../../Obstacles/Fyerlarm2")
+
+[node name="Phase3Drickery" parent="Impostor/StateMachine" index="7" node_paths=PackedStringArray("flying_height_position")]
+flying_height_position = NodePath("../../../BossPathing/FlyingHeight")
 
 [node name="BossMusicPlayer" parent="." instance=ExtResource("8_iyawa")]
 stream = ExtResource("9_365aa")
@@ -185,5 +187,8 @@ curve = SubResource("Curve2D_mqu4i")
 [node name="ArenaBoundaryPointL" type="Node2D" parent="BossPathing"]
 
 [node name="ArenaBoundaryPointR" type="Node2D" parent="BossPathing"]
+
+[node name="FlyingHeight" type="Node2D" parent="BossPathing"]
+position = Vector2(784, -48)
 
 [editable path="Impostor"]

@@ -20,10 +20,6 @@ enum ThrowPosition {LEFT, RIGHT}
 
 @export var sword_throw_path_right : Path2D
 
-@export var fyerlarm_left : Fyerlarm
-
-@export var fyerlarm_right : Fyerlarm
-
 @export_range(0, 1) var left_turnaround_threshold : float = 0.6
 
 @export_range(0, 1) var right_turnaround_threshold : float = 0.4
@@ -41,11 +37,10 @@ func on_enter():
 	current_phase_state = PhaseState.TRAVEL
 	target_throw_position = (ThrowPosition.LEFT if impostor_boss.player_hub.char_body.global_position.x > impostor_boss.body.global_position.x else ThrowPosition.RIGHT)
 	impostor_boss.can_be_stomped = false
-	impostor_boss.can_reflect_projectiles = true
+	impostor_boss.can_reflect_projectiles = false
 	impostor_boss.sprite.play("ImpKnigelIdle")
 
 func state_process(_delta):
-	impostor_boss.check_player_collision()
 	phase_state_process(_delta)
 	if (impostor_boss.current_armor <= 0):
 		set_next_state(disguise_break_state)
@@ -72,10 +67,10 @@ func phase_state_process(_delta):
 
 func do_travel_state(_delta):
 	var distance_btwn_fyerlarms : float = inverse_lerp(sword_throw_position_left.global_position.x, sword_throw_position_right.global_position.x, impostor_boss.global_position.x)
-	if (fyerlarm_left.is_attack_active() or fyerlarm_right.is_attack_active()):
-		if (fyerlarm_left.is_attack_active() and !fyerlarm_right.is_attack_active() and distance_btwn_fyerlarms < left_turnaround_threshold):
+	if (impostor_boss.fyerlarm_l.is_attack_active() or impostor_boss.fyerlarm_r.is_attack_active()):
+		if (impostor_boss.fyerlarm_l.is_attack_active() and !impostor_boss.fyerlarm_r.is_attack_active() and distance_btwn_fyerlarms < left_turnaround_threshold):
 			target_throw_position = ThrowPosition.RIGHT
-		elif (!fyerlarm_left.is_attack_active() and fyerlarm_right.is_attack_active() and distance_btwn_fyerlarms > right_turnaround_threshold):
+		elif (!impostor_boss.fyerlarm_l.is_attack_active() and impostor_boss.fyerlarm_r.is_attack_active() and distance_btwn_fyerlarms > right_turnaround_threshold):
 			target_throw_position = ThrowPosition.LEFT
 		else:
 			pass

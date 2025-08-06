@@ -67,7 +67,7 @@ point_count = 2
 script = ExtResource("1_yggyj")
 level_index = 11
 player_reference = NodePath("Player")
-starting_room = NodePath("CH2_LV4_R1")
+starting_room = NodePath("CH2_LV4_R15")
 room_list = [NodePath("CH2_LV4_R1"), NodePath("CH2_LV4_R2"), NodePath("CH2_LV4_R3"), NodePath("CH2_LV4_R4"), NodePath("CH2_LV4_R5"), NodePath("CH2_LV4_R6"), NodePath("CH2_LV4_R7"), NodePath("CH2_LV4_R8"), NodePath("CH2_LV4_R9"), NodePath("CH2_LV4_R10"), NodePath("CH2_LV4_R11"), NodePath("CH2_LV4_R12"), NodePath("CH2_LV4_R13"), NodePath("CH2_LV4_R14"), NodePath("CH2_LV4_R15")]
 magical_scale = NodePath("CH2_LV4_R6/CollectableScale")
 draconic_scale = NodePath("CH2_LV4_R9/CollectableScale")
@@ -309,13 +309,14 @@ screen_fade = NodePath("../UI_Canvas/ScreenFade")
 [connection signal="player_defeated" from="." to="LevelMusicPlayer" method="stop"]
 [connection signal="player_defeated" from="." to="DefeatScreen" method="do_defeat_screen"]
 [connection signal="room_activated" from="CH2_LV4_R15" to="LevelMusicPlayer" method="fade_out"]
+[connection signal="level_finished" from="CH2_LV4_R15/FinishLine" to="." method="level_finish"]
 [connection signal="level_finished" from="CH2_LV4_R15/FinishLine" to="UI_Canvas/TemperMeterUI" method="hide"]
 [connection signal="level_finished" from="CH2_LV4_R15/FinishLine" to="UI_Canvas/MagicMeterUI" method="hide"]
 [connection signal="level_finished" from="CH2_LV4_R15/FinishLine" to="UI_Canvas/FragmentCounterUI" method="hide"]
 [connection signal="level_finished" from="CH2_LV4_R15/FinishLine" to="UI_Canvas/ClearTimer" method="hide"]
 [connection signal="level_finished" from="CH2_LV4_R15/FinishLine" to="UI_Canvas/ClearTimer" method="stop_timer"]
+[connection signal="level_finished" from="CH2_LV4_R15/FinishLine" to="UI_Canvas/ResultsScreen" method="on_level_complete"]
 [connection signal="level_finished" from="CH2_LV4_R15/FinishLine" to="LevelMusicPlayer" method="fade_out"]
-[connection signal="level_finished" from="CH2_LV4_R15/FinishLine" to="Player/Hub" method="set_force_stand" binds= [true]]
 
 [editable path="Player"]
 [editable path="CH2_LV4_R1"]

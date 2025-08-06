@@ -9,6 +9,5 @@ func on_enter():
 	impostor_boss.sprite.play("ImpKnigelIdle")
 
 func state_process(_delta):
-	impostor_boss.check_player_collision()
 	if (impostor_boss.first_fyerlarm_hit):
 		set_next_state(disguise_break_state)

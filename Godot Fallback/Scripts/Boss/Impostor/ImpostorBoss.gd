@@ -2,6 +2,10 @@ extends Boss
 
 class_name ImpostorBoss
 
+@export var fyerlarm_l : Fyerlarm
+
+@export var fyerlarm_r : Fyerlarm
+
 @export var sword_projectile_scene : PackedScene
 
 @export var fire_bullet_projectile_scene : PackedScene
@@ -160,3 +164,4 @@ func on_dialogue_defeat_finished():
 	await get_tree().process_frame # prevents pausing on the same frame
 	PauseHandler.enable_pausing(true)
 	textbox.textbox_finished.disconnect(on_dialogue_defeat_finished)
+	self.sprite.set_visible(false)

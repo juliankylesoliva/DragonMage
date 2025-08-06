@@ -4,4 +4,6 @@ extends BossState
 
 func on_enter():
 	impostor_boss.can_be_stomped = false
+	impostor_boss.fyerlarm_l.set_disable(true)
+	impostor_boss.fyerlarm_r.set_disable(true)
 	impostor_boss.sprite.play("DrickeryIdle")

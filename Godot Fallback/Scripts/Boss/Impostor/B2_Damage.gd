@@ -20,6 +20,9 @@ func on_enter():
 	impostor_boss.set_gravity_scale(falling_gravity)
 	impostor_boss.can_be_stomped = false
 	impostor_boss.can_reflect_projectiles = false
+	if (impostor_boss.current_health > 0):
+		impostor_boss.fyerlarm_l.set_disable(false)
+		impostor_boss.fyerlarm_r.set_disable(false)
 	impostor_boss.sprite.play("DrickeryIdle")
 	current_damage_timer = damage_duration
 

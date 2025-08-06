@@ -153,8 +153,10 @@ func is_attack_active():
 
 func set_disable(b : bool):
 	is_disabled = b
-	if (is_disabled and current_state != 3):
+	if (is_disabled):
 		set_to_state(3)
+	else:
+		set_to_state(0)
 
 func _on_attack_area_body_entered(body):
 	if (!bodies_in_hitbox.has(body)):

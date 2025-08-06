@@ -29,7 +29,9 @@ var travel_direction : float = 1
 var aim_direction : Vector2 = Vector2.ZERO
 
 func on_enter():
-	impostor_boss.can_be_stomped = true
+	init_phase_state(PhaseState.TRAVEL)
+	impostor_boss.fyerlarm_l.set_disable(true)
+	impostor_boss.fyerlarm_r.set_disable(true)
 	impostor_boss.sprite.play("DrickeryIdle")
 
 func state_process(_delta):
@@ -41,6 +43,7 @@ func init_phase_state(phase : PhaseState):
 	current_phase_state = phase
 	match current_phase_state:
 		PhaseState.TRAVEL:
+			impostor_boss.reset_post_damage_invulnerability()
 			impostor_boss.body.velocity = Vector2.ZERO
 			impostor_boss.is_invisible = true
 			impostor_boss.can_be_stomped = false
@@ -51,7 +54,7 @@ func init_phase_state(phase : PhaseState):
 			impostor_boss.body.velocity = Vector2.ZERO
 			impostor_boss.sprite.flip_h = (get_direction_to_player() < 0)
 			current_phase_state_timer = aiming_duration
-			impostor_boss.sprite.modulate.a = 0.0
+			impostor_boss.sprite.modulate.a = partial_invis_alpha
 		PhaseState.FIRE:
 			impostor_boss.is_invisible = false
 			impostor_boss.can_be_stomped = true
@@ -71,7 +74,7 @@ func phase_state_process(_delta):
 func do_travel_state(_delta):
 	impostor_boss.sprite.modulate.a = (partial_invis_alpha if impostor_boss.is_player_in_collider else 0.0)
 	current_phase_state_timer = move_toward(current_phase_state_timer, 0, _delta)
-	if (current_phase_state_timer <= 0 and is_far_from_player()):
+	if (current_phase_state_timer <= 0 and is_far_from_player() and !is_player_attacking()):
 		init_phase_state(PhaseState.AIM)
 	else:
 		impostor_boss.body.velocity.x = (abs(move_speed) * travel_direction)
@@ -103,3 +106,8 @@ func get_direction_to_player():
 
 func is_far_from_player():
 	return (get_distance_to_player() >= attack_distance)
+
+func is_player_attacking():
+	var player_temp : PlayerHub = impostor_boss.player_hub
+	var magic_blast_temp : MagicBlastAttack = player_temp.jumping.magic_blast_attack
+	return (player_temp.state_machine.current_state.name == "Attacking" or magic_blast_temp.projectile_instance != null or magic_blast_temp.is_blast_jumping)

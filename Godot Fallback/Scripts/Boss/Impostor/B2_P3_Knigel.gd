@@ -37,7 +37,6 @@ var current_phase_state_timer : float = 0
 func on_enter():
 	impostor_boss.restore_armor()
 	impostor_boss.can_be_stomped = false
-	impostor_boss.can_reflect_projectiles = true
 	init_phase_state(PhaseState.WINDUP)
 	impostor_boss.sprite.play("ImpKnigelIdle")
 
@@ -51,16 +50,19 @@ func init_phase_state(phase : PhaseState):
 	current_phase_state = phase
 	match current_phase_state:
 		PhaseState.WINDUP:
+			impostor_boss.can_reflect_projectiles = false
 			impostor_boss.set_gravity_scale(falling_gravity_scale)
 			impostor_boss.body.velocity = Vector2.ZERO
 			windup_facing_direction = -get_direction_to_player()
 			impostor_boss.sprite.flip_h = (-windup_facing_direction < 0)
 			current_phase_state_timer = windup_duration
 		PhaseState.SPIN:
+			impostor_boss.can_reflect_projectiles = true
 			impostor_boss.set_gravity_scale(spin_gravity_scale)
 			impostor_boss.body.velocity = Vector2.ZERO
 			current_phase_state_timer = spin_duration
 		PhaseState.DIZZY:
+			impostor_boss.can_reflect_projectiles = false
 			impostor_boss.set_gravity_scale(falling_gravity_scale)
 			dizzy_start_speed = impostor_boss.body.velocity.x
 			current_phase_state_timer = dizzy_duration
