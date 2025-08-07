@@ -48,6 +48,7 @@ loop = false
 script = ExtResource("1_83fel")
 sprite = NodePath("AnimatedSprite2D")
 travel_time = 2.8
+reflected_travel_time = 1.4
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 z_index = 5

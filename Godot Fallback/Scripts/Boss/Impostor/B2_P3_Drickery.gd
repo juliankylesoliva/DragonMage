@@ -54,6 +54,9 @@ func state_process(_delta):
 	if (impostor_boss.current_health < minimum_health):
 		set_next_state(damaged_state)
 
+func on_exit():
+	impostor_boss.is_invisible = false
+
 func init_phase_state(phase : PhaseState):
 	current_phase_state = phase
 	match current_phase_state:
@@ -84,9 +87,9 @@ func init_phase_state(phase : PhaseState):
 			impostor_boss.can_be_stomped = true
 			impostor_boss.sprite.modulate.a = 1.0
 			next_attack_state = PhaseState.DIVE
-			impostor_boss.spawn_fire_bullet(Vector2.DOWN)
-			impostor_boss.spawn_fire_bullet(Vector2.DOWN.rotated(deg_to_rad(throw_angle_separation)))
-			impostor_boss.spawn_fire_bullet(Vector2.DOWN.rotated(deg_to_rad(-throw_angle_separation)))
+			for i in range(-2, 3):
+				if (i != 0):
+					impostor_boss.spawn_fire_bullet(Vector2.DOWN.rotated(deg_to_rad(throw_angle_separation * i)))
 		PhaseState.DIVE:
 			current_dive_direction = (impostor_boss.player_hub.char_body.global_position - impostor_boss.body.global_position).normalized()
 			impostor_boss.body.velocity = (current_dive_direction * dive_speed)

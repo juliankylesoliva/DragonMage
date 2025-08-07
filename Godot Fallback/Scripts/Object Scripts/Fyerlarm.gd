@@ -103,6 +103,9 @@ func do_state_process(delta : float):
 			if (state_timer <= 0):
 				set_to_state(3)
 		3:
+			if (soundwave_sprite.scale != Vector2.ZERO):
+				soundwave_sprite.scale = Vector2.ZERO
+			
 			if (!is_disabled and state_timer <= 0):
 				set_to_state(0)
 		_:

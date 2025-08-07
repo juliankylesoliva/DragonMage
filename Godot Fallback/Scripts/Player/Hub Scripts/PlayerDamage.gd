@@ -71,7 +71,7 @@ func take_damage(knockback : int = 0, pierces_guard : bool = false):
 		return false
 	elif (is_player_damaged() or !can_take_damage()):
 		return false
-	elif (is_player_guarding() and ((knockback * hub.movement.get_facing_value() < 0) or fairy_guard_attack.is_in_blockstun()) and !pierces_guard):
+	elif (is_player_guarding() and ((knockback * hub.movement.get_facing_value() <= 0) or fairy_guard_attack.is_in_blockstun()) and !pierces_guard):
 		fairy_guard_attack.do_blockstun()
 		return false
 	else:

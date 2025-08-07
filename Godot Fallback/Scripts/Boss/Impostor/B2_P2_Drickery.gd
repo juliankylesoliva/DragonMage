@@ -39,6 +39,9 @@ func state_process(_delta):
 	if (impostor_boss.current_health < minimum_health):
 		set_next_state(damaged_state)
 
+func on_exit():
+	impostor_boss.is_invisible = false
+
 func init_phase_state(phase : PhaseState):
 	current_phase_state = phase
 	match current_phase_state:

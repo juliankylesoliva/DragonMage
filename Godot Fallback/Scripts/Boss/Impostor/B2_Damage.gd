@@ -2,6 +2,8 @@ extends BossState
 
 @export var impostor_boss : ImpostorBoss
 
+@export var knockback_strength : float = 64
+
 @export var falling_gravity : float = 3
 
 @export var knigel_phase1_state : BossState
@@ -17,7 +19,9 @@ extends BossState
 var current_damage_timer : float = 0
 
 func on_enter():
+	impostor_boss.body.velocity = Vector2(knockback_strength * (1 if impostor_boss.sprite.flip_h else -1), -knockback_strength)
 	impostor_boss.set_gravity_scale(falling_gravity)
+	impostor_boss.body.move_and_slide()
 	impostor_boss.can_be_stomped = false
 	impostor_boss.can_reflect_projectiles = false
 	if (impostor_boss.current_health > 0):

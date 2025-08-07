@@ -67,7 +67,6 @@ player_contact_hitbox = NodePath("ContactHitbox")
 introduction_text = Array[String](["placeholder 1/3", "placeholder 2/3", "placeholder 3/3"])
 defeat_text = Array[String](["defeat placeholder 1/3", "defeat placeholder 2/3", "defeat placeholder 3/3"])
 can_be_stomped = false
-can_reflect_projectiles = true
 post_hit_invulnerability_duration = 3.0
 knockback_gravity_scale = 0.0
 battle_left_camera_limit = 512
@@ -135,12 +134,13 @@ damaged_state = NodePath("../Damaged")
 [node name="Phase2Knigel" type="Node" parent="StateMachine" node_paths=PackedStringArray("impostor_boss", "disguise_break_state")]
 script = ExtResource("9_h5wqk")
 impostor_boss = NodePath("../..")
-move_speed = 115.2
+move_speed = 138.24
 cooldown_duration = 0.85
 jump_speed = 488.0
-windup_duration = 0.65
+windup_duration = 0.25
+windup_rising_speed = 96.0
 attack_speed = 512.0
-endlag_duration = 0.85
+endlag_duration = 0.45
 disguise_break_state = NodePath("../DisguiseBreak")
 
 [node name="Phase2Drickery" type="Node" parent="StateMachine" node_paths=PackedStringArray("impostor_boss", "damaged_state")]
@@ -148,8 +148,7 @@ script = ExtResource("10_jy7fv")
 impostor_boss = NodePath("../..")
 move_speed = 102.4
 cooldown_duration = 2.5
-attack_distance = 200.0
-firing_end_duration = 1.2
+firing_end_duration = 0.85
 damaged_state = NodePath("../Damaged")
 
 [node name="Phase3Knigel" type="Node" parent="StateMachine" node_paths=PackedStringArray("impostor_boss", "disguise_break_state")]
@@ -165,14 +164,16 @@ disguise_break_state = NodePath("../DisguiseBreak")
 [node name="Phase3Drickery" type="Node" parent="StateMachine" node_paths=PackedStringArray("impostor_boss", "damaged_state")]
 script = ExtResource("12_m3gjn")
 impostor_boss = NodePath("../..")
+throw_attack_range = 80.0
 windup_duration = 0.65
+throw_angle_separation = 25.0
 throw_duration = 0.4
-dive_speed = 409.6
 damaged_state = NodePath("../Damaged")
 
 [node name="DisguiseBreak" type="Node" parent="StateMachine" node_paths=PackedStringArray("impostor_boss", "drickery_phase0_state", "drickery_phase1_state", "drickery_phase2_state", "drickery_phase3_state", "defeat_state")]
 script = ExtResource("13_tubth")
 impostor_boss = NodePath("../..")
+knockback_strength = 128.0
 drickery_phase0_state = NodePath("../Phase0Drickery")
 drickery_phase1_state = NodePath("../Phase1Drickery")
 drickery_phase2_state = NodePath("../Phase2Drickery")
@@ -182,6 +183,7 @@ defeat_state = NodePath("../Defeated")
 [node name="Damaged" type="Node" parent="StateMachine" node_paths=PackedStringArray("impostor_boss", "knigel_phase1_state", "knigel_phase2_state", "knigel_phase3_state", "defeat_state")]
 script = ExtResource("14_ar2lu")
 impostor_boss = NodePath("../..")
+knockback_strength = 128.0
 knigel_phase1_state = NodePath("../Phase1Knigel")
 knigel_phase2_state = NodePath("../Phase2Knigel")
 knigel_phase3_state = NodePath("../Phase3Knigel")

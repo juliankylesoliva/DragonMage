@@ -133,7 +133,7 @@ func hit_check(body):
 		
 		if (player_temp != null):
 			var direction = (body.global_position.x - global_position.x)
-			direction = (1.0 if direction >= 0 else -1.0)
+			direction = (0.0 if enable_rotation else 1.0 if direction >= 0 else -1.0)
 			if (player_temp.damage.take_damage(direction) or player_temp.damage.is_player_guarding()):
 				destroy_projectile()
 			elif (!is_reflected and player_temp.damage.is_player_parrying() and current_reflects < max_reflects):

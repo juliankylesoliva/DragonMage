@@ -87,7 +87,7 @@ func damage_boss(_damage_type : StringName, _damage_strength : int = 0, _knockba
 		return false
 	
 	if (current_armor > 0):
-		if (_damage_type == "HAZARD"):
+		if (_damage_type == "HAZARD" or _damage_type == "PARRY"):
 			if (first_fyerlarm_hit):
 				current_armor -= 1
 			else:
@@ -97,7 +97,7 @@ func damage_boss(_damage_type : StringName, _damage_strength : int = 0, _knockba
 			return true
 	else:
 		if (!is_invisible):
-			current_health -= (parry_damage if _damage_type == "PARRY" else 1)
+			current_health -= (3 if _damage_type == "PARRY" else 1)
 			if (current_health <= 0):
 				current_health = 0
 				on_defeat()
@@ -111,7 +111,7 @@ func spawn_sword_projectile(path : Path2D, is_reverse : bool, is_facing_right : 
 	path.add_child(temp_node)
 	
 	var temp_proj : ImpostorSwordProjectile = (temp_node as ImpostorSwordProjectile)
-	temp_proj.start_moving(is_reverse, is_facing_right)
+	temp_proj.start_moving(is_reverse, is_facing_right, self)
 	
 	return temp_proj
 
@@ -165,3 +165,5 @@ func on_dialogue_defeat_finished():
 	PauseHandler.enable_pausing(true)
 	textbox.textbox_finished.disconnect(on_dialogue_defeat_finished)
 	self.sprite.set_visible(false)
+	player_hub.temper.disable_temper_rebound = true
+	player_hub.temper.set_temper_level(player_hub.temper.max_segments)

@@ -6,6 +6,8 @@ class_name ImpostorSwordProjectile
 
 @export var travel_time : float = 2
 
+@export var reflected_travel_time : float = 1
+
 @export var player_collision_effect_name : String = "EnemyContactImpact"
 
 @export var player_collision_sound_name : String = "enemy_contact_impact"
@@ -20,22 +22,27 @@ var is_reflected : bool = false
 
 var target_ratio : float = 0
 
+var source_boss : Boss = null
+
 func _physics_process(delta):
 	if (!is_moving):
 		return
 	
 	if (progress_ratio != target_ratio):
-		progress_ratio = move_toward(progress_ratio, target_ratio, delta / travel_time)
+		progress_ratio = move_toward(progress_ratio, target_ratio, delta / (travel_time if !is_reflected else reflected_travel_time))
 		if (progress_ratio == target_ratio):
+			if (is_reflected and source_boss != null):
+				source_boss.damage_boss("PARRY", 0, Vector2.ZERO, true)
 			self.queue_free()
 	
 
-func start_moving(is_reverse : bool, is_facing_right : bool):
+func start_moving(is_reverse : bool, is_facing_right : bool, boss_ref : Boss = null):
 	if (!is_moving):
 		self.position = Vector2.ZERO
 		progress_ratio = (1.0 if is_reverse else 0.0)
 		target_ratio = (0.0 if is_reverse else 1.0)
 		sprite.flip_h = (is_reverse == is_facing_right)
+		source_boss = boss_ref
 		is_moving = true
 
 func reflect_projectile():

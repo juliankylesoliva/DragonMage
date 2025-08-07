@@ -45,6 +45,10 @@ func state_process(_delta):
 	if (impostor_boss.current_armor <= 0):
 		set_next_state(disguise_break_state)
 
+func on_exit():
+	if (sword_instance != null):
+		sword_instance.queue_free()
+
 func init_phase_state(phase : PhaseState):
 	current_phase_state = phase
 	match current_phase_state:
