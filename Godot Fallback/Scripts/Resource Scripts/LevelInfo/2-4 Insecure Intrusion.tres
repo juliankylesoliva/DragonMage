@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="LevelInfo" load_steps=2 format=3 uid="uid://bqvrcodu0k2ek"]
+
+[ext_resource type="Script" path="res://Scripts/Resource Scripts/LevelInfo/LevelInfo.gd" id="1_qnxyt"]
+
+[resource]
+script = ExtResource("1_qnxyt")
+level_scene_path = "res://Level Scenes/CH2_LV4/CH2_LV4.tscn"
+name_header = "Ch. 2-4: Insecure Intrusion"
+story_description = Array[String](["TBD"])
+form_changing_enabled = true

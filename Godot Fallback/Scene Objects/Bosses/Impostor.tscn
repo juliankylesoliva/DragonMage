@@ -167,7 +167,7 @@ impostor_boss = NodePath("../..")
 throw_attack_range = 80.0
 windup_duration = 0.65
 throw_angle_separation = 25.0
-throw_duration = 0.4
+throw_duration = 0.55
 damaged_state = NodePath("../Damaged")
 
 [node name="DisguiseBreak" type="Node" parent="StateMachine" node_paths=PackedStringArray("impostor_boss", "drickery_phase0_state", "drickery_phase1_state", "drickery_phase2_state", "drickery_phase3_state", "defeat_state")]

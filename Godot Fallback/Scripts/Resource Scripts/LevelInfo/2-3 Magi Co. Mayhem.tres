@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="LevelInfo" load_steps=2 format=3 uid="uid://cv07ku12u57q4"]
+
+[ext_resource type="Script" path="res://Scripts/Resource Scripts/LevelInfo/LevelInfo.gd" id="1_ucsg2"]
+
+[resource]
+script = ExtResource("1_ucsg2")
+level_scene_path = "res://Level Scenes/CH2_LV3/CH2_LV3.tscn"
+name_header = "Ch. 2-3: Magi Co. Mayhem"
+story_description = Array[String](["TBD"])
+form_changing_enabled = true
