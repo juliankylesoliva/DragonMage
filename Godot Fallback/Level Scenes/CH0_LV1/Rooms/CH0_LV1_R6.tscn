@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=4 uid="uid://cwu70jgkk7f63"]
+[gd_scene load_steps=20 format=4 uid="uid://cwu70jgkk7f63"]
 
 [ext_resource type="Script" path="res://Scripts/Utility Scripts/Room.gd" id="1_kfuh4"]
 [ext_resource type="TileSet" uid="uid://dhwi7i1loa2pd" path="res://Sprites/Tiles/Test Tiles/TestTileSet.tres" id="2_s00jp"]
@@ -15,29 +15,36 @@
 [ext_resource type="PackedScene" uid="uid://dfkmxoba64spw" path="res://Scene Objects/Objects/MedalFragment.tscn" id="13_4eco7"]
 [ext_resource type="PackedScene" uid="uid://db6i3rmu8i44r" path="res://Scene Objects/Objects/CollectableScale.tscn" id="14_cjtne"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_ldr1g"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_jnqqf"]
 atlas = ExtResource("12_xtcqh")
-region = Rect2(0, 0, 192, 176)
+region = Rect2(0, 0, 256, 176)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_6iu3n"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_smg1u"]
 atlas = ExtResource("12_xtcqh")
-region = Rect2(192, 0, 192, 176)
+region = Rect2(256, 0, 256, 176)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_njjm5"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_813k2"]
 atlas = ExtResource("12_xtcqh")
-region = Rect2(384, 0, 192, 176)
+region = Rect2(512, 0, 256, 176)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mcmup"]
+atlas = ExtResource("12_xtcqh")
+region = Rect2(768, 0, 256, 176)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_ee5n8"]
 animations = [{
 "frames": [{
 "duration": 60.0,
-"texture": SubResource("AtlasTexture_ldr1g")
+"texture": SubResource("AtlasTexture_jnqqf")
 }, {
 "duration": 60.0,
-"texture": SubResource("AtlasTexture_6iu3n")
+"texture": SubResource("AtlasTexture_smg1u")
 }, {
 "duration": 60.0,
-"texture": SubResource("AtlasTexture_njjm5")
+"texture": SubResource("AtlasTexture_813k2")
+}, {
+"duration": 60.0,
+"texture": SubResource("AtlasTexture_mcmup")
 }],
 "loop": true,
 "name": &"default",
@@ -214,10 +221,10 @@ modulate = Color(1, 1, 1, 0.7)
 light_mask = 8
 visibility_layer = 8
 z_index = 4
-position = Vector2(320, 184)
+position = Vector2(288, 184)
 sprite_frames = SubResource("SpriteFrames_ee5n8")
 autoplay = "default"
-frame_progress = 0.376482
+frame_progress = 0.151609
 
 [node name="Fragments" type="Node2D" parent="."]
 
