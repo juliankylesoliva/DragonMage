@@ -183,8 +183,8 @@ delay_autoplay = true
 
 [connection signal="level_finished" from="CH0_LV2_R10/FinishLine" to="." method="level_finish"]
 [connection signal="level_finished" from="CH0_LV2_R10/FinishLine" to="UI_Canvas/FragmentCounterUI" method="hide"]
-[connection signal="level_finished" from="CH0_LV2_R10/FinishLine" to="UI_Canvas/ClearTimer" method="hide"]
 [connection signal="level_finished" from="CH0_LV2_R10/FinishLine" to="UI_Canvas/ClearTimer" method="stop_timer"]
+[connection signal="level_finished" from="CH0_LV2_R10/FinishLine" to="UI_Canvas/ClearTimer" method="hide"]
 [connection signal="level_finished" from="CH0_LV2_R10/FinishLine" to="UI_Canvas/ResultsScreen" method="on_level_complete"]
 [connection signal="level_finished" from="CH0_LV2_R10/FinishLine" to="LevelMusicPlayer" method="fade_out"]
 

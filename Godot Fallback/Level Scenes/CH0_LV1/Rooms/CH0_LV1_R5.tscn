@@ -175,7 +175,7 @@ offset_bottom = 148.0
 theme_override_fonts/normal_font = ExtResource("6_iqevn")
 theme_override_font_sizes/normal_font_size = 8
 bbcode_enabled = true
-text = "[center][Move Down]+[Attack],[Attack]: Star Boost"
+text = "[center][Move Down]+[Attack] , [Attack]: Star Boost"
 scroll_active = false
 shortcut_keys_enabled = false
 script = ExtResource("7_ulwmk")
@@ -210,7 +210,7 @@ theme_override_fonts/normal_font = ExtResource("6_iqevn")
 theme_override_font_sizes/normal_font_size = 8
 bbcode_enabled = true
 text = "[center]Run and boost!
-[Move Down]+[Attack],[Move Left]/[Move Right],[Attack]"
+[Move Down]+[Attack] , [Move Right] , [Attack]"
 scroll_active = false
 shortcut_keys_enabled = false
 script = ExtResource("7_ulwmk")
@@ -227,7 +227,7 @@ offset_bottom = 528.0
 theme_override_fonts/normal_font = ExtResource("6_iqevn")
 theme_override_font_sizes/normal_font_size = 8
 bbcode_enabled = true
-text = "[center]Jump and boost!
+text = "[center]Jump and boost at the same time!
 [Move Down]+[Attack],[Jump]+[Attack]"
 scroll_active = false
 shortcut_keys_enabled = false
