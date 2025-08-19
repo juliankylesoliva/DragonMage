@@ -109,13 +109,13 @@ func check_fast_fall_buffer(delta : float):
 	if (!(hub.attacks.previous_attack is FireTackleAttack) or hub.state_machine.current_state.name != "Attacking"):
 		fall_buffer_tackle_check = false
 	
-	if (hub.jumping.enable_fast_falling and ((hub.state_machine.current_state.name != "Attacking" and hub.is_action_just_pressed("Attack") and !hub.char_body.is_on_floor() and hub.movement.is_crouching and (!hub.collisions.is_in_ceiling_when_uncrouched() or hub.is_action_pressed("Crouch"))) or (hub.state_machine.current_state.name == "Attacking" and hub.attacks.current_attack is SlideAttack and (!(hub.attacks.previous_attack is FireTackleAttack) or fall_buffer_tackle_check) and hub.is_action_just_pressed("Crouch") and hub.movement.is_crouching) or (hub.state_machine.current_state.name == "FormChanging" and hub.is_action_pressed("Crouch") and hub.is_action_just_pressed("Attack") and !hub.char_body.is_on_floor()))):
+	if (hub.jumping.enable_fast_falling and ((hub.state_machine.current_state.name != "Attacking" and hub.is_action_just_pressed("Attack") and (!hub.char_body.is_on_floor() or hub.state_machine.current_state.name == "Falling" or (hub.jumping.fast_fall_threshold < 0 and hub.state_machine.current_state.name == "Jumping")) and hub.movement.is_crouching and (!hub.collisions.is_in_ceiling_when_uncrouched() or hub.is_action_pressed("Crouch"))) or (hub.state_machine.current_state.name == "Attacking" and hub.attacks.current_attack is SlideAttack and (!(hub.attacks.previous_attack is FireTackleAttack) or fall_buffer_tackle_check) and hub.is_action_just_pressed("Crouch") and hub.movement.is_crouching) or (hub.state_machine.current_state.name == "FormChanging" and hub.is_action_pressed("Crouch") and hub.is_action_just_pressed("Attack") and !hub.char_body.is_on_floor()))):
 		refresh_fast_fall_buffer()
 	elif (hub.attacks.previous_attack is FireTackleAttack):
 		fall_buffer_tackle_check = true
 
 func is_fast_fall_buffer_active():
-	return (!hub.char_body.is_on_floor() and fast_fall_buffer_time_left > 0)
+	return ((!hub.char_body.is_on_floor() or hub.state_machine.current_state.name == "Falling" or (hub.jumping.fast_fall_threshold < 0 and hub.state_machine.current_state.name == "Jumping")) and fast_fall_buffer_time_left > 0)
 
 func reset_fast_fall_buffer():
 	fast_fall_buffer_time_left = 0

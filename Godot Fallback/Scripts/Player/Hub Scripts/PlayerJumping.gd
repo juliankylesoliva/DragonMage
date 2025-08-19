@@ -321,7 +321,7 @@ func start_ground_jump():
 		reset_super_jump_timers()
 
 func ground_jump_update(delta : float):
-	if (hub.char_body.velocity.y < 0):
+	if (hub.char_body.velocity.y < 0 or hub.state_machine.current_state.name == "Jumping"):
 		if (can_fast_fall()):
 			set_fast_fall()
 			hub.char_body.velocity.y = fast_falling_speed
@@ -355,7 +355,7 @@ func falling_update(delta : float):
 		hub.char_body.velocity.y = max_fall_speed_to_use
 
 func can_fast_fall():
-	return (enable_fast_falling and !is_fast_falling and hub.movement.is_crouching and hub.buffers.is_fast_fall_buffer_active() and fast_falling_speed > max_fall_speed and !hub.char_body.is_on_floor() and hub.char_body.velocity.y >= fast_fall_threshold and hub.char_body.velocity.y < fast_falling_speed)
+	return (enable_fast_falling and !is_fast_falling and hub.movement.is_crouching and hub.buffers.is_fast_fall_buffer_active() and fast_falling_speed > max_fall_speed and (!hub.char_body.is_on_floor() or hub.state_machine.current_state.name == "Falling" or (fast_fall_threshold < 0 and hub.state_machine.current_state.name == "Jumping")) and hub.char_body.velocity.y >= fast_fall_threshold and hub.char_body.velocity.y < fast_falling_speed)
 
 func can_fast_fall_slope_boost():
 	return (enable_fast_falling and is_fast_falling and hub.char_body.is_on_floor() and hub.collisions.get_distance_to_ground() <= hub.char_body.floor_snap_length and hub.char_body.get_floor_angle() > fast_fall_slope_boost_threshold)

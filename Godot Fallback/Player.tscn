@@ -367,6 +367,7 @@ slide_attack = NodePath("../Attacks/Slide")
 script = ExtResource("54_k03tc")
 hub = NodePath("..")
 max_x_lookahead = 128.0
+standing_x_easing_rate = 1.5
 max_y_lookahead = 160.0
 camera_height_from_ground = 64.0
 ground_level_update_height_threshold = 96.0
