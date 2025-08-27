@@ -76,32 +76,38 @@ editor_draw_drag_margin = true
 [node name="CH2_LV1_R1" parent="." instance=ExtResource("4_8agxn")]
 position = Vector2(-1, 0)
 
+[node name="DecorationWall" parent="CH2_LV1_R1/LevelCollisionTilemap" index="2"]
+modulate = Color(0.3328, 0.288, 0.48, 1)
+
+[node name="Background" parent="CH2_LV1_R1/LevelCollisionTilemap" index="3"]
+modulate = Color(0.422613, 0.3808, 0.56, 1)
+
 [node name="Warp 0" parent="CH2_LV1_R1" index="5" node_paths=PackedStringArray("room_destination")]
 room_destination = NodePath("../../CH2_LV1_R2")
 
 [node name="CH2_LV1_R2" parent="." instance=ExtResource("5_tum2n")]
 position = Vector2(736, 0)
 
-[node name="Door 0" parent="CH2_LV1_R2" index="6" node_paths=PackedStringArray("room_destination")]
+[node name="Door 0" parent="CH2_LV1_R2" index="5" node_paths=PackedStringArray("room_destination")]
 room_destination = NodePath("../../CH2_LV1_R6")
 room_entrance_index = 0
 
-[node name="Door 1" parent="CH2_LV1_R2" index="7" node_paths=PackedStringArray("room_destination")]
+[node name="Door 1" parent="CH2_LV1_R2" index="6" node_paths=PackedStringArray("room_destination")]
 room_destination = NodePath("../../CH2_LV1_R5")
 room_entrance_index = 0
 
-[node name="Door 2" parent="CH2_LV1_R2" index="8" node_paths=PackedStringArray("room_destination")]
+[node name="Door 2" parent="CH2_LV1_R2" index="7" node_paths=PackedStringArray("room_destination")]
 room_destination = NodePath("../../CH2_LV1_R7")
 room_entrance_index = 0
 
-[node name="Warp 0" parent="CH2_LV1_R2" index="9" node_paths=PackedStringArray("room_destination")]
+[node name="Warp 0" parent="CH2_LV1_R2" index="8" node_paths=PackedStringArray("room_destination")]
 room_destination = NodePath("../../CH2_LV1_R1")
 room_entrance_index = 1
 
-[node name="Warp 1" parent="CH2_LV1_R2" index="10" node_paths=PackedStringArray("room_destination")]
+[node name="Warp 1" parent="CH2_LV1_R2" index="9" node_paths=PackedStringArray("room_destination")]
 room_destination = NodePath("../../CH2_LV1_R3")
 
-[node name="Warp 2" parent="CH2_LV1_R2" index="11" node_paths=PackedStringArray("room_destination")]
+[node name="Warp 2" parent="CH2_LV1_R2" index="10" node_paths=PackedStringArray("room_destination")]
 room_destination = NodePath("../../CH2_LV1_R4")
 
 [node name="CH2_LV1_R3" parent="." instance=ExtResource("6_3bc5p")]
@@ -311,8 +317,8 @@ screen_fade = NodePath("../UI_Canvas/ScreenFade")
 [connection signal="player_defeated" from="." to="UI_Canvas/TemperMeterUI" method="hide"]
 [connection signal="player_defeated" from="." to="UI_Canvas/MagicMeterUI" method="hide"]
 [connection signal="player_defeated" from="." to="UI_Canvas/FragmentCounterUI" method="hide"]
-[connection signal="player_defeated" from="." to="UI_Canvas/ClearTimer" method="hide"]
 [connection signal="player_defeated" from="." to="UI_Canvas/ClearTimer" method="stop_timer"]
+[connection signal="player_defeated" from="." to="UI_Canvas/ClearTimer" method="hide"]
 [connection signal="player_defeated" from="." to="Textbox" method="hide_textbox"]
 [connection signal="player_defeated" from="." to="LevelMusicPlayer" method="stop"]
 [connection signal="player_defeated" from="." to="DefeatScreen" method="do_defeat_screen"]
@@ -329,8 +335,8 @@ screen_fade = NodePath("../UI_Canvas/ScreenFade")
 [connection signal="level_finished" from="CH2_LV1_R16/FinishLine" to="UI_Canvas/TemperMeterUI" method="hide"]
 [connection signal="level_finished" from="CH2_LV1_R16/FinishLine" to="UI_Canvas/MagicMeterUI" method="hide"]
 [connection signal="level_finished" from="CH2_LV1_R16/FinishLine" to="UI_Canvas/FragmentCounterUI" method="hide"]
-[connection signal="level_finished" from="CH2_LV1_R16/FinishLine" to="UI_Canvas/ClearTimer" method="hide"]
 [connection signal="level_finished" from="CH2_LV1_R16/FinishLine" to="UI_Canvas/ClearTimer" method="stop_timer"]
+[connection signal="level_finished" from="CH2_LV1_R16/FinishLine" to="UI_Canvas/ClearTimer" method="hide"]
 [connection signal="level_finished" from="CH2_LV1_R16/FinishLine" to="UI_Canvas/ResultsScreen" method="on_level_complete"]
 [connection signal="level_finished" from="CH2_LV1_R16/FinishLine" to="LevelMusicPlayer" method="fade_out"]
 
