@@ -129,12 +129,6 @@ room_entrance_index = 1
 [node name="CH2_LV1_R5" parent="." instance=ExtResource("8_awkx0")]
 position = Vector2(191, -704)
 
-[node name="DecorationWall" parent="CH2_LV1_R5/LevelCollisionTilemap" index="2"]
-modulate = Color(0.506333, 0.31, 0.62, 1)
-
-[node name="Background" parent="CH2_LV1_R5/LevelCollisionTilemap" index="3"]
-modulate = Color(0.695333, 0.42, 0.7, 1)
-
 [node name="Warp 0" parent="CH2_LV1_R5" index="4" node_paths=PackedStringArray("room_destination")]
 room_destination = NodePath("../../CH2_LV1_R2")
 room_entrance_index = 4
