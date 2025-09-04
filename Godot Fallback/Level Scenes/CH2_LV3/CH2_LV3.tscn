@@ -177,6 +177,9 @@ editor_draw_drag_margin = true
 
 [node name="CH2_LV3_R1" parent="." instance=ExtResource("14_2pbtd")]
 
+[node name="Ground" parent="CH2_LV3_R1/LevelCollisionTilemap" index="2"]
+modulate = Color(0.075, 0.1125, 0.3, 0)
+
 [node name="WarpDoor" parent="CH2_LV3_R1" index="2" node_paths=PackedStringArray("room_destination")]
 room_destination = NodePath("../../CH2_LV3_R2")
 
@@ -219,7 +222,7 @@ room_destination = NodePath("../../CH2_LV3_R3")
 room_entrance_index = 2
 
 [node name="CH2_LV3_R5" parent="." instance=ExtResource("8_ghwuo")]
-position = Vector2(4224, -672)
+position = Vector2(-1568, 704)
 
 [node name="Warp 0" parent="CH2_LV3_R5" index="3" node_paths=PackedStringArray("room_destination")]
 room_destination = NodePath("../../CH2_LV3_R3")
@@ -280,7 +283,7 @@ curve = SubResource("Curve2D_dj7bb")
 curve = SubResource("Curve2D_8kyjn")
 
 [node name="CH2_LV3_R8" parent="." instance=ExtResource("22_4hlsg")]
-position = Vector2(4224, -1264)
+position = Vector2(-1568, 192)
 
 [node name="Warp 0" parent="CH2_LV3_R8" index="3" node_paths=PackedStringArray("room_destination")]
 room_destination = NodePath("../../CH2_LV3_R6")
@@ -329,7 +332,7 @@ room_destination = NodePath("../../CH2_LV3_R9")
 room_entrance_index = 2
 
 [node name="CH2_LV3_R11" parent="." instance=ExtResource("14_d4kmv")]
-position = Vector2(4224, -1776)
+position = Vector2(-1568, -320)
 
 [node name="Warp 0" parent="CH2_LV3_R11" index="3" node_paths=PackedStringArray("room_destination")]
 room_destination = NodePath("../../CH2_LV3_R9")

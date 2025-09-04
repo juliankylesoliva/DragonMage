@@ -98,7 +98,7 @@ func update_y_lookahead(delta : float):
 	else:
 		pass
 	
-	if (was_upper_threshold_crossed or was_lower_threshold_crossed or state_name == "WallSliding" or state_name == "WallClimbing" or state_name == "WallVaulting"):
+	if (was_upper_threshold_crossed or was_lower_threshold_crossed or hub.collisions.is_on_a_moving_platform() or state_name == "WallSliding" or state_name == "WallClimbing" or state_name == "WallVaulting"):
 		saved_y_position = (hub.collisions.get_ground_point().y + clampf(hub.char_body.velocity.y, 0, min(hub.collisions.get_distance_to_ground() if state_name == "Falling" or state_name == "WallSliding" else fast_fall_y_lookahead if hub.jumping.is_fast_falling else max_y_lookahead, fast_fall_y_lookahead if hub.jumping.is_fast_falling else max_y_lookahead)))
 	
 	var target_y : float = (saved_y_position - camera_height_from_ground)

@@ -270,6 +270,7 @@ animations = [{
 }]
 
 [node name="ConveyorBeltSegment" type="AnimatedSprite2D"]
+z_index = 3
 texture_repeat = 2
 sprite_frames = SubResource("SpriteFrames_87h1j")
 animation = &"GoingRightS"

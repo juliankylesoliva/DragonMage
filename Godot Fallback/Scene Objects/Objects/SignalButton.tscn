@@ -20,6 +20,7 @@ button_prompt = NodePath("ButtonPrompt")
 shape = SubResource("RectangleShape2D_s6xeh")
 
 [node name="ButtonSprite" type="Sprite2D" parent="."]
+z_index = 2
 texture = ExtResource("2_k6t28")
 
 [node name="ButtonPrompt" type="RichTextLabel" parent="."]
