@@ -177,9 +177,6 @@ editor_draw_drag_margin = true
 
 [node name="CH2_LV3_R1" parent="." instance=ExtResource("14_2pbtd")]
 
-[node name="Ground" parent="CH2_LV3_R1/LevelCollisionTilemap" index="2"]
-modulate = Color(0.075, 0.1125, 0.3, 0)
-
 [node name="WarpDoor" parent="CH2_LV3_R1" index="2" node_paths=PackedStringArray("room_destination")]
 room_destination = NodePath("../../CH2_LV3_R2")
 
