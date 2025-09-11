@@ -76,7 +76,7 @@ editor_draw_drag_margin = true
 [node name="CH2_LV1_R1" parent="." instance=ExtResource("4_8agxn")]
 position = Vector2(-1, 0)
 
-[node name="Warp 0" parent="CH2_LV1_R1" index="5" node_paths=PackedStringArray("room_destination")]
+[node name="Warp 0" parent="CH2_LV1_R1" index="6" node_paths=PackedStringArray("room_destination")]
 room_destination = NodePath("../../CH2_LV1_R2")
 
 [node name="CH2_LV1_R2" parent="." instance=ExtResource("5_tum2n")]
