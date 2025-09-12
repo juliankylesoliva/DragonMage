@@ -367,7 +367,7 @@ subsequent_checkpoints = [NodePath("../../CH2_LV3_R9/Checkpoint"), NodePath("../
 [node name="CH2_LV3_R13" parent="." instance=ExtResource("16_l2dnv")]
 position = Vector2(4416, 896)
 
-[node name="MovingPlatform" parent="CH2_LV3_R13" index="9"]
+[node name="MovingPlatform" parent="CH2_LV3_R13" index="10"]
 curve = SubResource("Curve2D_8drkn")
 
 [node name="UI_Canvas" type="CanvasLayer" parent="."]

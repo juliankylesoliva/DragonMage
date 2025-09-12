@@ -1,8 +1,9 @@
-[gd_scene load_steps=9 format=4 uid="uid://bth8i161g1eoq"]
+[gd_scene load_steps=10 format=4 uid="uid://bth8i161g1eoq"]
 
 [ext_resource type="Script" path="res://Scripts/Utility Scripts/Room.gd" id="1_qldfj"]
 [ext_resource type="TileSet" uid="uid://dhwi7i1loa2pd" path="res://Sprites/Tiles/Test Tiles/TestTileSet.tres" id="2_fvuse"]
 [ext_resource type="PackedScene" uid="uid://dqbo0wu6hm8lj" path="res://Scene Objects/Objects/WarpTrigger.tscn" id="3_6taqj"]
+[ext_resource type="Texture2D" uid="uid://gfnoyyl4dtm5" path="res://Sprites/Backgrounds/2_2_BG/WaterHazardSign.png" id="4_lrvss"]
 [ext_resource type="PackedScene" uid="uid://dopdmj4qfj6sx" path="res://Scene Objects/Obstacles/WaterHazard.tscn" id="4_s7qwv"]
 [ext_resource type="PackedScene" uid="uid://clfqwsy4byrkf" path="res://Scene Objects/Enemies/GreenDragoon.tscn" id="4_vbohb"]
 [ext_resource type="PackedScene" uid="uid://dwnpgujive352" path="res://Scene Objects/Enemies/RedDragoon.tscn" id="5_1jfjc"]
@@ -69,6 +70,11 @@ position = Vector2(2736, 512)
 position = Vector2(2800, 512)
 room_origin = NodePath("..")
 room_destination = NodePath("..")
+
+[node name="WaterHazardSign" type="Sprite2D" parent="."]
+z_index = 2
+position = Vector2(320, 192)
+texture = ExtResource("4_lrvss")
 
 [node name="Fragments" type="Node2D" parent="."]
 

@@ -1,7 +1,8 @@
-[gd_scene load_steps=10 format=4 uid="uid://dgtkwfetbmg1g"]
+[gd_scene load_steps=11 format=4 uid="uid://dgtkwfetbmg1g"]
 
 [ext_resource type="Script" path="res://Scripts/Utility Scripts/Room.gd" id="1_rtrnx"]
 [ext_resource type="TileSet" uid="uid://dhwi7i1loa2pd" path="res://Sprites/Tiles/Test Tiles/TestTileSet.tres" id="2_g213n"]
+[ext_resource type="Texture2D" uid="uid://b7ysvxq2rtt2o" path="res://Sprites/Backgrounds/2_3_BG/VaultEntrance.png" id="3_ivd5e"]
 [ext_resource type="PackedScene" uid="uid://c3el80dbnmcws" path="res://Scene Objects/Objects/ConveyorBelt.tscn" id="3_j5r5c"]
 [ext_resource type="PackedScene" uid="uid://b157weul8inp0" path="res://Scene Objects/Objects/BreakableCycleBlock.tscn" id="4_j3fnj"]
 [ext_resource type="PackedScene" uid="uid://b78mf3ykyid5a" path="res://Scene Objects/Objects/MovingPlatform.tscn" id="4_nohyl"]
@@ -73,6 +74,11 @@ rendering_quadrant_size = 32
 
 [node name="Entrance 0" type="Node2D" parent="."]
 position = Vector2(96, -32)
+
+[node name="VaultEntrance" type="Sprite2D" parent="."]
+z_index = 2
+position = Vector2(1280, 160)
+texture = ExtResource("3_ivd5e")
 
 [node name="ConveyorBelt" parent="." instance=ExtResource("3_j5r5c")]
 position = Vector2(192, 592)

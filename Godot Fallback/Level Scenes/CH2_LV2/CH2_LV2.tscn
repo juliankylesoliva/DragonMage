@@ -124,13 +124,13 @@ room_destination = NodePath("../../CH2_LV2_R7")
 [node name="CH2_LV2_R7" parent="." instance=ExtResource("9_upmt3")]
 position = Vector2(32, -1568)
 
-[node name="Warp 0" parent="CH2_LV2_R7" index="5" node_paths=PackedStringArray("room_destination")]
+[node name="Warp 0" parent="CH2_LV2_R7" index="6" node_paths=PackedStringArray("room_destination")]
 room_destination = NodePath("../../CH2_LV2_R6")
 
-[node name="Warp 1" parent="CH2_LV2_R7" index="6" node_paths=PackedStringArray("room_destination")]
+[node name="Warp 1" parent="CH2_LV2_R7" index="7" node_paths=PackedStringArray("room_destination")]
 room_destination = NodePath("../../CH2_LV2_R8")
 
-[node name="CollectableScale" parent="CH2_LV2_R7" index="8"]
+[node name="CollectableScale" parent="CH2_LV2_R7" index="9"]
 dragon_fragments_needed = 40
 
 [node name="CH2_LV2_R8" parent="." instance=ExtResource("11_qr1xm")]

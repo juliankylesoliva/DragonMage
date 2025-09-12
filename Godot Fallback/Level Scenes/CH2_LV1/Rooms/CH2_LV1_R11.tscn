@@ -1,8 +1,9 @@
-[gd_scene load_steps=12 format=4 uid="uid://7hckxw56tt36"]
+[gd_scene load_steps=13 format=4 uid="uid://7hckxw56tt36"]
 
 [ext_resource type="Script" path="res://Scripts/Utility Scripts/Room.gd" id="1_e40nr"]
 [ext_resource type="TileSet" uid="uid://dhwi7i1loa2pd" path="res://Sprites/Tiles/Test Tiles/TestTileSet.tres" id="2_yt3ua"]
 [ext_resource type="PackedScene" uid="uid://7hpfpsyk75xy" path="res://Scene Objects/Obstacles/AmbushBlockade.tscn" id="3_md5gx"]
+[ext_resource type="Texture2D" uid="uid://dfhk7vlvs882a" path="res://Sprites/Backgrounds/2_1_BG/GarageBallGuide.png" id="3_vs4mo"]
 [ext_resource type="PackedScene" uid="uid://dwnpgujive352" path="res://Scene Objects/Enemies/RedDragoon.tscn" id="4_gqyxc"]
 [ext_resource type="PackedScene" uid="uid://dqbo0wu6hm8lj" path="res://Scene Objects/Objects/WarpTrigger.tscn" id="4_yyi2b"]
 [ext_resource type="PackedScene" uid="uid://bgww8jir45ktf" path="res://Scene Objects/Enemies/BlueDragoon.tscn" id="5_siqh4"]
@@ -73,6 +74,12 @@ modulate = Color(0.701961, 0.215686, 0.105882, 1)
 z_index = -1
 use_parent_material = true
 tile_set = ExtResource("2_yt3ua")
+
+[node name="GarageBallGuide" type="Sprite2D" parent="."]
+z_index = 2
+position = Vector2(96, 64)
+texture = ExtResource("3_vs4mo")
+centered = false
 
 [node name="AmbushBlockade" parent="." node_paths=PackedStringArray("room_ref", "blocks_to_break") instance=ExtResource("3_md5gx")]
 tile_map_data = PackedByteArray("AAAAAAYAEgAAAAAAAAAAAAcAEgAAAAAAAAAFAAIAEgAAAAAAAAAGAAIAEgAAAAAAAAAHAAIAEgAAAAAAAAAIAAIAEgAAAAAAAAAJAAUAEgAAAAAAAAAKAAUAEgAAAAAAAAALAAUAEgAAAAAAAAAMAAUAEgAAAAAAAAANAAQAEgAAAAAAAAANAAUAEgAAAAAAAAAOAAQAEgAAAAAAAAAOAAUAEgAAAAAAAAAFAAUAEgAAAAAAAAAGAAUAEgAAAAAAAAAJAAIAEgAAAAAAAAAJAAYAEgAAAAAAAAAJAAcAEgAAAAAAAAAKAAIAEgAAAAAAAAAPAAQAEgAAAAAAAAAPAAUAEgAAAAAAAAAQAAQAEgAAAAAAAAAQAAUAEgAAAAAAAAAFAAYAEgAAAAAAAAAFAAcAEgAAAAAAAAAGAAYAEgAAAAAAAAAGAAcAEgAAAAAAAAAMAAcAEgAAAAAAAAAHAAcAEgAAAAAAAAAIAAcAEgAAAAAAAAANAAcAEgAAAAAAAAAFAAMAEgAAAAAAAAAGAAMAEgAAAAAAAAAHAAMAEgAAAAAAAAAIAAMAEgAAAAAAAAAJAAMAEgAAAAAAAAAKAAMAEgAAAAAAAAA=")
