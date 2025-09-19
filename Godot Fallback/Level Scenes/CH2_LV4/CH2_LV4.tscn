@@ -101,7 +101,7 @@ editor_draw_drag_margin = true
 
 [node name="CH2_LV4_R1" parent="." instance=ExtResource("4_a8ql6")]
 
-[node name="Warp 0" parent="CH2_LV4_R1" index="5" node_paths=PackedStringArray("room_destination")]
+[node name="Warp 0" parent="CH2_LV4_R1" index="6" node_paths=PackedStringArray("room_destination")]
 room_destination = NodePath("../../CH2_LV4_R2")
 
 [node name="CH2_LV4_R2" parent="." instance=ExtResource("16_3ugfk")]

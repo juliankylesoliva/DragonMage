@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=4 uid="uid://bqvx6tj40xkls"]
+[gd_scene load_steps=24 format=4 uid="uid://bqvx6tj40xkls"]
 
 [ext_resource type="Script" path="res://Scripts/Utility Scripts/Room.gd" id="1_rele6"]
 [ext_resource type="TileSet" uid="uid://dhwi7i1loa2pd" path="res://Sprites/Tiles/Test Tiles/TestTileSet.tres" id="2_copig"]
@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://d3ahci60rs8ef" path="res://Scene Objects/Objects/WarpDoor.tscn" id="5_jsw0e"]
 [ext_resource type="PackedScene" uid="uid://dfkmxoba64spw" path="res://Scene Objects/Objects/MedalFragment.tscn" id="5_l4d0n"]
 [ext_resource type="PackedScene" uid="uid://b2a0ttqvejk51" path="res://Scene Objects/Objects/TemperDragonFruit.tscn" id="5_ly1bc"]
+[ext_resource type="Texture2D" uid="uid://bc1wfvirw3i1u" path="res://Sprites/Backgrounds/2_4_BG/VaultDoor.png" id="5_nh307"]
 [ext_resource type="PackedScene" uid="uid://b03ie1oct07e3" path="res://Scene Objects/Obstacles/Fyerlarm.tscn" id="6_l1nha"]
 [ext_resource type="PackedScene" uid="uid://duqf3giujjj3r" path="res://Scene Objects/Objects/FallingPlatform.tscn" id="7_a3xpu"]
 [ext_resource type="PackedScene" uid="uid://b78mf3ykyid5a" path="res://Scene Objects/Objects/MovingPlatform.tscn" id="8_h4b1h"]
@@ -124,6 +125,7 @@ room_destination = NodePath("..")
 
 [node name="WarpDoor" parent="." node_paths=PackedStringArray("room_origin", "room_destination") instance=ExtResource("5_jsw0e")]
 position = Vector2(3392, 128)
+door_texture_override = ExtResource("5_nh307")
 room_origin = NodePath("..")
 room_destination = NodePath("..")
 room_entrance_index = 2

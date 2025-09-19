@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=4 uid="uid://c8g75jsc1ng17"]
+[gd_scene load_steps=6 format=4 uid="uid://c8g75jsc1ng17"]
 
 [ext_resource type="Script" path="res://Scripts/Utility Scripts/Room.gd" id="1_mwuon"]
 [ext_resource type="TileSet" uid="uid://dhwi7i1loa2pd" path="res://Sprites/Tiles/Test Tiles/TestTileSet.tres" id="2_nrtay"]
 [ext_resource type="PackedScene" uid="uid://d3ahci60rs8ef" path="res://Scene Objects/Objects/WarpDoor.tscn" id="3_667id"]
 [ext_resource type="PackedScene" uid="uid://dfkmxoba64spw" path="res://Scene Objects/Objects/MedalFragment.tscn" id="4_8y1yy"]
+[ext_resource type="Texture2D" uid="uid://bc1wfvirw3i1u" path="res://Sprites/Backgrounds/2_4_BG/VaultDoor.png" id="4_dqete"]
 
 [node name="CH2_LV4_R14" type="Node2D" node_paths=PackedStringArray("tilemap_list", "room_entrances", "medal_fragments")]
 script = ExtResource("1_mwuon")
@@ -53,6 +54,7 @@ tile_set = ExtResource("2_nrtay")
 
 [node name="WarpDoor" parent="." node_paths=PackedStringArray("room_origin", "room_destination") instance=ExtResource("3_667id")]
 position = Vector2(256, 160)
+door_texture_override = ExtResource("4_dqete")
 room_origin = NodePath("..")
 room_destination = NodePath("..")
 

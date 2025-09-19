@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=4 uid="uid://bgwmmnhqig3g2"]
+[gd_scene load_steps=16 format=4 uid="uid://bgwmmnhqig3g2"]
 
 [ext_resource type="Script" path="res://Scripts/Utility Scripts/Room.gd" id="1_uyoqj"]
 [ext_resource type="TileSet" uid="uid://dhwi7i1loa2pd" path="res://Sprites/Tiles/Test Tiles/TestTileSet.tres" id="2_qxb50"]
@@ -6,6 +6,8 @@
 [ext_resource type="PackedScene" uid="uid://d3ahci60rs8ef" path="res://Scene Objects/Objects/WarpDoor.tscn" id="3_ti4ja"]
 [ext_resource type="PackedScene" uid="uid://c3el80dbnmcws" path="res://Scene Objects/Objects/ConveyorBelt.tscn" id="4_o1e2q"]
 [ext_resource type="PackedScene" uid="uid://dqbo0wu6hm8lj" path="res://Scene Objects/Objects/WarpTrigger.tscn" id="5_ay5qj"]
+[ext_resource type="Texture2D" uid="uid://dxp7mcm8uu01q" path="res://Sprites/Backgrounds/2_3_BG/OfficeElevator.png" id="5_s53rx"]
+[ext_resource type="Texture2D" uid="uid://d0y3u17yuqdel" path="res://Sprites/Backgrounds/2_3_BG/OfficeDoor.png" id="6_8o2vd"]
 [ext_resource type="PackedScene" uid="uid://dfkmxoba64spw" path="res://Scene Objects/Objects/MedalFragment.tscn" id="7_ck504"]
 [ext_resource type="PackedScene" uid="uid://clfqwsy4byrkf" path="res://Scene Objects/Enemies/GreenDragoon.tscn" id="7_v7qsu"]
 [ext_resource type="PackedScene" uid="uid://dwnpgujive352" path="res://Scene Objects/Enemies/RedDragoon.tscn" id="8_ftokk"]
@@ -79,11 +81,13 @@ room_ref = NodePath("..")
 
 [node name="WarpDoor" parent="." node_paths=PackedStringArray("room_origin", "room_destination") instance=ExtResource("3_ti4ja")]
 position = Vector2(256, 224)
+door_texture_override = ExtResource("5_s53rx")
 room_origin = NodePath("..")
 room_destination = NodePath("..")
 
 [node name="WarpDoor2" parent="." node_paths=PackedStringArray("room_origin", "room_destination") instance=ExtResource("3_ti4ja")]
 position = Vector2(2368, 224)
+door_texture_override = ExtResource("6_8o2vd")
 room_origin = NodePath("..")
 room_destination = NodePath("..")
 room_entrance_index = 1
@@ -91,6 +95,7 @@ is_locked = true
 
 [node name="WarpDoor3" parent="." node_paths=PackedStringArray("room_origin", "room_destination") instance=ExtResource("3_ti4ja")]
 position = Vector2(-1856, 224)
+door_texture_override = ExtResource("6_8o2vd")
 room_origin = NodePath("..")
 room_destination = NodePath("..")
 room_entrance_index = 2

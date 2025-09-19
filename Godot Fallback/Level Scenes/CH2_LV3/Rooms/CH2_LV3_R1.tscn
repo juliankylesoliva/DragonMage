@@ -1,8 +1,9 @@
-[gd_scene load_steps=9 format=4 uid="uid://cawcebumcenpi"]
+[gd_scene load_steps=10 format=4 uid="uid://cawcebumcenpi"]
 
 [ext_resource type="Script" path="res://Scripts/Utility Scripts/Room.gd" id="1_whmkp"]
 [ext_resource type="TileSet" uid="uid://dhwi7i1loa2pd" path="res://Sprites/Tiles/Test Tiles/TestTileSet.tres" id="2_welqn"]
 [ext_resource type="PackedScene" uid="uid://d3ahci60rs8ef" path="res://Scene Objects/Objects/WarpDoor.tscn" id="3_h8bu4"]
+[ext_resource type="Texture2D" uid="uid://dxp7mcm8uu01q" path="res://Sprites/Backgrounds/2_3_BG/OfficeElevator.png" id="4_n8t56"]
 [ext_resource type="PackedScene" uid="uid://c3el80dbnmcws" path="res://Scene Objects/Objects/ConveyorBelt.tscn" id="4_nq14r"]
 [ext_resource type="PackedScene" uid="uid://d0yrt438jc3k7" path="res://Scene Objects/Objects/DoorKey.tscn" id="5_2bdqe"]
 [ext_resource type="PackedScene" uid="uid://dfkmxoba64spw" path="res://Scene Objects/Objects/MedalFragment.tscn" id="6_j7i6i"]
@@ -58,6 +59,7 @@ tile_set = ExtResource("2_welqn")
 
 [node name="WarpDoor" parent="." node_paths=PackedStringArray("room_origin", "room_destination") instance=ExtResource("3_h8bu4")]
 position = Vector2(1792, 224)
+door_texture_override = ExtResource("4_n8t56")
 room_origin = NodePath("..")
 room_destination = NodePath("..")
 is_locked = true
