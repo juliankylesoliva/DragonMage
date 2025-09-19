@@ -1,9 +1,10 @@
-[gd_scene load_steps=15 format=4 uid="uid://bw32ithamxecl"]
+[gd_scene load_steps=16 format=4 uid="uid://bw32ithamxecl"]
 
 [ext_resource type="Script" path="res://Scripts/Utility Scripts/Room.gd" id="1_rn06e"]
 [ext_resource type="TileSet" uid="uid://dhwi7i1loa2pd" path="res://Sprites/Tiles/Test Tiles/TestTileSet.tres" id="2_x2wpf"]
 [ext_resource type="PackedScene" uid="uid://d3ahci60rs8ef" path="res://Scene Objects/Objects/WarpDoor.tscn" id="3_g63rd"]
 [ext_resource type="PackedScene" uid="uid://7hpfpsyk75xy" path="res://Scene Objects/Obstacles/AmbushBlockade.tscn" id="3_p2t5v"]
+[ext_resource type="Texture2D" uid="uid://daxb2nv26jyqx" path="res://Sprites/Backgrounds/2_1_BG/HouseDoor.png" id="4_7byfh"]
 [ext_resource type="PackedScene" uid="uid://dqbo0wu6hm8lj" path="res://Scene Objects/Objects/WarpTrigger.tscn" id="4_x175i"]
 [ext_resource type="PackedScene" uid="uid://clfqwsy4byrkf" path="res://Scene Objects/Enemies/GreenDragoon.tscn" id="6_ahe3d"]
 [ext_resource type="PackedScene" uid="uid://curi6w4ex7jou" path="res://Scene Objects/Enemies/YellowDragoon.tscn" id="6_aif4n"]
@@ -94,6 +95,7 @@ tile_set = ExtResource("2_x2wpf")
 
 [node name="Door 0" parent="." node_paths=PackedStringArray("room_origin", "room_destination") instance=ExtResource("3_g63rd")]
 position = Vector2(64, 224)
+door_texture_override = ExtResource("4_7byfh")
 room_origin = NodePath("..")
 room_destination = NodePath("..")
 
@@ -111,6 +113,7 @@ shape = SubResource("RectangleShape2D_6cf4d")
 
 [node name="Door 1" parent="." node_paths=PackedStringArray("room_origin", "room_destination") instance=ExtResource("3_g63rd")]
 position = Vector2(256, 224)
+door_texture_override = ExtResource("4_7byfh")
 room_origin = NodePath("..")
 room_destination = NodePath("..")
 room_entrance_index = 2
@@ -118,6 +121,7 @@ is_locked = true
 
 [node name="Door 2" parent="." node_paths=PackedStringArray("room_origin", "room_destination") instance=ExtResource("3_g63rd")]
 position = Vector2(512, 224)
+door_texture_override = ExtResource("4_7byfh")
 room_origin = NodePath("..")
 room_destination = NodePath("..")
 room_entrance_index = 3
@@ -127,6 +131,7 @@ enemies_to_defeat = 44
 
 [node name="Door 3" parent="." node_paths=PackedStringArray("room_origin", "room_destination") instance=ExtResource("3_g63rd")]
 position = Vector2(1024, 224)
+door_texture_override = ExtResource("4_7byfh")
 room_origin = NodePath("..")
 room_destination = NodePath("..")
 room_entrance_index = 4
