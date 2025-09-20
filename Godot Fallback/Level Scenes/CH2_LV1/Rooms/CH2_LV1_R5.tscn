@@ -1,7 +1,8 @@
-[gd_scene load_steps=12 format=4 uid="uid://b1jo5gnekcot0"]
+[gd_scene load_steps=13 format=4 uid="uid://b1jo5gnekcot0"]
 
 [ext_resource type="Script" path="res://Scripts/Utility Scripts/Room.gd" id="1_yq2ed"]
 [ext_resource type="TileSet" uid="uid://dhwi7i1loa2pd" path="res://Sprites/Tiles/Test Tiles/TestTileSet.tres" id="2_v5wpg"]
+[ext_resource type="Texture2D" uid="uid://bb1h7p5q21ywl" path="res://Sprites/Backgrounds/2_1_BG/MasterBedroomBG.png" id="3_5q2r6"]
 [ext_resource type="PackedScene" uid="uid://7hpfpsyk75xy" path="res://Scene Objects/Obstacles/AmbushBlockade.tscn" id="3_d0ukw"]
 [ext_resource type="PackedScene" uid="uid://dqbo0wu6hm8lj" path="res://Scene Objects/Objects/WarpTrigger.tscn" id="4_a6qu8"]
 [ext_resource type="PackedScene" uid="uid://bgww8jir45ktf" path="res://Scene Objects/Enemies/BlueDragoon.tscn" id="5_8ocme"]
@@ -78,6 +79,11 @@ modulate = Color(0.701961, 0.215686, 0.105882, 1)
 z_index = -1
 use_parent_material = true
 tile_set = ExtResource("2_v5wpg")
+
+[node name="MasterBedroomBg" type="Sprite2D" parent="."]
+z_index = 2
+position = Vector2(256, 144)
+texture = ExtResource("3_5q2r6")
 
 [node name="AmbushBlockade" parent="." node_paths=PackedStringArray("room_ref", "blocks_to_break") instance=ExtResource("3_d0ukw")]
 tile_map_data = PackedByteArray("AAAAAAYAEgAAAAAAAAAAAAcAEgAAAAAAAAACAAEAEgAAAAAAAAACAAIAEgAAAAAAAAACAAMAEgAAAAAAAAAFAAcAEgAAAAAAAAAFAAYAEgAAAAAAAAAFAAUAEgAAAAAAAAAFAAQAEgAAAAAAAAAFAAMAEgAAAAAAAAAKAAMAEgAAAAAAAAAGAAMAEgAAAAAAAAABAAMAEgAAAAAAAAALAAMAEgAAAAAAAAAMAAMAEgAAAAAAAAAHAAMAEgAAAAAAAAAMAAQAEgAAAAAAAAAMAAUAEgAAAAAAAAALAAUAEgAAAAAAAAALAAQAEgAAAAAAAAAGAAQAEgAAAAAAAAAGAAUAEgAAAAAAAAAGAAYAEgAAAAAAAAAGAAcAEgAAAAAAAAABAAIAEgAAAAAAAAAMAAIAEgAAAAAAAAAMAAEAEgAAAAAAAAA=")

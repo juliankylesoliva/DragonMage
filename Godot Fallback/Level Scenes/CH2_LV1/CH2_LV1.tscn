@@ -194,7 +194,7 @@ room_destination = NodePath("../../CH2_LV1_R10")
 [node name="CH2_LV1_R10" parent="." instance=ExtResource("13_j5mx5")]
 position = Vector2(-737, 416)
 
-[node name="Warp 0" parent="CH2_LV1_R10" index="4" node_paths=PackedStringArray("room_destination")]
+[node name="Warp 0" parent="CH2_LV1_R10" index="5" node_paths=PackedStringArray("room_destination")]
 room_destination = NodePath("../../CH2_LV1_R9")
 room_entrance_index = 1
 

@@ -177,7 +177,10 @@ editor_draw_drag_margin = true
 
 [node name="CH2_LV3_R1" parent="." instance=ExtResource("14_2pbtd")]
 
-[node name="WarpDoor" parent="CH2_LV3_R1" index="2" node_paths=PackedStringArray("room_destination")]
+[node name="FloorLabel" parent="CH2_LV3_R1" index="3"]
+modulate = Color(0.184314, 0.407843, 0.458824, 1)
+
+[node name="WarpDoor" parent="CH2_LV3_R1" index="4" node_paths=PackedStringArray("room_destination")]
 room_destination = NodePath("../../CH2_LV3_R2")
 
 [node name="CH2_LV3_R2" parent="." instance=ExtResource("16_2c4qm")]
@@ -193,22 +196,22 @@ initial_locked_rooms = 3
 [node name="CH2_LV3_R3" parent="." instance=ExtResource("17_cvotr")]
 position = Vector2(1536, -672)
 
-[node name="WarpDoor" parent="CH2_LV3_R3" index="3" node_paths=PackedStringArray("room_destination")]
+[node name="WarpDoor" parent="CH2_LV3_R3" index="4" node_paths=PackedStringArray("room_destination")]
 room_destination = NodePath("../../CH2_LV3_R2")
 
-[node name="WarpDoor2" parent="CH2_LV3_R3" index="4" node_paths=PackedStringArray("room_destination")]
+[node name="WarpDoor2" parent="CH2_LV3_R3" index="5" node_paths=PackedStringArray("room_destination")]
 room_destination = NodePath("../../CH2_LV3_R5")
 room_entrance_index = 0
 
-[node name="WarpDoor3" parent="CH2_LV3_R3" index="5" node_paths=PackedStringArray("room_destination")]
+[node name="WarpDoor3" parent="CH2_LV3_R3" index="6" node_paths=PackedStringArray("room_destination")]
 room_destination = NodePath("../../CH2_LV3_R4")
 room_entrance_index = 0
 
-[node name="FallWarp" parent="CH2_LV3_R3" index="6" node_paths=PackedStringArray("room_destination")]
+[node name="FallWarp" parent="CH2_LV3_R3" index="7" node_paths=PackedStringArray("room_destination")]
 room_destination = NodePath("../../CH2_LV3_R1")
 room_entrance_index = 2
 
-[node name="Checkpoint" parent="CH2_LV3_R3" index="10" node_paths=PackedStringArray("level_origin")]
+[node name="Checkpoint" parent="CH2_LV3_R3" index="11" node_paths=PackedStringArray("level_origin")]
 level_origin = NodePath("../..")
 
 [node name="CH2_LV3_R4" parent="." instance=ExtResource("7_vdrf6")]
@@ -232,18 +235,18 @@ room_entrance_index = 2
 [node name="CH2_LV3_R6" parent="." instance=ExtResource("9_vrj57")]
 position = Vector2(1536, -1264)
 
-[node name="WarpDoor" parent="CH2_LV3_R6" index="3" node_paths=PackedStringArray("room_destination")]
+[node name="WarpDoor" parent="CH2_LV3_R6" index="4" node_paths=PackedStringArray("room_destination")]
 room_destination = NodePath("../../CH2_LV3_R2")
 
-[node name="WarpDoor2" parent="CH2_LV3_R6" index="4" node_paths=PackedStringArray("room_destination")]
+[node name="WarpDoor2" parent="CH2_LV3_R6" index="5" node_paths=PackedStringArray("room_destination")]
 room_destination = NodePath("../../CH2_LV3_R8")
 room_entrance_index = 0
 
-[node name="WarpDoor3" parent="CH2_LV3_R6" index="5" node_paths=PackedStringArray("room_destination")]
+[node name="WarpDoor3" parent="CH2_LV3_R6" index="6" node_paths=PackedStringArray("room_destination")]
 room_destination = NodePath("../../CH2_LV3_R7")
 room_entrance_index = 0
 
-[node name="FallWarp" parent="CH2_LV3_R6" index="6" node_paths=PackedStringArray("room_destination")]
+[node name="FallWarp" parent="CH2_LV3_R6" index="7" node_paths=PackedStringArray("room_destination")]
 room_destination = NodePath("../../CH2_LV3_R1")
 room_entrance_index = 2
 
@@ -259,7 +262,7 @@ curve = SubResource("Curve2D_yy40b")
 [node name="MovingPlatform4" parent="CH2_LV3_R6/Platforms" index="3"]
 curve = SubResource("Curve2D_cq4gk")
 
-[node name="Checkpoint" parent="CH2_LV3_R6" index="10" node_paths=PackedStringArray("level_origin", "subsequent_checkpoints")]
+[node name="Checkpoint" parent="CH2_LV3_R6" index="11" node_paths=PackedStringArray("level_origin", "subsequent_checkpoints")]
 level_origin = NodePath("../..")
 subsequent_checkpoints = [NodePath("../../CH2_LV3_R3/Checkpoint")]
 
@@ -302,22 +305,22 @@ curve = SubResource("Curve2D_cqeig")
 [node name="CH2_LV3_R9" parent="." instance=ExtResource("12_vtno5")]
 position = Vector2(1536, -1776)
 
-[node name="WarpDoor" parent="CH2_LV3_R9" index="3" node_paths=PackedStringArray("room_destination")]
+[node name="WarpDoor" parent="CH2_LV3_R9" index="4" node_paths=PackedStringArray("room_destination")]
 room_destination = NodePath("../../CH2_LV3_R2")
 
-[node name="WarpDoor2" parent="CH2_LV3_R9" index="4" node_paths=PackedStringArray("room_destination")]
+[node name="WarpDoor2" parent="CH2_LV3_R9" index="5" node_paths=PackedStringArray("room_destination")]
 room_destination = NodePath("../../CH2_LV3_R11")
 room_entrance_index = 0
 
-[node name="WarpDoor3" parent="CH2_LV3_R9" index="5" node_paths=PackedStringArray("room_destination")]
+[node name="WarpDoor3" parent="CH2_LV3_R9" index="6" node_paths=PackedStringArray("room_destination")]
 room_destination = NodePath("../../CH2_LV3_R10")
 room_entrance_index = 0
 
-[node name="FallWarp" parent="CH2_LV3_R9" index="6" node_paths=PackedStringArray("room_destination")]
+[node name="FallWarp" parent="CH2_LV3_R9" index="7" node_paths=PackedStringArray("room_destination")]
 room_destination = NodePath("../../CH2_LV3_R1")
 room_entrance_index = 2
 
-[node name="Checkpoint" parent="CH2_LV3_R9" index="10" node_paths=PackedStringArray("level_origin", "subsequent_checkpoints")]
+[node name="Checkpoint" parent="CH2_LV3_R9" index="11" node_paths=PackedStringArray("level_origin", "subsequent_checkpoints")]
 level_origin = NodePath("../..")
 subsequent_checkpoints = [NodePath("../../CH2_LV3_R6/Checkpoint"), NodePath("../../CH2_LV3_R3/Checkpoint")]
 
@@ -342,10 +345,10 @@ room_entrance_index = 2
 [node name="CH2_LV3_R12" parent="." instance=ExtResource("26_b07ya")]
 position = Vector2(-512, 352)
 
-[node name="WarpDoor" parent="CH2_LV3_R12" index="2" node_paths=PackedStringArray("room_destination")]
+[node name="WarpDoor" parent="CH2_LV3_R12" index="3" node_paths=PackedStringArray("room_destination")]
 room_destination = NodePath("../../CH2_LV3_R2")
 
-[node name="Warp 0" parent="CH2_LV3_R12" index="3" node_paths=PackedStringArray("room_destination")]
+[node name="Warp 0" parent="CH2_LV3_R12" index="4" node_paths=PackedStringArray("room_destination")]
 room_destination = NodePath("../../CH2_LV3_R13")
 
 [node name="MovingPlatform" parent="CH2_LV3_R12/Platforms" index="1"]
@@ -360,7 +363,7 @@ curve = SubResource("Curve2D_6r2hp")
 [node name="MovingPlatform4" parent="CH2_LV3_R12/Platforms" index="7"]
 curve = SubResource("Curve2D_07wdy")
 
-[node name="Checkpoint" parent="CH2_LV3_R12" index="12" node_paths=PackedStringArray("level_origin", "subsequent_checkpoints")]
+[node name="Checkpoint" parent="CH2_LV3_R12" index="13" node_paths=PackedStringArray("level_origin", "subsequent_checkpoints")]
 level_origin = NodePath("../..")
 subsequent_checkpoints = [NodePath("../../CH2_LV3_R9/Checkpoint"), NodePath("../../CH2_LV3_R6/Checkpoint"), NodePath("../../CH2_LV3_R3/Checkpoint")]
 
