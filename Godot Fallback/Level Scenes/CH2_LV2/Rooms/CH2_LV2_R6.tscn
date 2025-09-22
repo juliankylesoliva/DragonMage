@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=4 uid="uid://dd5xsco4mbk36"]
+[gd_scene load_steps=18 format=4 uid="uid://dd5xsco4mbk36"]
 
 [ext_resource type="Script" path="res://Scripts/Utility Scripts/Room.gd" id="1_7khts"]
 [ext_resource type="TileSet" uid="uid://dhwi7i1loa2pd" path="res://Sprites/Tiles/Test Tiles/TestTileSet.tres" id="2_3gcwk"]
@@ -11,9 +11,16 @@
 [ext_resource type="PackedScene" uid="uid://clfqwsy4byrkf" path="res://Scene Objects/Enemies/GreenDragoon.tscn" id="7_g1i8i"]
 [ext_resource type="PackedScene" uid="uid://curi6w4ex7jou" path="res://Scene Objects/Enemies/YellowDragoon.tscn" id="9_3rn6y"]
 [ext_resource type="PackedScene" uid="uid://b2a0ttqvejk51" path="res://Scene Objects/Objects/TemperDragonFruit.tscn" id="11_ewsvv"]
+[ext_resource type="Texture2D" uid="uid://bvapgwt5j5pov" path="res://Sprites/Backgrounds/2_2_BG/BrickBackdrop.png" id="12_utvcb"]
+[ext_resource type="Texture2D" uid="uid://b0jgwllnwhp25" path="res://Sprites/Backgrounds/2_2_BG/PipeBG.png" id="13_5oqm5"]
+[ext_resource type="Texture2D" uid="uid://cepl2f7obh65" path="res://Sprites/Backgrounds/2_2_BG/PlatformBG.png" id="14_1rgv5"]
+[ext_resource type="Texture2D" uid="uid://bxpqwyidrr24i" path="res://Sprites/Backgrounds/2_2_BG/SewageBack.png" id="15_7kakm"]
+[ext_resource type="Script" path="res://Scripts/Utility Scripts/BGRegionScroll.gd" id="16_p4bn1"]
+[ext_resource type="Texture2D" uid="uid://dxl3woeratgt3" path="res://Sprites/Backgrounds/2_2_BG/SewageFront.png" id="17_4xpy6"]
 
-[node name="CH2_LV2_R6" type="Node2D" node_paths=PackedStringArray("tilemap_list", "room_entrances", "enemy_nodes", "medal_fragments")]
+[node name="CH2_LV2_R6" type="Node2D" node_paths=PackedStringArray("parallax_bg", "tilemap_list", "room_entrances", "enemy_nodes", "medal_fragments")]
 script = ExtResource("1_7khts")
+parallax_bg = NodePath("ParallaxBackground")
 tilemap_list = [NodePath("BoundaryCollisionTilemap"), NodePath("LevelCollisionTilemap")]
 right_camera_limit = 3072
 bottom_camera_limit = 512
@@ -268,3 +275,68 @@ enable_cycling = false
 position = Vector2(2176, 96)
 starting_state = 1
 enable_cycling = false
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+visible = false
+
+[node name="BrickBackdropLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+modulate = Color(0.85, 0.85, 0.85, 1)
+motion_scale = Vector2(0.86, 0)
+
+[node name="BrickBackdropSprite" type="Sprite2D" parent="ParallaxBackground/BrickBackdropLayer"]
+texture_repeat = 2
+position = Vector2(0, 48)
+texture = ExtResource("12_utvcb")
+centered = false
+region_enabled = true
+region_rect = Rect2(0, 0, 3072, 96)
+
+[node name="PipeLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+modulate = Color(0.85, 0.85, 0.85, 1)
+motion_scale = Vector2(0.88, 0)
+
+[node name="PipeSprite" type="Sprite2D" parent="ParallaxBackground/PipeLayer"]
+texture_repeat = 2
+position = Vector2(0, 48)
+texture = ExtResource("13_5oqm5")
+centered = false
+region_enabled = true
+region_rect = Rect2(0, 0, 3072, 16)
+
+[node name="PlatformLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+modulate = Color(0.85, 0.85, 0.85, 1)
+motion_scale = Vector2(0.9, 0)
+
+[node name="PlatformSprite" type="Sprite2D" parent="ParallaxBackground/PlatformLayer"]
+texture_repeat = 2
+texture = ExtResource("14_1rgv5")
+centered = false
+region_enabled = true
+region_rect = Rect2(0, 0, 3072, 320)
+
+[node name="SewageBackLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+modulate = Color(0.85, 0.85, 0.85, 1)
+motion_scale = Vector2(1, 0)
+
+[node name="SewageBackSprite" type="Sprite2D" parent="ParallaxBackground/SewageBackLayer"]
+texture_repeat = 2
+position = Vector2(0, 176)
+texture = ExtResource("15_7kakm")
+centered = false
+region_enabled = true
+region_rect = Rect2(0, 0, 3072, 48)
+script = ExtResource("16_p4bn1")
+scroll_speed = 48.0
+
+[node name="SewageFrontLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+modulate = Color(0.85, 0.85, 0.85, 1)
+motion_scale = Vector2(1, 0)
+
+[node name="SewageFrontSprite" type="Sprite2D" parent="ParallaxBackground/SewageFrontLayer"]
+texture_repeat = 2
+position = Vector2(0, 208)
+texture = ExtResource("17_4xpy6")
+centered = false
+region_enabled = true
+region_rect = Rect2(0, 0, 3072, 112)
+script = ExtResource("16_p4bn1")

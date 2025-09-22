@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=4 uid="uid://bcgef8vp622bu"]
+[gd_scene load_steps=13 format=4 uid="uid://bcgef8vp622bu"]
 
 [ext_resource type="Script" path="res://Scripts/Utility Scripts/Room.gd" id="1_yci2q"]
 [ext_resource type="TileSet" uid="uid://dhwi7i1loa2pd" path="res://Sprites/Tiles/Test Tiles/TestTileSet.tres" id="2_4vtdh"]
@@ -6,9 +6,16 @@
 [ext_resource type="PackedScene" uid="uid://dfkmxoba64spw" path="res://Scene Objects/Objects/MedalFragment.tscn" id="4_hm626"]
 [ext_resource type="PackedScene" uid="uid://cs4s34scsvcfr" path="res://Scene Objects/Objects/BreakableBlock.tscn" id="4_sbo0r"]
 [ext_resource type="PackedScene" uid="uid://dopdmj4qfj6sx" path="res://Scene Objects/Obstacles/WaterHazard.tscn" id="5_mjtjx"]
+[ext_resource type="Texture2D" uid="uid://bvapgwt5j5pov" path="res://Sprites/Backgrounds/2_2_BG/BrickBackdrop.png" id="7_uvo12"]
+[ext_resource type="Texture2D" uid="uid://b0jgwllnwhp25" path="res://Sprites/Backgrounds/2_2_BG/PipeBG.png" id="8_nme4b"]
+[ext_resource type="Texture2D" uid="uid://cepl2f7obh65" path="res://Sprites/Backgrounds/2_2_BG/PlatformBG.png" id="9_cs4p3"]
+[ext_resource type="Texture2D" uid="uid://bxpqwyidrr24i" path="res://Sprites/Backgrounds/2_2_BG/SewageBack.png" id="10_px58u"]
+[ext_resource type="Script" path="res://Scripts/Utility Scripts/BGRegionScroll.gd" id="11_mgq0s"]
+[ext_resource type="Texture2D" uid="uid://dxl3woeratgt3" path="res://Sprites/Backgrounds/2_2_BG/SewageFront.png" id="12_l6dnq"]
 
-[node name="CH2_LV2_R3" type="Node2D" node_paths=PackedStringArray("tilemap_list", "room_entrances", "medal_fragments")]
+[node name="CH2_LV2_R3" type="Node2D" node_paths=PackedStringArray("parallax_bg", "tilemap_list", "room_entrances", "medal_fragments")]
 script = ExtResource("1_yci2q")
+parallax_bg = NodePath("ParallaxBackground")
 tilemap_list = [NodePath("BoundaryCollisionTilemap"), NodePath("LevelCollisionTilemap")]
 right_camera_limit = 1024
 bottom_camera_limit = 960
@@ -193,3 +200,68 @@ water_tile_height_offsets = Array[float]([2.0])
 position = Vector2(544, 960)
 tile_width = 18
 water_tile_height_offsets = Array[float]([2.0])
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+visible = false
+
+[node name="BrickBackdropLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+modulate = Color(0.85, 0.85, 0.85, 1)
+motion_scale = Vector2(0.86, 0)
+
+[node name="BrickBackdropSprite" type="Sprite2D" parent="ParallaxBackground/BrickBackdropLayer"]
+texture_repeat = 2
+position = Vector2(0, 48)
+texture = ExtResource("7_uvo12")
+centered = false
+region_enabled = true
+region_rect = Rect2(0, 0, 1024, 96)
+
+[node name="PipeLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+modulate = Color(0.85, 0.85, 0.85, 1)
+motion_scale = Vector2(0.88, 0)
+
+[node name="PipeSprite" type="Sprite2D" parent="ParallaxBackground/PipeLayer"]
+texture_repeat = 2
+position = Vector2(0, 48)
+texture = ExtResource("8_nme4b")
+centered = false
+region_enabled = true
+region_rect = Rect2(0, 0, 1024, 16)
+
+[node name="PlatformLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+modulate = Color(0.85, 0.85, 0.85, 1)
+motion_scale = Vector2(0.9, 0)
+
+[node name="PlatformSprite" type="Sprite2D" parent="ParallaxBackground/PlatformLayer"]
+texture_repeat = 2
+texture = ExtResource("9_cs4p3")
+centered = false
+region_enabled = true
+region_rect = Rect2(0, 0, 1024, 320)
+
+[node name="SewageBackLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+modulate = Color(0.85, 0.85, 0.85, 1)
+motion_scale = Vector2(1, 0)
+
+[node name="SewageBackSprite" type="Sprite2D" parent="ParallaxBackground/SewageBackLayer"]
+texture_repeat = 2
+position = Vector2(0, 176)
+texture = ExtResource("10_px58u")
+centered = false
+region_enabled = true
+region_rect = Rect2(0, 0, 1024, 48)
+script = ExtResource("11_mgq0s")
+scroll_speed = 48.0
+
+[node name="SewageFrontLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+modulate = Color(0.85, 0.85, 0.85, 1)
+motion_scale = Vector2(1, 0)
+
+[node name="SewageFrontSprite" type="Sprite2D" parent="ParallaxBackground/SewageFrontLayer"]
+texture_repeat = 2
+position = Vector2(0, 208)
+texture = ExtResource("12_l6dnq")
+centered = false
+region_enabled = true
+region_rect = Rect2(0, 0, 1024, 112)
+script = ExtResource("11_mgq0s")
