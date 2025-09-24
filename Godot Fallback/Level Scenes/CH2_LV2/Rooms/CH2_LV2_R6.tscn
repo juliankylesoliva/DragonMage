@@ -200,7 +200,7 @@ position = Vector2(2864, 432)
 position = Vector2(1536, 512)
 room_ref = NodePath("..")
 tile_width = 96
-water_tile_height_offsets = Array[float]([7.0, 2.0])
+water_tile_height_offsets = Array[float]([7.0, 1.0])
 cycle_type = 1
 
 [node name="Enemies" type="Node2D" parent="."]
