@@ -1,11 +1,17 @@
-[gd_scene load_steps=7 format=4 uid="uid://u8e1fwrtc1mm"]
+[gd_scene load_steps=13 format=4 uid="uid://u8e1fwrtc1mm"]
 
 [ext_resource type="Script" path="res://Scripts/Utility Scripts/Room.gd" id="1_hkc7q"]
+[ext_resource type="Texture2D" uid="uid://snnpjequroyx" path="res://Sprites/Backgrounds/2_3_BG/ElevatorInterior.png" id="2_gks2u"]
 [ext_resource type="TileSet" uid="uid://dhwi7i1loa2pd" path="res://Sprites/Tiles/Test Tiles/TestTileSet.tres" id="2_l0qfb"]
 [ext_resource type="PackedScene" uid="uid://d3ahci60rs8ef" path="res://Scene Objects/Objects/WarpDoor.tscn" id="3_1fa0u"]
 [ext_resource type="PackedScene" uid="uid://bkkxc1em4mqaq" path="res://Scene Objects/Objects/SignalButton.tscn" id="4_5542e"]
 [ext_resource type="Texture2D" uid="uid://dxp7mcm8uu01q" path="res://Sprites/Backgrounds/2_3_BG/OfficeElevator.png" id="4_b5hj4"]
+[ext_resource type="Texture2D" uid="uid://ctvgkj32grwdt" path="res://Sprites/Backgrounds/2_3_BG/ElevatorFloorSign.png" id="4_ejurc"]
+[ext_resource type="Texture2D" uid="uid://bj0eyjgh4bskv" path="res://Sprites/Backgrounds/2_3_BG/ElevatorFloorLocked.png" id="5_6xy2h"]
 [ext_resource type="Script" path="res://Scripts/Object Scripts/ElevatorSelector.gd" id="5_qm3my"]
+[ext_resource type="Texture2D" uid="uid://b2lvmw5ucftyk" path="res://Sprites/Backgrounds/2_3_BG/ElevatorFloorSelection.png" id="6_sfkk5"]
+[ext_resource type="Texture2D" uid="uid://0j7ny88bmuea" path="res://Sprites/Backgrounds/2_3_BG/ElevatorUpButton.png" id="7_34x5r"]
+[ext_resource type="Texture2D" uid="uid://33hu4qk5g81f" path="res://Sprites/Backgrounds/2_3_BG/ElevatorDownButton.png" id="8_aeyie"]
 
 [node name="CH2_LV3_R2" type="Node2D" node_paths=PackedStringArray("tilemap_list", "room_entrances")]
 script = ExtResource("1_hkc7q")
@@ -35,7 +41,7 @@ rendering_quadrant_size = 32
 [node name="Background" type="TileMapLayer" parent="LevelCollisionTilemap"]
 z_index = -1
 use_parent_material = true
-tile_map_data = PackedByteArray("AAAEAAAAFQAEAAIAAAAEAAEAFQAEAAIAAAAEAAIAFQAEAAIAAAAEAAMAFQAEAAIAAAAEAAQAFQAEAAIAAAAEAAUAFQAEAAIAAAAEAAYAFQAEAAIAAAAEAAcAFQAEAAIAAAAEAAgAFQAEAAIAAAAEAAkAFQAEAAIAAAAFAAAAFQAEAAIAAAAFAAEAFQAEAAIAAAAFAAIAFQAEAAIAAAAFAAMAFQAEAAIAAAAFAAQAFQAEAAIAAAAFAAUAFQAEAAIAAAAFAAYAFQAEAAIAAAAFAAcAFQAEAAIAAAAFAAgAFQAEAAIAAAAFAAkAFQAEAAIAAAAGAAAAFQAEAAIAAAAGAAEAFQAEAAIAAAAGAAIAFQAEAAIAAAAGAAMAFQAEAAIAAAAGAAQAFQAEAAIAAAAGAAUAFQAEAAIAAAAGAAYAFQAEAAIAAAAGAAcAFQAEAAIAAAAGAAgAFQAEAAIAAAAGAAkAFQAEAAIAAAAHAAAAFQAEAAIAAAAHAAEAFQAEAAIAAAAHAAIAFQAEAAIAAAAHAAMAFQAEAAIAAAAHAAQAFQAEAAIAAAAHAAUAFQAEAAIAAAAHAAYAFQAEAAIAAAAHAAcAFQAEAAIAAAAHAAgAFQAEAAIAAAAHAAkAFQAEAAIAAAAIAAAAFQAEAAIAAAAIAAEAFQAEAAIAAAAIAAIAFQAEAAIAAAAIAAMAFQAEAAIAAAAIAAQAFQAEAAIAAAAIAAUAFQAEAAIAAAAIAAYAFQAEAAIAAAAIAAcAFQAEAAIAAAAIAAgAFQAEAAIAAAAIAAkAFQAEAAIAAAAJAAAAFQAEAAIAAAAJAAEAFQAEAAIAAAAJAAIAFQAEAAIAAAAJAAMAFQAEAAIAAAAJAAQAFQAEAAIAAAAJAAUAFQAEAAIAAAAJAAYAFQAEAAIAAAAJAAcAFQAEAAIAAAAJAAgAFQAEAAIAAAAJAAkAFQAEAAIAAAAKAAAAFQAEAAIAAAAKAAEAFQAEAAIAAAAKAAIAFQAEAAIAAAAKAAMAFQAEAAIAAAAKAAQAFQAEAAIAAAAKAAUAFQAEAAIAAAAKAAYAFQAEAAIAAAAKAAcAFQAEAAIAAAAKAAgAFQAEAAIAAAAKAAkAFQAEAAIAAAALAAAAFQAEAAIAAAALAAEAFQAEAAIAAAALAAIAFQAEAAIAAAALAAMAFQAEAAIAAAALAAQAFQAEAAIAAAALAAUAFQAEAAIAAAALAAYAFQAEAAIAAAALAAcAFQAEAAIAAAALAAgAFQAEAAIAAAALAAkAFQAEAAIAAAA=")
+tile_map_data = PackedByteArray("AAAFAAAAFQAEAAIAAAAFAAEAFQAEAAIAAAAFAAIAFQAEAAIAAAAFAAMAFQAEAAIAAAAFAAQAFQAEAAIAAAAFAAUAFQAEAAIAAAAFAAYAFQAEAAIAAAAFAAcAFQAEAAIAAAAFAAgAFQAEAAIAAAAFAAkAFQAEAAIAAAAGAAAAFQAEAAIAAAAGAAEAFQAEAAIAAAAGAAIAFQAEAAIAAAAGAAMAFQAEAAIAAAAGAAQAFQAEAAIAAAAGAAUAFQAEAAIAAAAGAAYAFQAEAAIAAAAGAAcAFQAEAAIAAAAGAAgAFQAEAAIAAAAGAAkAFQAEAAIAAAAHAAAAFQAEAAIAAAAHAAEAFQAEAAIAAAAHAAIAFQAEAAIAAAAHAAMAFQAEAAIAAAAHAAQAFQAEAAIAAAAHAAUAFQAEAAIAAAAHAAYAFQAEAAIAAAAHAAcAFQAEAAIAAAAHAAgAFQAEAAIAAAAHAAkAFQAEAAIAAAAIAAAAFQAEAAIAAAAIAAEAFQAEAAIAAAAIAAIAFQAEAAIAAAAIAAMAFQAEAAIAAAAIAAQAFQAEAAIAAAAIAAUAFQAEAAIAAAAIAAYAFQAEAAIAAAAIAAcAFQAEAAIAAAAIAAgAFQAEAAIAAAAIAAkAFQAEAAIAAAAJAAAAFQAEAAIAAAAJAAEAFQAEAAIAAAAJAAIAFQAEAAIAAAAJAAMAFQAEAAIAAAAJAAQAFQAEAAIAAAAJAAUAFQAEAAIAAAAJAAYAFQAEAAIAAAAJAAcAFQAEAAIAAAAJAAgAFQAEAAIAAAAJAAkAFQAEAAIAAAAKAAAAFQAEAAIAAAAKAAEAFQAEAAIAAAAKAAIAFQAEAAIAAAAKAAMAFQAEAAIAAAAKAAQAFQAEAAIAAAAKAAUAFQAEAAIAAAAKAAYAFQAEAAIAAAAKAAcAFQAEAAIAAAAKAAgAFQAEAAIAAAAKAAkAFQAEAAIAAAALAAAAFQAEAAIAAAALAAEAFQAEAAIAAAALAAIAFQAEAAIAAAALAAMAFQAEAAIAAAALAAQAFQAEAAIAAAALAAUAFQAEAAIAAAALAAYAFQAEAAIAAAALAAcAFQAEAAIAAAALAAgAFQAEAAIAAAALAAkAFQAEAAIAAAAEAAkAFQAEAAIAAAAEAAgAFQAEAAIAAAAEAAcAFQAEAAIAAAAEAAYAFQAEAAIAAAAEAAUAFQAEAAIAAAAEAAQAFQAEAAIAAAAEAAMAFQAEAAIAAAAEAAIAFQAEAAIAAAAEAAEAFQAEAAIAAAAEAAAAFQAEAAIAAAA=")
 tile_set = ExtResource("2_l0qfb")
 
 [node name="Ground" type="TileMapLayer" parent="LevelCollisionTilemap"]
@@ -51,6 +57,11 @@ z_index = -1
 use_parent_material = true
 tile_set = ExtResource("2_l0qfb")
 
+[node name="ElevatorInterior" type="Sprite2D" parent="."]
+z_index = 2
+position = Vector2(256, 208)
+texture = ExtResource("2_gks2u")
+
 [node name="WarpDoor" parent="." node_paths=PackedStringArray("room_origin", "room_destination") instance=ExtResource("3_1fa0u")]
 position = Vector2(256, 224)
 door_texture_override = ExtResource("4_b5hj4")
@@ -60,15 +71,48 @@ room_destination = NodePath("..")
 [node name="SignalButton" parent="." instance=ExtResource("4_5542e")]
 position = Vector2(320, 224)
 custom_prompt = "Up"
+button_texture_override = ExtResource("7_34x5r")
 
 [node name="SignalButton2" parent="." instance=ExtResource("4_5542e")]
 position = Vector2(192, 224)
 custom_prompt = "Down"
+button_texture_override = ExtResource("8_aeyie")
 
-[node name="ElevatorSelector" type="Node2D" parent="." node_paths=PackedStringArray("door_destination_to_modify", "up_button", "down_button")]
+[node name="ElevatorSelector" type="Node2D" parent="." node_paths=PackedStringArray("door_destination_to_modify", "up_button", "down_button", "selector_sprite", "selector_sprite_positions", "lock_sprite_2f", "lock_sprite_3f", "lock_sprite_b")]
 position = Vector2(256, 112)
 script = ExtResource("5_qm3my")
 door_destination_to_modify = NodePath("../WarpDoor")
 up_button = NodePath("../SignalButton")
 down_button = NodePath("../SignalButton2")
-initial_locked_rooms = 0
+selector_sprite = NodePath("ElevatorFloorSign/ElevatorFloorSelection")
+selector_sprite_positions = [NodePath("ElevatorFloorSign/ElevatorFloorLockedB"), NodePath("ElevatorFloorSign/SelectorPositionG"), NodePath("ElevatorFloorSign/SelectorPosition1F"), NodePath("ElevatorFloorSign/ElevatorFloorLocked2F"), NodePath("ElevatorFloorSign/ElevatorFloorLocked3F")]
+lock_sprite_2f = NodePath("ElevatorFloorSign/ElevatorFloorLocked2F")
+lock_sprite_3f = NodePath("ElevatorFloorSign/ElevatorFloorLocked3F")
+lock_sprite_b = NodePath("ElevatorFloorSign/ElevatorFloorLockedB")
+
+[node name="ElevatorFloorSign" type="Sprite2D" parent="ElevatorSelector"]
+z_index = 2
+position = Vector2(0, 45)
+texture = ExtResource("4_ejurc")
+
+[node name="ElevatorFloorLockedB" type="Sprite2D" parent="ElevatorSelector/ElevatorFloorSign"]
+position = Vector2(-64, -8)
+texture = ExtResource("5_6xy2h")
+
+[node name="SelectorPositionG" type="Node2D" parent="ElevatorSelector/ElevatorFloorSign"]
+position = Vector2(-32, -8)
+
+[node name="SelectorPosition1F" type="Node2D" parent="ElevatorSelector/ElevatorFloorSign"]
+position = Vector2(0, -8)
+
+[node name="ElevatorFloorLocked2F" type="Sprite2D" parent="ElevatorSelector/ElevatorFloorSign"]
+position = Vector2(32, -8)
+texture = ExtResource("5_6xy2h")
+
+[node name="ElevatorFloorLocked3F" type="Sprite2D" parent="ElevatorSelector/ElevatorFloorSign"]
+position = Vector2(64, -8)
+texture = ExtResource("5_6xy2h")
+
+[node name="ElevatorFloorSelection" type="Sprite2D" parent="ElevatorSelector/ElevatorFloorSign"]
+position = Vector2(-32, -8)
+texture = ExtResource("6_sfkk5")

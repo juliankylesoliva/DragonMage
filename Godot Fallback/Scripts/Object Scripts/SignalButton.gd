@@ -23,6 +23,9 @@ func _ready():
 		button_prompt_label = (button_prompt as ButtonPromptTextLabel)
 		if (button_prompt_label != null and !custom_prompt.is_empty()):
 			button_prompt_label.set_raw_text(prompt_template % custom_prompt)
+	
+	if (button_texture_override != null):
+		button_sprite.texture = button_texture_override
 
 func interact(hub : PlayerHub):
 	if (player != null and hub == player and is_pressing_enabled):
