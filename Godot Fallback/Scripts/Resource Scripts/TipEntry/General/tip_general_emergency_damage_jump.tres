@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="TipEntry" load_steps=2 format=3 uid="uid://dcdeukriffjnv"]
+
+[ext_resource type="Script" path="res://Scripts/Resource Scripts/TipEntry/TipEntry.gd" id="1_e2jij"]
+
+[resource]
+script = ExtResource("1_e2jij")
+tip_title = "Emergency Damage Jump"
+tip_description = Array[String](["If you start to fall down after taking damage, press [Jump] as you are falling to jump out of the knockback. This also prevents the Temper Meter from going into the critical zones.
+
+Be aware that you won't be invulnerable after using this jump and that you'll need to wait three seconds before you can use this jump again, so prioritize getting to safety!"])

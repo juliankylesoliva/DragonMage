@@ -18,6 +18,8 @@ var saved_collision_mask : int = 0
 
 var was_damage_warping : bool = false
 
+var disable_iframes : bool = false
+
 func state_process(_delta):
 	if (hub.damage.current_hitstun_timer > 0 and !hub.damage.is_damage_warping):
 		knockback_damage_process(_delta)
@@ -63,7 +65,10 @@ func on_exit():
 		hub.char_body.collision_layer = saved_collision_layer
 		hub.char_body.collision_mask = saved_collision_mask
 	
-	hub.damage.do_iframes()
+	if (!disable_iframes):
+		hub.damage.do_iframes()
+	else:
+		disable_iframes = false
 	was_damage_warping = false
 
 func knockback_damage_process(_delta):
@@ -71,9 +76,16 @@ func knockback_damage_process(_delta):
 	hub.damage.update_hitstun_timer(_delta)
 	hub.camera.damaged_horizontal_camera_update(_delta)
 	
-	if (!hub.damage.is_player_damaged() or hub.is_deactivated):
+	if (!hub.damage.is_player_damaged() or hub.is_deactivated or hub.damage.can_emergency_damage_jump()):
 		hub.damage.reset_hitstun_timer()
-		if (hub.temper.is_forcing_form_change()):
+		if (hub.damage.can_emergency_damage_jump()):
+			hub.damage.set_emergency_jump_cooldown()
+			disable_iframes = true
+			if (hub.temper.is_forcing_form_change()):
+				hub.temper.set_boss_courtesy_temper_level()
+			hub.jumping.start_ground_jump()
+			hub.state_machine.current_state.set_next_state(hub.state_machine.get_state_by_name("Jumping"))
+		elif (hub.temper.is_forcing_form_change()):
 			set_next_state(state_machine.get_state_by_name("FormChanging"))
 		elif (hub.char_body.is_on_floor()):
 			set_next_state(state_machine.get_state_by_name("Standing"))

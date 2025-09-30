@@ -24,6 +24,8 @@ signal defeated
 
 @export_range(0, 1) var hitstun_ground_cancel_portion : float = 0.5
 
+@export var emergency_damage_jump_cooldown_duration : float = 1
+
 @export var post_damage_invulnerability_time : float = 3
 
 @export_range(0, 1) var invulnerability_alpha : float = 0.75
@@ -33,6 +35,8 @@ var damage_taken : int = 0
 var knockback_direction : int = 0
 
 var current_hitstun_timer : float = 0
+
+var current_emergency_jump_cooldown_timer : float = 0
 
 var is_damage_warping : bool = false
 
@@ -47,6 +51,7 @@ func _ready():
 		damage_taken = CheckpointHandler.saved_damage_taken
 
 func _process(delta):
+	update_emergency_jump_cooldown_timer(delta)
 	update_iframe_timer(delta)
 	do_iframe_sprite_alpha()
 
@@ -157,6 +162,16 @@ func can_take_damage():
 	var fire_tackle : FireTackleAttack = (hub.attacks.get_attack_by_name("FireTackle") as FireTackleAttack)
 	var dodge : DodgeAttack = (hub.attacks.get_attack_by_name("Dodge") as DodgeAttack)
 	return (!is_damage_invulnerability_active() and !fairy_guard_attack.is_invincibility_active and !fairy_guard_attack.did_player_parry and !magic_blast.is_blast_jumping and fire_tackle.current_attack_state != Attack.AttackState.ACTIVE and dodge.current_attack_state != Attack.AttackState.ACTIVE and state_name != "Damaged")
+
+func can_emergency_damage_jump():
+	return (current_emergency_jump_cooldown_timer <= 0 and !is_damage_warping and !hub.char_body.is_on_floor() and hub.char_body.velocity.y >= 0 and hub.buffers.is_jump_buffer_active())
+
+func set_emergency_jump_cooldown():
+	current_emergency_jump_cooldown_timer = emergency_damage_jump_cooldown_duration
+
+func update_emergency_jump_cooldown_timer(delta : float):
+	if (current_emergency_jump_cooldown_timer > 0):
+		current_emergency_jump_cooldown_timer = move_toward(current_emergency_jump_cooldown_timer, 0, delta)
 
 func update_hitstun_timer(delta : float):
 	if (is_player_damaged()):

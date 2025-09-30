@@ -310,7 +310,7 @@ func start_ground_jump():
 	hub.animation.set_animation_frame(1 if is_throwing else 0)
 	hub.animation.set_animation_speed(1)
 	
-	hub.movement.current_horizontal_velocity = (horizontal_result * hub.movement.get_facing_value())
+	hub.movement.current_horizontal_velocity = (horizontal_result * hub.get_input_vector().x)
 	hub.char_body.velocity.x = hub.movement.current_horizontal_velocity
 	hub.char_body.velocity.y = -((initial_jump_velocity * super_jump_result) + running_jump_result)
 	

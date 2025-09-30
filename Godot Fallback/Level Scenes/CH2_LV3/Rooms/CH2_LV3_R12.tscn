@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=4 uid="uid://px1d1uajurq2"]
+[gd_scene load_steps=27 format=4 uid="uid://px1d1uajurq2"]
 
 [ext_resource type="Script" path="res://Scripts/Utility Scripts/Room.gd" id="1_s78sg"]
 [ext_resource type="TileSet" uid="uid://dhwi7i1loa2pd" path="res://Sprites/Tiles/Test Tiles/TestTileSet.tres" id="2_58mmx"]
@@ -19,6 +19,8 @@
 [ext_resource type="PackedScene" uid="uid://curi6w4ex7jou" path="res://Scene Objects/Enemies/YellowDragoon.tscn" id="9_lfjlu"]
 [ext_resource type="PackedScene" uid="uid://bgww8jir45ktf" path="res://Scene Objects/Enemies/BlueDragoon.tscn" id="12_4x2b8"]
 [ext_resource type="PackedScene" uid="uid://vtyaphi47lrf" path="res://Scene Objects/Objects/Checkpoint.tscn" id="17_6ytdo"]
+[ext_resource type="Texture2D" uid="uid://3c0xidsxlgc1" path="res://Sprites/Backgrounds/2_3_BG/OfficeBasementPalletsBG.png" id="20_h8vd8"]
+[ext_resource type="Texture2D" uid="uid://vrjkuchdf8fb" path="res://Sprites/Backgrounds/2_3_BG/OfficeBasementRacksBG.png" id="21_iwg73"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0bvmo"]
 size = Vector2(64, 32)
@@ -51,8 +53,9 @@ _data = {
 }
 point_count = 2
 
-[node name="CH2_LV3_R12" type="Node2D" node_paths=PackedStringArray("tilemap_list", "room_entrances", "enemy_nodes", "medal_fragments")]
+[node name="CH2_LV3_R12" type="Node2D" node_paths=PackedStringArray("parallax_bg", "tilemap_list", "room_entrances", "enemy_nodes", "medal_fragments")]
 script = ExtResource("1_s78sg")
+parallax_bg = NodePath("ParallaxBackground")
 tilemap_list = [NodePath("BoundaryCollisionTilemap"), NodePath("LevelCollisionTilemap")]
 right_camera_limit = 5120
 room_entrances = [NodePath("WarpDoor")]
@@ -501,6 +504,30 @@ enable_magic = true
 [node name="Checkpoint" parent="." node_paths=PackedStringArray("room_origin") instance=ExtResource("17_6ytdo")]
 position = Vector2(336, 224)
 room_origin = NodePath("..")
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+visible = false
+scroll_base_scale = Vector2(1, 0)
+
+[node name="BasementPallets" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2(0.25, 0)
+
+[node name="OfficeBasementPalletsBg" type="Sprite2D" parent="ParallaxBackground/BasementPallets"]
+texture_repeat = 2
+texture = ExtResource("20_h8vd8")
+centered = false
+region_enabled = true
+region_rect = Rect2(0, 0, 5120, 320)
+
+[node name="BasementRacks" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2(0.5, 0)
+
+[node name="OfficeBasementRacksBg" type="Sprite2D" parent="ParallaxBackground/BasementRacks"]
+texture_repeat = 2
+texture = ExtResource("21_iwg73")
+centered = false
+region_enabled = true
+region_rect = Rect2(0, 0, 5120, 320)
 
 [connection signal="room_activated" from="." to="Checkpoint" method="activate"]
 

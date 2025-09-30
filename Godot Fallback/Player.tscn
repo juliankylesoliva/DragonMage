@@ -343,6 +343,7 @@ vertical_damage_knockback = -320.0
 knockback_steering_rate = 120.0
 hitstun_time = 0.65
 hitstun_ground_cancel_portion = 0.25
+emergency_damage_jump_cooldown_duration = 3.0
 invulnerability_alpha = 0.25
 
 [node name="Interaction" type="Node" parent="Hub" node_paths=PackedStringArray("hub")]
