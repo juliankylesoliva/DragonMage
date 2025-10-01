@@ -18,7 +18,7 @@ var saved_collision_mask : int = 0
 
 var was_damage_warping : bool = false
 
-var disable_iframes : bool = false
+var did_emergency_jump : bool = false
 
 func state_process(_delta):
 	if (hub.damage.current_hitstun_timer > 0 and !hub.damage.is_damage_warping):
@@ -65,10 +65,8 @@ func on_exit():
 		hub.char_body.collision_layer = saved_collision_layer
 		hub.char_body.collision_mask = saved_collision_mask
 	
-	if (!disable_iframes):
-		hub.damage.do_iframes()
-	else:
-		disable_iframes = false
+	hub.damage.do_iframes(did_emergency_jump)
+	did_emergency_jump = false
 	was_damage_warping = false
 
 func knockback_damage_process(_delta):
@@ -80,7 +78,7 @@ func knockback_damage_process(_delta):
 		hub.damage.reset_hitstun_timer()
 		if (hub.damage.can_emergency_damage_jump()):
 			hub.damage.set_emergency_jump_cooldown()
-			disable_iframes = true
+			did_emergency_jump = true
 			if (hub.temper.is_forcing_form_change()):
 				hub.temper.set_boss_courtesy_temper_level()
 			hub.jumping.start_ground_jump()

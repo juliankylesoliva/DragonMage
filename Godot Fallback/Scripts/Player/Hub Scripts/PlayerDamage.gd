@@ -28,6 +28,8 @@ signal defeated
 
 @export var post_damage_invulnerability_time : float = 3
 
+@export var emergency_damage_jump_invulnerability_time : float = 0.25
+
 @export_range(0, 1) var invulnerability_alpha : float = 0.75
 
 var damage_taken : int = 0
@@ -150,11 +152,11 @@ func update_knockback(delta : float):
 	hub.char_body.move_and_slide()
 	hub.collisions.upward_slope_correction(intended_velocity)
 
-func do_iframes():
+func do_iframes(did_emergency_jump : bool = false):
 	if (is_damage_invulnerability_active()):
 		return
 	is_damage_invulnerability_flickering = false
-	current_iframe_timer = post_damage_invulnerability_time
+	current_iframe_timer = (emergency_damage_jump_invulnerability_time if did_emergency_jump else post_damage_invulnerability_time)
 
 func can_take_damage():
 	var state_name : String = hub.state_machine.current_state.name

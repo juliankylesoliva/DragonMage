@@ -7,4 +7,4 @@ script = ExtResource("1_e2jij")
 tip_title = "Emergency Damage Jump"
 tip_description = Array[String](["If you start to fall down after taking damage, press [Jump] as you are falling to jump out of the knockback. This also prevents the Temper Meter from going into the critical zones.
 
-Be aware that you won't be invulnerable after using this jump and that you'll need to wait three seconds before you can use this jump again, so prioritize getting to safety!"])
+Be aware that you'll only be invulnerable for a split second after using this jump and that you'll need to wait three seconds before you can use this jump again, so prioritize getting to safety!"])

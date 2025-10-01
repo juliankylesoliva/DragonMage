@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=4 uid="uid://bres6fuhnqslh"]
+[gd_scene load_steps=22 format=4 uid="uid://bres6fuhnqslh"]
 
 [ext_resource type="Script" path="res://Scripts/Utility Scripts/Room.gd" id="1_3sm5i"]
 [ext_resource type="TileSet" uid="uid://dhwi7i1loa2pd" path="res://Sprites/Tiles/Test Tiles/TestTileSet.tres" id="2_ml8ig"]
@@ -18,9 +18,13 @@
 [ext_resource type="PackedScene" uid="uid://dcs7w117uukcd" path="res://Scene Objects/Objects/BreakableMagicBlock.tscn" id="11_jrfkc"]
 [ext_resource type="PackedScene" uid="uid://curi6w4ex7jou" path="res://Scene Objects/Enemies/YellowDragoon.tscn" id="14_vb7i8"]
 [ext_resource type="PackedScene" uid="uid://clfqwsy4byrkf" path="res://Scene Objects/Enemies/GreenDragoon.tscn" id="15_paldx"]
+[ext_resource type="Texture2D" uid="uid://dqi4i5qff0lmp" path="res://Sprites/Backgrounds/2_4_BG/VaultBoxesBG.png" id="19_yrnm7"]
+[ext_resource type="Texture2D" uid="uid://b62tk15piskm6" path="res://Sprites/Backgrounds/2_4_BG/VaultBarsBG.png" id="20_nqu04"]
+[ext_resource type="Texture2D" uid="uid://cawcul1xx8eod" path="res://Sprites/Backgrounds/2_4_BG/VaultSafesBG.png" id="21_jddbf"]
 
-[node name="CH2_LV4_R9" type="Node2D" node_paths=PackedStringArray("tilemap_list", "room_entrances", "enemy_nodes", "medal_fragments")]
+[node name="CH2_LV4_R9" type="Node2D" node_paths=PackedStringArray("parallax_bg", "tilemap_list", "room_entrances", "enemy_nodes", "medal_fragments")]
 script = ExtResource("1_3sm5i")
+parallax_bg = NodePath("ParallaxBackground")
 tilemap_list = [NodePath("BoundaryCollisionTilemap"), NodePath("LevelCollisionTilemap")]
 right_camera_limit = 2048
 room_entrances = [NodePath("Entrance 0"), NodePath("Entrance 1")]
@@ -277,3 +281,40 @@ floor_length = 8
 
 [node name="Fyerlarm6" parent="Obstacles" instance=ExtResource("5_h5nlo")]
 position = Vector2(1824, 224)
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+visible = false
+scroll_base_scale = Vector2(1, 0)
+
+[node name="VaultBoxesLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+modulate = Color(0.7, 0.7, 0.7, 1)
+motion_scale = Vector2(0.9, 0)
+
+[node name="VaultBoxesBg" type="Sprite2D" parent="ParallaxBackground/VaultBoxesLayer"]
+texture_repeat = 2
+texture = ExtResource("19_yrnm7")
+centered = false
+region_enabled = true
+region_rect = Rect2(0, 0, 2048, 320)
+
+[node name="VaultBarsLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+modulate = Color(0.7, 0.7, 0.7, 1)
+motion_scale = Vector2(0.85, 0)
+
+[node name="VaultBarsBg" type="Sprite2D" parent="ParallaxBackground/VaultBarsLayer"]
+texture_repeat = 2
+texture = ExtResource("20_nqu04")
+centered = false
+region_enabled = true
+region_rect = Rect2(0, 0, 2048, 320)
+
+[node name="VaultSafesLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+modulate = Color(0.7, 0.7, 0.7, 1)
+motion_scale = Vector2(0.8, 0)
+
+[node name="VaultSafesBg" type="Sprite2D" parent="ParallaxBackground/VaultSafesLayer"]
+texture_repeat = 2
+texture = ExtResource("21_jddbf")
+centered = false
+region_enabled = true
+region_rect = Rect2(0, 0, 2048, 320)
