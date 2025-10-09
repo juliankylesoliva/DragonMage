@@ -129,6 +129,7 @@ move_speed = 102.4
 attack_speed = 512.0
 distance_margin = 4.0
 attack_windup_duration = 0.7
+partial_invis_alpha = 0.35
 damaged_state = NodePath("../Damaged")
 
 [node name="Phase2Knigel" type="Node" parent="StateMachine" node_paths=PackedStringArray("impostor_boss", "disguise_break_state")]
@@ -149,6 +150,7 @@ impostor_boss = NodePath("../..")
 move_speed = 102.4
 cooldown_duration = 2.5
 firing_end_duration = 0.85
+partial_invis_alpha = 0.35
 damaged_state = NodePath("../Damaged")
 
 [node name="Phase3Knigel" type="Node" parent="StateMachine" node_paths=PackedStringArray("impostor_boss", "disguise_break_state")]
@@ -168,6 +170,7 @@ throw_attack_range = 80.0
 windup_duration = 0.65
 throw_angle_separation = 25.0
 throw_duration = 0.55
+partial_invis_alpha = 0.35
 damaged_state = NodePath("../Damaged")
 
 [node name="DisguiseBreak" type="Node" parent="StateMachine" node_paths=PackedStringArray("impostor_boss", "drickery_phase0_state", "drickery_phase1_state", "drickery_phase2_state", "drickery_phase3_state", "defeat_state")]
