@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=4 uid="uid://bgwmmnhqig3g2"]
+[gd_scene load_steps=21 format=4 uid="uid://bgwmmnhqig3g2"]
 
 [ext_resource type="Script" path="res://Scripts/Utility Scripts/Room.gd" id="1_uyoqj"]
 [ext_resource type="TileSet" uid="uid://dhwi7i1loa2pd" path="res://Sprites/Tiles/Test Tiles/TestTileSet.tres" id="2_qxb50"]
@@ -15,12 +15,17 @@
 [ext_resource type="PackedScene" uid="uid://bgww8jir45ktf" path="res://Scene Objects/Enemies/BlueDragoon.tscn" id="9_l7hh4"]
 [ext_resource type="PackedScene" uid="uid://curi6w4ex7jou" path="res://Scene Objects/Enemies/YellowDragoon.tscn" id="10_lh21i"]
 [ext_resource type="PackedScene" uid="uid://vtyaphi47lrf" path="res://Scene Objects/Objects/Checkpoint.tscn" id="11_3hwue"]
+[ext_resource type="Texture2D" uid="uid://dqvan57wg618b" path="res://Sprites/Backgrounds/2_3_BG/OfficeBackWallBG.png" id="16_5l7bv"]
+[ext_resource type="Texture2D" uid="uid://cscw2piaf863i" path="res://Sprites/Backgrounds/2_3_BG/OfficePropsBG.png" id="17_oxl52"]
+[ext_resource type="Texture2D" uid="uid://cjlyqk4f7tnwi" path="res://Sprites/Backgrounds/2_3_BG/OfficeGlassDoorsBG.png" id="18_fhiud"]
+[ext_resource type="Texture2D" uid="uid://wkwfufrceoph" path="res://Sprites/Backgrounds/2_3_BG/OfficeFloorBG.png" id="19_ssyri"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gbnbv"]
 size = Vector2(3584, 32)
 
-[node name="CH2_LV3_R3" type="Node2D" node_paths=PackedStringArray("tilemap_list", "room_entrances", "enemy_nodes", "medal_fragments")]
+[node name="CH2_LV3_R3" type="Node2D" node_paths=PackedStringArray("parallax_bg", "tilemap_list", "room_entrances", "enemy_nodes", "medal_fragments")]
 script = ExtResource("1_uyoqj")
+parallax_bg = NodePath("ParallaxBackground")
 tilemap_list = [NodePath("BoundaryCollisionTilemap"), NodePath("LevelCollisionTilemap")]
 left_camera_limit = -2048
 right_camera_limit = 2560
@@ -321,6 +326,58 @@ flip_initial_winged_movement = true
 [node name="Checkpoint" parent="." node_paths=PackedStringArray("room_origin") instance=ExtResource("11_3hwue")]
 position = Vector2(336, 224)
 room_origin = NodePath("..")
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+visible = false
+scroll_base_scale = Vector2(1, 0)
+
+[node name="BackWallBgLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+modulate = Color(0.85, 0.85, 0.85, 1)
+motion_scale = Vector2(0.847, 0)
+
+[node name="BackWallBgSprite" type="Sprite2D" parent="ParallaxBackground/BackWallBgLayer"]
+texture_repeat = 2
+position = Vector2(-2048, 0)
+texture = ExtResource("16_5l7bv")
+centered = false
+region_enabled = true
+region_rect = Rect2(0, 0, 4608, 320)
+
+[node name="PropsBgLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+modulate = Color(0.85, 0.85, 0.85, 1)
+motion_scale = Vector2(0.848, 0)
+
+[node name="PropsBgSprite" type="Sprite2D" parent="ParallaxBackground/PropsBgLayer"]
+texture_repeat = 2
+position = Vector2(-2048, 0)
+texture = ExtResource("17_oxl52")
+centered = false
+region_enabled = true
+region_rect = Rect2(0, 0, 4608, 320)
+
+[node name="DoorBgLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+modulate = Color(0.85, 0.85, 0.85, 1)
+motion_scale = Vector2(0.849, 0)
+
+[node name="DoorBgSprite" type="Sprite2D" parent="ParallaxBackground/DoorBgLayer"]
+texture_repeat = 2
+position = Vector2(-2048, 0)
+texture = ExtResource("18_fhiud")
+centered = false
+region_enabled = true
+region_rect = Rect2(0, 0, 4608, 320)
+
+[node name="FloorBgLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+modulate = Color(0.85, 0.85, 0.85, 1)
+motion_scale = Vector2(0.85, 0)
+
+[node name="FloorBgSprite" type="Sprite2D" parent="ParallaxBackground/FloorBgLayer"]
+texture_repeat = 2
+position = Vector2(-2048, 208)
+texture = ExtResource("19_ssyri")
+centered = false
+region_enabled = true
+region_rect = Rect2(0, 0, 4608, 112)
 
 [connection signal="room_activated" from="." to="Checkpoint" method="activate"]
 
