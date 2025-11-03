@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://b0ty2600utuod"]
+
+[ext_resource type="TileSet" uid="uid://dhwi7i1loa2pd" path="res://Sprites/Tiles/Test Tiles/TestTileSet.tres" id="1_bnr1f"]
+[ext_resource type="Script" path="res://Scripts/Object Scripts/SwitchingBlockade.gd" id="2_a3alj"]
+
+[node name="SwitchingBlockade" type="TileMapLayer"]
+z_index = 3
+use_parent_material = true
+tile_set = ExtResource("1_bnr1f")
+script = ExtResource("2_a3alj")
