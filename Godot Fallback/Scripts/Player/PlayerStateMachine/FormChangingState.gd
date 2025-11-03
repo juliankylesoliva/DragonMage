@@ -5,6 +5,11 @@ class_name FormChangingState
 var prev_velocity : Vector2 = Vector2.ZERO
 
 func state_process(_delta):
+	if (!hub.damage.is_player_damaged() and !hub.form.is_changing_form() and hub.collisions.is_inside_a_wall()):
+		EffectFactory.get_effect("EnemyContactImpact", hub.char_body.global_position)
+		SoundFactory.play_sound_by_name("enemy_contact_impact", hub.char_body.global_position, -2, 1, "SFX")
+		hub.damage.do_damage_warp(true)
+	
 	if (!hub.damage.is_player_damaged() and !hub.form.is_changing_form()):
 		var prev_state : String = state_machine.previous_state.name
 		match prev_state:

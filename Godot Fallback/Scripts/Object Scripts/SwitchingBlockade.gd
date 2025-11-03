@@ -4,7 +4,7 @@ class_name SwitchingBlockade
 
 @export var room_ref : Room
 
-@export_enum("MAGE:0", "DRAGON:1", "OUTLINES:2") var solid_form : int = 0
+@export_enum("MAGE:0", "DRAGON:1", "OUTLINES:2") var solid_form : int = 2
 
 var player_ref : PlayerHub = null
 

@@ -123,6 +123,32 @@ func is_facing_an_intangible_wall():
 	
 	return (total_collisions >= intangible_wall_raycast_collision_threshold)
 
+func is_inside_a_wall():
+	var total_collisions : int = 0
+	
+	hub.raycast_wall_top_r.force_raycast_update()
+	hub.raycast_wall_mid_r.force_raycast_update()
+	hub.raycast_wall_bot_r.force_raycast_update()
+	
+	hub.raycast_wall_top_l.force_raycast_update()
+	hub.raycast_wall_mid_l.force_raycast_update()
+	hub.raycast_wall_bot_l.force_raycast_update()
+	
+	var top_l : bool = (hub.raycast_wall_top_l.is_colliding() and !is_raycast_in_semisolid(hub.raycast_wall_top_l))
+	var top_r : bool = (hub.raycast_wall_top_r.is_colliding() and !is_raycast_in_semisolid(hub.raycast_wall_top_r))
+	
+	var mid_l : bool = (hub.raycast_wall_mid_l.is_colliding() and !is_raycast_in_semisolid(hub.raycast_wall_mid_l))
+	var mid_r : bool = (hub.raycast_wall_mid_r.is_colliding() and !is_raycast_in_semisolid(hub.raycast_wall_mid_r))
+	
+	var bot_l : bool = (hub.raycast_wall_bot_l.is_colliding() and !is_raycast_in_semisolid(hub.raycast_wall_bot_l))
+	var bot_r : bool = (hub.raycast_wall_bot_r.is_colliding() and !is_raycast_in_semisolid(hub.raycast_wall_bot_r))
+	
+	total_collisions += (1 if (top_l and top_r) else 0)
+	total_collisions += (1 if (mid_l and mid_r) else 0)
+	total_collisions += (1 if (!hub.char_body.is_on_floor() and bot_l and bot_r) else 0)
+	
+	return (total_collisions >= wall_raycast_collision_threshold)
+
 func is_raycast_in_semisolid(ray : RayCast2D):
 	if (ray.is_colliding()):
 		var target = ray.get_collider()
