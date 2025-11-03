@@ -22,8 +22,9 @@ class_name PlayerCollisions
 
 @export var max_upward_slope_correction_iterations : float = 16
 
-func _process(_delta):
+func _physics_process(_delta):
 	collider_crouch_update()
+	do_wall_trapped_check()
 
 func is_moving_against_a_wall():
 	var total_collisions : int = 0
@@ -217,6 +218,12 @@ func collider_crouch_update():
 	hub.raycast_wall_top_r.position.y = (upper_raycasts_y_pos + capsule_curve_offset)
 	hub.raycast_wall_mid_l.position.y = hub.collision_shape.position.y
 	hub.raycast_wall_mid_r.position.y = hub.collision_shape.position.y
+
+func do_wall_trapped_check():
+	if (!hub.damage.is_player_damaged() and !hub.form.is_changing_form() and hub.collisions.is_inside_a_wall()):
+		EffectFactory.get_effect("EnemyContactImpact", hub.char_body.global_position)
+		SoundFactory.play_sound_by_name("enemy_contact_impact", hub.char_body.global_position, -2, 1, "SFX")
+		hub.damage.do_damage_warp(true)
 
 func do_ledge_nudge(custom_ease : float = 0):
 	if (is_near_a_ledge() and !is_on_a_moving_platform() and get_ground_normal().x == 0):
