@@ -20,7 +20,11 @@ class_name PlayerCollisions
 @export var intangible_wall_raycast_collision_threshold : int = 1
 @export var capsule_curve_offset : float = 6
 
+@export var trapped_in_wall_buffer : int = 2
+
 @export var max_upward_slope_correction_iterations : float = 16
+
+var current_trapped_in_wall_buffer : int = 0
 
 func _physics_process(_delta):
 	collider_crouch_update()
@@ -220,10 +224,15 @@ func collider_crouch_update():
 	hub.raycast_wall_mid_r.position.y = hub.collision_shape.position.y
 
 func do_wall_trapped_check():
-	if (!hub.damage.is_player_damaged() and !hub.form.is_changing_form() and hub.collisions.is_inside_a_wall()):
-		EffectFactory.get_effect("EnemyContactImpact", hub.char_body.global_position)
-		SoundFactory.play_sound_by_name("enemy_contact_impact", hub.char_body.global_position, -2, 1, "SFX")
-		hub.damage.do_damage_warp(true)
+	if (!hub.damage.is_player_defeated and !hub.damage.is_player_damaged() and !hub.form.is_changing_form() and hub.collisions.is_inside_a_wall()):
+		if (current_trapped_in_wall_buffer >= trapped_in_wall_buffer):
+			EffectFactory.get_effect("EnemyContactImpact", hub.char_body.global_position)
+			SoundFactory.play_sound_by_name("enemy_contact_impact", hub.char_body.global_position, -2, 1, "SFX")
+			hub.damage.do_damage_warp(true)
+		else:
+			current_trapped_in_wall_buffer += 1
+	else:
+		current_trapped_in_wall_buffer = 0
 
 func do_ledge_nudge(custom_ease : float = 0):
 	if (is_near_a_ledge() and !is_on_a_moving_platform() and get_ground_normal().x == 0):

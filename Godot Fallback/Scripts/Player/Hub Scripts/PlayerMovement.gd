@@ -85,7 +85,7 @@ func check_crouch_state():
 		return
 	
 	if (!is_crouching):
-		is_crouching = ((!is_crouch_cooldown_active() and hub.is_action_pressed("Crouch") and (hub.jumping.enable_crouch_jumping or hub.char_body.is_on_floor())) or (hub.char_body.is_on_floor() and hub.char_body.get_platform_velocity().y < 0 and hub.collisions.get_distance_to_ceiling() <= auto_crouch_threshold))
+		is_crouching = ((!is_crouch_cooldown_active() and hub.is_action_pressed("Crouch") and (hub.jumping.enable_crouch_jumping or hub.char_body.is_on_floor())) or (hub.char_body.is_on_floor() and hub.collisions.get_distance_to_ceiling() <= auto_crouch_threshold) or hub.collisions.is_inside_a_wall())
 		if (is_crouching):
 			current_min_crouch_timer = min_crouch_time
 	else:

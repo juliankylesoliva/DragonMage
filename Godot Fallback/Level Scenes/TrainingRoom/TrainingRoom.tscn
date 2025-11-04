@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://ditx5iixwbmbo"]
+[gd_scene load_steps=13 format=3 uid="uid://ditx5iixwbmbo"]
 
 [ext_resource type="Script" path="res://Scripts/Utility Scripts/Level.gd" id="1_kmw2k"]
 [ext_resource type="PackedScene" uid="uid://c6qw77ovfwgfs" path="res://Player.tscn" id="2_klk6k"]
@@ -15,6 +15,13 @@
 resource_local_to_scene = true
 radius = 8.0
 height = 48.0
+
+[sub_resource type="Curve2D" id="Curve2D_wjm0m"]
+resource_local_to_scene = true
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -128)
+}
+point_count = 2
 
 [node name="TestLevel" type="Node2D" node_paths=PackedStringArray("player_reference", "starting_room", "room_list")]
 script = ExtResource("1_kmw2k")
@@ -45,6 +52,9 @@ editor_draw_limits = true
 editor_draw_drag_margin = true
 
 [node name="tr_room_hub" parent="." instance=ExtResource("3_x0qt0")]
+
+[node name="MovingPlatform" parent="tr_room_hub" index="5"]
+curve = SubResource("Curve2D_wjm0m")
 
 [node name="UI_Canvas" type="CanvasLayer" parent="."]
 
