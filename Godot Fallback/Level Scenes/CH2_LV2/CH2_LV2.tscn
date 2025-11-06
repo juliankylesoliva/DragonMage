@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://bid1ngpd6fm80"]
+[gd_scene load_steps=28 format=3 uid="uid://bid1ngpd6fm80"]
 
 [ext_resource type="Script" path="res://Scripts/Utility Scripts/Level.gd" id="1_36h7d"]
 [ext_resource type="PackedScene" uid="uid://d0ff35cm57xb7" path="res://Scene Objects/Effects/DroppedFragment.tscn" id="2_bdmbh"]
@@ -25,6 +25,7 @@
 [ext_resource type="PackedScene" uid="uid://bth8i161g1eoq" path="res://Level Scenes/CH2_LV2/Rooms/CH2_LV2_R1.tscn" id="14_cwpjk"]
 [ext_resource type="PackedScene" uid="uid://dxggmmiafkaq0" path="res://Level Scenes/CH2_LV2/Rooms/CH2_LV2_R11.tscn" id="14_pq67n"]
 [ext_resource type="PackedScene" uid="uid://08vlaru525wu" path="res://Level Scenes/CH2_LV2/Rooms/CH2_LV2_R2.tscn" id="16_4bu2w"]
+[ext_resource type="AudioStream" uid="uid://dgym31x3pvmab" path="res://Music/CH2/ch_2-2_bgm_loop.wav" id="25_iur1i"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_k23s2"]
 resource_local_to_scene = true
@@ -212,6 +213,9 @@ accept_input_events = false
 ui_canvas = NodePath("../UI_Canvas")
 
 [node name="LevelMusicPlayer" parent="." instance=ExtResource("12_tljqs")]
+stream = ExtResource("25_iur1i")
+autoplay = false
+delay_autoplay = true
 
 [node name="DefeatScreen" parent="." node_paths=PackedStringArray("screen_fade") instance=ExtResource("13_0xd2q")]
 screen_fade = NodePath("../UI_Canvas/ScreenFade")
