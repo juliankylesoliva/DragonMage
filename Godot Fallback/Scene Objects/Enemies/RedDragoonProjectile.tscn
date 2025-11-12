@@ -56,7 +56,7 @@ visibility_layer = 16
 z_index = 5
 sprite_frames = SubResource("SpriteFrames_b5ptf")
 autoplay = "default"
-frame_progress = 0.458744
+frame_progress = 0.186165
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
 rect = Rect2(-15, -6, 31, 13)

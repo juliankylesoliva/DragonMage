@@ -4,6 +4,7 @@
 
 [node name="SpriteEffect" type="AnimatedSprite2D"]
 sprite_frames = ExtResource("1_hggh7")
-animation = &"FireballInactive"
+animation = &"TurretomeProjectileImpact"
 autoplay = "default"
-frame_progress = 0.673831
+frame = 3
+frame_progress = 1.0

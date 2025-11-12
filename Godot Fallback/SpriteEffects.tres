@@ -1,4 +1,4 @@
-[gd_resource type="SpriteFrames" load_steps=126 format=3 uid="uid://cxb5mjrw5mrd4"]
+[gd_resource type="SpriteFrames" load_steps=130 format=3 uid="uid://cxb5mjrw5mrd4"]
 
 [ext_resource type="Texture2D" uid="uid://dox4bkppa7wvs" path="res://Sprites/Effects/DragoonProjectileImpact.png" id="1_1qdun"]
 [ext_resource type="Texture2D" uid="uid://du8qhvwbopk0k" path="res://Sprites/Effects/EnemyContactImpact.png" id="1_n3i0w"]
@@ -25,6 +25,7 @@
 [ext_resource type="Texture2D" uid="uid://b5hl51iqnatr0" path="res://Sprites/Effects/WallVaultSpark.png" id="12_7qlv5"]
 [ext_resource type="Texture2D" uid="uid://c0qux165gk8v3" path="res://Sprites/Effects/StompEffect.png" id="12_h7vex"]
 [ext_resource type="Texture2D" uid="uid://c5r2vtun4251p" path="res://Sprites/Effects/ReflectImpact.png" id="13_c44ge"]
+[ext_resource type="Texture2D" uid="uid://cb4bl21b5kvaw" path="res://Sprites/Effects/TurretomeProjectileImpact.png" id="21_t6483"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_q608l"]
 atlas = ExtResource("1_1qdun")
@@ -353,6 +354,18 @@ region = Rect2(16, 0, 16, 16)
 [sub_resource type="AtlasTexture" id="AtlasTexture_ylyej"]
 atlas = ExtResource("6_hgyfw")
 region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o8pkl"]
+atlas = ExtResource("21_t6483")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5rl2j"]
+atlas = ExtResource("21_t6483")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_q72oi"]
+atlas = ExtResource("21_t6483")
+region = Rect2(64, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_32yyh"]
 atlas = ExtResource("5_dwefw")
@@ -848,6 +861,23 @@ animations = [{
 }],
 "loop": false,
 "name": &"TurnaroundSpark",
+"speed": 60.0
+}, {
+"frames": [{
+"duration": 6.0,
+"texture": SubResource("AtlasTexture_o8pkl")
+}, {
+"duration": 6.0,
+"texture": SubResource("AtlasTexture_5rl2j")
+}, {
+"duration": 6.0,
+"texture": SubResource("AtlasTexture_q72oi")
+}, {
+"duration": 1.0,
+"texture": null
+}],
+"loop": false,
+"name": &"TurretomeProjectileImpact",
 "speed": 60.0
 }, {
 "frames": [{

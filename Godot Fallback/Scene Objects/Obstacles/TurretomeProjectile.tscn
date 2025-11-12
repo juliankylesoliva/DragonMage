@@ -1,0 +1,78 @@
+[gd_scene load_steps=9 format=3 uid="uid://kvcb17kauax8"]
+
+[ext_resource type="Texture2D" uid="uid://bswtufur6akjs" path="res://Sprites/Objects/TurretomeProjectile.png" id="1_a4gk0"]
+[ext_resource type="Script" path="res://Scripts/Enemy/EnemyProjectile.gd" id="1_qdgfm"]
+[ext_resource type="AudioStream" uid="uid://kf4tvoei7tei" path="res://Sounds/obstacle_turretome_projectile.wav" id="2_gsnsn"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_4yjrw"]
+radius = 6.0
+height = 26.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nu6q3"]
+atlas = ExtResource("1_a4gk0")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kdv43"]
+atlas = ExtResource("1_a4gk0")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_xni1w"]
+animations = [{
+"frames": [{
+"duration": 5.0,
+"texture": SubResource("AtlasTexture_nu6q3")
+}, {
+"duration": 5.0,
+"texture": SubResource("AtlasTexture_kdv43")
+}],
+"loop": true,
+"name": &"default",
+"speed": 60.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_db1y0"]
+radius = 6.0
+height = 26.0
+
+[node name="TurretomeProjectile" type="CharacterBody2D" node_paths=PackedStringArray("audio", "projectile_sprite", "visible_on_screen_notifier")]
+collision_layer = 128
+collision_mask = 0
+script = ExtResource("1_qdgfm")
+audio = NodePath("AudioStreamPlayer2D")
+projectile_sprite = NodePath("AnimatedSprite2D")
+visible_on_screen_notifier = NodePath("VisibleOnScreenNotifier2D")
+move_speed = 240.0
+enable_rotation = true
+damage_type = "MAGIC"
+impact_effect_name = "TurretomeProjectileImpact"
+destroy_sound_name = "obstacle_turretome_projectile_destroy"
+metadata/Tag = "EnemyProjectile"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_4yjrw")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+z_index = 5
+sprite_frames = SubResource("SpriteFrames_xni1w")
+autoplay = "default"
+frame_progress = 0.772309
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+rect = Rect2(-16, -7, 32, 14)
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("2_gsnsn")
+autoplay = true
+max_distance = 512.0
+bus = &"SFX"
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 461
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_db1y0")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_body_entered"]

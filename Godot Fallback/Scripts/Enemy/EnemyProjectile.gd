@@ -97,6 +97,12 @@ func setup(enemy_source : Enemy):
 	projectile_sprite.flip_h = !is_moving_right
 	is_setup = true
 
+func general_setup(custom_direction : Vector2):
+	velocity = (custom_direction * move_speed)
+	if (enable_rotation):
+		rotation_degrees = rad_to_deg(Vector2.RIGHT.angle_to(velocity.normalized()))
+	is_setup = true
+
 func destroy_projectile():
 	EffectFactory.get_effect(impact_effect_name, global_position, scale.x)
 	SoundFactory.play_sound_by_name(destroy_sound_name, global_position, 0, audio.pitch_scale if audio != null else 1.0, "SFX")
@@ -133,7 +139,7 @@ func hit_check(body):
 		
 		if (player_temp != null):
 			var direction = (body.global_position.x - global_position.x)
-			direction = (0.0 if enable_rotation else 1.0 if direction >= 0 else -1.0)
+			direction = (1.0 if direction >= 0 else -1.0)
 			if (player_temp.damage.take_damage(direction) or player_temp.damage.is_player_guarding()):
 				destroy_projectile()
 			elif (!is_reflected and player_temp.damage.is_player_parrying() and current_reflects < max_reflects):

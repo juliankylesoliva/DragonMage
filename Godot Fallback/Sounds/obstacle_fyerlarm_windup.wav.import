@@ -14,8 +14,8 @@ dest_files=["res://.godot/imported/obstacle_fyerlarm_windup.wav-d7d558f717ce2da3
 
 force/8_bit=false
 force/mono=false
-force/max_rate=false
-force/max_rate_hz=44100
+force/max_rate=true
+force/max_rate_hz=48000.0
 edit/trim=false
 edit/normalize=false
 edit/loop_mode=2

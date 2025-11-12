@@ -1,0 +1,69 @@
+[gd_scene load_steps=8 format=3 uid="uid://ty4ophuremy3"]
+
+[ext_resource type="Texture2D" uid="uid://cw1scy308rkfj" path="res://Sprites/Objects/TurretomeTemp.png" id="1_fwu61"]
+[ext_resource type="Script" path="res://Scripts/Object Scripts/Turretome.gd" id="1_itduj"]
+[ext_resource type="PackedScene" uid="uid://kvcb17kauax8" path="res://Scene Objects/Obstacles/TurretomeProjectile.tscn" id="2_gkp1r"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hh07b"]
+size = Vector2(32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3rbo7"]
+atlas = ExtResource("1_fwu61")
+region = Rect2(64, 0, 64, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jdm52"]
+atlas = ExtResource("1_fwu61")
+region = Rect2(0, 0, 64, 48)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_oqf88"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3rbo7")
+}],
+"loop": true,
+"name": &"Active",
+"speed": 60.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jdm52")
+}],
+"loop": true,
+"name": &"Idle",
+"speed": 60.0
+}]
+
+[node name="Turretome" type="StaticBody2D" node_paths=PackedStringArray("ray_cast", "on_screen_notifier", "anim_sprite", "audio_stream_player", "node_2d")]
+collision_layer = 256
+collision_mask = 32
+script = ExtResource("1_itduj")
+ray_cast = NodePath("RayCast2D")
+on_screen_notifier = NodePath("VisibleOnScreenNotifier2D")
+anim_sprite = NodePath("AnimatedSprite2D")
+audio_stream_player = NodePath("AudioStreamPlayer2D")
+magic_projectile_scene = ExtResource("2_gkp1r")
+detection_range = 256.0
+attack_interval = 0.85
+node_2d = NodePath(".")
+breakable_by = "FIRE"
+break_sound = "damage_enemy"
+
+[node name="CollisionShapeHurtbox" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_hh07b")
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+target_position = Vector2(0, 0)
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+position = Vector2(1.43051e-06, 1.43051e-06)
+rect = Rect2(-16, -16, 32, 32)
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_oqf88")
+animation = &"Idle"
+autoplay = "Idle"
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+max_distance = 1024.0
+bus = &"SFX"
