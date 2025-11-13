@@ -166,6 +166,7 @@ func do_title_screen():
 	PauseHandler.set_unpause_lock(true)
 	CheckpointHandler.clear_checkpoint()
 	enable_input = false
+	OptionsHelper.enable_safety_mode_toggle = false
 	if (!OptionsHelper.enable_quick_restart_toggle):
 		menu_cursor.do_selection_movement()
 		await get_tree().create_timer(1.0).timeout

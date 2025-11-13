@@ -35,6 +35,9 @@ func on_enter():
 		hub.movement.reset_crouch_state()
 	if (!hub.temper.is_form_locked()):
 		hub.temper.change_temper_by((hub.damage.mage_temper_damage if hub.form.current_mode == PlayerForm.CharacterMode.MAGE else hub.damage.dragon_temper_damage) * (1 if state_machine.previous_state.name != "FormChanging" else hub.temper.total_segments))
+	else:
+		hub.temper.activate_temper_rebound_timer()
+		hub.temper.set_temper_level(hub.temper.min_temper_level if hub.form.current_mode == PlayerForm.CharacterMode.MAGE else hub.temper.max_segments)
 	hub.movement.reset_current_horizontal_velocity()
 	hub.buffers.reset_speed_preservation_buffer()
 	hub.jumping.reset_super_jump_timers()

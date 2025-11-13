@@ -48,6 +48,8 @@ var is_damage_invulnerability_flickering : bool = false
 
 var is_player_defeated = false
 
+var disable_defeat = false
+
 func _ready():
 	if (CheckpointHandler.saved_clear_time >= 0):
 		damage_taken = CheckpointHandler.saved_damage_taken
@@ -85,7 +87,7 @@ func take_damage(knockback : int = 0, pierces_guard : bool = false):
 		if (!is_player_damaged()):
 			damage_taken += 1
 		
-		if (hub.temper.is_form_locked()):
+		if (hub.temper.is_form_locked() and !disable_defeat):
 			is_player_defeated = true
 			hub.form.stop_form_change_timer()
 			defeated.emit()
@@ -113,7 +115,7 @@ func do_damage_warp(bypass_invulnerability : bool = false):
 		if (!is_player_damaged()):
 			damage_taken += 1
 		
-		if (hub.temper.is_form_locked() and !is_damage_invulnerability_active()):
+		if (hub.temper.is_form_locked() and !is_damage_invulnerability_active() and !disable_defeat):
 			is_player_defeated = true
 			hub.form.stop_form_change_timer()
 			defeated.emit()

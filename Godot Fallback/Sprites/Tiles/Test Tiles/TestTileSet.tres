@@ -1,4 +1,4 @@
-[gd_resource type="TileSet" load_steps=63 format=3 uid="uid://dhwi7i1loa2pd"]
+[gd_resource type="TileSet" load_steps=65 format=3 uid="uid://dhwi7i1loa2pd"]
 
 [ext_resource type="Texture2D" uid="uid://dq7fuvy215h0w" path="res://Sprites/Tiles/Test Tiles/TestTiles.png" id="1_qds5d"]
 [ext_resource type="Texture2D" uid="uid://bfogey04fo28c" path="res://Sprites/Tiles/0_1_Tiles/ForestGroundTiles.png" id="2_uly4v"]
@@ -31,6 +31,7 @@
 [ext_resource type="Texture2D" uid="uid://bm6evt22i0xrf" path="res://Sprites/Tiles/2_1_Tiles/CheckeredCeramicWallTiles.png" id="19_n75jq"]
 [ext_resource type="Texture2D" uid="uid://hrtnabndpjgd" path="res://Sprites/Tiles/2_4_Tiles/VaultTiles.png" id="23_o0e3x"]
 [ext_resource type="Texture2D" uid="uid://dbaektkunv8m4" path="res://Sprites/Tiles/SwitchingBlockade.png" id="25_wv5ue"]
+[ext_resource type="Texture2D" uid="uid://cly4gcfi0ymhr" path="res://Sprites/Tiles/NumberedBlockade.png" id="26_jttkc"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_m4hke"]
 texture = ExtResource("1_qds5d")
@@ -4083,6 +4084,22 @@ texture_region_size = Vector2i(32, 32)
 0:1/0/physics_layer_1/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 1:1/0 = 0
 
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_fqb76"]
+texture = ExtResource("26_jttkc")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+0:0/0/physics_layer_1/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+1:0/0 = 0
+0:1/0 = 0
+0:1/0/physics_layer_1/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+1:1/0 = 0
+0:2/0 = 0
+0:2/0/physics_layer_1/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+1:2/0 = 0
+0:3/0 = 0
+0:3/0/physics_layer_1/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+1:3/0 = 0
+
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ci486"]
 texture = ExtResource("4_404ni")
 texture_region_size = Vector2i(32, 32)
@@ -4541,3 +4558,4 @@ sources/21 = SubResource("TileSetAtlasSource_sob1h")
 sources/22 = SubResource("TileSetAtlasSource_4vd1g")
 sources/29 = SubResource("TileSetAtlasSource_5n3gj")
 sources/30 = SubResource("TileSetAtlasSource_0l2yp")
+sources/32 = SubResource("TileSetAtlasSource_fqb76")

@@ -20,6 +20,8 @@ var enable_quick_restart_toggle : bool = false
 
 var enable_clear_timer_toggle : bool = false
 
+var enable_safety_mode_toggle : bool = false
+
 var master_volume : int = 100
 
 var music_volume : int = 80
@@ -43,9 +45,14 @@ func switch_quick_restart_toggle():
 func switch_clear_timer_toggle():
 	enable_clear_timer_toggle = !enable_clear_timer_toggle
 
+func switch_safety_mode_toggle():
+	enable_safety_mode_toggle = !enable_safety_mode_toggle
+
 func update_control_options(hub : PlayerHub):
 	hub.jumping.enable_glide_toggle = self.enable_glide_toggle
+	hub.jumping.enable_infinite_midair_abilities = self.enable_safety_mode_toggle
 	hub.movement.enable_crouch_toggle = self.enable_crouch_toggle
+	hub.damage.disable_defeat = self.enable_safety_mode_toggle
 
 func set_master_volume(vol : int):
 	master_volume = (MAX_VOLUME if vol > MAX_VOLUME else MIN_VOLUME if vol < MIN_VOLUME else vol)

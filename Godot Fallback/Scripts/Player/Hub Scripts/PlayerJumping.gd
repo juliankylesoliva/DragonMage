@@ -193,6 +193,8 @@ var current_wall_jump_direction_lock_time : float = 0
 
 var current_wall_release_timer : float = 0
 
+var enable_infinite_midair_abilities : bool = false
+
 func _ready():
 	current_gravity_scale = falling_gravity_scale
 
@@ -389,11 +391,14 @@ func start_glide():
 	hub.buffers.reset_glide_buffer()
 	hub.audio.play_sound("jump_magli_glide")
 	switch_to_zero_gravity()
-	hub.char_body.velocity.y = glide_fall_speed
+	hub.char_body.velocity.y = (0.0 if enable_infinite_midair_abilities else glide_fall_speed)
 
 func glide_update(delta : float):
-	hub.char_body.velocity.y = glide_fall_speed
-	current_glide_time = move_toward(current_glide_time, max_glide_time, delta)
+	hub.char_body.velocity.y = (0.0 if enable_infinite_midair_abilities else glide_fall_speed)
+	if (!enable_infinite_midair_abilities):
+		current_glide_time = move_toward(current_glide_time, max_glide_time, delta)
+	else:
+		current_glide_time = 0
 
 func is_glide_canceled():
 	return ((!enable_glide_toggle and !hub.is_action_pressed("Glide")) or (enable_glide_toggle and hub.is_action_just_pressed("Glide")) or hub.char_body.is_on_floor() or hub.jumping.current_glide_time >= hub.jumping.max_glide_time)
@@ -439,7 +444,10 @@ func do_midair_jump():
 	midair_jump_particles.restart()
 	midair_jump_particles.emitting = true
 	
-	current_midair_jumps += 1
+	if (!enable_infinite_midair_abilities):
+		current_midair_jumps += 1
+	else:
+		current_midair_jumps = 0
 
 func can_wall_slide():
 	return (enable_wall_jumping and !hub.movement.is_crouching and hub.collisions.get_distance_to_ground() >= min_wall_jump_height and hub.collisions.is_facing_a_wall() and hub.collisions.is_moving_against_a_wall() and !hub.collisions.is_facing_an_intangible_wall() and !hub.collisions.is_moving_against_an_intangible_wall() and (!hub.is_action_pressed("Jump") or !is_jump_held or hub.char_body.velocity.y >= 0))

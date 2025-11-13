@@ -12,6 +12,8 @@ class_name GameplayOptionsMenu
 
 @export var clear_timer_toggle_state_label : RichTextLabel
 
+@export var safety_mode_toggle_state_label : RichTextLabel
+
 @export_multiline var option_descriptions : Array[String]
 
 @export var options_description_label : RichTextLabel
@@ -57,6 +59,9 @@ func on_selection_confirm():
 		3:
 			OptionsHelper.switch_clear_timer_toggle()
 			update_text()
+		4:
+			OptionsHelper.switch_safety_mode_toggle()
+			update_text()
 		_:
 			pass
 	menu_cursor.play_accept_sound()
@@ -73,6 +78,7 @@ func update_text():
 	crouch_toggle_state_label.text = ("ON" if OptionsHelper.enable_crouch_toggle else "OFF")
 	quick_restart_toggle_state_label.text = ("ON" if OptionsHelper.enable_quick_restart_toggle else "OFF")
 	clear_timer_toggle_state_label.text = ("ON" if OptionsHelper.enable_clear_timer_toggle else "OFF")
+	safety_mode_toggle_state_label.text = ("ON" if OptionsHelper.enable_safety_mode_toggle else "OFF")
 
 func get_label_center(label : RichTextLabel):
 	return (label.global_position + label.pivot_offset)

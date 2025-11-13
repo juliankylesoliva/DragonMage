@@ -174,6 +174,7 @@ func respawn_all_enemies():
 func level_finish():
 	player_hub.set_force_stand(true)
 	NextLevelHelper.set_next_level_menu_index(level_index + 1)
+	OptionsHelper.enable_safety_mode_toggle = false
 
 func get_current_room():
 	for room in room_list:
