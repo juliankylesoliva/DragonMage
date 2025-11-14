@@ -10,6 +10,8 @@ class_name Enemy
 
 @export var immunity_list : Array[StringName]
 
+@export var is_intangible : bool = false
+
 @export var can_reflect_projectiles : bool = false
 
 @export var allow_upside_down_stomp : bool = false
@@ -39,6 +41,9 @@ var is_defeated : bool = false
 var home_position : Vector2 = Vector2.ZERO
 
 func defeat_enemy(damage_type : StringName, is_projectile : bool = false):
+	if (!is_defeated and is_intangible):
+		return false
+	
 	if (!is_defeated and is_projectile and can_reflect_projectiles):
 		return false
 	elif (!is_defeated and !immunity_list.has(damage_type)):

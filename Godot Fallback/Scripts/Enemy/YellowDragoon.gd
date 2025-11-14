@@ -145,6 +145,9 @@ func on_stay_sightline():
 			sprite.play("WingedChase" if enable_wings else "Walk")
 
 func on_touching_wall():
+	if (is_defeated):
+		return
+	
 	if (player_detection.is_player_in_sightline):
 		movement.flip_movement()
 	else:
@@ -156,7 +159,8 @@ func on_touching_wall():
 			sprite.play("WingedIdle" if enable_wings else "Idle")
 
 func on_touching_ledge():
-	movement.flip_movement(true)
+	if (!is_defeated):
+		movement.flip_movement(true)
 
 func on_player_collision():
 	if (!is_defeated):

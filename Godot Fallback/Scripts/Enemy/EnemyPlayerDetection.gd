@@ -32,6 +32,14 @@ signal player_stay_sightline
 
 signal player_exit_sightline
 
+signal player_turned_towards
+
+signal player_looking_towards
+
+signal player_turned_away
+
+signal player_looking_away
+
 signal player_jump
 
 var player_ref : PlayerHub = null
@@ -44,6 +52,8 @@ var did_player_jump : bool = false
 
 var is_player_in_midair : bool = false
 
+var is_player_facing_enemy : bool = false
+
 var current_contact_damage_cooldown : float = 0
 
 func _physics_process(_delta):
@@ -51,6 +61,7 @@ func _physics_process(_delta):
 	check_enemy_sightline()
 	check_player_jump()
 	check_player_midair()
+	check_player_facing_direction()
 	check_contact_damage_cooldown(_delta)
 
 func get_player_position():
@@ -59,6 +70,14 @@ func get_player_position():
 func get_distance_to_player():
 	if (player_ref != null):
 		return enemy.body.global_position.distance_to(player_ref.char_body.global_position)
+
+func get_horizontal_distance_to_player():
+	if (player_ref != null):
+		return abs(player_ref.char_body.global_position.x - enemy.body.global_position.x)
+
+func get_vertical_distance_to_player():
+	if (player_ref != null):
+		return abs(player_ref.char_body.global_position.y - enemy.body.global_position.y)
 
 func get_direction_to_player():
 	if (player_ref != null):
@@ -146,6 +165,21 @@ func check_player_midair():
 		is_player_in_midair = !player_ref.char_body.is_on_floor()
 		return
 	is_player_in_midair = false
+
+func check_player_facing_direction():
+	if (player_ref != null):
+		if (get_direction_to_player() * player_ref.movement.get_facing_value() < 0):
+			if (!is_player_facing_enemy):
+				player_turned_towards.emit()
+			else:
+				player_looking_towards.emit()
+			is_player_facing_enemy = true
+		else:
+			if (is_player_facing_enemy):
+				player_turned_away.emit()
+			else:
+				player_looking_away.emit()
+			is_player_facing_enemy = false
 
 func check_contact_damage_cooldown(delta : float):
 	if (current_contact_damage_cooldown > 0):

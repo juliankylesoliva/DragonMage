@@ -1,0 +1,200 @@
+[gd_scene load_steps=12 format=3 uid="uid://fbhmjessf6he"]
+
+[ext_resource type="Script" path="res://Scripts/Enemy/GreenMagent.gd" id="1_mrgxa"]
+[ext_resource type="Script" path="res://Scripts/Enemy/EnemyMovement.gd" id="2_xqg6w"]
+[ext_resource type="Script" path="res://Scripts/Enemy/EnemyPlayerDetection.gd" id="3_7jl13"]
+[ext_resource type="Script" path="res://Scripts/Enemy/EnemyCollisionDetection.gd" id="4_qjl0m"]
+[ext_resource type="Texture2D" uid="uid://pk7g70ysmn6" path="res://Sprites/Enemies/GreenDragoon.png" id="5_ntota"]
+[ext_resource type="PackedScene" uid="uid://cve2fw8d2yj8j" path="res://Scene Objects/Effects/ProjectileReflector.tscn" id="6_4sbtv"]
+[ext_resource type="PackedScene" uid="uid://ce2kqx88sgobh" path="res://Scene Objects/Effects/MagicPowerParticles.tscn" id="7_r6wwx"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_f1n2w"]
+radius = 12.0
+height = 57.6
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ucm2n"]
+atlas = ExtResource("5_ntota")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_q7jna"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ucm2n")
+}],
+"loop": true,
+"name": &"default",
+"speed": 60.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_q7l5y"]
+radius = 12.0
+height = 57.6
+
+[node name="GreenMagent" type="CharacterBody2D" node_paths=PackedStringArray("reflector_sprite", "magic_particles", "movement", "collision_detection", "player_detection", "body", "sprite", "shape", "visibility_notifier")]
+process_mode = 4
+light_mask = 8
+visibility_layer = 8
+disable_mode = 1
+collision_layer = 64
+collision_mask = 3
+floor_stop_on_slope = false
+floor_constant_speed = true
+floor_max_angle = 1.39626
+floor_snap_length = 24.0
+platform_floor_layers = 3
+safe_margin = 0.001
+script = ExtResource("1_mrgxa")
+min_distance_from_player = 64.0
+reflector_sprite = NodePath("ProjectileReflector")
+magic_particles = NodePath("MagicPowerParticles")
+magic_speed_modifier = 1.5
+movement = NodePath("Enemy/Movement")
+collision_detection = NodePath("Enemy/CollisionDetection")
+player_detection = NodePath("Enemy/PlayerDetection")
+body = NodePath(".")
+sprite = NodePath("AnimatedSprite2D")
+shape = NodePath("CollisionShape2D")
+visibility_notifier = NodePath("VisibleOnScreenNotifier2D")
+defeated_deactivation_camera_distance = 800.0
+z_index_on_defeat = 8
+metadata/Tag = "Enemy"
+
+[node name="Enemy" type="Node" parent="."]
+
+[node name="Movement" type="Node" parent="Enemy" node_paths=PackedStringArray("enemy")]
+script = ExtResource("2_xqg6w")
+enemy = NodePath("../..")
+
+[node name="PlayerDetection" type="Node" parent="Enemy" node_paths=PackedStringArray("enemy", "front_sightline_raycast", "back_sightline_raycast")]
+script = ExtResource("3_7jl13")
+enemy = NodePath("../..")
+player_detection_distance = 640.0
+enemy_sightline_distance = 224.0
+enemy_short_sightline_distance = 224.0
+front_sightline_raycast = NodePath("../../PlayerRayCastFront")
+back_sightline_raycast = NodePath("../../PlayerRayCastBack")
+use_back_sightline = true
+
+[node name="CollisionDetection" type="Node" parent="Enemy" node_paths=PackedStringArray("enemy", "raycast_wall_top_l", "raycast_wall_mid_l", "raycast_wall_bot_l", "raycast_wall_top_r", "raycast_wall_mid_r", "raycast_wall_bot_r", "raycast_ledge_l", "raycast_ledge_r")]
+script = ExtResource("4_qjl0m")
+enemy = NodePath("../..")
+raycast_wall_top_l = NodePath("../../WallRayCastTopL")
+raycast_wall_mid_l = NodePath("../../WallRayCastMidL")
+raycast_wall_bot_l = NodePath("../../WallRayCastBotL")
+raycast_wall_top_r = NodePath("../../WallRayCastTopR")
+raycast_wall_mid_r = NodePath("../../WallRayCastMidR")
+raycast_wall_bot_r = NodePath("../../WallRayCastBotR")
+raycast_ledge_l = NodePath("../../LedgeRayCastL")
+raycast_ledge_r = NodePath("../../LedgeRayCastR")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+rect = Rect2(-16, -32, 32, 64)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+z_index = 3
+position = Vector2(0, 3)
+shape = SubResource("CapsuleShape2D_f1n2w")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+light_mask = 8
+visibility_layer = 8
+z_index = 3
+sprite_frames = SubResource("SpriteFrames_q7jna")
+autoplay = "default"
+flip_h = true
+
+[node name="ProjectileReflector" parent="." instance=ExtResource("6_4sbtv")]
+visible = false
+frame_progress = 0.518722
+
+[node name="MagicPowerParticles" parent="." instance=ExtResource("7_r6wwx")]
+color = Color(0.0352941, 0.611765, 0.207843, 1)
+
+[node name="ContactHitbox" type="Area2D" parent="."]
+collision_layer = 32
+collision_mask = 36
+
+[node name="ContactHitboxShape" type="CollisionShape2D" parent="ContactHitbox"]
+position = Vector2(0, 3)
+shape = SubResource("CapsuleShape2D_q7l5y")
+
+[node name="PlayerRayCastFront" type="RayCast2D" parent="."]
+target_position = Vector2(0, 0)
+collision_mask = 4
+hit_from_inside = true
+collide_with_areas = true
+
+[node name="PlayerRayCastBack" type="RayCast2D" parent="."]
+target_position = Vector2(0, 0)
+collision_mask = 4
+hit_from_inside = true
+collide_with_areas = true
+
+[node name="WallRayCastTopL" type="RayCast2D" parent="."]
+position = Vector2(0, -17)
+target_position = Vector2(-13, 0)
+collision_mask = 11
+hit_from_inside = true
+collide_with_areas = true
+
+[node name="WallRayCastMidL" type="RayCast2D" parent="."]
+position = Vector2(0, 3)
+target_position = Vector2(-13, 0)
+collision_mask = 11
+hit_from_inside = true
+collide_with_areas = true
+
+[node name="WallRayCastBotL" type="RayCast2D" parent="."]
+position = Vector2(0, 23)
+target_position = Vector2(-13, 0)
+collision_mask = 11
+hit_from_inside = true
+collide_with_areas = true
+
+[node name="WallRayCastTopR" type="RayCast2D" parent="."]
+position = Vector2(0, -17)
+target_position = Vector2(13, 0)
+collision_mask = 11
+hit_from_inside = true
+collide_with_areas = true
+
+[node name="WallRayCastMidR" type="RayCast2D" parent="."]
+position = Vector2(0, 3)
+target_position = Vector2(13, 0)
+collision_mask = 11
+hit_from_inside = true
+collide_with_areas = true
+
+[node name="WallRayCastBotR" type="RayCast2D" parent="."]
+position = Vector2(0, 23)
+target_position = Vector2(13, 0)
+collision_mask = 11
+hit_from_inside = true
+collide_with_areas = true
+
+[node name="LedgeRayCastL" type="RayCast2D" parent="."]
+position = Vector2(-12, 32)
+target_position = Vector2(0, 24)
+collision_mask = 11
+hit_from_inside = true
+collide_with_areas = true
+
+[node name="LedgeRayCastR" type="RayCast2D" parent="."]
+position = Vector2(12, 32)
+target_position = Vector2(0, 24)
+collision_mask = 11
+hit_from_inside = true
+collide_with_areas = true
+
+[connection signal="player_approach" from="Enemy/PlayerDetection" to="." method="on_player_approach"]
+[connection signal="player_looking_away" from="Enemy/PlayerDetection" to="." method="on_looking_away"]
+[connection signal="player_looking_towards" from="Enemy/PlayerDetection" to="." method="on_looking_towards"]
+[connection signal="player_retreat" from="Enemy/PlayerDetection" to="." method="on_player_retreat"]
+[connection signal="player_turned_away" from="Enemy/PlayerDetection" to="." method="on_turned_away"]
+[connection signal="player_turned_towards" from="Enemy/PlayerDetection" to="." method="on_turned_towards"]
+[connection signal="player_collision" from="Enemy/CollisionDetection" to="." method="on_player_collision"]
+[connection signal="touching_ledge" from="Enemy/CollisionDetection" to="." method="on_touching_ledge"]
+[connection signal="touching_wall" from="Enemy/CollisionDetection" to="." method="on_touching_wall"]
+[connection signal="body_entered" from="ContactHitbox" to="Enemy/CollisionDetection" method="_on_contact_hitbox_body_entered"]
+[connection signal="body_exited" from="ContactHitbox" to="Enemy/CollisionDetection" method="_on_contact_hitbox_body_exited"]

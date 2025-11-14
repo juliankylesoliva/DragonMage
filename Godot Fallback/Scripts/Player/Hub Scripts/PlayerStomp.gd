@@ -30,7 +30,7 @@ var is_rising_stomp_on_cooldown : bool = false
 
 func is_stomping_enemy():
 	if (!hub.damage.is_player_defeated and !hub.damage.is_player_damaged() and !hub.char_body.is_on_floor() and !magic_blast_attack.is_blast_jumping and (valid_stomp_state_names.has(hub.state_machine.current_state.name) or can_do_rising_stomp() or is_valid_attack_state())):
-		if (stomp_hitbox.enemy_to_stomp != null and hub.raycast_dm.global_position.y < stomp_hitbox.enemy_to_stomp.body.global_position.y):
+		if (stomp_hitbox.enemy_to_stomp != null and !stomp_hitbox.enemy_to_stomp.is_intangible and hub.raycast_dm.global_position.y < stomp_hitbox.enemy_to_stomp.body.global_position.y):
 			return true
 		elif (stomp_hitbox.boss_to_stomp != null and stomp_hitbox.boss_to_stomp.can_be_stomped and hub.raycast_dm.global_position.y < stomp_hitbox.boss_to_stomp.body.global_position.y):
 			return (true and !can_do_rising_stomp())
