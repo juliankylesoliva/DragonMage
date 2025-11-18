@@ -1,0 +1,87 @@
+[gd_scene load_steps=10 format=3 uid="uid://jxohs583estv"]
+
+[ext_resource type="Script" path="res://Scripts/Enemy/EnemyProjectile.gd" id="1_yp20p"]
+[ext_resource type="Texture2D" uid="uid://d1cfjpysf5e88" path="res://Sprites/Enemies/YellowMagentProjectile.png" id="2_htap2"]
+[ext_resource type="AudioStream" uid="uid://cv3hqverpvy3g" path="res://Sounds/enemy_dragoon_fireball.wav" id="3_6orrc"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_8ttq4"]
+radius = 6.0
+height = 26.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w038u"]
+atlas = ExtResource("2_htap2")
+region = Rect2(0, 0, 31, 31)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_it5s8"]
+atlas = ExtResource("2_htap2")
+region = Rect2(31, 0, 31, 31)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jvveo"]
+atlas = ExtResource("2_htap2")
+region = Rect2(62, 0, 31, 31)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_b5ptf"]
+animations = [{
+"frames": [{
+"duration": 6.0,
+"texture": SubResource("AtlasTexture_w038u")
+}, {
+"duration": 6.0,
+"texture": SubResource("AtlasTexture_it5s8")
+}, {
+"duration": 6.0,
+"texture": SubResource("AtlasTexture_jvveo")
+}],
+"loop": true,
+"name": &"default",
+"speed": 60.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_x8f7j"]
+radius = 6.0
+height = 26.0
+
+[node name="YellowMagentProjectile" type="CharacterBody2D" node_paths=PackedStringArray("audio", "projectile_sprite", "visible_on_screen_notifier")]
+light_mask = 16
+visibility_layer = 16
+collision_layer = 128
+collision_mask = 0
+script = ExtResource("1_yp20p")
+audio = NodePath("AudioStreamPlayer2D")
+projectile_sprite = NodePath("AnimatedSprite2D")
+visible_on_screen_notifier = NodePath("VisibleOnScreenNotifier2D")
+move_speed = 600.0
+enable_rotation = true
+damage_type = "MAGIC"
+metadata/Tag = "EnemyProjectile"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_8ttq4")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+light_mask = 16
+visibility_layer = 16
+z_index = 5
+sprite_frames = SubResource("SpriteFrames_b5ptf")
+autoplay = "default"
+frame_progress = 0.314778
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+rect = Rect2(-15, -6, 31, 13)
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_6orrc")
+autoplay = true
+max_distance = 512.0
+bus = &"SFX"
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 461
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_x8f7j")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_body_entered"]

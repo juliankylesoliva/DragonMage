@@ -23,6 +23,7 @@ extends Enemy
 var base_gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
 func _ready():
+	movement.ignore_y_value = !enable_wings
 	if (enable_helmet):
 		immunity_list.append("STOMP")
 	can_reflect_projectiles = enable_reflector
@@ -30,7 +31,6 @@ func _ready():
 	if (enable_magic):
 		move_speed *= magic_speed_modifier
 		if (enable_wings):
-			movement.ignore_y_value = false
 			winged_turnaround_speed *= (magic_speed_modifier * magic_speed_modifier)
 		sprite.set_speed_scale(magic_speed_modifier)
 	magic_particles.set_emitting(enable_magic)
@@ -72,7 +72,6 @@ func activate_enemy():
 	movement.reset_to_initial_position()
 	movement.reset_to_initial_move_vector()
 	movement.is_always_facing_player = true
-	movement.ignore_y_value = !enable_wings
 	#if (enable_helmet):
 	#	sprite.play("WingedIdleHelmet" if enable_wings else "IdleHelmet")
 	#else:
@@ -80,7 +79,6 @@ func activate_enemy():
 
 func deactivate_enemy():
 	movement.is_always_facing_player = true
-	movement.ignore_y_value = !enable_wings
 	movement.set_physics_process(false)
 	movement.set_process(false)
 	#if (enable_helmet):
@@ -102,12 +100,10 @@ func on_player_approach():
 		movement.set_process(true)
 		movement.reset_to_initial_move_vector()
 		movement.is_always_facing_player = true
-		movement.ignore_y_value = !enable_wings
 
 func on_player_retreat():
 	if (!is_defeated):
 		movement.is_always_facing_player = true
-		movement.ignore_y_value = !enable_wings
 		movement.set_facing_direction(-1)
 		movement.reset_to_initial_move_vector()
 		movement.set_physics_process(false)
@@ -121,7 +117,6 @@ func on_player_retreat():
 func on_turned_away():
 	if (!is_defeated and visibility_notifier.is_on_screen() and movement.current_move_vector.x == 0 and player_detection.get_horizontal_distance_to_player() >= min_distance_from_player):
 		movement.is_always_facing_player = false
-		movement.ignore_y_value = !enable_wings
 		movement.face_towards_player()
 		var horizontal_vector : Vector2 = (Vector2.RIGHT * movement.get_facing_value() * move_speed)
 		var vertical_vector : Vector2 = (min(move_speed, player_detection.get_vertical_distance_to_player()) * (Vector2.ZERO if !enable_wings else Vector2.UP if player_detection.get_player_position().y < body.global_position.y else Vector2.DOWN if player_detection.get_player_position().y > body.global_position.y else Vector2.ZERO))
@@ -134,7 +129,6 @@ func on_turned_away():
 func on_looking_away():
 	if (!is_defeated and visibility_notifier.is_on_screen() and player_detection.get_horizontal_distance_to_player() >= min_distance_from_player):
 		movement.is_always_facing_player = false
-		movement.ignore_y_value = !enable_wings
 		var horizontal_vector : Vector2 = (Vector2.RIGHT * movement.get_facing_value() * move_speed)
 		var vertical_vector : Vector2 = (min(move_speed, player_detection.get_vertical_distance_to_player()) * (Vector2.ZERO if !enable_wings else Vector2.UP if player_detection.get_player_position().y < body.global_position.y else Vector2.DOWN if player_detection.get_player_position().y > body.global_position.y else Vector2.ZERO))
 		movement.set_move_vector(horizontal_vector + vertical_vector)
@@ -147,28 +141,24 @@ func on_turned_towards():
 	if (!is_defeated and visibility_notifier.is_on_screen() and movement.current_move_vector.x != 0):
 		movement.set_move_vector(Vector2.ZERO)
 		movement.is_always_facing_player = true
-		movement.ignore_y_value = !enable_wings
 		# hiding animation
 
 func on_looking_towards():
 	if (!is_defeated and visibility_notifier.is_on_screen() and movement.current_move_vector.x != 0):
 		movement.set_move_vector(Vector2.ZERO)
 		movement.is_always_facing_player = true
-		movement.ignore_y_value = !enable_wings
 		# hiding animation
 
 func on_touching_wall():
 	if (!is_defeated and !enable_wings):
 		movement.set_move_vector(Vector2.ZERO)
 		movement.is_always_facing_player = true
-		movement.ignore_y_value = !enable_wings
 		# hiding animation
 
 func on_touching_ledge():
 	if (!is_defeated and !enable_wings):
 		movement.set_move_vector(Vector2.ZERO)
 		movement.is_always_facing_player = true
-		movement.ignore_y_value = !enable_wings
 		# hiding animation
 
 func on_player_collision():
@@ -180,7 +170,6 @@ func on_player_collision():
 		elif (player_detection.damage_player()):
 			movement.set_move_vector(Vector2.ZERO)
 			movement.is_always_facing_player = true
-			movement.ignore_y_value = !enable_wings
 			# hiding animation
 			collision_detection.play_player_collision_sound()
 			collision_detection.spawn_player_collision_effect()

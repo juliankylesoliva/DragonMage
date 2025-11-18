@@ -24,6 +24,8 @@ class_name EnemyPlayerDetection
 
 signal player_approach
 
+signal player_still_nearby
+
 signal player_retreat
 
 signal player_enter_sightline
@@ -86,6 +88,10 @@ func get_direction_to_player():
 			return (1.0 if x_diff > 0 else -1.0)
 	return 0.0
 
+func get_vector_to_player():
+	if (player_ref != null):
+		return (enemy.body.global_position.direction_to(player_ref.char_body.global_position))
+
 func is_facing_player():
 	return ((get_direction_to_player() * enemy.movement.get_facing_value()) > 0)
 
@@ -120,6 +126,8 @@ func check_player_detection_radius():
 		if (player_distance >= 0 and player_distance <= player_detection_distance):
 			if (!is_player_nearby):
 				player_approach.emit()
+			else:
+				player_still_nearby.emit()
 			is_player_nearby = true
 		else:
 			if (is_player_nearby):
