@@ -1,27 +1,27 @@
-[gd_scene load_steps=13 format=3 uid="uid://cp0r2k3bepkhi"]
+[gd_scene load_steps=13 format=3 uid="uid://bembkq2kts2g6"]
 
-[ext_resource type="Script" path="res://Scripts/Enemy/YellowMagent.gd" id="1_6qse8"]
-[ext_resource type="Script" path="res://Scripts/Enemy/EnemyMovement.gd" id="2_f13jh"]
-[ext_resource type="PackedScene" uid="uid://jxohs583estv" path="res://Scene Objects/Enemies/YellowMagentProjectile.tscn" id="2_q3na7"]
-[ext_resource type="Script" path="res://Scripts/Enemy/EnemyPlayerDetection.gd" id="3_t11de"]
-[ext_resource type="Script" path="res://Scripts/Enemy/EnemyCollisionDetection.gd" id="4_hfgv5"]
-[ext_resource type="Texture2D" uid="uid://cat03jbesyy6f" path="res://Sprites/Enemies/YellowDragoon.png" id="5_1k23j"]
-[ext_resource type="PackedScene" uid="uid://cve2fw8d2yj8j" path="res://Scene Objects/Effects/ProjectileReflector.tscn" id="6_ldxu0"]
-[ext_resource type="PackedScene" uid="uid://ce2kqx88sgobh" path="res://Scene Objects/Effects/MagicPowerParticles.tscn" id="7_s4khc"]
+[ext_resource type="Script" path="res://Scripts/Enemy/RedMagent.gd" id="1_xaevq"]
+[ext_resource type="PackedScene" uid="uid://dm3cpg1labv4p" path="res://Scene Objects/Enemies/RedMagentProjectile.tscn" id="2_6kl6n"]
+[ext_resource type="Script" path="res://Scripts/Enemy/EnemyMovement.gd" id="3_5magq"]
+[ext_resource type="Script" path="res://Scripts/Enemy/EnemyPlayerDetection.gd" id="4_cgdw1"]
+[ext_resource type="Script" path="res://Scripts/Enemy/EnemyCollisionDetection.gd" id="5_umt8v"]
+[ext_resource type="Texture2D" uid="uid://csqde18tv4wya" path="res://Sprites/Enemies/RedDragoon.png" id="6_x71lc"]
+[ext_resource type="PackedScene" uid="uid://cve2fw8d2yj8j" path="res://Scene Objects/Effects/ProjectileReflector.tscn" id="7_b2uhe"]
+[ext_resource type="PackedScene" uid="uid://ce2kqx88sgobh" path="res://Scene Objects/Effects/MagicPowerParticles.tscn" id="8_m3e1s"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_f1n2w"]
 radius = 12.0
 height = 57.6
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_n58ej"]
-atlas = ExtResource("5_1k23j")
+[sub_resource type="AtlasTexture" id="AtlasTexture_u476n"]
+atlas = ExtResource("6_x71lc")
 region = Rect2(0, 0, 64, 64)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_q7jna"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_n58ej")
+"texture": SubResource("AtlasTexture_u476n")
 }],
 "loop": true,
 "name": &"default",
@@ -32,7 +32,7 @@ animations = [{
 radius = 12.0
 height = 57.6
 
-[node name="YellowMagent" type="CharacterBody2D" node_paths=PackedStringArray("projectile_spawn_point", "reflector_sprite", "magic_particles", "movement", "collision_detection", "player_detection", "body", "sprite", "shape", "visibility_notifier")]
+[node name="RedMagent" type="CharacterBody2D" node_paths=PackedStringArray("projectile_spawn_point", "reflector_sprite", "magic_particles", "movement", "collision_detection", "player_detection", "body", "sprite", "shape", "visibility_notifier")]
 process_mode = 4
 light_mask = 8
 visibility_layer = 8
@@ -45,14 +45,12 @@ floor_max_angle = 1.39626
 floor_snap_length = 24.0
 platform_floor_layers = 3
 safe_margin = 0.001
-script = ExtResource("1_6qse8")
-yellow_magent_projectile_scene = ExtResource("2_q3na7")
+script = ExtResource("1_xaevq")
+red_magent_projectile_scene = ExtResource("2_6kl6n")
 projectile_spawn_point = NodePath(".")
-min_distance_from_player = 64.0
 max_distance_from_player = 288.0
 reflector_sprite = NodePath("ProjectileReflector")
 magic_particles = NodePath("MagicPowerParticles")
-magic_sound_pitch_modifer = 0.75
 movement = NodePath("Enemy/Movement")
 collision_detection = NodePath("Enemy/CollisionDetection")
 player_detection = NodePath("Enemy/PlayerDetection")
@@ -60,18 +58,16 @@ body = NodePath(".")
 sprite = NodePath("AnimatedSprite2D")
 shape = NodePath("CollisionShape2D")
 visibility_notifier = NodePath("VisibleOnScreenNotifier2D")
-defeated_deactivation_camera_distance = 800.0
-z_index_on_defeat = 8
 metadata/Tag = "Enemy"
 
 [node name="Enemy" type="Node" parent="."]
 
 [node name="Movement" type="Node" parent="Enemy" node_paths=PackedStringArray("enemy")]
-script = ExtResource("2_f13jh")
+script = ExtResource("3_5magq")
 enemy = NodePath("../..")
 
 [node name="PlayerDetection" type="Node" parent="Enemy" node_paths=PackedStringArray("enemy", "front_sightline_raycast", "back_sightline_raycast")]
-script = ExtResource("3_t11de")
+script = ExtResource("4_cgdw1")
 enemy = NodePath("../..")
 player_detection_distance = 640.0
 enemy_sightline_distance = 224.0
@@ -81,7 +77,7 @@ back_sightline_raycast = NodePath("../../PlayerRayCastBack")
 use_back_sightline = true
 
 [node name="CollisionDetection" type="Node" parent="Enemy" node_paths=PackedStringArray("enemy", "raycast_wall_top_l", "raycast_wall_mid_l", "raycast_wall_bot_l", "raycast_wall_top_r", "raycast_wall_mid_r", "raycast_wall_bot_r", "raycast_ledge_l", "raycast_ledge_r")]
-script = ExtResource("4_hfgv5")
+script = ExtResource("5_umt8v")
 enemy = NodePath("../..")
 raycast_wall_top_l = NodePath("../../WallRayCastTopL")
 raycast_wall_mid_l = NodePath("../../WallRayCastMidL")
@@ -108,12 +104,12 @@ sprite_frames = SubResource("SpriteFrames_q7jna")
 autoplay = "default"
 flip_h = true
 
-[node name="ProjectileReflector" parent="." instance=ExtResource("6_ldxu0")]
+[node name="ProjectileReflector" parent="." instance=ExtResource("7_b2uhe")]
 visible = false
 frame_progress = 0.518722
 
-[node name="MagicPowerParticles" parent="." instance=ExtResource("7_s4khc")]
-color = Color(0.278431, 0.780392, 0.211765, 1)
+[node name="MagicPowerParticles" parent="." instance=ExtResource("8_m3e1s")]
+color = Color(0.560784, 0.192157, 0.0666667, 1)
 
 [node name="ContactHitbox" type="Area2D" parent="."]
 collision_layer = 32
@@ -191,9 +187,5 @@ collision_mask = 11
 hit_from_inside = true
 collide_with_areas = true
 
-[connection signal="player_approach" from="Enemy/PlayerDetection" to="." method="on_player_approach"]
-[connection signal="player_retreat" from="Enemy/PlayerDetection" to="." method="on_player_retreat"]
-[connection signal="player_still_nearby" from="Enemy/PlayerDetection" to="." method="on_player_still_nearby"]
-[connection signal="player_collision" from="Enemy/CollisionDetection" to="." method="on_player_collision"]
 [connection signal="body_entered" from="ContactHitbox" to="Enemy/CollisionDetection" method="_on_contact_hitbox_body_entered"]
 [connection signal="body_exited" from="ContactHitbox" to="Enemy/CollisionDetection" method="_on_contact_hitbox_body_exited"]
