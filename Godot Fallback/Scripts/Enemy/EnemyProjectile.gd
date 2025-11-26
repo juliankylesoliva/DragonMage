@@ -92,7 +92,7 @@ func boss_setup(boss_source : Boss, custom_direction : Vector2 = Vector2.INF):
 	is_setup = true
 
 func setup(enemy_source : Enemy):
-	velocity = (Vector2.RIGHT * enemy_source.movement.get_facing_value() * move_speed)
+	velocity = ((Vector2.RIGHT * enemy_source.movement.get_facing_value() * move_speed) + (Vector2.UP * jump_speed))
 	is_moving_right = (enemy_source.movement.get_facing_value() >= 0)
 	projectile_sprite.flip_h = !is_moving_right
 	is_setup = true

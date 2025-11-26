@@ -47,10 +47,14 @@ platform_floor_layers = 3
 safe_margin = 0.001
 script = ExtResource("1_xaevq")
 red_magent_projectile_scene = ExtResource("2_6kl6n")
-projectile_spawn_point = NodePath(".")
-max_distance_from_player = 288.0
+projectile_spawn_point = NodePath("PlayerRayCastFront")
+move_speed = 48.0
+move_duration = 0.8
 reflector_sprite = NodePath("ProjectileReflector")
 magic_particles = NodePath("MagicPowerParticles")
+magic_projectile_scale_modifier = 2.0
+magic_projectile_speed_modifier = 0.85
+magic_sound_pitch_modifer = 0.75
 movement = NodePath("Enemy/Movement")
 collision_detection = NodePath("Enemy/CollisionDetection")
 player_detection = NodePath("Enemy/PlayerDetection")
@@ -58,6 +62,8 @@ body = NodePath(".")
 sprite = NodePath("AnimatedSprite2D")
 shape = NodePath("CollisionShape2D")
 visibility_notifier = NodePath("VisibleOnScreenNotifier2D")
+defeated_deactivation_camera_distance = 800.0
+z_index_on_defeat = 8
 metadata/Tag = "Enemy"
 
 [node name="Enemy" type="Node" parent="."]
@@ -65,6 +71,8 @@ metadata/Tag = "Enemy"
 [node name="Movement" type="Node" parent="Enemy" node_paths=PackedStringArray("enemy")]
 script = ExtResource("3_5magq")
 enemy = NodePath("../..")
+face_movement_direction = false
+is_always_facing_player = false
 
 [node name="PlayerDetection" type="Node" parent="Enemy" node_paths=PackedStringArray("enemy", "front_sightline_raycast", "back_sightline_raycast")]
 script = ExtResource("4_cgdw1")
@@ -187,5 +195,10 @@ collision_mask = 11
 hit_from_inside = true
 collide_with_areas = true
 
+[connection signal="player_approach" from="Enemy/PlayerDetection" to="." method="on_player_approach"]
+[connection signal="player_retreat" from="Enemy/PlayerDetection" to="." method="on_player_retreat"]
+[connection signal="player_collision" from="Enemy/CollisionDetection" to="." method="on_player_collision"]
+[connection signal="touching_ledge" from="Enemy/CollisionDetection" to="." method="on_touching_ledge"]
+[connection signal="touching_wall" from="Enemy/CollisionDetection" to="." method="on_touching_wall"]
 [connection signal="body_entered" from="ContactHitbox" to="Enemy/CollisionDetection" method="_on_contact_hitbox_body_entered"]
 [connection signal="body_exited" from="ContactHitbox" to="Enemy/CollisionDetection" method="_on_contact_hitbox_body_exited"]

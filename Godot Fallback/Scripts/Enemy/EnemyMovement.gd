@@ -10,6 +10,8 @@ class_name EnemyMovement
 
 @export var ignore_y_value : bool = true
 
+@export var face_movement_direction : bool = true
+
 @export var is_always_facing_player : bool = true
 
 @export var max_distance_from_init_pos : float = -1
@@ -45,7 +47,8 @@ func set_move_vector(vector : Vector2):
 	current_move_vector = vector
 	target_move_vector = vector
 	current_turn_speed = 0
-	set_facing_direction(vector.x)
+	if (face_movement_direction):
+		set_facing_direction(vector.x)
 
 func flip_movement(override_cooldown : bool = false):
 	if (!override_cooldown and is_turning_cooldown_active()):
@@ -110,6 +113,14 @@ func check_distance_from_home():
 			is_far_from_home = false
 		else:
 			pass
+
+func get_direction_to_home():
+	if (initial_position.x > enemy.body.global_position.x):
+		return 1.0
+	elif (initial_position.x < enemy.body.global_position.x):
+		return -1.0
+	else:
+		return 0.0
 
 func check_if_facing_player():
 	if (!enemy.is_defeated and is_always_facing_player):
