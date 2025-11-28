@@ -52,7 +52,6 @@ var current_projectile_state_timer : float = 0
 var current_target_position : Vector2 = Vector2.ZERO
 
 func _ready():
-	movement.ignore_y_value = !enable_wings
 	if (enable_helmet):
 		immunity_list.append("STOMP")
 	can_reflect_projectiles = enable_reflector

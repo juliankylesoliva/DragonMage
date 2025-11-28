@@ -1,0 +1,100 @@
+[gd_scene load_steps=11 format=3 uid="uid://bwr5ucrmhrb4m"]
+
+[ext_resource type="Script" path="res://Scripts/Enemy/EnemyProjectile.gd" id="1_q0sdb"]
+[ext_resource type="Texture2D" uid="uid://b156lo3o6mk23" path="res://Sprites/Enemies/BlueMagentProjectile.png" id="2_vtwal"]
+[ext_resource type="AudioStream" uid="uid://cv3hqverpvy3g" path="res://Sounds/enemy_dragoon_fireball.wav" id="3_aubpu"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6q5cw"]
+size = Vector2(64, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3ihw5"]
+atlas = ExtResource("2_vtwal")
+region = Rect2(0, 0, 64, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hmnsr"]
+atlas = ExtResource("2_vtwal")
+region = Rect2(64, 0, 64, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b6gsp"]
+atlas = ExtResource("2_vtwal")
+region = Rect2(128, 0, 64, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j7c7t"]
+atlas = ExtResource("2_vtwal")
+region = Rect2(192, 0, 64, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_b5ptf"]
+animations = [{
+"frames": [{
+"duration": 5.0,
+"texture": SubResource("AtlasTexture_3ihw5")
+}, {
+"duration": 5.0,
+"texture": SubResource("AtlasTexture_hmnsr")
+}, {
+"duration": 5.0,
+"texture": SubResource("AtlasTexture_b6gsp")
+}, {
+"duration": 5.0,
+"texture": SubResource("AtlasTexture_j7c7t")
+}],
+"loop": true,
+"name": &"default",
+"speed": 60.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_prytw"]
+size = Vector2(8, 32)
+
+[node name="BlueMagentProjectile" type="CharacterBody2D" node_paths=PackedStringArray("audio", "projectile_sprite", "visible_on_screen_notifier")]
+light_mask = 16
+visibility_layer = 16
+collision_layer = 129
+collision_mask = 3
+motion_mode = 1
+platform_floor_layers = 4278190083
+platform_wall_layers = 3
+script = ExtResource("1_q0sdb")
+audio = NodePath("AudioStreamPlayer2D")
+projectile_sprite = NodePath("AnimatedSprite2D")
+visible_on_screen_notifier = NodePath("VisibleOnScreenNotifier2D")
+move_speed = 120.0
+destroy_on_wall_bounce = true
+destroy_when_offscreen = false
+damage_type = "MAGIC"
+metadata/Tag = "EnemyProjectile"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 8)
+shape = SubResource("RectangleShape2D_6q5cw")
+one_way_collision = true
+one_way_collision_margin = 16.0
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+light_mask = 16
+visibility_layer = 16
+z_index = 5
+sprite_frames = SubResource("SpriteFrames_b5ptf")
+autoplay = "default"
+frame_progress = 0.814539
+offset = Vector2(0, 16)
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+rect = Rect2(-32, 0, 64, 32)
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_aubpu")
+autoplay = true
+max_distance = 512.0
+bus = &"SFX"
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 461
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0, 8)
+rotation = 1.5708
+shape = SubResource("RectangleShape2D_prytw")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_body_entered"]

@@ -28,6 +28,8 @@ class_name EnemyProjectile
 
 @export var max_reflects : int = 3
 
+@export var destroy_when_offscreen : bool = true
+
 @export_enum("MAGIC", "FIRE") var damage_type : String = "FIRE"
 
 @export var impact_effect_name : String = "DragoonProjectileImpact"
@@ -80,7 +82,7 @@ func _physics_process(_delta):
 	move_and_slide()
 	velocity += (Vector2.DOWN * get_gravity_delta(_delta))
 	
-	if (is_setup and !visible_on_screen_notifier.is_on_screen()):
+	if (is_setup and !visible_on_screen_notifier.is_on_screen() and destroy_when_offscreen):
 		queue_free()
 
 func boss_setup(boss_source : Boss, custom_direction : Vector2 = Vector2.INF):
