@@ -1,0 +1,94 @@
+[gd_scene load_steps=8 format=4 uid="uid://b6nymom8fkgg3"]
+
+[ext_resource type="Script" path="res://Scripts/Utility Scripts/Room.gd" id="1_q8swm"]
+[ext_resource type="TileSet" uid="uid://dhwi7i1loa2pd" path="res://Sprites/Tiles/Test Tiles/TestTileSet.tres" id="2_pnvn5"]
+[ext_resource type="PackedScene" uid="uid://7hpfpsyk75xy" path="res://Scene Objects/Obstacles/AmbushBlockade.tscn" id="3_arhul"]
+[ext_resource type="PackedScene" uid="uid://dqbo0wu6hm8lj" path="res://Scene Objects/Objects/WarpTrigger.tscn" id="3_cqlcs"]
+[ext_resource type="PackedScene" uid="uid://bgeb7gsyn4pn" path="res://Scene Objects/Enemies/BlueMagent.tscn" id="4_vyww8"]
+[ext_resource type="PackedScene" uid="uid://dck0mc2tc82kx" path="res://Scene Objects/Objects/ReinforcedFireBlock.tscn" id="6_faohu"]
+[ext_resource type="PackedScene" uid="uid://dgtmsbsmeieyh" path="res://Scene Objects/Objects/ReinforcedMagicBlock.tscn" id="7_uyf2j"]
+
+[node name="CH3_LV1_R3" type="Node2D" node_paths=PackedStringArray("tilemap_list", "room_entrances", "enemy_nodes")]
+script = ExtResource("1_q8swm")
+tilemap_list = [NodePath("BoundaryCollisionTilemap"), NodePath("LevelCollisionTilemap")]
+top_camera_limit = -320
+room_entrances = [NodePath("Entrance 0"), NodePath("Entrance 1")]
+enemy_nodes = [NodePath("BlueMagent"), NodePath("BlueMagent2"), NodePath("BlueMagent3")]
+
+[node name="BoundaryCollisionTilemap" type="Node2D" parent="."]
+z_index = 4
+
+[node name="Intangible" type="TileMapLayer" parent="BoundaryCollisionTilemap"]
+z_index = -1
+use_parent_material = true
+tile_map_data = PackedByteArray("AAD9/wUAAAADAAAAAAD9/wYAAAADAAAAAAD9/wcAAAADAAAAAAD9/wgAAAADAAAAAAD+/wUAAAADAAAAAAD+/wgAAAADAAAAAAD//wUAAAADAAAAAAD//wgAAAADAAAAAAALAP//AAADAAAAAAALAAIAAAADAAAAAAALAAMAAAADAAAAAAALAAQAAAADAAAAAAALAAUAAAADAAAAAAAEAP//AAADAAAAAAAEAAAAAAADAAAAAAAEAAEAAAADAAAAAAAEAAIAAAADAAAAAAAEAAMAAAADAAAAAAAEAAUAAAADAAAAAAALAAEAAAADAAAAAAASAPj/AAADAAAAAAASAPn/AAADAAAAAAASAPr/AAADAAAAAAAQAPj/AAADAAAAAAAQAPv/AAADAAAAAAARAPj/AAADAAAAAAARAPv/AAADAAAAAAASAPv/AAADAAAAAAA=")
+tile_set = ExtResource("2_pnvn5")
+rendering_quadrant_size = 32
+metadata/Tag = "IntangibleWall"
+
+[node name="LevelCollisionTilemap" type="Node2D" parent="."]
+visibility_layer = 4
+z_index = 3
+
+[node name="Decoration" type="TileMapLayer" parent="LevelCollisionTilemap"]
+use_parent_material = true
+tile_set = ExtResource("2_pnvn5")
+rendering_quadrant_size = 32
+
+[node name="Background" type="TileMapLayer" parent="LevelCollisionTilemap"]
+z_index = -1
+use_parent_material = true
+tile_set = ExtResource("2_pnvn5")
+
+[node name="Ground" type="TileMapLayer" parent="LevelCollisionTilemap"]
+modulate = Color(0.0745098, 0.113725, 0.301961, 1)
+z_index = -1
+use_parent_material = true
+tile_map_data = PackedByteArray("AAAAAAgAAAADAAAAAAAAAAkAAAADAAAAAAABAAgAAAADAAAAAAABAAkAAAADAAAAAAACAAgAAAADAAAAAAACAAkAAAADAAAAAAADAAgAAAADAAAAAAADAAkAAAADAAAAAAAEAAgAAAADAAAAAAAEAAkAAAADAAAAAAAFAAgAAAADAAAAAAAFAAkAAAADAAAAAAAGAAgAAAADAAAAAAAGAAkAAAADAAAAAAAHAAgAAAADAAAAAAAHAAkAAAADAAAAAAAIAAgAAAADAAAAAAAIAAkAAAADAAAAAAAJAAgAAAADAAAAAAAJAAkAAAADAAAAAAAKAAgAAAADAAAAAAAKAAkAAAADAAAAAAALAAgAAAADAAAAAAALAAkAAAADAAAAAAAMAAgAAAADAAAAAAAMAAkAAAADAAAAAAANAAgAAAADAAAAAAANAAkAAAADAAAAAAAOAAgAAAADAAAAAAAOAAkAAAADAAAAAAAPAAgAAAADAAAAAAAPAAkAAAADAAAAAAAAAAAAAAADAAAAAAAAAAEAAAADAAAAAAAAAAIAAAADAAAAAAAAAAMAAAADAAAAAAAAAAQAAAADAAAAAAAAAAUAAAADAAAAAAABAAUAAAADAAAAAAAAAPb/AAADAAAAAAAAAPf/AAADAAAAAAAAAPj/AAADAAAAAAAAAPn/AAADAAAAAAAAAPr/AAADAAAAAAAAAPv/AAADAAAAAAAAAPz/AAADAAAAAAAAAP3/AAADAAAAAAAAAP7/AAADAAAAAAAAAP//AAADAAAAAAABAPb/AAADAAAAAAABAPf/AAADAAAAAAACAPb/AAADAAAAAAACAPf/AAADAAAAAAADAPb/AAADAAAAAAADAPf/AAADAAAAAAAEAPb/AAADAAAAAAAEAPf/AAADAAAAAAAFAPb/AAADAAAAAAAFAPf/AAADAAAAAAAGAPb/AAADAAAAAAAGAPf/AAADAAAAAAAHAPb/AAADAAAAAAAHAPf/AAADAAAAAAAIAPb/AAADAAAAAAAIAPf/AAADAAAAAAAJAPb/AAADAAAAAAAJAPf/AAADAAAAAAAKAPb/AAADAAAAAAAKAPf/AAADAAAAAAALAPb/AAADAAAAAAALAPf/AAADAAAAAAAMAPb/AAADAAAAAAAMAPf/AAADAAAAAAANAPb/AAADAAAAAAANAPf/AAADAAAAAAAOAPb/AAADAAAAAAAOAPf/AAADAAAAAAAPAPb/AAADAAAAAAAPAPf/AAADAAAAAAAOAPv/AAADAAAAAAAOAPz/AAADAAAAAAAOAAIAAAADAAAAAAAOAAMAAAADAAAAAAAOAAQAAAADAAAAAAAOAAUAAAADAAAAAAAOAAYAAAADAAAAAAAOAAcAAAADAAAAAAAPAPv/AAADAAAAAAAPAPz/AAADAAAAAAAPAP3/AAADAAAAAAAPAP7/AAADAAAAAAAPAP//AAADAAAAAAAPAAAAAAADAAAAAAAPAAEAAAADAAAAAAAPAAIAAAADAAAAAAAPAAMAAAADAAAAAAAPAAQAAAADAAAAAAAPAAUAAAADAAAAAAAPAAYAAAADAAAAAAAPAAcAAAADAAAAAAAMAAYAAAADAAAAAAAMAAcAAAADAAAAAAANAAYAAAADAAAAAAANAAcAAAADAAAAAAACAAUAAAADAAAAAAADAAUAAAADAAAAAAAKAPv/AAADAAAAAAALAPv/AAADAAAAAAAMAPv/AAADAAAAAAANAPv/AAADAAAAAAAGAPv/AAADAAAAAAAHAPv/AAADAAAAAAAIAPv/AAADAAAAAAAJAPv/AAADAAAAAAAKAPj/AAADAAAAAAALAPj/AAADAAAAAAAMAAIAAAADAAAAAAAMAAMAAAADAAAAAAANAAIAAAADAAAAAAANAAMAAAADAAAAAAAMAAQAAAADAAAAAAAMAAUAAAADAAAAAAANAAQAAAADAAAAAAANAAUAAAADAAAAAAAKAPz/AAADAAAAAAALAPz/AAADAAAAAAAMAPz/AAADAAAAAAANAPz/AAADAAAAAAAJAPz/AAADAAAAAAAIAPz/AAADAAAAAAAHAPz/AAADAAAAAAAGAPz/AAADAAAAAAAMAP//AAADAAAAAAADAP//AAADAAAAAAADAAAAAAADAAAAAAADAAEAAAADAAAAAAADAAIAAAADAAAAAAADAAMAAAADAAAAAAALAAYAAAADAAAAAAALAAcAAAADAAAAAAAFAPv/AAADAAAAAAAFAPz/AAADAAAAAAAOAAEAAAADAAAAAAANAAEAAAADAAAAAAAMAAEAAAADAAAAAAABAPj/AAADAAAAAAACAPj/AAADAAAAAAADAPj/AAADAAAAAAAEAPj/AAADAAAAAAAFAPj/AAADAAAAAAAGAPj/AAADAAAAAAAHAPj/AAADAAAAAAAIAPj/AAADAAAAAAAJAPj/AAADAAAAAAAMAPj/AAADAAAAAAANAPj/AAADAAAAAAAOAPj/AAADAAAAAAAPAPj/AAADAAAAAAAEAPz/AAADAAAAAAAEAPv/AAADAAAAAAADAPv/AAADAAAAAAADAPz/AAADAAAAAAADAPr/AAADAAAAAAAEAPr/AAADAAAAAAA=")
+tile_set = ExtResource("2_pnvn5")
+
+[node name="Slopes" type="TileMapLayer" parent="LevelCollisionTilemap"]
+modulate = Color(0.701961, 0.215686, 0.105882, 1)
+z_index = -1
+use_parent_material = true
+tile_set = ExtResource("2_pnvn5")
+
+[node name="AmbushBlockade" parent="." node_paths=PackedStringArray("room_ref") instance=ExtResource("3_arhul")]
+tile_map_data = PackedByteArray("AAAOAPn/EgAAAAAAAAAOAPr/EgAAAAAAAAA=")
+room_ref = NodePath("..")
+
+[node name="Entrance 0" type="Node2D" parent="."]
+position = Vector2(16, 224)
+
+[node name="Entrance 1" type="Node2D" parent="."]
+position = Vector2(496, -192)
+
+[node name="Warp 0" parent="." node_paths=PackedStringArray("room_origin", "room_destination") instance=ExtResource("3_cqlcs")]
+position = Vector2(560, -192)
+room_origin = NodePath("..")
+room_destination = NodePath("..")
+
+[node name="Warp 1" parent="." node_paths=PackedStringArray("room_origin", "room_destination") instance=ExtResource("3_cqlcs")]
+position = Vector2(-48, 224)
+room_origin = NodePath("..")
+room_destination = NodePath("..")
+room_entrance_index = 1
+
+[node name="BlueMagent" parent="." instance=ExtResource("4_vyww8")]
+position = Vector2(64, 128)
+flip_initial_direction = true
+enable_reflector = true
+
+[node name="BlueMagent2" parent="." instance=ExtResource("4_vyww8")]
+position = Vector2(448, 0)
+enable_reflector = true
+
+[node name="BlueMagent3" parent="." instance=ExtResource("4_vyww8")]
+position = Vector2(416, -192)
+enable_reflector = true
+
+[node name="ReinforcedFireBlock" parent="." instance=ExtResource("6_faohu")]
+position = Vector2(384, -64)
+
+[node name="ReinforcedMagicBlock" parent="." instance=ExtResource("7_uyf2j")]
+position = Vector2(64, 0)

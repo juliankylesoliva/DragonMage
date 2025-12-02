@@ -157,7 +157,7 @@ func is_inside_a_wall():
 func is_raycast_in_semisolid(ray : RayCast2D):
 	if (ray.is_colliding()):
 		var target = ray.get_collider()
-		if (target.has_method("shape_find_owner")):
+		if (target != null and target.has_method("shape_find_owner")):
 			var shape_id = ray.get_collider_shape()
 			var owner_id = target.shape_find_owner(shape_id)
 			var shape = target.shape_owner_get_owner(owner_id)
